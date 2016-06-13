@@ -1,33 +1,95 @@
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-
-    <modelVersion>4.0.0</modelVersion>
-    <artifactId>core-server</artifactId>
-    <packaging>jar</packaging>
-
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <groupId>hsenid</groupId>
         <artifactId>parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../parent/pom.xml</relativePath>
     </parent>
-
-    <name>core-server Maven Webapp</name>
-    <url>http://maven.apache.org</url>
-
-    <dependencies>
-
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-            <scope>test</scope>
-        </dependency>
-
-    </dependencies>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>core-server</artifactId>
 
     <build>
-        <finalName>core-server</finalName>
-    </build>
+        <plugins>
+            <plugin>
+                <!-- maven appassembler plugin. -->
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>appassembler-maven-plugin</artifactId>
+                <version>1.10</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <!-- Assembles the artifacts and generates bin scripts. -->
+                            <goal>assemble</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!-- Creating the configuration directory. -->
+                    <configurationSourceDirectory>../parent/src/main/resources</configurationSourceDirectory>
+                    <configurationDirectory>conf</configurationDirectory>
+                    <copyConfigurationDirectory>true</copyConfigurationDirectory>
 
+                    <!-- Creating the logs directory. -->
+                    <logsDirectory>logs</logsDirectory>
+
+                    <!-- Modifying the directory contains dependencies directory.-->
+                    <!-- Default name is 'repo'. Here it has changed to 'lib' -->
+                    <repositoryName>lib</repositoryName>
+                    <!-- Changing the layout of the repository folder(lib). -->
+                    <!-- Default layout:'default'. -->
+                    <repositoryLayout>flat</repositoryLayout>
+
+                    <!-- Defining the class having the main method. -->
+                    <programs>
+                        <program>
+                            <!-- Java class file contains the main method. -->
+                            <mainClass>com.hsenid.devspace.Demo</mainClass>
+                            <!-- Name of the output file. -->
+                            <id>devsapce-app</id>
+                        </program>
+                    </programs>
+                </configuration>
+            </plugin>
+
+            <!-- maven assembly plugin. -->
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+
+                <executions>
+                    <execution>
+                        <id>zip</id>
+                        <phase>package</phase>
+                        <goals>
+                            <!-- Assemble an application bundle or distribution. -->
+                            <goal>single</goal>
+                        </goals>
+
+                        <configuration>
+                            <!-- assembly.xml file contains the configurations of assembly plugin. -->
+                            <descriptor>assembly.xml</descriptor>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- maven jar plugin. -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.0.1</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <!-- Java class file contains the main method. -->
+                            <mainClass>com.hsenid.devspace.Demo</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

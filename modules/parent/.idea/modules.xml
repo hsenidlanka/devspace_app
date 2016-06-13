@@ -2,9 +2,15 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../cas/cas.iml" filepath="$PROJECT_DIR$/../cas/cas.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../core-logic/core-logic.iml" filepath="$PROJECT_DIR$/../core-logic/core-logic.iml" />
       <module fileurl="file://$PROJECT_DIR$/../core-server/core-server.iml" filepath="$PROJECT_DIR$/../core-server/core-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../core-server/core-server.iml" filepath="$PROJECT_DIR$/../core-server/core-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/devspace-app.iml" filepath="$PROJECT_DIR$/devspace-app.iml" />
       <module fileurl="file://$PROJECT_DIR$/parent.iml" filepath="$PROJECT_DIR$/parent.iml" />
       <module fileurl="file://$PROJECT_DIR$/../reporting/reporting.iml" filepath="$PROJECT_DIR$/../reporting/reporting.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../reporting/reporting.iml" filepath="$PROJECT_DIR$/../reporting/reporting.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../self-care/self-care.iml" filepath="$PROJECT_DIR$/../self-care/self-care.iml" />
       <module fileurl="file://$PROJECT_DIR$/../self-care/self-care.iml" filepath="$PROJECT_DIR$/../self-care/self-care.iml" />
     </modules>
   </component>
