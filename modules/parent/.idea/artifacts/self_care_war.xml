@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="self-care:war">
-    <output-path>$PROJECT_DIR$/../self-care/target</output-path>
-    <root id="archive" name="self-care.war">
-      <element id="artifact" artifact-name="self-care:war exploded" />
-    </root>
-  </artifact>
-</component>
