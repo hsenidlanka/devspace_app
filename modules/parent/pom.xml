@@ -45,6 +45,7 @@
         <module>../reporting</module>
         <module>../self-care</module>
         <module>../core-server</module>
+        <module>../core-logic</module>
     </modules>
 
     <build>

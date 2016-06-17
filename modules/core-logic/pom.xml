@@ -4,6 +4,14 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>core-logic</artifactId>
     <packaging>jar</packaging>
+
+    <parent>
+        <groupId>hsenid</groupId>
+        <artifactId>parent</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../parent/pom.xml</relativePath>
+    </parent>
+
     <build>
     <plugins>
         <plugin>
@@ -11,9 +19,9 @@
         <artifactId>maven-jar-plugin</artifactId>
         <version>3.0.1</version>
         <configuration>
-            <archive>
-                <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
-            </archive>
+            <!--<archive>-->
+                <!--<manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>-->
+            <!--</archive>-->
         </configuration>
     </plugin>
     </plugins>
