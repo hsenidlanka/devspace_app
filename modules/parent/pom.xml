@@ -42,10 +42,12 @@
     </dependencies>
 
     <modules>
-        <module>../reporting</module>
+        <module>../report-viewer</module>
         <module>../self-care</module>
         <module>../core-server</module>
-        <module>../core-logic</module>
+        <module>../admin</module>
+
+
     </modules>
 
     <build>
