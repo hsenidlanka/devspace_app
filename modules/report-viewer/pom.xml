@@ -5,14 +5,12 @@
 	<artifactId>report-viewer</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-
 	<parent>
 		<groupId>hsenid</groupId>
 		<artifactId>parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../parent/pom.xml</relativePath>
 	</parent>
-
 	<name>reporting Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
@@ -23,7 +21,6 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
 	<build>
 		<finalName>report-viewer</finalName>
 	</build>
