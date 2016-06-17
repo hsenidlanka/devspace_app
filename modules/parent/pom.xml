@@ -43,11 +43,11 @@
 
     <modules>
         <module>../report-viewer</module>
-        <module>../self-care</module>
         <module>../core-server</module>
         <module>../admin</module>
+	<module>../cas</module>
         <module>../core-logic</module>
-
+        <module>../self-care/web-selfcare</module>
 
     </modules>
 

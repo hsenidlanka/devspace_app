@@ -1,0 +1,17 @@
+2016-06-16 11:54:50,640 WARN [org.jasig.cas.services.InMemoryServiceRegistryDaoImpl] - Runtime memory is used as the persistence storage for retrieving and persisting service definitions. Changes that are made to service definitions during runtime will be LOST upon container restarts.
+2016-06-16 11:54:50,699 INFO [org.jasig.cas.services.DefaultServicesManagerImpl] - Loaded 1 services.
+2016-06-16 11:54:50,867 INFO [org.jasig.cas.CasEnvironmentContextListener] - 
+******************** Welcome to CAS ********************
+CAS Version: null
+Java Home: /home/hsenid/Software/jdk1.8.0_73/jre
+Java Vendor: Oracle Corporation
+Java Version: 1.8.0_73
+OS Architecture: amd64
+OS Name: Linux
+OS Version: 4.2.0-35-generic
+*******************************************************
+
+2016-06-16 11:54:52,658 INFO [org.jasig.cas.util.AutowiringSchedulerFactoryBean] - Starting Quartz Scheduler now
+2016-06-16 11:54:52,972 WARN [org.jasig.cas.services.InMemoryServiceRegistryDaoImpl] - Runtime memory is used as the persistence storage for retrieving and persisting service definitions. Changes that are made to service definitions during runtime will be LOST upon container restarts.
+2016-06-16 11:54:53,001 INFO [org.jasig.cas.services.DefaultServicesManagerImpl] - Loaded 1 services.
+2016-06-16 11:54:53,909 INFO [org.jasig.cas.util.AutowiringSchedulerFactoryBean] - Starting Quartz Scheduler now

@@ -1,0 +1,11 @@
+2016-06-08 12:06:01,049 INFO [org.jasig.cas.CasEnvironmentContextListener] - 
+******************** Welcome to CAS ********************
+CAS Version: 4.1.4
+Java Home: /home/hsenid/Software/jdk1.8.0_73/jre
+Java Vendor: Oracle Corporation
+Java Version: 1.8.0_73
+OS Architecture: amd64
+OS Name: Linux
+OS Version: 4.2.0-35-generic
+*******************************************************
+

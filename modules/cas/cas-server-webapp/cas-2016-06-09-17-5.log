@@ -1,0 +1,20 @@
+2016-06-09 17:15:21,239 INFO [org.jasig.cas.CasEnvironmentContextListener] - 
+******************** Welcome to CAS ********************
+CAS Version: 4.1.4
+Java Home: /home/hsenid/Software/jdk1.8.0_73/jre
+Java Vendor: Oracle Corporation
+Java Version: 1.8.0_73
+OS Architecture: amd64
+OS Name: Linux
+OS Version: 4.2.0-35-generic
+*******************************************************
+
+2016-06-09 17:15:23,559 INFO [org.jasig.cas.services.DefaultServicesManagerImpl] - Loaded 2 services.
+2016-06-09 17:15:23,986 INFO [org.jasig.cas.util.AutowiringSchedulerFactoryBean] - Starting Quartz Scheduler now
+2016-06-09 17:15:23,989 INFO [org.jasig.cas.CasEnvironmentContextListener] - [Apache Tomcat/8.0.32] has loaded the CAS application context
+2016-06-09 17:15:43,642 INFO [org.jasig.cas.ticket.registry.support.DefaultTicketRegistryCleaner] - Beginning ticket cleanup.
+2016-06-09 17:15:43,646 INFO [org.jasig.cas.ticket.registry.support.DefaultTicketRegistryCleaner] - 0 expired tickets found to be removed.
+2016-06-09 17:15:43,646 INFO [org.jasig.cas.ticket.registry.support.DefaultTicketRegistryCleaner] - Finished ticket cleanup.
+2016-06-09 17:17:23,731 INFO [org.jasig.cas.services.DefaultServicesManagerImpl] - Reloading registered services.
+2016-06-09 17:17:23,734 INFO [org.jasig.cas.services.DefaultServicesManagerImpl] - Loaded 2 services.
+2016-06-09 17:17:37,993 INFO [org.jasig.cas.util.AutowiringSchedulerFactoryBean] - Shutting down Quartz Scheduler

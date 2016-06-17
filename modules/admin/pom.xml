@@ -4,7 +4,7 @@
   <groupId>hsenid</groupId>
   <artifactId>admin</artifactId>
   <packaging>war</packaging>
-  <version>1.0-SNAPSHOT</version>
+  <version>0.0.1-SNAPSHOT</version>
 
   <parent>
     <groupId>hsenid</groupId>
@@ -13,7 +13,7 @@
     <relativePath>../parent/pom.xml</relativePath>
   </parent>
 
-  <name>admin Maven Webapp</name>
+  <name>admin</name>
   <url>http://maven.apache.org</url>
 
 
