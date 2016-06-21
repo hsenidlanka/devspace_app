@@ -41,6 +41,17 @@
         </dependency>
     </dependencies>
 
+    <properties>
+        <cas.version>4.1.4</cas.version>
+        <maven-jetty-plugin.version>9.3.0.v20150612</maven-jetty-plugin.version>
+        <spring-expression.version>4.3.0.RELEASE</spring-expression.version>
+        <jstl.version>1.2</jstl.version>
+        <cas-server-security-filter.version>2.0.4</cas-server-security-filter.version>
+        <metrics-spring.version>3.1.3</metrics-spring.version>
+        <metrics-jvm.version>3.1.2</metrics-jvm.version>
+        <metrics-servlets.version>3.1.2</metrics-servlets.version>
+    </properties>
+
     <modules>
         <module>../report-viewer</module>
         <module>../core-server</module>
