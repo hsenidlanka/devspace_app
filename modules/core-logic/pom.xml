@@ -11,7 +11,13 @@
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../parent/pom.xml</relativePath>
     </parent>
-
+<dependencies>
+    <dependency>
+        <groupId>c3p0</groupId>
+        <artifactId>c3p0</artifactId>
+        <version>${c3p0.version}</version>
+    </dependency>
+</dependencies>
     <build>
     <plugins>
         <plugin>
@@ -19,9 +25,9 @@
         <artifactId>maven-jar-plugin</artifactId>
         <version>3.0.1</version>
         <configuration>
-            <!--<archive>-->
-                <!--<manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>-->
-            <!--</archive>-->
+            <!--<archive>
+                <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
+            </archive>-->
         </configuration>
     </plugin>
     </plugins>
