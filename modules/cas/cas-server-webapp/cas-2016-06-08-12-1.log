@@ -1,4 +1,0 @@
-2016-06-08 12:06:03,308 INFO [org.jasig.cas.services.DefaultServicesManagerImpl] - Loaded 2 services.
-2016-06-08 12:06:03,702 INFO [org.jasig.cas.util.AutowiringSchedulerFactoryBean] - Starting Quartz Scheduler now
-2016-06-08 12:06:03,704 INFO [org.jasig.cas.CasEnvironmentContextListener] - [Apache Tomcat/8.0.32] has loaded the CAS application context
-2016-06-08 12:06:08,248 INFO [org.jasig.cas.util.AutowiringSchedulerFactoryBean] - Shutting down Quartz Scheduler
