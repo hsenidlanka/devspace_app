@@ -28,8 +28,11 @@
                 </executions>
                 <configuration>
                     <!-- Creating the configuration directory. -->
-                    <configurationSourceDirectory>../parent/src/main/resources</configurationSourceDirectory>
+		    <!-- Path for the configuration files. -->
+                    <configurationSourceDirectory></configurationSourceDirectory>
+		    <!-- Change name of the configuration file. Default:'repo'. -->
                     <configurationDirectory>conf</configurationDirectory>
+		    <!-- Place the 'conf' directory in assembler directory. -->
                     <copyConfigurationDirectory>true</copyConfigurationDirectory>
 
                     <!-- Creating the logs directory. -->
