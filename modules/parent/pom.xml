@@ -41,7 +41,7 @@
         <metrics-jvm.version>3.1.2</metrics-jvm.version>
         <metrics-servlets.version>3.1.2</metrics-servlets.version>
         <c3p0.version>0.9.1.2</c3p0.version>
-        <musql-connector-java.version>6.0.2</musql-connector-java.version>
+        <mysql-connector-java.version>6.0.2</mysql-connector-java.version>
 
         <spring.version>4.1.0.RELEASE</spring.version>
         <servlet-api.version>2.5</servlet-api.version>
