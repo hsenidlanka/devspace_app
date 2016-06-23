@@ -48,10 +48,12 @@
         <jsp-api.version>2.1</jsp-api.version>
         <jstl.version>1.2</jstl.version>
 
+        <RWD_DB_USER>root</RWD_DB_USER>
+        <RWD_DB_PASSWORD>root</RWD_DB_PASSWORD>
     </properties>
 
     <modules>
-        <module>../report-viewer</module>
+        <!--<module>../report-viewer</module>-->
         <module>../core-server</module>
         <module>../admin</module>
 	<module>../cas</module>
