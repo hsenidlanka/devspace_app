@@ -55,16 +55,20 @@
         <commons-collections.version>3.2.1</commons-collections.version>
         <commons-logging.version>1.2</commons-logging.version>
         <commons-lang.version>2.6</commons-lang.version>
+        <junit.version>4.12</junit.version>
 
         <RWD_DB_USER>root</RWD_DB_USER>
         <RWD_DB_PASSWORD>root</RWD_DB_PASSWORD>
+
+        <CAS.LOCATION>/home/hsenid/cas-4.1.4/cas-server-webapp/target/cas.war</CAS.LOCATION>
+
     </properties>
 
     <modules>
         <!--<module>../report-viewer</module>-->
         <module>../core-server</module>
         <module>../admin</module>
-	<module>../cas</module>
+        <module>../cas</module>
         <module>../core-logic</module>
         <module>../self-care/web-selfcare</module>
 
