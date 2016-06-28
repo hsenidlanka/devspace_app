@@ -27,13 +27,13 @@
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
-            <version>${log4j-api.version}</version>
+            <version>${log4j.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
-            <version>${log4j-core.version}</version>
+            <version>${log4j.version}</version>
         </dependency>
     </dependencies>
 
@@ -107,7 +107,7 @@
                                         <!-- Define the directory contains the configurations. -->
                                         <property>
                                             <name>configuration.directory.in.classpath.first</name>
-                                            <value>etc</value>
+                                            <value>conf</value>
                                         </property>
                                         <!-- Define the directory contains library files. -->
                                         <property>
@@ -131,10 +131,10 @@
                                         </property>
                                         <!--
                                             Configure the appearance of console logs.
-                                            'L':log level,
-                                            'P':for prefix,
-                                            'Z':millisecond time,
-                                            'M':for message.
+                                            'L':log level
+                                            'P':prefix
+                                            'Z':millisecond time
+                                            'M':for message
                                         -->
                                         <property>
                                             <name>wrapper.console.format</name>
