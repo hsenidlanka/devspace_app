@@ -52,23 +52,28 @@
         <taglibs.version>1.1.2</taglibs.version>
         <junit.version>4.12</junit.version>
         <log4j.version>2.6.1</log4j.version>
+        <log4j.version>1.2.17</log4j.version>
+        <log4j-api.version>2.5</log4j-api.version>
+        <log4j-core.version>2.5</log4j-core.version>
         <validation-api.version>1.1.0.Final</validation-api.version>
         <commons-collections.version>3.2.1</commons-collections.version>
         <commons-logging.version>1.2</commons-logging.version>
         <commons-lang.version>2.6</commons-lang.version>
+        <tanukisoft-wrapper.version>3.2.3</tanukisoft-wrapper.version>
 
         <RWD_DB_USER>root</RWD_DB_USER>
         <RWD_DB_PASSWORD>root</RWD_DB_PASSWORD>
     </properties>
 
     <modules>
-        <!--<module>../report-viewer</module>-->
+        <module>../core-logic</module>
         <module>../core-server</module>
         <module>../admin</module>
         <module>../cas</module>
         <module>../core-logic</module>
         <module>../self-care/web-selfcare</module>
-
+        <!--<module>../report-viewer</module>-->
+        <module>../cas</module>
     </modules>
 
     <build>

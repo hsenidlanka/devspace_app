@@ -10,60 +10,160 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>core-server</artifactId>
+    <packaging>jar</packaging>
+
+    <!-- Define a location to save configuration files. -->
+    <properties>
+        <configurations.path>../generated-resources/appassembler/jsw/core-server/etc</configurations.path>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>tanukisoft</groupId>
+            <artifactId>wrapper</artifactId>
+            <version>${tanukisoft-wrapper.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j-api.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j-core.version}</version>
+        </dependency>
+    </dependencies>
 
     <build>
+        <!-- Source files location. -->
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <!-- Test source files location. -->
+        <testSourceDirectory>src/test/java</testSourceDirectory>
+
+        <!-- Copy resources to the configuration directory defined above. -->
+        <resources>
+            <!-- Resources used in core-server module. -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <targetPath>${configurations.path}</targetPath>
+            </resource>
+
+            <!-- Resources used in core-logic module. -->
+            <resource>
+                <directory>../core-logic/src/main/resources</directory>
+                <targetPath>${configurations.path}</targetPath>
+            </resource>
+        </resources>
+
         <plugins>
+            <!-- Appassembler plugin. -->
             <plugin>
-                <!-- maven appassembler plugin. -->
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>appassembler-maven-plugin</artifactId>
                 <version>1.10</version>
+                <configuration>
+                    <!-- Define the layout. Default is 'default'. -->
+                    <repositoryLayout>flat</repositoryLayout>
+                    <includeConfigurationDirectoryInClasspath>true</includeConfigurationDirectoryInClasspath>
+                    <target>${project.build.directory}</target>
+                    <daemons>
+                        <daemon>
+                            <id>core-server</id>
+                            <!-- Main class of the program. -->
+                            <mainClass>com.hsenid.devspace.Demo</mainClass>
+
+                            <!-- Commannline arguments to perform tasks. -->
+                            <commandLineArguments>
+                                <commandLineArgument>start</commandLineArgument>
+                            </commandLineArguments>
+
+                            <!-- Define the platform to support. -->
+                            <platforms>
+                                <platform>jsw</platform>
+                            </platforms>
+
+                            <!-- Define the platforms needed to be support. -->
+                            <generatorConfigurations>
+                                <generatorConfiguration>
+                                    <generator>jsw</generator>
+                                    <!-- Platforms. -->
+                                    <includes>
+                                        <include>linux-x86-32</include>
+                                        <include>windows-x86-32</include>
+                                        <include>linux-x86-64</include>
+                                        <include>windows-x86-64</include>
+                                    </includes>
+
+                                    <!-- wrapper.conf configurations. -->
+                                    <configuration>
+                                        <!-- Define java main class. -->
+                                        <property>
+                                            <name>wrapper.java.mainclass</name>
+                                            <value>com.hsenid.devspace.Demo</value>
+                                        </property>
+                                        <!-- Define the directory contains the configurations. -->
+                                        <property>
+                                            <name>configuration.directory.in.classpath.first</name>
+                                            <value>etc</value>
+                                        </property>
+                                        <!-- Define the directory contains library files. -->
+                                        <property>
+                                            <name>set.default.REPO_DIR</name>
+                                            <value>lib</value>
+                                        </property>
+                                        <!-- Define the file to save logs related to wrapper. -->
+                                        <property>
+                                            <name>wrapper.logfile</name>
+                                            <value>logs/wrapper.log</value>
+                                        </property>
+                                        <!-- Initial memory size for JVM in Megabytes. -->
+                                        <property>
+                                            <name>wrapper.java.initmemory</name>
+                                            <value>256</value>
+                                        </property>
+                                        <!-- Maximum memory size for JVM in Megabytes. -->
+                                        <property>
+                                            <name>wrapper.java.maxmemory</name>
+                                            <value>1024</value>
+                                        </property>
+                                        <!--
+                                            Configure the appearance of console logs.
+                                            'L':log level,
+                                            'P':for prefix,
+                                            'Z':millisecond time,
+                                            'M':for message.
+                                        -->
+                                        <property>
+                                            <name>wrapper.console.format</name>
+                                            <value>LPZM</value>
+                                        </property>
+                                    </configuration>
+                                </generatorConfiguration>
+                            </generatorConfigurations>
+                        </daemon>
+                    </daemons>
+                </configuration>
                 <executions>
                     <execution>
+                        <id>generate-jsw-scripts</id>
+                        <phase>package</phase>
                         <goals>
-                            <!-- Assembles the artifacts and generates bin scripts. -->
-                            <goal>assemble</goal>
+                            <goal>generate-daemons</goal>
+                            <goal>create-repository</goal>
                         </goals>
                     </execution>
                 </executions>
-                <configuration>
-                    <!-- Creating the configuration directory. -->
-		    <!-- Path for the configuration files. -->
-                    <configurationSourceDirectory></configurationSourceDirectory>
-		    <!-- Change name of the configuration file. Default:'repo'. -->
-                    <configurationDirectory>conf</configurationDirectory>
-		    <!-- Place the 'conf' directory in assembler directory. -->
-                    <copyConfigurationDirectory>true</copyConfigurationDirectory>
-
-                    <!-- Creating the logs directory. -->
-                    <logsDirectory>logs</logsDirectory>
-
-                    <!-- Modifying the directory contains dependencies directory.-->
-                    <!-- Default name is 'repo'. Here it has changed to 'lib' -->
-                    <repositoryName>lib</repositoryName>
-                    <!-- Changing the layout of the repository folder(lib). -->
-                    <!-- Default layout:'default'. -->
-                    <repositoryLayout>flat</repositoryLayout>
-
-                    <!-- Defining the class having the main method. -->
-                    <programs>
-                        <program>
-                            <!-- Java class file contains the main method. -->
-                            <mainClass>com.hsenid.devspace.Demo</mainClass>
-                            <!-- Name of the output file. -->
-                            <id>devsapce-app</id>
-                        </program>
-                    </programs>
-                </configuration>
             </plugin>
 
-            <!-- maven assembly plugin. -->
+            <!-- Maven Assembly plugin. -->
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
-
                 <executions>
                     <execution>
-                        <id>zip</id>
+                        <id>make-tar</id>
                         <phase>package</phase>
                         <goals>
                             <!-- Assemble an application bundle or distribution. -->
@@ -72,7 +172,9 @@
 
                         <configuration>
                             <!-- assembly.xml file contains the configurations of assembly plugin. -->
-                            <descriptor>assembly.xml</descriptor>
+                            <descriptors>
+                                <descriptor>src/main/assembly/src.xml</descriptor>
+                            </descriptors>
                         </configuration>
                     </execution>
                 </executions>
@@ -94,5 +196,6 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>core-server</finalName>
     </build>
 </project>
