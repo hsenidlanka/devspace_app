@@ -47,6 +47,7 @@
         <spring-security.version>4.1.0.RELEASE</spring-security.version>
         <spring.version>4.3.0.RELEASE</spring.version>
         <servlet-api.version>2.5</servlet-api.version>
+        <junit.version>3.8.1</junit.version>
         <jsp-api.version>2.2</jsp-api.version>
         <jstl.version>1.2</jstl.version>
         <taglibs.version>1.1.2</taglibs.version>
@@ -61,13 +62,12 @@
     </properties>
 
     <modules>
+        <module>../core-logic</module>
         <!--<module>../report-viewer</module>-->
         <module>../core-server</module>
         <module>../admin</module>
-	<module>../cas</module>
-        <module>../core-logic</module>
+	    <module>../cas</module>
         <module>../self-care/web-selfcare</module>
-
     </modules>
 
     <build>

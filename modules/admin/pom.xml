@@ -21,16 +21,21 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8.1</version>
+      <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
 
+    <!-- Following dependency is for log4j java logings -->
     <dependency>
-      <groupId>log4j</groupId>
-      <artifactId>log4j</artifactId>
-      <version>${log4j.version}</version>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+      <version>2.5</version>
     </dependency>
-
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+      <version>2.5</version>
+    </dependency>
 
     <!--DB dependencies -->
     <dependency>
@@ -134,5 +139,18 @@
   </dependencies>
   <build>
     <finalName>admin</finalName>
+    <sourceDirectory>src/main/java</sourceDirectory>
+
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+        <includes>
+          <include>*</include>
+        </includes>
+      </resource>
+    </resources>
+
+
   </build>
 </project>
