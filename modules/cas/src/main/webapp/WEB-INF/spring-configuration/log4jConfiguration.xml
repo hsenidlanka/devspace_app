@@ -37,7 +37,7 @@
 
     <bean id="log4jInitialization" class="org.jasig.cas.util.CasLoggerContextInitializer"
             c:logConfigurationField="log4jConfiguration"
-            c:logConfigurationFile="${log4j.config.location:classpath:log4j2.xml}"
+            c:logConfigurationFile="${log4j.config.location}"
             c:loggerContextPackageName="org.apache.logging.log4j.web"/>
 
 </beans>

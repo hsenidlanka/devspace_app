@@ -91,8 +91,8 @@
           p:redirectsEnabled="false" p:circularRedirectsAllowed="false"/>
 
     <bean id="trustStoreSslSocketFactory" class="org.jasig.cas.authentication.FileTrustStoreSslSocketFactory"
-          c:trustStoreFile="${http.client.truststore.file:classpath:truststore.jks}"
-          c:trustStorePassword="${http.client.truststore.psw:changeit}"/>
+          c:trustStoreFile="${http.client.truststore.file}"
+          c:trustStorePassword="${http.client.truststore.psw}"/>
 
     <bean id="supportsTrustStoreSslSocketFactoryHttpClient" class="org.jasig.cas.util.http.SimpleHttpClientFactoryBean"
           parent="httpClient" p:sslSocketFactory-ref="trustStoreSslSocketFactory"/>

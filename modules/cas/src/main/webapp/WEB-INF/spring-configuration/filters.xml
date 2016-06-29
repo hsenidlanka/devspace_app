@@ -27,7 +27,7 @@
                     http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
     <bean id="characterEncodingFilter" class="org.springframework.web.filter.CharacterEncodingFilter"
-            p:encoding="${httprequest.web.encoding:UTF-8}"
+            p:encoding="${httprequest.web.encoding}"
             p:forceEncoding="${httprequest.web.encoding.force:true}" />
 
     <bean id="requestParameterSecurityFilter"
