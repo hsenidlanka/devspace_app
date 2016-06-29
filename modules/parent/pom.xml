@@ -35,6 +35,7 @@
         <commons-lang.version>2.6</commons-lang.version>
         <tanukisoft-wrapper.version>3.2.3</tanukisoft-wrapper.version>
 
+        <RWD_LOG_ROOT>/home/hsenid/Documents/MAVEN/devspace_app/modules/admin</RWD_LOG_ROOT>
         <RWD_DB_USER>root</RWD_DB_USER>
         <RWD_DB_PASSWORD>root</RWD_DB_PASSWORD>
     </properties>
