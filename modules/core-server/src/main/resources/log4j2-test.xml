@@ -21,6 +21,8 @@
             </Policies>
             <!-- Maximum number of files to keep. -->
             <DefaultRolloverStrategy max="20"/>
+            <!-- Data of error/fatal log levels will be opted out when writing to the file. -->
+            <ThresholdFilter level="ERROR" onMatch="DENY" onMismatch="NEUTRAL"/>
         </RollingRandomAccessFile>
 
         <!-- Create a log file to hold error/fatal log level details. -->
@@ -38,8 +40,6 @@
             </Policies>
             <!-- Maximum number of files to keep. -->
             <DefaultRolloverStrategy max="20"/>
-            <!-- Data of error/fatal log levels will be opted out when writing to the file. -->
-            <ThresholdFilter level="ERROR" onMatch="DENY" onMismatch="NEUTRAL"/>
         </RollingRandomAccessFile>
 
         <!-- Standard console output. -->

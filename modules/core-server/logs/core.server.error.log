@@ -1,0 +1,4 @@
+2016-Jun-28 15:16:48:048 ERROR [WrapperListener_start_runner] com.hsenid.devspace.Demo Error occured. java.lang.ArithmeticException: / by zero
+2016-Jun-28 16:46:18:018 ERROR [WrapperListener_start_runner] com.hsenid.devspace.Demo Error occured. java.lang.IllegalStateException: !STOPPED
+2016-Jun-28 16:54:45:045 ERROR [WrapperListener_start_runner] com.hsenid.devspace.Demo Error occured. java.lang.IllegalStateException: !STOPPED
+2016-Jun-28 16:56:20:020 ERROR [WrapperListener_start_runner] com.hsenid.devspace.Demo Error occured. java.lang.IllegalStateException: !STOPPED

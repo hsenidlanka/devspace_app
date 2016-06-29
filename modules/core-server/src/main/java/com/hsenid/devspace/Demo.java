@@ -5,8 +5,6 @@ import org.apache.logging.log4j.Logger;
 import org.tanukisoftware.wrapper.WrapperListener;
 import org.tanukisoftware.wrapper.WrapperManager;
 
-import java.net.MalformedURLException;
-
 /**
  * Created by hsenid on 6/13/16.
  */
@@ -41,7 +39,7 @@ public class Demo implements WrapperListener {
         }
     }
 
-    public static void main(String[] args) throws MalformedURLException {
+    public static void main(String[] args) {
         WrapperManager.start(new Demo(), args);
     }
 }

@@ -75,12 +75,13 @@
                             <!-- Main class of the program. -->
                             <mainClass>com.hsenid.devspace.Demo</mainClass>
 
-                            <!-- Commannline arguments to perform tasks. -->
+                            <!-- Commandline arguments to perform tasks. -->
                             <commandLineArguments>
                                 <commandLineArgument>start</commandLineArgument>
                             </commandLineArguments>
 
-                            <!-- Define the platform to support. -->
+                            <!-- Define the platform to support.
+                            jsw: Java Service Wrapper. -->
                             <platforms>
                                 <platform>jsw</platform>
                             </platforms>
@@ -107,7 +108,7 @@
                                         <!-- Define the directory contains the configurations. -->
                                         <property>
                                             <name>configuration.directory.in.classpath.first</name>
-                                            <value>conf</value>
+                                            <value>etc</value>
                                         </property>
                                         <!-- Define the directory contains library files. -->
                                         <property>
