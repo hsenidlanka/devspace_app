@@ -35,6 +35,42 @@
             <artifactId>log4j-core</artifactId>
             <version>${log4j.version}</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-server -->
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-server</artifactId>
+            <version>9.3.10.v20160621</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-webapp -->
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-webapp</artifactId>
+            <version>9.3.10.v20160621</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-server</artifactId>
+            <version>1.19</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-server</artifactId>
+            <version>2.23</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.sun.jersey/jersey-servlet -->
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-servlet</artifactId>
+            <version>1.19</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>4.2.6.RELEASE</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -52,10 +88,10 @@
             </resource>
 
             <!-- Resources used in core-logic module. -->
-            <resource>
-                <directory>../core-logic/src/main/resources</directory>
-                <targetPath>${configurations.path}</targetPath>
-            </resource>
+            <!--<resource>-->
+            <!--<directory>../core-logic/src/main/resources</directory>-->
+            <!--<targetPath>${configurations.path}</targetPath>-->
+            <!--</resource>-->
         </resources>
 
         <plugins>
@@ -73,7 +109,7 @@
                         <daemon>
                             <id>core-server</id>
                             <!-- Main class of the program. -->
-                            <mainClass>com.hsenid.devspace.Demo</mainClass>
+                            <mainClass>com.hsenid.devspace.ServerMain</mainClass>
 
                             <!-- Commandline arguments to perform tasks. -->
                             <commandLineArguments>
@@ -103,7 +139,7 @@
                                         <!-- Define java main class. -->
                                         <property>
                                             <name>wrapper.java.mainclass</name>
-                                            <value>com.hsenid.devspace.Demo</value>
+                                            <value>com.hsenid.devspace.ServerMain</value>
                                         </property>
                                         <!-- Define the directory contains the configurations. -->
                                         <property>
@@ -191,7 +227,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <!-- Java class file contains the main method. -->
-                            <mainClass>com.hsenid.devspace.Demo</mainClass>
+                            <mainClass>com.hsenid.devspace.ServerMain</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

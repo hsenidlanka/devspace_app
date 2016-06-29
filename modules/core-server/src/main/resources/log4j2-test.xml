@@ -5,6 +5,7 @@
         <property name="format">%d{yyyy-MMM-dd HH:mm:ss:sss} %p [%t] %c %m%n</property>
         <property name="log_root">/home/hsenid/Projects/devspace_app/modules/core-server/logs</property>
     </properties>
+
     <Appenders>
         <!-- Create a log file to hold error/fatal log level details. -->
         <RollingRandomAccessFile name="core-server-info-log"
@@ -47,6 +48,7 @@
             <PatternLayout pattern="${format}"/>
         </Console>
     </Appenders>
+
     <Loggers>
         <Root level="info">
             <AppenderRef ref="core-server-info-log" level="info"/>
