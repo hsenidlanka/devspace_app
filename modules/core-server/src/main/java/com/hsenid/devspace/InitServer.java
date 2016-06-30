@@ -15,6 +15,8 @@ public class InitServer {
     private static final Logger log = LogManager.getLogger(InitServer.class);
     private int port;
     private String packageName;
+    private String contextRoot;
+    private String servletPath;
 
     public int getPort() {
         return port;
@@ -24,21 +26,37 @@ public class InitServer {
         this.port = port;
     }
 
-    public void setPackageName(String packageName) {
-        this.packageName = packageName;
-    }
-
     public String getPackageName() {
         return packageName;
     }
 
+    public void setPackageName(String packageName) {
+        this.packageName = packageName;
+    }
+
+    public String getContextRoot() {
+        return contextRoot;
+    }
+
+    public void setContextRoot(String contextRoot) {
+        this.contextRoot = contextRoot;
+    }
+
+    public String getServletPath() {
+        return servletPath;
+    }
+
+    public void setServletPath(String servletPath) {
+        this.servletPath = servletPath;
+    }
+
     public Server createServer() {
         ResourceConfig config = new ResourceConfig();
-        config.packages(this.packageName);
+        config.packages(getPackageName());
         ServletHolder servlet = new ServletHolder(new ServletContainer(config));
-        Server server = new Server(this.port);
-        ServletContextHandler context = new ServletContextHandler(server, "/*");
-        context.addServlet(servlet, "/*");
+        Server server = new Server(getPort());
+        ServletContextHandler context = new ServletContextHandler(server, getContextRoot());
+        context.addServlet(servlet, getServletPath());
         return server;
     }
 }

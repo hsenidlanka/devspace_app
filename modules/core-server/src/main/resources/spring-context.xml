@@ -4,5 +4,6 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <import resource="server-spring-config.xml"/>
+    <import resource="datasource-spring-config.xml"/>
 
 </beans>

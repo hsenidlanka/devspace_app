@@ -1,5 +1,6 @@
 package com.hsenid.devspace;
 
+import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.jetty.server.Server;
@@ -14,6 +15,7 @@ import org.tanukisoftware.wrapper.WrapperManager;
 public class ServerMain implements WrapperListener {
     private static final Logger log = LogManager.getLogger(ServerMain.class);
     Server server;
+    ComboPooledDataSource comboPooledDataSource;
 
     @Override
     public Integer start(String[] strings) {
@@ -24,6 +26,8 @@ public class ServerMain implements WrapperListener {
         try {
             server.start();
             server.join();
+            comboPooledDataSource = (ComboPooledDataSource) appContext.getBean("datasource");
+            comboPooledDataSource.getConnection();
         } catch (Exception e) {
             log.error("Error while starting jetty server. " + e);
         }
@@ -32,23 +36,25 @@ public class ServerMain implements WrapperListener {
 
     @Override
     public int stop(int i) {
-        log.info("Stop core server");
+        WrapperManager.log(WrapperManager.WRAPPER_LOG_LEVEL_INFO, "Stop");
+        log.error("SFSDSDFSDF");
         try {
+            comboPooledDataSource.close();
             server.stop();
         } catch (Exception e) {
             log.error("Error while stopping jetty server. " + e);
         }
-        return 0;
+        return i;
     }
 
     @Override
     public void controlEvent(int i) {
-        if ((i == WrapperManager.WRAPPER_CTRL_LOGOFF_EVENT)
+        /*if ((i == WrapperManager.WRAPPER_CTRL_LOGOFF_EVENT)
                 && WrapperManager.isLaunchedAsService()) {
             // Ignore
         } else {
             WrapperManager.stop(0);
-        }
+        }*/
     }
 
     public static void main(String[] args) throws Exception {
