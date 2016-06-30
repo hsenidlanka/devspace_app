@@ -1,16 +1,23 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: hsenid
-  Date: 6/29/16
-  Time: 4:15 PM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
+<%@ page session="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-</body>
-</html>
+<fmt:bundle basename="messages">
+  <div class="container">
+    <div class="success">
+      <fmt:message ><c:out value='${model.successMessage}'/></fmt:message>
+    </div>
+    <c:url var="Back" value="${model.redirectUrl}"/>
+
+      <%--<a href="<c:url value="${model.redirectUrl}" />">--%>
+      <%----%>
+      <%--</a>--%>
+
+    <input id="btn" class="button" type="submit" value="Back" onclick="window.location='${Back}';" />
+
+      <%--<input type="button" class="button_left_most" value="Cancel" onclick="window.location='${cancel}';" />--%>
+
+  </div>
+  </body>
+</fmt:bundle>

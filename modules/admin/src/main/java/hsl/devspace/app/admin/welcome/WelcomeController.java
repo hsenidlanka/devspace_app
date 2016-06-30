@@ -10,9 +10,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 
-/**
- * Created by hsenid on 6/28/16.
- */
 
 @Controller
 @RequestMapping("/welcome")

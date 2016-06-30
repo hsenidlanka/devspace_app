@@ -51,13 +51,13 @@
     </dependency>
 
     <!-- View Dependencies -->
+
     <dependency>
       <groupId>taglibs</groupId>
       <artifactId>standard</artifactId>
       <version>${taglibs.version}</version>
-      <type>jar</type>
-      <scope>compile</scope>
     </dependency>
+
 
     <dependency>
       <groupId>javax.servlet.jsp</groupId>
