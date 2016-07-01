@@ -204,8 +204,7 @@
           c:encodingAlgorithm="MD5"
           p:characterEncoding="UTF-8" />
 
-    <!-- MySQL connector -->
-    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+  <!--  <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName">
             <value>com.mysql.jdbc.Driver</value>
         </property>
@@ -218,32 +217,14 @@
         <property name="password">
             <value>root</value>
         </property>
-    </bean>
+    </bean>-->
 
-    <!--<bean id="dataSource"
-          class="com.mchange.v2.c3p0.ComboPooledDataSource"
-          p:driverClass="com.mysql.jdbc.Driver"
-          p:jdbcUrl="jdbc:mysql://localhost:3306/project_dvspc"
-          p:user="root"
-          p:password="root"
-          p:initialPoolSize="10"
-          p:minPoolSize="10"
-          p:maxPoolSize="50"
-          p:maxIdleTimeExcessConnections="20"
-          p:checkoutTimeout="10000"
-          p:acquireIncrement="5"
-          p:acquireRetryAttempts="5"
-          p:acquireRetryDelay="20000"
-          p:idleConnectionTestPeriod="30"
-          p:preferredTestQuery="select 1" />-->
-
-
-   <!-- <bean id="dataSource"
+    <bean id="dataSource"
           class="com.mchange.v2.c3p0.ComboPooledDataSource"
           p:driverClass="${database.driverClass}"
-          p:jdbcUrl="${database.url}"
+          p:jdbcUrl="${cas.database.url}"
           p:user="${database.user}"
-          p:password="${database.password}"
+          p:password="${cas.database.password}"
           p:initialPoolSize="${database.pool.minSize}"
           p:minPoolSize="${database.pool.minSize}"
           p:maxPoolSize="${database.pool.maxSize}"
@@ -253,6 +234,9 @@
           p:acquireRetryAttempts="${database.pool.acquireRetryAttempts}"
           p:acquireRetryDelay="${database.pool.acquireRetryDelay}"
           p:idleConnectionTestPeriod="${database.pool.idleConnectionTestPeriod}"
-          p:preferredTestQuery="${database.pool.connectionHealthQuery}" />-->
+          p:preferredTestQuery="${database.pool.connectionHealthQuery}" />
 
+    <bean id="casdatabaseProperties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="casdatabase.properties"></property>
+    </bean>
 </beans>

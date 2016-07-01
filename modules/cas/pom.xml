@@ -226,6 +226,25 @@
                         </configuration>
                     </execution>
 
+                    <execution>
+                        <id>copy-resources3</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/cas/WEB-INF</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}/src/main/webapp/WEB-INF</directory>
+                                    <includes>
+                                        <include>casdatabase.properties</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+
                     <!--test-->
                     <!--<execution>
                         <id>copy-test</id>
