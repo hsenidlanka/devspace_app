@@ -193,7 +193,7 @@
                 <executions>
                     <execution>
                         <id>copy-resources</id>
-                        <phase>deploy</phase>
+                        <phase>install</phase>
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>
@@ -201,14 +201,16 @@
                             <outputDirectory>${basedir}/target</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>${CAS.LOCATION}</directory>
-                                    <filtering>true</filtering>
+                                    <directory>${CAS.LOCATION}/target</directory>
+                                    <includes>
+                                        <include>cas.war</include>
+                                    </includes>
                                 </resource>
                             </resources>
                         </configuration>
                     </execution>
                     <execution>
-                        <id>copy-resources2</id>
+                        <id>copy-deployerConfigContext</id>
                         <phase>install</phase>
                         <goals>
                             <goal>copy-resources</goal>
@@ -225,15 +227,33 @@
                             </resources>
                         </configuration>
                     </execution>
-
                     <execution>
-                        <id>copy-resources3</id>
+                        <id>copy-web.xml</id>
                         <phase>install</phase>
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${basedir}/cas/WEB-INF</outputDirectory>
+                            <outputDirectory>${basedir}/target/cas/WEB-INF</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}/src/main/webapp/WEB-INF</directory>
+                                    <includes>
+                                        <include>web.xml</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>copy-resources4</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/src/WEB-INF</outputDirectory>
                             <resources>
                                 <resource>
                                     <directory>${basedir}/src/main/webapp/WEB-INF</directory>
@@ -245,7 +265,7 @@
                         </configuration>
                     </execution>
 
-                    <!--test-->
+                    <!--test copy resources-->
                     <!--<execution>
                         <id>copy-test</id>
                         <phase>install</phase>
