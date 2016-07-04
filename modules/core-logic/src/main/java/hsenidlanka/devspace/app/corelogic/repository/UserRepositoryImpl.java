@@ -16,13 +16,13 @@ public class UserRepositoryImpl implements UserRepository{
     }
 
     @Override
-    public int deleteUser(int usr_id) {
-        return usr_id;
+    public int deleteUser() {
+        return user.getUsr_id();
 
     }
 
     @Override
-    public String changePassword(String password) {
+    public String changePassword() {
         return user.getPassword();
     }
 }
