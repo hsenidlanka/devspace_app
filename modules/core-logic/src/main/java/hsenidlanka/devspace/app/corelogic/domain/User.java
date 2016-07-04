@@ -69,4 +69,10 @@ public class User {
     public void setAddressL2(String addressL2) {
         this.addressL2 = addressL2;
     }
+
+    public User(int usr_id, String username, String password) {
+        this.usr_id = usr_id;
+        this.username = username;
+        this.password = password;
+    }
 }
