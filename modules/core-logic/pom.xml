@@ -7,6 +7,7 @@
     <packaging>jar</packaging>
 
 
+
     <parent>
         <groupId>hsenid</groupId>
         <artifactId>parent</artifactId>
@@ -42,6 +43,12 @@
         </dependency>
 
     </dependencies>
+    <!--<repositories>
+        <repository>
+            <id>my-repo</id>
+            <url>${repobasedir}</url>&lt;!&ndash;add a repo in project location as repo&ndash;&gt;
+        </repository>
+    </repositories>-->
     <build>
         <!--<resources>
             <resource>
@@ -62,6 +69,26 @@
                         <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
                     </archive>-->
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>2.5.2</version>
+                <executions>
+                    <execution>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                        <configuration>
+                            <groupId>core-logic1</groupId>
+                            <artifactId>core-logic1</artifactId>
+                            <version>1.0</version>
+                            <packaging>jar</packaging>
+                            <file>${repobasedir}/hsenid/core-logic/1.0/core-logic-1.0.jar</file>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
         <finalName>core-logic</finalName>
