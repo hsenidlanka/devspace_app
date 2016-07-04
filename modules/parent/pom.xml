@@ -41,6 +41,7 @@
 
         <RWD_DB_USER>root</RWD_DB_USER>
         <RWD_DB_PASSWORD>root</RWD_DB_PASSWORD>
+        <repobasedir>/home/hsenid/my-repo</repobasedir>
     </properties>
 
     <modules>
