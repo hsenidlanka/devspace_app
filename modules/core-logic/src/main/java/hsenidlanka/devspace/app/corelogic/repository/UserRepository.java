@@ -6,6 +6,6 @@ package hsenidlanka.devspace.app.corelogic.repository;
 public interface UserRepository {
 
     String addUser();
-    void deleteUser(int usr_id);
+    int deleteUser(int usr_id);
     String changePassword(String password);
 }

@@ -75,4 +75,9 @@ public class User {
         this.username = username;
         this.password = password;
     }
+
+    public User() {
+       /* User user=new User();
+        user.getUsername();*/
+    }
 }
