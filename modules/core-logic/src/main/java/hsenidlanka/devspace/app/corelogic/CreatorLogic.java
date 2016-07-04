@@ -1,4 +1,4 @@
-package devspace.app.corelogic;
+package hsenidlanka.devspace.app.corelogic;
 
 
 /**
@@ -23,5 +23,6 @@ public class CreatorLogic {
     public void setPassword(String password) {
         this.password = password;
     }
+
 
 }
