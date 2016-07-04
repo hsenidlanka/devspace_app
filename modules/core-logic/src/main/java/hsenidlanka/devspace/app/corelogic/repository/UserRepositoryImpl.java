@@ -25,4 +25,9 @@ public class UserRepositoryImpl implements UserRepository{
     public String changePassword() {
         return user.getPassword();
     }
+
+    @Override
+    public boolean confirmPassword() {
+        return user.isConfirmed();
+    }
 }

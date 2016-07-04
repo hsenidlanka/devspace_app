@@ -5,7 +5,12 @@ package hsenidlanka.devspace.app.corelogic.repository;
  */
 public interface UserRepository {
 
+
     String addUser();
+
     int deleteUser();
+
     String changePassword();
+
+    boolean confirmPassword();
 }
