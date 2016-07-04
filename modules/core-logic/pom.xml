@@ -43,12 +43,12 @@
         </dependency>
 
     </dependencies>
-    <!--<repositories>
+    <repositories>
         <repository>
             <id>my-repo</id>
-            <url>${repobasedir}</url>&lt;!&ndash;add a repo in project location as repo&ndash;&gt;
+            <url>${repobasedir}</url><!--add a repo in project location as repo-->
         </repository>
-    </repositories>-->
+    </repositories>
     <build>
         <!--<resources>
             <resource>
@@ -81,8 +81,8 @@
                             <goal>install-file</goal>
                         </goals>
                         <configuration>
-                            <groupId>core-logic1</groupId>
-                            <artifactId>core-logic1</artifactId>
+                            <groupId>core-logic</groupId>
+                            <artifactId>core-logic</artifactId>
                             <version>1.0</version>
                             <packaging>jar</packaging>
                             <file>${repobasedir}/hsenid/core-logic/1.0/core-logic-1.0.jar</file>
