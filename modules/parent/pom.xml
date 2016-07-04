@@ -34,6 +34,7 @@
         <commons-logging.version>1.2</commons-logging.version>
         <commons-lang.version>2.6</commons-lang.version>
         <tanukisoft-wrapper.version>3.2.3</tanukisoft-wrapper.version>
+        <testng.version>6.8</testng.version>
 
         <RWD_LOG_ROOT>/home/hsenid/Documents/MAVEN/devspace_app/modules/admin</RWD_LOG_ROOT>
 
