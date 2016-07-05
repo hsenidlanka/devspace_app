@@ -34,8 +34,8 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>cas-server-webapp</artifactId>
-    <packaging>war</packaging>
-    <name>Apereo CAS Web Application</name>
+  <!--  <packaging>war</packaging>
+    <name>Apereo CAS Web Application</name>-->
 
     <dependencies>
 
@@ -186,19 +186,47 @@
                 </configuration>
             </plugin>
 
+            <!--<plugin>
+                <groupId>com.github.goldin</groupId>
+                <artifactId>maven-common</artifactId>
+                <version>0.2.4</version>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/hh</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${CAS.LOCATION}/target</directory>
+                                    <includes>
+                                        <include>cas.war</include>
+                                    </includes>
+                                    <unpack>true</unpack>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>-->
+
             <!--Copy plugin-->
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>3.0.1</version>
                 <executions>
                     <execution>
-                        <id>copy-resources</id>
+                        <id>copy-initial-cas.war</id>
                         <phase>install</phase>
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${basedir}/target</outputDirectory>
+                            <overwrite>true</overwrite>
+                            <outputDirectory>${basedir}/target/cas</outputDirectory>
                             <resources>
                                 <resource>
                                     <directory>${CAS.LOCATION}/target</directory>
@@ -209,6 +237,7 @@
                             </resources>
                         </configuration>
                     </execution>
+
                     <execution>
                         <id>copy-deployerConfigContext</id>
                         <phase>install</phase>
@@ -216,10 +245,11 @@
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
+                            <overwrite>true</overwrite>
                             <outputDirectory>${basedir}/target/cas/WEB-INF</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>${basedir}/src/main/webapp/WEB-INF</directory>
+                                    <directory>${basedir}/resources</directory>
                                     <includes>
                                         <include>deployerConfigContext.xml</include>
                                     </includes>
@@ -227,6 +257,7 @@
                             </resources>
                         </configuration>
                     </execution>
+
                     <execution>
                         <id>copy-web.xml</id>
                         <phase>install</phase>
@@ -234,10 +265,11 @@
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
+                            <overwrite>true</overwrite>
                             <outputDirectory>${basedir}/target/cas/WEB-INF</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>${basedir}/src/main/webapp/WEB-INF</directory>
+                                    <directory>${basedir}/resources</directory>
                                     <includes>
                                         <include>web.xml</include>
                                     </includes>
@@ -247,16 +279,16 @@
                     </execution>
 
                     <execution>
-                        <id>copy-resources4</id>
+                        <id>copy-casdatabase.properties</id>
                         <phase>install</phase>
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${basedir}/src/WEB-INF</outputDirectory>
+                            <outputDirectory>${basedir}/target/cas/WEB-INF</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>${basedir}/src/main/webapp/WEB-INF</directory>
+                                    <directory>${basedir}/resources</directory>
                                     <includes>
                                         <include>casdatabase.properties</include>
                                     </includes>
@@ -264,30 +296,30 @@
                             </resources>
                         </configuration>
                     </execution>
-
-                    <!--test copy resources-->
-                    <!--<execution>
-                        <id>copy-test</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${basedir}/target/cas/WEB-INF/testdir</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>${basedir}/src/main/webapp/WEB-INF</directory>
-                                    <includes>
-                                        <include>testfile.xml</include>
-                                        <include>cas.properties</include>
-                                    </includes>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>-->
                 </executions>
             </plugin>
 
+            <!--unpacking plugin-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <id>unzip-war</id>
+                        <phase>install</phase>
+                        <configuration>
+                            <tasks>
+                                <echo message="unpack cas.war" />
+                                <unzip src="${basedir}/target/cas/cas.war" dest="${basedir}/target/cas" overwrite="true"/>
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
         <finalName>cas</finalName>
     </build>
