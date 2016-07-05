@@ -10,9 +10,5 @@ public interface UserRepository {
 
     public void addUser(User user);
 
-    int deleteUser();
 
-    String changePassword();
-
-    boolean confirmPassword();
 }

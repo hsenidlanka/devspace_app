@@ -2,6 +2,10 @@ package hsenidlanka.devspace.app.corelogic.repository;
 
 import hsenidlanka.devspace.app.corelogic.domain.User;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.sql.DataSource;
 
@@ -12,36 +16,29 @@ public class UserRepositoryImpl implements UserRepository{
     User user=new User();
     private DataSource dataSource;
     private JdbcTemplate jdbcTemplate;
+    private PlatformTransactionManager transactionManager;
 
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }
+    public void setTransactionManager(PlatformTransactionManager transactionManager){
+        this.transactionManager=transactionManager;
+    }
 
     @Override
     public void addUser(User user) {
+        TransactionDefinition tr_def = new DefaultTransactionDefinition();
+        TransactionStatus stat = transactionManager.getTransaction(tr_def);
+        jdbcTemplate = new JdbcTemplate(dataSource);
+
         String sql = "INSERT INTO users " +
                 "(username,password) VALUES (?, ?)";
 
-        jdbcTemplate = new JdbcTemplate(dataSource);
 
-        jdbcTemplate.update(sql, new Object[] { user.getUsername(),
+        jdbcTemplate.update(sql, new Object[]{ user.getUsername(),
                 user.getPassword() });
-
+        transactionManager.commit(stat);
     }
 
-    @Override
-    public int deleteUser() {
-        return user.getUsr_id();
 
-    }
-
-    @Override
-    public String changePassword() {
-        return user.getPassword();
-    }
-
-    @Override
-    public boolean confirmPassword() {
-        return user.isConfirmed();
-    }
 }
