@@ -70,8 +70,8 @@ public class User {
         this.addressL2 = addressL2;
     }
 
-    public User(int usr_id, String username, String password) {
-        this.usr_id = usr_id;
+    public User( String username, String password) {
+
         this.username = username;
         this.password = password;
     }

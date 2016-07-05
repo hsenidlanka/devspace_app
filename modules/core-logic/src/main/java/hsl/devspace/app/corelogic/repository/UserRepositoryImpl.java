@@ -29,14 +29,13 @@ public class UserRepositoryImpl implements UserRepository{
     public void addUser(User user) {
         TransactionDefinition tr_def = new DefaultTransactionDefinition();
         TransactionStatus stat = transactionManager.getTransaction(tr_def);
-        jdbcTemplate = new JdbcTemplate(dataSource);
 
         String sql = "INSERT INTO users " +
-                "(username,password) VALUES (?, ?)";
+                "(username,password) VALUES (? , ?)";
 
+        jdbcTemplate = new JdbcTemplate(dataSource);
 
-        jdbcTemplate.update(sql, new Object[]{ user.getUsername(),
-                user.getPassword() });
+        jdbcTemplate.update(sql, new Object[]{ user.getUsername(), user.getPassword() });
         transactionManager.commit(stat);
     }
 
