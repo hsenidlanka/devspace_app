@@ -7,7 +7,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 /**
  * Created by hsenid on 7/5/16.
  */
-public class Demo {
+public class UserRepositoryApp {
     public static void main(String[] args){
         ApplicationContext context = new ClassPathXmlApplicationContext("spring-user.xml");
 /*
