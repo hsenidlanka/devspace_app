@@ -15,7 +15,7 @@
         <property name="password" value="${jdbc.password}" />
     </bean>
 
-    <bean id="userRepository" class="hsenidlanka.devspace.app.corelogic.repository.UserRepositoryImpl">
+    <bean id="userRepository" class="hsl.devspace.app.corelogic.repository.UserRepositoryImpl">
         <property name="dataSource" ref="dataSource" />
         <property name="transactionManager" ref="transactionManager"/>
     </bean>

@@ -1,4 +1,4 @@
-package hsenidlanka.devspace.app.corelogic.domain;
+package hsl.devspace.app.corelogic.domain;
 
 import java.util.Date;
 

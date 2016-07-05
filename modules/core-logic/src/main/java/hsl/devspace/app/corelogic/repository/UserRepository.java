@@ -1,6 +1,6 @@
-package hsenidlanka.devspace.app.corelogic.repository;
+package hsl.devspace.app.corelogic.repository;
 
-import hsenidlanka.devspace.app.corelogic.domain.User;
+import hsl.devspace.app.corelogic.domain.User;
 
 /**
  * Created by hsenid on 7/4/16.

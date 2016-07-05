@@ -1,4 +1,4 @@
-package hsenidlanka.devspace.app.corelogic.repository;
+package hsl.devspace.app.corelogic.repository;
 
 /**
  * Created by hsenid on 7/5/16.
