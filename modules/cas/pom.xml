@@ -186,61 +186,35 @@
                 </configuration>
             </plugin>
 
-            <!--<plugin>
-                <groupId>com.github.goldin</groupId>
-                <artifactId>maven-common</artifactId>
-                <version>0.2.4</version>
-                <executions>
-                    <execution>
-                        <id>copy-resources</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${basedir}/hh</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>${CAS.LOCATION}/target</directory>
-                                    <includes>
-                                        <include>cas.war</include>
-                                    </includes>
-                                    <unpack>true</unpack>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>-->
-
             <!--Copy plugin-->
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>3.0.1</version>
                 <executions>
+
+                    <!--copy cas.war file-->
                     <execution>
                         <id>copy-initial-cas.war</id>
-                        <phase>install</phase>
+                        <phase>validate</phase>
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <overwrite>true</overwrite>
+                          <overwrite>true</overwrite>
                             <outputDirectory>${basedir}/target/cas</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>${CAS.LOCATION}/target</directory>
-                                    <includes>
-                                        <include>cas.war</include>
-                                    </includes>
+                                    <directory>${CAS.LOCATION}</directory>
                                 </resource>
                             </resources>
                         </configuration>
                     </execution>
 
+
+                    <!--copying & replacing modified files-->
                     <execution>
                         <id>copy-deployerConfigContext</id>
-                        <phase>install</phase>
+                        <phase>validate</phase>
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>
@@ -250,27 +224,10 @@
                             <resources>
                                 <resource>
                                     <directory>${basedir}/resources</directory>
+                                    <filtering>true</filtering>
                                     <includes>
                                         <include>deployerConfigContext.xml</include>
-                                    </includes>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-
-                    <execution>
-                        <id>copy-web.xml</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <overwrite>true</overwrite>
-                            <outputDirectory>${basedir}/target/cas/WEB-INF</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>${basedir}/resources</directory>
-                                    <includes>
+                                        <include>casdatabase.properties</include>
                                         <include>web.xml</include>
                                     </includes>
                                 </resource>
@@ -279,18 +236,20 @@
                     </execution>
 
                     <execution>
-                        <id>copy-casdatabase.properties</id>
-                        <phase>install</phase>
+                        <id>copy-app-context</id>
+                        <phase>validate</phase>
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${basedir}/target/cas/WEB-INF</outputDirectory>
+                            <overwrite>true</overwrite>
+                            <outputDirectory>${basedir}/target/cas/WEB-INF/spring-configuration</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>${basedir}/resources</directory>
+                                    <directory>${basedir}/src/spring-configuration</directory>
+                                    <filtering>true</filtering>
                                     <includes>
-                                        <include>casdatabase.properties</include>
+                                        <include>applicationContext.xml</include>
                                     </includes>
                                 </resource>
                             </resources>
@@ -300,7 +259,7 @@
             </plugin>
 
             <!--unpacking plugin-->
-            <plugin>
+           <!-- <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
                 <version>1.6</version>
@@ -319,7 +278,8 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin>-->
+
         </plugins>
         <finalName>cas</finalName>
     </build>
