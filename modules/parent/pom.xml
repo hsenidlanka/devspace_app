@@ -38,7 +38,7 @@
 
         <RWD_LOG_ROOT>/home/hsenid/Documents/MAVEN/devspace_app/modules/admin</RWD_LOG_ROOT>
 
-        <CAS.LOCATION>/home/hsenid/cas-4.1.4/cas-server-webapp</CAS.LOCATION>
+        <CAS.LOCATION>/home/hsenid/devspace_app/devspace_app/deployment/cas</CAS.LOCATION>
         <JDBC_DRIVER>com.mysql.jdbc.Driver</JDBC_DRIVER>
         <JDBC_URL>jdbc:mysql://localhost:3306/project_dvspc</JDBC_URL>
         <RWD_DB_USER>root</RWD_DB_USER>
