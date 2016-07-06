@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ProjectModuleManager">
-    <modules />
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../admin/admin.iml" filepath="$PROJECT_DIR$/../admin/admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../cas/cas-server-webapp.iml" filepath="$PROJECT_DIR$/../cas/cas-server-webapp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../core-logic/core-logic.iml" filepath="$PROJECT_DIR$/../core-logic/core-logic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../core-server/core-server.iml" filepath="$PROJECT_DIR$/../core-server/core-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/parent.iml" filepath="$PROJECT_DIR$/parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../self-care/web-selfcare/web-selfcare.iml" filepath="$PROJECT_DIR$/../self-care/web-selfcare/web-selfcare.iml" />
+    </modules>
   </component>
 </project>
