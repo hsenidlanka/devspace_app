@@ -1,12 +1,12 @@
-package com.hsenid.devspace;
+package hsl.devspace.app.coreserver.common;
 
+import com.sun.jersey.spi.container.servlet.ServletContainer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.glassfish.jersey.server.ResourceConfig;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
-import com.sun.jersey.spi.container.servlet.ServletContainer;
+
 
 /**
  * Created by hsenid on 6/29/16.
@@ -51,12 +51,22 @@ public class InitServer {
     }
 
     public Server createServer() {
-        ResourceConfig config = new ResourceConfig();
-        config.packages(getPackageName());
-        ServletHolder servlet = new ServletHolder(new ServletContainer(config));
-        Server server = new Server(getPort());
-        ServletContextHandler context = new ServletContextHandler(server, getContextRoot());
-        context.addServlet(servlet, getServletPath());
+//        ResourceConfig config = new ResourceConfig();
+//        config.packages(getPackageName());
+//        ServletHolder servlet = new ServletHolder(new ServletContainer(config));
+//        Server server = new Server(getPort());
+//        ServletContextHandler context = new ServletContextHandler(server, getContextRoot());
+//        context.addServlet(servlet, getServletPath());
+
+        ServletHolder sh = new ServletHolder(ServletContainer.class);
+        sh.setInitParameter("com.sun.jersey.config.property.packages", getPackageName());//Set the package where the services reside
+        sh.setInitParameter("com.sun.jersey.api.json.POJOMappingFeature", "true");
+
+        Server server = new Server(2222);
+        ServletContextHandler context = new ServletContextHandler(server, getContextRoot(), ServletContextHandler.SESSIONS);
+        context.addServlet(sh, getServletPath());
+
         return server;
+
     }
 }
