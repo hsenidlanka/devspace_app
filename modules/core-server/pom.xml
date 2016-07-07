@@ -19,6 +19,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>hsenid</groupId>
+            <artifactId>core-logic</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
             <groupId>tanukisoft</groupId>
             <artifactId>wrapper</artifactId>
             <version>${tanukisoft-wrapper.version}</version>
@@ -56,25 +62,28 @@
             <artifactId>jetty-webapp</artifactId>
             <version>9.3.10.v20160621</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.sun.jersey/jersey-bundle -->
         <dependency>
             <groupId>com.sun.jersey</groupId>
-            <artifactId>jersey-server</artifactId>
-            <version>1.19</version>
+            <artifactId>jersey-bundle</artifactId>
+            <version>1.19.1</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.owlike/genson -->
         <dependency>
-            <groupId>org.glassfish.jersey.core</groupId>
-            <artifactId>jersey-server</artifactId>
-            <version>2.23</version>
+            <groupId>com.owlike</groupId>
+            <artifactId>genson</artifactId>
+            <version>1.3</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.sun.jersey/jersey-servlet -->
-        <dependency>
-            <groupId>com.sun.jersey</groupId>
-            <artifactId>jersey-servlet</artifactId>
-            <version>1.19</version>
-        </dependency>
+
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
+            <version>4.2.6.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
             <version>4.2.6.RELEASE</version>
         </dependency>
 
@@ -116,7 +125,7 @@
                         <daemon>
                             <id>core-server</id>
                             <!-- Main class of the program. -->
-                            <mainClass>com.hsenid.devspace.ServerMain</mainClass>
+                            <mainClass>hsl.devspace.app.coreserver.common.ServerMain</mainClass>
 
                             <!-- Commandline arguments to perform tasks. -->
                             <commandLineArguments>
@@ -146,7 +155,7 @@
                                         <!-- Define java main class. -->
                                         <property>
                                             <name>wrapper.java.mainclass</name>
-                                            <value>com.hsenid.devspace.ServerMain</value>
+                                            <value>hsl.devspace.app.coreserver.common.ServerMain</value>
                                         </property>
                                         <!-- Define the directory contains the configurations. -->
                                         <property>
@@ -238,7 +247,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <!-- Java class file contains the main method. -->
-                            <mainClass>com.hsenid.devspace.ServerMain</mainClass>
+                            <mainClass>hsl.devspace.app.coreserver.common.ServerMain</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

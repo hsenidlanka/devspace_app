@@ -1,4 +1,4 @@
-package com.hsenid.devspace;
+package hsl.devspace.app.coreserver.common;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.apache.logging.log4j.LogManager;
@@ -14,8 +14,7 @@ import org.tanukisoftware.wrapper.WrapperManager;
  */
 public class ServerMain implements WrapperListener {
     private static final Logger log = LogManager.getLogger(ServerMain.class);
-    Server server;
-    ComboPooledDataSource comboPooledDataSource;
+    private Server server;
 
     @Override
     public Integer start(String[] strings) {
@@ -26,8 +25,6 @@ public class ServerMain implements WrapperListener {
         try {
             server.start();
             server.join();
-            comboPooledDataSource = (ComboPooledDataSource) appContext.getBean("datasource");
-            comboPooledDataSource.getConnection();
         } catch (Exception e) {
             log.error("Error while starting jetty server. " + e);
         }
@@ -36,10 +33,9 @@ public class ServerMain implements WrapperListener {
 
     @Override
     public int stop(int i) {
-        WrapperManager.log(WrapperManager.WRAPPER_LOG_LEVEL_INFO, "Stop");
-        log.error("SFSDSDFSDF");
+        log.error("Error...");
         try {
-            comboPooledDataSource.close();
+            DatabaseConnection.closeComboPooledDataSource();
             server.stop();
         } catch (Exception e) {
             log.error("Error while stopping jetty server. " + e);
@@ -59,5 +55,6 @@ public class ServerMain implements WrapperListener {
 
     public static void main(String[] args) throws Exception {
         WrapperManager.start(new ServerMain(), args);
+        DatabaseConnection.createComboPooledDataSource();
     }
 }
