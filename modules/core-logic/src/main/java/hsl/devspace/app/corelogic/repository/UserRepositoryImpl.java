@@ -19,7 +19,9 @@ public class UserRepositoryImpl implements UserRepository{
     private PlatformTransactionManager transactionManager;
 
     public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
+        //this.dataSource = dataSource;
+        jdbcTemplate = new JdbcTemplate(dataSource);
+
     }
     public void setTransactionManager(PlatformTransactionManager transactionManager){
         this.transactionManager=transactionManager;
@@ -33,7 +35,6 @@ public class UserRepositoryImpl implements UserRepository{
         String sql = "INSERT INTO users " +
                 "(username,password) VALUES (?,?)";
 
-        jdbcTemplate = new JdbcTemplate(dataSource);
 
         jdbcTemplate.update(sql, new Object[]{user.getUsername(), user.getPassword() });
         transactionManager.commit(stat);
