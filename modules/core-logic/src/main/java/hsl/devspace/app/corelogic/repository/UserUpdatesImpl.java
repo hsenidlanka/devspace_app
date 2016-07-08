@@ -18,8 +18,8 @@ public class UserUpdatesImpl implements UserUpdates {
     private JdbcTemplate jdbcTemplate;
     private PlatformTransactionManager transactionManager;
 
-    public void setDataSource(DataSource dataSource2) {
-        this.dataSource = dataSource2;
+    public void setDataSource(DataSource dataSource) {
+        jdbcTemplate = new JdbcTemplate(dataSource);
     }
     public void setTransactionManager(PlatformTransactionManager transactionManager){
         this.transactionManager=transactionManager;
@@ -31,20 +31,23 @@ public class UserUpdatesImpl implements UserUpdates {
     public TransactionStatus createTransStat(TransactionDefinition tr_def){
         return transactionManager.getTransaction(tr_def);
     }*/
-
     @Override
     public void deleteUser(String username) {
         TransactionDefinition tr_def = new DefaultTransactionDefinition();
         TransactionStatus stat = transactionManager.getTransaction(tr_def);
 
-        user.setUsername(username);
+      
+           user.setUsername(username);
+
         String sql = "DELETE FROM users WHERE username = ?";
 
-        jdbcTemplate = new JdbcTemplate(dataSource);
 
         jdbcTemplate.update(sql, new Object[]{ user.getUsername() });
         transactionManager.commit(stat);
+
+
     }
+
 
     @Override
     public void changePassword(String username,String password) {
@@ -55,7 +58,7 @@ public class UserUpdatesImpl implements UserUpdates {
         user.setPassword(password);
         String sql = "UPDATE users SET password = ? WHERE username = ? ";
 
-        jdbcTemplate = new JdbcTemplate(dataSource);
+        //jdbcTemplate = new JdbcTemplate(dataSource);
 
         jdbcTemplate.update(sql, new Object[]{ user.getPassword(),user.getUsername() });
         transactionManager.commit(stat);

@@ -31,13 +31,18 @@ public class UserRepositoryImpl implements UserRepository{
     public void addUser(User user) {
         TransactionDefinition tr_def = new DefaultTransactionDefinition();
         TransactionStatus stat = transactionManager.getTransaction(tr_def);
+try {
+    String sql = "INSERT INTO users " +
+            "(username,password) VALUES (?,?)";
 
-        String sql = "INSERT INTO users " +
-                "(username,password) VALUES (?,?)";
 
+    jdbcTemplate.update(sql, new Object[]{user.getUsername(), user.getPassword()});
+    transactionManager.commit(stat);
+}
+        catch (Exception SQLIntegrityConstraintViolationException ){
+            System.out.println("Duplicate Entry");
 
-        jdbcTemplate.update(sql, new Object[]{user.getUsername(), user.getPassword() });
-        transactionManager.commit(stat);
+        }
     }
 
 
