@@ -1,43 +1,40 @@
 package hsl.devspace.app.coreserver.resources;
 
-import com.mchange.v2.c3p0.ComboPooledDataSource;
-import com.sun.jersey.api.NotFoundException;
 import hsl.devspace.app.corelogic.domain.User;
 import hsl.devspace.app.corelogic.repository.UserRepositoryImpl;
-import hsl.devspace.app.coreserver.common.DatabaseConnection;
-import hsl.devspace.app.coreserver.model.ErrorMessage;
+import hsl.devspace.app.coreserver.model.SuccessMessage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
-import javax.xml.crypto.Data;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by hsenid on 6/29/16.
  */
-@Path("/user")
+@Path("/users")
 public class UserManagement {
     private static final Logger log = LogManager.getLogger(UserManagement.class);
     UserRepositoryImpl userImpl = new UserRepositoryImpl();
 
-    @GET
+    @POST
     @Path("/add/{username}/{password}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response addNewUser(@PathParam("username") String userName, @PathParam("password") String password) {
-//        User user = new User(userName, password);
+        User user = new User(userName, password);
 //        userImpl.addUser(user);
-        return Response.status(200).entity("hhh").build();
+        Map<String, Object> userData = new HashMap<String, Object>();
+        userData.put("username", user.getUsername());
+        userData.put("password", user.getPassword());
+        SuccessMessage successMessage = new SuccessMessage("success", Response.Status.CREATED.getStatusCode(), "user added", userData);
+        return Response.status(Response.Status.CREATED).entity(successMessage).build();
     }
 
-    @GET
+    @DELETE
     @Path("/delete/{id}")
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     public int getUser(@PathParam("id") int id) {
 
         return 0;

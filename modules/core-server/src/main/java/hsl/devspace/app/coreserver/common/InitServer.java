@@ -10,6 +10,7 @@ import org.eclipse.jetty.servlet.ServletHolder;
 
 /**
  * Created by hsenid on 6/29/16.
+ * This class has the configuration for the Jetty server.
  */
 public class InitServer {
     private static final Logger log = LogManager.getLogger(InitServer.class);
@@ -51,13 +52,6 @@ public class InitServer {
     }
 
     public Server createServer() {
-//        ResourceConfig config = new ResourceConfig();
-//        config.packages(getPackageName());
-//        ServletHolder servlet = new ServletHolder(new ServletContainer(config));
-//        Server server = new Server(getPort());
-//        ServletContextHandler context = new ServletContextHandler(server, getContextRoot());
-//        context.addServlet(servlet, getServletPath());
-
         ServletHolder sh = new ServletHolder(ServletContainer.class);
         sh.setInitParameter("com.sun.jersey.config.property.packages", getPackageName());//Set the package where the services reside
         sh.setInitParameter("com.sun.jersey.api.json.POJOMappingFeature", "true");
