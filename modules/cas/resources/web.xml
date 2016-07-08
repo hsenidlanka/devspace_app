@@ -33,9 +33,12 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-            /WEB-INF/spring-configuration/*.xml
+           <!-- /WEB-INF/spring-configuration/*.xml
             /resources/deployerConfigContext.xml
-            classpath*:/META-INF/spring/*.xml
+            classpath*:/META-INF/spring/*.xml-->
+            file:/target/cas/WEB-INF/spring-configuration/*.xml
+            file:/target/cas/WEB-INF/deployerConfigContext.xml
+            file:/target/cas/META-INF/spring/*.xml
         </param-value>
     </context-param>
 

@@ -213,7 +213,7 @@
 
                     <!--copying & replacing modified files-->
                     <execution>
-                        <id>copy-deployerConfigContext</id>
+                        <id>copy-resources1</id>
                         <phase>validate</phase>
                         <goals>
                             <goal>copy-resources</goal>
@@ -229,6 +229,27 @@
                                         <include>deployerConfigContext.xml</include>
                                         <include>casdatabase.properties</include>
                                         <include>web.xml</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>copy-jspViews</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <overwrite>true</overwrite>
+                            <outputDirectory>${basedir}/target/cas/WEB-INF/view/jsp/default/ui</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}/jsp</directory>
+                                    <filtering>true</filtering>
+                                    <includes>
+                                        <!--<include>casLoginView.jsp</include>-->
                                     </includes>
                                 </resource>
                             </resources>
