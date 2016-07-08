@@ -6,7 +6,7 @@ package hsl.devspace.app.corelogic.repository;
 public interface UserUpdates {
     void deleteUser(String username);
 
-    String changePassword();
+    void changePassword(String username,String password);
 
     boolean confirmPassword();
 }

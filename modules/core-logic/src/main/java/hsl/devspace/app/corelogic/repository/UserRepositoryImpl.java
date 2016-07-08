@@ -31,11 +31,11 @@ public class UserRepositoryImpl implements UserRepository{
         TransactionStatus stat = transactionManager.getTransaction(tr_def);
 
         String sql = "INSERT INTO users " +
-                "(username,password) VALUES (? , ?)";
+                "(username,password) VALUES (?,?)";
 
         jdbcTemplate = new JdbcTemplate(dataSource);
 
-        jdbcTemplate.update(sql, new Object[]{ user.getUsername(), user.getPassword() });
+        jdbcTemplate.update(sql, new Object[]{user.getUsername(), user.getPassword() });
         transactionManager.commit(stat);
     }
 

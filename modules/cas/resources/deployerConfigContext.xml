@@ -159,6 +159,7 @@
               p:sessionCountWarnThreshold="100000" />
     </util:list>
 
+    <bean id="ticketRegistry"/>
 
 <!--Configuration for the OAuth server support-->
 <bean id="serviceRegistryDao" class="org.jasig.cas.services.InMemoryServiceRegistryDaoImpl">

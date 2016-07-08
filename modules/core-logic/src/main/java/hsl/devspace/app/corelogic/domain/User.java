@@ -7,12 +7,30 @@ import java.util.Date;
  */
 public class User {
     private int usr_id;
+    private String firstName;
+    private String lastName;
     private String username;
     private String password;
     private boolean isConfirmed;
     private Date dob;
     private String addressL1;
     private String addressL2;
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
     public int getUsr_id() {
         return usr_id;
@@ -79,5 +97,16 @@ public class User {
     public User() {
       /* User user=new User();
         user.getUsername();*/
+    }
+
+    public User(String addressL2, String addressL1, Date dob,
+                String password, String username, String lastName, String firstName) {
+        this.addressL2 = addressL2;
+        this.addressL1 = addressL1;
+        this.dob = dob;
+        this.password = password;
+        this.username = username;
+        this.lastName = lastName;
+        this.firstName = firstName;
     }
 }
