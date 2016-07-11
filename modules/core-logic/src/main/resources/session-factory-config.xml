@@ -1,10 +1,29 @@
+<!--
+#
+#   (C) Copyright 2008-2009 hSenid Software International (Pvt) Limited.
+#   All Rights Reserved.
+#
+#   These materials are unpublished, proprietary, confidential source code of
+#   hSenid Software International (Pvt) Limited and constitute a TRADE SECRET
+#   of hSenid Software International (Pvt) Limited.
+#
+#   hSenid Software International (Pvt) Limited retains all title to and intellectual
+#   property rights in these materials.
+#
+# $LastChangedDate$
+# $LastChangedBy$
+# $LastChangedRevision$
+#
+#
+-->
+
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
 
 
-    <bean id="logicDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+    <bean id="productionDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
         <property name="driverClass" value="${jdbc.driver}"/>
         <property name="jdbcUrl" value="${jdbc.url}"/>
         <property name="user" value="${jdbc.username}"/>
@@ -23,16 +42,16 @@
         <property name="acquireRetryDelay" value="${datasource.acquireRetryDelay}"/>
         <property name="breakAfterAcquireFailure" value="${datasource.breakAfterAcquireFailure}"/>
         <property name="connectionTesterClassName" value="com.mchange.v2.c3p0.impl.DefaultConnectionTester"/>
-        <property name="preferredTestQuery" value="SELECT 1"/>
+        <property name="preferredTestQuery" value="SELECT 1" />
         <property name="unreturnedConnectionTimeout" value="10000"/>
 
     </bean>
 
-    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate" p:dataSource-ref="logicDataSource"/>
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate"
+          p:dataSource-ref="productionDataSource"/>
 
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="logicDataSource"/>
-
+        <property name="dataSource" ref="productionDataSource"/>
     </bean>
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
