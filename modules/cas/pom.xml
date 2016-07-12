@@ -34,8 +34,8 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>cas-server-webapp</artifactId>
-  <!--  <packaging>war</packaging>
-    <name>Apereo CAS Web Application</name>-->
+    <!--  <packaging>war</packaging>
+      <name>Apereo CAS Web Application</name>-->
 
     <dependencies>
 
@@ -77,6 +77,12 @@
             <version>1.1.2</version>
             <type>jar</type>
             <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jasig.cas</groupId>
+            <artifactId>cas-server-support-jdbc</artifactId>
+            <version>${cas.version}</version>
         </dependency>
 
         <dependency>
@@ -125,56 +131,40 @@
             <scope>test</scope>
         </dependency>
 
-        <!--database configuration-->
-        <dependency>
-            <groupId>org.jasig.cas</groupId>
-            <artifactId>cas-server-support-jdbc</artifactId>
-            <version>4.1.4</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
-        <dependency>
-            <groupId>commons-dbcp</groupId>
-            <artifactId>commons-dbcp</artifactId>
-            <version>1.4</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.38</version>
-        </dependency>
-
         <dependency>
             <groupId>c3p0</groupId>
             <artifactId>c3p0</artifactId>
             <version>0.9.1.2</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.jasig.cas</groupId>
+            <artifactId>cas-server-core</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+            <version>1.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-pool</groupId>
+            <artifactId>commons-pool</artifactId>
+            <version>1.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.38</version>
+        </dependency>
+
     </dependencies>
 
     <build>
         <plugins>
-            <!--<plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>2.6</version>
-                <configuration>
-                    <warName>cas</warName>
-                    <webResources>
-                        <resource>
-                            <directory>${basedir}/src/main/webapp/WEB-INF</directory>
-                            <filtering>true</filtering>
-                            <targetPath>WEB-INF</targetPath>
-                            <includes>
-                                <include>**/web.xml</include>
-                            </includes>
-                        </resource>
-                    </webResources>
-                </configuration>
-            </plugin>-->
-
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
@@ -184,6 +174,55 @@
                         <contextPath>/cas</contextPath>
                     </webApp>
                 </configuration>
+            </plugin>
+
+            <!--maven dependency plugin-->
+        <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.10</version>
+                <executions>
+
+                    <!--unpacking initial cas.war-->
+                    <execution>
+                        <id>unpack-cas.war</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>org.jasig.cas</groupId>
+                                    <artifactId>cas-server-webapp</artifactId>
+                                    <version>${cas.version}</version>
+                                    <type>war</type>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>${basedir}/target/alternateLocation</outputDirectory>
+                                    <destFileName>optional-new-name.war</destFileName>
+                                    <includes>**/*.class,**/*.xml</includes>
+                                   <!-- <excludes>**/*test.class</excludes>-->
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+
+                    <!--copying dependencies to the lib folder-->
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/target/alternateLocation/WEB-INF/lib</outputDirectory>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>true</overWriteSnapshots>
+                            <excludeTransitive>true</excludeTransitive>
+                        </configuration>
+                    </execution>
+                </executions>
+
             </plugin>
 
             <!--Copy plugin-->
@@ -200,7 +239,7 @@
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                          <overwrite>true</overwrite>
+                            <overwrite>true</overwrite>
                             <outputDirectory>${basedir}/target</outputDirectory>
                             <resources>
                                 <resource>
@@ -214,7 +253,7 @@
                     <!--copying & replacing modified files-->
                     <execution>
                         <id>copy-resources1</id>
-                        <phase>validate</phase>
+                        <phase>process-resources</phase>
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>
@@ -237,7 +276,7 @@
 
                     <execution>
                         <id>copy-jspViews</id>
-                        <phase>validate</phase>
+                        <phase>process-resources</phase>
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>
@@ -258,7 +297,7 @@
 
                     <execution>
                         <id>copy-app-context</id>
-                        <phase>validate</phase>
+                        <phase>process-resources</phase>
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>
@@ -276,30 +315,32 @@
                             </resources>
                         </configuration>
                     </execution>
+
+                   <!-- <execution>
+                        <id>copy-resources22</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <overwrite>true</overwrite>
+                            <outputDirectory>${basedir}/target/alternateLocation/WEB-INF</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}/resources</directory>
+                                    <filtering>true</filtering>
+                                    <includes>
+                                        <include>deployerConfigContext.xml</include>
+                                        <include>casdatabase.properties</include>
+                                        &lt;!&ndash;<include>web.xml</include>&ndash;&gt;
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>-->
                 </executions>
             </plugin>
 
-            <!--unpacking plugin-->
-           <!-- <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <version>1.6</version>
-                <executions>
-                    <execution>
-                        <id>unzip-war</id>
-                        <phase>install</phase>
-                        <configuration>
-                            <tasks>
-                                <echo message="unpack cas.war" />
-                                <unzip src="${basedir}/target/cas/cas.war" dest="${basedir}/target/cas" overwrite="true"/>
-                            </tasks>
-                        </configuration>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>-->
 
         </plugins>
         <finalName>cas</finalName>
