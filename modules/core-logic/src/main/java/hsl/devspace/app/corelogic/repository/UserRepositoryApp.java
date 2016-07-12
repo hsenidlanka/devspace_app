@@ -15,8 +15,9 @@ public class UserRepositoryApp {
         userdemo.addUser(new User("aa","bb"));*/
 
         UserRepository userdemo = (UserRepository) context.getBean("userRepository");
-        User user1 = new User("test3","test4");
+        User user1 = new User("test31","test41");
         userdemo.addUser(user1);
+        userdemo.deleteUser("dinis");
 
     }
 }

@@ -9,6 +9,11 @@ public interface UserRepository {
 
 
     public void addUser(User user);
+    void deleteUser(String username);
+
+    void changePassword(String username, String password);
+
+    boolean confirmPassword();
 
 
 }

@@ -10,10 +10,7 @@
         <property name="dataSource" ref="dataSource" />
         <property name="transactionManager" ref="transactionManager"/>
     </bean>
-    <bean id="userUpdates" class="hsl.devspace.app.corelogic.repository.UserUpdatesImpl">
-        <property name="dataSource" ref="dataSource" />
-        <property name="transactionManager" ref="transactionManager"/>
-    </bean>
+
 
     <bean id="transactionManager"
           class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

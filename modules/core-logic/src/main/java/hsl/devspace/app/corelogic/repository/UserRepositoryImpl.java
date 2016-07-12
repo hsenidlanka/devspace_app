@@ -44,6 +44,40 @@ try {
 
         }
     }
+    @Override
+    public void deleteUser(String username) {
+        TransactionDefinition tr_def = new DefaultTransactionDefinition();
+        TransactionStatus stat = transactionManager.getTransaction(tr_def);
+        user.setUsername(username);
+
+        String sql = "DELETE FROM users WHERE username = ?";
+        jdbcTemplate.update(sql, new Object[]{ user.getUsername() });
+        transactionManager.commit(stat);
+
+
+    }
+
+
+    @Override
+    public void changePassword(String username,String password) {
+        TransactionDefinition tr_def = new DefaultTransactionDefinition();
+        TransactionStatus stat = transactionManager.getTransaction(tr_def);
+
+        user.setUsername(username);
+        user.setPassword(password);
+        String sql = "UPDATE users SET password = ? WHERE username = ? ";
+
+        jdbcTemplate = new JdbcTemplate(dataSource);
+
+        jdbcTemplate.update(sql, new Object[]{ user.getPassword(),user.getUsername() });
+        transactionManager.commit(stat);
+    }
+
+    @Override
+    public boolean confirmPassword() {
+        return user.isConfirmed();
+    }
+
 
 
 }
