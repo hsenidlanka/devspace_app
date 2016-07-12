@@ -30,5 +30,8 @@
         <module name="web-selfcare" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="web-selfcare" target="1.7" />
+    </bytecodeTargetLevel>
   </component>
 </project>
