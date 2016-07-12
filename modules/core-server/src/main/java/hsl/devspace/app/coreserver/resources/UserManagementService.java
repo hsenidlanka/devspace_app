@@ -2,9 +2,12 @@ package hsl.devspace.app.coreserver.resources;
 
 import hsl.devspace.app.corelogic.domain.User;
 import hsl.devspace.app.corelogic.repository.UserRepositoryImpl;
+import hsl.devspace.app.coreserver.common.*;
+import hsl.devspace.app.coreserver.common.Context;
 import hsl.devspace.app.coreserver.model.SuccessMessage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.context.ApplicationContext;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
@@ -13,18 +16,20 @@ import java.util.Map;
 
 /**
  * Created by hsenid on 6/29/16.
+ * This class handles the requests related to users.
  */
 @Path("/users")
-public class UserManagement {
-    private static final Logger log = LogManager.getLogger(UserManagement.class);
-    UserRepositoryImpl userImpl = new UserRepositoryImpl();
+public class UserManagementService {
+    private static final Logger log = LogManager.getLogger(UserManagementService.class);
+    ApplicationContext context = Context.appContext;
+    UserRepositoryImpl userRepository = (UserRepositoryImpl) context.getBean("userRepoImpl");
 
     @POST
     @Path("/add/{username}/{password}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response addNewUser(@PathParam("username") String userName, @PathParam("password") String password) {
         User user = new User(userName, password);
-//        userImpl.addUser(user);
+        userRepository.addUser(user);
         Map<String, Object> userData = new HashMap<String, Object>();
         userData.put("username", user.getUsername());
         userData.put("password", user.getPassword());
@@ -33,10 +38,13 @@ public class UserManagement {
     }
 
     @DELETE
-    @Path("/delete/{id}")
+    @Path("/delete/{username}")
     @Produces(MediaType.APPLICATION_JSON)
-    public int getUser(@PathParam("id") int id) {
-
-        return 0;
+    public Response getUser(@PathParam("username") String username) {
+        userRepository.deleteUser(username);
+        Map<String, Object> userData = new HashMap<String, Object>();
+        userData.put("username", username);
+        SuccessMessage successMessage = new SuccessMessage("success", Response.Status.OK.getStatusCode(), "user deleted", userData);
+        return Response.status(Response.Status.OK).entity(successMessage).build();
     }
 }
