@@ -31,18 +31,14 @@ public class UserRepositoryImpl implements UserRepository{
     public void addUser(User user) {
         TransactionDefinition tr_def = new DefaultTransactionDefinition();
         TransactionStatus stat = transactionManager.getTransaction(tr_def);
-try {
+
     String sql = "INSERT INTO users " +
             "(username,password) VALUES (?,?)";
 
 
     jdbcTemplate.update(sql, new Object[]{user.getUsername(), user.getPassword()});
     transactionManager.commit(stat);
-}
-        catch (Exception SQLIntegrityConstraintViolationException ){
-            System.out.println("Duplicate Entry");
 
-        }
     }
     @Override
     public void deleteUser(String username) {
@@ -78,6 +74,25 @@ try {
         return user.isConfirmed();
     }
 
+    @Override
+    public boolean loginAuthenticate(User user) {
+        TransactionDefinition tr_def = new DefaultTransactionDefinition();
+        TransactionStatus stat = transactionManager.getTransaction(tr_def);
+
+        String sql = "SELECT count(*) FROM users WHERE username = ? AND password= ?";
+        boolean result = false;
+
+        int count =  jdbcTemplate.queryForObject(
+                sql, new Object[]{user.getUsername(), user.getPassword()}, Integer.class);
+
+
+        if (count > 0) {
+            result = true;
+        }
+        transactionManager.commit(stat);
+        //System.out.println(result);
+        return result;
+    }
 
 
 }
