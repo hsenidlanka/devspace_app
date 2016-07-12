@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<b:beans xmlns:b="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns="http://www.springframework.org/schema/security"
+             xmlns:context="http://www.springframework.org/schema/context"
+             xmlns:mvc="http://www.springframework.org/schema/mvc"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+              http://www.springframework.org/schema/beans/spring-beans.xsd
+              http://www.springframework.org/schema/mvc
+             http://www.springframework.org/schema/mvc/spring-mvc.xsd
+              http://www.springframework.org/schema/context
+              http://www.springframework.org/schema/context/spring-context.xsd">
+<!--
+    <b:import resource="admin-repositories.xml"/>
+    <b:import resource="admin-service.xml"/>
+    <b:import resource="admin-validator.xml"/>
+    <b:import resource="admin-security.xml"/>-->
+
+    <!-- Configures the @Controller programming model -->
+   <!-- means that you can define spring beans dependencies without actually having to specify a bunch
+    of elements in xml or implement an interface or extend a base class-->
+    <mvc:annotation-driven/>
+
+    <!-- Scans or searches the classpath for all the classes of this application
+    under hsl.devspace.app.admin for @Components to deploy as beans -->
+    <context:component-scan base-package="hsl.devspace.app.admin"/>
+
+    <!--It pulls values from a properties file into bean definitions.-->
+    <b:bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <b:property name="locations">
+            <b:list>
+                <b:value>classpath:connectivity.properties</b:value>
+                <b:value>classpath:system.properties</b:value>
+            </b:list>
+        </b:property>
+        <b:property name="ignoreUnresolvablePlaceholders" value="true"/>
+    </b:bean>
+
+
+    <!--resolve the view names with the given prefix and suffix-->
+    <b:bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <b:property name="prefix" value="/WEB-INF/views/"/>
+        <b:property name="suffix" value=".jsp"/>
+        <b:property name="order" value="2"/>
+    </b:bean>
+
+
+    <!-- Forwards requests to the "/" resource to the "welcome" view
+     to shoiw a default jsp page when user runs the application.
+     Above bean resolve the view as WEB-INF/views/welcome.jsp-->
+    <mvc:view-controller path="/" view-name="welcome"/>
+
+
+    <!--when an excepton listed under exceptionMapping property list is thrown from the application,
+    it'll render the pre-determined view WEB-INF/views/500.jsp-->
+    <b:bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <b:property name="exceptionMappings">
+            <b:props>
+                <b:prop key="java.lang.Exception">500</b:prop>
+            </b:props>
+        </b:property>
+        <!--other exeptions thrown are rendered to this view-->
+        <b:property name="defaultErrorView" value="defaultError"/>
+    </b:bean>
+
+
+    <!-- Configures Handler Interceptors -->
+    <mvc:interceptors>
+        <!-- Changes the locale when a 'locale' request parameter is sent; e.g. /?locale=de -->
+
+        <b:bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"/>
+        <b:bean class="hsl.devspace.app.admin.ThemeApplyingInterceptor">
+            <b:property name="themeName" value="${web.theme}"/>
+        </b:bean>
+    </mvc:interceptors>
+
+
+    <!--The tile definition xml is specified when you define the TilesConfigurer bean
+    Tiles specified in the definition xml can be used as views in the Web Application -->
+
+    <b:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+        <b:property name="definitions">
+            <b:list>
+                <b:value>/WEB-INF/tiles-defs.xml</b:value>
+            </b:list>
+        </b:property>
+    </b:bean>
+
+
+    <!--instantiates the viewClass for each view-->
+    <b:bean id="tilesviewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+        <b:property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"/>
+        <b:property name="order" value="1"/>
+    </b:bean>
+
+
+    <!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources/ directory -->
+    <!--<mvc:resources mapping="/resources/**" location="/resources/, classpath:/META-INF/web-resources/"/>-->
+    <mvc:resources mapping="/themes/**" location="/themes/"/>
+
+    <!-- Saves a locale change using a cookie -->
+    <b:bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver"/>
+
+    <!-- Application Message Bundle
+      used to resolve text messages from properties file, base on the selected locales.-->
+    <b:bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <b:property name="basename" value="classpath:messages"/>
+        <b:property name="cacheSeconds" value="0"/>
+    </b:bean>
+
+    <!--MultipartResolver used in Spring to handle file upload in web application
+    The CommonsMultipartResolver is a common MultipartResolver implementation,
+    which use the Apache commons upload library to handle the file upload in a form.-->
+    <b:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+</b:beans>
