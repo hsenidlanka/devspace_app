@@ -1,7 +1,9 @@
 package hsl.devspace.app.corelogic.repository;
 
 import hsl.devspace.app.corelogic.domain.User;
+import org.springframework.dao.DuplicateKeyException;
 
+import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 
 /**
@@ -10,13 +12,13 @@ import java.sql.SQLIntegrityConstraintViolationException;
 public interface UserRepository {
 
 
-    public void addUser(User user)throws SQLIntegrityConstraintViolationException;
-    void deleteUser(String username);
+    public void addUser(User user)throws SQLIntegrityConstraintViolationException,DuplicateKeyException;
+    void deleteUser(String username)throws SQLException;
 
-    void changePassword(String username, String password);
+    void changePassword(String username, String password)throws SQLException;
 
-    boolean confirmPassword();
-    boolean loginAuthenticate(User user);
+    boolean confirmPassword()throws SQLException;
+    boolean loginAuthenticate(User user)throws SQLException;
 
 
 }
