@@ -7,6 +7,7 @@ import java.util.Map;
 
 /**
  * Created by hsenid on 7/8/16.
+ * This is the model/template of the success message to pass as a response.
  */
 @XmlRootElement
 public class SuccessMessage {

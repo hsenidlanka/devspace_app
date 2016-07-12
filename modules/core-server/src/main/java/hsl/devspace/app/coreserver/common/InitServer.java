@@ -14,10 +14,10 @@ import org.eclipse.jetty.servlet.ServletHolder;
  */
 public class InitServer {
     private static final Logger log = LogManager.getLogger(InitServer.class);
-    private int port;
-    private String packageName;
-    private String contextRoot;
-    private String servletPath;
+    private int port;   // Jetty server port number
+    private String packageName; // Package contains resources(REST)
+    private String contextRoot; // Context path pattern
+    private String servletPath; // Servlet path-url pattern
 
     public int getPort() {
         return port;
@@ -51,16 +51,16 @@ public class InitServer {
         this.servletPath = servletPath;
     }
 
+    // Create and return a Jetty server instance under the port number defined.
     public Server createServer() {
         ServletHolder sh = new ServletHolder(ServletContainer.class);
         sh.setInitParameter("com.sun.jersey.config.property.packages", getPackageName());//Set the package where the services reside
         sh.setInitParameter("com.sun.jersey.api.json.POJOMappingFeature", "true");
 
-        Server server = new Server(2222);
+        Server server = new Server(getPort());
         ServletContextHandler context = new ServletContextHandler(server, getContextRoot(), ServletContextHandler.SESSIONS);
         context.addServlet(sh, getServletPath());
 
         return server;
-
     }
 }
