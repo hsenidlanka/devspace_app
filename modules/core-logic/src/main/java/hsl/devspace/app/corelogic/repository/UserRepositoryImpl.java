@@ -49,6 +49,7 @@ public class UserRepositoryImpl implements UserRepository{
         String sql = "DELETE FROM users WHERE username = ?";
         jdbcTemplate.update(sql, new Object[]{ user.getUsername() });
         transactionManager.commit(stat);
+       // transactionManager.rollback(stat);
 
 
     }
@@ -67,6 +68,7 @@ public class UserRepositoryImpl implements UserRepository{
 
         jdbcTemplate.update(sql, new Object[]{ user.getPassword(),user.getUsername() });
         transactionManager.commit(stat);
+        //transactionManager.rollback(stat);
     }
 
     @Override
@@ -79,18 +81,19 @@ public class UserRepositoryImpl implements UserRepository{
         TransactionDefinition tr_def = new DefaultTransactionDefinition();
         TransactionStatus stat = transactionManager.getTransaction(tr_def);
 
-        String sql = "SELECT count(*) FROM users WHERE username = ? AND password= ?";
+        String sql = "SELECT count(*) FROM users WHERE username = ? AND password=? ";
         boolean result = false;
 
         int count =  jdbcTemplate.queryForObject(
-                sql, new Object[]{user.getUsername(), user.getPassword()}, Integer.class);
+                sql, new Object[]{user.getUsername(), (user.getPassword())}, Integer.class);
 
 
         if (count > 0) {
             result = true;
         }
-        transactionManager.commit(stat);
-        //System.out.println(result);
+       // transactionManager.commit(stat);
+        transactionManager.rollback(stat);
+        System.out.println(result);
         return result;
     }
 
