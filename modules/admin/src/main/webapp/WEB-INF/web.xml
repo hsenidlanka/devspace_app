@@ -8,9 +8,14 @@
   <display-name>Archetype Created Web Application</display-name>
 
     <!--
-        - Location of the XML file that defines the root application context
-        - Applied by ContextLoaderListener.
+        - Location of the XML file that defines the root application context is initiated by
+        - ContextLoaderListener.
         -->
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>/WEB-INF/spring/admin-integration-context.xml</param-value>
@@ -43,20 +48,20 @@
         <filter-class>org.jasig.cas.client.session.SingleSignOutFilter</filter-class>
     </filter>
 
-    <filter>
+  <!--  <filter>
         <filter-name>springSecurityFilterChain</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-    </filter>
+    </filter>-->
 
     <filter-mapping>
         <filter-name>CAS Single Sign Out Filter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
-    <filter-mapping>
+<!--    <filter-mapping>
         <filter-name>springSecurityFilterChain</filter-name>
         <url-pattern>/*</url-pattern>
-    </filter-mapping>
+    </filter-mapping>-->
 
 
 
@@ -69,13 +74,13 @@
 
     <servlet-mapping>
         <servlet-name>admin</servlet-name>
-        <url-pattern>*.html</url-pattern>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 
-    <servlet-mapping>
-        <servlet-name>admin</servlet-name>
-        <url-pattern>*.js</url-pattern>
-    </servlet-mapping>
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>admin</servlet-name>-->
+        <!--<url-pattern>*.js</url-pattern>-->
+    <!--</servlet-mapping>-->
 
 
     <!--  Enable the following and spring-security.xml configurations for Concurrent Access Restriction-->
@@ -83,9 +88,7 @@
         <listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
     </listener>-->
 
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
+
 
     <listener>
         <listener-class>hsl.devspace.app.admin.listener.ApplicationStatusEventListener</listener-class>
