@@ -7,7 +7,7 @@
         <property name="packageName" value="hsl.devspace.app.coreserver"/>
         <property name="port" value="2222"/>
         <property name="contextRoot" value="/*"/>
-        <property name="servletPath" value="/devspace/*"/>
+        <property name="servletPath" value="/devspace/api/v1.0/*"/>
     </bean>
 
 </beans>

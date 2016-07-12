@@ -6,11 +6,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Created by hsenid on 7/5/16.
+ * This is the model/template of the error message to pass as a response.
  */
 
 @XmlRootElement
 public class ErrorMessage {
-
+    private String status;
     private int errorCode;
     private String errorMessage;
     private String description;
@@ -18,13 +19,23 @@ public class ErrorMessage {
     public ErrorMessage() {
     }
 
-    public ErrorMessage(int errorCode, String errorMessage, String description) {
+    public ErrorMessage(String status, int errorCode, String errorMessage, String description) {
+        this.status = status;
         this.errorCode = errorCode;
         this.errorMessage = errorMessage;
-        this.description=description;
+        this.description = description;
     }
 
-    @JsonProperty("error-code")
+    @JsonProperty("status")
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    @JsonProperty("code")
     public int getErrorCode() {
         return errorCode;
     }

@@ -1,6 +1,5 @@
 package hsl.devspace.app.coreserver.common;
 
-import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.jetty.server.Server;
@@ -17,10 +16,11 @@ public class ServerMain implements WrapperListener {
     private Server server;
 
     @Override
+    // Start wrapper
     public Integer start(String[] strings) {
         log.info("Start core server");
-        ApplicationContext appContext = new ClassPathXmlApplicationContext("spring-context.xml");
-        InitServer initServer = (InitServer) appContext.getBean("init-server");
+        ApplicationContext context=Context.appContext;
+        InitServer initServer = (InitServer) context.getBean("init-server");
         server = initServer.createServer();
         try {
             server.start();
@@ -32,10 +32,10 @@ public class ServerMain implements WrapperListener {
     }
 
     @Override
+    // Stop wrapper
     public int stop(int i) {
         log.error("Error...");
         try {
-            DatabaseConnection.closeComboPooledDataSource();
             server.stop();
         } catch (Exception e) {
             log.error("Error while stopping jetty server. " + e);
@@ -55,6 +55,5 @@ public class ServerMain implements WrapperListener {
 
     public static void main(String[] args) throws Exception {
         WrapperManager.start(new ServerMain(), args);
-        DatabaseConnection.createComboPooledDataSource();
     }
 }

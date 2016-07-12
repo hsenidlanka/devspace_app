@@ -1,0 +1,70 @@
+@charset "utf-8";
+/* CSS Document */
+
+#mask {
+    position:absolute;
+    left:0;
+    top:0;
+    z-index:9000;
+    background-color:#fff;
+    display:none;
+    opacity:0.1;
+
+}
+  
+.boxes .window {
+	position:absolute;
+	left:0;
+	top:0;
+	width:300px;
+	display:none;
+	z-index:9999;
+	/*padding:20px;*/
+}
+
+.boxes .dialog {
+	width:375px;
+	padding:5px;
+	background-color:#ffffff;
+}
+.mcontent {
+	padding-top: 10px;
+	padding-right: 20px;
+	padding-bottom: 10px;
+	padding-left: 20px;
+	background-color: #F1F2F3;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size:12px;
+	font-weight:normal;
+}
+
+.mbutton {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.mtext_box {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	font-weight:normal;
+	color:#1B1B1B;
+	text-align:left;
+	border-style:groove;
+	width:190px;
+}
+
+.mtext_area {
+	margin: 0px;
+	width: 190px;
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	border-color: #AEB7BF;
+	border-style: solid;
+	border-width: 1px;
+	margin-bottom: 5px;
+	margin-top: 5px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+}

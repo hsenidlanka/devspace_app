@@ -1,0 +1,1198 @@
+/*
+               -------------------------------------------------------------------------------
+                                        mChoice Rewards Main CSS.
+               -=============================================================================-
+             TODO: identify difference in mail.css and this file. remove redundant css and redundant files.
+
+*/
+
+
+#header {
+    float: left;
+    width: 990px;
+    padding-top: 6px;
+    position: relative;
+}
+
+.container {
+    width: 740;
+    height: auto;
+    padding-left: 15px;
+    margin-left: 15px;
+    margin-bottom: auto;
+    float: left;
+    text-align: left;
+    overflow: visible;
+}
+
+#footer {
+    background: url(../images/rwd/footerbg2.jpg) no-repeat;
+    float: left;
+    height: 60px;
+    width: 990px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding: 15px 10px 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    line-height: 20px;
+    color: #000000;
+    text-align: center;
+}
+
+.buttonWidth {
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: center;
+}
+
+#footer a {
+    color: #a1dd65;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#footer a:hover {
+    color: #80b04f;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+/*.welcome_text {*/
+/*font-family: Arial, Helvetica, sans-serif;*/
+/*font-size: 10px;*/
+/*font-weight: normal;*/
+/*color: #1B1B1B;*/
+/*text-align: right;*/
+/*padding-top: 35px;*/
+/*padding-bottom: 10px;*/
+/*padding-left: 20px;*/
+/*position: absolute;*/
+/*}*/
+
+/*.list_content {*/
+/*list-style-type: none;*/
+/*margin: 0 0 0 0px;*/
+/*padding: 0 0 0 0px;*/
+/*width: 400px;*/
+/*text-decoration: none;*/
+/*text-align: left*/
+/*}*/
+
+.content_text {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    color: #1B1B1B;
+    text-align: left;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.text_lable {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    min-height: 27px;
+    max-height: 27px;
+    font-weight: bold;
+    color: #1B1B1B;
+    text-align: left;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.text_box {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    color: #1B1B1B;
+    text-align: left;
+    width: 195px;
+    margin-bottom: 2px;
+    margin-top: 2px;
+    float: left;
+    min-height: 27px;
+    max-height: 27px;
+}
+
+.text_area {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    color: #1B1B1B;
+    text-align: left;
+    border-style: groove;
+    margin-bottom: 2px;
+    overflow: scroll;
+    float: left;
+    width : 180px;
+
+}
+
+.dropdown_box {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    color: #1B1B1B;
+    text-align: left;
+    width: 195px;
+    float: left;
+    height:45px;
+}
+
+.dynamic_dropdown_box {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    color: #1B1B1B;
+    text-align: left;
+    border-style: groove;
+    width: 120px;
+}
+
+.dropdown_box_small {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    color: #1B1B1B;
+    text-align: left;
+    width: 120px;
+}
+
+.normal_drop_down {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    color: #1B1B1B;
+    text-align: left;
+    border-style: groove;
+    min-width: 150px;
+    max-width: 150px;
+}
+
+.h1_colour {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: #000000;
+    text-align: left;
+    border-bottom: 1px solid #efefef;
+}
+
+.h2_colour {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    color: #990000;
+    text-align: left;
+}
+
+.h1_black {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: #1B1B1B;
+    text-align: left;
+    border-bottom: 1px solid #efefef;
+}
+
+.h2_black {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    color: #1B1B1B;
+    text-align: left;
+}
+
+.h2_colour_underline {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    color: #990000;
+    text-align: left;
+    border-bottom: 1px solid #efefef;
+}
+
+.h2_black_underline {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    color: #1B1B1B;
+    text-align: left;
+    border-bottom: 1px solid #efefef;
+}
+
+.h2_black_seperator {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    color: #1B1B1B;
+    text-align: left;
+    border-bottom: 1px dashed #CCCCCC;
+}
+
+.h2_colour_seperator {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    color: #990000;
+    text-align: left;
+    border-bottom: 1px dashed #CC9999;
+}
+
+.table_content {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    color: #1B1B1B;
+    text-align: left;
+    vertical-align: top;
+}
+
+.report_table_header {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    color: #FFFFFF;
+    background-color: #1B1B1B;
+    text-align: center;
+    vertical-align: middle;
+    height: 20px;
+}
+
+.report_table_content_even {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    font-weight: normal;
+    color: #1B1B1B;
+    background-color: gainsboro;
+    text-align: center;
+    vertical-align: middle;
+    height: 20px;
+}
+
+.report_table_content_odd {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    font-weight: normal;
+    color: #1B1B1B;
+    background-color: white;
+    text-align: center;
+    vertical-align: middle;
+    height: 20px;
+}
+
+.report_table_content_hover {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    font-weight: normal;
+    color: #ffffff;
+    background-color: #990000;
+    text-align: center;
+    vertical-align: middle;
+    height: 20px;
+}
+
+.report_table_action_header {
+    background-color: #990000;
+}
+
+.table_view_info {
+    color: #1B1B1B;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: left;
+    padding-bottom: 5px;
+    padding-top: 5px;
+
+}
+
+.table_view_details {
+    color: #1B1B1B;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    text-align: left;
+
+}
+
+.text_label {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    color: #1B1B1B;
+    text-align: left;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.row_count_label {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    color: #999999;
+    text-align: left;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.download_link {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    text-decoration: underline;
+    color: #434F6D;
+}
+
+.download_link:hover {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #990000;
+}
+
+.login_description {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    color: #1B1B1B;
+    text-align: left;
+}
+
+.error_message {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    color: #FF0000;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.error_message_top {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    color: #FF0000;
+    text-align: left;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.error_message_above_field {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+    color: #FF0000;
+    text-align: left;
+    padding-left: 0px;
+    padding-top: 5px;
+    padding-bottom: 0px;
+}
+
+.condition_error_message_above_field {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+    color: #FF0000;
+    text-align: left;
+    padding-left: 50px;
+    padding-top: 5px;
+    padding-bottom: 0px;
+}
+
+.acceptence_message {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    color: #009900;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.message_text {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    color: #1B1B1B;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.genericFormPanel {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    font-size: 90%;
+    color: #ffffff;
+    max-width: 500px;
+}
+
+.genericFormPanel label{
+    padding-top: 6px;
+    font-size: 13px;
+    line-height: 18px;
+    float: left;
+    width: 200px;
+    text-align: left;
+    color: #404040;
+    font-weight: bold;
+}
+
+/*.genericFormPanel label {
+    color: #1B1B1B;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: left;
+    width: 227px;
+    margin-right: 5px;
+    clear: left;
+    float: left;
+    display: block;
+    height: 15px;*/
+    /*padding-bottom: 0px;
+    margin-bottom: 0px;
+    margin-top: 4px;*/
+/*}*/
+
+.test {
+    color: #1B1B1B;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: left;
+    width: 227px;
+    margin-right: 250px;
+    clear: left;
+    float: left;
+    display: block;
+    height: 15px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    margin-top: 4px;
+}
+
+.genericFormTabPanel {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    background-color: #ddd;
+    font-size: 90%;
+    color: #ffffff;
+    width: 650px;
+}
+
+.programCreationTable {
+    background-color: #ddd;
+}
+
+/*.genericFormTabPanel label {
+    color: #1B1B1B;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: left;
+    width: 150px;
+    margin-right: 5px;
+    clear: left;
+    float: left;
+    display: block;
+    height: 15px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    margin-top: 4px;
+}*/
+
+.genericFormTabPanel .viewInfo {
+    color: #1B1B1B;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: left;
+    width: 150px;
+    margin-right: 5px;
+    clear: left;
+    float: left;
+    display: block;
+    height: 15px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    margin-top: 4px;
+    float: none;
+}
+
+.genericFormTabPanel .viewDetails {
+    color: #1B1B1B;
+    font-size: 12px;
+    text-align: left; /*width: 150px;*/
+    height: 15px;
+    margin-right: 5px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    margin-top: 4px;
+    clear: left;
+    display: block;
+    float: left;
+    font-weight: normal;
+}
+
+.genericFormTabPanel .viewSingleDetails {
+    color: #1B1B1B;
+    font-size: 12px;
+    text-align: left;
+    width: 150px;
+    height: 15px;
+    margin-right: 5px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    margin-top: 4px;
+    display: block;
+    font-weight: normal;
+}
+
+.genericFormTabPanel .text-cell {
+    color: #1B1B1B;
+    font-size: 12px;
+    text-align: left; /*width: 150px;*/
+    height: 15px;
+    margin-right: 5px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    margin-top: 4px;
+    clear: left;
+    display: block;
+    float: none;
+    font-weight: normal;
+    border: 1px solid azure;
+
+}
+
+.helpText {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 90%;
+    color: #000000;
+    background-color: gainsboro;
+    clear: both;
+    margin-top: 37px;
+    margin-left: 221px;
+    padding-bottom: 20px;
+    vertical-align: middle;
+    text-align: left;
+    width: 450px;
+}
+
+.uiWaitText {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 90%;
+    color: #ffffff;
+    clear: both;
+    vertical-align: middle;
+    text-align: left;
+    margin-left: 25px;
+}
+
+.periodPanel {
+    clear: both;
+    margin-top: 37px;
+    padding-bottom: 20px;
+    vertical-align: middle;
+    text-align: left;
+    width: 850px
+}
+
+.operation_value_text_box {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    color: #1B1B1B;
+    text-align: left;
+    border-style: groove;
+    width: 130px;
+    clear: none;
+    float: left;
+}
+
+.selectionBox {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    color: #1B1B1B;
+    text-align: left;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.selection_mid_text {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    color: #1B1B1B;
+    text-align: center;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.period_text_box {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    color: #1B1B1B;
+    text-align: left;
+    border-style: groove;
+    width: 195px;
+    clear: none;
+    float: left;
+}
+
+.periodPanel label {
+    color: #1B1B1B;
+    font-size: 93%;
+    font-weight: bold;
+    text-align: left;
+    width: 100px;
+    margin-right: 5px;
+    margin-left: 5px;
+    clear: none;
+    float: left;
+    display: block;
+    height: 20px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    margin-top: 4px;
+
+}
+
+.periodPanel_radiobutton {
+    color: #1B1B1B;
+    font-size: 93%;
+    font-weight: bold;
+    text-align: left;
+    width: 100px;
+    margin-right: 5px;
+    clear: left;
+    float: left;
+    display: block;
+    height: 15px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    margin-top: 10px;
+    margin-left: 50px;
+
+}
+
+.dropdown_box_time {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    color: #1B1B1B;
+    text-align: left;
+    border-style: groove;
+    clear: none;
+    float: left;
+    width: 65px;
+}
+
+.dropdown_box_event {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    width: 300;
+    color: #1B1B1B;
+    text-align: left;
+    border-style: groove;
+    margin-left: 2px;
+    margin-right: 2px;
+    clear: none;
+    float: left;
+    width: 125px;
+}
+
+.dropdown_box_time_min {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    color: #1B1B1B;
+    text-align: left;
+    border-style: groove;
+    clear: right;
+    float: left;
+    width: 65px;
+}
+
+.viewTableWrapper {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    color: #1B1B1B;
+    background-color: #dfdede;
+    table-layout: fixed;
+    text-align: left;
+    height: 20px;
+    border: #ffffff groove thin;
+    float: none;
+}
+
+.viewTableWrapper .viewInfo {
+    border: #ffffff groove thin;
+    font-weight: bold;
+}
+
+.viewTableWrapper .viewDetails {
+    border: #ffffff groove thin;
+    font-weight: normal;
+}
+
+.buttonGroup {
+    clear: both;
+    margin-top: 37px;
+    padding-bottom: 20px;
+    vertical-align: middle;
+    text-align: center;
+    margin-left: 185px;
+}
+
+.buttonGroup2 {
+    clear: both;
+    margin-top: 37px;
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+.rulesContainer {
+    clear: both;
+    margin-top: 37px;
+    padding-bottom: 20px;
+    vertical-align: middle;
+    text-align: center;
+    margin-left: 185px;
+}
+
+.searchFormPanel {
+    font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 0;
+    background-color: #FFFFFF;
+    font-size: 90%;
+    color: #1B1B1B;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: left;
+    float: left;
+    width: 730px;
+}
+
+.searchFormPanel label {
+    color: #1B1B1B;
+    font-size: 93%;
+    font-weight: bold;
+    text-align: left;
+    width: 180px;
+    margin-right: 5px;
+    clear: left;
+    float: left;
+    display: block;
+    height: 15px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    margin-top: 7px;
+}
+
+.xgif {
+    background-image: url("../images/btn_x.gif");
+    border: 0;
+    width: 16px;
+    height: 16px;
+    padding-left: 2px;
+    padding-right: 2px;
+    float: left;
+}
+
+.editButton {
+    background-image: url("../images/btn_edit.png");
+    border: 0;
+    width: 16px;
+    height: 16px;
+    padding-left: 2px;
+    padding-right: 2px;
+    float: left;
+}
+
+.dynamic_text_box {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    color: #1B1B1B;
+    text-align: left;
+    border-style: groove;
+    width: 120px;
+}
+
+.dynamic_text_box_header {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    color: #1B1B1B;
+    text-align: center;
+    width: 120px;
+}
+
+.dynamic_text_box_small {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    color: #1B1B1B;
+    text-align: left;
+    border-style: groove;
+    width: 65px;
+}
+
+.dynamic_text_box_small_header {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    color: #1B1B1B;
+    text-align: center;
+    width: 65px;
+}
+
+.dynamic_text_box_very_small {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    color: #1B1B1B;
+    text-align: left;
+    border-style: groove;
+    width: 40px;
+}
+
+.dynamic_check_box_small {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    color: #1B1B1B;
+    margin-left: 25px;
+    margin-right: 25px;
+    text-align: center;
+    width: 65px;
+}
+
+.dynamic_check_box {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    color: #1B1B1B;
+    margin-left: 55px;
+    margin-right: 55px;
+    text-align: center;
+    width: 120px;
+}
+
+.dynamic_text_header {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 93%;
+    font-weight: normal;
+    color: #1B1B1B;
+    text-align: left;
+    border-style: groove;
+    width: 120px;
+}
+
+#rightbar {
+    height: 400px;
+    width: 690px;
+    overflow: auto;
+}
+
+#cellrightbar {
+    height: 300px;
+    width: 690px;
+    overflow: auto;
+}
+
+#custom-doc {
+    min-width: 990px;
+    margin: auto;
+    text-align: left;
+    overflow: hidden;
+}
+
+.textbox-features {
+    margin-right: 5px;
+    font-family: verdana, sans-serif;
+    font-size: 95%;
+    float: left;
+    vertical-align: middle;
+    width: 20.6em;
+    *width: 20.6em;
+    min-height: 1.7em;
+    *min-height: auto;
+}
+
+.inputtext {
+    border: 1px solid #bdc7d8;
+    font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
+    font-size: 12px;
+    padding: 3px
+}
+
+.inputpassword {
+    border: 1px solid #bdc7d8;
+    font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
+    font-size: 12px;
+    padding: 3px
+}
+
+.labelText {
+    color: #8e8989;
+    font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
+    font-size: 12px;
+    padding: 3px
+}
+
+.labelText_dark {
+    color: #a29f9f;
+    font-weight: bold;
+    font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
+    font-size: 12px;
+    padding: 3px
+}
+
+.labelText_vlaues {
+    color: #bdb6b6;
+    font-weight: bold;
+    font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
+    font-size: 12px;
+    padding: 3px
+}
+
+.labelText_small {
+    color: #8e8989;
+    font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
+    font-size: 11px;
+    padding: 3px
+}
+
+.labelText_button {
+    color: #817c7c;
+    font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
+    font-size: 12px;
+    padding: 3px
+}
+
+.fileBrowser {
+    border: 1px solid #bdc7d8;
+    font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
+    font-size: 12px;
+    padding: 4px
+}
+
+.comboBox {
+    border: 1px solid #817c7c;
+    font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
+    font-size: 11px;
+    padding: 2px
+}
+
+.padding-space {
+    padding-bottom: 12px;
+}
+
+.errorMessage {
+    color: #ff9999;
+    font-weight: bold;
+    font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
+    font-size: 12px;
+    padding: 3px
+}
+
+.successMessage {
+    color: #009999;
+    font-weight: bold;
+    font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
+    font-size: 12px;
+    padding: 3px
+}
+
+.appPageHeader {
+    color: #96b1b6;
+    font-weight: bold;
+    font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
+    font-size: 23px;
+    padding: 3px;
+    border-bottom: 1px solid #efefef;
+}
+
+/*
+ * date picker
+ */
+a.dp-choose-date {
+    float: left;
+    width: 16px;
+    height: 16px;
+    padding: 0;
+    margin: 5px 3px 0;
+    display: block;
+    text-indent: -2000px;
+    overflow: hidden;
+    background: url(../images/calendar.gif) no-repeat;
+}
+
+a.dp-choose-date.dp-disabled {
+    background-position: 0 -20px;
+    cursor: default;
+}
+
+/* makes the input field shorter once the date picker code
+* has run (to allow space for the calendar icon
+*/
+input.dp-applied {
+    width: 180px;
+    float: left;
+}
+
+.table_borders {
+    border: 1px solid white;
+}
+
+/* user list style*/
+table.user_list {
+    color: #1B1B1B;
+    font-size: 93%;
+    font-weight: bold;
+    text-align: left;
+    width: 300px;
+    margin-right: 5px;
+    clear: left;
+    float: left;
+    display: block;
+    height: 15px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    margin-top: 4px;
+}
+
+.error_message_above_field {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+    color: #FF0000;
+    text-align: left;
+    padding-left: 0px;
+    padding-top: 5px;
+    padding-bottom: 0px;
+}
+
+.required {
+    color: #ff3300;
+    font-weight: bold;
+    font-size: small;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0px;
+    margin: 0px;
+    margin-left: 4px;
+    vertical-align: top;
+}
+
+a.itemMoves {
+    display: block;
+    border: 1px solid #cccccc;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+    background-color: #b5b4b4;
+    color: #990000;
+    margin: 1px;
+    height: 15px;
+    width: 15px;
+    clear: both;
+}
+
+select.selectionBox {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    font-weight: normal;
+    color: #1B1B1B;
+    text-align: left;
+    border-style: groove;
+    width: 200px;
+    height: 100px;
+}
+
+select.selectionBox option {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    font-weight: normal;
+    color: #1B1B1B;
+    text-align: left;
+    width: 100% !important;
+    border: 0;
+    border-bottom: 1px dotted #999999;
+}
+
+lable.tabpanes_text_lable {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    color: #1B1B1B;
+    text-align: left;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.check_box {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    color: #1B1B1B;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.radio_button {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    color: #1B1B1B;
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: left;
+    vertical-align: top;
+}
+
+.rewarding_dynamic_text_box {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    color: #1B1B1B;
+    text-align: left;
+    border-style: groove;
+    width: 50px;
+}
+
+.empty_new_line {
+    float: left;
+    clear: both;
+}
+
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: table-cell;
+}
+
+.errorCell {
+    border: 4 solid red;
+
+    border-collapse: collapse;
+    outline: 1px red;
+}
