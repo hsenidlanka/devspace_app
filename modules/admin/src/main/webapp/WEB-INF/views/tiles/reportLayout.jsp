@@ -92,7 +92,7 @@
 
     <div class="maincontent" id="custom-doc" align="center">
         <div id="hd" align="center">
-            <tiles:insertAttribute name="header" />
+            <%--<tiles:insertAttribute name="header" />--%>
         </div>
         <div id="bd" align="center">
             <div id="wrapper">
