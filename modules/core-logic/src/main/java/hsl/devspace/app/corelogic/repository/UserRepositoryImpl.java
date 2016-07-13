@@ -81,7 +81,7 @@ public class UserRepositoryImpl implements UserRepository{
         TransactionDefinition tr_def = new DefaultTransactionDefinition();
         TransactionStatus stat = transactionManager.getTransaction(tr_def);
 
-        String sql = "SELECT count(*) FROM users WHERE username = ? AND password=? ";
+        String sql = "SELECT count(*) FROM users WHERE BINARY username = ? AND BINARY password =? ";
         boolean result = false;
 
         int count =  jdbcTemplate.queryForObject(
@@ -93,7 +93,6 @@ public class UserRepositoryImpl implements UserRepository{
         }
        // transactionManager.commit(stat);
         transactionManager.rollback(stat);
-       // System.out.println(result);
         log.info(result);
         return result;
     }
