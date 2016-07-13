@@ -6,7 +6,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
-
+import org.apache.log4j.Logger;
 import javax.sql.DataSource;
 
 /**
@@ -17,7 +17,7 @@ public class UserRepositoryImpl implements UserRepository{
     private DataSource dataSource;
     private JdbcTemplate jdbcTemplate;
     private PlatformTransactionManager transactionManager;
-
+    private static org.apache.log4j.Logger log = Logger.getLogger(UserRepositoryImpl.class);
     public void setDataSource(DataSource dataSource) {
         //this.dataSource = dataSource;
         jdbcTemplate = new JdbcTemplate(dataSource);
@@ -93,7 +93,8 @@ public class UserRepositoryImpl implements UserRepository{
         }
        // transactionManager.commit(stat);
         transactionManager.rollback(stat);
-        System.out.println(result);
+       // System.out.println(result);
+        log.info(result);
         return result;
     }
 
