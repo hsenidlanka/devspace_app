@@ -12,7 +12,6 @@
 package hsl.devspace.app.selfcare.login;
 
 import hsl.devspace.app.selfcare.service.AuthenticationService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,12 +29,11 @@ public class LoginController {
 
 //    private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
+    private static final String view = "login";
     @Autowired
     private LoginValidator loginValidator;
-
     @Autowired
     private AuthenticationService authenticationService;
-    private static final String view = "login";
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView initLogin(Model model) throws Exception {

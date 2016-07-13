@@ -1,6 +1,6 @@
-function injectFacebox(){
+function injectFacebox() {
 
-    var fbcode= "\
+    var fbcode = "\
 <div class='boxes'><div id='sccf' class='window'> \
 <table width='100%' border='0' cellspacing='0' cellpadding='0' class='faceboxtable'>\
    <tr>\
@@ -9,10 +9,10 @@ function injectFacebox(){
   <tr>\
     <td class='mbutton'><table width='100%' border='0' cellspacing='0' cellpadding='0'>\
         <tr>\
-          <td width='45%' align='center'> <div class='span2'><a href='/campaign-management/createCampaign/main.html' style='cursor:pointer'><img src='/campaign-management/themes/"+theme+"/images/reward.png' title='Normal flow'/></div>\
+          <td width='45%' align='center'> <div class='span2'><a href='/campaign-management/createCampaign/main.html' style='cursor:pointer'><img src='/campaign-management/themes/" + theme + "/images/reward.png' title='Normal flow'/></div>\
 		  <div class='flow-dialog-label'>Normal Flow</div></a></td>\
           <td width='9%'>&nbsp;</td>\
-          <td width='45%' align='center'><div class='span2'> <a href='/campaign-management/bulkRewards/createBulkMain.html' style='cursor:pointer'><img src='/campaign-management/themes/"+theme+"/images/bulk-reward.png' title='Bulk Rewards'/></div>\
+          <td width='45%' align='center'><div class='span2'> <a href='/campaign-management/bulkRewards/createBulkMain.html' style='cursor:pointer'><img src='/campaign-management/themes/" + theme + "/images/bulk-reward.png' title='Bulk Rewards'/></div>\
 		  <div class='flow-dialog-label'>Bulk Rewards</div></a></td>\
 		  <td width='1%'>&nbsp;</td>\
 		  \

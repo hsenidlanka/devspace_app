@@ -16,17 +16,20 @@
     margin-left: 100px;
     float: left;
 }
-.sign_in_logo{
+
+.sign_in_logo {
     margin-bottom: 40px;
 }
+
 .login_header_content {
     padding-top: 16px;
 }
 
-.sign_up_header{
+.sign_up_header {
     float: right;
     margin-right: 60px;
 }
+
 .sign_up_button {
     border-radius: 5px;
     background-image: url(../images/buttonbg2.jpg);
@@ -45,6 +48,7 @@
     margin-left: 10px;
 
 }
+
 .sign_in_button {
     border-radius: 5px;
     background-image: url(../images/buttonbg2.jpg);
@@ -63,21 +67,25 @@
     margin-left: 10px;
 
 }
+
 .login_main_content {
     width: auto;
     max-width: 1200px;
     min-width: 780px;
 }
+
 .sign_in_content {
     width: 335px;
     float: right;
 }
+
 .sign_in_box {
     margin: 12px 0 0;
     padding: 20px 25px 15px;
     background: #f1f1f1;
     border: 1px solid #e5e5e5;
 }
+
 .sign_in_text_box {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 18px;
@@ -88,6 +96,7 @@
     height: 22px;
     margin-bottom: 12px;
 }
+
 .label_for_checkbox {
     font-size: 12px;
     line-height: 12px;
@@ -101,12 +110,14 @@
     margin: 0px 0;
     vertical-align: middle;
 }
+
 .check_box {
     margin: 5px;
     margin-bottom: 1px;
     padding: 0px;
 
 }
+
 a {
     color: #F2AF54;
     text-decoration: none;
@@ -2870,7 +2881,7 @@ th {
 }
 
 .modal-backdrop, .modal-backdrop.fade.in {
-    filter: alpha(opacity = 80);
+    filter: alpha(opacity=80);
     -khtml-opacity: 0.8;
     -moz-opacity: 0.8;
     opacity: 0.8;
@@ -2970,7 +2981,7 @@ th {
     font-weight: bold;
     line-height: 13.5px;
     text-shadow: 0 1px 0 #ffffff;
-    filter: alpha(opacity = 25);
+    filter: alpha(opacity=25);
     -khtml-opacity: 0.25;
     -moz-opacity: 0.25;
     opacity: 0.25;
@@ -2979,7 +2990,7 @@ th {
 .close:hover {
     color: #000000;
     text-decoration: none;
-    filter: alpha(opacity = 40);
+    filter: alpha(opacity=40);
     -khtml-opacity: 0.4;
     -moz-opacity: 0.4;
     opacity: 0.4;

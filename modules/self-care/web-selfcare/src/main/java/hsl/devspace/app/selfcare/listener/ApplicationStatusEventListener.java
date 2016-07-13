@@ -1,14 +1,10 @@
 package hsl.devspace.app.selfcare.listener;
 
 
-
-
-
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 public class ApplicationStatusEventListener implements ServletContextListener {
-
 
 
     @Override

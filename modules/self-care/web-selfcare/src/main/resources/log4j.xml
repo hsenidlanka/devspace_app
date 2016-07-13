@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
 
-<log4j:configuration debug="false" xmlns:log4j="http://jakarta.apache.org/log4j/">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
 
     <appender name="trace" class="org.apache.log4j.DailyRollingFileAppender">
         <param name="File" value="${RWD_LOG_ROOT}/selfcare-trace.log"/>
@@ -43,7 +43,8 @@
     </category>
 
     <category name="trace" additivity="false">
-        <priority value="debug"/> <!-- This should change to info in production -->
+        <priority value="debug"/>
+        <!-- This should change to info in production -->
         <appender-ref ref="trace"/>
     </category>
 
@@ -54,7 +55,8 @@
     </category>
 
     <category name="hms" additivity="false">
-        <priority value="debug"/> <!-- This should change to info in production -->
+        <priority value="debug"/>
+        <!-- This should change to info in production -->
         <appender-ref ref="trace"/>
         <appender-ref ref="error"/>
     </category>
@@ -70,7 +72,8 @@
     </category>
 
     <root>
-        <priority value="debug"/> <!-- This should change to info in production -->
+        <priority value="debug"/>
+        <!-- This should change to info in production -->
         <appender-ref ref="error"/>
         <appender-ref ref="trace"/>
     </root>

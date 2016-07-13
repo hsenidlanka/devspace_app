@@ -6,8 +6,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <%
-  final Logger logger = LoggerFactory.getLogger("defaultError_jsp");
-  logger.error("Error in web application", exception);
+    final Logger logger = LoggerFactory.getLogger("defaultError_jsp");
+    logger.error("Error in web application", exception);
 %>
 
 <fmt:bundle basename="messages">

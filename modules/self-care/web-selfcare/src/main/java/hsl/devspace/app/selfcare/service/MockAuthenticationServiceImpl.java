@@ -20,7 +20,7 @@ public class MockAuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public boolean authenticate(LoginForm loginForm) {
-        if(loginForm.getUsername().equals("user") && loginForm.getPassword().equals("password")){
+        if (loginForm.getUsername().equals("user") && loginForm.getPassword().equals("password")) {
 //            logger.debug("Successfully authenticated the user into system");
             return true;
         } else {

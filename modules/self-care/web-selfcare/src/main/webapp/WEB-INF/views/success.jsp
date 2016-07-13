@@ -6,17 +6,17 @@
 <fmt:bundle basename="messages">
     <div class="container">
         <div class="success">
-            <fmt:message ><c:out value='${model.successMessage}'/></fmt:message>
+            <fmt:message><c:out value='${model.successMessage}'/></fmt:message>
         </div>
         <c:url var="Back" value="${model.redirectUrl}"/>
 
-        <%--<a href="<c:url value="${model.redirectUrl}" />">--%>
-          <%----%>
-        <%--</a>--%>
+            <%--<a href="<c:url value="${model.redirectUrl}" />">--%>
+            <%----%>
+            <%--</a>--%>
 
-        <input id="btn" class="button" type="submit" value="Back" onclick="window.location='${Back}';" />
+        <input id="btn" class="button" type="submit" value="Back" onclick="window.location='${Back}';"/>
 
-        <%--<input type="button" class="button_left_most" value="Cancel" onclick="window.location='${cancel}';" />--%>
+            <%--<input type="button" class="button_left_most" value="Cancel" onclick="window.location='${cancel}';" />--%>
 
     </div>
     </body>

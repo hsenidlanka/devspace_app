@@ -6,7 +6,6 @@
 
 */
 
-
 #header {
     float: left;
     width: 990px;
@@ -130,7 +129,7 @@ body {
     margin-bottom: 2px;
     overflow: scroll;
     float: left;
-    width : 180px;
+    width: 180px;
 
 }
 
@@ -142,7 +141,7 @@ body {
     text-align: left;
     width: 195px;
     float: left;
-    height:45px;
+    height: 45px;
 }
 
 .dynamic_dropdown_box {
@@ -437,7 +436,7 @@ body {
     max-width: 500px;
 }
 
-.genericFormPanel label{
+.genericFormPanel label {
     padding-top: 6px;
     font-size: 13px;
     line-height: 18px;
@@ -459,9 +458,9 @@ body {
     float: left;
     display: block;
     height: 15px;*/
-    /*padding-bottom: 0px;
-    margin-bottom: 0px;
-    margin-top: 4px;*/
+/*padding-bottom: 0px;
+margin-bottom: 0px;
+margin-top: 4px;*/
 /*}*/
 
 .test {

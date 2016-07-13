@@ -16,5 +16,5 @@ package hsl.devspace.app.selfcare.service;
 import hsl.devspace.app.selfcare.login.LoginForm;
 
 public interface AuthenticationService {
-   public boolean authenticate(LoginForm loginForm);
+    public boolean authenticate(LoginForm loginForm);
 }

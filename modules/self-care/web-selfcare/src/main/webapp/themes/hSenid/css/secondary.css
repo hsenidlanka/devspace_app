@@ -214,8 +214,9 @@ input.span6, textarea.span6 {
     display: table;
     width: 29%;
 }
-.subscriber_custom_type_table{
-  display: table;
+
+.subscriber_custom_type_table {
+    display: table;
     width: 29%;
     margin-left: 184px;
 }

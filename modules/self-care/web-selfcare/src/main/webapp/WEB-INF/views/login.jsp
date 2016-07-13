@@ -22,10 +22,11 @@
             <div class="sign_in_box">
                 <img class="sign_in_logo" src="<c:url value="/themes/${theme}/images/logo-rewards.png" />"
                      alt="Rewards"/>
-                <form:input cssClass="sign_in_text_box" placeholder = "Username" id="username"
+                <form:input cssClass="sign_in_text_box" placeholder="Username" id="username"
                             path="username" autocomplete="false" htmlEscape="true"/>
 
-                <form:password cssClass="sign_in_text_box" placeholder = "Password" id="password"  path="password"   htmlEscape="true" autocomplete="off" />
+                <form:password cssClass="sign_in_text_box" placeholder="Password" id="password" path="password"
+                               htmlEscape="true" autocomplete="off"/>
                 <form:checkbox type="checkbox" path="keepSigned" id="keepSigned"/>
                 <label for="keepSigned" class="minor_margin_left label_for_checkbox">
                     <fmt:message key="sc.keep.signed.in"/>
@@ -39,7 +40,7 @@
     </div>
 </form:form>
 <script type="text/javascript">
-    window.onload = function() {
+    window.onload = function () {
         document.getElementById("username").focus();
     }
 </script>

@@ -6,10 +6,10 @@
 <fmt:bundle basename="messages">
     <div class="container">
         <div class="error">
-            <fmt:message ><c:out value='${model.errorMessage}'/></fmt:message>
+            <fmt:message><c:out value='${model.errorMessage}'/></fmt:message>
         </div>
         <c:url var="Back" value="${model.redirectUrl}"/>
-            <input id="btn" class="button" type="submit" value="Back" onclick="window.location='${Back}';"/>
+        <input id="btn" class="button" type="submit" value="Back" onclick="window.location='${Back}';"/>
         </a>
     </div>
     </body>

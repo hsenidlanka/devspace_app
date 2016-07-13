@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-function getInnerHtmlForBlock1(){
+function getInnerHtmlForBlock1() {
 
 // var innerHtml1=(' <div class="offset13">  ' +
 //      	'<select class="span2"><option selected="selected">Any</option><option>All</option> ' +
@@ -49,7 +49,7 @@ function getInnerHtmlForBlock1(){
 //   return innerHtml1
 }
 
-function getInnerHtmlForRow1(){
+function getInnerHtmlForRow1() {
 //    var innerHtml1= (
 //
 //         '<select class="eventSelect"> ' +
@@ -76,84 +76,84 @@ function getInnerHtmlForRow1(){
 //
 //     return innerHtml1
 
- }
+}
 
 
- var rowsInBlock=Array();          // For storing the number of rows in a block....
-     rowsInBlock["rowBlock"]=0;
+var rowsInBlock = Array();          // For storing the number of rows in a block....
+rowsInBlock["rowBlock"] = 0;
 
 
-  $(document).ready(function() {
-      /*
+$(document).ready(function () {
+    /*
 
-      block adder
-       */
+     block adder
+     */
 
-      $(".blockAdd").live("click",function(){
+    $(".blockAdd").live("click", function () {
 
 
-        var hidnVal=$(".topH").attr("value");
-        var intVal=parseInt(hidnVal)
-        var newDiv=$("<div></div>")
-        $(newDiv).attr("id",("row block-seperator"+(++intVal)))
-        $(".topH").attr("value",(intVal))
+        var hidnVal = $(".topH").attr("value");
+        var intVal = parseInt(hidnVal)
+        var newDiv = $("<div></div>")
+        $(newDiv).attr("id", ("row block-seperator" + (++intVal)))
+        $(".topH").attr("value", (intVal))
         $(newDiv).html(getInnerHtmlForBlock1())
-        $(newDiv).css("padding-left","45px")
-		$(newDiv).addClass("block-seperator");
-        $(newDiv).css("padding-right","0px")
+        $(newDiv).css("padding-left", "45px")
+        $(newDiv).addClass("block-seperator");
+        $(newDiv).css("padding-right", "0px")
         $("#logicF1").append(newDiv)
-        if(rowsInBlock[$(newDiv).attr("id")]==null) rowsInBlock[$(newDiv).attr("id")]=1
-        else rowsInBlock[$(newDiv).attr("id")] +=1
+        if (rowsInBlock[$(newDiv).attr("id")] == null) rowsInBlock[$(newDiv).attr("id")] = 1
+        else rowsInBlock[$(newDiv).attr("id")] += 1
 
 
+    });
 
-      });
-
-     /*
+    /*
 
      row adder
-      */
+     */
 
-      $(".rowAdd").live("click",function(ele){
-        var blockDiv=$($($($(this).parent()).parent()).parent())
-       if(rowsInBlock[$(blockDiv).attr("id")]==null){
-          rowsInBlock[$(newDiv).attr("id")]=1}
-       else rowsInBlock[$(blockDiv).attr("id")] +=1
+    $(".rowAdd").live("click", function (ele) {
+        var blockDiv = $($($($(this).parent()).parent()).parent())
+        if (rowsInBlock[$(blockDiv).attr("id")] == null) {
+            rowsInBlock[$(newDiv).attr("id")] = 1
+        }
+        else rowsInBlock[$(blockDiv).attr("id")] += 1
 
-        var newDiv=$("<div></div>")
-        $(newDiv).attr("id",$(blockDiv).attr("id")+"R"+rowsInBlock[$(blockDiv).attr("id")])
-        $(newDiv).attr("class","offset13")
+        var newDiv = $("<div></div>")
+        $(newDiv).attr("id", $(blockDiv).attr("id") + "R" + rowsInBlock[$(blockDiv).attr("id")])
+        $(newDiv).attr("class", "offset13")
         $(newDiv).html(getInnerHtmlForRow1())
         $(newDiv).insertBefore($($($(this).parent()).parent()))
 
 
-      });
+    });
 
     /*
 
-    row remover...
+     row remover...
      */
-      $(".rowRm").live("click",function(ele){
+    $(".rowRm").live("click", function (ele) {
 
-       var blockDiv=$($($($(this).parent()).parent()).parent())
-       rowsInBlock[$(blockDiv).attr("id")] -=1
-       $(this).parent().parent().remove()
-      });
+        var blockDiv = $($($($(this).parent()).parent()).parent())
+        rowsInBlock[$(blockDiv).attr("id")] -= 1
+        $(this).parent().parent().remove()
+    });
 
 
     /*
 
-    block remover
+     block remover
      */
-      $(".blockRm").live("click",function(){
-       var blockDiv=$($($($(this).parent()).parent()).parent())
-       rowsInBlock[$(blockDiv).attr("id")] =null
-       $(blockDiv).remove()
+    $(".blockRm").live("click", function () {
+        var blockDiv = $($($($(this).parent()).parent()).parent())
+        rowsInBlock[$(blockDiv).attr("id")] = null
+        $(blockDiv).remove()
 
 
-      });
+    });
 
-   });
+});
 
 
 

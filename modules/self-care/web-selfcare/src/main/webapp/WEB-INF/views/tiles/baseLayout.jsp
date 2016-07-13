@@ -46,7 +46,7 @@
 
     <!--[if IE]>
     <style type="text/css">
-            /* css for IE 8 */
+        /* css for IE 8 */
         #selectionCriteria .inline_block {
             margin: 3px 0 0 0px;
             padding: 0px;

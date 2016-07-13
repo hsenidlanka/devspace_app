@@ -25,7 +25,7 @@ public class ThemeApplyingInterceptor extends HandlerInterceptorAdapter {
     private String themeName = "m1-green";
 
 
-    public ThemeApplyingInterceptor(){
+    public ThemeApplyingInterceptor() {
 
     }
 
@@ -34,7 +34,7 @@ public class ThemeApplyingInterceptor extends HandlerInterceptorAdapter {
             throws ServletException {
 
         request.setAttribute(THEME_ATTRIBUTE_NAME, themeName);
-		return true;
+        return true;
     }
 
     public void setThemeName(String themeName) {

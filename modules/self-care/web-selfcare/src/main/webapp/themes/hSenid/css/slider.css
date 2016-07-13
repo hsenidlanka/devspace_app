@@ -162,7 +162,7 @@
 }
 
 /*.stripNav:hover {*/
-    /*cursor: pointer;*/
+/*cursor: pointer;*/
 /*}*/
 
 .stripNav ul {
@@ -228,21 +228,21 @@
 }
 
 /*.stripNav li:hover {*/
-    /*color: #fff;*/
-    /*background-color: #7dad15;*/
-    /*border-left-color: #729F13;*/
-    /*border-left-style: solid;*/
-    /*border-left-width: 1px;*/
-    /*border-right-color: #729F13;*/
-    /*border-right-style: solid;*/
-    /*border-right-width: 1px;*/
-    /*border-top-color: #729F13;*/
-    /*border-top-style: solid;*/
-    /*border-top-width: 1px;*/
-    /*border-bottom-color: #729F13;*/
-    /*border-bottom-style: solid;*/
-    /*border-bottom-width: 0px;*/
-    /*background-image: url(../images/tablehead1.jpg);*/
+/*color: #fff;*/
+/*background-color: #7dad15;*/
+/*border-left-color: #729F13;*/
+/*border-left-style: solid;*/
+/*border-left-width: 1px;*/
+/*border-right-color: #729F13;*/
+/*border-right-style: solid;*/
+/*border-right-width: 1px;*/
+/*border-top-color: #729F13;*/
+/*border-top-style: solid;*/
+/*border-top-width: 1px;*/
+/*border-bottom-color: #729F13;*/
+/*border-bottom-style: solid;*/
+/*border-bottom-width: 0px;*/
+/*background-image: url(../images/tablehead1.jpg);*/
 /*}*/
 
 .stripNav li.selected {

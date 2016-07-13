@@ -12,27 +12,27 @@ import java.util.Map;
 @Controller
 @RequestMapping("/")
 public class LoginController {
-	@RequestMapping(method = RequestMethod.GET)
-	public String showForm(Map model) {
-		LoginForm loginForm = new LoginForm();
-		model.put("loginForm", loginForm);
-		return "loginform";
-	}
+    @RequestMapping(method = RequestMethod.GET)
+    public String showForm(Map model) {
+        LoginForm loginForm = new LoginForm();
+        model.put("loginForm", loginForm);
+        return "loginform";
+    }
 
-	@RequestMapping("/loginform")
-	public String processForm(@Valid LoginForm loginForm, BindingResult result,
-			Map model) {
-		String userName = "UserName";
-		String password = "password";
-		if (result.hasErrors()) {
-			return "loginform";
-		}
-		loginForm = (LoginForm) model.get("loginForm");
-		if (!loginForm.getUserName().equals(userName) || !loginForm.getPassword().equals(password)) {
-			return "loginform";
-		}
-		model.put("loginForm", loginForm);
-		return "loginsuccess";
-	}
+    @RequestMapping("/loginform")
+    public String processForm(@Valid LoginForm loginForm, BindingResult result,
+                              Map model) {
+        String userName = "UserName";
+        String password = "password";
+        if (result.hasErrors()) {
+            return "loginform";
+        }
+        loginForm = (LoginForm) model.get("loginForm");
+        if (!loginForm.getUserName().equals(userName) || !loginForm.getPassword().equals(password)) {
+            return "loginform";
+        }
+        model.put("loginForm", loginForm);
+        return "loginsuccess";
+    }
 
 }

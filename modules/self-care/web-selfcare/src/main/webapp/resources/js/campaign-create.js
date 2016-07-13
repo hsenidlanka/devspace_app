@@ -1,4 +1,4 @@
-function enableCampaignCreation () {
+function enableCampaignCreation() {
     try {
 //        $('.tTip').betterTooltip({speed:150, delay:300});
 

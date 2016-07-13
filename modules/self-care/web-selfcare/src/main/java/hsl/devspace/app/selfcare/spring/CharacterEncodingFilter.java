@@ -25,24 +25,24 @@ public class CharacterEncodingFilter extends OncePerRequestFilter {
 
     private String encoding;
 
-	private boolean forceRequestEncoding = false;
-	private boolean forceResponseEncoding = false;
+    private boolean forceRequestEncoding = false;
+    private boolean forceResponseEncoding = false;
 
     @Override
-	protected void doFilterInternal(
-			HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-			throws ServletException, IOException {
+    protected void doFilterInternal(
+            HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
 
-		if (this.encoding != null) {
-            if(this.forceRequestEncoding || request.getCharacterEncoding() == null) {
-			    request.setCharacterEncoding(this.encoding);
+        if (this.encoding != null) {
+            if (this.forceRequestEncoding || request.getCharacterEncoding() == null) {
+                request.setCharacterEncoding(this.encoding);
             }
-			if (this.forceResponseEncoding) {
-				response.setCharacterEncoding(this.encoding);
-			}
-		}
-		filterChain.doFilter(request, response);
-	}
+            if (this.forceResponseEncoding) {
+                response.setCharacterEncoding(this.encoding);
+            }
+        }
+        filterChain.doFilter(request, response);
+    }
 
     public void setEncoding(String encoding) {
         this.encoding = encoding;

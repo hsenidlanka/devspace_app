@@ -4,7 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib uri="http://jsptags.com/tags/navigation/pager" prefix="pg" %>
 
-<pg:pager url="${myAppUrl}" export="currentPageNumber=pageNumber;" items="${dataListSize}" isOffset="true" >
+<pg:pager url="${myAppUrl}" export="currentPageNumber=pageNumber;" items="${dataListSize}" isOffset="true">
 
     <pg:index>
         <pg:prev>&nbsp;<a href="<c:out value="${pageUrl}"/>">Prev</a></pg:prev>

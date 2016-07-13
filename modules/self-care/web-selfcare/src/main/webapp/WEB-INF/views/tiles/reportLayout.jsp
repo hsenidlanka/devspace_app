@@ -15,20 +15,20 @@
     <meta http-equiv="expires" content="0"/>
     <meta http-equiv="pragma" content="no-cache"/>
     <meta http-equiv="cache-control" content="max-age=0, no-cache, no-store, must-revalidate"/>
-    <link rel="shortcut icon" href="images/favicon.png" type="image/png" />
+    <link rel="shortcut icon" href="images/favicon.png" type="image/png"/>
 
     <script type="text/javascript">
 
         function addLoadEvent(func) {
             var oldonload = window.onload;
             if (typeof window.onload != 'function') {
-                if(typeof func == 'function'){
+                if (typeof func == 'function') {
                     window.onload = func;
-                }else{
+                } else {
                     alert("This is not a function " + func);
                 }
             } else {
-                window.onload = function() {
+                window.onload = function () {
                     oldonload();
                     func();
                 }
@@ -37,7 +37,7 @@
 
     </script>
     <title><%
-        if (request.getParameter("page")!=null) {
+        if (request.getParameter("page") != null) {
             out.print(request.getParameter("page"));
         } else {
             out.print("mchoiceRewards");
@@ -47,7 +47,7 @@
 
     <!--[if IE]>
     <style type="text/css">
-            /* css for IE 8 */
+        /* css for IE 8 */
         #selectionCriteria .inline_block {
             margin: 3px 0 0 0px;
             padding: 0px;
@@ -65,7 +65,6 @@
         #selectionCriteria .float_left_style {
             float: none;
         }
-
 
         #selectionCriteria .sub_table_cell {
             min-height: 23px;
@@ -91,13 +90,13 @@
 
     <div class="maincontent" id="custom-doc" align="center">
         <div id="hd" align="center">
-            <tiles:insertAttribute name="header" />
+            <tiles:insertAttribute name="header"/>
         </div>
         <div id="bd" align="center">
             <div id="wrapper">
-               <%-- <div>
-                    <tiles:insertAttribute name="menu" />
-                </div>--%>
+                    <%-- <div>
+                         <tiles:insertAttribute name="menu" />
+                     </div>--%>
                 <div class="bumperpack">
                     <div class="bw1">
                         <div class="bw2">
@@ -105,10 +104,10 @@
                                 <div class="bw4">
                                     <div class="bw5">
                                         <div class="bw7">
-                                            <div id="mask" >
+                                            <div id="mask">
 
                                             </div>
-                                            <tiles:insertAttribute name="container" />
+                                            <tiles:insertAttribute name="container"/>
                                         </div>
                                     </div>
                                 </div>
@@ -120,12 +119,12 @@
         </div>
 
         <div class="footer">
-            <tiles:insertAttribute name="footer" />
+            <tiles:insertAttribute name="footer"/>
         </div>
     </div>
     <div id="dialog-modal" style="display: none; height: 32px; ">
         <c:url var="loadingImg" value="/themes/${theme}/images/loading.gif"/>
-        <img src="${loadingImg}" />
+        <img src="${loadingImg}"/>
         <label class="label_for_waitbox" style="margin-left: 10px;">Please wait...</label>
     </div>
 </fmt:bundle>
@@ -134,9 +133,9 @@
     var myMenu;
 
     function loadMainLayOut() {
-        $("#cm_rule_create").click(function(event){
+        $("#cm_rule_create").click(function (event) {
             injectFacebox();
-            $('#sccf').css('left','300px');
+            $('#sccf').css('left', '300px');
         });
         myMenu = new SDMenu("my_menu");
 
@@ -152,31 +151,35 @@
     }
     addLoadEvent(loadMainLayOut);
 
-    $(document).ready(function(){
+    $(document).ready(function () {
         $("#hd").parent().append($(".bw1 .footer"));
     });
 
-    $( "#dialog-modal" ).dialog({
+    $("#dialog-modal").dialog({
         height: 50,
-        width:40,
-        modal: true ,
+        width: 40,
+        modal: true,
         draggable: false,
         resizable: false,
-        closeOnEscape:false,
+        closeOnEscape: false,
         autoOpen: false
     });
 
-    $(function() {
+    $(function () {
         $('#bw6 *').tooltip()
         updateTitleForTooltip()
     })
 
-    function updateTitleForTooltip(){
-        $('input').each(function(){$(this).attr('title', $(this).val())})
-        $('select').each(function(){$(this).attr('title', $(this).children("option:selected").html())})
+    function updateTitleForTooltip() {
+        $('input').each(function () {
+            $(this).attr('title', $(this).val())
+        })
+        $('select').each(function () {
+            $(this).attr('title', $(this).children("option:selected").html())
+        })
     }
 
-    $(document).change(function(){
+    $(document).change(function () {
         updateTitleForTooltip();
     })
 </script>
