@@ -4,6 +4,7 @@ import hsl.devspace.app.corelogic.domain.User;
 import hsl.devspace.app.corelogic.repository.UserRepositoryImpl;
 import hsl.devspace.app.coreserver.common.*;
 import hsl.devspace.app.coreserver.common.Context;
+import hsl.devspace.app.coreserver.model.ErrorMessage;
 import hsl.devspace.app.coreserver.model.SuccessMessage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -46,5 +47,33 @@ public class UserManagementService {
         userData.put("username", username);
         SuccessMessage successMessage = new SuccessMessage("success", Response.Status.OK.getStatusCode(), "user deleted", userData);
         return Response.status(Response.Status.OK).entity(successMessage).build();
+    }
+
+    @POST
+    @Path("/login/{username}/{password}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response loginValidate(@PathParam("username") String userName, @PathParam("password") String password) {
+        User user = new User(userName, password);
+        boolean status=userRepository.loginAuthenticate(user);
+        Response response;
+        if(status){
+            Map<String, Object> userData = new HashMap<String, Object>();
+            userData.put("username", user.getUsername());
+            userData.put("password", user.getPassword());
+            SuccessMessage successMessage=new SuccessMessage();
+            successMessage.setStatus("success");
+            successMessage.setCode(200);
+            successMessage.setMessage("username, password validated.");
+            successMessage.setData(userData);
+            response=Response.status(Response.Status.OK).entity(successMessage).build();
+        }else{
+            ErrorMessage errorMessage=new ErrorMessage();
+            errorMessage.setStatus("unauthorized");
+            errorMessage.setErrorCode(401);
+            errorMessage.setErrorMessage("unauthorized user");
+            errorMessage.setDescription("username, password not matched. Check username and password.");
+            response=Response.status(Response.Status.UNAUTHORIZED).entity(errorMessage).build();
+        }
+        return response;
     }
 }
