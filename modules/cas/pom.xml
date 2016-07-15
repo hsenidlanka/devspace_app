@@ -181,7 +181,7 @@
                     <!--*
                         *unpacking initial cas.war
                         **-->
-                    
+
                     <execution>
                         <id>unpack-cas.war</id>
                         <phase>package</phase>
@@ -328,6 +328,26 @@
                 </executions>
             </plugin>
 
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>make-cas.war</id>
+                        <phase>package</phase>
+                        <goals>
+                            <!-- Assemble an application bundle or distribution. -->
+                            <goal>single</goal>
+                        </goals>
+
+                        <configuration>
+                            <!-- assembly.xml file contains the configurations of assembly plugin. -->
+                            <descriptors>
+                                <descriptor>resources/assembly.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
 
         </plugins>
         <finalName>cas</finalName>
