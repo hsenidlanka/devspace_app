@@ -12,8 +12,8 @@ import java.sql.SQLIntegrityConstraintViolationException;
 public interface UserRepository {
 
 
-    public void addUser(User user)throws SQLIntegrityConstraintViolationException,DuplicateKeyException;
-    void deleteUser(String username)throws SQLException;
+    public int addUser(User user)throws SQLIntegrityConstraintViolationException,DuplicateKeyException;
+    int deleteUser(String username)throws SQLException;
 
     void changePassword(String username, String password)throws SQLException;
 
