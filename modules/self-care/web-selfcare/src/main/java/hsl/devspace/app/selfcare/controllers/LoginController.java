@@ -35,4 +35,9 @@ public class LoginController {
         return "loginsuccess";
     }
 
+    @RequestMapping("/register")
+    public String showRegister(Map model){
+        return "register";
+    }
+
 }
