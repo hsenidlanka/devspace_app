@@ -1,7 +1,7 @@
 package hsl.devspace.app.coreserver.exception;
 
 import com.sun.jersey.api.NotFoundException;
-import hsl.devspace.app.coreserver.model.ErrorMessage;
+import hsl.devspace.app.coreserver.model.ErrorModel;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -18,12 +18,12 @@ public class NotFoundExceptionMapper implements ExceptionMapper<NotFoundExceptio
     @Override
     public Response toResponse(NotFoundException e) {
         // Creating an error message to return as a response.
-        ErrorMessage errorMessage = new ErrorMessage();
-        errorMessage.setStatus("error");
-        errorMessage.setErrorCode(Response.Status.NOT_FOUND.getStatusCode());
-        errorMessage.setErrorMessage(e.getMessage());
-        errorMessage.setDescription("make sure the url is correct, check the passed parameters and try again.");
+        ErrorModel errorModel = new ErrorModel();
+        errorModel.setStatus("error");
+        errorModel.setErrorCode(Response.Status.NOT_FOUND.getStatusCode());
+        errorModel.setErrorMessage(e.getMessage());
+        errorModel.setDescription("make sure the url is correct, check the passed parameters and try again.");
         // Returning a response with created error details.
-        return Response.status(404).entity(errorMessage).type(MediaType.APPLICATION_JSON_TYPE).build();
+        return Response.status(404).entity(errorModel).type(MediaType.APPLICATION_JSON_TYPE).build();
     }
 }

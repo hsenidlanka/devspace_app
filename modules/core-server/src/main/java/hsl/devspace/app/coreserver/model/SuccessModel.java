@@ -10,16 +10,16 @@ import java.util.Map;
  * This is the model/template of the success message to pass as a response.
  */
 @XmlRootElement
-public class SuccessMessage {
+public class SuccessModel {
     private String status;
     private int code;
     private String message;
     private Map<String, Object> data;
 
-    public SuccessMessage() {
+    public SuccessModel() {
     }
 
-    public SuccessMessage(String status, int code, String message, Map<String, Object> data) {
+    public SuccessModel(String status, int code, String message, Map<String, Object> data) {
         this.status = status;
         this.code = code;
         this.message = message;

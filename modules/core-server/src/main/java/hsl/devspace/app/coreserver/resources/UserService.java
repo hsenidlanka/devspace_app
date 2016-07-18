@@ -2,10 +2,9 @@ package hsl.devspace.app.coreserver.resources;
 
 import hsl.devspace.app.corelogic.domain.User;
 import hsl.devspace.app.corelogic.repository.UserRepositoryImpl;
-import hsl.devspace.app.coreserver.common.*;
 import hsl.devspace.app.coreserver.common.Context;
-import hsl.devspace.app.coreserver.model.ErrorMessage;
-import hsl.devspace.app.coreserver.model.SuccessMessage;
+import hsl.devspace.app.coreserver.model.ErrorModel;
+import hsl.devspace.app.coreserver.model.SuccessModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.context.ApplicationContext;
@@ -20,8 +19,8 @@ import java.util.Map;
  * This class handles the requests related to users.
  */
 @Path("/users")
-public class UserManagementService {
-    private static final Logger log = LogManager.getLogger(UserManagementService.class);
+public class UserService {
+    private static final Logger log = LogManager.getLogger(UserService.class);
     ApplicationContext context = Context.appContext;
     UserRepositoryImpl userRepository = (UserRepositoryImpl) context.getBean("userRepoImpl");
 
@@ -34,8 +33,8 @@ public class UserManagementService {
         Map<String, Object> userData = new HashMap<String, Object>();
         userData.put("username", user.getUsername());
         userData.put("password", user.getPassword());
-        SuccessMessage successMessage = new SuccessMessage("success", Response.Status.CREATED.getStatusCode(), "user added", userData);
-        return Response.status(Response.Status.CREATED).entity(successMessage).build();
+        SuccessModel successModel = new SuccessModel("success", Response.Status.CREATED.getStatusCode(), "user added", userData);
+        return Response.status(Response.Status.CREATED).entity(successModel).build();
     }
 
     @DELETE
@@ -45,8 +44,8 @@ public class UserManagementService {
         userRepository.deleteUser(username);
         Map<String, Object> userData = new HashMap<String, Object>();
         userData.put("username", username);
-        SuccessMessage successMessage = new SuccessMessage("success", Response.Status.OK.getStatusCode(), "user deleted", userData);
-        return Response.status(Response.Status.OK).entity(successMessage).build();
+        SuccessModel successModel = new SuccessModel("success", Response.Status.OK.getStatusCode(), "user deleted", userData);
+        return Response.status(Response.Status.OK).entity(successModel).build();
     }
 
     @POST
@@ -54,25 +53,17 @@ public class UserManagementService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response loginValidate(@PathParam("username") String userName, @PathParam("password") String password) {
         User user = new User(userName, password);
-        boolean status=userRepository.loginAuthenticate(user);
+        boolean status = userRepository.loginAuthenticate(user);
         Response response;
-        if(status){
+        if (status) {
             Map<String, Object> userData = new HashMap<String, Object>();
             userData.put("username", user.getUsername());
             userData.put("password", user.getPassword());
-            SuccessMessage successMessage=new SuccessMessage();
-            successMessage.setStatus("success");
-            successMessage.setCode(200);
-            successMessage.setMessage("username, password validated.");
-            successMessage.setData(userData);
-            response=Response.status(Response.Status.OK).entity(successMessage).build();
-        }else{
-            ErrorMessage errorMessage=new ErrorMessage();
-            errorMessage.setStatus("unauthorized");
-            errorMessage.setErrorCode(401);
-            errorMessage.setErrorMessage("unauthorized user");
-            errorMessage.setDescription("username, password not matched. Check username and password.");
-            response=Response.status(Response.Status.UNAUTHORIZED).entity(errorMessage).build();
+            SuccessModel successModel = new SuccessModel("success",Response.Status.OK.getStatusCode(),"username, password validated.",userData);
+            response = Response.status(Response.Status.OK).entity(successModel).build();
+        } else {
+            ErrorModel errorModel = new ErrorModel("unauthorized",Response.Status.UNAUTHORIZED.getStatusCode(),"unauthorized user","username, password not matched. Check username and password.");
+            response = Response.status(Response.Status.UNAUTHORIZED).entity(errorModel).build();
         }
         return response;
     }

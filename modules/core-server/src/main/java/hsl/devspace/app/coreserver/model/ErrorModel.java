@@ -10,16 +10,16 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 
 @XmlRootElement
-public class ErrorMessage {
+public class ErrorModel {
     private String status;
     private int errorCode;
     private String errorMessage;
     private String description;
 
-    public ErrorMessage() {
+    public ErrorModel() {
     }
 
-    public ErrorMessage(String status, int errorCode, String errorMessage, String description) {
+    public ErrorModel(String status, int errorCode, String errorMessage, String description) {
         this.status = status;
         this.errorCode = errorCode;
         this.errorMessage = errorMessage;
