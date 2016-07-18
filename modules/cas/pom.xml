@@ -240,17 +240,42 @@
                             <outputDirectory>${basedir}/target/unpacked/WEB-INF</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>${basedir}/resources</directory>
+                                    <directory>${basedir}/resourcesWEB-INF</directory>
                                     <filtering>true</filtering>
-                                    <includes>
+                                   <!-- <includes>
                                         <include>deployerConfigContext.xml</include>
                                         <include>casdatabase.properties</include>
-                                    </includes>
+                                    </includes>-->
+                                    <excludes>
+                                        <exclude>casdatabase.properties</exclude>
+                                    </excludes>
                                 </resource>
                             </resources>
                         </configuration>
                     </execution>
 
+
+                    <!--*
+                        **Copying Spring config files
+                        *-->
+
+                   <!-- <execution>
+                        <id>copy-spring-sonf</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <overwrite>true</overwrite>
+                            <outputDirectory>${basedir}/target/unpacked/WEB-INF/spring-configuration</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}/resourcesSpringConfg</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>-->
 
                     <!--*
                         *copying jsp views
@@ -282,7 +307,7 @@
                         *copying applicationContext.xml
                         **-->
 
-                    <!-- <execution>
+                     <!--<execution>
                          <id>copy-app-context</id>
                          <phase>process-resources</phase>
                          <goals>
@@ -290,7 +315,7 @@
                          </goals>
                          <configuration>
                              <overwrite>true</overwrite>
-                             <outputDirectory>${basedir}/target/WEB-INF/spring-configuration</outputDirectory>
+                             <outputDirectory>${basedir}/target/unpacked/WEB-INF/spring-configuration</outputDirectory>
                              <resources>
                                  <resource>
                                      <directory>${basedir}/src/spring-configuration</directory>
@@ -301,14 +326,13 @@
                                  </resource>
                              </resources>
                          </configuration>
-                     </execution>
- -->
+                     </execution>-->
 
                     <!--*
                         *Copying css files
                         **-->
 
-                    <execution>
+                  <!--  <execution>
                         <id>copy-modified-files</id>
                         <phase>package</phase>
                         <goals>
@@ -324,7 +348,8 @@
                                 </resource>
                             </resources>
                         </configuration>
-                    </execution>
+                    </execution>-->
+
                 </executions>
             </plugin>
 
@@ -342,7 +367,7 @@
                         <configuration>
                             <!-- assembly.xml file contains the configurations of assembly plugin. -->
                             <descriptors>
-                                <descriptor>resources/assembly.xml</descriptor>
+                                <descriptor>resourcesWEB-INF/assembly.xml</descriptor>
                             </descriptors>
                         </configuration>
                     </execution>
