@@ -1,102 +1,119 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 
+<head>
+    <%@include file="includeFiles/include.jsp" %>
 
+    <fmt:setLocale value="en"/>
+    <fmt:setBundle basename="messages" var="lang"/>
 
-
-    <!DOCTYPE html>
-    <html>
-
-
-    <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-
-        <fmt:setLocale value="en"/>
-        <fmt:setBundle basename="messages" var="lang"/>
-
-    <title>Login Page</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
-    <script>
-    $(window).load(function () {
-    $('#myModal').modal('show');
-    });
-    </script>
+    <title>Sign In</title>
 
     <style>
-    body {
-    background-image: url("HMS-Logo-2013.png");
-    background-repeat: no-repeat;
-    }
+        .div2 {
+            width: 50%;
+            height: 60%;
+            padding: 50px;
+            border: 10px solid cornflowerblue;
+            border-style:outset;
+            margin-top: 12%;
+        }
+
+        .login-footer {
+            margin-top: 3%;
+        }
+
+        body {
+            background: url('https://goo.gl/IEb9V9') no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+
+        a { color: inherit; }
+        /*html {
+            background: url('https://goo.gl/vZT8nX') no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }*/
+
+        /* enable absolute positioning */
+        .inner-addon {
+            position: relative;
+        }
+
+        /* style icon */
+        .inner-addon .glyphicon {
+            position: absolute;
+            padding: 10px;
+            pointer-events: none;
+        }
+
+        /* align icon */
+        .left-addon .glyphicon  { left:  0px;}
+        .right-addon .glyphicon { right: 0px;}
+
+        /* add padding  */
+        .left-addon input  { padding-left:  30px; }
+        .right-addon input { padding-right: 30px; }
+
+
+        .btn.btn-success {
+            color: #0a010a;
+            background-color: #8664e3;
+            background-image: linear-gradient(to bottom, #69679e, #ebcee2);
+            border-color: #3E8F3E #d2cce8 #f2faf2;
+        }
+        .btn.btn-success:hover {
+            color: #0a010a;
+            background-color: #ebcee2;
+            background-image: linear-gradient(to bottom, #ebcee2, #ebcee2);
+            border-color: #3E8F3E #d2cce8 #f2faf2;
+        }
+
     </style>
 
-    </head>
-    <body>
+</head>
 
-    <%--<c:out value="${'kjflk'}" />--%>
-    <div class="container container-fluid">
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" role="dialog" data-backdrop="static" style="left: 5%; top: 25%;">
-    <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-    <div class="modal-header">
-    <div align="center"><h3 class="modal-title" style="color: red;"><fmt:message key="login.title" bundle="${lang}"/> </h3></div>
-
-    </div>
-    <div class="modal-body">
+<body background="login.jpg">
+<div align="center" class="container div2">
 
     <form:form action="loginform" commandName="loginForm" method="post">
 
+        <div class="raw">
+            <h3><form:label path="userName">
+                <fmt:message key="login.username" bundle="${lang}"/> <i class="glyphicon glyphicon-user"></i></form:label></h3>
+        </div>
+        <div class="raw">
+            <form:input path="userName" size="40"/>
+        </div>
 
+        <div class="raw">
+            <h3><form:label path="password">
+                <fmt:message key="login.password" bundle="${lang}"/> <i class="glyphicon glyphicon-lock"></i></form:label></h3>
+        </div>
 
-        <div class="form-group">
-            <div class="col-md-3"><form:label path="userName"><fmt:message key="login.username" bundle="${lang}"/> : </form:label></div>
-            <div class="col-md-9"><form:input path="userName" id="userName" size="40"/></div>
+        <div class="row">
+
+            <form:password path="password" size="40"/>
+
         </div>
         <br><br>
 
-        <div class="form-group">
-            <div class="col-md-3"><form:label path="password"><fmt:message key="login.password" bundle="${lang}"/> : </form:label></div>
-            <div class="col-md-9"><form:password path="password" id="password" size="40"/></div>
+        <div class="row" style="width: 64%">
+            <input type="submit" class="btn btn-block btn btn-success btn-lg" value=<fmt:message key="login.submit" bundle="${lang}"/> />
         </div>
 
-        </div>
-        <br>
-
-        <div align="center">
-            <div style="width:50%"><input type="submit" value=<fmt:message key="login.submit" bundle="${lang}"/>
-                                          class="btn btn-danger btn-block btn-lg btn-primary btn-default btn-large"/>
-            </div>
-        </div>
-        <br>
-
-        <div>
-            <div class="row">
-                <div align="center" class="col-md-6">
-                    <h4><a><fmt:message key="login.registernow" bundle="${lang}"/></a></h4>
-                </div>
-                <div align="center" class="col-md-6">
-                    <h4><a><fmt:message key="login.forgotpassword" bundle="${lang}"/></a></h4>
-                </div>
-            </div>
-        </div>
 
     </form:form>
-    <br>
-
-    </div>
-    </div>
-    </div>
-    </div>
-    </body>
+</div>
 
 
-    </html>
+<div align="center" class="login-footer">
+    <footer style="color: whitesmoke"><a href="http://www.hsenid.com/">Copyright © 1997 - 2016 hSenid Mobile Solutions. All Rights Reserved.</a></footer>
+</div>
+</body>
+</html>

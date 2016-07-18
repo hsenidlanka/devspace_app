@@ -5,15 +5,15 @@ info:
   description: A sample API documentation created to demonstrate the currently available RESTful services.
     Open the url meioned below the email address and paste this complete set of code or click file > import file.
     Browse and open this YAML file.
-  termsOfService: http://helloreverb.com/terms/
+  #termsOfService: http://helloreverb.com/terms/
   contact:
     name: hSenid Lanka team
-    email: foo@example.com
+    #email: foo@example.com
     url: http://editor.swagger.io/
-  license:
-    name: MIT
-    url: http://opensource.org/licenses/MIT
-host: petstore.swagger.io
+  #license:
+    #name: MIT
+    #url: http://opensource.org/licenses/MIT
+host: localhost:2222
 basePath: /devspace/api/v1.0
 schemes:
   - http
@@ -22,7 +22,7 @@ consumes:
 produces:
   - application/json
 paths:
-  /user/add/{username}/{password}:
+  /users/add/{username}/{password}:
     post:
       description: Add a new user to the database
       produces:
@@ -33,6 +33,7 @@ paths:
           description: Username of the new user
           required: true
           type: string
+          
         - name: password
           in: path
           description: Password of the new user
@@ -58,14 +59,9 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/error-message'      
-              
-        default:
-          description: unexpected error
-          schema:
-            $ref: '#/definitions/error-message'
+              $ref: '#/definitions/error-message'    
             
-  /user/delete/{username}:
+  /users/delete/{username}:
     delete:
       description: Delete a user from the database
       produces:
@@ -96,12 +92,53 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/error-message'    
-              
-        default:
-          description: unexpected error
+              $ref: '#/definitions/error-message'
+            
+  /users/login/{username}/{password}:
+    post:
+      description: Authorize a user by username and password
+      produces:
+        - application/json
+      parameters:
+        - name: username
+          in: path
+          description: Username of the new user
+          required: true
+          type: string
+          
+        - name: password
+          in: path
+          description: Password of the new user
+          required: true
+          type: string
+      responses:
+        '200':
+          description: User authorized
           schema:
-            $ref: '#/definitions/error-message'
+            type: array
+            items:
+              $ref: '#/definitions/success-message'
+              
+        '404':
+          description: Resource not found
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/error-message'
+              
+        '500':
+          description: Internal server error
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/error-message'  
+              
+        '401':
+          description: Unauthorized user
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/error-message'     
             
 definitions:
   error-message:
@@ -138,6 +175,6 @@ definitions:
       message:
         type: string
       data:
-        type: string
+        type: object
         
         
