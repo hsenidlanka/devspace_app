@@ -2,6 +2,8 @@
 <html>
 <head>
     <%@include file="includeFiles/include.jsp" %>
+    <fmt:setLocale value="en"/>
+    <fmt:setBundle basename="messages" var="lang"/>
     <title>Register Now</title>
 
     <style>
@@ -12,12 +14,23 @@
         .position {
             float: left;
         }
+
+        body {
+            background: url('https://goo.gl/6fz7w6') no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
     </style>
 
 </head>
-<body background="login.jpg">
 
+<body>
 
-<input type="submit" class="btn btn-success btn-lg btn-block"><span class="glyphicon glyphicon-user"></span> >
+<form:form>
+
+</form:form>
+
 </body>
 </html>

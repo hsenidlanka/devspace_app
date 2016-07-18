@@ -13,7 +13,7 @@
     <mvc:annotation-driven/>
 
     <context:component-scan base-package="hsl.devspace.app.selfcare.controllers"/>
-    <mvc:resources mapping="../../resources/images/**" location="resources" />
+    <mvc:resources mapping="/resources/**" location="/resources/" />
 
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver">

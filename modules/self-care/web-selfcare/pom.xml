@@ -74,7 +74,6 @@
             <version>3.1.0</version>
         </dependency>
 
-
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
@@ -92,7 +91,6 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
-
         <dependency>
             <groupId>javax.el</groupId>
             <artifactId>javax.el-api</artifactId>
@@ -108,4 +106,5 @@
     <build>
         <finalName>${final.name}</finalName>
     </build>
+
 </project>
