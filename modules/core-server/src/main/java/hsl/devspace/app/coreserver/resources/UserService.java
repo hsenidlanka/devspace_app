@@ -8,7 +8,6 @@ import hsl.devspace.app.coreserver.model.SuccessModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.context.ApplicationContext;
-
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import java.util.HashMap;
