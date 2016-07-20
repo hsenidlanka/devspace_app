@@ -13,7 +13,7 @@ import javax.ws.rs.ext.Provider;
  * This class is mapped to execute when programs occurs a 404 (NOT FOUND) error.
  */
 
-@Provider
+
 public class NotFoundExceptionMapper implements ExceptionMapper<NotFoundException> {
     @Override
     public Response toResponse(NotFoundException e) {
