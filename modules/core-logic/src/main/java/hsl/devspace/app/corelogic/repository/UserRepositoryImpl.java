@@ -3,6 +3,7 @@ package hsl.devspace.app.corelogic.repository;
 import hsl.devspace.app.corelogic.domain.User;
 import org.apache.log4j.Logger;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.dao.TransientDataAccessResourceException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
@@ -10,6 +11,7 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.sql.DataSource;
+import java.sql.SQLException;
 
 /**
  * Created by hsenid on 7/4/16.
@@ -22,7 +24,7 @@ public class UserRepositoryImpl implements UserRepository {
     private static org.apache.log4j.Logger log = Logger.getLogger(UserRepositoryImpl.class);
 
     public void setDataSource(DataSource dataSource) {
-      //this.dataSource = dataSource;
+        //this.dataSource = dataSource;
         jdbcTemplate = new JdbcTemplate(dataSource);
 
     }
@@ -33,33 +35,32 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
 
-
     @Override
-    public int addUser(User user)throws DuplicateKeyException {
-        int row=0;
+    public int add(User user) throws DuplicateKeyException {
+        int row = 0;
         TransactionDefinition tr_def = new DefaultTransactionDefinition();
         TransactionStatus stat = transactionManager.getTransaction(tr_def);
-        String un=user.getUsername();
-        String pw=user.getPassword();
-if(un!="" && pw!="") {
-    String sql = "INSERT INTO users " +
-            "(username,password) VALUES (?,?)";
+        String un = user.getUsername();
+        String pw = user.getPassword();
+        if (un != "" && pw != "") {
+            String sql = "INSERT INTO users " +
+                    "(username,password) VALUES (?,?)";
 
 
-    row = jdbcTemplate.update(sql, new Object[]{user.getUsername(), user.getPassword()});
-    transactionManager.commit(stat);
+            row = jdbcTemplate.update(sql, new Object[]{user.getUsername(), user.getPassword()});
+            transactionManager.commit(stat);
 
-    log.info(row + "inserted");
-    log.info(un);
-}else
-    log.error("values cannot be null");
+            log.info(row + "inserted");
+            log.info(un);
+        } else
+            log.error("values cannot be null");
 
-    return row;
+        return row;
 
     }
 
     @Override
-    public int deleteUser(String username)throws IllegalArgumentException{
+    public int delete(String username) throws IllegalArgumentException {
         TransactionDefinition tr_def = new DefaultTransactionDefinition();
         TransactionStatus stat = transactionManager.getTransaction(tr_def);
         user.setUsername(username);
@@ -69,7 +70,7 @@ if(un!="" && pw!="") {
         transactionManager.commit(stat);
         log.info(row + "deleted");
         // transactionManager.rollback(stat);
-return row;
+        return row;
 
     }
 
@@ -116,5 +117,16 @@ return row;
         return result;
     }
 
+    @Override
+    public int modify(User user) throws TransientDataAccessResourceException,SQLException{
+        TransactionDefinition tr_def = new DefaultTransactionDefinition();
+        TransactionStatus stat = transactionManager.getTransaction(tr_def);
+            String sql = "UPDATE users SET username=? password = ? WHERE username = ? ";
+          int count = jdbcTemplate.queryForObject(
+                    sql, new Object[]{user.getUsername(), (user.getPassword())}, Integer.class);
+        transactionManager.commit(stat);
+        log.info(count);
+        return count;
 
+    }
 }

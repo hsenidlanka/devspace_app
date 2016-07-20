@@ -29,7 +29,7 @@ public class UserService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response addNewUser(@PathParam("username") String userName, @PathParam("password") String password) {
         User user = new User(userName, password);
-        userRepository.addUser(user);
+        userRepository.add(user);
         Map<String, Object> userData = new HashMap<String, Object>();
         userData.put("username", user.getUsername());
         userData.put("password", user.getPassword());
@@ -41,7 +41,7 @@ public class UserService {
     @Path("/delete/{username}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUser(@PathParam("username") String username) {
-        userRepository.deleteUser(username);
+        userRepository.delete(username);
         Map<String, Object> userData = new HashMap<String, Object>();
         userData.put("username", username);
         SuccessModel successModel = new SuccessModel("success", Response.Status.OK.getStatusCode(), "user deleted", userData);
