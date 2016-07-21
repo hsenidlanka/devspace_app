@@ -48,9 +48,9 @@
 
     </div>
 </form:form>
-<%--<script type="text/javascript">
+<script type="text/javascript">
     window.onload = function() {
         document.getElementById("username").focus();
     }
-</script>--%>
+</script>
 <jsp:directive.include file="bottom.jsp" />

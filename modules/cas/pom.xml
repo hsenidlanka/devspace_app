@@ -260,7 +260,7 @@
                         *-->
 
                    <!-- <execution>
-                        <id>copy-spring-sonf</id>
+                        <id>copy-spring-conf</id>
                         <phase>package</phase>
                         <goals>
                             <goal>copy-resources</goal>
@@ -332,8 +332,8 @@
                         *Copying css files
                         **-->
 
-                  <!--  <execution>
-                        <id>copy-modified-files</id>
+                    <execution>
+                        <id>copy-modified-css</id>
                         <phase>package</phase>
                         <goals>
                             <goal>copy-resources</goal>
@@ -343,12 +343,33 @@
                             <outputDirectory>${basedir}/target/unpacked/css</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>${basedir}/src/css</directory>
+                                    <directory>${basedir}/themes/${theme}/css</directory>
                                     <filtering>true</filtering>
                                 </resource>
                             </resources>
                         </configuration>
-                    </execution>-->
+                    </execution>
+
+                    <!--*
+                        **Copying images
+                        *-->
+                    <execution>
+                        <id>copy-modified-images</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <overwrite>true</overwrite>
+                            <outputDirectory>${basedir}/target/unpacked/images</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}/themes/${theme}/images</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
 
                 </executions>
             </plugin>
@@ -380,6 +401,7 @@
 
     <properties>
         <cs.dir>${basedir}</cs.dir>
+        <theme>hSenid</theme>
     </properties>
 </project>
 
