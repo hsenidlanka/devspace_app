@@ -49,6 +49,9 @@ public class GenericExceptionMapper implements ExceptionMapper<Exception> {
             // According to the status code, specific error message will be generated.
             // Error message format for status codes are defined in spring-config-error-msgs.xml file.
             // If the statusCode matches with the cases of the switch, relevant response will return.
+            case 401:
+                ErrorModel error401 = (ErrorModel) context.getBean("response401");
+                return Response.status(statusCode).entity(error401).type(MediaType.APPLICATION_JSON).build();
             case 404:
                 ErrorModel error404 = (ErrorModel) context.getBean("response404");
                 return Response.status(statusCode).entity(error404).type(MediaType.APPLICATION_JSON).build();

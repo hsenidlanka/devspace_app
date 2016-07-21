@@ -9,7 +9,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class Context {
     public static ApplicationContext appContext;
 
-    // Instantiate appcontext using static intializer. So the other classes can
+    // Instantiate appcontext using static initializer. So the other classes can
     // access the same appcontext object.
     static {
         appContext=new ClassPathXmlApplicationContext("spring-context.xml");

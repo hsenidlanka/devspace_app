@@ -3,6 +3,13 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <bean id="response401" class="hsl.devspace.app.coreserver.model.ErrorModel">
+        <property name="status" value="unauthorized"/>
+        <property name="errorCode" value="401"/>
+        <property name="errorMessage" value="HTTP_UNAUTHORIZED"/>
+        <property name="description" value="credentials provided are not authorized."/>
+    </bean>
+
     <bean id="response404" class="hsl.devspace.app.coreserver.model.ErrorModel">
         <property name="status" value="error"/>
         <property name="errorCode" value="404"/>

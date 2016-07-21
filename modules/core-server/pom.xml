@@ -92,7 +92,7 @@
         <!-- Source files location. -->
         <sourceDirectory>src/main/java</sourceDirectory>
         <!-- Test source files location. -->
-        <testSourceDirectory>src/test/java</testSourceDirectory>
+        <testSourceDirectory>src/test/frisby</testSourceDirectory>
 
         <!-- Copy resources to the configuration directory defined above. -->
         <resources>

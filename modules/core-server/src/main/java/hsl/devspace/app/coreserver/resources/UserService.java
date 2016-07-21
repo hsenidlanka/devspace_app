@@ -8,6 +8,8 @@ import hsl.devspace.app.coreserver.model.SuccessModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.context.ApplicationContext;
+
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import java.util.HashMap;
@@ -50,7 +52,7 @@ public class UserService {
     @POST
     @Path("/login/{username}/{password}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response loginValidate(@PathParam("username") String userName, @PathParam("password") String password) {
+    public Response loginValidate(@PathParam("username") String userName, @PathParam("password") String password,@javax.ws.rs.core.Context UriInfo uriInfo) {
         User user = new User(userName, password);
         boolean status = userRepository.loginAuthenticate(user);
         Response response;
@@ -61,8 +63,7 @@ public class UserService {
             SuccessModel successModel = new SuccessModel("success",Response.Status.OK.getStatusCode(),"username, password validated.",userData);
             response = Response.status(Response.Status.OK).entity(successModel).build();
         } else {
-            ErrorModel errorModel = new ErrorModel("unauthorized",Response.Status.UNAUTHORIZED.getStatusCode(),"unauthorized user","username, password not matched. Check username and password.");
-            response = Response.status(Response.Status.UNAUTHORIZED).entity(errorModel).build();
+            throw new WebApplicationException(401);
         }
         return response;
     }
