@@ -1,66 +1,52 @@
 package hsl.devspace.app.coreserver.common;
 
 import com.sun.jersey.spi.container.servlet.ServletContainer;
+import hsl.devspace.app.coreserver.model.ServerModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+import org.springframework.context.ApplicationContext;
 
 
 /**
- * Created by hsenid on 6/29/16.
- * This class has the configuration for the Jetty server.
+ * Created by Kasun Dinesh on 6/29/16.
+ * This class handles the start and stop of the Jetty server.
  */
 public class InitServer {
+    ApplicationContext context = Context.appContext;
     private static final Logger log = LogManager.getLogger(InitServer.class);
-    private int port;   // Jetty server port number
-    private String packageName; // Package contains resources(REST)
-    private String contextRoot; // Context path pattern
-    private String servletPath; // Servlet path-url pattern
+    Server server;
 
-    public int getPort() {
-        return port;
-    }
-
-    public void setPort(int port) {
-        this.port = port;
-    }
-
-    public String getPackageName() {
-        return packageName;
-    }
-
-    public void setPackageName(String packageName) {
-        this.packageName = packageName;
-    }
-
-    public String getContextRoot() {
-        return contextRoot;
-    }
-
-    public void setContextRoot(String contextRoot) {
-        this.contextRoot = contextRoot;
-    }
-
-    public String getServletPath() {
-        return servletPath;
-    }
-
-    public void setServletPath(String servletPath) {
-        this.servletPath = servletPath;
-    }
-
-    // Create and return a Jetty server instance under the port number defined.
-    public Server createServer() {
+    // Start Jetty server.
+    public void startServer() {
+        log.info("core-server starting.");
+        ServerModel serverModel = (ServerModel) context.getBean("serverModel");
         ServletHolder sh = new ServletHolder(ServletContainer.class);
-        sh.setInitParameter("com.sun.jersey.config.property.packages", getPackageName());//Set the package where the services reside
+        sh.setInitParameter("com.sun.jersey.config.property.packages", serverModel.getPackageName());//Set the package where the services reside
         sh.setInitParameter("com.sun.jersey.api.json.POJOMappingFeature", "true");
 
-        Server server = new Server(getPort());
-        ServletContextHandler context = new ServletContextHandler(server, getContextRoot(), ServletContextHandler.SESSIONS);
-        context.addServlet(sh, getServletPath());
+        server = new Server(serverModel.getPort());
+        ServletContextHandler context = new ServletContextHandler(server, serverModel.getContextRoot(), ServletContextHandler.SESSIONS);
+        context.addServlet(sh, serverModel.getServletPath());
+        try {
+            server.join();
+            server.start();
+        } catch (Exception e) {
+            log.error("error starting core-server. " + e);
+        }
+        log.info("core-server started.");
+    }
 
-        return server;
+    // Stop Jetty server.
+    public void stopServer() {
+        log.info("core-server stopping.");
+        try {
+            server.stop();
+        } catch (Exception e) {
+            log.error("error stopping core-server. " + e);
+        }
+        log.info("core-server stopped.");
     }
 }

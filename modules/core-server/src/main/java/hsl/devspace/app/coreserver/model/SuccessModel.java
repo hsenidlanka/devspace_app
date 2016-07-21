@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Map;
 
 /**
- * Created by hsenid on 7/8/16.
+ * Created by Kasun Dinesh on 7/8/16.
  * This is the model/template of the success message to pass as a response.
  */
 @XmlRootElement

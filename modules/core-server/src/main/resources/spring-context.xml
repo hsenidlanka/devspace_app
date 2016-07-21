@@ -8,8 +8,9 @@
         <property name="location" value="classpath:connection.properties"/>
     </bean>
 
-    <import resource="server-spring-config.xml"/>
+    <import resource="spring-config-server.xml"/>
     <import resource="session-factory-config.xml"/>
-    <import resource="beans-spring-config.xml"/>
+    <import resource="spring-config-beans.xml"/>
+    <import resource="spring-config-error-msgs.xml"/>
 
 </beans>

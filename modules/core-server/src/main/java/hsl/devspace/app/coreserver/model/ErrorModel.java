@@ -5,7 +5,7 @@ import com.owlike.genson.annotation.JsonProperty;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * Created by hsenid on 7/5/16.
+ * Created by Kasun Dinesh on 7/5/16.
  * This is the model/template of the error message to pass as a response.
  */
 

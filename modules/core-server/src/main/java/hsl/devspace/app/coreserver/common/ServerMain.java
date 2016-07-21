@@ -1,45 +1,26 @@
 package hsl.devspace.app.coreserver.common;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.eclipse.jetty.server.Server;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.tanukisoftware.wrapper.WrapperListener;
 import org.tanukisoftware.wrapper.WrapperManager;
 
 /**
- * Created by hsenid on 6/13/16.
+ * Created by Kasun Dinesh on 6/13/16.
+ * This class handles the life cycle of Wrapper.
  */
 public class ServerMain implements WrapperListener {
-    private static final Logger log = LogManager.getLogger(ServerMain.class);
-    private Server server;
+    InitServer initServer = new InitServer();
 
     @Override
     // Start wrapper
     public Integer start(String[] strings) {
-        log.info("Start core server");
-        ApplicationContext context=Context.appContext;
-        InitServer initServer = (InitServer) context.getBean("init-server");
-        server = initServer.createServer();
-        try {
-            server.start();
-            server.join();
-        } catch (Exception e) {
-            log.error("Error while starting jetty server. " + e);
-        }
+        initServer.startServer();
         return null;
     }
 
     @Override
     // Stop wrapper
     public int stop(int i) {
-        log.error("Error...");
-        try {
-            server.stop();
-        } catch (Exception e) {
-            log.error("Error while stopping jetty server. " + e);
-        }
+        initServer.stopServer();
         return i;
     }
 

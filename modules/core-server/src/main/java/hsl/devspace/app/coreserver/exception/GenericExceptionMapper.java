@@ -1,6 +1,8 @@
 package hsl.devspace.app.coreserver.exception;
 
+import hsl.devspace.app.coreserver.common.Context;
 import hsl.devspace.app.coreserver.model.ErrorModel;
+import org.springframework.context.ApplicationContext;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
@@ -9,29 +11,17 @@ import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
 /**
- * Created by hsenid on 7/7/16.
- * This class is mapped to execute when programs occurs an exception
- * which can not be caught by other exception mappers.
+ * Created by Kasun Dinesh on 7/7/16.
+ * This class is works as a mapper to handle exceptions.
  */
 
-/*@Provider
-public class GenericExceptionMapper implements ExceptionMapper<Exception> {
-    @Override
-    public Response toResponse(Exception e) {
-        // Creating an error message to return as a response.
-        ErrorModel errorModel = new ErrorModel();
-        errorModel.setStatus("error");
-        errorModel.setErrorCode(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-        errorModel.setErrorMessage(e.toString());
-        errorModel.setDescription("internal server error occurred.");
-        // Returning a response with created error details.
-        return Response.status(500).entity(errorModel).type(MediaType.APPLICATION_JSON_TYPE).build();
-    }
-}*/
 @Provider
-public class GenericExceptionMapper implements ExceptionMapper<RuntimeException> {
+public class GenericExceptionMapper implements ExceptionMapper<Exception> {
+
+    ApplicationContext context = Context.appContext;
+
     @Override
-    public Response toResponse(RuntimeException exception) {
+    public Response toResponse(Exception exception) {
         ErrorModel errorModel = new ErrorModel();
         errorModel.setStatus("error");
         errorModel.setErrorCode(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
@@ -48,26 +38,38 @@ public class GenericExceptionMapper implements ExceptionMapper<RuntimeException>
         return response500;
     }
 
-    private Response handleWebApplicationException(RuntimeException exception, Response response500) {
+    // This method will generate a relevant response according to the WebApplicationException occurred.
+    private Response handleWebApplicationException(Exception exception, Response response500) {
         WebApplicationException webAppException = (WebApplicationException) exception;
+        // Get the status code of the exception
         int statusCode = webAppException.getResponse().getStatus();
-        ErrorModel errorModel = new ErrorModel();
-        errorModel.setStatus("error");
-        errorModel.setErrorCode(405);
-        errorModel.setErrorMessage(exception.toString());
-        errorModel.setDescription("wrong http method used. use the proper http method as described in the documentation.");
 
-        ErrorModel errorModel2 = new ErrorModel();
-        errorModel2.setStatus("error");
-        errorModel2.setErrorCode(Response.Status.NOT_FOUND.getStatusCode());
-        errorModel2.setErrorMessage(exception.toString());
-        errorModel2.setDescription("make sure the url is correct, check the passed parameters and try again.");
-
-
-        switch(statusCode) {
-            case 405: return Response.status(statusCode).entity(errorModel).type(MediaType.APPLICATION_JSON).build();
-            case 404: return Response.status(statusCode).entity(errorModel2).type(MediaType.APPLICATION_JSON).build();
+        // Check statusCode
+        switch (statusCode) {
+            // According to the status code, specific error message will be generated.
+            // Error message format for status codes are defined in spring-config-error-msgs.xml file.
+            // If the statusCode matches with the cases of the switch, relevant response will return.
+            case 404:
+                ErrorModel error404 = (ErrorModel) context.getBean("response404");
+                return Response.status(statusCode).entity(error404).type(MediaType.APPLICATION_JSON).build();
+            case 405:
+                ErrorModel error405 = (ErrorModel) context.getBean("response405");
+                return Response.status(statusCode).entity(error405).type(MediaType.APPLICATION_JSON).build();
+            case 408:
+                ErrorModel error408 = (ErrorModel) context.getBean("response408");
+                return Response.status(statusCode).entity(error408).type(MediaType.APPLICATION_JSON).build();
+            case 409:
+                ErrorModel error409 = (ErrorModel) context.getBean("response409");
+                return Response.status(statusCode).entity(error409).type(MediaType.APPLICATION_JSON).build();
+            case 414:
+                ErrorModel error414 = (ErrorModel) context.getBean("response414");
+                return Response.status(statusCode).entity(error414).type(MediaType.APPLICATION_JSON).build();
+            case 415:
+                ErrorModel error415 = (ErrorModel) context.getBean("response415");
+                return Response.status(statusCode).entity(error415).type(MediaType.APPLICATION_JSON).build();
         }
+        // If the status code did not match with switch case,
+        // already defined internal server error message will be returned.
         return response500;
     }
 }

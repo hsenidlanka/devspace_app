@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by hsenid on 6/29/16.
+ * Created by Kasun Dinesh on 6/29/16.
  * This class handles the requests related to users.
  */
 @Path("/users")
