@@ -7,7 +7,7 @@
     </properties>
 
     <Appenders>
-        <!-- Create a log file to hold error/fatal log level details. -->
+        <!-- Create a log file to hold info/warn log level details. -->
         <RollingRandomAccessFile name="core-server-info-log"
                                  fileName="${log_root}/core.server.info.log"
                                  filePattern="${log_root}/core.server.info.%d{yyyy-MM-dd}-%i.log">

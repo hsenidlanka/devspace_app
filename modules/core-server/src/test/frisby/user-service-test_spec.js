@@ -8,15 +8,28 @@ frisby.create('Add user test 01')
     .expectJSONTypes({
         code: Number,
         data: {},
+        links:{},
         message: String,
         status: String
     })
     .expectJSON({
         code: 201,
-        data: {
-            password: '123',
-            username: 'frisby'
-        },
+        "data": [
+            {
+                "key": "username",
+                "value": "frisby"
+            },
+            {
+                "key": "password",
+                "value": "123"
+            }
+        ],
+        "links": [
+            {
+                "link": "http://localhost:2222/devspace/api/v1.0/users/add/frisby/123",
+                "rel": "self"
+            }
+        ],
         message: "user added",
         status: "success"
     })
@@ -36,7 +49,7 @@ frisby.create('Add user test 02')
     .expectJSON({
         "code": 405,
         "description": "wrong http method used. use the proper http method as described in the documentation.",
-        "error-message": "method_not_allowed",
+        "error-message": "HTTP_METHOD_NOT_ALLOWED",
         "status": "error"
     })
     .toss();
@@ -49,15 +62,28 @@ frisby.create('User login test 01')
     .expectJSONTypes({
         code: Number,
         data: {},
+        links: {},
         message: String,
         status: String
     })
     .expectJSON({
         code: 200,
-        data: {
-            password: '123',
-            username: 'frisby'
-        },
+        "data": [
+            {
+                "key": "username",
+                "value": "frisby"
+            },
+            {
+                "key": "password",
+                "value": "123"
+            }
+        ],
+        "links": [
+            {
+                "link": "http://localhost:2222/devspace/api/v1.0/users/login/frisby/123",
+                "rel": "self"
+            }
+        ],
         message: "username, password validated.",
         status: "success"
     })
@@ -76,8 +102,8 @@ frisby.create('User login test 02')
     })
     .expectJSON({
         "code": 401,
-        "description": "username, password not matched. Check username and password.",
-        "error-message": "unauthorized user",
+        "description": "credentials provided are not authorized.",
+        "error-message": "HTTP_UNAUTHORIZED",
         "status": "unauthorized"
     })
     .toss();
@@ -95,8 +121,8 @@ frisby.create('User login test 03')
     })
     .expectJSON({
         "code": 401,
-        "description": "username, password not matched. Check username and password.",
-        "error-message": "unauthorized user",
+        "description": "credentials provided are not authorized.",
+        "error-message": "HTTP_UNAUTHORIZED",
         "status": "unauthorized"
     })
     .toss();
@@ -114,8 +140,8 @@ frisby.create('User login test 04')
     })
     .expectJSON({
         "code": 401,
-        "description": "username, password not matched. Check username and password.",
-        "error-message": "unauthorized user",
+        "description": "credentials provided are not authorized.",
+        "error-message": "HTTP_UNAUTHORIZED",
         "status": "unauthorized"
     })
     .toss();
@@ -133,8 +159,8 @@ frisby.create('User login test 05')
     })
     .expectJSON({
         "code": 401,
-        "description": "username, password not matched. Check username and password.",
-        "error-message": "unauthorized user",
+        "description": "credentials provided are not authorized.",
+        "error-message": "HTTP_UNAUTHORIZED",
         "status": "unauthorized"
     })
     .toss();
@@ -152,8 +178,8 @@ frisby.create('User login test 06')
     })
     .expectJSON({
         "code": 401,
-        "description": "username, password not matched. Check username and password.",
-        "error-message": "unauthorized user",
+        "description": "credentials provided are not authorized.",
+        "error-message": "HTTP_UNAUTHORIZED",
         "status": "unauthorized"
     })
     .toss();
@@ -172,7 +198,7 @@ frisby.create('User login test 07')
     .expectJSON({
         "code": 404,
         "description": "make sure the url is correct, check the passed parameters and try again.",
-        "error-message": "not_found",
+        "error-message": "HTTP_NOT_FOUND",
         "status": "error"
     })
     .toss();
@@ -191,29 +217,27 @@ frisby.create('User login test 08')
     .expectJSON({
         "code": 405,
         "description": "wrong http method used. use the proper http method as described in the documentation.",
-        "error-message": "method_not_allowed",
+        "error-message": "HTTP_METHOD_NOT_ALLOWED",
         "status": "error"
     })
     .toss();
 
 // Test delete user-different method.
 frisby.create('Delete user test 01')
-    .delete('http://localhost:2222/devspace/api/v1.0/users/delete/frisby')
-    .expectStatus(200)
+    .post('http://localhost:2222/devspace/api/v1.0/users/delete/frisby')
+    .expectStatus(405)
     .inspectJSON()
     .expectJSONTypes({
         code: Number,
-        data: {},
-        message: String,
+        description: String,
+        "error-message": String,
         status: String
     })
     .expectJSON({
-        code: 200,
-        data: {
-            "username": "frisby"
-        },
-        message: "user deleted",
-        status: "success"
+        "code": 405,
+        "description": "wrong http method used. use the proper http method as described in the documentation.",
+        "error-message": "HTTP_METHOD_NOT_ALLOWED",
+        "status": "error"
     })
     .toss();
 
@@ -225,14 +249,24 @@ frisby.create('Delete user test 01')
     .expectJSONTypes({
         code: Number,
         data: {},
+        links: {},
         message: String,
         status: String
     })
     .expectJSON({
         code: 200,
-        data: {
-            "username": "frisby"
-        },
+        "data": [
+            {
+                "key": "username",
+                "value": "frisby"
+            }
+        ],
+        "links": [
+            {
+                "link": "http://localhost:2222/devspace/api/v1.0/users/delete/frisby",
+                "rel": "self"
+            }
+        ],
         message: "user deleted",
         status: "success"
     })

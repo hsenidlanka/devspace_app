@@ -1,11 +1,8 @@
 package hsl.devspace.app.coreserver.exception;
 
-import hsl.devspace.app.coreserver.common.Context;
-import hsl.devspace.app.coreserver.model.ErrorModel;
-import org.springframework.context.ApplicationContext;
+import hsl.devspace.app.coreserver.model.ErrorMessage;
 
 import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
@@ -21,14 +18,14 @@ public class GenericExceptionMapper implements ExceptionMapper<Exception> {
     @Override
     public Response toResponse(Exception exception) {
         WebApplicationExceptionHandler webApplicationExceptionHandler=new WebApplicationExceptionHandler();
-        ErrorModel errorModel = new ErrorModel();
-        errorModel.setStatus("error");
-        errorModel.setErrorCode(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-        errorModel.setErrorMessage(exception.toString());
-        errorModel.setDescription("internal server error occurred.");
+        ErrorMessage errorMessage = new ErrorMessage();
+        errorMessage.setStatus("error");
+        errorMessage.setErrorCode(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+        errorMessage.setErrorMessage(exception.toString());
+        errorMessage.setDescription("internal server error occurred.");
         Response response500 = Response
                 .serverError()
-                .entity(errorModel)
+                .entity(errorMessage)
                 .build();
 
         if (exception instanceof WebApplicationException) {
