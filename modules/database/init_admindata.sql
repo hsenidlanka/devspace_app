@@ -31,8 +31,6 @@ INSERT INTO `module` VALUES (1,'admin','admin module'),(2,'rewards-reporting','T
 UNLOCK TABLES;
 
 
-
-
 --
 -- Table structure for table `permission`
 --
@@ -157,25 +155,18 @@ UNLOCK TABLES;
 -- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
   `id` bigint(20) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(1000) NOT NULL,
-  `last_password_updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `previous_password` varchar(2000) DEFAULT NULL,
-  `enabled` tinyint(1) NOT NULL,
-  `expired` tinyint(1) NOT NULL DEFAULT '0',
   `created_by` varchar(50) DEFAULT NULL,
-  `last_login` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `login_attempt_count` int(11) DEFAULT NULL,
   `first_name` varchar(50) DEFAULT NULL,
   `last_name` varchar(50) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
-  `mobile_no` varchar(15) DEFAULT NULL,
-  `land_no` varchar(15) DEFAULT NULL,
+  `telephone_no` varchar(15) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
@@ -189,9 +180,9 @@ CREATE TABLE `users` (
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` VALUES
-  (1,'sysadmin','098f6bcd4621d373cade4e832627b4f6','2013-09-15 15:59:07','098f6bcd4621d373cade4e832627b4f6',1,0,'sysadmin','2012-09-22 07:01:35',0,'sysadmin','sysadmin','sysadmin@hsenidmobile.com','94777111111','','Colombo'),
-  (2,'custcare','098f6bcd4621d373cade4e832627b4f6','2013-09-15 15:59:07','098f6bcd4621d373cade4e832627b4f6',1,0,'sysadmin','2012-09-22 07:01:35',1,'customercare','customercare','custcare@hsenidmobile.com','94777111111','','Colombo'),
-  (3,'ccmanager','098f6bcd4621d373cade4e832627b4f6','2013-10-07 14:29:14','098f6bcd4621d373cade4e832627b4f6',1,0,'sysadmin','2013-10-07 14:29:14',0,'ccManager','ccManager','ccmanager@hsenidmobile.com','94777111111','','Colombo');
+  (1,'sysadmin','098f6bcd4621d373cade4e832627b4f6','sysadmin','System','Admin','sysadmin@hsenidmobile.com','94777111111','Colombo'),
+  (2,'custcare','098f6bcd4621d373cade4e832627b4f6','sysadmin','Customer','Care','custcare@hsenidmobile.com','94777111111','Colombo'),
+  (3,'ccmanager','098f6bcd4621d373cade4e832627b4f6','sysadmin','CustomerCare','Manager','ccmanager@hsenidmobile.com','94777111111','Colombo');
 
 
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;

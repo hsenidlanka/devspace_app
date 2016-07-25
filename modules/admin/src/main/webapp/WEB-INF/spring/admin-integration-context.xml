@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <b:beans xmlns:b="http://www.springframework.org/schema/beans"
-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xmlns="http://www.springframework.org/schema/security"
-             xmlns:context="http://www.springframework.org/schema/context"
-             xmlns:mvc="http://www.springframework.org/schema/mvc"
-             xsi:schemaLocation="http://www.springframework.org/schema/beans
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://www.springframework.org/schema/security"
+         xmlns:context="http://www.springframework.org/schema/context"
+         xmlns:mvc="http://www.springframework.org/schema/mvc"
+         xsi:schemaLocation="http://www.springframework.org/schema/beans
               http://www.springframework.org/schema/beans/spring-beans.xsd
               http://www.springframework.org/schema/mvc
              http://www.springframework.org/schema/mvc/spring-mvc.xsd
               http://www.springframework.org/schema/context
               http://www.springframework.org/schema/context/spring-context.xsd">
-<!--
-    <b:import resource="admin-repositories.xml"/>
-    <b:import resource="admin-service.xml"/>
-    <b:import resource="admin-validator.xml"/>
-    <b:import resource="admin-security.xml"/>-->
+
+        <!--<b:import resource="admin-repositories.xml"/>-->
+        <!--<b:import resource="admin-service.xml"/>-->
+        <!--<b:import resource="admin-validator.xml"/>-->
+        <!--<b:import resource="admin-security.xml"/>-->
 
     <!-- Configures the @Controller programming model -->
-   <!-- means that you can define spring beans dependencies without actually having to specify a bunch
-    of elements in xml or implement an interface or extend a base class-->
+    <!-- means that you can define spring beans dependencies without actually having to specify a bunch
+     of elements in xml or implement an interface or extend a base class-->
     <mvc:annotation-driven/>
 
     <!-- Scans or searches the classpath for all the classes of this application

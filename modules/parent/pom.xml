@@ -38,6 +38,14 @@
         <tiles.version>3.0.5</tiles.version>
         <commons-fileupload.version>1.3.1</commons-fileupload.version>
         <commons-io.version>2.5</commons-io.version>
+        <hibernate-validator.version>5.2.4.Final</hibernate-validator.version>
+        <validation-api.version>1.0.0.GA</validation-api.version>
+        <cglib.version>3.2.3</cglib.version>
+        <slf4j.version>1.7.21</slf4j.version>
+        <xercesImpl.version>2.11.0</xercesImpl.version>
+        <xerces.version>2.4.0</xerces.version>
+
+        <joda-time.version>2.9.4</joda-time.version>
 
         <RWD_LOG_ROOT>/home/hsenid/Documents/MAVEN/devspace_app/modules/admin</RWD_LOG_ROOT>
 

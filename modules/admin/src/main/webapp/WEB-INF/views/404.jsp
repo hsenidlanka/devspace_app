@@ -8,7 +8,7 @@
         <div class="error">
             <fmt:message>HTTP Error 404 - Requested resource not found</fmt:message>
         </div>
-        <c:url var="Back" value="/welcome.html"/>
+        <c:url var="Back" value="/welcome.jsp"/>
         <input id="btn" class="button" type="submit" value="Back" onclick="window.location='${Back}';"/>
     </div>
     </body>

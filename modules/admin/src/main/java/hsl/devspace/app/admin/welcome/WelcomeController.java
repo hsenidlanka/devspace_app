@@ -24,7 +24,6 @@ public class WelcomeController {
 
         LOG.trace("inside the welcome initiate service method");
 
-
         WelcomeForm welcomeForm = new WelcomeForm();
         model.addAttribute("welcomeForm", welcomeForm);
         return new ModelAndView(view, "model", model);

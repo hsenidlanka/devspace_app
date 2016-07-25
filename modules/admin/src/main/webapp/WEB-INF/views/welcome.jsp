@@ -8,6 +8,9 @@
 <fmt:setLocale value="En"/>
 <fmt:bundle basename="messages_en">
 
+
+    <h3><a href=" http://localhost:8080/users/list">User Management</a></h3>
+
 <form:form id="welcomeForm" commandName="welcomeForm" modelAttribute="welcomeForm">
     <%--<div class="clearfix">--%>
     <div class="table-cell">

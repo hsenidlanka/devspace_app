@@ -1,28 +1,19 @@
-<!--
-#
-#   (C) Copyright 2008-2009 hSenid Software International (Pvt) Limited.
-#   All Rights Reserved.
-#
-#   These materials are unpublished, proprietary, confidential source code of
-#   hSenid Software International (Pvt) Limited and constitute a TRADE SECRET
-#   of hSenid Software International (Pvt) Limited.
-#
-#   hSenid Software International (Pvt) Limited retains all title to and intellectual
-#   property rights in these materials.
-#
-# $LastChangedDate$
-# $LastChangedBy$
-# $LastChangedRevision$
-#
-#
--->
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
-       xmlns:p="http://www.springframework.org/schema/p" xmlns:tx="http://www.springframework.org/schema/tx"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
-       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/jdbc
+       http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
 
-
+    <!--This enables Spring’s support for transaction management using the @Transactional annotation
+    @Configuration
+    @EnableTransactionManagement
+    public class AppConfig {
+     // ...
+    }-->
     <tx:annotation-driven transaction-manager="txManager"/>
 
 
@@ -32,6 +23,7 @@
 
     </bean>
 
-    <bean class="hsl.devspace.app.admin.LoggingHandlerExceptionResolver"/>
+    <bean class="hsl.devspace.app.admin.ExceptionResolver"/>
 
+    <jdbc:embedded-database id="productionDataSource"/>
 </beans>
