@@ -1,7 +1,5 @@
 package hsl.devspace.app.corelogic.domain;
 
-import java.util.Date;
-
 /**
  * Created by hsenid on 7/4/16.
  */
@@ -12,7 +10,7 @@ public class User {
     private String username;
     private String password;
     private boolean isConfirmed;
-    private Date dob;
+    private String dob;
     private String addressL1;
     private String addressL2;
 
@@ -64,11 +62,11 @@ public class User {
         this.isConfirmed = isConfirmed;
     }
 
-    public Date getDob() {
+    public String getDob() {
         return dob;
     }
 
-    public void setDob(Date dob) {
+    public void setDob(String dob) {
         this.dob = dob;
     }
 
@@ -99,14 +97,14 @@ public class User {
         user.getUsername();*/
     }
 
-    public User(String addressL2, String addressL1, Date dob,
-                String password, String username, String lastName, String firstName) {
-        this.addressL2 = addressL2;
-        this.addressL1 = addressL1;
-        this.dob = dob;
-        this.password = password;
-        this.username = username;
-        this.lastName = lastName;
+    public User(String firstName, String lastName, String dob,String addressL1, String addressL2,
+                String username,String password) {
         this.firstName = firstName;
+        this.lastName = lastName;
+        this.dob = dob;
+        this.addressL1 = addressL1;
+        this.addressL2 = addressL2;
+        this.username = username;
+        this.password = password;
     }
 }
