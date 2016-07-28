@@ -1,6 +1,6 @@
 package hsl.devspace.app.corelogic.repository;
 
-import hsl.devspace.app.corelogic.domain.User;
+        import hsl.devspace.app.corelogic.domain.User;
 import org.apache.log4j.Logger;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.TransientDataAccessResourceException;
@@ -12,6 +12,8 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
+        import java.util.List;
+        import java.util.Map;
 
 /**
  * Created by hsenid on 7/4/16.
@@ -69,7 +71,6 @@ public class UserRepositoryImpl implements UserRepository {
         int row = jdbcTemplate.update(sql, new Object[]{user.getUsername()});
         transactionManager.commit(stat);
         log.info(row + "deleted");
-        // transactionManager.rollback(stat);
         return row;
 
     }
@@ -89,7 +90,6 @@ public class UserRepositoryImpl implements UserRepository {
         int row = jdbcTemplate.update(sql, new Object[]{user.getPassword(), user.getUsername()});
         transactionManager.commit(stat);
         log.info(row + "password changed");
-        //transactionManager.rollback(stat);
     }
 
     @Override
@@ -111,22 +111,29 @@ public class UserRepositoryImpl implements UserRepository {
         if (count > 0) {
             result = true;
         }
-        // transactionManager.commit(stat);
         transactionManager.rollback(stat);
         log.info(result);
         return result;
     }
 
     @Override
-    public int modify(User user) throws TransientDataAccessResourceException,SQLException{
+    public int modify(User user) throws TransientDataAccessResourceException, SQLException {
         TransactionDefinition tr_def = new DefaultTransactionDefinition();
         TransactionStatus stat = transactionManager.getTransaction(tr_def);
-            String sql = "UPDATE users SET username=? password = ? WHERE username = ? ";
-          int count = jdbcTemplate.queryForObject(
-                    sql, new Object[]{user.getUsername(), (user.getPassword())}, Integer.class);
+        String sql = "UPDATE users SET username=? password = ? WHERE username = ? ";
+        int count = jdbcTemplate.queryForObject(
+                sql, new Object[]{user.getUsername(), user.getPassword(), (user.getUsername())}, Integer.class);
         transactionManager.commit(stat);
         log.info(count);
         return count;
 
     }
+
+    @Override
+    public List<Map<String, Object>> retrieveMultipleRowsColumns(String username) {
+    List<Map<String, Object>> mp =  jdbcTemplate.queryForList("SELECT * FROM users WHERE username = ?", username);
+        log.info(mp);
+        return mp;
+    }
 }
+
