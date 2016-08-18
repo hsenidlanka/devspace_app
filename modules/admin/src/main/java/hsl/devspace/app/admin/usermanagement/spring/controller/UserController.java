@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -36,7 +37,7 @@ public class UserController {
     public ModelAndView listContact(ModelAndView model)  {
        User newContact = new User();;
         model.addObject("contact", newContact);
-        model.setViewName("users");
+        model.setViewName("home");
         return model;
     }
 
@@ -48,16 +49,15 @@ public class UserController {
         model.setViewName("users");// view the user list page
         return model;
     }*/
-/*
     //handler method for inserting or updating a user record
-    @RequestMapping(value = "/users/userAdd", method = RequestMethod.POST)
+    @RequestMapping(value = "/userAdd")
     public ModelAndView saveUser(@ModelAttribute User user){
-        userRepository.saveOrUpdate(user);
-        return new ModelAndView("redirect:/");
+//        userRepository.saveOrUpdate(user);
+        return new ModelAndView("userAdd");
     }
 
     //handler method to delete a user record
-    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+   /* @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public ModelAndView deleteUser(HttpServletRequest request){
         String uname= request.getParameter("username");
         userRepository.delete(uname);
