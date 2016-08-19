@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <title>Delivery</title>
+    <link rel="shortcut icon" href="">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/yeti/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="../js/delivery-operations.js"></script>
+    <link rel="stylesheet" href="../css/progress-wizard.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap.timepicker/0.2.6/css/bootstrap-timepicker.min.css">
+    <script src="https://cdn.jsdelivr.net/bootstrap.timepicker/0.2.6/js/bootstrap-timepicker.min.js"></script>
+</head>
+
+<body>
+<center>
+    <div class="section">
+        <ul class="progress-indicator">
+            <li class="active"><span class="bubble"></span> Delivery</li>
+            <li><span class="bubble"></span> Payment</li>
+            <li><span class="bubble"></span> Verify</li>
+            <li><span class="bubble"></span> Success</li>
+        </ul>
+
+        <div>
+            <div class="radio">
+                <label>Preferred delivery method:</label>
+                <label><input type="radio" name="optradio" id="radio-delivery" value="delivery" checked>A
+                    delivery</label>&nbsp;
+                <label><input type="radio" name="optradio" id="radio-pickup" value="pickup">A pickup</label>
+            </div>
+            <div id="delivery-div">
+                <h4>When to deliver</h4>
+                <hr>
+                <div class="radio">
+                    <label><input type="radio" name="radiodelwhen" value="">Deliver now</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="radiodelwhen" value="">Deliver later:&nbsp;Date:</label>
+                    &nbsp;<input type="text" style="width: 100px; height: 20px;">
+                    &nbsp;&nbsp;Time:
+                    <div class="input-group bootstrap-timepicker timepicker"
+                         style="display: inline-block; height: auto;">
+                        <input id="timepicker1" type="text" class="form-control input-small"
+                               style="width: 100px; height: 20px;">
+                    </div>
+                </div>
+
+                <h4>Where to deliver</h4>
+                <hr>
+                <div class="container" style="width: 800px;">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="exampleInputEmail1">First name</label>
+                                <input class="form-control" id="exampleInputEmail1"
+                                       placeholder="Enter your first name" type="email">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="exampleInputPassword1">Last name</label>
+                                <input class="form-control" type="text" placeholder="Enter your last name"
+                                       id="exampleInputPassword1">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Contact no</label>
+                                <input class="form-control" type="text" placeholder="Enter your contact no">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Email</label>
+                                <input class="form-control" type="text" placeholder="Enter your email address">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <form role="form">
+                                <div class="form-group">
+                                    <label class="control-label">Delivery address</label>
+                                    <input class="form-control" type="text" placeholder="Address line 01">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Description of the delivery location</label>
+                                    <textarea class="form-control"></textarea>
+                                </div>
+                                <div>
+                                    <a class="btn btn-primary btn-proceed-payment"
+                                           style="width: 45%; display: inline-block; float: right;">Proceed to payment</a>
+                                    <input type="reset" class="btn btn-primary" value="Reset"
+                                           style="width: 45%; display: inline-block; float: right; margin-right:5px">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="pickup-div">
+                <h4>When to pickup</h4>
+                <hr>
+                <div class="radio">
+                    <label><input type="radio" name="radiopickwhen" value="">Pickup now</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="radiopickwhen" value="">Deliver later:&nbsp;</label>
+                    &nbsp;&nbsp;Time:
+                    <div class="input-group bootstrap-timepicker timepicker"
+                         style="display: inline-block; height: auto;">
+                        <input id="timepicker2" type="text" class="form-control input-small"
+                               style="width: 100px; height: 20px;">
+                    </div>
+                </div>
+
+                <h4>Where to deliver</h4>
+                <hr>
+
+                <div class="container" style="width: 800px;">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form role="form">
+                                <div class="form-group">
+                                    <label class="control-label">Pickup branch</label>
+                                    <select class="form-control">
+                                        <option>1</option>
+                                        <option>2</option>
+                                    </select>
+                                    <p class="help-block">Example block-level help text here.</p>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Branch address</label>
+                                    <textarea class="form-control"></textarea>
+                                </div>
+                                <div>
+                                    <a class="btn btn-primary btn-proceed-payment"
+                                       style="width: 45%; display: inline-block; float: right;">Proceed to payment</a>
+                                    <input type="reset" class="btn btn-primary" value="Reset"
+                                           style="width: 45%; display: inline-block; float: right; margin-right:5px">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="control-label">Locate branch</label>
+                        </div>
+                        <img class="center-block img-responsive" src="../images/map.png" width="300px" height="300px;">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</center>
+</body>
+</html>
