@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/modules/cas/cas-server-webapp.iml" filepath="$PROJECT_DIR$/modules/cas/cas-server-webapp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/core-logic/core-logic.iml" filepath="$PROJECT_DIR$/modules/core-logic/core-logic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/core-server/core-server.iml" filepath="$PROJECT_DIR$/modules/core-server/core-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/devspace_app.iml" filepath="$PROJECT_DIR$/.idea/devspace_app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/parent/parent.iml" filepath="$PROJECT_DIR$/modules/parent/parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/report-viewer/report-viewer.iml" filepath="$PROJECT_DIR$/modules/report-viewer/report-viewer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/self-care/web-selfcare/web-selfcare.iml" filepath="$PROJECT_DIR$/modules/self-care/web-selfcare/web-selfcare.iml" />
+    </modules>
+  </component>
+</project>
