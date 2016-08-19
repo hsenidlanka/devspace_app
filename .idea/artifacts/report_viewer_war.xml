@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="report-viewer:war">
-    <output-path>$PROJECT_DIR$/modules/report-viewer/target</output-path>
-    <root id="archive" name="report-viewer.war">
-      <element id="artifact" artifact-name="report-viewer:war exploded" />
-    </root>
-  </artifact>
-</component>
