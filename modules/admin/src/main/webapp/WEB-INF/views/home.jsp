@@ -34,172 +34,131 @@
   <div class="address-bar">3481 Pizza Shefu | Ward Place, Colombo 7 | 123.456.7890</div>
 
   <center>
+    <div class="container">
+      <div class="panel-group" id="accordion">
 
-    <%--panel for Item Management--%>
-    <div class="form-box">
-
-      <div class="form-top">
-        <div class="form-top-left panel_hh">Item Management</div>
-          <div class="form-top-right">
-            <i class="fa fa-pencil"></i>
+        <%--panel for Item Management--%>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h2 class="panel-title">
+              <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Item Management</a>
+            </h2>
           </div>
-      </div>
-
-      <div class="form-bottom">
-        <!-- Navigation -->
-        <nav class="navbar navbar-default" role="navigation">
-        <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="container-fluid" >
-            <ul class="nav navbar-nav">
-              <li>
-                <a href="success.jsp">View Item</a>
-              </li>
-              <li>
-                <a href="about.html">Add Item</a>
-              </li>
-              <li>
-                <a href="blog.html">Edit Item</a>
-              </li>
-              <li>
-                <a href="contact.html">Delete Item</a>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </div>
-
-    </div>
-  <br>
-
-    <%--panel for Package Management--%>
-    <div class="form-box">
-
-      <div class="form-top">
-        <div class="form-top-left panel_hh">Package Management</div>
-          <div class="form-top-right">
-            <i class="fa fa-pencil"></i>
-          </div>
-      </div>
-
-      <div class="form-bottom">
-        <!-- Navigation -->
-        <nav class="navbar navbar-default" role="navigation">
-          <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="container-fluid" >
-            <ul class="nav navbar-nav">
-              <li>
-                <a href="success.jsp">View Package</a>
-              </li>
-              <li>
-                <a href="about.html">Add Package</a>
-              </li>
-              <li>
-                <a href="blog.html">Edit Package</a>
-              </li>
-              <li>
-                <a href="contact.html">Delete Package</a>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </div>
-
-    </div>
-  <br>
-
-    <%--panel for Category Management--%>
-    <div class="form-box">
-
-      <div class="form-top">
-        <div class="form-top-left panel_hh">Category  Management</div>
-          <div class="form-top-right">
-            <i class="fa fa-pencil"></i>
+          <div id="collapseOne" class="panel-collapse collapse ">
+            <div class="panel-body">
+              <ul class="nav navbar-nav">
+                <li>
+                  <a href="success.jsp">View Item</a>
+                </li>
+                <li>
+                  <a href="about.html">Add Item</a>
+                </li>
+                <li>
+                  <a href="blog.html">Edit Item</a>
+                </li>
+                <li>
+                  <a href="contact.html">Delete Item</a>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
 
-      <div class="form-bottom">
-        <!-- Navigation -->
-        <nav class="navbar navbar-default" role="navigation">
-          <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse" >
-            <ul class="nav navbar-nav">
-              <li>
-                <a href="success.jsp">Add Category</a>
-              </li>
-              <li>
-                <a href="about.html">View Category</a>
-              </li>
-
-            </ul>
+          <%--panel for Package Management--%>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Package Management</a>
+            </h4>
           </div>
-        </nav>
-      </div>
-
-    </div>
-  <br>
-
-    <%--panel for User Management--%>
-    <div class="form-box">
-
-      <div class="form-top">
-        <div class="form-top-left panel_hh">User  Management</div>
-          <div class="form-top-right">
-            <i class="fa fa-pencil"></i>
-          </div>
-      </div>
-
-      <div class="form-bottom">
-        <!-- Navigation -->
-        <nav class="navbar navbar-default" role="navigation">
-          <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse" >
-            <ul class="nav navbar-nav">
-              <li>
-                <a href="http://localhost:8080/users/userAdd">Add Users</a>
-              </li>
-              <li>
-                <a href="userView.jsp">View Users</a>
-              </li>
-              <li>
-                <a href="about.html">Banned Users</a>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </div>
-
-    </div>
-  <br>
-
-     <%--panel for Notification Management--%>
-    <div class="form-box">
-
-      <div class="form-top">
-        <div class="form-top-left panel_hh">View Notifications</div>
-          <div class="form-top-right">
-            <i class="fa fa-pencil"></i>
+          <div id="collapseTwo" class="panel-collapse collapse">
+              <div class="panel-body">
+                <ul class="nav navbar-nav">
+                  <li>
+                    <a href="success.jsp">View Package</a>
+                  </li>
+                  <li>
+                    <a href="about.html">Add Package</a>
+                  </li>
+                  <li>
+                    <a href="blog.html">Edit Package</a>
+                  </li>
+                  <li>
+                    <a href="contact.html">Delete Package</a>
+                  </li>
+                </ul>
+              </div>
           </div>
         </div>
-      <div class="form-bottom">
-        <!-- Navigation -->
-        <nav class="navbar navbar-default" role="navigation">
-         <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse" >
-            <ul class="nav navbar-nav">
-              <li>
-                <a href="success.jsp">Comments</a>
-              </li>
-              <li>
-                <a href="about.html">Ratings</a>
-              </li>
-            </ul>
+
+         <%--panel for Category Management--%>
+         <div class="panel panel-default">
+           <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Category Management</a>
+              </h4>
+           </div>
+          <div id="collapseThree" class="panel-collapse collapse">
+            <div class="panel-body">
+              <ul class="nav navbar-nav">
+                <li>
+                  <a href="success.jsp">Add Category</a>
+                </li>
+                <li>
+                  <a href="about.html">View Category</a>
+                </li>
+              </ul>
+            </div>
           </div>
-        </nav>
+         </div>
+
+
+         <%--panel for User Management--%>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">User Management</a>
+              </h4>
+            </div>
+            <div id="collapseFour" class="panel-collapse collapse">
+              <div class="panel-body">
+                <ul class="nav navbar-nav">
+                  <li>
+                    <a href="http://localhost:8080/users/userAdd">Add Users</a>
+                  </li>
+                  <li>
+                    <a href="userView.jsp">View Users</a>
+                  </li>
+                  <li>
+                    <a href="about.html">Banned Users</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">View Notifications</a>
+        </h4>
       </div>
-
+      <div id="collapseFive" class="panel-collapse collapse">
+        <div class="panel-body">
+          <ul class="nav navbar-nav">
+            <li>
+              <a href="success.jsp">Comments</a>
+            </li>
+            <li>
+              <a href="about.html">Ratings</a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
-    <br>
 
+  </div>
+</div>
   </center>
 </body>
 </html>
