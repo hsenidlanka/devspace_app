@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+
+    <meta charset="UTF-8">
+    <title></title>
+
+    <!-- CSS -->
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="../css/business-casual.css" rel="stylesheet">
+    <link href="../css/itemMgt.css" rel="stylesheet">
+
+    <!-- Javascript -->
+    <script src="../bootstrap/js/jquery.min.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Fonts -->
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic
+  ,400,300,600,700,800" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+<div class="brand">Item Management</div>
+
+<div class="form-box"  style="margin-left: 20%;">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 id="panel-heading-title">Add New Item</h3>
+        </div>
+        <div class="panel-body">
+
+            <form class="form-horizontal" role="form" id="frmAddItem">
+                <fieldset class="scheduler-border">
+                    <legend class="scheduler-border" id="legendHeading">(*) Fields are read only</legend>
+                    <div class="form-group">
+
+                        <label for="selectCat" class="col-sm-2 control-label">
+                            Category
+                        </label>
+
+                        <div class="col-sm-4">
+                            <select class="form-control" id="selectCat">
+                                <option>Pizza</option>
+                                <option>Pasta</option>
+                                <option>Salad / Appetizer</option>
+                                <option>Dessert</option>
+                                <option>Topping</option>
+                                <option>Crust</option>
+                            </select>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <button type="button" class="btn btn-warning btnAddItem" id="btnAddCat">Add New Category</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="selectSubCat" class="col-sm-2 control-label">
+                            Sub-category
+                        </label>
+
+                        <div class="col-sm-4">
+                            <select class="form-control" id="selectSubCat">
+                                <option>Deep dish Pizza</option>
+                                <option>Italiano Pizza</option>
+                                <option>Gourmet</option>
+                                <option>NY Thin crust</option>
+                                <option>Big Pizza</option>
+                            </select>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <button type="button" class="btn btn-warning btnAddItem" id="btnAddSubCat">Add Sub-category</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="txtItemId" class="col-sm-2 control-label">
+                            Item ID *
+                        </label>
+                        <div class="col-sm-4">
+                            <input class="form-control" id="txtItemId" type="text" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="txtItemName" class="col-sm-2 control-label">
+                            Item Name
+                        </label>
+                        <div class="col-sm-4">
+                            <input class="form-control" id="txtItemName" type="text">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">
+                            Item Price
+                        </label>
+
+                        <div class="col-sm-6">
+                            <table class="table table-hover table-bordered table-condensed">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Size</th>
+                                    <th>Price</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>  <input type="checkbox" value="" class="checkbox"></td>
+                                    <td>Regular</td>
+                                    <td>  <input type="texe" value="" class="col-xs-1 form-control"></td>
+                                </tr>
+                                <tr>
+                                    <td>  <input type="checkbox" value="" class="checkbox"></td>
+                                    <td>Medium</td>
+                                    <td>  <input type="texe" value="" class="col-xs-1 form-control"></td>
+                                </tr>
+                                <tr>
+                                    <td>  <input type="checkbox" value="" class="checkbox"></td>
+                                    <td>Large</td>
+                                    <td>  <input type="texe" value="" class="col-xs-1 form-control"></td>
+                                </tr>
+                                <tr>
+                                    <td>  <input type="checkbox" value="" class="checkbox"></td>
+                                    <td>Other</td>
+                                    <td>  <input type="texe" value="" class="col-xs-1 form-control"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">
+                            Item Name
+                        </label>
+                        <div class="col-sm-4">
+                            <label class="radio-inline">
+                                <input type="radio" name="optradio">Veg
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="optradio">Non-veg
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="btnUpldImage" class="col-sm-2 control-label">
+                            Add Image/s
+                        </label>
+                        <div class="col-sm-4">
+                            <button type="button" class="btn btn-warning btnAddItem" id="btnUpldImage">Browse to Upload Images</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="txtDesc" class="col-sm-2 control-label">
+                           Description
+                        </label>
+                        <div class="col-sm-6">
+                            <textarea class="form-control" rows="5" id="txtdesc"></textarea>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
