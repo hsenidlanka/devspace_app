@@ -29,54 +29,140 @@
       <div class="panel-body">
         <form role="form" id="adduser_form" action="AddUserServlet" method="post" class="form-horizontal" >
 
-          <div class="form-group">
-            <label class="control-label col-sm-8">Name *</label>
-            <label class="control-label col-sm-4">User Type *</label>
+          <fieldset class="scheduler-border">
+                    <legend class="scheduler-border" id="legendHeading"></legend>
+                    <div class="form-group">
 
-            <div class="col-sm-4">
-              <input type="text" name="form-first-name" placeholder="First name..."
-                     class="form-control" id="form-first-name" required>
-            </div>
-            <div class="col-sm-4">
-              <input type="text" name="form-second-name" placeholder="Second name..."
-                     class="form-control" id="form-second-name" required>
-            </div>
-            <div class="col-sm-2">
-              <label><input type="radio" name="optradio">Option 1</label>
-            </div>
-            <div class="col-sm-2">
-              <label><input type="radio" name="optradio">Option 2</label>
-            </div>
-          </div>
-          <br>
+                        <label  class="col-sm-2 control-label">
+                            Title
+                        </label>
 
-          <div class="form-group">
-            <label class="col-sm-4 " >Mobile Number *</label>
-            <label class="col-sm-4 " >Phone Number</label>
-            <label class="col-sm-4 " >Birth Date *</label>
+		   	<div class="col-sm-4">
+ 			    <label class="radio-inline">
+                                <input type="radio" name="optradio">Mr
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="optradio">Mrs
+                            </label>
+			    <label class="radio-inline">
+                                <input type="radio" name="optradio">Miss
+                            </label>
+                        </div>
+                   
+                    </div>
 
-            <div class="col-sm-4">
-              <input type="text" name="form-mobile" placeholder="94xxxxxxxxx"
-                     class="form-control" id="form-mobile" pattern="^\(?(\+94)\)?([0-9]{9})$" required="">
-            </div>
-            <div class="col-sm-4">
-              <input type="text" name="form-phone" placeholder="94xxxxxxxxx"
-                     class="form-control" id="form-phone" pattern="^\(?(\+94)\)?([0-9]{9})$">
-            </div>
-            <div class="col-sm-4">
-              <input type="text" name="date" class="form-control" id="date" required="">
-            </div>
-          </div>
+                    <div class="form-group">
 
+                        <label class="col-sm-2 control-label">
+                            Name
+                        </label>
 
-          <div class="form-group">
-            <div class="col-sm-6">
+                        <div class="col-sm-4">
+                           <input class="form-control" id="fname" type="text">
+                        </div>
 
-            </div>
-            <div class="col-sm-6">
+                        <div class="col-sm-4">
+                           <input class="form-control" id="lname" type="text">
+                        </div>
+                    </div>
 
-            </div>
-          </div>
+                    <div class="form-group">
+                        <label for="mobileNo" class="col-sm-2 control-label">
+                           Mobile No*
+                        </label>
+                        <div class="col-sm-4">
+                            <input class="form-control" id="mobileNo" type="text">
+                        </div>
+ 			<label for="phoneNo" class="col-sm-2 control-label">
+                           Phone No
+                        </label>
+                        <div class="col-sm-4">
+                            <input class="form-control" id="phoneNo" type="text">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="txtItemName" class="col-sm-2 control-label">
+                            Item Name
+                        </label>
+                        <div class="col-sm-4">
+                            <input class="form-control" id="txtItemName" type="text">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">
+                            Item Price
+                        </label>
+
+                        <div class="col-sm-6">
+                            <table class="table table-hover table-bordered table-condensed">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Size</th>
+                                    <th>Price</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>  <input type="checkbox" value="" class="checkbox"></td>
+                                    <td>Regular</td>
+                                    <td>  <input type="texe" value="" class="col-xs-1 form-control"></td>
+                                </tr>
+                                <tr>
+                                    <td>  <input type="checkbox" value="" class="checkbox"></td>
+                                    <td>Medium</td>
+                                    <td>  <input type="texe" value="" class="col-xs-1 form-control"></td>
+                                </tr>
+                                <tr>
+                                    <td>  <input type="checkbox" value="" class="checkbox"></td>
+                                    <td>Large</td>
+                                    <td>  <input type="texe" value="" class="col-xs-1 form-control"></td>
+                                </tr>
+                                <tr>
+                                    <td>  <input type="checkbox" value="" class="checkbox"></td>
+                                    <td>Other</td>
+                                    <td>  <input type="texe" value="" class="col-xs-1 form-control"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">
+                            Item Name
+                        </label>
+                        <div class="col-sm-4">
+                            <label class="radio-inline">
+                                <input type="radio" name="optradio">Veg
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="optradio">Non-veg
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="btnUpldImage" class="col-sm-2 control-label">
+                            Add Image/s
+                        </label>
+                        <div class="col-sm-4">
+                            <button type="button" class="btn btn-warning btnAddItem" id="btnUpldImage">Browse to Upload Images</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="txtDesc" class="col-sm-2 control-label">
+                           Description
+                        </label>
+                        <div class="col-sm-6">
+                            <textarea class="form-control" rows="5" id="txtdesc"></textarea>
+                        </div>
+                    </div>
+
+                </fieldset>
       </form>
 
       </div>
