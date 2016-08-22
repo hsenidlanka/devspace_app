@@ -70,6 +70,7 @@ body {
     text-align: left;
 }
 
+<<<<<<< Updated upstream
 .form-top-left {
     float: left;
     width: 75%;
@@ -87,7 +88,20 @@ body {
     color: #ddd;
     line-height: 100px;
     text-align: right;
+=======
+<<<<<<< Updated upstream
+.panel-heading-title {
+    width: 75%;
+=======
+#panel-heading-title {
+    width: 75%;
+    /*float: left;*/
+>>>>>>> Stashed changes
+    font-size: 20px;
+    text-align: center;
+>>>>>>> Stashed changes
 }
+
 .form-bottom {
     padding: 25px 25px 30px 25px;
     background: #eee;
