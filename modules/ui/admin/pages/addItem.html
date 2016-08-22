@@ -1,83 +1,89 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head lang="en">
 
-  <!-- CSS -->
-  <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
-  <link href="../css/business-casual.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title></title>
 
-  <!-- Javascript -->
-  <script src="../bootstrap/js/jquery.min.js"></script>
-  <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <!-- CSS -->
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="../css/business-casual.css" rel="stylesheet">
+    <link href="../css/itemMgt.css" rel="stylesheet">
 
-  <!-- Fonts -->
+    <!-- Javascript -->
+    <script src="../bootstrap/js/jquery.min.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
 
-  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic
+    <!-- Fonts -->
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic
   ,400,300,600,700,800" rel="stylesheet" type="text/css">
-  <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
 
 </head>
 <body>
-<div class="brand">User Page</div>
-<center>
-  <div class="form-box">
+<div class="brand">Item Management</div>
+
+<div class="form-box"  style="margin-left: 20%;">
     <div class="panel panel-default">
-      <div class="panel-heading">
-          <h3 id="panel-heading-title">New User Sign up</h3>
-      </div>
-      <div class="panel-body">
-        <form role="form" id="adduser_form" action="AddUserServlet" method="post" class="form-horizontal" >
+        <div class="panel-heading">
+            <h3 id="panel-heading-title">Add New Item</h3>
+        </div>
+        <div class="panel-body">
 
-          <fieldset class="scheduler-border">
-                    <legend class="scheduler-border" id="legendHeading"></legend>
+            <form class="form-horizontal" role="form" id="frmAddItem">
+                <fieldset class="scheduler-border">
+                    <legend class="scheduler-border" id="legendHeading">(*) Fields are read only</legend>
                     <div class="form-group">
 
-                        <label  class="col-sm-2 control-label">
-                            Title
+                        <label for="selectCat" class="col-sm-2 control-label">
+                            Category
                         </label>
 
-		   	<div class="col-sm-4">
- 			    <label class="radio-inline">
-                                <input type="radio" name="optradio">Mr
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="optradio">Mrs
-                            </label>
-			    <label class="radio-inline">
-                                <input type="radio" name="optradio">Miss
-                            </label>
+                        <div class="col-sm-4">
+                            <select class="form-control" id="selectCat">
+                                <option>Pizza</option>
+                                <option>Pasta</option>
+                                <option>Salad / Appetizer</option>
+                                <option>Dessert</option>
+                                <option>Topping</option>
+                                <option>Crust</option>
+                            </select>
                         </div>
-                   
+
+                        <div class="col-sm-4">
+                            <button type="button" class="btn btn-warning btnAddItem" id="btnAddCat">Add New Category</button>
+                        </div>
                     </div>
 
                     <div class="form-group">
 
-                        <label class="col-sm-2 control-label">
-                            Name
+                        <label for="selectSubCat" class="col-sm-2 control-label">
+                            Sub-category
                         </label>
 
                         <div class="col-sm-4">
-                           <input class="form-control" id="fname" type="text">
+                            <select class="form-control" id="selectSubCat">
+                                <option>Deep dish Pizza</option>
+                                <option>Italiano Pizza</option>
+                                <option>Gourmet</option>
+                                <option>NY Thin crust</option>
+                                <option>Big Pizza</option>
+                            </select>
                         </div>
 
                         <div class="col-sm-4">
-                           <input class="form-control" id="lname" type="text">
+                            <button type="button" class="btn btn-warning btnAddItem" id="btnAddSubCat">Add Sub-category</button>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="mobileNo" class="col-sm-2 control-label">
-                           Mobile No*
+                        <label for="txtItemId" class="col-sm-2 control-label">
+                            Item ID *
                         </label>
                         <div class="col-sm-4">
-                            <input class="form-control" id="mobileNo" type="text">
-                        </div>
- 			<label for="phoneNo" class="col-sm-2 control-label">
-                           Phone No
-                        </label>
-                        <div class="col-sm-4">
-                            <input class="form-control" id="phoneNo" type="text">
+                            <input class="form-control" id="txtItemId" type="text" readonly>
                         </div>
                     </div>
 
@@ -163,15 +169,10 @@
                     </div>
 
                 </fieldset>
-      </form>
-
-      </div>
+            </form>
+        </div>
 
     </div>
-  </div>
-</center>
-
-
-
+</div>
 </body>
 </html>
