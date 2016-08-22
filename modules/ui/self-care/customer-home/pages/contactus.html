@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- CSS -->
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="../css/business-casual.css" rel="stylesheet">
+
+    <!-- Javascript -->
+    <script src="../bootstrap/js/jquery.min.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Fonts -->
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic
+  ,400,300,600,700,800" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic"
+          rel="stylesheet" type="text/css">
+
+</head>
+<body>
+<div class="brand"></div>
+<center>
+    <div class="inner-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2 text">
+
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h1>Contact us</h1>
+                </div>
+                <div class="panel-body">
+                    <form role="form" id="adduser_form" action="AddUserServlet" method="post" class="form-horizontal">
+
+                        <div class="form-group">
+
+                            <label class="col-sm-4 control-label">
+                                Inquiry Type
+                            </label>
+
+                            <div class="col-sm-2">
+                                <div class="dropdown">
+                                    <button class="btn btn-default dropdown-toggle" type="button" id="inquiry"
+                                            data-toggle="dropdown">Select Inquiry Type
+                                        <span class="caret"></span></button>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">complaint</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <label class="col-sm-4 control-label">
+                                Your Name
+                            </label>
+
+                            <div class="dropdown col-sm-2">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="title"
+                                        data-toggle="dropdown">Mr
+                                    <span class="caret"></span></button>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Mr</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="0" href="#">Mrs</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="1" href="#">Miss</a></li>
+
+
+                                </ul>
+                            </div>
+                            <div class="col-sm-4">
+                                <input class="form-control" id="name" type="text" placeholder="Your name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <label class="col-sm-4 control-label">
+                                E-Mail </label>
+
+                            <div class="col-sm-6">
+                                <input class="form-control" id="email" type="text" placeholder="example@domain.com">
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <label class="col-sm-4 control-label">
+                                Phone No </label>
+
+                            <div class="col-sm-6">
+                                <input class="form-control" id="phone" type="text" placeholder="+94-XXXXXXXXXX">
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <label class="col-sm-4 control-label">
+                                Message </label>
+
+                            <div class="col-sm-6">
+                                <textarea class="form-control" id="message" type="text"
+                                          placeholder="Your inquiry here"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="button" class="btn btn-success">Submit</button>
+                        </div>
+
+
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</center>
+
+
+</body>
+</html>
