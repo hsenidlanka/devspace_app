@@ -10,6 +10,7 @@
     <!-- Javascript -->
     <script src="../bootstrap/js/jquery.min.js"></script>
     <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <script src="../js/userMgt.js"></script>
 
     <!-- Fonts -->
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic
@@ -26,147 +27,160 @@
                 <h3 class="default-panel-headings">New User Sign up</h3>
             </div>
             <div class="panel-body">
-                <form role="form" id="adduser_form" action="AddUserServlet" method="post" class="form-horizontal" >
+                <form role="form" id="adduser_form" action="AddUserServlet" method="post" class="form-horizontal">
 
                     <fieldset class="scheduler-border">
                         <legend class="scheduler-border" id="legendHeading"></legend>
 
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">
-                                User Type
-                            </label>
-                            <div class="col-sm-2">
-                                <label class="radio-inline">
-                                    <input type="radio" name="optradio">Customer
+                            <br>
+                            <div class="row">
+                                <label class="col-sm-2 control-label">
+                                    User Type
                                 </label>
-                            </div>
-                            <div class="col-sm-2">
-                                <label class="radio-inline">
-                                    <input type="radio" name="optradio">Staff Member
-                                </label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label  class="col-sm-2 control-label">
-                               Name
-                            </label>
-                            <div class="col-sm-2">
-                                <select class="form-control" id="selectTitle">
-                                    <option>Mr</option>
-                                    <option>Mrs</option>
-                                    <option>Miss</option>
-                                </select>
-                            </div>
-                            <div class="col-sm-3">
-                                <input class="form-control" id="fname" placeholder="First Name" type="text"  style="width: 200px">
-                            </div>
-
-                            <div class="col-sm-3">
-                                <input class="form-control" id="lname" placeholder="Last Name" type="text" style="width: 200px">
-                            </div>
-                        </div> <br>
-
-                        <div class="form-group">
-                            <label  class="col-sm-2 control-label">
-                                Phone No*
-                            </label>
-                            <div class="col-sm-2">
-                                <input class="form-control" id="codeNo" placeholder="Area Code" type="text">
-                            </div>
-                            <div class="col-sm-3">
-                                <input class="form-control" id="mobileNo" style="width: 200px" placeholder="Phone Number" type="text">
+                                <div class="col-sm-2">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="optradio" onclick="hide(this)" >Customer
+                                    </label>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="optradio" onclick="show(this)">Staff Member
+                                    </label>
+                                </div>
                             </div>
                         </div>
 
                         <div class="form-group">
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <label  class="col-sm-4 control-label">
+                                        Name
+                                    </label>
 
-                            <label class="col-sm-2 control-label">
-                                E-Mail
-                            </label>
-                            <div class="col-sm-4">
-                                <input class="form-control" id="email" placeholder="myname@example.com" type="text">
+                                    <div class="col-sm-2">
+                                        <select class="form-control" id="selectTitle" style="width: 65px">
+                                            <option>Mr</option>
+                                            <option>Mrs</option>
+                                            <option>Miss</option>
+                                        </select>
+                                     </div>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" id="fname" placeholder="First Name" type="text"  style="width: 175px">
+                                    </div>
+                                </div>
                             </div>
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <input class="form-control" id="lname" placeholder="Last Name" type="text"  style="width: 200px">
+                                    </div>
+                                </div>
 
+                            </div>
                         </div> <br>
 
                         <div class="form-group">
                             <div class="col-sm-6">
-                            <div class="row">
-                                <label class="col-sm-4 control-label">
-                                     Address
-                                </label>
+                                <div class="row">
+                                    <label  class="col-sm-4 control-label">
+                                        Phone No*
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" id="mobileNo" placeholder="+94XXXXXXXXX" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <label class="col-sm-4 control-label">
+                                        E-Mail
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" id="email" placeholder="myname@example.com" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+
+
+                        </div> <br>
+
+                        <div class="form-group">
+                            <!--address-->
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <label class="col-sm-4 control-label">
+                                        Address
+                                    </label>
                                     <div class="col-sm-8">
                                         <input class="form-control" id="addLine1" placeholder="Street Address" type="text" >
                                     </div>
-                            </div>
-                            <div class="row"> <label class="control-label"></label>   </div>
-                            <div class="row">
-                                <label class="col-sm-4 control-label">
-                                </label>
-                                <div class="col-sm-8">
-                                    <input class="form-control" id="addLine2" placeholder="Address Line 2" type="text" >
                                 </div>
-                            </div>
-                            <div class="row"><label class="control-label"></label></div>
-                            <div class="row">
-                                <label class="col-sm-4 control-label">
-                                </label>
-                                <div class="col-sm-8">
-                                    <input class="form-control" id="city" placeholder="City" type="text">
+                                <div class="row"> <label class="control-label"></label>   </div>
+                                <div class="row">
+                                    <label class="col-sm-4 control-label">
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" id="addLine2" placeholder="Address Line 2" type="text" >
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row"><label class="control-label"></label></div>
-                            <div class="row">
-                                <label class="col-sm-4 control-label">
-                                </label>
-                                <div class="col-sm-8">
-                                    <input class="form-control" id="province" placeholder="Province" type="text">
+                                <div class="row"><label class="control-label"></label></div>
+                                <div class="row">
+                                    <label class="col-sm-4 control-label">
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" id="city" placeholder="City" type="text">
+                                    </div>
                                 </div>
+                                <div class="row"><label class="control-label"></label></div>
+                                <div class="row">
+                                    <label class="col-sm-4 control-label">
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" id="province" placeholder="Province" type="text">
+                                    </div>
+                                </div>
+                                <div class="row"><label class="control-label"></label></div>
                             </div>
-                            <div class="row"><label class="control-label"></label></div>
-                            </div>
-                            <div class="col-sm-6">
 
+                            <!--login details-->
+                            <div class="col-sm-6">
                                 <div class="row">
                                     <label class="col-sm-4 control-label">
                                         Username
                                     </label>
                                     <div class="col-sm-8">
-                                        <input class="form-control" id="username" placeholder="Street Address" type="text" >
+                                        <input class="form-control" id="username" placeholder="User Name" type="text" >
                                     </div>
                                 </div>
                                 <div class="row">  <label class=" control-label"></label></div>
                                 <div class="row">
-                                    <label class="col-sm-2 control-label">
+                                    <label class="col-sm-4 control-label">
                                         Password
                                     </label>
-                                    <div class="col-sm-4">
-                                        <input class="form-control" id="password" placeholder="Street Address" type="text" >
+                                    <div class="col-sm-8">
+                                        <input class="form-control" id="password" placeholder="Password" type="text" >
                                     </div>
                                 </div>
+                                <div class="row">  <label class=" control-label"></label></div>
                                 <div class="row">
-                                    <label class="col-sm-2 control-label">
+                                    <label class="col-sm-4 control-label">
                                         Confirm Password
                                     </label>
-                                    <div class="col-sm-4">
-                                        <input class="form-control" id="cpassword" placeholder="Street Address" type="text" >
+                                    <div class="col-sm-8">
+                                        <input class="form-control" id="cpassword" placeholder="Password Confirm" type="text" >
                                     </div>
                                 </div>
                             </div>
-                        </div><br>
-
-
-                        <div class="form-group">
-                            <label for="txtDesc" class="col-sm-2 control-label">
-                                Description
-                            </label>
-                            <div class="col-sm-6">
-                                <textarea class="form-control" rows="5" id="txtdesc"></textarea>
-                            </div>
                         </div>
+
+                        <!--when the user is a customer-->
                         <div class="form-group">
                             <center>
-                            <fieldset class="scheduler-border">
+                            <fieldset class="scheduler-border" id="staffDetail">
                                 <legend class="scheduler-border" id="legendStaff">when the user is staff</legend>
                                 <div class="col-sm-3">
                                     <select class="form-control" id="designation">
@@ -194,9 +208,11 @@
                             </center>
                         </div>
                         <div class="form-group">
-                            <div class="col-xs-4">
-                                <button type="button" class="btn btn-warning btnAddItem" id="btnAddCancel">Cancel</button>
+                            <div class="col-sm-4"></div>
+                            <div class="col-sm-4">
+                                <button type="button" class="btn btn-success btnAddItem" id="btnAddUser">Add User</button>
                             </div>
+                            <div class="col-sm-4"></div>
                         </div>
                     </fieldset>
                 </form>
