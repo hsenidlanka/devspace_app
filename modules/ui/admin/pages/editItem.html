@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
-
     <meta charset="UTF-8">
     <title></title>
 
@@ -21,35 +20,34 @@
   ,400,300,600,700,800" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic"
           rel="stylesheet" type="text/css">
-
 </head>
-<style type="text/css">
-    .bs-example{
-        margin: 20px;
-    }
-</style>
+
 <body>
+<div style="height: 100px; border: solid 2px #045411;">
+    Top Banner goes here
+</div>
 
-<div class="brand">Item Management</div>
-
-<div class="row">
-    <div class="bs-example" style="opacity: 1;">
-        <ul class="breadcrumb">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Products</a></li>
-            <li class="active">Accessories</li>
+<div class="row title-brd-crm-bar">
+    <div class="col-xs-6 brand">Item Management</div>
+    <div class="col-xs-6">
+        <ul class="breadcrumb breadcrumb-menu">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="#">Item Management</a></li>
+            <li class="active"><a href="#">Edit Item</a></li>
         </ul>
     </div>
 </div>
 
-<div class="form-box" id="edit-item-form-box">
+
+<div class="form-box" id="view-item-form-box">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="default-panel-headings">Edit Item</h3>
+            <h3 class="default-panel-headings">View Item</h3>
         </div>
+
         <div class="panel-body">
 
-            <div class="row" id="itemSearchBar">
+            <div class="row itemSearchBar">
                 <div class="col-sm-1"></div>
                 <div class="col-sm-3">
                     <label class="control-label" style="float: right;">
@@ -76,7 +74,7 @@
                             <div class="col-xs-6">
                                 <div class="col-xs-4">
                                     <label class="control-label" style="float:right;">
-                                        Item ID :  &nbsp; *
+                                        Item ID : &nbsp; *
                                     </label>
                                 </div>
                                 <div class="col-xs-8">
@@ -140,7 +138,7 @@
                             <div class="col-xs-6">
                                 <div class="col-xs-4">
                                     <label class="control-label" style="float: right">
-                                       Sub-category :
+                                        Sub-category :
                                     </label>
                                 </div>
                                 <div class="col-xs-8">
@@ -168,40 +166,44 @@
                                     </label>
                                 </div>
 
-                            <div class="col-xs-8">
-                                <table class="table table-hover table-bordered table-condensed" id="tblEditPrice">
-                                    <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th>Size</th>
-                                        <th>Price</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td><input type="checkbox" value="" class="checkbox"></td>
-                                        <td>Regular</td>
-                                        <td><input type="text" value="eee" class="col-xs-1 form-control" style="text-align:right"></td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox" value="" class="checkbox"></td>
-                                        <td>Medium</td>
-                                        <td><input type="text" value="" class="col-xs-1 form-control"></td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox" value="" class="checkbox"></td>
-                                        <td>Large</td>
-                                        <td><input type="text" value="" class="col-xs-1 form-control"></td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox" value="" class="checkbox"></td>
-                                        <td>Other</td>
-                                        <td><input type="text" value="" class="col-xs-1 form-control"></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                                <div class="col-xs-8">
+                                    <table class="table table-hover table-bordered table-condensed" id="tblEditPrice">
+                                        <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Size</th>
+                                            <th>Price</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td><input type="checkbox" value="" class="checkbox"></td>
+                                            <td>Regular</td>
+                                            <td><input type="text" value="" class="col-xs-1 form-control"
+                                                       style="text-align:right"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox" value="" class="checkbox"></td>
+                                            <td>Medium</td>
+                                            <td><input type="text" value="" class="col-xs-1 form-control"
+                                                       style="text-align:right"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox" value="" class="checkbox"></td>
+                                            <td>Large</td>
+                                            <td><input type="text" value="" class="col-xs-1 form-control"
+                                                       style="text-align:right"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox" value="" class="checkbox"></td>
+                                            <td>Other</td>
+                                            <td><input type="text" value="" class="col-xs-1 form-control"
+                                                       style="text-align:right"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                        </div>
                             <div class="col-xs-6">
                                 <div class="col-xs-4">
                                     <label class="control-label" style="">
@@ -210,8 +212,11 @@
                                 </div>
 
                                 <div class="col-xs-8">
-                                    <button type="button" class="btn btn-warning btnAddItem" id="btnEditImage">Browse to Upload Images</button>
+                                    <button type="button" class="btn btn-warning btnAddItem" id="btnEditImage">Browse to
+                                        Upload Images
+                                    </button>
                                     <br><br>
+
                                     <div class="col-xs-8">
                                         <table class="table table-hover table-bordered table-condensed" id="">
                                             <tbody>
@@ -247,10 +252,10 @@
                                     </label>
                                 </div>
 
-                            <div class="col-xs-8">
-                                <textarea class="form-control" rows="5" id="txtEditDesc"></textarea>
+                                <div class="col-xs-8">
+                                    <textarea class="form-control" rows="5" id="txtEditDesc"></textarea>
+                                </div>
                             </div>
-                        </div>
                         </div>
                     </div>
 
@@ -265,7 +270,8 @@
                             </button>
                         </div>
                         <div class="col-xs-3">
-                            <button type="button" class="btn btn-warning btnAddItem" id="btnEditClear">Clear All</button>
+                            <button type="button" class="btn btn-warning btnAddItem" id="btnEditClear">Clear All
+                            </button>
                         </div>
                         <div class="col-xs-3">
                             <button type="button" class="btn btn-warning btnAddItem" id="btnEditCancel">Cancel</button>
@@ -277,5 +283,6 @@
 
     </div>
 </div>
+
 </body>
 </html>

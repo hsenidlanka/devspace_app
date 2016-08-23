@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+
+    <meta charset="UTF-8">
+    <title></title>
+
+    <!-- CSS -->
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="../css/business-casual.css" rel="stylesheet">
+    <link href="../css/itemMgt.css" rel="stylesheet">
+
+    <!-- Javascript -->
+    <script src="../bootstrap/js/jquery.min.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Fonts -->
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic
+  ,400,300,600,700,800" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic"
+          rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+<div style="height: 100px; border: solid 2px #045411;">
+    Top Banner goes here
+</div>
+
+<div class="row title-brd-crm-bar">
+    <div class="col-xs-6 brand">Item Management</div>
+    <div class="col-xs-6">
+        <ul class="breadcrumb breadcrumb-menu">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="#">Item Management</a></li>
+            <li class="active"><a href="#">View Item</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="form-box" id="edit-item-form-box">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="default-panel-headings">View Item</h3>
+        </div>
+
+        <div class="panel-body">
+
+            <div class="row itemSearchBar">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-3">
+                    <label class="control-label" style="float: right;">
+                        Item Name :
+                    </label>
+
+                </div>
+                <div class="col-sm-4">
+                    <input class="form-control" id="txtViewSearchItem" type="text">
+                </div>
+                <div class="col-sm-3">
+                    <button type="button" class="btn btn-warning btnAddItem" id="btnViewSearchItem">Search</button>
+                </div>
+                <div class="col-sm-1"></div>
+            </div>
+            <br>
+
+            <form class="form-horizontal" role="form" id="frmViewItem">
+                <fieldset class="scheduler-border">
+                    <legend class="scheduler-border">Item Details</legend>
+                    <table class="table table-hover table-bordered table-condensed" id="tblEditPrice">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Sub-category</th>
+                        <th>Type</th>
+                        <th>Price</th>
+                        <th>Opertaions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><a href=""><span class='glyphicon glyphicon-eye-open'></span>View</a> &nbsp; <a href="" class="glyphicon glyphicon-edit">Edit</a> &nbsp; <a href="">Delete</a></td>
+                    </tr>
+                    <tr>
+
+                    </tr>
+                    <tr>
+
+                    </tr>
+                    <tr>
+
+                    </tr>
+                    </tbody>
+                </table>
+                </fieldset>
+
+
+            </form>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
