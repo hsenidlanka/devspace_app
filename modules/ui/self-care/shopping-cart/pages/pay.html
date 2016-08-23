@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <title>Payment</title>
+    <link rel="shortcut icon" href="">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/yeti/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../css/progress-wizard.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/payment-operations.js"></script>
+</head>
+<body>
+<center>
+    <div class="section">
+        <ul class="progress-indicator">
+            <li class="completed"><span class="bubble"></span> Delivery</li>
+            <li class="completed"><span class="bubble"></span> Payment</li>
+            <li class="active"><span class="bubble"></span> Verify</li>
+            <li><span class="bubble"></span> Success</li>
+        </ul>
+        <div style="text-align: center; margin-top: 40px;">
+            <img src="../images/payment/visa.png">
+            <img src="../images/payment/master.png">
+        </div>
+        <div class="container" style="width:800px;;">
+            <div class="row">
+                <div class="col-md-6">
+                    <form role="form">
+                        <h4><strong>Total Amount (Rs.): 2000.00</strong></h4>
+
+                        <div class="form-group">
+                            <label class="control-label" for="text-card-name">Name on card</label>
+                            <input class="form-control" id="text-card-name"
+                                   placeholder="Enter name as appeared in card" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="text-card-no">Card number</label>
+                            <input class="form-control" id="text-card-no"
+                                   placeholder="XXXX-XXXX-XXXX-XXXX" type="text">
+                        </div>
+                        <div>
+                            <label class="control-label">Expiration date</label>
+                        </div>
+                        <label for="month">Month:</label>
+
+                        <div class="form-group" style="display:inline-block;">
+                            <select class="form-control" id="month">
+                                <option>Jan</option>
+                                <option>Feb</option>
+                                <option>Mar</option>
+                            </select>
+                        </div>
+                        <label for="year">Year:</label>
+
+                        <div class="form-group" style="display:inline-block;">
+                            <select class="form-control" id="year">
+                                <option>2016</option>
+                                <option>2017</option>
+                                <option>2018</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="text-cvv-no">Security code/CVV number</label>
+                            <input class="form-control" id="text-cvv-no"
+                                   placeholder="XXXX" type="text" size="3" style="width: 70px;">
+                        </div>
+                        <div style="text-align: right;">
+                            <a class="btn btn-primary btn-proceed-payment" id="btn-confirm-pay"
+                               style="width: 45%; margin-left: 25%;">Pay (Rs. 2000.00)</a>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-6" style="margin-top: 10%;">
+                    <img src="../images/payment/Credit-Card-Security-Code-Locations.jpg" width="100%;">
+                </div>
+            </div>
+        </div>
+    </div>
+</center>
+
+<div id="confirm-payment-popup" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Confirm Payment</h4>
+            </div>
+            <div class="modal-body">
+                <p>You are about to pay Rs. 2000 via the card number ending with 3423.
+                    <br>Click 'Pay 'to make th payment or cancel to go to the previis page.</p>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default" data-dismiss="modal" style="width:80px;">Cancel</a>
+                <a class="btn btn-success" id="btn-pay-popup" style="width:80px;">Pay</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
