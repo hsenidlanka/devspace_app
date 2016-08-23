@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>View Categories</title>
+    <title>View Sub Categories</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -29,7 +29,7 @@
 </div>
 
 <div class="titlemodify">
-    <p>View All Categories</p>
+    <p>View Sub Categories For Pizza</p>
 </div>
 
 <div id="tableposition">
@@ -44,7 +44,7 @@
         <tbody class="table-hover">
         <tr>
             <td>001</td>
-            <td><a href="view_sub_categories.html">Pizza</a></td>
+            <td>Deep Dish Pizza</td>
             <td>
                 <a data-toggle="modal" href="#modifyModel">Modify <span class="glyphicon glyphicon-edit"></span></a>
                 &nbsp;&nbsp;
@@ -53,7 +53,7 @@
         </tr>
         <tr>
             <td>002</td>
-            <td><a href="view_sub_categories.html">Pasta</a></td>
+            <td>Italiano</td>
             <td>
                 <a data-toggle="modal" href="#modifyModel">Modify <span class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;
                 <a data-toggle="modal"href="#deleteModal">Delete<span class="glyphicon glyphicon-remove"></span> </a>
@@ -61,8 +61,7 @@
         </tr>
         <tr>
             <td>003</td>
-            <td><a href="view_sub_categories.html">Beverage</a></td>
-
+            <td>Big Pizza</td>
             <td>
                 <a data-toggle="modal" href="#modifyModel">Modify <span class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;
                 <a data-toggle="modal" href="#deleteModal">Delete <span class="glyphicon glyphicon-remove"></span> </a>
@@ -70,7 +69,7 @@
         </tr>
         <tr>
             <td>005</td>
-            <td><a href="view_sub_categories.html">Toppings</a></td>
+            <td>Pan and Other crust</td>
             <td>
                 <a data-toggle="modal" href="#modifyModel">Modify <span class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;
                 <a data-toggle="modal" href="#deleteModal">Delete <span class="glyphicon glyphicon-remove"></span> </a>
@@ -78,7 +77,7 @@
         </tr>
         <tr>
             <td>006</td>
-            <td><a href="view_sub_categories.html">Salads</a></td>
+            <td>Supreme</td>
             <td>
                 <a data-toggle="modal" href="#modifyModel">Modify <span class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;
                 <a data-toggle="modal" href="#deleteModal">Delete<span class="glyphicon glyphicon-remove"></span> </a>
@@ -86,7 +85,7 @@
         </tr>
         <tr>
             <td>007</td>
-            <td><a href="view_sub_categories.html">Desserts</a></td>
+            <td>Signature</td>
             <td>
                 <a data-toggle="modal" href="#modifyModel">Modify <span class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;
                 <a data-toggle="modal" href="#deleteModal">Delete<span class="glyphicon glyphicon-remove"></span> </a>
@@ -109,8 +108,7 @@
                 </div>
             </div>
             <div class="modal-body" style="text-align: center">
-                <h4><p>You are about to delete category "Lorem" <br>and <br>It's Sub categories</p>
-                </h4>
+                <h4><p>You are about to delete Sub category "Lorem" </p></h4>
                 <br>
 
                 <div class="row">
@@ -140,15 +138,13 @@
         <div class="modal-content">
             <div class="modal-header" style="text-align: center">
 
-                <h3 class="modal-title">Modify Category &nbsp;<span class="glyphicon glyphicon-edit"></span></h3>
+                <h3 class="modal-title">Modify Sub Category &nbsp;<span class="glyphicon glyphicon-edit"></span></h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
                     <fieldset>
-
-
                         <div class="form-group">
-                            <label for="categoryid" class="control-label col-sm-4" style="">Category Id :</label>
+                            <label for="categoryid" class="control-label col-sm-4" style="">Sub Category Id :</label>
 
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" id="categoryid" placeholder="Please Enter Category Id">
@@ -156,14 +152,32 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="categoryname" class="control-label col-sm-4">Category Name :</label>
-
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="categoryname" placeholder="Please Enter Category Name">
+                            <div class="col-sm-4" style="text-align: right">
+                                    <label for="selectCategory">
+                                        Sub Category :
+                                    </label>
 
                             </div>
+
+                            <div class="col-sm-8">
+                                <select id="selectCategory" style="width: 100%; height: 30px" class="selectpicker">
+                                    <option>Pizza</option>
+                                    <option>Pasta</option>
+                                    <option>Salad</option>
+                                    <option>Desserts</option>
+                                </select>
+                            </div>
+
                         </div>
 
+                        <div class="form-group">
+                            <label for="subcategory" class="control-label col-sm-4">Sub Category Name : </label>
+
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="subcategory"
+                                       placeholder="Please Enter Sub Category Name">
+                            </div>
+                        </div>
                         <br>
 
                         <div class="form-group" style="text-align: center">

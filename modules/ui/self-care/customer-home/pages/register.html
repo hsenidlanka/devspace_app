@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- CSS -->
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="../css/business-casual.css" rel="stylesheet">
+
+    <!-- Javascript -->
+    <script src="../bootstrap/js/jquery.min.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Fonts -->
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic
+  ,400,300,600,700,800" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic"
+          rel="stylesheet" type="text/css">
+
+</head>
+<body>
+<div class="brand"></div>
+<center>
+    <div class="inner-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2 text">
+
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h1> Sign up</h1>
+                </div>
+                <div class="panel-body">
+                    <form role="form" id="adduser_form" action="AddUserServlet" method="post" class="form-horizontal">
+
+
+                        <div class="form-group">
+
+                            <label class="col-sm-2 control-label">
+                                Title
+                            </label>
+
+                            <div class="col-sm-4">
+                                <label class="radio-inline">
+                                    <input type="radio" name="optradio">Mr
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="optradio">Mrs
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="optradio">Miss
+                                </label>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label class="col-sm-2 control-label">
+                                Name
+                            </label>
+
+                            <div class="col-sm-4">
+                                <input class="form-control" id="fname" type="text" placeholder="First Name*">
+                            </div>
+
+                            <div class="col-sm-4">
+                                <input class="form-control" id="lname" type="text" placeholder="Last Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <label class="col-sm-2 control-label">
+                                Address
+                            </label>
+
+                            <div class="col-sm-4">
+                                <input class="form-control" id="address1" type="text" placeholder="Line1*">
+                            </div>
+
+                            <div class="col-sm-4">
+                                <input class="form-control" id="address2" type="text" placeholder="Line2*">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+
+                            <label class="col-sm-2 control-label">
+                                City
+                            </label>
+
+                            <div class="col-sm-2">
+                                <!-- <select name="city">
+                                     <option>Select Your Nearest City</option>
+                                 </select>-->
+                                <div class="dropdown">
+                                    <button class="btn btn-default dropdown-toggle" type="button" id="menu1"
+                                            data-toggle="dropdown">Select Nearest City
+                                        <span class="caret"></span></button>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Nugegoda</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <label class="col-sm-4 control-label">
+                                Date Of Birth
+                            </label>
+
+                            <div class='col-sm-2'>
+                                <input class="form-control" id="dob" type="text" placeholder="22/08/2016">
+                            </div>
+                            <div class="form-group">
+                                <label for="mobileNo" class="col-sm-2 control-label">
+                                    Phone No
+                                </label>
+
+                                <div class="col-sm-4">
+                                    <input class="form-control" id="mobileNo" type="text" placeholder="+94-XXXXXXXXXX">
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="col-sm-2 control-label">
+                                    E-Mail
+                                </label>
+
+                                <div class="col-sm-4">
+                                    <input class="form-control" id="email" type="text" placeholder="example@domain.com">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="username" class="col-sm-2 control-label">
+                                    Username
+                                </label>
+
+                                <div class="col-sm-4">
+                                    <input class="form-control" id="username" type="text" placeholder="username">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="col-sm-2 control-label">
+                                    Password
+                                </label>
+
+                                <div class="col-sm-4">
+                                    <input class="form-control" id="password" type="text" placeholder="password">
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <input class="form-control" id="rePassword" type="text"
+                                           placeholder="Re-Enter Password">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-success">Create Account</button>
+                            </div>
+
+
+                        </div>
+
+
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</center>
+
+
+</body>
+</html>
