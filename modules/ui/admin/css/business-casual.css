@@ -1,8 +1,3 @@
-/*!
- * Start Bootstrap - Business Casual (http://startbootstrap.com/)
- * Copyright 2013-2016 Start Bootstrap
- * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
- */
 
 body {
     font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -14,111 +9,29 @@ body {
 }
 .container{
     width:60% ;
-
 }
-/*.panel-group{
-   background-color:n;
-}*/
-
 .panel-default > .panel-heading {
     background-color: rgba(255, 220, 172, 0.48);
     height: 70px;
     font-weight: bold;
     padding: 20px 0 20px 0;
-
 }
-
 .panel-title{
     font-size: 20px;
 }
-
-
-
-/*
-.form-top {
-    overflow: hidden;
-    padding: 0 25px 15px 25px;
-    *//*background-color: rgba(255, 220, 172, 0.48);*//*
-    -moz-border-radius: 4px 4px 0 0; -webkit-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0;
-    text-align: left;
-}*/
-
-#panel-heading-title {
-    /*float: left;*/
-    text-align:left ;
-    font-size: 20px;
-    margin-left: 20px;
-
-}
-
 .form-box {
     margin-top: 10px;
     width: 70%;
 }
-
-.form-label-align{
-    text-align: left;
-    align-items: flex-start;
-    float: left;
-}
-
-.form-top {
-    overflow: hidden;
-    padding: 0 25px 15px 25px;
-    background: #fff;
-    -moz-border-radius: 4px 4px 0 0; -webkit-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0;
-    text-align: left;
-}
-
-.form-top-left {
-    float: left;
-    width: 75%;
-    padding-top: 25px;
-
-}
-
-.form-top-left h3 { margin-top: 0; }
-
-.form-top-right {
-    float: left;
-    width: 25%;
-    padding-top: 5px;
-    font-size: 66px;
-    color: #ddd;
-    line-height: 100px;
-    text-align: right;
-}
-.form-bottom {
-    padding: 25px 25px 30px 25px;
-    background: #eee;
-    -moz-border-radius: 0 0 4px 4px; -webkit-border-radius: 0 0 4px 4px; border-radius: 0 0 4px 4px;
-    text-align: left;
-}
-
-/*.form-bottom form textarea {
-    height: 100px;
-}*/
-
-.form-bottom form button.btn {
-    width: 150px;
-
-}
-
 .default-panel-headings{
     text-transform: uppercase;
     font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 30px;
+    font-size: 22px;
     font-weight: 700;
     letter-spacing: 1px;
     text-align: center;
     margin-top: 10px;
 }
-
-/*p {
-    font-size: 1.25em;
-    line-height: 1.6;
-    color: #000;
-}*/
 
 .brand,
 .address-bar {
@@ -138,17 +51,6 @@ body {
 .brand-name {
     margin: 0;
     font-size: 4em;
-}
-
-
-footer {
-    background: #fff;
-    background: rgba(255,255,255,0.9);
-}
-
-footer p {
-    margin: 0;
-    padding: 50px 0;
 }
 
 @media screen and (min-width:768px) {
@@ -187,7 +89,7 @@ footer p {
         color: #fff;
     }
 
-     .navbar-default {
+    .navbar-default {
         border: none;
         background: transparent;
         /*background: rgba(255,255,255,0.9);*/
