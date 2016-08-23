@@ -3,6 +3,8 @@
 }
 .btnAddItem{
     font-weight: bold;
+    background-color: #e7ce98;
+    border-color: #e7ce98;
     color: saddlebrown;
 }
 #itemSearchBar{
@@ -18,7 +20,7 @@
     width: 80%;
     margin-left: 10%;
 }
-.default-panel-headings{
+/*.default-panel-headings{
     text-transform: uppercase;
     font-family: "Josefin Slab", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 22px;
@@ -26,7 +28,7 @@
     letter-spacing: 1px;
     text-align: center;
     margin-top: 10px;
-}
+}*/
 
 fieldset.scheduler-border {
     border: 1px groove #ddd !important;

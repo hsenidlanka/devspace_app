@@ -6,7 +6,7 @@
 
 body {
     font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-    background: url('../images/cover.png') no-repeat center center fixed;
+    background: url('../images/cover.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
@@ -21,7 +21,7 @@ body {
 }*/
 
 .panel-default > .panel-heading {
-    background-color: rgba(255, 220, 172, 0.48);
+    background-color: rgb(165, 109, 57);
     height: 70px;
     font-weight: bold;
     padding: 20px 0 20px 0;
@@ -107,11 +107,12 @@ body {
 .default-panel-headings{
     text-transform: uppercase;
     font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 30px;
-    font-weight: 700;
+    font-size: 22px;
+    font-weight: 900;
     letter-spacing: 1px;
     text-align: center;
     margin-top: 10px;
+    color: #ffffff;
 }
 
 /*p {
