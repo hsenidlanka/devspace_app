@@ -36,7 +36,7 @@
                 <h4>When to deliver</h4>
                 <hr>
                 <div class="radio">
-                    <label><input type="radio" name="radiodelwhen" value="">Deliver now</label>
+                    <label><input type="radio" name="radiodelwhen" value="" checked>Deliver now</label>
                 </div>
                 <div class="radio">
                     <label><input type="radio" name="radiodelwhen" value="">Deliver later:&nbsp;Date:</label>
@@ -51,18 +51,18 @@
 
                 <h4>Where to deliver</h4>
                 <hr>
-                <div class="container" style="width: 800px;">
+                <div class="container" style="width: 1000px;">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="control-label" for="exampleInputEmail1">First name</label>
-                                <input class="form-control" id="exampleInputEmail1"
+                                <label class="control-label" for="text-fname">First name</label>
+                                <input class="form-control" id="text-fname"
                                        placeholder="Enter your first name" type="email">
                             </div>
                             <div class="form-group">
-                                <label class="control-label" for="exampleInputPassword1">Last name</label>
+                                <label class="control-label" for="text-lname">Last name</label>
                                 <input class="form-control" type="text" placeholder="Enter your last name"
-                                       id="exampleInputPassword1">
+                                       id="text-lname">
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Contact no</label>
@@ -85,7 +85,7 @@
                                 </div>
                                 <div>
                                     <a class="btn btn-primary btn-proceed-payment"
-                                           style="width: 45%; display: inline-block; float: right;">Proceed to payment</a>
+                                           style="width: 45%; display: inline-block; float: right;" href="delivery-summary.html">Proceed</a>
                                     <input type="reset" class="btn btn-primary" value="Reset"
                                            style="width: 45%; display: inline-block; float: right; margin-right:5px">
                                 </div>
@@ -99,7 +99,7 @@
                 <h4>When to pickup</h4>
                 <hr>
                 <div class="radio">
-                    <label><input type="radio" name="radiopickwhen" value="">Pickup now</label>
+                    <label><input type="radio" name="radiopickwhen" value="" checked>Pickup now</label>
                 </div>
                 <div class="radio">
                     <label><input type="radio" name="radiopickwhen" value="">Deliver later:&nbsp;</label>
@@ -111,28 +111,28 @@
                     </div>
                 </div>
 
-                <h4>Where to deliver</h4>
+                <h4>From where to pickup</h4>
                 <hr>
-
-                <div class="container" style="width: 800px;">
+                <div class="container" style="width: 1000px;">
                     <div class="row">
                         <div class="col-md-6">
                             <form role="form">
                                 <div class="form-group">
                                     <label class="control-label">Pickup branch</label>
                                     <select class="form-control">
-                                        <option>1</option>
-                                        <option>2</option>
+                                        <option>Colombo</option>
+                                        <option>Galle</option>
+                                        <option>Kaluthara</option>
                                     </select>
                                     <p class="help-block">Example block-level help text here.</p>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Branch address</label>
-                                    <textarea class="form-control"></textarea>
+                                    <textarea class="form-control" disabled></textarea>
                                 </div>
                                 <div>
                                     <a class="btn btn-primary btn-proceed-payment"
-                                       style="width: 45%; display: inline-block; float: right;">Proceed to payment</a>
+                                       style="width: 45%; display: inline-block; float: right;" href="pickup-summary.html">Proceed</a>
                                     <input type="reset" class="btn btn-primary" value="Reset"
                                            style="width: 45%; display: inline-block; float: right; margin-right:5px">
                                 </div>
@@ -145,7 +145,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </center>
