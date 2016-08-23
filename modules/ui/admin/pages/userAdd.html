@@ -30,125 +30,109 @@
 
                     <fieldset class="scheduler-border">
                         <legend class="scheduler-border" id="legendHeading"></legend>
-                        <div class="form-group">
 
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                                User Type
+                            </label>
+                            <div class="col-sm-2">
+                                <label class="radio-inline">
+                                    <input type="radio" name="optradio">Customer
+                                </label>
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="radio-inline">
+                                    <input type="radio" name="optradio">Staff Member
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label  class="col-sm-2 control-label">
-                                Title
+                               Name
                             </label>
-
-                            <div class="col-sm-4">
-                                <label class="radio-inline">
-                                    <input type="radio" name="optradio">Mr
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="optradio">Mrs
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="optradio">Miss
-                                </label>
+                            <div class="col-sm-2">
+                                <select class="form-control" id="selectTitle">
+                                    <option>Mr</option>
+                                    <option>Mrs</option>
+                                    <option>Miss</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-3">
+                                <input class="form-control" id="fname" placeholder="First Name" type="text"  style="width: 200px">
                             </div>
 
+                            <div class="col-sm-3">
+                                <input class="form-control" id="lname" placeholder="Last Name" type="text" style="width: 200px">
+                            </div>
+                        </div> <br>
+
+                        <div class="form-group">
+                            <label  class="col-sm-2 control-label">
+                                Phone No*
+                            </label>
+                            <div class="col-sm-2">
+                                <input class="form-control" id="codeNo" placeholder="Area Code" type="text">
+                            </div>
+                            <div class="col-sm-3">
+                                <input class="form-control" id="mobileNo" style="width: 200px" placeholder="Phone Number" type="text">
+                            </div>
                         </div>
 
                         <div class="form-group">
 
                             <label class="col-sm-2 control-label">
-                                Name
-                            </label>
-
-                            <div class="col-sm-4">
-                                <input class="form-control" id="fname" type="text">
-                            </div>
-
-                            <div class="col-sm-4">
-                                <input class="form-control" id="lname" type="text">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="mobileNo" class="col-sm-2 control-label">
-                                Mobile No*
+                                E-Mail
                             </label>
                             <div class="col-sm-4">
-                                <input class="form-control" id="mobileNo" type="text">
+                                <input class="form-control" id="email" placeholder="myname@example.com" type="text">
                             </div>
-                            <label for="phoneNo" class="col-sm-2 control-label">
-                                Phone No
-                            </label>
-                            <div class="col-sm-4">
-                                <input class="form-control" id="phoneNo" type="text">
-                            </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label for="txtItemName" class="col-sm-2 control-label">
-                                Item Name
-                            </label>
-                            <div class="col-sm-4">
-                                <input class="form-control" id="txtItemName" type="text">
-                            </div>
-                        </div>
+                        </div> <br>
 
                         <div class="form-group">
                             <label class="col-sm-2 control-label">
-                                Item Price
+                               Address
                             </label>
-
-                            <div class="col-sm-6">
-                                <table class="table table-hover table-bordered table-condensed">
-                                    <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th>Size</th>
-                                        <th>Price</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>  <input type="checkbox" value="" class="checkbox"></td>
-                                        <td>Regular</td>
-                                        <td>  <input type="texe" value="" class="col-xs-1 form-control"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>  <input type="checkbox" value="" class="checkbox"></td>
-                                        <td>Medium</td>
-                                        <td>  <input type="texe" value="" class="col-xs-1 form-control"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>  <input type="checkbox" value="" class="checkbox"></td>
-                                        <td>Large</td>
-                                        <td>  <input type="texe" value="" class="col-xs-1 form-control"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>  <input type="checkbox" value="" class="checkbox"></td>
-                                        <td>Other</td>
-                                        <td>  <input type="texe" value="" class="col-xs-1 form-control"></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                            <div class="col-sm-4">
+                                <input class="form-control" id="addLine1" placeholder="Street Address" type="text" >
+                            </div>
+                            <div class="col-sm-4">
+                                <input class="form-control" id="addLine2" placeholder="Address Line 2" type="text" >
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                            </label>
+                            <div class="col-sm-4">
+                                <input class="form-control" id="city" placeholder="City" type="text">
+                            </div>
+                            <div class="col-sm-4">
+                                <input class="form-control" id="province" placeholder="Province" type="text">
+                            </div>
+                        </div><br>
 
                         <div class="form-group">
                             <label class="col-sm-2 control-label">
-                                Item Name
+                                Username
                             </label>
                             <div class="col-sm-4">
-                                <label class="radio-inline">
-                                    <input type="radio" name="optradio">Veg
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="optradio">Non-veg
-                                </label>
+                                <input class="form-control" id="username" placeholder="Street Address" type="text" >
                             </div>
                         </div>
-
                         <div class="form-group">
-                            <label for="btnUpldImage" class="col-sm-2 control-label">
-                                Add Image/s
+                            <label class="col-sm-2 control-label">
+                                Password
                             </label>
                             <div class="col-sm-4">
-                                <button type="button" class="btn btn-warning btnAddItem" id="btnUpldImage">Browse to Upload Images</button>
+                                <input class="form-control" id="password" placeholder="Street Address" type="text" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                               Confirm Password
+                            </label>
+                            <div class="col-sm-4">
+                                <input class="form-control" id="cpassword" placeholder="Street Address" type="text" >
                             </div>
                         </div>
 
@@ -160,7 +144,40 @@
                                 <textarea class="form-control" rows="5" id="txtdesc"></textarea>
                             </div>
                         </div>
-
+                        <div class="form-group">
+                            <center>
+                            <fieldset class="scheduler-border">
+                                <legend class="scheduler-border" id="legendStaff">when the user is staff</legend>
+                                <div class="col-sm-3">
+                                    <select class="form-control" id="designation">
+                                        <option>System Admin</option>
+                                        <option>CustomerCare Manager</option>
+                                        <option>Miss</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-3">
+                                    <select class="form-control" id="department">
+                                        <option>Finance</option>
+                                        <option>Administration</option>
+                                        <option>Customer Service</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-3">
+                                    <select class="form-control" id="branch">
+                                        <option>Colombo</option>
+                                        <option>Gampaha</option>
+                                        <option>Ja-Ela</option>
+                                        <option>Kadana</option>
+                                    </select>
+                                </div>
+                            </fieldset>
+                            </center>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-4">
+                                <button type="button" class="btn btn-warning btnAddItem" id="btnAddCancel">Cancel</button>
+                            </div>
+                        </div>
                     </fieldset>
                 </form>
 
