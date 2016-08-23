@@ -5,7 +5,7 @@
     <!-- CSS -->
     <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
-    <link href="../css/business-casual.css" rel="stylesheet">
+    <link href="../css/userMgt.css" rel="stylesheet">
 
     <!-- Javascript -->
     <script src="../bootstrap/js/jquery.min.js"></script>
@@ -23,7 +23,7 @@
     <div class="form-box">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 id="panel-heading-title">New User Sign up</h3>
+                <h3 class="default-panel-headings">New User Sign up</h3>
             </div>
             <div class="panel-body">
                 <form role="form" id="adduser_form" action="AddUserServlet" method="post" class="form-horizontal" >
@@ -90,51 +90,71 @@
                         </div> <br>
 
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">
-                               Address
-                            </label>
-                            <div class="col-sm-4">
-                                <input class="form-control" id="addLine1" placeholder="Street Address" type="text" >
+                            <div class="col-sm-6">
+                            <div class="row">
+                                <label class="col-sm-4 control-label">
+                                     Address
+                                </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" id="addLine1" placeholder="Street Address" type="text" >
+                                    </div>
                             </div>
-                            <div class="col-sm-4">
-                                <input class="form-control" id="addLine2" placeholder="Address Line 2" type="text" >
+                            <div class="row"> <label class="control-label"></label>   </div>
+                            <div class="row">
+                                <label class="col-sm-4 control-label">
+                                </label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" id="addLine2" placeholder="Address Line 2" type="text" >
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">
-                            </label>
-                            <div class="col-sm-4">
-                                <input class="form-control" id="city" placeholder="City" type="text">
+                            <div class="row"><label class="control-label"></label></div>
+                            <div class="row">
+                                <label class="col-sm-4 control-label">
+                                </label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" id="city" placeholder="City" type="text">
+                                </div>
                             </div>
-                            <div class="col-sm-4">
-                                <input class="form-control" id="province" placeholder="Province" type="text">
+                            <div class="row"><label class="control-label"></label></div>
+                            <div class="row">
+                                <label class="col-sm-4 control-label">
+                                </label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" id="province" placeholder="Province" type="text">
+                                </div>
+                            </div>
+                            <div class="row"><label class="control-label"></label></div>
+                            </div>
+                            <div class="col-sm-6">
+
+                                <div class="row">
+                                    <label class="col-sm-4 control-label">
+                                        Username
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" id="username" placeholder="Street Address" type="text" >
+                                    </div>
+                                </div>
+                                <div class="row">  <label class=" control-label"></label></div>
+                                <div class="row">
+                                    <label class="col-sm-2 control-label">
+                                        Password
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" id="password" placeholder="Street Address" type="text" >
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-sm-2 control-label">
+                                        Confirm Password
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" id="cpassword" placeholder="Street Address" type="text" >
+                                    </div>
+                                </div>
                             </div>
                         </div><br>
 
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">
-                                Username
-                            </label>
-                            <div class="col-sm-4">
-                                <input class="form-control" id="username" placeholder="Street Address" type="text" >
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">
-                                Password
-                            </label>
-                            <div class="col-sm-4">
-                                <input class="form-control" id="password" placeholder="Street Address" type="text" >
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">
-                               Confirm Password
-                            </label>
-                            <div class="col-sm-4">
-                                <input class="form-control" id="cpassword" placeholder="Street Address" type="text" >
-                            </div>
-                        </div>
 
                         <div class="form-group">
                             <label for="txtDesc" class="col-sm-2 control-label">
