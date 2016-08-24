@@ -7,7 +7,7 @@
     position: absolute;
     left: 10%;
     top: 4%;
-    padding-top: 5%;
+    /*padding-top: 5%;*/
 }
 
 label {
@@ -21,12 +21,6 @@ label {
     margin-right: auto;
     margin-top: 8%;
 
-}
-
-body {
-    background-image: url("../images/cover.png");
-    background-repeat: no-repeat;
-    background-size: cover
 }
 
 .modal {
