@@ -15,6 +15,7 @@
     <script src="https://cdn.jsdelivr.net/bootstrap.timepicker/0.2.6/js/bootstrap-timepicker.min.js"></script>
     <script src="http://www.w3schools.com/lib/w3data.js"></script>
     <script src="../js/include.js"></script>
+    <script src="../js/validate.js"></script>
 </head>
 
 <body>
@@ -46,9 +47,9 @@
                         </div>
                         <div class="radio">
                             <label><input type="radio" name="radiodelwhen" value="">Deliver later:&nbsp;Date:</label>
-                            &nbsp;<input type="text" style="width: 100px; height: 20px;">
+                            &nbsp;<input type="text" style="width: 50px; height: 20px;">
                             &nbsp;&nbsp;Time:
-                            <div class="input-group bootstrap-timepicker timepicker">
+                            <div class="input-group bootstrap-timepicker timepicker" style="display: inline-block;">
                                 <input id="timepicker1" type="text" class="form-control input-small">
                             </div>
                         </div>
@@ -61,38 +62,51 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label" for="text-fname">First name</label>
-                                        <input class="form-control" id="text-fname"
+                                        <label class="control-label" for="txt-fname">First name</label>
+                                        <label id="fname_error" class="error-labels"></label>
+                                        <input class="form-control" id="txt-fname"
                                                placeholder="Enter your first name" type="email">
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label" for="text-lname">Last name</label>
+                                        <label class="control-label" for="txt-lname">Last name</label>
+                                        <label id="lname_error" class="error-labels"></label>
                                         <input class="form-control" type="text" placeholder="Enter your last name"
-                                               id="text-lname">
+                                               id="txt-lname">
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label">Contact no</label>
-                                        <input class="form-control" type="text" placeholder="Enter your contact no">
+                                        <label id="contactno_error" class="error-labels"></label>
+                                        <input id="txt-contactno" class="form-control" type="text" placeholder="Enter your contact no">
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label">Email</label>
-                                        <input class="form-control" type="text" placeholder="Enter your email address">
+                                        <label id="email_error" class="error-labels"></label>
+                                        <input id="txt-email" class="form-control" type="text" placeholder="Enter your email address">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <form role="form">
                                         <div class="form-group">
                                             <label class="control-label">Delivery address</label>
-                                            <input class="form-control" type="text" placeholder="Address line 01">
+                                            <label id="address_error" class="error-labels"></label>
+                                            <input class="form-control" type="text" id="txt-deliadd01" placeholder="Building name/no and street name">
+                                            <div style="margin-top: 5px;">
+                                                <input class="form-control" id="txt-deliadd02" type="text" placeholder="Address line 02">
+                                            </div>
+                                            <div style="margin-top: 5px;">
+                                                <input class="form-control" id="txt-deliadd03" type="text" placeholder="Address line 03">
+                                            </div>
+                                            <div style="margin-top: 5px;">
+                                                <input class="form-control" id="txt-deliadd04" type="text" placeholder="City">
+                                            </div>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group" style="margin-top: 20px;">
                                             <label class="control-label">Description of the delivery location</label>
-                                            <textarea class="form-control"></textarea>
+                                            <textarea class="form-control" placeholder="Describe the location to ease the delivery process"></textarea>
                                         </div>
                                         <div>
-                                            <a class="btn btn-primary btn-proceed-payment btn-submit-proceed"
-                                               href="delivery-summary.html">Proceed</a>
-                                            <input type="reset" class="btn btn-primary btn-delivery-reset"
+                                            <button type="submit" class="btn btn-success btn-proceed-payment btn-submit-proceed" id="btn-delivery-submit">Proceed</button>
+                                            <input type="reset" class="btn btn-success btn-delivery-reset"
                                                    value="Reset">
                                         </div>
                                     </form>
@@ -110,7 +124,7 @@
                         <div class="radio">
                             <label><input type="radio" name="radiopickwhen" value="">Deliver later:&nbsp;</label>
                             &nbsp;&nbsp;Time:
-                            <div class="input-group bootstrap-timepicker timepicker">
+                            <div class="input-group bootstrap-timepicker timepicker" style="display: inline-block;">
                                 <input id="timepicker2" type="text" class="form-control input-small">
                             </div>
                         </div>
@@ -139,10 +153,10 @@
                                             <textarea class="form-control" disabled></textarea>
                                         </div>
                                         <div>
-                                            <a class="btn btn-primary btn-proceed-payment"
+                                            <a class="btn btn-success btn-proceed-payment"
                                                style="width: 45%; display: inline-block; float: right;"
                                                href="pickup-summary.html">Proceed</a>
-                                            <input type="reset" class="btn btn-primary" value="Reset"
+                                            <input type="reset" class="btn btn-success" value="Reset"
                                                    style="width: 45%; display: inline-block; float: right; margin-right:5px">
                                         </div>
                                     </form>
@@ -160,5 +174,6 @@
         </div>
     </div>
 </center>
+
 </body>
 </html>

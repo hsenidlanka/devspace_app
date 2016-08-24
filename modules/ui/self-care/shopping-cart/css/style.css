@@ -50,11 +50,6 @@ body {
     height: 20px;
 }
 
-.timepicker {
-    display: inline-block;
-    height: auto;
-}
-
 .btn-submit-proceed {
     width: 45%;
     display: inline-block;
@@ -86,4 +81,12 @@ hr {
 .panel-body, .panel-heading {
     background-color: #efefef !important;
     border-color: #00529B !important;
+}
+
+.error-labels {
+    color: red;
+    font-weight: lighter;
+    font-size: smaller;
+    text-align: left;
+    display: block;
 }
