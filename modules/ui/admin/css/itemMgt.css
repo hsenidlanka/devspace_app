@@ -3,27 +3,32 @@
 }
 .btnAddItem{
     font-weight: bold;
-    background-color: #e7ce98;
-    border-color: #e7ce98;
-    color: saddlebrown;
+    background-color: rgb(4, 84, 6);
+    border-color: rgb(4, 84, 6);
+    color: #e7ce98;
 }
 .itemSearchBar{
     margin-top: 10px;
 }
 #add-item-form-box{
-    margin-top: 10px;
+    margin-top: 0px;
     width: 60%;
     margin-left: 20%;
 }
 #edit-item-form-box{
-    margin-top: 10px;
-    width: 80%;
-    margin-left: 10%;
+    margin-top: 0px;
+    width: 70%;
+    margin-left: 15%;
 }
 #view-item-form-box{
-    margin-top: 10px;
-    width: 80%;
-    margin-left: 10%;
+    margin-top: 0px;
+    width: 90%;
+    margin-left: 5%;
+}
+#add-pkg-form-box{
+    margin-top: 0px;
+    width: 60%;
+    margin-left: 20%;
 }
 fieldset.scheduler-border {
     border: 1px groove #ddd !important;
@@ -39,4 +44,11 @@ legend.scheduler-border {
     text-align: left;
     padding: 0px 10px;
     border-bottom: none;
+}
+.panel-default > .panel-heading {
+    background-color: rgb(4, 84, 6);
+}
+
+.default-panel-headings{
+    color: #e7ce98;
 }
