@@ -10,22 +10,25 @@ and open the template in the editor.
     <link rel="shortcut icon" href="">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/yeti/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/spacelab/bootstrap.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../js/cart-operations.js"></script>
     <link rel="stylesheet" href="../css/style.css"/>
+    <script src="http://www.w3schools.com/lib/w3data.js"></script>
+    <script src="../js/include.js"></script>
 </head>
 <body>
+<div w3-include-html="../../self-care-template/pages/header.html"></div>
 <center>
     <div class="section">
-        <div class="panel panel-primary">
-            <div class="panel-heading">Shopping cart</div>
+        <div class="panel panel-default">
+            <div class="panel-heading"><h3>Shopping cart</h3></div>
             <div class="panel-body">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-8">
-                            <table class="table table-striped table-hover" id="table-cart">
+                            <table class="table" id="table-cart">
                                 <tbody>
                                 <tr>
                                     <th>Description</th>
@@ -227,6 +230,5 @@ and open the template in the editor.
         </div>
     </div>
 </div>
-
 </body>
 </html>

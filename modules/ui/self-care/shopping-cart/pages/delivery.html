@@ -5,7 +5,7 @@
     <link rel="shortcut icon" href="">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/yeti/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/spacelab/bootstrap.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="../js/delivery-operations.js"></script>
@@ -13,135 +13,147 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap.timepicker/0.2.6/css/bootstrap-timepicker.min.css">
     <script src="https://cdn.jsdelivr.net/bootstrap.timepicker/0.2.6/js/bootstrap-timepicker.min.js"></script>
+    <script src="http://www.w3schools.com/lib/w3data.js"></script>
+    <script src="../js/include.js"></script>
 </head>
 
 <body>
+<div w3-include-html="../../self-care-template/pages/header.html"></div>
 <center>
     <div class="section">
-        <ul class="progress-indicator">
-            <li class="active"><span class="bubble"></span> Delivery</li>
-            <li><span class="bubble"></span> Payment</li>
-            <li><span class="bubble"></span> Verify</li>
-            <li><span class="bubble"></span> Success</li>
-        </ul>
+        <div class="panel panel-default">
+            <div class="panel-heading"><h3>Delivery</h3></div>
+            <div class="panel-body">
+                <ul class="progress-indicator">
+                    <li class="active"><span class="bubble"></span> Delivery</li>
+                    <li><span class="bubble"></span> Payment</li>
+                    <li><span class="bubble"></span> Verify</li>
+                    <li><span class="bubble"></span> Success</li>
+                </ul>
 
-        <div>
-            <div class="radio">
-                <label>Preferred delivery method:</label>
-                <label><input type="radio" name="optradio" id="radio-delivery" value="delivery" checked>A
-                    delivery</label>&nbsp;
-                <label><input type="radio" name="optradio" id="radio-pickup" value="pickup">A pickup</label>
-            </div>
-            <div id="delivery-div">
-                <h4>When to deliver</h4>
-                <hr>
-                <div class="radio">
-                    <label><input type="radio" name="radiodelwhen" value="" checked>Deliver now</label>
-                </div>
-                <div class="radio">
-                    <label><input type="radio" name="radiodelwhen" value="">Deliver later:&nbsp;Date:</label>
-                    &nbsp;<input type="text" style="width: 100px; height: 20px;">
-                    &nbsp;&nbsp;Time:
-                    <div class="input-group bootstrap-timepicker timepicker"
-                         style="display: inline-block; height: auto;">
-                        <input id="timepicker1" type="text" class="form-control input-small"
-                               style="width: 100px; height: 20px;">
+                <div style="margin-top: 30px;">
+                    <div class="radio" style="text-align: center; font-size: medium;">
+                        <label>Preferred delivery method:</label>
+                        <label><input type="radio" name="optradio" id="radio-delivery" value="delivery" checked>A
+                            delivery</label>&nbsp;
+                        <label><input type="radio" name="optradio" id="radio-pickup" value="pickup">A pickup</label>
                     </div>
-                </div>
-
-                <h4>Where to deliver</h4>
-                <hr>
-                <div class="container" style="width: 1000px;">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="control-label" for="text-fname">First name</label>
-                                <input class="form-control" id="text-fname"
-                                       placeholder="Enter your first name" type="email">
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label" for="text-lname">Last name</label>
-                                <input class="form-control" type="text" placeholder="Enter your last name"
-                                       id="text-lname">
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">Contact no</label>
-                                <input class="form-control" type="text" placeholder="Enter your contact no">
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">Email</label>
-                                <input class="form-control" type="text" placeholder="Enter your email address">
+                    <div id="delivery-div" style="margin-top: 30px;">
+                        <h4>When to deliver</h4>
+                        <hr>
+                        <div class="radio">
+                            <label><input type="radio" name="radiodelwhen" value="" checked>Deliver now</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="radiodelwhen" value="">Deliver later:&nbsp;Date:</label>
+                            &nbsp;<input type="text" style="width: 100px; height: 20px;">
+                            &nbsp;&nbsp;Time:
+                            <div class="input-group bootstrap-timepicker timepicker">
+                                <input id="timepicker1" type="text" class="form-control input-small">
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <form role="form">
-                                <div class="form-group">
-                                    <label class="control-label">Delivery address</label>
-                                    <input class="form-control" type="text" placeholder="Address line 01">
+
+                        <div style="margin-top: 30px;">
+                            <h4>Where to deliver</h4>
+                            <hr>
+                        </div>
+                        <div class="container" style="width: 1000px;">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label" for="text-fname">First name</label>
+                                        <input class="form-control" id="text-fname"
+                                               placeholder="Enter your first name" type="email">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label" for="text-lname">Last name</label>
+                                        <input class="form-control" type="text" placeholder="Enter your last name"
+                                               id="text-lname">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Contact no</label>
+                                        <input class="form-control" type="text" placeholder="Enter your contact no">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Email</label>
+                                        <input class="form-control" type="text" placeholder="Enter your email address">
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="control-label">Description of the delivery location</label>
-                                    <textarea class="form-control"></textarea>
+                                <div class="col-md-6">
+                                    <form role="form">
+                                        <div class="form-group">
+                                            <label class="control-label">Delivery address</label>
+                                            <input class="form-control" type="text" placeholder="Address line 01">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Description of the delivery location</label>
+                                            <textarea class="form-control"></textarea>
+                                        </div>
+                                        <div>
+                                            <a class="btn btn-primary btn-proceed-payment btn-submit-proceed"
+                                               href="delivery-summary.html">Proceed</a>
+                                            <input type="reset" class="btn btn-primary btn-delivery-reset"
+                                                   value="Reset">
+                                        </div>
+                                    </form>
                                 </div>
-                                <div>
-                                    <a class="btn btn-primary btn-proceed-payment"
-                                           style="width: 45%; display: inline-block; float: right;" href="delivery-summary.html">Proceed</a>
-                                    <input type="reset" class="btn btn-primary" value="Reset"
-                                           style="width: 45%; display: inline-block; float: right; margin-right:5px">
-                                </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
 
-            <div id="pickup-div">
-                <h4>When to pickup</h4>
-                <hr>
-                <div class="radio">
-                    <label><input type="radio" name="radiopickwhen" value="" checked>Pickup now</label>
-                </div>
-                <div class="radio">
-                    <label><input type="radio" name="radiopickwhen" value="">Deliver later:&nbsp;</label>
-                    &nbsp;&nbsp;Time:
-                    <div class="input-group bootstrap-timepicker timepicker"
-                         style="display: inline-block; height: auto;">
-                        <input id="timepicker2" type="text" class="form-control input-small"
-                               style="width: 100px; height: 20px;">
-                    </div>
-                </div>
+                    <div id="pickup-div" style="margin-top: 30px;">
+                        <h4>When to pickup</h4>
+                        <hr>
+                        <div class="radio">
+                            <label><input type="radio" name="radiopickwhen" value="" checked>Pickup now</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="radiopickwhen" value="">Deliver later:&nbsp;</label>
+                            &nbsp;&nbsp;Time:
+                            <div class="input-group bootstrap-timepicker timepicker">
+                                <input id="timepicker2" type="text" class="form-control input-small">
+                            </div>
+                        </div>
 
-                <h4>From where to pickup</h4>
-                <hr>
-                <div class="container" style="width: 1000px;">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <form role="form">
-                                <div class="form-group">
-                                    <label class="control-label">Pickup branch</label>
-                                    <select class="form-control">
-                                        <option>Colombo</option>
-                                        <option>Galle</option>
-                                        <option>Kaluthara</option>
-                                    </select>
-                                    <p class="help-block">Example block-level help text here.</p>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Branch address</label>
-                                    <textarea class="form-control" disabled></textarea>
-                                </div>
-                                <div>
-                                    <a class="btn btn-primary btn-proceed-payment"
-                                       style="width: 45%; display: inline-block; float: right;" href="pickup-summary.html">Proceed</a>
-                                    <input type="reset" class="btn btn-primary" value="Reset"
-                                           style="width: 45%; display: inline-block; float: right; margin-right:5px">
-                                </div>
-                            </form>
+                        <div style="margin-top: 30px;">
+                            <h4>From where to pickup</h4>
+                            <hr>
                         </div>
-                        <div class="col-md-6">
-                            <label class="control-label">Locate branch</label>
+
+                        <div class="container" style="width: 1000px;">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <form role="form">
+                                        <div class="form-group">
+                                            <label class="control-label">Pickup branch</label>
+                                            <select class="form-control">
+                                                <option>Colombo</option>
+                                                <option>Galle</option>
+                                                <option>Kaluthara</option>
+                                            </select>
+
+                                            <p class="help-block">Example block-level help text here.</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Branch address</label>
+                                            <textarea class="form-control" disabled></textarea>
+                                        </div>
+                                        <div>
+                                            <a class="btn btn-primary btn-proceed-payment"
+                                               style="width: 45%; display: inline-block; float: right;"
+                                               href="pickup-summary.html">Proceed</a>
+                                            <input type="reset" class="btn btn-primary" value="Reset"
+                                                   style="width: 45%; display: inline-block; float: right; margin-right:5px">
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="control-label">Locate branch</label>
+                                </div>
+                                <img class="center-block img-responsive" src="../images/map.png" width="300px"
+                                     height="300px;">
+                            </div>
                         </div>
-                        <img class="center-block img-responsive" src="../images/map.png" width="300px" height="300px;">
                     </div>
                 </div>
             </div>

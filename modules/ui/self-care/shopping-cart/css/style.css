@@ -1,33 +1,89 @@
-.login-card{
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700);
+
+.login-card {
     /*padding: 40px;*/
     width: 300px;
     min-height: 400px;
-    background-color: #F7F7F7;
+    background-color: #efefef;
     padding: 10px;
     /*margin-top: 200px;*/
-    /*border-radius: 2px;*/
+    border-radius: 10px;
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
     overflow: hidden;
 }
-.section{
+
+.section {
     max-width: 1500px;
     min-width: 500px;
     display: inline-block;
-    background-color: #F7F7F7;
+    background-color: #efefef;
     margin: 0px auto 10px;
-    margin-top: 30px;
-    padding: 20px;
-    border-radius: 2px;
+    margin-top: 10px;
+    border-radius: 10px;
     /*box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);*/
     overflow: hidden;
     text-align: left;
 }
 
-#div-submit{
+#div-submit {
     display: block;
     float: right;
 }
 
-body{
+body {
     background-image: url(../images/brown-wallpaper.jpg);
+    font-family: 'Lato', sans-serif;
+}
+
+.btn-editcart, .btn-editdelidetails {
+    width: 20%;
+    margin-left: 75%;
+}
+
+.btn-agree, #btn-pay {
+    width: 45%;
+    margin-left: 25%;
+}
+
+#timepicker1, #timepicker2 {
+    width: 100px;
+    height: 20px;
+}
+
+.timepicker {
+    display: inline-block;
+    height: auto;
+}
+
+.btn-submit-proceed {
+    width: 45%;
+    display: inline-block;
+    float: right;
+}
+
+h2, h3 {
+    font-family: 'Poiret One', cursive;
+}
+
+.btn-delivery-reset {
+    width: 45%;
+    display: inline-block;
+    float: right;
+    margin-right: 5px;
+}
+
+#btn-pay-popup, #btn-pay-cancel {
+    width: 80px;
+}
+
+hr {
+    height: 2px !important;
+    border: 10px;
+    /*box-shadow: 0 10px 10px -10px #8c8b8b inset;*/
+    box-shadow: 0 10px 10px -10px #337AB7 inset;
+}
+
+.panel-body, .panel-heading {
+    background-color: #efefef !important;
+    border-color: #00529B !important;
 }
