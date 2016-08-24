@@ -6,6 +6,7 @@
     <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="../css/userMgt.css" rel="stylesheet">
+    <link href="../css/form-elements.css" rel="stylesheet">
 
     <!-- Javascript -->
     <script src="../bootstrap/js/jquery.min.js"></script>
@@ -19,12 +20,26 @@
 
 </head>
 <body>
-<div class="brand">User Page</div>
+
+<div style="height: 100px; border: solid 2px #045411;">
+    Top Banner goes here
+</div>
+
+<div class="row title-brd-crm-bar">
+    <div class="col-xs-6 brand">User Management</div>
+    <div class="col-xs-6">
+        <ul class="breadcrumb breadcrumb-menu">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="userAdd.html">User Management</a></li>
+            <li  class="active"><a href="userAdd.html">Add User</a></li>
+        </ul>
+    </div>
+</div>
 <center>
     <div class="form-box">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="default-panel-headings">New User Sign up</h3>
+                <h3 class="default-panel-headings">Add New User</h3>
             </div>
             <div class="panel-body">
                 <form role="form" id="adduser_form" action="AddUserServlet" method="post" class="form-horizontal">
@@ -40,12 +55,12 @@
                                 </label>
                                 <div class="col-sm-2">
                                     <label class="radio-inline">
-                                        <input type="radio" name="optradio" onclick="hide(this)" >Customer
+                                        <input type="radio" name="optradio" id="customer" >Customer
                                     </label>
                                 </div>
                                 <div class="col-sm-2">
                                     <label class="radio-inline">
-                                        <input type="radio" name="optradio" onclick="show(this)">Staff Member
+                                        <input type="radio" name="optradio"  id="staff">Staff Member
                                     </label>
                                 </div>
                             </div>
@@ -111,6 +126,7 @@
                         <div class="form-group">
                             <!--address-->
                             <div class="col-sm-6">
+                                <br>
                                 <div class="row">
                                     <label class="col-sm-4 control-label">
                                         Address
@@ -146,67 +162,87 @@
                                 <div class="row"><label class="control-label"></label></div>
                             </div>
 
-                            <!--login details-->
+                         <!--when the user is a customer-->
                             <div class="col-sm-6">
+                                <fieldset class="scheduler-border" id="staffDetail">
+                                    <legend class="scheduler-border" id="legendStaff">when the user is staff</legend>
                                 <div class="row">
                                     <label class="col-sm-4 control-label">
-                                        Username
+                                       Designation
                                     </label>
                                     <div class="col-sm-8">
-                                        <input class="form-control" id="username" placeholder="User Name" type="text" >
+                                        <select class="form-control" id="designation">
+                                            <option>System Admin</option>
+                                            <option>CustomerCare Manager</option>
+                                            <option>Miss</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="row">  <label class=" control-label"></label></div>
                                 <div class="row">
                                     <label class="col-sm-4 control-label">
-                                        Password
+                                       Department
                                     </label>
                                     <div class="col-sm-8">
-                                        <input class="form-control" id="password" placeholder="Password" type="text" >
+                                        <select class="form-control" id="department">
+                                            <option>Finance</option>
+                                            <option>Administration</option>
+                                            <option>Customer Service</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="row">  <label class=" control-label"></label></div>
                                 <div class="row">
                                     <label class="col-sm-4 control-label">
-                                        Confirm Password
+                                       Branch
                                     </label>
                                     <div class="col-sm-8">
-                                        <input class="form-control" id="cpassword" placeholder="Password Confirm" type="text" >
+                                        <select class="form-control" id="branch">
+                                            <option>Colombo</option>
+                                            <option>Gampaha</option>
+                                            <option>Ja-Ela</option>
+                                            <option>Kadana</option>
+                                        </select>
                                     </div>
                                 </div>
+                                </fieldset>
                             </div>
                         </div>
 
-                        <!--when the user is a customer-->
+                        <!--login details-->
                         <div class="form-group">
-                            <center>
-                            <fieldset class="scheduler-border" id="staffDetail">
-                                <legend class="scheduler-border" id="legendStaff">when the user is staff</legend>
-                                <div class="col-sm-3">
-                                    <select class="form-control" id="designation">
-                                        <option>System Admin</option>
-                                        <option>CustomerCare Manager</option>
-                                        <option>Miss</option>
-                                    </select>
-                                </div>
-                                <div class="col-sm-3">
-                                    <select class="form-control" id="department">
-                                        <option>Finance</option>
-                                        <option>Administration</option>
-                                        <option>Customer Service</option>
-                                    </select>
-                                </div>
-                                <div class="col-sm-3">
-                                    <select class="form-control" id="branch">
-                                        <option>Colombo</option>
-                                        <option>Gampaha</option>
-                                        <option>Ja-Ela</option>
-                                        <option>Kadana</option>
-                                    </select>
-                                </div>
+                            <!--<div class="col-xs-1"></div>-->
+                            <div class="col-xs-12">
+                            <fieldset class="scheduler-border" id="loginInfo">
+                                <legend class="scheduler-border" id="legendInfo">Login Credentials</legend>
+                                    <div class="row">
+                                        <label class="col-xs-4 control-label">
+                                           User Name
+                                        </label>
+                                        <label class="col-xs-4 control-label">
+                                            Password
+                                        </label>
+                                        <label class="col-xs-4 control-label">
+                                            Confirm Password
+                                        </label>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-4">
+                                            <input class="form-control" id="username" placeholder="User Name" type="text" >
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <input class="form-control" id="password" placeholder="Password" type="text" >
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <input class="form-control" id="cpassword" placeholder="Password Confirm" type="text" >
+                                        </div>
+                                    </div>.
                             </fieldset>
-                            </center>
+                            </div>
+                            <!--<div class="col-xs-1"></div>-->
+
                         </div>
+
                         <div class="form-group">
                             <div class="col-sm-4"></div>
                             <div class="col-sm-4">
@@ -216,9 +252,7 @@
                         </div>
                     </fieldset>
                 </form>
-
             </div>
-
         </div>
     </div>
 </center>
