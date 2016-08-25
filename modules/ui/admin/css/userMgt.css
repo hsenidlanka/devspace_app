@@ -92,3 +92,7 @@ legend.scheduler-border {
     position: absolute; left: 50%;
     top: 9%;
 }
+.panel-default > .common-form-headings{
+    height: 50px;
+    padding: 10px 0 10px 0;
+}
