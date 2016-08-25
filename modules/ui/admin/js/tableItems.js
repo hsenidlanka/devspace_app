@@ -41,7 +41,6 @@ $(document).ready(function () {
                 field: 'operate',
                 title: 'Operations',
                 align: 'center',
-                valign: 'middle',
                 formatter: operateFormatter,
                 events: operateEvents
             }]
@@ -57,12 +56,14 @@ function operateFormatter(value, row, index){
         '<a class="edit" href="../pages/editItem.html" title="Edit" id="linkEditItem">',
         '<i class="glyphicon glyphicon-edit">Edit</i>',
         '</a>&nbsp;&nbsp;&nbsp;&nbsp;',
-        '<a class="delete" href="" title="Delete" id="linkDeleteItem">',
+        '<a class="delete" href="javascript:void(0)" title="Delete" id="linkDeleteItem">',
         '<i class="glyphicon glyphicon-remove">Delete</i>',
         '</a></center>'
     ].join('');
 }
 
 window.operateEvents = {
-
+    'click .delete':function(){
+        $('#itemDeleteModal').modal('show');
+    }
 }

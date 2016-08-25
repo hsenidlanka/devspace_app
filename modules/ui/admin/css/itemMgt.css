@@ -25,6 +25,11 @@
     width: 90%;
     margin-left: 5%;
 }
+#view-pkg-form-box{
+    margin-top: 0px;
+    width: 80%;
+    margin-left: 10%;
+}
 #add-pkg-form-box{
     margin-top: 0px;
     width: 60%;
@@ -59,4 +64,10 @@ legend.scheduler-border {
 .list-group-item > .badge{
     background-color: #bababa;
     color: red;
+}
+.item-modal-header-style{
+    color: #e7ce98;
+    background: #045406;
+    font-weight: bolder;
+    font-size: 20px;
 }
