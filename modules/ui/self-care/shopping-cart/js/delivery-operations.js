@@ -11,8 +11,4 @@ $(document).ready(function () {
             $("#delivery-div").show();
         }
     });
-
-    $('.btn-proceed-payment').click(function(){
-        window.location='../pages/payment.html';
-    })
 });

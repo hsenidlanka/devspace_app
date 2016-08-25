@@ -7,12 +7,4 @@ $(document).ready(function () {
             window.location.href = "../pages/pay.html";
         }
     });
-
-    $("#btn-confirm-pay").click(function () {
-        $("#confirm-payment-popup").modal('show');
-    });
-
-    $("#btn-pay-popup").click(function () {
-        window.location.href = "../pages/success.html";
-    });
 });

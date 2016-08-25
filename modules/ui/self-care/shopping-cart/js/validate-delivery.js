@@ -1,5 +1,59 @@
 var background_color = "#fde99c";
 
+$(document).ready(function () {
+    hideErrorLabels();
+
+    $("#txt-fname").keyup(function () {
+        validateFirstName();
+    });
+    $("#txt-fname").focusout(function () {
+        validateFirstName();
+    });
+
+    $("#txt-lname").keyup(function () {
+        validateLastName();
+    });
+    $("#txt-lname").focusout(function () {
+        validateLastName();
+    });
+
+    $("#txt-contactno").keyup(function () {
+        validateContactNo();
+    });
+    $("#txt-contactno").focusout(function () {
+        validateContactNo();
+    });
+
+    $("#txt-email").keyup(function () {
+        validateEmail();
+    });
+    $("#txt-email").focusout(function () {
+        validateEmail();
+    });
+
+    $("#txt-deliadd01").keyup(function () {
+        validateDeliveryAddress01();
+    });
+    $("#txt-deliadd01").focusout(function () {
+        validateDeliveryAddress01();
+    });
+
+    $("#txt-deliadd04").keyup(function () {
+        validateDeliveryAddress04();
+    });
+    $("#txt-deliadd04").focusout(function () {
+        validateDeliveryAddress04();
+    });
+
+    $("#btn-delivery-submit").click(function () {
+        if (validateFirstName() == false || validateLastName() == false || validateContactNo() == false || validateEmail() == false || validateDeliveryAddress01() == false || validateDeliveryAddress04() == false) {
+            $("#validation-error-popup").modal('show');
+        }else{
+            window.location='../pages/delivery-summary.html';
+        }
+    });
+});
+
 // Validate the first name
 function validateFirstName() {
     if ($("#txt-fname").val().length == 0) {
@@ -117,58 +171,3 @@ function hideErrorLabels() {
     $("#email_error").hide();
     $("#address_error").hide();
 }
-
-$(document).ready(function () {
-    hideErrorLabels();
-
-    $("#txt-fname").keyup(function () {
-        validateFirstName();
-    });
-    $("#txt-fname").focusout(function () {
-        validateFirstName();
-    });
-
-    $("#txt-lname").keyup(function () {
-        validateLastName();
-    });
-    $("#txt-lname").focusout(function () {
-        validateLastName();
-    });
-
-    $("#txt-contactno").keyup(function () {
-        validateContactNo();
-    });
-    $("#txt-contactno").focusout(function () {
-        validateContactNo();
-    });
-
-    $("#txt-email").keyup(function () {
-        validateEmail();
-    });
-    $("#txt-email").focusout(function () {
-        validateEmail();
-    });
-
-    $("#txt-deliadd01").keyup(function () {
-        validateDeliveryAddress01();
-    });
-    $("#txt-deliadd01").focusout(function () {
-        validateDeliveryAddress01();
-    });
-
-    $("#txt-deliadd04").keyup(function () {
-        validateDeliveryAddress04();
-    });
-    $("#txt-deliadd04").focusout(function () {
-        validateDeliveryAddress04();
-    });
-
-    $("#btn-delivery-submit").submit(function () {
-        if (validateFirstName() == false || validateLastName() == false || validateContactNo() == false || validateEmail() == false || validateDeliveryAddress01() == false || validateDeliveryAddress04() == false) {
-            alert("Validation errors...");
-            return false;
-        }else{
-            window.location='../pages/delivery-summary.html';
-        }
-    });
-});

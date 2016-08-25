@@ -1,6 +1,8 @@
 $(document).ready(function () {
     calculateTotal(".tot-price");
     calculateDicountedTotal();
+    calculateNetAmount();
+
     $("#coupon-alert-div").hide();
 
     $("#coupon-submit").click(function () {
@@ -12,14 +14,23 @@ $(document).ready(function () {
     });
 
     $(".del").click(function () {
-        var closest=$(this).closest('tr');
+        var closest = $(this).closest('tr');
         $("#delete-confirm-popup").modal('show');
         $('#removeOk').off('click');
-        $('#removeOk').click(function(){
+        $('#removeOk').click(function () {
             closest.remove();
             calculateTotal(".tot-price");
             calculateDicountedTotal();
+            calculateNetAmount();
             $("#delete-confirm-popup").modal('hide');
+            if ($("#label-tot").val() !== 0) {
+                alert("Sdf");
+                $("#coupon-submit").prop('disabled', false);
+                $("#checkoutButton").prop('disabled', false);
+            } else {
+                $("#coupon-submit").prop('disabled', true);
+                $("#checkoutButton").prop('disabled', true);
+            }
         });
     });
 
@@ -29,6 +40,7 @@ $(document).ready(function () {
         var total = qty * price;
         $(this).closest('tr').children('td:eq(3)').text(total.toFixed(2));
         calculateTotal(".tot-price");
+        recalculateTotals();
     });
 
     $(".spin").keyup(function () {
@@ -37,13 +49,14 @@ $(document).ready(function () {
         var total = qty * price;
         $(this).closest('tr').children('td:eq(3)').text(total.toFixed(2));
         calculateTotal(".tot-price");
-        calculateDicountedTotal();
+        recalculateTotals();
     });
 
     $("#checkoutButton").click(function () {
         $("#proceed-checkout-confirm").modal('show');
     });
 });
+
 function couponValidator() {
     var enteredCouponVal = $("#txt-coupon").val();
     if (enteredCouponVal.length === 0) {
@@ -61,9 +74,20 @@ function couponValidator() {
         $("#coupon-validate-msg").text("Coupon code validated (20% discount).");
         $("#coupon-alert-div").show();
         var discount = $("#label-tot").text() * 20 / 100;
-        $("#label-dis").text(discount);
+        $("#label-dis").text(discount.toFixed(2));
+        $("#txt-coupon").attr("disabled",true);
         calculateDicountedTotal();
-        return false;
+        calculateNetAmount();
+        return true;
+    }
+}
+
+function recalculateTotals(){
+    if($("#coupon-alert-div").hasClass("alert alert-success")){
+        var discount = $("#label-tot").text() * 20 / 100;
+        $("#label-dis").text(discount.toFixed(2));
+        calculateDicountedTotal();
+        calculateNetAmount();
     }
 }
 
@@ -76,11 +100,16 @@ function calculateTotal(element) {
             sum += parseFloat(value);
         }
     });
-    $("#label-tot").text(sum);
+    $("#label-tot").text(sum.toFixed(2));
 }
 
 function calculateDicountedTotal(element) {
     var total = $("#label-tot").text();
     var discount = $("#label-dis").text();
-    $("#label-distot").text(total - discount);
+    $("#label-distot").text(parseFloat(total - discount).toFixed(2));
+}
+
+function calculateNetAmount() {
+    var discountedTotal = $("#label-distot").text();
+    $("#net-amount-field").text(parseFloat(discountedTotal * 105 / 100).toFixed(2));
 }

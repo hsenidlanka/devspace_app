@@ -35,7 +35,7 @@ body {
     font-family: 'Lato', sans-serif;
 }
 
-.btn-editcart, .btn-editdelidetails {
+.btn-editcart, .btn-editdelidetails, .btn-editpickdetails{
     width: 20%;
     margin-left: 75%;
 }

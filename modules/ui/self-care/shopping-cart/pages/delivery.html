@@ -14,8 +14,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap.timepicker/0.2.6/css/bootstrap-timepicker.min.css">
     <script src="https://cdn.jsdelivr.net/bootstrap.timepicker/0.2.6/js/bootstrap-timepicker.min.js"></script>
     <script src="http://www.w3schools.com/lib/w3data.js"></script>
-    <script src="../js/include.js"></script>
-    <script src="../js/validate.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/validate-delivery.js"></script>
+    <link rel="stylesheet" href="../css/back-to-top.css"/>
+    <script src="../js/back-to-top.js"></script>
 </head>
 
 <body>
@@ -76,12 +78,14 @@
                                     <div class="form-group">
                                         <label class="control-label">Contact no</label>
                                         <label id="contactno_error" class="error-labels"></label>
-                                        <input id="txt-contactno" class="form-control" type="text" placeholder="Enter your contact no">
+                                        <input id="txt-contactno" class="form-control" type="text"
+                                               placeholder="Enter your contact no (e.g: 94712345678)">
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label">Email</label>
                                         <label id="email_error" class="error-labels"></label>
-                                        <input id="txt-email" class="form-control" type="text" placeholder="Enter your email address">
+                                        <input id="txt-email" class="form-control" type="text"
+                                               placeholder="Enter your email address">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -89,23 +93,31 @@
                                         <div class="form-group">
                                             <label class="control-label">Delivery address</label>
                                             <label id="address_error" class="error-labels"></label>
-                                            <input class="form-control" type="text" id="txt-deliadd01" placeholder="Building name/no and street name">
+                                            <input class="form-control" type="text" id="txt-deliadd01"
+                                                   placeholder="Building name/no and street name">
+
                                             <div style="margin-top: 5px;">
-                                                <input class="form-control" id="txt-deliadd02" type="text" placeholder="Address line 02">
+                                                <input class="form-control" id="txt-deliadd02" type="text"
+                                                       placeholder="Address line 02">
                                             </div>
                                             <div style="margin-top: 5px;">
-                                                <input class="form-control" id="txt-deliadd03" type="text" placeholder="Address line 03">
+                                                <input class="form-control" id="txt-deliadd03" type="text"
+                                                       placeholder="Address line 03">
                                             </div>
                                             <div style="margin-top: 5px;">
-                                                <input class="form-control" id="txt-deliadd04" type="text" placeholder="City">
+                                                <input class="form-control" id="txt-deliadd04" type="text"
+                                                       placeholder="City">
                                             </div>
                                         </div>
                                         <div class="form-group" style="margin-top: 20px;">
                                             <label class="control-label">Description of the delivery location</label>
-                                            <textarea class="form-control" placeholder="Describe the location to ease the delivery process"></textarea>
+                                            <textarea class="form-control"
+                                                      placeholder="Describe the location to ease the delivery process"></textarea>
                                         </div>
                                         <div>
-                                            <button type="submit" class="btn btn-success btn-proceed-payment btn-submit-proceed" id="btn-delivery-submit">Proceed</button>
+                                            <a class="btn btn-success btn-proceed-payment btn-submit-proceed"
+                                               id="btn-delivery-submit">Proceed
+                                            </a>
                                             <input type="reset" class="btn btn-success btn-delivery-reset"
                                                    value="Reset">
                                         </div>
@@ -175,5 +187,26 @@
     </div>
 </center>
 
+<!-- Delivery details incorrect popup -->
+<div id="validation-error-popup" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title"><img src="../images/error.png">&nbsp;&nbsp;Validation errors</h2>
+            </div>
+            <div class="modal-body">
+                <p style="font-size: medium;">Can not proceed due to the
+                    <b>validation errors in the form.</b><br>
+                    Please correct them and try again.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default" data-dismiss="modal">Ok</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a href="#" class="scrollup"></a>
 </body>
 </html>

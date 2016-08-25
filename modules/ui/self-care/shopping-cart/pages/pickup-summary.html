@@ -11,7 +11,9 @@
     <link rel="stylesheet" href="../css/progress-wizard.min.css">
     <link rel="stylesheet" href="../css/style.css">
     <script src="http://www.w3schools.com/lib/w3data.js"></script>
-    <script src="../js/include.js"></script>
+    <script src="../js/common.js"></script>
+    <link rel="stylesheet" href="../css/back-to-top.css"/>
+    <script src="../js/back-to-top.js"></script>
 </head>
 <body>
 <div w3-include-html="../../self-care-template/pages/header.html"></div>
@@ -64,8 +66,7 @@
                         </div>
                     </div>
                 </div>
-                <a class="btn btn-primary btn-proceed-payment" href="shopping-cart.html"
-                   style="width: 25%; margin-left: 70%; height: 25px; font-size: 12px;">Edit cart</a>
+                <a class="btn btn-primary btn-proceed-payment btn-editcart" href="shopping-cart.html">Edit cart</a>
 
                 <div class="section2">
                     <div class="container" style="width:800px;">
@@ -87,8 +88,7 @@
                         </div>
                     </div>
                 </div>
-                <a class="btn btn-primary btn-proceed-payment" href="delivery.html"
-                   style="width: 25%; margin-left: 70%; height: 25px; font-size: 12px;">Edit pickup details</a>
+                <a class="btn btn-primary btn-proceed-payment btn-editpickdetails" href="delivery.html">Edit pickup details</a>
 
                 <div class="section3">
                     <div class="container" style="width:800px;">
@@ -112,5 +112,6 @@
         </div>
     </div>
 </center>
+<a href="#" class="scrollup"></a>
 </body>
 </html>
