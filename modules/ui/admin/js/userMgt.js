@@ -1,19 +1,15 @@
 
-function hide(elm) {
-    if (elm.checked) {
-        document.getElementById('staffDetail').style.visibility = 'hidden';
+$(document).ready(function () {
+    $("#staffDetail").hide();
 
-    }
-}
+    $("#staff").click(function(){
+        $("#staffDetail").show();
 
+    });
+    $("#customer").click(function(){
 
-function show(elm) {
-    if (elm.checked) {
-        document.getElementById('staffDetail').style.visibility = 'visible';
+        $("#staffDetail").hide();
+    });
 
-    }
-}
+});
 
-function hideDefault(){
-    document.getElementById('staffDetail').style.visibility = 'hidden';
-}

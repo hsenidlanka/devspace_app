@@ -1,9 +1,9 @@
 
 
-.control-label{
+.form-horizontal .control-label, .control-label{
 
     /*vertical-align:middle;*/
-    /*text-align: left;*/
+    text-align: left;
 }
 
 .form-group{
@@ -17,7 +17,7 @@ button.btn {
     margin: 0;
     padding: 0 20px;
     vertical-align: middle;
-    background: #e79239;
+    background-color: rgba(74, 103, 0, 0.5);
     border: 0;
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
@@ -30,9 +30,3 @@ button.btn {
     -o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; -ms-transition: all .3s; transition: all .3s;
 }
 button.btn:hover { opacity: 0.6; color: #fff; }
-
-button.btn:active { outline: 0; opacity: 0.6; color: #fff; -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none; }
-
-button.btn:focus { outline: 0; opacity: 0.6; background: #19b9e7; color: #fff; }
-
-button.btn:active:focus, button.btn.active:focus { outline: 0; opacity: 0.6; background: #19b9e7; color: #fff; }
