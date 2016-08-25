@@ -23,7 +23,6 @@
 <body>
 
 
-
 <div class="row" id="toprow">
     <div id="search">
         <form>
@@ -31,81 +30,82 @@
             <input type="button" value="Search">
         </form>
     </div>
-
-    <div>
-        <button id="btnhome" class="btn btn-success"><span class="glyphicon glyphicon-home"></span>&nbsp; Home</button>
-    </div>
 </div>
 
-<div>
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item"><a href="#">Library</a></li>
-        <li class="breadcrumb-item active">Data</li>
-    </ol>
-</div>
+
 <div class="brand">
     <p>View All Categories</p>
 </div>
 
-<div id="tableposition">
-    <table class="table-fill">
+<div class="table-responsive tableposition" style="width: 80%">
+    <table class="table ">
         <thead>
         <tr>
-            <th class="text-center">Id</th>
-            <th class="text-center">Name</th>
-            <th class="text-center" style="width:40%"></th>
+            <th class="col-md-1">Id</th>
+            <th class="col-md-2">Name</th>
+            <th class="col-md-6">Description</th>
+            <th class="col-md-3">Actions</th>
         </tr>
         </thead>
-        <tbody class="table-hover">
+        <tbody >
         <tr>
-            <td>001</td>
-            <td><a href="viewsubcategories.html">Pizza</a></td>
-            <td>
-                <a data-toggle="modal" href="#modifyModel">Modify <span class="glyphicon glyphicon-edit"></span></a>
+            <td style="vertical-align:middle">001</td>
+            <td style="vertical-align:middle"><a href="viewsubcategories.html">Pizza</a></td>
+            <td style="vertical-align:middle">The ever famous Butter Masala Chicken together with a layer of cream cheese, fresh oinions, coriander, ginger and garlic, blanketed with a layer of Mozzarella chees</td>
+            <td style="vertical-align:middle">
+                <button class="btn btn-success" data-toggle="modal" data-target="#modifyModel">Modify <span class="glyphicon glyphicon-edit"></span></button>
                 &nbsp;&nbsp;
-                <a data-toggle="modal" href="#deleteModal">Delete<span class="glyphicon glyphicon-remove"></span> </a>
+                    <button class="btn btn-success" data-toggle="modal" data-target="#deleteModal">Delete<span class="glyphicon glyphicon-remove"></span></button>
             </td>
         </tr>
         <tr>
-            <td>002</td>
-            <td><a href="viewsubcategories.html">Pasta</a></td>
-            <td>
-                <a data-toggle="modal" href="#modifyModel">Modify <span class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;
-                <a data-toggle="modal"href="#deleteModal">Delete<span class="glyphicon glyphicon-remove"></span> </a>
+            <td style="vertical-align:middle">002</td>
+            <td style="vertical-align:middle"><a href="viewsubcategories.html">Pasta</a></td>
+            <td style="vertical-align:middle">Freshly cooked pasta with prawns, vegetables & sliced mushrooms baked with a white cream sauce and mozzarella cheese</td>
+            <td style="vertical-align:middle">
+                <button class="btn btn-success" data-toggle="modal" data-target="#modifyModel">Modify <span class="glyphicon glyphicon-edit"></span></button>
+                &nbsp;&nbsp;
+                <button class="btn btn-success" data-toggle="modal" data-target="#deleteModal">Delete<span class="glyphicon glyphicon-remove"></span></button>
             </td>
         </tr>
         <tr>
-            <td>003</td>
-            <td><a href="viewsubcategories.html">Beverage</a></td>
-
-            <td>
-                <a data-toggle="modal" href="#modifyModel">Modify <span class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;
-                <a data-toggle="modal" href="#deleteModal">Delete <span class="glyphicon glyphicon-remove"></span> </a>
+            <td style="vertical-align:middle">003</td>
+            <td style="vertical-align:middle"><a href="viewsubcategories.html">Beverage</a></td>
+            <td style="vertical-align:middle">Freshly cooked pasta with prawns, vegetables & sliced mushrooms baked with a white cream sauce and mozzarella cheese</td>
+            <td style="vertical-align:middle">
+                <button class="btn btn-success" data-toggle="modal" data-target="#modifyModel">Modify <span class="glyphicon glyphicon-edit"></span></button>
+                &nbsp;&nbsp;
+                <button class="btn btn-success" data-toggle="modal" data-target="#deleteModal">Delete<span class="glyphicon glyphicon-remove"></span></button>
             </td>
         </tr>
         <tr>
-            <td>005</td>
-            <td><a href="viewsubcategories.html">Toppings</a></td>
-            <td>
-                <a data-toggle="modal" href="#modifyModel">Modify <span class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;
-                <a data-toggle="modal" href="#deleteModal">Delete <span class="glyphicon glyphicon-remove"></span> </a>
+            <td style="vertical-align:middle">005</td>
+            <td style="vertical-align:middle"><a href="viewsubcategories.html">Toppings</a></td>
+            <td style="vertical-align:middle">Freshly cooked pasta with prawns, vegetables & sliced mushrooms baked with a white cream sauce and mozzarella cheese</td>
+            <td style="vertical-align:middle">
+                <button class="btn btn-success" data-toggle="modal" data-target="#modifyModel">Modify <span class="glyphicon glyphicon-edit"></span></button>
+                &nbsp;&nbsp;
+                <button class="btn btn-success" data-toggle="modal" data-target="#deleteModal">Delete<span class="glyphicon glyphicon-remove"></span></button>
             </td>
         </tr>
         <tr>
-            <td>006</td>
-            <td><a href="viewsubcategories.html">Salads</a></td>
-            <td>
-                <a data-toggle="modal" href="#modifyModel">Modify <span class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;
-                <a data-toggle="modal" href="#deleteModal">Delete<span class="glyphicon glyphicon-remove"></span> </a>
+            <td style="vertical-align:middle">006</td>
+            <td style="vertical-align:middle"><a href="viewsubcategories.html">Salads</a></td>
+            <td style="vertical-align:middle">Freshly cooked pasta with prawns, vegetables & sliced mushrooms baked with a white cream sauce and mozzarella cheese</td>
+            <td style="vertical-align:middle">
+                <button class="btn btn-success" data-toggle="modal" data-target="#modifyModel">Modify <span class="glyphicon glyphicon-edit"></span></button>
+                &nbsp;&nbsp;
+                <button class="btn btn-success" data-toggle="modal" data-target="#deleteModal">Delete<span class="glyphicon glyphicon-remove"></span></button>
             </td>
         </tr>
         <tr>
-            <td>007</td>
-            <td><a href="viewsubcategories.html">Desserts</a></td>
-            <td>
-                <a data-toggle="modal" href="#modifyModel">Modify <span class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;
-                <a data-toggle="modal" href="#deleteModal">Delete<span class="glyphicon glyphicon-remove"></span> </a>
+            <td style="vertical-align:middle">007</td>
+            <td style="vertical-align:middle"><a href="viewsubcategories.html">Desserts</a></td>
+            <td style="vertical-align:middle">Freshly cooked pasta with prawns, vegetables & sliced mushrooms baked with a white cream sauce and mozzarella cheese</td>
+            <td style="vertical-align:middle">
+                <button class="btn btn-success" data-toggle="modal" data-target="#modifyModel">Modify <span class="glyphicon glyphicon-edit"></span></button>
+                &nbsp;&nbsp;
+                <button class="btn btn-success" data-toggle="modal" data-target="#deleteModal">Delete<span class="glyphicon glyphicon-remove"></span></button>
             </td>
         </tr>
         </tbody>
@@ -203,7 +203,7 @@
     </div>
 </div>
 <br>
-<object width="100%" data="footer.html"></object>
+<object width="100%" data="footer.html" style="position: absolute; bottom: 1%"></object>
 </body>
 
 </html>
