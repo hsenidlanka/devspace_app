@@ -151,7 +151,6 @@ body {
     color: #045411;
 }
 
-
 .breadcrumb-menu > li > a {
     color: #045411;
     font-size: medium;
@@ -160,4 +159,8 @@ body {
 .breadcrumbPosition{
     position: absolute; left: 50%;
     top: 9%;
+}
+.panel-default > .common-form-headings{
+    height: 50px;
+    padding: 10px 0 10px 0;
 }

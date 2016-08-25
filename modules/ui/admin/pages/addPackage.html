@@ -95,8 +95,9 @@
                             <label class="col-xs-3 control-label">
                                 Package Detail :
                             </label>
-</div>
+                        </div>
                         <br>
+
                         <div class="row">
                             <div class="col-xs-2"></div>
                             <div class="col-xs-10">
@@ -116,7 +117,8 @@
                                                    placeholder="Enter Item Name.."></td>
                                         <td><input class="" type="number" value="0"></td>
                                         <td>
-                                            <button type="button" value="" class="btn btnAddItem" id="btnAddPkgPza">
+                                            <button type="button" value="" class="btn btn-warning  btnAddItem"
+                                                    id="btnAddPkgPza">
                                                 <span class="glyphicon glyphicon-plus"></span>Add
                                             </button>
                                         </td>
@@ -127,7 +129,8 @@
                                                    placeholder="Enter Item Name.."></td>
                                         <td><input class="" type="number" value="0"></td>
                                         <td>
-                                            <button type="button" value="" class="btn btnAddItem" id="btnAddPkgPasta">
+                                            <button type="button" value="" class="btn btn-warning btnAddItem"
+                                                    id="btnAddPkgPasta">
                                                 <span class="glyphicon glyphicon-plus"></span>Add
                                             </button>
                                         </td>
@@ -138,7 +141,8 @@
                                                    placeholder="Enter Item Name.."></td>
                                         <td><input class="" type="number" value="0"></td>
                                         <td>
-                                            <button type="button" value="" class="btn btnAddItem" id="btnAddPkgBvg">
+                                            <button type="button" value="" class="btn btn-warning btnAddItem"
+                                                    id="btnAddPkgBvg">
                                                 <span class="glyphicon glyphicon-plus"></span>Add
                                             </button>
                                         </td>
@@ -149,18 +153,20 @@
                                                    placeholder="Enter Item Name.."></td>
                                         <td><input class="" type="number" value="0"></td>
                                         <td>
-                                            <button type="button" value="" class="btn btnAddItem" id="btnAddPkgSalad">
+                                            <button type="button" value="" class="btn btn-warning btnAddItem"
+                                                    id="btnAddPkgSalad">
                                                 <span class="glyphicon glyphicon-plus"></span>Add
                                             </button>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td><input type="checkbox" value="" id="chkPkgDssrt"> Desser5t</td>
+                                        <td><input type="checkbox" value="" id="chkPkgDssrt"> Dessert</td>
                                         <td><input type="search" value="" class="form-control"
                                                    placeholder="Enter Item Name.."></td>
                                         <td><input class="" type="number" value="0"></td>
                                         <td>
-                                            <button type="button" value="" class="btn btnAddItem" id="btnAddPkgDssrt">
+                                            <button type="button" value="" class="btn btn-warning btnAddItem"
+                                                    id="btnAddPkgDssrt">
                                                 <span class="glyphicon glyphicon-plus"></span>Add
                                             </button>
                                         </td>
@@ -178,7 +184,8 @@
                             </label>
 
                             <div class="col-xs-5">
-                                <button type="button" class="btn btnAddItem" id="btnupldPkgImg">Browse to Upload
+                                <button type="button" class="btn btn-warning btnAddItem" id="btnupldPkgImg"><span
+                                        class="glyphicon glyphicon-open"></span> Browse to Upload
                                     Images
                                 </button>
                             </div>
@@ -187,19 +194,67 @@
 
                     <br>
 
+                    <div class="list-group row" style="margin:auto; width:50%; border:2px solid black; padding: 10px;">
+                    <label id="newPkgName"><strong>Pacakage Name</strong></label> <br>
+                        <ul class="list-group">
+                            <li class="list-group-item">Pkg item1
+                                <span class="badge">
+                                  <div class="itemList">
+                                    <span class="glyphicon glyphicon-remove">
+                                    </span> <a href="">Remove</a>
+                                  </div>
+                                </span>
+                            </li>
+                            <li class="list-group-item">Pkg item2
+                                <span class="badge">
+                                  <div class="itemList">
+                                    <span class="glyphicon glyphicon-remove">
+                                    </span> <a href="">Remove</a>
+                                  </div>
+                                </span>
+                            </li>
+                            <li class="list-group-item">Pkg item3
+                                <span class="badge">
+                                  <div class="itemList">
+                                    <span class="glyphicon glyphicon-remove">
+                                    </span> <a href="">Remove</a>
+                                  </div>
+                                </span>
+                            </li>
+                         <li class="list-group-item">Price
+                                <span class="badge">
+                                  <div class="itemList">
+                                    <span class="glyphicon glyphicon-remove">
+                                    </span> <a href="">Remove</a>
+                                  </div>
+                                </span>
+                            </li>
+                        <li class="list-group-item">Images
+                                <span class="badge">
+                                  <div class="itemList">
+                                    <span class="glyphicon glyphicon-remove">
+                                    </span> <a href="">Remove</a>
+                                  </div>
+                                </span>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                    <br><br>
+
                     <div class="row">
-                        <div class="col-xs-3">
+                        <div class="col-xs-4">
                         </div>
-                        <div class="col-xs-3" align="right">
-                            <button type="button" class="btn btn-group-xs btnAddItem" id="btnAddItem">Add
-                                Package
+                        <div class="col-xs-4" align="right">
+                            <button type="button" class="btn btn-warning btnAddItem" id="btnPkgCancel"><span
+                                    class="glyphicon glyphicon-chevron-left"></span> Back to home
                             </button>
                         </div>
-                        <div class="col-xs-3" align="center">
-                            <button type="button" class="btn btnAddItem" id="btnPkgClear">Clear</button>
-                        </div>
-                        <div class="col-xs-3" align="left">
-                            <button type="button" class="btn btnAddItem" id="btnPkgCancel">Cancel</button>
+                        <div class="col-xs-4" align="left">
+                            <button type="button" class="btn btn-warning btn-group-xs btnAddItem" id="btnAddItem">Add
+                                Package
+                            </button>
                         </div>
                     </div>
                 </fieldset>

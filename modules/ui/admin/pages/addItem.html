@@ -36,14 +36,14 @@
         <ul class="breadcrumb breadcrumb-menu">
             <li><a href="home.html">Home</a></li>
             <li><a href="#">Item Management</a></li>
-            <li  class="active"><a href="#">Add Item</a></li>
+            <li class="active"><a href="#">Add Item</a></li>
         </ul>
     </div>
 </div>
 
 <div class="form-box" id="add-item-form-box">
     <div class="panel panel-default">
-        <div class="panel-heading">
+        <div class="panel-heading common-form-headings">
             <h3 class="default-panel-headings">Add New Item</h3>
         </div>
         <div class="panel-body">
@@ -71,8 +71,8 @@
                             </div>
 
                             <div class="col-xs-4">
-                                <button type="button" class="btn btnAddItem" id="btnAddCat">Add New
-                                    Category
+                                <button type="button" class="btn btn-warning btnAddItem" id="btnAddCat"><span
+                                        class="glyphicon glyphicon-plus"></span> Add New Category
                                 </button>
                             </div>
                         </div>
@@ -95,7 +95,8 @@
                             </div>
 
                             <div class="col-xs-4">
-                                <button type="button" class="btn btnAddItem" id="btnAddSubCat">Add
+                                <button type="button" class="btn btn-warning btnAddItem" id="btnAddSubCat"><span
+                                        class="glyphicon glyphicon-plus"></span> Add
                                     Sub-category
                                 </button>
                             </div>
@@ -116,116 +117,120 @@
 
                     <div class="form-group">
                         <div class="row">
-                        <label for="txtItemName" class="col-xs-3 control-label">
-                            Item Name
-                        </label>
-
-                        <div class="col-xs-5">
-                            <input class="form-control" id="txtItemName" type="text">
-                        </div>
-                    </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="row">
-                        <label class="col-xs-3 control-label">
-                            Item Price
-                        </label>
-
-                        <div class="col-xs-5">
-                            <table class="table table-hover table-bordered table-condensed">
-                                <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>Size</th>
-                                    <th>Price</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td><input type="checkbox" value="" class="checkbox"></td>
-                                    <td>Regular</td>
-                                    <td><input type="text" value="" class="col-xs-1 form-control"></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" value="" class="checkbox"></td>
-                                    <td>Medium</td>
-                                    <td><input type="text" value="" class="col-xs-1 form-control"></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" value="" class="checkbox"></td>
-                                    <td>Large</td>
-                                    <td><input type="text" value="" class="col-xs-1 form-control"></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" value="" class="checkbox"></td>
-                                    <td>Other</td>
-                                    <td><input type="text" value="" class="col-xs-1 form-control"></td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="row">
-                        <label class="col-xs-3 control-label">
-                            Item Name
-                        </label>
-
-                        <div class="col-xs-5">
-                            <label class="radio-inline">
-                                <input type="radio" name="optAddType">Veg
+                            <label for="txtItemName" class="col-xs-3 control-label">
+                                Item Name
                             </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="optAddType">Non-veg
+
+                            <div class="col-xs-5">
+                                <input class="form-control" id="txtItemName" type="text">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="col-xs-3 control-label">
+                                Item Price
                             </label>
+
+                            <div class="col-xs-5">
+                                <table class="table table-hover table-bordered table-condensed">
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Size</th>
+                                        <th>Price</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td><input type="checkbox" value="" class="checkbox"></td>
+                                        <td>Regular</td>
+                                        <td><input type="text" value="" class="col-xs-1 form-control"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" value="" class="checkbox"></td>
+                                        <td>Medium</td>
+                                        <td><input type="text" value="" class="col-xs-1 form-control"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" value="" class="checkbox"></td>
+                                        <td>Large</td>
+                                        <td><input type="text" value="" class="col-xs-1 form-control"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" value="" class="checkbox"></td>
+                                        <td>Other</td>
+                                        <td><input type="text" value="" class="col-xs-1 form-control"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                    </div>
                     </div>
 
                     <div class="form-group">
                         <div class="row">
-                        <label for="btnUpldImage" class="col-xs-3 control-label">
-                            Add Image/s
-                        </label>
+                            <label class="col-xs-3 control-label">
+                                Item Name
+                            </label>
 
-                        <div class="col-xs-5">
-                            <button type="button" class="btn btnAddItem" id="btnUpldImage">Browse to Upload
-                                Images
-                            </button>
+                            <div class="col-xs-5">
+                                <label class="radio-inline">
+                                    <input type="radio" name="optAddType">Veg
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="optAddType">Non-veg
+                                </label>
+                            </div>
                         </div>
-                    </div>
                     </div>
 
                     <div class="form-group">
                         <div class="row">
-                        <label for="txtDesc" class="col-xs-3 control-label">
-                            Description
-                        </label>
+                            <label for="btnUpldImage" class="col-xs-3 control-label">
+                                Add Image/s
+                            </label>
 
-                        <div class="col-xs-5">
-                            <textarea class="form-control" rows="5" id="txtdesc"></textarea>
+                            <div class="col-xs-5">
+                                <button type="button" class="btn btn-warning btnAddItem" id="btnUpldImage">
+                                    <span class="glyphicon glyphicon-upload"></span> Browse to Upload
+                                    Images
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <label for="txtDesc" class="col-xs-3 control-label">
+                                Description
+                            </label>
+
+                            <div class="col-xs-5">
+                                <textarea class="form-control" rows="5" id="txtdesc"></textarea>
+                            </div>
+                        </div>
+                    </div>
 
                     <br>
 
-                    <div class="row">
+                    <div class="row" align="right">
                         <div class="col-xs-3">
                         </div>
                         <div class="col-xs-3" align="right">
-                            <button type="button" class="btn btn-group-xs btnAddItem" id="btnAddItem">Add
-                                Item
+                            <button type="button" class="btn btn-warning btn-group-xs btnAddItem" id="btnAddItemBack"><span
+                                    class="glyphicon glyphicon-chevron-left"></span> back to home
                             </button>
                         </div>
                         <div class="col-xs-3" align="center">
-                            <button type="button" class="btn btnAddItem" id="btnAddClear">Clear</button>
+                            <button type="button" class="btn btn-warning btn-group-xs btnAddItem" id="btnAddItem"><span
+                                    class="glyphicon glyphicon-plus"></span> Add
+                                Item
+                            </button>
                         </div>
                         <div class="col-xs-3" align="left">
-                            <button type="button" class="btn btnAddItem" id="btnAddCancel">Cancel</button>
+                            <button type="button" class="btn btn-warning btnAddItem" id="btnAddClear">Clear</button>
                         </div>
                     </div>
                 </fieldset>

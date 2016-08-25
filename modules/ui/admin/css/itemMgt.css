@@ -52,3 +52,11 @@ legend.scheduler-border {
 .default-panel-headings{
     color: #e7ce98;
 }
+.itemList > a,
+.itemList > .glyphicon {
+    color:red;
+}
+.list-group-item > .badge{
+    background-color: #bababa;
+    color: red;
+}
