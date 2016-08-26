@@ -4,8 +4,9 @@
 <link href="../css/homeStyle.css" rel="stylesheet" type="text/css">
 <link href="../css/footer.css" rel="stylesheet" type="text/css">
 <link href="../css/style.css" rel="stylesheet" type="text/css" media="all"/>
+<div w3-include-html="header.html"></div>
 
-<body>
+<body style="overflow: hidden">
 <div class="brand"></div>
 <center>
     <div class="inner-bg">
@@ -112,16 +113,21 @@
 </center>
 
 </body>
+<div w3-include-html="footer.html"></div>
 
+<script src="http://www.w3schools.com/lib/w3data.js"></script>
+<script>
+    w3IncludeHTML();
+</script>
 <!-------------------------------------- Modal--------------------------------- -->
 <div id="passwordModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
         <!-- Modal content-->
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header"style="background-color: #99b176">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title" style="color: #204d74;font-size: x-large">Change Password</h4>
+                <h4 class="modal-title" style="color:#ffffff;font-size: x-large">Change Password</h4>
             </div>
             <div class="modal-body">
                 <div class="panel-body">
