@@ -50,13 +50,13 @@ $(document).ready(function () {
 function operateFormatter(value, row, index){
     return[
         '<center>',
-        '<a class="view" href="" title="View" id="linkViewItem">',
+        '<a class="view" title="View" id="linkViewPkg">',
         '<i class="glyphicon glyphicon-eye-open">View</i>',
         '</a>&nbsp;&nbsp;&nbsp;&nbsp;',
-        '<a class="edit" href="../pages/editItem.html" title="Edit" id="linkEditItem">',
+        '<a class="edit" title="Edit" id="linkEditPkg">',
         '<i class="glyphicon glyphicon-edit">Edit</i>',
         '</a>&nbsp;&nbsp;&nbsp;&nbsp;',
-        '<a class="delete" href="javascript:void(0)" title="Delete" id="linkDeleteItem">',
+        '<a class="delete" title="Delete" id="linkDeletePkg">',
         '<i class="glyphicon glyphicon-remove">Delete</i>',
         '</a></center>'
     ].join('');
@@ -65,5 +65,8 @@ function operateFormatter(value, row, index){
 window.operateEvents = {
     'click .delete':function(){
         $('#pkgDeleteModal').modal('show');
+    },
+    'click .edit':function(){
+        $('#pkgEditModal').modal('show');
     }
 }

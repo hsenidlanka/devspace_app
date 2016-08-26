@@ -5,23 +5,11 @@
     <meta charset="UTF-8">
     <title>View Package</title>
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link href="../css/business-casual.css" rel="stylesheet">
+    <!--include common CSS, fonts and js-->
+    <link rel="import" href="adminTop.html">
+
     <link href="../css/itemMgt.css" rel="stylesheet">
-
-    <!-- Javascript -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-    <!-- Fonts -->
-
-    <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic"
-          rel="stylesheet" type="text/css">
-
-    <!--bootstrap table-->
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.js"></script>
+    <script src="../js/itemMgt.js"></script>
     <script src="../js/tablePackges.js"></script>
 
 </head>
@@ -49,7 +37,7 @@
 
 <div class="form-box" id="view-pkg-form-box">
     <div class="panel panel-default">
-        <div class="panel-heading common-form-headings">
+        <div class="panel-heading  common-form-headings">
             <h3 class="default-panel-headings">View Package</h3>
         </div>
 
@@ -104,7 +92,7 @@
     </div>
 </div>
 
-<!--Modal for delete item-->
+<!--Modal for delete package-->
 <div class="modal fade" id="pkgDeleteModal">
     <div class="modal-dialog ">
         <div class="modal-content">
@@ -134,5 +122,165 @@
         </div>
     </div>
 </div>
+
+
+<!--Modal for edit package-->
+<div class="modal fade" id="pkgEditModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header item-modal-header-style">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
+                        class="glyphicon glyphicon-remove"></span></button>
+                <div align="center"><span class="glyphicon glyphicon-trash"></span> Edit Package
+                </div>
+            </div>
+            <div class="modal-body">
+
+                <form class="form-horizontal" role="form" id="frmEditPkg">
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border">(*) Edit relevant fields</legend>
+
+                        <div class="form-group">
+
+                            <div class="row">
+                                <div class="col-xs-4" align="right">
+                                    <label id="lblEditPkgId">Package ID : * </label>
+                                </div>
+                                <div class="col-xs-5">
+                                    <input type="text" class="form-control" readonly>
+                                </div>
+                                <div class="col-xs-3" align="center">
+                                </div>
+                            </div>
+                            <br>
+
+                            <div class="row">
+                                <div class="col-xs-4" align="right">
+                                    <label id="lblEditPkgNm">Package Name : </label>
+                                </div>
+                                <div class="col-xs-5">
+                                    <input class="form-control" type="text">
+                                </div>
+                                <div class="col-xs-3" align="center">
+                                    <label> <span class="badge edit-pkg-Badges edt glyphicon glyphicon-edit"> Edit</span></label>
+                                </div>
+                            </div>
+
+                            <br>
+
+                            <div class="row">
+                                <div class="col-xs-4" align="right">
+                                    <label>Package Content : </label>
+                                </div>
+                                <div class="col-xs-5">
+                                    <textarea class="form-control" id="editPkgCont"></textarea>
+                                </div>
+                                <div class="col-xs-3" align="center">
+                                    <label id="lblEditPkgCont"> <span
+                                            class="badge edit-pkg-Badges edt glyphicon glyphicon-edit"> Edit</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <br>
+
+                            <div class="row">
+                                <div class="col-xs-4" align="right">
+                                    <label> Package Images : </label>
+                                </div>
+                                <div class="col-xs-5">
+                                    <span class="badge glyphicon glyphicon-asterisk"> image71. jpg  </span><br>
+                                    <span class="badge glyphicon glyphicon-asterisk"> image21. jpg </span><br>
+                                    <span class="badge glyphicon glyphicon-asterisk"> image42. jpg</span><br>
+                                </div>
+                                <div class="col-xs-3" align="center">
+                                    <label id="lblAddPkgImg"> <span
+                                            class="badge edit-pkg-Badges edt glyphicon glyphicon-plus"> Add</span>
+                                    </label>
+                                    <label id="lblRmvPkgImg"> <span
+                                            class="badge rmv-pkg-Badges glyphicon glyphicon-remove"> Remove</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <br>
+
+                            <div class="row">
+                                <div class="col-xs-4" align="right">
+                                    <label>Package Price : </label>
+                                </div>
+                                <div class="col-xs-5">
+                                    <input type="text" class="form-control" id="editPkgPrice" style="text-align: right;">
+                                </div>
+                                <div class="col-xs-3" align="center">
+                                </div>
+                            </div>
+
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+
+            <div class="modal-footer" align="right">
+                <button class="btn btn-warning btnAddItem" type="button" value="Yes">Update package details
+                </button>
+                <button class="btn btn-warning btnAddItem" type="button" value="cancel" id="btnPkgBack">Back
+                </button>
+                <button class="btn btn-warning btnAddItem" type="button" value="cancel" id="btnPkgCancel">Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--<div class="list-group row" style="margin:auto; width:50%; border:2px solid black; padding: 10px;">
+    <label id="newPkgName"><strong>Pacakage Name</strong></label> <br>
+    <ul class="list-group">
+        <li class="list-group-item">Pkg item1
+                                <span class="badge">
+                                  <div class="itemList">
+                                    <span class="glyphicon glyphicon-remove">
+                                    </span> <a href="">Remove</a>
+                                  </div>
+                                </span>
+        </li>
+        <li class="list-group-item">Pkg item2
+                                <span class="badge">
+                                  <div class="itemList">
+                                    <span class="glyphicon glyphicon-remove">
+                                    </span> <a href="">Remove</a>
+                                  </div>
+                                </span>
+        </li>
+        <li class="list-group-item">Pkg item3
+                                <span class="badge">
+                                  <div class="itemList">
+                                    <span class="glyphicon glyphicon-remove">
+                                    </span> <a href="">Remove</a>
+                                  </div>
+                                </span>
+        </li>
+        <li class="list-group-item">Price
+                                <span class="badge">
+                                  <div class="itemList">
+                                    <span class="glyphicon glyphicon-remove">
+                                    </span> <a href="">Remove</a>
+                                  </div>
+                                </span>
+        </li>
+        <li class="list-group-item">Images
+                                <span class="badge">
+                                  <div class="itemList">
+                                    <span class="glyphicon glyphicon-remove">
+                                    </span> <a href="">Remove</a>
+                                  </div>
+                                </span>
+        </li>
+
+    </ul>
+</div>-->
+
+
 </body>
 </html>

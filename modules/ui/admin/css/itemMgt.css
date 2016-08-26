@@ -71,3 +71,25 @@ legend.scheduler-border {
     font-weight: bolder;
     font-size: 20px;
 }
+.input-group-error{
+    color: red;
+    font-weight: bolder;
+    font-style: italic;
+    font-size: 12px;
+}
+.invalid-input{
+    border: 2px solid red;
+}
+.valid-input{
+    border: solid 2px green;
+}
+.rmv-pkg-Badges {
+    background-color: #bababa;
+    color: red;
+    font-size: small;
+}
+.edit-pkg-Badges {
+    background-color: #bababa;
+    color: #0019ea;
+    font-size: small;
+}
