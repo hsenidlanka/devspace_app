@@ -42,13 +42,21 @@ button.btn:hover { opacity: 0.6; color: #fff; }
     background-color: rgba(69, 141, 19, 0);
 
 }
-
-.nav > li > a {
+/*
+.nav > li > a > {
     padding: 5px 10px 10px 10px;
 
-    /*height: px;*/
+    *//*height: px;*//*
     margin: 0 5px 10px 5px;
     font-size: large;
     font-weight: 700;
 
+}*/
+.nav > li > a {
+    padding: 5px 10px 10px 10px;
+    /*height: px;*/
+    margin: 0 5px 10px 80px;
+    font-size: large;
+    font-weight: 700;
+    color: #0d630d;
 }

@@ -3,7 +3,7 @@ $(document).ready(function () {
     $('#tableStaff').bootstrapTable({
 
         url: '../js/customer.json',
-        height: 420,
+        height: 350,
         pagination: true,
         pageSize: 8,
         clickToSelect: true,
@@ -47,11 +47,11 @@ $(document).ready(function () {
             events: operateEvents
         }]
     });
-})
+});
 
 function operateFormatter(value, row, index) {
     return [
-        '<a class="like" href="javascript:void(0)" title="Like" >',
+        '<a class="like" href="../pages/userStaff_edit.html" title="Like" >',
         '<em class="fa fa-pencil"></em>',
         '</a>  ',
         '<a class="remove" href="javascript:void(0)" title="Delete">',
@@ -62,13 +62,13 @@ function operateFormatter(value, row, index) {
 
 window.operateEvents = {
     'click .like': function(){
-        $('#editModal').modal('show');
+        //$('#editStaffModal').modal('show');
 
         //alert('You click like action, row: ' );
     },
 
     'click .remove': function () {
-        $('#removeModal').modal({show:true});
+        $('#removeStaffModal').modal({show:true});
 
         //alert('You click remove action, row: ');
 
