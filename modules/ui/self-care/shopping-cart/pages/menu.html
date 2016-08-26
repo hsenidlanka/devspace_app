@@ -9,14 +9,22 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/loader.css"/>
     <script src="http://www.w3schools.com/lib/w3data.js"></script>
     <script src="../js/common.js"></script>
     <link rel="stylesheet" href="../css/back-to-top.css"/>
+    <link rel="stylesheet" href="../css/notify.css"/>
     <script src="../js/back-to-top.js"></script>
     <script src="../js/menu-operations.js"></script>
     <script src="../js/jquery.contenthover.js"></script>
+    <script src="../js/loader.js"></script>
+    <script src="../js/notify.js"></script>
+
+
 </head>
 <body>
+<div id="myToast" class="toast-popup"></div>
+<div class="loader-anim"></div>
 <div w3-include-html="../../self-care-template/pages/header.html"></div>
 <div class="main-div">
     <div class="section">
@@ -560,6 +568,8 @@
                                                         <div class="contenthover">
                                                             Item description goes here.
                                                             <div>
+                                                                <label class="add-to-cart-label-qty">QTY:</label>
+                                                                <input class="spin add-to-cart-spin" type="number" min="1" max="100" value="1">
                                                                 <button class="btn btn-success btn-xs btn-addtocart-dessert">
                                                                     Add
                                                                     to
@@ -576,6 +586,8 @@
                                                         <div class="contenthover">
                                                             Item description goes here.
                                                             <div>
+                                                                <label class="add-to-cart-label-qty">QTY:</label>
+                                                                <input class="spin add-to-cart-spin" type="number" min="1" max="100" value="1">
                                                                 <button class="btn btn-success btn-xs btn-addtocart-dessert">
                                                                     Add
                                                                     to
@@ -592,6 +604,8 @@
                                                         <div class="contenthover">
                                                             Item description goes here.
                                                             <div>
+                                                                <label class="add-to-cart-label-qty">QTY:</label>
+                                                                <input class="spin add-to-cart-spin" type="number" min="1" max="100" value="1">
                                                                 <button class="btn btn-success btn-xs btn-addtocart-dessert">
                                                                     Add
                                                                     to
@@ -608,6 +622,8 @@
                                                         <div class="contenthover">
                                                             Item description goes here.
                                                             <div>
+                                                                <label class="add-to-cart-label-qty">QTY:</label>
+                                                                <input class="spin add-to-cart-spin" type="number" min="1" max="100" value="1">
                                                                 <button class="btn btn-success btn-xs btn-addtocart-dessert">
                                                                     Add
                                                                     to
@@ -626,6 +642,8 @@
                                                         <div class="contenthover">
                                                             Item description goes here.
                                                             <div>
+                                                                <label class="add-to-cart-label-qty">QTY:</label>
+                                                                <input class="spin add-to-cart-spin" type="number" min="1" max="100" value="1">
                                                                 <button class="btn btn-success btn-xs btn-addtocart-dessert">
                                                                     Add
                                                                     to
@@ -642,6 +660,8 @@
                                                         <div class="contenthover">
                                                             Item description goes here.
                                                             <div>
+                                                                <label class="add-to-cart-label-qty">QTY:</label>
+                                                                <input class="spin add-to-cart-spin" type="number" min="1" max="100" value="1">
                                                                 <button class="btn btn-success btn-xs btn-addtocart-dessert">
                                                                     Add
                                                                     to
@@ -672,6 +692,8 @@
                                                             <div class="contenthover">
                                                                 Item description goes here.
                                                                 <div>
+                                                                    <label class="add-to-cart-label-qty">QTY:</label>
+                                                                    <input class="spin add-to-cart-spin" type="number" min="1" max="100" value="1">
                                                                     <button class="btn btn-success btn-xs btn-addtocart-dessert">
                                                                         Add
                                                                         to
@@ -688,6 +710,8 @@
                                                             <div class="contenthover">
                                                                 Item description goes here.
                                                                 <div>
+                                                                    <label class="add-to-cart-label-qty">QTY:</label>
+                                                                    <input class="spin add-to-cart-spin" type="number" min="1" max="100" value="1">
                                                                     <button class="btn btn-success btn-xs btn-addtocart-dessert">
                                                                         Add
                                                                         to
@@ -704,6 +728,8 @@
                                                             <div class="contenthover">
                                                                 Item description goes here.
                                                                 <div>
+                                                                    <label class="add-to-cart-label-qty">QTY:</label>
+                                                                    <input class="spin add-to-cart-spin" type="number" min="1" max="100" value="1">
                                                                     <button class="btn btn-success btn-xs btn-addtocart-dessert">
                                                                         Add
                                                                         to
@@ -720,6 +746,8 @@
                                                             <div class="contenthover">
                                                                 Item description goes here.
                                                                 <div>
+                                                                    <label class="add-to-cart-label-qty">QTY:</label>
+                                                                    <input class="spin add-to-cart-spin" type="number" min="1" max="100" value="1">
                                                                     <button class="btn btn-success btn-xs btn-addtocart-dessert">
                                                                         Add
                                                                         to
@@ -751,6 +779,8 @@
                                                             <div class="contenthover">
                                                                 Item description goes here.
                                                                 <div>
+                                                                    <label class="add-to-cart-label-qty">QTY:</label>
+                                                                    <input class="spin add-to-cart-spin" type="number" min="1" max="100" value="1">
                                                                     <button class="btn btn-success btn-xs btn-addtocart-dessert">
                                                                         Add
                                                                         to
@@ -767,6 +797,8 @@
                                                             <div class="contenthover">
                                                                 Item description goes here.
                                                                 <div>
+                                                                    <label class="add-to-cart-label-qty">QTY:</label>
+                                                                    <input class="spin add-to-cart-spin" type="number" min="1" max="100" value="1">
                                                                     <button class="btn btn-success btn-xs btn-addtocart-dessert">
                                                                         Add
                                                                         to
@@ -783,6 +815,8 @@
                                                             <div class="contenthover">
                                                                 Item description goes here.
                                                                 <div>
+                                                                    <label class="add-to-cart-label-qty">QTY:</label>
+                                                                    <input class="spin add-to-cart-spin" type="number" min="1" max="100" value="1">
                                                                     <button class="btn btn-success btn-xs btn-addtocart-dessert">
                                                                         Add
                                                                         to
@@ -814,6 +848,8 @@
                                                             <div class="contenthover">
                                                                 Item description goes here.
                                                                 <div>
+                                                                    <label class="add-to-cart-label-qty">QTY:</label>
+                                                                    <input class="spin add-to-cart-spin" type="number" min="1" max="100" value="1">
                                                                     <button class="btn btn-success btn-xs btn-addtocart-dessert">
                                                                         Add
                                                                         to
@@ -830,6 +866,8 @@
                                                             <div class="contenthover">
                                                                 Item description goes here.
                                                                 <div>
+                                                                    <label class="add-to-cart-label-qty">QTY:</label>
+                                                                    <input class="spin add-to-cart-spin" type="number" min="1" max="100" value="1">
                                                                     <button class="btn btn-success btn-xs btn-addtocart-dessert">
                                                                         Add
                                                                         to
@@ -861,6 +899,8 @@
                                                             <div class="contenthover">
                                                                 Item description goes here.
                                                                 <div>
+                                                                    <label class="add-to-cart-label-qty">QTY:</label>
+                                                                    <input class="spin add-to-cart-spin" type="number" min="1" max="100" value="1">
                                                                     <button class="btn btn-success btn-xs btn-addtocart-dessert">
                                                                         Add
                                                                         to
@@ -877,6 +917,8 @@
                                                             <div class="contenthover">
                                                                 Item description goes here.
                                                                 <div>
+                                                                    <label class="add-to-cart-label-qty">QTY:</label>
+                                                                    <input class="spin add-to-cart-spin" type="number" min="1" max="100" value="1">
                                                                     <button class="btn btn-success btn-xs btn-addtocart-dessert">
                                                                         Add
                                                                         to
@@ -893,6 +935,8 @@
                                                             <div class="contenthover">
                                                                 Item description goes here.
                                                                 <div>
+                                                                    <label class="add-to-cart-label-qty">QTY:</label>
+                                                                    <input class="spin add-to-cart-spin" type="number" min="1" max="100" value="1">
                                                                     <button class="btn btn-success btn-xs btn-addtocart-dessert">
                                                                         Add
                                                                         to
@@ -909,6 +953,8 @@
                                                             <div class="contenthover">
                                                                 Item description goes here.
                                                                 <div>
+                                                                    <label class="add-to-cart-label-qty">QTY:</label>
+                                                                    <input class="spin add-to-cart-spin" type="number" min="1" max="100" value="1">
                                                                     <button class="btn btn-success btn-xs btn-addtocart-dessert">
                                                                         Add
                                                                         to
@@ -927,6 +973,8 @@
                                                             <div class="contenthover">
                                                                 Item description goes here.
                                                                 <div>
+                                                                    <label class="add-to-cart-label-qty">QTY:</label>
+                                                                    <input class="spin add-to-cart-spin" type="number" min="1" max="100" value="1">
                                                                     <button class="btn btn-success btn-xs btn-addtocart-dessert">
                                                                         Add
                                                                         to
@@ -1019,7 +1067,9 @@
                                                         <div class="contenthover">
                                                             Item description goes here.
                                                             <div>
-                                                                <button class="btn btn-success btn-xs btn-addtocart-dessert">
+                                                                <label class="add-to-cart-label-qty">QTY:</label>
+                                                                <input class="spin add-to-cart-spin" type="number" min="1" max="100" value="1">
+                                                                <button class="btn btn-success btn-xs btn-addtocart-beverage">
                                                                     Add
                                                                     to
                                                                     cart
@@ -1035,7 +1085,9 @@
                                                         <div class="contenthover">
                                                             Item description goes here.
                                                             <div>
-                                                                <button class="btn btn-success btn-xs btn-addtocart-dessert">
+                                                                <label class="add-to-cart-label-qty">QTY:</label>
+                                                                <input class="spin add-to-cart-spin" type="number" min="1" max="100" value="1">
+                                                                <button class="btn btn-success btn-xs btn-addtocart-beverage">
                                                                     Add
                                                                     to
                                                                     cart
@@ -1051,7 +1103,9 @@
                                                         <div class="contenthover">
                                                             Item description goes here.
                                                             <div>
-                                                                <button class="btn btn-success btn-xs btn-addtocart-dessert">
+                                                                <label class="add-to-cart-label-qty">QTY:</label>
+                                                                <input class="spin add-to-cart-spin" type="number" min="1" max="100" value="1">
+                                                                <button class="btn btn-success btn-xs btn-addtocart-beverage">
                                                                     Add
                                                                     to
                                                                     cart
@@ -1082,7 +1136,9 @@
                                                         <div class="contenthover">
                                                             Item description goes here.
                                                             <div>
-                                                                <button class="btn btn-success btn-xs btn-addtocart-dessert">
+                                                                <label class="add-to-cart-label-qty">QTY:</label>
+                                                                <input class="spin add-to-cart-spin" type="number" min="1" max="100" value="1">
+                                                                <button class="btn btn-success btn-xs btn-addtocart-beverage">
                                                                     Add
                                                                     to
                                                                     cart
@@ -1098,7 +1154,9 @@
                                                         <div class="contenthover">
                                                             Item description goes here.
                                                             <div>
-                                                                <button class="btn btn-success btn-xs btn-addtocart-dessert">
+                                                                <label class="add-to-cart-label-qty">QTY:</label>
+                                                                <input class="spin add-to-cart-spin" type="number" min="1" max="100" value="1">
+                                                                <button class="btn btn-success btn-xs btn-addtocart-beverage">
                                                                     Add
                                                                     to
                                                                     cart
@@ -1114,7 +1172,9 @@
                                                         <div class="contenthover">
                                                             Item description goes here.
                                                             <div>
-                                                                <button class="btn btn-success btn-xs btn-addtocart-dessert">
+                                                                <label class="add-to-cart-label-qty">QTY:</label>
+                                                                <input class="spin add-to-cart-spin" type="number" min="1" max="100" value="1">
+                                                                <button class="btn btn-success btn-xs btn-addtocart-beverage">
                                                                     Add
                                                                     to
                                                                     cart
@@ -1130,7 +1190,9 @@
                                                         <div class="contenthover">
                                                             Item description goes here.
                                                             <div>
-                                                                <button class="btn btn-success btn-xs btn-addtocart-dessert">
+                                                                <label class="add-to-cart-label-qty">QTY:</label>
+                                                                <input class="spin add-to-cart-spin" type="number" min="1" max="100" value="1">
+                                                                <button class="btn btn-success btn-xs btn-addtocart-beverage">
                                                                     Add
                                                                     to
                                                                     cart
@@ -1148,7 +1210,9 @@
                                                         <div class="contenthover">
                                                             Item description goes here.
                                                             <div>
-                                                                <button class="btn btn-success btn-xs btn-addtocart-dessert">
+                                                                <label class="add-to-cart-label-qty">QTY:</label>
+                                                                <input class="spin add-to-cart-spin" type="number" min="1" max="100" value="1">
+                                                                <button class="btn btn-success btn-xs btn-addtocart-beverage">
                                                                     Add
                                                                     to
                                                                     cart
@@ -1179,7 +1243,9 @@
                                                         <div class="contenthover">
                                                             Item description goes here.
                                                             <div>
-                                                                <button class="btn btn-success btn-xs btn-addtocart-dessert">
+                                                                <label class="add-to-cart-label-qty">QTY:</label>
+                                                                <input class="spin add-to-cart-spin" type="number" min="1" max="100" value="1">
+                                                                <button class="btn btn-success btn-xs btn-addtocart-beverage">
                                                                     Add
                                                                     to
                                                                     cart
@@ -1195,7 +1261,9 @@
                                                         <div class="contenthover">
                                                             Item description goes here.
                                                             <div>
-                                                                <button class="btn btn-success btn-xs btn-addtocart-dessert">
+                                                                <label class="add-to-cart-label-qty">QTY:</label>
+                                                                <input class="spin add-to-cart-spin" type="number" min="1" max="100" value="1">
+                                                                <button class="btn btn-success btn-xs btn-addtocart-beverage">
                                                                     Add
                                                                     to
                                                                     cart
@@ -1211,7 +1279,9 @@
                                                         <div class="contenthover">
                                                             Item description goes here.
                                                             <div>
-                                                                <button class="btn btn-success btn-xs btn-addtocart-dessert">
+                                                                <label class="add-to-cart-label-qty">QTY:</label>
+                                                                <input class="spin add-to-cart-spin" type="number" min="1" max="100" value="1">
+                                                                <button class="btn btn-success btn-xs btn-addtocart-beverage">
                                                                     Add
                                                                     to
                                                                     cart
@@ -1227,7 +1297,9 @@
                                                         <div class="contenthover">
                                                             Item description goes here.
                                                             <div>
-                                                                <button class="btn btn-success btn-xs btn-addtocart-dessert">
+                                                                <label class="add-to-cart-label-qty">QTY:</label>
+                                                                <input class="spin add-to-cart-spin" type="number" min="1" max="100" value="1">
+                                                                <button class="btn btn-success btn-xs btn-addtocart-beverage">
                                                                     Add
                                                                     to
                                                                     cart
@@ -1258,7 +1330,9 @@
                                                         <div class="contenthover">
                                                             Item description goes here.
                                                             <div>
-                                                                <button class="btn btn-success btn-xs btn-addtocart-dessert">
+                                                                <label class="add-to-cart-label-qty">QTY:</label>
+                                                                <input class="spin add-to-cart-spin" type="number" min="1" max="100" value="1">
+                                                                <button class="btn btn-success btn-xs btn-addtocart-beverage">
                                                                     Add
                                                                     to
                                                                     cart
@@ -1274,7 +1348,9 @@
                                                         <div class="contenthover">
                                                             Item description goes here.
                                                             <div>
-                                                                <button class="btn btn-success btn-xs btn-addtocart-dessert">
+                                                                <label class="add-to-cart-label-qty">QTY:</label>
+                                                                <input class="spin add-to-cart-spin" type="number" min="1" max="100" value="1">
+                                                                <button class="btn btn-success btn-xs btn-addtocart-beverage">
                                                                     Add
                                                                     to
                                                                     cart
@@ -1290,7 +1366,9 @@
                                                         <div class="contenthover">
                                                             Item description goes here.
                                                             <div>
-                                                                <button class="btn btn-success btn-xs btn-addtocart-dessert">
+                                                                <label class="add-to-cart-label-qty">QTY:</label>
+                                                                <input class="spin add-to-cart-spin" type="number" min="1" max="100" value="1">
+                                                                <button class="btn btn-success btn-xs btn-addtocart-beverage">
                                                                     Add
                                                                     to
                                                                     cart
@@ -1356,6 +1434,87 @@
         </div>
     </div>
 </div>
+
 <a href="#" class="scrollup"></a>
+
+<div id="add-to-cart-popup" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Customize and Add to Cart</h4>
+            </div>
+            <div class="modal-body">
+                <p>Customize the following item as you wish and click add to cart to add
+                    the item to cart.</p>
+                <div class="thumbnail" style="height:120px; border: none;">
+                    <img src="../images/Whole-Pizza-100x100.jpg"
+                         class="img-responsive" align="left">
+                    <div class="caption">
+                        <h4>&nbsp; Item Title</h4>
+                        <p>&nbsp; Some description about the item.</p>
+                    </div>
+                </div>
+                <form role="form" style="margin-top:-20px;">
+                    <div class="form-group">
+                        <div class="col-sm-6" style="display:inline-block;">
+                            <label class="control-label">Crust</label>
+                            <select class="form-control">
+                                <option>Sausage</option>
+                                <option>Topping 02</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-6" style="display:inline-block;">
+                            <label class="control-label">Size</label>
+                            <select class="form-control">
+                                <option>Small</option>
+                                <option>Medium</option>
+                                <option>Large</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" style="display:inline-block; margin-top:10px; margin-left:15px;">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox">Extra Cheese (Rs.150.00)</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-6" style="display:inline-block; margin-top:-10px;">
+                            <label class="control-label">Toppings</label>
+                            <select class="form-control">
+                                <option>Topping 01</option>
+                                <option>Topping 02</option>
+                                <option>Topping 03</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-6" style="display:inline-block; margin-top:-10px;">
+                            <label class="control-label">&nbsp;</label>
+                            <select class="form-control">
+                                <option>Topping 01</option>
+                                <option>Topping 02</option>
+                                <option>Topping 03</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" style="display:inline-block; margin-top:10px; margin-left:15px;">
+                        <label class="control-label">Special Instructions</label>
+                        <textarea class="form-control" cols="35" placeholder="Mention any special instructions"></textarea>
+                    </div>
+                    <div class="form-group" style="margin-left:15px;">
+                        <label class="control-label" style="padding-right:15px;">Quantity:</label>
+                        <input class="spin" type="number" min="1" max="100" value="1">
+                        <label class="control-label" style="padding-left:30px; padding-right:10px;">Price:&nbsp;&nbsp;</label>
+                        <input type="text" disabled="" style="width:10em">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer" style="margin-top:-20px;">
+                <a class="btn btn-default" data-dismiss="modal">Cancel</a>
+                <button data-dismiss="modal" class="btn btn-success btn-popup-add-to-cart-pizza">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
