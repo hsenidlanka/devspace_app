@@ -54,6 +54,7 @@ $(document).ready(function () {
     });
 
     $(".btn-popup-add-to-cart-pizza").click(function () {
+        $("#add-to-cart-popup").modal('hide');
         $.notify("Selected pizza added to the shopping cart.", {
             align: "center",
             verticalAlign: "top",
