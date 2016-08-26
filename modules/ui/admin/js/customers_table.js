@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-            $('#table').bootstrapTable({
+            $('#tableCustomer').bootstrapTable({
 
                 url: '../js/customer.json',
                 height: 420,

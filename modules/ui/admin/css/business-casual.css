@@ -41,10 +41,12 @@ body {
     text-align: left;
     font-size: 20px;
     margin-left: 20px;
+
 }
 
 .form-box {
-    margin-top: 10px;
+    /*margin-top: 10px;*/
+    margin-top: -30px;
     width: 70%;
 }
 
@@ -119,7 +121,7 @@ body {
     letter-spacing: 2px;
     color: #fff;
 }
-
+/*
 .navbar-default {
     border: none;
     background: transparent;
@@ -139,7 +141,7 @@ body {
     margin: 0 auto;
     table-layout: fixed;
     font-size: 1.25em;
-}
+}*/
 
 .breadcrumb-menu {
     background-color: transparent;
