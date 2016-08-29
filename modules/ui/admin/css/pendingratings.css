@@ -1,10 +1,11 @@
 .maintable {
-    background: white;
+    /*background: white;*/
     width: 80%;
-    position: absolute;
+    position: absolute; left: 50%;
+    top: 19%;
     /*bottom: 13%;*/
     /*position: absolute;style="vertical-align:middle"*/
-    left: 10%;
+    /*left: 10%;*/
     /*text-align: center;*/
 }
 
