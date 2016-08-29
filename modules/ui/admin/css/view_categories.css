@@ -11,14 +11,11 @@ th{
 
 
 
-.footerposition{
-    position: absolute;
-    top: 100%;
-    bottom:0;
-}
 
 .viewcategorysize{
-    width: 80%;
-    position: absolute; left: 50%;
-    top: 19%;
+    /*width: 80%;*/
+    position: absolute;
+    /*left: 50%;*/
+    top: 18%;
 }
+

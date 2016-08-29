@@ -1,14 +1,9 @@
 .categoryField {
-    /*border-radius: 50px;*/
-    border: 2px solid white;
-    padding: 70px;
     width: 80%;
-    height: 60%;
-    position: absolute;
+    top: 2%;
     left: 10%;
-    top: 4%;
-    background: white;
-    /*padding-top: 5%;*/
+    position: absolute;
+
 }
 
 label {

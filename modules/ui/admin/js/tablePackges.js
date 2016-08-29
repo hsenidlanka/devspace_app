@@ -50,9 +50,6 @@ $(document).ready(function () {
 function operateFormatter(value, row, index){
     return[
         '<center>',
-        '<a class="view" title="View" id="linkViewPkg">',
-        '<i class="glyphicon glyphicon-eye-open">View</i>',
-        '</a>&nbsp;&nbsp;&nbsp;&nbsp;',
         '<a class="edit" title="Edit" id="linkEditPkg">',
         '<i class="glyphicon glyphicon-edit">Edit</i>',
         '</a>&nbsp;&nbsp;&nbsp;&nbsp;',

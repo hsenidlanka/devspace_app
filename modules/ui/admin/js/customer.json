@@ -1,58 +1,49 @@
 [
   {
     "ID": 0,
-    "Username": "test0",
-    "address": "$0"
+    "Username": "test0"
+
   },
   {
     "ID": 1,
-    "Username": "test1",
-    "address": "$1"
+    "Username": "test1"
+
   },
   {
     "ID": 2,
-    "name": "test2",
-    "address": "$2"
+    "name": "test2"
   },
   {
     "ID": 3,
-    "Username": "test3",
-    "address": "$3"
+    "Username": "test3"
   },
   {
     "ID": 4,
-    "Username": "test4",
-    "address": "$4"
+    "Username": "test4"
   },
   {
     "ID": 5,
-    "Username": "test5",
-    "address": "$5"
+    "Username": "test5"
   },
   {
     "ID": 6,
-    "Username": "test6",
-    "address": "$6"
+    "Username": "test6"
   },
   {
     "ID": 7,
-    "Username": "test7",
-    "address": "$7"
+    "Username": "test7"
   },
   {
     "ID": 8,
-    "Username": "test8",
-    "address": "$8"
+    "Username": "test8"
   },
   {
     "ID": 9,
-    "Username": "test9",
-    "address": "$9"
+    "Username": "test9"
   },
   {
     "ID": 10,
-    "Username": "test10",
-    "address": "$10"
+    "Username": "test10"
   },
   {
     "ID": 11,
@@ -61,23 +52,19 @@
   },
   {
     "Id": 12,
-    "Username": "test12",
-    "address": "$12"
+    "Username": "test12"
   },
   {
     "Id": 13,
-    "Username": "test13",
-    "address": "$13"
+    "Username": "test13"
   },
   {
     "Id": 14,
-    "Username": "test14",
-    "address": "$14"
+    "Username": "test14"
   },
   {
     "Id": 15,
-    "Username": "test15",
-    "address": "$15"
+    "Username": "test15"
   },
   {
     "Id": 16,
@@ -106,33 +93,27 @@
   },
   {
     "Id": 21,
-    "Username": "test21",
-    "address": "$21"
+    "Username": "test21"
   },
   {
     "Id": 22,
-    "Username": "test22",
-    "address": "$22"
+    "Username": "test22"
   },
   {
     "Id": 23,
-    "Username": "test23",
-    "address": "$23"
+    "Username": "test23"
   },
   {
     "Id": 24,
-    "Username": "test24",
-    "address": "$24"
+    "Username": "test24"
   },
   {
     "Id": 25,
-    "Username": "test25",
-    "address": "$25"
+    "Username": "test25"
   },
   {
     "Id": 26,
-    "Username": "test26",
-    "address": "$26"
+    "Username": "test26"
   },
   {
     "id": 27,

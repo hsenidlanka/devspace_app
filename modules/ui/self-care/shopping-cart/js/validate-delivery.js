@@ -59,7 +59,7 @@ function validateFirstName() {
     if ($("#txt-fname").val().length == 0) {
         $("#fname_error").show();
         $("#txt-fname").css("background-color", background_color);
-        $("#fname-error").text("First name should not be empty.");
+        $("#fname_error").text("First name should not be empty.");
         return false;
     } else {
         var inputVal = $("#txt-fname").val();

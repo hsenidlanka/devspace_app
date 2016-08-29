@@ -5,6 +5,7 @@
     <!-- CSS -->
     <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="../css/business-casual.css" rel="stylesheet">
     <link href="../css/userMgt.css" rel="stylesheet">
     <link href="../css/form-elements.css" rel="stylesheet">
 
@@ -12,6 +13,10 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="../js/userMgt.js"></script>
+
+    <!--include the jQuery toaster plugin's script-->
+    <script src="../js/jquery.toaster.js"></script>
+    <script src="../js/simpleToastMessage.js"></script>
 
     <!-- Fonts -->
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic
@@ -36,8 +41,9 @@
     <div style="position: relative; left: -50%;">
         <ul class="breadcrumb breadcrumb-menu" >
             <li><a href="home.html">Home</a></li>
-            <li><a href="userAdd.html">User Management</a></li>
-            <li class="active"><a href="userAdd.html">Add User</a></li>
+            <li><a href="usersView.html">User Management</a></li>
+            <li><a href="usersView.html">View Users</a></li>
+            <li class="active"><a href="userStaff_edit.html">Edit Staff User</a></li>
         </ul>
     </div>
 </div>
@@ -47,7 +53,7 @@
         <div class="panel panel-default">
 
             <div class="panel-heading common-form-headings">
-                <h3 class="default-panel-headings ">Add New User</h3>
+                <h3 class="default-panel-headings ">Edit Staff User</h3>
             </div>
             <div class="panel-body">
                 <form role="form" id="adduser_form" action="AddUserServlet" method="post" class="form-horizontal">
@@ -56,23 +62,6 @@
                         <legend class="scheduler-border" id="legendHeading"></legend>
 
                         <div class="form-group">
-                            <div class="col-sm-6">
-                                <div class="row">
-                                    <label class="col-sm-4 control-label">
-                                        User Type
-                                    </label>
-                                    <div class="col-sm-3">
-                                        <label class="radio-inline">
-                                            <input type="radio" name="optradio" id="customer" >Customer
-                                        </label>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <label class="radio-inline">
-                                            <input type="radio" name="optradio"  id="staff">Staff Member
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
 
                         <div class="form-group">
@@ -83,7 +72,7 @@
                                     </label>
 
                                     <div class="col-sm-2">
-                                        <select class="form-control" id="selectTitle" style="width: 65px">
+                                        <select class="form-control" id="selectTitle" style="width: 65px" disabled="disabled">
                                             <option>Mr</option>
                                             <option>Mrs</option>
                                             <option>Miss</option>
@@ -120,7 +109,7 @@
                                     <label class="col-sm-4 control-label">
                                         E-Mail
                                     </label>
-                                    <div class="col-sm-8">
+                                    <div class="col-sm-7">
                                         <input class="form-control" id="email" placeholder="myname@example.com" type="text">
                                     </div>
                                 </div>
@@ -173,8 +162,8 @@
 
                             <!--when the user is a customer-->
                             <div class="col-sm-6">
-                                <fieldset class="scheduler-border" id="staffDetail">
-                                    <legend class="scheduler-border" id="legendStaff">when the user is staff</legend>
+                                <fieldset class="scheduler-border fieldsetRight"  style="width: 400px; height: 220px" >
+                                    <legend class="scheduler-border" >staff detail</legend>
                                     <div class="row">
                                         <label class="col-sm-4 control-label">
                                             Designation
@@ -259,7 +248,8 @@
                                     <button type="reset" value="Reset" class="btn btn-success btnAddItem">Reset</button>
                                 </div>
                                 <div class="col-xs-4">
-                                    <button type="button" class="btn btn-success btnAddItem" id="btnAddUser">Add User</button>
+                                    <button type="button" class="btn btn-success btnAddItem" id="btnEditStaff"
+                                            onclick="successToast('You have successfully edited the Staff user.. !')">Edit Staff User</button>
                                 </div>
                             </div>
                             <div class="col-xs-1"></div>

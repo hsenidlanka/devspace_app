@@ -100,8 +100,6 @@ body {
     color: #045406;
     top: 1%;
     position: absolute; left: 50%;
-
-
 }
 
 .top-divider {
@@ -149,6 +147,7 @@ body {
     height: 50px;
     padding: 10px 0 10px 0;
 }
+
 button.btn {
     height:40px;
     margin: 0;
@@ -167,3 +166,13 @@ button.btn {
 
 }
 button.btn:hover { opacity: 0.6; color: #fff; }
+
+
+
+.footerposition{
+    position: absolute; left: 50%;
+    top: 99.5%;
+    padding-top: 3%;
+    text-align: center;
+}
+

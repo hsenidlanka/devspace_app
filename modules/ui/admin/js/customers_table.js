@@ -45,36 +45,29 @@ $(document).ready(function () {
                     align:'left'
                 }, {
                     field: 'Options',
-                    title: 'Options :',
+                    title: 'Operations :',
                     align: 'center',
-                    formatter: operateFormatter,
-                    events: operateEvents
+                    formatter: operateFormatter1,
+                    events: operateEvents1
                 }]
             });
 })
 
-function operateFormatter(value, row, index) {
+function operateFormatter1(value, row, index) {
     return [
-        '<a class="like" href="../pages/userCustomer_edit.html" title="Like" >',
-        '<em class="fa fa-pencil"></em>',
+        '<a class="likec" href="../pages/userCustomer_edit.html" title="LikeCustomer" >',
+        '<i class="glyphicon glyphicon-edit">Edit</i>',
+        //'<em class="fa fa-pencil"></em>',
         '</a>  ',
         '<a class="remove" href="javascript:void(0)" title="Delete">',
-        '<i class="glyphicon glyphicon-remove"></i>',
+        '<i class="glyphicon glyphicon-remove">Delete</i>',
         '</a>'
     ].join('');
 }
 
-window.operateEvents = {
-    'click .like': function(){
-          //$('#editCustomerModal').modal('show');
-
-          //alert('You click like action, row: ' );
-    },
-
+window.operateEvents1 = {
     'click .remove': function() {
         $('#removeCustomerModal').modal({show:true});
-
-        //alert('You click remove action, row: ');
 
     }
 }

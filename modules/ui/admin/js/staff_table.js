@@ -36,38 +36,32 @@ $(document).ready(function () {
             title: 'Phone No :',
             align:'left'
         }, {
-            field: 'e_mail',
-            title: 'Email :',
+            field: 'designation',
+            title: 'Designation :',
             align:'left'
         },  {
             field: 'Options',
-            title: 'Options :',
+            title: 'Operations :',
             align: 'center',
-            formatter: operateFormatter,
-            events: operateEvents
+            formatter: operateFormatter2,
+            events: operateEvents2
         }]
     });
 });
 
-function operateFormatter(value, row, index) {
+function operateFormatter2(value, row, index) {
     return [
-        '<a class="like" href="../pages/userStaff_edit.html" title="Like" >',
-        '<em class="fa fa-pencil"></em>',
+        '<a class="likes" href="../pages/userStaff_edit.html" title="LikeStaff" >',
+        '<i class="glyphicon glyphicon-edit">Edit</i>',
         '</a>  ',
         '<a class="remove" href="javascript:void(0)" title="Delete">',
-        '<i class="glyphicon glyphicon-remove"></i>',
+        '<i class="glyphicon glyphicon-remove">Delete</i>',
         '</a>'
     ].join('');
 }
 
-window.operateEvents = {
-    'click .like': function(){
-        //$('#editStaffModal').modal('show');
-
-        //alert('You click like action, row: ' );
-    },
-
-    'click .remove': function () {
+window.operateEvents2 = {
+      'click .remove': function () {
         $('#removeStaffModal').modal({show:true});
 
         //alert('You click remove action, row: ');
