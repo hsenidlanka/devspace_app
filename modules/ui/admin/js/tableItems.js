@@ -33,6 +33,10 @@ $(document).ready(function () {
                 title: 'Type',
                 sortable: true
             }, {
+                field: 'images',
+                title: 'Images',
+                sortable: true
+            },{
                 field: 'price',
                 title: 'Item Price',
                 align: 'right',
@@ -50,9 +54,6 @@ $(document).ready(function () {
 function operateFormatter(value, row, index){
     return[
         '<center>',
-        '<a class="view" href="" title="View" id="linkViewItem">',
-        '<i class="glyphicon glyphicon-eye-open">View</i>',
-        '</a>&nbsp;&nbsp;&nbsp;&nbsp;',
         '<a class="edit" href="../pages/editItem.html" title="Edit" id="linkEditItem">',
         '<i class="glyphicon glyphicon-edit">Edit</i>',
         '</a>&nbsp;&nbsp;&nbsp;&nbsp;',

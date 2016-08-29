@@ -6,9 +6,10 @@
 
     <!--include common CSS, fonts and js-->
     <link rel="import" href="adminTop.html">
-
+    <script src="../js/jquery.toaster.js"></script>
     <link href="../css/itemMgt.css" rel="stylesheet">
     <script src="../js/itemMgt.js"></script>
+    <script src="../js/myAlerts.js"></script>
 
 </head>
 
@@ -53,7 +54,7 @@
                     <input class="form-control" id="txtSearchItem" type="text">
                 </div>
                 <div class="col-sm-3">
-                    <button type="button" class="btn btn-warning btnAddItem" id="btnSearchItem"><span class="glyphicon glyphicon-search"></span> Search</button>
+                    <button type="button" class="btn btn-success" id="btnSearchItem"><span class="glyphicon glyphicon-search"></span> Search</button>
                 </div>
                 <div class="col-sm-1"></div>
             </div>
@@ -161,7 +162,7 @@
                                 </div>
 
                                 <div class="col-xs-8">
-                                    <table class="table table-hover table-bordered table-condensed" id="tblEditPrice">
+                                   <!-- <table class="table table-hover table-bordered table-condensed" id="tblEditPrice">
                                         <thead>
                                         <tr>
                                             <th></th>
@@ -173,29 +174,74 @@
                                         <tr>
                                             <td><input type="checkbox" value="" class="checkbox"></td>
                                             <td>Regular</td>
-                                            <td><input type="text" value="" class="col-xs-1 form-control"
-                                                       style="text-align:right"></td>
+                                            <td><input type="text" value="" class="col-xs-1 form-control price"></td>
                                         </tr>
                                         <tr>
                                             <td><input type="checkbox" value="" class="checkbox"></td>
                                             <td>Medium</td>
-                                            <td><input type="text" value="" class="col-xs-1 form-control"
-                                                       style="text-align:right"></td>
+                                            <td><input type="text" value="" class="col-xs-1 form-control price"></td>
                                         </tr>
                                         <tr>
                                             <td><input type="checkbox" value="" class="checkbox"></td>
                                             <td>Large</td>
-                                            <td><input type="text" value="" class="col-xs-1 form-control"
-                                                       style="text-align:right"></td>
+                                            <td><input type="text" value="" class="col-xs-1 form-control price"></td>
                                         </tr>
                                         <tr>
                                             <td><input type="checkbox" value="" class="checkbox"></td>
                                             <td>Other</td>
-                                            <td><input type="text" value="" class="col-xs-1 form-control"
-                                                       style="text-align:right"></td>
+                                            <td><input type="text" value="" class="col-xs-1 form-control price"></td>
                                         </tr>
                                         </tbody>
-                                    </table>
+                                    </table>-->
+
+                                        <div class="row item-tbl-row item-tbl-hdr">
+                                            <div class="col-xs-5">
+                                                <strong>Size</strong>
+                                            </div>
+                                            <div class="col-xs-7">
+                                                <strong>Price</strong>
+                                            </div>
+                                        </div>
+
+                                        <div class="row item-tbl-row" id="edtItmChkbxReg">
+
+                                            <div class="col-xs-5">
+                                                <label class="checkbox-inline"><input type="checkbox" value="" class="checkbox">Regular</label>
+                                            </div>
+                                            <div class="col-xs-7">
+                                                <input type="text" value="" class="form-control price">
+                                            </div>
+                                        </div>
+
+                                        <div class="row item-tbl-row" id="edtItmChkbxMed">
+
+                                            <div class="col-xs-5">
+                                                <label class="checkbox-inline"><input type="checkbox" value="" class="checkbox">Medium</label>
+                                            </div>
+                                            <div class="col-xs-7">
+                                                <input type="text" value="" class="form-control price">
+                                            </div>
+                                        </div>
+
+                                        <div class="row item-tbl-row" id="edtItmChkbxLrg">
+
+                                            <div class="col-xs-5">
+                                                <label class="checkbox-inline"><input type="checkbox" value="" class="checkbox">Large</label>
+                                            </div>
+                                            <div class="col-xs-7">
+                                                <input type="text" value="" class="form-control price">
+                                            </div>
+                                        </div>
+
+                                        <div class="row item-tbl-row" id="edtItmChkbxOthr">
+                                            <div class="col-xs-5">
+                                                <label class="checkbox-inline"><input type="checkbox" value="" class="checkbox">Other</label>
+                                            </div>
+                                            <div class="col-xs-7">
+                                                <input type="text" value="" class="form-control price">
+                                            </div>
+                                        </div>
+
                                 </div>
                             </div>
                             <div class="col-xs-6">
@@ -206,7 +252,7 @@
                                 </div>
 
                                 <div class="col-xs-8">
-                                    <button type="button" class="btn btn-warning btnAddItem" id="btnEditImage"><span class="glyphicon glyphicon-open"></span> Browse to
+                                    <button type="button" class="btn btn-success" id="btnEditImage"><span class="glyphicon glyphicon-open"></span> Browse to
                                         Upload Images
                                     </button>
                                     <br><br>
@@ -255,20 +301,22 @@
 
                     <br>
 
+                    <div style="text-align: center; z-index: 50000; width: 50%; margin: auto;" id="toaster"></div>
+
                     <div class="row" align="center">
                         <div class="col-xs-3">
                         </div>
                         <div class="col-xs-3" align="right">
-                        <button type="button" class="btn btn-warning btnAddItem" id="btnEditBack"><span
-                                class="glyphicon glyphicon-chevron-left"></span> Back</button>
+                        <button type="button" class="btn btn-success bckToHome" id="btnEditBack"><span
+                                class="glyphicon glyphicon-chevron-left"></span> Back to home</button>
                     </div>
                         <div class="col-xs-3" align="center">
-                            <button type="button" class="btn btn-warning btn-group-xs btnAddItem" id="btnEditItem"><span
+                            <button type="button" class="btn btn-success btn-group-xs" id="btnEditItem"><span
                                     class="glyphicon glyphicon-ok"></span> Save edits
                             </button>
                         </div>
                         <div class="col-xs-3" align="left">
-                            <button type="button" class="btn btn-warning btnAddItem" id="btnEditClear"><span
+                            <button type="button" class="btn btn-success" id="btnEditClear" onclick="this.form.reset();"><span
                                     class="glyphicon glyphicon-remove"></span> Clear All
                             </button>
                         </div>

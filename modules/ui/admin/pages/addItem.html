@@ -7,9 +7,10 @@
 
     <!--include common CSS, fonts and js-->
     <link rel="import" href="adminTop.html">
-
+    <script src="../js/jquery.toaster.js"></script>
     <link href="../css/itemMgt.css" rel="stylesheet">
     <script src="../js/itemMgt.js"></script>
+    <script src="../js/myAlerts.js"></script>
 
 </head>
 <body>
@@ -65,7 +66,7 @@
                             </div>
 
                             <div class="col-xs-4">
-                                <button type="button" class="btn btn-warning btnAddItem" id="btnAddCat"
+                                <button type="button" class="btn btn-success" id="btnAddCat"
                                         onclick="window.location='addcategory.html'"><span
                                         class="glyphicon glyphicon-plus"></span> Add New Category
                                 </button>
@@ -92,7 +93,7 @@
                             </div>
 
                             <div class="col-xs-4">
-                                <button type="button" class="btn btn-warning btnAddItem" id="btnAddSubCat"
+                                <button type="button" class="btn btn-success" id="btnAddSubCat"
                                         onclick="window.location='addcategory.html'"><span
                                         class="glyphicon glyphicon-plus"></span> Add
                                     Sub-category
@@ -138,38 +139,58 @@
                             </label>
 
                             <div class="col-xs-5">
-                                <table class="table table-hover table-bordered table-condensed">
-                                    <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th>Size</th>
-                                        <th>Price</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td><input type="checkbox" value="" class="checkbox"></td>
-                                        <td>Regular</td>
-                                        <td><input type="text" value="" class="col-xs-1 form-control"></td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox" value="" class="checkbox"></td>
-                                        <td>Medium</td>
-                                        <td><input type="text" value="" class="col-xs-1 form-control"></td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox" value="" class="checkbox"></td>
-                                        <td>Large</td>
-                                        <td><input type="text" value="" class="col-xs-1 form-control"></td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox" value="" class="checkbox"></td>
-                                        <td>Other</td>
-                                        <td><input type="text" value="" class="col-xs-1 form-control"></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+
+                                <div class="row item-tbl-row item-tbl-hdr" style="text-align: center;">
+                                    <div class="col-xs-5">
+                                        <strong>Size</strong>
+                                    </div>
+                                    <div class="col-xs-7">
+                                        <strong>Price</strong>
+                                    </div>
+                                </div>
+
+                                <div class="row item-tbl-row" id="addItmChkbxReg">
+
+                                    <div class="col-xs-5">
+                                        <label class="checkbox-inline"><input type="checkbox" value="" class="checkbox">Regular</label>
+                                    </div>
+                                    <div class="col-xs-7">
+                                        <input type="text" value="" class="form-control price">
+                                    </div>
+                                </div>
+
+                                <div class="row item-tbl-row" id="addItmChkbxMed">
+
+                                    <div class="col-xs-5">
+                                        <label class="checkbox-inline"><input type="checkbox" value="" class="checkbox">Medium</label>
+                                    </div>
+                                    <div class="col-xs-7">
+                                        <input type="text" value="" class="form-control price">
+                                    </div>
+                                </div>
+
+                                <div class="row item-tbl-row" id="addItmChkbxLrg">
+
+                                    <div class="col-xs-5">
+                                        <label class="checkbox-inline"><input type="checkbox" value="" class="checkbox">Large</label>
+                                    </div>
+                                    <div class="col-xs-7">
+                                        <input type="text" value="" class="form-control price">
+                                    </div>
+                                </div>
+
+                                <div class="row item-tbl-row" id="addItmChkbxOthr">
+                                    <div class="col-xs-5">
+                                        <label class="checkbox-inline"><input type="checkbox" value="" class="checkbox">Other</label>
+                                    </div>
+                                    <div class="col-xs-7">
+                                        <input type="text" value="" class="form-control price">
+                                    </div>
+                                </div>
+
+
                             </div>
+
                             <div class="col-xs-4">
                                 <span id="itmPriceErr" class="input-group-error"></span>
                             </div>
@@ -204,7 +225,7 @@
                             </label>
 
                             <div class="col-xs-5">
-                                <button type="button" class="btn btn-warning btnAddItem" id="btnUpldImage">
+                                <button type="button" class="btn btn-success" id="btnUpldImage">
                                     <span class="glyphicon glyphicon-upload"></span> Browse to Upload
                                     Images
                                 </button>
@@ -229,23 +250,25 @@
 
                     <br>
 
+                    <div style="text-align: center; z-index: 50000; width: 50%; margin: auto;" id="toaster"></div>
+
                     <div class="row" align="right">
                         <div class="col-xs-3">
                         </div>
                         <div class="col-xs-3" align="right">
-                            <button type="button" class="btn btn-warning btn-group-xs btnAddItem"
-                                    id="btnAddItemBack"><span
+                            <button type="button" class="btn btn-success btn-group-xs bckToHome"
+                                    id=Back"><span
                                     class="glyphicon glyphicon-chevron-left"></span> back to home
                             </button>
                         </div>
                         <div class="col-xs-3" align="center">
-                            <button type="button" class="btn btn-warning btn-group-xs btnAddItem" id="btnAddItem"><span
+                            <button type="button" class="btn btn-success btn-group-xs" id="btnAddItem"><span
                                     class="glyphicon glyphicon-plus"></span> Add
                                 Item
                             </button>
                         </div>
                         <div class="col-xs-3" align="left">
-                            <button type="button" class="btn btn-warning btnAddItem" id="btnAddClear">Clear</button>
+                            <button type="button" class="btn btn-success" id="btnAddClear" onclick="this.form.reset();">Clear</button>
                         </div>
                     </div>
                 </fieldset>

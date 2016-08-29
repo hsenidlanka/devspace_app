@@ -50,10 +50,6 @@ legend.scheduler-border {
     padding: 0px 10px;
     border-bottom: none;
 }
-.panel-default > .panel-heading {
-    background-color: rgb(4, 84, 6);
-}
-
 .default-panel-headings{
     color: #e7ce98;
 }
@@ -98,4 +94,21 @@ legend.scheduler-border {
 }
 .edit-pkg-Badges > a{
     color: blue;
+}
+.price{
+    text-align: right;
+}
+.item-tbl-row{
+    border: 1px solid #999999;
+    border-radius: 4px;
+    padding: 4px;
+    margin: auto;
+}
+.item-tbl-hdr{
+    background-color: rgba(204, 204, 209, 0.81);
+    border-color:  rgba(204, 204, 209, 0.81);
+    text-align: center;
+}
+.qty-spinner{
+    width: 75px;
 }
