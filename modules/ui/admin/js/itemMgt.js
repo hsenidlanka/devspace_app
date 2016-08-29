@@ -12,4 +12,16 @@ $(document).ready(function() {
     function goHome() {
         window.location.href='home.html';
     }
+
+    /*
+    * Function for loading package content to modal for edditing
+    */
+    $("#lnkModalView").click(function(){
+        $("#pkgViewModal").modal();
+        load_modal('editPackage.html');
+    })
+
+    function load_modal(url){
+        $('#editModalContent').load(url,function(){});
+    }
 })

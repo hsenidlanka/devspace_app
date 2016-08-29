@@ -161,8 +161,7 @@
                                 <div class="col-xs-5">
                                     <input class="form-control" type="text">
                                 </div>
-                                <div class="col-xs-3" align="center">
-                                    <label> <span class="badge edit-pkg-Badges edt glyphicon glyphicon-edit"> Edit</span></label>
+                                <div class="col-xs-3">
                                 </div>
                             </div>
 
@@ -175,9 +174,9 @@
                                 <div class="col-xs-5">
                                     <textarea class="form-control" id="editPkgCont"></textarea>
                                 </div>
-                                <div class="col-xs-3" align="center">
-                                    <label id="lblEditPkgCont"> <span
-                                            class="badge edit-pkg-Badges edt glyphicon glyphicon-edit"> Edit</span>
+                                <div class="col-xs-3" align="left">
+                                    <label id="lblEditPkgCont" onclick=""> <span
+                                            class="badge edit-pkg-Badges edt glyphicon glyphicon-edit"><a href="#" id="lnkModalView"> Edit</a></span>
                                     </label>
                                 </div>
                             </div>
@@ -193,12 +192,12 @@
                                     <span class="badge glyphicon glyphicon-asterisk"> image21. jpg </span><br>
                                     <span class="badge glyphicon glyphicon-asterisk"> image42. jpg</span><br>
                                 </div>
-                                <div class="col-xs-3" align="center">
+                                <div class="col-xs-3" align="left">
                                     <label id="lblAddPkgImg"> <span
-                                            class="badge edit-pkg-Badges edt glyphicon glyphicon-plus"> Add</span>
+                                            class="badge edit-pkg-Badges edt glyphicon glyphicon-plus"><a href=""> Add</a></span>
                                     </label>
                                     <label id="lblRmvPkgImg"> <span
-                                            class="badge rmv-pkg-Badges glyphicon glyphicon-remove"> Remove</span>
+                                            class="badge rmv-pkg-Badges glyphicon glyphicon-remove"><a href=""> Remove</a></span>
                                     </label>
                                 </div>
                             </div>
@@ -210,7 +209,8 @@
                                     <label>Package Price : </label>
                                 </div>
                                 <div class="col-xs-5">
-                                    <input type="text" class="form-control" id="editPkgPrice" style="text-align: right;">
+                                    <input type="text" class="form-control" id="editPkgPrice"
+                                           style="text-align: right;">
                                 </div>
                                 <div class="col-xs-3" align="center">
                                 </div>
@@ -219,6 +219,34 @@
                         </div>
                     </fieldset>
                 </form>
+
+            </div>
+
+            <div class="modal-footer" align="right">
+                <button class="btn btn-warning btnAddItem" type="button" value="Yes">Update package details
+                </button>
+                <button class="btn btn-warning btnAddItem" type="button" value="cancel" id="btnPkgBack">Back
+                </button>
+                <button class="btn btn-warning btnAddItem" type="button" value="cancel" id="btnPkgCancel">Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="pkgViewModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header item-modal-header-style">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
+                        class="glyphicon glyphicon-remove"></span></button>
+            </div>
+            <div class="modal-body">
+
+                <div id="editModalContent">
+
+                </div>
+
             </div>
 
             <div class="modal-footer" align="right">
