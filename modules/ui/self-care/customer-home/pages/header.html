@@ -26,20 +26,22 @@
                 <li>
 
                     <a href="#"><span class="glyphicon glyphicon-shopping-cart"
-                                      style="padding-right: 10px;color: #22697d"></span></a></li>
+                                      style="padding-right:0px;padding-left:30px;color: #22697d"></span></a></li>
+
                 <li>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-signup">Sign
+                    <a data-toggle="modal" data-target="#modal-signup" style="padding-left: 3px">Sign
                         Up
-                    </button>
+                    </a>
                 </li>
 
                 <li>
-                    <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#modal-login" style="tab-size: 10px">Log
+                    <a data-toggle="modal" data-target="#modal-login" style="tab-size: 10px;padding-left: 3px">Log
                         In
-                    </button>
+                    </a>
 
 
                 </li>
+
             </ul>
         </div>
     </div>
@@ -241,13 +243,18 @@
                                              <option>Select Your Nearest City</option>
                                          </select>-->
                                         <div class="dropdown">
-                                            <button class="btn dropdown-toggle" type="button" id="menu1"
+                                            <!--<button class="btn dropdown-toggle" type="button" id="menu1"
                                                     data-toggle="dropdown">Select Nearest City
                                                 <span class="caret"></span></button>
                                             <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
                                                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Nugegoda</a>
                                                 </li>
-                                            </ul>
+                                            </ul>-->
+                                            <select class="form-control">
+                                                <option value="nesrest">select nearest</option>
+                                                <option value="col7">Colombo 7</option>
+                                                <option value="nug">Nugegoda</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <label class="col-sm-4 control-label">
