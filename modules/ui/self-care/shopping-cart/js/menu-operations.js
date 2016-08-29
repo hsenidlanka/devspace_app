@@ -3,11 +3,11 @@ $(document).ready(function () {
     $("#beverage-collapse").hide(menuThumbnailsOverlay());
 
     // Keep only one collapsible group open.
-/*    $('.panel-heading a').on('click', function (e) {
-        if ($(this).parents('.panel').children('.panel-collapse').hasClass('in')) {
-            e.stopPropagation();
-        }
-    });*/
+    /*    $('.panel-heading a').on('click', function (e) {
+     if ($(this).parents('.panel').children('.panel-collapse').hasClass('in')) {
+     e.stopPropagation();
+     }
+     });*/
 
     menuThumbnailsOverlay();
 
@@ -23,10 +23,45 @@ $(document).ready(function () {
         $("#pizza-collapse").show();
     });
 
-    $(".tab-beverages").click(function(){
+    $(".tab-beverages").click(function () {
         $("#desserts-collapse").hide();
         $("#pizza-collapse").hide();
         $("#beverage-collapse").show();
+    });
+
+    $(".btn-addtocart-dessert").click(function () {
+        $.notify("Selected dessert added to the shopping cart.", {
+            align: "center",
+            verticalAlign: "top",
+            type: 'toast',
+            delay: 2000,
+            icon: 'check'
+        });
+    });
+
+    $(".btn-addtocart-beverage").click(function () {
+        $.notify("Selected beverage added to the shopping cart.", {
+            align: "center",
+            verticalAlign: "top",
+            type: 'toast',
+            delay: 2000,
+            icon: 'check'
+        });
+    });
+
+    $(".btn-addtocart-pizza").click(function () {
+        $("#add-to-cart-popup").modal('show');
+    });
+
+    $(".btn-popup-add-to-cart-pizza").click(function () {
+        $("#add-to-cart-popup").modal('hide');
+        $.notify("Selected pizza added to the shopping cart.", {
+            align: "center",
+            verticalAlign: "top",
+            type: 'toast',
+            delay: 2000,
+            icon: 'check'
+        });
     });
 });
 

@@ -13,12 +13,12 @@
     <!-- Javascript -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="../js/customer_table.js"></script>
 
     <!--datepicker-->
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-    <script src="../js/userMgt.js"></script>
+
+
 
 
     <!--For bootstrap table minified CSS and Javascript -->
@@ -29,14 +29,22 @@
     <!-- Fonts -->
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic
   ,400,300,600,700,800" rel="stylesheet" type="text/css">
-    <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic"
+          rel="stylesheet" type="text/css">
 
     <script>
+<<<<<<< Updated upstream
         $(function(){
+            $("#customerContent").load("userCustomer_view.html");
+            $("#staffContent").load("userStaff_view.html");
+=======
+        $(function () {
             $("#includedContent").load("userEdit.html");
 
+>>>>>>> Stashed changes
         });
     </script>
+
 </head>
 <body>
 
@@ -48,149 +56,154 @@
     </div>
 </div>
 <br>
+
 <div class="breadcrumbPosition">
     <div style="position: relative; left: -50%;">
-        <ul class="breadcrumb breadcrumb-menu" >
+        <ul class="breadcrumb breadcrumb-menu">
             <li><a href="home.html">Home</a></li>
             <li><a href="usersView.html">User Management</a></li>
             <li class="active"><a href="usersView.html">View Users</a></li>
         </ul>
     </div>
 </div>
-    <center>
+<center>
     <div class="form-box" id="viewuser_box">
         <div class="panel panel-default">
 
             <div class="panel-heading common-form-headings">
                 <h3 class="default-panel-headings">View Users</h3>
-
             </div>
-            <div class="panel-body" >
 
-                <div  id="toolbar">
+<<<<<<< Updated upstream
+            <div class="panel-body">
+
+                <div id="toolbar">
                     <div class="col-sm-1"></div>
                     <div class="col-sm-10">
-                    <fieldset class="scheduler-border">
-                        <legend class="scheduler-border" id="searchCriteria">Search Criteria</legend>
+                        <fieldset class="scheduler-border">
+                            <legend class="scheduler-border" id="searchCriteria">Search Criteria</legend>
 
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-xs-4">
-                                    <div class="col-xs-4"></div>
-                                    <div class="col-xs-8">
-                                        <select class=" form-control" id="selectCustomer"
-                                                onchange="configureDropDownLists(this,document.getElementById('filterOption'))">
-                                            <option>--Select--</option>
-                                            <option>Customer</option>
-                                            <option>Staff Member</option>
-                                        </select>
-                                    </div>
-
-                                </div>
-                                <div class="col-xs-4">
+                            <div class="form-group">
+                                <div class="row">
                                     <div class="col-xs-4">
-                                        <label class=" control-label">
-                                           Filter By:
-                                        </label>
-                                    </div>
-                                    <!--dropdownbox to populate-->
-                                    <div class="col-xs-8">
-                                        <select class=" form-control" id="filterOption" onchange="showMe(this);">
-                                            <option value="None">None</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-xs-4">
-                                        <div class="col-xs-4">
-                                        <button type="button" class="btn btn-info">
-                                            <span class="glyphicon glyphicon-search"></span> Search
-                                        </button>
+                                        <div class="col-xs-4"></div>
+                                        <div class="col-xs-8">
+                                            <select class=" form-control" id="selectCustomer"
+                                                    onchange="configureDropDownLists(this,document.getElementById('filterOption'))">
+                                                <option>--Select--</option>
+                                                <option>Customer</option>
+                                                <option>Staff Member</option>
+                                            </select>
                                         </div>
+
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <div class="col-xs-4">
+                                            <label class=" control-label">
+                                                Filter By:
+                                            </label>
+                                        </div>
+                                        <!--dropdownbox to populate-->
+                                        <div class="col-xs-8">
+                                            <select class=" form-control" id="filterOption" onchange="showMe(this);">
+                                                <option value="None">None</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-4">
+                                        <div class="col-xs-4">
+                                            <button type="button" class="btn btn-info">
+                                                <span class="glyphicon glyphicon-search"></span> Search
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="form-group">
-                            <div class="row">
-                                <!--left side-->
-                                <div class="col-xs-6">
-                                    <!--registered form-group-->
-                                    <!--<div class="form-group" id="regPeriod">-->
-                                    <div class="form-group" id="regPeriod" style="display: none">
-                                        <div class="row">
-                                            <div class="col-xs-10">
-                                                <label class="col-xs-6 control-label">
-                                                    Registered Period
-                                                </label>
+                            <div class="form-group">
+                                <div class="row">
+                                    <!--left side-->
+                                    <div class="col-xs-6">
+                                        <!--registered form-group-->
+                                        <!--<div class="form-group" id="regPeriod">-->
+                                        <div class="form-group" id="regPeriod" style="display: none">
+                                            <div class="row">
+                                                <div class="col-xs-10">
+                                                    <label class="col-xs-6 control-label">
+                                                        Registered Period
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-6">
+                                                    <div class="col-xs-3">
+                                                        <label class=" control-label">
+                                                            From:
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-xs-9">
+                                                        <input class="form-control" id="fromDate" type="text"
+                                                               placeholder="Click on me" style="width: 150px">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <div class="col-xs-3">
+                                                        <label class=" control-label">
+                                                            To:
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-xs-9">
+                                                        <input class="form-control" id="toDate"
+                                                               placeholder="Click on me"
+                                                               type="text" style="width: 150px">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                <div class="col-xs-3">
-                                                    <label class=" control-label">
-                                                      From:
+
+                                        <!--name form-group-->
+                                        <div class="form-group" id="name" style="display:none">
+                                            <div class="row">
+                                                <div class="col-xs-10">
+                                                    <label class="col-xs-6 control-label">
+                                                        Name
                                                     </label>
-                                                </div>
-                                                <div class="col-xs-9">
-                                                    <input class="form-control" id="fromDate" type="text"
-                                                           placeholder="Click on me" style="width: 150px">
                                                 </div>
                                             </div>
-                                            <div class="col-xs-6">
-                                                <div class="col-xs-3">
-                                                    <label class=" control-label">
-                                                        To:
-                                                    </label>
+                                            <div class="row">
+                                                <div class="col-xs-6">
+                                                    <div class="col-xs-10">
+                                                        <input class="form-control" id="sfname" placeholder="First Name"
+                                                               type="text" style="width: 200px">
+                                                    </div>
+                                                    <div class="col-xs-2"></div>
                                                 </div>
-                                                <div class="col-xs-9">
-                                                    <input class="form-control" id="toDate" placeholder="Click on me"
-                                                           type="text" style="width: 150px">
+                                                <div class="col-xs-6">
+                                                    <div class="col-xs-10">
+                                                        <input class="form-control" id="slname" placeholder="Last Name"
+                                                               type="text" style="width: 200px">
+                                                    </div>
+                                                    <div class="col-xs-2"></div>
                                                 </div>
+
                                             </div>
                                         </div>
                                     </div>
 
-                                    <!--name form-group-->
-                                    <div class="form-group" id="name" style="display:none">
-                                        <div class="row">
-                                            <div class="col-xs-10">
-                                                <label class="col-xs-6 control-label">
-                                                    Name
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                <div class="col-xs-10">
-                                                    <input class="form-control" id="sfname" placeholder="First Name" type="text" style="width: 200px">
-                                                </div>
-                                                <div class="col-xs-2"></div>
-                                            </div>
-                                            <div class="col-xs-6">
-                                                <div class="col-xs-10">
-                                                    <input class="form-control" id="slname" placeholder="Last Name" type="text" style="width: 200px">
-                                                </div>
-                                                <div class="col-xs-2"></div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!--right side-->
-                                <div class="col-xs-6">
-                                    <fieldset class="scheduler-border" id="loginInfo" style="display:none">
-                                        <legend class="scheduler-border" id="legendInfo"></legend>
+                                    <!--right side-->
+                                    <div class="col-xs-6">
+                                        <fieldset class="scheduler-border" id="loginInfo" style="display:none">
+                                            <legend class="scheduler-border" id="legendInfo"></legend>
                                             <div class="form-group" style="display:none">
                                                 <div class="row">
                                                     <div class="col-xs-6">
-                                                    <label class=" control-label">
-                                                        Designation
-                                                    </label>
+                                                        <label class=" control-label">
+                                                            Designation
+                                                        </label>
                                                     </div>
                                                     <div class="col-xs-6">
-                                                        <select class="form-control" id="designation" >
+                                                        <select class="form-control" id="designation">
                                                             <option>System Admin</option>
                                                             <option>CustomerCare Manager</option>
                                                             <option>Customer Care</option>
@@ -201,12 +214,12 @@
                                             <div class="form-group" style="display:none">
                                                 <div class="row">
                                                     <div class="col-xs-6">
-                                                    <label class=" control-label">
-                                                        Department
-                                                    </label>
+                                                        <label class=" control-label">
+                                                            Department
+                                                        </label>
                                                     </div>
                                                     <div class="col-xs-6">
-                                                        <select class="form-control" id="department" >
+                                                        <select class="form-control" id="department">
                                                             <option>Finance</option>
                                                             <option>Administration</option>
                                                             <option>Customer Service</option>
@@ -214,40 +227,49 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        <div class="form-group" style="display:none">
-                                            <div class="row">
-                                                <div class="col-xs-6">
-                                                    <label class=" control-label">
-                                                        Branch
-                                                    </label>
-                                                </div>
-                                                <div class="col-xs-6">
-                                                    <select class="form-control" id="branch" >
-                                                        <option>Colombo</option>
-                                                        <option>Gampaha</option>
-                                                        <option>Ja-Ela</option>
-                                                    </select>
+                                            <div class="form-group" style="display:none">
+                                                <div class="row">
+                                                    <div class="col-xs-6">
+                                                        <label class=" control-label">
+                                                            Branch
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                        <select class="form-control" id="branch">
+                                                            <option>Colombo</option>
+                                                            <option>Gampaha</option>
+                                                            <option>Ja-Ela</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
                                         </fieldset>
                                     </div>
+                                </div>
                             </div>
-                        </div>
 
-                    </fieldset>
+                        </fieldset>
+=======
+            <div class="panel-body" >
+                <ul class="nav nav-pills ">
+                    <li class="active"><a data-toggle="pill" href="#home" style="margin: 0 5px 10px 5px;">Customers</a></li>
+                    <li><a class="view" data-toggle="pill" href="#menu1" style="margin: 0 5px 10px 5px;">Staff Members</a></li>
+                </ul>
+>>>>>>> Stashed changes
+
                     </div>
-                    <div class="col-sm-1"></div>
                 </div>
-                <table  id="table">
+
+                <table id="table">
                 </table>
             </div>
         </div>
     </div>
-    </center>
+</center>
 
-    <!--div to include modals-->
-    <div id="includedContent"></div>
+<!--div to include modals-->
+<div id="includedContent"></div>
+
 
 </body>
 </html>

@@ -16,11 +16,14 @@ and open the template in the editor.
     <script type="text/javascript" src="../js/cart-operations.js"></script>
     <link rel="stylesheet" href="../css/style.css"/>
     <link rel="stylesheet" href="../css/back-to-top.css"/>
+    <link rel="stylesheet" href="../css/loader.css"/>
     <script src="../js/back-to-top.js"></script>
     <script src="http://www.w3schools.com/lib/w3data.js"></script>
     <script src="../js/common.js"></script>
+    <script src="../js/loader.js"></script>
 </head>
 <body>
+<div class="loader-anim"></div>
 <div w3-include-html="../../self-care-template/pages/header.html"></div>
 <div class="main-div">
     <div class="section">
@@ -222,11 +225,20 @@ and open the template in the editor.
                 <h4 class="modal-title">Remove item?</h4>
             </div>
             <div class="modal-body">
-                <p>Do you want to remove the selected item from cart?</p>
+                <p>Do you want to remove the following item from cart?</p>
+                <div class="thumbnail"
+                     style="height:250px; border: none;">
+                    <img src="../images/Whole-Pizza-100x100.jpg"
+                         class="img-responsive" align="left">
+                    <div class="caption">
+                        <h4>Thumbnail label</h4>
+                        <p>Some description about the item.</p>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-default btn-xs" data-dismiss="modal" style="width:70px;">No</button>
-                <button id="removeOk" class="btn btn-danger btn-xs" style="width:70px;">Yes</button>
+                <button class="btn btn-default btn-sm" data-dismiss="modal" style="width:70px;">No</button>
+                <button id="removeOk" class="btn btn-danger btn-sm" style="width:70px;">Yes</button>
             </div>
         </div>
     </div>

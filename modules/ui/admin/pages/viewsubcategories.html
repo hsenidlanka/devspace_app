@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>View Sub Categories</title>
+    <title>View Categories</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -14,114 +14,169 @@
     <link rel="stylesheet" href="../css/business-casual.css">
     <link rel="stylesheet" href="../css/view_categories.css">
 
-
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic
   ,400,300,600,700,800" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
+
 </head>
 
 <body>
-
-<div id="search">
-    <form>
-        <input type="text" placeholder="Search..." required>
-        <input type="button" value="Search">
-    </form>
+<object width="100%" data="header.html"></object>
+<div class="brand">
+    <div style="position: relative; left: -50%;">
+        <p>Category Management</p>
+    </div>
 </div>
+<br>
 
-<div class="titlemodify">
-    <p>View Sub Categories For Pizza</p>
+<div class="breadcrumbPosition">
+    <div style="position: relative; left: -50%;">
+        <ul class="breadcrumb breadcrumb-menu">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="#">Category Management</a></li>
+            <li><a href="viewcategories.html">View All Category</a></li>
+            <li class="active"><a href="viewsubcategories.html">View All Sub Category</a></li>
+        </ul>
+    </div>
 </div>
+<div class="row">
+<div class="viewcategorysize">
+<div class="panel panel-default " style="position: relative; left: -50%;">
 
-<div id="tableposition">
-    <table class="table-fill">
-        <thead>
-        <tr>
-            <th class="text-center">Id</th>
-            <th class="text-center">Name</th>
-            <th class="text-center" style="width:40%"></th>
-        </tr>
-        </thead>
-        <tbody class="table-hover">
-        <tr>
-            <td>001</td>
-            <td>Deep Dish Pizza</td>
-            <td>
-                <a data-toggle="modal" href="#modifyModel">Modify <span class="glyphicon glyphicon-edit"></span></a>
-                &nbsp;&nbsp;
-                <a data-toggle="modal" href="#deleteModal">Delete<span class="glyphicon glyphicon-remove"></span> </a>
-            </td>
-        </tr>
-        <tr>
-            <td>002</td>
-            <td>Italiano</td>
-            <td>
-                <a data-toggle="modal" href="#modifyModel">Modify <span class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;
-                <a data-toggle="modal"href="#deleteModal">Delete<span class="glyphicon glyphicon-remove"></span> </a>
-            </td>
-        </tr>
-        <tr>
-            <td>003</td>
-            <td>Big Pizza</td>
-            <td>
-                <a data-toggle="modal" href="#modifyModel">Modify <span class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;
-                <a data-toggle="modal" href="#deleteModal">Delete <span class="glyphicon glyphicon-remove"></span> </a>
-            </td>
-        </tr>
-        <tr>
-            <td>005</td>
-            <td>Pan and Other crust</td>
-            <td>
-                <a data-toggle="modal" href="#modifyModel">Modify <span class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;
-                <a data-toggle="modal" href="#deleteModal">Delete <span class="glyphicon glyphicon-remove"></span> </a>
-            </td>
-        </tr>
-        <tr>
-            <td>006</td>
-            <td>Supreme</td>
-            <td>
-                <a data-toggle="modal" href="#modifyModel">Modify <span class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;
-                <a data-toggle="modal" href="#deleteModal">Delete<span class="glyphicon glyphicon-remove"></span> </a>
-            </td>
-        </tr>
-        <tr>
-            <td>007</td>
-            <td>Signature</td>
-            <td>
-                <a data-toggle="modal" href="#modifyModel">Modify <span class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;
-                <a data-toggle="modal" href="#deleteModal">Delete<span class="glyphicon glyphicon-remove"></span> </a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="panel-heading common-form-headings">
+        <h3 class="default-panel-headings">View All Sub Category</h3>
+    </div>
+
+
+    <div class="panel-body" >
+
+
+        <div class="row" style="text-align: center">
+            <div class="col-md-3"></div>
+
+            <div class="col-md-2">
+                <input type="text">
+            </div>
+
+            <div class="col-md-2"></div>
+
+            <div class="col-md-2">
+                <button class="btn btn-success" style="width: 100%">
+                    Search
+                </button>
+            </div>
+
+            <div class="col-md-3"></div>
+
+        </div>
+        <br>
+        <div class="table-responsive " style="width: 100%">
+            <table class="table table-bordered" width="100%">
+                <thead>
+                <tr>
+                    <th class="col-md-1">Id</th>
+                    <th class="col-md-2">Name</th>
+                    <th class="col-md-6">Description</th>
+                    <th class="col-md-3">Actions</th>
+                </tr>
+                </thead>
+                <tbody >
+                <tr>
+                    <td style="vertical-align:middle">001</td>
+                    <td style="vertical-align:middle"><a href="viewsubcategories.html">Pizza</a></td>
+                    <td style="vertical-align:middle">The ever famous Butter Masala Chicken together with a layer of cream cheese, fresh oinions, coriander, ginger and garlic, blanketed with a layer of Mozzarella chees</td>
+                    <td style="vertical-align:middle">
+                        <button class="btn btn-success" data-toggle="modal" data-target="#modifyModel">Modify <span class="glyphicon glyphicon-edit"></span></button>
+                        &nbsp;&nbsp;
+                        <button class="btn btn-success" data-toggle="modal" data-target="#deleteModal">Delete<span class="glyphicon glyphicon-remove"></span></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align:middle">002</td>
+                    <td style="vertical-align:middle"><a href="viewsubcategories.html">Pasta</a></td>
+                    <td style="vertical-align:middle">Freshly cooked pasta with prawns, vegetables & sliced mushrooms baked with a white cream sauce and mozzarella cheese</td>
+                    <td style="vertical-align:middle">
+                        <button class="btn btn-success" data-toggle="modal" data-target="#modifyModel">Modify <span class="glyphicon glyphicon-edit"></span></button>
+                        &nbsp;&nbsp;
+                        <button class="btn btn-success" data-toggle="modal" data-target="#deleteModal">Delete<span class="glyphicon glyphicon-remove"></span></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align:middle">003</td>
+                    <td style="vertical-align:middle"><a href="viewsubcategories.html">Beverage</a></td>
+                    <td style="vertical-align:middle">Freshly cooked pasta with prawns, vegetables & sliced mushrooms baked with a white cream sauce and mozzarella cheese</td>
+                    <td style="vertical-align:middle">
+                        <button class="btn btn-success" data-toggle="modal" data-target="#modifyModel">Modify <span class="glyphicon glyphicon-edit"></span></button>
+                        &nbsp;&nbsp;
+                        <button class="btn btn-success" data-toggle="modal" data-target="#deleteModal">Delete<span class="glyphicon glyphicon-remove"></span></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align:middle">005</td>
+                    <td style="vertical-align:middle"><a href="viewsubcategories.html">Toppings</a></td>
+                    <td style="vertical-align:middle">Freshly cooked pasta with prawns, vegetables & sliced mushrooms baked with a white cream sauce and mozzarella cheese</td>
+                    <td style="vertical-align:middle">
+                        <button class="btn btn-success" data-toggle="modal" data-target="#modifyModel">Modify <span class="glyphicon glyphicon-edit"></span></button>
+                        &nbsp;&nbsp;
+                        <button class="btn btn-success" data-toggle="modal" data-target="#deleteModal">Delete<span class="glyphicon glyphicon-remove"></span></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align:middle">006</td>
+                    <td style="vertical-align:middle"><a href="viewsubcategories.html">Salads</a></td>
+                    <td style="vertical-align:middle">Freshly cooked pasta with prawns, vegetables & sliced mushrooms baked with a white cream sauce and mozzarella cheese</td>
+                    <td style="vertical-align:middle">
+                        <button class="btn btn-success" data-toggle="modal" data-target="#modifyModel">Modify <span class="glyphicon glyphicon-edit"></span></button>
+                        &nbsp;&nbsp;
+                        <button class="btn btn-success" data-toggle="modal" data-target="#deleteModal">Delete<span class="glyphicon glyphicon-remove"></span></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align:middle">007</td>
+                    <td style="vertical-align:middle"><a href="viewsubcategories.html">Desserts</a></td>
+                    <td style="vertical-align:middle">Freshly cooked pasta with prawns, vegetables & sliced mushrooms baked with a white cream sauce and mozzarella cheese</td>
+                    <td style="vertical-align:middle">
+                        <button class="btn btn-success" data-toggle="modal" data-target="#modifyModel">Modify <span class="glyphicon glyphicon-edit"></span></button>
+                        &nbsp;&nbsp;
+                        <button class="btn btn-success" data-toggle="modal" data-target="#deleteModal">Delete<span class="glyphicon glyphicon-remove"></span></button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
 </div>
-
+</div>
+</div>
 
 <div class="modal fade" id="deleteModal" role="dialog" style="top: 25%">
+
     <div class="modal-dialog">
 
+        <!-- Modal content-->
         <div class="modal-content">
-            <div class="modal-header" style="background: rgba(255, 220, 172, 0.48)">
+            <div class="modal-header" style="text-align: center">
 
-                <div class="row">
-                    <h3 class="modal-title" style="text-align: center;">Are You Sure? &nbsp; <span
-                            class="glyphicon glyphicon-trash"></span></h3>
-                </div>
+                <h3 class="modal-title"> <span class="glyphicon glyphicon-trash"></span> Are you sure&nbsp;?</h3>
             </div>
-            <div class="modal-body" style="text-align: center">
-                <h4><p>You are about to delete Sub category "Lorem" </p></h4>
-                <br>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <fieldset>
 
-                <div class="row">
-                    <div class="col-xs-6" style="text-align: right">
-                        <button class="btn btn-success btn-lg">Yes <span class="glyphicon glyphicon-ok"></span></button>
-                    </div>
-                    <div class="col-xs-6" style="text-align: left">
-                        <button class="btn btn-success btn-lg">No <span class="glyphicon glyphicon-remove"></span>
-                        </button>
-                    </div>
 
-                </div>
-                <br>
+                        <div class="form-group" style="text-align: center">
+                            <p>You are about to delete category "Lorem" <br>and <br>It's Sub categories</p>
+                        </div>
+                        <div class="form-group row" style="text-align: center">
+                            <div class="col-xs-3"></div>
+                            <div class="col-xs-2" ><button class="btn btn-success">  Approve <span class="glyphicon glyphicon-ok"></span></button></div>
+                            <div class="col-xs-2"></div>
+                            <div class="col-xs-2" ><button class="btn btn-success"> Cancel <span class="glyphicon glyphicon-remove"></span></button></div>
+                            <div class="col-xs-3"></div>
+                        </div>
+                    </fieldset>
+                </form>
             </div>
 
         </div>
@@ -138,13 +193,15 @@
         <div class="modal-content">
             <div class="modal-header" style="text-align: center">
 
-                <h3 class="modal-title">Modify Sub Category &nbsp;<span class="glyphicon glyphicon-edit"></span></h3>
+                <h3 class="modal-title">Modify Category &nbsp;<span class="glyphicon glyphicon-edit"></span></h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
                     <fieldset>
+
+
                         <div class="form-group">
-                            <label for="categoryid" class="control-label col-sm-4" style="">Sub Category Id :</label>
+                            <label for="categoryid" class="control-label col-sm-4" style="">Category Id :</label>
 
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" id="categoryid" placeholder="Please Enter Category Id">
@@ -152,33 +209,25 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-sm-4" style="text-align: right">
-                                    <label for="selectCategory">
-                                        Sub Category :
-                                    </label>
-
-                            </div>
+                            <label for="categoryname" class="control-label col-sm-4">Category Name :</label>
 
                             <div class="col-sm-8">
-                                <select id="selectCategory" style="width: 100%; height: 30px" class="selectpicker">
-                                    <option>Pizza</option>
-                                    <option>Pasta</option>
-                                    <option>Salad</option>
-                                    <option>Desserts</option>
-                                </select>
-                            </div>
+                                <input type="text" class="form-control" id="categoryname" placeholder="Please Enter Category Name">
 
+                            </div>
                         </div>
+
+
 
                         <div class="form-group">
-                            <label for="subcategory" class="control-label col-sm-4">Sub Category Name : </label>
+                            <label for="categoryname" class="control-label col-sm-4">Category Description :</label>
 
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="subcategory"
-                                       placeholder="Please Enter Sub Category Name">
+                                <input class="form-control" placeholder="Please Enter Description" type="text">
+
                             </div>
                         </div>
-                        <br>
+
 
                         <div class="form-group" style="text-align: center">
                             <div class="col-sm-6" style="text-align: right">
@@ -192,6 +241,7 @@
                                 </button>
                             </div>
                         </div>
+
                     </fieldset>
                 </form>
             </div>
@@ -199,6 +249,12 @@
         </div>
 
     </div>
+</div>
+<br>
+<br><br>
+<br>
+<div class="footerposition">
+    <object width="100%" data="footer.html"></object>
 </div>
 
 </body>

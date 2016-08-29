@@ -1,6 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:400,700);
 
-.main-div{
+.main-div {
     text-align: center;
 }
 
@@ -104,4 +104,14 @@ hr {
 
 .menu-images {
     border: groove;
+}
+
+.add-to-cart-spin {
+    color: #000000;
+    width: 45px;
+    height: 20px;
+}
+
+.add-to-cart-label-qty {
+    font-size: small;
 }

@@ -3,7 +3,7 @@
 .form-horizontal .control-label, .control-label{
 
     /*vertical-align:middle;*/
-    text-align: left;
+    /*text-align: left;*/
 }
 
 .form-group{
@@ -13,9 +13,9 @@
 
 
 button.btn {
-    height:45px;
+    height:40px;
     margin: 0;
-    padding: 0 20px;
+    padding: 0 20px 20px 20px ;
     vertical-align: middle;
     background-color: rgba(74, 103, 0, 0.5);
     border: 0;
@@ -27,6 +27,36 @@ button.btn {
     -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;
     text-shadow: none;
     -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none;
-    -o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; -ms-transition: all .3s; transition: all .3s;
+
 }
 button.btn:hover { opacity: 0.6; color: #fff; }
+
+
+.nav-pills > li.active > a, .nav-pills > li.active > a:focus  {
+    color: rgb(255, 255, 255);
+    /*background-color: #7aad74;*/
+    background-color: rgba(74, 103, 0, 0.5);
+}
+.nav-pills > li.active > a:hover{
+    color: #0b0909;
+    background-color: rgba(69, 141, 19, 0);
+
+}
+/*
+.nav > li > a > {
+    padding: 5px 10px 10px 10px;
+
+    *//*height: px;*//*
+    margin: 0 5px 10px 5px;
+    font-size: large;
+    font-weight: 700;
+
+}*/
+.nav > li > a {
+    padding: 5px 10px 10px 10px;
+    /*height: px;*/
+    margin: 0 5px 10px 80px;
+    font-size: large;
+    font-weight: 700;
+    color: #0d630d;
+}

@@ -9,8 +9,16 @@ th{
     text-align: center;
 }
 
-.tableposition{
+
+
+.footerposition{
     position: absolute;
-    top: 20%;
-    left: 10%;
+    top: 100%;
+    bottom:0;
+}
+
+.viewcategorysize{
+    width: 80%;
+    position: absolute; left: 50%;
+    top: 19%;
 }

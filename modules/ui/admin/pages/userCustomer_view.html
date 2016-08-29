@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <script>
+        //datepicker
+        $(document).ready(function() {
+            $("#fromDate").datepicker({
+                "changeMonth":true,
+                "changeYear":true
+
+            });
+
+            $("#toDate").datepicker({
+                "changeMonth":true,
+                "changeYear":true
+
+            });
+        });
+    </script>
+
+    <script src="../js/customers_table.js"></script>
+
+<!--    <script>
+        $(function(){
+            $("#includedContent1").load("userCustomer_edit.html");
+
+        });
+    </script>-->
+    <script src="../js/userMgt.js"></script>
+
+
+</head>
+<body>
+
+
+<div  id="toolbar">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-10">
+        <fieldset class="scheduler-border">
+            <legend class="scheduler-border" id="searchCriteria"></legend>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-8" style="width: 64%">
+                        <div class="col-xs-2">
+                            <label class=" control-label">
+                                Filter By:
+                            </label>
+                        </div>
+                        <!--checkboxes to select-->
+                        <div class="col-xs-10" id="checkboxDiv">
+                            <label class="checkbox-inline">
+                                <input type="checkbox" value="1" id="regCheck" onchange="showMe()">Registered Date
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" value="2" id="nameCheck" onchange="showMe()">Name
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" value="3" id="liveCheck" onchange="showMe()">Living Area
+                            </label>
+                        </div>
+                        <!--<div class="col-xs-2"></div>-->
+                    </div>
+
+                    <div class="col-xs-4" style="width: 36%">
+                        <div class="col-xs-8">
+                            <input class="form-control"  placeholder=" Name" type="text" id="cname"  style="display: none;">
+                        </div>
+                        <div class="col-xs-1">
+                            <button type="button" class="btn btn-info" style="width: 80px; padding: 0 0 20px 0;">
+                                <span class="glyphicon glyphicon-search"></span> Search
+                            </button>
+                        </div>
+                        <div class="col-xs-2"></div>
+                    </div>
+                </div>
+            </div>
+
+
+       <!--Filtering elements to be displayed as checkbox is checked     -->
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <!--registered form-group-->
+                        <div class="form-group" id="regPeriod" style="display: none">
+                                <div class="col-xs-6">
+                                    <div class="col-xs-3">
+                                        <label class=" control-label">
+                                            From:
+                                        </label>
+                                    </div>
+                                    <div class="col-xs-9">
+                                        <input class="form-control" id="fromDate" type="text"
+                                               placeholder="Click on me" style="width: 150px">
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="col-xs-3">
+                                        <label class=" control-label">
+                                            To:
+                                        </label>
+                                    </div>
+                                    <div class="col-xs-9">
+                                        <input class="form-control" id="toDate" placeholder="Click on me"
+                                               type="text" style="width: 150px">
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                    <!--next half-->
+                    <!--name form-group-->
+                    <div class="col-xs-6">
+                        <div class="form-group" >
+                            <div class="col-xs-6" >
+
+                            </div>
+                            <div class="col-xs-6">
+                                <select class="form-control" id="city"  style="display: none;">
+                                    <option>Colombo</option>
+                                    <option>Gampaha</option>
+                                    <option>Ja-Ela</option>
+                                </select>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <div class="col-sm-1"></div>
+</div>
+<table  id="tableCustomer">
+</table>
+
+<!--div to include modals-->
+<!--<div id="includedContent1"></div>-->
+
+
+<!--modelto appear when banning a Customer or Staff user -->
+<div class="modal fade" id="removeCustomerModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 class="modal-title">Ban User</h3>
+            </div>
+            <div class="modal-body">
+                Are you sure to ban the user ?<label id="lblUname2"></label>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                <button  class="btn red"  id="btnDelt2">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
