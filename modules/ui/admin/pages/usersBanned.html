@@ -20,14 +20,11 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.js"></script>
 
 
-
-
     <script>
         $(function() {
-            $("#customerContent").load("userCustomer_view.html");
-            $("#staffContent").load("userStaff_view.html");
-        });
+//            $("#customerContent").load("userCustomer_view.html");
 
+        });
     </script>
 
 </head>
@@ -47,37 +44,27 @@
         <ul class="breadcrumb breadcrumb-menu">
             <li><a href="home.html">Home</a></li>
             <li><a href="usersView.html">User Management</a></li>
-            <li class="active"><a href="usersView.html">View Users</a></li>
+            <li class="active"><a href="usersView.html">View Banned Users</a></li>
         </ul>
     </div>
 </div>
+
 <center>
     <div class="form-box" id="viewuser_box">
         <div class="panel panel-default">
 
             <div class="panel-heading common-form-headings">
-                <h3 class="default-panel-headings">View Users</h3>
+                <h3 class="default-panel-headings">View Banned Users</h3>
             </div>
 
             <div class="panel-body">
-                <ul class="nav nav-pills red">
-                    <li class="active"><a data-toggle="pill" href="#home">Customers</a></li>
-                    <li><a data-toggle="pill" href="#menu1">Staff Members</a></li>
-                </ul>
-                <br>
-                <div class="tab-content">
-                    <!--div to get customer info-->
-                    <div id="home" class="tab-pane fade in active">
-                        <div id="customerContent"></div>
-                    </div>
-                    <!--div to present staff info-->
-                    <div id="menu1" class="tab-pane fade">
-                        <div id="staffContent"></div>
-                    </div>
-                </div>
+
+
             </div>
         </div>
     </div>
 </center>
+
+
 </body>
 </html>
