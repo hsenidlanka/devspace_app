@@ -171,4 +171,10 @@ button.btn:hover { opacity: 0.6; color: #fff; }
     padding-top: 3%;
     text-align: center;
 }
+.panel-sub-menu1{
+    margin: 0 5px 10px 80px;
+}
+.panel-sub-menu2{
+    margin: 0 5px 10px 130px;
+}
 
