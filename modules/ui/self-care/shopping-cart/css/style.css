@@ -22,7 +22,7 @@
     margin: 0px auto 10px;
     margin-top: 10px;
     border-radius: 10px;
-    /*box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);*/
+    /*box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);*/
     overflow: hidden;
     text-align: left;
 }
@@ -114,7 +114,63 @@ hr {
     font-size: small;
 }
 
-table{
+table {
     border-radius: 10px;
     box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
+}
+
+.header-panel {
+    display: inline-block;
+}
+
+.icons {
+    width: 50px;
+    height: 50px;
+}
+
+#net-amount-text {
+    text-align: center;
+    text-decoration: underline;
+    font-size: large;
+}
+
+#net-amount-field {
+    text-align: center;
+    font-weight: bolder;
+    font-size: xx-large;
+}
+
+.cart-carousel-control {
+    padding-top: 10%;
+    width: 2%;
+    height: 200px;
+}
+
+.summary-table {
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.summary-row {
+    display:table-row;
+}
+
+.summary-cell {
+    display: table-cell;
+    padding: 10px;
+    border: 1px solid #bfbfbf;
+}
+
+.summary-table-header{
+    font-weight: bold;
+    text-align: center;
+}
+
+.price-cell{
+    text-align: right;
+}
+
+.qty-cell{
+    text-align: center;
 }

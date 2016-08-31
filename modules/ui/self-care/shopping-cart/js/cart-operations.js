@@ -4,6 +4,10 @@ $(document).ready(function () {
     calculateDicountedTotal();
     calculateNetAmount();
 
+    $('#myCarousel').carousel({
+        interval: 5000
+    })
+
     $("#coupon-alert-div").hide();
 
     $("#coupon-submit").click(function () {
@@ -19,7 +23,6 @@ $(document).ready(function () {
                 verticalAlign: "top",
                 type: 'toast',
                 delay: 2000,
-                icon: 'check',
                 animationType:"fade"
             });
             $("#modify-item-popup").modal("hide");
@@ -41,7 +44,6 @@ $(document).ready(function () {
                 verticalAlign: "top",
                 type: 'toast',
                 delay: 2000,
-                icon: 'check',
                 animationType:"fade"
             });
             if ($("#label-tot").val() !== 0) {
@@ -108,6 +110,9 @@ function recalculateTotals(){
     if($("#coupon-alert-div").hasClass("alert alert-success")){
         var discount = $("#label-tot").text() * 20 / 100;
         $("#label-dis").text(discount.toFixed(2));
+        calculateDicountedTotal();
+        calculateNetAmount();
+    }else{
         calculateDicountedTotal();
         calculateNetAmount();
     }

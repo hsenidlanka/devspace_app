@@ -42,7 +42,6 @@ $(document).ready(function () {
             verticalAlign: "top",
             type: 'toast',
             delay: 2000,
-            icon: 'check',
             animationType: "fade"
         });
     });
@@ -54,7 +53,6 @@ $(document).ready(function () {
             verticalAlign: "top",
             type: 'toast',
             delay: 2000,
-            icon: 'check',
             animationType: "fade"
         });
     });
@@ -71,11 +69,11 @@ $(document).ready(function () {
             verticalAlign: "top",
             type: 'toast',
             delay: 2000,
-            icon: 'check',
             animationType: "fade"
         });
     });
 
+    // Validate the search textbox
     $("#btn-menu-search").click(function () {
         if ($("#txt-menu-search").val().length == 0) {
             $("#txt-menu-search").css("border-color", "red");
@@ -85,7 +83,6 @@ $(document).ready(function () {
                 delay: 2000,
                 animationType: "fade",
                 color: "#fff",
-                icon:'close',
                 background: "#D44950"
             });
         }else{
@@ -95,7 +92,7 @@ $(document).ready(function () {
     });
 });
 
-// Overlay description of the images of menu items
+// Configurations of the overlay description of the images of menu items
 function menuThumbnailsOverlay() {
     $('.menu-images').contenthover({
         overlay_background: '#000',

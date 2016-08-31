@@ -10,9 +10,9 @@ and open the template in the editor.
     <link rel="shortcut icon" href="">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/spacelab/bootstrap.min.css"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../css/bootstrap.min.css"/>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../js/cart-operations.js"></script>
     <link rel="stylesheet" href="../css/style.css"/>
     <link rel="stylesheet" href="../css/back-to-top.css"/>
@@ -30,7 +30,11 @@ and open the template in the editor.
 <div class="main-div">
     <div class="section">
         <div class="panel panel-default">
-            <div class="panel-heading"><h3>Shopping cart</h3></div>
+            <div class="panel-heading">
+                <img class="icons" src="../images/icons/shopping-cart.png"/>
+
+                <h3 class="header-panel">Shopping cart</h3>
+            </div>
             <div class="panel-body">
                 <div class="container">
                     <div class="row">
@@ -46,24 +50,26 @@ and open the template in the editor.
                                 </tr>
                                 <tr>
                                     <td style="vertical-align: middle; text-align: left;"><img
-                                            src="../images/Whole-Pizza-100x100.jpg"> Sample item 01
+                                            src="../images/gourmet-pizza-100x100.jpg"> Sample item 01
                                     </td>
-                                    <td style="vertical-align: middle;">450.00</td>
+                                    <td style="vertical-align: middle; text-align: center;">450.00</td>
                                     <td style="vertical-align: middle;"><input class="spin" type="number" min="1"
                                                                                max="100" value="1"></td>
-                                    <td style="vertical-align: middle;" class="tot-price">450.00</td>
+                                    <td style="vertical-align: middle; text-align: center;" class="tot-price">450.00
+                                    </td>
                                     <td style="vertical-align: middle;"><a class="mod"><i
                                             class="glyphicon glyphicon-edit"></i> Edit</a>&nbsp;
                                         <a class="del"><i class="glyphicon glyphicon-remove"></i> Remove</a>
                                 </tr>
                                 <tr>
                                     <td style="vertical-align: middle; text-align: left;"><img
-                                            src="../images/Whole-Pizza-100x100.jpg"> Sample item 02
+                                            src="../images/pizza-100x100.jpg"> Sample item 02
                                     </td>
-                                    <td style="vertical-align: middle;">650.00</td>
+                                    <td style="vertical-align: middle; text-align: center;">650.00</td>
                                     <td style="vertical-align: middle;"><input class="spin" type="number" min="1"
                                                                                max="100" value="1"></td>
-                                    <td style="vertical-align: middle;" class="tot-price">650.00</td>
+                                    <td style="vertical-align: middle; text-align: center;" class="tot-price">650.00
+                                    </td>
                                     <td style="vertical-align: middle;"><a class="mod"><i
                                             class="glyphicon glyphicon-edit"></i> Edit</a>&nbsp;
                                         <a class="del"><i class="glyphicon glyphicon-remove"></i> Remove</a>
@@ -72,10 +78,11 @@ and open the template in the editor.
                                     <td style="vertical-align: middle; text-align: left;"><img
                                             src="../images/Whole-Pizza-100x100.jpg"> Sample item 03
                                     </td>
-                                    <td style="vertical-align: middle;">450.00</td>
+                                    <td style="vertical-align: middle; text-align: center;">450.00</td>
                                     <td style="vertical-align: middle;"><input class="spin" type="number" min="1"
                                                                                max="100" value="1"></td>
-                                    <td style="vertical-align: middle;" class="tot-price">450.00</td>
+                                    <td style="vertical-align: middle; text-align: center;" class="tot-price">450.00
+                                    </td>
                                     <td style="vertical-align: middle;"><a class="mod"><i
                                             class="glyphicon glyphicon-edit"></i> Edit</a>&nbsp;
                                         <a class="del"><i class="glyphicon glyphicon-remove"></i> Remove</a>
@@ -97,7 +104,9 @@ and open the template in the editor.
 
                         <div class="col-md-4">
                             <div class="login-card">
-                                <h2>Total</h2>
+                                <img src="../images/icons/invoice.png" width="40px" height="40px"/>
+
+                                <h2 style="display: inline;">Total</h2>
                                 <hr>
                                 <h5>Apply a coupon</h5>
 
@@ -124,9 +133,12 @@ and open the template in the editor.
                                     <label><strong>Service charges (%): <label
                                             id="label-serv">5</label></strong></label>
                                 </div>
-                                <div style="margin-top: 10px;">
-                                    <p style="text-align: center;"><strong><u>Net amount (Rs.):</u></strong></p>
-                                    <p id="net-amount-field" style="text-align: center;"><strong>0.00</strong></p>
+                                <div style="margin-top: 10px; border: groove; border-color: #62c462; border-width: thin;">
+                                    <p id="net-amount-text"><strong>Net amount (Rs.)</strong></p>
+
+                                    <p id="net-amount-field">0.00</p>
+                                </div>
+                                <div style="margin-top: 5px;">
                                     <button type="submit" class="btn btn-success" id="checkoutButton"
                                             style="width: 100%;">
                                         <span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;Proceed Checkout
@@ -138,53 +150,87 @@ and open the template in the editor.
                 </div>
             </div>
         </div>
-
+        <!-- Start-Suggestions image slider -->
         <div class="container">
-            <div class="row">
+            <div class="col-md-12">
                 <h3>You may interested in these...</h3>
 
-                <div class="col-md-3">
-                    <img src="../images/pizza-salgada-620.jpg">
+                <div class="well">
+                    <div id="myCarousel" class="carousel slide">
+                        <!-- Carousel items -->
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <div class="row">
+                                    <div class="col-sm-3"><a href="#x"><img src="../images/pizzas/02.jpg"
+                                                                            class="img-responsive"></a>
+                                        <h4>Item title</h4>
 
-                    <h3>Suggested item 01</h3>
+                                        <p>Item description</p>
+                                    </div>
+                                    <div class="col-sm-3"><a href="#x"><img src="../images/desserts/cake%2003.jpg"
+                                                                            class="img-responsive"></a>
 
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisici elit,
-                        <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.</p>
+                                        <h4>Item title</h4>
+
+                                        <p>Item description</p>
+                                    </div>
+                                    <div class="col-sm-3"><a href="#x"><img src="../images/desserts/ice-cream%2002.jpg"
+                                                                            class="img-responsive"></a>
+                                        <h4>Item title</h4>
+
+                                        <p>Item description</p>
+                                    </div>
+                                    <div class="col-sm-3"><a href="#x"><img src="../images/pizzas/22.png"
+                                                                            class="img-responsive"></a>
+                                        <h4>Item title</h4>
+
+                                        <p>Item description</p>
+                                    </div>
+                                </div>
+                                <!--/row-->
+                            </div>
+                            <!--/item-->
+                            <div class="item">
+                                <div class="row">
+                                    <div class="col-sm-3"><a href="#x"><img src="../images/beverages/coffee%2003.jpg"
+                                                                            class="img-responsive"></a>
+                                        <h4>Item title</h4>
+
+                                        <p>Item description</p>
+                                    </div>
+                                    <div class="col-sm-3"><a href="#x"><img src="../images/desserts/pudding%2003.jpg"
+                                                                            class="img-responsive"></a>
+                                        <h4>Item title</h4>
+
+                                        <p>Item description</p>
+                                    </div>
+                                    <div class="col-sm-3"><a href="#x"><img src="../images/pizzas/21.jpg"
+                                                                            class="img-responsive"></a>
+                                        <h4>Item title</h4>
+
+                                        <p>Item description</p>
+                                    </div>
+                                    <div class="col-sm-3"><a href="#x"><img src="../images/pizzas/12.jpg"
+                                                                            class="img-responsive"></a>
+                                        <h4>Item title</h4>
+
+                                        <p>Item description</p>
+                                    </div>
+                                </div>
+                                <!--/row-->
+                            </div>
+                        </div>
+                        <!--/carousel-inner--> <a class="left carousel-control cart-carousel-control" href="#myCarousel"
+                                                  data-slide="prev">‹</a>
+                        <a class="right carousel-control cart-carousel-control" href="#myCarousel"
+                           data-slide="next">›</a>
+                    </div>
+                    <!--/myCarousel-->
                 </div>
-                <div class="col-md-3">
-                    <img src="../images/BexleysBBQpizza-200x200.jpg">
-
-                    <h3>Suggested item 02</h3>
-
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisici elit,
-                        <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.</p>
-                </div>
-                <div class="col-md-3">
-                    <img src="../images/Pineapplepizza3-200x200.jpg">
-
-                    <h3>Suggested item 03</h3>
-
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisici elit,
-                        <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.</p>
-                </div>
-                <div class="col-md-3">
-                    <img src="../images/The-Best-Gluten-Free-Pizza-Dough1-200x200.jpg">
-
-                    <h3>Suggested item 04</h3>
-
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisici elit,
-                        <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.</p>
-                </div>
-            </div>
-            <div style="text-align: center;">
-                <button>
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                </button>
-                <button>
-                    <span class="glyphicon glyphicon-chevron-right"></span>
-                </button>
+                <!--/well-->
             </div>
         </div>
+        <!-- End-Suggessions image slider -->
     </div>
 </div>
 
@@ -201,6 +247,7 @@ and open the template in the editor.
                     <br>
                     <br>
                 </p>
+
                 <div style="text-align:center">
                     <div style="padding:5px;">
                         <a class="btn btn-primary" style="width:300px;">Login to the system</a>
@@ -226,16 +273,20 @@ and open the template in the editor.
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title">Remove item?</h4>
+                <img class="icons" src="../images/icons/shopping-cart-remove.png">
+                <h4 class="modal-title header-panel">Remove item?</h4>
             </div>
             <div class="modal-body">
                 <p>Do you want to remove the following item from cart?</p>
+
                 <div class="thumbnail"
                      style="height:auto; border: none;">
                     <img src="../images/Whole-Pizza-100x100.jpg"
                          class="img-responsive" align="left">
+
                     <div class="caption">
                         <h4>&nbsp;Thumbnail label</h4>
+
                         <p>&nbsp;Some description about the item.</p>
                     </div>
                 </div>
@@ -254,7 +305,8 @@ and open the template in the editor.
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title">Modify and Update cart</h4>
+                <img class="icons" src="../images/icons/shopping-cart-modify.png">
+                <h4 class="modal-title header-panel">Modify and Update cart</h4>
             </div>
             <div class="modal-body">
                 <p>Customize the following item as you wish and click add to cart to add

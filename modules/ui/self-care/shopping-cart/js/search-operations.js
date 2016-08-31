@@ -1,24 +1,27 @@
-$(document).ready(function(){
-    $("#chkbox-search-pizza").click(function(){
-        if($(this).is (':checked')) {
+$(document).ready(function () {
+    // Filter searched results
+    $("#chkbox-search-pizza").click(function () {
+        if ($(this).is(':checked')) {
             $("#search-pizza-collapse").show();
-        }else{
+        } else {
             $("#search-pizza-collapse").hide();
         }
     });
 
-    $("#chkbox-search-dessert").click(function(){
-        if($(this).is (':checked')) {
+    // Filter searched results
+    $("#chkbox-search-dessert").click(function () {
+        if ($(this).is(':checked')) {
             $("#search-desserts-collapse").show();
-        }else{
+        } else {
             $("#search-desserts-collapse").hide();
         }
     });
 
-    $("#chkbox-search-beverage").click(function(){
-        if($(this).is (':checked')) {
+    // Filter searched results
+    $("#chkbox-search-beverage").click(function () {
+        if ($(this).is(':checked')) {
             $("#search-beverages-collapse").show();
-        }else{
+        } else {
             $("#search-beverages-collapse").hide();
         }
     });
