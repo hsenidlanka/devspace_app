@@ -28,7 +28,7 @@
 
         $('#tableCustomer').bootstrapTable({
 
-            url: '../js/customer.json',
+            url: '../js/viewcategory.json',
             height: 375,
             pagination: true,
             pageSize: 8,
@@ -36,39 +36,21 @@
             singleSelect: true,
             minimumCountColumns: 3,
             columns: [{
-                //field: 'id',
-                field:'ID',
-                title: 'ID :',
+                field:'id',
+                title: 'id',
                 sortable: true,
                 align:'left'
             },{
-                field: 'Username',
-                title: 'Username :',
+                field: 'name',
+                title: 'name',
                 sortable: true,
                 align:'left',
                 searchable:true
             }, {
-                field: 'f_name',
-                title: 'First Name :',
+                field: 'description',
+                title: 'description',
                 align:'left',
-                sortable: true
-            }, {
-                field: 'l_name',
-                title: 'Last Name :',
-                align:'left',
-                sortable: true
-            }, {
-                field: 'mobile',
-                title: 'Phone No :',
-                align:'left'
-            }, {
-                field: 'e_mail',
-                title: 'Email :',
-                align:'left'
-            }, {
-                field: 'address',
-                title: 'Address :',
-                align:'left'
+                description: true
             }, {
                 field: 'Options',
                 title: 'Operations :',
