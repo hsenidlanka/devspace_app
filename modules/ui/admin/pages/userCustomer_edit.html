@@ -2,7 +2,6 @@
 <html>
 <head>
 
-
     <!--include common CSS, fonts and js-->
     <link rel="import" href="adminTop.html">
 
@@ -10,13 +9,10 @@
     <link href="../css/userMgt.css" rel="stylesheet">
     <link href="../css/form-elements.css" rel="stylesheet">
 
-
     <!--include the jQuery toaster plugin's script-->
     <script src="../js/jquery.toaster.js"></script>
     <script src="../js/simpleToastMessage.js"></script>
     <script src="../js/userMgt.js"></script>
-
-
 
 </head>
 <body>
@@ -191,35 +187,6 @@
 
                         <!--login details-->
                         <div class="form-group">
-                            <!--<div class="col-xs-1"></div>-->
-                         <!--   <div class="col-xs-12">
-                                <fieldset class="scheduler-border" id="loginInfo">
-                                    <legend class="scheduler-border" id="legendInfo">Login Credentials</legend>
-                                    <div class="row">
-                                        <label class="col-xs-4 control-label" style="text-align: left">
-                                            User Name
-                                        </label>
-                                        <label class="col-xs-4 control-label" style="text-align: left">
-                                            Password
-                                        </label>
-                                        <label class="col-xs-4 control-label" style="text-align: left">
-                                            Confirm Password
-                                        </label>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xs-4">
-                                            <input class="form-control" id="username" placeholder="User Name" type="text" >
-                                        </div>
-                                        <div class="col-xs-4">
-                                            <input class="form-control" id="password" placeholder="Password" type="text" >
-                                        </div>
-                                        <div class="col-xs-4">
-                                            <input class="form-control" id="cpassword" placeholder="Password Confirm" type="text" >
-                                        </div>
-                                    </div>.
-                                </fieldset>
-                            </div>-->
-                            <!--<div class="col-xs-1"></div>-->
 
                         </div>
 
@@ -231,7 +198,8 @@
                                 </div>
                                 <div class="col-xs-4">
                                     <button type="button" class="btn btn-success btnAddItem" id="btnEditCustomer"
-                                            onclick="errorToast('You have failed to edit the Customer user.. !')">Edit Customer</button>
+                                            onclick="errorToast('You have failed to edit the Customer user.. !')"><span
+                                            class="glyphicon glyphicon-ok"></span>Save Edits</button>
                                 </div>
                             </div>
                             <div class="col-xs-1"></div>
@@ -242,8 +210,5 @@
         </div>
     </div>
 </center>
-
-
-
 </body>
 </html>

@@ -111,21 +111,33 @@
 <table  id="tableStaff">
 </table>
 
+
 <!--modelto appear when banning a Customer or Staff user -->
-<div class="modal fade" id="removeStaffModal" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
+<div class="modal fade" id="removeStaffModal">
+    <div class="modal-dialog ">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h3 class="modal-title">Ban User</h3>
+            <div class="modal-header deleteuser-modal-header-style">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
+                        class="glyphicon glyphicon-remove"></span></button>
+                <div align="center"><span class="glyphicon glyphicon-trash"></span> Block Staff User
+                </div>
             </div>
             <div class="modal-body">
-                Are you sure to ban the user ?<label id="lblUname"></label>
+                <div class="form-group">
+                    <label id="lblBlockStaffMsg">Do you really want to block this User ?</label><br><br>
+
+                    <div align="center">
+                        <label id="lblBlockStaffId">Username : xxxxxx </label><br>
+                        <label id="lblBlockStaffName">Name : yyyyyy </label><br>
+                    </div>
+                </div>
             </div>
-            <div class="modal-footer">
-                <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                <button  class="btn red"  id="btnDelt">Confirm</button>
+            <div class="modal-footer" align="right">
+                <button class="btn btn-success" type="button" value="Yes" id="btnBlockStaff">Yes
+                </button>
+                <button class="btn btn-success" type="button" value="cancel" id="btnCnclBlockStaff">
+                    No
+                </button>
             </div>
         </div>
     </div>
