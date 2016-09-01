@@ -295,6 +295,29 @@
                                     <filtering>true</filtering>
                                     <includes>
                                         <include>top.jsp</include>
+                                        <include>bottom.jsp</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+
+<execution>
+                        <id>copy-jspViews2</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <overwrite>true</overwrite>
+                            <outputDirectory>${basedir}/target/unpacked/WEB-INF/view/jsp/default/ui</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}/jspViews</directory>
+                                    <filtering>true</filtering>
+                                    <includes>
+                                        <include>casLoginView.jsp</include>
+                                        <include>casLogoutView.jsp</include>
                                     </includes>
                                 </resource>
                             </resources>
@@ -348,6 +371,25 @@
                             </resources>
                         </configuration>
                     </execution>
+
+                    <execution>
+                        <id>copy-images</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <overwrite>true</overwrite>
+                            <outputDirectory>${basedir}/target/unpacked/images</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}/themes/${theme}/images</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+
 
                     <!--*
                         **Copying images
