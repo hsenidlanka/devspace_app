@@ -2,12 +2,7 @@
 <html>
 <head>
 
-  <!--  <script>
-        $(function(){
-            $("#includedContent").load("userStaff_edit.html");
 
-        });
-    </script>-->
     <script src="../js/staff_table.js"></script>
     <script src="../js/userMgt.js"></script>
 
@@ -39,9 +34,7 @@
                             <label class="checkbox-inline">
                                 <input type="checkbox" value="3" id="branchCheck" onchange="showMe()">Branch
                             </label>
-
                         </div>
-                        <!--<div class="col-xs-2"></div>-->
                     </div>
 
                     <div class="col-xs-4" style="width: 36%">
@@ -50,7 +43,7 @@
 
                         </div>
                         <div class="col-xs-1">
-                            <button type="button" class="btn btn-success" style="width: 80px; padding: 0 0 20px 0;">
+                            <button type="button" class="btn btn-success">
                                 <span class="glyphicon glyphicon-search"></span> Search
                             </button>
                         </div>
@@ -117,9 +110,6 @@
 <!--staff detail table is included -->
 <table  id="tableStaff">
 </table>
-
-<!--div to include modals-->
-<!--<div id="includedContent"></div>-->
 
 <!--modelto appear when banning a Customer or Staff user -->
 <div class="modal fade" id="removeStaffModal" role="dialog">

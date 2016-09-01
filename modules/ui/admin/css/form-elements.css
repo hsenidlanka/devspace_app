@@ -13,14 +13,18 @@
 
 
 .nav-pills > li.active > a, .nav-pills > li.active > a:focus  {
-    color: rgb(255, 255, 255);
+    color: #0d630d;
     /*background-color: #7aad74;*/
     /*background-color: rgba(74, 103, 0, 0.5);*/
-    background-color: rgb(36, 90, 3);
+    /*background-color: rgb(36, 90, 3);*/
+    background-color: #dff0d8;
+    text-decoration: underline;
+    height: 40px;
 }
 .nav-pills > li.active > a:hover{
-    color: #0b0909;
+    color: #0d630d;
     background-color: rgba(69, 141, 19, 0);
+    height: 40px;
 
 }
 

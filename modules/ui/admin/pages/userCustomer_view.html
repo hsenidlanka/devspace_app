@@ -21,12 +21,6 @@
 
     <script src="../js/customers_table.js"></script>
 
-<!--    <script>
-        $(function(){
-            $("#includedContent1").load("userCustomer_edit.html");
-
-        });
-    </script>-->
     <script src="../js/userMgt.js"></script>
 
 
@@ -34,7 +28,7 @@
 <body>
 
 
-<div  id="toolbar">
+<!--<div  id="toolbar">-->
     <div class="col-sm-1"></div>
     <div class="col-sm-10">
         <fieldset class="scheduler-border">
@@ -54,7 +48,7 @@
                                 <input type="checkbox" value="1" id="regCheck" onchange="showMe()">Registered Date
                             </label>
                             <label class="checkbox-inline">
-                                <input type="checkbox" value="2" id="nameCheck" onchange="showMe()">Name
+                                <input type="checkbox" value="2" id="nameCheck" onchange="showMe()" checked>Name
                             </label>
                             <label class="checkbox-inline">
                                 <input type="checkbox" value="3" id="liveCheck" onchange="showMe()">Living Area
@@ -65,10 +59,10 @@
 
                     <div class="col-xs-4" style="width: 36%">
                         <div class="col-xs-8">
-                            <input class="form-control"  placeholder=" Name" type="text" id="cname"  style="display: none;">
+                            <input class="form-control"  placeholder=" Name" type="text" id="cname"  >
                         </div>
                         <div class="col-xs-1">
-                            <button type="button" class="btn btn-success" style="width: 80px; padding: 0 0 20px 0;">
+                            <button type="button" class="btn btn-success" >
                                 <span class="glyphicon glyphicon-search"></span> Search
                             </button>
                         </div>
@@ -131,7 +125,7 @@
         </fieldset>
     </div>
     <div class="col-sm-1"></div>
-</div>
+<!--</div>-->
 <table  id="tableCustomer">
 </table>
 
