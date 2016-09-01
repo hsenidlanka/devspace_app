@@ -9,7 +9,7 @@
 <form:form method="post" id="fm1" cssClass="fm-v clearfix" commandName="${commandName}" htmlEscape="true">
     <div id="wrapper">
     <div id="login-window">
-        <h2>Login</h2>
+        <h2>Loginqq</h2>
         <br/>
 
         <form:errors path="*" cssClass="error_message" id="status" element="div" />
