@@ -47,7 +47,7 @@ body {
     margin-left: 25%;
 }
 
-#timepicker1, #timepicker2 {
+#timepicker1, #timepicker2, #date {
     width: 100px;
     height: 20px;
 }
