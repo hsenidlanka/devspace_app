@@ -1,8 +1,10 @@
-body {
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700);
+
+/*body {
     height: 100%;
     -webkit-font-smoothing: antialiased;
     font: normal 14px arial,sans-serif;
-}
+}*/
 
 .row {
     margin-left:0px;
@@ -24,7 +26,7 @@ body {
     background-color: #f9f9f9;
     margin-top:50px;
     padding-top:20px;
-    padding-bottom:20px;
+   /* padding-bottom:20px;*/
 }
 
 
@@ -65,7 +67,7 @@ header h1,header h2,header h3 a,header a,header a:hover {
 }
 
 header h3 {
-    font-family: 'Kreon', serif;
+    /*font-family: 'Kreon', serif;*/
     background: #ffcc33;
     padding:10px;
     border-radius:3px;
