@@ -10,6 +10,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.css">
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.js"></script>
 
     <link rel="stylesheet" href="../css/business-casual.css">
@@ -39,90 +40,93 @@
 <div class="row">
 <center>
     <div class="maintable">
-        <div class="panel panel-default" >
-            <div class="panel-heading common-form-headings" style="vertical-align:middle">
-                <h3 class="default-panel-headings">View All Pending Comments</h3>
-                <br>
-            </div>
-            <div class="panel-body">
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th class="col-md-1">Id</th>
-                            <th class="col-md-3">Username</th>
-                            <th class="col-md-5">Comment</th>
-                            <th class="col-md-3">Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td style="vertical-align:middle">001</td>
-                            <td style="vertical-align:middle">Harold Finch</td>
-                            <td style="vertical-align:middle">Lorem Ipsum is simply dummy text of the printing and</td>
+        <center>
+            <div class="panel panel-default" >
+                <div class="panel-heading common-form-headings" style="vertical-align:middle">
+                    <h3 class="default-panel-headings">View All Pending Comments</h3>
+                    <br>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th class="col-md-1">Id</th>
+                                <th class="col-md-3">Username</th>
+                                <th class="col-md-5">Comment</th>
+                                <th class="col-md-3">Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td style="vertical-align:middle">001</td>
+                                <td style="vertical-align:middle">Harold Finch</td>
+                                <td style="vertical-align:middle">Lorem Ipsum is simply dummy text of the printing and</td>
 
-                            <td style="vertical-align:middle">
-                                <a data-toggle="modal" data-target="#approveModel" href="#approveModel">Approve <span class="glyphicon glyphicon-edit"></span></a>
-                                &nbsp;&nbsp;
-                                <a data-toggle="modal" data-target="#discardModel" href="#discardModel">Discard <span class="glyphicon glyphicon-remove"></span></a>
-                            </td>
+                                <td style="vertical-align:middle">
+                                    <a data-toggle="modal" data-target="#approveModel" href="#approveModel">Approve <span class="glyphicon glyphicon-edit"></span></a>
+                                    &nbsp;&nbsp;
+                                    <a data-toggle="modal" data-target="#discardModel" href="#discardModel">Discard <span class="glyphicon glyphicon-remove"></span></a>
+                                </td>
 
-                        </tr>
-                        <tr>
-                            <td style="vertical-align:middle">001</td>
-                            <td style="vertical-align:middle">John Reese</td>
-                            <td style="vertical-align:middle">Lorem Ipsum is simply dummy text of the printing and</td>
-                            <td style="vertical-align:middle">
-                                <a data-toggle="modal" data-target="#approveModel" href="#approveModel">Approve <span class="glyphicon glyphicon-edit"></span></a>
-                                &nbsp;&nbsp;
-                                <a data-toggle="modal" data-target="#discardModel" href="#discardModel">Discard <span class="glyphicon glyphicon-remove"></span></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="vertical-align:middle">001</td>
-                            <td style="vertical-align:middle">Joss Carter</td>
-                            <td style="vertical-align:middle">Lorem Ipsum is simply dummy text of the printing and</td>
-                            <td style="vertical-align:middle">
-                                <a data-toggle="modal" data-target="#approveModel" href="#approveModel">Approve <span class="glyphicon glyphicon-edit"></span></a>
-                                &nbsp;&nbsp;
-                                <a data-toggle="modal" data-target="#discardModel" href="#discardModel">Discard <span class="glyphicon glyphicon-remove"></span></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="vertical-align:middle">001</td>
-                            <td style="vertical-align:middle">Root</td>
-                            <td style="vertical-align:middle">Lorem Ipsum is simply dummy text of the printing and</td>
-                            <td style="vertical-align:middle">
-                                <a data-toggle="modal" data-target="#approveModel" href="#approveModel">Approve <span class="glyphicon glyphicon-edit"></span></a>
-                                &nbsp;&nbsp;
-                                <a data-toggle="modal" data-target="#discardModel" href="#discardModel">Discard <span class="glyphicon glyphicon-remove"></span></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="vertical-align:middle">001</td>
-                            <td style="vertical-align:middle">Sameen Shaw</td>
-                            <td style="vertical-align:middle">Lorem Ipsum is simply dummy text of the printing and</td>
-                            <td style="vertical-align:middle">
-                                <a data-toggle="modal" data-target="#approveModel" href="#approveModel">Approve <span class="glyphicon glyphicon-edit"></span></a>
-                                &nbsp;&nbsp;
-                                <a data-toggle="modal" data-target="#discardModel" href="#discardModel">Discard <span class="glyphicon glyphicon-remove"></span></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="vertical-align:middle">001</td>
-                            <td style="vertical-align:middle">Lionel Fusco</td>
-                            <td style="vertical-align:middle">Lorem Ipsum is simply dummy text of the printing and</td>
-                            <td style="vertical-align:middle">
-                                <a data-toggle="modal" data-target="#approveModel" href="#approveModel">Approve <span class="glyphicon glyphicon-edit"></span></a>
-                                &nbsp;&nbsp;
-                                <a data-toggle="modal" data-target="#discardModel" href="#discardModel">Discard <span class="glyphicon glyphicon-remove"></span></a>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align:middle">001</td>
+                                <td style="vertical-align:middle">John Reese</td>
+                                <td style="vertical-align:middle">Lorem Ipsum is simply dummy text of the printing and</td>
+                                <td style="vertical-align:middle">
+                                    <a data-toggle="modal" data-target="#approveModel" href="#approveModel">Approve <span class="glyphicon glyphicon-edit"></span></a>
+                                    &nbsp;&nbsp;
+                                    <a data-toggle="modal" data-target="#discardModel" href="#discardModel">Discard <span class="glyphicon glyphicon-remove"></span></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align:middle">001</td>
+                                <td style="vertical-align:middle">Joss Carter</td>
+                                <td style="vertical-align:middle">Lorem Ipsum is simply dummy text of the printing and</td>
+                                <td style="vertical-align:middle">
+                                    <a data-toggle="modal" data-target="#approveModel" href="#approveModel">Approve <span class="glyphicon glyphicon-edit"></span></a>
+                                    &nbsp;&nbsp;
+                                    <a data-toggle="modal" data-target="#discardModel" href="#discardModel">Discard <span class="glyphicon glyphicon-remove"></span></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align:middle">001</td>
+                                <td style="vertical-align:middle">Root</td>
+                                <td style="vertical-align:middle">Lorem Ipsum is simply dummy text of the printing and</td>
+                                <td style="vertical-align:middle">
+                                    <a data-toggle="modal" data-target="#approveModel" href="#approveModel">Approve <span class="glyphicon glyphicon-edit"></span></a>
+                                    &nbsp;&nbsp;
+                                    <a data-toggle="modal" data-target="#discardModel" href="#discardModel">Discard <span class="glyphicon glyphicon-remove"></span></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align:middle">001</td>
+                                <td style="vertical-align:middle">Sameen Shaw</td>
+                                <td style="vertical-align:middle">Lorem Ipsum is simply dummy text of the printing and</td>
+                                <td style="vertical-align:middle">
+                                    <a data-toggle="modal" data-target="#approveModel" href="#approveModel">Approve <span class="glyphicon glyphicon-edit"></span></a>
+                                    &nbsp;&nbsp;
+                                    <a data-toggle="modal" data-target="#discardModel" href="#discardModel">Discard <span class="glyphicon glyphicon-remove"></span></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align:middle">001</td>
+                                <td style="vertical-align:middle">Lionel Fusco</td>
+                                <td style="vertical-align:middle">Lorem Ipsum is simply dummy text of the printing and</td>
+                                <td style="vertical-align:middle">
+                                    <a data-toggle="modal" data-target="#approveModel" href="#approveModel">Approve <span class="glyphicon glyphicon-edit"></span></a>
+                                    &nbsp;&nbsp;
+                                    <a data-toggle="modal" data-target="#discardModel" href="#discardModel">Discard <span class="glyphicon glyphicon-remove"></span></a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
+        </center>
+
     </div>
 </center>
 </div>
