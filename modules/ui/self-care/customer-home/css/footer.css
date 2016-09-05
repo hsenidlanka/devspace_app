@@ -25,7 +25,7 @@
     height: 70px;
     background-color: #f9f9f9;
     margin-top:50px;
-    padding-top:20px;
+    /*padding-top:10px;*/
    /* padding-bottom:20px;*/
 }
 
@@ -49,6 +49,7 @@
 /* end of footer styles
 -------------------------------------------------- */
 
+/*
 h1,h2,h3,h4 {
     font-family: 'Kreon', serif;
     vertical-align:middle;
@@ -67,7 +68,9 @@ header h1,header h2,header h3 a,header a,header a:hover {
 }
 
 header h3 {
-    /*font-family: 'Kreon', serif;*/
+    */
+/*font-family: 'Kreon', serif;*//*
+
     background: #ffcc33;
     padding:10px;
     border-radius:3px;
@@ -161,6 +164,7 @@ h1 {
     margin: 0;
     padding: 15px;
 }
+*/
 
 .scroll-top {
     position:fixed;
@@ -177,7 +181,7 @@ h1 {
 }
 
 
-section {
+/*section {
     color: #ffffff;
     min-height: 400px;
     height: auto !important;
@@ -212,4 +216,4 @@ section {
 .bg-4 {
     padding-top:30px;
     background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(20,20,20,0.2)),to(rgba(255,255,255,0)), color-stop(1,#000));
-}
+}*/

@@ -38,7 +38,7 @@
                 <li><a href="../pages/locations.html">Locations</a></li>
                 <li><a href="../pages/createfeedback.html">Feedbacks</a></li>
                 <li><a href="contactus.html">Contact Us</a></li>
-                <li><a href="#">About us</a></li>
+                <li><a href="aboutus.html">About us</a></li>
                 <li>
 
                     <a href="#"><span class="glyphicon glyphicon-shopping-cart"
@@ -159,7 +159,7 @@
 <!------------------------------login modal--------------------------->
 
 <div id="modal-login" class="modal fade">
-    <div class="modal-dialog modal-md">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" >x</button>
@@ -176,14 +176,11 @@
         </div>
     </div>
 </div>
-
-</body>
-
 <!------------------------------------------------------------------------->
 <!-------Footer------------------------------------->
 
-<div id="footer" >
-
+<div id="footer" style="position: fixed"  >
+    <div style="height: 22px"></div>
     <div class="form-group row static">
 
         <label class="col-sm-4 control-label">
@@ -207,9 +204,9 @@
         </div>
 
     </div>
-    <!--<ul class="nav pull-right scroll-top">
+    <ul class="nav pull-right scroll-top">
         <li><a href="#" title="Scroll to top"><i class="glyphicon glyphicon-chevron-up"></i></a></li>
-    </ul>-->
+    </ul>
 </div>
 <!--<div w3-include-html="footer.html"></div>-->
 
@@ -219,20 +216,23 @@
 </script>
 
 
+</body>
+
+
 <!------------------------------signup modal --------------------------------------------->
-<div class="modal fade" id="modal-signup" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true"
+<!--<div class="modal fade" id="modal-signup" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true"
      style="width: 1200px;height: 700px;">
-    <!--<div class="modal-dialog">-->
+    &lt;!&ndash;<div class="modal-dialog">&ndash;&gt;
         <div class="modal-body" style="width: 1500px;height: 700px;">
             <div class="brand"></div>
             <center>
                 <div class="inner-bg">
                     <div class="container">
-                        <!--<div class="row">
+                        &lt;!&ndash;<div class="row">
                             <div class="col-sm-8 col-sm-offset-2 text">
 
                             </div>
-                        </div>-->
+                        </div>&ndash;&gt;
 
                         <div class="panel panel-success">
                             <div class="panel-heading" style="height: 50px">
@@ -251,9 +251,9 @@
                                 <form role="form" id="adduser_form" action="" method="post"
                                       class="form-horizontal">
 
-<!--
+&lt;!&ndash;
                                     <p style="font-weight: bold;font-size: larger">Create New Account</p>
--->
+&ndash;&gt;
 
                                     <div class="form-group">
 
@@ -397,10 +397,9 @@
 
 
         </div>
-    </div>
-<!--
-</div>
--->
+    </div>-->
+<div w3-include-html="signupmodal.html"></div>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
