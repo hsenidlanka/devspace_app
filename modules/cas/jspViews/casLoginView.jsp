@@ -1,179 +1,115 @@
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<jsp:directive.include file="includes/top.jsp"/>
 
-<%@ page contentType="text/html; charset=UTF-8" %>
+<c:if test="${not pageContext.request.secure}">
+    <div id="msg" class="errors">
+        <h2><spring:message code="screen.nonsecure.title"/></h2>
 
-<jsp:directive.include file="top.jsp" />
-<form:form method="post" id="lginFrm1" cssClass="fm-v clearfix" htmlEscape="true">
-    <div id="wrapper">
-    <div id="login-window">
-        <h2>Loginqq</h2>
-        <br/>
-
-        <%--<form:errors path="*" cssClass="error_message" id="status" element="div" />--%>
-
-        <div class="clearfix">
-            <label for="username"><spring:message code="screen.welcome.label.netid" /></label>
-           <%-- <c:if test="${not empty sessionScope.openIdLocalId}">
-                <strong>${sessionScope.openIdLocalId}</strong>
-                <input type="hidden" id="username" name="username" value="${sessionScope.openIdLocalId}" />
-            </c:if>
-
-            <c:if test="${empty sessionScope.openIdLocalId}">
-                <spring:message code="screen.welcome.label.netid.accesskey" var="userNameAccessKey" />
-            </c:if>--%>
-            <form:input cssClass="text_box" id="username" path="username" autocomplete="false" htmlEscape="true"/>
-        </div>
-
-        <div class="clearfix">
-            <label for="password">
-                <spring:message code="screen.welcome.label.password" />
-            </label>
-            <spring:message code="screen.welcome.label.password.accesskey"/>
-            <form:password cssClass="text_box" id="password"  path="password" htmlEscape="true" autocomplete="off" />
-        </div>
-
-        <div class="row btn-row">
-            <input type="hidden" name="lt"/>
-            <input type="hidden" name="execution" />
-            <input type="hidden" name="_eventId" value="submit" />
-        </div>
-
-        <div class="clearfix">
-            <input class="button casLoginButton" accesskey="l" tabindex="2" type="submit" value="Login"/>
-        </div>
-
+        <p><spring:message code="screen.nonsecure.message"/></p>
     </div>
-</form:form>
-<%--<script type="text/javascript">
-    window.onload = function() {
-        document.getElementById("username").focus();
-    }
-</script>--%>
-<jsp:directive.include file="bottom.jsp" />
-
-<%--
-
-      <div id="content">
- <div id="msg" class="errors">
-        <h2>Non-secure Connection</h2>
-        <p>You are currently accessing CAS over a non-secure connection. Single Sign On WILL NOT WORK. In order to have single sign on work, you MUST log in over HTTPS.</p>
-    </div>
-
+</c:if>
 
 <div id="cookiesDisabled" class="errors" style="display:none;">
-    <h2>Browser cookies disabled</h2>
-    <p>Your browser does not accept cookies. Single Sign On WILL NOT WORK.</p>
+    <h2><spring:message code="screen.cookies.disabled.title"/></h2>
+
+    <p><spring:message code="screen.cookies.disabled.message"/></p>
 </div>
 
 
+<c:if test="${not empty registeredService}">
+    <c:set var="registeredServiceLogo" value="images/webapp.png"/>
+    <c:set var="registeredServiceName" value="${registeredService.name}"/>
+    <c:set var="registeredServiceDescription" value="${registeredService.description}"/>
 
+    <c:choose>
+        <c:when test="${not empty mduiContext}">
+            <c:if test="${not empty mduiContext.logoUrl}">
+                <c:set var="registeredServiceLogo" value="${mduiContext.logoUrl}"/>
+            </c:if>
+            <c:set var="registeredServiceName" value="${mduiContext.displayName}"/>
+            <c:set var="registeredServiceDescription" value="${mduiContext.description}"/>
+        </c:when>
+        <c:when test="${not empty registeredService.logo}">
+            <c:set var="registeredServiceLogo" value="${registeredService.logo}"/>
+        </c:when>
+    </c:choose>
+
+    <div id="serviceui" class="serviceinfo">
+        <table>
+            <tr>
+                <td><img src="${registeredServiceLogo}"></td>
+                <td id="servicedesc">
+                    <h1>${fn:escapeXml(registeredServiceName)}</h1>
+
+                    <p>${fn:escapeXml(registeredServiceDescription)}</p>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <p/>
+</c:if>
 
 <div class="box" id="login">
-    <form id="fm1" action="/cas/login" method="post">
+    <form:form method="post" id="fm1" commandName="${commandName}" htmlEscape="true">
 
+        <form:errors path="*" id="msg" cssClass="errors" element="div" htmlEscape="false"/>
 
+        <h2><spring:message code="screen.welcome.instructions"/></h2>
 
-        <h2>Enter your Username and Password</h2>
-
-        <section class="row">
-            <label for="username"><span class="accesskey">U</span>sername:</label>
-
-
-
-
-                    <input id="username" name="username" class="required" tabindex="1" accesskey="u" type="text" value="" size="25" autocomplete="off"/>
-
-
+        <section class="row" id="row1">
+            <label for="username"><spring:message code="screen.welcome.label.netid"/></label>
+            <c:choose>
+                <c:when test="${not empty sessionScope.openIdLocalId}">
+                    <strong><c:out value="${sessionScope.openIdLocalId}"/></strong>
+                    <input type="hidden" id="username" name="username"
+                           value="<c:out value="${sessionScope.openIdLocalId}" />" />
+                </c:when>
+                <c:otherwise>
+                    <spring:message code="screen.welcome.label.netid.accesskey" var="userNameAccessKey"/>
+                    <form:input cssClass="required" cssErrorClass="error" id="username" size="25" tabindex="1"
+                                accesskey="${userNameAccessKey}" path="username" autocomplete="off" htmlEscape="true"/>
+                </c:otherwise>
+            </c:choose>
         </section>
 
-        <section class="row">
-            <label for="password"><span class="accesskey">P</span>assword:</label>
-
-
-            <input id="password" name="password" class="required" tabindex="2" accesskey="p" type="password" value="" size="25" autocomplete="off"/>
-            <span id="capslock-on" style="display:none;"><p><img src="images/warning.png" valign="top"> CAPSLOCK key is turned on!</p></span>
+        <section class="row" id="row2">
+            <label for="password"><spring:message code="screen.welcome.label.password"/></label>
+            <%--
+            NOTE: Certain browsers will offer the option of caching passwords for a user.  There is a non-standard attribute,
+            "autocomplete" that when set to "off" will tell certain browsers not to prompt to cache credentials.  For more
+            information, see the following web page:
+            http://www.technofundo.com/tech/web/ie_autocomplete.html
+            --%>
+            <spring:message code="screen.welcome.label.password.accesskey" var="passwordAccessKey"/>
+            <form:password cssClass="required" cssErrorClass="error" id="password" size="25" tabindex="2"
+                           path="password" accesskey="${passwordAccessKey}" htmlEscape="true" autocomplete="off"/>
+            <span id="capslock-on" style="display:none;"><p><img src="images/warning.png" valign="top"> <spring:message
+                    code="screen.capslock.on"/></p></span>
         </section>
 
         <!--
         <section class="row check">
-            <p>
-                <input id="warn" name="warn" value="true" tabindex="3" accesskey="w" type="checkbox" />
-                <label for="warn"><span class="accesskey">W</span>arn me before logging me into other sites.</label>
-                <br/>
-                <input id="publicWorkstation" name="publicWorkstation" value="false" tabindex="4" type="checkbox" />
-                <label for="publicWorkstation">I am at a public workstation.</label>
-                <br/>
-                <input type="checkbox" name="rememberMe" id="rememberMe" value="true" tabindex="5"  />
-                <label for="rememberMe">Remember Me</label>
-            </p>
+        <p>
+        <input id="warn" name="warn" value="true" tabindex="3" accesskey="<spring:message code="screen.welcome.label.warn.accesskey" />" type="checkbox" />
+        <label for="warn"><spring:message code="screen.welcome.label.warn" /></label>
+        <br/>
+        <input id="publicWorkstation" name="publicWorkstation" value="false" tabindex="4" type="checkbox" />
+        <label for="publicWorkstation"><spring:message code="screen.welcome.label.publicstation" /></label>
+        <br/>
+        <input type="checkbox" name="rememberMe" id="rememberMe" value="true" tabindex="5"  />
+        <label for="rememberMe"><spring:message code="screen.rememberme.checkbox.title" /></label>
+        </p>
         </section>
         -->
 
-        <section class="row btn-row">
-            <input type="hidden" name="lt" value="LT-10-xsAW60EFwuabzJlDG3vP0nqLXrmAJD-cas01.example.org" />
-            <input type="hidden" name="execution" value="6bc1595f-5c8f-43d0-89df-6350aef212fd_AAAAIgAAABAYNVHH/oRa/HuOVZj0+e3CAAAABmFlczEyOPcVcSrSyNsM0qhjQBq8yhOgQ2ykrlM0H/asbd9YYGVN9ZcSV0/PlDD7diTTXBgf40WEQsTV5NRbIGj0JZOR6r//PimW8gNfxX/3Qn7JP5Pzrw2xaCsTyZEiiUlOVzPCBZ+IxHeaia7PIXa1jaAwvDPfLAI1pKp+n8KT6tZ+zcEhuVmLRK+yQHtl9KXoDJBWs9lerFDQ3WcXYquJ+sfb9Z5KcXUqWXls9ZyIC/jiqeNSXvHb/FkLJBC1B7ssaH8lsmCyM7qSNYUbkJGBvDFzKJp1Tu7knfAPRqUuVSoVJvHw6rSw5osWxD4ARqMdaeYoWDE6miJF61sPJUbdxtWF0WiEez5T/zCVr8lWbKPeGssV39vg4FO2u/uuXqwIY1G2hdhKv4dkp7MwM5uEirQIrsoGGuHG4pomN8lvdVeKn+Jl5NZrCe9EfHNms3XaH99kPsnG6WbCndzhmo8I1dIKPhDA+o5h9bomBwyVgfyfiazPPhRO/dpYW41fKoOkXumnEzC5ZCij0OAYp6gkpJNtQfjei9FSGtJNsZDpL+cfvU3ozIc0BbzcyCAA5auxMI85XqWoEeMjIgDnRjMVtDCzAfJ7pwn4ziQdgddSuBERORz9taq9sUatfW+zf4mcSj7TWwSW3cJ4lE4fclsJm3reaU2Fm/VZcl2VcZxf1wcz7Rj82370opJ7vNuk3myzYrIA7J1I/CTFDnrbGNc7AknEe3kNue5xkLgRQUnK6vtbAoY2uVkCnwB42jLWKl0Yblz49vc06pQWnh+qV+MEeF5Cmi404urdiRIJidOlXjbtRCEru4cPoCKxzifPi36prCowL7Mtav0sDdAMXeHTftlUqVwgOuPN04KpbirkyLsH5vMPxEjhyHIo9EpZ3qddVTYX7p6nqwhfrAUYw9dIGqwaXjo85s2YesLx//8MFQgWOjFS9Snl9rWNyhxqInh+1WgDUwVugBmH4b/vjgwBLwzql/SC8DMMU8Mp2RCGbl12t86p" />
-            <input type="hidden" name="_eventId" value="submit" />
+        <section class="row btn-row" style="">
+            <input type="hidden" name="lt" value="${loginTicket}"/>
+            <input type="hidden" name="execution" value="${flowExecutionKey}"/>
+            <input type="hidden" name="_eventId" value="submit"/>
 
-            <input class="btn-submit" name="submit" accesskey="l" value="LOGIN" tabindex="6" type="submit" />
-            <input class="btn-reset" name="reset" accesskey="c" value="CLEAR" tabindex="7" type="reset" />
+            <input class="btn-submit" name="submit" accesskey="l" value="Login" tabindex="6" type="submit" />
+            <input class="btn-reset" name="reset" accesskey="c" value="Clear" tabindex="7" type="reset" />
         </section>
-    <div>
-</div></form>
+    </form:form>
 </div>
 
-<div id="sidebar">
-    <div class="sidebar-content">
-        <p>For security reasons, please Log Out and Exit your web browser when you are done accessing services that require authentication!</p>
-
-        <div id="list-languages">
-
-
-
-
-            <h3>Languages:</h3>
-
-
-
-
-
-                    <ul>
-                        <li class="first"><a href="login?locale=en">English</a></li>
-                        <li><a href="login?locale=es">Spanish</a></li>
-                        <li><a href="login?locale=fr">French</a></li>
-                        <li><a href="login?locale=ru">Russian</a></li>
-                        <li><a href="login?locale=nl">Nederlands</a></li>
-                        <li><a href="login?locale=sv">Svenska</a></li>
-                        <li><a href="login?locale=it">Italiano</a></li>
-                        <li><a href="login?locale=ur">Urdu</a></li>
-                        <li><a href="login?locale=zh_CN">Chinese (Simplified)</a></li>
-                        <li><a href="login?locale=zh_TW">Chinese (Traditional)</a></li>
-                        <li><a href="login?locale=de">Deutsch</a></li>
-                        <li><a href="login?locale=ja">Japanese</a></li>
-                        <li><a href="login?locale=hr">Croatian</a></li>
-                        <li><a href="login?locale=uk">Ukranian</a></li>
-                        <li><a href="login?locale=cs">Czech</a></li>
-                        <li><a href="login?locale=sl">Slovenian</a></li>
-                        <li><a href="login?locale=ca">Catalan</a></li>
-                        <li><a href="login?locale=mk">Macedonian</a></li>
-                        <li><a href="login?locale=fa">Farsi</a></li>
-                        <li><a href="login?locale=ar">Arabic</a></li>
-                        <li><a href="login?locale=pt_PT">Portuguese</a></li>
-                        <li><a href="login?locale=pt_BR">Portuguese (Brazil)</a></li>
-                        <li class="last"><a href="login?locale=pl">Polish</a></li>
-                    </ul>
-
-
-        </div>
-    </div>
-</div>
-
-
-
-
-</div> <!-- END #content -->
-
-<footer>
---%>
+<jsp:directive.include file="includes/bottom.jsp"/>

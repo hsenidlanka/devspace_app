@@ -7,12 +7,13 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Pizza Shefu Admin Login</title>
-    <link href="css/cass.css" rel="stylesheet" type="text/css" />
+    <link href="css/cas.css" rel="stylesheet"/>
+    <link href="css/cass.css" rel="stylesheet"/>
     <link href="css/fonts.css" rel="stylesheet" type="text/css"/>
 
 </head>
 <body>
-
+<div id="container">
 <div class="home-title">Control Panel</div>
 <div class="address-bar">3481 Pizza Shefu | Ward Place, Colombo 07 | 123.456.7890</div>
-
+<div id="content">
