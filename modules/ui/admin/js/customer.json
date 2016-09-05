@@ -1,37 +1,61 @@
 [
   {
     "ID": 0,
-    "Username": "test0"
+    "Username": "test0",
+    "f_name" :"Difna",
+    "l_name":"Jayashani",
+    "mobile": "0774078986"
 
   },
   {
     "ID": 1,
-    "Username": "test1"
+    "Username": "test1",
+    "f_name" :"Nayana",
+    "l_name":"Damayanthi",
+    "mobile": "0724978986"
 
   },
   {
     "ID": 2,
-    "name": "test2"
+    "Username": "test2",
+    "f_name" :"Sugath",
+    "l_name":"Serasinghe",
+    "mobile": "0774000786"
   },
   {
     "ID": 3,
-    "Username": "test3"
+    "Username": "test3",
+    "f_name" :"Senani",
+    "l_name":"Maheshika",
+    "mobile": "0729928986"
   },
   {
     "ID": 4,
-    "Username": "test4"
+    "Username": "test4",
+    "f_name" :"Dineesha",
+    "l_name":"Suraweera",
+    "mobile": "0789087651"
   },
   {
     "ID": 5,
-    "Username": "test5"
+    "Username": "test5",
+    "f_name" :"Upeksha",
+    "l_name":"Dissananyaka",
+    "mobile": "0774078986"
   },
   {
     "ID": 6,
-    "Username": "test6"
+    "Username": "test6",
+    "f_name" :"Kanchani",
+    "l_name":"Basnayaka",
+    "mobile": "0774078986"
   },
   {
     "ID": 7,
-    "Username": "test7"
+    "Username": "test7",
+    "f_name" :"Suraweera",
+    "l_name":"Gunawardana",
+    "mobile": "07812365748"
   },
   {
     "ID": 8,
@@ -279,7 +303,7 @@
     "id": 59,
     "name": "test59",
     "price": "$59"
-  }z,
+  },
   {
     "id": 64,
     "name": "test64",

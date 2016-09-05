@@ -2,10 +2,10 @@ $(document).ready(function () {
 
     $('#tableBannedusers').bootstrapTable({
 
-        url: '../js/customer.json',
+        url: '../js/bannedUser.json',
         height: 375,
         pagination: true,
-        pageSize: 8,
+        pageSize: 7,
         clickToSelect: true,
         singleSelect: true,
         minimumCountColumns: 3,
@@ -31,19 +31,12 @@ $(document).ready(function () {
             title: 'Last Name :',
             align:'left',
             sortable: true
-        }, {
-            field: 'mobile',
-            title: 'Phone No :',
+        },  {
+            field: 'userType',
+            title: 'User Type :',
             align:'left'
-        }, {
-            field: 'e_mail',
-            title: 'Email :',
-            align:'left'
-        }, {
-            field: 'address',
-            title: 'Address :',
-            align:'left'
-        }, {
+        },
+            {
             field: 'Options',
             title: 'Operations :',
             align: 'center',
@@ -55,19 +48,25 @@ $(document).ready(function () {
 
 function operateFormatter3(value, row, index) {
     return [
-        '<a class="likeb" href="../pages/userCustomer_edit.html" title="LikeCustomer" >',
-        '<i class="glyphicon glyphicon-edit">Edit</i>',
+        '<a class="likeb" href="javascript:void(0)" title="LikeCustomer" >',
+        '<i class="glyphicon glyphicon-eye-open">View</i>',
         //'<em class="fa fa-pencil"></em>',
         '</a>  ',
         '<a class="remove" href="javascript:void(0)" title="Delete">',
-        '<i class="glyphicon glyphicon-remove">Delete</i>',
+        '<i class="glyphicon glyphicon-refresh">Restore</i>',
         '</a>'
     ].join('');
 }
 
 window.operateEvents3 = {
+
+    'click .likeb': function() {
+        $('#detailUserModal').modal({show:true});
+
+    },
+
     'click .remove': function() {
-        $('#removeCustomerModal').modal({show:true});
+        $('#replaceUserModal').modal({show:true});
 
     }
 }

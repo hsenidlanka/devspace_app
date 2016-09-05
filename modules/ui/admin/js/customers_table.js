@@ -5,7 +5,7 @@ $(document).ready(function () {
                 url: '../js/customer.json',
                 height: 375,
                 pagination: true,
-                pageSize: 8,
+                pageSize: 7,
                 clickToSelect: true,
                 singleSelect: true,
                 minimumCountColumns: 3,
@@ -60,7 +60,7 @@ function operateFormatter1(value, row, index) {
         //'<em class="fa fa-pencil"></em>',
         '</a>  ',
         '<a class="remove" href="javascript:void(0)" title="Delete">',
-        '<i class="glyphicon glyphicon-remove">Delete</i>',
+        '<i class="glyphicon glyphicon-remove">Block</i>',
         '</a>'
     ].join('');
 }
