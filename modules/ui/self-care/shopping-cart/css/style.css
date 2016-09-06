@@ -100,7 +100,7 @@ hr {
     color: #ffcc33;
 }
 
-.menu-images {
+.menu-images, .package-images {
     border: groove;
 }
 
