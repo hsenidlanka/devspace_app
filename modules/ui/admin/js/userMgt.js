@@ -1,4 +1,3 @@
-
 //userAdd js
 $(document).ready(function () {
     $("#staffDetail").hide();
@@ -10,9 +9,7 @@ $(document).ready(function () {
     $("#customer").click(function(){
         $("#staffDetail").hide();
     });
-
 });
-
 
 //customerView js
     function showMe(){
@@ -23,7 +20,6 @@ $(document).ready(function () {
         var designation= document.getElementById("designation");
         var department= document.getElementById("department");
         var branch= document.getElementById("branch");
-
 
         //customer filter elements
         if (  $("#regCheck").is(":checked")){
@@ -65,6 +61,29 @@ $(document).ready(function () {
 
 
     }
+
+
+function showMeBlocked(){
+    //blocked users
+    var blockPeriod= document.getElementById("blockPeriod");
+    var bsname= document.getElementById("bsname");
+
+
+    //blocked users filter
+
+    if (  $("#blockCheck").is(":checked")){
+        blockPeriod.style.display = "block";
+    } else{
+        blockPeriod.style.display = "none";
+    }
+
+    if (  $("#bsCheck").is(":checked")){
+        bsname.style.display = "block";
+    } else{
+        bsname.style.display = "none";
+    }
+
+}
 
 //toast messages bootstrap
 

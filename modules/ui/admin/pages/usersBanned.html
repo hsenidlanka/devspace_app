@@ -5,20 +5,21 @@
     <!--include common CSS, fonts and js-->
     <link rel="import" href="adminTop.html">
 
-    <!--my css files-->
-    <link href="../css/userMgt.css" rel="stylesheet">
-    <script src="../js/userMgt.js"></script>
-
-    <script src="../js/bannedUser_table.js"></script>
     <!--datepicker-->
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 
+    <!--my css files-->
+    <link href="../css/userMgt.css" rel="stylesheet">
+    <script src="../js/userMgt.js"></script>
+
+
     <script>
         $(function() {
-//            $("#customerContent").load("userCustomer_view.html");
-
+            $("#blockcustomerContent").load("userCustomerBlock_view.html");
+            $("#blockstaffContent").load("userStaffBlock_view.html");
         });
+
     </script>
 
 </head>
@@ -38,66 +39,70 @@
         <ul class="breadcrumb breadcrumb-menu">
             <li><a href="home.html">Home</a></li>
             <li><a href="usersView.html">User Management</a></li>
-            <li class="active"><a href="usersView.html">View Banned Users</a></li>
+            <li class="active"><a href="usersView.html">View Users</a></li>
         </ul>
     </div>
 </div>
-
 <center>
     <div class="form-box" id="viewuser_box">
         <div class="panel panel-default">
 
             <div class="panel-heading common-form-headings">
-                <h3 class="default-panel-headings">View Banned Users</h3>
+                <h3 class="default-panel-headings">View Users</h3>
             </div>
 
             <div class="panel-body">
-
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-xs-8" style="width: 64%">
-                            <div class="col-xs-2">
-                                <label class=" control-label">
-                                    Filter By:
-                                </label>
-                            </div>
-                            <!--checkboxes to select-->
-                            <div class="col-xs-10" id="checkboxDiv">
-                                <label class="checkbox-inline">
-                                    <input type="checkbox" value="1" id="regCheck" onchange="showMe()">Registered Date
-                                </label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox" value="2" id="nameCheck" onchange="showMe()">Name
-                                </label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox" value="3" id="liveCheck" onchange="showMe()">Living Area
-                                </label>
-                            </div>
-                            <!--<div class="col-xs-2"></div>-->
-                        </div>
-
-                        <div class="col-xs-4" style="width: 36%">
-                            <div class="col-xs-8">
-                                <input class="form-control"  placeholder=" Name" type="text" id="bname">
-                            </div>
-                            <div class="col-xs-1">
-                                <button type="button" class="btn btn-success" >
-                                    <span class="glyphicon glyphicon-search"></span> Search
-                                </button>
-                            </div>
-                            <div class="col-xs-2"></div>
-                        </div>
+                <ul class="nav nav-pills red">
+                    <li class="active"><a data-toggle="pill" href="#home">Blocked Customers</a></li>
+                    <li><a data-toggle="pill" href="#menu1">Blocked Staff Members</a></li>
+                </ul>
+                <br>
+                <div class="tab-content">
+                    <!--div to get customer info-->
+                    <div id="home" class="tab-pane fade in active">
+                        <div id="blockcustomerContent"></div>
+                    </div>
+                    <!--div to present staff info-->
+                    <div id="menu1" class="tab-pane fade">
+                        <div id="blockstaffContent"></div>
                     </div>
                 </div>
-
-                <!--inserting the bootstrap table with banned users -->
-                <table  id="tableBannedusers">
-                </table>
-
             </div>
         </div>
     </div>
 </center>
+
+<!--modelto appear when replacing a banned Customer or Staff user -->
+<div class="modal fade" id="replaceUserModal">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header deleteuser-modal-header-style">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
+                        class="glyphicon glyphicon-remove"></span></button>
+                <div align="center"><span class="glyphicon glyphicon-refresh"></span>Replace Blocked User
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label id="lblBlockStaffMsg">Do you really want to unblock this User ?</label><br><br>
+
+                    <div align="center">
+                        <label id="lblBlockStaffId">Username : xxxxxx </label><br>
+                        <label id="lblBlockStaffName">Name : yyyyyy </label><br>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" align="right">
+                <button class="btn btn-success" type="button" value="Yes" id="btnBlockStaff">Yes
+                </button>
+                <button class="btn btn-success" type="button" value="cancel" id="btnCnclBlockStaff">
+                    No
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
 </body>

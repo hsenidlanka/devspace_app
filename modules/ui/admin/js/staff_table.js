@@ -55,7 +55,7 @@ function operateFormatter2(value, row, index) {
         '<i class="glyphicon glyphicon-edit">Edit</i>',
         '</a>  ',
         '<a class="remove" href="javascript:void(0)" title="Delete">',
-        '<i class="glyphicon glyphicon-remove">Delete</i>',
+        '<i class="glyphicon glyphicon-remove">Block</i>',
         '</a>'
     ].join('');
 }
