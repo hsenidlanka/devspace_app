@@ -247,9 +247,9 @@
                                 <resource>
                                     <directory>${basedir}/resourcesWEB-INF</directory>
                                     <filtering>true</filtering>
-                                   <!-- <includes>
-                                        <include>deployerConfigContext.xml</include>
-                                    </includes>-->
+                                    <!-- <includes>
+                                         <include>deployerConfigContext.xml</include>
+                                     </includes>-->
                                     <excludes>
                                         <exclude>casdatabase.properties</exclude>
                                     </excludes>
@@ -257,29 +257,6 @@
                             </resources>
                         </configuration>
                     </execution>
-
-
-                    <!--*
-                        **Copying Spring config files
-                        *-->
-
-                   <!-- <execution>
-                        <id>copy-spring-conf</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <overwrite>true</overwrite>
-                            <outputDirectory>${basedir}/target/unpacked/WEB-INF/spring-configuration</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>${basedir}/resourcesSpringConfg</directory>
-                                    <filtering>true</filtering>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>-->
 
                     <!--*
                         *copying jsp views
@@ -293,7 +270,8 @@
                         </goals>
                         <configuration>
                             <overwrite>true</overwrite>
-                            <outputDirectory>${basedir}/target/unpacked/WEB-INF/view/jsp/default/ui/includes</outputDirectory>
+                            <outputDirectory>${basedir}/target/unpacked/WEB-INF/view/jsp/default/ui/includes
+                            </outputDirectory>
                             <resources>
                                 <resource>
                                     <directory>${basedir}/jspViews</directory>
@@ -307,7 +285,7 @@
                         </configuration>
                     </execution>
 
-<execution>
+                    <execution>
                         <id>copy-jspViews2</id>
                         <phase>package</phase>
                         <goals>
@@ -334,26 +312,26 @@
                         *copying applicationContext.xml
                         **-->
 
-                     <!--<execution>
-                         <id>copy-app-context</id>
-                         <phase>process-resources</phase>
-                         <goals>
-                             <goal>copy-resources</goal>
-                         </goals>
-                         <configuration>
-                             <overwrite>true</overwrite>
-                             <outputDirectory>${basedir}/target/unpacked/WEB-INF/spring-configuration</outputDirectory>
-                             <resources>
-                                 <resource>
-                                     <directory>${basedir}/src/spring-configuration</directory>
-                                     <filtering>true</filtering>
-                                     <includes>
-                                         <include>applicationContext.xml</include>
-                                     </includes>
-                                 </resource>
-                             </resources>
-                         </configuration>
-                     </execution>-->
+                    <!--<execution>
+                        <id>copy-app-context</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <overwrite>true</overwrite>
+                            <outputDirectory>${basedir}/target/unpacked/WEB-INF/spring-configuration</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}/src/spring-configuration</directory>
+                                    <filtering>true</filtering>
+                                    <includes>
+                                        <include>applicationContext.xml</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>-->
 
                     <!--*
                         *Copying css files
@@ -376,6 +354,7 @@
                             </resources>
                         </configuration>
                     </execution>
+
 
                     <execution>
                         <id>copy-images</id>

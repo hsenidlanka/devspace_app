@@ -101,13 +101,13 @@
         </section>
         -->
 
-        <section class="row btn-row" style="">
+        <section class="row btn-row">
             <input type="hidden" name="lt" value="${loginTicket}"/>
             <input type="hidden" name="execution" value="${flowExecutionKey}"/>
-            <input type="hidden" name="_eventId" value="submit"/>
-
-            <input class="btn-submit" name="submit" accesskey="l" value="Login" tabindex="6" type="submit" />
-            <input class="btn-reset" name="reset" accesskey="c" value="Clear" tabindex="7" type="reset" />
+            <input type="hidden" name="_eventId" value="submit"/> </section>
+            <section class="row btn-row">
+            <input class="btn-submit login-pg-button" name="submit" accesskey="l" value="Login" tabindex="6" type="submit" />
+            <input class="btn-reset login-pg-button" name="reset" accesskey="c" value="Clear" tabindex="7" type="reset" />
         </section>
     </form:form>
 </div>
