@@ -60,8 +60,11 @@ h2{
     padding-bottom: 25px;
 }
 footer{
-    padding-top:50px ;
+    padding-top:100px ;
     text-align: center;
+    font-family: fantasy;
+    font-style: oblique;
+    font-weight: bold;
 }
 .btn-row{
     padding-left: 40%;
@@ -75,4 +78,15 @@ footer{
     background-color: white;
     font-weight: bold;
     color: #266620;
+}
+#footer-sub-msg{
+    font-size: smaller;
+}
+#msg{
+    display: inline;
+    font-size: small;
+    color: rgb(255, 0, 0);
+    font-style: oblique;
+    font-weight: bold;
+    padding: inherit;
 }

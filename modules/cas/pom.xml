@@ -234,6 +234,7 @@
 
                     <!--copying & replacing modified files-->
 
+
                     <execution>
                         <id>copy-resources1</id>
                         <phase>package</phase>
@@ -250,9 +251,12 @@
                                     <!-- <includes>
                                          <include>deployerConfigContext.xml</include>
                                      </includes>-->
-                                    <excludes>
+                                   <!-- <excludes>
+                                        <exclude>cas.properties</exclude>
                                         <exclude>casdatabase.properties</exclude>
-                                    </excludes>
+                                        <exclude>deployerConfigContext.xml</exclude>
+                                        <exclude>assembly.xml</exclude>
+                                    </excludes>-->
                                 </resource>
                             </resources>
                         </configuration>

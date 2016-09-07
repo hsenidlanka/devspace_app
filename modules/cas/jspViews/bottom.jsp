@@ -6,8 +6,8 @@
 <footer>
     <div id="copyright">
         <p><spring:message code="copyright" /></p>
-        <p>Powered by <a href="http://www.apereo.org/cas">Apereo Central Authentication Service <%=org.jasig.cas.CasVersion.getVersion()%></a>
-        hsenid Sftware international</p>
+        <p id="footer-sub-msg">Powered by <a href="http://www.apereo.org/cas">Apereo Central Authentication Service <%=org.jasig.cas.CasVersion.getVersion()%></a>
+        <br>hSenid Software International- 2016</p>
     </div>
 </footer>
 
