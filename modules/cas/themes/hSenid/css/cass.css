@@ -63,3 +63,16 @@ footer{
     padding-top:50px ;
     text-align: center;
 }
+.btn-row{
+    padding-left: 40%;
+}
+.login-pg-button{
+    height: 25px;
+    border-radius: 5px;
+    width: 20%;
+    font-size: 14px;
+    border: 2px solid #316f29;
+    background-color: white;
+    font-weight: bold;
+    color: #266620;
+}

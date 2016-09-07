@@ -7,6 +7,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Pizza Shefu Admin Login</title>
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet"/>
     <link href="css/cas.css" rel="stylesheet"/>
     <link href="css/cass.css" rel="stylesheet"/>
     <link href="css/fonts.css" rel="stylesheet" type="text/css"/>
