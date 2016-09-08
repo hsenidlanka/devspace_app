@@ -48,7 +48,7 @@
     <p/>
 </c:if>
 
-<div class="box" id="login">
+<div class="box">
     <form:form method="post" id="fm1" commandName="${commandName}" htmlEscape="true">
 
         <h2><spring:message code="screen.welcome.instructions"/></h2>

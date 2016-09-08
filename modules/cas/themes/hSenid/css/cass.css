@@ -82,11 +82,19 @@ footer{
 #footer-sub-msg{
     font-size: smaller;
 }
-#msg{
+.errors{
     display: inline;
     font-size: small;
     color: rgb(255, 0, 0);
     font-style: oblique;
     font-weight: bold;
     padding: inherit;
+}
+#content{
+    width: 50%;
+    margin-left: 25%;
+    padding: 20px;
+    border: 5px solid rgb(28, 99, 24);
+    border-radius: 15px;
+    background: rgb(189, 212, 184) none repeat scroll 0% 0%;
 }
