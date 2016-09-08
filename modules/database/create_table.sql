@@ -7,7 +7,7 @@ CREATE TABLE `group` (
   `id` bigint(20) NOT NULL,
   `name` varchar(50) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
-  `module_id` bigint(20 NOT NULL,
+  `module_id` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -74,6 +74,18 @@ CREATE TABLE IF NOT EXISTS `staff` (
   `register_date` date NOT NULL,
   `status` varchar(20) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`);
+  UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Table structure for table `user_group`
+--
+
+DROP TABLE IF EXISTS `group_staff`;
+CREATE TABLE `group_staff` (
+  `group_id` bigint(10) NOT NULL,
+  `staff_id` bigint(10) NOT NULL,
+  PRIMARY KEY (`staff_id`,`group_id`),
+  KEY `fk_user` (`staff_id`),
+  KEY `fk_group` (`group_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
