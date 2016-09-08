@@ -1,54 +1,47 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<b:beans xmlns:b="http://www.springframework.org/schema/beans"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://www.springframework.org/schema/security"
-         xsi:schemaLocation="http://www.springframework.org/schema/beans
-              http://www.springframework.org/schema/beans/spring-beans.xsd
-           ">
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security-4.1.xsd">
 
-    <!--to enable web security services
-    all URLs within the app is secured with ROLE_USER to access them-->
-    <http auto-config='true'>
-        <intercept-url pattern="/welcome*" access="ROLE_ADMIN" />
-        <intercept-url pattern="/**" access="ROLE_USER" />
-        <logout logout-url="/logout" logout-success-url="/logoutSuccess.jsp"/>
+
+    <!--ServiceProperties bean represents the CAS service
+    The service must equal a URL that will be monitored by the CasAuthenticationFilter
+     this provides URL to the enterprise's CAS login serve.-->
+    <beans:bean id="serviceProperties"
+          class="org.springframework.security.cas.ServiceProperties">
+        <beans:property name="service"
+                  value="http://localhost:8080/cas/login"/>
+        <beans:property name="sendRenew" value="false"/>
+    </beans:bean>
+
+
+    <!--The following beans should be configured to commence the CAS authentication process-->
+    <http entry-point-ref="casEntryPoint" auto-config="true">
+        <intercept-url pattern="/users**" access="ROLE_USER" />
+        <custom-filter ref="casAuthenticationFilter" position="CAS_FILTER"/>
     </http>
 
-
-    <b:alias name="filterChainProxy" alias="springSecurityFilterChain"/>
-   <!-- <b:bean id="filterChainProxy" class="org.springframework.security.web.FilterChainProxy">
-        <filter-chain-map >
-            <filter-chain pattern="/**" filters="wrappingFilter"/>
-        </filter-chain-map>
-    </b:bean>-->
-
-    <b:bean id="filterChainProxy" class="org.springframework.security.web.FilterChainProxy">
-        <b:constructor-arg>
-            <b:list>
-                <filter-chain pattern="/do/not/filter*" filters="wrappingFilter"/>
-                <!--<filter-chain pattern="/**" filters="filter1,filter2,filter3"/>-->
-            </b:list>
-        </b:constructor-arg>
-    </b:bean>
-
-    <!--<beans:bean id="casAuthenticationFilter" class="org.springframework.security.cas.web.CasAuthenticationFilter">
-        &lt;!&ndash;3 Enable the following and web.xml configurations for Concurrent Access Restriction&ndash;&gt;
-        &lt;!&ndash;<property name="sessionAuthenticationStrategy" ref="sessionControlStrategy" />&ndash;&gt;
-        <beans:property name="authenticationManager" ref="authenticationManager"/>
-        &lt;!&ndash;<property name="filterProcessesUrl" value="/casFailed.jspx"/>&ndash;&gt;
-        &lt;!&ndash;<property name="filterProcessesUrl" value="/index.jspx"/>&ndash;&gt;
-        &lt;!&ndash;<property name="proxyGrantingTicketStorage" ref="proxyGrantingTicketStorage"/>&ndash;&gt;
-        <beans:property name="proxyReceptorUrl" value="/secure/receptor"/>
+    <beans:bean id="casEntryPoint"
+          class="org.springframework.security.cas.web.CasAuthenticationEntryPoint">
+        <beans:property name="loginUrl" value="http://localhost:8080/cas/login"/>
+        <beans:property name="serviceProperties" ref="serviceProperties"/>
     </beans:bean>
--->
 
-    <b:bean id="wrappingFilter" class="org.jasig.cas.client.util.HttpServletRequestWrapperFilter"/>
-    <!--    <b:bean id="wrappingFilter" class="org.jasig.cas.client.util.HttpServletRequestWrapperFilter" />-->
 
-  <!--  <authentication-manager alias="authenticationManager">
+    <beans:bean id="casAuthenticationFilter"
+          class="org.springframework.security.cas.web.CasAuthenticationFilter">
+        <beans:property name="authenticationManager" ref="authenticationManager"/>
+    </beans:bean >
 
-            <authentication-provider ref="myAuthenticationProvider" />
+    <authentication-manager alias="authenticationManager">
+        <authentication-provider>
+            <user-service>
+                <user name="mkyong" password="123456" authorities="ROLE_USER" />
+            </user-service>
+        </authentication-provider>
+    </authentication-manager>
 
-    </authentication-manager>-->
-
-</b:beans>
+</beans:beans>

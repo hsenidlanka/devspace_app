@@ -33,6 +33,10 @@ public class UserController {
 
  /*   ApplicationContext context= new ClassPathXmlApplicationContext("admin-servlet.xml");
     UserRepository userRepository= (UserRepository) context.getBean("userRepository")*/;
+
+
+
+
     @RequestMapping(value="/list")
     public ModelAndView listContact(ModelAndView model)  {
        User newContact = new User();;
