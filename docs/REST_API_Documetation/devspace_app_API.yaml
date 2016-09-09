@@ -1,9 +1,10 @@
 swagger: '2.0'
 info:
-  version: '1.0.0'
-  title: devpspace_app API
-  description: A sample API documentation created to demonstrate the currently available RESTful services.
-    Open the url meioned below the email address and paste this complete set of code or click file > import file.
+  version: '1.0'
+  title: Pizza Shefu REST API
+  description: This documentation created to demonstrate the currently available RESTful services in the system.
+    Please follow the following steps to open this YAML file in Swagger Editor. 
+    Open the url meioned below and paste this complete set of code or click file > import file.
     Browse and open this YAML file.
   #termsOfService: http://helloreverb.com/terms/
   contact:
@@ -14,7 +15,7 @@ info:
     #name: MIT
     #url: http://opensource.org/licenses/MIT
 host: localhost:2222
-basePath: /devspace/api/v1.0
+basePath: /pizza-shefu/api/v1.0
 schemes:
   - http
 consumes:
@@ -271,6 +272,7 @@ definitions:
       - code
       - message
       - data
+      - links
     properties:
       status:
         type: string
@@ -280,6 +282,8 @@ definitions:
       message:
         type: string
       data:
+        type: object
+      links:
         type: object
         
         
