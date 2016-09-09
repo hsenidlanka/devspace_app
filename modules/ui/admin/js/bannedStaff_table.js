@@ -1,8 +1,8 @@
 $(document).ready(function () {
 
-    $('#tableBannedusers').bootstrapTable({
+    $('#tableBannedstaff').bootstrapTable({
 
-        url: '../js/bannedUser.json',
+        url: '../js/bannedStaff.json',
         height: 375,
         pagination: true,
         pageSize: 7,
@@ -32,11 +32,16 @@ $(document).ready(function () {
             align:'left',
             sortable: true
         },  {
-            field: 'userType',
-            title: 'User Type :',
+            field: 'blockedDate',
+            title: 'Blocked Date :',
+            sortable: true,
             align:'left'
-        },
-            {
+        }, {
+            field: 'branch',
+            title: 'Branch :',
+            sortable: true,
+            align:'left'
+        },{
             field: 'Options',
             title: 'Operations :',
             align: 'center',
@@ -44,7 +49,7 @@ $(document).ready(function () {
             events: operateEvents3
         }]
     });
-})
+});
 
 function operateFormatter3(value, row, index) {
     return [
@@ -61,7 +66,7 @@ function operateFormatter3(value, row, index) {
 window.operateEvents3 = {
 
     'click .likeb': function() {
-        $('#detailUserModal').modal({show:true});
+        $('#blockedStaffModal').modal({show:true});
 
     },
 
