@@ -80,6 +80,7 @@ INSERT INTO `group_permission` (`group_id`, `permission_id`) VALUES
 -- Dumping data for table `staff`
 --
 
+
 INSERT INTO `staff` (`id`, `title`, `username`, `password`, `first_name`, `last_name`, `email`, `mobile`, `address_line1`, `address_line2`, `address_line3`, `designation`, `department`, `branch`, `register_date`, `status`) VALUES
   (1, 'Mr', 'sysadmin', 'a159b7ae81ba3552af61e9731b20870515944538', 'Piumantha', 'Heshan', 'sysadmin@pizzashefu.com', '+94778908976', 'No:2, Dangarama Road', 'Kollupitiya', 'Colombo', 'System Adinistrator', 'Adminintration', 'Colombo', '2015-08-04', 'active'),
   (2, 'Mrs', 'adminmanager', '47597d7f4c61063f651df834bed02203b816d996', 'Piumika', 'Dankotuva', 'adminmanager@pizzashefu.com', '+94710098765', 'No:32, ', 'Kadawatha', 'Gampaha', 'System Manager', 'Adminintration', 'Colombo', '2015-09-22', 'active'),
