@@ -17,13 +17,16 @@ $(document).ready(function () {
         location.href = 'home.html';
     })
 
-
+    $('.btnAddItmPkg').click(function(){
+        $(this).replaceWith("<div class=\"add-status\"><span class=\"glyphicon glyphicon-ok\"></span> Added</div>");
+    });
     /*
      * Function for loading package content to modal for edditing
      */
     $("#lnkModalView").click(function () {
         $("#pkgViewModal").modal();
         load_modal('editPackage.html');
+
     })
 
     function load_modal(url) {
@@ -58,4 +61,7 @@ $(document).ready(function () {
             event.preventDefault();
         }
     })
+
+
+
 })

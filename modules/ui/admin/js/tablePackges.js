@@ -14,27 +14,23 @@ $(document).ready(function () {
         minimumCountColumns: 2,
         columns: [{
             field: 'id',
-            title: 'Item ID',
+            title: 'Package ID',
             sortable: true
         }, {
             field: 'name',
-            title: 'Item Name',
+            title: 'Package Name',
             sortable: true
         },{
-            field: 'category',
-            title: 'Category',
+            field: 'content',
+            title: 'Package Content',
             sortable: true
         },{
-            field: 'subcategory',
-            title: 'Sub-category',
-            sortable: true
-        }, {
-            field: 'type',
-            title: 'Type',
+            field: 'images',
+            title: 'Package Images',
             sortable: true
         }, {
             field: 'price',
-            title: 'Item Price',
+            title: 'Package Price',
             align: 'right',
             sortable: true
         }, {
@@ -60,10 +56,22 @@ function operateFormatter(value, row, index){
 }
 
 window.operateEvents = {
-    'click .delete':function(){
+
+    'click .delete': function () {
         $('#pkgDeleteModal').modal('show');
     },
-    'click .edit':function(){
+    'click .edit': function (e, value, row, index) {
+
+        var data = JSON.stringify(row);
+        var objct = JSON.parse(data);
+
+        $('#txtEditPkgId').val(objct["id"]);
+        $('#txtEditPkgNm').val(objct["name"]);
+        /*$('#editPkgCont').val(objct["id"]);*/
+        /*$('#imge').val(objct["id"]);*/
+        $('#editPkgPrice').val(objct["price"]);
+
         $('#pkgEditModal').modal('show');
     }
 }
+

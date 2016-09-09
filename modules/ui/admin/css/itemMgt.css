@@ -115,5 +115,13 @@ legend.scheduler-border {
     text-align: center;
 }
 .qty-spinner{
-    width: 75px;
+    width: 65px;
+}
+.add-status {
+    background-color: #e7ce98;
+    color: green;
+    padding: 4px 12px;
+    border-radius: 5px;
+    font-weight: bolder;
+    float: inherit;
 }

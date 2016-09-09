@@ -64,6 +64,20 @@ function operateFormatter(value, row, index){
 }
 
 window.operateEvents = {
+
+   /* 'click .edit': function (e, value, row,index){
+
+        var data =JSON.stringify(row);
+        var objct = JSON.parse(data);
+
+        $('#txtEditPkgId').val(objct["id"]);
+        $('#txtEditPkgNm').val(objct["name"]);
+        *//*$('#editPkgCont').val(objct["id"]);*//*
+        *//*$('#imge').val(objct["id"]);*//*
+        $('#editPkgPrice').val(objct["id"]);
+
+    },*/
+
     'click .delete':function(){
         $('#itemDeleteModal').modal('show');
     }
