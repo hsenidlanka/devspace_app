@@ -342,12 +342,13 @@ DROP TABLE IF EXISTS `payment_transaction_discount`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `payment_transaction_discount` (
-  `payment_id` int(10) NOT NULL,
+  `payment_transaction_id` int(10) NOT NULL,
   `discount_id` int(10) NOT NULL,
-  PRIMARY KEY (`payment_id`),
+  PRIMARY KEY (`payment_transaction_id`,`discount_id`),
+  KEY `fk_payment_transaction_discount_1_idx` (`payment_transaction_id`),
   KEY `fk_payment_transaction_discount_2_idx` (`discount_id`),
-  CONSTRAINT `fk_payment_transaction_discount_1` FOREIGN KEY (`payment_id`) REFERENCES `payment_transaction` (`id`) ON UPDATE CASCADE,
-  CONSTRAINT `fk_payment_transaction_discount_2` FOREIGN KEY (`discount_id`) REFERENCES `discount` (`id`) ON UPDATE CASCADE
+  CONSTRAINT `fk_payment_transaction_discount_1` FOREIGN KEY (`payment_transaction_id`) REFERENCES `payment_transaction` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_payment_transaction_discount_2` FOREIGN KEY (`discount_id`) REFERENCES `discount` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -427,9 +428,9 @@ DROP TABLE IF EXISTS `shopping_cart_product`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `shopping_cart_product` (
   `shopping_cart_id` int(10) NOT NULL,
-  `product_id` int(10) DEFAULT NULL,
+  `product_id` int(10) NOT NULL,
+  PRIMARY KEY (`shopping_cart_id`,`product_id`),
   KEY `fk_shopping_cart_product_2_idx` (`product_id`),
-  KEY `fk_shopping_cart_product_1_idx` (`shopping_cart_id`),
   CONSTRAINT `fk_shopping_cart_product_1` FOREIGN KEY (`shopping_cart_id`) REFERENCES `shopping_cart` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_shopping_cart_product_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -492,4 +493,4 @@ CREATE TABLE `sub_category` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-09-09 14:00:36
+-- Dump completed on 2016-09-09 14:12:16
