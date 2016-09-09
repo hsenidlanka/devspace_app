@@ -65,6 +65,7 @@ CREATE TABLE `customer` (
   `last_name` varchar(50) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(500) NOT NULL,
+  `email` varchar(50) NOT NULL,
   `address` varchar(100) NOT NULL,
   `mobile` varchar(15) NOT NULL,
   `registered_date` date NOT NULL,
@@ -163,7 +164,8 @@ CREATE TABLE `group` (
   `description` varchar(255) DEFAULT NULL,
   `module_id` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`)
+  UNIQUE KEY `name` (`name`),
+  KEY `fk_module` (`module_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -442,6 +444,7 @@ DROP TABLE IF EXISTS `staff`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `staff` (
   `id` int(10) NOT NULL,
+  `title` varchar(20) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(1000) NOT NULL,
   `first_name` varchar(50) DEFAULT NULL,
