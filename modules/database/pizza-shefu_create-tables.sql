@@ -1,10 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `pizza_shefu` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `pizza_shefu`;
--- MySQL dump 10.13  Distrib 5.7.9, for linux-glibc2.5 (x86_64)
+-- MySQL dump 10.13  Distrib 5.6.31, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: pizza_shefu
 -- ------------------------------------------------------
--- Server version	5.7.11
+-- Server version	5.6.31-0ubuntu0.15.10.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -30,7 +28,7 @@ CREATE TABLE `category` (
   `description` varchar(500) NOT NULL,
   `creator` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,12 +41,12 @@ DROP TABLE IF EXISTS `coupon`;
 CREATE TABLE `coupon` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `coupon_code` varchar(20) NOT NULL,
-  `rate` decimal(3,2) NOT NULL,
+  `rate` decimal(5,2) NOT NULL,
   `expire_date` date DEFAULT NULL,
   `status` enum('active','used','expired') NOT NULL,
   `customer_mobile` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -74,7 +72,7 @@ CREATE TABLE `customer` (
   `status` enum('active','inactive') NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -100,7 +98,7 @@ CREATE TABLE `delivery` (
   KEY `fk_staff$delivery_idx` (`staff_id`),
   CONSTRAINT `fk_delivery_method$delivery` FOREIGN KEY (`delivery_method_id`) REFERENCES `delivery_method` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_staff$delivery` FOREIGN KEY (`staff_id`) REFERENCES `staff` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -114,7 +112,7 @@ CREATE TABLE `delivery_method` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,10 +124,10 @@ DROP TABLE IF EXISTS `discount`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `discount` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `type` varchar(20) NOT NULL,
+  `type` enum('seasonal','coupen') NOT NULL,
   `type_id` int(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -144,13 +142,13 @@ CREATE TABLE `feedback` (
   `date` date NOT NULL,
   `time` time(6) NOT NULL,
   `comment` varchar(255) DEFAULT NULL,
-  `number_of_stars` int(5) NOT NULL,
+  `number_of_stars` int(1) NOT NULL,
   `customer_id` int(10) NOT NULL,
   `item_id` int(10) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_customer$feedback_idx` (`customer_id`),
   CONSTRAINT `fk_customer$feedback` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -168,7 +166,7 @@ CREATE TABLE `group` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
   KEY `fk_module` (`module_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -214,7 +212,7 @@ CREATE TABLE `guest` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
   `mobile` varchar(15) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -228,13 +226,13 @@ CREATE TABLE `item` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `price` decimal(5,2) NOT NULL,
-  `description` int(10) NOT NULL,
+  `description` varchar(500) NOT NULL,
   `size` varchar(10) NOT NULL,
   `type` enum('carbonate','non-carbonate','veg','non-veg') NOT NULL,
   `image` varchar(500) DEFAULT NULL,
   `sub_category_id` int(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -250,7 +248,7 @@ CREATE TABLE `module` (
   `description` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -269,7 +267,7 @@ CREATE TABLE `notification` (
   PRIMARY KEY (`id`),
   KEY `fk_shopping_cart$notification_idx` (`shopping_cart_id`),
   CONSTRAINT `fk_shopping_cart$notification` FOREIGN KEY (`shopping_cart_id`) REFERENCES `shopping_cart` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -286,7 +284,7 @@ CREATE TABLE `package` (
   `price` decimal(5,2) NOT NULL,
   `image` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -300,7 +298,7 @@ CREATE TABLE `payment_method` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -331,7 +329,7 @@ CREATE TABLE `payment_transaction` (
   CONSTRAINT `fk_delivery$payment_transaction` FOREIGN KEY (`delivery_id`) REFERENCES `delivery` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `fk_guest$payment_transaction` FOREIGN KEY (`guest_id`) REFERENCES `guest` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `fk_payment_method$payment_transaction` FOREIGN KEY (`payment_method_id`) REFERENCES `payment_method` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -364,7 +362,7 @@ CREATE TABLE `permission` (
   `name` varchar(50) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -379,7 +377,7 @@ CREATE TABLE `product` (
   `type` enum('item','package') NOT NULL,
   `type_id` int(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -391,12 +389,12 @@ DROP TABLE IF EXISTS `seasonal_discount`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `seasonal_discount` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `rate` varchar(45) NOT NULL,
-  `start_date` varchar(45) DEFAULT NULL,
-  `expire_date` int(11) DEFAULT NULL,
+  `rate` decimal(10,2) NOT NULL,
+  `start_date` date DEFAULT NULL,
+  `expire_date` date DEFAULT NULL,
   `status` enum('active','inactive') NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -416,7 +414,7 @@ CREATE TABLE `shopping_cart` (
   KEY `fk_guest$shopping_cart_idx` (`guest_id`),
   CONSTRAINT `fk_customer$shopping_cart` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_guest$shopping_cart` FOREIGN KEY (`guest_id`) REFERENCES `guest` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -462,7 +460,7 @@ CREATE TABLE `staff` (
   `status` enum('active','inactive') NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -481,7 +479,7 @@ CREATE TABLE `sub_category` (
   PRIMARY KEY (`id`),
   KEY `fk_sub_category_1_idx` (`category_id`),
   CONSTRAINT `fk_sub_category_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -493,4 +491,4 @@ CREATE TABLE `sub_category` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-09-09 14:15:24
+-- Dump completed on 2016-09-09 17:24:31
