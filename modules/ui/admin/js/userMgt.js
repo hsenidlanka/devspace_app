@@ -64,13 +64,19 @@ $(document).ready(function () {
 
 
 function showMeBlocked(){
-    //blocked users
+
+    //blocked staff users
     var blockPeriod= document.getElementById("blockPeriod");
     var bsname= document.getElementById("bsname");
+    var branch= document.getElementById("branch");
+
+    //blocked customers
+    var blockcPeriod= document.getElementById("blockcPeriod");
+    var bcname= document.getElementById("bcname");
+    var blockcCity= document.getElementById("blockcCity");
 
 
     //blocked users filter
-
     if (  $("#blockCheck").is(":checked")){
         blockPeriod.style.display = "block";
     } else{
@@ -82,6 +88,33 @@ function showMeBlocked(){
     } else{
         bsname.style.display = "none";
     }
+
+    if (  $("#branchCheck").is(":checked")){
+        branch.style.display = "block";
+    } else{
+        branch.style.display = "none";
+    }
+
+
+    //blocked customer filters
+    if (  $("#blockcCheck").is(":checked")){
+        blockcPeriod.style.display = "block";
+    } else{
+        blockcPeriod.style.display = "none";
+    }
+
+    if (  $("#bcCheck").is(":checked")){
+        bcname.style.display = "block";
+    } else{
+        bcname.style.display = "none";
+    }
+
+    if (  $("#citycCheck").is(":checked")){
+        blockcCity.style.display = "block";
+    } else{
+        blockcCity.style.display = "none";
+    }
+
 
 }
 

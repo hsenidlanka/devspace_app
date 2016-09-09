@@ -2,7 +2,7 @@
 <html>
 <head>
 
-    <script src="../js/bannedUser_table.js"></script>
+    <script src="../js/bannedStaff_table.js"></script>
     <script src="../js/userMgt.js"></script>
     <script>
         //datepicker
@@ -51,7 +51,7 @@
                         </div>
                         <div class="col-xs-4">
                             <label class="checkbox-inline">
-                                <input type="checkbox" value="3" id="branchCheck" onchange="showMe()">Living Area
+                                <input type="checkbox" value="3" id="branchCheck" onchange="showMeBlocked()">Branch
                             </label>
                         </div>
                     </div>
@@ -75,7 +75,7 @@
         <!--Filtering elements to be displayed as checkbox is checked     -->
         <div class="form-group">
             <div class="row">
-                <div class="col-xs-8" id="blockPeriod"style="display: none" >
+                <div class="col-xs-8" id="blockPeriod"style="display: none; width: 64%" >
                     <div class="col-xs-2"  style="text-align: right">
                         <label class=" control-label">
                             From:
@@ -102,12 +102,13 @@
                 <!--name form-group-->
                 <div class="col-xs-4" style="width: 36%">
                     <div class="col-xs-8">
-                        <select class="form-control" id="city"  style="display: none;">
+                        <select class="form-control" id="branch"  style="display: none;">
                             <option>Colombo</option>
                             <option>Gampaha</option>
                             <option>Ja-Ela</option>
                         </select>
                     </div>
+                    <div class="col-xs-4"></div>
                 </div>
             </div>
         </div>
@@ -115,13 +116,13 @@
 </div>
 <div class="col-sm-1"></div>
 
-<table  id="tableBannedusers">
+<table  id="tableBannedstaff">
 </table>
 
 
 
 <!--modelto appear when viewing the details of the blocked user (STAFF) -->
-<div class="modal fade" id="detailUserModal">
+<div class="modal fade" id="blockedStaffModal">
     <div class="modal-dialog ">
         <div class="modal-content">
             <div class="modal-header deleteuser-modal-header-style">

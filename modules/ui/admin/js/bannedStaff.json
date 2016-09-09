@@ -4,7 +4,8 @@
     "Username": "test0",
     "f_name" :"Supun",
     "l_name":"Athukorala",
-    "userType":"staff"
+    "blockedDate":"03/02/2016",
+    "branch" :"Colombo"
 
   },
   {
@@ -12,7 +13,8 @@
     "Username": "test1",
     "f_name" :"Tharin",
     "l_name":"Senevirathne",
-    "userType":"staff"
+    "blockedDate":"03/01/2015",
+    "branch" :"Colombo"
 
   },
   {
@@ -20,63 +22,72 @@
     "Username": "test2",
     "f_name" :"Digath",
     "l_name":"Ekanayaka",
-    "userType":"customer"
+    "blockedDate":"03/12/2016",
+    "branch" :"Gampaha"
   },
   {
     "ID": 3,
     "Username": "test3",
     "f_name" :"Uthpala",
     "l_name":"Godakubura",
-    "userType":"staff"
+    "blockedDate":"03/08/2011",
+    "branch" :"Ja-Ela"
   },
   {
     "ID": 4,
     "Username": "test4",
     "f_name" :"Dineesha",
     "l_name":"Suraweera",
-    "userType":"customer"
+    "blockedDate":"03/05/2012",
+    "branch" :"Ja-Ela"
   },
   {
     "ID": 5,
     "Username": "test5",
     "f_name" :"Upeksha",
     "l_name":"Dissananyaka",
-    "userType":"customer"
+    "blockedDate":"03/02/2016",
+    "branch" :"Gampaha"
   },
   {
     "ID": 6,
     "Username": "test6",
     "f_name" :"Kanchani",
     "l_name":"Basnayaka",
-    "userType":"customer"
+    "blockedDate":"03/07/2010",
+    "branch" :"Colombo"
   },
   {
     "ID": 7,
     "Username": "test7",
     "f_name" :"Suraweera",
     "l_name":"Gunawardana",
-    "userType":"customer"
+    "blockedDate":"23/11/2011",
+    "branch" :"Colombo"
   },
   {
     "ID": 8,
     "Username": "test8",
     "f_name" :"Sajani",
     "l_name":"Ekanayaka",
-    "userType":"staff"
+    "blockedDate":"17/02/2016",
+    "branch" :"Colombo"
   },
   {
     "ID": 9,
     "Username": "test9",
     "f_name" :"Imalka",
     "l_name":"Perera",
-    "userType":"customer"
+    "blockedDate":"20/02/1999",
+    "branch" :"Ja-Ela"
   },
   {
     "ID": 10,
     "Username": "test10",
     "f_name" :"Suraweera",
     "l_name":"DeSilva",
-    "userType":"staff"
+    "blockedDate":"13/06/2014",
+    "branch" :"Ja-Ela"
   },
   {
     "ID": 11,
