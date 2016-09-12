@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.31, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.9, for linux-glibc2.5 (x86_64)
 --
 -- Host: localhost    Database: pizza_shefu
 -- ------------------------------------------------------
--- Server version	5.6.31-0ubuntu0.15.10.1
+-- Server version	5.7.11
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -131,7 +131,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `item` WRITE;
 /*!40000 ALTER TABLE `item` DISABLE KEYS */;
-INSERT INTO `item` VALUES (1,'Thanduri Pizza',550.00,'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text','large','non-veg','/a/dummy/image/path/',1),(2,'Cheese Lover',750.00,'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text','medium','veg','/a/dummy/image/path/',2),(3,'Chicken Lasanga',500.00,'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text','jumbo','non-veg','/a/dummy/image/path/',3),(4,'Garlic Bread',450.00,'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text','large','carbonate','/a/dummy/image/path/',1),(5,'Sausage Rolls',250.00,'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text','large','carbonate','/a/dummy/image/path/',5);
+INSERT INTO `item` VALUES (1,'Thanduri Pizza','Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text','non-veg','/a/dummy/image/path/',1),(2,'Cheese Lover','Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text','veg','/a/dummy/image/path/',2),(3,'Chicken Lasanga','Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text','non-veg','/a/dummy/image/path/',3),(4,'Garlic Bread','Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text','carbonate','/a/dummy/image/path/',1),(5,'Sausage Rolls','Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text','carbonate','/a/dummy/image/path/',5);
 /*!40000 ALTER TABLE `item` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -246,6 +246,15 @@ INSERT INTO `shopping_cart_product` VALUES (4,1),(5,2),(1,3),(2,4),(3,5);
 UNLOCK TABLES;
 
 --
+-- Dumping data for table `size`
+--
+
+LOCK TABLES `size` WRITE;
+/*!40000 ALTER TABLE `size` DISABLE KEYS */;
+/*!40000 ALTER TABLE `size` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Dumping data for table `staff`
 --
 
@@ -274,4 +283,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-09-09 17:23:59
+-- Dump completed on 2016-09-12 10:13:00
