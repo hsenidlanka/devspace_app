@@ -1,6 +1,6 @@
 package hsl.devspace.app.corelogic.repository;
 
-        import hsl.devspace.app.corelogic.domain.User;
+import hsl.devspace.app.corelogic.domain.User;
 import org.apache.log4j.Logger;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.TransientDataAccessResourceException;
@@ -12,8 +12,8 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
-        import java.util.List;
-        import java.util.Map;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by hsenid on 7/4/16.
@@ -45,11 +45,11 @@ public class UserRepositoryImpl implements UserRepository {
         String un = user.getUsername();
         String pw = user.getPassword();
         if (un != "" && pw != "") {
-            String sql = "INSERT INTO users " +
-                    "(username,password) VALUES (?,?)";
+            String sql = "INSERT INTO customer " +
+                    "(title,first_name,last_name,username,password,email,address_line1,address_line2,address_line3,mobile,registered_date,status) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 
-
-            row = jdbcTemplate.update(sql, new Object[]{user.getUsername(), user.getPassword()});
+            row = jdbcTemplate.update(sql, new Object[]{user.getTitle(), user.getFirstName(),user.getLastName(),user.getUsername(),user.getPassword(),
+            user.getEmail(),user.getAddressL1(),user.getAddressL2(),user.getCity(),user.getMobile(),"2016-11-11","active"});
             transactionManager.commit(stat);
 
             log.info(row + "inserted");
@@ -67,7 +67,7 @@ public class UserRepositoryImpl implements UserRepository {
         TransactionStatus stat = transactionManager.getTransaction(tr_def);
         user.setUsername(username);
 
-        String sql = "DELETE FROM users WHERE username = ?";
+        String sql = "DELETE FROM customer WHERE username = ?";
         int row = jdbcTemplate.update(sql, new Object[]{user.getUsername()});
         transactionManager.commit(stat);
         log.info(row + "deleted");
@@ -77,19 +77,23 @@ public class UserRepositoryImpl implements UserRepository {
 
 
     @Override
-    public void changePassword(String username, String password) {
+    public void changePassword(String username, String password, String nPw) {
         TransactionDefinition tr_def = new DefaultTransactionDefinition();
         TransactionStatus stat = transactionManager.getTransaction(tr_def);
 
         user.setUsername(username);
         user.setPassword(password);
-        String sql = "UPDATE users SET password = ? WHERE username = ? ";
+        boolean verified = loginAuthenticate(user);
+        if (verified) {
 
-        jdbcTemplate = new JdbcTemplate(dataSource);
+            user.setPassword(nPw);
+            System.out.println(user.getPassword());
 
-        int row = jdbcTemplate.update(sql, new Object[]{user.getPassword(), user.getUsername()});
-        transactionManager.commit(stat);
-        log.info(row + "password changed");
+            String sql = "UPDATE customer SET password = ? WHERE username = ? ";
+            int row = jdbcTemplate.update(sql, new Object[]{user.getPassword(), user.getUsername()});
+            transactionManager.rollback(stat);
+            log.info(row + "password changed");
+        } else log.info("cannot");
     }
 
     @Override
@@ -102,7 +106,7 @@ public class UserRepositoryImpl implements UserRepository {
         TransactionDefinition tr_def = new DefaultTransactionDefinition();
         TransactionStatus stat = transactionManager.getTransaction(tr_def);
 
-        String sql = "SELECT count(*) FROM users WHERE BINARY username = ? AND BINARY password = ? ";
+        String sql = "SELECT count(*) FROM customer WHERE BINARY username = ? AND BINARY password = ? ";
         boolean result = false;
 
         int count = jdbcTemplate.queryForObject(
@@ -121,8 +125,10 @@ public class UserRepositoryImpl implements UserRepository {
         TransactionDefinition tr_def = new DefaultTransactionDefinition();
         TransactionStatus stat = transactionManager.getTransaction(tr_def);
         String sql = "UPDATE users SET username=? password = ? WHERE username = ? ";
-        int count = jdbcTemplate.queryForObject(
+        /*int count = jdbcTemplate.queryForObject(
                 sql, new Object[]{user.getUsername(), user.getPassword(), (user.getUsername())}, Integer.class);
+       */
+        int count = jdbcTemplate.update(sql, new Object[]{user.getUsername(), user.getPassword(), (user.getUsername())}, Integer.class);
         transactionManager.commit(stat);
         log.info(count);
         return count;
@@ -131,9 +137,11 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public List<Map<String, Object>> retrieveMultipleRowsColumns(String username) {
-    List<Map<String, Object>> mp =  jdbcTemplate.queryForList("SELECT * FROM users WHERE username = ?", username);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE BINARY username = ?", username);
         log.info(mp);
         return mp;
     }
+
+
 }
 

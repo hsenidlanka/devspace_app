@@ -4,15 +4,86 @@ package hsl.devspace.app.corelogic.domain;
  * Created by hsenid on 7/4/16.
  */
 public class User {
-    private int usr_id;
+
+    private boolean isConfirmed;
+    private String dob;
+
+    private String title;
     private String firstName;
     private String lastName;
     private String username;
     private String password;
-    private boolean isConfirmed;
-    private String dob;
+    private String email;
     private String addressL1;
     private String addressL2;
+    private String city;
+    private String mobile;
+    private String designation;
+    private String department;
+    private String  branch;
+    private enum status{
+        active,inactive
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+
+
+    public String getBranch() {
+        return branch;
+    }
+
+    public void setBranch(String branch) {
+        this.branch = branch;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDesignation() {
+        return designation;
+    }
+
+    public void setDesignation(String designation) {
+        this.designation = designation;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+
 
     public String getLastName() {
         return lastName;
@@ -30,13 +101,6 @@ public class User {
         this.firstName = firstName;
     }
 
-    public int getUsr_id() {
-        return usr_id;
-    }
-
-    public void setUsr_id(int usr_id) {
-        this.usr_id = usr_id;
-    }
 
     public String getUsername() {
         return username;
@@ -97,14 +161,37 @@ public class User {
         user.getUsername();*/
     }
 
-    public User(String firstName, String lastName, String dob,String addressL1, String addressL2,
-                String username,String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.dob = dob;
-        this.addressL1 = addressL1;
-        this.addressL2 = addressL2;
+    public User(String title, String username,String password,String firstName, String lastName,String email,
+                String mobile,String addressL1, String addressL2,String city,String designation, String department,
+                String branch) {
+        this.title=title;
         this.username = username;
         this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email=email;
+        this.mobile=mobile;
+        this.addressL1 = addressL1;
+        this.addressL2 = addressL2;
+        this.city=city;
+        this.designation=designation;
+        this.department=department;
+        this.branch=branch;
+    }
+    //customer
+    public User(String title,String firstName,String lastName,String username,String password,String email,String addressL1,
+                String addressL2,String city,String mobile){
+        this.title=title;
+        this.firstName=firstName;
+        this.lastName=lastName;
+        this.username=username;
+        this.password=password;
+        this.email=email;
+        this.addressL1=addressL1;
+        this.addressL2=addressL2;
+        this.city=city;
+        this.mobile=mobile;
+
+
     }
 }
