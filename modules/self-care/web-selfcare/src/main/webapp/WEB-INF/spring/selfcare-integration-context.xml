@@ -14,7 +14,7 @@
     <!-- JSR-303 support will be detected on classpath and enabled automatically -->
     <mvc:annotation-driven/>
     <!-- Scans the classpath of this application for @Components to deploy as beans -->
-    <context:component-scan base-package="hsl.devspace.app.selfcare"/>
+    <context:component-scan base-package="removed.selfcare"/>
     <context:property-placeholder location="classpath:system.properties,classpath:validation.properties"/>
 
     <!-- Forwards requests to the "/" resource to the "welcome" view -->
@@ -44,7 +44,7 @@
     <mvc:interceptors>
         <!-- Changes the locale when a 'locale' request parameter is sent; e.g. /?locale=de -->
         <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"/>
-        <bean class="hsl.devspace.app.selfcare.ThemeApplyingInterceptor">
+        <bean class="removed.selfcare.ThemeApplyingInterceptor">
             <property name="themeName" value="${web.theme}"/>
         </bean>
     </mvc:interceptors>

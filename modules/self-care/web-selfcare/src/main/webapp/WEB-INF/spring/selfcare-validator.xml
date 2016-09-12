@@ -5,5 +5,5 @@
     <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
 
     <bean id="loginValidator"
-          class="hsl.devspace.app.selfcare.login.LoginValidator"/>
+          class="removed.selfcare.login.LoginValidator"/>
 </beans>

@@ -12,7 +12,7 @@
 
     <mvc:annotation-driven/>
 
-    <context:component-scan base-package="hsl.devspace.app.selfcare.controllers"/>
+    <context:component-scan base-package="removed.selfcare.controllers"/>
     <mvc:resources mapping="/resources/**" location="/resources/" />
 
     <bean id="viewResolver"
