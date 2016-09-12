@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html>
+<head>
 <link href="../bootstrap-3.3.7/css/bootstrap.min_spacelab.css" rel="stylesheet"
       integrity="sha384-L/tgI3wSsbb3f/nW9V6Yqlaw3Gj7mpE56LWrhew/c8MIhAYWZ/FNirA64AVkB5pI" crossorigin="anonymous">
 
@@ -9,12 +12,13 @@
 <link href="../css/scroll_top.css" rel="stylesheet" type="text/css">
 <link href="../css/loader.css" rel="stylesheet">
 <div class="loader-anim"></div>
-
-<div w3-include-html="headertest2.html"></div>
+</head>
 
 <!------------------------------------------------------------------------->
 <!--------------Body------------------------->
 <body style="overflow: visible" >
+<div w3-include-html="headertest2.html"></div>
+
 <div class="col-sm-12" style="height: 40px"></div>
 <div class="col-sm-1"></div>
 <div class="col-sm-4">
@@ -71,7 +75,7 @@
 <div w3-include-html="loginload.html"></div>
 <div w3-include-html="signupmodal.html"></div>
 </body>
-
+</html>
 <!------------------------------------------------------------------------->
 <!--<div w3-include-html="footer.html"></div>-->
 
