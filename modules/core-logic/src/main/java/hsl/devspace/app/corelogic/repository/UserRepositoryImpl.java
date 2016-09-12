@@ -36,7 +36,6 @@ public class UserRepositoryImpl implements UserRepository {
 
     }
 
-
     @Override
     public int add(User user) throws DuplicateKeyException {
         int row = 0;
@@ -46,7 +45,7 @@ public class UserRepositoryImpl implements UserRepository {
         String pw = user.getPassword();
         if (un != "" && pw != "") {
             String sql = "INSERT INTO customer " +
-                    "(title,first_name,last_name,username,password,email,address_line1,address_line2,address_line3,mobile,registered_date,status) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+                    "(title,first_name,last_name,username,password,email,address_line1,address_line2,address_line3,mobile,registered_date,status) VALUES (?,?,?,?,md5(?),?,?,?,?,?,?,?)";
 
             row = jdbcTemplate.update(sql, new Object[]{user.getTitle(), user.getFirstName(),user.getLastName(),user.getUsername(),user.getPassword(),
             user.getEmail(),user.getAddressL1(),user.getAddressL2(),user.getCity(),user.getMobile(),"2016-11-11","active"});
@@ -89,11 +88,11 @@ public class UserRepositoryImpl implements UserRepository {
             user.setPassword(nPw);
             System.out.println(user.getPassword());
 
-            String sql = "UPDATE customer SET password = ? WHERE username = ? ";
+            String sql = "UPDATE customer SET password = md5(?) WHERE username = ? ";
             int row = jdbcTemplate.update(sql, new Object[]{user.getPassword(), user.getUsername()});
             transactionManager.rollback(stat);
             log.info(row + "password changed");
-        } else log.info("cannot");
+        } else log.info("cannot change password");
     }
 
     @Override
@@ -106,7 +105,7 @@ public class UserRepositoryImpl implements UserRepository {
         TransactionDefinition tr_def = new DefaultTransactionDefinition();
         TransactionStatus stat = transactionManager.getTransaction(tr_def);
 
-        String sql = "SELECT count(*) FROM customer WHERE BINARY username = ? AND BINARY password = ? ";
+        String sql = "SELECT count(*) FROM customer WHERE BINARY username = ? AND BINARY password =md5(?) ";
         boolean result = false;
 
         int count = jdbcTemplate.queryForObject(
@@ -124,7 +123,7 @@ public class UserRepositoryImpl implements UserRepository {
     public int modify(User user) throws TransientDataAccessResourceException, SQLException {
         TransactionDefinition tr_def = new DefaultTransactionDefinition();
         TransactionStatus stat = transactionManager.getTransaction(tr_def);
-        String sql = "UPDATE users SET username=? password = ? WHERE username = ? ";
+        String sql = "UPDATE customer SET username=? password = ? WHERE username = ? ";
         /*int count = jdbcTemplate.queryForObject(
                 sql, new Object[]{user.getUsername(), user.getPassword(), (user.getUsername())}, Integer.class);
        */
@@ -137,10 +136,35 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public List<Map<String, Object>> retrieveMultipleRowsColumns(String username) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE BINARY username = ?", username);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE BINARY username = ?",username);
         log.info(mp);
         return mp;
     }
+    @Override
+    public void block(String username){
+        TransactionDefinition tr_def = new DefaultTransactionDefinition();
+        TransactionStatus stat = transactionManager.getTransaction(tr_def);
+        user.setUsername(username);
+
+        String sql = "UPDATE customer SET status='inactive' WHERE username = ?";
+        int row = jdbcTemplate.update(sql, new Object[]{user.getUsername()});
+        transactionManager.commit(stat);
+        log.info(row + "block status");
+    }
+
+    @Override
+    public void unblock(String username) {
+        TransactionDefinition tr_def = new DefaultTransactionDefinition();
+        TransactionStatus stat = transactionManager.getTransaction(tr_def);
+        user.setUsername(username);
+
+        String sql = "UPDATE customer SET status='active' WHERE username = ?";
+        int row = jdbcTemplate.update(sql, new Object[]{user.getUsername()});
+        transactionManager.commit(stat);
+        log.info(row + "unblock status");
+
+    }
+
 
 
 }

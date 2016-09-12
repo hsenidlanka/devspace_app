@@ -191,7 +191,5 @@ public class User {
         this.addressL2=addressL2;
         this.city=city;
         this.mobile=mobile;
-
-
     }
 }
