@@ -49,6 +49,12 @@ $(document).ready(function () {
                 events: operateEvents
             }]
         });
+
+        /*
+        *populating drop-down list according to the table's field
+        */
+
+    
 });
 
 function operateFormatter(value, row, index){
@@ -65,18 +71,15 @@ function operateFormatter(value, row, index){
 
 window.operateEvents = {
 
-   /* 'click .edit': function (e, value, row,index){
+    'click .edit': function (e, value, row,index){
 
         var data =JSON.stringify(row);
         var objct = JSON.parse(data);
 
-        $('#txtEditPkgId').val(objct["id"]);
-        $('#txtEditPkgNm').val(objct["name"]);
-        *//*$('#editPkgCont').val(objct["id"]);*//*
-        *//*$('#imge').val(objct["id"]);*//*
-        $('#editPkgPrice').val(objct["id"]);
+        $('#txtEditID').val(objct["id"]);
+        $('#txtEditeName').val(objct["name"]);
 
-    },*/
+    },
 
     'click .delete':function(){
         $('#itemDeleteModal').modal('show');

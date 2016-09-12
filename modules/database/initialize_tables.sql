@@ -131,7 +131,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `item` WRITE;
 /*!40000 ALTER TABLE `item` DISABLE KEYS */;
-INSERT INTO `item` VALUES (1,'Thanduri Pizza',550.00,'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text','large','non-veg','/a/dummy/image/path/',1),(2,'Cheese Lover',750.00,'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text','medium','veg','/a/dummy/image/path/',2),(3,'Chicken Lasanga',500.00,'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text','jumbo','non-veg','/a/dummy/image/path/',3),(4,'Garlic Bread',450.00,'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text','large','carbonate','/a/dummy/image/path/',1),(5,'Sausage Rolls',250.00,'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text','large','carbonate','/a/dummy/image/path/',5);
+INSERT INTO `item` VALUES (1,'Thanduri Pizza','Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text','non-veg','/a/dummy/image/path/',1),(2,'Cheese Lover','Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text','veg','/a/dummy/image/path/',2),(3,'Chicken Lasanga','Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text','non-veg','/a/dummy/image/path/',3),(4,'Garlic Bread','Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text','carbonate','/a/dummy/image/path/',1),(5,'Sausage Rolls','Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text','carbonate','/a/dummy/image/path/',5);
 /*!40000 ALTER TABLE `item` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -246,6 +246,16 @@ INSERT INTO `shopping_cart_product` VALUES (4,1),(5,2),(1,3),(2,4),(3,5);
 UNLOCK TABLES;
 
 --
+-- Dumping data for table `size`
+--
+
+LOCK TABLES `size` WRITE;
+/*!40000 ALTER TABLE `size` DISABLE KEYS */;
+INSERT INTO `size` VALUES ('large',1280.00,1),('medium',890.00,1),('regular',560.00,1),('large',960.00,2),('regular',490.00,2),('large',1380.00,3),('medium',740.00,3),('regular',470.00,3),('medium',390.00,4),('regular',240.00,4);
+/*!40000 ALTER TABLE `size` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Dumping data for table `staff`
 --
 
@@ -274,4 +284,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-09-09 17:23:59
+-- Dump completed on 2016-09-12 10:57:15
