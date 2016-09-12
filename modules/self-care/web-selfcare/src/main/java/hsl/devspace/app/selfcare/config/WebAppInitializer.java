@@ -5,7 +5,7 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer{
     @Override
     protected String[] getServletMappings(){
-        return new String[]{"/"};
+        return new String[]{"self-care-home"};
     }
 
     @Override
