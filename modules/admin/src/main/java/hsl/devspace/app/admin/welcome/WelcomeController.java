@@ -3,30 +3,32 @@ package hsl.devspace.app.admin.welcome;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 
 
 @Controller
-@RequestMapping("/welcome")
-@SessionAttributes("welcomeForm")
+@RequestMapping(value = "/cas")
+//@SessionAttributes("welcomeForm")
 public class WelcomeController {
 
     private static final Logger LOG = LogManager.getLogger(WelcomeController.class);
-    private static final String view = "welcome";
+    private static final String view = "casLoginView";
 
-    @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView initWelcome(Model model) throws Exception {
+    @RequestMapping(value ="/login", method= RequestMethod.GET)
+    public ModelAndView initWelcome(@RequestParam(value = "error", required = false) String error) throws Exception {
 
         LOG.trace("inside the welcome initiate service method");
 
-        WelcomeForm welcomeForm = new WelcomeForm();
-        model.addAttribute("welcomeForm", welcomeForm);
-        return new ModelAndView(view, "model", model);
+        ModelAndView model = new ModelAndView();
+        if (error != null) {
+            model.addObject("error", "Invalid username and password!");
+        }
+        model.setViewName(view);
+        return model;
     }
 
 }
