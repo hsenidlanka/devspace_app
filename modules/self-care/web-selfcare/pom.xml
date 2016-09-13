@@ -8,13 +8,14 @@
     <version>1.0.0</version>
     <packaging>war</packaging>
     <name>selfcare</name>
-
-    <parent>
-        <artifactId>hsl-app-parent</artifactId>
-        <groupId>hsl.devspace.app</groupId>
-        <version>1.0.0</version>
-        <relativePath>../../parent/pom.xml</relativePath>
-    </parent>
+    <groupId>menuka.hsenid</groupId>
+    <!-- ***** groupid must be parent id un comment below-->
+    <!--<parent>-->
+        <!--<artifactId>hsl-app-parent</artifactId>-->
+        <!--<groupId>hsl.devspace.app</groupId>-->
+        <!--<version>1.0.0</version>-->
+        <!--<relativePath>../../parent/pom.xml</relativePath>-->
+    <!--</parent>-->
 
 
     <properties>

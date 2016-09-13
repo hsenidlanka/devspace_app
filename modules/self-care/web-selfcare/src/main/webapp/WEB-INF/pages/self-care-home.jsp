@@ -1,34 +1,25 @@
-<!DOCTYPE html>
-<html>
-<head>
+<link href="../bootstrap-3.3.7/css/bootstrap.min_spacelab.css" rel="stylesheet"
+      integrity="sha384-L/tgI3wSsbb3f/nW9V6Yqlaw3Gj7mpE56LWrhew/c8MIhAYWZ/FNirA64AVkB5pI" crossorigin="anonymous">
+<link href="../css/homeStyle.css" rel="stylesheet" type="text/css">
+<link href="../css/footer.css" rel="stylesheet" type="text/css">
+<link href="../css/style2.css" rel="stylesheet" type="text/css" media="all"/>
+<link href="../css/loader.css" rel="stylesheet">
+<div class="loader-anim"></div>
 
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    <link href="../bootstrap-3.3.7/css/bootstrap.min_spacelab.css" rel="stylesheet"
-          integrity="sha384-L/tgI3wSsbb3f/nW9V6Yqlaw3Gj7mpE56LWrhew/c8MIhAYWZ/FNirA64AVkB5pI" crossorigin="anonymous">
-    <link href="../css/homeStyle.css" rel="stylesheet" type="text/css">
-    <link href="../css/footer.css" rel="stylesheet" type="text/css">
-    <link href="../css/style2.css" rel="stylesheet" type="text/css" media="all"/>
-    <link href="../css/loader.css" rel="stylesheet">
-    <div class="loader-anim"></div>
-
-    <style>
-        .carousel-inner > .item > img,
-        .carousel-inner > .item > a > img {
-            width: 58%;
-            height: 52%;
-            margin: auto;
-        }
-    </style>
-    <!--<div w3-include-html="header.html"></div>-->
-    <script src="../js/w3data.js"></script>
-    <script>
-        w3IncludeHTML();
-    </script>
-</head>
+<style>
+    .carousel-inner > .item > img,
+    .carousel-inner > .item > a > img {
+        width: 58%;
+        height: 52%;
+        margin: auto;
+    }
+</style>
+<!--<div w3-include-html="header.html"></div>-->
+<script src="../js/w3data.js"></script>
+<script>
+    w3IncludeHTML();
+</script>
 <!-------Header------------------------------------->
-<body>
-<c:url var="imageUrl" value="../images/bg.png">
-    <img src="${imageUrl}">
 <nav class="navbar navbar-default ">
     <div class="container-fluid">
         <div class="col-sm-4"><a href="self-care-home.html"> <img
@@ -41,26 +32,33 @@
         </div>
         <div class="col-sm-8">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="menu.html">Menu</a></li>
-                <li><a href="../pages/locations.html">Locations</a></li>
-                <li><a href="../pages/createfeedback.html">Feedbacks</a></li>
-                <li><a href="contactus.html">Contact Us</a></li>
-                <li><a href="aboutus.html">About us</a></li>
+                <!--<li class="active"><a href="#">Home</a></li>-->
+                <li><a href="menu">Menu</a></li>
+                <!--<li><a href="#">Packages</a></li>-->
+                <li><a href="locations">Locations</a></li>
+                <li><a href="createfeedback">Feedbacks</a></li>
+                <li><a href="contactus">Contact Us</a></li>
+                <li><a href="aboutus">About us</a></li>
                 <li>
 
-                    <a href="shopping-cart.html"><img src="../images/shopping-cart.png"
-                                                      style="padding-left: 30px"></span>
+                   <!-- <a href="#"><span class="glyphicon glyphicon-shopping-cart"
+                                      style="padding-right: 10px;color: #22697d"></span></a>-->
+                    <a href="shopping-cart.html"><img src="../images/shopping-cart.png" style="padding-left: 30px"></span>
                     </a>
                 </li>
                 <li>
-                    <a class="form-group" data-toggle="modal" data-target="#modal-signup"><img
-                            src="../images/signup.png" style=""></span>
+                    <!--<a data-toggle="modal" data-target="#modal-signup">Sign
+                        Up
+                    </a>-->
+                    <a class="form-group" data-toggle="modal" data-target="#modal-signup" ><img src="../images/signup.png" style=""></span>
                     </a>
                 </li>
 
                 <li>
-                    <a class="form-group-sm" data-toggle="modal" data-target="#modal-login"><img
-                            src="../images/user2.png" style=""></span>
+                    <!--<a data-toggle="modal" data-target="#modal-login" style="tab-size: 10px">Log
+                        In
+                    </a>-->
+                    <a class="form-group-sm" data-toggle="modal" data-target="#modal-login"><img src="../images/user2.png" style=""></span>
                     </a>
 
 
@@ -70,9 +68,16 @@
     </div>
 
 </nav>
+<!--<div w3-include-html="header.html"></div>-->
+
 
 <!------------------------------------------------------------------------->
 <!--------------Body------------------------->
+
+<body >
+<!--
+        <div class="container">
+-->
 
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
@@ -88,7 +93,7 @@
     <div class="carousel-inner" role="listbox">
 
         <div class="item active">
-            <img src="<c:url value="../images/53debcce3a030pizza_transparent_png.png"/>" alt="" width="100"
+            <img src="../images/53debcce3a030pizza_transparent_png.png" alt="" width="100"
                  height="220">
         </div>
 
@@ -109,6 +114,17 @@
 
     </div>
 
+
+    <!-- Left and right controls -->
+    <!-- <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true" hidden="hidden"></span>
+         <span class="sr-only" hidden="hidden">Previous</span>
+     </a>
+     <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+         <span class="glyphicon glyphicon-chevron-right" aria-hidden="true" hidden="hidden"></span>
+         <span class="sr-only">Next</span>
+     </a>-->
+
 </div>
 
 <!----------------------------order online,surf menu,hot deals--------------->
@@ -117,20 +133,18 @@
     <div class="col-sm-2">
          <span>
                       <a href="#"> <img src="../images/hotdeals.png"
-                                        style="width: 150px;height: 140px"></a>
+                            style="width: 150px;height: 140px"></a>
                     </span>
     </div>
     <div class="col-sm-2">
                     <span>
-                       <a href="../pages/payment.html"> <img src="../images/ordernow3.png"
-                                                             style="width: 185px;height: 148px">
+                       <a href="../pages/payment.html"> <img src="../images/ordernow3.png" style="width: 185px;height: 148px">
                        </a>
                     </span>
     </div>
     <div class="col-sm-2">
                     <span>
-                       <a href="../pages/menu.html"> <img src="../images/ordernow2.png"
-                                                          style="width: 185px;height: 148px">
+                       <a href="menu"> <img src="../images/ordernow2.png" style="width: 185px;height: 148px">
                        </a>
                     </span>
     </div>
@@ -152,13 +166,13 @@
 <!------------------------------login modal--------------------------->
 
 <div id="modal-login" class="modal fade">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg"  >
         <div class="modal-content" style="width: 750px">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">x</button>
+                <button type="button" class="close" data-dismiss="modal" >x</button>
                 <p class="modal-title" style="font-size: x-large">Log In</p>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" >
                 <!--<div w3-include-html="loginmodaloptional.html"></div>-->
                 <form class="contact_form" action="#" method="post" name="contact_form">
 
@@ -193,8 +207,7 @@
                 <div class="account">
                     <div class="row">
                         <div class="col-sm-10">
-                            <h2><a class="form-group-sm" data-toggle="modal" data-target="#modal-signup"
-                                   data-dismiss="modal">Don' have an account?</a></h2>
+                            <h2><a class="form-group-sm" data-toggle="modal" data-target="#modal-signup" data-dismiss="modal">Don' have an account?</a></h2>
                         </div>
 
                     </div>
@@ -230,9 +243,11 @@
     </div>
 </div>
 
+
+<!------------------------------------------------------------------------->
 <!-------Footer------------------------------------->
 
-<div id="footer" style="position: fixed;height: 50px">
+<div id="footer" style="position: fixed;height: 50px"  >
     <!--<div style="height: 22px"></div>-->
     <div class="form-group row static">
 
@@ -265,15 +280,18 @@
         <li><a href="#" title="Scroll to top"><i class="glyphicon glyphicon-chevron-up"></i></a></li>
     </ul>
 </div>
+<!--<div w3-include-html="footer.html"></div>-->
 
 <script src="../js/w3data.js"></script>
 
+
+
 </body>
+
 
 <!------------------------------signup modal --------------------------------------------->
 
 <div w3-include-html="signupmodal.html"></div>
-</html>
 <script>
     w3IncludeHTML();
 </script>
@@ -281,3 +299,4 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 <script src="../js/loader.js"></script>
+

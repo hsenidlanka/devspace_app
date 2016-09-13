@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html>
+<head>
 <link href="../bootstrap-3.3.7/css/bootstrap.min_spacelab.css" rel="stylesheet"
       integrity="sha384-L/tgI3wSsbb3f/nW9V6Yqlaw3Gj7mpE56LWrhew/c8MIhAYWZ/FNirA64AVkB5pI" crossorigin="anonymous">
 
@@ -14,8 +17,8 @@
 <script src="../js/notify.js"></script>
 <script src="../js/prettify.js"></script>
 <link href="../css/loader.css" rel="stylesheet">
+</head>
 <div class="loader-anim"></div>
-<div w3-include-html="headertest2.html"></div>
 <style>
     .status {
         display: inline;
@@ -30,6 +33,8 @@
     }
 </style>
 <body style="overflow: visible">
+<div w3-include-html="headertest2.html"></div>
+
 <div class="brand"></div>
 <center>
     <div class="inner-bg">
@@ -174,7 +179,7 @@
 
 </body>
 <!--<div w3-include-html="footer.html"></div>-->
-
+</html>
 <script src="../js/w3data.js"></script>
 <script>
     w3IncludeHTML();
