@@ -22,19 +22,19 @@
     </definition>
 
     <definition name="error" extends="reportLayout">
-        <put-attribute name="container" value="/WEB-INF/views/error.jsp"/>
+        <put-attribute name="container" value="/WEB-INF/views/error_pages/error.jsp"/>
     </definition>
 
     <definition name="404" extends="reportLayout">
-        <put-attribute name="container" value="/WEB-INF/views/404.jsp"/>
+        <put-attribute name="container" value="/WEB-INF/views/error_pages/404.jsp"/>
     </definition>
 
     <definition name="500" extends="reportLayout">
-        <put-attribute name="container" value="/WEB-INF/views/500.jsp"/>
+        <put-attribute name="container" value="/WEB-INF/views/error_pages/500.jsp"/>
     </definition>
 
     <definition name="sessionNotFound" extends="reportLayout">
-        <put-attribute name="container" value="/WEB-INF/views/sessionNotFound.jsp"/>
+        <put-attribute name="container" value="/WEB-INF/views/error_pages/sessionNotFound.jsp"/>
     </definition>
 
    <!-- <definition name="reports/subscriberView" extends="reportLayout">
