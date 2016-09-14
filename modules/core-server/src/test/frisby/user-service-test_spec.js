@@ -2,7 +2,7 @@ var frisby = require('frisby');
 
 // Test add user success.
 frisby.create('Add user test 01')
-    .post('http://localhost:2222/devspace/api/v1.0/users/add/frisby/123')
+    .post('http://localhost:2222/pizza-shefu/api/v1.0/users/add/frisby/123')
     .expectStatus(201)
     .inspectJSON()
     .expectJSONTypes({
@@ -26,7 +26,7 @@ frisby.create('Add user test 01')
         ],
         "links": [
             {
-                "link": "http://localhost:2222/devspace/api/v1.0/users/add/frisby/123",
+                "link": "http://localhost:2222/pizza-shefu/api/v1.0/users/add/frisby/123",
                 "rel": "self"
             }
         ],
@@ -37,7 +37,7 @@ frisby.create('Add user test 01')
 
 // Test add user with different http method.
 frisby.create('Add user test 02')
-    .get('http://localhost:2222/devspace/api/v1.0/users/add/frisby/123')
+    .get('http://localhost:2222/pizza-shefu/api/v1.0/users/add/frisby/123')
     .expectStatus(405)
     .inspectJSON()
     .expectJSONTypes({
@@ -56,7 +56,7 @@ frisby.create('Add user test 02')
 
 // Test user login success.
 frisby.create('User login test 01')
-    .post('http://localhost:2222/devspace/api/v1.0/users/login/frisby/123')
+    .post('http://localhost:2222/pizza-shefu/api/v1.0/users/login/frisby/123')
     .expectStatus(200)
     .inspectJSON()
     .expectJSONTypes({
@@ -80,7 +80,7 @@ frisby.create('User login test 01')
         ],
         "links": [
             {
-                "link": "http://localhost:2222/devspace/api/v1.0/users/login/frisby/123",
+                "link": "http://localhost:2222/pizza-shefu/api/v1.0/users/login/frisby/123",
                 "rel": "self"
             }
         ],
@@ -91,7 +91,7 @@ frisby.create('User login test 01')
 
 // Test user login wrong password.
 frisby.create('User login test 02')
-    .post('http://localhost:2222/devspace/api/v1.0/users/login/frisby/12')
+    .post('http://localhost:2222/pizza-shefu/api/v1.0/users/login/frisby/12')
     .expectStatus(401)
     .inspectJSON()
     .expectJSONTypes({
@@ -110,7 +110,7 @@ frisby.create('User login test 02')
 
 // Test user login wrong username.
 frisby.create('User login test 03')
-    .post('http://localhost:2222/devspace/api/v1.0/users/login/frisb/123')
+    .post('http://localhost:2222/pizza-shefu/api/v1.0/users/login/frisb/123')
     .expectStatus(401)
     .inspectJSON()
     .expectJSONTypes({
@@ -129,7 +129,7 @@ frisby.create('User login test 03')
 
 // Test user login-mixed case user name.
 frisby.create('User login test 04')
-    .post('http://localhost:2222/devspace/api/v1.0/users/login/fRiSby/123')
+    .post('http://localhost:2222/pizza-shefu/api/v1.0/users/login/fRiSby/123')
     .expectStatus(401)
     .inspectJSON()
     .expectJSONTypes({
@@ -148,7 +148,7 @@ frisby.create('User login test 04')
 
 // Test user login-With spaces.
 frisby.create('User login test 05')
-    .post('http://localhost:2222/devspace/api/v1.0/users/login/ frisby/123')
+    .post('http://localhost:2222/pizza-shefu/api/v1.0/users/login/ frisby/123')
     .expectStatus(401)
     .inspectJSON()
     .expectJSONTypes({
@@ -167,7 +167,7 @@ frisby.create('User login test 05')
 
 // Test user login-With spaces.
 frisby.create('User login test 06')
-    .post('http://localhost:2222/devspace/api/v1.0/users/login/frisby /123')
+    .post('http://localhost:2222/pizza-shefu/api/v1.0/users/login/frisby /123')
     .expectStatus(401)
     .inspectJSON()
     .expectJSONTypes({
@@ -186,7 +186,7 @@ frisby.create('User login test 06')
 
 // Test user login-Without password.
 frisby.create('User login test 07')
-    .post('http://localhost:2222/devspace/api/v1.0/users/login/frisby/')
+    .post('http://localhost:2222/pizza-shefu/api/v1.0/users/login/frisby/')
     .expectStatus(404)
     .inspectJSON()
     .expectJSONTypes({
@@ -205,7 +205,7 @@ frisby.create('User login test 07')
 
 // Test user login-With different http method.
 frisby.create('User login test 08')
-    .get('http://localhost:2222/devspace/api/v1.0/users/login/frisby/123')
+    .get('http://localhost:2222/pizza-shefu/api/v1.0/users/login/frisby/123')
     .expectStatus(405)
     .inspectJSON()
     .expectJSONTypes({
@@ -224,7 +224,7 @@ frisby.create('User login test 08')
 
 // Test delete user-different method.
 frisby.create('Delete user test 01')
-    .post('http://localhost:2222/devspace/api/v1.0/users/delete/frisby')
+    .post('http://localhost:2222/pizza-shefu/api/v1.0/users/delete/frisby')
     .expectStatus(405)
     .inspectJSON()
     .expectJSONTypes({
@@ -243,7 +243,7 @@ frisby.create('Delete user test 01')
 
 // Test delete user success.
 frisby.create('Delete user test 01')
-    .delete('http://localhost:2222/devspace/api/v1.0/users/delete/frisby')
+    .delete('http://localhost:2222/pizza-shefu/api/v1.0/users/delete/frisby')
     .expectStatus(200)
     .inspectJSON()
     .expectJSONTypes({
@@ -263,7 +263,7 @@ frisby.create('Delete user test 01')
         ],
         "links": [
             {
-                "link": "http://localhost:2222/devspace/api/v1.0/users/delete/frisby",
+                "link": "http://localhost:2222/pizza-shefu/api/v1.0/users/delete/frisby",
                 "rel": "self"
             }
         ],

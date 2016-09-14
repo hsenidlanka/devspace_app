@@ -43,7 +43,7 @@ public class UserService {
     @DELETE
     @Path("/delete/{username}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getUser(@PathParam("username") String userName, @javax.ws.rs.core.Context UriInfo uriInfo) {
+    public Response deleteUser(@PathParam("username") String userName, @javax.ws.rs.core.Context UriInfo uriInfo) {
         userRepository.delete(userName);
         SuccessMessage successMessage = new SuccessMessage();
         successMessage.setStatus("success");
