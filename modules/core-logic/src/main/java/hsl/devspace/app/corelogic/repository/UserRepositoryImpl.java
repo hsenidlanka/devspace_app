@@ -104,21 +104,21 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public boolean loginAuthenticate(String username,String password) {
+
         TransactionDefinition tr_def = new DefaultTransactionDefinition();
         TransactionStatus stat = transactionManager.getTransaction(tr_def);
 
-        String sql = "SELECT count(*) FROM customer WHERE BINARY username = ? AND BINARY password =sha1(?) ";
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT count(*) FROM customer WHERE BINARY username = ? AND BINARY password =sha1(?)", username,password);
         boolean result = false;
 
-        int count = jdbcTemplate.queryForObject(
-                sql, new Object[]{user.getUsername(), (user.getPassword())}, Integer.class);
 
-        if (count > 0) {
+        if (mp!=null ) {
             result = true;
         }
         transactionManager.rollback(stat);
         log.info(result);
         return result;
+
     }
 
     @Override
