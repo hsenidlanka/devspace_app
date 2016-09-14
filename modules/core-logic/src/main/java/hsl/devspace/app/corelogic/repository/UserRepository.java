@@ -6,6 +6,7 @@ import org.springframework.dao.TransientDataAccessResourceException;
 
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.sql.SQLType;
 import java.util.List;
 import java.util.Map;
 
@@ -19,14 +20,23 @@ public interface UserRepository {
 
     int delete(String username) throws SQLException;
 
-    void changePassword(String username, String password,String nPassw) throws SQLException;
+    void changePassword(String username, String password, String nPassw) throws SQLException;
 
     boolean confirmPassword() throws SQLException;
 
-    boolean loginAuthenticate(User user) throws SQLException;
-    int modify(User user)throws SQLException,TransientDataAccessResourceException;
+    boolean loginAuthenticate(String username,String password) throws SQLException;
+
+    int modify(User user) throws SQLException, TransientDataAccessResourceException;
 
     List<Map<String, Object>> retrieveMultipleRowsColumns(String username);
-    void block(String username);
-    void unblock(String username);
+
+    int block(String username);
+
+    int unblock(String username);
+
+    List<Map<String, Object>> retrieveCustomersByDate(java.sql.Date date);
+    List<Map<String, Object>> retrieveByDateRange(java.sql.Date date1,java.sql.Date date2);
+    List<Map<String, Object>>filter(SQLType column,String filterValue);
+    int countUsers();
+
 }

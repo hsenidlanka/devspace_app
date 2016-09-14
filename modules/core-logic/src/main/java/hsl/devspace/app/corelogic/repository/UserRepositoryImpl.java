@@ -11,7 +11,9 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.sql.DataSource;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.SQLType;
 import java.util.List;
 import java.util.Map;
 
@@ -45,13 +47,13 @@ public class UserRepositoryImpl implements UserRepository {
         String pw = user.getPassword();
         if (un != "" && pw != "") {
             String sql = "INSERT INTO customer " +
-                    "(title,first_name,last_name,username,password,email,address_line1,address_line2,address_line3,mobile,registered_date,status) VALUES (?,?,?,?,md5(?),?,?,?,?,?,?,?)";
+                    "(title,first_name,last_name,username,password,email,address_line1,address_line2,address_line3,mobile,registered_date,status) VALUES (?,?,?,?,sha1(?),?,?,?,?,?,CURRENT_DATE,1)";
 
-            row = jdbcTemplate.update(sql, new Object[]{user.getTitle(), user.getFirstName(),user.getLastName(),user.getUsername(),user.getPassword(),
-            user.getEmail(),user.getAddressL1(),user.getAddressL2(),user.getCity(),user.getMobile(),"2016-11-11","active"});
+            row = jdbcTemplate.update(sql, new Object[]{user.getTitle(), user.getFirstName(), user.getLastName(), user.getUsername(), user.getPassword(),
+                    user.getEmail(), user.getAddressL1(), user.getAddressL2(), user.getCity(), user.getMobile()});
             transactionManager.commit(stat);
 
-            log.info(row + "inserted");
+            log.info(row + "customer inserted");
             log.info(un);
         } else
             log.error("values cannot be null");
@@ -82,7 +84,7 @@ public class UserRepositoryImpl implements UserRepository {
 
         user.setUsername(username);
         user.setPassword(password);
-        boolean verified = loginAuthenticate(user);
+        boolean verified = loginAuthenticate(username,password);
         if (verified) {
 
             user.setPassword(nPw);
@@ -101,11 +103,11 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public boolean loginAuthenticate(User user) {
+    public boolean loginAuthenticate(String username,String password) {
         TransactionDefinition tr_def = new DefaultTransactionDefinition();
         TransactionStatus stat = transactionManager.getTransaction(tr_def);
 
-        String sql = "SELECT count(*) FROM customer WHERE BINARY username = ? AND BINARY password =md5(?) ";
+        String sql = "SELECT count(*) FROM customer WHERE BINARY username = ? AND BINARY password =sha1(?) ";
         boolean result = false;
 
         int count = jdbcTemplate.queryForObject(
@@ -136,36 +138,68 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public List<Map<String, Object>> retrieveMultipleRowsColumns(String username) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE BINARY username = ?",username);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE BINARY username = ?", username);
         log.info(mp);
         return mp;
     }
+
     @Override
-    public void block(String username){
+    public int block(String username) {
         TransactionDefinition tr_def = new DefaultTransactionDefinition();
         TransactionStatus stat = transactionManager.getTransaction(tr_def);
         user.setUsername(username);
 
-        String sql = "UPDATE customer SET status='inactive' WHERE username = ?";
+        String sql = "UPDATE customer SET status=2 WHERE username = ?";
         int row = jdbcTemplate.update(sql, new Object[]{user.getUsername()});
         transactionManager.commit(stat);
         log.info(row + "block status");
+        return row;
     }
 
     @Override
-    public void unblock(String username) {
+    public int unblock(String username) {
         TransactionDefinition tr_def = new DefaultTransactionDefinition();
         TransactionStatus stat = transactionManager.getTransaction(tr_def);
         user.setUsername(username);
 
-        String sql = "UPDATE customer SET status='active' WHERE username = ?";
+        String sql = "UPDATE customer SET status=1 WHERE username = ?";
         int row = jdbcTemplate.update(sql, new Object[]{user.getUsername()});
         transactionManager.commit(stat);
         log.info(row + "unblock status");
+        return row;
+    }
+
+    @Override
+    public List<Map<String, Object>> retrieveCustomersByDate(java.sql.Date date) {
+
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE registered_date = ?", date);
+        log.info(mp);
+        return mp;
+    }
+
+    @Override
+    public List<Map<String, Object>> retrieveByDateRange(Date date1, Date date2) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE registered_date BETWEEN ? AND ?", date1, date2);
+        log.info(mp);
+        return mp;
+    }
+
+    @Override
+    public List<Map<String, Object>> filter(SQLType column, String filterValue) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE ? = ?", column, filterValue);
+        log.info(mp);
+        return mp;
 
     }
 
+    @Override
+    public int countUsers() {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer ");
+        int count = mp.size();
+        log.info(count);
+        return count;
+    }
 
 
-}
+    }
 
