@@ -3,25 +3,16 @@
 <head lang="en">
     <title>Menu</title>
     <link rel="shortcut icon" href="">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../bootstrap-3.3.7/css/bootstrap.min_spacelab.css"/>
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="../css/style.css">/
-    <link rel="stylesheet" href="../css/loader.css"/>
-    <script src="http://www.w3schools.com/lib/w3data.js"></script>
-    <script src="../js/common.js"></script>
-    <link rel="stylesheet" href="../css/back-to-top.css"/>
-    <link rel="stylesheet" href="../css/notify.css"/>
-    <script src="../js/back-to-top.js"></script>
-    <script src="../js/menu-operations.js"></script>
-    <script src="../js/jquery.contenthover.js"></script>
-    <script src="../js/loader.js"></script>
-    <script src="../js/notify.js"></script>
+    <%@include file="include.jsp" %>
+    <script src="<c:url value="/resources/js/menu-operations.js"/>" ></script>
+    <script src="<c:url value="/resources/js/jquery.contenthover.js"/>" ></script>
+    <script src="<c:url value="/resources/js/common.js"/>" ></script>
+
+
 </head>
 <body>
-<div w3-include-html="headertest2.html" style="margin-top:-20px;"></div>
+<%@include file="headertest2.jsp" %>
+
 <div id="myToast" class="toast-popup"></div>
 <div class="loader-anim"></div>
 <div class="main-div">
@@ -30,7 +21,7 @@
             <div class="panel-heading">
                 <div>
                     <div style="display: inline-block;">
-                        <img class="icons" src="../images/icons/menu.png"/>
+                        <img class="icons" src="<c:url value="/resources/images/icons/menu.png"/>"/>
                         <h3 id="menu-panel-heading" class="header-panel">Menu-Pizza</h3>
                     </div>
                     <div style="display: inline-block; float:right;">
@@ -81,7 +72,7 @@
                                             <div class="panel-body">
                                                 <div class="row">
                                                     <div class="col-md-3">
-                                                        <img src="../images/pizzas/01.jpg"
+                                                        <img src="<c:url value="/resources/images/pizzas/01.jpg"/>"
                                                              class="img-responsive menu-images">
 
                                                         <div class="contenthover">
@@ -97,7 +88,7 @@
                                                         <h4>A title</h4>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <img src="../images/pizzas/02.jpg"
+                                                        <img src="<c:url value="/resources/images/pizzas/02.jpg"/>"
                                                              class="img-responsive menu-images">
 
                                                         <div class="contenthover">
@@ -113,7 +104,7 @@
                                                         <h4>A title</h4>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <img src="../images/pizzas/03.jpg"
+                                                        <img src="<c:url value="/resources/images/pizzas/03.jpg"/>"
                                                              class="img-responsive menu-images">
 
                                                         <div class="contenthover">
@@ -129,7 +120,7 @@
                                                         <h4>A title</h4>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <img src="../images/pizzas/04.jpg"
+                                                        <img src="<c:url value="/resources/images/pizzas/04.jpg"/>"
                                                              class="img-responsive menu-images">
 
                                                         <div class="contenthover">
@@ -147,7 +138,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-3">
-                                                        <img src="../images/pizzas/05.jpg"
+                                                        <img src="<c:url value="/resources/images/pizzas/05.jpg"/>"
                                                              class="img-responsive menu-images">
 
                                                         <div class="contenthover">
@@ -163,7 +154,7 @@
                                                         <h4>A title</h4>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <img src="../images/pizzas/06.jpg"
+                                                        <img src="<c:url value="/resources/images/pizzas/06.jpg"/>"
                                                              class="img-responsive menu-images">
 
                                                         <div class="contenthover">
@@ -179,7 +170,7 @@
                                                         <h4>A title</h4>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <img src="../images/pizzas/07.jpg"
+                                                        <img src="<c:url value="/resources/images/pizzas/07.jpg"/>"
                                                              class="img-responsive menu-images">
 
                                                         <div class="contenthover">
@@ -195,7 +186,7 @@
                                                         <h4>A title</h4>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <img src="../images/pizzas/08.jpg"
+                                                        <img src="<c:url value="/resources/images/pizzas/08.jpg"/>"
                                                              class="img-responsive menu-images">
 
                                                         <div class="contenthover">
@@ -226,7 +217,7 @@
                                             <div class="panel-body">
                                                 <div class="row">
                                                     <div class="col-md-3">
-                                                        <img src="../images/pizzas/09.jpg"
+                                                        <img src="<c:url value="/resources/images/pizzas/09.jpg"/>"
                                                              class="img-responsive menu-images">
 
                                                         <div class="contenthover">
@@ -242,7 +233,7 @@
                                                         <h4>A title</h4>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <img src="../images/pizzas/10.jpg"
+                                                        <img src="<c:url value="/resources/images/pizzas/10.jpg"/>"
                                                              class="img-responsive menu-images">
 
                                                         <div class="contenthover">
@@ -258,7 +249,7 @@
                                                         <h4>A title</h4>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <img src="../images/pizzas/11.jpg"
+                                                        <img src="<c:url value="/resources/images/pizzas/11.jpg"/>"
                                                              class="img-responsive menu-images">
 
                                                         <div class="contenthover">
@@ -274,7 +265,7 @@
                                                         <h4>A title</h4>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <img src="../images/pizzas/12.jpg"
+                                                        <img src="<c:url value="/resources/images/pizzas/12.jpg"/>"
                                                              class="img-responsive menu-images">
 
                                                         <div class="contenthover">
@@ -305,7 +296,7 @@
                                             <div class="panel-body">
                                                 <div class="row">
                                                     <div class="col-md-3">
-                                                        <img src="../images/pizzas/13.jpg"
+                                                        <img src="<c:url value="/resources/images/pizzas/13.jpg"/>"
                                                              class="img-responsive menu-images">
 
                                                         <div class="contenthover">
@@ -321,7 +312,7 @@
                                                         <h4>A title</h4>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <img src="../images/pizzas/14.png"
+                                                        <img src="<c:url value="/resources/images/pizzas/14.png"/>"
                                                              class="img-responsive menu-images">
 
                                                         <div class="contenthover">
@@ -337,7 +328,7 @@
                                                         <h4>A title</h4>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <img src="../images/pizzas/15.jpg"
+                                                        <img src="<c:url value="/resources/images/pizzas/15.jpg"/>"
                                                              class="img-responsive menu-images">
 
                                                         <div class="contenthover">
@@ -353,7 +344,7 @@
                                                         <h4>A title</h4>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <img src="../images/pizzas/16.jpg"
+                                                        <img src="<c:url value="/resources/images/pizzas/16.jpg"/>"
                                                              class="img-responsive menu-images">
 
                                                         <div class="contenthover">
@@ -371,7 +362,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-3">
-                                                        <img src="../images/pizzas/17.jpg"
+                                                        <img src="<c:url value="/resources/images/pizzas/17.jpg"/>"
                                                              class="img-responsive menu-images">
 
                                                         <div class="contenthover">
@@ -387,7 +378,7 @@
                                                         <h4>A title</h4>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <img src="../images/pizzas/18.jpg"
+                                                        <img src="<c:url value="/resources/images/pizzas/18.jpg"/>"
                                                              class="img-responsive menu-images">
 
                                                         <div class="contenthover">
@@ -403,7 +394,7 @@
                                                         <h4>A title</h4>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <img src="../images/pizzas/19.jpg"
+                                                        <img src="<c:url value="/resources/images/pizzas/19.jpg"/>"
                                                              class="img-responsive menu-images">
 
                                                         <div class="contenthover">
@@ -419,7 +410,7 @@
                                                         <h4>A title</h4>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <img src="../images/pizzas/20.jpg"
+                                                        <img src="<c:url value="/resources/images/pizzas/20.jpg"/>"
                                                              class="img-responsive menu-images">
 
                                                         <div class="contenthover">
@@ -450,7 +441,7 @@
                                             <div class="panel-body">
                                                 <div class="row">
                                                     <div class="col-md-3">
-                                                        <img src="../images/pizzas/21.jpg"
+                                                        <img src="<c:url value="/resources/images/pizzas/21.jpg"/>"
                                                              class="img-responsive menu-images">
 
                                                         <div class="contenthover">
@@ -466,7 +457,7 @@
                                                         <h4>A title</h4>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <img src="../images/pizzas/22.png"
+                                                        <img src="<c:url value="/resources/images/pizzas/22.png"/>"
                                                              class="img-responsive menu-images">
 
                                                         <div class="contenthover">
@@ -482,7 +473,7 @@
                                                         <h4>A title</h4>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <img src="../images/pizzas/23.jpg"
+                                                        <img src="<c:url value="/resources/images/pizzas/23.jpg"/>"
                                                              class="img-responsive menu-images">
 
                                                         <div class="contenthover">
@@ -498,7 +489,7 @@
                                                         <h4>A title</h4>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <img src="../images/pizzas/24.jpg"
+                                                        <img src="<c:url value="/resources/images/pizzas/24.jpg"/>"
                                                              class="img-responsive menu-images">
 
                                                         <div class="contenthover">
@@ -522,7 +513,7 @@
                         </div>
 
                         <div class="col-md-3" style="margin-top: 25px;">
-                            <img src="../images/icons/favorite.png" width="30px" height="30px"/>
+                            <img src="<c:url value="/resources/images/icons/favorite.png"/>" width="30px" height="30px"/>
                             <h4 style="display:inline-block;">Top rated pizzas</h4>
 
                             <div id="myCarousel1" class="carousel slide" data-ride="carousel1">
@@ -537,19 +528,19 @@
                                 <!-- Wrapper for slides -->
                                 <div class="carousel-inner" role="listbox">
                                     <div class="item active">
-                                        <img src="../images/pizzas/pizza1-nota.jpg">
+                                        <img src="<c:url value="/resources/images/pizzas/pizza1-nota.jpg"/>" >
                                     </div>
 
                                     <div class="item">
-                                        <img src="../images/pizzas/Margherita-Pizza-With-Salami-2-400x600.png">
+                                        <img src="<c:url value="/resources/images/pizzas/Margherita-Pizza-With-Salami-2-400x600.png"/>" >
                                     </div>
 
                                     <div class="item">
-                                        <img src="../images/pizzas/c3fc09ff6816d3ec759a68680c61f736.jpg">
+                                        <img src="<c:url value="/resources/images/pizzas/c3fc09ff6816d3ec759a68680c61f736.jpg"/>" >
                                     </div>
 
                                     <div class="item">
-                                        <img src="../images/pizzas/pizza_diavolo.jpg">
+                                        <img src="<c:url value="/resources/images/pizzas/pizza_diavolo.jpg"/>" >
                                     </div>
                                 </div>
 
@@ -589,7 +580,7 @@
                                             <div class="panel-body">
                                                 <div class="row">
                                                     <div class="col-md-3">
-                                                        <img src="../images/desserts/ice-cream%2001.jpg"
+                                                        <img src="<c:url value="/resources/images/desserts/ice-cream%2001.jpg"/>"
                                                              class="img-responsive menu-images">
 
                                                         <div class="contenthover">
@@ -608,7 +599,7 @@
                                                         <h4>A title</h4>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <img src="../images/desserts/ice-cream%2002.jpg"
+                                                        <img src="<c:url value="/resources/images/desserts/ice-cream%2002.jpg"/>"
                                                              class="img-responsive menu-images">
 
                                                         <div class="contenthover">
@@ -627,7 +618,7 @@
                                                         <h4>A title</h4>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <img src="../images/desserts/ice-cream%2003.jpg"
+                                                        <img src="<c:url value="/resources/images/desserts/ice-cream%2003.jpg"/>"
                                                              class="img-responsive menu-images">
 
                                                         <div class="contenthover">
@@ -646,7 +637,7 @@
                                                         <h4>A title</h4>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <img src="../images/desserts/ice-cream%2004.jpg"
+                                                        <img src="<c:url value="/resources/images/desserts/ice-cream%2004.jpg"/>"
                                                              class="img-responsive menu-images">
 
                                                         <div class="contenthover">
@@ -667,7 +658,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-3">
-                                                        <img src="../images/desserts/ice-cream%2005.jpg"
+                                                        <img src="<c:url value="/resources/images/desserts/ice-cream%2005.jpg"/>"
                                                              class="img-responsive menu-images">
 
                                                         <div class="contenthover">
@@ -686,7 +677,7 @@
                                                         <h4>A title</h4>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <img src="../images/desserts/ice-cream%2006.jpg"
+                                                        <img src="<c:url value="/resources/images/desserts/ice-cream%2006.jpg"/>"
                                                              class="img-responsive menu-images">
 
                                                         <div class="contenthover">
@@ -719,7 +710,7 @@
                                                 <div class="panel-body">
                                                     <div class="row">
                                                         <div class="col-md-3">
-                                                            <img src="../images/desserts/pudding%2001.jpg"
+                                                            <img src="<c:url value="/resources/images/desserts/pudding%2001.jpg"/>"
                                                                  class="img-responsive menu-images">
 
                                                             <div class="contenthover">
@@ -738,7 +729,7 @@
                                                             <h4>A title</h4>
                                                         </div>
                                                         <div class="col-md-3">
-                                                            <img src="../images/desserts/pudding%2002.jpg"
+                                                            <img src="<c:url value="/resources/images/desserts/pudding%2002.jpg"/>"
                                                                  class="img-responsive menu-images">
 
                                                             <div class="contenthover">
@@ -757,7 +748,7 @@
                                                             <h4>A title</h4>
                                                         </div>
                                                         <div class="col-md-3">
-                                                            <img src="../images/desserts/pudding%2003.jpg"
+                                                            <img src="<c:url value="/resources/images/desserts/pudding%2003.jpg"/>"
                                                                  class="img-responsive menu-images">
 
                                                             <div class="contenthover">
@@ -776,7 +767,7 @@
                                                             <h4>A title</h4>
                                                         </div>
                                                         <div class="col-md-3">
-                                                            <img src="../images/desserts/pudding%2004.jpg"
+                                                            <img src="<c:url value="/resources/images/desserts/pudding%2004.jpg"/>"
                                                                  class="img-responsive menu-images">
 
                                                             <div class="contenthover">
@@ -810,7 +801,7 @@
                                                 <div class="panel-body">
                                                     <div class="row">
                                                         <div class="col-md-3">
-                                                            <img src="../images/desserts/salads%2001.jpg"
+                                                            <img src="<c:url value="/resources/images/desserts/salads%2001.jpg"/>"
                                                                  class="img-responsive menu-images">
 
                                                             <div class="contenthover">
@@ -829,7 +820,7 @@
                                                             <h4>A title</h4>
                                                         </div>
                                                         <div class="col-md-3">
-                                                            <img src="../images/desserts/salads%2002.jpg"
+                                                            <img src="<c:url value="/resources/images/desserts/salads%2002.jpg"/>"
                                                                  class="img-responsive menu-images">
 
                                                             <div class="contenthover">
@@ -848,7 +839,7 @@
                                                             <h4>A title</h4>
                                                         </div>
                                                         <div class="col-md-3">
-                                                            <img src="../images/desserts/salads%2003.jpg"
+                                                            <img src="<c:url value="/resources/images/desserts/salads%2003.jpg"/>"
                                                                  class="img-responsive menu-images">
 
                                                             <div class="contenthover">
@@ -882,7 +873,7 @@
                                                 <div class="panel-body">
                                                     <div class="row">
                                                         <div class="col-md-3">
-                                                            <img src="../images/desserts/brownies%2001.jpg"
+                                                            <img src="<c:url value="/resources/images/desserts/brownies%2001.jpg"/>"
                                                                  class="img-responsive menu-images">
 
                                                             <div class="contenthover">
@@ -901,7 +892,7 @@
                                                             <h4>A title</h4>
                                                         </div>
                                                         <div class="col-md-3">
-                                                            <img src="../images/desserts/brownies%2002.jpg"
+                                                            <img src="<c:url value="/resources/images/desserts/brownies%2002.jpg"/>"
                                                                  class="img-responsive menu-images">
 
                                                             <div class="contenthover">
@@ -935,7 +926,7 @@
                                                 <div class="panel-body">
                                                     <div class="row">
                                                         <div class="col-md-3">
-                                                            <img src="../images/desserts/cake%2001.jpg"
+                                                            <img src="<c:url value="/resources/images/desserts/cake%2001.jpg"/>"
                                                                  class="img-responsive menu-images">
 
                                                             <div class="contenthover">
@@ -954,7 +945,7 @@
                                                             <h4>A title</h4>
                                                         </div>
                                                         <div class="col-md-3">
-                                                            <img src="../images/desserts/cake%2002.jpg"
+                                                            <img src="<c:url value="/resources/images/desserts/cake%2002.jpg"/>"
                                                                  class="img-responsive menu-images">
 
                                                             <div class="contenthover">
@@ -973,7 +964,7 @@
                                                             <h4>A title</h4>
                                                         </div>
                                                         <div class="col-md-3">
-                                                            <img src="../images/desserts/cake%2003.jpg"
+                                                            <img src="<c:url value="/resources/images/desserts/cake%2003.jpg"/>"
                                                                  class="img-responsive menu-images">
 
                                                             <div class="contenthover">
@@ -992,7 +983,7 @@
                                                             <h4>A title</h4>
                                                         </div>
                                                         <div class="col-md-3">
-                                                            <img src="../images/desserts/cake%2004.jpg"
+                                                            <img src="<c:url value="/resources/images/desserts/cake%2004.jpg"/>"
                                                                  class="img-responsive menu-images">
 
                                                             <div class="contenthover">
@@ -1013,7 +1004,7 @@
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-md-3">
-                                                            <img src="../images/desserts/cake%2005.jpg"
+                                                            <img src="<c:url value="/resources/images/desserts/cake%2005.jpg"/>"
                                                                  class="img-responsive menu-images">
 
                                                             <div class="contenthover">
@@ -1040,7 +1031,7 @@
                             </div>
                         </div>
                         <div class="col-md-3" style="margin-top: 25px;">
-                            <img src="../images/icons/favorite.png" width="30px" height="30px"/>
+                            <img src="<c:url value="/resources/images/icons/favorite.png"/>" width="30px" height="30px"/>
                             <h4 style="display:inline-block;">Top rated desserts</h4>
 
                             <div id="myCarousel2" class="carousel slide" data-ride="carousel2">
@@ -1055,19 +1046,19 @@
                                 <!-- Wrapper for slides -->
                                 <div class="carousel-inner" role="listbox">
                                     <div class="item active">
-                                        <img src="../images/desserts/Pretzel_Peanut_Clusters-3-1.jpg">
+                                        <img src="<c:url value="/resources/images/desserts/Pretzel_Peanut_Clusters-3-1.jpg"/>" >
                                     </div>
 
                                     <div class="item">
-                                        <img src="../images/desserts/millionaires-shortbread-bars-no-bake-dessert-400x600.jpg">
+                                        <img src="<c:url value="/resources/images/desserts/millionaires-shortbread-bars-no-bake-dessert-400x600.jpg"/>" >
                                     </div>
 
                                     <div class="item">
-                                        <img src="../images/desserts/dcd1215458d3caf672f9f432464c5e42.jpg">
+                                        <img src="<c:url value="/resources/images/desserts/dcd1215458d3caf672f9f432464c5e42.jpg"/>" >
                                     </div>
 
                                     <div class="item">
-                                        <img src="../images/desserts/flourless-chocolate-cake-8-400x600.jpg">
+                                        <img src="<c:url value="/resources/images/desserts/flourless-chocolate-cake-8-400x600.jpg"/>" >
                                     </div>
                                 </div>
 
@@ -1107,7 +1098,7 @@
                                             <div class="panel-body">
                                                 <div class="row">
                                                     <div class="col-md-3">
-                                                        <img src="../images/beverages/tea%2001.jpg"
+                                                        <img src="<c:url value="/resources/images/beverages/tea%2001.jpg"/>"
                                                              class="img-responsive menu-images">
 
                                                         <div class="contenthover">
@@ -1126,7 +1117,7 @@
                                                         <h4>A title</h4>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <img src="../images/beverages/tea%2002.jpg"
+                                                        <img src="<c:url value="/resources/images/beverages/tea%2002.jpg"/>"
                                                              class="img-responsive menu-images">
 
                                                         <div class="contenthover">
@@ -1145,7 +1136,7 @@
                                                         <h4>A title</h4>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <img src="../images/beverages/tea%2003.jpg"
+                                                        <img src="<c:url value="/resources/images/beverages/tea%2003.jpg"/>"
                                                              class="img-responsive menu-images">
 
                                                         <div class="contenthover">
@@ -1179,7 +1170,7 @@
                                             <div class="panel-body">
                                                 <div class="row">
                                                     <div class="col-md-3">
-                                                        <img src="../images/beverages/coffee%2001.jpg"
+                                                        <img src="<c:url value="/resources/images/beverages/coffee%2001.jpg"/>"
                                                              class="img-responsive menu-images">
 
                                                         <div class="contenthover">
@@ -1198,7 +1189,7 @@
                                                         <h4>A title</h4>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <img src="../images/beverages/coffee%2002.jpg"
+                                                        <img src="<c:url value="/resources/images/beverages/coffee%2002.jpg"/>"
                                                              class="img-responsive menu-images">
 
                                                         <div class="contenthover">
@@ -1217,7 +1208,7 @@
                                                         <h4>A title</h4>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <img src="../images/beverages/coffee%2003.jpg"
+                                                        <img src="<c:url value="/resources/images/beverages/coffee%2003.jpg"/>"
                                                              class="img-responsive menu-images">
 
                                                         <div class="contenthover">
@@ -1236,7 +1227,7 @@
                                                         <h4>A title</h4>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <img src="../images/beverages/coffee%2004.jpg"
+                                                        <img src="<c:url value="/resources/images/beverages/coffee%2004.jpg"/>"
                                                              class="img-responsive menu-images">
 
                                                         <div class="contenthover">
@@ -1257,7 +1248,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-3">
-                                                        <img src="../images/beverages/coffee%2005.jpg"
+                                                        <img src="<c:url value="/resources/images/beverages/coffee%2005.jpg"/>"
                                                              class="img-responsive menu-images">
 
                                                         <div class="contenthover">
@@ -1291,7 +1282,7 @@
                                             <div class="panel-body">
                                                 <div class="row">
                                                     <div class="col-md-3">
-                                                        <img src="../images/beverages/soft-drink%2001.jpg"
+                                                        <img src="<c:url value="/resources/images/beverages/soft-drink%2001.jpg"/>"
                                                              class="img-responsive menu-images">
 
                                                         <div class="contenthover">
@@ -1310,7 +1301,7 @@
                                                         <h4>A title</h4>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <img src="../images/beverages/soft-drink%2002.jpg"
+                                                        <img src="<c:url value="/resources/images/beverages/soft-drink%2002.jpg"/>"
                                                              class="img-responsive menu-images">
 
                                                         <div class="contenthover">
@@ -1329,7 +1320,7 @@
                                                         <h4>A title</h4>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <img src="../images/beverages/soft-drink%2003.jpg"
+                                                        <img src="<c:url value="/resources/images/beverages/soft-drink%2003.jpg"/>"
                                                              class="img-responsive menu-images">
 
                                                         <div class="contenthover">
@@ -1348,7 +1339,7 @@
                                                         <h4>A title</h4>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <img src="../images/beverages/soft-drink%2004.jpg"
+                                                        <img src="<c:url value="/resources/images/beverages/soft-drink%2004.jpg"/>"
                                                              class="img-responsive menu-images">
 
                                                         <div class="contenthover">
@@ -1382,7 +1373,7 @@
                                             <div class="panel-body">
                                                 <div class="row">
                                                     <div class="col-md-3">
-                                                        <img src="../images/beverages/fresh-juice%2001.jpg"
+                                                        <img src="<c:url value="/resources/images/beverages/fresh-juice%2001.jpg"/>"
                                                              class="img-responsive menu-images">
 
                                                         <div class="contenthover">
@@ -1401,7 +1392,7 @@
                                                         <h4>A title</h4>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <img src="../images/beverages/fresh-juice%2002.jpg"
+                                                        <img src="<c:url value="/resources/images/beverages/fresh-juice%2002.jpg"/>"
                                                              class="img-responsive menu-images">
 
                                                         <div class="contenthover">
@@ -1420,7 +1411,7 @@
                                                         <h4>A title</h4>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <img src="../images/beverages/fresh-juice%2003.jpg"
+                                                        <img src="<c:url value="/resources/images/beverages/fresh-juice%2003.jpg"/>"
                                                              class="img-responsive menu-images">
 
                                                         <div class="contenthover">
@@ -1447,7 +1438,7 @@
                         </div>
 
                         <div class="col-md-3" style="margin-top: 25px;">
-                            <img src="../images/icons/favorite.png" width="30px" height="30px"/>
+                            <img src="<c:url value="/resources/images/icons/favorite.png"/>" width="30px" height="30px"/>
                             <h4 style="display:inline-block;">Top rated Beverages</h4>
 
                             <div id="myCarousel3" class="carousel slide" data-ride="carousel3">
@@ -1462,19 +1453,19 @@
                                 <!-- Wrapper for slides -->
                                 <div class="carousel-inner" role="listbox">
                                     <div class="item active">
-                                        <img src="../images/beverages/Bergers-Catering-Cold-Beverages-400x600.jpg">
+                                        <img src="<c:url value="/resources/images/beverages/Bergers-Catering-Cold-Beverages-400x600.jpg"/>" >
                                     </div>
 
                                     <div class="item">
-                                        <img src="../images/beverages/Irish-Coffee-22-400x600.jpg">
+                                        <img src="<c:url value="/resources/images/beverages/Irish-Coffee-22-400x600.jpg"/> " >
                                     </div>
 
                                     <div class="item">
-                                        <img src="../images/beverages/aerated_02_big.jpg">
+                                        <img src="<c:url value="/resources/images/beverages/aerated_02_big.jpg"/>" >
                                     </div>
 
                                     <div class="item">
-                                        <img src="../images/beverages/Bergers-Catering-Hot-Beverage-Service-400x600.jpg">
+                                        <img src="<c:url value="/resources/images/beverages/Bergers-Catering-Hot-Beverage-Service-400x600.jpg"/>">
                                     </div>
                                 </div>
 
@@ -1505,7 +1496,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <img class="icons" src="../images/icons/shopping-cart-add.png">
+                <img class="icons" src="<c:url value="/resources/images/icons/shopping-cart-add.png"/>" >
                 <h4 class="modal-title header-panel">Customize and Add to Cart</h4>
             </div>
             <div class="modal-body">
@@ -1513,7 +1504,7 @@
                     the item to cart.</p>
 
                 <div class="thumbnail" style="height:120px; border: none;">
-                    <img src="../images/Whole-Pizza-100x100.jpg"
+                    <img src="<c:url value="/resources/images/Whole-Pizza-100x100.jpg"/>"
                          class="img-responsive" align="left">
 
                     <div class="caption">

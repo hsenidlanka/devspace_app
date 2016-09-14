@@ -1,21 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="../bootstrap-3.3.7/css/bootstrap.min_spacelab.css" rel="stylesheet"
-      integrity="sha384-L/tgI3wSsbb3f/nW9V6Yqlaw3Gj7mpE56LWrhew/c8MIhAYWZ/FNirA64AVkB5pI" crossorigin="anonymous">
+    <%@include file="include.jsp" %>
 
-<link href="../css/homeStyle.css" rel="stylesheet" type="text/css">
-<link href="../css/footer.css" rel="stylesheet" type="text/css">
-<link href="../css/style.css" rel="stylesheet" type="text/css" media="all"/>
-<script src="../js/jquery.min.js"></script>
-<link href="../css/css" rel="stylesheet" type="text/css">
-<link href="../css/scroll_top.css" rel="stylesheet" type="text/css">
-<link href="../css/loader.css" rel="stylesheet">
-<div class="loader-anim"></div>
 </head>
 <body style="overflow: visible">
-
-<div w3-include-html="headertest2.html"></div>
+<div class="loader-anim"></div>
+<%@include file="headertest2.jsp" %>
 <div class="col-sm-12"></div>
 
 <div class="brand"></div>
@@ -39,31 +30,33 @@
                             yummy varieties from all around the globe.
                         </p>
 
-
                     </form>
 
                 </div>
 
             </div>
             <div class="col-sm-4" style="width: 100px"></div>
-            <img src="../images/pizza_hut_eabout2.png" style="width: 330px;height: 250px">
+            <img src="<c:url value="/resources/images/pizza_hut_eabout2.png"/>"  style="width: 330px;height: 250px">
         </div>
     </div>
 </div>
 
 <a href="http://gazpo.com/downloads/tutorials/jquery/scrolltop/#" class="scrollup" style="display: none;">Scroll</a>
 
-<div w3-include-html="loginload.html"></div>
-<div w3-include-html="signupmodal.html"></div>
+<%@include file="loginload.jsp" %>
+<%@include file="signupmodal.jsp" %>
+<%--<div w3-include-html="loginload.html"></div>--%>
+<%--<div w3-include-html="signupmodal.html"></div>--%>
 </body>
 </html>
 <!--<div w3-include-html="footer.html"></div>-->
 
-<script src="../js/w3data.js"></script>
-<script>
-    w3IncludeHTML();
-</script>
-<script src="../js/scroll_top.js"></script>
-<script src="../js/loader.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<%--<script src="../js/w3data.js"></script>--%>
+<%--<script>--%>
+    <%--w3IncludeHTML();--%>
+<%--</script>--%>
+
+<%--<script src="../js/scroll_top.js"></script>--%>
+<%--<script src="../js/loader.js"></script>--%>
+<%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>--%>
+<%--<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--%>

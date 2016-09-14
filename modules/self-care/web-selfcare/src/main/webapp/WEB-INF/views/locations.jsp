@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
     <%@include file="include.jsp" %>
     <div class="loader-anim"></div>
 </head>
