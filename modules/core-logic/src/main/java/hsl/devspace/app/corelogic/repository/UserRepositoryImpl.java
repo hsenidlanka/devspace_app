@@ -107,14 +107,15 @@ public class UserRepositoryImpl implements UserRepository {
 
         TransactionDefinition tr_def = new DefaultTransactionDefinition();
         TransactionStatus stat = transactionManager.getTransaction(tr_def);
+        boolean result ;
 
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT count(*) FROM customer WHERE BINARY username = ? AND BINARY password =sha1(?)", username,password);
-        boolean result = false;
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE BINARY username = ? AND BINARY password =?", username,password);
+        log.info(mp);
 
-
-        if (mp!=null ) {
+        if (mp.size()!=0 ) {
             result = true;
         }
+        else result=false;
         transactionManager.rollback(stat);
         log.info(result);
         return result;
