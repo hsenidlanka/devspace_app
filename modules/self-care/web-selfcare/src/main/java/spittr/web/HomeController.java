@@ -38,6 +38,21 @@ public class HomeController {
         return "aboutus";
     }
 
+    @RequestMapping("/payment")
+    public String payment(){
+        return "payment";
+    }
+
+    @RequestMapping("/shopping-cart")
+    public String shoppingCart(){
+        return "shopping-cart";
+    }
+
+    @RequestMapping("forgotpassword")
+    public String forgotpassword(){
+        return "forgotpassword";
+    }
+//    Test request
     @RequestMapping("/test")
     public String test(){
         return "test";

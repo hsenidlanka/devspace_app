@@ -1,36 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="../bootstrap-3.3.7/css/bootstrap.min_spacelab.css" rel="stylesheet"
-      integrity="sha384-L/tgI3wSsbb3f/nW9V6Yqlaw3Gj7mpE56LWrhew/c8MIhAYWZ/FNirA64AVkB5pI" crossorigin="anonymous">
-
-<link href="../css/homeStyle.css" rel="stylesheet" type="text/css">
-<link href="../css/footer.css" rel="stylesheet" type="text/css">
-<link href="../css/style.css" rel="stylesheet" type="text/css" media="all"/>
-<script src="../js/jquery.min.js"></script>
-<link href="../css/css" rel="stylesheet" type="text/css">
-<link href="../css/scroll_top.css" rel="stylesheet" type="text/css">
-<link href="../css/loader.css" rel="stylesheet">
-<div class="loader-anim"></div>
+    <%@include file="include.jsp" %>
+    <div class="loader-anim"></div>
 </head>
 
 <!------------------------------------------------------------------------->
 <!--------------Body------------------------->
 <body style="overflow: visible" >
-<div w3-include-html="headertest2.html"></div>
+
+<%@include file="headertest2.jsp" %>
+
+<%--'https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyAWJ-UMsacU4LmjA3dtfctz2UsPl5s2tZw'--%>
 
 <div class="col-sm-12" style="height: 40px"></div>
 <div class="col-sm-1"></div>
 <div class="col-sm-4">
-    <script src='https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyAWJ-UMsacU4LmjA3dtfctz2UsPl5s2tZw'></script>
+    <script src="<c:url value="/resources/js/googlemaps.js"/>" ></script>
     <div style='overflow:hidden;height:400px;width:520px;border:outset #f5f5f5;'>
         <div id='gmap_canvas' style='height:400px;width:520px;'>
 
         </div>
         <style>#gmap_canvas img{max-width:none!important;background:none!important}</style>
     </div>
-    <a href='https://www.add-map.net/' >1</a>
-    <script type='text/javascript' src='https://embedmaps.com/google-maps-authorization/script.js?id=bf0f25b017965e1f295e96e4b6403d42e11613bf'></script>
+    <a href='https://www.add-map.net/' >.</a>
+    <script type='text/javascript' src="<c:url value="/resources/js/googlemaps2.js"/>"></script>
     <script type='text/javascript'>
         function init_map(){var myOptions =
         {zoom:12,center:new google.maps.LatLng(6.91767744776597,79.86787278331086),mapTypeId: google.maps.MapTypeId.ROADMAP};
@@ -61,17 +55,10 @@
     <p>(+94)011-25432344</p>
 
 </div>
-<!--<div class="col-sm-2"></div>
-<div class="col-sm-4" style="padding-top: 40px">
-    <p style="color: #c09853;font-size: x-large">e-mail</p>
-</div>
-<div class="col-sm-3"></div>
-<div class="col-sm-4 location">
-    <p>pizzashefu@hsenid.com</p>
 
-</div>-->
 
 <a href="http://gazpo.com/downloads/tutorials/jquery/scrolltop/#" class="scrollup" style="display: none;">Scroll</a>
+
 <div w3-include-html="loginload.html"></div>
 <div w3-include-html="signupmodal.html"></div>
 </body>

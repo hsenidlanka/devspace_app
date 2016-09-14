@@ -1,35 +1,21 @@
-<link href="../bootstrap-3.3.7/css/bootstrap.min_spacelab.css" rel="stylesheet"
-      integrity="sha384-L/tgI3wSsbb3f/nW9V6Yqlaw3Gj7mpE56LWrhew/c8MIhAYWZ/FNirA64AVkB5pI" crossorigin="anonymous">
-<link href="../css/homeStyle.css" rel="stylesheet" type="text/css">
-<link href="../css/style2.css" rel="stylesheet" type="text/css" media="all"/>
-
 <nav class="navbar navbar  navbar-custom" style="color: #e32c6d;">
     <div class="container-fluid">
-        <div class="col-sm-8" style="height: 50px"><a href="../pages/self-care-home.html"><img src="../images/logo.png"
-                                                                                               style="width:90px;height:90px;"></a>
+        <div class="col-sm-8" style="height: 50px"><a href="home"><img src="<c:url value="/resources/images/logo.png"/>" style="width:90px;height:90px;"></a>
         </div>
         <div class="col-sm-4">
             <ul class="nav navbar-nav navbar-right">
                 <div style="padding: 10px">
                     <li>
 
-                        <a href="shopping-cart.html"><img src="../images/shopping-cart.png"
+                        <a href="shopping-cart"><img src="<c:url value="/resources/images/shopping-cart.png"/>"
                                                           style="padding-right: 10px"></span>
                         </a>
 
-                        <!-- <a class="form-group" data-toggle="modal" data-target="#modal-signup" style="padding-left: 3px">Sign
-                             Up
-                         </a>
-
-
-                         <a class="form-group-sm" data-toggle="modal" data-target="#modal-login" style="tab-size: 10px;padding-left: 3px">Log
-                             In
-                         </a>-->
                         <a class="form-group" data-toggle="modal" data-target="#modal-signup"><img
-                                src="../images/signup.png" style="padding-right: 10px"></span>
+                                src="<c:url value="/resources/images/signup.png"/>" style="padding-right: 10px"></span>
                         </a>
                         <a class="form-group-sm" data-toggle="modal" data-target="#modal-login"><img
-                                src="../images/user2.png" style="padding-right: 10px"></span>
+                                src="<c:url value="/resources/images/user2.png"/>" style="padding-right: 10px"></span>
                         </a>
 
 
@@ -38,7 +24,6 @@
             </ul>
         </div>
         <div class="navbar-header">
-            <!--<a class="navbar-brand" href="#"><h4>PizzaShefu</h4></a>-->
 
         </div>
         <div style="padding: 10px"></div>
@@ -47,11 +32,10 @@
         </div>
         <ul class="nav navbar-nav navbar-right" style="padding-right: 30px;">
             <li><a href="menu.html">Menu</a></li>
-            <!--<li><a href="#">Packages</a></li>-->
-            <li><a href="../pages/locations.html">Locations</a></li>
-            <li><a href="../pages/createfeedback.html">Feedbacks</a></li>
-            <li><a href="../pages/contactus.html">Contact Us</a></li>
-            <li><a href="../pages/aboutus.html">About us</a></li>
+            <li><a href="locations">Locations</a></li>
+            <li><a href="createfeedback">Feedbacks</a></li>
+            <li><a href="contactus">Contact Us</a></li>
+            <li><a href="aboutus">About us</a></li>
         </ul>
     </div>
 
@@ -66,27 +50,21 @@
                 <p class="modal-title" style="font-size: x-large">Log In</p>
             </div>
             <div class="modal-body">
-                <div w3-include-html="loginmodaloptional.html"></div>
-                <script src="../js/w3data.js"></script>
-                <script>
-                    w3IncludeHTML();
-                </script>
+                <%@include file="loginmodaloptional.jsp" %>
             </div>
         </div>
     </div>
 </div>
 <!------------------------------signup modal --------------------------------------------->
 
-<div w3-include-html="signupmodal.html"></div>
+<%@include file="signupmodal.jsp" %>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>
+<link rel="stylesheet" href="<c:url value="/resources/css/jquery-ui.css"/>" />
 
 <!-----------------Datepicker scripts----------------------------------->
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<script src="<c:url value="/resources/js/jquery-1.9.1.js"/>"></script>
+<script src="<c:url value="/resources/js/jquery-ui.js"/>" </script>
 <script>
     $(document).ready(
             /* This is the function that will get executed after the DOM is fully loaded */
