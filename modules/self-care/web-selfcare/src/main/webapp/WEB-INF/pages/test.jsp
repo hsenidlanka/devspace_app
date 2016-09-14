@@ -13,8 +13,8 @@
 </head>
 <body>
   knock
-<img src="/WEB-INF/bg.png">
-<img src="<c:url value="/images/bg.png"/>"/>
+<%--<img src="/WEB-INF/bg.png">--%>
+<img src="<c:url value="/resources/images/bg.png"/>" />
 
 </body>
 </html>
