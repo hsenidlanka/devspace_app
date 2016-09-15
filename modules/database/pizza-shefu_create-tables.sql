@@ -66,8 +66,8 @@ CREATE TABLE `customer` (
   `username` varchar(50) NOT NULL,
   `password` varchar(500) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `address_line1` varchar(100) DEFAULT NULL,
-  `address_line2` varchar(100) DEFAULT NULL,
+  `address_line1` varchar(100) NOT NULL,
+  `address_line2` varchar(100) NOT NULL,
   `address_line3` varchar(100) DEFAULT NULL,
   `mobile` varchar(15) NOT NULL,
   `registered_date` date NOT NULL,
@@ -463,12 +463,12 @@ CREATE TABLE `staff` (
   `title` varchar(20) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(1000) NOT NULL,
-  `first_name` varchar(50) DEFAULT NULL,
-  `last_name` varchar(50) DEFAULT NULL,
-  `email` varchar(50) DEFAULT NULL,
-  `mobile` varchar(15) DEFAULT NULL,
-  `address_line1` varchar(100) DEFAULT NULL,
-  `address_line2` varchar(100) DEFAULT NULL,
+  `first_name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `mobile` varchar(15) NOT NULL,
+  `address_line1` varchar(100) NOT NULL,
+  `address_line2` varchar(100) NOT NULL,
   `address_line3` varchar(100) DEFAULT NULL,
   `designation` varchar(50) NOT NULL,
   `department` varchar(50) NOT NULL,
@@ -508,4 +508,4 @@ CREATE TABLE `sub_category` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-09-12 10:11:56
+-- Dump completed on 2016-09-15 10:11:33
