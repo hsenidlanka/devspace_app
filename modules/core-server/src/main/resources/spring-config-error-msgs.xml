@@ -3,6 +3,13 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <bean id="response400" class="hsl.devspace.app.coreserver.model.ErrorMessage">
+        <property name="status" value="error"/>
+        <property name="errorCode" value="400"/>
+        <property name="errorMessage" value="HTTP_BAD_REQUEST"/>
+        <property name="description" value="incorrect request. make sure the data sent are correct."/>
+    </bean>
+
     <bean id="response401" class="hsl.devspace.app.coreserver.model.ErrorMessage">
         <property name="status" value="unauthorized"/>
         <property name="errorCode" value="401"/>
@@ -37,7 +44,7 @@
         <property name="errorCode" value="409"/>
         <property name="errorMessage" value="HTTP_CONFLICT"/>
         <property name="description"
-                  value="The request could not be completed due to a conflict with the current state of the target resource. try sending the request later."/>
+                  value="request could not be completed due to a conflict with the current state of the target resource. try sending the request later."/>
     </bean>
 
     <bean id="response414" class="hsl.devspace.app.coreserver.model.ErrorMessage">

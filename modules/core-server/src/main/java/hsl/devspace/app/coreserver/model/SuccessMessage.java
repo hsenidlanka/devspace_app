@@ -1,5 +1,6 @@
 package hsl.devspace.app.coreserver.model;
 
+import com.google.gson.JsonArray;
 import com.owlike.genson.annotation.JsonProperty;
 
 import javax.xml.bind.annotation.XmlRootElement;
