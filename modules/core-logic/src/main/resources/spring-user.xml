@@ -17,6 +17,14 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="transactionManager" ref="transactionManager"/>
     </bean>
+    <bean id="categoryRepository" class="hsl.devspace.app.corelogic.repository.category.CategoryRepositoryImpl">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="transactionManager" ref="transactionManager"/>
+    </bean>
+    <bean id="subCategoryRepository" class="hsl.devspace.app.corelogic.repository.category.SubCategoryRepositoryImpl">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="transactionManager" ref="transactionManager"/>
+    </bean>
     <bean id="transactionManager"
           class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
