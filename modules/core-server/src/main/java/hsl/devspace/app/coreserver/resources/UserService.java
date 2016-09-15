@@ -56,19 +56,19 @@ public class UserService {
     }
 
     @POST
-    @Path("/login/{username}/{password}")
+    @Path("/login")
+    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response loginValidate(@PathParam("username") String userName, @PathParam("password") String password, @javax.ws.rs.core.Context UriInfo uriInfo) {
-        User user = new User(userName, password);
-        boolean status = userRepository.loginAuthenticate(user);
+    public Response loginValidate(User u, @javax.ws.rs.core.Context UriInfo uriInfo) {
+        boolean status = userRepository.loginAuthenticate(u.getUsername(), u.getPassword());
         Response response;
         if (status) {
             SuccessMessage successMessage = new SuccessMessage();
             successMessage.setStatus("success");
             successMessage.setCode(Response.Status.OK.getStatusCode());
             successMessage.setMessage("username, password validated.");
-            successMessage.addData("username", userName);
-            successMessage.addData("password", password);
+            successMessage.addData("username", u.getUsername());
+            successMessage.addData("password", u.getPassword());
             String url = uriInfo.getAbsolutePath().toString();
             successMessage.addLink(url, "self");
             response = Response.status(Response.Status.OK).entity(successMessage).build();
