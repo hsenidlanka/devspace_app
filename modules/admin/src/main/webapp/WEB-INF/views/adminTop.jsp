@@ -5,11 +5,9 @@
 <!-- CSS -->
 <spring:url value="../themes/hsenid/bootstrap/css/bootstrap.min.css" var="css1"/>
 <spring:url value="../themes/hsenid/css/business-casual.css" var="css2"/>
-<spring:url value="../themes/hsenid/css/form-elements.css" var="css3"/>
 
 <link href="${css1}" rel="stylesheet">
 <link href="${css2}" rel="stylesheet">
-<link href="${css3}" rel="stylesheet">
 
 
 <!-- Javascript -->
@@ -21,16 +19,19 @@
 
 
 <!-- Fonts -->
-<spring:url value="../themes/hsenid/bootstrap/css/fonts.css" var="css4"/>
+<spring:url value="/themes/hsenid/bootstrap/css/fonts.css" var="css4"/>
 <link href="${css4}" rel="stylesheet">
 
-
 <!--bootstrap table-->
-<spring:url value="../themes/hsenid/bootstrap/css/bootstrap-table.min.css" var="css5"/>
-<link href="${css5}" rel="stylesheet">
+<spring:url value="/themes/hsenid/bootstrap/css/bootstrap-table.min.css" var="css1"/>
+<link href="${css1}" rel="stylesheet">
 
 <spring:url value="/themes/hsenid/bootstrap/js/bootstrap-table.min.js" var="js3"/>
 <script src="${js3}"></script>
+
+
+
+
 
 
 
