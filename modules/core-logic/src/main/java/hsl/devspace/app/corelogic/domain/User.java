@@ -16,7 +16,7 @@ public class User {
     private String email;
     private String addressL1;
     private String addressL2;
-    private String city;
+    private String addressL3;
     private String mobile;
     private String designation;
     private String department;
@@ -33,12 +33,12 @@ public class User {
         this.email = email;
     }
 
-    public String getCity() {
-        return city;
+    public String getAddressL3() {
+        return addressL3;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setAddressL3(String addressL3) {
+        this.addressL3 = addressL3;
     }
 
 
@@ -162,7 +162,7 @@ public class User {
     }
 
     public User(String title, String username,String password,String firstName, String lastName,String email,
-                String mobile,String addressL1, String addressL2,String city,String designation, String department,
+                String mobile,String addressL1, String addressL2,String addressL3,String designation, String department,
                 String branch) {
         this.title=title;
         this.username = username;
@@ -173,14 +173,14 @@ public class User {
         this.mobile=mobile;
         this.addressL1 = addressL1;
         this.addressL2 = addressL2;
-        this.city=city;
+        this.addressL3 = addressL3;
         this.designation=designation;
         this.department=department;
         this.branch=branch;
     }
     //customer
     public User(String title,String firstName,String lastName,String username,String password,String email,String addressL1,
-                String addressL2,String city,String mobile){
+                String addressL2,String addressL3,String mobile){
         this.title=title;
         this.firstName=firstName;
         this.lastName=lastName;
@@ -189,7 +189,7 @@ public class User {
         this.email=email;
         this.addressL1=addressL1;
         this.addressL2=addressL2;
-        this.city=city;
+        this.addressL3 = addressL3;
         this.mobile=mobile;
     }
 }

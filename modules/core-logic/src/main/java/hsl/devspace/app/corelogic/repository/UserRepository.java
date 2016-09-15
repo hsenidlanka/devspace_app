@@ -29,6 +29,7 @@ public interface UserRepository {
     int modify(User user) throws SQLException, TransientDataAccessResourceException;
 
     List<Map<String, Object>> retrieveMultipleRowsColumns(String username);
+    List<Map<String, Object>> view();
 
     int block(String username);
 

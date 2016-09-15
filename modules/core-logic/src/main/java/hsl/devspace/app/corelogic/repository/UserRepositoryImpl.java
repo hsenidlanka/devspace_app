@@ -50,7 +50,7 @@ public class UserRepositoryImpl implements UserRepository {
                     "(title,first_name,last_name,username,password,email,address_line1,address_line2,address_line3,mobile,registered_date,status) VALUES (?,?,?,?,sha1(?),?,?,?,?,?,CURRENT_DATE,1)";
 
             row = jdbcTemplate.update(sql, new Object[]{user.getTitle(), user.getFirstName(), user.getLastName(), user.getUsername(), user.getPassword(),
-                    user.getEmail(), user.getAddressL1(), user.getAddressL2(), user.getCity(), user.getMobile()});
+                    user.getEmail(), user.getAddressL1(), user.getAddressL2(), user.getAddressL3(), user.getMobile()});
             transactionManager.commit(stat);
 
             log.info(row + "customer inserted");
@@ -90,7 +90,7 @@ public class UserRepositoryImpl implements UserRepository {
             user.setPassword(nPw);
             System.out.println(user.getPassword());
 
-            String sql = "UPDATE customer SET password = md5(?) WHERE username = ? ";
+            String sql = "UPDATE customer SET password = sha1(?) WHERE username = ? ";
             int row = jdbcTemplate.update(sql, new Object[]{user.getPassword(), user.getUsername()});
             transactionManager.rollback(stat);
             log.info(row + "password changed");
@@ -140,6 +140,13 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public List<Map<String, Object>> retrieveMultipleRowsColumns(String username) {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE BINARY username = ?", username);
+        log.info(mp);
+        return mp;
+    }
+
+    @Override
+    public List<Map<String, Object>> view() {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer");
         log.info(mp);
         return mp;
     }
