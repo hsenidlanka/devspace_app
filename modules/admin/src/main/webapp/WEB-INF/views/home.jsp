@@ -4,17 +4,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-
   <!--include common CSS, fonts and js-->
-  <%--<link rel="import" href="adminTop.html">--%>
   <jsp:include page="adminTop.jsp"/>
-
+  <spring:url value="/themes/hsenid/css/form-elements.css" var="css2"/>
+  <link href="${css2}" rel="stylesheet">
 
 </head>
 <body>
+<jsp:include page="header.jsp"/>
 
-<spring:url value="adminTop.jsp" var="page1"/>
-<link href="${page1}" rel="import">
+
+<%--<spring:url value="header.jsp" var="page1"/>
+<link href="${page1}" rel="import">--%>
 
 
 <div class="home-title">Control Panel</div>
@@ -102,13 +103,13 @@
           <div class="panel-body">
             <ul class="nav navbar-nav">
               <li>
-                <a href="userAdd.html" class="panel-sub-menu1">Add Users</a>
+                <a href="https://localhost:8443/users/add" class="panel-sub-menu1">Add Users</a>
               </li>
               <li>
-                <a href="usersView.html" class="panel-sub-menu1">View Users</a>
+                <a href="https://localhost:8443/users/view" class="panel-sub-menu1">View Users</a>
               </li>
               <li>
-                <a href="usersBanned.html" class="panel-sub-menu1">Blocked Users</a>
+                <a href="https://localhost:8443/users/viewBlocked" class="panel-sub-menu1">Blocked Users</a>
               </li>
             </ul>
           </div>
@@ -140,4 +141,3 @@
 </center>
 </body>
 </html>
-

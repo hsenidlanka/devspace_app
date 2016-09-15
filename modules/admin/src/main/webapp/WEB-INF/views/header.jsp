@@ -20,11 +20,11 @@
         }
     </style>
     <div>
-        <img src="<c:url value="/themes/hsenid/images/logo.png">" alt="logo" style="width:100px;height:130px;">
+
+        <img src="/themes/hsenid/images/logo.png" alt="logo" style="width:100px;height:130px;">
     </div>
 
     <div>
         <a href="#">Log Out</a>
     </div>
 </div>
-
