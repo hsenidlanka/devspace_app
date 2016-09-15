@@ -26,8 +26,6 @@
 
 <jsp:include page="header.jsp"/>
 
-
-
 <div class="brand">
   <div style="position: relative; left: -50%;">
     User Management
