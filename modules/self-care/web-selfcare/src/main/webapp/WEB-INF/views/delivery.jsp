@@ -3,34 +3,27 @@
 <head lang="en">
     <title>Delivery</title>
     <link rel="shortcut icon" href="">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../bootstrap-3.3.7/css/bootstrap.min_spacelab.css"/>
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="../css/bootstrap-datepicker3.css"/>
-    <script type="text/javascript" src="../js/bootstrap-datepicker.min.js"></script>
-    <script src="../js/delivery-operations.js"></script>
-    <link rel="stylesheet" href="../css/progress-wizard.min.css">
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/loader.css"/>
-    <script src="http://www.w3schools.com/lib/w3data.js"></script>
-    <script src="../js/common.js"></script>
-    <script src="../js/validate-delivery.js"></script>
-    <link rel="stylesheet" href="../css/back-to-top.css"/>
-    <script src="../js/back-to-top.js"></script>
-    <script src="../js/loader.js"></script>
-    <script src="../js/datepicker.js"></script>
+
+    <%@include file="include.jsp" %>
+
+    <link href="<c:url value="/resources/css/bootstrap-datepicker3.css"/>" rel="stylesheet" />
+    <script src="<c:url value="/resources/js/bootstrap-datepicker.min.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/resources/js/delivery-operations.js"/>" ></script>
+    <link href="<c:url value="/resources/css/progress-wizard.min.css"/>" rel="stylesheet" >
+    <script src="<c:url value="/resources/js/datepicker.js"/>" ></script>
+    <script src="<c:url value="/resources/js/common.js"/>" ></script>
+    <script src="<c:url value="/resources/js/validate-delivery.js"/>" ></script>
+
 </head>
 
 <body>
 <div class="loader-anim"></div>
-<div w3-include-html="headertest2.html"></div>
+<%@include file="headertest2.jsp" %>
 <div class="main-div">
     <div class="section">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <img class="icons" src="../images/icons/pizzadeliveryman.png">
+                <img class="icons" src="<c:url value="/resources/images/icons/pizzadeliveryman.png"/>" >
 
                 <h3 class="header-panel">Delivery</h3>
             </div>
@@ -179,7 +172,7 @@
                                         <div>
                                             <a class="btn btn-success btn-proceed-payment"
                                                style="width: 45%; display: inline-block; float: right;"
-                                               href="pickup-summary.html"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;Proceed</a>
+                                               href="pickup-summary"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;Proceed</a>
                                             <button type="reset" class="btn btn-success" value="Reset"
                                                     style="width: 45%; display: inline-block; float: right; margin-right:5px">
                                                 <span class="glyphicon glyphicon-refresh"></span>&nbsp;&nbsp;Reset
@@ -190,7 +183,7 @@
                                 <div class="col-md-6">
                                     <label class="control-label">Locate branch</label>
                                 </div>
-                                <img class="center-block img-responsive" src="../images/map.png" width="300px"
+                                <img class="center-block img-responsive" src="<c:url value="/resources/images/map.png"/>"  width="300px"
                                      height="300px;">
                             </div>
                         </div>
@@ -206,7 +199,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title"><img src="../images/icons/error.png" width="100px" height="100px">&nbsp;&nbsp;Validation
+                <h2 class="modal-title"><img src="<c:url value="/resources/images/icons/error.png"/>"  width="100px" height="100px">&nbsp;&nbsp;Validation
                     errors</h2>
             </div>
             <div class="modal-body">

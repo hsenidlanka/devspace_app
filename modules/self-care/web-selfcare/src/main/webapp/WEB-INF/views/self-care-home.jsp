@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+    <title>Welcome to Pizza Shefu</title>
     <%@include file="include.jsp" %>
+
     <div class="loader-anim"></div>
 
     <style>
@@ -36,7 +37,7 @@
                 <li>
 
                     <a href="shopping-cart.html"><img src="<c:url value="/resources/images/shopping-cart.png"/>"
-                                                      style="padding-left: 30px"></span></a>
+                                                      style="padding-left: 30px"></a>
                 </li>
                 <li>
                     <a class="form-group" data-toggle="modal" data-target="#modal-signup"><img
@@ -103,7 +104,7 @@
 
     <div class="col-sm-2">
         <span>
-            <a href="../pages/payment.html"> <img src="<c:url value="/resources/images/ordernow3.png"/>" style="width: 185px;height: 148px"></a>
+            <a href="payment"> <img src="<c:url value="/resources/images/ordernow3.png"/>" style="width: 185px;height: 148px"></a>
         </span>
     </div>
 
@@ -121,7 +122,7 @@
         </span>
 
         <span>
-            <a href="#"> <img src="<c:url value="/resources/images/twitter-flat.png"/>" style="padding-right: 10px"></a>
+            <a href="http://www.twitter.com"> <img src="<c:url value="/resources/images/twitter-flat.png"/>" style="padding-right: 10px"></a>
         </span>
 
         <span>
@@ -163,7 +164,7 @@
                     </label>
 
                     <div class="forgot">
-                        <a href="../pages/forgotpassword.html">forgot password?</a>
+                        <a href="forgotpassword">forgot password?</a>
                     </div>
                     <div class="clear"></div>
                 </form>
@@ -202,23 +203,15 @@
                 <!-- end-account -->
                 <div class="clear"></div>
 
-
-                <%--<script src="<c:url value="/resources/js/w3data.js"/>"></script>--%>
-                <%--<script>--%>
-                    <%--w3IncludeHTML();--%>
-                <%--</script>--%>
             </div>
 
         </div>
     </div>
 </div>
 
-
-<!------------------------------------------------------------------------->
 <!-------Footer------------------------------------->
 
 <div id="footer" style="position: fixed;height: 50px">
-    <!--<div style="height: 22px"></div>-->
     <div class="form-group row static">
 
         <label class="col-sm-4 control-label">
@@ -250,22 +243,11 @@
         <li><a href="#" title="Scroll to top"><i class="glyphicon glyphicon-chevron-up"></i></a></li>
     </ul>
 </div>
-<!--<div w3-include-html="footer.html"></div>-->
 
-<%--<script src="../js/w3data.js"></script>--%>
-
+<!------------------------------signup modal --------------------------------------------->
 <%@include file="signupmodal.jsp" %>
 
 </body>
-
-
-<!------------------------------signup modal --------------------------------------------->
-
-<%--<div w3-include-html=""></div>--%>
-
 </html>
-<%--<script>--%>
-<%--w3IncludeHTML();--%>
-<%--</script>--%>
 
 

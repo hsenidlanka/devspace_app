@@ -1,5 +1,3 @@
-
-
 <div class="modal fade" id="modal-signup" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true"
      style="width: 1200px;height: 700px;">
     <!--<div class="modal-dialog">-->
@@ -8,11 +6,6 @@
         <center>
             <div class="inner-bg">
                 <div class="container">
-                    <!--<div class="row">
-                        <div class="col-sm-8 col-sm-offset-2 text">
-
-                        </div>
-                    </div>-->
 
                     <div class="panel panel-success">
                         <div class="panel-heading" style="height: 50px">
@@ -30,10 +23,6 @@
                         <div class="panel-body">
                             <form role="form" id="adduser_form" action="" method="post"
                                   class="form-horizontal">
-
-                                <!--
-                                                                    <p style="font-weight: bold;font-size: larger">Create New Account</p>
-                                -->
 
                                 <div class="form-group">
 
@@ -67,7 +56,7 @@
                                     </div>
 
                                     <div class="col-sm-4">
-                                        <input class="form-control" id="lname" type="text" placeholder="Last Name">
+                                        <input class="form-control" id="lname" type="text" placeholder="Last Name" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -83,7 +72,7 @@
 
                                     <div class="col-sm-4">
                                         <input class="form-control" id="address2" type="text" placeholder="Line2*"
-                                               required>
+                                               requied>
                                     </div>
                                 </div>
 
@@ -111,10 +100,6 @@
                                     <div class='col-sm-2'>
                                         <input class="form-control" id="datepicker" type="text" placeholder="22/08/2016"
                                                required>
-                                        <!-- <p>Pick a Date: <input type="text" id="datepicker" /></p>-->
-                                        <!--<div w3-include-html="datepicker.html"></div>-->
-
-
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -169,7 +154,6 @@
 
                                 </div>
                                 <div class="form-group">
-                                    <!--<a class="form-group-sm" data-toggle="modal" data-target="#modal-login">Already Have An Account ?</a>-->
                                     <a class="form-group-sm" data-toggle="modal" data-target="#modal-login" data-dismiss="modal">Already Have An Account ?</a>
 
                                 </div>

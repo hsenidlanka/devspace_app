@@ -18,70 +18,24 @@ host: localhost:2222
 basePath: /pizza-shefu/api/v1.0
 schemes:
   - http
-consumes:
-  - application/json
-produces:
-  - application/json
 paths:
-  /users/signup/{title}/{firstName}/{lastName}/{address01}/{address02}/{city}/{email}/{username}/{password}:
+  /users/signup:
     post:
-      description: Register to the system
+      description: Register new user
+      tags:
+        - user
+      consumes:
+        - application/json
       produces:
         - application/json
       parameters:
-        - name: title
-          in: path
-          description: User title (Mr, Mrs, etc)
-          required: true
-          type: string
-      
-        - name: firstName
-          in: path
-          description: First name of the user
-          required: true
-          type: string
-      
-        - name: lastName
-          in: path
-          description: Last name of the user
-          required: true
-          type: string
-          
-        - name: address01
-          in: path
-          description: Address line 01 value
-          required: true
-          type: string
-          
-        - name: address02
-          in: path
-          description: Address line 02 value
-          required: true
-          type: string
-      
-        - name: city
-          in: path
-          description: City name of the user
-          required: true
-          type: string
-          
-        - name: email
-          in: path
-          description: Email address of the user
-          required: true
-          type: string
-          
-        - name: username
-          in: path
-          description: Username of the new user
-          required: true
-          type: string 
-          
-        - name: password
-          in: path
-          description: Password of the new user
-          required: true
-          type: string
+        - name: body
+          in: body
+          description: User object to register
+          required: false
+          schema:
+            $ref: "#/definitions/user"
+            
       responses:
         '201':
           description: New user added/created
@@ -90,139 +44,57 @@ paths:
             items:
               $ref: '#/definitions/success-message'
               
-        '404':
-          description: Resource not found
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-              
-        '405':
-          description: Wrong http method used
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-        
-        '408':
-          description: Request timeout
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-              
-        '409':
-          description: Conflict with the target resource
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-              
-        '414':
-          description: URI too long
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-              
         '415':
-          description: Unsupported media type
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'     
-        
-        '500':
-          description: Internal server error
+          description: Media type should be application/json
           schema:
             type: array
             items:
               $ref: '#/definitions/error-message'    
 
-  /users/login/{username}/{password}:
+  /users/login:
     post: 
       description: Authorize a user by username and password
+      tags:
+        - user
+      consumes:
+        - application/json
       produces:
         - application/json
       parameters:
-        - name: username
-          in: path
-          description: Username of the new user
+        - name: body
+          in: body
+          description: User object to authenticate
           required: true
-          type: string
-          
-        - name: password
-          in: path
-          description: Password of the new user
-          required: true
-          type: string
+          schema:
+            $ref: '#/definitions/user-login'
+            
       responses:
         '200':
-          description: User authorized
+          description: Correct username password combination
           schema:
             type: array
             items:
               $ref: '#/definitions/success-message'
               
-        '404':
-          description: Resource not found
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-              
-        '405':
-          description: Wrong http method used
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-        
-        '408':
-          description: Request timeout
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-              
-        '409':
-          description: Conflict with the target resource
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-              
-        '414':
-          description: URI too long
+        '401':
+          description: Wrong username password combination
           schema:
             type: array
             items:
               $ref: '#/definitions/error-message'
               
         '415':
-          description: Unsupported media type
+          description: Media type should be application/json
           schema:
             type: array
             items:
-              $ref: '#/definitions/error-message'
-              
-        '500':
-          description: Internal server error
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'  
-              
-        '401':
-          description: Unauthorized user
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'     
-
+              $ref: '#/definitions/error-message'              
+            
   /categories/{categoryName}/items:
     get: 
       description: Returns all the details of items for the given category
+      tags:
+        - category
       produces:
         - application/json
       parameters:
@@ -247,51 +119,11 @@ paths:
             items:
               $ref: '#/definitions/error-message'
               
-        '405':
-          description: Wrong http method used
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-        
-        '408':
-          description: Request timeout
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-              
-        '409':
-          description: Conflict with the target resource
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-              
-        '414':
-          description: URI too long
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-              
-        '415':
-          description: Unsupported media type
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-              
-        '500':
-          description: Internal server error
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'  
-              
   /sub-categories/{subcategoryName}/items:
     get: 
       description: Returns all the details of items for the given sub-category
+      tags:
+        - category
       produces:
         - application/json
       parameters:
@@ -314,53 +146,13 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/error-message'
-              
-        '405':
-          description: Wrong http method used
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-        
-        '408':
-          description: Request timeout
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-              
-        '409':
-          description: Conflict with the target resource
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-              
-        '414':
-          description: URI too long
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-              
-        '415':
-          description: Unsupported media type
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-              
-        '500':
-          description: Internal server error
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'  
+              $ref: '#/definitions/error-message' 
               
   /categories/toprated:
     get: 
       description: Returns the top rated items by all categories
+      tags:
+        - category
       produces:
         - application/json
 
@@ -379,51 +171,11 @@ paths:
             items:
               $ref: '#/definitions/error-message'
               
-        '405':
-          description: Wrong http method used
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-        
-        '408':
-          description: Request timeout
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-              
-        '409':
-          description: Conflict with the target resource
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-              
-        '414':
-          description: URI too long
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-              
-        '415':
-          description: Unsupported media type
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-              
-        '500':
-          description: Internal server error
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-              
   /categories/{categoryName}/toprated:
     get: 
       description: Returns the top rated items of a category
+      tags:
+        - category
       produces:
         - application/json
 
@@ -449,51 +201,11 @@ paths:
             items:
               $ref: '#/definitions/error-message'
               
-        '405':
-          description: Wrong http method used
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-        
-        '408':
-          description: Request timeout
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-              
-        '409':
-          description: Conflict with the target resource
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-              
-        '414':
-          description: URI too long
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-              
-        '415':
-          description: Unsupported media type
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-              
-        '500':
-          description: Internal server error
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message' 
-              
   /categories/search/{searchKey}:
     get: 
       description: Search item within all categories
+      tags:
+        - category
       produces:
         - application/json
 
@@ -519,51 +231,11 @@ paths:
             items:
               $ref: '#/definitions/error-message'
               
-        '405':
-          description: Wrong http method used
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-        
-        '408':
-          description: Request timeout
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-              
-        '409':
-          description: Conflict with the target resource
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-              
-        '414':
-          description: URI too long
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-              
-        '415':
-          description: Unsupported media type
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-              
-        '500':
-          description: Internal server error
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'  
-              
   /categories/{categoryName}/search/{searchKey}:
     get: 
       description: Search item from a specific category
+      tags:
+        - category
       produces:
         - application/json
 
@@ -579,7 +251,7 @@ paths:
           description: Key value to search items
           required: true
           type: string
-
+          
       responses:
         '200':
           description: Request processed successfully
@@ -595,150 +267,55 @@ paths:
             items:
               $ref: '#/definitions/error-message'
               
-        '405':
-          description: Wrong http method used
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-        
-        '408':
-          description: Request timeout
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-              
-        '409':
-          description: Conflict with the target resource
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-              
-        '414':
-          description: URI too long
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-              
-        '415':
-          description: Unsupported media type
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-              
-        '500':
-          description: Internal server error
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'   
-              
-  /coupons/validate/{couponCode}:
+  /coupons/validate:
     post: 
       description: Validate the coupon code user submitted
+      tags:
+        - coupon
+      consumes:
+        - application/json
       produces:
         - application/json
-
       parameters:
-        - name: couponCode
-          in: path
-          description: User entered coupon code
-          required: true
-          type: string
-
+        - name: body
+          in: body
+          description: Coupon to validate
+          required: false
+          schema:
+            $ref: "#/definitions/coupon-validate"
+            
       responses:
         '200':
-          description: Request processed successfully
+          description: Coupon validated
           schema:
             type: array
             items:
               $ref: '#/definitions/success-message'
               
-        '404':
-          description: Resource not found
+        '401':
+          description: Invalid coupon code
           schema:
             type: array
             items:
               $ref: '#/definitions/error-message'
               
-        '405':
-          description: Wrong http method used
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-        
-        '408':
-          description: Request timeout
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-              
-        '409':
-          description: Conflict with the target resource
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-              
-        '414':
-          description: URI too long
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-              
-        '415':
-          description: Unsupported media type
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-              
-        '500':
-          description: Internal server error
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'    
-              
-  /coupons/add/{couponCode}/{rate}/{expireDate}/{customerMobile}:
+  /coupons/add:
     post: 
       description: Generate a new coupon code for the payment
+      tags:
+        - coupon
+      consumes:
+        - application/json
       produces:
         - application/json
-
       parameters:
-        - name: couponCode
-          in: path
-          description: New coupon code
+        - name: body
+          in: body
+          description: New coupon to add
           required: true
-          type: string
-
-        - name: rate
-          in: path
-          description: Discount rate for the coupon
-          required: true
-          type: number
-          format: double
-          
-        - name: expireDate
-          in: path
-          description: Expire date of the coupon
-          required: true
-          type: string
-
-        - name: customerMobile
-          in: path
-          description: Mobile no of the customer (coupon receiver)
-          required: true
-          type: string    
-
+          schema:
+            $ref: '#/definitions/coupon'
+            
       responses:
         '201':
           description: New coupon added/created
@@ -747,61 +324,22 @@ paths:
             items:
               $ref: '#/definitions/success-message'
               
-        '404':
-          description: Resource not found
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-              
-        '405':
-          description: Wrong http method used
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-        
-        '408':
-          description: Request timeout
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-              
-        '409':
-          description: Conflict with the target resource
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-              
-        '414':
-          description: URI too long
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-              
         '415':
-          description: Unsupported media type
+          description: Media type should be application/json
           schema:
             type: array
             items:
-              $ref: '#/definitions/error-message'
-              
-        '500':
-          description: Internal server error
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'   
+              $ref: '#/definitions/error-message'    
               
   /shopping-cart/add/item/{ItemName}/qty/{quantity}:
     post: 
       description: Add a selected item to the shopping cart
+      tags:
+        - shopping cart
+      consumes:
+        - application/json
       produces:
         - application/json
-
       parameters:
         - name: ItemName
           in: path
@@ -824,54 +362,12 @@ paths:
             items:
               $ref: '#/definitions/success-message'
               
-        '404':
-          description: Resource not found
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-              
-        '405':
-          description: Wrong http method used
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-        
-        '408':
-          description: Request timeout
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-              
-        '409':
-          description: Conflict with the target resource
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-              
-        '414':
-          description: URI too long
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-              
         '415':
-          description: Unsupported media type
+          description: Media type should be application/json.
           schema:
             type: array
             items:
               $ref: '#/definitions/error-message'
-              
-        '500':
-          description: Internal server error
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message' 
               
   /shopping-cart/modify/item/{ItemName}/qty/{quantity}:
     put: 
@@ -1282,4 +778,74 @@ definitions:
       links:
         type: object
         
+  user-login:
+      type: object
+      required:
+            - username
+            - password
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+          
+  user:
+      type: object
+      required:
+            - title
+            - fisrtName
+            - lastName
+            - username
+            - password
+            - addressL1
+            - addressL2
+            - mobile
+            
+      properties:
+        title:
+         type: string
+        fisrtName:
+         type: string
+        lastName:
+         type: string
+        username:
+          type: string
+        password:
+          type: string 
+        addressL1:
+          type: string
+        addressL2:
+          type: string
+        addressL3:
+          type: string
+        mobile:
+          type: string
+          
+  coupon-validate:
+    type: object
+    required:
+          - couponCode
+          - customerMobile
+    properties:
+      couponCode:
+        type: string
+      customerMobile:
+        type: string     
         
+  coupon:
+    type: object
+    required:
+          - couponCode
+          - rate
+          - expireDate
+          - customerMobile
+    properties:
+      couponCode:
+        type: string
+      rate:
+        type: number
+      expireDate:
+        type: string
+        format: date
+      customerMobile:
+        type: string            

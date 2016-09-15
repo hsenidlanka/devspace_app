@@ -27,6 +27,9 @@ public class WebApplicationExceptionHandler {
             // According to the status code, specific error message will be generated.
             // Error message format for status codes are defined in spring-config-error-msgs.xml file.
             // If the statusCode matches with the cases of the switch, relevant response will return.
+            case 400:
+                ErrorMessage error400 = (ErrorMessage) context.getBean("response400");
+                return Response.status(statusCode).entity(error400).type(MediaType.APPLICATION_JSON).build();
             case 401:
                 ErrorMessage error401 = (ErrorMessage) context.getBean("response401");
                 return Response.status(statusCode).entity(error401).type(MediaType.APPLICATION_JSON).build();

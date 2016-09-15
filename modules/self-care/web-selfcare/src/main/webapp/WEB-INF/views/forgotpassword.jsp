@@ -33,7 +33,7 @@
         function example1(){
             $.notify({
                 delay : 999999,
-                message : "hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!",
+                message : "hello world!",
                 type : "warning",
                 close : "true",
                 animation : true,

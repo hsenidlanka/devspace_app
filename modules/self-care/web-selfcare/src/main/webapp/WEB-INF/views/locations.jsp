@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+    <title>Locations</title>
     <%@include file="include.jsp" %>
     <div class="loader-anim"></div>
 </head>
@@ -60,20 +60,7 @@
 
 <a href="http://gazpo.com/downloads/tutorials/jquery/scrolltop/#" class="scrollup" style="display: none;">Scroll</a>
 
-<div w3-include-html="loginload.html"></div>
-<div w3-include-html="signupmodal.html"></div>
+<%@include file="loginload.jsp" %>
+<%@include file="signupmodal.jsp" %>
 </body>
 </html>
-<!------------------------------------------------------------------------->
-<!--<div w3-include-html="footer.html"></div>-->
-
-<script src="http://www.w3schools.com/lib/w3data.js"></script>
-<script>
-    w3IncludeHTML();
-</script>
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="../js/scroll_top.js"></script>
-<script src="../js/loader.js"></script>

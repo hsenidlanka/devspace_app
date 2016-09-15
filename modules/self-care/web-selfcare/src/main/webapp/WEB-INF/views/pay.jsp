@@ -3,30 +3,26 @@
 <head lang="en">
     <title>Payment</title>
     <link rel="shortcut icon" href="">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../bootstrap-3.3.7/css/bootstrap.min_spacelab.css"/>
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="../css/progress-wizard.min.css">
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/loader.css"/>
-    <script src="../js/payment-operations.js"></script>
-    <script src="http://www.w3schools.com/lib/w3data.js"></script>
-    <script src="../js/common.js"></script>
-    <link rel="stylesheet" href="../css/back-to-top.css"/>
-    <script src="../js/back-to-top.js"></script>
-    <script src="../js/validate-pay.js"></script>
-    <script src="../js/loader.js"></script>
+
+    <%@include file="include.jsp" %>
+
+    <link rel="stylesheet" href="<c:url value="/resources/css/progress-wizard.min.css"/>" >
+    <script src="<c:url value="/resources/js/payment-operations.js"/>" ></script>
+    <script src="<c:url value="/resources/js/common.js"/>" ></script>
+    <script src="<c:url value="/resources/js/validate-pay.js"/>" ></script>
+
 </head>
 <body>
+
 <div class="loader-anim"></div>
-<div w3-include-html="headertest2.html"></div>
+
+<%@include file="headertest2.jsp" %>
+
 <div class="main-div">
     <div class="section">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <img class="icons" src="../images/icons/pay.png">
+                <img class="icons" src="<c:url value="/resources/images/icons/pay.png"/>" >
                 <h3 class="header-panel">Pay</h3>
             </div>
             <div class="panel-body">
@@ -37,8 +33,8 @@
                     <li><span class="bubble"></span> Success</li>
                 </ul>
                 <div style="text-align: center; margin-top: 40px;">
-                    <img src="../images/payment/visa.png">
-                    <img src="../images/payment/master.png">
+                    <img src="<c:url value="/resources/images/payment/visa.png"/>" >
+                    <img src="<c:url value="/resources/images/payment/master.png"/>" >
                 </div>
                 <div class="container" style="width:800px;;">
                     <div class="row">
@@ -92,7 +88,7 @@
                             </form>
                         </div>
                         <div class="col-md-6" style="margin-top: 10%;">
-                            <img src="../images/payment/Credit-Card-Security-Code-Locations.jpg" width="100%;">
+                            <img src="<c:url value="/resources/images/payment/Credit-Card-Security-Code-Locations.jpg"/>" width="100%;">
                         </div>
                     </div>
                 </div>
@@ -106,7 +102,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <img class="icons" src="../images/icons/pay-confirm.png">
+                <img class="icons" src="<c:url value="/resources/images/icons/pay-confirm.png"/>" >
                 <h4 class="modal-title header-panel">Confirm Payment</h4>
             </div>
             <div class="modal-body">
@@ -126,7 +122,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title"><img src="../images/icons/error.png" width="100px" height="100px">&nbsp;&nbsp;Validation errors</h2>
+                <h2 class="modal-title"><img src="<c:url value="/resources/images/icons/error.png"/>" width="100px" height="100px">&nbsp;&nbsp;Validation errors</h2>
             </div>
             <div class="modal-body">
                 <p style="font-size: medium;">Can not proceed due to the

@@ -3,34 +3,24 @@
 <head lang="en">
     <title>Search Results</title>
     <link rel="shortcut icon" href="">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../bootstrap-3.3.7/css/bootstrap.min_spacelab.css"/>
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/loader.css"/>
-    <script src="http://www.w3schools.com/lib/w3data.js"></script>
-    <script src="../js/common.js"></script>
-    <link rel="stylesheet" href="../css/back-to-top.css"/>
-    <link rel="stylesheet" href="../css/notify.css"/>
-    <script src="../js/back-to-top.js"></script>
-    <script src="../js/menu-operations.js"></script>
-    <script src="../js/search-operations.js"></script>
-    <script src="../js/jquery.contenthover.js"></script>
-    <script src="../js/loader.js"></script>
-    <script src="../js/notify.js"></script>
+
+    <%@include file="include.jsp" %>
+
+    <script src="<c:url value="/resources/js/common.js"/>"></script>
+    <script src="<c:url value="/resources/js/menu-operations.js"/>" ></script>
+    <script src="<c:url value="/resources/js/search-operations.js"/>" ></script>
+    <script src="<c:url value="/resources/js/jquery.contenthover.js"/>" ></script>
 </head>
 <body>
 <div class="loader-anim"></div>
-<div w3-include-html="headertest2.html"></div>
+<%@include file="headertest2.jsp" %>
 <div class="main-div">
     <div class="section">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div>
                     <div style="display: inline-block;">
-                        <img class="icons" src="../images/icons/search-result.png">
+                        <img class="icons" src="<c:url value="/resources/images/icons/search-result.png"/>" >
                         <h3 id="menu-panel-heading" class="header-panel">Search Results</h3>
                     </div>
                     <div style="display: inline-block; float:right;">
@@ -68,7 +58,7 @@
                                         <div class="panel-body">
                                             <div class="row">
                                                 <div class="col-md-3">
-                                                    <img src="../images/pizzas/15.jpg"
+                                                    <img src="<c:url value="/resources/images/pizzas/15.jpg"/>"
                                                          class="img-responsive menu-images">
 
                                                     <div class="contenthover">
@@ -84,7 +74,7 @@
                                                     <h4>A title</h4>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <img src="../images/pizzas/12.jpg"
+                                                    <img src="<c:url value="/resources/images/pizzas/12.jpg"/>"
                                                          class="img-responsive menu-images">
 
                                                     <div class="contenthover">
@@ -100,7 +90,7 @@
                                                     <h4>A title</h4>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <img src="../images/pizzas/21.jpg"
+                                                    <img src="<c:url value="/resources/images/pizzas/21.jpg"/>"
                                                          class="img-responsive menu-images">
 
                                                     <div class="contenthover">
@@ -132,7 +122,7 @@
                                         <div class="panel-body">
                                             <div class="row">
                                                 <div class="col-md-3">
-                                                    <img src="../images/desserts/pudding%2001.jpg"
+                                                    <img src="<c:url value="/resources/images/desserts/pudding%2001.jpg"/>"
                                                          class="img-responsive menu-images">
 
                                                     <div class="contenthover">
@@ -167,7 +157,7 @@
                                         <div class="panel-body">
                                             <div class="row">
                                                 <div class="col-md-3">
-                                                    <img src="../images/beverages/coffee%2005.jpg"
+                                                    <img src="<c:url value="/resources/images/beverages/coffee%2005.jpg"/>"
                                                          class="img-responsive menu-images">
 
                                                     <div class="contenthover">
@@ -186,7 +176,7 @@
                                                     <h4>A title</h4>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <img src="../images/beverages/soft-drink%2002.jpg"
+                                                    <img src="<c:url value="/resources/images/beverages/soft-drink%2002.jpg"/>"
                                                          class="img-responsive menu-images">
 
                                                     <div class="contenthover">
@@ -226,19 +216,19 @@
                                 <!-- Wrapper for slides -->
                                 <div class="carousel-inner" role="listbox">
                                     <div class="item active">
-                                        <img src="../images/beverages/Bergers-Catering-Cold-Beverages-400x600.jpg">
+                                        <img src="<c:url value="/resources/images/beverages/Bergers-Catering-Cold-Beverages-400x600.jpg"/>" >
                                     </div>
 
                                     <div class="item">
-                                        <img src="../images/desserts/flourless-chocolate-cake-8-400x600.jpg">
+                                        <img src="<c:url value="/resources/images/desserts/flourless-chocolate-cake-8-400x600.jpg"/>" >
                                     </div>
 
                                     <div class="item">
-                                        <img src="../images/pizzas/c3fc09ff6816d3ec759a68680c61f736.jpg">
+                                        <img src="<c:url value="/resources/images/pizzas/c3fc09ff6816d3ec759a68680c61f736.jpg"/>" >
                                     </div>
 
                                     <div class="item">
-                                        <img src="../images/desserts/millionaires-shortbread-bars-no-bake-dessert-400x600.jpg">
+                                        <img src="<c:url value="/resources/images/desserts/millionaires-shortbread-bars-no-bake-dessert-400x600.jpg"/>" >
                                     </div>
                                 </div>
 
@@ -274,7 +264,7 @@
                     the item to cart.</p>
 
                 <div class="thumbnail" style="height:120px; border: none;">
-                    <img src="../images/Whole-Pizza-100x100.jpg"
+                    <img src="<c:url value="/resources/images/Whole-Pizza-100x100.jpg"/>"
                          class="img-responsive" align="left">
 
                     <div class="caption">

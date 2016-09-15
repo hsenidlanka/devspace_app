@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>Give us a feedback</title>
     <%@include file="include.jsp" %>
     <script src="<c:url value="/resources/js/validate-inputs.js"/>" ></script>
 
@@ -31,7 +32,7 @@
         function example1(){
             $.notify({
                 delay : 999999,
-                message : "hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!",
+                message : "hello world!",
                 type : "warning",
                 close : "true",
                 animation : true,
@@ -57,10 +58,6 @@
             });
         }
 
-        function test(){
-            alert("확인");
-        }
-
         $(function(){
             $("input[name=align]:radio").change(function(){
                 $("#positionBtn").html("align : <var>"+$(this).val()+"</var>, verticalAlign : <var>"+$(":radio[name=verticalAlign]:checked").val()+"</var>");
@@ -78,9 +75,7 @@
         }(window.jQuery)
 
     </script>
-    <%----%>
-    <%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>--%>
-    <%--<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--%>
+
 </head>
 <div class="loader-anim"></div>
 <body>
@@ -162,5 +157,4 @@
 
 </center>
 </body>
-<!--<div w3-include-html="footer.html"></div>-->
 </html>

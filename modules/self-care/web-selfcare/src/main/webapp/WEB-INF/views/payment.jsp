@@ -3,29 +3,23 @@
 <head lang="en">
     <title>Payment</title>
     <link rel="shortcut icon" href="">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../bootstrap-3.3.7/css/bootstrap.min_spacelab.css"/>
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="../css/progress-wizard.min.css">
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/loader.css"/>
-    <script src="../js/payment-operations.js"></script>
-    <script src="http://www.w3schools.com/lib/w3data.js"></script>
-    <script src="../js/common.js"></script>
-    <link rel="stylesheet" href="../css/back-to-top.css"/>
-    <script src="../js/back-to-top.js"></script>
-    <script src="../js/loader.js"></script>
+    <%@include file="include.jsp" %>
+
+    <link rel="stylesheet" href="<c:url value="/resources/css/progress-wizard.min.css"/>" >
+    <script src="<c:url value="/resources/js/payment-operations.js"/>" ></script>
+    <script src="<c:url value="/resources/js/common.js"/>" ></script>
+
 </head>
 <body>
 <div class="loader-anim"></div>
-<div w3-include-html="headertest2.html"></div>
+
+<%@include file="headertest2.jsp" %>
+
 <div class="main-div">
     <div class="section">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <img class="icons" src="../images/icons/payment-method.png">
+                <img class="icons" src="<c:url value="/resources/images/icons/payment-method.png"/>" >
                 <h3 class="header-panel">Setup payment</h3>
             </div>
             <div class="panel-body">
