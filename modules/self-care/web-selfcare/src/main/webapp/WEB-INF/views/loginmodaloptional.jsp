@@ -1,4 +1,3 @@
-<!--<link href="../css/style.css" rel="stylesheet" type="text/css">-->
 
 <form class="contact_form" action="#" method="post" name="contact_form">
 

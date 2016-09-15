@@ -95,9 +95,7 @@
                                                             Item description goes here.
                                                             <div>
                                                                 <button class="btn btn-success btn-xs btn-addtocart-pizza">
-                                                                    Add
-                                                                    to
-                                                                    cart
+                                                                    Add to cart
                                                                 </button>
                                                             </div>
                                                         </div>

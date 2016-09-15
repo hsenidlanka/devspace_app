@@ -3,28 +3,22 @@
 <head lang="en">
     <title>Summary-Pickup</title>
     <link rel="shortcut icon" href="">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../bootstrap-3.3.7/css/bootstrap.min_spacelab.css"/>
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="../css/progress-wizard.min.css">
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/loader.css"/>
-    <script src="http://www.w3schools.com/lib/w3data.js"></script>
-    <script src="../js/common.js"></script>
-    <link rel="stylesheet" href="../css/back-to-top.css"/>
-    <script src="../js/back-to-top.js"></script>
-    <script src="../js/loader.js"></script>
+    <%@include file="include.jsp" %>
+
+    <link href="<c:url value="/resources/css/progress-wizard.min.css"/>" rel="stylesheet" >
+    <script src="<c:url value="/resources/js/common.js"/>" ></script>
+
 </head>
 <body>
 <div class="loader-anim"></div>
-<div w3-include-html="headertest2.html"></div>
+
+<%@include file="headertest2.jsp" %>
+
 <div class="main-div">
     <div class="section">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <img class="icons" src="../images/icons/Summary.png">
+                <img class="icons" src="<c:url value="/resources/images/icons/Summary.png"/>" >
 
                 <h3 class="header-panel">Order summary</h3>
             </div>
@@ -114,7 +108,7 @@
                         </div>
                     </div>
                 </div>
-                <a class="btn btn-success btn-agree" href="payment.html"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;Agree
+                <a class="btn btn-success btn-agree" href="payment"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;Agree
                     and continue to checkout</a>
             </div>
         </div>

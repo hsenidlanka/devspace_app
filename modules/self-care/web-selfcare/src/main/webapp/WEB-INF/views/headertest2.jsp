@@ -31,7 +31,7 @@
 
         </div>
         <ul class="nav navbar-nav navbar-right" style="padding-right: 30px;">
-            <li><a href="menu.html">Menu</a></li>
+            <li><a href="menu">Menu</a></li>
             <li><a href="locations">Locations</a></li>
             <li><a href="createfeedback">Feedbacks</a></li>
             <li><a href="contactus">Contact Us</a></li>

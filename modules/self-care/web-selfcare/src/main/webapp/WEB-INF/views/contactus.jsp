@@ -1,18 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>Contach us</title>
     <%@include file="include.jsp" %>
     <link href="<c:url value="/resources/css/prettify.css"/>" >
     <script src="<c:url value="/resources/js/prettify.js"/>" ></script>
 
-
-    <script src="../js/w3data.js"></script>
-    <script>
-        w3IncludeHTML();
-    </script>
-    <script src="../js/contactus_validate.js"></script>
-    <script src="../js/loader.js"></script>
-    <script src="../js/validate-inputs.js"></script>
+    <script src="<c:url value="/resources/js/contactus_validate.js"/>" ></script>
+    <script src="<c:url value="/resources/js/loader.js"/>" ></script>
+    <script src="<c:url value="/resources/js/validate-inputs.js"/>" ></script>
 
     <script type="text/javascript">
 
@@ -251,5 +247,4 @@
 </div>
 
 </body>
-<!--<div w3-include-html="footer.html"></div>-->
 </html>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>About us</title>
     <%@include file="include.jsp" %>
 
 </head>
@@ -23,7 +24,6 @@
                 <div class="panel-body">
                     <form role="form" id="adduser_form" action="" method="post" class="form-horizontal">
                         <p style="font-size: x-large">
-                            <!--PizzaShefu, a subsidiary of Yum! Brands, is the world’s largest pizza company and home of the Pan Pizza. PizzaShefu began 55 years ago in Wichita, Kansas, and today is an iconic global brand that delivers more pizza, pasta and wings than any other restaurant in the world.-->
                             PizzaShefu,We are the best pizza provider in Sri Lanka for the all recent years.We are
                             dedicated to make pizzas that satisfy your taste buds.Not only Pizza but we are
                             rich with different kind of delicious appetizers,pastas,beverages and many more
@@ -45,18 +45,5 @@
 
 <%@include file="loginload.jsp" %>
 <%@include file="signupmodal.jsp" %>
-<%--<div w3-include-html="loginload.html"></div>--%>
-<%--<div w3-include-html="signupmodal.html"></div>--%>
 </body>
 </html>
-<!--<div w3-include-html="footer.html"></div>-->
-
-<%--<script src="../js/w3data.js"></script>--%>
-<%--<script>--%>
-    <%--w3IncludeHTML();--%>
-<%--</script>--%>
-
-<%--<script src="../js/scroll_top.js"></script>--%>
-<%--<script src="../js/loader.js"></script>--%>
-<%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>--%>
-<%--<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--%>
