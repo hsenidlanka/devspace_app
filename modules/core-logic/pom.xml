@@ -3,7 +3,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>core-logic</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2</version>
     <packaging>jar</packaging>
 
 
@@ -104,7 +104,7 @@
                         <configuration>
                             <groupId>core-logic</groupId>
                             <artifactId>core-logic</artifactId>
-                            <version>1.0</version>
+                            <version>1.0.2</version>
                             <packaging>jar</packaging>
                             <file>${project.build.directory}/${project.build.finalName}.jar</file>
                         </configuration>
