@@ -1,4 +1,4 @@
-package hsl.devspace.app.corelogic.repository;
+package hsl.devspace.app.corelogic.repository.user;
 
 import hsl.devspace.app.corelogic.domain.User;
 import org.springframework.dao.DuplicateKeyException;

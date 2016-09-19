@@ -9,11 +9,11 @@
 
     <context:property-placeholder location="classpath:core-logic.properties"/>
 
-    <bean id="userRepository" class="hsl.devspace.app.corelogic.repository.UserRepositoryImpl">
+    <bean id="userRepository" class="hsl.devspace.app.corelogic.repository.user.UserRepositoryImpl">
         <property name="dataSource" ref="dataSource"/>
         <property name="transactionManager" ref="transactionManager"/>
     </bean>
-    <bean id="staffRepository" class="hsl.devspace.app.corelogic.repository.StaffRepositoryImpl">
+    <bean id="staffRepository" class="hsl.devspace.app.corelogic.repository.user.StaffRepositoryImpl">
         <property name="dataSource" ref="dataSource"/>
         <property name="transactionManager" ref="transactionManager"/>
     </bean>
@@ -22,6 +22,22 @@
         <property name="transactionManager" ref="transactionManager"/>
     </bean>
     <bean id="subCategoryRepository" class="hsl.devspace.app.corelogic.repository.category.SubCategoryRepositoryImpl">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="transactionManager" ref="transactionManager"/>
+    </bean>
+    <bean id="itemRepository" class="hsl.devspace.app.corelogic.repository.item.ItemRepositoryImpl">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="transactionManager" ref="transactionManager"/>
+    </bean>
+    <bean id="couponRepository" class="hsl.devspace.app.corelogic.repository.coupon.CouponRepositoryImpl">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="transactionManager" ref="transactionManager"/>
+    </bean>
+    <bean id="guestRepository" class="hsl.devspace.app.corelogic.repository.user.GuestRepositoryImpl">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="transactionManager" ref="transactionManager"/>
+    </bean>
+    <bean id="deliveryRepository" class="hsl.devspace.app.corelogic.repository.delivery.DeliveryRepositoryImpl">
         <property name="dataSource" ref="dataSource"/>
         <property name="transactionManager" ref="transactionManager"/>
     </bean>

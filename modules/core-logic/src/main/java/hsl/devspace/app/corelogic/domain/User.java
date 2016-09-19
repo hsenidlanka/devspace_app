@@ -192,4 +192,7 @@ public class User {
         this.addressL3 = addressL3;
         this.mobile=mobile;
     }
+    public User(String mobile){
+        this.mobile=mobile;
+    }
 }

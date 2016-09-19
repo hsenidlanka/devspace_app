@@ -20,7 +20,7 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
     private DataSource dataSource;
     private JdbcTemplate jdbcTemplate;
     private PlatformTransactionManager transactionManager;
-    private static org.apache.log4j.Logger log = Logger.getLogger(CategoryRepositoryImpl.class);
+    private static org.apache.log4j.Logger log = Logger.getLogger(SubCategoryRepositoryImpl.class);
 
     public void setDataSource(DataSource dataSource) {
         //this.dataSource = dataSource;
