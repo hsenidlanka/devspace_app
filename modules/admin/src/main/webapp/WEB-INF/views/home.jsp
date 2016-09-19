@@ -34,13 +34,13 @@
           <div class="panel-body">
             <ul class="nav navbar-nav">
               <li>
-                <a href="viewItem.html" class="panel-sub-menu1">View Item</a>
+                <a href="https://localhost:8443/items/view_item" class="panel-sub-menu1">View Item</a>
               </li>
               <li>
-                <a href="addItem.html" class="panel-sub-menu1">Add Item</a>
+                <a href="https://localhost:8443/items/add_item" class="panel-sub-menu1">Add Item</a>
               </li>
               <li>
-                <a href="editItem.html" class="panel-sub-menu1">Edit Item</a>
+                <a href="https://localhost:8443/items/edit_item" class="panel-sub-menu1">Edit Item</a>
               </li>
             </ul>
           </div>
