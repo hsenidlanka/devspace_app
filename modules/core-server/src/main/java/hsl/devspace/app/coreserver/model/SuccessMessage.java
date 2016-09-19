@@ -1,6 +1,7 @@
 package hsl.devspace.app.coreserver.model;
 
 import com.owlike.genson.annotation.JsonProperty;
+
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.*;
 
@@ -13,7 +14,7 @@ public class SuccessMessage {
     private String status;
     private int code;
     private String message;
-    private ArrayList<Object> dataList=new ArrayList<Object>();
+    private List<Object> dataList = new ArrayList<Object>();
     private List<Link> links = new ArrayList<Link>();
 
     public SuccessMessage() {
@@ -56,11 +57,11 @@ public class SuccessMessage {
     }
 
     @JsonProperty("data")
-    public ArrayList<Object> getDataList() {
+    public List<Object> getDataList() {
         return dataList;
     }
 
-    public void setDataList(ArrayList<Object> dataList) {
+    public void setDataList(List<Object> dataList) {
         this.dataList = dataList;
     }
 
@@ -72,6 +73,7 @@ public class SuccessMessage {
         links.add(link);
     }
 
+    // Add data(resources) to represent
     public void addData(Object data) {
         dataList.add(data);
     }

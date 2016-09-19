@@ -24,6 +24,7 @@ public class CustomerService {
     private static final Logger log = LogManager.getLogger(CustomerService.class);
     ApplicationContext context = Context.appContext;
     UserRepositoryImpl userRepository = (UserRepositoryImpl) context.getBean("userRepoImpl");
+    final String BASE_URL = "http://localhost:2222/pizza-shefu/api/v1.0/";
 
     // Register a new customer
     @POST
@@ -41,6 +42,7 @@ public class CustomerService {
             successMessage.addData(user);
             String url = uriInfo.getAbsolutePath().toString();
             successMessage.addLink(url, "self");
+            successMessage.addLink(BASE_URL+"customers/"+user.getUsername(), "profile");
             response = Response.status(Response.Status.CREATED).entity(successMessage).build();
         } else {
             throw new WebApplicationException(400);
@@ -61,7 +63,8 @@ public class CustomerService {
             successMessage.setStatus("success");
             successMessage.setCode(Response.Status.OK.getStatusCode());
             successMessage.setMessage("username, password validated.");
-            successMessage.addData(user);
+            successMessage.addData(user.getUsername());
+            successMessage.addData(user.getPassword());
             String url = uriInfo.getAbsolutePath().toString();
             successMessage.addLink(url, "self");
             response = Response.status(Response.Status.OK).entity(successMessage).build();
@@ -78,10 +81,9 @@ public class CustomerService {
     public Response getUserDetails(@PathParam("username") String userName, @javax.ws.rs.core.Context UriInfo uriInfo) {
         List<Map<String, Object>> userData = userRepository.retrieveMultipleRowsColumns(userName);
         SuccessMessage successMessage = new SuccessMessage();
-
-        for (Object idname : userData) {
+        for (Map<String, Object> map : userData) {
         }
-        successMessage.addData("");
+        successMessage.addData(userData);
         return Response.status(Response.Status.OK).entity(successMessage).build();
     }
 }
