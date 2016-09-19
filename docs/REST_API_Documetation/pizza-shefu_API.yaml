@@ -19,11 +19,11 @@ basePath: /pizza-shefu/api/v1.0
 schemes:
   - http
 paths:
-  /users/signup:
+  /customers/register:
     post:
       description: Register new user
       tags:
-        - user
+        - customer
       consumes:
         - application/json
       produces:
@@ -51,11 +51,11 @@ paths:
             items:
               $ref: '#/definitions/error-message'    
 
-  /users/login:
+  /customers/login:
     post: 
       description: Authorize a user by username and password
       tags:
-        - user
+        - customer
       consumes:
         - application/json
       produces:
