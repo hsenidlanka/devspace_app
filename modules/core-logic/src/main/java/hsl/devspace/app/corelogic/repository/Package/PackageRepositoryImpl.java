@@ -75,10 +75,10 @@ public class PackageRepositoryImpl implements PackageRepository  {
         TransactionStatus stat = transactionManager.getTransaction(tr_def);
 
         String sql = "UPDATE package SET price=?  WHERE name = ? ";
-        int row = jdbcTemplate.update(sql, new Object[]{price,packageName});
+        int row = jdbcTemplate.update(sql, new Object[]{price, packageName});
         transactionManager.commit(stat);
         log.info(row);
-        return row;    }
-
+        return row;
+    }
 
 }
