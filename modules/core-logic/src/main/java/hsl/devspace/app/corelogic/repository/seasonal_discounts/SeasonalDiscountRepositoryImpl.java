@@ -9,6 +9,7 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.sql.DataSource;
+import java.sql.Date;
 
 /**
  * Created by hsenid on 9/20/16.
@@ -37,7 +38,7 @@ SeasonalDiscount sd=new SeasonalDiscount();
         TransactionDefinition tr_def = new DefaultTransactionDefinition();
         TransactionStatus stat = transactionManager.getTransaction(tr_def);
         String sql = "INSERT INTO seasonal_discount " +
-                "(rate,start_date,expire_date,status) VALUES (?,?,?,active)";
+                "(rate,start_date,expire_date,status) VALUES (?,?,?,1)";
 
         row = jdbcTemplate.update(sql, new Object[]{seasonalDiscount.getRate(),seasonalDiscount.getStartDate(),seasonalDiscount.getExpireDate()});
         transactionManager.commit(stat);
@@ -54,6 +55,41 @@ SeasonalDiscount sd=new SeasonalDiscount();
         int row = jdbcTemplate.update(sql, new Object[]{id});
         transactionManager.commit(stat);
         log.info(row + " Seasonal discount deleted");
+        return row;
+    }
+
+    @Override
+    public int inactiveStatus() {
+        TransactionDefinition tr_def = new DefaultTransactionDefinition();
+        TransactionStatus stat = transactionManager.getTransaction(tr_def);
+
+        String sql = "UPDATE seasonal_discount SET status=2 WHERE expire_date < CURRENT_DATE ";
+        int row = jdbcTemplate.update(sql);
+        transactionManager.commit(stat);
+        log.info(row + "inactive discount after expired");
+        return row;
+    }
+
+    @Override
+    public int changeExpireDate(int id, Date exp) {
+        TransactionDefinition tr_def = new DefaultTransactionDefinition();
+        TransactionStatus stat = transactionManager.getTransaction(tr_def);
+
+        String sql = "UPDATE seasonal_discount SET expire_date=? WHERE id = ?";
+        int row = jdbcTemplate.update(sql, new Object[]{exp,id});
+        transactionManager.commit(stat);
+        log.info(row + "change expire date");
+        return row;
+    }
+
+    @Override
+    public int inactiveStatus(int id) {
+        TransactionDefinition tr_def = new DefaultTransactionDefinition();
+        TransactionStatus stat = transactionManager.getTransaction(tr_def);
+        String sql = "UPDATE seasonal_discount SET status=2 WHERE id=?";
+        int row = jdbcTemplate.update(sql, new Object[]{id});
+        transactionManager.commit(stat);
+        log.info(row + "inactive status manually");
         return row;
     }
 
