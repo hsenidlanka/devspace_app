@@ -1,3 +1,4 @@
+/*
 package controller;
 
 import org.springframework.stereotype.Controller;
@@ -12,8 +13,5 @@ public class LoginController
         model.addAttribute("login", new Login());
         return "casLoginView";
     }
-   /* @RequestMapping("/login")
-    public String loginSubmit(@ModelAttribute Login login){
-        return "result";
-    }*/
 }
+*/

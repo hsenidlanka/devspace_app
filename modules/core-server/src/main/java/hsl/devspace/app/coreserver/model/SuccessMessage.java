@@ -1,12 +1,9 @@
 package hsl.devspace.app.coreserver.model;
 
-import com.google.gson.JsonArray;
 import com.owlike.genson.annotation.JsonProperty;
 
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Kasun Dinesh on 7/8/16.
@@ -17,8 +14,8 @@ public class SuccessMessage {
     private String status;
     private int code;
     private String message;
-    private List<Data> dataList=new ArrayList<Data>();
-    private List<Link> links=new ArrayList<Link>();
+    private List<Object> dataList = new ArrayList<Object>();
+    private List<Link> links = new ArrayList<Link>();
 
     public SuccessMessage() {
     }
@@ -50,15 +47,6 @@ public class SuccessMessage {
         this.message = message;
     }
 
-    @JsonProperty("data")
-    public List<Data> getDataList() {
-        return dataList;
-    }
-
-    public void setDataList(List<Data> dataList) {
-        this.dataList = dataList;
-    }
-
     @JsonProperty("links")
     public List<Link> getLinks() {
         return links;
@@ -68,19 +56,25 @@ public class SuccessMessage {
         this.links = links;
     }
 
+    @JsonProperty("data")
+    public List<Object> getDataList() {
+        return dataList;
+    }
+
+    public void setDataList(List<Object> dataList) {
+        this.dataList = dataList;
+    }
+
     // Add HATEOAS links
-    public void addLink(String url, String rel){
-        Link link=new Link();
+    public void addLink(String url, String rel) {
+        Link link = new Link();
         link.setLink(url);
         link.setRel(rel);
         links.add(link);
     }
 
-    // Add data fields to response
-    public void addData(String key, Object value){
-        Data data=new Data();
-        data.setKey(key);
-        data.setValue(value);
+    // Add data(resources) to represent
+    public void addData(Object data) {
         dataList.add(data);
     }
 }

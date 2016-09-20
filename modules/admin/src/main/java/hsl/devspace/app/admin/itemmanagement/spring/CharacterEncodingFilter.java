@@ -10,7 +10,7 @@
  *   property rights in these materials.
  */
 
-package hsl.devspace.app.admin.spring;
+package hsl.devspace.app.admin.itemmanagement.spring;
 
 import org.springframework.web.filter.OncePerRequestFilter;
 
