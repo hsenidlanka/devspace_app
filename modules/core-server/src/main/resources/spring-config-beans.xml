@@ -3,7 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="userRepoImpl" class="hsl.devspace.app.corelogic.repository.UserRepositoryImpl">
+    <bean id="userRepoImpl" class="hsl.devspace.app.corelogic.repository.user.UserRepositoryImpl">
         <property name="dataSource" ref="productionDataSource"/>
         <property name="transactionManager" ref="transactionManager"/>
     </bean>
