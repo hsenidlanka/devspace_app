@@ -140,19 +140,20 @@
                 <p class="modal-title" style="font-size: x-large">Log In</p>
             </div>
             <div class="modal-body">
-                <!--<div w3-include-html="loginmodaloptional.html"></div>-->
-                <form class="contact_form" action="#" method="post" name="contact_form">
+
+
+                <form:form class="contact_form" action="#" method="post" name="contact_form">
 
                     <h1 style="font-size: larger;color: #22ca1f">Login Into Your Account!</h1>
                     <ul>
                         <li>
-                            <input type="text" class="textbox1" name="email" placeholder="username" required/>
+                            <form:input type="text" class="textbox1" name="email" placeholder="username" required path=""/>
                             <span class="form_hint">Enter a valid username</span>
 
                             <p><img src="<c:url value="/resources/images/contact.png"/>" alt=""></p>
                         </li>
                         <li>
-                            <input type="password" name="website" class="textbox2" placeholder="password">
+                            <form:input type="password" name="website" class="textbox2" placeholder="password" path="">
 
                             <p><img src="<c:url value="/resources/images/lock.png"/>" alt=""></p>
                         </li>
@@ -167,8 +168,12 @@
                         <a href="forgotpassword">forgot password?</a>
                     </div>
                     <div class="clear"></div>
-                </form>
+                </form:form>                
                 <!-- end-form -->
+
+
+
+
 
                 <!-- start-account -->
                 <div class="account">
