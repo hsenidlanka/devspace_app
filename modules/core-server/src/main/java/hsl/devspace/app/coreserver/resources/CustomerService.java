@@ -1,7 +1,7 @@
 package hsl.devspace.app.coreserver.resources;
 
 import hsl.devspace.app.corelogic.domain.User;
-import hsl.devspace.app.corelogic.repository.UserRepositoryImpl;
+import hsl.devspace.app.corelogic.repository.user.UserRepositoryImpl;
 import hsl.devspace.app.coreserver.common.Context;
 import hsl.devspace.app.coreserver.model.SuccessMessage;
 import org.apache.logging.log4j.LogManager;
