@@ -2,14 +2,12 @@ package hsl.devspace.app.coreserver.model;
 
 import com.owlike.genson.annotation.JsonProperty;
 
-import javax.xml.bind.annotation.XmlRootElement;
 import java.util.*;
 
 /**
  * Created by Kasun Dinesh on 7/8/16.
  * This is the model/template of the success message to pass as a response.
  */
-@XmlRootElement
 public class SuccessMessage {
     private String status;
     private int code;

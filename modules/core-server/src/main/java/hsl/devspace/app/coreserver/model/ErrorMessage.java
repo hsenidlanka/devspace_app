@@ -1,15 +1,13 @@
 package hsl.devspace.app.coreserver.model;
 
-import com.owlike.genson.annotation.JsonProperty;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import com.owlike.genson.annotation.JsonProperty;
 
 /**
  * Created by Kasun Dinesh on 7/5/16.
  * This is the model/template of the error message to pass as a response.
  */
 
-@XmlRootElement
 public class ErrorMessage {
     private String status;
     private int errorCode;

@@ -42,7 +42,7 @@ public class CustomerService {
             successMessage.addData(user);
             String url = uriInfo.getAbsolutePath().toString();
             successMessage.addLink(url, "self");
-            successMessage.addLink(BASE_URL+"customers/"+user.getUsername(), "profile");
+            successMessage.addLink(BASE_URL + "customers/" + user.getUsername(), "profile");
             response = Response.status(Response.Status.CREATED).entity(successMessage).build();
         } else {
             throw new WebApplicationException(400);
@@ -77,13 +77,33 @@ public class CustomerService {
     // Get details of a specific customer
     @GET
     @Path("/{username}")
+    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserDetails(@PathParam("username") String userName, @javax.ws.rs.core.Context UriInfo uriInfo) {
         List<Map<String, Object>> userData = userRepository.retrieveMultipleRowsColumns(userName);
         SuccessMessage successMessage = new SuccessMessage();
-        for (Map<String, Object> map : userData) {
+        successMessage.setCode(Response.Status.OK.getStatusCode());
+        successMessage.setStatus("success");
+        String url = uriInfo.getAbsolutePath().toString();
+        successMessage.addLink(url, "self");
+        if (userData.size() != 0) {
+            successMessage.setMessage("customer data retrieved");
+            for (Map<String, Object> map : userData) {
+                User u = new User();
+                u.setTitle(map.get("title").toString());
+                u.setFirstName(map.get("first_name").toString());
+                u.setLastName(map.get("last_name").toString());
+                u.setUsername(map.get("username").toString());
+                u.setEmail(map.get("email").toString());
+                u.setAddressL1(map.get("address_line1").toString());
+                u.setAddressL2(map.get("address_line2").toString());
+                u.setAddressL3(map.get("address_line3").toString());
+                u.setMobile(map.get("mobile").toString());
+                successMessage.addData(u);
+            }
+        } else {
+            successMessage.setMessage("no customer data to retrieve");
         }
-        successMessage.addData(userData);
         return Response.status(Response.Status.OK).entity(successMessage).build();
     }
 }
