@@ -1,3 +1,4 @@
+/*
 package controller;
 
 public class Login {
@@ -20,3 +21,4 @@ public class Login {
         this.pswd=pswd;
     }
 }
+*/

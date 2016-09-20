@@ -43,4 +43,34 @@ public class Item {
     public void setName(String name){
         this.name=name;
     }
+
+    public String getCategory(){
+        return category;
+    }
+    public void setCategory(String category){
+        this.category=category;
+    }
+
+    public String getSubCategory(){
+        return subCategory;
+    }
+    public void setSubCategory(String subCategory){
+        this.subCategory=subCategory;
+    }
+
+    public double getPrice(){
+        return price;
+    }
+    public void setPrice(double price){
+        this.price=price;
+    }
+
+    public  String getSize(){ return  size; }
+    public  void setSize(String size){ this.size=size;}
+
+    public String getType(){ return  type;}
+    public void setType(String type){ this.type=type;}
+
+    public String getImgLocation(){ return  imgLocation;}
+    public void setImgLocation(String imgLocation){ this.imgLocation=imgLocation; }
 }

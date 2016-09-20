@@ -1,6 +1,5 @@
 package hsl.devspace.app.admin.itemmanagement.spring.repository;
 
-
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import hsl.devspace.app.admin.itemmanagement.spring.model.Item;
 import org.springframework.jdbc.core.JdbcTemplate;
