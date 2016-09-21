@@ -58,5 +58,30 @@ public class DeliveryRepositoryImpl implements DeliveryRepository {
         return row;
     }
 
+    @Override
+    public int addDeliveryMethod(String deliveryMethod) {
+        int row;
+        TransactionDefinition tr_def = new DefaultTransactionDefinition();
+        TransactionStatus stat = transactionManager.getTransaction(tr_def);
+        String sql = "INSERT INTO delivery_method " +
+                "(name) VALUES (?)";
 
+        row = jdbcTemplate.update(sql, new Object[]{deliveryMethod});
+        transactionManager.commit(stat);
+        log.info(row + "new delivery method inserted");
+        return row;
+    }
+
+    @Override
+    public int deleteDeliveryMethod(String deliveryMethod) {
+        int row;
+        TransactionDefinition tr_def = new DefaultTransactionDefinition();
+        TransactionStatus stat = transactionManager.getTransaction(tr_def);
+        String sql = "DELETE FROM delivery_method WHERE name=?";
+
+        row = jdbcTemplate.update(sql, new Object[]{deliveryMethod});
+        transactionManager.commit(stat);
+        log.info(row + " delivery method deleted");
+        return row;
+    }
 }

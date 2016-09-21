@@ -8,4 +8,7 @@ import hsl.devspace.app.corelogic.domain.Delivery;
 public interface DeliveryRepository {
     int add(Delivery delivery);
     int changeStatus(int id);
+    int addDeliveryMethod(String deliveryMethod);
+    int deleteDeliveryMethod(String deliveryMethod);
+
 }

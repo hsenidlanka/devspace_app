@@ -34,7 +34,7 @@ public class ItemRepositoryImpl implements ItemRepository {
     }
 
     @Override
-    public int add(Item item) {
+    public int add(Item item,List<Item> item2) {
         int row = 0;
         TransactionDefinition tr_def = new DefaultTransactionDefinition();
         TransactionStatus stat = transactionManager.getTransaction(tr_def);
@@ -43,14 +43,28 @@ public class ItemRepositoryImpl implements ItemRepository {
 
         if (availability == false) {
             String sql = "INSERT INTO item" +
-                    "(name,price,description,size,type,image,sub_category_id) VALUES (?,?,?,?,?,?,(SELECT id FROM sub_category WHERE name=?))";
-            row = jdbcTemplate.update(sql, new Object[]{item.getItemName(),item.getPrice(),item.getDescription(),
-                    item.getSize(),item.getType(),item.getImage(),item.getSubCategoryName()});
+                    "(name,description,type,image,sub_category_id) VALUES (?,?,?,?,(SELECT id FROM sub_category WHERE name=?))";
+            row = jdbcTemplate.update(sql, new Object[]{item.getItemName(),item.getDescription(),
+                    item.getType(),item.getImage(),item.getSubCategoryName()});
             transactionManager.commit(stat);
             log.info(row + "new item inserted");
+            updateSizeTable(itm_nm,item2);
         } else
             log.info(row + "item already available");
 
+        return row;
+    }
+    public int updateSizeTable(String name,List<Item> item2){
+        int row=0;
+        TransactionDefinition tr_def = new DefaultTransactionDefinition();
+        TransactionStatus stat = transactionManager.getTransaction(tr_def);
+        for(int i=0;i<item2.size();i++) {
+            String sql = "INSERT INTO size" +
+                    "(size,price,item_id) VALUES (?,?,(SELECT id FROM item WHERE name=?))";
+            row = jdbcTemplate.update(sql, new Object[]{item2.get(i),item2.get(i),name});
+            transactionManager.commit(stat);
+            log.info(row + "size updated");
+        }
         return row;
     }
 

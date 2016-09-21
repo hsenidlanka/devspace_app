@@ -79,4 +79,17 @@ public class Item {
         this.image=image;
         this.subCategoryName=subCategoryName;
     }
+
+    public Item(String itemName, String description, String type, String image, String subCategoryName) {
+        this.itemName = itemName;
+        this.description = description;
+        this.type = type;
+        this.image = image;
+        this.subCategoryName = subCategoryName;
+    }
+
+    public Item(double price, String size) {
+        this.price = price;
+        this.size = size;
+    }
 }

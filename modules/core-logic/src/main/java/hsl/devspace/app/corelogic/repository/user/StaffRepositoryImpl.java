@@ -45,6 +45,7 @@ public class StaffRepositoryImpl implements UserRepository {
                 TransactionStatus stat = transactionManager.getTransaction(tr_def);
                 String un = user.getUsername();
                 String pw = user.getPassword();
+                String des=user.getDesignation();
                 if (un != "" && pw != "") {
                         String sql = "INSERT INTO staff " +
                                 "(title,username,password,first_name,last_name,email,mobile,address_line1,address_line2,address_line3," +
@@ -54,15 +55,33 @@ public class StaffRepositoryImpl implements UserRepository {
                                 user.getEmail(),user.getMobile(), user.getAddressL1(), user.getAddressL2(),user.getAddressL3(),user.getDesignation(),
                         user.getDepartment(),user.getBranch()});
                         transactionManager.commit(stat);
-
                         log.info(row + " staff inserted");
                         log.info(un);
+                        updateGroupStaff(un,des);
+
                 } else
                         log.error("values cannot be null");
 
                 return row;
 
         }
+    public int updateGroupStaff(String staffName,String designation){
+        int row = 0;
+        TransactionDefinition tr_def = new DefaultTransactionDefinition();
+        TransactionStatus stat = transactionManager.getTransaction(tr_def);
+        String un = user.getUsername();
+            String sql = "INSERT INTO group_staff " +
+                    "(group_id,staff_id) VALUES ((SELECT id FROM group WHERE name=? ),(SELECT id FROM staff WHERE username=?))";
+
+            row = jdbcTemplate.update(sql, new Object[]{designation,staffName});
+            transactionManager.commit(stat);
+
+            log.info(row + " group-staff updated");
+            log.info(un);
+
+        return row;
+
+    }
 
         @Override
         public int delete(String username) throws IllegalArgumentException {
