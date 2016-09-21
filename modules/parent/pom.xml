@@ -44,7 +44,7 @@
         <slf4j.version>1.7.21</slf4j.version>
         <xercesImpl.version>2.11.0</xercesImpl.version>
         <xerces.version>2.4.0</xerces.version>
-
+        <core-logic.version>1.0.2</core-logic.version>
         <joda-time.version>2.9.4</joda-time.version>
 
         <RWD_LOG_ROOT>/home/hsenid/Documents/MAVEN/devspace_app/modules/admin</RWD_LOG_ROOT>
