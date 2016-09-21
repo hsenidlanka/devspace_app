@@ -121,11 +121,11 @@ public class ItemRepositoryImpl implements ItemRepository {
     }
 
     @Override
-    public int update(int id) {
+    public int update(Item item) {
         TransactionDefinition tr_def = new DefaultTransactionDefinition();
         TransactionStatus stat = transactionManager.getTransaction(tr_def);
         String sql = "UPDATE item SET name=? price=? description=? size=? type=? image=? sub_category_id=? WHERE id = ? ";
-        int row = jdbcTemplate.update(sql, new Object[]{item.getItemName(), item.getPrice(),item.getDescription(),item.getSize(),item.getType(),item.getImage(),item.getSubCategoryName(),id});
+        int row = jdbcTemplate.update(sql, new Object[]{item.getItemName(), item.getPrice(),item.getDescription(),item.getSize(),item.getType(),item.getImage(),item.getSubCategoryName(),item.getItemId()});
         transactionManager.rollback(stat);
         log.info(row + "Item details changed");
         return  row;

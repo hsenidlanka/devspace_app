@@ -15,5 +15,5 @@ public interface ItemRepository {
     List<Map<String, Object>> view();
     int count();
     List<Map<String, Object>> viewList();
-    int update(int id);
+    int update(Item item);
 }
