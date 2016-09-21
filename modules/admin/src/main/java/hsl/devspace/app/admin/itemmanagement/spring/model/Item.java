@@ -73,4 +73,7 @@ public class Item {
 
     public String getImgLocation(){ return  imgLocation;}
     public void setImgLocation(String imgLocation){ this.imgLocation=imgLocation; }
+
+    public String getDescript(){ return  descript;}
+    public void setDescript(String descript){ this.descript=descript; }
 }

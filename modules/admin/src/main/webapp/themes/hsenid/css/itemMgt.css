@@ -125,3 +125,8 @@ legend.scheduler-border {
     font-weight: bolder;
     float: inherit;
 }
+#add-item-breadcrumb-position{
+    position: relative;
+    margin-top: 40px;
+    text-align: center;
+}

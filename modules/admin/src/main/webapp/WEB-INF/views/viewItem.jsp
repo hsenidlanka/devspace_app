@@ -32,8 +32,8 @@
 </div>
 <br>
 
-<div id="add-item-breadcrumb-position">
-  <div style="">
+<div>
+  <div id="add-item-breadcrumb-position">
     <ul class="breadcrumb breadcrumb-menu">
       <li><a href="https://localhost:8443/users/list">Home</a></li>
       <li><a href="#">Item Management</a></li>
