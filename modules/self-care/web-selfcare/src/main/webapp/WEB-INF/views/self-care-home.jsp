@@ -3,7 +3,7 @@
 <head>
     <title>Welcome to Pizza Shefu</title>
     <%@include file="include.jsp" %>
-
+    <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
     <div class="loader-anim"></div>
 
     <style>
@@ -142,23 +142,26 @@
             <div class="modal-body">
 
 
-                <form:form class="contact_form" action="#" method="post" name="contact_form">
+                <form:form class="contact_form" action="test" method="post" >
 
                     <h1 style="font-size: larger;color: #22ca1f">Login Into Your Account!</h1>
                     <ul>
                         <li>
-                            <form:input type="text" class="textbox1" name="email" placeholder="username" required path=""/>
+                            <%--<form:input type="text" class="textbox1" name="email" placeholder="username" path="username"/>--%>
+                                <form:input path="username"/>
                             <span class="form_hint">Enter a valid username</span>
 
                             <p><img src="<c:url value="/resources/images/contact.png"/>" alt=""></p>
                         </li>
                         <li>
-                            <form:input type="password" name="website" class="textbox2" placeholder="password" path="">
+                            <%--<form:input type="password" name="website" class="textbox2" placeholder="password" path="password"/>--%>
 
+                                <form:input path="password"/>
                             <p><img src="<c:url value="/resources/images/lock.png"/>" alt=""></p>
                         </li>
                     </ul>
-                    <input type="submit" name="Sign In" value="Log In"/>
+                    <%--<input type="submit" name="Sign In" value="Log In"/>--%>
+                    <form:button>Log In</form:button>
 
                     <div class="clear"></div>
                     <label class="checkbox"><input type="checkbox" name="checkbox" checked><i></i>Remember

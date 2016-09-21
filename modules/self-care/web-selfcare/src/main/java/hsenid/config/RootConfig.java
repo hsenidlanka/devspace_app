@@ -1,4 +1,4 @@
-package spittr.config;
+package hsenid.config;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
@@ -7,7 +7,7 @@ import org.springframework.context.annotation.FilterType;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
-@ComponentScan(basePackages={"spitter"},
+@ComponentScan(basePackages={"hsenid"},
         excludeFilters={
                 @Filter(type= FilterType.ANNOTATION, value=EnableWebMvc.class)
         })

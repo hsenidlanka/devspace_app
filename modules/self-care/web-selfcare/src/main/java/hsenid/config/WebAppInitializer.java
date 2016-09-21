@@ -1,4 +1,4 @@
-package spittr.config;
+package hsenid.config;
 
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
