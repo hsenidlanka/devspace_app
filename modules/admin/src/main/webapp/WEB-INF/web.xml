@@ -31,10 +31,10 @@
         - Location of the XML file that defines the root application context is initiated by
         - ContextLoaderListener.
         -->
-  <!--  <context-param>
+   <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>/WEB-INF/spring/admin-security.xml</param-value>
-    </context-param>&ndash;&gt;-->
+    </context-param>
 
 
     <!-- Spring Security -->

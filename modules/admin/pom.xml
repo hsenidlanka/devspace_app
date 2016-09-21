@@ -19,6 +19,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>hsenid</groupId>
+            <artifactId>core-logic</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
@@ -233,14 +239,29 @@
 
     <build>
         <finalName>admin</finalName>
+
+        <!-- Source files location. -->
         <sourceDirectory>src/main/java</sourceDirectory>
+        <!-- Test source files location. -->
+        <testSourceDirectory>src/test/frisby</testSourceDirectory>
 
         <resources>
+            <!-- Resources used in admin module. -->
             <resource>
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
                 <includes>
                     <include>*</include>
+                </includes>
+            </resource>
+
+            <!--Resources used in core-logic module.-->
+            <resource>
+                <directory>../core-logic/src/main/resources</directory>
+                <targetPath>${project.build.directory}/admin/WEB-INF</targetPath>
+                <includes>
+                    <include>session-factory-config.xml</include>
+                    <!--<include>spring-user.xml</include>-->
                 </includes>
             </resource>
         </resources>

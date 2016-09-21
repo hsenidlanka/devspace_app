@@ -1,3 +1,4 @@
+/*
 package hsl.devspace.app.admin.itemmanagement.spring.controller;
 
 import hsl.devspace.app.admin.itemmanagement.spring.model.Item;
@@ -19,30 +20,37 @@ public class ItemController {
     @Autowired
     private ItemRepository itemRepository;
 
-    /**
+    */
+/**
      * Add new item view
-     **/
+     **//*
+
     @RequestMapping(value = "/add_item")
     public ModelAndView addItem(@ModelAttribute Item item){
         item = new Item();
         return new ModelAndView("addItem");
     }
 
-    /**
+    */
+/**
      * View Item details view
-     **/
+     **//*
+
     @RequestMapping(value = "/view_item")
     public ModelAndView viewItem(@ModelAttribute Item item){
         item = new Item();
         return new ModelAndView("viewItem");
     }
 
-    /**
+    */
+/**
      * Edit Item view
-     **/
+     **//*
+
     @RequestMapping(value = "/edit_item")
     public ModelAndView editItem(@ModelAttribute Item item){
         item = new Item();
         return new ModelAndView("editItem");
     }
 }
+*/

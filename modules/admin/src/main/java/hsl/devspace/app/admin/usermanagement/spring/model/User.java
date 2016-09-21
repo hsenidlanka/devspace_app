@@ -3,7 +3,7 @@ package hsl.devspace.app.admin.usermanagement.spring.model;
 /**
  * domain class
  */
-public class User {
+public class User extends hsl.devspace.app.corelogic.domain.User {
 
     private int id;
     private String username;
