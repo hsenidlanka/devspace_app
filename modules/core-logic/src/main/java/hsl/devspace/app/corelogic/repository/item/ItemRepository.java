@@ -9,11 +9,11 @@ import java.util.Map;
  * Created by hsenid on 9/19/16.
  */
 public interface ItemRepository {
-    int add(Item item);
+    int add(Item item,List<Item> item2);
     boolean checkAvailability(String itemName);
     int delete(String itemName);
     List<Map<String, Object>> view();
     int count();
     List<Map<String, Object>> viewList();
-    int update(int id);
+    int update(Item item);
 }

@@ -53,6 +53,10 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="transactionManager" ref="transactionManager"/>
     </bean>
+    <bean id="paymentRepository" class="hsl.devspace.app.corelogic.repository.payment.PaymentRepositoryImpl">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="transactionManager" ref="transactionManager"/>
+    </bean>
     <bean id="transactionManager"
           class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>

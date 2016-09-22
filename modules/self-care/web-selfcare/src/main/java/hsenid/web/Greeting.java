@@ -1,4 +1,4 @@
-package spittr.web;
+package hsenid.web;
 
 public class Greeting {
 

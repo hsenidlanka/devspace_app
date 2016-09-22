@@ -104,7 +104,7 @@
                         <configuration>
                             <groupId>core-logic</groupId>
                             <artifactId>core-logic</artifactId>
-                            <version>1.0.2</version>
+                            <version>${core-logic.version}</version>
                             <packaging>jar</packaging>
                             <file>${project.build.directory}/${project.build.finalName}.jar</file>
                         </configuration>

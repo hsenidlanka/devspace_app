@@ -1,4 +1,4 @@
-package spittr.config;
+package hsenid.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -12,7 +12,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("spittr.web")
+@ComponentScan("hsenid.web")
 public class WebConfig extends WebMvcConfigurerAdapter {
     @Bean
     public ViewResolver viewResolver(){

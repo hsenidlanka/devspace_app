@@ -11,6 +11,15 @@ public class Item {
     private String type;
     private String image;
     private String subCategoryName;
+    private int itemId;
+
+    public int getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(int itemId) {
+        this.itemId = itemId;
+    }
 
     public String getType() {
         return type;
@@ -78,5 +87,29 @@ public class Item {
         this.type=type;
         this.image=image;
         this.subCategoryName=subCategoryName;
+    }
+
+    public Item(String itemName, double price, String description, String size, String type, String image, String subCategoryName, int itemId) {
+        this.itemName = itemName;
+        this.price = price;
+        this.description = description;
+        this.size = size;
+        this.type = type;
+        this.image = image;
+        this.subCategoryName = subCategoryName;
+        this.itemId = itemId;
+    }
+
+    public Item(String itemName, String description, String type, String image, String subCategoryName) {
+        this.itemName = itemName;
+        this.description = description;
+        this.type = type;
+        this.image = image;
+        this.subCategoryName = subCategoryName;
+    }
+
+    public Item(double price, String size) {
+        this.price = price;
+        this.size = size;
     }
 }
