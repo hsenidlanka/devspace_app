@@ -18,10 +18,11 @@
 
 
     <dependencies>
+
         <dependency>
             <groupId>hsenid</groupId>
             <artifactId>core-logic</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>0.0.2</version>
         </dependency>
 
         <dependency>
@@ -243,7 +244,7 @@
         <!-- Source files location. -->
         <sourceDirectory>src/main/java</sourceDirectory>
         <!-- Test source files location. -->
-        <testSourceDirectory>src/test/frisby</testSourceDirectory>
+        <testSourceDirectory>src/test/testng</testSourceDirectory>
 
         <resources>
             <!-- Resources used in admin module. -->
@@ -258,12 +259,15 @@
             <!--Resources used in core-logic module.-->
             <resource>
                 <directory>../core-logic/src/main/resources</directory>
-                <targetPath>${project.build.directory}/admin/WEB-INF</targetPath>
+                <targetPath>../admin/WEB-INF/spring</targetPath>
                 <includes>
                     <include>session-factory-config.xml</include>
                     <!--<include>spring-user.xml</include>-->
                 </includes>
             </resource>
         </resources>
+        <plugins>
+
+        </plugins>
     </build>
 </project>
