@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class LoginController {
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    /*@RequestMapping(value = "/test", method = RequestMethod.GET)
     public ModelAndView student(){
         return new ModelAndView("student", "command", new Login());
     }
@@ -20,5 +20,5 @@ public class LoginController {
         model.addAttribute("age", student.getAge());
         model.addAttribute("id", student.getId());
         return "result";
-    }
+    }*/
 }
