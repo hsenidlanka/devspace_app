@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.sql.DataSource;
@@ -17,27 +18,23 @@ import java.util.Map;
  */
 public class CategoryRepositoryImpl  implements CategoryRepository {
     Category category = new Category();
-    private DataSource dataSource;
     private JdbcTemplate jdbcTemplate;
     private PlatformTransactionManager transactionManager;
     private static org.apache.log4j.Logger log = Logger.getLogger(CategoryRepositoryImpl.class);
 
     public void setDataSource(DataSource dataSource) {
-        //this.dataSource = dataSource;
         jdbcTemplate = new JdbcTemplate(dataSource);
 
     }
 
     public void setTransactionManager(PlatformTransactionManager transactionManager) {
-        this.transactionManager = transactionManager;
+       this.transactionManager = transactionManager;
 
     }
 
     @Override
     public int add(Category category) {
         int row = 0;
-        TransactionDefinition tr_def = new DefaultTransactionDefinition();
-        TransactionStatus stat = transactionManager.getTransaction(tr_def);
         String cat_nm = category.getCategoryName();
         boolean availability = checkAvailability(cat_nm);
         if (availability == false) {
@@ -45,7 +42,6 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
                     "(name,description,creator) VALUES (?,?,?)";
 
             row = jdbcTemplate.update(sql, new Object[]{category.getCategoryName(), category.getDescription(), category.getCreator()});
-            transactionManager.commit(stat);
 
             log.info(row + "new category inserted");
         } else
@@ -57,8 +53,6 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
 
     @Override
     public boolean checkAvailability(String categoryName) {
-        TransactionDefinition tr_def = new DefaultTransactionDefinition();
-        TransactionStatus stat = transactionManager.getTransaction(tr_def);
         boolean result;
 
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category WHERE  name=?", categoryName);
@@ -67,21 +61,17 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
         if (mp.size() != 0) {
             result = true;
         } else result = false;
-        transactionManager.rollback(stat);
-        log.info(result);
+        log.info(result +"availability checking");
         return result;
 
     }
 
     @Override
     public int delete(String categoryName){
-        TransactionDefinition tr_def = new DefaultTransactionDefinition();
-        TransactionStatus stat = transactionManager.getTransaction(tr_def);
         category.setCategoryName(categoryName);
 
         String sql = "DELETE FROM category WHERE name = ?";
         int row = jdbcTemplate.update(sql, new Object[]{category.getCategoryName()});
-        transactionManager.commit(stat);
         log.info(row + " category deleted");
         return row;
     }
@@ -103,12 +93,10 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
 
     @Override
     public int update(String categoryName,String description) {
-        TransactionDefinition tr_def = new DefaultTransactionDefinition();
-        TransactionStatus stat = transactionManager.getTransaction(tr_def);
+
         String sql = "UPDATE category SET name=? description = ? WHERE name = ? ";
 
         int count = jdbcTemplate.update(sql, new Object[]{category.getCategoryName(), category.getSubCategoryName(), category.getCategoryName()}, Integer.class);
-        transactionManager.commit(stat);
         log.info(count);
         return count;
     }
@@ -119,5 +107,26 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
         log.info(mp);
         return mp;
     }
+
+    @Override
+    @Transactional
+    public void createCategory(Category cat) {
+
+        add(cat);
+    }
+
+    @Override
+    public void createCategory1(Category cat) {
+        TransactionDefinition trDef = new DefaultTransactionDefinition();
+        TransactionStatus stat = transactionManager.getTransaction(trDef);
+        try {
+            add(cat);
+            transactionManager.commit(stat);
+        }
+        catch (Exception e){
+            transactionManager.rollback(stat);
+        }
+    }
+
 
 }
