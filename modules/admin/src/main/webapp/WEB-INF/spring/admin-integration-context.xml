@@ -10,27 +10,21 @@
        http://www.springframework.org/schema/mvc
        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <import resource="admin-security.xml"/>
+    <!--<import resource="admin-security.xml"/>-->
+    <import resource="session-factory-config.xml"/>
+    <!--<import resource="admin-service.xml"/>-->
 
     <!--It pulls values from a properties file into bean definitions.-->
-    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="locations">
-            <list>
-                <value>classpath:connectivity.properties</value>
-                <value>classpath:system.properties</value>
-            </list>
-        </property>
-        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+    <bean id="connectionProperties"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:connectivity.properties"/>
     </bean>
 
-    <!--resolve the view names with the given prefix and suffix-->
-    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/views/"/>
-        <property name="suffix" value=".jsp"/>
-        <property name="order" value="2"/>
+    <bean id="userRepository" class="hsl.devspace.app.corelogic.repository.user.UserRepositoryImpl">
+        <property name="dataSource" ref="productionDataSource"/>
+        <property name="transactionManager" ref="transactionManager"/>
     </bean>
-
-
+    <!--<import resource="admin-service.xml"/>-->
     <!--when an excepton listed under exceptionMapping property list is thrown from the application,
    it'll render the pre-determined view WEB-INF/views/500.jsp-->
     <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
@@ -46,6 +40,7 @@
 
     <!--The tile definition xml is specified when you define the TilesConfigurer bean
     Tiles specified in the definition xml can be used as views in the Web Application -->
+<!--
     <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
         <property name="definitions">
             <list>
@@ -53,6 +48,7 @@
             </list>
         </property>
     </bean>
+-->
 
 
 
