@@ -22,9 +22,7 @@
     <listener>
         <listener-class>org.jasig.cas.client.session.SingleSignOutHttpSessionListener</listener-class>
     </listener>
-  <!--  <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>-->
+
 
 
     <!--
@@ -33,25 +31,15 @@
         -->
    <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/spring/admin-security.xml</param-value>
+        <param-value>/WEB-INF/spring/admin-integration-context.xml</param-value>
     </context-param>
 
+    <listener>
+      <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
 
-    <!-- Spring Security -->
-  <!--  <filter>
-        <filter-name>springSecurityFilterChain</filter-name>
-        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-        <init-param>
-            <param-name>targetBeanName</param-name>
-            <param-value>authenticationFilter</param-value>
-        </init-param>
-    </filter>
 
-    <filter-mapping>
-        <filter-name>springSecurityFilterChain</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>-->
-
+    <!--integrating cas server-->
     <filter>
         <filter-name>CAS Authentication Filter</filter-name>
         <filter-class>org.jasig.cas.client.authentication.AuthenticationFilter</filter-class>

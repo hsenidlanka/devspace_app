@@ -10,12 +10,6 @@
        http://www.springframework.org/schema/mvc
        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <bean id="connectionProperties"
-          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="location" value="classpath:connectivity.properties"/>
-    </bean>
-
-    <import resource="session-factory-config.xml"/>
 
        <context:component-scan base-package="hsl.devspace.app.admin.*" />
        <!--<mvc:resources mapping="/resources/**" location="/resources/" />-->
@@ -29,33 +23,5 @@
       <mvc:resources mapping="/themes/**" location="/themes/" />
        <mvc:annotation-driven/>
 
-       <!-- Initialization for data source -->
- <!--      <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
-              <property name="driverClass" value="${jdbc.driver}"/>
-              <property name="jdbcUrl" value="${jdbc.url}"/>
-              <property name="user" value="${jdbc.username}"/>
-              <property name="password" value="${jdbc.password}"/>
-       </bean>
 
-
-       &lt;!&ndash; Definition for the UserRepositoryImpl bean &ndash;&gt;
-       <bean id="userRepository" class="hsl.devspace.app.admin.usermanagement.spring.repository.UserRepositoryImpl">
-           <property name="dataSource" ref="dataSource" />
-       </bean>
--->
-<!--
-       <bean id="controller" class="hsl.devspace.app.admin.usermanagement.spring.controller.UserController">
-
-       </bean>
--->
-
-
-    <!--Definition for the ItemRepositoryImpl bean-->
-   <!-- <bean id="itemRepository" class="hsl.devspace.app.admin.itemmanagement.spring.repository.ItemRepositoryImpl">
-        <property name="dataSource" ref="dataSource" />
-    </bean>-->
-    <bean id="userRepo" class="hsl.devspace.app.corelogic.repository.UserRepositoryImpl">
-        <property name="dataSource" ref="productionDataSource"/>
-        <property name="transactionManager" ref="transactionManager"/>
-    </bean>
 </beans>
