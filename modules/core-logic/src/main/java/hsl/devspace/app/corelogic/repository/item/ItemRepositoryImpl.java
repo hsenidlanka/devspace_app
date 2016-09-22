@@ -17,7 +17,6 @@ import java.util.Map;
  */
 public class ItemRepositoryImpl implements ItemRepository {
     Item item=new Item();
-    private DataSource dataSource;
     private JdbcTemplate jdbcTemplate;
     private PlatformTransactionManager transactionManager;
     private static org.apache.log4j.Logger log = Logger.getLogger(ItemRepositoryImpl.class);
@@ -25,20 +24,17 @@ public class ItemRepositoryImpl implements ItemRepository {
     public void setDataSource(DataSource dataSource) {
         //this.dataSource = dataSource;
         jdbcTemplate = new JdbcTemplate(dataSource);
-
     }
 
     public void setTransactionManager(PlatformTransactionManager transactionManager) {
         this.transactionManager = transactionManager;
-
     }
 
     @Override
-    public int add(Item item,List<Item> item2) {
+    public int add(Item item) {
         int row = 0;
-        TransactionDefinition tr_def = new DefaultTransactionDefinition();
-        TransactionStatus stat = transactionManager.getTransaction(tr_def);
         String itm_nm = item.getItemName();
+        int id=item.getItemId();
         boolean availability = checkAvailability(itm_nm);
 
         if (availability == false) {
@@ -46,23 +42,22 @@ public class ItemRepositoryImpl implements ItemRepository {
                     "(name,description,type,image,sub_category_id) VALUES (?,?,?,?,(SELECT id FROM sub_category WHERE name=?))";
             row = jdbcTemplate.update(sql, new Object[]{item.getItemName(),item.getDescription(),
                     item.getType(),item.getImage(),item.getSubCategoryName()});
-            transactionManager.commit(stat);
             log.info(row + "new item inserted");
-            updateSizeTable(itm_nm,item2);
         } else
             log.info(row + "item already available");
 
-        return row;
+        return id;
     }
-    public int updateSizeTable(String name,List<Item> item2){
+
+    @Override
+    public int updateSizeTable(int id,List<Item> item2){
         int row=0;
-        TransactionDefinition tr_def = new DefaultTransactionDefinition();
-        TransactionStatus stat = transactionManager.getTransaction(tr_def);
         for(int i=0;i<item2.size();i++) {
+            double price=item2.get(i).getPrice();
+            String size=item2.get(i).getSize();
             String sql = "INSERT INTO size" +
-                    "(size,price,item_id) VALUES (?,?,(SELECT id FROM item WHERE name=?))";
-            row = jdbcTemplate.update(sql, new Object[]{item2.get(i),item2.get(i),name});
-            transactionManager.commit(stat);
+                    "(size,price,item_id) VALUES (?,?,?)";
+            row = jdbcTemplate.update(sql, new Object[]{size,price,id});
             log.info(row + "size updated");
         }
         return row;
@@ -70,30 +65,24 @@ public class ItemRepositoryImpl implements ItemRepository {
 
     @Override
     public boolean checkAvailability(String itemName) {
-        TransactionDefinition tr_def = new DefaultTransactionDefinition();
-        TransactionStatus stat = transactionManager.getTransaction(tr_def);
-        boolean result;
 
+        boolean result;
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM item WHERE  name=?",itemName);
         log.info(mp);
 
         if (mp.size() != 0) {
             result = true;
         } else result = false;
-        transactionManager.commit(stat);
         log.info(result);
         return result;
     }
 
     @Override
     public int delete(String itemName) {
-        TransactionDefinition tr_def = new DefaultTransactionDefinition();
-        TransactionStatus stat = transactionManager.getTransaction(tr_def);
-        item.setItemName(itemName);
 
+        item.setItemName(itemName);
         String sql = "DELETE FROM item WHERE name = ?";
         int row = jdbcTemplate.update(sql, new Object[]{item.getItemName()});
-        transactionManager.commit(stat);
         log.info(row + " item deleted");
         return row;
     }
@@ -122,13 +111,26 @@ public class ItemRepositoryImpl implements ItemRepository {
 
     @Override
     public int update(Item item) {
-        TransactionDefinition tr_def = new DefaultTransactionDefinition();
-        TransactionStatus stat = transactionManager.getTransaction(tr_def);
+
         String sql = "UPDATE item SET name=? price=? description=? size=? type=? image=? sub_category_id=? WHERE id = ? ";
         int row = jdbcTemplate.update(sql, new Object[]{item.getItemName(), item.getPrice(),item.getDescription(),item.getSize(),item.getType(),item.getImage(),item.getSubCategoryName(),item.getItemId()});
-        transactionManager.rollback(stat);
         log.info(row + "Item details changed");
         return  row;
+    }
+
+    @Override
+    public void addItem(Item item,List<Item> item2){
+        TransactionDefinition tr_def = new DefaultTransactionDefinition();
+        TransactionStatus stat = transactionManager.getTransaction(tr_def);
+        int id=item.getItemId();
+        try {
+            add(item);
+            updateSizeTable(id,item2);
+            transactionManager.commit(stat);
+        }
+        catch (Exception e){
+            transactionManager.rollback(stat);
+        }
     }
 
 

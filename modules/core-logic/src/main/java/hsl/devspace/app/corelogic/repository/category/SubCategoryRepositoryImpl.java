@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.sql.DataSource;
@@ -17,13 +18,11 @@ import java.util.Map;
  */
 public class SubCategoryRepositoryImpl implements CategoryRepository {
     Category category = new Category();
-    private DataSource dataSource;
     private JdbcTemplate jdbcTemplate;
     private PlatformTransactionManager transactionManager;
     private static org.apache.log4j.Logger log = Logger.getLogger(SubCategoryRepositoryImpl.class);
 
     public void setDataSource(DataSource dataSource) {
-        //this.dataSource = dataSource;
         jdbcTemplate = new JdbcTemplate(dataSource);
 
     }
@@ -37,8 +36,7 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
     @Override
     public int add(Category category) {
         int row = 0;
-        TransactionDefinition tr_def = new DefaultTransactionDefinition();
-        TransactionStatus stat = transactionManager.getTransaction(tr_def);
+
         String cat_nm = category.getSubCategoryName();
         boolean availability = checkAvailability(cat_nm);
 
@@ -46,7 +44,6 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
             String sql = "INSERT INTO sub_category " +
                     "(name,description,creator,category_id) VALUES (?,?,?,(SELECT id FROM category WHERE name=?))";
             row = jdbcTemplate.update(sql, new Object[]{category.getSubCategoryName(), category.getDescription(), category.getCreator(), category.getCategoryName()});
-            transactionManager.commit(stat);
             log.info(row + "new sub category inserted");
         } else
             log.info(row + "sub category already available");
@@ -56,8 +53,7 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
 
     @Override
     public boolean checkAvailability(String subCategoryName) {
-        TransactionDefinition tr_def = new DefaultTransactionDefinition();
-        TransactionStatus stat = transactionManager.getTransaction(tr_def);
+
         boolean result;
 
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM sub_category WHERE  name=?",subCategoryName);
@@ -66,20 +62,17 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
         if (mp.size() != 0) {
             result = true;
         } else result = false;
-        transactionManager.commit(stat);
         log.info(result);
         return result;
     }
 
     @Override
     public int delete(String subCategoryName) {
-        TransactionDefinition tr_def = new DefaultTransactionDefinition();
-        TransactionStatus stat = transactionManager.getTransaction(tr_def);
+
         category.setSubCategoryName(subCategoryName);
 
         String sql = "DELETE FROM sub_category WHERE name = ?";
         int row = jdbcTemplate.update(sql, new Object[]{category.getSubCategoryName()});
-        transactionManager.commit(stat);
         log.info(row + " sub category deleted");
         return row;
     }
@@ -109,5 +102,26 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT name FROM sub_category");
         log.info(mp);
         return mp;
+    }
+
+    @Override
+    @Transactional
+    public void createCategory(Category cat) {
+        add(cat);
+
+    }
+
+    @Override
+    public void createCategory1(Category cat) {
+        TransactionDefinition trDef = new DefaultTransactionDefinition();
+        TransactionStatus stat = transactionManager.getTransaction(trDef);
+        try {
+            add(cat);
+            transactionManager.commit(stat);
+        }
+        catch (Exception e){
+            transactionManager.rollback(stat);
+        }
+
     }
 }
