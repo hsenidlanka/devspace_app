@@ -216,7 +216,6 @@
                 </fieldset>
               </div>
             </div>
-
             <!--login details-->
             <div class="form-group">
               <!--<div class="col-xs-1"></div>-->
