@@ -17,7 +17,7 @@ import java.util.Map;
 
 /**
  * Created by Kasun Dinesh on 6/29/16.
- * This class handles the requests related to users.
+ * This class handles the requests related to customers.
  */
 @Path("/customers")
 public class CustomerService {
@@ -97,7 +97,11 @@ public class CustomerService {
                 u.setEmail(map.get("email").toString());
                 u.setAddressL1(map.get("address_line1").toString());
                 u.setAddressL2(map.get("address_line2").toString());
-                u.setAddressL3(map.get("address_line3").toString());
+                if (map.get("address_line3") != null) {
+                    u.setAddressL3(map.get("address_line3").toString());
+                } else {
+                    u.setAddressL3(null);
+                }
                 u.setMobile(map.get("mobile").toString());
                 successMessage.addData(u);
             }

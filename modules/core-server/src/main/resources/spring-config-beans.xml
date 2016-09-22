@@ -8,4 +8,9 @@
         <property name="transactionManager" ref="transactionManager"/>
     </bean>
 
+    <bean id="couponRepoImpl" class="hsl.devspace.app.corelogic.repository.coupon.CouponRepositoryImpl">
+        <property name="dataSource" ref="productionDataSource"/>
+        <property name="transactionManager" ref="transactionManager"/>
+    </bean>
+
 </beans>
