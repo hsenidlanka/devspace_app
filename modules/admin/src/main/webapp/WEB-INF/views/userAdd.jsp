@@ -1,4 +1,6 @@
 <%@ taglib prefix="spring" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,14 +14,14 @@
   <link href="${css2}" rel="stylesheet">
 
   <!--include the jQuery toaster plugin's script-->
-  <spring:url value="/themes/hsenid/js/jquery.toaster.js" var="js1"/>
+  <%--<spring:url value="/themes/hsenid/js/jquery.toaster.js" var="js1"/>--%>
   <spring:url value="/themes/hsenid/js/userMgt.js" var="js2"/>
-  <spring:url value="/themes/hsenid/js/simpleToastMessage.js" var="js3"/>
+  <%--<spring:url value="/themes/hsenid/js/simpleToastMessage.js" var="js3"/>--%>
 
 
-  <script src="${js1}"></script>
+  <%--<script src="${js1}"></script>--%>
   <script src="${js2}"></script>
-  <script src="${js3}"></script>
+  <%--<script src="${js3}"></script>--%>
 
 </head>
 <body>
@@ -36,9 +38,9 @@
 <div class="breadcrumbPosition">
   <div style="position: relative; left: -50%;">
     <ul class="breadcrumb breadcrumb-menu" >
-      <li><a href="home.html">Home</a></li>
-      <li><a href="userAdd.html">User Management</a></li>
-      <li class="active"><a href="userAdd.html">Add User</a></li>
+      <li><a href="https://localhost:8443/users/list">Home</a></li>
+      <li><a href="https://localhost:8443/users/list">User Management</a></li>
+      <li class="active"><a href="https://localhost:8443/users/add">Add User</a></li>
     </ul>
   </div>
 </div>
@@ -51,7 +53,7 @@
         <h3 class="default-panel-headings ">Add New User</h3>
       </div>
       <div class="panel-body">
-        <form role="form" id="admin_adduser_form"  method="post" class="form-horizontal">
+        <form:form role="form" id="admin_adduser_form"  method="POST" class="form-horizontal" action="/users/addCustomer">
 
           <fieldset class="scheduler-border">
             <legend class="scheduler-border" id="legendHeading"></legend>
@@ -59,18 +61,18 @@
             <div class="form-group">
               <div class="col-sm-6">
                 <div class="row">
-                  <label class="col-sm-4 control-label">
+                  <form:label path="user" class="col-sm-4 control-label">
                     User Type
-                  </label>
+                  </form:label>
                   <div class="col-sm-3">
-                    <label class="radio-inline">
-                      <input type="radio" name="optradio" id="customer" checked>Customer
-                    </label>
+                    <form:label path="customer" class="radio-inline">
+                      <form:input path="customerin" type="radio" name="optradio" id="customer" checked="checked"/>Customer
+                    </form:label>
                   </div>
                   <div class="col-sm-4">
-                    <label class="radio-inline">
-                      <input type="radio" name="optradio"  id="staff">Staff Member
-                    </label>
+                    <form:label path="staff" class="radio-inline">
+                      <form:input path="staffin" type="radio" name="optradio"  id="staff"/>Staff Member
+                    </form:label>
                   </div>
                 </div>
               </div>
@@ -79,40 +81,38 @@
             <div class="form-group">
               <div class="col-sm-6">
                 <div class="row">
-                  <label  class="col-sm-4 control-label">
+                  <form:label path="name"  class="col-sm-4 control-label">
                     Name
-                  </label>
-
+                  </form:label>
                   <div class="col-sm-2">
-                    <select class="form-control" id="selectTitle" style="width: 65px">
-                      <option>Mr</option>
-                      <option>Mrs</option>
-                      <option>Miss</option>
-                    </select>
+                    <form:select path="title" class="form-control" id="selectTitle" style="width: 65px">
+                      <form:option value="mr">Mr</form:option>
+                      <form:option value="mrs">Mrs</form:option>
+                      <form:option value="miss">Miss</form:option>
+                    </form:select>
                   </div>
                   <div class="col-sm-4">
-                    <input class="form-control" id="fname" placeholder="First Name" type="text"  style="width: 190px">
+                    <form:input path="fnamein" class="form-control" id="fname" placeholder="First Name" type="text"  style="width: 190px"/>
                   </div>
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="row">
                   <div class="col-sm-4">
-                    <input class="form-control" id="lname" placeholder="Last Name" type="text"  style="width: 200px">
+                    <form:input path="lnamein" class="form-control" id="lname" placeholder="Last Name" type="text"  style="width: 200px"/>
                   </div>
                 </div>
-
               </div>
             </div> <br>
 
             <div class="form-group">
               <div class="col-sm-6">
                 <div class="row">
-                  <label  class="col-sm-4 control-label">
+                  <form:label path="phone"  class="col-sm-4 control-label">
                     Phone No*
-                  </label>
+                  </form:label>
                   <div class="col-sm-8">
-                    <input class="form-control" id="mobileNo" placeholder="+94XXXXXXXXX" type="text">
+                    <form:input path="phonein" class="form-control" id="mobileNo" placeholder="+94XXXXXXXXX" type="text"/>
                   </div>
                 </div>
               </div>
@@ -120,11 +120,11 @@
             <div class="form-group">
               <div class="col-sm-6">
                 <div class="row">
-                  <label class="col-sm-4 control-label">
+                  <form:label path="email" class="col-sm-4 control-label">
                     E-Mail
-                  </label>
+                  </form:label>
                   <div class="col-sm-8">
-                    <input class="form-control" id="email" placeholder="myname@example.com" type="text">
+                    <form:input path="emailin" class="form-control" id="email" placeholder="myname@example.com" type="text"/>
                   </div>
                 </div>
               </div>
@@ -135,35 +135,35 @@
               <div class="col-sm-6">
                 <br>
                 <div class="row">
-                  <label class="col-sm-4 control-label">
+                  <form:label path="add1" class="col-sm-4 control-label">
                     Address
-                  </label>
+                  </form:label>
                   <div class="col-sm-8">
-                    <input class="form-control" id="addLine1" placeholder="Street Address" type="text" >
+                    <form:input path="add1in" class="form-control" id="addLine1" placeholder="Street Address" type="text"/> >
                   </div>
                 </div>
                 <div class="row"> <label class="control-label"></label>   </div>
                 <div class="row">
-                  <label class="col-sm-4 control-label">
-                  </label>
+                  <form:label path="add2" class="col-sm-4 control-label">
+                  </form:label>
                   <div class="col-sm-8">
-                    <input class="form-control" id="addLine2" placeholder="Address Line 2" type="text" >
+                    <form:input path="add2in" class="form-control" id="addLine2" placeholder="Address Line 2" type="text" />
                   </div>
                 </div>
                 <div class="row"><label class="control-label"></label></div>
                 <div class="row">
-                  <label class="col-sm-4 control-label">
-                  </label>
+                  <form:label path="city" class="col-sm-4 control-label">
+                  </form:label>
                   <div class="col-sm-8">
-                    <input class="form-control" id="city" placeholder="City" type="text">
+                    <form:input path="cityin" class="form-control" id="city" placeholder="City" type="text"/>
                   </div>
                 </div>
                 <div class="row"><label class="control-label"></label></div>
                 <div class="row">
-                  <label class="col-sm-4 control-label">
-                  </label>
+                  <form:label path="province" class="col-sm-4 control-label">
+                  </form:label>
                   <div class="col-sm-8">
-                    <input class="form-control" id="province" placeholder="Province" type="text">
+                    <form:input path="provincein" class="form-control" id="province" placeholder="Province" type="text"/>
                   </div>
                 </div>
                 <div class="row"><label class="control-label"></label></div>
@@ -188,29 +188,29 @@
                   </div>
                   <div class="row">  <label class=" control-label"></label></div>
                   <div class="row">
-                    <label class="col-sm-4 control-label">
+                    <form:label path="department" class="col-sm-4 control-label">
                       Department
-                    </label>
+                    </form:label>
                     <div class="col-sm-8">
-                      <select class="form-control" id="department">
-                        <option>Finance</option>
-                        <option>Administration</option>
-                        <option>Customer Service</option>
-                      </select>
+                      <form:select path="depin" class="form-control" id="department">
+                        <form:option value="finance">Finance</form:option>
+                        <form:option value="administration">Administration</form:option>
+                        <form:option value="cc">Customer Service</form:option>
+                      </form:select>
                     </div>
                   </div>
                   <div class="row">  <label class=" control-label"></label></div>
                   <div class="row">
-                    <label class="col-sm-4 control-label">
+                    <form:label path="branch" class="col-sm-4 control-label">
                       Branch
-                    </label>
+                    </form:label>
                     <div class="col-sm-8">
-                      <select class="form-control" id="branch">
-                        <option>Colombo</option>
-                        <option>Gampaha</option>
-                        <option>Ja-Ela</option>
-                        <option>Kadana</option>
-                      </select>
+                      <form:select path="branchin" class="form-control" id="branch">
+                        <form:option value="1">Colombo</form:option>
+                        <form:option value="2">Gampaha</form:option>
+                        <form:option value="3">Ja-Ela</form:option>
+                        <form:option value="4">Kadana</form:option>
+                      </form:select>
                     </div>
                   </div>
                 </fieldset>
@@ -224,25 +224,25 @@
                 <fieldset class="scheduler-border" id="loginInfo">
                   <legend class="scheduler-border" id="legendInfo">Login Credentials</legend>
                   <div class="row">
-                    <label class="col-xs-4 control-label" style="text-align: left">
+                    <form:label path="uname" class="col-xs-4 control-label" style="text-align: left">
                       User Name
-                    </label>
-                    <label class="col-xs-4 control-label" style="text-align: left">
+                    </form:label>
+                    <form:label path="password" class="col-xs-4 control-label" style="text-align: left">
                       Password
-                    </label>
-                    <label class="col-xs-4 control-label" style="text-align: left">
+                    </form:label>
+                    <form:label path="cpassword" class="col-xs-4 control-label" style="text-align: left">
                       Confirm Password
-                    </label>
+                    </form:label>
                   </div>
                   <div class="row">
                     <div class="col-xs-4">
-                      <input class="form-control" id="username" placeholder="User Name" type="text" >
+                      <form:input path="unamein" class="form-control" id="username" placeholder="User Name" type="text"/> >
                     </div>
                     <div class="col-xs-4">
-                      <input class="form-control" id="password" placeholder="Password" type="text" >
+                      <form:input path="passwordin" class="form-control" id="password" placeholder="Password" type="text" />
                     </div>
                     <div class="col-xs-4">
-                      <input class="form-control" id="cpassword" placeholder="Password Confirm" type="text" >
+                      <form:input path="cpasswordin" class="form-control" id="cpassword" placeholder="Password Confirm" type="text" />
                     </div>
                   </div>.
                 </fieldset>
@@ -255,17 +255,16 @@
               <div class="col-xs-3"></div>
               <div class="col-xs-8">
                 <div class="col-xs-4">
-                  <button type="reset" value="Reset" class="btn btn-success btnAddItem">Reset</button>
+                  <form:button type="reset" value="Reset" class="btn btn-success btnAddItem">Reset</form:button>
                 </div>
                 <div class="col-xs-4">
-                  <button type="button" class="btn btn-success btnAddItem" id="btnAddUser"
-                          onclick="successToast('You have successfully added the user')">Add User</button>
+                  <form:button type="button" class="btn btn-success btnAddItem" id="btnAddUser">Add User</form:button>
                 </div>
               </div>
               <div class="col-xs-1"></div>
             </div>
           </fieldset>
-        </form>
+        </form:form>
       </div>
     </div>
   </div>
