@@ -24,6 +24,10 @@
         <property name="dataSource" ref="productionDataSource"/>
         <property name="transactionManager" ref="transactionManager"/>
     </bean>
+    <bean id="itemRepository" class="hsl.devspace.app.corelogic.repository.item.ItemRepositoryImpl">
+        <property name="dataSource" ref="productionDataSource"/>
+        <property name="transactionManager" ref="transactionManager"/>
+    </bean>
     <!--<import resource="admin-service.xml"/>-->
     <!--when an excepton listed under exceptionMapping property list is thrown from the application,
    it'll render the pre-determined view WEB-INF/views/500.jsp-->
