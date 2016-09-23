@@ -4,7 +4,7 @@
 var frisby = require('frisby');
 
 // Test add coupon-valid data.
-/*frisby.create('Coupon test 01-valid data')
+frisby.create('Coupon test 01-valid data')
     .post('http://localhost:2222/pizza-shefu/api/v1.0/coupons/add/', {
         "couponCode": "frisbytest",
         "customerMobile": "12345678"
@@ -35,7 +35,7 @@ var frisby = require('frisby');
             }
         ]
     })
-    .toss();*/
+    .toss();
 
 // Test add coupon-empty customer mobile.
 frisby.create('Coupon test 02-empty customer mobile')
