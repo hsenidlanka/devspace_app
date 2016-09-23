@@ -1,3 +1,4 @@
+/*
 package hsl.devspace.app.admin.usermanagement.spring.repository;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
@@ -11,9 +12,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+*/
 /**
  * An implementation of the UserRepository interface
- */
+ *//*
+
 public class UserRepositoryImpl implements UserRepository {
 
     //declare the  jdbcTemplate
@@ -104,3 +107,4 @@ public class UserRepositoryImpl implements UserRepository {
         return listUsers;
     }
 }
+*/

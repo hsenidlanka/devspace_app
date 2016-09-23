@@ -175,15 +175,15 @@
                 <fieldset class="scheduler-border" id="staffDetail">
                   <legend class="scheduler-border" id="legendStaff">when the user is staff</legend>
                   <div class="row">
-                    <label class="col-sm-4 control-label">
+                    <form:label path="designation" class="col-sm-4 control-label">
                       Designation
-                    </label>
+                    </form:label>
                     <div class="col-sm-8">
-                      <select class="form-control" id="designation">
-                        <option>System Admin</option>
-                        <option>CustomerCare Manager</option>
-                        <option>Miss</option>
-                      </select>
+                      <form:select path="designationin" class="form-control" id="designation">
+                        <form:option value="sysAdmin">System Admin</form:option>
+                        <form:option value="ccManager">CustomerCare Manager</form:option>
+                        <form:option value="adminManager">Admin Manager</form:option>
+                      </form:select>
                     </div>
                   </div>
                   <div class="row">  <label class=" control-label"></label></div>
@@ -257,7 +257,7 @@
                   <form:button type="reset" value="Reset" class="btn btn-success btnAddItem">Reset</form:button>
                 </div>
                 <div class="col-xs-4">
-                  <form:button type="button" class="btn btn-success btnAddItem" id="btnAddUser">Add User</form:button>
+                  <form:button type="submit" class="btn btn-success btnAddItem" >Add User</form:button>
                 </div>
               </div>
               <div class="col-xs-1"></div>

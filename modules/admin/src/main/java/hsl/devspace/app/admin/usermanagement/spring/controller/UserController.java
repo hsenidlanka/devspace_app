@@ -1,11 +1,13 @@
 package hsl.devspace.app.admin.usermanagement.spring.controller;
 
-import hsl.devspace.app.admin.usermanagement.spring.model.User;
-import hsl.devspace.app.corelogic.repository.UserRepository;
+
+import hsl.devspace.app.corelogic.domain.User;
+import hsl.devspace.app.corelogic.repository.user.UserRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,23 +31,12 @@ public class UserController {
     @Autowired
     private UserRepository user1;
 
-/*    ApplicationContext context =
-            new ClassPathXmlApplicationContext("admin-servlet.xml");
-
-    UserRepository user1= (UserRepository)context.getBean("userRepo");*/
-//    UserRepository userRepository = (UserRepository) context.getBean("userRepository");
-
-
- /*   ApplicationContext context= new ClassPathXmlApplicationContext("admin-servlet.xml");
-    UserRepository userRepository= (UserRepository) context.getBean("userRepository")*/;
-
-
 
 
     @RequestMapping(value="/list")
     public ModelAndView listContact(ModelAndView model)  {
-        User newContact = new User();;
-        model.addObject("contact", newContact);
+//        User newContact = new User();;
+//        model.addObject("contact", newContact);
         model.setViewName("home");
         return model;
     }
@@ -59,16 +50,25 @@ public class UserController {
         return model;
     }*/
 
-    @RequestMapping(value="/add")
-    public ModelAndView saveOrUpdate(@ModelAttribute("userForm")hsl.devspace.app.corelogic.domain.User newUser) throws SQLIntegrityConstraintViolationException {
-        ModelAndView model = new ModelAndView();
-//
+//    customer user add is done in below methods
+
+    @RequestMapping(value="/add",method=RequestMethod.GET)
+    public ModelAndView showCustomer(){
+        return new ModelAndView("userAdd", "command",new User());
+    }
+
+    @RequestMapping(value="/addCustomer",method = RequestMethod.POST)
+    public String saveOrUpdate(@ModelAttribute("newUser")hsl.devspace.app.corelogic.domain.User newUser, ModelMap model) throws SQLIntegrityConstraintViolationException {
+
+        System.out.println("First Name:" + newUser.getUsername());
+
        int i= user1.add(newUser);
-        if(i ==1)
-            model.setViewName("userAdd");
+        if(i ==0)
+            return "redirect:userAdd";
         else
-         System.out.print("Error in add user");
-        return model;
+            return "redirect:userAdd";
+
+
 
     }
 
@@ -81,14 +81,7 @@ public class UserController {
 //        model.addObject("user",user);
         return model;
     }
-    //handler method for inserting or updating a user record
- /*   @RequestMapping(value = "/userAdd")
-    public ModelAndView saveUser(@ModelAttribute User user){
-        ModelAndView model = new ModelAndView();
-//        userRepository.saveOrUpdate(user);
-//        return new ModelAndView("userManagement/userAdd");
-        model.setViewName("userAdd");
-        return model;*/
+
 
 
 }

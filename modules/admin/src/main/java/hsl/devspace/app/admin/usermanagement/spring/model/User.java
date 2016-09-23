@@ -1,8 +1,11 @@
+/*
 package hsl.devspace.app.admin.usermanagement.spring.model;
 
+*/
 /**
  * domain class
- */
+ *//*
+
 public class User extends hsl.devspace.app.corelogic.domain.User {
 
     private int id;
@@ -69,3 +72,4 @@ public class User extends hsl.devspace.app.corelogic.domain.User {
     }
 
 }
+*/
