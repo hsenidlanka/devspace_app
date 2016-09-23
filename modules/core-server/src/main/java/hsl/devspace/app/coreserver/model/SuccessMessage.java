@@ -22,7 +22,6 @@ public class SuccessMessage {
     public SuccessMessage() {
     }
 
-
     @JsonProperty("status")
     public String getStatus() {
         return status;
@@ -81,6 +80,8 @@ public class SuccessMessage {
         dataList.add(jsonObject);
     }
 
+    // Optionally we can call this method to generate the JSON response.
+    // Order not preserved.
     public JSONObject generateSuccessMessage() {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("status", getStatus());

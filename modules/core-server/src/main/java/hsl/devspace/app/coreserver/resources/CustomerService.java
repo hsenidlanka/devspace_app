@@ -18,7 +18,7 @@ import java.util.Map;
 
 /**
  * Created by Kasun Dinesh on 6/29/16.
- * This class handles the requests related to customers.
+ * This class handles the requests related to the customers.
  */
 @Path("/customers")
 public class CustomerService {
@@ -57,7 +57,7 @@ public class CustomerService {
             successMessage.addLink(url, "self");
             successMessage.addLink(BASE_URL + "customers/" + user.getUsername(), "profile");
 
-            response = Response.status(Response.Status.CREATED).entity(successMessage.generateSuccessMessage()).build();
+            response = Response.status(Response.Status.CREATED).entity(successMessage).build();
         } else {
             throw new WebApplicationException(400);
         }
@@ -86,7 +86,7 @@ public class CustomerService {
             String url = uriInfo.getAbsolutePath().toString();
             successMessage.addLink(url, "self");
             successMessage.addLink(BASE_URL + "customers/" + user.getUsername(), "profile");
-            response = Response.status(Response.Status.OK).entity(successMessage.generateSuccessMessage()).build();
+            response = Response.status(Response.Status.OK).entity(successMessage).build();
         } else {
             throw new WebApplicationException(401);
         }
@@ -126,6 +126,6 @@ public class CustomerService {
         } else {
             successMessage.setMessage("no customer data to retrieve");
         }
-        return Response.status(Response.Status.OK).entity(successMessage.generateSuccessMessage()).build();
+        return Response.status(Response.Status.OK).entity(successMessage).build();
     }
 }

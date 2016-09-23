@@ -16,7 +16,7 @@ import javax.ws.rs.core.UriInfo;
 
 /**
  * Created by Kasun Dinesh on 9/22/16.
- * * This class handles the requests related to coupons.
+ * This class handles the requests related to the coupons.
  */
 @Path("/coupons")
 public class CouponService {
@@ -32,21 +32,21 @@ public class CouponService {
     public Response addNewCoupon(Coupon coupon, @javax.ws.rs.core.Context UriInfo uriInfo) {
         int status = couponRepository.add(coupon.getCouponCode(), coupon.getCustomerMobile());
         Response response;
-        if (true) {
+        if (status > 0) {
             SuccessMessage successMessage = new SuccessMessage();
             successMessage.setStatus("success");
             successMessage.setCode(Response.Status.CREATED.getStatusCode());
             successMessage.setMessage("coupon added");
 
-            JSONObject jsonObject=new JSONObject();
+            JSONObject jsonObject = new JSONObject();
             jsonObject.put("couponCode", coupon.getCouponCode());
-            jsonObject.put("cusomerMobile", coupon.getCustomerMobile());
+            jsonObject.put("customerMobile", coupon.getCustomerMobile());
             successMessage.addData(jsonObject);
 
             String url = uriInfo.getAbsolutePath().toString();
             successMessage.addLink(url, "self");
 
-            response = Response.status(Response.Status.CREATED).entity(successMessage.generateSuccessMessage()).build();
+            response = Response.status(Response.Status.CREATED).entity(successMessage).build();
         } else {
             throw new WebApplicationException(400);
         }
