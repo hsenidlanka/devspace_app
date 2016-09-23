@@ -11,7 +11,7 @@ import javax.sql.DataSource;
  * Created by hsenid on 9/20/16.
  */
 public class PackageRepositoryImpl implements PackageRepository  {
-    Package pkg=new Package();
+    //Package pkg=new Package();
     private JdbcTemplate jdbcTemplate;
     private PlatformTransactionManager transactionManager;
     private static org.apache.log4j.Logger log = Logger.getLogger(PackageRepositoryImpl.class);

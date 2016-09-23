@@ -57,9 +57,9 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public int delete(String username) throws IllegalArgumentException {
 
-        user.setUsername(username);
+       // user.setUsername(username);
         String sql = "DELETE FROM customer WHERE username = ?";
-        int row = jdbcTemplate.update(sql, new Object[]{user.getUsername()});
+        int row = jdbcTemplate.update(sql, new Object[]{username});
         log.info(row + "deleted");
         return row;
 
@@ -73,7 +73,6 @@ public class UserRepositoryImpl implements UserRepository {
         user.setPassword(password);
         boolean verified = loginAuthenticate(username,password);
         if (verified) {
-
             user.setPassword(nPw);
             System.out.println(user.getPassword());
 
@@ -102,7 +101,6 @@ public class UserRepositoryImpl implements UserRepository {
         else result=false;
         log.info(result);
         return result;
-
     }
 
     @Override
