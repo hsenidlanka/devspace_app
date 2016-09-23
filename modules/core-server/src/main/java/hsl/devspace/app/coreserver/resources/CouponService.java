@@ -6,6 +6,7 @@ import hsl.devspace.app.coreserver.common.Context;
 import hsl.devspace.app.coreserver.model.SuccessMessage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.json.simple.JSONObject;
 import org.springframework.context.ApplicationContext;
 
 import javax.ws.rs.*;
@@ -19,7 +20,7 @@ import javax.ws.rs.core.UriInfo;
  */
 @Path("/coupons")
 public class CouponService {
-    private static final Logger log = LogManager.getLogger(CustomerService.class);
+    private static final Logger log = LogManager.getLogger(CouponService.class);
     ApplicationContext context = Context.appContext;
     CouponRepositoryImpl couponRepository = (CouponRepositoryImpl) context.getBean("couponRepoImpl");
     final String BASE_URL = "http://localhost:2222/pizza-shefu/api/v1.0/";
@@ -31,16 +32,21 @@ public class CouponService {
     public Response addNewCoupon(Coupon coupon, @javax.ws.rs.core.Context UriInfo uriInfo) {
         int status = couponRepository.add(coupon.getCouponCode(), coupon.getCustomerMobile());
         Response response;
-//        Genson gensonBuilder = new GensonBuilder().setSkipNull(true).create();
-        if (status > 0) {
+        if (true) {
             SuccessMessage successMessage = new SuccessMessage();
             successMessage.setStatus("success");
             successMessage.setCode(Response.Status.CREATED.getStatusCode());
             successMessage.setMessage("coupon added");
-            successMessage.addData(coupon);
+
+            JSONObject jsonObject=new JSONObject();
+            jsonObject.put("couponCode", coupon.getCouponCode());
+            jsonObject.put("cusomerMobile", coupon.getCustomerMobile());
+            successMessage.addData(jsonObject);
+
             String url = uriInfo.getAbsolutePath().toString();
             successMessage.addLink(url, "self");
-            response = Response.status(Response.Status.CREATED).entity(successMessage).build();
+
+            response = Response.status(Response.Status.CREATED).entity(successMessage.generateSuccessMessage()).build();
         } else {
             throw new WebApplicationException(400);
         }

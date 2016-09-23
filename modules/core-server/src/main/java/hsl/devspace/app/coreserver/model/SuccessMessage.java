@@ -2,6 +2,7 @@ package hsl.devspace.app.coreserver.model;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonPropertyOrder;
+import org.json.simple.JSONObject;
 
 import java.util.*;
 
@@ -15,11 +16,12 @@ public class SuccessMessage {
     private String status;
     private int code;
     private String message;
-    private List<Object> dataList = new ArrayList<Object>();
+    private List<JSONObject> dataList = new ArrayList<JSONObject>();
     private List<Link> links = new ArrayList<Link>();
 
     public SuccessMessage() {
     }
+
 
     @JsonProperty("status")
     public String getStatus() {
@@ -58,11 +60,11 @@ public class SuccessMessage {
     }
 
     @JsonProperty("data")
-    public List<Object> getDataList() {
+    public List<JSONObject> getDataList() {
         return dataList;
     }
 
-    public void setDataList(List<Object> dataList) {
+    public void setDataList(List<JSONObject> dataList) {
         this.dataList = dataList;
     }
 
@@ -75,7 +77,17 @@ public class SuccessMessage {
     }
 
     // Add data(resources) to represent
-    public void addData(Object data) {
-        dataList.add(data);
+    public void addData(JSONObject jsonObject) {
+        dataList.add(jsonObject);
+    }
+
+    public JSONObject generateSuccessMessage() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("status", getStatus());
+        jsonObject.put("code", getCode());
+        jsonObject.put("message", getMessage());
+        jsonObject.put("data", getDataList());
+        jsonObject.put("links", getLinks());
+        return jsonObject;
     }
 }

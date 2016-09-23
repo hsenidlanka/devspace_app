@@ -6,6 +6,7 @@ import hsl.devspace.app.coreserver.common.Context;
 import hsl.devspace.app.coreserver.model.SuccessMessage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.json.simple.JSONObject;
 import org.springframework.context.ApplicationContext;
 
 import javax.ws.rs.*;
@@ -39,11 +40,24 @@ public class CustomerService {
             successMessage.setStatus("success");
             successMessage.setCode(Response.Status.CREATED.getStatusCode());
             successMessage.setMessage("user added");
-            successMessage.addData(user);
+
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("title", user.getTitle());
+            jsonObject.put("firstName", user.getFirstName());
+            jsonObject.put("lastName", user.getLastName());
+            jsonObject.put("username", user.getUsername());
+            jsonObject.put("Email", user.getEmail());
+            jsonObject.put("AddressLine01", user.getAddressL1());
+            jsonObject.put("AddressLine02", user.getAddressL2());
+            jsonObject.put("AddressLine03", user.getAddressL3());
+            jsonObject.put("mobile", user.getMobile());
+            successMessage.addData(jsonObject);
+
             String url = uriInfo.getAbsolutePath().toString();
             successMessage.addLink(url, "self");
             successMessage.addLink(BASE_URL + "customers/" + user.getUsername(), "profile");
-            response = Response.status(Response.Status.CREATED).entity(successMessage).build();
+
+            response = Response.status(Response.Status.CREATED).entity(successMessage.generateSuccessMessage()).build();
         } else {
             throw new WebApplicationException(400);
         }
@@ -63,11 +77,16 @@ public class CustomerService {
             successMessage.setStatus("success");
             successMessage.setCode(Response.Status.OK.getStatusCode());
             successMessage.setMessage("username, password validated.");
-            successMessage.addData(user.getUsername());
-            successMessage.addData(user.getPassword());
+
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("username", user.getUsername());
+            jsonObject.put("password", user.getPassword());
+            successMessage.addData(jsonObject);
+
             String url = uriInfo.getAbsolutePath().toString();
             successMessage.addLink(url, "self");
-            response = Response.status(Response.Status.OK).entity(successMessage).build();
+            successMessage.addLink(BASE_URL + "customers/" + user.getUsername(), "profile");
+            response = Response.status(Response.Status.OK).entity(successMessage.generateSuccessMessage()).build();
         } else {
             throw new WebApplicationException(401);
         }
@@ -86,28 +105,27 @@ public class CustomerService {
         successMessage.setStatus("success");
         String url = uriInfo.getAbsolutePath().toString();
         successMessage.addLink(url, "self");
+        JSONObject jsonObject = new JSONObject();
         if (userData.size() != 0) {
             successMessage.setMessage("customer data retrieved");
             for (Map<String, Object> map : userData) {
                 User u = new User();
-                u.setTitle(map.get("title").toString());
-                u.setFirstName(map.get("first_name").toString());
-                u.setLastName(map.get("last_name").toString());
-                u.setUsername(map.get("username").toString());
-                u.setEmail(map.get("email").toString());
-                u.setAddressL1(map.get("address_line1").toString());
-                u.setAddressL2(map.get("address_line2").toString());
+                jsonObject.put("title", map.get("title").toString());
+                jsonObject.put("firstName", map.get("first_name").toString());
+                jsonObject.put("lastName", map.get("last_name").toString());
+                jsonObject.put("username", map.get("username").toString());
+                jsonObject.put("email", map.get("email").toString());
+                jsonObject.put("addressLine01", map.get("address_line1").toString());
+                jsonObject.put("addressLine02", map.get("address_line2").toString());
                 if (map.get("address_line3") != null) {
-                    u.setAddressL3(map.get("address_line3").toString());
-                } else {
-                    u.setAddressL3(null);
+                    jsonObject.put("addressLine03", map.get("address_line3").toString());
                 }
-                u.setMobile(map.get("mobile").toString());
-                successMessage.addData(u);
+                jsonObject.put("mobile", map.get("mobile").toString());
+                successMessage.addData(jsonObject);
             }
         } else {
             successMessage.setMessage("no customer data to retrieve");
         }
-        return Response.status(Response.Status.OK).entity(successMessage).build();
+        return Response.status(Response.Status.OK).entity(successMessage.generateSuccessMessage()).build();
     }
 }
