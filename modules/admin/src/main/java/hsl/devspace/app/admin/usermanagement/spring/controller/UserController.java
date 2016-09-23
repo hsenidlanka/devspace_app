@@ -81,9 +81,6 @@ public class UserController {
 //        model.addObject("user",user);
         return model;
     }
-
-
-
 }
 
 //handler method to delete a user record
