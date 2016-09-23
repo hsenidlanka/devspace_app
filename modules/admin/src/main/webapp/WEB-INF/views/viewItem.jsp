@@ -1,4 +1,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,24 +55,24 @@
       <div class="row itemSearchBar">
         <div class="col-sm-1"></div>
         <div class="col-sm-3">
-          <label class="control-label" style="float: right;">
+          <form:label class="control-label" style="float: right;" path="lblItmNm">
             Item Name :
-          </label>
+          </form:label>
 
         </div>
         <div class="col-sm-4">
-          <input class="form-control" id="txtViewSearchItem" type="text">
+          <form:input class="form-control" id="txtViewSearchItem" type="text" path="txtSrchItem"> </form:input>
         </div>
         <div class="col-sm-3">
-          <button type="button" class="btn btn-success" id="btnViewSearchItem"><span
+          <form:button type="button" class="btn btn-success" id="btnViewSearchItem"><span
                   class="glyphicon glyphicon-search"></span> Search
-          </button>
+          </form:button>
         </div>
         <div class="col-sm-1"></div>
       </div>
       <br>
 
-      <form class="form-horizontal" role="form" id="frmViewItem">
+      <form:form class="form-horizontal" role="form" id="frmViewItem">
         <fieldset class="scheduler-border">
           <legend class="scheduler-border">Item Details</legend>
 
@@ -87,13 +89,13 @@
           <div class="col-sm-4"></div>
           <div class="col-sm-4"></div>
           <div class="col-sm-4">
-            <button type="button" class="btn btn-success" id="btnViewItemBack"><span
+            <form:button type="button" class="btn btn-success" id="btnViewItemBack"><span
                     class="glyphicon glyphicon-chevron-left"></span> Back to home
-            </button>
+            </form:button>
           </div>
         </div>
         <br>
-      </form>
+      </form:form>
     </div>
 
   </div>
@@ -104,28 +106,28 @@
   <div class="modal-dialog ">
     <div class="modal-content">
       <div class="modal-header item-modal-header-style">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
-                class="glyphicon glyphicon-remove"></span></button>
+        <form:button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
+                class="glyphicon glyphicon-remove"></span></form:button>
         <div align="center"><span class="glyphicon glyphicon-trash"></span> Delete Item
         </div>
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label id="lblDeltItmMsg">Do you really want to delete this Item ?</label><br><br>
+          <form:label id="lblDeltItmMsg" path="lbllDltItmMsg">Do you really want to delete this Item ?</form:label><br><br>
 
           <div align="center">
-            <label id="lblDeltItmId">Item ID : xxxxxx </label><br>
-            <label id="lblDeltItmName">Item Name : yyyyyy </label><br>
+            <form:label id="lblDeltItmId" path="lblDltItmId">Item ID : xxxxxx </form:label><br>
+            <form:label id="lblDeltItmName" path="lblDltItmName">Item Name : yyyyyy </form:label><br>
           </div>
         </div>
       </div>
 
       <div class="modal-footer" align="right">
-        <button class="btn btn-success" type="button" value="Yes" id="btnDeltItm">Yes
-        </button>
-        <button class="btn btn-success" type="button" value="cancel" id="btnCnclDeltItm">
+        <form:button class="btn btn-success" type="button" value="Yes" id="btnDeltItm">Yes
+        </form:button>
+        <form:button class="btn btn-success" type="button" value="cancel" id="btnCnclDeltItm">
           No
-        </button>
+        </form:button>
       </div>
     </div>
   </div>

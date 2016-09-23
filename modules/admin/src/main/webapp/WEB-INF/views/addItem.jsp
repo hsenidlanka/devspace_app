@@ -1,4 +1,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,75 +50,76 @@
     </div>
     <div class="panel-body">
 
-      <form class="form-horizontal" role="form" id="frmAddItem">
+      <form:form class="form-horizontal" role="form" id="frmAddItem" action="" method="post">
         <fieldset class="scheduler-border">
           <legend class="scheduler-border">(*) Fields are read only</legend>
 
 
           <div class="form-group">
             <div class="row">
-              <label for="selectCat" class="col-xs-3 control-label">
+              <form:label for="selectCat" class="col-xs-3 control-label" path="/item/addItem">
                 Category
-              </label>
+              </form:label>
 
               <div class="col-xs-5">
-                <select class="form-control" id="selectCat">
-                  <option>--Select Category--</option>
-                  <option>Pizza</option>
-                  <option>Pasta</option>
-                  <option>Salad / Appetizer</option>
-                  <option>Dessert</option>
-                  <option>Topping</option>
-                  <option>Crust</option>
-                </select>
+                <form:select class="form-control" id="selectCat" path="slctCat">
+                  <form:option value="0">--Select Category--</form:option>
+                  <form:option value="pizza">Pizza</form:option>
+                  <form:option value="pasta">Pasta</form:option>
+                  <form:option value="salad">Salad / Appetizer</form:option>
+                  <form:option value="dessert">Dessert</form:option>
+                  <form:option value="topping">Topping</form:option>
+                  <form:option value="crust">Crust</form:option>
+                </form:select>
                 <span id="catErr" class="input-group-error"></span>
               </div>
 
               <div class="col-xs-4">
-                <button type="button" class="btn btn-success" id="btnAddCat"
+                <form:button type="button" class="btn btn-success" id="btnAddCat"
                         onclick="window.location='addcategory.html'"><span
                         class="glyphicon glyphicon-plus"></span> Add New Category
-                </button>
+                </form:button>
               </div>
             </div>
           </div>
 
           <div class="form-group">
             <div class="row">
-              <label for="selectSubCat" class="col-xs-3 control-label">
+              <form:label path="" for="selectSubCat" class="col-xs-3 control-label">
                 Sub-category
-              </label>
+              </form:label>
 
               <div class="col-xs-5">
-                <select class="form-control" id="selectSubCat">
-                  <option>--Select sub-catrgory--</option>
-                  <option>Deep dish Pizza</option>
-                  <option>Italiano Pizza</option>
-                  <option>Gourmet</option>
-                  <option>NY Thin crust</option>
-                  <option>Big Pizza</option>
-                </select>
+                <form:select class="form-control" id="selectSubCat" path="slctSbcat">
+                  <form:option value="">--Select sub-catrgory--</form:option>
+                  <form:option value="">Deep dish Pizza</form:option>
+                  <form:option value="">Italiano Pizza</form:option>
+                  <form:option value="">Gourmet</form:option>
+                  <form:option value="">NY Thin crust</form:option>
+                  <form:option value="">Big Pizza</form:option>
+                </form:select>
                 <span id="subCatErr" class="input-group-error"></span>
               </div>
 
               <div class="col-xs-4">
-                <button type="button" class="btn btn-success" id="btnAddSubCat"
+                <form:button type="button" class="btn btn-success" id="btnAddSubCat"
                         onclick="window.location='addcategory.html'"><span
                         class="glyphicon glyphicon-plus"></span> Add
                   Sub-category
-                </button>
+                </form:button>
               </div>
             </div>
           </div>
 
           <div class="form-group">
             <div class="row">
-              <label for="txtItemId" class="col-xs-3 control-label">
+              <form:label for="txtItemId" class="col-xs-3 control-label" path="lblItmid">
                 Item ID *
-              </label>
+              </form:label>
 
               <div class="col-xs-5">
-                <input class="form-control" id="txtItemId" type="text" readonly>
+                <form:input class="form-control" id="txtItemId" type="text" path="itmId" readonly="true">
+                </form:input>
               </div>
               <div class="col-xs-4">
                 <span id="itmIdErr" class="input-group-error"></span>
@@ -126,12 +129,13 @@
 
           <div class="form-group">
             <div class="row">
-              <label for="txtItemName" class="col-xs-3 control-label">
+              <form:label for="txtItemName" class="col-xs-3 control-label" path="lblItmNm">
                 Item Name
-              </label>
+              </form:label>
 
               <div class="col-xs-5">
-                <input class="form-control" id="txtItemName" type="text">
+                <form:input class="form-control" id="txtItemName" type="text" path="txtItmNm">
+                </form:input>
               </div>
               <div class="col-xs-4">
                 <span id="itmNmErr" class="input-group-error"></span>
@@ -141,9 +145,9 @@
 
           <div class="form-group">
             <div class="row">
-              <label class="col-xs-3 control-label">
+              <form:label class="col-xs-3 control-label" path="lblItmprc">
                 Item Price
-              </label>
+              </form:label>
 
               <div class="col-xs-5">
 
@@ -159,39 +163,52 @@
                 <div class="row item-tbl-row" id="addItmChkbxReg">
 
                   <div class="col-xs-5">
-                    <label class="checkbox-inline"><input type="checkbox" value="" class="checkbox">Regular</label>
+                    <form:label class="checkbox-inline" path="lblchk1">
+                      <form:input type="checkbox" value="" class="checkbox" path="chk1"> Regular</form:input>
+                    </form:label>
                   </div>
                   <div class="col-xs-7">
-                    <input type="text" value="" class="form-control price">
+                    <form:input type="text" value="" class="form-control price" path="txtPrc1">
+                    </form:input>
                   </div>
                 </div>
 
                 <div class="row item-tbl-row" id="addItmChkbxMed">
 
                   <div class="col-xs-5">
-                    <label class="checkbox-inline"><input type="checkbox" value="" class="checkbox">Medium</label>
+                    <form:label class="checkbox-inline" path="lblchk2">
+                      <form:input type="checkbox" value="" class="checkbox" path="chk2"> Medium</form:input>
+                    </form:label>
                   </div>
                   <div class="col-xs-7">
-                    <input type="text" value="" class="form-control price">
+                    <form:input type="text" value="" class="form-control price" path="txtPrc2">
+                    </form:input>
                   </div>
                 </div>
 
                 <div class="row item-tbl-row" id="addItmChkbxLrg">
 
                   <div class="col-xs-5">
-                    <label class="checkbox-inline"><input type="checkbox" value="" class="checkbox">Large</label>
+                    <form:label class="checkbox-inline" path="lblchk3">
+                      <form:input type="checkbox" value="" class="checkbox" path="chk3"> Large
+                      </form:input>.
+                    </form:label>
                   </div>
                   <div class="col-xs-7">
-                    <input type="text" value="" class="form-control price">
+                    <form:input type="text" value="" class="form-control price" path="txtPrc3">
+                    </form:input>
                   </div>
                 </div>
 
                 <div class="row item-tbl-row" id="addItmChkbxOthr">
                   <div class="col-xs-5">
-                    <label class="checkbox-inline"><input type="checkbox" value="" class="checkbox">Other</label>
+                    <form:label class="checkbox-inline" path="lblchk4">
+                    <form:input type="checkbox" value="" class="checkbox" path="chk4"> Other</form:input>
+                    </form:label>
                   </div>
                   <div class="col-xs-7">
-                    <input type="text" value="" class="form-control price">
+                    <form:input type="text" value="" class="form-control price" path="txtPrc4">
+                    </form:input>
                   </div>
                 </div>
 
@@ -206,17 +223,17 @@
 
           <div class="form-group">
             <div class="row">
-              <label class="col-xs-3 control-label">
+              <form:label class="col-xs-3 control-label" path="lblType">
                 Item Type
-              </label>
+              </form:label>
 
               <div class="col-xs-5">
-                <label class="radio-inline">
-                  <input type="radio" name="optAddType">Veg
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optAddType">Non-veg
-                </label>
+                <form:label class="radio-inline" path="lblrd1">
+                  <form:input type="radio" name="optAddType" path="rd1"> Veg </form:input>
+                </form:label>
+                <form:label class="radio-inline" path="lblrd2">
+                  <form:input type="radio" name="optAddType" path="rd2">Non-veg </form:input>
+                </form:label>
               </div>
 
               <div class="col-xs-4">
@@ -227,15 +244,15 @@
 
           <div class="form-group">
             <div class="row">
-              <label for="btnUpldImage" class="col-xs-3 control-label">
+              <form:label for="btnUpldImage" class="col-xs-3 control-label" path="lblbtnupld">
                 Add Image/s
-              </label>
+              </form:label>
 
               <div class="col-xs-5">
-                <button type="button" class="btn btn-success" id="btnUpldImage">
+                <form:button type="button" class="btn btn-success" id="btnUpldImage">
                   <span class="glyphicon glyphicon-upload"></span> Browse to Upload
                   Images
-                </button>
+                </form:button>
               </div>
               <div class="col-xs-4">
                 <span id="itmImgErr" class="input-group-error"> </span>
@@ -245,12 +262,13 @@
 
           <div class="form-group">
             <div class="row">
-              <label for="txtDesc" class="col-xs-3 control-label">
+              <form:label for="txtDesc" class="col-xs-3 control-label" path="lbldesc">
                 Description
-              </label>
+              </form:label>
 
               <div class="col-xs-5">
-                <textarea class="form-control" rows="5" id="txtdesc"></textarea>
+                <form:textarea class="form-control" rows="5" id="txtdesc" path="txtarea">
+                </form:textarea>
               </div>
             </div>
           </div>
@@ -263,23 +281,23 @@
             <div class="col-xs-3">
             </div>
             <div class="col-xs-3" align="right">
-              <button type="button" class="btn btn-success btn-group-xs bckToHome"
-                      id=Back"><span
+              <form:button type="button" class="btn btn-success btn-group-xs bckToHome"
+                      id="Back"><span
                       class="glyphicon glyphicon-chevron-left"></span> back to home
-              </button>
+              </form:button>
             </div>
             <div class="col-xs-3" align="center">
-              <button type="button" class="btn btn-success btn-group-xs" id="btnAddItem"><span
+              <form:button type="button" class="btn btn-success btn-group-xs" id="btnAddItem"><span
                       class="glyphicon glyphicon-plus"></span> Add
                 Item
-              </button>
+              </form:button>
             </div>
             <div class="col-xs-3" align="left">
-              <button type="button" class="btn btn-success" id="btnAddClear" onclick="this.form.reset();">Clear</button>
+              <form:button type="button" class="btn btn-success" id="btnAddClear" onclick="this.form.reset();">Clear</form:button>
             </div>
           </div>
         </fieldset>
-      </form>
+      </form:form>
     </div>
   </div>
 </div>
