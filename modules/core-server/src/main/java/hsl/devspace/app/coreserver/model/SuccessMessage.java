@@ -10,7 +10,6 @@ import java.util.*;
  * Created by Kasun Dinesh on 7/8/16.
  * This is the model/template of the success message to pass as a response.
  */
-
 @JsonPropertyOrder({"status", "code", "message", "data", "links"})
 public class SuccessMessage {
     private String status;
