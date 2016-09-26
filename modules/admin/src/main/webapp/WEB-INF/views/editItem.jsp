@@ -71,7 +71,7 @@
             </div>
             <br>
 
-            <form:form class="form-horizontal" role="form" id="frmEditItem">
+            <form:form class="form-horizontal" role="form" id="frmEditItem" action="/edit_item" method="post">
                 <fieldset class="scheduler-border">
                     <legend class="scheduler-border">(*) Fields are read only</legend>
 
@@ -84,8 +84,7 @@
                                     </label>
                                 </div>
                                 <div class="col-xs-8">
-                                    <form:input class="form-control" id="txtEditID" type="text" readonly="true"
-                                                path="txtEditID"></form:input>
+                                    <form:input class="form-control" id="txtEditID" type="text" readonly="true" path="txtEditID"></form:input>
                                 </div>
 
                             </div>
@@ -96,8 +95,7 @@
                                     </form:label>
                                 </div>
                                 <div class="col-xs-9">
-                                    <form:input class="form-control" id="txtEditeName" type="text"
-                                                path="txteditNm"></form:input>
+                                    <form:input class="form-control" id="txtEditName" type="text" path="txteditNm"></form:input>
                                 </div>
                             </div>
                         </div>
