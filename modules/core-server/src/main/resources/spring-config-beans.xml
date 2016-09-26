@@ -13,4 +13,14 @@
         <property name="transactionManager" ref="transactionManager"/>
     </bean>
 
+    <bean id="categoryRepoImpl" class="hsl.devspace.app.corelogic.repository.category.CategoryRepositoryImpl">
+        <property name="dataSource" ref="productionDataSource"/>
+        <property name="transactionManager" ref="transactionManager"/>
+    </bean>
+
+    <bean id="feedbackRepoImpl" class="hsl.devspace.app.corelogic.repository.feedback.FeedbackRepositoryImpl">
+        <property name="dataSource" ref="productionDataSource"/>
+        <property name="transactionManager" ref="transactionManager"/>
+    </bean>
+
 </beans>

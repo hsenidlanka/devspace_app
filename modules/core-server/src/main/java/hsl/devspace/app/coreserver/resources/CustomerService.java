@@ -109,7 +109,6 @@ public class CustomerService {
         if (userData.size() != 0) {
             successMessage.setMessage("customer data retrieved");
             for (Map<String, Object> map : userData) {
-                User u = new User();
                 jsonObject.put("title", map.get("title").toString());
                 jsonObject.put("firstName", map.get("first_name").toString());
                 jsonObject.put("lastName", map.get("last_name").toString());
