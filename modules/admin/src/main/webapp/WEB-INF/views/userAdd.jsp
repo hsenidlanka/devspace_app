@@ -38,9 +38,9 @@
 <div class="breadcrumbPosition">
   <div style="position: relative; left: -50%;">
     <ul class="breadcrumb breadcrumb-menu" >
-      <li><a href="https://localhost:8443/users/list">Home</a></li>
-      <li><a href="https://localhost:8443/users/list">User Management</a></li>
-      <li class="active"><a href="https://localhost:8443/users/add">Add User</a></li>
+      <li><a href="https://localhost:8443/admin/users/list">Home</a></li>
+      <li><a href="https://localhost:8443/admin/users/list">User Management</a></li>
+      <li class="active"><a href="https://localhost:8443/admin/users/add">Add User</a></li>
     </ul>
   </div>
 </div>

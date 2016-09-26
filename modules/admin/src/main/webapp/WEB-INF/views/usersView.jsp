@@ -32,9 +32,9 @@
 <div class="breadcrumbPosition">
     <div style="position: relative; left: -50%;">
         <ul class="breadcrumb breadcrumb-menu">
-            <li><a href="home.jsp">Home</a></li>
-            <li><a href="usersView.jsp">User Management</a></li>
-            <li class="active"><a href="usersView.jsp">View Users</a></li>
+            <li><a href="https://localhost:8443/admin/users/list">Home</a></li>
+            <li><a href="https://localhost:8443/admin/users/list">User Management</a></li>
+            <li class="active"><a href="https://localhost:8443/admin/users/view">View Users</a></li>
         </ul>
     </div>
 </div>

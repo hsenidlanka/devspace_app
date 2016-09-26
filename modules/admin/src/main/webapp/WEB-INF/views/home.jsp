@@ -34,13 +34,13 @@
           <div class="panel-body">
             <ul class="nav navbar-nav">
               <li>
-                <a href="https://localhost:8443/items/view_item" class="panel-sub-menu1">View Item</a>
+                <a href="https://localhost:8443/admin/items/view_item" class="panel-sub-menu1">View Item</a>
               </li>
               <li>
-                <a href="https://localhost:8443/items/add_item" class="panel-sub-menu1">Add Item</a>
+                <a href="https://localhost:8443/admin/items/add_item" class="panel-sub-menu1">Add Item</a>
               </li>
               <li>
-                <a href="https://localhost:8443/items/edit_item" class="panel-sub-menu1">Edit Item</a>
+                <a href="https://localhost:8443/admin/items/edit_item" class="panel-sub-menu1">Edit Item</a>
               </li>
             </ul>
           </div>
@@ -103,13 +103,13 @@
           <div class="panel-body">
             <ul class="nav navbar-nav">
               <li>
-                <a href="https://localhost:8443/users/add" class="panel-sub-menu1">Add Users</a>
+                <a href="https://localhost:8443/admin/users/add" class="panel-sub-menu1">Add Users</a>
               </li>
               <li>
-                <a href="https://localhost:8443/users/view" class="panel-sub-menu1">View Users</a>
+                <a href="https://localhost:8443/admin/users/view" class="panel-sub-menu1">View Users</a>
               </li>
               <li>
-                <a href="https://localhost:8443/users/viewBlocked" class="panel-sub-menu1">Blocked Users</a>
+                <a href="https://localhost:8443/admin/users/viewBlocked" class="panel-sub-menu1">Blocked Users</a>
               </li>
             </ul>
           </div>

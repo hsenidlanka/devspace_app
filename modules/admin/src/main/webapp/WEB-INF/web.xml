@@ -53,7 +53,7 @@
         </init-param>
         <init-param>
             <param-name>service</param-name>
-            <param-value>https://localhost:8443/users/list</param-value>
+            <param-value>https://localhost:8443/admin/users/list</param-value>
         </init-param>
     </filter>
     <filter-mapping>

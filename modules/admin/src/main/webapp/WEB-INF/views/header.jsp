@@ -21,7 +21,7 @@
     </style>
     <div>
 
-        <a href="https://localhost:8443/users/list"><img id="logo" src="/themes/hsenid/images/logo.png" alt="logo" style="width:100px;height:130px;"/></a>
+        <a href="https://localhost:8443/admin/users/list"><img id="logo" src="/themes/hsenid/images/logo.png" alt="logo" style="width:100px;height:130px;"/></a>
     </div>
 
     <div>
