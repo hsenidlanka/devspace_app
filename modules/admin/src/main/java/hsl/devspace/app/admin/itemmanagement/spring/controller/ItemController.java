@@ -1,5 +1,6 @@
 package hsl.devspace.app.admin.itemmanagement.spring.controller;
 
+import hsl.devspace.app.corelogic.domain.Item;
 import hsl.devspace.app.corelogic.repository.item.ItemRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.sql.SQLIntegrityConstraintViolationException;
@@ -22,36 +24,46 @@ public class ItemController {
     @Autowired
     private ItemRepository item;
 
-/**
+    /**
      * Add new item view
-     **/
+     */
 
+    //For viewing the add item form
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public ModelAndView showAddItem() {
+        return new ModelAndView("itemAdd", "command", new Item());
+    }
+
+    //For submitting the add new item
     @RequestMapping(value = "/add_item")
+    public ModelAndView addItem(@ModelAttribute("addItem") hsl.devspace.app.corelogic.domain.Item newItem) throws SQLIntegrityConstraintViolationException {
+        ModelAndView model = new ModelAndView();
 
-    public ModelAndView addItem(@ModelAttribute("addItem")hsl.devspace.app.corelogic.domain.Item newItem) throws SQLIntegrityConstraintViolationException {
-        ModelAndView model = new ModelAndView() ;
-        /*List<Item> items=new ArrayList<Item>();
-        items.add(newItem);*/
         int a = item.add(newItem);
-
-        if(a==1)
+        if (a == 1)
             model.setViewName("addItem");
         else
             System.out.println("Error in item add");
 
-      return model;
+        return model;
     }
 
-/**
+    /**
      * View Item details view
-     **/
+     */
+
+    //For view the search item form
+    @RequestMapping(value = "/view", method = RequestMethod.GET)
+    public ModelAndView showItemView() {
+        return new ModelAndView("itemView", "command", new Item());
+    }
 
     @RequestMapping(value = "/view_item")
-    public ModelAndView viewItem(@ModelAttribute("viewItem")hsl.devspace.app.corelogic.domain.Item viewItem) throws SQLIntegrityConstraintViolationException {
-       ModelAndView model = new ModelAndView();
+    public ModelAndView view(@ModelAttribute("viewItem") hsl.devspace.app.corelogic.domain.Item viewItem) throws SQLIntegrityConstraintViolationException {
+        ModelAndView model = new ModelAndView();
         List<Map<String, Object>> x = item.view();
 
-        if(x != null)
+        if (x != null)
             model.setViewName("viewItem");
         else
             System.out.println("Error in viewing item");
@@ -59,12 +71,12 @@ public class ItemController {
         return model;
     }
 
-/**
+    /**
      * Edit Item view
-     **/
+     */
 
     @RequestMapping(value = "/edit_item")
-    public ModelAndView editItem(@ModelAttribute("editItem")hsl.devspace.app.corelogic.domain.Item editItem) throws SQLIntegrityConstraintViolationException {
+    public ModelAndView editItem(@ModelAttribute("editItem") hsl.devspace.app.corelogic.domain.Item editItem) throws SQLIntegrityConstraintViolationException {
 
         ModelAndView model = new ModelAndView();
         /*int y = item.update(editItem.n);*/
@@ -74,8 +86,8 @@ public class ItemController {
     }
 
 /**
-     * Delete Item view
-     **/
+ * Delete Item view
+ **/
 
 }
 

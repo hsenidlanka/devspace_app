@@ -90,7 +90,6 @@ public class UserController {
         userRepository.delete(uname);
         return new ModelAndView("redirect:/");
     }
-
     //handler method to retrieve the details of a particular user
     @RequestMapping(value = "/userDetail", method = RequestMethod.GET)
     public ModelAndView viewUser(HttpServletRequest request){
@@ -100,6 +99,3 @@ public class UserController {
         model.addObject("user",user);
         return model;
     }*/
-
-
-
