@@ -108,12 +108,19 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
         return mp;
     }
 
-    public List<Map<String,Object>> retrieveCategoryTypes(String categoryName){
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT name FROM type WHERE type_id=" +
-                "(SELECT type_id FROM category_type WHERE category_id=" +
-                "(SELECT id FROM category WHERE name=?))",categoryName);
-        log.info(mp);
+    public List<Map<String, Object>> retrieveCategoryTypes(String categoryName){
+
+        List<Map<String, Object>> mp1=jdbcTemplate.queryForList("SELECT id FROM category WHERE name=?", categoryName);
+        List<Map<String, Object>> mp2=jdbcTemplate.queryForList("SELECT type_id FROM category_type WHERE category_id=?",mp1.get(0).get("id"));
+        List<Map<String, Object>> mp=null;
+        for(int i=0;i<mp2.size();i++) {
+             mp = jdbcTemplate.queryForList("SELECT name FROM type WHERE type_id=?", mp2.get(i).get("type_id"));
+            log.info(mp);
+        }
         return mp;
+        /*List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT name FROM type WHERE type_id=" +"(SELECT type_id FROM category_type WHERE category_id=" + "(SELECT id FROM category WHERE name=?))",categoryName);
+        log.info(mp);*/
+
     }
 
     @Override

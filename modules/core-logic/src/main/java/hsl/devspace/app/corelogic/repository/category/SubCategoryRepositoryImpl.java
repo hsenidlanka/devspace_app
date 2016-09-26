@@ -133,5 +133,6 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
     @Override
     public List<Map<String, Object>> retrieveCategoryTypes(String categoryName) {
         return null;
+
     }
 }
