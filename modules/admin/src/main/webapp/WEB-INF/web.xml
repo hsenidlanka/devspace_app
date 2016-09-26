@@ -23,7 +23,6 @@
         <listener-class>org.jasig.cas.client.session.SingleSignOutHttpSessionListener</listener-class>
     </listener>
 
-
     <!--
         - Location of the XML file that defines the root application context is initiated by
         - ContextLoaderListener.

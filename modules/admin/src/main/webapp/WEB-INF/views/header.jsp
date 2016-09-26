@@ -26,4 +26,5 @@
     <div>
         <a id="logout" href="#">Log Out</a>
     </div>
+
 </div>
