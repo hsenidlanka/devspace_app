@@ -39,7 +39,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 
         if (availability == false) {
             String sql = "INSERT INTO item" +
-                    "(name,description,type,image,sub_category_id) VALUES (?,?,?,?,(SELECT id FROM sub_category WHERE name=?))";
+                    "(name,description,type_id,image,sub_category_id) VALUES (?,?,(SELECT type_id FROM type WHERE name=? ),?,(SELECT id FROM sub_category WHERE name=?))";
             row = jdbcTemplate.update(sql, new Object[]{item.getItemName(),item.getDescription(),
                     item.getType(),item.getImage(),item.getSubCategoryName()});
             log.info(row + "new item inserted");
