@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `pizza_shefu` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `pizza_shefu`;
--- MySQL dump 10.13  Distrib 5.7.9, for linux-glibc2.5 (x86_64)
+-- MySQL dump 10.13  Distrib 5.6.31, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: pizza_shefu
 -- ------------------------------------------------------
--- Server version	5.7.11
+-- Server version	5.6.31-0ubuntu0.15.10.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -34,6 +34,20 @@ CREATE TABLE `category` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `category_type`
+--
+
+DROP TABLE IF EXISTS `category_type`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `category_type` (
+  `category_id` int(10) NOT NULL,
+  `type_id` int(10) NOT NULL,
+  PRIMARY KEY (`category_id`,`type_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `coupon`
 --
 
@@ -47,9 +61,8 @@ CREATE TABLE `coupon` (
   `expire_date` date DEFAULT NULL,
   `status` enum('active','used','expired') NOT NULL,
   `customer_mobile` varchar(45) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `coupon_code_UNIQUE` (`coupon_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,15 +80,15 @@ CREATE TABLE `customer` (
   `username` varchar(50) NOT NULL,
   `password` varchar(500) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `address_line1` varchar(100) NOT NULL,
-  `address_line2` varchar(100) NOT NULL,
+  `address_line1` varchar(100) DEFAULT NULL,
+  `address_line2` varchar(100) DEFAULT NULL,
   `address_line3` varchar(100) DEFAULT NULL,
   `mobile` varchar(15) NOT NULL,
   `registered_date` date NOT NULL,
   `status` enum('active','inactive') NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -229,11 +242,14 @@ CREATE TABLE `item` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `description` varchar(500) NOT NULL,
-  `type` enum('carbonate','non-carbonate','veg','non-veg') NOT NULL,
+  `type_id` int(10) NOT NULL,
   `image` varchar(500) DEFAULT NULL,
   `sub_category_id` int(10) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`id`),
+  KEY `fk_item_1_idx` (`type_id`),
+  KEY `fk_item$type_idx` (`type_id`),
+  CONSTRAINT `fk_item$type` FOREIGN KEY (`type_id`) REFERENCES `type` (`type_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -464,12 +480,12 @@ CREATE TABLE `staff` (
   `title` varchar(20) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(1000) NOT NULL,
-  `first_name` varchar(50) NOT NULL,
-  `last_name` varchar(50) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `mobile` varchar(15) NOT NULL,
-  `address_line1` varchar(100) NOT NULL,
-  `address_line2` varchar(100) NOT NULL,
+  `first_name` varchar(50) DEFAULT NULL,
+  `last_name` varchar(50) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `mobile` varchar(15) DEFAULT NULL,
+  `address_line1` varchar(100) DEFAULT NULL,
+  `address_line2` varchar(100) DEFAULT NULL,
   `address_line3` varchar(100) DEFAULT NULL,
   `designation` varchar(50) NOT NULL,
   `department` varchar(50) NOT NULL,
@@ -499,6 +515,20 @@ CREATE TABLE `sub_category` (
   CONSTRAINT `fk_sub_category_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `type`
+--
+
+DROP TABLE IF EXISTS `type`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `type` (
+  `type_id` int(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL,
+  PRIMARY KEY (`type_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -509,4 +539,4 @@ CREATE TABLE `sub_category` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-09-23 13:53:07
+-- Dump completed on 2016-09-26 14:46:39
