@@ -103,6 +103,11 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
         log.info(mp);
         return mp;
     }
+    public List<Map<String, Object>>  retrieveSubcatogories(String category){
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT name FROM sub_category WHERE category_id=(SELECT id FROM category WHERE NAME =?)",category);
+        log.info(mp);
+        return mp;
+    }
 
     @Override
     @Transactional
