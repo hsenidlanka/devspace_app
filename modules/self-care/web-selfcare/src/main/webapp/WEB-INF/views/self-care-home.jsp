@@ -152,7 +152,7 @@
                             <p><img src="<c:url value="/resources/images/contact.png"/>" alt=""></p>
                         </li>
                         <li>
-                            <input type="password" name="website" class="textbox2" placeholder="password">
+                            <input type="password" name="password" class="textbox2" placeholder="password">
 
                             <p><img src="<c:url value="/resources/images/lock.png"/>" alt=""></p>
                         </li>

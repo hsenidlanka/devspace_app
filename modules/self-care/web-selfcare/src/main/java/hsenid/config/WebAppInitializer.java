@@ -7,8 +7,8 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     protected String[] getServletMappings(){
-        String log4jConfigFile = "/log4j2-test.xml";
-        PropertyConfigurator.configure(log4jConfigFile);
+//        String log4jConfigFile = "/log4j2-test.xml";
+//        PropertyConfigurator.configure(log4jConfigFile);
         return new String[]{"/"};
     }
 

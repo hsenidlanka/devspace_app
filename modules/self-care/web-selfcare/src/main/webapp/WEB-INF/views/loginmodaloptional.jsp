@@ -4,15 +4,15 @@
     <h1 style="font-size: larger;color: #22ca1f">Login Into Your Account!</h1>
     <ul>
         <li>
-            <input type="text" class="textbox1" name="email" placeholder="username" required/>
+            <input type="text" class="textbox1" name="" placeholder="username" required/>
             <span class="form_hint">Enter a valid username</span>
 
             <p><img src="<c:url value="/resources/images/contact.png"/>" alt=""></p>
         </li>
         <li>
-            <input type="password" name="website" class="textbox2" placeholder="password">
+            <input type="password" name="" class="textbox2" placeholder="password">
 
-            <p><img src="<c:url value="/resources/images/contact.png"/>" "../images/lock.png" alt=""></p>
+            <p><img src="<c:url value="/resources/images/contact.png"/>"></p>
         </li>
     </ul>
     <input type="submit" name="Sign In" value="Log In"/>
