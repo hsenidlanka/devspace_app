@@ -1,5 +1,7 @@
 package hsenid.web;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -7,13 +9,19 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 
 public class HomeController {
+
+    private final static Logger logger = LogManager.getLogger(HomeController.class);
+
+
     @RequestMapping({"/", "/home"})
     public String home() {
+        logger.error("test");
         return "self-care-home";
     }
 
     @RequestMapping("/menu")
     public String menu() {
+        logger.info("DBConnecter connection created");
         return "menu";
     }
 

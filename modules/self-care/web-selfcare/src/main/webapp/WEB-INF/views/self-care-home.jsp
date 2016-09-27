@@ -18,43 +18,8 @@
 </head>
 <!-------Header------------------------------------->
 <body>
+<%@include file="NewHeader.jsp" %>
 
-<nav class="navbar navbar-default ">
-    <div class="container-fluid">
-        <div class="col-sm-4"><a href="home"> <img src="<c:url value="/resources/images/logo.png"/>" style="width:75px;height:65px;"></a></div>
-
-        <div style="padding: 10px"></div>
-        <div>
-
-        </div>
-        <div class="col-sm-8">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="menu">Menu</a></li>
-                <li><a href="locations">Locations</a></li>
-                <li><a href="createfeedback">Feedbacks</a></li>
-                <li><a href="contactus">Contact Us</a></li>
-                <li><a href="aboutus">About us</a></li>
-                <li>
-
-                    <a href="shopping-cart.html"><img src="<c:url value="/resources/images/shopping-cart.png"/>"
-                                                      style="padding-left: 30px"></a>
-                </li>
-                <li>
-                    <a class="form-group" data-toggle="modal" data-target="#modal-signup"><img
-                            src="<c:url value="/resources/images/signup.png"/>" style=""></span>
-                    </a>
-                </li>
-
-                <li>
-
-                    <a class="form-group-sm" data-toggle="modal" data-target="#modal-login"><img src="<c:url value="/resources/images/user2.png"/>" style=""></span> </a>
-
-                </li>
-            </ul>
-        </div>
-    </div>
-
-</nav>
 
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
@@ -130,9 +95,10 @@
         </span>
     </div>
 </div>
-<!------------------------------login modal--------------------------->
 
-<div id="modal-login" class="modal fade">
+
+
+<%--<div id="modal-login" class="modal fade">
     <div class="modal-dialog modal-lg">
         <div class="modal-content" style="width: 750px">
             <div class="modal-header">
@@ -142,26 +108,26 @@
             <div class="modal-body">
 
 
-                <form:form class="contact_form" action="test" method="post" >
+                <form class="contact_form" action="test" method="post" >
 
                     <h1 style="font-size: larger;color: #22ca1f">Login Into Your Account!</h1>
                     <ul>
                         <li>
-                            <%--<form:input type="text" class="textbox1" name="email" placeholder="username" path="username"/>--%>
-                                <form:input path="username"/>
+                            &lt;%&ndash;<form:input type="text" class="textbox1" name="email" placeholder="username" path="username"/>&ndash;%&gt;
+                                &lt;%&ndash;<form:input path="username"/>&ndash;%&gt;
                             <span class="form_hint">Enter a valid username</span>
 
                             <p><img src="<c:url value="/resources/images/contact.png"/>" alt=""></p>
                         </li>
                         <li>
-                            <%--<form:input type="password" name="website" class="textbox2" placeholder="password" path="password"/>--%>
+                            &lt;%&ndash;<form:input type="password" name="website" class="textbox2" placeholder="password" path="password"/>&ndash;%&gt;
 
-                                <form:input path="password"/>
+                                &lt;%&ndash;<form:input path="password"/>&ndash;%&gt;
                             <p><img src="<c:url value="/resources/images/lock.png"/>" alt=""></p>
                         </li>
                     </ul>
-                    <%--<input type="submit" name="Sign In" value="Log In"/>--%>
-                    <form:button>Log In</form:button>
+                    &lt;%&ndash;<input type="submit" name="Sign In" value="Log In"/>&ndash;%&gt;
+                    <button>Log In</button>
 
                     <div class="clear"></div>
                     <label class="checkbox"><input type="checkbox" name="checkbox" checked><i></i>Remember
@@ -171,7 +137,7 @@
                         <a href="forgotpassword">forgot password?</a>
                     </div>
                     <div class="clear"></div>
-                </form:form>                
+                </form>
                 <!-- end-form -->
 
 
@@ -215,7 +181,7 @@
 
         </div>
     </div>
-</div>
+</div>--%>
 
 <!-------Footer------------------------------------->
 

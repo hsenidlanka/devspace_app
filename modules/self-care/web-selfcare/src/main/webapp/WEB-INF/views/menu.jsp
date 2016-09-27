@@ -11,7 +11,7 @@
 
 </head>
 <body>
-<%@include file="headertest2.jsp" %>
+<%@include file="NewHeader.jsp" %>
 
 <div id="myToast" class="toast-popup"></div>
 <div class="loader-anim"></div>
