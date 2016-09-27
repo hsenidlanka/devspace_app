@@ -15,11 +15,13 @@
         <relativePath>../parent/pom.xml</relativePath>
     </parent>
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/com.mchange/c3p0 -->
         <dependency>
-            <groupId>c3p0</groupId>
+            <groupId>com.mchange</groupId>
             <artifactId>c3p0</artifactId>
-            <version>${c3p0.version}</version>
+            <version>0.9.5.2</version>
         </dependency>
+
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
