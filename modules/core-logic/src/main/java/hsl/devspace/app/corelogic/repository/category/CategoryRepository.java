@@ -19,7 +19,6 @@ public interface CategoryRepository {
     int count();
     int update(String name,String description);
     List<Map<String, Object>> viewList();
-    void createCategory(Category cat);
     void createCategory1(Category cat);
     List<Map<String, Object>> retrieveCategoryTypes(String categoryName);
 

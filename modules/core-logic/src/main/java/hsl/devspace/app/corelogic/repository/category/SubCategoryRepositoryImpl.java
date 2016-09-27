@@ -6,7 +6,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.sql.DataSource;
@@ -109,12 +108,6 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
         return mp;
     }
 
-    @Override
-    @Transactional
-    public void createCategory(Category cat) {
-        add(cat);
-
-    }
 
     @Override
     public void createCategory1(Category cat) {
