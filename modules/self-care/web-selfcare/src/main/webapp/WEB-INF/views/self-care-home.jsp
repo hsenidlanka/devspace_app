@@ -133,35 +133,31 @@
 <!------------------------------login modal--------------------------->
 
 <div id="modal-login" class="modal fade">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg"  >
         <div class="modal-content" style="width: 750px">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">x</button>
+                <button type="button" class="close" data-dismiss="modal" >x</button>
                 <p class="modal-title" style="font-size: x-large">Log In</p>
             </div>
-            <div class="modal-body">
-
-
-                <form:form class="contact_form" action="test" method="post" >
+            <div class="modal-body" >
+                <!--<div w3-include-html="loginmodaloptional.html"></div>-->
+                <form class="contact_form" action="login" method="post" name="contact_form">
 
                     <h1 style="font-size: larger;color: #22ca1f">Login Into Your Account!</h1>
                     <ul>
                         <li>
-                            <%--<form:input type="text" class="textbox1" name="email" placeholder="username" path="username"/>--%>
-                                <form:input path="username"/>
+                            <input type="text" class="textbox1" name="username" placeholder="username" required/>
                             <span class="form_hint">Enter a valid username</span>
 
                             <p><img src="<c:url value="/resources/images/contact.png"/>" alt=""></p>
                         </li>
                         <li>
-                            <%--<form:input type="password" name="website" class="textbox2" placeholder="password" path="password"/>--%>
+                            <input type="password" name="website" class="textbox2" placeholder="password">
 
-                                <form:input path="password"/>
                             <p><img src="<c:url value="/resources/images/lock.png"/>" alt=""></p>
                         </li>
                     </ul>
-                    <%--<input type="submit" name="Sign In" value="Log In"/>--%>
-                    <form:button>Log In</form:button>
+                    <input type="submit" name="Sign In" value="Log In"/>
 
                     <div class="clear"></div>
                     <label class="checkbox"><input type="checkbox" name="checkbox" checked><i></i>Remember
@@ -171,7 +167,88 @@
                         <a href="forgotpassword">forgot password?</a>
                     </div>
                     <div class="clear"></div>
-                </form:form>                
+                </form>
+                <!-- end-form -->
+
+                <!-- start-account -->
+                <div class="account">
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <h2><a class="form-group-sm" data-toggle="modal" data-target="#modal-signup" data-dismiss="modal">Don' have an account?</a></h2>
+                        </div>
+
+                    </div>
+
+                    <div class="span"><a href="#"><img src="<c:url value="/resources/images/facebook.png"/>" alt=""/><i>Sign In with
+                        Facebook</i>
+
+                        <div class="clear"></div>
+                    </a></div>
+                    <div class="span1"><a href="#"><img src="<c:url value="/resources/images/twitter.png"/>" alt=""/><i>Sign In with
+                        Twitter</i>
+
+                        <div class="clear"></div>
+                    </a></div>
+                    <div class="span2"><a href="#"><img src="<c:url value="/resources/images/gplus.png"/>" alt=""/><i>Sign In with
+                        Google+</i>
+
+                        <div class="clear"></div>
+                    </a></div>
+                </div>
+
+                <!-- end-account -->
+                <div class="clear"></div>
+
+
+                <%--<script src="../js/w3data.js"></script>
+                <script>
+                    w3IncludeHTML();
+                </script>--%>
+            </div>
+
+        </div>
+    </div>
+</div>
+<%--<div id="modal-login" class="modal fade">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="width: 750px">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">x</button>
+                <p class="modal-title" style="font-size: x-large">Log In</p>
+            </div>
+            <div class="modal-body">
+
+
+                <form class="contact_form" action="test" method="post" >
+
+                    <h1 style="font-size: larger;color: #22ca1f">Login Into Your Account!</h1>
+                    <ul>
+                        <li>
+                            &lt;%&ndash;<form:input type="text" class="textbox1" name="email" placeholder="username" path="username"/>&ndash;%&gt;
+                                &lt;%&ndash;<form:input path="username"/>&ndash;%&gt;
+                            <span class="form_hint">Enter a valid username</span>
+
+                            <p><img src="<c:url value="/resources/images/contact.png"/>" alt=""></p>
+                        </li>
+                        <li>
+                            &lt;%&ndash;<form:input type="password" name="website" class="textbox2" placeholder="password" path="password"/>&ndash;%&gt;
+
+                                &lt;%&ndash;<form:input path="password"/>&ndash;%&gt;
+                            <p><img src="<c:url value="/resources/images/lock.png"/>" alt=""></p>
+                        </li>
+                    </ul>
+                    &lt;%&ndash;<input type="submit" name="Sign In" value="Log In"/>&ndash;%&gt;
+                    <button>Log In</button>
+
+                    <div class="clear"></div>
+                    <label class="checkbox"><input type="checkbox" name="checkbox" checked><i></i>Remember
+                    </label>
+
+                    <div class="forgot">
+                        <a href="forgotpassword">forgot password?</a>
+                    </div>
+                    <div class="clear"></div>
+                </form>
                 <!-- end-form -->
 
 
@@ -215,7 +292,7 @@
 
         </div>
     </div>
-</div>
+</div>--%>
 
 <!-------Footer------------------------------------->
 
