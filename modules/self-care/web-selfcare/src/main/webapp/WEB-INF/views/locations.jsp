@@ -37,28 +37,28 @@
 </div>
 <div class="col-sm-2"></div>
 <div class="col-sm-5">
-    <p style="color: #c09853;font-size: x-large">location</p>
+    <p style="color: #c09853;font-size: x-large"><fmt:message key="location" bundle="${lang}"/></p>
 </div>
 <div class="col-sm-3"></div>
 <div class="col-sm-4 location">
-    <p>PizzaShefu </p>
-    <p>Ward Place</p>
-    <p> Colombo 7</p>
-    <p> Sri Lanka</p>
+    <p><fmt:message key="location.pizzashefu" bundle="${lang}"/></p>
+    <p><fmt:message key="location.ward" bundle="${lang}"/></p>
+    <p><fmt:message key="location.colombo" bundle="${lang}"/></p>
+    <p><fmt:message key="location.sri" bundle="${lang}"/></p>
 </div>
 <div class="col-sm-2"></div>
 <div class="col-sm-4" style="padding-top: 40px">
-    <p style="color: #c09853;font-size: x-large">hotline</p>
+    <p style="color: #c09853;font-size: x-large"><fmt:message key="footer.hotline" bundle="${lang}"/></p>
 </div>
 <div class="col-sm-3"></div>
 <div class="col-sm-4 location">
-    <p>(+94)011-25432343</p>
-    <p>(+94)011-25432344</p>
+    <p><fmt:message key="location.num1" bundle="${lang}"/></p>
+    <p><fmt:message key="location.num2" bundle="${lang}"/></p>
 
 </div>
 
 
-<a href="http://gazpo.com/downloads/tutorials/jquery/scrolltop/#" class="scrollup" style="display: none;">Scroll</a>
+<a href="http://gazpo.com/downloads/tutorials/jquery/scrolltop/#" class="scrollup" style="display: none;"><fmt:message key="location.scroll" bundle="${lang}"/></a>
 
 <%@include file="loginload.jsp" %>
 <%@include file="signupmodal.jsp" %>

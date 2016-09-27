@@ -19,15 +19,12 @@
         <div>
             <div class="panel panel-success col-sm-2" style="width: 700px">
                 <div class="panel-heading" style="height: 50px">
-                    <p style="font-size: xx-large;text-align: left">About Us</p>
+                    <p style="font-size: xx-large;text-align: left"><fmt:message key="aboutus" bundle="${lang}"/></p>
                 </div>
                 <div class="panel-body">
                     <form role="form" id="adduser_form" action="" method="post" class="form-horizontal">
                         <p style="font-size: x-large">
-                            PizzaShefu,We are the best pizza provider in Sri Lanka for the all recent years.We are
-                            dedicated to make pizzas that satisfy your taste buds.Not only Pizza but we are
-                            rich with different kind of delicious appetizers,pastas,beverages and many more
-                            yummy varieties from all around the globe.
+                            <fmt:message key="aboutus.content" bundle="${lang}"/>
                         </p>
 
                     </form>

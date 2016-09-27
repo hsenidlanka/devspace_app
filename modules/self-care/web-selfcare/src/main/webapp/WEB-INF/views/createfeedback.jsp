@@ -95,7 +95,7 @@
 
             <div class="panel panel-success" style="width: 800px">
                 <div class="panel-heading" style="height: 50px">
-                    <p style="font-size: xx-large;text-align: left">Create Feedback</p>
+                    <p style="font-size: xx-large;text-align: left"><fmt:message key="feedback.create" bundle="${lang}"/></p>
                 </div>
                 <div class="panel-body">
                     <form role="form" id="adduser_form" action="" method="post" class="form-horizontal">
@@ -103,7 +103,7 @@
                         <div class="form-group">
 
                             <label class="col-sm-4 control-label">
-                                Your Feedback </label>
+                                <fmt:message key="feedback.your" bundle="${lang}"/></label>
 
                             <div class="col-sm-6">
 
@@ -117,12 +117,12 @@
 
                             <div class="col-sm-11">
                                 <label class="radio">
-                                    <input type="radio" name="optradio">Display Feedback
+                                    <input type="radio" name="optradio"><fmt:message key="feedback.display" bundle="${lang}"/>
                                 </label></div>
                             <div class="col-sm-11">
 
                                 <label class="radio">
-                                    <input type="radio" name="optradio">Don't Display Feedback
+                                    <input type="radio" name="optradio"><fmt:message key="feedback.dont" bundle="${lang}"/>
                                 </label>
 
                             </div>
@@ -130,11 +130,11 @@
                         <div class="form-group">
 
                             <label class="col-sm-4 control-label">
-                                Display Name </label>
+                                <fmt:message key="feedback.name" bundle="${lang}"/></label>
 
                             <div class="col-sm-6">
 
-                                <input class="form-control" id="txt-fname" type="text" placeholder="Name Shown Publicly"
+                                <input class="form-control" id="txt-fname" type="text" placeholder="<fmt:message key="feedback.shown" bundle="${lang}"/>"
                                        required>
                                 <label id="fname_error" class="error-labels"></label>
 
@@ -142,7 +142,7 @@
                         </div>
 
                         <div class="form-group" style="width: 200px">
-                            <button id="btn-proceed-submit" type="submit" class="btn btn-success" onclick="api_type('success')">Send</button>
+                            <button id="btn-proceed-submit" type="submit" class="btn btn-success" onclick="api_type('success')"><fmt:message key="feedback.send" bundle="${lang}"/></button>
                         </div>
 
 
@@ -153,7 +153,7 @@
             </div>
         </div>
     </div>
-    <a href="http://gazpo.com/downloads/tutorials/jquery/scrolltop/#" class="scrollup" style="display: none;">Scroll</a>
+    <a href="http://gazpo.com/downloads/tutorials/jquery/scrolltop/#" class="scrollup" style="display: none;"><fmt:message key="location.scroll" bundle="${lang}"/></a>
 
 </center>
 </body>

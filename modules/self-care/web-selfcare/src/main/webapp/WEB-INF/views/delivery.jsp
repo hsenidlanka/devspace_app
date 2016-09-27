@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
-    <title>Delivery</title>
+    <%@include file="include.jsp" %>
+
+    <title> <fmt:message key="delivery" bundle="${lang}"/></title>
     <link rel="shortcut icon" href="">
 
-    <%@include file="include.jsp" %>
 
     <link href="<c:url value="/resources/css/bootstrap-datepicker3.css"/>" rel="stylesheet" />
     <script src="<c:url value="/resources/js/bootstrap-datepicker.min.js"/>" type="text/javascript"></script>
@@ -29,27 +30,27 @@
             </div>
             <div class="panel-body">
                 <ul class="progress-indicator">
-                    <li class="active"><span class="bubble"></span> Delivery</li>
-                    <li><span class="bubble"></span> Payment</li>
-                    <li><span class="bubble"></span> Verify</li>
-                    <li><span class="bubble"></span> Success</li>
+                    <li class="active"><span class="bubble"></span> <fmt:message key="delivery" bundle="${lang}"/></li>
+                    <li><span class="bubble"></span><fmt:message key="delivery.pay" bundle="${lang}"/></li>
+                    <li><span class="bubble"></span><fmt:message key="delivery.verify" bundle="${lang}"/></li>
+                    <li><span class="bubble"></span><fmt:message key="delivery.success" bundle="${lang}"/></li>
                 </ul>
 
                 <div style="margin-top: 30px;">
                     <div class="radio" style="text-align: center; font-size: medium;">
-                        <label>Preferred delivery method:</label>
+                        <label><fmt:message key="delivery.prefer" bundle="${lang}"/></label>
                         <label><input type="radio" name="optradio" id="radio-delivery" value="delivery" checked>A
-                            delivery</label>&nbsp;
-                        <label><input type="radio" name="optradio" id="radio-pickup" value="pickup">A pickup</label>
+                            <fmt:message key="delivery" bundle="${lang}"/></label>&nbsp;
+                        <label><input type="radio" name="optradio" id="radio-pickup" value="pickup"><fmt:message key="delivery.pickup" bundle="${lang}"/></label>
                     </div>
                     <div id="delivery-div" style="margin-top: 30px;">
-                        <h4>When to deliver</h4>
+                        <h4><fmt:message key="delivery.when" bundle="${lang}"/></h4>
                         <hr>
                         <div class="radio">
-                            <label><input type="radio" name="radiodelwhen" value="del-now" checked>Deliver now</label>
+                            <label><input type="radio" name="radiodelwhen" value="del-now" checked><fmt:message key="delivery.pickup" bundle="${lang}"/>Deliver now</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" name="radiodelwhen" value="del-later">Deliver later:&nbsp;&nbsp;&nbsp;Date:</label>
+                            <label><input type="radio" name="radiodelwhen" value="del-later">Deliver later:&nbsp;&nbsp;&nbsp;<fmt:message key="delivery.pickup" bundle="${lang}"/>Date:</label>
                             <input type="text" id="date" name="date">
                             &nbsp;&nbsp;Time:
                             <div class="input-group" style="display: inline-block; vertical-align: middle;">
@@ -58,17 +59,17 @@
                         </div>
 
                         <div style="margin-top: 30px;">
-                            <h4>Where to deliver</h4>
+                            <h4><fmt:message key="delivery.pickup" bundle="${lang}"/> Where to deliver</h4>
                             <hr>
                         </div>
                         <div class="container" style="width: 1000px;">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label" for="txt-fname">First name</label>
+                                        <label class="control-label" for="txt-fname"><fmt:message key="delivery.pickup" bundle="${lang}"/>First name</label>
                                         <label id="fname_error" class="error-labels"></label>
                                         <input class="form-control" id="txt-fname"
-                                               placeholder="Enter your first name" type="email">
+                                               placeholder="<fmt:message key="delivery.pickup" bundle="${lang}"/>Enter your first name" type="email">
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label" for="txt-lname">Last name</label>

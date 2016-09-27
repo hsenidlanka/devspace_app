@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Contach us</title>
+    <title><fmt:message key="contactus" bundle="${lang}"/></title>
     <%@include file="include.jsp" %>
     <link href="<c:url value="/resources/css/prettify.css"/>" >
     <script src="<c:url value="/resources/js/prettify.js"/>" ></script>
@@ -117,7 +117,7 @@
             </div>
             <div class="panel panel-success" style="width: 900px">
                 <div class="panel-heading" style="height: 50px">
-                    <p style="font-size: xx-large;text-align: left">Contact Us</p>
+                    <p style="font-size: xx-large;text-align: left"><fmt:message key="contactus" bundle="${lang}"/></p>
                 </div>
                 <div class="panel-body">
                     <form role="form" id="contactus_form" action="" method="post" class="form-horizontal">
@@ -125,18 +125,18 @@
                         <div class="form-group">
 
                             <label class="col-sm-4 control-label">
-                                Inquiry Type
+                                <fmt:message key="contactus.inquiry" bundle="${lang}"/>
                             </label>
 
                             <div class="col-sm-2">
                                 <div class="dropdown">
 
                                     <select class="form-control" required>
-                                        <option value="complaint">Select Type</option>
-                                        <option value="complaint">complaint</option>
-                                        <option value="suggestion">suggestion</option>
-                                        <option value="clarify">clarification</option>
-                                        <option value="other">other</option>
+                                        <option value="complaint"><fmt:message key="contactus.select.type" bundle="${lang}"/></option>
+                                        <option value="complaint"><fmt:message key="contactus.complaint" bundle="${lang}"/></option>
+                                        <option value="suggestion"><fmt:message key="contactus.suggestion" bundle="${lang}"/></option>
+                                        <option value="clarify"><fmt:message key="contactus.clarification" bundle="${lang}"/></option>
+                                        <option value="other"><fmt:message key="contactus.other" bundle="${lang}"/></option>
                                     </select>
                                 </div>
                             </div>
@@ -150,14 +150,14 @@
                             <div class="dropdown col-sm-2">
 
                                 <select class="form-control" required>
-                                    <option value="mr">Mr</option>
-                                    <option value="mrs">Mrs</option>
-                                    <option value="miss">Miss</option>
+                                    <option value="mr"><fmt:message key="signup.mr" bundle="${lang}"/>Mr</option>
+                                    <option value="mrs"><fmt:message key="signup.mrs" bundle="${lang}"/>Mrs</option>
+                                    <option value="miss"><fmt:message key="signup.miss" bundle="${lang}"/></option>
 
                                 </select>
                             </div>
                             <div class="col-sm-4 row">
-                                <input class="form-control" id="txt-fname" type="text" placeholder="Your name" required>
+                                <input class="form-control" id="txt-fname" type="text" placeholder="<fmt:message key="contactus.yourn" bundle="${lang}"/>" required>
                                 <label id="fname_error" class="error-labels"></label>
 
                             </div>
@@ -165,7 +165,7 @@
                         <div class="form-group">
 
                             <label class="col-sm-4 control-label">
-                                E-Mail </label>
+                                <fmt:message key="signup.email" bundle="${lang}"/> </label>
 
                             <div class="col-sm-6">
 
@@ -178,7 +178,7 @@
                         <div class="form-group">
 
                             <label class="col-sm-4 control-label">
-                                Phone No </label>
+                                <fmt:message key="signup.phone" bundle="${lang}"/></label>
 
                             <div class="col-sm-6">
 
@@ -191,12 +191,12 @@
                         <div class="form-group">
 
                             <label class="col-sm-4 control-label">
-                                Message </label>
+                                <fmt:message key="contactus.message" bundle="${lang}"/></label>
 
                             <div class="col-sm-6">
 
                                 <textarea class="form-control" id="txt-inquirymsg" type="text"
-                                          placeholder="Your inquiry here" required></textarea>
+                                          placeholder="<fmt:message key="contactus.your.inquiry" bundle="${lang}"/>" required></textarea>
                                 <label id="inquirymsg_error" class="error-labels"></label>
 
                             </div>
@@ -205,7 +205,7 @@
 
                         <div class="form-group">
                             <button id="btn-proceed-submit" type="submit" class="btn btn-success"
-                                    onclick="api_type('success')">Submit
+                                    onclick="api_type('success')"><fmt:message key="contactus.submit" bundle="${lang}"/>
                             </button>
 
                         </div>
@@ -234,9 +234,9 @@
                 </h2>
             </div>
             <div class="modal-body">
-                <p style="font-size: medium;">Can not proceed due to the
-                    <b>validation errors in the form.</b><br>
-                    Please correct them and try again.
+                <p style="font-size: medium;"><fmt:message key="contactus.cant" bundle="${lang}"/>
+                    <b><fmt:message key="contactus.valid" bundle="${lang}"/></b><br>
+                    <fmt:message key="contactus.please" bundle="${lang}"/>
                 </p>
             </div>
             <div class="modal-footer">

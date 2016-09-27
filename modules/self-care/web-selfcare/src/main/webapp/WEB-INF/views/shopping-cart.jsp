@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="loader-anim"></div>
-<%@include file="headertest2.jsp" %>
+<%@include file="NewHeader.jsp" %>
 <div class="main-div">
     <div class="section">
         <div class="panel panel-default">
