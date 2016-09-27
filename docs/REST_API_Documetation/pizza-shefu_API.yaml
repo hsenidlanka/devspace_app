@@ -32,7 +32,7 @@ paths:
         - name: body
           in: body
           description: User object to register
-          required: false
+          required: true
           schema:
             $ref: "#/definitions/user"
             
@@ -88,7 +88,46 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/error-message'     
+              $ref: '#/definitions/error-message'  
+              
+  /guests/add:
+    post:
+      description: Add a new guest customer to the database.
+      tags:
+        - guest
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          description: User object to register
+          required: true
+          schema:
+            $ref: "#/definitions/user-guest"
+            
+      responses:
+        '201':
+          description: New user added/created
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/success-message'
+              
+        '415':
+          description: Media type should be application/json
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/error-message'
+              
+        '400':
+          description: Invalid data. May be a duplicate mobile no.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/error-message'
               
   /customers/{username}:
     get: 
@@ -119,7 +158,31 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/error-message'                  
+              $ref: '#/definitions/error-message' 
+    
+  /categories/getall:
+    get: 
+      description: Get details of all categories
+      tags:
+        - category
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '201':
+          description: Request processed successfully
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/success-message'
+              
+        '415':
+          description: Media type should be application/json
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/error-message'         
             
   /categories/{categoryName}/items:
     get: 
@@ -824,31 +887,43 @@ definitions:
       type: object
       required:
             - title
-            - fisrtName
+            - firstName
             - lastName
             - username
             - password
+            - email
             - addressL1
             - addressL2
             - mobile
             
       properties:
         title:
-         type: string
-        fisrtName:
-         type: string
+          type: string
+        firstName:
+          type: string
         lastName:
-         type: string
+          type: string
         username:
           type: string
         password:
-          type: string 
+          type: string
+        email:
+          type: string
         addressL1:
           type: string
         addressL2:
           type: string
         addressL3:
           type: string
+        mobile:
+          type: string
+          
+  user-guest:
+      type: object
+      required:
+            - mobile
+            
+      properties:
         mobile:
           type: string
           

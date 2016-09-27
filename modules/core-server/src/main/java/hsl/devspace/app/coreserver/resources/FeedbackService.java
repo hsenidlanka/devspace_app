@@ -14,6 +14,7 @@ import javax.ws.rs.core.UriInfo;
 
 /**
  * Created by Kasun Dinesh on 9/26/16.
+ * This class handles the requests related to the feedbacks.
  */
 @Path("/feedbacks")
 public class FeedbackService {

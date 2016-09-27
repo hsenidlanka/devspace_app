@@ -23,4 +23,9 @@
         <property name="transactionManager" ref="transactionManager"/>
     </bean>
 
+    <bean id="guestRepoImpl" class="hsl.devspace.app.corelogic.repository.user.GuestRepositoryImpl">
+        <property name="dataSource" ref="productionDataSource"/>
+        <property name="transactionManager" ref="transactionManager"/>
+    </bean>
+
 </beans>

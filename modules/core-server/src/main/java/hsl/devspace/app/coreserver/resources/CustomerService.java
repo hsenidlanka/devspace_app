@@ -39,7 +39,7 @@ public class CustomerService {
             SuccessMessage successMessage = new SuccessMessage();
             successMessage.setStatus("success");
             successMessage.setCode(Response.Status.CREATED.getStatusCode());
-            successMessage.setMessage("user added");
+            successMessage.setMessage("user added to the database");
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("title", user.getTitle());

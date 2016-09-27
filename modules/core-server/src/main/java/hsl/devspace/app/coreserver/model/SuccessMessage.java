@@ -15,7 +15,7 @@ public class SuccessMessage {
     private String status;
     private int code;
     private String message;
-    private List<JSONObject> dataList = new ArrayList<JSONObject>();
+    private List<JSONObject> data = new ArrayList<JSONObject>();
     private List<Link> links = new ArrayList<Link>();
 
     public SuccessMessage() {
@@ -58,12 +58,12 @@ public class SuccessMessage {
     }
 
     @JsonProperty("data")
-    public List<JSONObject> getDataList() {
-        return dataList;
+    public List<JSONObject> getData() {
+        return data;
     }
 
-    public void setDataList(List<JSONObject> dataList) {
-        this.dataList = dataList;
+    public void setData(List<JSONObject> data) {
+        this.data = data;
     }
 
     // Add HATEOAS links
@@ -76,7 +76,7 @@ public class SuccessMessage {
 
     // Add data(resources) to represent
     public void addData(JSONObject jsonObject) {
-        dataList.add(jsonObject);
+        data.add(jsonObject);
     }
 
     // Optionally we can call this method to generate the JSON response.
@@ -86,7 +86,7 @@ public class SuccessMessage {
         jsonObject.put("status", getStatus());
         jsonObject.put("code", getCode());
         jsonObject.put("message", getMessage());
-        jsonObject.put("data", getDataList());
+        jsonObject.put("data", getData());
         jsonObject.put("links", getLinks());
         return jsonObject;
     }
