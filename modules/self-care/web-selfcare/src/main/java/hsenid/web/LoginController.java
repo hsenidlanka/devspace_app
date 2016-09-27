@@ -29,9 +29,6 @@ public class LoginController {
         String string = "{" + "username" + ":" + username + "," + "password" + ":" + password + "}";
         JSONObject jsonObject = new JSONObject(string);
 
-
-//        System.out.println(jsonObject);
-
         try {
             URL url = new URL("http://localhost:2222/pizza-shefu/api/v1.0/customers/login/");
             URLConnection connection = url.openConnection();
@@ -62,9 +59,69 @@ public class LoginController {
             }
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            logger.error("Exception occur. Reason -> " + e.getMessage());
         }
 
         return "menu";
+    }
+
+
+    @RequestMapping("/register")
+    public String register(HttpServletRequest regRequest) throws JSONException {
+
+        String title = regRequest.getParameter("title");
+        String firstName = regRequest.getParameter("fname");
+        String lastName = regRequest.getParameter("lname");
+        String username = regRequest.getParameter("username");
+        String email = regRequest.getParameter("email");
+        String password = regRequest.getParameter("password");
+        String addressL1 = regRequest.getParameter("address1");
+        String addressL2 = regRequest.getParameter("address2");
+        String addressL3 = regRequest.getParameter("address3");
+        String mobile = regRequest.getParameter("mobileNo");
+//logger.error(title+firstName+lastName+username+password+addressL1+addressL2+addressL3+mobile);
+
+
+//        + "username" + ":" + username + ","
+
+        String string = "{" + "title" + ":" + title + ","+ "firstName" + ":" + firstName + ","+ "lastName" + ":" + lastName + ","  + "email" + ":" + email + ","+ "addressL1" + ":" + addressL1 + ","+ "addressL2" + ":" + addressL2 + ","+ "addressL3" + ":" + addressL3 +","+  "username" + ":" + username + "," + "password" + ":" + password + "," + "mobile" + ":" + mobile + "}";
+        JSONObject jsonObject = new JSONObject(string);
+
+        logger.error(string);
+
+        try {
+            URL url = new URL("http://localhost:2222/pizza-shefu/api/v1.0/customers/register/");
+            URLConnection connection = url.openConnection();
+            connection.setDoOutput(true);
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setConnectTimeout(5000);
+            connection.setReadTimeout(5000);
+            OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream());
+            out.write(jsonObject.toString());
+            out.close();
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String ttt = null;
+            StringBuilder sb = new StringBuilder();
+
+            while ((ttt = in.readLine()) != null) {
+                sb.append(ttt);
+            }
+
+            in.close();
+
+            JSONObject reply = new JSONObject(sb.toString());
+            int status = reply.getInt("code");
+            logger.error(status);
+            if (status == 201) {
+                logger.error("success");
+                return "locations";
+            }
+
+        } catch (Exception e) {
+            logger.error("Exception occur. Reason -> " + e.getMessage());
+        }
+
+        return "aboutus";
     }
 }

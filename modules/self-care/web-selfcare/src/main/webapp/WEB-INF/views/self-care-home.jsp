@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Welcome to Pizza Shefu</title>
+
     <%@include file="include.jsp" %>
     <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
     <div class="loader-anim"></div>
 
+    <title><fmt:message key="home.title" bundle="${lang}"/></title>
     <style>
         .carousel-inner > .item > img,
         .carousel-inner > .item > a > img {
@@ -18,8 +19,8 @@
 </head>
 <!-------Header------------------------------------->
 <body>
-<%@include file="NewHeader.jsp" %>
 
+<%@include file="NewHeader.jsp" %>
 
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->

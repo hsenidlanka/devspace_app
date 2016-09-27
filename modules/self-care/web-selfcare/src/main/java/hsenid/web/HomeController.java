@@ -85,11 +85,11 @@ public class HomeController {
     public String success() {
         return "success";
     }
-
+/*
     @RequestMapping("/register")
     public String register() {
         return "register";
-    }
+    }*/
 
     @RequestMapping("/delivery-summary")
     public String deliverySummary(){
