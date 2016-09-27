@@ -8,6 +8,15 @@ public class Package {
     private String content;
     private double price;
     private String image;
+    private int packageId;
+
+    public int getPackageId() {
+        return packageId;
+    }
+
+    public void setPackageId(int packageId) {
+        this.packageId = packageId;
+    }
 
     public String getPackName() {
         return packName;

@@ -6,6 +6,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by hsenid on 9/20/16.
@@ -60,6 +62,13 @@ public class PackageRepositoryImpl implements PackageRepository  {
         int row = jdbcTemplate.update(sql, new Object[]{price, packageName});
         log.info(row);
         return row;
+    }
+
+    @Override
+    public List<Map<String, Object>> viewAll() {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM package");
+        log.info(mp);
+        return mp;
     }
 
 }
