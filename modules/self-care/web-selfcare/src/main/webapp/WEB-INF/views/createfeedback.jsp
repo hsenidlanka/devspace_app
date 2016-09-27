@@ -79,7 +79,7 @@
 </head>
 <div class="loader-anim"></div>
 <body>
-<%@include file="headertest2.jsp" %>
+<%@include file="NewHeader.jsp" %>
 
 <div class="brand"></div>
 <center>
