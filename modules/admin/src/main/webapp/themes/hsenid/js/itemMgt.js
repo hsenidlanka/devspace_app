@@ -21,18 +21,11 @@ $(document).ready(function () {
         $(this).replaceWith("<div class=\"add-status\"><span class=\"glyphicon glyphicon-ok\"></span> Added</div>");
     });
     /*
-     * Function for loading package content to modal for edditing
+     * Function for loading package content to modal for editing
      */
     $("#lnkModalView").click(function () {
         $("#pkgViewModal").modal();
-        load_modal('editPackage.html');
-
     })
-
-    function load_modal(url) {
-        $('#editModalContent').load(url, function () {
-        });
-    }
 
     /*
      * Price validation function to allow only 2 decimals

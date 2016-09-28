@@ -29,9 +29,9 @@
 <spring:url value="/themes/hsenid/bootstrap/js/bootstrap-table.min.js" var="js3"/>
 <script src="${js3}"></script>
 
-
-
-
+<%--jquery toaster--%>
+<spring:url value="/themes/hsenid/js/jquery.toaster.js" var="jsToast"/>
+<script src="${jsToast}"></script>
 
 
 

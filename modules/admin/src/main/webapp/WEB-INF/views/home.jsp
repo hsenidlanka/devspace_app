@@ -57,13 +57,13 @@
           <div class="panel-body">
             <ul class="nav navbar-nav">
               <li>
-                <a href="viewPackage.html" class="panel-sub-menu1">View Package</a>
+                <a href="https://localhost:8443/admin/packages/view_package" class="panel-sub-menu1">View Package</a>
               </li>
               <li>
-                <a href="addPackage.html" class="panel-sub-menu1">Add Package</a>
+                <a href="https://localhost:8443/admin/packages/add_package" class="panel-sub-menu1">Add Package</a>
               </li>
               <li>
-                <a href="editPckgPage.html" class="panel-sub-menu1">Edit Package</a>
+                <a href="https://localhost:8443/admin/packages/edit_package" class="panel-sub-menu1">Edit Package</a>
               </li>
             </ul>
           </div>

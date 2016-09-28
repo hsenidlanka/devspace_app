@@ -130,3 +130,8 @@ legend.scheduler-border {
     margin-top: 40px;
     text-align: center;
 }
+#add-pkg-breadcrumb-position{
+    position: relative;
+    margin-top: 40px;
+    text-align: center;
+}
