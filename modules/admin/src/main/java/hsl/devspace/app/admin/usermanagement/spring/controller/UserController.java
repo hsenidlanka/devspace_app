@@ -64,9 +64,9 @@ public class UserController {
 
        int i= user1.add(newUser);
         if(i ==0)
-            return "redirect:userAdd";
+            return "userAdd";
         else
-            return "redirect:userAdd";
+            return "userAdd";
 
 
 

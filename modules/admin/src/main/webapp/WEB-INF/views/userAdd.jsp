@@ -18,7 +18,6 @@
   <spring:url value="/themes/hsenid/js/userMgt.js" var="js2"/>
   <%--<spring:url value="/themes/hsenid/js/simpleToastMessage.js" var="js3"/>--%>
 
-
   <%--<script src="${js1}"></script>--%>
   <script src="${js2}"></script>
   <%--<script src="${js3}"></script>--%>
@@ -53,7 +52,7 @@
         <h3 class="default-panel-headings ">Add New User</h3>
       </div>
       <div class="panel-body">
-        <form:form role="form" id="admin_adduser_form"  method="POST" class="form-horizontal" action="/users/addCustomer">
+        <form:form role="form" id="admin_adduser_form"  method="POST" class="form-horizontal" action="/admin/users/addCustomer">
 
           <fieldset class="scheduler-border">
             <legend class="scheduler-border" id="legendHeading"></legend>
@@ -61,18 +60,18 @@
             <div class="form-group">
               <div class="col-sm-6">
                 <div class="row">
-                  <form:label path="user" class="col-sm-4 control-label">
+                  <label  class="col-sm-4 control-label">
                     User Type
-                  </form:label>
+                  </label>
                   <div class="col-sm-3">
-                    <form:label path="customer" class="radio-inline">
-                      <form:input path="customerin" type="radio" name="optradio" id="customer" checked="checked"/>Customer
-                    </form:label>
+                    <label path="customer" class="radio-inline">
+                      <input path="customerin" type="radio" name="optradio" id="customer" checked="checked"/>Customer
+                    </label>
                   </div>
                   <div class="col-sm-4">
-                    <form:label path="staff" class="radio-inline">
-                      <form:input path="staffin" type="radio" name="optradio"  id="staff"/>Staff Member
-                    </form:label>
+                    <label path="staff" class="radio-inline">
+                      <input path="staffin" type="radio" name="optradio"  id="staff"/>Staff Member
+                    </label>
                   </div>
                 </div>
               </div>
@@ -81,7 +80,7 @@
             <div class="form-group">
               <div class="col-sm-6">
                 <div class="row">
-                  <form:label path="name"  class="col-sm-4 control-label">
+                  <form:label path="firstName"  class="col-sm-4 control-label">
                     Name
                   </form:label>
                   <div class="col-sm-2">
@@ -92,14 +91,14 @@
                     </form:select>
                   </div>
                   <div class="col-sm-4">
-                    <form:input path="fnamein" class="form-control" id="fname" placeholder="First Name" type="text"  style="width: 190px"/>
+                    <form:input path="firstName" class="form-control" id="fname" placeholder="First Name" type="text"  style="width: 190px"/>
                   </div>
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="row">
                   <div class="col-sm-4">
-                    <form:input path="lnamein" class="form-control" id="lname" placeholder="Last Name" type="text"  style="width: 200px"/>
+                    <form:input path="lastName" class="form-control" id="lname" placeholder="Last Name" type="text"  style="width: 200px"/>
                   </div>
                 </div>
               </div>
@@ -108,11 +107,11 @@
             <div class="form-group">
               <div class="col-sm-6">
                 <div class="row">
-                  <form:label path="phone"  class="col-sm-4 control-label">
+                  <form:label path="mobile"  class="col-sm-4 control-label">
                     Phone No*
                   </form:label>
                   <div class="col-sm-8">
-                    <form:input path="phonein" class="form-control" id="mobileNo" placeholder="+94XXXXXXXXX" type="text"/>
+                    <form:input path="mobile" class="form-control" id="mobileNo" placeholder="+94XXXXXXXXX" type="text"/>
                   </div>
                 </div>
               </div>
@@ -124,7 +123,7 @@
                     E-Mail
                   </form:label>
                   <div class="col-sm-8">
-                    <form:input path="emailin" class="form-control" id="email" placeholder="myname@example.com" type="text"/>
+                    <form:input path="email" class="form-control" id="email" placeholder="myname@example.com" type="text"/>
                   </div>
                 </div>
               </div>
@@ -135,35 +134,35 @@
               <div class="col-sm-6">
                 <br>
                 <div class="row">
-                  <form:label path="add1" class="col-sm-4 control-label">
+                  <form:label path="addressL1" class="col-sm-4 control-label">
                     Address
                   </form:label>
                   <div class="col-sm-8">
-                    <form:input path="add1in" class="form-control" id="addLine1" placeholder="Street Address" type="text"/> >
+                    <form:input path="addressL1" class="form-control" id="addLine1" placeholder="Street Address" type="text"/> >
                   </div>
                 </div>
                 <div class="row"> <label class="control-label"></label>   </div>
                 <div class="row">
-                  <form:label path="add2" class="col-sm-4 control-label">
+                  <form:label path="addressL2" class="col-sm-4 control-label">
                   </form:label>
                   <div class="col-sm-8">
-                    <form:input path="add2in" class="form-control" id="addLine2" placeholder="Address Line 2" type="text" />
+                    <form:input path="addressL2" class="form-control" id="addLine2" placeholder="Address Line 2" type="text" />
                   </div>
                 </div>
                 <div class="row"><label class="control-label"></label></div>
                 <div class="row">
-                  <form:label path="city" class="col-sm-4 control-label">
+                  <form:label path="addressL3" class="col-sm-4 control-label">
                   </form:label>
                   <div class="col-sm-8">
-                    <form:input path="cityin" class="form-control" id="city" placeholder="City" type="text"/>
+                    <form:input path="addressL3" class="form-control" id="city" placeholder="City" type="text"/>
                   </div>
                 </div>
                 <div class="row"><label class="control-label"></label></div>
                 <div class="row">
-                  <form:label path="province" class="col-sm-4 control-label">
-                  </form:label>
+                  <label path="province" class="col-sm-4 control-label">
+                  </label>
                   <div class="col-sm-8">
-                    <form:input path="provincein" class="form-control" id="province" placeholder="Province" type="text"/>
+                    <input path="provincein" class="form-control" id="province" placeholder="Province" type="text"/>
                   </div>
                 </div>
                 <div class="row"><label class="control-label"></label></div>
@@ -179,7 +178,7 @@
                       Designation
                     </form:label>
                     <div class="col-sm-8">
-                      <form:select path="designationin" class="form-control" id="designation">
+                      <form:select path="designation" class="form-control" id="designation">
                         <form:option value="sysAdmin">System Admin</form:option>
                         <form:option value="ccManager">CustomerCare Manager</form:option>
                         <form:option value="adminManager">Admin Manager</form:option>
@@ -192,7 +191,7 @@
                       Department
                     </form:label>
                     <div class="col-sm-8">
-                      <form:select path="depin" class="form-control" id="department">
+                      <form:select path="department" class="form-control" id="department">
                         <form:option value="finance">Finance</form:option>
                         <form:option value="administration">Administration</form:option>
                         <form:option value="cc">Customer Service</form:option>
@@ -205,7 +204,7 @@
                       Branch
                     </form:label>
                     <div class="col-sm-8">
-                      <form:select path="branchin" class="form-control" id="branch">
+                      <form:select path="branch" class="form-control" id="branch">
                         <form:option value="1">Colombo</form:option>
                         <form:option value="2">Gampaha</form:option>
                         <form:option value="3">Ja-Ela</form:option>
@@ -223,25 +222,25 @@
                 <fieldset class="scheduler-border" id="loginInfo">
                   <legend class="scheduler-border" id="legendInfo">Login Credentials</legend>
                   <div class="row">
-                    <form:label path="uname" class="col-xs-4 control-label" style="text-align: left">
+                    <form:label path="username" class="col-xs-4 control-label" style="text-align: left">
                       User Name
                     </form:label>
                     <form:label path="password" class="col-xs-4 control-label" style="text-align: left">
                       Password
                     </form:label>
-                    <form:label path="cpassword" class="col-xs-4 control-label" style="text-align: left">
+                    <form:label path="password" class="col-xs-4 control-label" style="text-align: left">
                       Confirm Password
                     </form:label>
                   </div>
                   <div class="row">
                     <div class="col-xs-4">
-                      <form:input path="unamein" class="form-control" id="username" placeholder="User Name" type="text"/> >
+                      <form:input path="username" class="form-control" id="username" placeholder="User Name" type="text"/> >
                     </div>
                     <div class="col-xs-4">
-                      <form:input path="passwordin" class="form-control" id="password" placeholder="Password" type="text" />
+                      <form:input path="password" class="form-control" id="password" placeholder="Password" type="text" />
                     </div>
                     <div class="col-xs-4">
-                      <form:input path="cpasswordin" class="form-control" id="cpassword" placeholder="Password Confirm" type="text" />
+                      <form:input path="password" class="form-control" id="cpassword" placeholder="Password Confirm" type="text" />
                     </div>
                   </div>.
                 </fieldset>

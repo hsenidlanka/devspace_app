@@ -51,15 +51,16 @@
 
         <CAS.LOCATION>/home/hsenid/devspace_app/devspace_app/deployment/cas</CAS.LOCATION>
         <JDBC.DRIVER>com.mysql.jdbc.Driver</JDBC.DRIVER>
-        <JDBC.URL>jdbc:mysql://localhost:3306/pizza_shefu?useSSL=false</JDBC.URL>
+        <JDBC.URL>jdbc:mysql://127.0.0.1:3306/pizza_shefu</JDBC.URL>
         <RWD_DB_USER>root</RWD_DB_USER>
         <RWD_DB_PASSWORD>root</RWD_DB_PASSWORD>
         <repobasedir>/home/hsenid/my-repo</repobasedir>
     </properties>
 
+
     <modules>
         <module>../core-logic</module>
-        <!--<module>../core-server</module>-->
+        <module>../core-server</module>
         <module>../admin</module>
         <module>../self-care/web-selfcare</module>
         <!--<module>../report-viewer</module>-->
