@@ -4,92 +4,15 @@
     <%@include file="include.jsp" %>
 
     <script src="<c:url value="/resources/js/contactus_validate.js"/>" ></script>
-
     <script src="<c:url value="/resources/js/validate-inputs.js"/>" ></script>
-    <script type="text/javascript">
-
-        function usage(){
-            $.notify("Alert!");
-        }
-
-        function api_type(type){
-            $.notify("Your verification email has send to reset the password!", {type:type});
-        }
-
-        function api_position(){
-            var an = $(":radio[name=align]:checked").val();
-            var vn = $(":radio[name=verticalAlign]:checked").val();
-            $.notify("Alert!", {align:an, verticalAlign:vn});
-        }
-
-        function api_delay(){
-            $.notify("Alert!", {delay: $("#delayValue").val()});
-        }
-
-        function myFunc(){
-            alert("삭제하였습니다");
-        }
-
-        function example1(){
-            $.notify({
-                delay : 999999,
-                message : "hello world!",
-                type : "warning",
-                close : "true",
-                animation : true,
-                animationType : "scale",
-                align: "center",
-                verticalAlign: "middle",
-                color: "#777",
-                background: "#eee"
-            });
-        }
-
-        function example2(){
-            $.notify({
-                delay : 0,
-                message : "hello world!",
-                animation : true,
-                align: "center",
-                verticalAlign: "middle",
-                buttons: ["확인","취소"],
-                buttonFunc: ["test"],
-                buttonAlign: "right",
-                blur: 0.2
-            });
-        }
-
-        function test(){
-            alert("확인");
-        }
-
-        $(function(){
-            $("input[name=align]:radio").change(function(){
-                $("#positionBtn").html("align : <var>"+$(this).val()+"</var>, verticalAlign : <var>"+$(":radio[name=verticalAlign]:checked").val()+"</var>");
-            });
-            $("input[name=verticalAlign]:radio").change(function(){
-                $("#positionBtn").html("align : <var>"+$(":radio[name=align]:checked").val()+"</var>, verticalAlign : <var>"+$(this).val()+"</var>");
-            });
-        });
-
-
-        !function ($) {
-            $(function(){
-                window.prettyPrint && prettyPrint()
-            })
-        }(window.jQuery)
-
-
-
-    </script>
-    <%--<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--%>
+    <script src="<c:url value="/resources/js/fgtpswd.js"/>" type="text/javascript"></script>
 
 </head>
 <div class="loader-anim"></div>
 
 
 <body style="overflow: visible">
-<%@include file="headertest2.jsp" %>
+<%@include file="NewHeader.jsp" %>
 
 <div class="brand"></div>
 <center>
@@ -113,7 +36,7 @@
                         <div class="form-group">
 
                             <label class="col-sm-4 control-label">
-                                E-Mail
+                                <fmt:message key="signup.email" bundle="${lang}"/>
                             </label>
 
                             <div class="col-sm-6">
@@ -127,7 +50,7 @@
                         <div class="form-group">
 
                             <label class="col-sm-4 control-label">
-                                New Password
+                                <fmt:message key="fgtpswd.new" bundle="${lang}"/>
                             </label>
 
                             <div class="col-sm-6">
@@ -137,7 +60,7 @@
                         <div class="form-group">
 
                             <label class="col-sm-4 control-label">
-                                Re-Enter Password
+                                <fmt:message key="fgtpswd.re" bundle="${lang}"/>
                             </label>
 
                             <div class="col-sm-6">
@@ -145,7 +68,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <button id="btn-proceed-submit" type="submit" class="btn btn-success"  onclick="api_type('info')">Reset Password</button>
+                            <button id="btn-proceed-submit" type="submit" class="btn btn-success"  onclick="api_type('info')"><fmt:message key="fgtpswd.reset" bundle="${lang}"/></button>
                         </div>
                     </form>
 

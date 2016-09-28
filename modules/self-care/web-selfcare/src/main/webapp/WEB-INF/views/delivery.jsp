@@ -205,9 +205,7 @@
                     errors</h2>
             </div>
             <div class="modal-body">
-                <p style="font-size: medium;"><fmt:message key="delivery.error" bundle="${lang}"/>Can not proceed due to the
-                    <b>validation errors in the form.</b><br>
-                    Please correct them and try again.
+                <p style="font-size: medium;"><fmt:message key="delivery.error" bundle="${lang}"/>
                 </p>
             </div>
             <div class="modal-footer">
