@@ -12,9 +12,10 @@
 
 
     <context:annotation-config />
-    <context:component-scan base-package="hsl.devspace.app.admin.*" />
 
     <mvc:annotation-driven/>
+    <context:component-scan base-package="hsl.devspace.app.admin.*" />
+
     <!--<mvc:resources mapping="/resources/**" location="/resources/" />-->
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -26,5 +27,25 @@
     <mvc:resources mapping="/themes/**" location="/themes/" />
 
 
+    <!--It pulls values from a properties file into bean definitions.-->
+    <bean id="connectionProperties"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:connectivity.properties"/>
+    </bean>
 
+    <!--import the datasource configuration file from core-logic module-->
+    <import resource="classpath:session-factory-config.xml"/>
+
+    <bean id="staffRepository" class="hsl.devspace.app.corelogic.repository.user.StaffRepositoryImpl">
+        <property name="dataSource" ref="productionDataSource"/>
+        <property name="transactionManager" ref="transactionManager"/>
+    </bean>
+    <bean id="itemRepository" class="hsl.devspace.app.corelogic.repository.item.ItemRepositoryImpl">
+        <property name="dataSource" ref="productionDataSource"/>
+        <property name="transactionManager" ref="transactionManager"/>
+    </bean>
+    <bean id="packageRepository" class="hsl.devspace.app.corelogic.repository.Package.PackageRepositoryImpl">
+        <property name="dataSource" ref="productionDataSource"/>
+        <property name="transactionManager" ref="transactionManager"/>
+    </bean>
 </beans>

@@ -33,14 +33,16 @@
         - Location of the XML file that defines the root application context is initiated by
         - ContextLoaderListener.
         -->
+<!--
    <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:admin-integration-context.xml</param-value>
+        <param-value>WEB-INF/spring/admin-integration-context.xml</param-value>
     </context-param>
 
     <listener>
       <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
+-->
 
 
     <!--integrating cas server-->

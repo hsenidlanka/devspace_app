@@ -2,11 +2,10 @@ package hsl.devspace.app.admin.usermanagement.spring.controller;
 
 
 import hsl.devspace.app.corelogic.domain.User;
-import hsl.devspace.app.corelogic.repository.user.StaffRepositoryImpl;
+import hsl.devspace.app.corelogic.repository.user.UserRepositoryImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -30,12 +29,13 @@ public class UserController {
     /*  this annotation allows Spring inject an instance of UserRepositoryImpl into this controller automatically.
        Each handler method uses this UserRepository object to perform necessary CRUD operation*/
 
- /*   @Autowired
-    private UserRepository staffRepository;*/
-ApplicationContext context=new ClassPathXmlApplicationContext("admin-integration-context.xml");
+    @Autowired
+    private UserRepositoryImpl staffRepository;
 
 
-    StaffRepositoryImpl staffRepository= (StaffRepositoryImpl) context.getBean("userRepository");
+
+/*ApplicationContext context=new ClassPathXmlApplicationContext("admin-integration-context.xml");
+    StaffRepositoryImpl staffRepository= (StaffRepositoryImpl) context.getBean("staffRepository");*/
 
 
 
