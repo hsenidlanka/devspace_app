@@ -110,13 +110,16 @@
         <div align="center"><span class="glyphicon glyphicon-trash"></span> Delete Item
         </div>
       </div>
+      <form:form class="form-horizontal" role="form" id="form-Item-Delete">
+        <fieldset class="scheduler-border">
+          <legend class="scheduler-border">You are about to delete this item..</legend>
       <div class="modal-body">
         <div class="form-group">
           <label id="lblDeltItmMsg">Do you really want to delete this Item ?</label><br><br>
 
           <div align="center">
             <label id="lblDeltItmId">Item ID : xxx</label><br>
-            <label id="lblDeltItmName">Item Name : yyyyyy </label> <br>
+            <label id="lblDeltItmName">Item Name : yyyyyy</label><br>
           </div>
         </div>
       </div>
@@ -128,6 +131,8 @@
           No
         </button>
       </div>
+        </fieldset>
+      </form:form>
     </div>
   </div>
 </div>

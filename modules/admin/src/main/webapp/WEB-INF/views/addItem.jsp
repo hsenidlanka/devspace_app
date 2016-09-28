@@ -140,7 +140,7 @@
               </label>
 
               <div class="col-xs-5">
-                <form:input class="form-control" id="txtItemName" type="text" path="itemName"></form:input>
+                <form:input class="form-control" id="txtItemName" type="text" path="itemName"/>
               </div>
               <div class="col-xs-4">
                 <span id="itmNmErr" class="input-group-error"></span>
