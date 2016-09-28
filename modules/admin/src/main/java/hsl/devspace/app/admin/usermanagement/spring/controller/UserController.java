@@ -2,7 +2,7 @@ package hsl.devspace.app.admin.usermanagement.spring.controller;
 
 
 import hsl.devspace.app.corelogic.domain.User;
-import hsl.devspace.app.corelogic.repository.user.UserRepositoryImpl;
+import hsl.devspace.app.corelogic.repository.user.UserRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +30,7 @@ public class UserController {
        Each handler method uses this UserRepository object to perform necessary CRUD operation*/
 
     @Autowired
-    private UserRepositoryImpl staffRepository;
+    private UserRepository staffRepository;
 
 
 
