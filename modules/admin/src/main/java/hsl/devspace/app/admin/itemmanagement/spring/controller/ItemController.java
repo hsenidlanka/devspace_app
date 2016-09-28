@@ -2,7 +2,7 @@
 package hsl.devspace.app.admin.itemmanagement.spring.controller;
 
 import hsl.devspace.app.corelogic.domain.Item;
-import hsl.devspace.app.corelogic.repository.item.ItemRepository;
+import hsl.devspace.app.corelogic.repository.item.ItemRepositoryImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class ItemController {
     private static final Logger LOG = LogManager.getLogger(ItemController.class);
 
     @Autowired
-    private ItemRepository item;
+    private ItemRepositoryImpl item;
 
     */
 /**
@@ -68,9 +68,9 @@ public class ItemController {
     @RequestMapping(value = "/view_item")
     public ModelAndView view(@ModelAttribute("viewItem") hsl.devspace.app.corelogic.domain.Item viewItem) throws SQLIntegrityConstraintViolationException {
         ModelAndView model = new ModelAndView();
-//        List<Map<String, Object>> x = item.view();
+   //     List<Map<String, Object>> x = item.view();
 
-//        if (x != null)
+     //   if (x != null)
             model.setViewName("viewItem");
 //        else
             System.out.println("Error in viewing item");
@@ -109,6 +109,15 @@ public class ItemController {
  **//*
 
 
+   /* @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    public ModelAndView showDeleteItem(){ return  new ModelAndView("itemDelete", "deleteItem",new Item()); }
+
+    @RequestMapping(value = "view_item")
+    public ModelAndView deleteItem(@ModelAttribute("deleteItem") hsl.devspace.app.corelogic.domain.Item deleteItem) throws SQLIntegrityConstraintViolationException {
+        ModelAndView model = new ModelAndView();
+
+        model.setViewName("");
+    }*/
 }
 
 */
