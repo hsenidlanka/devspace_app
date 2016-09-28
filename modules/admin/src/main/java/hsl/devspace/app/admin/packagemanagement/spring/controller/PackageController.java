@@ -1,3 +1,4 @@
+/*
 package hsl.devspace.app.admin.packagemanagement.spring.controller;
 
 import hsl.devspace.app.corelogic.domain.Package;
@@ -22,9 +23,11 @@ public class PackageController {
     @Autowired
     private PackageRepository itemPackage;
 
-    /**
+    */
+/**
      * Add new package view
-     **/
+     **//*
+
 
     //For viewing the add package form
     @RequestMapping(value = "/addPkg",method = RequestMethod.GET)
@@ -37,18 +40,24 @@ public class PackageController {
     public ModelAndView add(@ModelAttribute("addPackage") hsl.devspace.app.corelogic.domain.Package newPackg) throws SQLIntegrityConstraintViolationException {
         ModelAndView model = new ModelAndView();
 
-       /* int p = itemPackage.add(newPackg);
-        if(p == 1)*/
+       */
+/* int p = itemPackage.add(newPackg);
+        if(p == 1)*//*
+
             model.setViewName("addPackage");
-      /*  else*/
+      */
+/*  else*//*
+
             System.out.println("Error in package add");
 
         return model;
     }
 
-    /**
+    */
+/**
      * Edit package view
-     **/
+     **//*
+
 
     //For viewing the edit package form
     @RequestMapping(value = "/edtPkg",method = RequestMethod.GET)
@@ -61,13 +70,18 @@ public class PackageController {
     public ModelAndView update(@ModelAttribute("editPackage") hsl.devspace.app.corelogic.domain.Package newPackg) throws SQLIntegrityConstraintViolationException {
         ModelAndView model = new ModelAndView();
 
-        /*int p = itemPackage.changeItemsInPackage();
-        if(p == 1)*/
+        */
+/*int p = itemPackage.changeItemsInPackage();
+        if(p == 1)*//*
+
         model.setViewName("editPckgPage");
-      /*  else*/
+      */
+/*  else*//*
+
         System.out.println("Error in package update");
 
         return model;
     }
 
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package hsl.devspace.app.admin.itemmanagement.spring.controller;
 
 import hsl.devspace.app.corelogic.domain.Item;
@@ -22,9 +23,11 @@ public class ItemController {
     @Autowired
     private ItemRepository item;
 
-    /**
+    */
+/**
      * Add new item view
-     */
+     *//*
+
 
     //For viewing the add item form
     @RequestMapping(value = "/add", method = RequestMethod.GET)
@@ -37,18 +40,24 @@ public class ItemController {
     public ModelAndView addItem(@ModelAttribute("addItem") hsl.devspace.app.corelogic.domain.Item newItem) throws SQLIntegrityConstraintViolationException {
         ModelAndView model = new ModelAndView();
 
-       /* int a = item.add(newItem);
-        if (a == 1)*/
+       */
+/* int a = item.add(newItem);
+        if (a == 1)*//*
+
             model.setViewName("addItem");
-    /*    else*/
+    */
+/*    else*//*
+
             System.out.println("Error in item add");
 
         return model;
     }
 
-    /**
+    */
+/**
      * View Item details view
-     */
+     *//*
+
 
     //For view the search item form
     @RequestMapping(value = "/view", method = RequestMethod.GET)
@@ -69,9 +78,11 @@ public class ItemController {
         return model;
     }
 
-    /**
+    */
+/**
      * Edit Item view
-     */
+     *//*
+
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public ModelAndView showEditItem() {
@@ -81,8 +92,10 @@ public class ItemController {
     @RequestMapping(value = "/edit_item")
     public ModelAndView editItem(@ModelAttribute("editItem") hsl.devspace.app.corelogic.domain.Item editItem) throws SQLIntegrityConstraintViolationException {
         ModelAndView model = new ModelAndView();
-        /*int y = item.update(editItem);
-            if (y==1)*/
+        */
+/*int y = item.update(editItem);
+            if (y==1)*//*
+
                 model.setViewName("editItem");
 //            else
                 System.out.println("Error in updating item");
@@ -90,9 +103,12 @@ public class ItemController {
         return model;
     }
 
+*/
 /**
  * Delete Item view
- **/
+ **//*
+
 
 }
 
+*/
