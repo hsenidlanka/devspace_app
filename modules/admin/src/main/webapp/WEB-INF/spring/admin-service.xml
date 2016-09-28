@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
-       http://www.springframework.org/schema/context
-       http://www.springframework.org/schema/context/spring-context.xsd
-       http://www.springframework.org/schema/mvc
-       http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <!--<import resource="admin-repositories.xml"/>-->
     <!--repository beans-->
-    <bean id="staffRepository" class="hsl.devspace.app.corelogic.repository.user.StaffRepositoryImpl">
+    <bean id="userRepository" class="hsl.devspace.app.corelogic.repository.user.UserRepositoryImpl">
         <property name="dataSource" ref="productionDataSource"/>
         <property name="transactionManager" ref="transactionManager"/>
     </bean>
@@ -21,6 +17,10 @@
         <property name="transactionManager" ref="transactionManager"/>
     </bean>
     <bean id="packageRepository" class="hsl.devspace.app.corelogic.repository.Package.PackageRepositoryImpl">
+        <property name="dataSource" ref="productionDataSource"/>
+        <property name="transactionManager" ref="transactionManager"/>
+    </bean>
+    <bean id="categoryRepository" class="hsl.devspace.app.corelogic.repository.category.CategoryRepositoryImpl">
         <property name="dataSource" ref="productionDataSource"/>
         <property name="transactionManager" ref="transactionManager"/>
     </bean>
