@@ -182,13 +182,37 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/error-message'         
+              $ref: '#/definitions/error-message'    
+              
+  /categories/toprated:
+    get: 
+      description: Returns the top rated items by all categories
+      tags:
+        - category
+      produces:
+        - application/json
+
+      responses:
+        '200':
+          description: Request processed successfully
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/success-message'
+              
+        '404':
+          description: Resource not found (invalid request)
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/error-message'
+                            
             
-  /categories/{categoryName}/items:
+  /items/category/{categoryName}:
     get: 
       description: Returns all the details of items for the given category
       tags:
-        - category
+        - item
       produces:
         - application/json
       parameters:
@@ -213,11 +237,11 @@ paths:
             items:
               $ref: '#/definitions/error-message'
               
-  /sub-categories/{subcategoryName}/items:
+  /items/sub-category/{subcategoryName}:
     get: 
       description: Returns all the details of items for the given sub-category
       tags:
-        - category
+        - item
       produces:
         - application/json
       parameters:
@@ -242,34 +266,11 @@ paths:
             items:
               $ref: '#/definitions/error-message' 
               
-  /categories/toprated:
-    get: 
-      description: Returns the top rated items by all categories
-      tags:
-        - category
-      produces:
-        - application/json
-
-      responses:
-        '200':
-          description: Request processed successfully
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/success-message'
-              
-        '404':
-          description: Resource not found (invalid request)
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message'
-              
-  /categories/{categoryName}/toprated:
+  /items/category/{categoryName}/toprated:
     get: 
       description: Returns the top rated items of a category
       tags:
-        - category
+        - item
       produces:
         - application/json
 
@@ -295,11 +296,11 @@ paths:
             items:
               $ref: '#/definitions/error-message'
               
-  /categories/search/{searchKey}:
+  /items/search/{searchKey}:
     get: 
       description: Search item within all categories
       tags:
-        - category
+        - item
       produces:
         - application/json
 
@@ -325,11 +326,11 @@ paths:
             items:
               $ref: '#/definitions/error-message'
               
-  /categories/{categoryName}/search/{searchKey}:
+  /items/search/{searchKey}/category/{categoryName}:
     get: 
       description: Search item from a specific category
       tags:
-        - category
+        - item
       produces:
         - application/json
 
