@@ -32,21 +32,26 @@ public class GuestService {
     public Response addGuest(User user, @javax.ws.rs.core.Context UriInfo uriInfo) {
         User myUser = new User();
         myUser.setMobile(user.getMobile());
-        int status = guestRepository.add(myUser);
+
         Response response;
-        if (status != 0) {
-            SuccessMessage successMessage = new SuccessMessage();
-            successMessage.setCode(Response.Status.CREATED.getStatusCode());
-            successMessage.setStatus("success");
-            successMessage.setMessage("guest user added to the database");
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("mobileNo", user.getMobile());
-            String url = uriInfo.getAbsolutePath().toString();
-            successMessage.addLink(url, "self");
-            successMessage.addData(jsonObject);
-            response = Response.status(Response.Status.CREATED).entity(successMessage).build();
-        } else {
+        if (user.getMobile() == "") {
             throw new WebApplicationException(400);
+        } else {
+            int status = guestRepository.add(myUser);
+            if (status != 0) {
+                SuccessMessage successMessage = new SuccessMessage();
+                successMessage.setCode(Response.Status.CREATED.getStatusCode());
+                successMessage.setStatus("success");
+                successMessage.setMessage("guest user added to the database");
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("mobileNo", user.getMobile());
+                String url = uriInfo.getAbsolutePath().toString();
+                successMessage.addLink(url, "self");
+                successMessage.addData(jsonObject);
+                response = Response.status(Response.Status.CREATED).entity(successMessage).build();
+            } else {
+                throw new WebApplicationException(400);
+            }
         }
         return response;
     }

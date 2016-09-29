@@ -50,7 +50,7 @@
     </div>
     <div class="panel-body">
 
-      <form:form class="form-horizontal" role="form" id="frmAddItem" action="/add_item" method="post" modelAttribute="addItem" commandName="addItem">
+      <form:form class="form-horizontal" role="form" id="frmAddItem" action="/admin/items/add_item" method="post" modelAttribute="addItem" commandName="addItem">
         <fieldset class="scheduler-border">
           <legend class="scheduler-border">(*) Fields are read only</legend>
 

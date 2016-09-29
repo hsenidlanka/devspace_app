@@ -28,4 +28,8 @@
         <property name="transactionManager" ref="transactionManager"/>
     </bean>
 
+    <bean id="packageRepoImpl" class="hsl.devspace.app.corelogic.repository.Package.PackageRepositoryImpl">
+        <property name="dataSource" ref="productionDataSource"/>
+        <property name="transactionManager" ref="transactionManager"/>
+    </bean>
 </beans>

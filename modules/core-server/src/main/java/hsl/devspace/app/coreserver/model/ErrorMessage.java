@@ -7,7 +7,7 @@ import org.codehaus.jackson.annotate.JsonPropertyOrder;
  * Created by Kasun Dinesh on 7/5/16.
  * This is the model/template of the error message to pass as a response.
  */
-@JsonPropertyOrder({"status", "code", "error-message", "description"})
+@JsonPropertyOrder({"status", "code", "errorMessage", "description"})
 public class ErrorMessage {
     private String status;
     private int errorCode;
@@ -42,7 +42,7 @@ public class ErrorMessage {
         this.errorCode = errorCode;
     }
 
-    @JsonProperty("error-message")
+    @JsonProperty("errorMessage")
     public String getErrorMessage() {
         return errorMessage;
     }

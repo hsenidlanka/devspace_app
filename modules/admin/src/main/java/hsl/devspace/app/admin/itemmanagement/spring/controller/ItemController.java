@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/items")
@@ -37,10 +39,10 @@ public class ItemController {
     public ModelAndView addItem(@ModelAttribute("addItem") hsl.devspace.app.corelogic.domain.Item newItem) throws SQLIntegrityConstraintViolationException {
         ModelAndView model = new ModelAndView();
 
-        /* int a = item.add(newItem);
-                if (a == 1)*/
+         int a = item.add(newItem);
+                if (a == 1)
             model.setViewName("addItem");
-        /*    else*/
+            else
 
             System.out.println("Error in item add");
 
@@ -58,13 +60,13 @@ public class ItemController {
     }
 
     @RequestMapping(value = "/view_item")
-    public ModelAndView view(@ModelAttribute("viewItem") hsl.devspace.app.corelogic.domain.Item viewItem) throws SQLIntegrityConstraintViolationException {
+    public ModelAndView view(@ModelAttribute("viewItem") Item viewItem) throws SQLIntegrityConstraintViolationException {
         ModelAndView model = new ModelAndView();
-     //     List<Map<String, Object>> x = item.view();
+          List<Map<String, Object>> x = item.view();
 
-     //   if (x != null)
+        if (x != null)
             model.setViewName("viewItem");
-     //        else
+             else
             System.out.println("Error in viewing item");
 
         return model;

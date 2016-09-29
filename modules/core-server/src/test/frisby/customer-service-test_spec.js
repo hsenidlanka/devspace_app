@@ -19,7 +19,7 @@ frisby.create('Register customer test 01-valid data')
     .expectJSON({
         "status": "success",
         "code": 201,
-        "message": "user added",
+        "message": "user added to the database",
         "data": [
             {
                 "firstName": "frisby",
@@ -58,13 +58,13 @@ frisby.create('Register customer test 02-different http method')
     .expectJSONTypes({
         code: Number,
         description: String,
-        "error-message": String,
+        errorMessage: String,
         status: String
     })
     .expectJSON({
         "code": 405,
         "description": "wrong http method used. use the proper http method as described in the documentation.",
-        "error-message": "HTTP_METHOD_NOT_ALLOWED",
+        errorMessage: "HTTP_METHOD_NOT_ALLOWED",
         "status": "error"
     })
     .toss();
@@ -118,13 +118,13 @@ frisby.create('Customer login test 02-wrong username')
     .expectJSONTypes({
         code: Number,
         description: String,
-        "error-message": String,
+        errorMessage: String,
         status: String
     })
     .expectJSON({
         "code": 401,
         "description": "credentials provided are not authorized.",
-        "error-message": "HTTP_UNAUTHORIZED",
+        "errorMessage": "HTTP_UNAUTHORIZED",
         "status": "unauthorized"
     })
     .toss();
@@ -140,13 +140,13 @@ frisby.create('Customer login test 03-wrong password')
     .expectJSONTypes({
         code: Number,
         description: String,
-        "error-message": String,
+        errorMessage: String,
         status: String
     })
     .expectJSON({
         "code": 401,
         "description": "credentials provided are not authorized.",
-        "error-message": "HTTP_UNAUTHORIZED",
+        "errorMessage": "HTTP_UNAUTHORIZED",
         "status": "unauthorized"
     })
     .toss();
@@ -162,13 +162,13 @@ frisby.create('Customer login test 04-with spaces')
     .expectJSONTypes({
         code: Number,
         description: String,
-        "error-message": String,
+        errorMessage: String,
         status: String
     })
     .expectJSON({
         "code": 401,
         "description": "credentials provided are not authorized.",
-        "error-message": "HTTP_UNAUTHORIZED",
+        "errorMessage": "HTTP_UNAUTHORIZED",
         "status": "unauthorized"
     })
     .toss();
@@ -184,13 +184,13 @@ frisby.create('Customer login test 05-with spaces')
     .expectJSONTypes({
         code: Number,
         description: String,
-        "error-message": String,
+        errorMessage: String,
         status: String
     })
     .expectJSON({
         "code": 401,
         "description": "credentials provided are not authorized.",
-        "error-message": "HTTP_UNAUTHORIZED",
+        "errorMessage": "HTTP_UNAUTHORIZED",
         "status": "unauthorized"
     })
     .toss();
@@ -206,13 +206,13 @@ frisby.create('Customer login test 06-mixed case username')
     .expectJSONTypes({
         code: Number,
         description: String,
-        "error-message": String,
+        errorMessage: String,
         status: String
     })
     .expectJSON({
         "code": 401,
         "description": "credentials provided are not authorized.",
-        "error-message": "HTTP_UNAUTHORIZED",
+        "errorMessage": "HTTP_UNAUTHORIZED",
         "status": "unauthorized"
     })
     .toss();
@@ -228,13 +228,13 @@ frisby.create('Customer login test 07-mixed case password')
     .expectJSONTypes({
         code: Number,
         description: String,
-        "error-message": String,
+        errorMessage: String,
         status: String
     })
     .expectJSON({
         "code": 401,
         "description": "credentials provided are not authorized.",
-        "error-message": "HTTP_UNAUTHORIZED",
+        "errorMessage": "HTTP_UNAUTHORIZED",
         "status": "unauthorized"
     })
     .toss();
@@ -249,13 +249,13 @@ frisby.create('Customer login test 08-empty password')
     .expectJSONTypes({
         code: Number,
         description: String,
-        "error-message": String,
+        errorMessage: String,
         status: String
     })
     .expectJSON({
         "code": 401,
         "description": "credentials provided are not authorized.",
-        "error-message": "HTTP_UNAUTHORIZED",
+        "errorMessage": "HTTP_UNAUTHORIZED",
         "status": "unauthorized"
     })
     .toss();
@@ -270,13 +270,13 @@ frisby.create('Customer login test 09-empty password')
     .expectJSONTypes({
         code: Number,
         description: String,
-        "error-message": String,
+        errorMessage: String,
         status: String
     })
     .expectJSON({
         "code": 401,
         "description": "credentials provided are not authorized.",
-        "error-message": "HTTP_UNAUTHORIZED",
+        "errorMessage": "HTTP_UNAUTHORIZED",
         "status": "unauthorized"
     })
     .toss();
@@ -292,13 +292,13 @@ frisby.create('Customer login test 10-wrong http method')
     .expectJSONTypes({
         code: Number,
         description: String,
-        "error-message": String,
+        errorMessage: String,
         status: String
     })
     .expectJSON({
         "code": 405,
         "description": "wrong http method used. use the proper http method as described in the documentation.",
-        "error-message": "HTTP_METHOD_NOT_ALLOWED",
+        "errorMessage": "HTTP_METHOD_NOT_ALLOWED",
         "status": "error"
     })
     .toss();
