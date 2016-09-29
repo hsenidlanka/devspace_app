@@ -114,7 +114,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<Map<String, Object>> retrieveMultipleRowsColumns(String username) {
+    public List<Map<String, Object>> retrieveSelectedUserDetails(String username) {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE BINARY username = ?", username);
         log.info(mp);
         return mp;
@@ -145,6 +145,11 @@ public class UserRepositoryImpl implements UserRepository {
         int row = jdbcTemplate.update(sql, new Object[]{user.getUsername()});
         log.info(row + "unblock status");
         return row;
+    }
+
+    @Override
+    public int updateGroupStaff(String des,String username) {
+        return 0;
     }
 
     @Override

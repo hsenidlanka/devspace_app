@@ -28,13 +28,13 @@ public interface UserRepository {
 
     int modify(User user) throws SQLException, TransientDataAccessResourceException;
 
-    List<Map<String, Object>> retrieveMultipleRowsColumns(String username);
+    List<Map<String, Object>> retrieveSelectedUserDetails(String username);
     List<Map<String, Object>> view();
 
     int block(String username);
 
     int unblock(String username);
-
+    public int updateGroupStaff(String des,String username);
     List<Map<String, Object>> retrieveCustomersByDate(java.sql.Date date);
     List<Map<String, Object>> retrieveByDateRange(java.sql.Date date1,java.sql.Date date2);
     List<Map<String, Object>>filter(SQLType column,String filterValue);
