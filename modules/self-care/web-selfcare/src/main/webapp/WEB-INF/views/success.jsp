@@ -10,7 +10,7 @@
 </head>
 <body>
 <div class="loader-anim"></div>
-<%@include file="headertest2.jsp" %>
+<%@include file="NewHeader.jsp" %>
 <div class="main-div">
     <div class="section">
         <div class="panel panel-default">
@@ -20,29 +20,29 @@
             </div>
             <div class="panel-body">
                 <ul class="progress-indicator">
-                    <li class="completed"><span class="bubble"></span> Delivery</li>
-                    <li class="completed"><span class="bubble"></span> Payment</li>
-                    <li class="completed"><span class="bubble"></span> Verify</li>
-                    <li class="completed"><span class="bubble"></span> Success</li>
+                    <li class="completed"><span class="bubble"></span><fmt:message key="delivery" bundle="${lang}"/></li>
+                    <li class="completed"><span class="bubble"></span><fmt:message key="delivery.payment" bundle="${lang}"/></li>
+                    <li class="completed"><span class="bubble"></span><fmt:message key="delivery.verify" bundle="${lang}"/></li>
+                    <li class="completed"><span class="bubble"></span><fmt:message key="delivery.success" bundle="${lang}"/></li>
                 </ul>
 
                 <div class="container" style="width:800px;;">
                     <div style="text-align: center;">
                         <img src="<c:url value="/resources/images/icons/success.png"/>"  width="100px" height="100px">
 
-                        <h1>Thank you</h1>
+                        <h1><fmt:message key="success.thank" bundle="${lang}"/></h1>
                     </div>
                     <div>
-                        <h4>Your order has placed successfully...Here are some details of your order.</h4>
+                        <h4><fmt:message key="delivery.success" bundle="${lang}"/>Your order has placed successfully...Here are some details of your order.</h4>
                     </div>
-                    <div><label>Order id:</label></div>
-                    <div><label>Order date:</label></div>
-                    <div><label>Total:</label></div>
-                    <div><label>Type:</label></div>
-                    <div><label>Status:</label></div>
+                    <div><label><fmt:message key="success.id" bundle="${lang}"/></label></div>
+                    <div><label><fmt:message key="success.date" bundle="${lang}"/></label></div>
+                    <div><label><fmt:message key="shopping.total" bundle="${lang}"/>:</label></div>
+                    <div><label><fmt:message key="success.type" bundle="${lang}"/></label></div>
+                    <div><label><fmt:message key="success.status" bundle="${lang}"/></label></div>
 
                     <div>
-                        <a href="home">Click here to go to homepage</a>
+                        <a href="home"><fmt:message key="success.click" bundle="${lang}"/></a>
                     </div>
                 </div>
             </div>

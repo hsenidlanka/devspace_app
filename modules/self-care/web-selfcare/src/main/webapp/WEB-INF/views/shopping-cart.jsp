@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Shopping Cart</title>
-    <link rel="shortcut icon" href="">
     <%@include file="include.jsp" %>
+    <title><fmt:message key="shopping" bundle="${lang}"/></title>
+    <link rel="shortcut icon" href="">
+
     <script src="<c:url value="/resources/js/cart-operations.js"/>" type="text/javascript"></script>
 
 </head>
@@ -16,7 +17,7 @@
             <div class="panel-heading">
                 <img class="icons" src="<c:url value="/resources/images/icons/shopping-cart.png"/>" />
 
-                <h3 class="header-panel">Shopping cart</h3>
+                <h3 class="header-panel"><fmt:message key="shopping" bundle="${lang}"/></h3>
             </div>
             <div class="panel-body">
                 <div class="container">
@@ -25,11 +26,11 @@
                             <table class="table" id="table-cart">
                                 <tbody>
                                 <tr>
-                                    <th>Description</th>
-                                    <th>Price (Rs.)</th>
-                                    <th>QTY</th>
-                                    <th>Total (RS.)</th>
-                                    <th>Operations</th>
+                                    <th><fmt:message key="summary.descrip" bundle="${lang}"/></th>
+                                    <th><fmt:message key="summary.price" bundle="${lang}"/></th>
+                                    <th><fmt:message key="summary.qty" bundle="${lang}"/></th>
+                                    <th><fmt:message key="summary.total" bundle="${lang}"/></th>
+                                    <th><fmt:message key="shopping.op" bundle="${lang}"/></th>
                                 </tr>
                                 <tr>
                                     <td style="vertical-align: middle; text-align: left;"><img
@@ -89,9 +90,9 @@
                             <div class="login-card">
                                 <img src="<c:url value="/resources/images/icons/invoice.png"/>", width="40px" height="40px"/>
 
-                                <h2 style="display: inline;">Total</h2>
+                                <h2 style="display: inline;"><fmt:message key="shopping.total" bundle="${lang}"/></h2>
                                 <hr>
-                                <h5>Apply a coupon</h5>
+                                <h5><fmt:message key="shopping.apply" bundle="${lang}"/></h5>
 
                                 <div id="coupon-alert-div" class="alert alert-danger" hidden="">
                                     <p id="coupon-validate-msg"></p>
@@ -105,26 +106,26 @@
                                            class="btn btn-primary btn-xs">
                                 </div>
                                 <div style="margin-top: 30px;">
-                                    <label><strong>Total amount (Rs.): <label
+                                    <label><strong><fmt:message key="pay.total" bundle="${lang}"/> <label
                                             id="label-tot">0.00</label></strong></label><br>
-                                    <label><strong>Discount (Rs.): <label id="label-dis">0.00</label></strong></label>
+                                    <label><strong><fmt:message key="shopping.discount" bundle="${lang}"/> <label id="label-dis">0.00</label></strong></label>
                                 </div>
                                 <hr>
                                 <div>
-                                    <label><strong>Discounted total (Rs.): <label
+                                    <label><strong><fmt:message key="shopping.discount.total" bundle="${lang}"/> <label
                                             id="label-distot">0.00</label></strong></label><br>
-                                    <label><strong>Service charges (%): <label
+                                    <label><strong><fmt:message key="shopping.service" bundle="${lang}"/> <label
                                             id="label-serv">5</label></strong></label>
                                 </div>
                                 <div style="margin-top: 10px; border: groove; border-color: #62c462; border-width: thin;">
-                                    <p id="net-amount-text"><strong>Net amount (Rs.)</strong></p>
+                                    <p id="net-amount-text"><strong><fmt:message key="shopping.net" bundle="${lang}"/></strong></p>
 
                                     <p id="net-amount-field">0.00</p>
                                 </div>
                                 <div style="margin-top: 5px;">
                                     <button type="submit" class="btn btn-success" id="checkoutButton"
                                             style="width: 100%;">
-                                        <span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;Proceed Checkout
+                                        <span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;<fmt:message key="shopping.proceed" bundle="${lang}"/>
                                     </button>
                                 </div>
                             </div>
@@ -136,7 +137,7 @@
         <!-- Start-Suggestions image slider -->
         <div class="container">
             <div class="col-md-12">
-                <h3>You may interested in these...</h3>
+                <h3><fmt:message key="shopping.you" bundle="${lang}"/></h3>
 
                 <div class="well">
                     <div id="myCarousel" class="carousel slide">
@@ -212,28 +213,28 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h3 class="modal-title" id="myModalLabel" contenteditable="true">Proceed to Checkout</h3>
+                <h3 class="modal-title" id="myModalLabel" contenteditable="true"><fmt:message key="shopping.proceed" bundle="${lang}"/></h3>
             </div>
             <div class="modal-body">
-                <p>Login/register or continue as a guest to checkout.
+                <p><fmt:message key="shopping.login.reg" bundle="${lang}"/>
                     <br>
                     <br>
                 </p>
 
                 <div style="text-align:center">
                     <div style="padding:5px;">
-                        <a class="btn btn-primary" style="width:300px;">Login to the system</a>
+                        <a class="btn btn-primary" style="width:300px;"><fmt:message key="shopping.login.system" bundle="${lang}"/></a>
                     </div>
                     <div style="padding:5px;">
-                        <a class="btn btn-primary" style="width:300px;">Create an account</a>
+                        <a class="btn btn-primary" style="width:300px;"><fmt:message key="shopping.create" bundle="${lang}"/></a>
                     </div>
                     <div style="padding:5px;">
-                        <a class="btn btn-primary" style="width:300px;" href="delivery.html">Continue as a guest</a>
+                        <a class="btn btn-primary" style="width:300px;" href="delivery.html"><fmt:message key="shopping.guest" bundle="${lang}"/></a>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <a class="btn btn-default" data-dismiss="modal">Close</a>
+                <a class="btn btn-default" data-dismiss="modal"><fmt:message key="shopping.close" bundle="${lang}"/></a>
             </div>
         </div>
     </div>
@@ -246,15 +247,14 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <img class="icons" src="<c:url value="/resources/images/icons/shopping-cart-remove.png"/>" >
-                <h4 class="modal-title header-panel">Remove item?</h4>
+                <h4 class="modal-title header-panel"><fmt:message key="shopping.remove" bundle="${lang}"/></h4>
             </div>
             <div class="modal-body">
-                <p>Do you want to remove the following item from cart?</p>
+                <p><fmt:message key="shopping.do.you" bundle="${lang}"/></p>
 
                 <div class="thumbnail"
                      style="height:auto; border: none;">
-                    <img src="<c:url value="/resources/images/Whole-Pizza-100x100.jpg"/>" "../"
-                         class="img-responsive" align="left">
+                    <img src="<c:url value="/resources/images/Whole-Pizza-100x100.jpg"/>" class="img-responsive" align="left">
 
                     <div class="caption">
                         <h4>&nbsp;Thumbnail label</h4>
@@ -278,11 +278,10 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <img class="icons" src="<c:url value="/resources/images/icons/shopping-cart-modify.png"/>" >
-                <h4 class="modal-title header-panel">Modify and Update cart</h4>
+                <h4 class="modal-title header-panel"><fmt:message key="shopping.modify" bundle="${lang}"/></h4>
             </div>
             <div class="modal-body">
-                <p>Customize the following item as you wish and click add to cart to add
-                    the item to cart.</p>
+                <p><fmt:message key="shopping.customize" bundle="${lang}"/></p>
 
                 <div class="thumbnail" style="height:120px; border: none;">
                     <img src="<c:url value="/resources/images/Whole-Pizza-100x100.jpg"/>"
