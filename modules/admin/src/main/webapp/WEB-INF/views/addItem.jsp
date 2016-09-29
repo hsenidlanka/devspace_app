@@ -50,7 +50,7 @@
     </div>
     <div class="panel-body">
 
-      <form:form class="form-horizontal" role="form" id="frmAddItem" action="/admin/items/add_item" method="post" modelAttribute="addItem" commandName="addItem">
+      <form:form class="form-horizontal" role="form" id="frmAddItem" action="/admin/items/add_item" method="post" commandName="command">
         <fieldset class="scheduler-border">
           <legend class="scheduler-border">(*) Fields are read only</legend>
 
@@ -98,14 +98,15 @@
 
               <div class="col-xs-5">
                       <form:select class="form-control" id="selectSubCat" path="subCategoryName">
-                      <form:option value="-">--Select sub-category--</form:option>
-                           <form:option value="dpP" >Deep dish Pizza</form:option>
-                           <form:option value="itP">Italiano Pizza</form:option>
-                           <form:option value="gormt">Gourmet</form:option>
-                           <form:option value="ny">NY Thin crust</form:option>
-                           <form:option value="bg">Big Pizza</form:option>
+                      <form:option value="-" label="--Select sub-category--"/>
+                      <form:options items="${subCats}"/>
+                        <%--<form:option value="dpP" >Deep dish Pizza</form:option>
+                         <form:option value="itP">Italiano Pizza</form:option>
+                         <form:option value="gormt">Gourmet</form:option>
+                         <form:option value="ny">NY Thin crust</form:option>
+                         <form:option value="bg">Big Pizza</form:option>--%>
                 </form:select>
-                <span id="subCatErr" class="input-group-error"></span>
+                <span id="subCatErr" class="input-group-error"><%--<form:errors path="subCategoryName" />--%> </span>
               </div>
 
               <div class="col-xs-4">
@@ -283,7 +284,7 @@
               </form:button>
             </div>
             <div class="col-xs-3" align="center">
-              <form:button type="button" class="btn btn-success btn-group-xs" id="btnAddItem"><span
+              <form:button type="submit" class="btn btn-success btn-group-xs" id="btnAddItem"><span
                       class="glyphicon glyphicon-plus"></span> Add
                 Item
               </form:button>

@@ -37,7 +37,7 @@
                 <a href="https://localhost:8443/admin/items/view_item" class="panel-sub-menu1">View Item</a>
               </li>
               <li>
-                <a href="https://localhost:8443/admin/items/add_item" class="panel-sub-menu1">Add Item</a>
+                <a href="https://localhost:8443/admin/items/add" class="panel-sub-menu1">Add Item</a>
               </li>
               <li>
                 <a href="https://localhost:8443/admin/items/edit_item" class="panel-sub-menu1">Edit Item</a>
