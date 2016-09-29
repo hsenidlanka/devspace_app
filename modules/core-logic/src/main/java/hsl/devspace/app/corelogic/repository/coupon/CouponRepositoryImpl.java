@@ -68,5 +68,23 @@ public class CouponRepositoryImpl implements CouponRepository {
         return false;
     }
 
+    @Override
+    public boolean validateCoupon(String couponCode, String mobile) {
+        boolean result=false;
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT customer_mobile,status FROM coupon WHERE coupon_code=?", couponCode);
+       log.info(mp);
+        log.info(mp.get(0).get("customer_mobile"));
+        if(mp.get(0).get("customer_mobile").equals(mobile) && mp.get(0).get("status").toString().equals("active")){
+            result=true;
+            log.info("coupon is valid");
+
+        }
+        else{
+            log.info("coupon not valid");
+        }
+        log.info(result);
+        return result;
+    }
+
 
 }

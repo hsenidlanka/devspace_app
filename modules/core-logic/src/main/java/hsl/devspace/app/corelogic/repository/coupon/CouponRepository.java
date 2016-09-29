@@ -13,4 +13,5 @@ public interface CouponRepository {
     List<Map<String, Object>> viewActiveCoupons();
     int countActiveCoupons();
     boolean ifExpired(String couponCode);
+    boolean validateCoupon(String couponCode,String mobile);
 }
