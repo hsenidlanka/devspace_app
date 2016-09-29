@@ -1,90 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title><fmt:message key="contactus" bundle="${lang}"/></title>
     <%@include file="include.jsp" %>
+    <title><fmt:message key="contactus" bundle="${lang}"/></title>
     <link href="<c:url value="/resources/css/prettify.css"/>" >
     <script src="<c:url value="/resources/js/prettify.js"/>" ></script>
 
     <script src="<c:url value="/resources/js/contactus_validate.js"/>" ></script>
     <script src="<c:url value="/resources/js/loader.js"/>" ></script>
     <script src="<c:url value="/resources/js/validate-inputs.js"/>" ></script>
-
-    <script type="text/javascript">
-
-        function usage() {
-            $.notify("Alert!");
-        }
-
-        function api_type(type) {
-            $.notify("Thank you for your response.We'll get on to your inquiry as soon as possible", {type: type});
-        }
-
-        function api_position() {
-            var an = $(":radio[name=align]:checked").val();
-            var vn = $(":radio[name=verticalAlign]:checked").val();
-            $.notify("Alert!", {align: an, verticalAlign: vn});
-        }
-
-        function api_delay() {
-            $.notify("Alert!", {delay: $("#delayValue").val()});
-        }
-
-        function myFunc() {
-            alert("삭제하였습니다");
-        }
-
-        function example1() {
-            $.notify({
-                delay: 999999,
-                message: "hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!",
-                type: "warning",
-                close: "true",
-                animation: true,
-                animationType: "scale",
-                align: "center",
-                verticalAlign: "middle",
-                color: "#777",
-                background: "#eee"
-            });
-        }
-
-        function example2() {
-            $.notify({
-                delay: 0,
-                message: "hello world!",
-                animation: true,
-                align: "center",
-                verticalAlign: "middle",
-                buttons: ["확인", "취소"],
-                buttonFunc: ["test"],
-                buttonAlign: "right",
-                blur: 0.2
-            });
-        }
-
-        function test() {
-            alert("확인");
-        }
-
-        $(function () {
-            $("input[name=align]:radio").change(function () {
-                $("#positionBtn").html("align : <var>" + $(this).val() + "</var>, verticalAlign : <var>" + $(":radio[name=verticalAlign]:checked").val() + "</var>");
-            });
-            $("input[name=verticalAlign]:radio").change(function () {
-                $("#positionBtn").html("align : <var>" + $(":radio[name=align]:checked").val() + "</var>, verticalAlign : <var>" + $(this).val() + "</var>");
-            });
-        });
-
-
-        !function ($) {
-            $(function () {
-                window.prettyPrint && prettyPrint()
-            })
-        }(window.jQuery)
-
-
-    </script>
+    <script src="<c:url value="/resources/js/contactus.js"/>" type="text/javascript"></script>
 
 </head>
 <div class="loader-anim"></div>
@@ -150,8 +75,8 @@
                             <div class="dropdown col-sm-2">
 
                                 <select class="form-control" required>
-                                    <option value="mr"><fmt:message key="signup.mr" bundle="${lang}"/>Mr</option>
-                                    <option value="mrs"><fmt:message key="signup.mrs" bundle="${lang}"/>Mrs</option>
+                                    <option value="mr"><fmt:message key="signup.mr" bundle="${lang}"/></option>
+                                    <option value="mrs"><fmt:message key="signup.mrs" bundle="${lang}"/></option>
                                     <option value="miss"><fmt:message key="signup.miss" bundle="${lang}"/></option>
 
                                 </select>

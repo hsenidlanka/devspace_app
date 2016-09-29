@@ -37,7 +37,7 @@
 <div>
   <div id="add-item-breadcrumb-position">
     <ul class="breadcrumb breadcrumb-menu">
-      <li><a href="https://localhost:8443/users/list">Home</a></li>
+      <li><a href="https://localhost:8443/admin/users/list">Home</a></li>
       <li><a href="#">Item Management</a></li>
       <li class="active"><a href="#">View Item</a></li>
     </ul>
@@ -55,24 +55,24 @@
       <div class="row itemSearchBar">
         <div class="col-sm-1"></div>
         <div class="col-sm-3">
-          <form:label class="control-label" style="float: right;" path="lblItmNm">
+          <label class="control-label" style="float: right;">
             Item Name :
-          </form:label>
+          </label>
 
         </div>
         <div class="col-sm-4">
-          <form:input class="form-control" id="txtViewSearchItem" type="text" path="txtSrchItem"> </form:input>
+          <input class="form-control" id="txtViewSearchItem" type="text"/>
         </div>
         <div class="col-sm-3">
-          <form:button type="button" class="btn btn-success" id="btnViewSearchItem"><span
+          <button type="button" class="btn btn-success" id="btnViewSearchItem"><span
                   class="glyphicon glyphicon-search"></span> Search
-          </form:button>
+          </button>
         </div>
         <div class="col-sm-1"></div>
       </div>
       <br>
 
-      <form:form class="form-horizontal" role="form" id="frmViewItem">
+      <form:form class="form-horizontal" role="form" id="frmViewItem" commandName="viewItem" modelAttribute="viewItem" method="post" action="/view_item">
         <fieldset class="scheduler-border">
           <legend class="scheduler-border">Item Details</legend>
 
@@ -106,29 +106,33 @@
   <div class="modal-dialog ">
     <div class="modal-content">
       <div class="modal-header item-modal-header-style">
-        <form:button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
-                class="glyphicon glyphicon-remove"></span></form:button>
+        <button class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove"></span></button>
         <div align="center"><span class="glyphicon glyphicon-trash"></span> Delete Item
         </div>
       </div>
+      <form:form class="form-horizontal" role="form" id="form-Item-Delete">
+        <fieldset class="scheduler-border">
+          <legend class="scheduler-border">You are about to delete this item..</legend>
       <div class="modal-body">
         <div class="form-group">
-          <form:label id="lblDeltItmMsg" path="lbllDltItmMsg">Do you really want to delete this Item ?</form:label><br><br>
+          <label id="lblDeltItmMsg">Do you really want to delete this Item ?</label><br><br>
 
           <div align="center">
-            <form:label id="lblDeltItmId" path="lblDltItmId">Item ID : xxxxxx </form:label><br>
-            <form:label id="lblDeltItmName" path="lblDltItmName">Item Name : yyyyyy </form:label><br>
+            <label id="lblDeltItmId">Item ID : xxx</label><br>
+            <label id="lblDeltItmName">Item Name : yyyyyy</label><br>
           </div>
         </div>
       </div>
 
       <div class="modal-footer" align="right">
-        <form:button class="btn btn-success" type="button" value="Yes" id="btnDeltItm">Yes
-        </form:button>
-        <form:button class="btn btn-success" type="button" value="cancel" id="btnCnclDeltItm">
+        <button class="btn btn-success" type="button" value="Yes" id="btnDeltItm">Yes
+        </button>
+        <button class="btn btn-success" type="button" value="cancel" id="btnCnclDeltItm">
           No
-        </form:button>
+        </button>
       </div>
+        </fieldset>
+      </form:form>
     </div>
   </div>
 </div>

@@ -28,8 +28,14 @@ public class UserController {
 
     /*  this annotation allows Spring inject an instance of UserRepositoryImpl into this controller automatically.
        Each handler method uses this UserRepository object to perform necessary CRUD operation*/
+
     @Autowired
-    private UserRepository user1;
+    private UserRepository staffRepository;
+
+
+
+/*ApplicationContext context=new ClassPathXmlApplicationContext("admin-integration-context.xml");
+    StaffRepositoryImpl staffRepository= (StaffRepositoryImpl) context.getBean("staffRepository");*/
 
 
 
@@ -58,15 +64,15 @@ public class UserController {
     }
 
     @RequestMapping(value="/addCustomer",method = RequestMethod.POST)
-    public String saveOrUpdate(@ModelAttribute("newUser")hsl.devspace.app.corelogic.domain.User newUser, ModelMap model) throws SQLIntegrityConstraintViolationException {
+    public String saveOrUpdate(@ModelAttribute("newUser")User newUser, ModelMap model) throws SQLIntegrityConstraintViolationException {
 
         System.out.println("First Name:" + newUser.getUsername());
 
-       int i= user1.add(newUser);
+       int i= staffRepository.add(newUser);
         if(i ==0)
-            return "redirect:userAdd";
+            return "userAdd";
         else
-            return "redirect:userAdd";
+            return "userAdd";
 
 
 

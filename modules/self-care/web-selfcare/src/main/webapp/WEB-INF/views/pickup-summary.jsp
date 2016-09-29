@@ -6,7 +6,7 @@
     <%@include file="include.jsp" %>
 
     <link href="<c:url value="/resources/css/progress-wizard.min.css"/>" rel="stylesheet" >
-    <script src="<c:url value="/resources/js/common.js"/>" ></script>
+
 
 </head>
 <body>

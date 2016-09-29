@@ -6,7 +6,7 @@
     <%@include file="include.jsp" %>
     <script src="<c:url value="/resources/js/menu-operations.js"/>" ></script>
     <script src="<c:url value="/resources/js/jquery.contenthover.js"/>" ></script>
-    <script src="<c:url value="/resources/js/common.js"/>" ></script>
+
 
 
 </head>

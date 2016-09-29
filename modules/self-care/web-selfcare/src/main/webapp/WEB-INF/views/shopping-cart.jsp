@@ -5,7 +5,7 @@
     <link rel="shortcut icon" href="">
     <%@include file="include.jsp" %>
     <script src="<c:url value="/resources/js/cart-operations.js"/>" type="text/javascript"></script>
-    <script src="<c:url value="/resources/js/common.js"/>" ></script>
+
 </head>
 <body>
 <div class="loader-anim"></div>

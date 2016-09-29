@@ -7,19 +7,25 @@
 
     <meta charset="UTF-8">
     <title>Add new package</title>
+    <!-- include common CSS, fonts and js -->
+    <jsp:include page="adminTop.jsp"/>
 
-    <!--include common CSS, fonts and js-->
-    <link rel="import" href="adminTop.html">
+    <%-- Other css --%>
+    <spring:url value="/themes/hsenid/css/itemMgt.css" var="cssItem"/>
+    <link href="${cssItem}" rel="stylesheet">
 
-    <link href="../css/itemMgt.css" rel="stylesheet">
-    <script src="../js/jquery.toaster.js"></script>
-    <script src="../js/itemMgt.js"></script>
-    <script src="../js/myAlerts.js"></script>
+    <%--  other javascripts --%>
+
+    <spring:url value="/themes/hsenid/js/itemMgt.js" var="itemJs"/>
+    <spring:url value="/themes/hsenid/js/myAlerts.js" var="myAlerts"/>
+
+    <script src="${itemJs}"></script>
+    <script src="${myAlerts}"></script>
 </head>
 <body>
 
 
-<object width="100%" data="header.html"></object>
+<jsp:include page="header.jsp"/>
 
 <div class="brand">
     <div style="position: relative; left: -50%;">
@@ -28,10 +34,10 @@
 </div>
 <br>
 
-<div class="breadcrumbPosition">
-    <div style="position: relative; left: -50%;">
+<div>
+    <div id="add-pkg-breadcrumb-position">
         <ul class="breadcrumb breadcrumb-menu">
-            <li><a href="home.html">Home</a></li>
+            <li><a href="https://localhost:8443/admin/users/list">Home</a></li>
             <li><a href="#">Package Management</a></li>
             <li class="active"><a href="#">Add New Package</a></li>
         </ul>
@@ -45,7 +51,7 @@
         </div>
         <div class="panel-body">
 
-            <form:form class="form-horizontal" role="form" id="frmAddPkg" method="post" action="/addPkg">
+            <form:form class="form-horizontal" role="form" id="frmAddPkg" method="post" modelAttribute="addPackage" commandName="addPackage" action="/add_package">
                 <fieldset class="scheduler-border">
                     <legend class="scheduler-border">(*) Fields are read only</legend>
 
@@ -53,21 +59,21 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-xs-7">
-                                <form:label class="col-xs-5 control-label" path="lblpkgID">
+                                <label class="col-xs-5 control-label">
                                     Package ID : &nbsp; *
-                                </form:label>
+                                </label>
 
                                 <div class="col-xs-7">
-                                    <form:input class="form-control" type="text" id="txtAddPkgId" readonly="true" path="txtpkgId"></form:input>
+                                    <input class="form-control" type="text" id="txtAddPkgId" readonly="true"/>
                                 </div>
                             </div>
                             <div class="col-xs-5">
-                                <form:label class="col-xs-5 control-label" path="lblprice">
+                                <label class="col-xs-5 control-label">
                                     Price :
-                                </form:label>
+                                </label>
 
                                 <div class="col-xs-7" align="right">
-                                    <form:input class="form-control price" type="text" id="txtAddPkgPrice" path="txtpkgprc"></form:input>
+                                    <form:input class="form-control price" type="text" id="txtAddPkgPrice" path="price"/>
                                     <span id="pkgPriceErr" class="input-group-error" style="float: left"> </span>
                                 </div>
                             </div>
@@ -77,12 +83,12 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-xs-7">
-                                <form:label class="col-xs-5 control-label" path="lblpkgNm">
+                                <label class="col-xs-5 control-label">
                                     Name :
-                                </form:label>
+                                </label>
 
                                 <div class="col-xs-7">
-                                    <form:input class="form-control" type="text" id="txtAddPkgName" path="txtpkgNm"></form:input>
+                                    <form:input class="form-control" type="text" id="txtAddPkgName" path="packName"/>
                                 </div>
                                 <span id="pkgNmErr" class="input-group-error"> </span>
                             </div>
@@ -91,9 +97,9 @@
 
                     <div class="form-group">
                         <div class="row">
-                            <form:label class="col-xs-3 control-label" path="lblpkgDetl">
+                            <label class="col-xs-3 control-label">
                                 Package Detail :
-                            </form:label>
+                            </label>
                         </div>
                         <br>
 
@@ -119,20 +125,19 @@
 
                                 <div class="row item-tbl-row">
                                     <div class="col-xs-3">
-                                        <form:label class="checkbox-inline" path="lblchkp1">
-                                        <form:input type="checkbox" value="" class="checkbox" path="pkgchk1"></form:input>
+                                        <label class="checkbox-inline">
+                                        <form:checkbox value="pizza" class="checkbox" path="content"/>
                                         Pizza
-                                        </form:label>
+                                        </label>
                                     </div>
                                     <div class="col-xs-4">
-                                        <form:input type="text" value="" class="form-control price" path="txtpkgPrc1"></form:input>
+                                        <form:input type="text" class="form-control price" path="price"/>
                                     </div>
                                     <div class="col-xs-2">
-                                        <form:input class="qty-spinner" type="number" value="0" path="qtysp1"></form:input>
+                                        <form:input class="qty-spinner" type="number" value="0" path="content"/>
                                     </div>
                                     <div class="col-xs-3">
-                                        <form:button type="button" value="" class="btn btn-success btnAddItmPkg"
-                                                id="btnAddPkgPizza">
+                                        <form:button type="button" value="" class="btn btn-success btnAddItmPkg" id="btnAddPkgPizza">
                                             <span class="glyphicon glyphicon-plus"></span>Add
                                         </form:button>
                                     </div>
@@ -140,20 +145,19 @@
 
                                 <div class="row item-tbl-row">
                                     <div class="col-xs-3">
-                                        <form:label class="checkbox-inline" path="lblchk2">
-                                        <form:input type="checkbox" value="" class="checkbox" path="pkgchk2"></form:input>
+                                        <label class="checkbox-inline">
+                                        <form:checkbox value="pasta" class="checkbox" path="content"/>
                                         Pasta/Appetizer
-                                        </form:label>
+                                        </label>
                                     </div>
                                     <div class="col-xs-4">
-                                        <form:input type="text" value="" class="form-control price" path="txtpkgPrc2"></form:input>
+                                        <form:input type="text" class="form-control price" path="price"/>
                                     </div>
                                     <div class="col-xs-2">
-                                        <form:input class="qty-spinner" type="number" value="0" path="qtysp2"></form:input>
+                                        <form:input class="qty-spinner" type="number" value="0" path="content"/>
                                     </div>
                                     <div class="col-xs-3">
-                                        <form:button type="button" value="" class="btn btn-success btnAddItmPkg"
-                                                id="btnAddPkgPasta">
+                                        <form:button type="button" value="" class="btn btn-success btnAddItmPkg" id="btnAddPkgPasta">
                                             <span class="glyphicon glyphicon-plus"></span>Add
                                         </form:button>
                                     </div>
@@ -161,20 +165,19 @@
 
                                 <div class="row item-tbl-row">
                                     <div class="col-xs-3">
-                                        <form:label class="checkbox-inline" path="lblchk3">
-                                        <form:input type="checkbox" value="" class="checkbox" path="pkgchk3"></form:input>
+                                        <label class="checkbox-inline">
+                                        <form:checkbox value="bevrg" class="checkbox" path="content"/>
                                         Bevarage
-                                        </form:label>
+                                        </label>
                                     </div>
                                     <div class="col-xs-4">
-                                        <form:input type="text" value="" class="form-control price" path="txtpkgPrc3"></form:input>
+                                        <form:input type="text" class="form-control price" path="price"/>
                                     </div>
                                     <div class="col-xs-2">
-                                        <form:input class="qty-spinner" type="number" value="0" path="qtysp3"></form:input>
+                                        <form:input class="qty-spinner" type="number" value="0" path="content"/>
                                     </div>
                                     <div class="col-xs-3">
-                                        <form:button type="button" value="" class="btn btn-success btnAddItmPkg"
-                                                id="btnAddPkgBvrg">
+                                        <form:button type="button" value="" class="btn btn-success btnAddItmPkg" id="btnAddPkgBvrg">
                                             <span class="glyphicon glyphicon-plus"></span>Add
                                         </form:button>
                                     </div>
@@ -182,20 +185,19 @@
 
                                 <div class="row item-tbl-row">
                                     <div class="col-xs-3">
-                                        <form:label class="checkbox-inline" path="lblchk4">
-                                        <form:input type="checkbox" value="" class="checkbox" path="pkgchk4"></form:input>
+                                        <label class="checkbox-inline">
+                                        <form:checkbox value="salad" class="checkbox" path="content"/>
                                         Salad
-                                        </form:label>
+                                        </label>
                                     </div>
                                     <div class="col-xs-4">
-                                        <form:input type="text" value="" class="form-control price" path="txtxpkgPrc4"></form:input>
+                                        <form:input type="text" class="form-control price" path="price"/>
                                     </div>
                                     <div class="col-xs-2">
-                                        <form:input class="qty-spinner" type="number" value="0" path="qtysp4"></form:input>
+                                        <form:input class="qty-spinner" type="number" value="0" path="content"/>
                                     </div>
                                     <div class="col-xs-3">
-                                        <form:button type="button" value="" class="btn btn-success btnAddItmPkg"
-                                                id="btnAddPkgSalad">
+                                        <form:button type="button" value="" class="btn btn-success btnAddItmPkg" id="btnAddPkgSalad">
                                             <span class="glyphicon glyphicon-plus"></span>Add
                                         </form:button>
                                     </div>
@@ -203,20 +205,19 @@
 
                                 <div class="row item-tbl-row">
                                     <div class="col-xs-3">
-                                        <form:label class="checkbox-inline" path="lblchk5">
-                                        <form:input type="checkbox" value="" class="checkbox" path="chkpkg5"></form:input>
+                                        <label class="checkbox-inline">
+                                        <form:checkbox value="dessert" class="checkbox" path="content"/>
                                         Dessert
-                                        </form:label>
+                                        </label>
                                     </div>
                                     <div class="col-xs-4">
-                                        <form:input type="text" value="" class="form-control price" path="txtpkgPrc5"></form:input>
+                                        <form:input type="text" class="form-control price" path="price"/>
                                     </div>
                                     <div class="col-xs-2">
-                                        <form:input class="qty-spinner" type="number" value="0" path="qtysp5"></form:input>
+                                        <form:input class="qty-spinner" type="number" value="0" path="content"/>
                                     </div>
                                     <div class="col-xs-3">
-                                        <form:button type="button" value="" class="btn btn-success btnAddItmPkg"
-                                                id="btnAddPkgDssrt">
+                                        <form:button type="button" value="" class="btn btn-success btnAddItmPkg" id="btnAddPkgDssrt">
                                             <span class="glyphicon glyphicon-plus"></span>Add
                                         </form:button>
                                     </div>
@@ -227,9 +228,9 @@
 
                     <div class="form-group">
                         <div class="row">
-                            <form:label class="col-xs-3 control-label" path="lblpkgImg">
+                            <label class="col-xs-3 control-label">
                                 Add Image/s :
-                            </form:label>
+                            </label>
 
                             <div class="col-xs-5">
                                <form:button type="button" class="btn btn-success" id="btnupldPkgImg"><span
@@ -243,8 +244,8 @@
                     <br>
 
                     <div class="list-group row" style="margin:auto; width:50%; border:2px solid black; padding: 10px;">
-                        <form:label path="lblhidden"><h4>Hidden field</h4></form:label><br>
-                        <form:label id="newPkgName" path="lblpkgNmNew"><strong>Pacakage Name</strong></form:label> <br>
+                        <label path="lblhidden"><h4>Hidden field</h4></label><br>
+                        <label id="newPkgName" path="lblpkgNmNew"><strong>Pacakage Name</strong></label> <br>
                         <ul class="list-group">
                             <li class="list-group-item">Pkg item1
                                 <span class="badge">

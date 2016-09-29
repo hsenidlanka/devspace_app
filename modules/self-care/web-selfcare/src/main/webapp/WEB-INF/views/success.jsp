@@ -5,9 +5,8 @@
     <link rel="shortcut icon" href="">
 
     <%@include file="include.jsp" %>
-
     <link rel="stylesheet" href="<c:url value="/resources/css/progress-wizard.min.css"/>" >
-    <script src="<c:url value="/resources/js/common.js"/>" ></script>
+
 </head>
 <body>
 <div class="loader-anim"></div>
