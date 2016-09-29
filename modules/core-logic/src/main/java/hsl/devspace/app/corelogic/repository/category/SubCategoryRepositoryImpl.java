@@ -36,8 +36,8 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
     public int add(Category category) {
         int row = 0;
 
-        String cat_nm = category.getSubCategoryName();
-        boolean availability = checkAvailability(cat_nm);
+        String catNm=category.getSubCategoryName();
+        boolean availability = checkAvailability(catNm);
 
         if (availability == false) {
             String sql = "INSERT INTO sub_category " +
@@ -127,5 +127,12 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
     public List<Map<String, Object>> retrieveCategoryTypes(String categoryName) {
         return null;
 
+    }
+
+    @Override
+    public List<Map<String, Object>> loadMenuItems(String catName) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM item WHERE sub_category_id=(SELECT id FROM sub_category WHERE name=?)",catName);
+        log.info(mp);
+        return mp;
     }
 }

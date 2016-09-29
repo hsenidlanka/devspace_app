@@ -34,8 +34,8 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
     @Override
     public int add(Category category) {
         int row = 0;
-        String cat_nm = category.getCategoryName();
-        boolean availability = checkAvailability(cat_nm);
+        String catNm = category.getCategoryName();
+        boolean availability = checkAvailability(catNm);
         if (availability == false) {
             String sql = "INSERT INTO category " +
                     "(name,description,creator) VALUES (?,?,?)";
@@ -102,7 +102,7 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
 
     @Override
     public List<Map<String, Object>> viewList() {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT name FROM category");
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT name,description FROM category");
         log.info(mp);
         return mp;
     }
@@ -129,7 +129,12 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
 
     }
 
-
+    @Override
+    public List<Map<String, Object>> loadMenuItems(String catName) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM sub_category");
+        log.info(mp);
+        return mp;
+    }
 
     @Override
     public void createCategory1(Category cat) {

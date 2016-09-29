@@ -32,8 +32,8 @@ public class GuestRepositoryImpl  {
     public int add(User user){
         int row = 0;
 
-        String itm_nm = user.getMobile();
-        boolean availability = checkAvailability(itm_nm);
+        String guestMob = user.getMobile();
+        boolean availability = checkAvailability(guestMob);
 
         if (availability == false) {
             String sql = "INSERT INTO guest" +

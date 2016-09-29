@@ -12,4 +12,5 @@ public interface CouponRepository {
     int expire();
     List<Map<String, Object>> viewActiveCoupons();
     int countActiveCoupons();
+    boolean ifExpired(String couponCode);
 }

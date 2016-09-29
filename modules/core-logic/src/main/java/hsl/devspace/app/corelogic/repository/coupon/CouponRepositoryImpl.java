@@ -61,5 +61,12 @@ public class CouponRepositoryImpl implements CouponRepository {
         return count;
     }
 
+    @Override
+    public boolean ifExpired(String couponCode) {
+        boolean ifExpired=false;
+
+        return false;
+    }
+
 
 }

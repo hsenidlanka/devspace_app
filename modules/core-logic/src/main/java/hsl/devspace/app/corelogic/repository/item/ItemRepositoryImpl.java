@@ -33,9 +33,9 @@ public class ItemRepositoryImpl implements ItemRepository {
     @Override
     public int add(Item item) {
         int row = 0;
-        String itm_nm = item.getItemName();
+        String itmNm = item.getItemName();
         int id=item.getItemId();
-        boolean availability = checkAvailability(itm_nm);
+        boolean availability = checkAvailability(itmNm);
 
         if (availability == false) {
             String sql = "INSERT INTO item" +
@@ -120,8 +120,8 @@ public class ItemRepositoryImpl implements ItemRepository {
 
     @Override
     public void addItem(Item item,List<Item> item2){
-        TransactionDefinition tr_def = new DefaultTransactionDefinition();
-        TransactionStatus stat = transactionManager.getTransaction(tr_def);
+        TransactionDefinition trDef = new DefaultTransactionDefinition();
+        TransactionStatus stat = transactionManager.getTransaction(trDef);
         int id=item.getItemId();
         try {
             add(item);

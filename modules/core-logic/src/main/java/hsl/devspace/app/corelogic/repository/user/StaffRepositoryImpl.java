@@ -214,7 +214,7 @@ public class StaffRepositoryImpl implements UserRepository {
             add(user);
             updateGroupStaff(user);
             log.info("updated");
-           // transactionManager.commit(stat);
+            transactionManager.commit(stat);
         } catch (Exception e) {
             transactionManager.rollback(stat);
         }
@@ -223,6 +223,7 @@ public class StaffRepositoryImpl implements UserRepository {
     @Transactional
     public void addStaffMember2(User user) {
         add(user);
+        updateGroupStaff(user);
     }
 
     }
