@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.List;
 
 @Controller
 @RequestMapping("/category")
@@ -37,5 +38,16 @@ public class CategoryController {
         model.setViewName("addCategory");
 
         return model;
+    }
+
+    /*
+    * Get category list
+    **/
+    @RequestMapping(value = "getCatLis")
+    public ModelAndView retrieveCategoryTypes(@ModelAttribute("viewCatg") Category viewCat) throws SQLIntegrityConstraintViolationException {
+        ModelAndView model = new ModelAndView("index");
+
+        List<Category> listCat = category.retrieveCategoryTypes();
+      //  model.addObject("list", categoryName);
     }
 }

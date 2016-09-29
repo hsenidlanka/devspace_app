@@ -1,7 +1,7 @@
 package hsl.devspace.app.admin.itemmanagement.spring.controller;
 
 import hsl.devspace.app.corelogic.domain.Item;
-import hsl.devspace.app.corelogic.repository.item.ItemRepositoryImpl;
+import hsl.devspace.app.corelogic.repository.item.ItemRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class ItemController {
     private static final Logger LOG = LogManager.getLogger(ItemController.class);
 
     @Autowired
-    private ItemRepositoryImpl item;
+    private ItemRepository item;
 
      /**
      * Add new item view
@@ -31,22 +31,24 @@ public class ItemController {
     //For viewing the add item form
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView showAddItem() {
-        return new ModelAndView("itemAdd", "addItem", new Item());
+        return new ModelAndView("addItem", "command", new Item());
     }
 
     //For submitting the add new item
     @RequestMapping(value = "/add_item")
-    public ModelAndView addItem(@ModelAttribute("addItem") hsl.devspace.app.corelogic.domain.Item newItem) throws SQLIntegrityConstraintViolationException {
-        ModelAndView model = new ModelAndView();
-
+    public String addItem(@ModelAttribute("newItem") Item newItem) throws SQLIntegrityConstraintViolationException {
+      /* ModelAndView model = new ModelAndView();
+        model.addObject("subCats", subCategoryName);*/
+        System.out.println("First Name:" + newItem.getItemName());
          int a = item.add(newItem);
                 if (a == 1)
-            model.setViewName("addItem");
+                    return "addItem";
+           // model.setViewName("addItem");
             else
 
-            System.out.println("Error in item add");
-
-        return model;
+           // System.out.println("Error in item add");
+return "addItem";
+      //  return model;
     }
 
      /**
