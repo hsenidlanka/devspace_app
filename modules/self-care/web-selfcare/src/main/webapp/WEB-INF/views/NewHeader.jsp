@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@include file="signupmodal.jsp" %>
 <nav class="navbar navbar-default ">
   <div class="container-fluid">
     <div class="col-sm-4"><a href="home"> <img src="<c:url value="/resources/images/logo.png"/>" style="width:75px;height:65px;"></a></div>
@@ -53,8 +53,8 @@
           <h1 style="font-size: larger;color: #22ca1f"><fmt:message key="new.header.loginto" bundle="${lang}"/></h1>
           <ul>
             <li>
-              <input type="text" class="textbox1" name="username" placeholder="<fmt:message key="signup.username" bundle="${lang}"/>" required/>
-              <span class="form_hint"><fmt:message key="new.header.enter.valid" bundle="${lang}"/></span>
+              <input type="text" class="textbox1" id="username" name="username" placeholder="<fmt:message key="signup.username" bundle="${lang}"/>" />
+              <%--<span class="form_hint"><fmt:message key="new.header.enter.valid" bundle="${lang}"/></span>--%>
 
               <p><img src="<c:url value="/resources/images/contact.png"/>" alt=""></p>
             </li>

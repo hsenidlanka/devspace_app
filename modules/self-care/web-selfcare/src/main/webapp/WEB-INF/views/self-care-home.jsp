@@ -5,8 +5,10 @@
     <%@include file="include.jsp" %>
     <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
     <div class="loader-anim"></div>
+    <link href="<c:url value="/resources/css/home-validation.css"/>" rel="stylesheet" >
 
     <title><fmt:message key="home.title" bundle="${lang}"/></title>
+
     <style>
         .carousel-inner > .item > img,
         .carousel-inner > .item > a > img {

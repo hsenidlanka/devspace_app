@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>View customer details</title>
     <%@include file="include.jsp" %>
+    <title><fmt:message key="view.title" bundle="${lang}"/></title>
+
 </head>
 
 <body style="overflow: visible">
 <div class="loader-anim"></div>
-<%@include file="headertest2.jsp" %>
+<%@include file="NewHeader.jsp" %>
 
 <div class="brand"></div>
 <center>
@@ -20,7 +21,7 @@
             </div>
 
 
-            <p style="font-size: xx-large;text-align: left;color: #f5f5f5">My Details</p>
+            <p style="font-size: xx-large;text-align: left;color: #f5f5f5"><fmt:message key="view.my" bundle="${lang}"/></p>
 
             <div class="col-sm-12" style="height: 40px"></div>
             <div class="row">
@@ -35,7 +36,7 @@
                             <div class="form-group">
 
                                 <label class="col-sm-2 control-label datalabel">
-                                    Name
+                                    <fmt:message key="signup.name" bundle="${lang}"/>
                                 </label>
 
                                 <div class="col-sm-4">
@@ -47,7 +48,8 @@
                             <div class="form-group">
 
                                 <label class="col-sm-2 control-label datalabel">
-                                    Address
+                                    <fmt:message key="signup.address" bundle="${lang}"/>
+
                                 </label>
 
                                 <div class="col-sm-4">
@@ -62,7 +64,7 @@
 
 
                                 <label class="col-sm-2 control-label datalabel">
-                                    Date Of Birth
+                                    <fmt:message key="view.birth" bundle="${lang}"/>
                                 </label>
 
                                 <div class='col-sm-4'>
@@ -71,7 +73,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="mobileNo" class="col-sm-2 control-label datalabel">
-                                    Phone No
+                                    <fmt:message key="delivery.contact" bundle="${lang}"/>
                                 </label>
 
                                 <div class="col-sm-4">
@@ -81,7 +83,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="email" class="col-sm-2 control-label datalabel">
-                                    E-Mail
+                                    <fmt:message key="signup.email" bundle="${lang}"/>
                                 </label>
 
                                 <div class="col-sm-4">
@@ -142,7 +144,7 @@
                         <div class="form-group">
 
                             <label class="col-sm-4 control-label">
-                                New Password
+                                <fmt:message key="fgtpswd.new" bundle="${lang}"/>
                             </label>
 
                             <div class="col-sm-6">
@@ -152,7 +154,7 @@
                         <div class="form-group">
 
                             <label class="col-sm-4 control-label">
-                                Re-Enter Password
+                                <fmt:message key="fgtpswd.re" bundle="${lang}"/>
                             </label>
 
                             <div class="col-sm-6">
@@ -161,7 +163,7 @@
                         </div>
                         <div class="col-sm-5"></div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-success">Change Password</button>
+                            <button type="submit" class="btn btn-success"><fmt:message key="view.change" bundle="${lang}"/></button>
                         </div>
 
 

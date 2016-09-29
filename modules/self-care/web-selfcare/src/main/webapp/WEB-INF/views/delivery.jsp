@@ -31,7 +31,7 @@
             <div class="panel-body">
                 <ul class="progress-indicator">
                     <li class="active"><span class="bubble"></span> <fmt:message key="delivery" bundle="${lang}"/></li>
-                    <li><span class="bubble"></span><fmt:message key="delivery.pay" bundle="${lang}"/></li>
+                    <li><span class="bubble"></span><fmt:message key="delivery.payment" bundle="${lang}"/></li>
                     <li><span class="bubble"></span><fmt:message key="delivery.verify" bundle="${lang}"/></li>
                     <li><span class="bubble"></span><fmt:message key="delivery.success" bundle="${lang}"/></li>
                 </ul>
