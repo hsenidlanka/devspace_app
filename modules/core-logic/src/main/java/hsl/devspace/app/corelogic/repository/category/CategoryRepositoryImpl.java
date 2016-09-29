@@ -31,6 +31,7 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
 
     }
 
+/*Add new category*/
     @Override
     public int add(Category category) {
         int row = 0;
@@ -50,6 +51,7 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
         return row;
     }
 
+/*check if category is already available*/
     @Override
     public boolean checkAvailability(String categoryName) {
         boolean result;
@@ -65,6 +67,7 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
 
     }
 
+ /*Delete category*/
     @Override
     public int delete(String categoryName){
         category.setCategoryName(categoryName);
@@ -75,6 +78,7 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
         return row;
     }
 
+    /*view all category details */
     @Override
     public List<Map<String, Object>> view() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category");
@@ -82,6 +86,7 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
         return mp;
     }
 
+    /*retrieve total no.of categories*/
     @Override
     public int count() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category ");
@@ -90,6 +95,7 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
         return count;
     }
 
+    /*update category details-name,description*/
     @Override
     public int update(String categoryName,String description) {
 
@@ -100,6 +106,7 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
         return count;
     }
 
+    /*view name and description of all categories*/
     @Override
     public List<Map<String, Object>> viewList() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT name,description FROM category");
@@ -107,6 +114,7 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
         return mp;
     }
 
+    /*retrieve types of a specific category*/
     public List<Map<String, Object>> retrieveCategoryTypes(String categoryName){
 
         List<Map<String, Object>> mp1=jdbcTemplate.queryForList("SELECT id FROM category WHERE name=?", categoryName);
@@ -129,6 +137,7 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
 
     }
 
+    /*retrieve all items in a specific category*/
     @Override
     public List<Map<String, Object>> loadMenuItems(String catName) {
        // List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM item WHERE sub_category_id=(SELECT id FROM sub_category WHERE category_id=(SELECT id FROM category WHERE name=?))",catName);
@@ -148,13 +157,23 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
         return mp;
     }
 
+/*view all sub categories of a specific category*/
     @Override
     public List<Map<String, Object>> viewSubCategories(String catName) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT name FROM sub_category WHERE category_id=(SELECT id FROM category WHERE NAME =?)",catName);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT name FROM category WHERE category_id=(SELECT id FROM category WHERE NAME =?)",catName);
         log.info(mp);
         return mp;
     }
 
+    /*retrieve list of category names*/
+    @Override
+    public List<Map<String, Object>> viewCategoryList() {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT name FROM category");
+        log.info(mp);
+        return mp;
+    }
+
+    /*Add new category*/
     @Override
     public void createCategory1(Category cat) {
         TransactionDefinition trDef = new DefaultTransactionDefinition();
