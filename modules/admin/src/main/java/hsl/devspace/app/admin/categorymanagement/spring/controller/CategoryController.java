@@ -49,5 +49,8 @@ public class CategoryController {
 
         List<Category> listCat = category.retrieveCategoryTypes();
       //  model.addObject("list", categoryName);
+
+       // return listCat;
+        return model;
     }
 }
