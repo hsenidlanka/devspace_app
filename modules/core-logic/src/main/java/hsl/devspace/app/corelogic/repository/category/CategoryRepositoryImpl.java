@@ -149,6 +149,13 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
     }
 
     @Override
+    public List<Map<String, Object>> viewSubCategories(String catName) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT name FROM sub_category WHERE category_id=(SELECT id FROM category WHERE NAME =?)",catName);
+        log.info(mp);
+        return mp;
+    }
+
+    @Override
     public void createCategory1(Category cat) {
         TransactionDefinition trDef = new DefaultTransactionDefinition();
         TransactionStatus stat = transactionManager.getTransaction(trDef);

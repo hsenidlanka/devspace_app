@@ -135,4 +135,9 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
         log.info(mp);
         return mp;
     }
+
+    @Override
+    public List<Map<String, Object>> viewSubCategories(String catName) {
+        return null;
+    }
 }

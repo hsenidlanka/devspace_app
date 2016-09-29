@@ -22,6 +22,9 @@ public interface CategoryRepository {
     void createCategory1(Category cat);
     List<Map<String, Object>> retrieveCategoryTypes(String categoryName);
     List<Map<String, Object>> loadMenuItems(String catName);
+    List<Map<String, Object>> viewSubCategories(String catName);
+
+
 
 
 
