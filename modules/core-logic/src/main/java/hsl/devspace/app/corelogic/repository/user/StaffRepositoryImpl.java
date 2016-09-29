@@ -39,12 +39,14 @@ public class StaffRepositoryImpl implements UserRepository {
 
     @Override
     public int add(User user) throws DuplicateKeyException {
+
         int row = 0;
 
         String un = user.getUsername();
         String pw = user.getPassword();
         String des = user.getDesignation();
         if (un != "" && pw != "") {
+
             String sql = "INSERT INTO staff " +
                     "(title,username,password,first_name,last_name,email,mobile,address_line1,address_line2,address_line3," +
                     "designation,department,branch,register_date,status) VALUES (?,?,sha1(?),?,?,?,?,?,?,?,?,?,?,CURRENT_DATE,1)";
@@ -52,9 +54,11 @@ public class StaffRepositoryImpl implements UserRepository {
             row = jdbcTemplate.update(sql, new Object[]{user.getTitle(), user.getUsername(), user.getPassword(), user.getFirstName(), user.getLastName(),
                     user.getEmail(), user.getMobile(), user.getAddressL1(), user.getAddressL2(), user.getAddressL3(), user.getDesignation(),
                     user.getDepartment(), user.getBranch()});
+            updateGroupStaff(des,un);
+
+
             log.info(row + " staff inserted");
             log.info(un);
-            updateGroupStaff(user);
 
         } else
             log.error("values cannot be null");
@@ -62,13 +66,18 @@ public class StaffRepositoryImpl implements UserRepository {
         return row;
 
     }
+@Override
+    public int updateGroupStaff(String des,String username) {
 
-    public int updateGroupStaff(User user) {
         int row;
-        String sql = "INSERT INTO group_staff " +
-                "(group_id,staff_id) VALUES ((SELECT id FROM group WHERE name=? ),(SELECT id FROM staff WHERE username=?))";
+    List<Map<String, Object>> mp1 = jdbcTemplate.queryForList("SELECT id FROM staff WHERE username=?",username);
 
-        row = jdbcTemplate.update(sql, new Object[]{user.getDesignation(), user.getUsername()});
+    List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT id FROM `group` WHERE name =?",des);
+
+    String sql = "INSERT INTO group_staff " +
+                "(group_id,staff_id) VALUES (?,?)";
+
+        row = jdbcTemplate.update(sql,new Object[]{mp.get(0).get("id"),mp1.get(0).get("id")});
         log.info(row + " group-staff updated");
         return row;
 
@@ -139,7 +148,7 @@ public class StaffRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<Map<String, Object>> retrieveMultipleRowsColumns(String username) {
+    public List<Map<String, Object>> retrieveSelectedUserDetails(String username) {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE BINARY username = ?", username);
         log.info(mp);
         return mp;
@@ -204,26 +213,34 @@ public class StaffRepositoryImpl implements UserRepository {
         log.info(count);
         return count;
     }
+    public void test(String des){
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT id FROM `group` ");
+        log.info(mp);
+
+    }
 
     public void addStaffMember(User user) {
         TransactionDefinition trDef = new DefaultTransactionDefinition();
         TransactionStatus stat = transactionManager.getTransaction(trDef);
+        String des=user.getDesignation();
+        String username=user.getUsername();
         try {
             log.info("going updated");
 
             add(user);
-            updateGroupStaff(user);
+           // updateGroupStaff( des, username);
             log.info("updated");
             transactionManager.commit(stat);
         } catch (Exception e) {
             transactionManager.rollback(stat);
+            log.info("rollbacked");
         }
 
     }
     @Transactional
     public void addStaffMember2(User user) {
         add(user);
-        updateGroupStaff(user);
+       // updateGroupStaff(user);
     }
 
     }
