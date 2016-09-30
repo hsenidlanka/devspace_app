@@ -140,8 +140,8 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
 
     /*retrieve all items in a specific subcategory*/
     @Override
-    public List<Map<String, Object>> loadMenuItems(String catName) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM item WHERE sub_category_id=(SELECT id FROM sub_category WHERE name=?)",catName);
+    public List<Map<String, Object>> loadMenuItems(String subCatName) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM item WHERE sub_category_id=(SELECT id FROM sub_category WHERE name=?)",subCatName);
         log.info(mp);
         return mp;
     }
