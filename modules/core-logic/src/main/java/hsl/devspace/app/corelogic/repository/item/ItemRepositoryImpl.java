@@ -30,6 +30,7 @@ public class ItemRepositoryImpl implements ItemRepository {
         this.transactionManager = transactionManager;
     }
 
+    /*Add new item*/
     @Override
     public int add(Item item) {
         int row = 0;
@@ -49,6 +50,7 @@ public class ItemRepositoryImpl implements ItemRepository {
         return id;
     }
 
+    /*insert sizes of a specific item*/
     @Override
     public int updateSizeTable(int id,List<Item> item2){
         int row=0;
@@ -63,6 +65,7 @@ public class ItemRepositoryImpl implements ItemRepository {
         return row;
     }
 
+    /*check if item is already available*/
     @Override
     public boolean checkAvailability(String itemName) {
 
@@ -77,6 +80,7 @@ public class ItemRepositoryImpl implements ItemRepository {
         return result;
     }
 
+    /*delete an item*/
     @Override
     public int delete(String itemName) {
 
@@ -87,6 +91,7 @@ public class ItemRepositoryImpl implements ItemRepository {
         return row;
     }
 
+    /*view all item details*/
     @Override
     public List<Map<String, Object>> view() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM item");
@@ -94,6 +99,7 @@ public class ItemRepositoryImpl implements ItemRepository {
         return mp;
     }
 
+    /*retrieve no.of items*/
     @Override
     public int count() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM item ");
@@ -102,6 +108,7 @@ public class ItemRepositoryImpl implements ItemRepository {
         return count;
     }
 
+    /*retrieve list of item names*/
     @Override
     public List<Map<String, Object>> viewList() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT name FROM item");
@@ -109,6 +116,7 @@ public class ItemRepositoryImpl implements ItemRepository {
         return mp;
     }
 
+    /*update item details(((((((((have to modify)))))*/
     @Override
     public int update(Item item) {
 
@@ -118,6 +126,7 @@ public class ItemRepositoryImpl implements ItemRepository {
         return  row;
     }
 
+    /*Add new item*/
     @Override
     public void addItem(Item item,List<Item> item2){
         TransactionDefinition trDef = new DefaultTransactionDefinition();
@@ -131,6 +140,23 @@ public class ItemRepositoryImpl implements ItemRepository {
         catch (Exception e){
             transactionManager.rollback(stat);
         }
+    }
+
+    /*retrieve top rated items from each category*/
+    @Override
+    public void getTopRatedItemsFromAllCategories() {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT id FROM category");
+        //log.info(mp);
+        for (int i=0;i<mp.size();i++){
+            List<Map<String, Object>> mp1= jdbcTemplate.queryForList("SELECT id FROM sub_category WHERE category_id=?",mp.get(i).get("id"));
+            //log.info(mp1);
+            for (int j=0;j<mp1.size();j++){
+                List<Map<String, Object>> mp2= jdbcTemplate.queryForList("SELECT id FROM item WHERE sub_category_id=?",mp.get(j).get("id"));
+                log.info(mp2);
+            }
+
+        }
+
     }
 
 

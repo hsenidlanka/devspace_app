@@ -27,6 +27,7 @@ SeasonalDiscount sd=new SeasonalDiscount();
 
     }
 
+    /*Add new seasonal discount*/
     @Override
     public int add(SeasonalDiscount seasonalDiscount) {
         int row;
@@ -38,6 +39,7 @@ SeasonalDiscount sd=new SeasonalDiscount();
         return row;
     }
 
+    /*delete a seasonal discount*/
     @Override
     public int delete(int id) {
         String sql = "DELETE FROM seasonal_discount WHERE id = ?";
@@ -46,6 +48,7 @@ SeasonalDiscount sd=new SeasonalDiscount();
         return row;
     }
 
+    /*change status to inactive for expired seasonal discounts*/
     @Override
     public int inactiveStatus() {
 
@@ -55,6 +58,7 @@ SeasonalDiscount sd=new SeasonalDiscount();
         return row;
     }
 
+    /*change expire date of a specific seasonal discount*/
     @Override
     public int changeExpireDate(int id, Date exp) {
 
@@ -64,6 +68,7 @@ SeasonalDiscount sd=new SeasonalDiscount();
         return row;
     }
 
+    /*change status to inactive*/
     @Override
     public int inactiveStatus(int id) {
 

@@ -27,6 +27,8 @@ public class CouponRepositoryImpl implements CouponRepository {
         this.transactionManager = transactionManager;
 
     }
+
+    /*Add new coupon*/
     @Override
     public int add(String couponCode,String customerMobile){
         int row;
@@ -37,6 +39,7 @@ public class CouponRepositoryImpl implements CouponRepository {
         return row;
     }
 
+    /*invalidate all the coupons that are expired by today*/
     @Override
     public int expire() {
         int row;
@@ -46,6 +49,7 @@ public class CouponRepositoryImpl implements CouponRepository {
         return row;
     }
 
+    /*view all the details of active(valid) coupons*/
     @Override
     public  List<Map<String, Object>> viewActiveCoupons() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM coupon WHERE status = 1");
@@ -53,6 +57,7 @@ public class CouponRepositoryImpl implements CouponRepository {
         return mp;
     }
 
+    /*retrieve no.of coupons that are in 'active' status*/
     @Override
     public int countActiveCoupons() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM coupon WHERE status=1");
@@ -61,6 +66,7 @@ public class CouponRepositoryImpl implements CouponRepository {
         return count;
     }
 
+    /*check if a coupon is expired*/
     @Override
     public boolean ifExpired(String couponCode) {
         boolean ifExpired=false;
@@ -68,6 +74,7 @@ public class CouponRepositoryImpl implements CouponRepository {
         return false;
     }
 
+    /*validate coupon whether it belongs to the correct user and active*/
     @Override
     public boolean validateCoupon(String couponCode, String mobile) {
         boolean result=false;

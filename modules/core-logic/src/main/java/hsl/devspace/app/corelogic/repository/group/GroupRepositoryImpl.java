@@ -24,6 +24,8 @@ public class GroupRepositoryImpl implements GroupRepository {
         this.transactionManager = transactionManager;
 
     }
+
+    /*Add new user group*/
     @Override
     public int add(Group group) {
         int row;
@@ -35,6 +37,7 @@ public class GroupRepositoryImpl implements GroupRepository {
         return row;
     }
 
+    /*delete a specific user group*/
     @Override
     public int delete(String groupName) {
         String sql = "DELETE FROM group WHERE name = ?";

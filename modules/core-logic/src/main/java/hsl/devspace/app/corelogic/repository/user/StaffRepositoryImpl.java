@@ -37,6 +37,7 @@ public class StaffRepositoryImpl implements UserRepository {
 
     }
 
+    /*add a new staff member*/
     @Override
     public int add(User user) throws DuplicateKeyException {
 
@@ -66,7 +67,9 @@ public class StaffRepositoryImpl implements UserRepository {
         return row;
 
     }
-@Override
+
+    /*insert into group staff table when adding a new staff member*/
+    @Override
     public int updateGroupStaff(String des,String username) {
 
         int row;
@@ -83,6 +86,7 @@ public class StaffRepositoryImpl implements UserRepository {
 
     }
 
+    /*delete a staff member*/
     @Override
     public int delete(String username) throws IllegalArgumentException {
 
@@ -96,6 +100,7 @@ public class StaffRepositoryImpl implements UserRepository {
     }
 
 
+    /*change password of a existing staff user*/
     @Override
     public void changePassword(String username, String password, String nPw) {
 
@@ -119,6 +124,7 @@ public class StaffRepositoryImpl implements UserRepository {
         return user.isConfirmed();
     }
 
+    /*verify whether password and username matched for a specific user*/
     @Override
     public boolean loginAuthenticate(String username, String password) {
 
@@ -136,6 +142,7 @@ public class StaffRepositoryImpl implements UserRepository {
         return result;
     }
 
+    /*update username and password for a specific user*/
     @Override
     public int modify(User user) throws TransientDataAccessResourceException, SQLException {
 
@@ -147,6 +154,7 @@ public class StaffRepositoryImpl implements UserRepository {
 
     }
 
+    /*retrieve all details for a specific staff user*/
     @Override
     public List<Map<String, Object>> retrieveSelectedUserDetails(String username) {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE BINARY username = ?", username);
@@ -154,6 +162,7 @@ public class StaffRepositoryImpl implements UserRepository {
         return mp;
     }
 
+    /*retrieve details of all staff users*/
     @Override
     public List<Map<String, Object>> view() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff");
@@ -161,6 +170,7 @@ public class StaffRepositoryImpl implements UserRepository {
         return mp;
     }
 
+    /*block a certain staff member*/
     @Override
     public int block(String username) {
 
@@ -172,6 +182,7 @@ public class StaffRepositoryImpl implements UserRepository {
         return row;
     }
 
+    /*unblock a blocked staff user*/
     @Override
     public int unblock(String username) {
 
@@ -183,6 +194,7 @@ public class StaffRepositoryImpl implements UserRepository {
         return row;
     }
 
+    /*retrieve details of staff members registered on a specific date*/
     @Override
     public List<Map<String, Object>> retrieveCustomersByDate(java.sql.Date date) {
 
@@ -191,6 +203,9 @@ public class StaffRepositoryImpl implements UserRepository {
         return mp;
     }
 
+/*
+    retrieve details of staff members registered between specified time period
+*/
     @Override
     public List<Map<String, Object>> retrieveByDateRange(Date date1, Date date2) {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE register_date BETWEEN ? AND ?", date1, date2);
@@ -198,6 +213,7 @@ public class StaffRepositoryImpl implements UserRepository {
         return mp;
     }
 
+    /*retrieve details of staff members filtered by a given attribute*/
     @Override
     public List<Map<String, Object>> filter(SQLType column, String filterValue) {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE ? = ?", column, filterValue);
@@ -206,6 +222,7 @@ public class StaffRepositoryImpl implements UserRepository {
 
     }
 
+    /*retrieve the total no.of staff members*/
     @Override
     public int countUsers() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff ");
@@ -219,6 +236,7 @@ public class StaffRepositoryImpl implements UserRepository {
 
     }
 
+    /*add a new staff member*/
     public void addStaffMember(User user) {
         TransactionDefinition trDef = new DefaultTransactionDefinition();
         TransactionStatus stat = transactionManager.getTransaction(trDef);
@@ -237,6 +255,8 @@ public class StaffRepositoryImpl implements UserRepository {
         }
 
     }
+
+    /*add a new staff member*/
     @Transactional
     public void addStaffMember2(User user) {
         add(user);

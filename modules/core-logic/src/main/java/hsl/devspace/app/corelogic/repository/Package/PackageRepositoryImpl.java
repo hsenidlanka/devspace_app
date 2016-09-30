@@ -28,6 +28,7 @@ public class PackageRepositoryImpl implements PackageRepository  {
 
     }
 
+    /*Add new package*/
     @Override
     public int add(Package pack) {
         int row;
@@ -38,6 +39,7 @@ public class PackageRepositoryImpl implements PackageRepository  {
         return row;
     }
 
+    /*delete specific package*/
     @Override
     public int delete(String packageName) {
 
@@ -47,6 +49,7 @@ public class PackageRepositoryImpl implements PackageRepository  {
         return row;
     }
 
+    /*change items in package((((((to be modified))))))))*/
     @Override
     public int changeItemsInPackage(String packageName,String content) {
         String sql = "UPDATE package SET content=?  WHERE name = ? ";
@@ -55,6 +58,7 @@ public class PackageRepositoryImpl implements PackageRepository  {
         return row;
     }
 
+    /*change price of a package*/
     @Override
     public int changePrice(String packageName,double price) {
 
@@ -64,6 +68,7 @@ public class PackageRepositoryImpl implements PackageRepository  {
         return row;
     }
 
+    /*view all details of package*/
     @Override
     public List<Map<String, Object>> viewAll() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM package");

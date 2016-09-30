@@ -26,6 +26,7 @@ public class DeliveryRepositoryImpl implements DeliveryRepository {
 
     }
 
+    /*Add new delivery*/
     @Override
     public int add(Delivery delivery) {
         int row;
@@ -38,6 +39,7 @@ public class DeliveryRepositoryImpl implements DeliveryRepository {
         return row;
     }
 
+    /*change delivery status*/
     @Override
     public int changeStatus(int id) {
 
@@ -47,6 +49,7 @@ public class DeliveryRepositoryImpl implements DeliveryRepository {
         return row;
     }
 
+    /*Add new delivery method*/
     @Override
     public int addDeliveryMethod(String deliveryMethod) {
         int row;
@@ -58,6 +61,7 @@ public class DeliveryRepositoryImpl implements DeliveryRepository {
         return row;
     }
 
+    /*remove delivery method*/
     @Override
     public int deleteDeliveryMethod(String deliveryMethod) {
         int row;

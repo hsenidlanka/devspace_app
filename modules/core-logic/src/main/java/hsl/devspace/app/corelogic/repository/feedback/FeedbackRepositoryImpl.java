@@ -26,6 +26,7 @@ public class FeedbackRepositoryImpl implements FeedbackRepository{
 
     }
 
+    /*Add new feedback*/
     @Override
     public int add(Feedback feedback) {
         int row;

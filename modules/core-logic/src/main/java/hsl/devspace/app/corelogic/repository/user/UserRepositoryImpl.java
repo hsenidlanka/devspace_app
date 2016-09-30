@@ -33,6 +33,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     }
 
+    /*add a new customer*/
     @Override
     public int add(User user) throws DuplicateKeyException {
         int row = 0;
@@ -54,6 +55,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     }
 
+    /*delete a customer*/
     @Override
     public int delete(String username) throws IllegalArgumentException {
 
@@ -66,6 +68,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
 
+    /*change password of a specific customer*/
     @Override
     public void changePassword(String username, String password, String nPw) {
 
@@ -87,6 +90,7 @@ public class UserRepositoryImpl implements UserRepository {
         return user.isConfirmed();
     }
 
+    /*authenticate username and password matched for a existing customer*/
     @Override
     public boolean loginAuthenticate(String username,String password) {
 
@@ -103,6 +107,7 @@ public class UserRepositoryImpl implements UserRepository {
         return result;
     }
 
+    /*change username and password for a customer*/
     @Override
     public int modify(User user) throws TransientDataAccessResourceException, SQLException {
 
@@ -113,6 +118,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     }
 
+    /*retrieve details for a specific customer*/
     @Override
     public List<Map<String, Object>> retrieveSelectedUserDetails(String username) {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE BINARY username = ?", username);
@@ -120,6 +126,7 @@ public class UserRepositoryImpl implements UserRepository {
         return mp;
     }
 
+    /*view all customer details*/
     @Override
     public List<Map<String, Object>> view() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer");
@@ -127,6 +134,7 @@ public class UserRepositoryImpl implements UserRepository {
         return mp;
     }
 
+    /*block a customer*/
     @Override
     public int block(String username) {
 
@@ -137,6 +145,7 @@ public class UserRepositoryImpl implements UserRepository {
         return row;
     }
 
+    /*unblock a blocked customer*/
     @Override
     public int unblock(String username) {
 
@@ -152,6 +161,7 @@ public class UserRepositoryImpl implements UserRepository {
         return 0;
     }
 
+    /*retrieve details of customer registered on a specific date*/
     @Override
     public List<Map<String, Object>> retrieveCustomersByDate(java.sql.Date date) {
 
@@ -160,6 +170,7 @@ public class UserRepositoryImpl implements UserRepository {
         return mp;
     }
 
+    /*retrieve details of customer registered between a specified date range*/
     @Override
     public List<Map<String, Object>> retrieveByDateRange(Date date1, Date date2) {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE registered_date BETWEEN ? AND ?", date1, date2);
@@ -167,6 +178,7 @@ public class UserRepositoryImpl implements UserRepository {
         return mp;
     }
 
+    /*retrieve details of customers by a given attribute*/
     @Override
     public List<Map<String, Object>> filter(SQLType column, String filterValue) {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE ? = ?", column, filterValue);
@@ -175,6 +187,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     }
 
+    /*retrieve total no.of customers*/
     @Override
     public int countUsers() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer ");

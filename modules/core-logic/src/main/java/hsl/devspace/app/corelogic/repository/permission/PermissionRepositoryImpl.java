@@ -25,6 +25,7 @@ public class PermissionRepositoryImpl implements PermissionRepository{
 
     }
 
+    /*Add new permission*/
     @Override
     public int add(Permission permission) {
         int row;
@@ -36,6 +37,7 @@ public class PermissionRepositoryImpl implements PermissionRepository{
         return row;
     }
 
+    /*delete a specific permission*/
     @Override
     public int delete(String permissionName) {
         String sql = "DELETE FROM permission WHERE name = ?";

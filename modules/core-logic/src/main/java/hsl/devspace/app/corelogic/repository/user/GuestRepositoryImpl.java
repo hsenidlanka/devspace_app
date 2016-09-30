@@ -29,6 +29,8 @@ public class GuestRepositoryImpl  {
         this.transactionManager = transactionManager;
 
     }
+
+    /*add a new guest user*/
     public int add(User user){
         int row = 0;
 
@@ -46,6 +48,8 @@ public class GuestRepositoryImpl  {
         return row;
 
     }
+
+    /*check if guest user is already available*/
     public boolean checkAvailability(String mobile) {
 
         boolean result;
@@ -59,6 +63,8 @@ public class GuestRepositoryImpl  {
         log.info(result);
         return result;
     }
+
+    /*add a new guest user*/
     @Transactional
     public void addGuest(User user){
         add(user);

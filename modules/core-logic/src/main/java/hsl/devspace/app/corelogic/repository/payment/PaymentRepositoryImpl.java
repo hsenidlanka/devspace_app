@@ -29,6 +29,7 @@ public class PaymentRepositoryImpl implements PaymentRepository {
     }
 
 
+    /*Add new payment*/
     @Override
     public int add(Payment payment) {
         int row ;
@@ -41,6 +42,7 @@ public class PaymentRepositoryImpl implements PaymentRepository {
         return row;
     }
 
+    /*Add new payment method*/
     @Override
     public int addPaymentMethod(String paymentMethod) {
         int row ;
