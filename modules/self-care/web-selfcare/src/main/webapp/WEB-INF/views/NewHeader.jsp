@@ -42,28 +42,35 @@
 <div id="modal-login" class="modal fade">
   <div class="modal-dialog modal-lg"  >
     <div class="modal-content" style="width: 750px">
+
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" >x</button>
         <p class="modal-title" style="font-size: x-large"><fmt:message key="new.header.login" bundle="${lang}"/></p>
       </div>
+
       <div class="modal-body" >
 
+          <button>btn</button>
         <form class="contact_form" action="login" method="post" name="contact_form">
 
           <h1 style="font-size: larger;color: #22ca1f"><fmt:message key="new.header.loginto" bundle="${lang}"/></h1>
-          <ul>
-            <li>
-              <input type="text" class="textbox1" id="username" name="username" placeholder="<fmt:message key="signup.username" bundle="${lang}"/>" />
-              <%--<span class="form_hint"><fmt:message key="new.header.enter.valid" bundle="${lang}"/></span>--%>
+            <ul>
+                <li>
+                    <input type="text" class="textbox1" id="uname" name="username"
+                           placeholder="<fmt:message key="signup.username" bundle="${lang}"/>"/>
+                    <%--<span class="form_hint"><fmt:message key="new.header.enter.valid" bundle="${lang}"/></span>--%>
+                    <label id="tst"></label>
+<%--<p></p>--%>
+                    <p><img src="<c:url value="/resources/images/contact.png"/>" alt=""></p>
+                </li>
 
-              <p><img src="<c:url value="/resources/images/contact.png"/>" alt=""></p>
-            </li>
-            <li>
-              <input type="password" name="password" class="textbox2" placeholder="<fmt:message key="signup.password" bundle="${lang}"/>">
-
-              <p><img src="<c:url value="/resources/images/lock.png"/>" alt=""></p>
-            </li>
-          </ul>
+                <li>
+                    <input type="password" name="password" class="textbox2"
+                           placeholder="<fmt:message key="signup.password" bundle="${lang}"/>">
+                    <p><img src="<c:url value="/resources/images/lock.png"/>" alt=""></p>
+                    <%--<span class="form_hint"><fmt:message key="new.header.enter.valid" bundle="${lang}"/></span>--%>
+                </li>
+            </ul>
           <input type="submit" name="Sign In" value="<fmt:message key="new.header.login" bundle="${lang}"/>"/>
 
           <div class="clear"></div>
@@ -75,6 +82,8 @@
           </div>
           <div class="clear"></div>
         </form>
+
+
         <!-- end-form -->
 
         <!-- start-account -->
