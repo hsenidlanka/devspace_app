@@ -25,34 +25,7 @@
             display: block;
         }
     </style>
-    <script>
-        $(document).ready(function (){
-            $("button").click(function(){
-                $("#tst").after('<div style="width: 100%" class="red">Address is Required</div>');
-            });
-
-//            alert("test");
-            $("#username").focus();
-
-            $("#username").blur(function () {
-
-                var username = $('#username').val();
-                if (username.length == 0) {
-
-                    $('#username').next('div.red').remove();
-                    $('#username').after('<div class="red">username is Required</div>');
-
-                } else {
-
-                    $(this).next('div.red').remove();
-                    return true;
-
-                }
-
-            });
-
-        })
-    </script>
+    <script src="<c:url value="/resources/js/validate-bootstrap.jquery.js"/>"></script>
 </head>
 <!-------Header------------------------------------->
 <body>
