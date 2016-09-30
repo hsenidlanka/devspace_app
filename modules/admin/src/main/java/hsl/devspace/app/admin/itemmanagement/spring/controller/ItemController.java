@@ -99,17 +99,11 @@ public class ItemController {
 /**
  * Delete Item view
  **//*
-
-
    /* @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public ModelAndView showDeleteItem(){ return  new ModelAndView("itemDelete", "deleteItem",new Item()); }
-
     @RequestMapping(value = "view_item")
     public ModelAndView deleteItem(@ModelAttribute("deleteItem") hsl.devspace.app.corelogic.domain.Item deleteItem) throws SQLIntegrityConstraintViolationException {
         ModelAndView model = new ModelAndView();
-
         model.setViewName("");
     }*/
 }
-
-
