@@ -144,17 +144,17 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
        // List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM item WHERE sub_category_id=(SELECT id FROM sub_category WHERE category_id=(SELECT id FROM category WHERE name=?))",catName);
         List<Map<String, Object>> mp1=jdbcTemplate.queryForList("SELECT id FROM category WHERE name=?", catName);
         List<Map<String, Object>> mp=null;
-        List<Map<String,Object>> another=null;
+        List<Map<String,Object>> another=new ArrayList<Map<String, Object>>();;
         if(mp1.size()>0){
             List<Map<String, Object>> mp2=jdbcTemplate.queryForList("SELECT id FROM sub_category WHERE category_id=?",mp1.get(0).get("id"));
             if(mp2.size()>0){
                 int i=0;
                 while ( i< mp2.size()){
                     mp =  jdbcTemplate.queryForList("SELECT * FROM item WHERE sub_category_id=?", mp2.get(i).get("id"));
-                     another=new ArrayList<Map<String, Object>>();
                     another.addAll(mp);
                     log.info(mp);
                     i++;
+
                 }
             }
             else {
