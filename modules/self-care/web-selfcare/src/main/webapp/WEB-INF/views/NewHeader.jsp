@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="signupmodal.jsp" %>
+
+
 <nav class="navbar navbar-default ">
   <div class="container-fluid">
     <div class="col-sm-4"><a href="home"> <img src="<c:url value="/resources/images/logo.png"/>" style="width:75px;height:65px;"></a></div>
@@ -45,71 +47,123 @@
 
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" >x</button>
-        <p class="modal-title" style="font-size: x-large"><fmt:message key="new.header.login" bundle="${lang}"/></p>
+        <center><p class="modal-title" style="font-size: x-large"><h1 style="font-size: larger;color: #22ca1f"><fmt:message key="new.header.loginto" bundle="${lang}"/></h1></p></center>
       </div>
 
       <div class="modal-body" >
+          <form name="loginForm" id="loginForm" novalidate="novalidate" action="login" method="post">
+              <div class="row form-group">
+                  <div class="col-sm-3">
+                      <h3><label for="username">Username</label></h3>
+                  </div>
+                  <div class="">
+                      <input id="username" class="form-control" min="3" name="username" required="" type="text" data-error-msg="Valid username required !!!">
+                  </div>
 
-          <button>btn</button>
-        <form class="contact_form" action="login" method="post" name="contact_form">
+              </div>
 
-          <h1 style="font-size: larger;color: #22ca1f"><fmt:message key="new.header.loginto" bundle="${lang}"/></h1>
-            <ul>
-                <li>
-                    <input type="text" class="textbox1" id="uname" name="username"
-                           placeholder="<fmt:message key="signup.username" bundle="${lang}"/>"/>
-                    <%--<span class="form_hint"><fmt:message key="new.header.enter.valid" bundle="${lang}"/></span>--%>
-                    <label id="tst"></label>
-<%--<p></p>--%>
+
+              <div class="row  form-group">
+                  <label for="password">Password</label>
+                  <input id="password" name="password" class="form-control" min="3" required="" data-error-msg="Please provide Valid password !!!"
+                         type="password">
+              </div>
+
+              <div class="row col-sm-offset-4">
+                  <button id="btn-submit" type="submit" class="btn btn-primary btn-block">Submit</button>
+              </div>
+
+
+          </form>
+<%--
+<center>
+          <form novalidate="novalidate" action="login" method="post">
+              <div class="row form-group form-inline">
+                  <label class="control-label col-sm-3" for="name">
+                      Name
+                  </label>
+                  <input  class="col-sm-6" id="username" name="username" type="text" required/>
+                  <span class="col-sm-3"></span>
+              </div>
+
+              <div class="row form-group form-inline">
+                  <label class="control-label col-sm-3" for="password" >
+                      Password
+                  </label>
+
+                  <input class="col-sm-6" id="password" name="password" type="password" required/>
+                  <span class="col-sm-3"></span>
+
+              </div>
+              <input type="submit" name="Sign In" value="<fmt:message key="new.header.login" bundle="${lang}"/>"/>
+          </form>
+
+</center>
+--%>
+
+        <%--<form class="contact_form" action="login" method="post" name="contact_form">
+            <div class="row  form-group">
+                <label for="uname">Username</label>
+                <input type="text" class="textbox1" id="uname" name="username" placeholder="<fmt:message key="signup.username" bundle="${lang}"/>"/>
+
+            </div>
+
+
+
+                    <label></label>
+
                     <p><img src="<c:url value="/resources/images/contact.png"/>" alt=""></p>
-                </li>
 
-                <li>
+
+
                     <input type="password" name="password" class="textbox2"
                            placeholder="<fmt:message key="signup.password" bundle="${lang}"/>">
-                    <p><img src="<c:url value="/resources/images/lock.png"/>" alt=""></p>
-                    <%--<span class="form_hint"><fmt:message key="new.header.enter.valid" bundle="${lang}"/></span>--%>
-                </li>
-            </ul>
+
+                   <p><img src="<c:url value="/resources/images/lock.png"/>" alt=""></p>
+
           <input type="submit" name="Sign In" value="<fmt:message key="new.header.login" bundle="${lang}"/>"/>
 
-          <div class="clear"></div>
-          <label class="checkbox"><input type="checkbox" name="checkbox" checked><i></i><fmt:message key="new.header.remember" bundle="${lang}"/>
-          </label>
+          &lt;%&ndash;<div class="clear"></div>&ndash;%&gt;
 
-          <div class="forgot">
-            <a href="forgotpassword"><fmt:message key="new.header.forget" bundle="${lang}"/></a>
-          </div>
-          <div class="clear"></div>
+
+
         </form>
 
 
-        <!-- end-form -->
 
-        <!-- start-account -->
+          <label class="checkbox"><input type="checkbox" name="checkbox" checked><i></i><fmt:message key="new.header.remember" bundle="${lang}"/>
+          </label>
+          <div class="forgot">
+              <a href="forgotpassword"><fmt:message key="new.header.forget" bundle="${lang}"/></a>
+          </div>
+          <div class="col-sm-10">
+              <h2><a class="form-group-sm" data-toggle="modal" data-target="#modal-signup" data-dismiss="modal"><fmt:message key="new.header.dont.have" bundle="${lang}"/></a></h2>
+          </div>
+
+        --%><!-- end-form -->
+
+       <%-- <!-- start-account -->
         <div class="account">
           <div class="row">
-            <div class="col-sm-10">
-              <h2><a class="form-group-sm" data-toggle="modal" data-target="#modal-signup" data-dismiss="modal"><fmt:message key="new.header.dont.have" bundle="${lang}"/></a></h2>
-            </div>
+
 
           </div>
 
-          <div class="span"><a href="#"><img src="<c:url value="/resources/images/facebook.png"/>" alt=""/><i><fmt:message key="new.header.facebook" bundle="${lang}"/></i>
+          &lt;%&ndash;<div class="span"><a href="#"><img src="<c:url value="/resources/images/facebook.png"/>" alt=""/><i><fmt:message key="new.header.facebook" bundle="${lang}"/></i>&ndash;%&gt;
 
             <div class="clear"></div>
           </a></div>
-          <div class="span1"><a href="#"><img src="<c:url value="/resources/images/twitter.png"/>" alt=""/><fmt:message key="new.header.twitter" bundle="${lang}"/><i></i>
+          &lt;%&ndash;<div class="span1"><a href="#"><img src="<c:url value="/resources/images/twitter.png"/>" alt=""/><fmt:message key="new.header.twitter" bundle="${lang}"/><i></i>&ndash;%&gt;
 
             <div class="clear"></div>
           </a></div>
-          <div class="span2"><a href="#"><img src="<c:url value="/resources/images/gplus.png"/>" alt=""/><i><fmt:message key="new.header.google" bundle="${lang}"/></i>
+          &lt;%&ndash;<div class="span2"><a href="#"><img src="<c:url value="/resources/images/gplus.png"/>" alt=""/><i><fmt:message key="new.header.google" bundle="${lang}"/></i>&ndash;%&gt;
 
             <div class="clear"></div>
           </a></div>
         </div>
 
-        <!-- end-account -->
+        <!-- end-account -->--%>
         <div class="clear"></div>
 
       </div>

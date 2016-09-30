@@ -24,7 +24,7 @@
         formGroupErrorClass: 'has-error',
         helpBlockClass: 'help-block with-errors',
         radio: true,
-        validateSelecters: 'input[type="text"],input[type="email"],input[type="number"],select,textarea',
+        validateSelecters: 'input[type="text"],input[type="password"],input[type="email"],input[type="number"],select,textarea',
         validHandlers: {},
         validOnBlur: true,
         validOnKeyUp: false,

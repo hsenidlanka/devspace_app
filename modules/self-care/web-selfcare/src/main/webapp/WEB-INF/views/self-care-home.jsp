@@ -5,9 +5,10 @@
     <%@include file="include.jsp" %>
     <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
     <div class="loader-anim"></div>
-    <link href="<c:url value="/resources/css/home-validation.css"/>" rel="stylesheet" >
+    <%--<link href="<c:url value="/resources/css/home-validation.css"/>" rel="stylesheet" >--%>
 
     <title><fmt:message key="home.title" bundle="${lang}"/></title>
+    <script src="<c:url value="/resources/js/validate-bootstrap.jquery.js"/>"></script>
 
     <style>
         .carousel-inner > .item > img,
@@ -25,7 +26,65 @@
             display: block;
         }
     </style>
-    <script src="<c:url value="/resources/js/validate-bootstrap.jquery.js"/>"></script>
+
+
+    <script>
+
+        $( document ).ready(function() {
+            /*      $('form').click(function(){
+             //           alert($("#login-username").val());
+             alert($('form').validator('check'));
+             //            $('form').validator('input');
+
+             });*/
+            $(function () {
+                $('form').validator({
+                    validHandlers: {
+                        '.customhandler': function (input) {
+                            //may do some formatting before validating
+                            input.val(input.val().toUpperCase());
+                            //return true if valid
+                            return input.val() === 'JQUERY' ? true : false;
+                        }
+                    }
+                });
+
+                $('form').submit(function (e) {
+//                    var bla = $('#login-username').val();
+                    e.preventDefault();
+//                    alert($('form').validator('check'));
+//                     alert(bla);
+                     /*alert("test")*/
+                     if ($('form').validator('check') < 1) {
+//                        this.submit();
+                         $.ajax({
+                             type: "POST",
+                             url: "login",
+                             data: $('#loginForm').serialize(),
+                             success: function (result) {
+                                 /*if ($.trim(result) == 1) {
+                                     $('#addUserPopup').modal('hide');
+                                     $('#addUserSuccess').modal('show');
+                                     $('#register').trigger('reset');
+                                 } else {
+                                     $('#addUserPopup').modal('hide');
+                                     $('#addUserFail').modal('show');
+                                 }*/
+                                 alert("reply came");
+                             },
+                             error: function (data) {
+                                 console.log(data);
+//                                 alert(data);
+                             }
+
+                         });
+                     }
+                })
+            })
+        });
+
+
+    </script>
 </head>
 <!-------Header------------------------------------->
 <body>

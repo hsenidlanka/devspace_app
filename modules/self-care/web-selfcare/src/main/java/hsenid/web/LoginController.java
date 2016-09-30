@@ -19,8 +19,10 @@ import java.net.URLConnection;
 public class LoginController {
     private final static Logger logger = LogManager.getLogger(LoginController.class);
 
+    String tst=null;
+
     @RequestMapping("/login")
-    public String login(HttpServletRequest request) throws JSONException {
+    public JSONObject login(HttpServletRequest request) throws JSONException {
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
@@ -49,20 +51,21 @@ public class LoginController {
             }
 
             in.close();
+            tst = "{" + "username" + ":" + username + "," + "password" + ":" + password + "}";
 
             JSONObject reply = new JSONObject(sb.toString());
             int status = reply.getInt("code");
             logger.error(status);
             if (status == 200) {
                 logger.error("success");
-                return "locations";
+//                return "locations";
             }
 
         } catch (Exception e) {
             logger.error("Exception occur. Reason -> " + e.getMessage());
         }
-
-        return "menu";
+       JSONObject test = new JSONObject(tst)
+        return test;
     }
 
 
@@ -124,4 +127,9 @@ public class LoginController {
 
         return "aboutus";
     }
+
+
+
+
+//    @RequestMapping("/")
 }
