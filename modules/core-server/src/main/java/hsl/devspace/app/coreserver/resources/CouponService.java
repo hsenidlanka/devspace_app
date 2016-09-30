@@ -53,4 +53,37 @@ public class CouponService {
         }
         return response;
     }
+
+    // Adding a new coupon to the system
+    @POST
+    @Path("/validate")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response validateCoupon(Coupon coupon, @javax.ws.rs.core.Context UriInfo uriInfo) {
+        Response response;
+        try {
+            boolean status = couponRepository.validateCoupon(coupon.getCouponCode(), coupon.getCustomerMobile());
+            if (status) {
+                SuccessMessage successMessage = new SuccessMessage();
+                successMessage.setStatus("success");
+                successMessage.setCode(Response.Status.OK.getStatusCode());
+                successMessage.setMessage("coupon validated");
+
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("couponCode", coupon.getCouponCode());
+                jsonObject.put("customerMobile", coupon.getCustomerMobile());
+                successMessage.addData(jsonObject);
+
+                String url = uriInfo.getAbsolutePath().toString();
+                successMessage.addLink(url, "self");
+
+                response = Response.status(Response.Status.CREATED).entity(successMessage).build();
+            } else {
+                throw new WebApplicationException(401);
+            }
+        } catch (IndexOutOfBoundsException e) {
+            throw new WebApplicationException(401);
+        }
+        return response;
+    }
 }

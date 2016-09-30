@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by Kasun Dinesh on 9/26/16.
+ * Created by Kasun Dinesh on 9/29/16.
  * This class handles the requests related to the packages.
  */
 @Path("/packages")

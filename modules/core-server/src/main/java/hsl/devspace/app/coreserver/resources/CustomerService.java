@@ -99,7 +99,7 @@ public class CustomerService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserDetails(@PathParam("username") String userName, @javax.ws.rs.core.Context UriInfo uriInfo) {
-        List<Map<String, Object>> userData = userRepository.retrieveMultipleRowsColumns(userName);
+        List<Map<String, Object>> userData = userRepository.retrieveSelectedUserDetails(userName);
         SuccessMessage successMessage = new SuccessMessage();
         successMessage.setCode(Response.Status.OK.getStatusCode());
         successMessage.setStatus("success");
