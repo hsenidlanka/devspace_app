@@ -11,10 +11,13 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.List;
+import java.util.Map;
 
 /**
  * controller class containing handler methods which perform necessary handler methods
@@ -78,15 +81,27 @@ public class UserController {
 
     }
 
-    //handler method to retrieve the details of a particular user
+
     @RequestMapping(value = "/view", method = RequestMethod.GET)
-    public ModelAndView viewUser(HttpServletRequest request){
-        String uname= request.getParameter("username");
-//        User user=  userRepository.get(uname);
-        ModelAndView model=new ModelAndView("usersView");// jsp form to view user details and edit
-//        model.addObject("user",user);
-        return model;
+    public ModelAndView showCustomerList(){
+        return new ModelAndView("usersView", "command",new User());
+
     }
+
+    //handler method to retrieve the details of a particular user
+    @RequestMapping(value = "/view/customerTable", method = RequestMethod.GET)
+    public @ResponseBody List<Map<String, Object>> viewUser(HttpServletRequest request){
+        List<Map<String, Object>> staffList = staffRepository.view();
+
+        return staffList;
+    }
+
+
+
+
+
+
+
 }
 
 //handler method to delete a user record

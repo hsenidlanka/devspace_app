@@ -62,7 +62,7 @@
               </label>
 
               <div class="col-xs-5">
-                <select class="form-control" id="selectCat">
+               <%-- <select class="form-control" id="selectCat">
                   <option value="0">--Select Category--</option>
                   <option value="pizza">Pizza</option>
                   <option value="pasta">Pasta</option>
@@ -70,9 +70,9 @@
                   <option value="dessert">Dessert</option>
                   <option value="topping">Topping</option>
                   <option value="crust">Crust</option>
-                </select>
+                </select>--%>
 
-               <%-- <form:select class="form-control" id="selectCat" path="">
+                <form:select class="form-control" id="selectCat" path="">
                   <form:option value="0">--Select Category--</form:option>
                   <form:option value="pizza">Pizza</form:option>
                   <form:option value="pasta">Pasta</form:option>
@@ -80,7 +80,7 @@
                   <form:option value="dessert">Dessert</form:option>
                   <form:option value="topping">Topping</form:option>
                   <form:option value="crust">Crust</form:option>
-                </form:select>--%>
+                </form:select>
                 <span id="catErr" class="input-group-error"></span>
               </div>
 
@@ -97,15 +97,15 @@
               </label>
 
               <div class="col-xs-5">
-                      <form:select class="form-control" id="selectSubCat" path="subCategoryName">
-                      <form:option value="-" label="--Select sub-category--"/>
-                      <form:options items="${subCats}"/>
-                        <%--<form:option value="dpP" >Deep dish Pizza</form:option>
-                         <form:option value="itP">Italiano Pizza</form:option>
-                         <form:option value="gormt">Gourmet</form:option>
-                         <form:option value="ny">NY Thin crust</form:option>
-                         <form:option value="bg">Big Pizza</form:option>--%>
-                </form:select>
+                  <%-- <form:select class="form-control" id="selectSubCat" path="subCategoryName">
+                   <form:option value="-" label="--Select sub-category--"/>
+                   <form:options items="${subCats}"/>
+                     <formion value="dpP" >Deep dish Pizza</form:option>
+                      <form:option value="itP">Italiano Pizza</form:option>
+                      <form:option value="gormt">Gourmet</form:option>
+                      <form:option value="ny">NY Thin crust</form:option>
+                      <form:option value="bg">Big Pizza</form:option>
+                </form:select>--%>
                 <span id="subCatErr" class="input-group-error"><%--<form:errors path="subCategoryName" />--%> </span>
               </div>
 
