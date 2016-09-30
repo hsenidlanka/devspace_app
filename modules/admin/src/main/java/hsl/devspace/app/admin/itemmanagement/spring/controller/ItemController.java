@@ -24,7 +24,7 @@ public class ItemController {
     @Autowired
     private ItemRepository item;
 
-     /**
+    /**
      * Add new item view
      */
 
@@ -40,18 +40,18 @@ public class ItemController {
       /* ModelAndView model = new ModelAndView();
         model.addObject("subCats", subCategoryName);*/
         System.out.println("First Name:" + newItem.getItemName());
-         int a = item.add(newItem);
-                if (a == 1)
-                    return "addItem";
-           // model.setViewName("addItem");
-            else
+        int a = item.add(newItem);
+        if (a == 1)
+            return "addItem";
+            // model.setViewName("addItem");
+        else
 
-           // System.out.println("Error in item add");
-return "addItem";
-      //  return model;
+            // System.out.println("Error in item add");
+            return "addItem";
+        //  return model;
     }
 
-     /**
+    /**
      * View Item details view
      */
 
@@ -64,17 +64,17 @@ return "addItem";
     @RequestMapping(value = "/view_item")
     public ModelAndView view(@ModelAttribute("viewItem") Item viewItem) throws SQLIntegrityConstraintViolationException {
         ModelAndView model = new ModelAndView();
-          List<Map<String, Object>> x = item.view();
+        List<Map<String, Object>> x = item.view();
 
         if (x != null)
             model.setViewName("viewItem");
-             else
+        else
             System.out.println("Error in viewing item");
 
         return model;
     }
 
-     /**
+    /**
      * Edit Item view
      */
 
@@ -89,9 +89,9 @@ return "addItem";
         /*int y = item.update(editItem);
             if (y==1)*/
 
-                model.setViewName("editItem");
+        model.setViewName("editItem");
         //            else
-                System.out.println("Error in updating item");
+        System.out.println("Error in updating item");
 
         return model;
     }
