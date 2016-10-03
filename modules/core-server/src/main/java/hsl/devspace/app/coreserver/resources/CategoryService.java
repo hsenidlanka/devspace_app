@@ -24,6 +24,7 @@ public class CategoryService {
     private static final Logger log = LogManager.getLogger(CategoryService.class);
     ApplicationContext context = Context.appContext;
     CategoryRepositoryImpl categoryRepository = (CategoryRepositoryImpl) context.getBean("categoryRepoImpl");
+    final String BASE_URL = "http://localhost:2222/pizza-shefu/api/v1.0/";
 
     // Retrieve all the categories
     @GET
@@ -44,6 +45,7 @@ public class CategoryService {
                 jsonObject.put("name", map.get("name").toString());
                 jsonObject.put("description", map.get("description").toString());
                 successMessage.addData(jsonObject);
+                successMessage.addLink(BASE_URL+"subcategories/category/"+map.get("name").toString().replaceAll(" ","%20"), "subcategories of "+map.get("name").toString());
             }
         } else {
             successMessage.setMessage("no categories to retrieve");

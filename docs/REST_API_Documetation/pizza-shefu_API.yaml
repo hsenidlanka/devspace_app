@@ -88,7 +88,38 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/error-message'  
+              $ref: '#/definitions/error-message' 
+              
+  /customers/{username}:
+    get: 
+      description: Get the profile of a specific customer
+      tags:
+        - customer
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: username
+          in: path
+          description: username of the customer to find
+          required: true
+          type: string
+            
+      responses:
+        '200':
+          description: Request processed successfully
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/success-message'
+              
+        '415':
+          description: Media type should be application/json
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/error-message'              
               
   /guests/add:
     post:
@@ -128,37 +159,6 @@ paths:
             type: array
             items:
               $ref: '#/definitions/error-message'
-              
-  /customers/{username}:
-    get: 
-      description: Get details of a specific customer
-      tags:
-        - customer
-      consumes:
-        - application/json
-      produces:
-        - application/json
-      parameters:
-        - name: username
-          in: path
-          description: username of the customer to find
-          required: true
-          type: string
-            
-      responses:
-        '200':
-          description: Request processed successfully
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/success-message'
-              
-        '415':
-          description: Media type should be application/json
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message' 
     
   /categories/getall:
     get: 
