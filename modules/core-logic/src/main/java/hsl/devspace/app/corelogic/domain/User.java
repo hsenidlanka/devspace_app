@@ -1,5 +1,7 @@
 package hsl.devspace.app.corelogic.domain;
 
+import java.sql.Date;
+
 /**
  * Created by hsenid on 7/4/16.
  */
@@ -21,10 +23,19 @@ public class User {
     private String designation;
     private String department;
     private String  branch;
+    private Date regDate;
+
     private enum status{
         active,inactive
     }
 
+    public Date getRegDate() {
+        return regDate;
+    }
+
+    public void setRegDate(Date regDate) {
+        this.regDate = regDate;
+    }
     public String getEmail() {
         return email;
     }

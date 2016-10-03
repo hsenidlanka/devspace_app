@@ -2,7 +2,7 @@ $(document).ready(function () {
 
             $('#tableCustomer').bootstrapTable({
 
-                url: '../js/customer.json',
+                url: 'https://localhost:8443/admin/users/view/customerTable',
                 height: 375,
                 pagination: true,
                 pageSize: 7,

@@ -1,18 +1,19 @@
 package hsl.devspace.app.admin.usermanagement.spring.controller;
 
 
+
 import hsl.devspace.app.corelogic.domain.User;
 import hsl.devspace.app.corelogic.repository.user.UserRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLIntegrityConstraintViolationException;
@@ -36,7 +37,6 @@ public class UserController {
     private UserRepository staffRepository;
 
 
-
 /*ApplicationContext context=new ClassPathXmlApplicationContext("admin-integration-context.xml");
     StaffRepositoryImpl staffRepository= (StaffRepositoryImpl) context.getBean("staffRepository");*/
 
@@ -45,40 +45,53 @@ public class UserController {
     @RequestMapping(value="/list")
     public ModelAndView listContact(ModelAndView model)  {
 //        User newContact = new User();;
-//        model.addObject("contact", newContact);
+//        validator.addObject("contact", newContact);
         model.setViewName("home");
         return model;
     }
 
-    //handler method to list all the users
- /*  @RequestMapping(value="/list")
-    public ModelAndView listUsers(ModelAndView model) throws IOException {
-        List<User> listUsers= userRepository.list();
-        model.addObject("listUsers",listUsers);
-        model.setViewName("users");// view the user list page
-        return model;
-    }*/
+
 
 //    customer user add is done in below methods
-
     @RequestMapping(value="/add",method=RequestMethod.GET)
     public ModelAndView showCustomer(){
         return new ModelAndView("userAdd", "command",new User());
     }
 
+    //controller method to validate the uniquness of username
+    @RequestMapping(value="/uniqueUsername",method=RequestMethod.POST)
+    public @ResponseBody int checkUser(@ModelAttribute(value="user") User user ){
+        boolean usernameExist = false;
+       int returnType =  0;
+
+        usernameExist=staffRepository.checkUsernameUnique(user.getUsername());
+        if(usernameExist ){
+                returnType= 1;
+        }
+        return returnType;
+    }
+
+
     @RequestMapping(value="/addCustomer",method = RequestMethod.POST)
-    public String saveOrUpdate(@ModelAttribute("newUser")User newUser, ModelMap model) throws SQLIntegrityConstraintViolationException {
+    public String saveOrUpdate(@ModelAttribute("newUser")  User newUser,
+                               final RedirectAttributes redirectAttributes) throws SQLIntegrityConstraintViolationException {
 
-        System.out.println("First Name:" + newUser.getUsername());
+        
+        int i= staffRepository.add(newUser);
 
-       int i= staffRepository.add(newUser);
-        if(i ==0)
-            return "userAdd";
-        else
-            return "userAdd";
+       if(i ==0)
+            return "redirect:add";
+        else {
+            redirectAttributes.addFlashAttribute("newUser", newUser);
+            redirectAttributes.addFlashAttribute("message", "Added Succcessfully");
+            return "redirect:add";
+        }
+    }
 
-
-
+    @RequestMapping(value="/showUser", method=RequestMethod.GET)
+    public String showCustomer(@ModelAttribute("newUser") User newUser) {
+        System.out.println("cust:" + newUser.getFirstName());
+        return "showUser";
     }
 
 
@@ -116,7 +129,7 @@ public class UserController {
     public ModelAndView viewUser(HttpServletRequest request){
         String uname= request.getParameter("username");
         User user=  userRepository.get(uname);
-        ModelAndView model=new ModelAndView("editUser");// jsp form to view user details and edit
-        model.addObject("user",user);
-        return model;
+        ModelAndView validator=new ModelAndView("editUser");// jsp form to view user details and edit
+        validator.addObject("user",user);
+        return validator;
     }*/

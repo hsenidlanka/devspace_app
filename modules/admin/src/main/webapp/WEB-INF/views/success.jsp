@@ -10,7 +10,7 @@
     </div>
     <c:url var="Back" value="${model.redirectUrl}"/>
 
-      <%--<a href="<c:url value="${model.redirectUrl}" />">--%>
+      <%--<a href="<c:url value="${validator.redirectUrl}" />">--%>
       <%----%>
       <%--</a>--%>
 

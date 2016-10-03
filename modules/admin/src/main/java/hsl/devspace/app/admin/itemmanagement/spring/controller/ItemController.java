@@ -37,18 +37,18 @@ public class ItemController {
     //For submitting the add new item
     @RequestMapping(value = "/add_item")
     public String addItem(@ModelAttribute("newItem") Item newItem) throws SQLIntegrityConstraintViolationException {
-      /* ModelAndView model = new ModelAndView();
-        model.addObject("subCats", subCategoryName);*/
+      /* ModelAndView validator = new ModelAndView();
+        validator.addObject("subCats", subCategoryName);*/
         System.out.println("First Name:" + newItem.getItemName());
         int a = item.add(newItem);
         if (a == 1)
             return "addItem";
-            // model.setViewName("addItem");
+            // validator.setViewName("addItem");
         else
 
             // System.out.println("Error in item add");
             return "addItem";
-        //  return model;
+        //  return validator;
     }
 
     /**
@@ -103,7 +103,13 @@ public class ItemController {
     public ModelAndView showDeleteItem(){ return  new ModelAndView("itemDelete", "deleteItem",new Item()); }
     @RequestMapping(value = "view_item")
     public ModelAndView deleteItem(@ModelAttribute("deleteItem") hsl.devspace.app.corelogic.domain.Item deleteItem) throws SQLIntegrityConstraintViolationException {
+<<<<<<< Updated upstream
         ModelAndView model = new ModelAndView();
         model.setViewName("");
+=======
+        ModelAndView validator = new ModelAndView();
+
+        validator.setViewName("");
+>>>>>>> Stashed changes
     }*/
 }

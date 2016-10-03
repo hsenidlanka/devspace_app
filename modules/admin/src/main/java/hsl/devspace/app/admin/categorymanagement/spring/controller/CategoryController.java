@@ -1,3 +1,4 @@
+/*
 package hsl.devspace.app.admin.categorymanagement.spring.controller;
 
 import hsl.devspace.app.corelogic.domain.Category;
@@ -24,9 +25,11 @@ public class CategoryController {
     @Autowired
     private CategoryRepository category;
 
-    /*
+    */
+/*
     * Add new category
-    **/
+    **//*
+
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView showAddCateg(){ return  new ModelAndView("categAdd", "addCategory", new Category()); }
@@ -34,18 +37,21 @@ public class CategoryController {
     @RequestMapping(value = "add_category")
     public ModelAndView addCategory(@ModelAttribute("addCategory") hsl.devspace.app.corelogic.domain.Category newCateg) throws SQLIntegrityConstraintViolationException {
 
-        ModelAndView model = new ModelAndView();
+        ModelAndView validator = new ModelAndView();
 
-        model.setViewName("addCategory");
+        validator.setViewName("addCategory");
 
-        return model;
+        return validator;
     }
 
-    /*
+    */
+/*
     * Get category list
-    **/
+    **//*
+
     @RequestMapping(value = "getCatLis")
     public ModelAndView retrieveCategoryTypes(@ModelAttribute("viewCatg") Category viewCat) throws SQLIntegrityConstraintViolationException {
+<<<<<<< Updated upstream
        ModelAndView model = new ModelAndView("index");
 
         List<Map<String, Object>> listCat = category.viewCategoryList();
@@ -54,5 +60,15 @@ public class CategoryController {
 
         //return listCat;
        return model;
+=======
+        ModelAndView validator = new ModelAndView("index");
+
+        List<Category> listCat = category.retrieveCategoryTypes();
+      //  validator.addObject("list", categoryName);
+
+       // return listCat;
+        return validator;
+>>>>>>> Stashed changes
     }
 }
+*/

@@ -1,4 +1,5 @@
 <%@ taglib prefix="spring" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -87,7 +88,7 @@
                         <div class="col-xs-10">
                             <div class="col-xs-4">
                                 <input class="form-control" id="fromDate" type="text"
-                                               placeholder="Click on me" style="width: 130px">
+                                               placeholder="Click on me" style="width: 130px"/>
                             </div>
                             <div class="col-xs-1">
                                 <label class=" control-label">
@@ -96,7 +97,7 @@
                             </div>
                             <div class="col-xs-4">
                                 <input class="form-control" id="toDate" placeholder="Click on me"
-                                               type="text" style="width: 130px">
+                                               type="text" style="width: 130px" />
                             </div>
                         </div>
                     </div>

@@ -13,14 +13,20 @@
   <link href="${css1}" rel="stylesheet">
   <link href="${css2}" rel="stylesheet">
 
-  <!--include the jQuery toaster plugin's script-->
-  <%--<spring:url value="/themes/hsenid/js/jquery.toaster.js" var="js1"/>--%>
-  <spring:url value="/themes/hsenid/js/userMgt.js" var="js2"/>
-  <%--<spring:url value="/themes/hsenid/js/simpleToastMessage.js" var="js3"/>--%>
 
-  <%--<script src="${js1}"></script>--%>
+  <spring:url value="/themes/hsenid/js/userMgt.js" var="js2"/>
+  <!--include the jQuery toaster plugin's script-->
+  <spring:url value="/themes/hsenid/js/jquery.toaster.js" var="js3"/>
+  <spring:url value="/themes/hsenid/js/toaster.js" var="js4"/>
+
+
   <script src="${js2}"></script>
-  <%--<script src="${js3}"></script>--%>
+  <script src="${js3}"></script>
+  <script src="${js4}"></script>
+
+<%--<spring:url value="/themes/hsenid/js/simpleToastMessage.js" var="js3"/>--%>
+
+
 
 </head>
 <body>
@@ -52,7 +58,7 @@
         <h3 class="default-panel-headings ">Add New User</h3>
       </div>
       <div class="panel-body">
-        <form:form role="form" id="admin_adduser_form"  method="POST" class="form-horizontal" action="/admin/users/addCustomer">
+        <form:form role="form" id="admin_adduser_form"  method="POST" class="form-horizontal" action="/admin/users/addCustomer" onsubmit="doAjaxPost()" >
 
           <fieldset class="scheduler-border">
             <legend class="scheduler-border" id="legendHeading"></legend>
@@ -80,9 +86,9 @@
             <div class="form-group">
               <div class="col-sm-6">
                 <div class="row">
-                  <form:label path="firstName"  class="col-sm-4 control-label">
+                  <label  class="col-sm-4 control-label" id="fname">
                     Name
-                  </form:label>
+                  </label>
                   <div class="col-sm-2">
                     <form:select path="title" class="form-control" id="selectTitle" style="width: 65px">
                       <form:option value="mr">Mr</form:option>
@@ -91,7 +97,8 @@
                     </form:select>
                   </div>
                   <div class="col-sm-4">
-                    <form:input path="firstName" class="form-control" id="fname" placeholder="First Name" type="text"  style="width: 190px"/>
+                    <form:input path="firstName" class="form-control" id="fname" placeholder="First Name" type="text"  style="width: 190px" required="required"/>
+
                   </div>
                 </div>
               </div>
@@ -111,7 +118,7 @@
                     Phone No*
                   </form:label>
                   <div class="col-sm-8">
-                    <form:input path="mobile" class="form-control" id="mobileNo" placeholder="+94XXXXXXXXX" type="text"/>
+                    <form:input path="mobile" class="form-control" id="mobileNo" placeholder="+94XXXXXXXXX" type="text" pattern="^\(?(\+94)\)?([0-9]{9})$" required="required"/>
                   </div>
                 </div>
               </div>
@@ -123,7 +130,8 @@
                     E-Mail
                   </form:label>
                   <div class="col-sm-8">
-                    <form:input path="email" class="form-control" id="email" placeholder="myname@example.com" type="text"/>
+                    <form:input path="email" class="form-control" id="email" placeholder="myname@example.com" type="text" pattern="^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.
+                    [a-zA-Z0-9-]+)*\.(([0-9]{1,3})|([a-zA-Z]{2,3}))$" required="required"/>
                   </div>
                 </div>
               </div>
@@ -146,7 +154,7 @@
                   <form:label path="addressL2" class="col-sm-4 control-label">
                   </form:label>
                   <div class="col-sm-8">
-                    <form:input path="addressL2" class="form-control" id="addLine2" placeholder="Address Line 2" type="text" />
+                    <form:input path="addressL2" class="form-control" id="addLine2" placeholder="Address Line 2" type="text" required="required"/>
                   </div>
                 </div>
                 <div class="row"><label class="control-label"></label></div>
@@ -154,7 +162,7 @@
                   <form:label path="addressL3" class="col-sm-4 control-label">
                   </form:label>
                   <div class="col-sm-8">
-                    <form:input path="addressL3" class="form-control" id="city" placeholder="City" type="text"/>
+                    <form:input path="addressL3" class="form-control" id="city" placeholder="City" type="text" required="required"/>
                   </div>
                 </div>
                 <div class="row"><label class="control-label"></label></div>
@@ -179,9 +187,14 @@
                     </form:label>
                     <div class="col-sm-8">
                       <form:select path="designation" class="form-control" id="designation">
-                        <form:option value="sysAdmin">System Admin</form:option>
-                        <form:option value="ccManager">CustomerCare Manager</form:option>
-                        <form:option value="adminManager">Admin Manager</form:option>
+                        <form:option value="GROUP_SYS_ADMIN">System Admin</form:option>
+                        <form:option value="GROUP_ADM_MANAGER">System Manager</form:option>
+                        <form:option value="GROUP_CC_MANAGER">Customer Manager</form:option>
+                        <form:option value="GROUP_CUSTOMERCARE">Cashier</form:option>
+                        <form:option value="GROUP_CUSTOMERCARE">Main Chef</form:option>
+                        <form:option value="GROUP_RPT_MANAGER">Reporting Manager</form:option>
+
+
                       </form:select>
                     </div>
                   </div>
@@ -192,9 +205,11 @@
                     </form:label>
                     <div class="col-sm-8">
                       <form:select path="department" class="form-control" id="department">
-                        <form:option value="finance">Finance</form:option>
-                        <form:option value="administration">Administration</form:option>
-                        <form:option value="cc">Customer Service</form:option>
+                        <form:option value="Finance">Finance</form:option>
+                        <form:option value="Administration">Administration</form:option>
+                        <form:option value="Logistic">Logistic</form:option>
+                        <form:option value="Reporting">Reporting</form:option>
+
                       </form:select>
                     </div>
                   </div>
@@ -205,10 +220,10 @@
                     </form:label>
                     <div class="col-sm-8">
                       <form:select path="branch" class="form-control" id="branch">
-                        <form:option value="1">Colombo</form:option>
-                        <form:option value="2">Gampaha</form:option>
-                        <form:option value="3">Ja-Ela</form:option>
-                        <form:option value="4">Kadana</form:option>
+                        <form:option value="Colombo">Colombo</form:option>
+                        <form:option value="Gampaha">Gampaha</form:option>
+                        <form:option value="Ja-Ela">Ja-Ela</form:option>
+                        <form:option value="Kadana">Kadana</form:option>
                       </form:select>
                     </div>
                   </div>
@@ -234,13 +249,13 @@
                   </div>
                   <div class="row">
                     <div class="col-xs-4">
-                      <form:input path="username" class="form-control" id="username" placeholder="User Name" type="text"/> >
+                      <form:input path="username" class="form-control" id="username_admin" placeholder="User Name" type="text" required="required"/>
                     </div>
                     <div class="col-xs-4">
-                      <form:input path="password" class="form-control" id="password" placeholder="Password" type="text" />
+                      <form:input path="password" class="form-control" id="password1" placeholder="Password" type="text" required="required" onchange="validatePassword(password1)"/>
                     </div>
                     <div class="col-xs-4">
-                      <form:input path="password" class="form-control" id="cpassword" placeholder="Password Confirm" type="text" />
+                      <form:input path="password" class="form-control" id="cpassword" placeholder="Password Confirm" type="text" required="required" onchange="passwordsEqual(cpassword,password1)"/>
                     </div>
                   </div>.
                 </fieldset>
@@ -256,7 +271,7 @@
                   <form:button type="reset" value="Reset" class="btn btn-success btnAddItem">Reset</form:button>
                 </div>
                 <div class="col-xs-4">
-                  <form:button type="submit" class="btn btn-success btnAddItem" >Add User</form:button>
+                  <button type="submit" class="btn btn-success btnAddItem" onclick="doAjaxPost()">Add User
                 </div>
               </div>
               <div class="col-xs-1"></div>
@@ -267,6 +282,43 @@
     </div>
   </div>
 </center>
+
+
+
+<!--modelto appear when banning a Customer or Staff user -->
+<div class="modal fade" id="removeCustomerModal">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header deleteuser-modal-header-style">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
+                class="glyphicon glyphicon-remove"></span></button>
+        <div align="center"><span class="glyphicon glyphicon-trash"></span> Block Customer User
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label id="lblBlockCustomerMsg">Do you really want to block this User ?</label><br><br>
+
+
+          <div align="center">
+            <label id="lblBlockCustomerId">Username : ${newUser.username} </label><br>
+            <label id="lblBlockCustomerName">Name : ${newUser.firstName}</label><br>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer" align="right">
+        <button class="btn btn-success" type="button" value="Yes" id="btnBlockCustomer">Yes
+        </button>
+        <button class="btn btn-success" type="button" value="cancel" id="btnCnclBlockCustomer" >
+          No
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 
 </body>
 </html>

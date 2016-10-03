@@ -27,6 +27,8 @@
     <mvc:resources mapping="/themes/**" location="/themes/" />
 
 
+    <bean id="userValidator" class="hsl.devspace.app.admin.usermanagement.spring.validator.UserValidator"/>
+
     <!--It pulls values from a properties file into bean definitions.-->
     <bean id="connectionProperties"
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -34,7 +36,7 @@
     </bean>
 
     <!--import the datasource configuration file from core-logic module-->
-    <import resource="classpath:session-factory-config.xml"/>
+    <import resource="classpath*:session-factory-config.xml"/>
 
     <bean id="staffRepository" class="hsl.devspace.app.corelogic.repository.user.StaffRepositoryImpl">
         <property name="dataSource" ref="productionDataSource"/>
