@@ -32,4 +32,9 @@
         <property name="dataSource" ref="productionDataSource"/>
         <property name="transactionManager" ref="transactionManager"/>
     </bean>
+
+    <bean id="subCategoryRepoImpl" class="hsl.devspace.app.corelogic.repository.category.SubCategoryRepositoryImpl">
+        <property name="dataSource" ref="productionDataSource"/>
+        <property name="transactionManager" ref="transactionManager"/>
+    </bean>
 </beans>

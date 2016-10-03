@@ -170,7 +170,7 @@ paths:
       produces:
         - application/json
       responses:
-        '201':
+        '200':
           description: Request processed successfully
           schema:
             type: array
@@ -206,7 +206,60 @@ paths:
             type: array
             items:
               $ref: '#/definitions/error-message'
-                            
+              
+  /subcategories/getall:
+    get: 
+      description: Get details of all categories
+      tags:
+        - sub-category
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Request processed successfully
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/success-message'
+              
+        '415':
+          description: Media type should be application/json
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/error-message'
+              
+  /subcategories/category/{categoryName}:
+    get: 
+      description: Get details of all categories
+      tags:
+        - sub-category
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: categoryName
+          in: path
+          description:  Name of the category to filter menu items (Pizza, Desserts, etc)
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Request processed successfully
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/success-message'
+              
+        '415':
+          description: Media type should be application/json
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/error-message'  
             
   /items/category/{categoryName}:
     get: 
@@ -247,7 +300,7 @@ paths:
       parameters:
         - name: subcategoryName
           in: path
-          description: Name of the sub-category to filter menu items (Soft drinks, Pudding, etc)
+          description: Name of the sub-category to filter menu items (Soft drinks, Ice creams, etc)
           required: true
           type: string
 
