@@ -29,7 +29,7 @@ public class PackageService {
     ApplicationContext context = Context.appContext;
     PackageRepositoryImpl packageRepository = (PackageRepositoryImpl) context.getBean("packageRepoImpl");
 
-    // Retrieve all the categories
+    // Retrieve all the packages
     @GET
     @Path("/getall")
     @Consumes(MediaType.APPLICATION_JSON)

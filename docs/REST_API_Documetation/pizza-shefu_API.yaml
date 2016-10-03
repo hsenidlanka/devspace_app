@@ -21,7 +21,7 @@ schemes:
 paths:
   /customers/register:
     post:
-      description: Register new user
+      description: Register new user.
       tags:
         - customer
       consumes:
@@ -53,7 +53,7 @@ paths:
 
   /customers/login:
     post: 
-      description: Authorize a user by username and password
+      description: Authorize a user by username and password.
       tags:
         - customer
       consumes:
@@ -88,7 +88,38 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/error-message'  
+              $ref: '#/definitions/error-message' 
+              
+  /customers/{username}:
+    get: 
+      description: Get the profile of a specific customer.
+      tags:
+        - customer
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: username
+          in: path
+          description: username of the customer to find
+          required: true
+          type: string
+            
+      responses:
+        '200':
+          description: Request processed successfully
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/success-message'
+              
+        '415':
+          description: Media type should be application/json
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/error-message'              
               
   /guests/add:
     post:
@@ -128,41 +159,10 @@ paths:
             type: array
             items:
               $ref: '#/definitions/error-message'
-              
-  /customers/{username}:
-    get: 
-      description: Get details of a specific customer
-      tags:
-        - customer
-      consumes:
-        - application/json
-      produces:
-        - application/json
-      parameters:
-        - name: username
-          in: path
-          description: username of the customer to find
-          required: true
-          type: string
-            
-      responses:
-        '200':
-          description: Request processed successfully
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/success-message'
-              
-        '415':
-          description: Media type should be application/json
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/error-message' 
     
   /categories/getall:
     get: 
-      description: Get details of all categories
+      description: Get details of all categories.
       tags:
         - category
       consumes:
@@ -170,7 +170,7 @@ paths:
       produces:
         - application/json
       responses:
-        '201':
+        '200':
           description: Request processed successfully
           schema:
             type: array
@@ -186,7 +186,7 @@ paths:
               
   /categories/toprated:
     get: 
-      description: Returns the top rated items by all categories
+      description: Returns the top rated items by all categories.
       tags:
         - category
       produces:
@@ -206,11 +206,64 @@ paths:
             type: array
             items:
               $ref: '#/definitions/error-message'
-                            
+              
+  /subcategories/getall:
+    get: 
+      description: Get details of all categories.
+      tags:
+        - sub-category
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Request processed successfully
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/success-message'
+              
+        '415':
+          description: Media type should be application/json
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/error-message'
+              
+  /subcategories/category/{categoryName}:
+    get: 
+      description: Get details of all categories.
+      tags:
+        - sub-category
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: categoryName
+          in: path
+          description:  Name of the category to filter menu items (Pizza, Desserts, etc)
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Request processed successfully
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/success-message'
+              
+        '415':
+          description: Media type should be application/json
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/error-message'  
             
   /items/category/{categoryName}:
     get: 
-      description: Returns all the details of items for the given category
+      description: Returns all the details of items for the given category.
       tags:
         - item
       produces:
@@ -239,7 +292,7 @@ paths:
               
   /items/sub-category/{subcategoryName}:
     get: 
-      description: Returns all the details of items for the given sub-category
+      description: Returns all the details of items for the given sub-category.
       tags:
         - item
       produces:
@@ -247,7 +300,7 @@ paths:
       parameters:
         - name: subcategoryName
           in: path
-          description: Name of the sub-category to filter menu items (Soft drinks, Pudding, etc)
+          description: Name of the sub-category to filter menu items (Soft drinks, Ice creams, etc)
           required: true
           type: string
 
@@ -268,7 +321,7 @@ paths:
               
   /items/category/{categoryName}/toprated:
     get: 
-      description: Returns the top rated items of a category
+      description: Returns the top rated items of a category.
       tags:
         - item
       produces:
@@ -298,7 +351,7 @@ paths:
               
   /items/search/{searchKey}:
     get: 
-      description: Search item within all categories
+      description: Search item within all categories.
       tags:
         - item
       produces:
@@ -328,7 +381,7 @@ paths:
               
   /items/search/{searchKey}/category/{categoryName}:
     get: 
-      description: Search item from a specific category
+      description: Search item from a specific category.
       tags:
         - item
       produces:
@@ -361,6 +414,30 @@ paths:
             type: array
             items:
               $ref: '#/definitions/error-message'
+              
+  /packages/getall:
+    get: 
+      description: Returns all categories with their respective attributes such as price, content, etc.
+      tags:
+        - package
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Request processed successfully
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/success-message'
+              
+        '415':
+          description: Media type should be application/json
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/error-message'               
               
   /coupons/validate:
     post: 
