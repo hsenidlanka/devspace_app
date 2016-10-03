@@ -72,7 +72,7 @@ public class ItemService {
         String url = uriInfo.getAbsolutePath().toString();
         successMessage.addLink(url, "self");
         try {
-            List<Map<String, Object>> categoryList = categoryRepository.loadMenuItems(subcategoryName);
+            List<Map<String, Object>> categoryList = subcategoryRepository.loadMenuItems(subcategoryName);
             if (categoryList.size() > 0) {
                 successMessage.setMessage("items for subcategory " + subcategoryName + " retrieved");
                 for (Map<String, Object> map : categoryList) {

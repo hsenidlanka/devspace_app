@@ -21,7 +21,7 @@ schemes:
 paths:
   /customers/register:
     post:
-      description: Register new user
+      description: Register new user.
       tags:
         - customer
       consumes:
@@ -53,7 +53,7 @@ paths:
 
   /customers/login:
     post: 
-      description: Authorize a user by username and password
+      description: Authorize a user by username and password.
       tags:
         - customer
       consumes:
@@ -92,7 +92,7 @@ paths:
               
   /customers/{username}:
     get: 
-      description: Get the profile of a specific customer
+      description: Get the profile of a specific customer.
       tags:
         - customer
       consumes:
@@ -162,7 +162,7 @@ paths:
     
   /categories/getall:
     get: 
-      description: Get details of all categories
+      description: Get details of all categories.
       tags:
         - category
       consumes:
@@ -186,7 +186,7 @@ paths:
               
   /categories/toprated:
     get: 
-      description: Returns the top rated items by all categories
+      description: Returns the top rated items by all categories.
       tags:
         - category
       produces:
@@ -209,7 +209,7 @@ paths:
               
   /subcategories/getall:
     get: 
-      description: Get details of all categories
+      description: Get details of all categories.
       tags:
         - sub-category
       consumes:
@@ -233,7 +233,7 @@ paths:
               
   /subcategories/category/{categoryName}:
     get: 
-      description: Get details of all categories
+      description: Get details of all categories.
       tags:
         - sub-category
       consumes:
@@ -263,7 +263,7 @@ paths:
             
   /items/category/{categoryName}:
     get: 
-      description: Returns all the details of items for the given category
+      description: Returns all the details of items for the given category.
       tags:
         - item
       produces:
@@ -292,7 +292,7 @@ paths:
               
   /items/sub-category/{subcategoryName}:
     get: 
-      description: Returns all the details of items for the given sub-category
+      description: Returns all the details of items for the given sub-category.
       tags:
         - item
       produces:
@@ -321,7 +321,7 @@ paths:
               
   /items/category/{categoryName}/toprated:
     get: 
-      description: Returns the top rated items of a category
+      description: Returns the top rated items of a category.
       tags:
         - item
       produces:
@@ -351,7 +351,7 @@ paths:
               
   /items/search/{searchKey}:
     get: 
-      description: Search item within all categories
+      description: Search item within all categories.
       tags:
         - item
       produces:
@@ -381,7 +381,7 @@ paths:
               
   /items/search/{searchKey}/category/{categoryName}:
     get: 
-      description: Search item from a specific category
+      description: Search item from a specific category.
       tags:
         - item
       produces:
@@ -414,6 +414,30 @@ paths:
             type: array
             items:
               $ref: '#/definitions/error-message'
+              
+  /packages/getall:
+    get: 
+      description: Returns all categories with their respective attributes such as price, content, etc.
+      tags:
+        - package
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Request processed successfully
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/success-message'
+              
+        '415':
+          description: Media type should be application/json
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/error-message'               
               
   /coupons/validate:
     post: 

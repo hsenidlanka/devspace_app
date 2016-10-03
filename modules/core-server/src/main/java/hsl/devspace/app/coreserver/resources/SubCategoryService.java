@@ -72,6 +72,7 @@ public class SubCategoryService {
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("name", map.get("name").toString());
                 successMessage.addData(jsonObject);
+                successMessage.addLink(BASE_URL + "items/subcategory/" + map.get("name").toString().replaceAll(" ", "%20"), "items of " + map.get("name").toString());
             }
         } else {
             successMessage.setMessage("no sub-categories to retrieve");
