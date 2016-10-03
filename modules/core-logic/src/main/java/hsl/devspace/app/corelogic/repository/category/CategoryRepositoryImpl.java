@@ -32,7 +32,7 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
 
     }
 
-/*Add new category*/
+    /*Add new category*/
     @Override
     public int add(Category category) {
         int row = 0;
@@ -52,7 +52,7 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
         return row;
     }
 
-/*check if category is already available*/
+    /*check if category is already available*/
     @Override
     public boolean checkAvailability(String categoryName) {
         boolean result;
@@ -68,7 +68,7 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
 
     }
 
- /*Delete category*/
+    /*Delete category*/
     @Override
     public int delete(String categoryName){
         category.setCategoryName(categoryName);
@@ -154,7 +154,6 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
                     another.addAll(mp);
                     log.info(mp);
                     i++;
-
                 }
             }
             else {

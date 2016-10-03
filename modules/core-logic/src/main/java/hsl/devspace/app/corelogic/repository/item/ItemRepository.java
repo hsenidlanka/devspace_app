@@ -19,4 +19,5 @@ public interface ItemRepository {
     int updateSizeTable(int id,List<Item> item2);
     void addItem(Item item,List<Item> item2);
     void getTopRatedItemsFromAllCategories();
+    List<Map<String, Object>> getTopRatedItems();
 }

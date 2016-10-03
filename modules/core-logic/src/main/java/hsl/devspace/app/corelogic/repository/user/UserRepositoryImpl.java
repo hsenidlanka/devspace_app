@@ -196,6 +196,24 @@ public class UserRepositoryImpl implements UserRepository {
         return count;
     }
 
+    @Override
+    public boolean checkUsernameUnique(String username) {
 
+        boolean result = false;
+
+        String sql = "SELECT count(*) FROM customer WHERE  username = ?  ";
+
+        int count = jdbcTemplate.queryForObject(
+                sql, new Object[]{username}, Integer.class);
+
+        if (count > 0) {
+            result = true;
+            log.info("username already available");
+        }
+        log.info(result);
+        return result;
     }
+
+
+}
 

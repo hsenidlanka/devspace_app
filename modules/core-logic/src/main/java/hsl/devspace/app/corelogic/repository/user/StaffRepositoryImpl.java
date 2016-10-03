@@ -230,6 +230,25 @@ public class StaffRepositoryImpl implements UserRepository {
         log.info(count);
         return count;
     }
+
+    @Override
+    public boolean checkUsernameUnique(String username) {
+
+        boolean result = false;
+
+        String sql = "SELECT count(*) FROM staff WHERE  username = ? ";
+
+        int count = jdbcTemplate.queryForObject(
+                sql, new Object[]{username}, Integer.class);
+
+        if (count > 0) {
+            result = true;
+            log.info("username already available");
+        }
+        log.info(result);
+        return result;
+    }
+
     public void test(String des){
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT id FROM `group` ");
         log.info(mp);
