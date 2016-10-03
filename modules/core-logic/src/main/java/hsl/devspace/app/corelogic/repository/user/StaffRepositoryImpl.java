@@ -234,7 +234,7 @@ public class StaffRepositoryImpl implements UserRepository {
     @Override
     public boolean checkUsernameUnique(String username) {
 
-        boolean result = false;
+        boolean result = true;
 
         String sql = "SELECT count(*) FROM staff WHERE  username = ? ";
 
@@ -242,7 +242,7 @@ public class StaffRepositoryImpl implements UserRepository {
                 sql, new Object[]{username}, Integer.class);
 
         if (count > 0) {
-            result = true;
+            result = false;
             log.info("username already available");
         }
         log.info(result);
