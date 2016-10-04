@@ -39,6 +39,6 @@ public interface UserRepository {
     List<Map<String, Object>> retrieveByDateRange(java.sql.Date date1,java.sql.Date date2);
     List<Map<String, Object>>filter(SQLType column,String filterValue);
     int countUsers();
-    boolean checkUsernameUnique(String username);
+    boolean checkUsernameUnique(User user);
 
 }

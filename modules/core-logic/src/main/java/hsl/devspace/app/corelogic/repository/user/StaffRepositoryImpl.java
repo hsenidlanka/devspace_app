@@ -46,23 +46,26 @@ public class StaffRepositoryImpl implements UserRepository {
         String un = user.getUsername();
         String pw = user.getPassword();
         String des = user.getDesignation();
-        if (un != "" && pw != "") {
-
-            String sql = "INSERT INTO staff " +
-                    "(title,username,password,first_name,last_name,email,mobile,address_line1,address_line2,address_line3," +
-                    "designation,department,branch,register_date,status) VALUES (?,?,sha1(?),?,?,?,?,?,?,?,?,?,?,CURRENT_DATE,1)";
-
-            row = jdbcTemplate.update(sql, new Object[]{user.getTitle(), user.getUsername(), user.getPassword(), user.getFirstName(), user.getLastName(),
-                    user.getEmail(), user.getMobile(), user.getAddressL1(), user.getAddressL2(), user.getAddressL3(), user.getDesignation(),
-                    user.getDepartment(), user.getBranch()});
-            updateGroupStaff(des,un);
+        if (un != "" && pw != "" ) {
+           // if (checkUsernameUnique(un)==true) {
 
 
-            log.info(row + " staff inserted");
-            log.info(un);
+                String sql = "INSERT INTO staff " +
+                        "(title,username,password,first_name,last_name,email,mobile,address_line1,address_line2,address_line3," +
+                        "designation,department,branch,register_date,status) VALUES (?,?,sha1(?),?,?,?,?,?,?,?,?,?,?,CURRENT_DATE,1)";
 
+                row = jdbcTemplate.update(sql, new Object[]{user.getTitle(), user.getUsername(), user.getPassword(), user.getFirstName(), user.getLastName(),
+                        user.getEmail(), user.getMobile(), user.getAddressL1(), user.getAddressL2(), user.getAddressL3(), user.getDesignation(),
+                        user.getDepartment(), user.getBranch()});
+                updateGroupStaff(des, un);
+
+
+                log.info(row + " staff inserted");
+                log.info(un);
+            /*}else
+                log.info("username already available");*/
         } else
-            log.error("values cannot be null");
+            log.error("values cannot be empty");
 
         return row;
 
@@ -231,15 +234,16 @@ public class StaffRepositoryImpl implements UserRepository {
         return count;
     }
 
+    /*check username availability*/
     @Override
-    public boolean checkUsernameUnique(String username) {
+    public boolean checkUsernameUnique(User user) {
 
         boolean result = true;
 
         String sql = "SELECT count(*) FROM staff WHERE  username = ? ";
 
         int count = jdbcTemplate.queryForObject(
-                sql, new Object[]{username}, Integer.class);
+                sql, new Object[]{user.getUsername()}, Integer.class);
 
         if (count > 0) {
             result = false;

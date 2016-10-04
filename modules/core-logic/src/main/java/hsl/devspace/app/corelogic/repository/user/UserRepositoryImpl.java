@@ -40,16 +40,19 @@ public class UserRepositoryImpl implements UserRepository {
         String un = user.getUsername();
         String pw = user.getPassword();
         if (un != "" && pw != "") {
-            String sql = "INSERT INTO customer " +
-                    "(title,first_name,last_name,username,password,email,address_line1,address_line2,address_line3,mobile,registered_date,status) VALUES (?,?,?,?,sha1(?),?,?,?,?,?,CURRENT_DATE,1)";
+           // if (checkUsernameUnique(un)==true) {
+                String sql = "INSERT INTO customer " +
+                        "(title,first_name,last_name,username,password,email,address_line1,address_line2,address_line3,mobile,registered_date,status) VALUES (?,?,?,?,sha1(?),?,?,?,?,?,CURRENT_DATE,1)";
 
-            row = jdbcTemplate.update(sql, new Object[]{user.getTitle(), user.getFirstName(), user.getLastName(), user.getUsername(), user.getPassword(),
-                    user.getEmail(), user.getAddressL1(), user.getAddressL2(), user.getAddressL3(), user.getMobile()});
+                row = jdbcTemplate.update(sql, new Object[]{user.getTitle(), user.getFirstName(), user.getLastName(), user.getUsername(), user.getPassword(),
+                        user.getEmail(), user.getAddressL1(), user.getAddressL2(), user.getAddressL3(), user.getMobile()});
 
-            log.info(row + "customer inserted");
-            log.info(un);
+                log.info(row + "customer inserted");
+                log.info(un);
+          /*  }else
+                log.info("username already available");*/
         } else
-            log.error("values cannot be null");
+            log.error("values cannot be empty");
 
         return row;
 
@@ -197,14 +200,14 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public boolean checkUsernameUnique(String username) {
+    public boolean checkUsernameUnique(User user) {
 
         boolean result = true;
 
         String sql = "SELECT count(*) FROM customer WHERE  username = ?  ";
 
         int count = jdbcTemplate.queryForObject(
-                sql, new Object[]{username}, Integer.class);
+                sql, new Object[]{user.getUsername()}, Integer.class);
 
         if (count > 0) {
             result = false;
