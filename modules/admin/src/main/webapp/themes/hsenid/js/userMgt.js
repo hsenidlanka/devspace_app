@@ -182,11 +182,16 @@ $(document).ready(function(){
         var uname = $(this).val();
         $.ajax({
             type: "POST",
-            url: "/admin/users/uniqueUsername",
+            url: "https://localhost:8443/admin/users/uniqueUsername",
             data: {"uname": uname},
             success: function(msg){
-                if(msg == 1)
-                    alert("User name exists !... try another");
+            /*    if(msg == 0)
+                    alert("OK");
+                else
+                alert("User name exists !... try another");*/
+                alert(msg + uname);
+
+
             },
             error:function(){
                 alert("ajax failed" +uname);
@@ -196,23 +201,23 @@ $(document).ready(function(){
     });
 });
 
-function doAjaxPost(){
+/*function doAjaxPost(){
 
     var  name= $('#fname').val();
     $.ajax({
         type:"POST",
-        //url:"https://localhost:8443/admin/users/add",
+        url: "https://localhost:8443/admin/users/addCustomer",
         data: name,
         success:function(data){
 
-            alert(data);
+            alert(data );
         },
         error:function(e){
             alert('Error' +e);
         }
 
     });
-}
+}*/
 
 
 
