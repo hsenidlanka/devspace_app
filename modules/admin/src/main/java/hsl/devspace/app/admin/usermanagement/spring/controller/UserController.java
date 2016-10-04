@@ -75,7 +75,7 @@ public class UserController {
     public String saveOrUpdate(@ModelAttribute("newUser")  User newUser,
                                final RedirectAttributes redirectAttributes) throws SQLIntegrityConstraintViolationException {
 
-        boolean usernameUnique=staffRepository.checkUsernameUnique(newUser.getUsername());
+        boolean usernameUnique=staffRepository.checkUsernameUnique(newUser);
         if(usernameUnique) {
             int i = staffRepository.add(newUser);
             if (i == 0)
