@@ -12,6 +12,15 @@ public class Item {
     private String image;
     private String subCategoryName;
     private int itemId;
+    private String categoryName;
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
 
     public int getItemId() {
         return itemId;

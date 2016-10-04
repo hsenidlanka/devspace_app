@@ -155,6 +155,13 @@ public class ItemRepositoryImpl implements ItemRepository {
 
     }
 
+    @Override
+    public List<Map<String, Object>> getAllCategories() {
+        List<Map<String,Object>> mp=jdbcTemplate.queryForList("SELECT name FROM category");
+        log.info(mp);
+        return mp;
+    }
+
     /*retrieve top rated items from each category*/
     @Override
     public List<Map<String, Object>> getTopRatedItemsFromAllCategories() {

@@ -20,4 +20,5 @@ public interface ItemRepository {
     void addItem(Item item,List<Item> item2);
     List<Map<String, Object>> getTopRatedItemsFromAllCategories();
     List<Map<String, Object>> getTopRatedItemsOfACategory(String categoryName);
+    List<Map<String, Object>> getAllCategories();
 }
