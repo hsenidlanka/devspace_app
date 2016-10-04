@@ -1,4 +1,3 @@
-/*
 package hsl.devspace.app.admin.categorymanagement.spring.controller;
 
 import hsl.devspace.app.corelogic.domain.Category;
@@ -13,62 +12,79 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.sql.SQLIntegrityConstraintViolationException;
-import java.util.List;
-import java.util.Map;
 
 @Controller
-@RequestMapping("/category")
+@RequestMapping("/items")
 public class CategoryController {
 
     private static final Logger LOG = LogManager.getLogger(CategoryController.class);
 
     @Autowired
-    private CategoryRepository category;
+    private CategoryRepository categoryRepository;
 
-    */
-/*
+  /*  @Autowired
+    private ItemRepository item;*/
+
+
+   /* @RequestMapping(value = "/add", method = RequestMethod.GET)
+   public ModelAndView showAddItem(ModelAndView modelAndView){
+        Map<String, Object> model = new HashMap<String, Object>();
+        List<Map<String, Object>> listCat = categoryRepository.viewCategoryList();
+        model.put("listCat",listCat);
+        model.put("command",new Item());
+        return new ModelAndView("addItem", "model", model);
+    }*/
+
+
+    /*public ModelAndView showAddItem() {
+        ModelAndView model = new ModelAndView();
+        List<Map<String, Object>> listCat = categoryRepository.viewCategoryList();
+        model.addObject("listCat", listCat);
+        return new ModelAndView("addItem", "command", new Item());
+    }
+*/
+
+   /* @RequestMapping(value = "/viewList", method = RequestMethod.GET)
+    public ModelAndView getCatList() {
+        ModelAndView model = new ModelAndView("index");
+        List<Map<String, Object>> listCat = category.viewCategoryList();
+        model.addObject("listCat", listCat);
+        return  new ModelAndView("catList", "getCategory", new Item()); }
+*/
+    /*
     * Add new category
-    **//*
+    **/
 
-
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public ModelAndView showAddCateg(){ return  new ModelAndView("categAdd", "addCategory", new Category()); }
+    @RequestMapping(value = "/addCat", method = RequestMethod.GET)
+    public ModelAndView showAddCateg(){
+       /* ModelAndView model = new ModelAndView();
+        List<Map<String, Object>> listCat = category.viewCategoryList();
+        model.addObject("listCat", listCat);*/
+        return  new ModelAndView("categAdd", "addCategory", new Category()); }
 
     @RequestMapping(value = "add_category")
-    public ModelAndView addCategory(@ModelAttribute("addCategory") hsl.devspace.app.corelogic.domain.Category newCateg) throws SQLIntegrityConstraintViolationException {
+    public ModelAndView addCategory(@ModelAttribute("addCategory") Category newCateg) throws SQLIntegrityConstraintViolationException {
 
-        ModelAndView validator = new ModelAndView();
+        ModelAndView model = new ModelAndView();
 
-        validator.setViewName("addCategory");
+        model.setViewName("addCategory");
 
-        return validator;
+        return model;
     }
 
-    */
-/*
+    /*
     * Get category list
-    **//*
-
-    @RequestMapping(value = "getCatLis")
-    public ModelAndView retrieveCategoryTypes(@ModelAttribute("viewCatg") Category viewCat) throws SQLIntegrityConstraintViolationException {
-<<<<<<< Updated upstream
-       ModelAndView model = new ModelAndView("index");
+    **/
+   // @RequestMapping(value = "getCatLis")
+    /*public ModelAndView retrieveCategoryTypes(@ModelAttribute("viewCatg") Category viewCat) throws SQLIntegrityConstraintViolationException {
+       ModelAndView model = new ModelAndView("addItem");
 
         List<Map<String, Object>> listCat = category.viewCategoryList();
       //  model.addObject("list", categoryName);
-        model.addObject(String.valueOf(listCat), viewCat.getCategoryName() );
+      //  model.addObject(String.valueOf(listCat), viewCat.getCategoryName() );
+        model.addObject("list", listCat );
 
         //return listCat;
        return model;
-=======
-        ModelAndView validator = new ModelAndView("index");
-
-        List<Category> listCat = category.retrieveCategoryTypes();
-      //  validator.addObject("list", categoryName);
-
-       // return listCat;
-        return validator;
->>>>>>> Stashed changes
-    }
+    }*/
 }
-*/
