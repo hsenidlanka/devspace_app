@@ -9,6 +9,7 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.sql.DataSource;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -141,48 +142,33 @@ public class ItemRepositoryImpl implements ItemRepository {
         }
     }
 
+
+    /*get top rated items of a given category*/
+    @Override
+    public List<Map<String, Object>> getTopRatedItemsOfACategory(String categoryName) {
+
+        List<Map<String, Object>> mp1 = jdbcTemplate.queryForList("SELECT sum(number_of_stars) AS total_stars, i.name AS item_name, sc.name AS subcategory_name," +
+                " c.name AS category_name FROM feedback f, item i, sub_category sc, category c WHERE f.item_id=i.id AND i.sub_category_id=sc.id" +
+                " AND sc.category_id=c.id AND c.name=? GROUP BY i.name ORDER BY total_stars desc LIMIT 2", categoryName);
+        log.info(mp1);
+        return mp1;
+
+    }
+
     /*retrieve top rated items from each category*/
     @Override
-    public void getTopRatedItemsFromAllCategories() {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT id FROM category WHERE name='Desserts'");
+    public List<Map<String, Object>> getTopRatedItemsFromAllCategories() {
+        List<Map<String, Object>> mp = new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> category = jdbcTemplate.queryForList("SELECT name FROM category ");
+        log.info(category + "category");
+        for (int i = 0; i < category.size(); i++) {
+            List<Map<String, Object>> mp1 = jdbcTemplate.queryForList("SELECT sum(number_of_stars) AS total_stars, i.name AS item_name, sc.name AS subcategory_name," +
+                    " c.name AS category_name FROM feedback f, item i, sub_category sc, category c WHERE f.item_id=i.id AND i.sub_category_id=sc.id" +
+                    " AND sc.category_id=c.id AND c.name=? GROUP BY i.name ORDER BY total_stars desc LIMIT 2", category.get(i).get("name"));
+            mp.addAll(mp1);
+            log.info(mp1);
+        }
         log.info(mp);
-       // for (int i = 0; i < mp.size(); i++) {
-            List<Map<String, Object>> mp1 = jdbcTemplate.queryForList("SELECT id FROM sub_category WHERE category_id=?", mp.get(0).get("id"));
-            log.info(mp1+"mp1");
-            for (int j = 0; j < mp1.size(); j++) {
-                List<Map<String, Object>> mp2 = jdbcTemplate.queryForList("SELECT id FROM item WHERE sub_category_id=?", mp1.get(j).get("id"));
-                log.info(mp2+"mp2");
-                for (int k = 0; k < mp2.size()-1 ; k++) {
-                    List<Map<String, Object>> mp3 = jdbcTemplate.queryForList("SELECT AVG (number_of_stars) FROM feedback WHERE item_id=? ", mp2.get(j).get("id"));
-                    log.info("mp3" + mp3);
-                    if (Double.parseDouble(mp3.get(0).get("AVG (number_of_stars)").toString()) >=2) {
-                        List<Map<String, Object>> mp4 = jdbcTemplate.queryForList("SELECT name FROM item WHERE id=(SELECT item_id FROM feedback WHERE number_of_stars=?) ", Double.parseDouble(mp3.get(j).get("AVG (number_of_stars)").toString()));
-                        log.info("mp4" + mp4);
-
-                    }
-                }
-
-            }
-
-        //}
-
-
-    }
-
-    @Override
-    public List<Map<String, Object>> getTopRatedItems() {
-        List<Map<String, Object>> mp3 = jdbcTemplate.queryForList("SELECT * FROM item WHERE id=(SELECT item_id FROM feedback WHERE number_of_stars=5)");
-        log.info(mp3);
-        return mp3;
-
-    }
-
-    public void getTopRatedItemsFromAllCategoriesTest() {
-        List<Map<String, Object>> mp = null;
-        List<Map<String, Object>> mp1 = jdbcTemplate.queryForList("SELECT sum(number_of_stars) AS total_stars, i.name, sc.name," +
-                " c.name FROM feedback f, item i, sub_category sc, category c WHERE f.item_id=i.id AND i.sub_category_id=sc.id" +
-                " AND sc.category_id=c.id AND c.name='pizza' GROUP BY i.name ORDER BY total_stars desc LIMIT 2");
-       log.info(mp1);
-
+        return mp;
     }
 }

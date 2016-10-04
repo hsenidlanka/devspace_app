@@ -18,6 +18,6 @@ public interface ItemRepository {
     int update(Item item);
     int updateSizeTable(int id,List<Item> item2);
     void addItem(Item item,List<Item> item2);
-    void getTopRatedItemsFromAllCategories();
-    List<Map<String, Object>> getTopRatedItems();
+    List<Map<String, Object>> getTopRatedItemsFromAllCategories();
+    List<Map<String, Object>> getTopRatedItemsOfACategory(String categoryName);
 }

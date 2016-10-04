@@ -199,7 +199,7 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public boolean checkUsernameUnique(String username) {
 
-        boolean result = false;
+        boolean result = true;
 
         String sql = "SELECT count(*) FROM customer WHERE  username = ?  ";
 
@@ -207,7 +207,7 @@ public class UserRepositoryImpl implements UserRepository {
                 sql, new Object[]{username}, Integer.class);
 
         if (count > 0) {
-            result = true;
+            result = false;
             log.info("username already available");
         }
         log.info(result);
