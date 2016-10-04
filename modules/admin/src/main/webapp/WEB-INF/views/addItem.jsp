@@ -1,5 +1,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -50,19 +52,25 @@
     </div>
     <div class="panel-body">
 
-      <form:form class="form-horizontal" role="form" id="frmAddItem" action="/admin/items/add_item" method="post" commandName="command">
+      <form:form class="form-horizontal" role="form" id="frmAddItem" action="/admin/items/add_item" method="post">
         <fieldset class="scheduler-border">
           <legend class="scheduler-border">(*) Fields are read only</legend>
 
 
           <div class="form-group">
             <div class="row">
-              <label for="selectCat" class="col-xs-3 control-label">
+              <label class="col-xs-3 control-label">
                 Category
               </label>
 
               <div class="col-xs-5">
-               <%-- <select class="form-control" id="selectCat">
+
+                <%--<select name='lists'>
+                  <c:forEach var="list" items="${listCat}">
+                    <option id="${list.key}" value="${list.value.getName()}">${list.value.getName()}</option>
+                  </c:forEach>
+                </select>--%>
+              <%--  <select class="form-control" id="selectCat">
                   <option value="0">--Select Category--</option>
                   <option value="pizza">Pizza</option>
                   <option value="pasta">Pasta</option>
@@ -72,15 +80,19 @@
                   <option value="crust">Crust</option>
                 </select>--%>
 
-                <form:select class="form-control" id="selectCat" path="">
-                  <form:option value="0">--Select Category--</form:option>
-                  <form:option value="pizza">Pizza</form:option>
-                  <form:option value="pasta">Pasta</form:option>
-                  <form:option value="salad">Salad / Appetizer</form:option>
-                  <form:option value="dessert">Dessert</form:option>
-                  <form:option value="topping">Topping</form:option>
-                  <form:option value="crust">Crust</form:option>
-                </form:select>
+                       <form:select class="form-control" id="selectCat" path="categoryName">
+                        <form:option value="-" label="--Select Category--"/>
+                         <%--<c:forEach var="list" items="${addItem.listCat}">
+                           <form:option value="${list.value.getName()}">${list.value.getName()}</form:option>
+                         </c:forEach>--%>
+                        <form:options items="${listCat}" />
+                 <%--<form:option value="pizza">Pizza</form:option>
+                        <form:option value="pasta">Pasta</form:option>
+                        <form:option value="salad">Salad / Appetizer</form:option>
+                        <form:option value="dessert">Dessert</form:option>
+                        <form:option value="topping">Topping</form:option>
+                        <form:option value="crust">Crust</form:option>--%>
+                      </form:select>
                 <span id="catErr" class="input-group-error"></span>
               </div>
 
