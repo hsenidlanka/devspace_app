@@ -1,6 +1,7 @@
 package hsl.devspace.app.admin.itemmanagement.spring.controller;
 
 import hsl.devspace.app.corelogic.domain.Item;
+import hsl.devspace.app.corelogic.repository.category.CategoryRepository;
 import hsl.devspace.app.corelogic.repository.item.ItemRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,6 +25,9 @@ public class ItemController {
     @Autowired
     private ItemRepository item;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
+
     /**
      * Add new item view
      */
@@ -31,24 +35,47 @@ public class ItemController {
     //For viewing the add item form
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView showAddItem() {
+        ModelAndView model = new ModelAndView();
+        List<Map<String, Object>> listCat = categoryRepository.viewCategoryList();
+        model.addObject("listCat", listCat);
         return new ModelAndView("addItem", "command", new Item());
     }
+
+
+   /* @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public ModelAndView showAddItem(ModelAndView modelandview) {
+        Map<String, Object> model = new HashMap<String, Object>();
+        List<Map<String, Object>> listCat =   categoryRepository.viewCategoryList();
+        model.put("listCat",listCat);
+        model.put("command",new Item());
+        return new ModelAndView("addItem", "model", model);
+    }*/
+    /*public ModelAndView showAddItem() {
+       *//* ModelAndView model = new ModelAndView();
+        List<Map<String, Object>> listCat = category.viewCategoryList();
+        model.addObject("listCat", listCat);*//*
+        return new ModelAndView("addItem", "command", new Item());
+    }*/
 
     //For submitting the add new item
     @RequestMapping(value = "/add_item")
     public String addItem(@ModelAttribute("newItem") Item newItem) throws SQLIntegrityConstraintViolationException {
-      /* ModelAndView validator = new ModelAndView();
-        validator.addObject("subCats", subCategoryName);*/
+
+        /*ModelAndView model = new ModelAndView();
+        List<Map<String, Object>> listCat = category.viewCategoryList();
+        model.addObject("listCat", listCat);*/
+
         System.out.println("First Name:" + newItem.getItemName());
+
         int a = item.add(newItem);
         if (a == 1)
-            return "addItem";
-            // validator.setViewName("addItem");
+            return "redirect:add";
+            // model.setViewName("addItem");
         else
 
             // System.out.println("Error in item add");
-            return "addItem";
-        //  return validator;
+            return "redirect:add";
+        //  return model;
     }
 
     /**
@@ -84,7 +111,7 @@ public class ItemController {
     }
 
     @RequestMapping(value = "/edit_item")
-    public ModelAndView editItem(@ModelAttribute("editItem") hsl.devspace.app.corelogic.domain.Item editItem) throws SQLIntegrityConstraintViolationException {
+    public ModelAndView editItem(@ModelAttribute("editItem") Item editItem) throws SQLIntegrityConstraintViolationException {
         ModelAndView model = new ModelAndView();
         /*int y = item.update(editItem);
             if (y==1)*/
@@ -103,13 +130,7 @@ public class ItemController {
     public ModelAndView showDeleteItem(){ return  new ModelAndView("itemDelete", "deleteItem",new Item()); }
     @RequestMapping(value = "view_item")
     public ModelAndView deleteItem(@ModelAttribute("deleteItem") hsl.devspace.app.corelogic.domain.Item deleteItem) throws SQLIntegrityConstraintViolationException {
-<<<<<<< Updated upstream
         ModelAndView model = new ModelAndView();
         model.setViewName("");
-=======
-        ModelAndView validator = new ModelAndView();
-
-        validator.setViewName("");
->>>>>>> Stashed changes
     }*/
 }
