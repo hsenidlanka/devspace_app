@@ -31,12 +31,6 @@
     <script>
 
         $( document ).ready(function() {
-            /*      $('form').click(function(){
-             //           alert($("#login-username").val());
-             alert($('form').validator('check'));
-             //            $('form').validator('input');
-
-             });*/
             $(function () {
                 $('form').validator({
                     validHandlers: {
@@ -50,11 +44,79 @@
                 });
 
                 $('form').submit(function (e) {
+                    e.preventDefault();
+
+                    if ($('form').validator('check') < 1) {
+
+                    }
+                })
+            })
+
+           /* $("#btn-submit").click(function (e) {
+//                alert("The paragraph was clicked.");
+                e.preventDefault();
+                $(function () {
+                    $('form').validator({
+                        validHandlers: {
+                            '.customhandler': function (input) {
+                                //may do some formatting before validating
+                                input.val(input.val().toUpperCase());
+                                //return true if valid
+                                return input.val() === 'JQUERY' ? true : false;
+                            }
+                        }
+                    });
+
+                    if ($('form').validator('check') < 1) {
+
+                        var datastring = $("#loginForm").serialize();
+//                        alert(datastring);
+                        $.ajax({
+                            type: "POST",
+                            url: "/ltest",
+                            data: datastring,
+                            dataType: "json",
+                            success: function(data) {
+                                //var obj = jQuery.parseJSON(data); if the dataType is not specified as json uncomment this
+                                // do what ever you want with the server response
+                                alert("passed")
+                            },
+                            error: function() {
+                                alert('error handing here');
+                            }
+                        });
+
+                    }
+
+
+                })
+
+
+            });*/
+            /*      $('form').click(function(){
+             //           alert($("#login-username").val());
+             alert($('form').validator('check'));
+             //            $('form').validator('input');
+
+             });*/
+           /* $(function () {
+                $('form').validator({
+                    validHandlers: {
+                        '.customhandler': function (input) {
+                            //may do some formatting before validating
+                            input.val(input.val().toUpperCase());
+                            //return true if valid
+                            return input.val() === 'JQUERY' ? true : false;
+                        }
+                    }
+                });
+
+               /!* $('form').submit(function (e) {
 //                    var bla = $('#login-username').val();
                     e.preventDefault();
 //                    alert($('form').validator('check'));
 //                     alert(bla);
-                     /*alert("test")*/
+                     /!*alert("test")*!/
                      if ($('form').validator('check') < 1) {
 //                        this.submit();
                          $.ajax({
@@ -62,14 +124,14 @@
                              url: "login",
                              data: $('#loginForm').serialize(),
                              success: function (result) {
-                                 /*if ($.trim(result) == 1) {
+                                 /!*if ($.trim(result) == 1) {
                                      $('#addUserPopup').modal('hide');
                                      $('#addUserSuccess').modal('show');
                                      $('#register').trigger('reset');
                                  } else {
                                      $('#addUserPopup').modal('hide');
                                      $('#addUserFail').modal('show');
-                                 }*/
+                                 }*!/
                                  alert("reply came");
                              },
                              error: function (data) {
@@ -79,12 +141,16 @@
 
                          });
                      }
-                })
-            })
+                })*!/
+            })*/
+
         });
 
 
     </script>
+
+
+
 </head>
 <!-------Header------------------------------------->
 <body>

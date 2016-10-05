@@ -28,6 +28,13 @@
 
 <fmt:message key="login.title" bundle="${lang}"/>
 
+<form action="login" method="post">
+    <input id="username" name="username" type="text">
+    <input type="text" id="password" name="password">
+    <input type="submit" value="submit">
+</form>
+
+
 
 </body>
 </html>
