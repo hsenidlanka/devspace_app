@@ -40,5 +40,9 @@ public interface UserRepository {
     List<Map<String, Object>>filter(SQLType column,String filterValue);
     int countUsers();
     boolean checkUsernameUnique(User user);
+    List<Map<String, Object>> viewActiveUsers();
+    List<Map<String, Object>> viewBlockedUsers();
+
+
 
 }

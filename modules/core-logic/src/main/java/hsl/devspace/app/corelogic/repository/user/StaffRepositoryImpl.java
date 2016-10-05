@@ -253,6 +253,19 @@ public class StaffRepositoryImpl implements UserRepository {
         return result;
     }
 
+    @Override
+    public List<Map<String, Object>> viewActiveUsers() {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE status=1");
+        log.info(mp);
+        return mp;
+    }
+
+    @Override
+    public List<Map<String, Object>> viewBlockedUsers() {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE status=2");
+        log.info(mp);
+        return mp;    }
+
     public void test(String des){
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT id FROM `group` ");
         log.info(mp);

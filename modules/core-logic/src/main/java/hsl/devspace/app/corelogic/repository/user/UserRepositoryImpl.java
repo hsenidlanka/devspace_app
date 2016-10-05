@@ -30,7 +30,6 @@ public class UserRepositoryImpl implements UserRepository {
 
     public void setTransactionManager(PlatformTransactionManager transactionManager) {
         this.transactionManager = transactionManager;
-
     }
 
     /*add a new customer*/
@@ -216,6 +215,18 @@ public class UserRepositoryImpl implements UserRepository {
         log.info(result);
         return result;
     }
+
+    @Override
+    public List<Map<String, Object>> viewActiveUsers() {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE status=1");
+        log.info(mp);
+        return mp;    }
+
+    @Override
+    public List<Map<String, Object>> viewBlockedUsers() {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE status=2");
+        log.info(mp);
+        return mp;    }
 
 
 }
