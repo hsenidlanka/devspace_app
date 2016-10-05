@@ -86,7 +86,7 @@
             <div class="form-group">
               <div class="col-sm-6">
                 <div class="row">
-                  <label  class="col-sm-4 control-label" id="fname">
+                  <label  class="col-sm-4 control-label" >
                     Name
                   </label>
                   <div class="col-sm-2">
@@ -249,7 +249,7 @@
                   </div>
                   <div class="row">
                     <div class="col-xs-4">
-                      <form:input path="username" class="form-control" id="username_admin" placeholder="User Name" type="text" required="required"/>
+                      <form:input path="username" class="form-control" name="username_admin" id="username_admin" placeholder="User Name" type="text" required="required"/>
                     </div>
                     <div class="col-xs-4">
                       <form:input path="password" class="form-control" id="password1" placeholder="Password" type="text" required="required" onchange="validatePassword(password1)"/>
@@ -271,7 +271,7 @@
                   <form:button type="reset" value="Reset" class="btn btn-success btnAddItem">Reset</form:button>
                 </div>
                 <div class="col-xs-4">
-                  <button type="submit" class="btn btn-success btnAddItem" onclick="doAjaxPost()">Add User
+                  <button type="submit" class="btn btn-success btnAddItem" >Add User
                 </div>
               </div>
               <div class="col-xs-1"></div>

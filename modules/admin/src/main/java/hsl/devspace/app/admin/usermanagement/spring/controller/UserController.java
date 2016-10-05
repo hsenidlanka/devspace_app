@@ -8,10 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -59,33 +56,37 @@ public class UserController {
     }
 
     //controller method to validate the uniquness of username
-    @RequestMapping(value="/uniqueUsername",method=RequestMethod.POST)
-    public @ResponseBody int checkUser(@ModelAttribute(value="user") User user ){
-        boolean usernameExist = false;
-       int returnType =  0;
+/*    @RequestMapping(value="/uniqueUsername",method=RequestMethod.POST)
+    public @ResponseBody String checkUser(@RequestParam("username") String uname ){
+        boolean usernameUnique ;
+       String returnType;
 
-        usernameExist=staffRepository.checkUsernameUnique(user.getUsername());
-        if(usernameExist ){
-                returnType= 1;
-        }
+        usernameUnique=staffRepository.checkUsernameUnique(uname);
+        if(!usernameUnique){
+                returnType= "Username available" + uname;
+        }else
+                returnType="Correct new username" + uname;
+
         return returnType;
-    }
+    }*/
 
 
     @RequestMapping(value="/addCustomer",method = RequestMethod.POST)
     public String saveOrUpdate(@ModelAttribute("newUser")  User newUser,
                                final RedirectAttributes redirectAttributes) throws SQLIntegrityConstraintViolationException {
 
-        
-        int i= staffRepository.add(newUser);
-
-       if(i ==0)
-            return "redirect:add";
-        else {
-            redirectAttributes.addFlashAttribute("newUser", newUser);
-            redirectAttributes.addFlashAttribute("message", "Added Succcessfully");
-            return "redirect:add";
+        boolean usernameUnique=staffRepository.checkUsernameUnique(newUser);
+        if(usernameUnique) {
+            int i = staffRepository.add(newUser);
+            if (i == 0)
+                return "redirect:add";
+            else {
+                redirectAttributes.addFlashAttribute("newUser", newUser);
+                redirectAttributes.addFlashAttribute("message", "Added Succcessfully");
+                return "redirect:add";
+            }
         }
+        return "redirect:list";
     }
 
     @RequestMapping(value="/showUser", method=RequestMethod.GET)

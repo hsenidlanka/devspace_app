@@ -51,7 +51,7 @@
       </div>
 
       <div class="modal-body" >
-          <form name="loginForm" id="loginForm" novalidate="novalidate" action="login" method="post">
+          <form name="loginForm" id="loginForm" novalidate="novalidate" action="ltest" method="post">
               <div class="row form-group">
                   <div class="col-sm-3">
                       <h3><label for="username">Username</label></h3>
