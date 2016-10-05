@@ -82,10 +82,10 @@
 
                        <form:select class="form-control" id="selectCat" path="categoryName">
                         <form:option value="-" label="--Select Category--"/>
-                         <%--<c:forEach var="list" items="${addItem.listCat}">
-                           <form:option value="${list.value.getName()}">${list.value.getName()}</form:option>
-                         </c:forEach>--%>
-                        <form:options items="${listCat}" />
+                         <c:forEach var="list" items="${listCat}">
+                           <option id="${list.key}" value="${list.value.getName()}">${list.value.getName()}</option>
+                         </c:forEach>
+                        <%--<form:options items="${listCat}" />--%>
                  <%--<form:option value="pizza">Pizza</form:option>
                         <form:option value="pasta">Pasta</form:option>
                         <form:option value="salad">Salad / Appetizer</form:option>

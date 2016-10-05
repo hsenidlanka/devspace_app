@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,17 +29,28 @@ public class ItemController {
     @Autowired
     private CategoryRepository categoryRepository;
 
+
+   /* private static  Map<String, Object> model = new HashMap<String, Object>();
+     {
+        List<Map<String, Object>> listCat = item.viewList();
+        model.put("listCat", listCat);
+    }*/
+
     /**
      * Add new item view
      */
-
     //For viewing the add item form
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView showAddItem() {
-        ModelAndView model = new ModelAndView();
-        List<Map<String, Object>> listCat = categoryRepository.viewCategoryList();
-        model.addObject("listCat", listCat);
-        return new ModelAndView("addItem", "command", new Item());
+        /*ModelAndView modelAndView = new ModelAndView();
+        Map<String, Object> model = new HashMap<String, Object>();
+        List<Map<String, Object>> listCat = item.viewList();
+        model.put("listCat", listCat);
+        model.put("command", new Item());*/
+
+        Map<String, Object> myModel = new HashMap<String, Object>();
+        myModel.put("listCat", "myValue1");
+        return new ModelAndView("addItem", myModel);
     }
 
 
