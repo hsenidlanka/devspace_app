@@ -31,26 +31,81 @@
     <script>
 
         $( document ).ready(function() {
+
+
+//            registration validation starts
             $(function () {
-                $('form').validator({
-                    validHandlers: {
-                        '.customhandler': function (input) {
-                            //may do some formatting before validating
-                            input.val(input.val().toUpperCase());
-                            //return true if valid
-                            return input.val() === 'JQUERY' ? true : false;
-                        }
+                $('form').validator({validHandlers: {
+
+                    '.mobileno':function(input) {
+//                        alert(input.val());
+                        return /[0-9]{10}$/.test(input.val());
+
+                    },
+                    '.password':function(input) {
+                        var bla = $('#rePassword').val();
+//                        alert(input.val() == bla);
+//                        input.val() ==
+//                        alert("test password");
+                        return input.val() == bla;
+
                     }
+
+                }
+
                 });
 
+//alert(3 != 4);
+               /* $('form').validator({validHandlers: {
+
+                    '.password':function(input) {
+                        alert("password");
+                        return (input.val()).match(document.getElementById("rePassword").value);
+                    },
+
+                }
+                });*/
+
                 $('form').submit(function (e) {
+
                     e.preventDefault();
-
-                    if ($('form').validator('check') < 1) {
-
+//                    alert($('form').validator('check'));
+                    if ($('form').validator('check') <= 2) {
+//                        alert($('form').validator('check'));
+                        this.submit();
                     }
                 })
             })
+
+//            registration validation end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
            /* $("#btn-submit").click(function (e) {
 //                alert("The paragraph was clicked.");
@@ -58,7 +113,7 @@
                 $(function () {
                     $('form').validator({
                         validHandlers: {
-                            '.customhandler': function (input) {
+                            '.mobileno': function (input) {
                                 //may do some formatting before validating
                                 input.val(input.val().toUpperCase());
                                 //return true if valid
@@ -102,7 +157,7 @@
            /* $(function () {
                 $('form').validator({
                     validHandlers: {
-                        '.customhandler': function (input) {
+                        '.mobileno': function (input) {
                             //may do some formatting before validating
                             input.val(input.val().toUpperCase());
                             //return true if valid

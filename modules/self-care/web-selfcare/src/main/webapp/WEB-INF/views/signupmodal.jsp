@@ -35,19 +35,21 @@
                                         <fmt:message key="signup.title" bundle="${lang}"/>
                                     </label>
 
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-5">
                                         <label class="radio-inline">
-                                            <input type="radio" required="" name="title" value="Mr."><fmt:message key="signup.mr" bundle="${lang}" />
+                                            <input type="radio" required="" name="title" data-error-msg="Select the Title" value="Mr."><fmt:message key="signup.mr" bundle="${lang}" />
                                         </label>
                                         <label class="radio-inline">
-                                            <input type="radio" required="" name="title" value="Mrs."><fmt:message key="signup.mrs" bundle="${lang}"/>
+                                            <input type="radio" required="" name="title" data-error-msg="Select the Title" value="Mrs."><fmt:message key="signup.mrs" bundle="${lang}"/>
                                         </label>
                                         <label class="radio-inline" >
-                                            <input type="radio" required="" name="title" value="Miss"><fmt:message key="signup.miss" bundle="${lang}"/>
+                                            <input type="radio" required="" name="title" data-error-msg="Select the Title" value="Miss"><fmt:message key="signup.miss" bundle="${lang}"/>
                                         </label>
                                     </div>
 
                                 </div>
+
+
 
                                 <div class="form-group">
 
@@ -55,37 +57,67 @@
                                         <fmt:message key="signup.name" bundle="${lang}"/>
                                     </label>
 
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-5">
                                         <input class="form-control" id="fname" name="fname" type="text"
-                                               placeholder="<fmt:message key="signup.first.name" bundle="${lang}"/>" required="" data-error-msg="Enter Valid First Name">
+                                               placeholder="<fmt:message key="signup.first.name" bundle="${lang}"/>" required="" data-error-msg="Enter First Name">
                                     </div>
 
-                                    <div class="col-sm-4">
+                                    <%--<div class="col-sm-4">
                                         <input class="form-control" id="lname" name="lname" type="text" placeholder="<fmt:message key="signup.last.name" bundle="${lang}"/>" required="" data-error-msg="Enter Valid Last Name" >
+                                    </div>--%>
+                                </div>
+
+                                <%----%>
+
+                                <div class="form-group">
+                                    <label for="lname" class="col-sm-2 control-label">
+                                        Last Name
+                                    </label>
+
+                                    <div class="col-sm-5">
+                                        <input class="form-control" id="lname" name="lname" type="text" placeholder="<fmt:message key="signup.last.name" bundle="${lang}"/>" required="" data-error-msg="Enter Last Name" >
                                     </div>
                                 </div>
+
+                                <%----%>
+
                                 <div class="form-group">
 
                                     <label class="col-sm-2 control-label">
                                         <fmt:message key="signup.address" bundle="${lang}"/>
                                     </label>
 
-                                    <div class="col-sm-4">
-                                        <input class="form-control" type="text" placeholder="<fmt:message key="signup.addr1" bundle="${lang}"/>" required>
+                                    <div class="col-sm-5">
+                                        <input name="address1" id="address1" class="form-control" type="text" placeholder="<fmt:message key="signup.addr1" bundle="${lang}"/>" required>
+
                                         <%--<input class="form-control" required="" id="address1" name="address1" type="text" placeholder="<fmt:message key="signup.addr1" bundle="${lang}"/>" >--%>
                                     </div>
-
+<%--
                                     <div class="col-sm-4">
-                                        <input class="form-control" type="text" placeholder="<fmt:message key="signup.addr2" bundle="${lang}"/>" required>
-                                        <%--<input class="form-control" id="address2" name="address2" type="text" placeholder="<fmt:message key="signup.addr2" bundle="${lang}"/>" requied="" >--%>
+                                        <input class="form-control" name="address2" id="address2" type="text" placeholder="<fmt:message key="signup.addr2" bundle="${lang}"/>" required>
+                                        <input class="form-control" id="address2" name="address2" type="text" placeholder="<fmt:message key="signup.addr2" bundle="${lang}"/>" requied="" >
+                                    </div>--%>
+                                </div>
+
+                                <%----%>
+                                <div class="form-group">
+                                    <label for="address2" class="col-sm-2 control-label">
+                                        &nbsp;
+                                    </label>
+
+                                    <div class="col-sm-5">
+                                        <input class="form-control" name="address2" id="address2" type="text" placeholder="<fmt:message key="signup.addr2" bundle="${lang}"/>" required>
                                     </div>
                                 </div>
+
+
+                                <%----%>
                                 <div class="form-group">
                                     <label for="address3" class="col-sm-2 control-label">
                                         &nbsp;
                                     </label>
 
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-5">
                                         <input class="form-control" id="address3" name="address3" type="text"
                                                placeholder="<fmt:message key="signup.addr3" bundle="${lang}"/>" >
                                     </div>
@@ -96,9 +128,9 @@
                                             <fmt:message key="signup.phone" bundle="${lang}"/>
                                         </label>
 
-                                        <div class="col-sm-4">
-                                            <input class="form-control" id="mobileNo" type="text"
-                                                   placeholder="+94-XXXXXXXXXX" required="" data-error-msg="Enter Valid Mobile No">
+                                        <div class="col-sm-5">
+                                            <input class="mobileno form-control" id="mobileNo" name="mobileNo" type="text"
+                                                   placeholder="+94-XXXXXXXXXX" pattern="[0-9]{10}" required="" data-error-msg="Enter Mobile No">
                                         </div>
 
                                     </div>
@@ -108,9 +140,9 @@
                                         <fmt:message key="signup.email" bundle="${lang}"/>
                                     </label>
 
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-5">
                                         <input class="form-control" id="email" name="email" type="email"
-                                               placeholder="<fmt:message key="signup.email.example" bundle="${lang}"/>" required>
+                                               placeholder="<fmt:message key="signup.email.example" bundle="${lang}"/>" required="" data-error-msg="Enter Email">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -118,8 +150,8 @@
                                         <fmt:message key="signup.username" bundle="${lang}"/>
                                     </label>
 
-                                    <div class="col-sm-4">
-                                        <input class="form-control" id="username" name="username" type="text" required=""
+                                    <div class="col-sm-5">
+                                        <input class="form-control" id="username" name="username" type="text" required="" data-error-msg="Enter an Username"
                                                placeholder="<fmt:message key="signup.username" bundle="${lang}"/>">
                                     </div>
                                 </div>
@@ -128,16 +160,32 @@
                                         <fmt:message key="signup.password" bundle="${lang}"/>
                                     </label>
 
-                                    <div class="col-sm-4">
-                                        <input class="form-control" id="password" name="password" type="text"
-                                               placeholder="<fmt:message key="signup.password" bundle="${lang}"/>" required>
+                                    <div class="col-sm-5">
+                                        <input class="password form-control" id="password" name="password" type="password"
+                                               placeholder="<fmt:message key="signup.password" bundle="${lang}"/>" required="" data-error-msg="Passwords should match!!!">
                                     </div>
-
+<%--
                                     <div class="col-sm-4">
-                                        <input class="form-control" id="rePassword" type="text"
-                                               placeholder="<fmt:message key="signup.password.re" bundle="${lang}"/>" required>
+
+                                    </div>--%>
+                                </div>
+
+                                <%----%>
+
+
+                                <div class="form-group">
+                                    <label for="rePassword" class="col-sm-2 control-label">
+                                        Confirm Password
+                                    </label>
+
+                                    <div class="col-sm-5">
+                                        <input class="form-control" name="rePassword" id="rePassword" type="password"
+                                               placeholder="<fmt:message key="signup.password.re" bundle="${lang}"/>" >
                                     </div>
                                 </div>
+
+
+                                <%----%>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-success"><fmt:message key="signup.create.account" bundle="${lang}"/> </button>
                                     <button type="reset" class="btn btn-warning"><fmt:message key="signup.clear" bundle="${lang}"/></button>

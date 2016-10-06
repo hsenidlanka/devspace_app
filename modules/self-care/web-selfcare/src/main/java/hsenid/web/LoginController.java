@@ -72,6 +72,8 @@ public class LoginController {
     @RequestMapping("/register")
     public String register(HttpServletRequest regRequest) throws JSONException {
 
+        String addressL3 = null;
+
         String title = regRequest.getParameter("title");
         String firstName = regRequest.getParameter("fname");
         String lastName = regRequest.getParameter("lname");
@@ -80,12 +82,18 @@ public class LoginController {
         String password = regRequest.getParameter("password");
         String addressL1 = regRequest.getParameter("address1");
         String addressL2 = regRequest.getParameter("address2");
-        String addressL3 = regRequest.getParameter("address3");
+        addressL3 = regRequest.getParameter("address3");
         String mobile = regRequest.getParameter("mobileNo");
+
+        if (addressL3.length() < 1){
+            addressL3 = null;
+        }
+
+
         String string = "{" + "title" + ":" + title + ","+ "firstName" + ":" + firstName + ","+ "lastName" + ":" + lastName + ","  + "email" + ":" + email + ","+ "addressL1" + ":" + addressL1 + ","+ "addressL2" + ":" + addressL2 + ","+ "addressL3" + ":" + addressL3 +","+  "username" + ":" + username + "," + "password" + ":" + password + "," + "mobile" + ":" + mobile + "}";
         JSONObject jsonObject = new JSONObject(string);
 
-        logger.error(string);
+//        logger.error(string);
 
         try {
             URL url = new URL("http://localhost:2222/pizza-shefu/api/v1.0/customers/register/");
