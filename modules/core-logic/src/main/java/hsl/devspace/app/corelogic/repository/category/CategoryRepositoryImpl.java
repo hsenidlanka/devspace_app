@@ -185,6 +185,11 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
         return mp;
     }
 
+    @Override
+    public List<Map<String, Object>> retrieveSubcatogories(String category) {
+        return null;
+    }
+
     /*Add new category*/
     @Override
     public void createCategory1(Category cat) {

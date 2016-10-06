@@ -56,12 +56,13 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
 
         boolean result;
 
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM sub_category WHERE  name=?",subCategoryName);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM sub_category WHERE  name=?", subCategoryName);
         log.info(mp);
 
         if (mp.size() != 0) {
             result = true;
-        } else result = false;
+        } else
+            result = false;
         log.info(result);
         return result;
     }
@@ -110,6 +111,7 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
     }
 
     /*retrieve subcategory names list in a specific category*/
+    @Override
     public List<Map<String, Object>>  retrieveSubcatogories(String category){
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT name FROM sub_category WHERE category_id=(SELECT id FROM category WHERE NAME =?)",category);
         log.info(mp);
@@ -129,7 +131,6 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
         catch (Exception e){
             transactionManager.rollback(stat);
         }
-
     }
 
     @Override
