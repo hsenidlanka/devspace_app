@@ -26,7 +26,7 @@ public class CategoryController {
     private ItemRepository item;*/
 
 
-   /* @RequestMapping(value = "/add", method = RequestMethod.GET)
+ /*   @RequestMapping(value = "/add", method = RequestMethod.GET)
    public ModelAndView showAddItem(ModelAndView modelAndView){
         Map<String, Object> model = new HashMap<String, Object>();
         List<Map<String, Object>> listCat = categoryRepository.viewCategoryList();
@@ -34,15 +34,6 @@ public class CategoryController {
         model.put("command",new Item());
         return new ModelAndView("addItem", "model", model);
     }*/
-
-
-    /*public ModelAndView showAddItem() {
-        ModelAndView model = new ModelAndView();
-        List<Map<String, Object>> listCat = categoryRepository.viewCategoryList();
-        model.addObject("listCat", listCat);
-        return new ModelAndView("addItem", "command", new Item());
-    }
-*/
 
    /* @RequestMapping(value = "/viewList", method = RequestMethod.GET)
     public ModelAndView getCatList() {
