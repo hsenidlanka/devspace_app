@@ -52,7 +52,7 @@
     </div>
     <div class="panel-body">
 
-      <form:form class="form-horizontal" role="form" id="frmAddItem" action="/admin/items/add_item" method="post">
+      <form:form class="form-horizontal" role="form" id="frmAddItem" action="/admin/items/add_item" method="post" commandName="command">
         <fieldset class="scheduler-border">
           <legend class="scheduler-border">(*) Fields are read only</legend>
 
@@ -65,33 +65,11 @@
 
               <div class="col-xs-5">
 
-                <%--<select name='lists'>
-                  <c:forEach var="list" items="${listCat}">
-                    <option id="${list.key}" value="${list.value.getName()}">${list.value.getName()}</option>
-                  </c:forEach>
-                </select>--%>
-              <%--  <select class="form-control" id="selectCat">
-                  <option value="0">--Select Category--</option>
-                  <option value="pizza">Pizza</option>
-                  <option value="pasta">Pasta</option>
-                  <option value="salad">Salad / Appetizer</option>
-                  <option value="dessert">Dessert</option>
-                  <option value="topping">Topping</option>
-                  <option value="crust">Crust</option>
-                </select>--%>
-
                        <form:select class="form-control" id="selectCat" path="categoryName">
                         <form:option value="-" label="--Select Category--"/>
                          <c:forEach var="list" items="${listCat}">
-                           <option id="${list.key}" value="${list.value.getName()}">${list.value.getName()}</option>
+                           <form:option id="${list.key}" value="${list.get(\"name\")}">${list.get("name")}</form:option>
                          </c:forEach>
-                        <%--<form:options items="${listCat}" />--%>
-                 <%--<form:option value="pizza">Pizza</form:option>
-                        <form:option value="pasta">Pasta</form:option>
-                        <form:option value="salad">Salad / Appetizer</form:option>
-                        <form:option value="dessert">Dessert</form:option>
-                        <form:option value="topping">Topping</form:option>
-                        <form:option value="crust">Crust</form:option>--%>
                       </form:select>
                 <span id="catErr" class="input-group-error"></span>
               </div>
@@ -109,15 +87,17 @@
               </label>
 
               <div class="col-xs-5">
-                  <%-- <form:select class="form-control" id="selectSubCat" path="subCategoryName">
+                   <form:select class="form-control" id="selectSubCat" path="subCategoryName">
                    <form:option value="-" label="--Select sub-category--"/>
-                   <form:options items="${subCats}"/>
-                     <formion value="dpP" >Deep dish Pizza</form:option>
-                      <form:option value="itP">Italiano Pizza</form:option>
+                     <c:forEach var="sublist" items="${listSubCat}">
+                       <form:option id="${sublist.key}" value="${sublist.get(\"name\")}">${sublist.get("name")}</form:option>
+                     </c:forEach>
+                     <%--  <form:option value="dpP" >Deep dish Pizza</form:option>
+                    <form:option value="itP">Italiano Pizza</form:option>
                       <form:option value="gormt">Gourmet</form:option>
                       <form:option value="ny">NY Thin crust</form:option>
-                      <form:option value="bg">Big Pizza</form:option>
-                </form:select>--%>
+                      <form:option value="bg">Big Pizza</form:option>--%>
+                </form:select>
                 <span id="subCatErr" class="input-group-error"><%--<form:errors path="subCategoryName" />--%> </span>
               </div>
 
