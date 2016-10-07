@@ -10,7 +10,7 @@ import java.util.Map;
 public interface PackageRepository {
     int add(hsl.devspace.app.corelogic.domain.Package pack) throws SQLIntegrityConstraintViolationException;
     int delete(String packageName);
-    int changeItemsInPackage(String packageName,String content);
+    int updatePackage(hsl.devspace.app.corelogic.domain.Package updatedPackage);
     int changePrice(String packageName,double price);
     List<Map<String, Object>> viewAll();
 }

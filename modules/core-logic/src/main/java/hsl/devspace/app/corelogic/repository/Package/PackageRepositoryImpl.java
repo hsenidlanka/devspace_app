@@ -49,11 +49,11 @@ public class PackageRepositoryImpl implements PackageRepository  {
         return row;
     }
 
-    /*change items in package((((((to be modified))))))))*/
+    /*update details of package*/
     @Override
-    public int changeItemsInPackage(String packageName,String content) {
-        String sql = "UPDATE package SET content=?  WHERE name = ? ";
-        int row = jdbcTemplate.update(sql, new Object[]{content,packageName});
+    public int updatePackage(Package updatedPackage) {
+        String sql = "UPDATE package SET content=?,price=?,image=? WHERE name = ? ";
+        int row = jdbcTemplate.update(sql, new Object[]{updatedPackage.getContent(),updatedPackage.getPrice(),updatedPackage.getImage(),updatedPackage.getPackName()});
         log.info(row);
         return row;
     }
