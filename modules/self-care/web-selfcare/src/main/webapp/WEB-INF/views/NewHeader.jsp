@@ -57,7 +57,7 @@
                       <h3><label for="username">Username</label></h3>
                   </div>
                   <div class="">
-                      <input id="username" class="form-control" min="3" name="username" required="" type="text" data-error-msg="Valid username required !!!">
+                      <input id="username" class="form-control" min="3" name="username" required="" type="text" data-error-msg="Username required !!!">
                   </div>
 
               </div>

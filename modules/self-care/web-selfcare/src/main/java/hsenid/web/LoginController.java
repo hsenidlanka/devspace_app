@@ -19,7 +19,7 @@ import java.net.URLConnection;
 public class LoginController {
     private final static Logger logger = LogManager.getLogger(LoginController.class);
 
-    String tst=null;
+    String tst = null;
 
     @RequestMapping("login")
     public JSONObject login(HttpServletRequest request) throws JSONException {
@@ -59,13 +59,16 @@ public class LoginController {
             logger.error(status);
             if (status == 200) {
                 logger.error("success");
+            } else if (status == 401) {
+//                return "unathorised";
             }
 
         } catch (Exception e) {
             logger.error("Exception occur. Reason -> " + e.getMessage());
         }
-       JSONObject test = new JSONObject(tst);
-        return test;
+        JSONObject authorizeJson = new JSONObject(tst);
+
+        return authorizeJson;
     }
 
 
@@ -85,12 +88,12 @@ public class LoginController {
         addressL3 = regRequest.getParameter("address3");
         String mobile = regRequest.getParameter("mobileNo");
 
-        if (addressL3.length() < 1){
+        if (addressL3.length() < 1) {
             addressL3 = null;
         }
 
 
-        String string = "{" + "title" + ":" + title + ","+ "firstName" + ":" + firstName + ","+ "lastName" + ":" + lastName + ","  + "email" + ":" + email + ","+ "addressL1" + ":" + addressL1 + ","+ "addressL2" + ":" + addressL2 + ","+ "addressL3" + ":" + addressL3 +","+  "username" + ":" + username + "," + "password" + ":" + password + "," + "mobile" + ":" + mobile + "}";
+        String string = "{" + "title" + ":" + title + "," + "firstName" + ":" + firstName + "," + "lastName" + ":" + lastName + "," + "email" + ":" + email + "," + "addressL1" + ":" + addressL1 + "," + "addressL2" + ":" + addressL2 + "," + "addressL3" + ":" + addressL3 + "," + "username" + ":" + username + "," + "password" + ":" + password + "," + "mobile" + ":" + mobile + "}";
         JSONObject jsonObject = new JSONObject(string);
 
 //        logger.error(string);
@@ -185,8 +188,6 @@ public class LoginController {
 //        return test;
         return "location";
     }
-
-
 
 
 }

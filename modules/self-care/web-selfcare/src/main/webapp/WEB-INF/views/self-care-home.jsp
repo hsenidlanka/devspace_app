@@ -70,7 +70,7 @@
 
                     e.preventDefault();
 //                    alert($('form').validator('check'));
-                    if ($('form').validator('check') <= 2) {
+                    if ($('form').validator('check') <= 3) {
 //                        alert($('form').validator('check'));
                         this.submit();
                     }
