@@ -2,7 +2,7 @@ $(document).ready(function () {
 
         $('#tblItems').bootstrapTable({
             /*method: '',*/
-            url: '../js/data2.json',
+            url: 'https://localhost:8443/admin/items/view/itemTable',
             height: 400,
             striped: true,
             pagination: true,
@@ -60,7 +60,7 @@ $(document).ready(function () {
 function operateFormatter(value, row, index){
     return[
         '<center>',
-        '<a class="edit" href="../pages/editItem.html" title="Edit" id="linkEditItem">',
+        '<a class="edit" href="https://localhost:8443/admin/items/view/" title="Edit" id="linkEditItem">',
         '<i class="glyphicon glyphicon-edit">Edit</i>',
         '</a>&nbsp;&nbsp;&nbsp;&nbsp;',
         '<a class="delete" href="javascript:void(0)" title="Delete" id="linkDeleteItem">',
