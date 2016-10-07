@@ -57,4 +57,26 @@ $(document).ready(function () {
 
 
 
+
+        $("#selectCat").change(function(){
+            var categoryNm = $(this).val();
+            $.ajax({
+                type: "POST",
+                url: "https://localhost:8443/admin/items/getSubcats",
+                success: function(data){
+                    var slctSubcat = $("#selectSubCat"), option= "";
+                    slctSubcat.empty();
+
+                    for(var sb =0; sb<data.length; sb++){
+                        option = option + "<option value='" + data[sb].name + "'>" +data[sb].name + "</option>";
+                    }
+                    slctSubcat.append(option);
+                },
+                error:function(){
+alert("error");
+                }
+            });
+
+        });
+
 })

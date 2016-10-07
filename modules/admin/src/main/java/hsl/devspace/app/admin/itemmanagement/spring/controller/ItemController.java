@@ -1,17 +1,15 @@
 package hsl.devspace.app.admin.itemmanagement.spring.controller;
 
+import hsl.devspace.app.corelogic.domain.Category;
 import hsl.devspace.app.corelogic.domain.Item;
 import hsl.devspace.app.corelogic.repository.category.CategoryRepository;
-import hsl.devspace.app.corelogic.repository.category.SubCategoryRepositoryImpl;
 import hsl.devspace.app.corelogic.repository.item.ItemRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.sql.SQLIntegrityConstraintViolationException;
@@ -31,21 +29,15 @@ public class ItemController {
     private CategoryRepository categoryRepository;
 
 
-    @Autowired
-    private SubCategoryRepositoryImpl subCategoryRepository;
-
     /**
      * Add new item view
      */
     //For viewing the add item form
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String showAddItem(Model model) {
+
         List<Map<String, Object>> listCat = categoryRepository.viewCategoryList();
         model.addAttribute("listCat",listCat);
-
-        List<Map<String, Object>> listSubCat = subCategoryRepository.retrieveSubcatogories(String.valueOf(listCat));
-        model.addAttribute("listSubCat", listSubCat);
-        model.addAttribute("command", new Item());
         return "addItem";
     }
 
@@ -121,4 +113,13 @@ public class ItemController {
         ModelAndView model = new ModelAndView();
         model.setViewName("");
     }*/
+
+
+
+    //controller method to get relevant subcategory
+    @RequestMapping(value="/getSubcats",method=RequestMethod.POST)
+    public @ResponseBody List<Map<String, Object>> getSubcatList(@ModelAttribute("categoryNm") Category categoryNm){
+
+        return categoryRepository.retrieveSubcatogories(categoryNm.getCategoryName());
+    }
 }

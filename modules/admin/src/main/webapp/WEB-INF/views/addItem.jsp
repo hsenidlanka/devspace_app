@@ -65,7 +65,7 @@
 
               <div class="col-xs-5">
 
-                       <form:select class="form-control" id="selectCat" path="categoryName">
+                      <form:select class="form-control" id="selectCat" path="categoryName">
                         <form:option value="-" label="--Select Category--"/>
                          <c:forEach var="list" items="${listCat}">
                            <form:option id="${list.key}" value="${list.get(\"name\")}">${list.get("name")}</form:option>
@@ -83,21 +83,16 @@
           <div class="form-group">
             <div class="row">
               <label class="col-xs-3 control-label">
-                Sub-category
+                Sub-category<div id="output"></div>
               </label>
 
               <div class="col-xs-5">
-                   <form:select class="form-control" id="selectSubCat" path="subCategoryName">
+                <select class="form-control" id="selectSubCat">
+                  <%--<option value="-" label="--Select sub-category--"></option>--%>
+                </select>
+                   <%--<form:select class="form-control" id="selectSubCat" path="subCategoryName">
                    <form:option value="-" label="--Select sub-category--"/>
-                     <c:forEach var="sublist" items="${listSubCat}">
-                       <form:option id="${sublist.key}" value="${sublist.get(\"name\")}">${sublist.get("name")}</form:option>
-                     </c:forEach>
-                     <%--  <form:option value="dpP" >Deep dish Pizza</form:option>
-                    <form:option value="itP">Italiano Pizza</form:option>
-                      <form:option value="gormt">Gourmet</form:option>
-                      <form:option value="ny">NY Thin crust</form:option>
-                      <form:option value="bg">Big Pizza</form:option>--%>
-                </form:select>
+                </form:select>--%>
                 <span id="subCatErr" class="input-group-error"><%--<form:errors path="subCategoryName" />--%> </span>
               </div>
 
