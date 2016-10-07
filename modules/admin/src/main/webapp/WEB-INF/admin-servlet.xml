@@ -42,6 +42,10 @@
         <property name="dataSource" ref="productionDataSource"/>
         <property name="transactionManager" ref="transactionManager"/>
     </bean>
+    <bean id="customerRepository" class="hsl.devspace.app.corelogic.repository.user.UserRepositoryImpl">
+        <property name="dataSource" ref="productionDataSource"/>
+        <property name="transactionManager" ref="transactionManager"/>
+    </bean>
     <bean id="itemRepository" class="hsl.devspace.app.corelogic.repository.item.ItemRepositoryImpl">
         <property name="dataSource" ref="productionDataSource"/>
         <property name="transactionManager" ref="transactionManager"/>

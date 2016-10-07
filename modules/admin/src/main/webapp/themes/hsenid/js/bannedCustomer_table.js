@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     $('#tableBannedcustomer').bootstrapTable({
 
-        url: '../js/bannedCustomer.json',
+        url: 'https://localhost:8443/admin/users/view/bannedcustomerTable',
         height: 375,
         pagination: true,
         pageSize: 7,
@@ -11,35 +11,32 @@ $(document).ready(function () {
         minimumCountColumns: 3,
         columns: [{
             //field: 'id',
-            field:'ID',
+            field:'id',
             title: 'ID :',
             sortable: true,
             align:'left'
         },{
-            field: 'Username',
+            field: 'username',
             title: 'Username :',
             sortable: true,
             align:'left',
             searchable:true
         }, {
-            field: 'f_name',
+            field: 'first_name',
             title: 'First Name :',
             align:'left',
             sortable: true
         }, {
-            field: 'l_name',
-            title: 'Last Name :',
-            align:'left',
-            sortable: true
-        },  {
-            field: 'blockedDate',
-            title: 'Blocked Date :',
-            sortable: true,
+            field: 'mobile',
+            title: 'Phone No :',
             align:'left'
         }, {
-            field: 'livingArea',
-            title: 'Living Area:',
-            sortable: true,
+            field: 'email',
+            title: 'Email :',
+            align:'left'
+        }, {
+            field: 'address_line3',
+            title: 'City:',
             align:'left'
         }, {
                 field: 'Options',

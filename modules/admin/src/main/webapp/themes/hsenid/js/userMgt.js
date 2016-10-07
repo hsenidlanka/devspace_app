@@ -177,7 +177,7 @@ function passwordsEqual(fld1,fld2) {
 
 
 <!--javascript to check the availability of the username in the database are equal -->
-$(document).ready(function(){
+/*$(document).ready(function(){
     $("#username_admin").change(function(){
         var uname = $(this).val();
         $.ajax({
@@ -185,10 +185,11 @@ $(document).ready(function(){
             url: "https://localhost:8443/admin/users/uniqueUsername",
             data: {"uname": uname},
             success: function(msg){
-            /*    if(msg == 0)
+    if(msg == 0)
                     alert("OK");
                 else
-                alert("User name exists !... try another");*/
+                alert("User name exists !... try another");
+
                 alert(msg + uname);
 
 
@@ -199,9 +200,13 @@ $(document).ready(function(){
         });
 
     });
-});
+});*/
+/*
+function popup() {
+    window.open("https://localhost:8443/admin/users/add", 'window', 'width=200,height=100');
+}
 
-/*function doAjaxPost(){
+function doAjaxPost(){
 
     var  name= $('#fname').val();
     $.ajax({
@@ -217,7 +222,8 @@ $(document).ready(function(){
         }
 
     });
-}*/
+}
+*/
 
 
 

@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     $('#tableStaff').bootstrapTable({
 
-        url: '../js/customer.json',
+        url: 'https://localhost:8443/admin/users/view/staffTable',
         height: 350,
         pagination: true,
         pageSize: 8,
@@ -11,35 +11,38 @@ $(document).ready(function () {
         minimumCountColumns: 3,
         columns: [{
             //field: 'id',
-            field:'ID',
+            field:'id',
             title: 'ID :',
             sortable: true,
             align:'left'
         },{
-            field: 'Username',
+            field: 'username',
             title: 'Username :',
             sortable: true,
             align:'left',
             searchable:true
         }, {
-            field: 'f_name',
+            field: 'first_name',
             title: 'First Name :',
             align:'left',
             sortable: true
         }, {
-            field: 'l_name',
-            title: 'Last Name :',
-            align:'left',
-            sortable: true
-        }, {
             field: 'mobile',
-            title: 'Phone No :',
+            title: 'Mobile :',
             align:'left'
         }, {
             field: 'designation',
             title: 'Designation :',
             align:'left'
-        },  {
+        }, {
+            field: 'department',
+            title: 'Department:',
+            align:'left'
+        },{
+            field: 'branch',
+            title: 'Branch:',
+            align:'left'
+        }, {
             field: 'Options',
             title: 'Operations :',
             align: 'center',
@@ -54,14 +57,18 @@ function operateFormatter2(value, row, index) {
         '<a class="likes" href="../pages/userStaff_edit.html" title="LikeStaff" >',
         '<i class="glyphicon glyphicon-edit">Edit</i>',
         '</a>  ',
-        '<a class="remove" href="javascript:void(0)" title="Delete">',
+        '<a class="removes" href="javascript:void(0)" title="Delete">',
         '<i class="glyphicon glyphicon-remove">Block</i>',
         '</a>'
     ].join('');
 }
 
 window.operateEvents2 = {
-      'click .remove': function () {
+      'click .removes': function (e, value, row, index) {
+          var data2 = JSON.stringify(row);
+          var objc2 = JSON.parse(data2);
+          $('#lblBlockStaffId').text("Username :"+objc2["username"]);
+          $('#lblBlockStaffName').text("Name :"+objc2["first_name"]);
         $('#removeStaffModal').modal({show:true});
 
         //alert('You click remove action, row: ');

@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     $('#tableBannedstaff').bootstrapTable({
 
-        url: '../js/bannedStaff.json',
+        url: 'https://localhost:8443/admin/users/view/bannedstaffTable',
         height: 375,
         pagination: true,
         pageSize: 7,
@@ -11,30 +11,32 @@ $(document).ready(function () {
         minimumCountColumns: 3,
         columns: [{
             //field: 'id',
-            field:'ID',
+            field:'id',
             title: 'ID :',
             sortable: true,
             align:'left'
         },{
-            field: 'Username',
+            field: 'username',
             title: 'Username :',
             sortable: true,
             align:'left',
             searchable:true
         }, {
-            field: 'f_name',
+            field: 'first_name',
             title: 'First Name :',
             align:'left',
             sortable: true
-        }, {
-            field: 'l_name',
-            title: 'Last Name :',
-            align:'left',
-            sortable: true
         },  {
-            field: 'blockedDate',
-            title: 'Blocked Date :',
-            sortable: true,
+            field: 'mobile',
+            title: 'Mobile :',
+            align:'left'
+        }, {
+            field: 'designation',
+            title: 'Designation :',
+            align:'left'
+        }, {
+            field: 'department',
+            title: 'Department:',
             align:'left'
         }, {
             field: 'branch',
