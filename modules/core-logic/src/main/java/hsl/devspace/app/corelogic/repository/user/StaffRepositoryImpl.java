@@ -132,15 +132,17 @@ public class StaffRepositoryImpl implements UserRepository {
     public boolean loginAuthenticate(String username, String password) {
 
         boolean result = false;
+        List<Map<String, Object>> mp1= jdbcTemplate.queryForList("SELECT status FROM customer WHERE BINARY username = ?",username);
+if (mp1.get(0).get("status")=="active") {
+    String sql = "SELECT count(*) FROM staff WHERE BINARY username = ? AND BINARY password =? ";
 
-        String sql = "SELECT count(*) FROM staff WHERE BINARY username = ? AND BINARY password =? ";
+    int count = jdbcTemplate.queryForObject(
+            sql, new Object[]{user.getUsername(), (user.getPassword())}, Integer.class);
 
-        int count = jdbcTemplate.queryForObject(
-                sql, new Object[]{user.getUsername(), (user.getPassword())}, Integer.class);
-
-        if (count > 0) {
-            result = true;
-        }
+    if (count > 0) {
+        result = true;
+    }
+}
         log.info(result);
         return result;
     }
