@@ -2,6 +2,7 @@ package hsl.devspace.app.coreserver.resources;
 
 import hsl.devspace.app.corelogic.repository.category.CategoryRepositoryImpl;
 import hsl.devspace.app.corelogic.repository.category.SubCategoryRepositoryImpl;
+import hsl.devspace.app.corelogic.repository.item.ItemRepositoryImpl;
 import hsl.devspace.app.coreserver.common.Context;
 import hsl.devspace.app.coreserver.model.SuccessMessage;
 import org.apache.logging.log4j.LogManager;
@@ -26,6 +27,7 @@ public class ItemService {
     ApplicationContext context = Context.appContext;
     CategoryRepositoryImpl categoryRepository = (CategoryRepositoryImpl) context.getBean("categoryRepoImpl");
     SubCategoryRepositoryImpl subcategoryRepository = (SubCategoryRepositoryImpl) context.getBean("subCategoryRepoImpl");
+    ItemRepositoryImpl itemRepository = (ItemRepositoryImpl) context.getBean("itemRepoImpl");
 
     // Retrieve all items of a category
     @GET
@@ -83,6 +85,41 @@ public class ItemService {
                     jsonObject.put("type", map.get("type").toString());
                     jsonObject.put("description", map.get("description").toString());
                     jsonObject.put("imagePath", map.get("image").toString());
+                    successMessage.addData(jsonObject);
+                }
+            } else {
+                successMessage.setMessage("no items to retrieve");
+            }
+        } catch (NullPointerException e) {
+            successMessage.setMessage("no items to retrieve");
+            return Response.status(Response.Status.OK).entity(successMessage)
+                    .header("Access-Control-Allow-Origin", "*")
+                    .build();
+        }
+        return Response.status(Response.Status.OK).entity(successMessage)
+                .header("Access-Control-Allow-Origin", "*")
+                .build();
+    }
+
+    // Retrieve top rated items of a category
+    @GET
+    @Path("/category/{categoryName}/toprated")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getTopItemsByCategory(@PathParam("categoryName") String categoryName, @javax.ws.rs.core.Context UriInfo uriInfo) {
+        SuccessMessage successMessage = new SuccessMessage();
+        successMessage.setCode(Response.Status.OK.getStatusCode());
+        successMessage.setStatus("success");
+        String url = uriInfo.getAbsolutePath().toString();
+        successMessage.addLink(url, "self");
+        try {
+            List<Map<String, Object>> categoryList = itemRepository.getTopRatedItemsOfACategory(categoryName);
+            if (categoryList.size() > 0) {
+                successMessage.setMessage("top rated items for category " + categoryName + " retrieved");
+                for (Map<String, Object> map : categoryList) {
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("name", map.get("item_name").toString());
+                    jsonObject.put("subCategory", map.get("subcategory_name").toString());
                     successMessage.addData(jsonObject);
                 }
             } else {
