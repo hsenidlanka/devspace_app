@@ -30,181 +30,239 @@
 
     <script>
 
-        $( document ).ready(function() {
-
+        $(document).ready(function () {
 
 //            registration validation starts
             $(function () {
-                $('form').validator({validHandlers: {
+                $('form').validator({
+                    validHandlers: {
 
-                    '.mobileno':function(input) {
-//                        alert(input.val());
-                        return /[0-9]{10}$/.test(input.val());
+                        '.mobileno': function (input) {
+                            return /^[0-9]{10}$/.test(input.val());
 
-                    },
-                    '.password':function(input) {
-                        var bla = $('#rePassword').val();
-//                        alert(input.val() == bla);
-//                        input.val() ==
-//                        alert("test password");
-                        return input.val() == bla;
+                        },
+                        '.password': function (input) {
+                            var bla = $('#rePassword').val();
+                            return input.val() == bla;
 
+                        }
+                        /*,
+                        '.username': function (input) {
+
+//                            $("#password").off("blur");
+                            var uname = input.val();
+                            alert("username " + uname);
+                            var urlSet = "http://localhost:2222/pizza-shefu/api/v1.0/customers/" + uname + "/";
+
+                            $.ajax({
+
+                                url: urlSet,
+
+                                // Whether this is a POST or GET request
+                                type: "GET",
+
+                                // The type of data we expect back
+                                dataType: "json",
+                                success: function (reply) {
+
+                                    $.each((reply.data).Apps, function(i, el) {
+                                        alert(el.groups.length);
+                                    });
+//
+                                },
+                                error: function (errorReply) {
+                                    console.log(errorReply);
+                                }
+                            })
+                            return false;
+                        }*/
                     }
-
-                }
-
                 });
 
-//alert(3 != 4);
-               /* $('form').validator({validHandlers: {
+                /* $('form').validator({validHandlers: {
 
-                    '.password':function(input) {
-                        alert("password");
-                        return (input.val()).match(document.getElementById("rePassword").value);
-                    },
+                 '.password':function(input) {
+                 alert("password");
+                 return (input.val()).match(document.getElementById("rePassword").value);
+                 },
 
-                }
-                });*/
+                 }
+                 });*/
 
-                $('form').submit(function (e) {
+//                $("#submitBtn").off("submit");
 
+
+
+
+/*
+
+*/
+
+
+                /*$('form').submit(function (e) {
+//                    alert("form submit");
                     e.preventDefault();
+
+
 //                    alert($('form').validator('check'));
-                    if ($('form').validator('check') <= 3) {
+                    if ($('form').validator('check') <= 2) {
 //                        alert($('form').validator('check'));
+
                         this.submit();
                     }
-                })
-            })
+                })*/
+            });
 
+
+
+
+            $("#submitBtn").off('click');
+
+            $("#submitBtn").click(function () {
+                if ($('form').validator('check') <= 3) {
+
+                    $.ajax({
+
+                        url: "register",
+                        type: 'post',
+                        data: $('#adduser_form').serialize(),
+                        success: function (result) {
+                            alert("success");
+                        },
+                        error: function (xhr, status, error) {
+                            var err = eval("(" + xhr.responseText + ")");
+                            alert(err.Message);
+                        }
+                    })
+
+                }
+
+            });
 //            registration validation end
 
 
+            /* $("#btn-submit").click(function (e) {
+             //                alert("The paragraph was clicked.");
+             e.preventDefault();
+             $(function () {
+             $('form').validator({
+             validHandlers: {
+             '.mobileno': function (input) {
+             //may do some formatting before validating
+             input.val(input.val().toUpperCase());
+             //return true if valid
+             return input.val() === 'JQUERY' ? true : false;
+             }
+             }
+             });
+
+             if ($('form').validator('check') < 1) {
+
+             var datastring = $("#loginForm").serialize();
+             //                        alert(datastring);
+             $.ajax({
+             type: "POST",
+             url: "/ltest",
+             data: datastring,
+             dataType: "json",
+             success: function(data) {
+             //var obj = jQuery.parseJSON(data); if the dataType is not specified as json uncomment this
+             // do what ever you want with the server response
+             alert("passed")
+             },
+             error: function() {
+             alert('error handing here');
+             }
+             });
+
+             }
 
 
+             })
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-           /* $("#btn-submit").click(function (e) {
-//                alert("The paragraph was clicked.");
-                e.preventDefault();
-                $(function () {
-                    $('form').validator({
-                        validHandlers: {
-                            '.mobileno': function (input) {
-                                //may do some formatting before validating
-                                input.val(input.val().toUpperCase());
-                                //return true if valid
-                                return input.val() === 'JQUERY' ? true : false;
-                            }
-                        }
-                    });
-
-                    if ($('form').validator('check') < 1) {
-
-                        var datastring = $("#loginForm").serialize();
-//                        alert(datastring);
-                        $.ajax({
-                            type: "POST",
-                            url: "/ltest",
-                            data: datastring,
-                            dataType: "json",
-                            success: function(data) {
-                                //var obj = jQuery.parseJSON(data); if the dataType is not specified as json uncomment this
-                                // do what ever you want with the server response
-                                alert("passed")
-                            },
-                            error: function() {
-                                alert('error handing here');
-                            }
-                        });
-
-                    }
-
-
-                })
-
-
-            });*/
+             });*/
             /*      $('form').click(function(){
              //           alert($("#login-username").val());
              alert($('form').validator('check'));
              //            $('form').validator('input');
 
              });*/
-           /* $(function () {
-                $('form').validator({
-                    validHandlers: {
-                        '.mobileno': function (input) {
-                            //may do some formatting before validating
-                            input.val(input.val().toUpperCase());
-                            //return true if valid
-                            return input.val() === 'JQUERY' ? true : false;
-                        }
-                    }
-                });
+            /* $(function () {
+             $('form').validator({
+             validHandlers: {
+             '.mobileno': function (input) {
+             //may do some formatting before validating
+             input.val(input.val().toUpperCase());
+             //return true if valid
+             return input.val() === 'JQUERY' ? true : false;
+             }
+             }
+             });
 
-               /!* $('form').submit(function (e) {
-//                    var bla = $('#login-username').val();
-                    e.preventDefault();
-//                    alert($('form').validator('check'));
-//                     alert(bla);
-                     /!*alert("test")*!/
-                     if ($('form').validator('check') < 1) {
-//                        this.submit();
-                         $.ajax({
-                             type: "POST",
-                             url: "login",
-                             data: $('#loginForm').serialize(),
-                             success: function (result) {
-                                 /!*if ($.trim(result) == 1) {
-                                     $('#addUserPopup').modal('hide');
-                                     $('#addUserSuccess').modal('show');
-                                     $('#register').trigger('reset');
-                                 } else {
-                                     $('#addUserPopup').modal('hide');
-                                     $('#addUserFail').modal('show');
-                                 }*!/
-                                 alert("reply came");
-                             },
-                             error: function (data) {
-                                 console.log(data);
-//                                 alert(data);
-                             }
+             /!* $('form').submit(function (e) {
+             //                    var bla = $('#login-username').val();
+             e.preventDefault();
+             //                    alert($('form').validator('check'));
+             //                     alert(bla);
+             /!*alert("test")*!/
+             if ($('form').validator('check') < 1) {
+             //                        this.submit();
+             $.ajax({
+             type: "POST",
+             url: "login",
+             data: $('#loginForm').serialize(),
+             success: function (result) {
+             /!*if ($.trim(result) == 1) {
+             $('#addUserPopup').modal('hide');
+             $('#addUserSuccess').modal('show');
+             $('#register').trigger('reset');
+             } else {
+             $('#addUserPopup').modal('hide');
+             $('#addUserFail').modal('show');
+             }*!/
+             alert("reply came");
+             },
+             error: function (data) {
+             console.log(data);
+             //                                 alert(data);
+             }
 
-                         });
-                     }
-                })*!/
-            })*/
+             });
+             }
+             })*!/
+             })*/
 
         });
-
-
     </script>
 
 
+<%--    <script>
+        $(document).ready(function(){
+            $("#username").blur(function(){
+                var username = $("#username").val();
+//                alert(username);
+                var urlSet = "http://localhost:2222/pizza-shefu/api/v1.0/customers/"+username+"/";
+
+                $.ajax({
+
+                    url: urlSet,
+
+                    // Whether this is a POST or GET request
+                    type: "GET",
+
+                    // The type of data we expect back
+//                    dataType: "json",
+                    success: function (data2) {
+                        alert(data2)
+                    },
+                    error: function (data) {
+                        console.log(data);
+                    }
+                })
+            });;
+        });
+    </script>--%>
 
 </head>
 <!-------Header------------------------------------->

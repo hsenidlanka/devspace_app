@@ -6,6 +6,7 @@ import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
@@ -72,7 +73,7 @@ public class LoginController {
     }
 
 
-    @RequestMapping("/register")
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String register(HttpServletRequest regRequest) throws JSONException {
 
         String addressL3 = null;

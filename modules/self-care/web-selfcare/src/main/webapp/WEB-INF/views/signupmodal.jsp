@@ -27,7 +27,7 @@
                         <%--         Add user form      --%>
 
                         <div class="panel-body">
-                            <form novalidate="novalidate" role="form" id="adduser_form" name="adduser_form" action="register" method="post" class="form form-horizontal">
+                            <form novalidate="novalidate" role="form" id="adduser_form" name="adduser_form" action="#" class="form form-horizontal">
 
                                 <div class="form-group">
 
@@ -130,7 +130,7 @@
 
                                         <div class="col-sm-5">
                                             <input class="mobileno form-control" id="mobileNo" name="mobileNo" type="text"
-                                                   placeholder="+94-XXXXXXXXXX" pattern="[0-9]{10}" required="" data-error-msg="Enter Mobile No">
+                                                   placeholder="0-XXXXXXXXXX" pattern="/^0[0-9]{9}$/" required="" data-error-msg="Enter Mobile No">
                                         </div>
 
                                     </div>
@@ -151,7 +151,7 @@
                                     </label>
 
                                     <div class="col-sm-5">
-                                        <input class="form-control" id="username" name="username" type="text" required="" data-error-msg="Enter an Username"
+                                        <input class="username form-control" id="username" name="username" type="text" required="" data-error-msg="Enter an Username"
                                                placeholder="<fmt:message key="signup.username" bundle="${lang}"/>">
                                     </div>
                                 </div>
@@ -164,10 +164,8 @@
                                         <input class="password form-control" id="password" name="password" type="password"
                                                placeholder="<fmt:message key="signup.password" bundle="${lang}"/>" required="" data-error-msg="Passwords should match!!!">
                                     </div>
-<%--
-                                    <div class="col-sm-4">
 
-                                    </div>--%>
+
                                 </div>
 
                                 <%----%>
@@ -187,7 +185,7 @@
 
                                 <%----%>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-success"><fmt:message key="signup.create.account" bundle="${lang}"/> </button>
+                                    <button id="submitBtn" name="submitBtn" class="btn btn-success"><fmt:message key="signup.create.account" bundle="${lang}"/> </button>
                                     <button type="reset" class="btn btn-warning"><fmt:message key="signup.clear" bundle="${lang}"/></button>
 
                                 </div>
