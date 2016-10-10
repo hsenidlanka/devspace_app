@@ -55,6 +55,8 @@ public class PackageService {
         } else {
             successMessage.setMessage("no packages to retrieve");
         }
-        return Response.status(Response.Status.OK).entity(successMessage).build();
+        return Response.status(Response.Status.OK).entity(successMessage)
+                .header("Access-Control-Allow-Origin", "*")
+                .build();
     }
 }
