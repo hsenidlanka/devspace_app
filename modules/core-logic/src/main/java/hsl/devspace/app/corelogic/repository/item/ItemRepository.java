@@ -21,4 +21,5 @@ public interface ItemRepository {
     List<Map<String, Object>> getTopRatedItemsFromAllCategories();
     List<Map<String, Object>> getTopRatedItemsOfACategory(String categoryName);
     List<Map<String, Object>> getAllCategories();
+    List<Map<String, Object>> viewAllItemDetails();
 }

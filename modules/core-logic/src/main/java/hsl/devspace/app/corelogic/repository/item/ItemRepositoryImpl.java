@@ -162,6 +162,17 @@ public class ItemRepositoryImpl implements ItemRepository {
         return mp;
     }
 
+    /*retrieve all item details as a view of selected fields*/
+    @Override
+    public List<Map<String, Object>> viewAllItemDetails() {
+        int row = jdbcTemplate.update("CREATE VIEW  item_details AS SELECT i.id,i.name AS item_name,c.name AS category_name," +
+                "s.name AS sub_category_name,t.name AS type,i.description,i.image FROM item i INNER JOIN sub_category s " +
+                "ON i.sub_category_id=s.id INNER JOIN type t ON i.type_id=t.type_id INNER JOIN category c ON c.id=s.category_id");
+        List<Map<String, Object>> itemDetails = jdbcTemplate.queryForList("SELECT * FROM item_details ");
+        log.info(itemDetails);
+        return itemDetails;
+    }
+
     /*retrieve top rated items from each category*/
     @Override
     public List<Map<String, Object>> getTopRatedItemsFromAllCategories() {
@@ -178,4 +189,8 @@ public class ItemRepositoryImpl implements ItemRepository {
         log.info(mp);
         return mp;
     }
-}
+
+
+    }
+
+
