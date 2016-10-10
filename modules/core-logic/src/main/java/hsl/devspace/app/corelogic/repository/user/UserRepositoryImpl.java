@@ -97,15 +97,25 @@ public class UserRepositoryImpl implements UserRepository {
     public boolean loginAuthenticate(String username,String password) {
 
         boolean result ;
+        List<Map<String, Object>> mp1= jdbcTemplate.queryForList("SELECT status FROM customer WHERE BINARY username = ?",username);
+       log.info(mp1.get(0).get("status"));
+        if (mp1.get(0).get("status").toString()=="active") {
+            List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE BINARY username = ? AND BINARY password =sha1(?)", username, password);
+            log.info(mp);
 
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE BINARY username = ? AND BINARY password =sha1(?)", username,password);
-        log.info(mp);
+            if (mp.size() != 0) {
+                log.info(mp.get(0));
+                result = true;
+            }
+        else result=false;
 
-        if (mp.size()!=0 ) {
-            result = true;
         }
         else result=false;
+
+
+
         log.info(result);
+
         return result;
     }
 
