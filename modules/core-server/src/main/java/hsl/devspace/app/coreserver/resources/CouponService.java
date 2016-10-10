@@ -47,7 +47,9 @@ public class CouponService {
             String url = uriInfo.getAbsolutePath().toString();
             successMessage.addLink(url, "self");
 
-            response = Response.status(Response.Status.CREATED).entity(successMessage).build();
+            response = Response.status(Response.Status.CREATED).entity(successMessage)
+                    .header("Access-Control-Allow-Origin", "*")
+                    .build();
         } else {
             throw new WebApplicationException(400);
         }
@@ -77,7 +79,9 @@ public class CouponService {
                 String url = uriInfo.getAbsolutePath().toString();
                 successMessage.addLink(url, "self");
 
-                response = Response.status(Response.Status.CREATED).entity(successMessage).build();
+                response = Response.status(Response.Status.CREATED).entity(successMessage)
+                        .header("Access-Control-Allow-Origin", "*")
+                        .build();
             } else {
                 throw new WebApplicationException(401);
             }

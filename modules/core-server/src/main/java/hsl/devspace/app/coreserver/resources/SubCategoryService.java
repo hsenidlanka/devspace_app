@@ -51,7 +51,9 @@ public class SubCategoryService {
         } else {
             successMessage.setMessage("no sub-categories to retrieve");
         }
-        return Response.status(Response.Status.OK).entity(successMessage).build();
+        return Response.status(Response.Status.OK).entity(successMessage)
+                .header("Access-Control-Allow-Origin", "*")
+                .build();
     }
 
     // Retrieve sub-categories of a specific category
@@ -77,6 +79,8 @@ public class SubCategoryService {
         } else {
             successMessage.setMessage("no sub-categories to retrieve");
         }
-        return Response.status(Response.Status.OK).entity(successMessage).build();
+        return Response.status(Response.Status.OK).entity(successMessage)
+                .header("Access-Control-Allow-Origin", "*")
+                .build();
     }
 }

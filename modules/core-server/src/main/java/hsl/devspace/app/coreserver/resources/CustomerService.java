@@ -57,7 +57,9 @@ public class CustomerService {
             successMessage.addLink(url, "self");
             successMessage.addLink(BASE_URL + "customers/" + user.getUsername(), "profile");
 
-            response = Response.status(Response.Status.CREATED).entity(successMessage).build();
+            response = Response.status(Response.Status.CREATED).entity(successMessage)
+                    .header("Access-Control-Allow-Origin", "*")
+                    .build();
         } else {
             throw new WebApplicationException(400);
         }
@@ -86,7 +88,9 @@ public class CustomerService {
             String url = uriInfo.getAbsolutePath().toString();
             successMessage.addLink(url, "self");
             successMessage.addLink(BASE_URL + "customers/" + user.getUsername(), "profile");
-            response = Response.status(Response.Status.OK).entity(successMessage).build();
+            response = Response.status(Response.Status.OK).entity(successMessage)
+                    .header("Access-Control-Allow-Origin", "*")
+                    .build();
         } else {
             throw new WebApplicationException(401);
         }
@@ -125,6 +129,8 @@ public class CustomerService {
         } else {
             successMessage.setMessage("no customer data to retrieve");
         }
-        return Response.status(Response.Status.OK).entity(successMessage).build();
+        return Response.status(Response.Status.OK).entity(successMessage)
+                .header("Access-Control-Allow-Origin", "*")
+                .build();
     }
 }

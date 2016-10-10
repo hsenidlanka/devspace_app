@@ -57,7 +57,9 @@ public class ItemService {
             successMessage.setMessage("no items to retrieve");
             return Response.status(Response.Status.OK).entity(successMessage).build();
         }
-        return Response.status(Response.Status.OK).entity(successMessage).build();
+        return Response.status(Response.Status.OK).entity(successMessage)
+                .header("Access-Control-Allow-Origin", "*")
+                .build();
     }
 
     // Retrieve all items of a sub-category
@@ -88,8 +90,12 @@ public class ItemService {
             }
         } catch (NullPointerException e) {
             successMessage.setMessage("no items to retrieve");
-            return Response.status(Response.Status.OK).entity(successMessage).build();
+            return Response.status(Response.Status.OK).entity(successMessage)
+                    .header("Access-Control-Allow-Origin", "*")
+                    .build();
         }
-        return Response.status(Response.Status.OK).entity(successMessage).build();
+        return Response.status(Response.Status.OK).entity(successMessage)
+                .header("Access-Control-Allow-Origin", "*")
+                .build();
     }
 }

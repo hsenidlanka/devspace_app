@@ -50,6 +50,8 @@ public class CategoryService {
         } else {
             successMessage.setMessage("no categories to retrieve");
         }
-        return Response.status(Response.Status.OK).entity(successMessage).build();
+        return Response.status(Response.Status.OK).entity(successMessage)
+                .header("Access-Control-Allow-Origin", "*")
+                .build();
     }
 }
