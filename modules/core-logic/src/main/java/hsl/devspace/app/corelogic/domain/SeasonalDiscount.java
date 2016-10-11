@@ -45,4 +45,13 @@ public class SeasonalDiscount {
 
     public SeasonalDiscount() {
     }
+
+    @Override
+    public String toString() {
+        return "SeasonalDiscount{" +
+                "rate=" + rate +
+                ", startDate=" + startDate +
+                ", expireDate=" + expireDate +
+                '}';
+    }
 }

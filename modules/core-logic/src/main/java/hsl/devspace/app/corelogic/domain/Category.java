@@ -9,6 +9,15 @@ public class Category {
     private String creator;
     private String subCategoryName;
     private int category_id;
+    private int subCategoryId;
+
+    public int getSubCategoryId() {
+        return subCategoryId;
+    }
+
+    public void setSubCategoryId(int subCategoryId) {
+        this.subCategoryId = subCategoryId;
+    }
 
     public String getCategoryName() {
         return categoryName;
@@ -65,5 +74,17 @@ public class Category {
         this.description=description;
         this.creator=creator;
         this.categoryName=categoryName;
+    }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "categoryName='" + categoryName + '\'' +
+                ", description='" + description + '\'' +
+                ", creator='" + creator + '\'' +
+                ", subCategoryName='" + subCategoryName + '\'' +
+                ", category_id=" + category_id +
+                ", subCategoryId=" + subCategoryId +
+                '}';
     }
 }

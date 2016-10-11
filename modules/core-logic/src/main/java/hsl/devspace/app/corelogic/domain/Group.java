@@ -37,4 +37,13 @@ public class Group {
         this.description = description;
         this.moduleName = moduleName;
     }
+
+    @Override
+    public String toString() {
+        return "Group{" +
+                "groupName='" + groupName + '\'' +
+                ", description='" + description + '\'' +
+                ", moduleName='" + moduleName + '\'' +
+                '}';
+    }
 }

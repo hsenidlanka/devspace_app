@@ -27,4 +27,12 @@ public class Permission {
         this.description = description;
         this.permissionName = permissionName;
     }
+
+    @Override
+    public String toString() {
+        return "Permission{" +
+                "permissionName='" + permissionName + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

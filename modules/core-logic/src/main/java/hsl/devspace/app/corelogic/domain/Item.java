@@ -121,4 +121,19 @@ public class Item {
         this.price = price;
         this.size = size;
     }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "itemName='" + itemName + '\'' +
+                ", price=" + price +
+                ", description='" + description + '\'' +
+                ", size='" + size + '\'' +
+                ", type='" + type + '\'' +
+                ", image='" + image + '\'' +
+                ", subCategoryName='" + subCategoryName + '\'' +
+                ", itemId=" + itemId +
+                ", categoryName='" + categoryName + '\'' +
+                '}';
+    }
 }

@@ -54,4 +54,14 @@ public class Coupon {
         this.expireDate=expireDate;
         this.customerMobile=customerMobile;
     }
+
+    @Override
+    public String toString() {
+        return "Coupon{" +
+                "couponCode='" + couponCode + '\'' +
+                ", rate=" + rate +
+                ", expireDate=" + expireDate +
+                ", customerMobile='" + customerMobile + '\'' +
+                '}';
+    }
 }
