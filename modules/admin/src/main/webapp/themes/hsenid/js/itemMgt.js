@@ -63,21 +63,20 @@ $(document).ready(function () {
             $.ajax({
                 type: "POST",
                 url: "https://localhost:8443/admin/items/getSubcats",
-             //   dataType: "JSON",
+                //dataType: "JSON",
                 data: {"categoryNm" : categoryNm},
 
                 success: function(data){
                     var slctSubcat = $("#selectSubCat"), option= "";
-                    //slctSubcat.empty();
+                    slctSubcat.empty();
 
                     for(var sb =0; sb<data.length; sb++){
                         option = option + "<option value='" + data[sb].name + "'>" +data[sb].name + "</option>";
                     }
                     slctSubcat.append(option);
-                    alert("smthg");
                 },
                 error:function(e){
-alert("error " + e);
+                    alert("error " + e);
                 }
             });
 

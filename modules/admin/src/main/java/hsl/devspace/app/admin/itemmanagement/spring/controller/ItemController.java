@@ -2,6 +2,7 @@ package hsl.devspace.app.admin.itemmanagement.spring.controller;
 
 import hsl.devspace.app.corelogic.domain.Item;
 import hsl.devspace.app.corelogic.repository.category.CategoryRepository;
+import hsl.devspace.app.corelogic.repository.category.SubCategoryRepositoryImpl;
 import hsl.devspace.app.corelogic.repository.item.ItemRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,7 +21,7 @@ import java.util.Map;
 @RequestMapping(value = "/items")
 public class ItemController {
 
-    private static final Logger LOG = LogManager.getLogger(ItemController.class);
+    private static final Logger LOGGER = LogManager.getLogger(ItemController.class);
 
     @Autowired
     private ItemRepository item;
@@ -28,6 +29,8 @@ public class ItemController {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    @Autowired
+    private SubCategoryRepositoryImpl subCategoryRepository;
 
     /**
      * Add new item view
@@ -53,8 +56,6 @@ public class ItemController {
             return "redirect:add";
             // model.setViewName("addItem");
         else
-
-            // System.out.println("Error in item add");
             return "redirect:add";
         //  return model;
     }
@@ -72,10 +73,9 @@ public class ItemController {
     //to view the item table
     @RequestMapping(value = "/view/itemTable", method = RequestMethod.GET)
     public @ResponseBody List<Map<String, Object>> viewItem(HttpServletRequest request){
-        List<Map<String, Object>> itemList = item.view();
-
-        return itemList;
+             return item.view();
     }
+
     @RequestMapping(value = "/view_item")
     public ModelAndView view(@ModelAttribute("viewItem") Item viewItem) throws SQLIntegrityConstraintViolationException {
         ModelAndView model = new ModelAndView();
@@ -126,18 +126,8 @@ public class ItemController {
 
     //controller method to get relevant subcategory
     @RequestMapping(value="/getSubcats",method=RequestMethod.POST)
-    public @ResponseBody List<Map<String, Object>> getSubcatList(@RequestParam("categoryNm") String categoryNm){
+    public @ResponseBody List<Map<String, Object>> getSubcatList(@RequestParam("categoryNm")String categoryNm){
 
-        return categoryRepository.retrieveSubcatogories(categoryNm);
+        return subCategoryRepository.retrieveSubcatogories(categoryNm);
     }
-
-/*@RequestMapping(value="/getSubcats",method=RequestMethod.POST)
-public @ResponseBody List<Map<String, Object>> getSubcatList(@RequestParam("categoryNm") Category categoryNm){
-
-    return categoryRepository.retrieveSubcatogories(categoryNm.getCategoryName());
-}*/
-
-
-
-
 }
