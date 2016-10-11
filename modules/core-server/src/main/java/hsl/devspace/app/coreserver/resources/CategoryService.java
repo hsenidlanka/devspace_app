@@ -2,10 +2,11 @@ package hsl.devspace.app.coreserver.resources;
 
 import hsl.devspace.app.corelogic.repository.category.CategoryRepositoryImpl;
 import hsl.devspace.app.coreserver.common.Context;
+import hsl.devspace.app.coreserver.model.ServerModel;
 import hsl.devspace.app.coreserver.model.SuccessMessage;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.json.simple.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 
 import javax.ws.rs.*;
@@ -21,10 +22,11 @@ import java.util.Map;
  */
 @Path("/categories")
 public class CategoryService {
-    private static final Logger log = LogManager.getLogger(CategoryService.class);
+    private static final Logger log = LoggerFactory.getLogger(CategoryService.class);
     ApplicationContext context = Context.appContext;
     CategoryRepositoryImpl categoryRepository = (CategoryRepositoryImpl) context.getBean("categoryRepoImpl");
-    final String BASE_URL = "http://localhost:2222/pizza-shefu/api/v1.0/";
+    private ServerModel serverModel = (ServerModel) context.getBean("serverModel");
+    final String BASE_URL = serverModel.getBaseUrl();
 
     // Retrieve all the categories
     @GET

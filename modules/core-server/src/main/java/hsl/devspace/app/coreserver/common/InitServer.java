@@ -2,13 +2,12 @@ package hsl.devspace.app.coreserver.common;
 
 import com.sun.jersey.spi.container.servlet.ServletContainer;
 import hsl.devspace.app.coreserver.model.ServerModel;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
-
 
 /**
  * Created by Kasun Dinesh on 6/29/16.
@@ -16,7 +15,8 @@ import org.springframework.context.ApplicationContext;
  */
 public class InitServer {
     ApplicationContext context = Context.appContext;
-    private static final Logger log = LogManager.getLogger(InitServer.class);
+//    private static final Logger log = LogManager.getLogger(InitServer.class);
+    private static final Logger log = LoggerFactory.getLogger(InitServer.class);
     Server server;
 
     // Start Jetty server.
@@ -34,7 +34,7 @@ public class InitServer {
             server.join();
             server.start();
         } catch (Exception e) {
-            log.error("error starting core-server. " + e);
+            log.error("error starting core-server. " , e);
         }
         log.info("core-server started.");
     }
