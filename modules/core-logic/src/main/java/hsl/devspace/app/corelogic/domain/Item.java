@@ -13,6 +13,24 @@ public class Item {
     private String subCategoryName;
     private int itemId;
     private String categoryName;
+    private int typeId;
+    private int subCategoryId;
+
+    public int getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(int typeId) {
+        this.typeId = typeId;
+    }
+
+    public int getSubCategoryId() {
+        return subCategoryId;
+    }
+
+    public void setSubCategoryId(int subCategoryId) {
+        this.subCategoryId = subCategoryId;
+    }
 
     public String getCategoryName() {
         return categoryName;

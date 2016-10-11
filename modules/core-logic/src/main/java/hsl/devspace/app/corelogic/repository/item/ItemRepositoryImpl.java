@@ -35,18 +35,18 @@ public class ItemRepositoryImpl implements ItemRepository {
     @Override
     public int add(Item item) {
         int row = 0;
-        String itmNm = item.getItemName();
+        //String itmNm = item.getItemName();
         int id = item.getItemId();
-        boolean availability = checkAvailability(itmNm);
+       //boolean availability = checkAvailability(itmNm);
 
-        if (availability == false) {
+       // if (availability == false) {
             String sql = "INSERT INTO item" +
                     "(name,description,type_id,image,sub_category_id) VALUES (?,?,(SELECT type_id FROM type WHERE name=? ),?,(SELECT id FROM sub_category WHERE name=?))";
             row = jdbcTemplate.update(sql, new Object[]{item.getItemName(), item.getDescription(),
                     item.getType(), item.getImage(), item.getSubCategoryName()});
             log.info(row + "new item inserted");
-        } else
-            log.info(row + "item already available");
+       // } else
+            //log.info(row + "item already available");
 
         return id;
     }
