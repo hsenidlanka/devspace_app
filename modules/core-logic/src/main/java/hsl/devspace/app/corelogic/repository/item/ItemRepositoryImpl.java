@@ -94,7 +94,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 
     /*view all item details*/
     @Override
-    public List<Map<String, Object>> view() {
+    public List<Map<String, Object>> selectAll() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM item");
         log.info(mp);
         return mp;
@@ -105,13 +105,13 @@ public class ItemRepositoryImpl implements ItemRepository {
     public int count() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM item ");
         int count = mp.size();
-        log.info(count);
+        log.debug(count);
         return count;
     }
 
     /*retrieve list of item names*/
     @Override
-    public List<Map<String, Object>> viewList() {
+    public List<Map<String, Object>> selectNameList() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT name FROM item");
         log.info(mp);
         return mp;
@@ -141,7 +141,6 @@ public class ItemRepositoryImpl implements ItemRepository {
             transactionManager.rollback(stat);
         }
     }
-
 
     /*get top rated items of a given category*/
     @Override

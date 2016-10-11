@@ -29,7 +29,7 @@ public interface UserRepository {
     int modify(User user) throws SQLException, TransientDataAccessResourceException;
 
     List<Map<String, Object>> retrieveSelectedUserDetails(String username);
-    List<Map<String, Object>> view();
+    List<Map<String, Object>> selectAll();
 
     int block(String username);
 
@@ -40,8 +40,8 @@ public interface UserRepository {
     List<Map<String, Object>>filter(SQLType column,String filterValue);
     int countUsers();
     boolean checkUsernameUnique(User user);
-    List<Map<String, Object>> viewActiveUsers();
-    List<Map<String, Object>> viewBlockedUsers();
+    List<Map<String, Object>> selectActiveUsers();
+    List<Map<String, Object>> selectBlockedUsers();
 
 
 

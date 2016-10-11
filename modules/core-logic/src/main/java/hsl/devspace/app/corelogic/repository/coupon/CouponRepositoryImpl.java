@@ -51,7 +51,7 @@ public class CouponRepositoryImpl implements CouponRepository {
 
     /*view all the details of active(valid) coupons*/
     @Override
-    public  List<Map<String, Object>> viewActiveCoupons() {
+    public  List<Map<String, Object>> selectActiveCoupons() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM coupon WHERE status = 1");
         log.info(mp);
         return mp;

@@ -70,7 +70,7 @@ public class PackageRepositoryImpl implements PackageRepository  {
 
     /*view all details of package*/
     @Override
-    public List<Map<String, Object>> viewAll() {
+    public List<Map<String, Object>> selectAll() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM package");
         log.info(mp);
         return mp;

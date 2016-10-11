@@ -140,7 +140,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     /*view all customer details*/
     @Override
-    public List<Map<String, Object>> view() {
+    public List<Map<String, Object>> selectAll() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer");
         log.info(mp);
         return mp;
@@ -227,13 +227,13 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<Map<String, Object>> viewActiveUsers() {
+    public List<Map<String, Object>> selectActiveUsers() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE status=1");
         log.info(mp);
         return mp;    }
 
     @Override
-    public List<Map<String, Object>> viewBlockedUsers() {
+    public List<Map<String, Object>> selectBlockedUsers() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE status=2");
         log.info(mp);
         return mp;    }

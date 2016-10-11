@@ -10,7 +10,7 @@ public interface CouponRepository {
 
      int add(String couponCode,String customerMobile);
     int expire();
-    List<Map<String, Object>> viewActiveCoupons();
+    List<Map<String, Object>> selectActiveCoupons();
     int countActiveCoupons();
     boolean ifExpired(String couponCode);
     boolean validateCoupon(String couponCode,String mobile);

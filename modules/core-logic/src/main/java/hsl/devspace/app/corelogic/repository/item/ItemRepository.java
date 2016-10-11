@@ -12,9 +12,9 @@ public interface ItemRepository {
     int add(Item item);
     boolean checkAvailability(String itemName);
     int delete(String itemName);
-    List<Map<String, Object>> view();
+    List<Map<String, Object>> selectAll();
     int count();
-    List<Map<String, Object>> viewList();
+    List<Map<String, Object>> selectNameList();
     int update(Item item);
     int updateSizeTable(int id,List<Item> item2);
     void addItem(Item item,List<Item> item2);

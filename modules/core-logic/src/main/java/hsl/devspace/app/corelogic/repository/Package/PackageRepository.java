@@ -12,5 +12,5 @@ public interface PackageRepository {
     int delete(String packageName);
     int updatePackage(hsl.devspace.app.corelogic.domain.Package updatedPackage);
     int changePrice(String packageName,double price);
-    List<Map<String, Object>> viewAll();
+    List<Map<String, Object>> selectAll();
 }

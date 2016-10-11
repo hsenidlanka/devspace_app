@@ -132,17 +132,17 @@ public class StaffRepositoryImpl implements UserRepository {
     public boolean loginAuthenticate(String username, String password) {
 
         boolean result = false;
-        List<Map<String, Object>> mp1= jdbcTemplate.queryForList("SELECT status FROM customer WHERE BINARY username = ?",username);
-if (mp1.get(0).get("status")=="active") {
-    String sql = "SELECT count(*) FROM staff WHERE BINARY username = ? AND BINARY password =? ";
+        List<Map<String, Object>> mp1 = jdbcTemplate.queryForList("SELECT status FROM customer WHERE BINARY username = ?", username);
+        if (mp1.get(0).get("status") == "active") {
+            String sql = "SELECT count(*) FROM staff WHERE BINARY username = ? AND BINARY password =? ";
 
-    int count = jdbcTemplate.queryForObject(
-            sql, new Object[]{user.getUsername(), (user.getPassword())}, Integer.class);
+            int count = jdbcTemplate.queryForObject(
+                    sql, new Object[]{user.getUsername(), (user.getPassword())}, Integer.class);
 
-    if (count > 0) {
-        result = true;
-    }
-}
+            if (count > 0) {
+                result = true;
+            }
+        }
         log.info(result);
         return result;
     }
@@ -169,7 +169,7 @@ if (mp1.get(0).get("status")=="active") {
 
     /*retrieve details of all staff users*/
     @Override
-    public List<Map<String, Object>> view() {
+    public List<Map<String, Object>> selectAll() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff");
         log.info(mp);
         return mp;
@@ -256,14 +256,14 @@ if (mp1.get(0).get("status")=="active") {
     }
 
     @Override
-    public List<Map<String, Object>> viewActiveUsers() {
+    public List<Map<String, Object>> selectActiveUsers() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE status=1");
         log.info(mp);
         return mp;
     }
 
     @Override
-    public List<Map<String, Object>> viewBlockedUsers() {
+    public List<Map<String, Object>> selectBlockedUsers() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE status=2");
         log.info(mp);
         return mp;    }
