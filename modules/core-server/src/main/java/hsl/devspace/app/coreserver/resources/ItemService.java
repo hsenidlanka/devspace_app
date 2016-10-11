@@ -5,9 +5,9 @@ import hsl.devspace.app.corelogic.repository.category.SubCategoryRepositoryImpl;
 import hsl.devspace.app.corelogic.repository.item.ItemRepositoryImpl;
 import hsl.devspace.app.coreserver.common.Context;
 import hsl.devspace.app.coreserver.model.SuccessMessage;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.json.simple.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 
 import javax.ws.rs.*;
@@ -23,7 +23,7 @@ import java.util.Map;
  */
 @Path("/items")
 public class ItemService {
-    private static final Logger log = LogManager.getLogger(ItemService.class);
+    private static final Logger log = LoggerFactory.getLogger(ItemService.class);
     ApplicationContext context = Context.appContext;
     CategoryRepositoryImpl categoryRepository = (CategoryRepositoryImpl) context.getBean("categoryRepoImpl");
     SubCategoryRepositoryImpl subcategoryRepository = (SubCategoryRepositoryImpl) context.getBean("subCategoryRepoImpl");

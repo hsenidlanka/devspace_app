@@ -5,9 +5,9 @@ import hsl.devspace.app.corelogic.repository.category.CategoryRepositoryImpl;
 import hsl.devspace.app.corelogic.repository.user.GuestRepositoryImpl;
 import hsl.devspace.app.coreserver.common.Context;
 import hsl.devspace.app.coreserver.model.SuccessMessage;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.json.simple.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 
 import javax.ws.rs.*;
@@ -20,7 +20,7 @@ import javax.ws.rs.core.UriInfo;
  */
 @Path("/guests")
 public class GuestService {
-    private static final Logger log = LogManager.getLogger(GuestService.class);
+    private static final Logger log = LoggerFactory.getLogger(GuestService.class);
     ApplicationContext context = Context.appContext;
     GuestRepositoryImpl guestRepository = (GuestRepositoryImpl) context.getBean("guestRepoImpl");
 

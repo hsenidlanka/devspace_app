@@ -4,9 +4,9 @@ import hsl.devspace.app.corelogic.repository.Package.PackageRepositoryImpl;
 import hsl.devspace.app.corelogic.repository.user.GuestRepositoryImpl;
 import hsl.devspace.app.coreserver.common.Context;
 import hsl.devspace.app.coreserver.model.SuccessMessage;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.json.simple.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 
 import javax.ws.rs.Consumes;
@@ -25,7 +25,7 @@ import java.util.Map;
  */
 @Path("/packages")
 public class PackageService {
-    private static final Logger log = LogManager.getLogger(PackageService.class);
+    private static final Logger log = LoggerFactory.getLogger(PackageService.class);
     ApplicationContext context = Context.appContext;
     PackageRepositoryImpl packageRepository = (PackageRepositoryImpl) context.getBean("packageRepoImpl");
 

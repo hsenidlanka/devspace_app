@@ -3,10 +3,11 @@ package hsl.devspace.app.coreserver.resources;
 import hsl.devspace.app.corelogic.domain.User;
 import hsl.devspace.app.corelogic.repository.user.UserRepositoryImpl;
 import hsl.devspace.app.coreserver.common.Context;
+import hsl.devspace.app.coreserver.model.ServerModel;
 import hsl.devspace.app.coreserver.model.SuccessMessage;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.json.simple.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 
 import javax.ws.rs.*;
@@ -22,10 +23,11 @@ import java.util.Map;
  */
 @Path("/customers")
 public class CustomerService {
-    private static final Logger log = LogManager.getLogger(CustomerService.class);
+    private static final Logger log = LoggerFactory.getLogger(CustomerService.class);
     ApplicationContext context = Context.appContext;
     UserRepositoryImpl userRepository = (UserRepositoryImpl) context.getBean("userRepoImpl");
-    final String BASE_URL = "http://localhost:2222/pizza-shefu/api/v1.0/";
+    private ServerModel serverModel = (ServerModel) context.getBean("serverModel");
+    final String BASE_URL = serverModel.getBaseUrl();
 
     // Register a new customer
     @POST

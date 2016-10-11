@@ -8,6 +8,7 @@
         <property name="port" value="2222"/>
         <property name="contextRoot" value="/"/>
         <property name="servletPath" value="/pizza-shefu/api/v1.0/*"/>
+        <property name="baseUrl" value="http://localhost:2222/pizza-shefu/api/v1.0/"/>
     </bean>
 
 </beans>
