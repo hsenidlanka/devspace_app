@@ -27,7 +27,7 @@
                         <%--         Add user form      --%>
 
                         <div class="panel-body">
-                            <form novalidate="novalidate" role="form" id="adduser_form" name="adduser_form" action="#" class="form form-horizontal">
+                            <form novalidate="novalidate" role="form" id="adduser_form" method="post" name="adduser_form" action="#" class="form form-horizontal">
 
                                 <div class="form-group">
 
