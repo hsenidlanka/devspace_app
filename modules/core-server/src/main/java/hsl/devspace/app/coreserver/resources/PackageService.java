@@ -35,7 +35,7 @@ public class PackageService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response getPackages(@javax.ws.rs.core.Context UriInfo uriInfo) {
-        List<Map<String, Object>> packageList = packageRepository.viewAll();
+        List<Map<String, Object>> packageList = packageRepository.selectAll();
         Response response;
         SuccessMessage successMessage = new SuccessMessage();
         successMessage.setCode(Response.Status.OK.getStatusCode());

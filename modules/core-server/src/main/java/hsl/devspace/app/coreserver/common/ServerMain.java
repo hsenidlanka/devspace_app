@@ -35,6 +35,8 @@ public class ServerMain implements WrapperListener {
     }
 
     public static void main(String[] args) throws Exception {
+        System.setProperty("com.mchange.v2.log.FallbackMLog.DEFAULT_CUTOFF_LEVEL", "WARNING");
+        System.setProperty("com.mchange.v2.log.MLog", "com.mchange.v2.log.FallbackMLog");
         WrapperManager.start(new ServerMain(), args);
     }
 }
