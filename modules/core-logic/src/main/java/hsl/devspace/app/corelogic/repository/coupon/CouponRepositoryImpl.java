@@ -1,11 +1,13 @@
 package hsl.devspace.app.corelogic.repository.coupon;
 
 import hsl.devspace.app.corelogic.domain.Coupon;
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +18,8 @@ public class CouponRepositoryImpl implements CouponRepository {
     Coupon coupon=new Coupon();
     private JdbcTemplate jdbcTemplate;
     private PlatformTransactionManager transactionManager;
-    private static org.apache.log4j.Logger log = Logger.getLogger(CouponRepositoryImpl.class);
+   // private static org.apache.log4j.Logger log = Logger.getLogger(CouponRepositoryImpl.class);
+   org.slf4j.Logger log = LoggerFactory.getLogger(CouponRepositoryImpl.class);
 
     public void setDataSource(DataSource dataSource) {
         jdbcTemplate = new JdbcTemplate(dataSource);
@@ -35,7 +38,7 @@ public class CouponRepositoryImpl implements CouponRepository {
         String sql = "INSERT INTO coupon" +
                 "(coupon_code,rate,expire_date,status,customer_mobile) VALUES (?,10,DATE_ADD(CURRENT_DATE,INTERVAL 30 DAY),1,?)";
         row = jdbcTemplate.update(sql, new Object[]{couponCode, customerMobile});
-        log.info(row + "new coupon inserted");
+        log.info("{} new coupon inserted",row);
         return row;
     }
 
@@ -51,10 +54,21 @@ public class CouponRepositoryImpl implements CouponRepository {
 
     /*view all the details of active(valid) coupons*/
     @Override
-    public  List<Map<String, Object>> selectActiveCoupons() {
+    public  List<Coupon> selectActiveCoupons() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM coupon WHERE status = 1");
-        log.info(mp);
-        return mp;
+        List<Coupon> couponsActive=new ArrayList<Coupon>();
+        for (int i=0;i<mp.size();i++){
+            Coupon coupon=new Coupon();
+            coupon.setCouponId(Integer.parseInt(mp.get(i).get("id").toString()));
+            coupon.setCouponCode(mp.get(i).get("coupon_code").toString());
+            coupon.setRate(Double.parseDouble(mp.get(i).get("rate").toString()));
+            coupon.setExpireDate(Date.valueOf(mp.get(i).get("expire_date").toString()));
+            coupon.setStatus(mp.get(i).get("status").toString());
+            coupon.setCustomerMobile(mp.get(i).get("customer_mobile").toString());
+            couponsActive.add(coupon);
+        }
+        log.info("{}",couponsActive);
+        return couponsActive;
     }
 
     /*retrieve no.of coupons that are in 'active' status*/
@@ -62,7 +76,7 @@ public class CouponRepositoryImpl implements CouponRepository {
     public int countActiveCoupons() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM coupon WHERE status=1");
         int count = mp.size();
-        log.info(count);
+        log.info("{}",count);
         return count;
     }
 
@@ -79,8 +93,8 @@ public class CouponRepositoryImpl implements CouponRepository {
     public boolean validateCoupon(String couponCode, String mobile) {
         boolean result=false;
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT customer_mobile,status FROM coupon WHERE coupon_code=?", couponCode);
-       log.info(mp);
-        log.info(mp.get(0).get("customer_mobile"));
+       log.info("{}",mp);
+        log.info("{}",mp.get(0).get("customer_mobile"));
         if(mp.get(0).get("customer_mobile").equals(mobile) && mp.get(0).get("status").toString().equals("active")){
             result=true;
             log.info("coupon is valid");
@@ -89,7 +103,7 @@ public class CouponRepositoryImpl implements CouponRepository {
         else{
             log.info("coupon not valid");
         }
-        log.info(result);
+        log.info("{}",result);
         return result;
     }
 

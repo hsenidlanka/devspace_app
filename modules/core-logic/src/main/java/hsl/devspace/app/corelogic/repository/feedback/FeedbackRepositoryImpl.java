@@ -1,7 +1,7 @@
 package hsl.devspace.app.corelogic.repository.feedback;
 
 import hsl.devspace.app.corelogic.domain.Feedback;
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.PlatformTransactionManager;
 
@@ -14,7 +14,8 @@ public class FeedbackRepositoryImpl implements FeedbackRepository{
     Feedback fd=new Feedback();
     private JdbcTemplate jdbcTemplate;
     private PlatformTransactionManager transactionManager;
-    private static org.apache.log4j.Logger log = Logger.getLogger(FeedbackRepositoryImpl.class);
+    //private static org.apache.log4j.Logger log = Logger.getLogger(FeedbackRepositoryImpl.class);
+    org.slf4j.Logger log = LoggerFactory.getLogger(FeedbackRepositoryImpl.class);
 
     public void setDataSource(DataSource dataSource) {
         jdbcTemplate = new JdbcTemplate(dataSource);
@@ -34,7 +35,7 @@ public class FeedbackRepositoryImpl implements FeedbackRepository{
                 "(date,time,comment,number_of_stars,customer_id,item_id) VALUES (?,?,?,?,?,(SELECT id FROM item WHERE name=?))";
 
         row = jdbcTemplate.update(sql, new Object[]{fd.getDate(),fd.getTime(),fd.getComment(),fd.getNumberOfStars(),fd.getCustomerId(),fd.getItemName()});
-        log.info(row + "new feedback added");
+        log.info("{} new feedback added",row);
         return row;
     }
 }
