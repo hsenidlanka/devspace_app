@@ -1,27 +1,28 @@
 package hsenid.web;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 
 public class HomeController {
 
-    private final static Logger logger = LogManager.getLogger(HomeController.class);
+    final Logger logger = LoggerFactory.getLogger(HomeController.class);
+//    private final static Logger logger = LogManager.getLogger(HomeController.class);
 
 
     @RequestMapping({"/", "/home"})
     public String home() {
-        logger.error("test");
+        logger.info("test");
+        logger.error("error log test");
         return "self-care-home";
     }
 
     @RequestMapping("/menu")
     public String menu() {
-        logger.info("DBConnecter connection created");
+//        logger.info("DBConnecter connection created");
         return "menu";
     }
 
@@ -101,15 +102,15 @@ public class HomeController {
         return "search-results";
     }
     //    Test request
-    @GetMapping("/test")
+    /*@GetMapping("/test")
     public String test(Model model) {
         model.addAttribute("greeting", new Greeting());
         return "test";
-    }
+    }*/
 
-    @RequestMapping(value = "/testt",  method = RequestMethod.GET)
+   /* @RequestMapping(value = "/testt",  method = RequestMethod.GET)
     public String greetSubmit(@ModelAttribute Greeting greeting){
         return "test";
-    }
+    }*/
 
 }

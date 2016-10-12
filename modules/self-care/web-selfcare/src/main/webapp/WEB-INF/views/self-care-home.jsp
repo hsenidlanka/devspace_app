@@ -125,7 +125,8 @@
 
                         url: "register",
                         type: 'post',
-                        data: $('#adduser_form').serialize(),
+                        data: $('#adduser_form').serialize() ,
+                        dataType: 'json',
                         success: function (result) {
                             alert("success");
                         },
@@ -133,7 +134,40 @@
                             var err = eval("(" + xhr.responseText + ")");
                             alert(err.Message);
                         }
-                    })
+                    });
+
+
+/*
+
+                    $.ajax({
+                        url: "register",
+                        type: 'post',
+                        data: $('#adduser_form').serialize(),
+                        dataType: 'json',
+                    }).then(function(data) {
+                        alert("post success");
+                    });
+
+*/
+
+/*
+
+                    $.ajax({
+                        url: 'register',
+                        dataType: 'json',
+                        type: 'post',
+                        contentType: 'application/json',
+                        data: JSON.stringify( {"title":"Mr.","first_name":"value","last_name":"value","username":"valueUser","password":"value","email":"value@mma.com","address_line1":"value1","address_line2":"value2","address_line3":"value3","mobile":"0123456789"} ),
+                        processData: false,
+                        success: function( data, textStatus, jQxhr ){
+                            alert("Test Success");
+                        },
+                        error: function( jqXhr, textStatus, errorThrown ){
+                            console.log( errorThrown );
+                        }
+                    });
+*/
+
 
                 }
 

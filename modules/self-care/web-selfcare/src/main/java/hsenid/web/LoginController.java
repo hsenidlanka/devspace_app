@@ -1,7 +1,5 @@
 package hsenid.web;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.springframework.stereotype.Controller;
@@ -18,7 +16,8 @@ import java.net.URLConnection;
 
 @Controller
 public class LoginController {
-    private final static Logger logger = LogManager.getLogger(LoginController.class);
+
+//    private final static Logger logger = LogManager.getLogger(LoginController.class);
 
     String tst = null;
 
@@ -27,8 +26,8 @@ public class LoginController {
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        logger.error("username " + username);
-        logger.error("password " + password);
+//        logger.error("username " + username);
+//        logger.error("password " + password);
         String string = "{" + "username" + ":" + username + "," + "password" + ":" + password + "}";
         JSONObject jsonObject = new JSONObject(string);
 
@@ -56,16 +55,16 @@ public class LoginController {
 
             JSONObject reply = new JSONObject(sb.toString());
             int status = reply.getInt("code");
-            logger.error("status code " + status);
-            logger.error(status);
+//            logger.error("status code " + status);
+//            logger.error(status);
             if (status == 200) {
-                logger.error("success");
+//                logger.error("success");
             } else if (status == 401) {
 //                return "unathorised";
             }
 
         } catch (Exception e) {
-            logger.error("Exception occur. Reason -> " + e.getMessage());
+//            logger.error("Exception occur. Reason -> " + e.getMessage());
         }
         JSONObject authorizeJson = new JSONObject(tst);
 
@@ -122,14 +121,14 @@ public class LoginController {
 
             JSONObject reply = new JSONObject(sb.toString());
             int status = reply.getInt("code");
-            logger.error(status);
+//            logger.error(status);
             if (status == 201) {
-                logger.error("success");
+//                logger.error("success");
                 return "locations";
             }
 
         } catch (Exception e) {
-            logger.error("Exception occur. Reason -> " + e.getMessage());
+//            logger.error("Exception occur. Reason -> " + e.getMessage());
         }
 
         return "aboutus";
@@ -142,8 +141,8 @@ public class LoginController {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        logger.error("username " + username);
-        logger.error("password " + password);
+//        logger.error("username " + username);
+//        logger.error("password " + password);
 
         String string = "{" + "username" + ":" + username + "," + "password" + ":" + password + "}";
 
@@ -170,20 +169,20 @@ public class LoginController {
             in.close();
 
             tst = "{" + "username" + ":" + username + "," + "password" + ":" + password + "}";
-            logger.error("send json " + tst);
+//            logger.error("send json " + tst);
 
 
             JSONObject reply = new JSONObject(sb.toString());
             int status = reply.getInt("code");
-            logger.error("status code " + status);
-            logger.error(status);
+//            logger.error("status code " + status);
+//            logger.error(status);
             if (status == 200) {
-                logger.error("success");
+//                logger.error("success");
                 return "aboutus";
             }
 
         } catch (Exception e) {
-            logger.error("Exception occur. Reason -> " + e.getMessage());
+//            logger.error("Exception occur. Reason -> " + e.getMessage());
         }
         JSONObject test = new JSONObject(tst);
 //        return test;
