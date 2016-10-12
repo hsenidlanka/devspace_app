@@ -1,7 +1,7 @@
 package hsl.devspace.app.corelogic.repository.delivery;
 
 import hsl.devspace.app.corelogic.domain.Delivery;
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.PlatformTransactionManager;
 
@@ -14,7 +14,8 @@ public class DeliveryRepositoryImpl implements DeliveryRepository {
     Delivery del=new Delivery();
     private JdbcTemplate jdbcTemplate;
     private PlatformTransactionManager transactionManager;
-    private static org.apache.log4j.Logger log = Logger.getLogger(DeliveryRepositoryImpl.class);
+   // private static org.apache.log4j.Logger log = Logger.getLogger(DeliveryRepositoryImpl.class);
+   org.slf4j.Logger log = LoggerFactory.getLogger(DeliveryRepositoryImpl.class);
 
     public void setDataSource(DataSource dataSource) {
         jdbcTemplate = new JdbcTemplate(dataSource);
@@ -35,7 +36,7 @@ public class DeliveryRepositoryImpl implements DeliveryRepository {
 
         row = jdbcTemplate.update(sql, new Object[]{del.getAgentName(), del.getRecepientName(), del.getRecepientAddress(),
                 del.getDeliveryDate(), del.getDeliveryTime(), del.getDeliveryStatus(), del.getDescription(), del.getAgentName(), del.getDeliveryMethod()});
-        log.info(row + "new delivery inserted");
+        log.info("{} new delivery inserted",row);
         return row;
     }
 
@@ -45,7 +46,7 @@ public class DeliveryRepositoryImpl implements DeliveryRepository {
 
         String sql = "UPDATE delivery SET delivery_status='Delivered' WHERE id = ?";
         int row = jdbcTemplate.update(sql, new Object[]{id});
-        log.info(row + "delivered");
+        log.info("{} delivered",row);
         return row;
     }
 
@@ -57,7 +58,7 @@ public class DeliveryRepositoryImpl implements DeliveryRepository {
                 "(name) VALUES (?)";
 
         row = jdbcTemplate.update(sql, new Object[]{deliveryMethod});
-        log.info(row + "new delivery method inserted");
+        log.info("{} new delivery method inserted",row);
         return row;
     }
 
@@ -68,7 +69,7 @@ public class DeliveryRepositoryImpl implements DeliveryRepository {
 
         String sql = "DELETE FROM delivery_method WHERE name=?";
         row = jdbcTemplate.update(sql, new Object[]{deliveryMethod});
-        log.info(row + " delivery method deleted");
+        log.info("{} delivery method deleted",row);
         return row;
     }
 }
