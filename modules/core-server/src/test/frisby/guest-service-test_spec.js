@@ -1,8 +1,9 @@
 var frisby = require('frisby');
+var base_url = "http://localhost:2222/pizza-shefu/api/v1.0";
 
 // Test add guest user-valid data.
 frisby.create('Register guest test 01-valid data')
-    .post('http://localhost:2222/pizza-shefu/api/v1.0/guests/add/', {
+    .post(base_url + '/guests/add/', {
         "mobile": "0111111111"
     }, {json: true})
     .expectStatus(201)
@@ -34,7 +35,7 @@ frisby.create('Register guest test 01-valid data')
 
 // Test add guest user-empty mobile no.
 frisby.create('Register guest test 01-empty mobile no')
-    .post('http://localhost:2222/pizza-shefu/api/v1.0/guests/add/', {
+    .post(base_url + '/guests/add/', {
         "mobile": ""
     }, {json: true})
     .expectStatus(400)

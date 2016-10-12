@@ -9,10 +9,10 @@ import org.codehaus.jackson.annotate.JsonPropertyOrder;
  */
 @JsonPropertyOrder({"status", "code", "errorMessage", "description"})
 public class ErrorMessage {
-    private String status;
-    private int errorCode;
-    private String errorMessage;
-    private String description;
+    private String status; // State of the request
+    private int errorCode; // HTTP status code
+    private String errorMessage; // Error message returned
+    private String description; // Error description
 
     public ErrorMessage() {
     }

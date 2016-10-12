@@ -15,7 +15,7 @@ import org.springframework.context.ApplicationContext;
  */
 public class InitServer {
     ApplicationContext context = Context.appContext;
-//    private static final Logger log = LogManager.getLogger(InitServer.class);
+    //    private static final Logger log = LogManager.getLogger(InitServer.class);
     private static final Logger log = LoggerFactory.getLogger(InitServer.class);
     Server server;
 
@@ -34,7 +34,7 @@ public class InitServer {
             server.join();
             server.start();
         } catch (Exception e) {
-            log.error("error starting core-server. " , e);
+            log.error("error starting core-server. ", e);
         }
         log.info("core-server started.");
     }
@@ -45,7 +45,7 @@ public class InitServer {
         try {
             server.stop();
         } catch (Exception e) {
-            log.error("error stopping core-server. " + e);
+            log.error("error stopping core-server. ", e);
         }
         log.info("core-server stopped.");
     }

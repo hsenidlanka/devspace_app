@@ -2,6 +2,7 @@ package hsl.devspace.app.coreserver.resources;
 
 import hsl.devspace.app.corelogic.repository.feedback.FeedbackRepositoryImpl;
 import hsl.devspace.app.coreserver.common.Context;
+import hsl.devspace.app.coreserver.common.PropertyReader;
 import hsl.devspace.app.coreserver.model.SuccessMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +22,7 @@ public class FeedbackService {
     private static final Logger log = LoggerFactory.getLogger(CategoryService.class);
     ApplicationContext context = Context.appContext;
     FeedbackRepositoryImpl feedbackRepository = (FeedbackRepositoryImpl) context.getBean("feedbackRepoImpl");
+    PropertyReader propertyReader = new PropertyReader("header.properties");
 
     @POST
     @Path("/add")

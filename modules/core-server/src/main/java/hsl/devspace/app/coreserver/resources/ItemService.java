@@ -4,6 +4,7 @@ import hsl.devspace.app.corelogic.repository.category.CategoryRepositoryImpl;
 import hsl.devspace.app.corelogic.repository.category.SubCategoryRepositoryImpl;
 import hsl.devspace.app.corelogic.repository.item.ItemRepositoryImpl;
 import hsl.devspace.app.coreserver.common.Context;
+import hsl.devspace.app.coreserver.common.PropertyReader;
 import hsl.devspace.app.coreserver.model.SuccessMessage;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
@@ -28,6 +29,7 @@ public class ItemService {
     CategoryRepositoryImpl categoryRepository = (CategoryRepositoryImpl) context.getBean("categoryRepoImpl");
     SubCategoryRepositoryImpl subcategoryRepository = (SubCategoryRepositoryImpl) context.getBean("subCategoryRepoImpl");
     ItemRepositoryImpl itemRepository = (ItemRepositoryImpl) context.getBean("itemRepoImpl");
+    PropertyReader propertyReader=new PropertyReader("header.properties");
 
     // Retrieve all items of a category
     @GET
@@ -60,7 +62,7 @@ public class ItemService {
             return Response.status(Response.Status.OK).entity(successMessage).build();
         }
         return Response.status(Response.Status.OK).entity(successMessage)
-                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Origin", propertyReader.readProperty("Access-Control-Allow-Origin"))
                 .build();
     }
 
@@ -93,7 +95,7 @@ public class ItemService {
         } catch (NullPointerException e) {
             successMessage.setMessage("no items to retrieve");
             return Response.status(Response.Status.OK).entity(successMessage)
-                    .header("Access-Control-Allow-Origin", "*")
+                    .header("Access-Control-Allow-Origin", propertyReader.readProperty("Access-Control-Allow-Origin"))
                     .build();
         }
         return Response.status(Response.Status.OK).entity(successMessage)
@@ -128,11 +130,11 @@ public class ItemService {
         } catch (NullPointerException e) {
             successMessage.setMessage("no items to retrieve");
             return Response.status(Response.Status.OK).entity(successMessage)
-                    .header("Access-Control-Allow-Origin", "*")
+                    .header("Access-Control-Allow-Origin", propertyReader.readProperty("Access-Control-Allow-Origin"))
                     .build();
         }
         return Response.status(Response.Status.OK).entity(successMessage)
-                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Origin", propertyReader.readProperty("Access-Control-Allow-Origin"))
                 .build();
     }
 }

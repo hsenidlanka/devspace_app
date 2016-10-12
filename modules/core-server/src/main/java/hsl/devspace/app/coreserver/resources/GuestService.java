@@ -4,6 +4,7 @@ import hsl.devspace.app.corelogic.domain.User;
 import hsl.devspace.app.corelogic.repository.category.CategoryRepositoryImpl;
 import hsl.devspace.app.corelogic.repository.user.GuestRepositoryImpl;
 import hsl.devspace.app.coreserver.common.Context;
+import hsl.devspace.app.coreserver.common.PropertyReader;
 import hsl.devspace.app.coreserver.model.SuccessMessage;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
@@ -48,9 +49,7 @@ public class GuestService {
                 String url = uriInfo.getAbsolutePath().toString();
                 successMessage.addLink(url, "self");
                 successMessage.addData(jsonObject);
-                response = Response.status(Response.Status.CREATED).entity(successMessage)
-                        .header("Access-Control-Allow-Origin", "*")
-                        .build();
+                response = Response.status(Response.Status.CREATED).entity(successMessage).build();
             } else {
                 throw new WebApplicationException(400);
             }

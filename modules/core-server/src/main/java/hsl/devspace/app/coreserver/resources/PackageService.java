@@ -3,6 +3,7 @@ package hsl.devspace.app.coreserver.resources;
 import hsl.devspace.app.corelogic.repository.Package.PackageRepositoryImpl;
 import hsl.devspace.app.corelogic.repository.user.GuestRepositoryImpl;
 import hsl.devspace.app.coreserver.common.Context;
+import hsl.devspace.app.coreserver.common.PropertyReader;
 import hsl.devspace.app.coreserver.model.SuccessMessage;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
@@ -28,6 +29,7 @@ public class PackageService {
     private static final Logger log = LoggerFactory.getLogger(PackageService.class);
     ApplicationContext context = Context.appContext;
     PackageRepositoryImpl packageRepository = (PackageRepositoryImpl) context.getBean("packageRepoImpl");
+    PropertyReader propertyReader = new PropertyReader("header.properties");
 
     // Retrieve all the packages
     @GET
@@ -56,7 +58,7 @@ public class PackageService {
             successMessage.setMessage("no packages to retrieve");
         }
         return Response.status(Response.Status.OK).entity(successMessage)
-                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Origin", propertyReader.readProperty("Access-Control-Allow-Origin"))
                 .build();
     }
 }

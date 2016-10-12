@@ -33,6 +33,4 @@ public class GenericExceptionMapper implements ExceptionMapper<Exception> {
         }
         return response500;
     }
-
-
 }
