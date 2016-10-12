@@ -1,7 +1,5 @@
-package hsenid.web;
+package hsenid.web.Test;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
@@ -16,12 +14,12 @@ import java.net.URLConnection;
  */
 public class TestJson {
 
-    private final static Logger logger = LogManager.getLogger(TestJson.class);
+//    private final static Logger logger = LogManager.getLogger(TestJson.class);
     public static void main(String[] args) throws JSONException {
 //        BasicConfigurator.configure();
-        logger.error("Test Error");
-        logger.error("Dist");
-        logger.trace("Entering application.");
+//        logger.error("Test Error");
+//        logger.error("Dist");
+//        logger.trace("Entering application.");
         String username = "testre";
         String password = "password";
 

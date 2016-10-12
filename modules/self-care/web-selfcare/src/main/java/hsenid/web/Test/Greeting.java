@@ -1,4 +1,4 @@
-package hsenid.web;
+package hsenid.web.Test;
 
 public class Greeting {
 
