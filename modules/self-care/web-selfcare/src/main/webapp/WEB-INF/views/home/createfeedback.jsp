@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <%@include file="include.jsp" %>
+    <%@include file="../includes/include.jsp" %>
     <title><fmt:message key="feedback.title" bundle="${lang}"/></title>
 
     <script src="<c:url value="/resources/js/validate-inputs.js"/>" ></script>
@@ -11,7 +11,7 @@
 </head>
 <div class="loader-anim"></div>
 <body>
-<%@include file="NewHeader.jsp" %>
+<%@include file="../includes/NewHeader.jsp" %>
 
 <div class="brand"></div>
 <center>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
-    <%@include file="include.jsp" %>
+    <%@include file="includes/include.jsp" %>
 
     <title> <fmt:message key="delivery" bundle="${lang}"/></title>
     <link rel="shortcut icon" href="">
@@ -19,7 +19,7 @@
 
 <body>
 <div class="loader-anim"></div>
-<%@include file="NewHeader.jsp" %>
+<%@include file="includes/NewHeader.jsp" %>
 <div class="main-div">
     <div class="section">
         <div class="panel panel-default">

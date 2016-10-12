@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Locations</title>
-    <%@include file="include.jsp" %>
+    <%@include file="../includes/include.jsp" %>
     <div class="loader-anim"></div>
 </head>
 
@@ -10,7 +10,7 @@
 <!--------------Body------------------------->
 <body style="overflow: visible" >
 
-<%@include file="NewHeader.jsp" %>
+<%@include file="../includes/NewHeader.jsp" %>
 
 <%--'https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyAWJ-UMsacU4LmjA3dtfctz2UsPl5s2tZw'--%>
 
@@ -60,7 +60,7 @@
 
 <a href="http://gazpo.com/downloads/tutorials/jquery/scrolltop/#" class="scrollup" style="display: none;"><fmt:message key="location.scroll" bundle="${lang}"/></a>
 
-<%@include file="loginload.jsp" %>
-<%@include file="signupmodal.jsp" %>
+<%@include file="../includes/loginload.jsp" %>
+<%@include file="../signupmodal.jsp" %>
 </body>
 </html>
