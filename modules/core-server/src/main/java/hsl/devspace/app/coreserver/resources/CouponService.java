@@ -3,6 +3,7 @@ package hsl.devspace.app.coreserver.resources;
 import hsl.devspace.app.corelogic.domain.Coupon;
 import hsl.devspace.app.corelogic.repository.coupon.CouponRepositoryImpl;
 import hsl.devspace.app.coreserver.common.Context;
+import hsl.devspace.app.coreserver.common.PropertyReader;
 import hsl.devspace.app.coreserver.model.ServerModel;
 import hsl.devspace.app.coreserver.model.SuccessMessage;
 import org.json.simple.JSONObject;
@@ -49,9 +50,7 @@ public class CouponService {
             String url = uriInfo.getAbsolutePath().toString();
             successMessage.addLink(url, "self");
 
-            response = Response.status(Response.Status.CREATED).entity(successMessage)
-                    .header("Access-Control-Allow-Origin", "*")
-                    .build();
+            response = Response.status(Response.Status.CREATED).entity(successMessage).build();
         } else {
             throw new WebApplicationException(400);
         }
@@ -81,9 +80,7 @@ public class CouponService {
                 String url = uriInfo.getAbsolutePath().toString();
                 successMessage.addLink(url, "self");
 
-                response = Response.status(Response.Status.CREATED).entity(successMessage)
-                        .header("Access-Control-Allow-Origin", "*")
-                        .build();
+                response = Response.status(Response.Status.CREATED).entity(successMessage).build();
             } else {
                 throw new WebApplicationException(401);
             }

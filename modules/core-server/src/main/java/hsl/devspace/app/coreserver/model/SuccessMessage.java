@@ -12,11 +12,11 @@ import java.util.*;
  */
 @JsonPropertyOrder({"status", "code", "message", "data", "links"})
 public class SuccessMessage {
-    private String status;
-    private int code;
-    private String message;
-    private List<JSONObject> data = new ArrayList<JSONObject>();
-    private List<Link> links = new ArrayList<Link>();
+    private String status; // State of the request
+    private int code; // State of the request
+    private String message; // HTTP status code
+    private List<JSONObject> data = new ArrayList<JSONObject>(); // Resources to include in the response
+    private List<Link> links = new ArrayList<Link>(); // HATEOAS links
 
     public SuccessMessage() {
     }

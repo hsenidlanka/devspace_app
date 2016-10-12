@@ -3,6 +3,7 @@ package hsl.devspace.app.coreserver.resources;
 import hsl.devspace.app.corelogic.domain.User;
 import hsl.devspace.app.corelogic.repository.user.UserRepositoryImpl;
 import hsl.devspace.app.coreserver.common.Context;
+import hsl.devspace.app.coreserver.common.PropertyReader;
 import hsl.devspace.app.coreserver.model.ServerModel;
 import hsl.devspace.app.coreserver.model.SuccessMessage;
 import org.json.simple.JSONObject;
@@ -28,6 +29,7 @@ public class CustomerService {
     UserRepositoryImpl userRepository = (UserRepositoryImpl) context.getBean("userRepoImpl");
     private ServerModel serverModel = (ServerModel) context.getBean("serverModel");
     final String BASE_URL = serverModel.getBaseUrl();
+    PropertyReader propertyReader = new PropertyReader("header.properties");
 
     // Register a new customer
     @POST
@@ -59,9 +61,7 @@ public class CustomerService {
             successMessage.addLink(url, "self");
             successMessage.addLink(BASE_URL + "customers/" + user.getUsername(), "profile");
 
-            response = Response.status(Response.Status.CREATED).entity(successMessage)
-                    .header("Access-Control-Allow-Origin", "*")
-                    .build();
+            response = Response.status(Response.Status.CREATED).entity(successMessage).build();
         } else {
             throw new WebApplicationException(400);
         }
@@ -90,9 +90,7 @@ public class CustomerService {
             String url = uriInfo.getAbsolutePath().toString();
             successMessage.addLink(url, "self");
             successMessage.addLink(BASE_URL + "customers/" + user.getUsername(), "profile");
-            response = Response.status(Response.Status.OK).entity(successMessage)
-                    .header("Access-Control-Allow-Origin", "*")
-                    .build();
+            response = Response.status(Response.Status.OK).entity(successMessage).build();
         } else {
             throw new WebApplicationException(401);
         }
@@ -132,7 +130,7 @@ public class CustomerService {
             successMessage.setMessage("no customer data to retrieve");
         }
         return Response.status(Response.Status.OK).entity(successMessage)
-                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Origin", propertyReader.readProperty("Access-Control-Allow-Origin"))
                 .build();
     }
 }

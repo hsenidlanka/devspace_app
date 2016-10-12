@@ -2,10 +2,11 @@
  * Created by Kasun Dinesh on 9/23/16.
  */
 var frisby = require('frisby');
+var base_url = "http://localhost:2222/pizza-shefu/api/v1.0";
 
 // Test add coupon-valid data.
 frisby.create('Coupon test 01-valid data')
-    .post('http://localhost:2222/pizza-shefu/api/v1.0/coupons/add/', {
+    .post(base_url + '/coupons/add/', {
         "couponCode": "frisbytest",
         "customerMobile": "12345678"
     }, {json: true})
@@ -39,7 +40,7 @@ frisby.create('Coupon test 01-valid data')
 
 // Test add coupon-empty customer mobile.
 frisby.create('Coupon test 02-empty customer mobile')
-    .post('http://localhost:2222/pizza-shefu/api/v1.0/coupons/add/', {
+    .post(base_url + '/coupons/add/', {
         "couponCode": "frisbytest"
     }, {json: true})
     .expectStatus(500)
@@ -58,7 +59,7 @@ frisby.create('Coupon test 02-empty customer mobile')
 
 // Test add coupon-empty coupon code.
 frisby.create('Coupon test 02-empty coupon code')
-    .post('http://localhost:2222/pizza-shefu/api/v1.0/coupons/add/', {
+    .post(base_url + '/coupons/add/', {
         "customerMobile": "12345678"
     }, {json: true})
     .expectStatus(500)

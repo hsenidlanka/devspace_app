@@ -2,6 +2,7 @@ package hsl.devspace.app.coreserver.resources;
 
 import hsl.devspace.app.corelogic.repository.category.CategoryRepositoryImpl;
 import hsl.devspace.app.coreserver.common.Context;
+import hsl.devspace.app.coreserver.common.PropertyReader;
 import hsl.devspace.app.coreserver.model.ServerModel;
 import hsl.devspace.app.coreserver.model.SuccessMessage;
 import org.json.simple.JSONObject;
@@ -27,6 +28,7 @@ public class CategoryService {
     CategoryRepositoryImpl categoryRepository = (CategoryRepositoryImpl) context.getBean("categoryRepoImpl");
     private ServerModel serverModel = (ServerModel) context.getBean("serverModel");
     final String BASE_URL = serverModel.getBaseUrl();
+    PropertyReader propertyReader=new PropertyReader("header.properties");
 
     // Retrieve all the categories
     @GET
@@ -40,6 +42,7 @@ public class CategoryService {
         successMessage.setStatus("success");
         String url = uriInfo.getAbsolutePath().toString();
         successMessage.addLink(url, "self");
+
         if (categoryList.size() != 0) {
             successMessage.setMessage("categories retrieved");
             for (Map<String, Object> map : categoryList) {
@@ -53,7 +56,7 @@ public class CategoryService {
             successMessage.setMessage("no categories to retrieve");
         }
         return Response.status(Response.Status.OK).entity(successMessage)
-                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Origin", propertyReader.readProperty("Access-Control-Allow-Origin"))
                 .build();
     }
 }
