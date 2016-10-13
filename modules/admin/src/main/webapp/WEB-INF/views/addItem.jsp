@@ -140,7 +140,7 @@
 
                   <div class="col-xs-5">
                     <label class="checkbox-inline">
-                      <form:checkbox value="regular" class="checkbox" path="size" label="Regular" id="chkReg" onclick="document.getElementById('txtRegPrc').disabled=!this.checked;"/>
+                      <form:checkbox value="regular" class="checkbox sizechkbx" path="size" label="Regular" id="chkReg" onclick="document.getElementById('txtRegPrc').disabled=!this.checked;"/>
                     </label>
                   </div>
                   <div class="col-xs-7">
@@ -152,7 +152,7 @@
 
                   <div class="col-xs-5">
                     <label class="checkbox-inline">
-                      <form:checkbox value="medium" class="checkbox" path="size" label="Medium" onclick="document.getElementById('txtMedPrc').disabled=!this.checked;"/>
+                      <form:checkbox value="medium" class="checkbox sizechkbx" path="size" label="Medium" onclick="document.getElementById('txtMedPrc').disabled=!this.checked;"/>
                     </label>
                   </div>
                   <div class="col-xs-7">
@@ -164,7 +164,7 @@
 
                   <div class="col-xs-5">
                     <label class="checkbox-inline">
-                      <form:checkbox value="large" class="checkbox" path="size" label="Large" onclick="document.getElementById('txtLrgPrc').disabled=!this.checked;"/>
+                      <form:checkbox value="large" class="checkbox sizechkbx" path="size" label="Large" onclick="document.getElementById('txtLrgPrc').disabled=!this.checked;"/>
                     </label>
                   </div>
                   <div class="col-xs-7">
@@ -175,7 +175,7 @@
                 <div class="row item-tbl-row" id="addItmChkbxOthr">
                   <div class="col-xs-5">
                     <label class="checkbox-inline">
-                    <form:checkbox value="other" class="checkbox" path="size" label="Other" onclick="document.getElementById('txtOthrPrc').disabled=!this.checked;"/>
+                    <form:checkbox value="other" class="checkbox sizechkbx" path="size" label="Other" onclick="document.getElementById('txtOthrPrc').disabled=!this.checked;"/>
                     </label>
                   </div>
                   <div class="col-xs-7">

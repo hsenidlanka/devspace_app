@@ -108,7 +108,9 @@ $(document).ready(function () {
         });
 
 
+/*$(".sizechkbx").click(function(){
 
+})*/
 
 
 
