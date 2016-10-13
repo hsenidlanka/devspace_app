@@ -1,7 +1,7 @@
 package hsl.devspace.app.corelogic.repository.user;
 
 import hsl.devspace.app.corelogic.domain.User;
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.TransientDataAccessResourceException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -15,6 +15,7 @@ import javax.sql.DataSource;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.SQLType;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -25,7 +26,9 @@ public class StaffRepositoryImpl implements UserRepository {
     User user = new User();
     private JdbcTemplate jdbcTemplate;
     private PlatformTransactionManager transactionManager;
-    private static org.apache.log4j.Logger log = Logger.getLogger(UserRepositoryImpl.class);
+   // private static org.apache.log4j.Logger log = Logger.getLogger(UserRepositoryImpl.class);
+   org.slf4j.Logger log = LoggerFactory.getLogger(StaffRepositoryImpl.class);
+
 
     public void setDataSource(DataSource dataSource) {
         jdbcTemplate = new JdbcTemplate(dataSource);
@@ -60,8 +63,8 @@ public class StaffRepositoryImpl implements UserRepository {
                 updateGroupStaff(des, un);
 
 
-                log.info(row + " staff inserted");
-                log.info(un);
+                log.info("{} staff inserted",row);
+
             /*}else
                 log.info("username already available");*/
         } else
@@ -84,7 +87,7 @@ public class StaffRepositoryImpl implements UserRepository {
                 "(group_id,staff_id) VALUES (?,?)";
 
         row = jdbcTemplate.update(sql,new Object[]{mp.get(0).get("id"),mp1.get(0).get("id")});
-        log.info(row + " group-staff updated");
+        log.info("{} group-staff updated",row);
         return row;
 
     }
@@ -97,7 +100,7 @@ public class StaffRepositoryImpl implements UserRepository {
 
         String sql = "DELETE FROM staff WHERE username = ?";
         int row = jdbcTemplate.update(sql, new Object[]{user.getUsername()});
-        log.info(row + "staff deleted");
+        log.info("{} staff deleted",row);
         return row;
 
     }
@@ -110,15 +113,15 @@ public class StaffRepositoryImpl implements UserRepository {
 
         user.setUsername(username);
         user.setPassword(password);
-        boolean verified = loginAuthenticate(username, password);
-        if (verified) {
+        int verified = loginAuthenticate(username, password);
+        if (verified==1) {
 
             user.setPassword(nPw);
             System.out.println(user.getPassword());
 
             String sql = "UPDATE staff SET password = sha1(?) WHERE username = ? ";
             int row = jdbcTemplate.update(sql, new Object[]{user.getPassword(), user.getUsername()});
-            log.info(row + "password changed");
+            log.info("{} password changed",row);
         } else log.info("cannot change password");
     }
 
@@ -128,22 +131,28 @@ public class StaffRepositoryImpl implements UserRepository {
     }
 
     /*verify whether password and username matched for a specific user*/
+    //blocked=2
+    //credentials matched=1
+    //mismatched=0
     @Override
-    public boolean loginAuthenticate(String username, String password) {
+    public int loginAuthenticate(String username, String password) {
+        int result ;
+        List<Map<String, Object>> mp1= jdbcTemplate.queryForList("SELECT status FROM staff WHERE BINARY username = ?",username);
+        log.info("{}",mp1.get(0).get("status"));
+        if (mp1.get(0).get("status").toString().equals("active")) {
+            List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE BINARY username = ? AND BINARY password =sha1(?)", username, password);
+            log.info("{}",mp);
 
-        boolean result = false;
-        List<Map<String, Object>> mp1 = jdbcTemplate.queryForList("SELECT status FROM customer WHERE BINARY username = ?", username);
-        if (mp1.get(0).get("status") == "active") {
-            String sql = "SELECT count(*) FROM staff WHERE BINARY username = ? AND BINARY password =? ";
-
-            int count = jdbcTemplate.queryForObject(
-                    sql, new Object[]{user.getUsername(), (user.getPassword())}, Integer.class);
-
-            if (count > 0) {
-                result = true;
+            if (mp.size() != 0) {
+                log.info("{}",mp.get(0));
+                result = 1;
             }
+            else result=0;
+
         }
-        log.info(result);
+        else result=2;
+        log.info("{}",result);
+
         return result;
     }
 
@@ -154,25 +163,73 @@ public class StaffRepositoryImpl implements UserRepository {
         String sql = "UPDATE staff SET username=? password = ? WHERE username = ? ";
 
         int count = jdbcTemplate.update(sql, new Object[]{user.getUsername(), user.getPassword(), (user.getUsername())}, Integer.class);
-        log.info(count);
+        log.info("{}",count);
         return count;
 
     }
 
     /*retrieve all details for a specific staff user*/
     @Override
-    public List<Map<String, Object>> retrieveSelectedUserDetails(String username) {
+    public List<User> retrieveSelectedUserDetails(String username) {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE BINARY username = ?", username);
-        log.info(mp);
-        return mp;
+        List<User> staffDetails=new ArrayList<User>();
+
+        for (int i=0;i<mp.size();i++){
+            User staff = new User();
+            staff.setId(Integer.parseInt(mp.get(i).get("id").toString()));
+            staff.setTitle(mp.get(i).get("title").toString());
+            staff.setUsername(mp.get(i).get("username").toString());
+            staff.setPassword(mp.get(i).get("password").toString());
+            staff.setFirstName(mp.get(i).get("first_name").toString());
+            staff.setLastName(mp.get(i).get("last_name").toString());
+            staff.setEmail(mp.get(i).get("email").toString());
+            staff.setMobile(mp.get(i).get("mobile").toString());
+            staff.setAddressL1(mp.get(i).get("address_line1").toString());
+            staff.setAddressL2(mp.get(i).get("address_line2").toString());
+            staff.setAddressL3(mp.get(i).get("address_line3").toString());
+            staff.setDesignation(mp.get(i).get("designation").toString());
+            staff.setDepartment(mp.get(i).get("department").toString());
+            staff.setBranch(mp.get(i).get("branch").toString());
+            staff.setRegDate(Date.valueOf(mp.get(i).get("register_date").toString()));
+            staff.setStatus(mp.get(i).get("status").toString());
+            staffDetails.add(staff);
+
+
+        }
+        log.info("{}",staffDetails);
+        return staffDetails;
     }
 
     /*retrieve details of all staff users*/
     @Override
-    public List<Map<String, Object>> selectAll() {
+    public List<User> selectAll() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff");
-        log.info(mp);
-        return mp;
+        List<User> staffDetails=new ArrayList<User>();
+
+        for (int i=0;i<mp.size();i++){
+            User staff = new User();
+            staff.setId(Integer.parseInt(mp.get(i).get("id").toString()));
+            staff.setTitle(mp.get(i).get("title").toString());
+            staff.setUsername(mp.get(i).get("username").toString());
+            staff.setPassword(mp.get(i).get("password").toString());
+            staff.setFirstName(mp.get(i).get("first_name").toString());
+            staff.setLastName(mp.get(i).get("last_name").toString());
+            staff.setEmail(mp.get(i).get("email").toString());
+            staff.setMobile(mp.get(i).get("mobile").toString());
+            staff.setAddressL1(mp.get(i).get("address_line1").toString());
+            staff.setAddressL2(mp.get(i).get("address_line2").toString());
+            staff.setAddressL3(mp.get(i).get("address_line3").toString());
+            staff.setDesignation(mp.get(i).get("designation").toString());
+            staff.setDepartment(mp.get(i).get("department").toString());
+            staff.setBranch(mp.get(i).get("branch").toString());
+            staff.setRegDate(Date.valueOf(mp.get(i).get("register_date").toString()));
+            staff.setStatus(mp.get(i).get("status").toString());
+            staffDetails.add(staff);
+
+
+        }
+        log.info("{}",staffDetails);
+        return staffDetails;
     }
 
     /*block a certain staff member*/
@@ -183,7 +240,7 @@ public class StaffRepositoryImpl implements UserRepository {
 
         String sql = "UPDATE staff SET status=2 WHERE username = ?";
         int row = jdbcTemplate.update(sql, new Object[]{user.getUsername()});
-        log.info(row + "block status");
+        log.info("{} block status",row);
         return row;
     }
 
@@ -195,35 +252,105 @@ public class StaffRepositoryImpl implements UserRepository {
 
         String sql = "UPDATE staff SET status=1 WHERE username = ?";
         int row = jdbcTemplate.update(sql, new Object[]{user.getUsername()});
-        log.info(row + "unblock status");
+        log.info("{} unblock status",row);
         return row;
     }
 
     /*retrieve details of staff members registered on a specific date*/
     @Override
-    public List<Map<String, Object>> retrieveCustomersByDate(java.sql.Date date) {
+    public List<User> retrieveCustomersByDate(java.sql.Date date) {
 
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE register_date = ?", date);
-        log.info(mp);
-        return mp;
+        List<User> staffDetails=new ArrayList<User>();
+
+        for (int i=0;i<mp.size();i++){
+            User staff = new User();
+            staff.setId(Integer.parseInt(mp.get(i).get("id").toString()));
+            staff.setTitle(mp.get(i).get("title").toString());
+            staff.setUsername(mp.get(i).get("username").toString());
+            staff.setPassword(mp.get(i).get("password").toString());
+            staff.setFirstName(mp.get(i).get("first_name").toString());
+            staff.setLastName(mp.get(i).get("last_name").toString());
+            staff.setEmail(mp.get(i).get("email").toString());
+            staff.setMobile(mp.get(i).get("mobile").toString());
+            staff.setAddressL1(mp.get(i).get("address_line1").toString());
+            staff.setAddressL2(mp.get(i).get("address_line2").toString());
+            staff.setAddressL3(mp.get(i).get("address_line3").toString());
+            staff.setDesignation(mp.get(i).get("designation").toString());
+            staff.setDepartment(mp.get(i).get("department").toString());
+            staff.setBranch(mp.get(i).get("branch").toString());
+            staff.setRegDate(Date.valueOf(mp.get(i).get("register_date").toString()));
+            staff.setStatus(mp.get(i).get("status").toString());
+            staffDetails.add(staff);
+
+
+        }
+        log.info("{}",staffDetails);
+        return staffDetails;
     }
 
 /*
     retrieve details of staff members registered between specified time period
 */
     @Override
-    public List<Map<String, Object>> retrieveByDateRange(Date date1, Date date2) {
+    public List<User> retrieveByDateRange(Date date1, Date date2) {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE register_date BETWEEN ? AND ?", date1, date2);
-        log.info(mp);
-        return mp;
+        List<User> staffDetails=new ArrayList<User>();
+
+        for (int i=0;i<mp.size();i++){
+            User staff = new User();
+            staff.setId(Integer.parseInt(mp.get(i).get("id").toString()));
+            staff.setTitle(mp.get(i).get("title").toString());
+            staff.setUsername(mp.get(i).get("username").toString());
+            staff.setPassword(mp.get(i).get("password").toString());
+            staff.setFirstName(mp.get(i).get("first_name").toString());
+            staff.setLastName(mp.get(i).get("last_name").toString());
+            staff.setEmail(mp.get(i).get("email").toString());
+            staff.setMobile(mp.get(i).get("mobile").toString());
+            staff.setAddressL1(mp.get(i).get("address_line1").toString());
+            staff.setAddressL2(mp.get(i).get("address_line2").toString());
+            staff.setAddressL3(mp.get(i).get("address_line3").toString());
+            staff.setDesignation(mp.get(i).get("designation").toString());
+            staff.setDepartment(mp.get(i).get("department").toString());
+            staff.setBranch(mp.get(i).get("branch").toString());
+            staff.setRegDate(Date.valueOf(mp.get(i).get("register_date").toString()));
+            staff.setStatus(mp.get(i).get("status").toString());
+            staffDetails.add(staff);
+        }
+        log.info("{}",staffDetails);
+        return staffDetails;
     }
 
     /*retrieve details of staff members filtered by a given attribute*/
     @Override
-    public List<Map<String, Object>> filter(SQLType column, String filterValue) {
+    public List<User> filter(SQLType column, String filterValue) {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE ? = ?", column, filterValue);
-        log.info(mp);
-        return mp;
+        List<User> staffDetails=new ArrayList<User>();
+
+        for (int i=0;i<mp.size();i++){
+            User staff = new User();
+            staff.setId(Integer.parseInt(mp.get(i).get("id").toString()));
+            staff.setTitle(mp.get(i).get("title").toString());
+            staff.setUsername(mp.get(i).get("username").toString());
+            staff.setPassword(mp.get(i).get("password").toString());
+            staff.setFirstName(mp.get(i).get("first_name").toString());
+            staff.setLastName(mp.get(i).get("last_name").toString());
+            staff.setEmail(mp.get(i).get("email").toString());
+            staff.setMobile(mp.get(i).get("mobile").toString());
+            staff.setAddressL1(mp.get(i).get("address_line1").toString());
+            staff.setAddressL2(mp.get(i).get("address_line2").toString());
+            staff.setAddressL3(mp.get(i).get("address_line3").toString());
+            staff.setDesignation(mp.get(i).get("designation").toString());
+            staff.setDepartment(mp.get(i).get("department").toString());
+            staff.setBranch(mp.get(i).get("branch").toString());
+            staff.setRegDate(Date.valueOf(mp.get(i).get("register_date").toString()));
+            staff.setStatus(mp.get(i).get("status").toString());
+            staffDetails.add(staff);
+
+
+        }
+        log.info("{}",staffDetails);
+        return staffDetails;
 
     }
 
@@ -232,7 +359,7 @@ public class StaffRepositoryImpl implements UserRepository {
     public int countUsers() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff ");
         int count = mp.size();
-        log.info(count);
+        log.info("{}",count);
         return count;
     }
 
@@ -251,26 +378,75 @@ public class StaffRepositoryImpl implements UserRepository {
             result = false;
             log.info("username already available");
         }
-        log.info(result);
+        log.info("{}",result);
         return result;
     }
 
     @Override
-    public List<Map<String, Object>> selectActiveUsers() {
+    public List<User> selectActiveUsers() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE status=1");
-        log.info(mp);
-        return mp;
+        List<User> staffDetails=new ArrayList<User>();
+
+        for (int i=0;i<mp.size();i++){
+            User staff = new User();
+            staff.setId(Integer.parseInt(mp.get(i).get("id").toString()));
+            staff.setTitle(mp.get(i).get("title").toString());
+            staff.setUsername(mp.get(i).get("username").toString());
+            staff.setPassword(mp.get(i).get("password").toString());
+            staff.setFirstName(mp.get(i).get("first_name").toString());
+            staff.setLastName(mp.get(i).get("last_name").toString());
+            staff.setEmail(mp.get(i).get("email").toString());
+            staff.setMobile(mp.get(i).get("mobile").toString());
+            staff.setAddressL1(mp.get(i).get("address_line1").toString());
+            staff.setAddressL2(mp.get(i).get("address_line2").toString());
+            staff.setAddressL3(mp.get(i).get("address_line3").toString());
+            staff.setDesignation(mp.get(i).get("designation").toString());
+            staff.setDepartment(mp.get(i).get("department").toString());
+            staff.setBranch(mp.get(i).get("branch").toString());
+            staff.setRegDate(Date.valueOf(mp.get(i).get("register_date").toString()));
+            staff.setStatus(mp.get(i).get("status").toString());
+            staffDetails.add(staff);
+
+
+        }
+        log.info("{}",staffDetails);
+        return staffDetails;
     }
 
     @Override
-    public List<Map<String, Object>> selectBlockedUsers() {
+    public List<User> selectBlockedUsers() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE status=2");
-        log.info(mp);
-        return mp;    }
+        List<User> staffDetails=new ArrayList<User>();
+
+        for (int i=0;i<mp.size();i++){
+            User staff = new User();
+            staff.setId(Integer.parseInt(mp.get(i).get("id").toString()));
+            staff.setTitle(mp.get(i).get("title").toString());
+            staff.setUsername(mp.get(i).get("username").toString());
+            staff.setPassword(mp.get(i).get("password").toString());
+            staff.setFirstName(mp.get(i).get("first_name").toString());
+            staff.setLastName(mp.get(i).get("last_name").toString());
+            staff.setEmail(mp.get(i).get("email").toString());
+            staff.setMobile(mp.get(i).get("mobile").toString());
+            staff.setAddressL1(mp.get(i).get("address_line1").toString());
+            staff.setAddressL2(mp.get(i).get("address_line2").toString());
+            staff.setAddressL3(mp.get(i).get("address_line3").toString());
+            staff.setDesignation(mp.get(i).get("designation").toString());
+            staff.setDepartment(mp.get(i).get("department").toString());
+            staff.setBranch(mp.get(i).get("branch").toString());
+            staff.setRegDate(Date.valueOf(mp.get(i).get("register_date").toString()));
+            staff.setStatus(mp.get(i).get("status").toString());
+            staffDetails.add(staff);
+
+
+        }
+        log.info("{}",staffDetails);
+        return staffDetails;
+    }
 
     public void test(String des){
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT id FROM `group` ");
-        log.info(mp);
+        log.info("{}",mp);
 
     }
 

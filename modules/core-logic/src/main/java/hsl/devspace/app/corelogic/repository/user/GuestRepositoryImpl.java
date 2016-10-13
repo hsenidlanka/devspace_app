@@ -1,7 +1,7 @@
 package hsl.devspace.app.corelogic.repository.user;
 
 import hsl.devspace.app.corelogic.domain.User;
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +17,9 @@ public class GuestRepositoryImpl  {
     User user = new User();
     private JdbcTemplate jdbcTemplate;
     private PlatformTransactionManager transactionManager;
-    private static org.apache.log4j.Logger log = Logger.getLogger(UserRepositoryImpl.class);
+    //private static org.apache.log4j.Logger log = Logger.getLogger(UserRepositoryImpl.class);
+    org.slf4j.Logger log = LoggerFactory.getLogger(GuestRepositoryImpl.class);
+
 
     public void setDataSource(DataSource dataSource) {
         //this.dataSource = dataSource;
@@ -41,9 +43,9 @@ public class GuestRepositoryImpl  {
             String sql = "INSERT INTO guest" +
                     "(mobile) VALUES (?)";
             row = jdbcTemplate.update(sql, new Object[]{user.getMobile()});
-            log.info(row + "new guest user inserted");
+            log.info("{} new guest user inserted",row);
         } else
-            log.info(row + "guest user already available");
+            log.info("{} guest user already available",row);
 
         return row;
 
@@ -55,12 +57,12 @@ public class GuestRepositoryImpl  {
         boolean result;
 
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM guest WHERE  mobile=?",mobile);
-        log.info(mp);
+        log.info("{}",mp);
 
         if (mp.size() != 0) {
             result = true;
         } else result = false;
-        log.info(result);
+        log.info("{}",result);
         return result;
     }
 
