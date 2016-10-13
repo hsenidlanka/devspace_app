@@ -12,14 +12,14 @@ public interface ItemRepository {
     int add(Item item);
     boolean checkAvailability(String itemName);
     int delete(String itemName);
-    List<Map<String, Object>> selectAll();
+    List<Item> selectAll();
     int count();
-    List<Map<String, Object>> selectNameList();
+    List<String> selectNameList();
     int update(Item item);
     int updateSizeTable(int id,List<Item> item2);
     void addItem(Item item,List<Item> item2);
     List<Map<String, Object>> getTopRatedItemsFromAllCategories();
     List<Map<String, Object>> getTopRatedItemsOfACategory(String categoryName);
-    List<Map<String, Object>> getAllCategories();
+    List<String> getAllCategories();
     List<Map<String, Object>> viewAllItemDetails();
 }

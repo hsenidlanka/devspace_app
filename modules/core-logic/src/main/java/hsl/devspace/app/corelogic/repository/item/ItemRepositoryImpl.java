@@ -1,7 +1,7 @@
 package hsl.devspace.app.corelogic.repository.item;
 
 import hsl.devspace.app.corelogic.domain.Item;
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
@@ -20,7 +20,9 @@ public class ItemRepositoryImpl implements ItemRepository {
     Item item = new Item();
     private JdbcTemplate jdbcTemplate;
     private PlatformTransactionManager transactionManager;
-    private static org.apache.log4j.Logger log = Logger.getLogger(ItemRepositoryImpl.class);
+    //private static org.apache.log4j.Logger log = Logger.getLogger(ItemRepositoryImpl.class);
+    org.slf4j.Logger log = LoggerFactory.getLogger(ItemRepositoryImpl.class);
+
 
     public void setDataSource(DataSource dataSource) {
         //this.dataSource = dataSource;
@@ -44,7 +46,7 @@ public class ItemRepositoryImpl implements ItemRepository {
                     "(name,description,type_id,image,sub_category_id) VALUES (?,?,(SELECT type_id FROM type WHERE name=? ),?,(SELECT id FROM sub_category WHERE name=?))";
             row = jdbcTemplate.update(sql, new Object[]{item.getItemName(), item.getDescription(),
                     item.getType(), item.getImage(), item.getSubCategoryName()});
-            log.info(row + "new item inserted");
+            log.info("{} new item inserted",row);
        // } else
             //log.info(row + "item already available");
 
@@ -61,7 +63,7 @@ public class ItemRepositoryImpl implements ItemRepository {
             String sql = "INSERT INTO size" +
                     "(size,price,item_id) VALUES (?,?,?)";
             row = jdbcTemplate.update(sql, new Object[]{size, price, id});
-            log.info(row + "size updated");
+            log.info("{} size updated",row);
         }
         return row;
     }
@@ -72,12 +74,12 @@ public class ItemRepositoryImpl implements ItemRepository {
 
         boolean result;
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM item WHERE  name=?", itemName);
-        log.info(mp);
+        log.info("{}",mp);
 
         if (mp.size() != 0) {
             result = true;
         } else result = false;
-        log.info(result);
+        log.info("{}",result);
         return result;
     }
 
@@ -88,16 +90,28 @@ public class ItemRepositoryImpl implements ItemRepository {
         item.setItemName(itemName);
         String sql = "DELETE FROM item WHERE name = ?";
         int row = jdbcTemplate.update(sql, new Object[]{item.getItemName()});
-        log.info(row + " item deleted");
+        log.info("{} item deleted",row);
         return row;
     }
 
     /*view all item details*/
     @Override
-    public List<Map<String, Object>> selectAll() {
+    public List<Item> selectAll() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM item");
-        log.info(mp);
-        return mp;
+        List<Item> items=new ArrayList<Item>();
+        for (int i=0;i<mp.size();i++){
+            Item item = new Item();
+            item.setItemId(Integer.parseInt(mp.get(i).get("id").toString()));
+            item.setItemName(mp.get(i).get("name").toString());
+            item.setDescription(mp.get(i).get("description").toString());
+            item.setTypeId(Integer.parseInt(mp.get(i).get("type_id").toString()));
+            item.setImage(mp.get(i).get("image").toString());
+            item.setSubCategoryId(Integer.parseInt(mp.get(i).get("sub_category_id").toString()));
+            items.add(item);
+
+        }
+        log.info("{}",items);
+        return items;
     }
 
     /*retrieve no.of items*/
@@ -105,16 +119,21 @@ public class ItemRepositoryImpl implements ItemRepository {
     public int count() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM item ");
         int count = mp.size();
-        log.debug(count);
+        log.debug("{}",count);
         return count;
     }
 
     /*retrieve list of item names*/
     @Override
-    public List<Map<String, Object>> selectNameList() {
+    public List<String> selectNameList() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT name FROM item");
-        log.info(mp);
-        return mp;
+        List<String> itemNames=new ArrayList<String>();
+        for (int j=0;j<mp.size();j++){
+            String nm=mp.get(j).get("name").toString();
+            itemNames.add(nm);
+        }
+        log.info("{}",itemNames);
+        return itemNames;
     }
 
     /*update item details(((((((((have to modify)))))*/
@@ -123,7 +142,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 
         String sql = "UPDATE item SET name=? price=? description=? size=? type=? image=? sub_category_id=? WHERE id = ? ";
         int row = jdbcTemplate.update(sql, new Object[]{item.getItemName(), item.getPrice(), item.getDescription(), item.getSize(), item.getType(), item.getImage(), item.getSubCategoryName(), item.getItemId()});
-        log.info(row + "Item details changed");
+        log.info("{} Item details changed",row);
         return row;
     }
 
@@ -149,26 +168,32 @@ public class ItemRepositoryImpl implements ItemRepository {
         List<Map<String, Object>> mp1 = jdbcTemplate.queryForList("SELECT sum(number_of_stars) AS total_stars, i.name AS item_name, sc.name AS subcategory_name," +
                 " c.name AS category_name FROM feedback f, item i, sub_category sc, category c WHERE f.item_id=i.id AND i.sub_category_id=sc.id" +
                 " AND sc.category_id=c.id AND c.name=? GROUP BY i.name ORDER BY total_stars desc LIMIT 2", categoryName);
-        log.info(mp1);
+        log.info("{}",mp1);
         return mp1;
 
     }
 
     @Override
-    public List<Map<String, Object>> getAllCategories() {
+    public List<String> getAllCategories() {
         List<Map<String,Object>> mp=jdbcTemplate.queryForList("SELECT name FROM category");
-        log.info(mp);
-        return mp;
+        List<String> categoryList=new ArrayList<String>();
+        for (int j=0;j<mp.size();j++){
+            String nm=mp.get(j).get("name").toString();
+            categoryList.add(nm);
+        }
+        log.info("{}",categoryList);
+        return categoryList;
     }
 
     /*retrieve all item details as a view of selected fields*/
     @Override
     public List<Map<String, Object>> viewAllItemDetails() {
-        int row = jdbcTemplate.update("CREATE VIEW  item_details AS SELECT i.id,i.name AS item_name,c.name AS category_name," +
+       /* int row = jdbcTemplate.update("CREATE VIEW  item_details AS SELECT i.id,i.name AS item_name,c.name AS category_name," +
                 "s.name AS sub_category_name,t.name AS type,i.description,i.image FROM item i INNER JOIN sub_category s " +
                 "ON i.sub_category_id=s.id INNER JOIN type t ON i.type_id=t.type_id INNER JOIN category c ON c.id=s.category_id");
+        */
         List<Map<String, Object>> itemDetails = jdbcTemplate.queryForList("SELECT * FROM item_details ");
-        log.info(itemDetails);
+        log.info("{}",itemDetails);
         return itemDetails;
     }
 
@@ -183,9 +208,9 @@ public class ItemRepositoryImpl implements ItemRepository {
                     " c.name AS category_name FROM feedback f, item i, sub_category sc, category c WHERE f.item_id=i.id AND i.sub_category_id=sc.id" +
                     " AND sc.category_id=c.id AND c.name=? GROUP BY i.name ORDER BY total_stars desc LIMIT 2", category.get(i).get("name"));
             mp.addAll(mp1);
-            log.info(mp1);
+            log.info("{}",mp1);
         }
-        log.info(mp);
+        log.info("{}",mp);
         return mp;
     }
 
