@@ -55,15 +55,14 @@ $(document).ready(function () {
         }
     })
 
-
-
-
+/*
+* populating the sub-category list in addItem.jsp
+**/
         $("#selectCat").change(function(){
             var categoryNm = $(this).val();
             $.ajax({
                 type: "POST",
                 url: "https://localhost:8443/admin/items/getSubcats",
-                //dataType: "JSON",
                 data: {"categoryNm" : categoryNm},
 
                 success: function(data){
@@ -81,5 +80,50 @@ $(document).ready(function () {
             });
 
         });
+
+/*
+* populating the sub-category list in editItem.jsp
+**/
+        $("#selectCatedt").change(function(){
+            var categoryNm = $(this).val();
+            $.ajax({
+                type: "POST",
+                url: "https://localhost:8443/admin/items/getSubcats",
+                data: {"categoryNm" : categoryNm},
+
+                success: function(data){
+                    var slctSubcatEdt = $("#slctEditSubCat"), option= "";
+                    slctSubcatEdt.empty();
+
+                    for(var sb =0; sb<data.length; sb++){
+                        option = option + "<option value='" + data[sb].name + "'>" +data[sb].name + "</option>";
+                    }
+                    slctSubcatEdt.append(option);
+                },
+                error:function(e){
+                    alert("error " + e);
+                }
+            });
+
+        });
+
+
+/*$(".sizechkbx").click(function(){
+
+})*/
+
+
+
+
+
+ /*   function enableTextbox(chk, txt){
+        if(chk.checked == true)
+            txt.disable(false);
+       //(document).getElementById(txt).disabled = !chk;
+        *//*if(chk.is(':checked')) {
+            $(txt).find(txt).attr('disabled', false);
+        }*//*
+
+    }*/
 
 })
