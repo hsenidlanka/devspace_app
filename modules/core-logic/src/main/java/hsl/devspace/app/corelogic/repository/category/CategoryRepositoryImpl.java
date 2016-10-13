@@ -142,24 +142,26 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
 
     /*retrieve types of a specific category*/
     public List<String> retrieveCategoryTypes(String categoryName){
+        List<String> subCatName = new ArrayList<String>();
 
         List<Map<String, Object>> mp1=jdbcTemplate.queryForList("SELECT id FROM category WHERE name=?", categoryName);
-        List<Map<String, Object>> mp2=jdbcTemplate.queryForList("SELECT type_id FROM category_type WHERE category_id=?",mp1.get(0).get("id"));
-        List<Map<String, Object>> mp=null;
-        List<Map<String,Object>> another=new ArrayList<Map<String, Object>>();
+        if (mp1.size()!=0) {
+            List<Map<String, Object>> mp2 = jdbcTemplate.queryForList("SELECT type_id FROM category_type WHERE category_id=?", mp1.get(0).get("id"));
+            List<Map<String, Object>> mp = null;
+            List<Map<String, Object>> another = new ArrayList<Map<String, Object>>();
 
-        int i=0;
-        while ( i<mp2.size()){
-           mp =  jdbcTemplate.queryForList("SELECT name FROM type WHERE type_id=?", mp2.get(i).get("type_id"));
-            another.addAll(mp);
-            log.info("{}",mp);
-            i++;
-        }
-        //log.info("another"+another);
-        List<String> subCatName=new ArrayList<String>();
-        for (int j=0;j<another.size();j++){
-            String nm=another.get(j).get("name").toString();
-            subCatName.add(nm);
+            int i = 0;
+            while (i < mp2.size()) {
+                mp = jdbcTemplate.queryForList("SELECT name FROM type WHERE type_id=?", mp2.get(i).get("type_id"));
+                another.addAll(mp);
+                log.info("{}", mp);
+                i++;
+            }
+            //log.info("another"+another);
+            for (int j = 0; j < another.size(); j++) {
+                String nm = another.get(j).get("name").toString();
+                subCatName.add(nm);
+            }
         }
         log.info("{}",subCatName);
         return subCatName;
