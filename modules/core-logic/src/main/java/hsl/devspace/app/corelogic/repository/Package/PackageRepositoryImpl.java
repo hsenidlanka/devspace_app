@@ -1,11 +1,12 @@
 package hsl.devspace.app.corelogic.repository.Package;
 
 import hsl.devspace.app.corelogic.domain.Package;
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +17,9 @@ public class PackageRepositoryImpl implements PackageRepository  {
     //Package pkg=new Package();
     private JdbcTemplate jdbcTemplate;
     private PlatformTransactionManager transactionManager;
-    private static org.apache.log4j.Logger log = Logger.getLogger(PackageRepositoryImpl.class);
+    //private static org.apache.log4j.Logger log = Logger.getLogger(PackageRepositoryImpl.class);
+    org.slf4j.Logger log = LoggerFactory.getLogger(PackageRepositoryImpl.class);
+
 
     public void setDataSource(DataSource dataSource) {
         jdbcTemplate = new JdbcTemplate(dataSource);
@@ -35,7 +38,7 @@ public class PackageRepositoryImpl implements PackageRepository  {
         String sql = "INSERT INTO package " +
                 "(name,content,price,image) VALUES (?,?,?,?)";
         row = jdbcTemplate.update(sql, new Object[]{pack.getPackName(),pack.getContent(),pack.getPrice(),pack.getImage()});
-        log.info(row + "new package added");
+        log.info("{} new package added",row);
         return row;
     }
 
@@ -45,7 +48,7 @@ public class PackageRepositoryImpl implements PackageRepository  {
 
         String sql = "DELETE FROM package WHERE name = ?";
         int row = jdbcTemplate.update(sql, new Object[]{packageName});
-        log.info(row + " package deleted");
+        log.info("{} package deleted",row);
         return row;
     }
 
@@ -54,7 +57,7 @@ public class PackageRepositoryImpl implements PackageRepository  {
     public int updatePackage(Package updatedPackage) {
         String sql = "UPDATE package SET content=?,price=?,image=? WHERE name = ? ";
         int row = jdbcTemplate.update(sql, new Object[]{updatedPackage.getContent(),updatedPackage.getPrice(),updatedPackage.getImage(),updatedPackage.getPackName()});
-        log.info(row);
+        log.info("{}",row);
         return row;
     }
 
@@ -64,16 +67,29 @@ public class PackageRepositoryImpl implements PackageRepository  {
 
         String sql = "UPDATE package SET price=?  WHERE name = ? ";
         int row = jdbcTemplate.update(sql, new Object[]{price, packageName});
-        log.info(row);
+        log.info("{}",row);
         return row;
     }
 
     /*view all details of package*/
     @Override
-    public List<Map<String, Object>> selectAll() {
+    public List<Package> selectAll() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM package");
-        log.info(mp);
-        return mp;
+        List<Package> pack=new ArrayList<Package>();
+
+        for (int i=0;i<mp.size();i++){
+            Package packages = new Package();
+            packages.setPackageId(Integer.parseInt(mp.get(i).get("id").toString()));
+            packages.setPackName(mp.get(i).get("name").toString());
+            packages.setContent(mp.get(i).get("content").toString());
+            packages.setPrice(Double.parseDouble(mp.get(i).get("price").toString()));
+            packages.setImage(mp.get(i).get("image").toString());
+            pack.add(packages);
+
+
+        }
+        log.info("{}",pack);
+        return pack;
     }
 
 }
