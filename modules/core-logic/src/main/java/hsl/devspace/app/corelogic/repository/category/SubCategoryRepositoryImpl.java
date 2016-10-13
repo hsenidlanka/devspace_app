@@ -184,7 +184,7 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
             item.setItemId(Integer.parseInt(another.get(j).get("id").toString()));
             item.setItemName(another.get(j).get("name").toString());
             item.setDescription(another.get(j).get("description").toString());
-            item.setTypeId(Integer.parseInt(another.get(j).get("type_id").toString()));
+            item.setType(another.get(j).get("type").toString());
             item.setImage(another.get(j).get("image").toString());
             item.setSubCategoryId(Integer.parseInt(another.get(j).get("sub_category_id").toString()));
             itemList.add(item);
