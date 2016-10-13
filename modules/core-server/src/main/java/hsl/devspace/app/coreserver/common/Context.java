@@ -12,6 +12,6 @@ public class Context {
     // Instantiate appcontext using static initializer. So the other classes can
     // access the same appcontext object.
     static {
-        appContext=new ClassPathXmlApplicationContext("spring-context.xml");
+        appContext = new ClassPathXmlApplicationContext("spring-context.xml");
     }
 }
