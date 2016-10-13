@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <%@include file="include.jsp" %>
+    <%@include file="includes/include.jsp" %>
 
     <script src="<c:url value="/resources/js/contactus_validate.js"/>" ></script>
     <script src="<c:url value="/resources/js/validate-inputs.js"/>" ></script>
@@ -12,7 +12,7 @@
 
 
 <body style="overflow: visible">
-<%@include file="NewHeader.jsp" %>
+<%@include file="includes/NewHeader.jsp" %>
 
 <div class="brand"></div>
 <center>
@@ -78,11 +78,11 @@
         </div>
     </div>
 </center>
-<%@include file="loginload.jsp" %>
+<%@include file="includes/loginload.jsp" %>
 <%@include file="signupmodal.jsp" %>
 
 
 </body>
-<%@include file="footer.jsp" %>
+<%@include file="includes/footer.jsp" %>
 </html>
 

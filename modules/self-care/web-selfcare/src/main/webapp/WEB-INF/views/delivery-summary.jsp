@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
-    <%@include file="include.jsp" %>
+    <%@include file="includes/include.jsp" %>
     <title><fmt:message key="summary" bundle="${lang}"/></title>
     <link rel="shortcut icon" href="">
     <link rel="stylesheet" href="<c:url value="/resources/css/progress-wizard.min.css"/>" >
@@ -11,7 +11,7 @@
 
 <div class="loader-anim"></div>
 
-<%@include file="NewHeader.jsp" %>
+<%@include file="includes/NewHeader.jsp" %>
 
 <div class="main-div">
     <div class="section">

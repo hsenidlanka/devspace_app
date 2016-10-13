@@ -1,7 +1,7 @@
 package hsl.devspace.app.corelogic.repository.permission;
 
 import hsl.devspace.app.corelogic.domain.Permission;
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.PlatformTransactionManager;
 
@@ -13,7 +13,8 @@ import javax.sql.DataSource;
 public class PermissionRepositoryImpl implements PermissionRepository{
     private JdbcTemplate jdbcTemplate;
     private PlatformTransactionManager transactionManager;
-    private static org.apache.log4j.Logger log = Logger.getLogger(PermissionRepositoryImpl.class);
+   // private static org.apache.log4j.Logger log = Logger.getLogger(PermissionRepositoryImpl.class);
+    org.slf4j.Logger log = LoggerFactory.getLogger(PermissionRepositoryImpl.class);
 
     public void setDataSource(DataSource dataSource) {
         jdbcTemplate = new JdbcTemplate(dataSource);
@@ -33,7 +34,7 @@ public class PermissionRepositoryImpl implements PermissionRepository{
                 "(name,description) VALUES (?,?)";
 
         row = jdbcTemplate.update(sql, new Object[]{permission.getPermissionName(),permission.getDescription()});
-        log.info(row + "new permission inserted");
+        log.info("{} new permission inserted",row);
         return row;
     }
 
@@ -42,7 +43,7 @@ public class PermissionRepositoryImpl implements PermissionRepository{
     public int delete(String permissionName) {
         String sql = "DELETE FROM permission WHERE name = ?";
         int row = jdbcTemplate.update(sql, new Object[]{permissionName});
-        log.info(row + "permission deleted");
+        log.info("{} permission deleted",row);
         return row;
     }
 }

@@ -1,8 +1,9 @@
 var frisby = require('frisby');
+var base_url = "http://localhost:2222/pizza-shefu/api/v1.0";
 
 // Test register customer-valid data.
 frisby.create('Register customer test 01-valid data')
-    .post('http://localhost:2222/pizza-shefu/api/v1.0/customers/register/', {
+    .post(base_url + '/customers/register/', {
         "title": "Mr", "firstName": "frisby", "lastName": "test", "username": "frisby123",
         "password": "password", "email": "frisby@kdm.com", "addressL1": "123",
         "addressL2": "abc", "mobile": "123456789"
@@ -48,7 +49,7 @@ frisby.create('Register customer test 01-valid data')
 
 // Test register customer-different http method.
 frisby.create('Register customer test 02-different http method')
-    .get('http://localhost:2222/pizza-shefu/api/v1.0/customers/register/', {
+    .get(base_url + '/customers/register/', {
         "title": "Mr", "firstName": "frisby", "lastName": "test", "username": "frisby123",
         "password": "password", "email": "frisby@kdm.com", "addressL1": "123",
         "addressL2": "abc", "mobile": "123456789"
@@ -71,7 +72,7 @@ frisby.create('Register customer test 02-different http method')
 
 // Test customer login-correct data.
 frisby.create('Customer login test 01-correct data')
-    .post('http://localhost:2222/pizza-shefu/api/v1.0/customers/login/', {
+    .post(base_url + '/customers/login/', {
         "username": "frisby123",
         "password": "password"
     }, {json: true})
@@ -109,7 +110,7 @@ frisby.create('Customer login test 01-correct data')
 
 // Test customer login-wrong username.
 frisby.create('Customer login test 02-wrong username')
-    .post('http://localhost:2222/pizza-shefu/api/v1.0/customers/login/', {
+    .post(base_url + '/customers/login/', {
         "username": "frisby12",
         "password": "password"
     }, {json: true})
@@ -131,7 +132,7 @@ frisby.create('Customer login test 02-wrong username')
 
 // Test customer login-wrong password.
 frisby.create('Customer login test 03-wrong password')
-    .post('http://localhost:2222/pizza-shefu/api/v1.0/customers/login/', {
+    .post(base_url + '/customers/login/', {
         "username": "frisby123",
         "password": "passwor"
     }, {json: true})
@@ -153,7 +154,7 @@ frisby.create('Customer login test 03-wrong password')
 
 // Test customer login-with spaces.
 frisby.create('Customer login test 04-with spaces')
-    .post('http://localhost:2222/pizza-shefu/api/v1.0/customers/login/', {
+    .post(base_url + '/customers/login/', {
         "username": " frisby123",
         "password": "password"
     }, {json: true})
@@ -175,7 +176,7 @@ frisby.create('Customer login test 04-with spaces')
 
 // Test customer login-with spaces.
 frisby.create('Customer login test 05-with spaces')
-    .post('http://localhost:2222/pizza-shefu/api/v1.0/customers/login/', {
+    .post(base_url + '/customers/login/', {
         "username": "frisby123 ",
         "password": "password"
     }, {json: true})
@@ -197,7 +198,7 @@ frisby.create('Customer login test 05-with spaces')
 
 // Test customer login-mixed case username.
 frisby.create('Customer login test 06-mixed case username')
-    .post('http://localhost:2222/pizza-shefu/api/v1.0/customers/login/', {
+    .post(base_url + '/customers/login/', {
         "username": "friSby123",
         "password": "password"
     }, {json: true})
@@ -219,7 +220,7 @@ frisby.create('Customer login test 06-mixed case username')
 
 // Test customer login-mixed case password.
 frisby.create('Customer login test 07-mixed case password')
-    .post('http://localhost:2222/pizza-shefu/api/v1.0/customers/login/', {
+    .post(base_url + '/customers/login/', {
         "username": "friSby123",
         "password": "pasSword"
     }, {json: true})
@@ -241,7 +242,7 @@ frisby.create('Customer login test 07-mixed case password')
 
 // Test customer login-empty password.
 frisby.create('Customer login test 08-empty password')
-    .post('http://localhost:2222/pizza-shefu/api/v1.0/customers/login/', {
+    .post(base_url + '/customers/login/', {
         "username": "frisby123"
     }, {json: true})
     .expectStatus(401)
@@ -262,7 +263,7 @@ frisby.create('Customer login test 08-empty password')
 
 // Test customer login-empty username.
 frisby.create('Customer login test 09-empty password')
-    .post('http://localhost:2222/pizza-shefu/api/v1.0/customers/login/', {
+    .post(base_url + '/customers/login/', {
         "password": "password"
     }, {json: true})
     .expectStatus(401)
@@ -283,7 +284,7 @@ frisby.create('Customer login test 09-empty password')
 
 // Test customer login-With different http method.
 frisby.create('Customer login test 10-wrong http method')
-    .get('http://localhost:2222/pizza-shefu/api/v1.0/customers/login/', {
+    .get(base_url + '/customers/login/', {
         "username": "frisby123",
         "password": "password"
     }, {json: true})
@@ -305,7 +306,7 @@ frisby.create('Customer login test 10-wrong http method')
 
 // Test getting the profile of a customer-valid data.
 frisby.create('Getting customer profile test 01-existing username')
-    .get('http://localhost:2222/pizza-shefu/api/v1.0/customers/frisby123',
+    .get(base_url + '/customers/frisby123',
     {
         headers: {'Content-Type': 'application/json'}
     })
@@ -346,7 +347,7 @@ frisby.create('Getting customer profile test 01-existing username')
 
 // Test getting the profile of a customer-valid data.
 frisby.create('Getting customer profile test 02-non-existing username')
-    .get('http://localhost:2222/pizza-shefu/api/v1.0/customers/frisby12',
+    .get(base_url + '/customers/frisby12',
     {
         headers: {'Content-Type': 'application/json'}
     })
@@ -375,7 +376,7 @@ frisby.create('Getting customer profile test 02-non-existing username')
 
 // Test getting the profile of a customer-valid data.
 frisby.create('Getting customer profile test 03-username case')
-    .get('http://localhost:2222/pizza-shefu/api/v1.0/customers/Frisby123',
+    .get(base_url + '/customers/Frisby123',
     {
         headers: {'Content-Type': 'application/json'}
     })

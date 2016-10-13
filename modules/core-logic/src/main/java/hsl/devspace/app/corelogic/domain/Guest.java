@@ -30,4 +30,12 @@ public class Guest {
 
     public Guest() {
     }
+
+    @Override
+    public String toString() {
+        return "Guest{" +
+                "name='" + name + '\'' +
+                ", city='" + city + '\'' +
+                '}';
+    }
 }

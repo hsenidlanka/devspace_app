@@ -10,6 +10,7 @@ public class ServerModel {
     private String packageName; // Package contains resources(REST)
     private String contextRoot; // Context path pattern
     private String servletPath; // Servlet path-url pattern
+    private String baseUrl; // Base url of the API
 
     public int getPort() {
         return port;
@@ -41,5 +42,13 @@ public class ServerModel {
 
     public void setServletPath(String servletPath) {
         this.servletPath = servletPath;
+    }
+
+    public String getBaseUrl() {
+        return baseUrl;
+    }
+
+    public void setBaseUrl(String baseUrl) {
+        this.baseUrl = baseUrl;
     }
 }

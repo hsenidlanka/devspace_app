@@ -1,12 +1,13 @@
 package hsl.devspace.app.coreserver.resources;
 
-import hsl.devspace.app.corelogic.repository.category.CategoryRepositoryImpl;
 import hsl.devspace.app.corelogic.repository.category.SubCategoryRepositoryImpl;
 import hsl.devspace.app.coreserver.common.Context;
+import hsl.devspace.app.coreserver.common.PropertyReader;
+import hsl.devspace.app.coreserver.model.ServerModel;
 import hsl.devspace.app.coreserver.model.SuccessMessage;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.json.simple.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 
 import javax.ws.rs.*;
@@ -22,10 +23,12 @@ import java.util.Map;
  */
 @Path("/subcategories")
 public class SubCategoryService {
-    private static final Logger log = LogManager.getLogger(SubCategoryService.class);
+    private static final Logger log = LoggerFactory.getLogger(SubCategoryService.class);
     ApplicationContext context = Context.appContext;
     SubCategoryRepositoryImpl subcategoryRepository = (SubCategoryRepositoryImpl) context.getBean("subCategoryRepoImpl");
-    final String BASE_URL = "http://localhost:2222/pizza-shefu/api/v1.0/";
+    private ServerModel serverModel = (ServerModel) context.getBean("serverModel");
+    final String BASE_URL = serverModel.getBaseUrl();
+    PropertyReader propertyReader = new PropertyReader("header.properties");
 
     // Retrieve all the sub-categories
     @GET
@@ -51,7 +54,9 @@ public class SubCategoryService {
         } else {
             successMessage.setMessage("no sub-categories to retrieve");
         }
-        return Response.status(Response.Status.OK).entity(successMessage).build();
+        return Response.status(Response.Status.OK).entity(successMessage)
+                .header("Access-Control-Allow-Origin", propertyReader.readProperty("Access-Control-Allow-Origin"))
+                .build();
     }
 
     // Retrieve sub-categories of a specific category
@@ -77,6 +82,8 @@ public class SubCategoryService {
         } else {
             successMessage.setMessage("no sub-categories to retrieve");
         }
-        return Response.status(Response.Status.OK).entity(successMessage).build();
+        return Response.status(Response.Status.OK).entity(successMessage)
+                .header("Access-Control-Allow-Origin", propertyReader.readProperty("Access-Control-Allow-Origin"))
+                .build();
     }
 }

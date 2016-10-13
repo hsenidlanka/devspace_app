@@ -1,7 +1,8 @@
 package hsl.devspace.app.corelogic.repository.category;
 
 import hsl.devspace.app.corelogic.domain.Category;
-import org.apache.log4j.Logger;
+import hsl.devspace.app.corelogic.domain.Item;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
@@ -20,7 +21,9 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
     Category category = new Category();
     private JdbcTemplate jdbcTemplate;
     private PlatformTransactionManager transactionManager;
-    private static org.apache.log4j.Logger log = Logger.getLogger(CategoryRepositoryImpl.class);
+    //private static org.apache.log4j.Logger log = Logger.getLogger(CategoryRepositoryImpl.class);
+    org.slf4j.Logger log = LoggerFactory.getLogger(CategoryRepositoryImpl.class);
+
 
     public void setDataSource(DataSource dataSource) {
         jdbcTemplate = new JdbcTemplate(dataSource);
@@ -44,10 +47,9 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
 
             row = jdbcTemplate.update(sql, new Object[]{category.getCategoryName(), category.getDescription(), category.getCreator()});
 
-            log.info(row + "new category inserted");
+            log.info("{} new category inserted",row);
         } else
-            log.info(row + "category already available");
-
+            log.info("{} category already available",row);
 
         return row;
     }
@@ -58,12 +60,12 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
         boolean result;
 
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category WHERE  name=?", categoryName);
-        log.info(mp);
+        log.info("{}",mp);
 
         if (mp.size() != 0) {
             result = true;
         } else result = false;
-        log.info(result +"availability checking");
+        log.info("{} availability checking",result);
         return result;
 
     }
@@ -75,24 +77,37 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
 
         String sql = "DELETE FROM category WHERE name = ?";
         int row = jdbcTemplate.update(sql, new Object[]{category.getCategoryName()});
-        log.info(row + " category deleted");
+        log.info("{} category deleted",row);
         return row;
     }
 
     /*view all category details */
     @Override
-    public List<Map<String, Object>> view() {
+    public List<Category> selectAll() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category");
-        log.info(mp);
-        return mp;
+        List<Category> categories=new ArrayList<Category>();
+
+        for (int i=0;i<mp.size();i++){
+            //for(int j=0;j<mp.get(i).size();j++) {
+                Category category = new Category();
+                category.setCategory_id(Integer.parseInt(mp.get(i).get("id").toString()));
+                category.setCategoryName(mp.get(i).get("name").toString());
+                category.setDescription(mp.get(i).get("description").toString());
+                category.setCreator(mp.get(i).get("creator").toString());
+                categories.add(category);
+           // }
+
+        }
+        log.info("{}",categories);
+        return categories;
     }
 
-    /*retrieve total no.of categories*/
+   /*retrieve total no.of categories*/
     @Override
     public int count() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category ");
         int count = mp.size();
-        log.info(count);
+        log.info("{}",count);
         return count;
     }
 
@@ -103,20 +118,30 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
         String sql = "UPDATE category SET name=? description = ? WHERE name = ? ";
 
         int count = jdbcTemplate.update(sql, new Object[]{category.getCategoryName(), category.getSubCategoryName(), category.getCategoryName()}, Integer.class);
-        log.info(count);
+        log.info("{}",count);
         return count;
     }
 
     /*view name and description of all categories*/
     @Override
-    public List<Map<String, Object>> viewList() {
+    public List<Category> selectNameAndDescription() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT name,description FROM category");
-        log.info(mp);
-        return mp;
+        List<Category> categories=new ArrayList<Category>();
+
+        for (int i=0;i<mp.size();i++){
+                Category category = new Category();
+                category.setCategoryName(mp.get(i).get("name").toString());
+                category.setDescription(mp.get(i).get("description").toString());
+                categories.add(category);
+
+
+        }
+        log.info("{}",categories);
+        return categories;
     }
 
     /*retrieve types of a specific category*/
-    public List<Map<String, Object>> retrieveCategoryTypes(String categoryName){
+    public List<String> retrieveCategoryTypes(String categoryName){
 
         List<Map<String, Object>> mp1=jdbcTemplate.queryForList("SELECT id FROM category WHERE name=?", categoryName);
         List<Map<String, Object>> mp2=jdbcTemplate.queryForList("SELECT type_id FROM category_type WHERE category_id=?",mp1.get(0).get("id"));
@@ -127,12 +152,17 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
         while ( i<mp2.size()){
            mp =  jdbcTemplate.queryForList("SELECT name FROM type WHERE type_id=?", mp2.get(i).get("type_id"));
             another.addAll(mp);
-            log.info(mp);
+            log.info("{}",mp);
             i++;
         }
-        log.info("another"+another);
-        return another;
-
+        //log.info("another"+another);
+        List<String> subCatName=new ArrayList<String>();
+        for (int j=0;j<another.size();j++){
+            String nm=another.get(j).get("name").toString();
+            subCatName.add(nm);
+        }
+        log.info("{}",subCatName);
+        return subCatName;
         /*List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT name FROM type WHERE type_id=" +"(SELECT type_id FROM category_type WHERE category_id=" + "(SELECT id FROM category WHERE name=?))",categoryName);
         log.info(mp);*/
 
@@ -140,11 +170,13 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
 
     /*retrieve all items in a specific category*/
     @Override
-    public List<Map<String, Object>> loadMenuItems(String catName) {
+    public List<Item> loadMenuItems(String catName) {
        // List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM item WHERE sub_category_id=(SELECT id FROM sub_category WHERE category_id=(SELECT id FROM category WHERE name=?))",catName);
         List<Map<String, Object>> mp1=jdbcTemplate.queryForList("SELECT id FROM category WHERE name=?", catName);
         List<Map<String, Object>> mp=null;
         List<Map<String,Object>> another=new ArrayList<Map<String, Object>>();
+        List<Item> itemList=new ArrayList<Item>();
+
         if(mp1.size()>0){
             List<Map<String, Object>> mp2=jdbcTemplate.queryForList("SELECT id FROM sub_category WHERE category_id=?",mp1.get(0).get("id"));
             if(mp2.size()>0){
@@ -152,7 +184,7 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
                 while ( i< mp2.size()){
                     mp =  jdbcTemplate.queryForList("SELECT * FROM item WHERE sub_category_id=?", mp2.get(i).get("id"));
                     another.addAll(mp);
-                    log.info(mp);
+                    log.info("{}",mp);
                     i++;
                 }
             }
@@ -166,27 +198,50 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
 
         log.info("mp"+mp);
         log.info("another"+another);
-        return another;
+        for (int j=0;j<another.size();j++){
+            Item item=new Item();
+            item.setItemId(Integer.parseInt(another.get(j).get("id").toString()));
+            item.setItemName(another.get(j).get("name").toString());
+            item.setDescription(another.get(j).get("description").toString());
+            item.setTypeId(Integer.parseInt(another.get(j).get("type_id").toString()));
+            item.setImage(another.get(j).get("image").toString());
+            item.setSubCategoryId(Integer.parseInt(another.get(j).get("sub_category_id").toString()));
+            itemList.add(item);
+
+
+        }
+        log.info("{}",itemList);
+        return itemList;
     }
 
 /*view all sub categories of a specific category*/
     @Override
-    public List<Map<String, Object>> viewSubCategories(String catName) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT name FROM category WHERE category_id=(SELECT id FROM category WHERE NAME =?)",catName);
-        log.info(mp);
-        return mp;
+    public List<String> viewSubCategories(String catName) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT name FROM sub_category WHERE category_id=(SELECT id FROM category WHERE name =?)",catName);
+        List<String> subCatName=new ArrayList<String>();
+        for (int i=0;i<mp.size();i++){
+            String nm=mp.get(i).get("name").toString();
+            subCatName.add(nm);
+        }
+        log.info("{}",subCatName);
+        return subCatName;
     }
 
     /*retrieve list of category names*/
     @Override
-    public List<Map<String, Object>> viewCategoryList() {
+    public List<String> selectCategoryNames() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT name FROM category");
-        log.info(mp);
-        return mp;
+        List<String> catName=new ArrayList<String>();
+        for (int i=0;i<mp.size();i++){
+            String nm=mp.get(i).get("name").toString();
+            catName.add(nm);
+        }
+        log.info("{}",catName);
+        return catName;
     }
 
     @Override
-    public List<Map<String, Object>> retrieveSubcatogories(String category) {
+    public List<String> retrieveSubcatogories(String category) {
         return null;
     }
 

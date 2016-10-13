@@ -9,7 +9,7 @@ public class User {
 
     private boolean isConfirmed;
     private String dob;
-
+private int id;
     private String title;
     private String firstName;
     private String lastName;
@@ -27,6 +27,23 @@ public class User {
 
     private enum status{
         active,inactive
+    }
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Date getRegDate() {
@@ -205,5 +222,27 @@ public class User {
     }
     public User(String mobile){
         this.mobile=mobile;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "isConfirmed=" + isConfirmed +
+                ", dob='" + dob + '\'' +
+                ", title='" + title + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", addressL1='" + addressL1 + '\'' +
+                ", addressL2='" + addressL2 + '\'' +
+                ", addressL3='" + addressL3 + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", designation='" + designation + '\'' +
+                ", department='" + department + '\'' +
+                ", branch='" + branch + '\'' +
+                ", regDate=" + regDate +
+                '}';
     }
 }

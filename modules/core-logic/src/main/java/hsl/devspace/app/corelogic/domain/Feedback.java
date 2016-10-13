@@ -73,5 +73,17 @@ public class Feedback {
 
     public Feedback() {
     }
+
+    @Override
+    public String toString() {
+        return "Feedback{" +
+                "date=" + date +
+                ", time=" + time +
+                ", comment='" + comment + '\'' +
+                ", numberOfStars=" + numberOfStars +
+                ", customerId=" + customerId +
+                ", itemName='" + itemName + '\'' +
+                '}';
+    }
 }
 

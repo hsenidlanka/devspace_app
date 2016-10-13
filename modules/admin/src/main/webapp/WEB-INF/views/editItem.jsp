@@ -1,5 +1,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -79,22 +81,11 @@
                         <div class="row">
                             <div class="col-xs-6">
                                 <div class="col-xs-4">
-                                    <label class="control-label" style="float:right;">
-                                        Item ID : &nbsp; *
-                                    </label>
-                                </div>
-                                <div class="col-xs-8">
-                                    <form:input class="form-control" id="txtEditID" type="text" readonly="true" path="itemId"/>
-                                </div>
-
-                            </div>
-                            <div class="col-xs-6">
-                                <div class="col-xs-3">
-                                    <label class="control-label">
+                                    <label class="control-label" style="float: right;">
                                         Name :
                                     </label>
                                 </div>
-                                <div class="col-xs-9">
+                                <div class="col-xs-8">
                                     <form:input class="form-control" id="txtEditName" type="text" path="itemName"/>
                                 </div>
                             </div>
@@ -110,24 +101,12 @@
                                     </label>
                                 </div>
                                 <div class="col-xs-8">
-                                    <%--<form:select class="form-control" id="editSlctCat" path="">
-                                        <form:option value="Pizza">Pizza</form:option>
-                                        <form:option value="Pasta">Pasta</form:option>
-                                        <form:option value="Salad">Salad / Appetizer</form:option>
-                                        <form:option value="Dessert">Dessert</form:option>
-                                        <form:option value="Topping">Topping</form:option>
-                                        <form:option value="Crust">Crust</form:option>
-                                    </form:select>--%>
-
-                                        <select class="form-control" id="selectCat">
-                                            <option value="0">--Select Category--</option>
-                                            <option value="pizza">Pizza</option>
-                                            <option value="pasta">Pasta</option>
-                                            <option value="salad">Salad / Appetizer</option>
-                                            <option value="dessert">Dessert</option>
-                                            <option value="topping">Topping</option>
-                                            <option value="crust">Crust</option>
-                                        </select>
+                                        <form:select class="form-control" id="selectCatedt" path="categoryName">
+                                            <form:option value="-" label="--Select Category--"/>
+                                            <c:forEach var="listEdit" items="${listCatEdit}">
+                                                <form:option id="${listEdit.key}" value="${listEdit.get(\"name\")}">${listEdit.get("name")}</form:option>
+                                            </c:forEach>
+                                        </form:select>
                                 </div>
 
                             </div>
@@ -158,13 +137,17 @@
                                     </label>
                                 </div>
                                 <div class="col-xs-8">
-                                    <form:select class="form-control" id="slctEditSubCat" path="subCategoryName">
+                                 <%--   <form:select class="form-control" id="slctEditSubCat" path="subCategoryName">
                                         <form:option value="Deepdish">Deep dish Pizza</form:option>
                                         <form:option value="Italiano">Italiano Pizza</form:option>
                                         <form:option value="Gourmet">Gourmet</form:option>
                                         <form:option value="NY">NY Thin crust</form:option>
                                         <form:option value="BigP">Big Pizza</form:option>
-                                    </form:select>
+                                    </form:select>--%>
+
+                                     <select class="form-control" id="slctEditSubCat">
+
+                                     </select>
                                 </div>
 
                             </div>
@@ -196,11 +179,11 @@
 
                                         <div class="col-xs-5">
                                             <label class="checkbox-inline">
-                                                <form:checkbox value="regular" class="checkbox" path="size"/> Regular
+                                                <form:checkbox value="regular" class="checkbox" path="size" label="Regular" onclick="document.getElementById('txtEdtPrcReg').disabled=!this.checked;"/>
                                             </label>
                                         </div>
                                         <div class="col-xs-7">
-                                            <form:input type="text" class="form-control price" path="price"/>
+                                            <form:input id="txtEdtPrcReg" type="text" class="form-control price" path="price" disabled="true"/>
                                         </div>
                                     </div>
 
@@ -208,11 +191,11 @@
 
                                         <div class="col-xs-5">
                                             <label class="checkbox-inline">
-                                            <form:checkbox value="medium" class="checkbox" path="size"/> Medium
+                                            <form:checkbox value="medium" class="checkbox" path="size" label="Medium" onclick="document.getElementById('txtEdtPrcReg').disabled=!this.checked;"/>
                                             </label>
                                         </div>
                                         <div class="col-xs-7">
-                                            <form:input type="text" class="form-control price" path="price"/>
+                                            <form:input type="text" id="txtEdtPrcMed" class="form-control price" path="price"/>
                                         </div>
                                     </div>
 
@@ -220,24 +203,24 @@
 
                                         <div class="col-xs-5">
                                             <label class="checkbox-inline">
-                                            <form:checkbox value="large" class="checkbox" path="size"/> Large
+                                            <form:checkbox value="large" class="checkbox" path="size" onclick="document.getElementById('txtEdtPrcReg').disabled=!this.checked;"/> Large
 
                                             </label>
                                         </div>
                                         <div class="col-xs-7">
-                                            <form:input type="text" class="form-control price" path="price"/>
+                                            <form:input id="txtEdtPrcLrg" type="text" class="form-control price" path="price"/>
                                         </div>
                                     </div>
 
                                     <div class="row item-tbl-row" id="edtItmChkbxOthr">
                                         <div class="col-xs-5">
                                             <label class="checkbox-inline">
-                                            <form:checkbox value="other" class="checkbox" path="size"/> Other
+                                            <form:checkbox value="other" class="checkbox" path="size" onclick="document.getElementById('txtEdtPrcReg').disabled=!this.checked;"/> Other
 
                                             </label>
                                         </div>
                                         <div class="col-xs-7">
-                                            <form:input type="text" value="" class="form-control price" path="price"/>
+                                            <form:input type="text" id="txtEdtPrOthr" class="form-control price" path="price"/>
                                         </div>
                                     </div>
 

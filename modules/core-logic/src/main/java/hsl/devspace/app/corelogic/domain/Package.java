@@ -59,4 +59,15 @@ public class Package {
 
     public Package() {
     }
+
+    @Override
+    public String toString() {
+        return "Package{" +
+                "packName='" + packName + '\'' +
+                ", content='" + content + '\'' +
+                ", price=" + price +
+                ", image='" + image + '\'' +
+                ", packageId=" + packageId +
+                '}';
+    }
 }

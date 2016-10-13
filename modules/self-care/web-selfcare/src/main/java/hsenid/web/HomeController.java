@@ -1,48 +1,49 @@
 package hsenid.web;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-
+@PropertySource("classpath:config.properties")
 public class HomeController {
+    @Value("${mongodb.url}")
+    private String mongodbUrl;
 
-    private final static Logger logger = LogManager.getLogger(HomeController.class);
-
+    final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
     @RequestMapping({"/", "/home"})
     public String home() {
-        logger.error("test");
-        return "self-care-home";
+        logger.info("Web Application Started");
+        return "/home/self-care-home";
     }
 
     @RequestMapping("/menu")
     public String menu() {
-        logger.info("DBConnecter connection created");
-        return "menu";
+        return "/home/menu";
     }
 
     @RequestMapping("/locations")
     public String locations() {
-        return "locations";
+        return "/home/locations";
     }
 
     @RequestMapping("/createfeedback")
     public String createfeedback() {
-        return "createfeedback";
+        return "/home/createfeedback";
     }
 
     @RequestMapping("/contactus")
     public String contactus() {
-        return "contactus";
+        return "/home/contactus";
     }
 
     @RequestMapping("/aboutus")
     public String aboutus() {
-        return "aboutus";
+        return "/home/aboutus";
     }
 
     @RequestMapping("/payment")
@@ -85,11 +86,6 @@ public class HomeController {
     public String success() {
         return "success";
     }
-/*
-    @RequestMapping("/register")
-    public String register() {
-        return "register";
-    }*/
 
     @RequestMapping("/delivery-summary")
     public String deliverySummary(){
@@ -99,17 +95,6 @@ public class HomeController {
     @RequestMapping("search-results")
     public String searchResults(){
         return "search-results";
-    }
-    //    Test request
-    @GetMapping("/test")
-    public String test(Model model) {
-        model.addAttribute("greeting", new Greeting());
-        return "test";
-    }
-
-    @RequestMapping(value = "/testt",  method = RequestMethod.GET)
-    public String greetSubmit(@ModelAttribute Greeting greeting){
-        return "test";
     }
 
 }

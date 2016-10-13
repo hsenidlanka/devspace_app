@@ -94,4 +94,18 @@ public class Delivery {
 
     public Delivery() {
     }
+
+    @Override
+    public String toString() {
+        return "Delivery{" +
+                "agentName='" + agentName + '\'' +
+                ", recepientName='" + recepientName + '\'' +
+                ", recepientAddress='" + recepientAddress + '\'' +
+                ", deliveryDate=" + deliveryDate +
+                ", deliveryTime=" + deliveryTime +
+                ", deliveryStatus='" + deliveryStatus + '\'' +
+                ", description='" + description + '\'' +
+                ", deliveryMethod='" + deliveryMethod + '\'' +
+                '}';
+    }
 }

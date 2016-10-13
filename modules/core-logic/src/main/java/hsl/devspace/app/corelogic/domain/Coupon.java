@@ -6,12 +6,31 @@ import java.sql.Date;
  * Created by hsenid on 9/19/16.
  */
 public class Coupon {
+    private int couponId;
     private String couponCode;
     private double rate;
     private Date expireDate;
     private enum status{
         active,used,expired
     }
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public int getCouponId() {
+        return couponId;
+    }
+
+    public void setCouponId(int couponId) {
+        this.couponId = couponId;
+    }
+
     private String customerMobile;
 
     public String getCouponCode() {
@@ -53,5 +72,15 @@ public class Coupon {
         this.rate=rate;
         this.expireDate=expireDate;
         this.customerMobile=customerMobile;
+    }
+
+    @Override
+    public String toString() {
+        return "Coupon{" +
+                "couponCode='" + couponCode + '\'' +
+                ", rate=" + rate +
+                ", expireDate=" + expireDate +
+                ", customerMobile='" + customerMobile + '\'' +
+                '}';
     }
 }

@@ -1,7 +1,8 @@
 package hsl.devspace.app.corelogic.repository.shopping_cart;
 
+import hsl.devspace.app.corelogic.domain.Item;
 import hsl.devspace.app.corelogic.domain.ShoppingCart;
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.PlatformTransactionManager;
 
@@ -16,7 +17,8 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 
     private JdbcTemplate jdbcTemplate;
     private PlatformTransactionManager transactionManager;
-    private static org.apache.log4j.Logger log = Logger.getLogger(ShoppingCartRepositoryImpl.class);
+   // private static org.apache.log4j.Logger log = Logger.getLogger(ShoppingCartRepositoryImpl.class);
+   org.slf4j.Logger log = LoggerFactory.getLogger(ShoppingCartRepositoryImpl.class);
 
     public void setDataSource(DataSource dataSource) {
         jdbcTemplate = new JdbcTemplate(dataSource);
@@ -35,7 +37,7 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
         String sql = "INSERT INTO shopping_cart " +
                 "(net_cost,customer_id,guest_id) VALUES (?,(SELECT id FROM customer WHERE username=?),(SELECT id FROM guest WHERE mobile=?))";
         row = jdbcTemplate.update(sql, new Object[]{shoppingCart.getNetCost(),shoppingCart.getCustomerUsername(),shoppingCart.getGuestMobile()});
-        log.info(row + "new shopping cart added");
+        log.info("{} new shopping cart added",row);
         return row;
     }
 
@@ -55,7 +57,7 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
     public int countPerCustomer(String customerUsername) {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM shopping_cart WHERE customer_id=(SELECT id FROM customer WHERE username=?)",customerUsername);
         int count = mp.size();
-        log.info(count);
+        log.info("{}",count);
         return count;
     }
 
@@ -64,16 +66,16 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
     public int countPerGuest(String mobile) {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM shopping_cart WHERE guest_id=(SELECT id FROM guest WHERE mobile=?)",mobile);
         int count = mp.size();
-        log.info(count);
+        log.info("{}",count);
         return count;
     }
 
-    /*retrieve no.of carts for the customers(registerd)*/
+    /*retrieve no.of carts for the customers(registered)*/
     @Override
     public int countTotalCustomerCarts() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM shopping_cart WHERE customer_id>0 ");
         int count = mp.size();
-        log.info(count);
+        log.info("{}",count);
         return count;
     }
 
@@ -82,8 +84,41 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
     public int countTotalGuestCarts() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM shopping_cart WHERE guest_id>0 ");
         int count = mp.size();
-        log.info(count);
+        log.info("{}",count);
         return count;
+    }
+
+    @Override
+    public void addItemToCart(Item item) {
+        String sql="INSERT INTO shopping_cart VALUES (?,?,?)";
+        jdbcTemplate.update(sql,new Object[]{Item.class.getDeclaredConstructors()});
+
+    }
+
+    @Override
+    public void modifyItemInCart(Item item) {
+
+
+    }
+
+    @Override
+    public void removeItemFromCart(int itemId) {
+
+    }
+
+    @Override
+    public void addPackageToCart(int packageId) {
+
+    }
+
+    @Override
+    public void modifyPackageInCart() {
+
+    }
+
+    @Override
+    public void removePackageFromCart(int packageId) {
+
     }
 
 

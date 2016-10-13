@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.SQLType;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by hsenid on 7/4/16.
@@ -24,24 +23,24 @@ public interface UserRepository {
 
     boolean confirmPassword() throws SQLException;
 
-    boolean loginAuthenticate(String username,String password) throws SQLException;
+    int loginAuthenticate(String username,String password) throws SQLException;
 
     int modify(User user) throws SQLException, TransientDataAccessResourceException;
 
-    List<Map<String, Object>> retrieveSelectedUserDetails(String username);
-    List<Map<String, Object>> view();
+    List<User> retrieveSelectedUserDetails(String username);
+    List<User> selectAll();
 
     int block(String username);
 
     int unblock(String username);
     public int updateGroupStaff(String des,String username);
-    List<Map<String, Object>> retrieveCustomersByDate(java.sql.Date date);
-    List<Map<String, Object>> retrieveByDateRange(java.sql.Date date1,java.sql.Date date2);
-    List<Map<String, Object>>filter(SQLType column,String filterValue);
+    List<User> retrieveCustomersByDate(java.sql.Date date);
+    List<User> retrieveByDateRange(java.sql.Date date1,java.sql.Date date2);
+    List<User>filter(SQLType column,String filterValue);
     int countUsers();
     boolean checkUsernameUnique(User user);
-    List<Map<String, Object>> viewActiveUsers();
-    List<Map<String, Object>> viewBlockedUsers();
+    List<User> selectActiveUsers();
+    List<User> selectBlockedUsers();
 
 
 

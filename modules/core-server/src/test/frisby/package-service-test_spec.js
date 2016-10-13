@@ -2,10 +2,11 @@
  * Created by Kasun Dinesh on 10/3/16.
  */
 var frisby = require('frisby');
+var base_url = "http://localhost:2222/pizza-shefu/api/v1.0";
 
 // Test get all the packages-correct.
 frisby.create('Package service test 01-correct url')
-    .get('http://localhost:2222/pizza-shefu/api/v1.0/packages/getall',
+    .get(base_url + '/packages/getall',
     {
         headers: {'Content-Type': 'application/json'}
     })
@@ -65,7 +66,7 @@ frisby.create('Package service test 01-correct url')
 
 // Test get all the packages-wrong method.
 frisby.create('Package service test 01-wrong method')
-    .post('http://localhost:2222/pizza-shefu/api/v1.0/packages/getall',
+    .post(base_url + '/packages/getall',
     {
         headers: {'Content-Type': 'application/json'}
     })

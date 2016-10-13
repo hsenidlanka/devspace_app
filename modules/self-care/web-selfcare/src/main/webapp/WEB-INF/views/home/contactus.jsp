@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <%@include file="include.jsp" %>
+    <%@include file="../includes/include.jsp" %>
     <title><fmt:message key="contactus" bundle="${lang}"/></title>
     <link href="<c:url value="/resources/css/prettify.css"/>" >
     <script src="<c:url value="/resources/js/prettify.js"/>" ></script>
@@ -27,7 +27,7 @@
     }
 </style>
 <body style="overflow: visible">
-<%@include file="NewHeader.jsp" %>
+<%@include file="../includes/NewHeader.jsp" %>
 
 <div class="brand"></div>
 <center>

@@ -104,4 +104,19 @@ public class Payment {
 
     public Payment() {
     }
+
+    @Override
+    public String toString() {
+        return "Payment{" +
+                "paymentMethodName='" + paymentMethodName + '\'' +
+                ", date=" + date +
+                ", time=" + time +
+                ", amount=" + amount +
+                ", paymentStatus='" + paymentStatus + '\'' +
+                ", orderType='" + orderType + '\'' +
+                ", userMobile='" + userMobile + '\'' +
+                ", deliveryId=" + deliveryId +
+                ", staffName='" + staffName + '\'' +
+                '}';
+    }
 }

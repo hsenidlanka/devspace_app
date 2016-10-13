@@ -13,6 +13,24 @@ public class Item {
     private String subCategoryName;
     private int itemId;
     private String categoryName;
+    private int typeId;
+    private int subCategoryId;
+
+    public int getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(int typeId) {
+        this.typeId = typeId;
+    }
+
+    public int getSubCategoryId() {
+        return subCategoryId;
+    }
+
+    public void setSubCategoryId(int subCategoryId) {
+        this.subCategoryId = subCategoryId;
+    }
 
     public String getCategoryName() {
         return categoryName;
@@ -120,5 +138,20 @@ public class Item {
     public Item(double price, String size) {
         this.price = price;
         this.size = size;
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "itemName='" + itemName + '\'' +
+                ", price=" + price +
+                ", description='" + description + '\'' +
+                ", size='" + size + '\'' +
+                ", type='" + type + '\'' +
+                ", image='" + image + '\'' +
+                ", subCategoryName='" + subCategoryName + '\'' +
+                ", itemId=" + itemId +
+                ", categoryName='" + categoryName + '\'' +
+                '}';
     }
 }

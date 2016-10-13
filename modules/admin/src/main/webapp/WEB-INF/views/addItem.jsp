@@ -88,12 +88,9 @@
 
               <div class="col-xs-5">
                 <select class="form-control" id="selectSubCat">
-                  <%--<option value="-" label="--Select sub-category--"></option>--%>
+
                 </select>
-                   <%--<form:select class="form-control" id="selectSubCat" path="subCategoryName">
-                   <form:option value="-" label="--Select sub-category--"/>
-                </form:select>--%>
-                <span id="subCatErr" class="input-group-error"><%--<form:errors path="subCategoryName" />--%> </span>
+                <span id="subCatErr" class="input-group-error"></span>
               </div>
 
               <div class="col-xs-4">
@@ -106,20 +103,6 @@
             </div>
           </div>
 
-          <div class="form-group">
-            <div class="row">
-              <label for="txtItemId" class="col-xs-3 control-label">
-                Item ID *
-              </label>
-
-              <div class="col-xs-5">
-                <input class="form-control" id="txtItemId" type="text" path="itemId" readonly="true"/>
-              </div>
-              <div class="col-xs-4">
-                <span id="itmIdErr" class="input-group-error"></span>
-              </div>
-            </div>
-          </div>
 
           <div class="form-group">
             <div class="row">
@@ -157,11 +140,11 @@
 
                   <div class="col-xs-5">
                     <label class="checkbox-inline">
-                      <form:checkbox value="Regular" class="checkbox" path="size"/> Regular
+                      <form:checkbox value="regular" class="checkbox" path="size" label="Regular" id="chkReg" onclick="document.getElementById('txtRegPrc').disabled=!this.checked;"/>
                     </label>
                   </div>
                   <div class="col-xs-7">
-                    <form:input type="text" class="form-control price" path="price"/>
+                    <form:input type="text" class="form-control price" path="price" id="txtRegPrc" disabled="true"/>
                   </div>
                 </div>
 
@@ -169,11 +152,11 @@
 
                   <div class="col-xs-5">
                     <label class="checkbox-inline">
-                      <form:checkbox value="Medium" class="checkbox" path="size"/> Medium
+                      <form:checkbox value="medium" class="checkbox" path="size" label="Medium" onclick="document.getElementById('txtMedPrc').disabled=!this.checked;"/>
                     </label>
                   </div>
                   <div class="col-xs-7">
-                    <form:input type="text" value="" class="form-control price" path="price"/>
+                    <form:input type="text" class="form-control price" path="price" id="txtMedPrc" disabled="true"/>
                   </div>
                 </div>
 
@@ -181,22 +164,22 @@
 
                   <div class="col-xs-5">
                     <label class="checkbox-inline">
-                      <form:checkbox value="Large" class="checkbox" path="size"/> Large
+                      <form:checkbox value="large" class="checkbox" path="size" label="Large" onclick="document.getElementById('txtLrgPrc').disabled=!this.checked;"/>
                     </label>
                   </div>
                   <div class="col-xs-7">
-                    <form:input type="text" class="form-control price" path="price"/>
+                    <form:input type="text" class="form-control price" path="price" id="txtLrgPrc" disabled="true"/>
                   </div>
                 </div>
 
                 <div class="row item-tbl-row" id="addItmChkbxOthr">
                   <div class="col-xs-5">
                     <label class="checkbox-inline">
-                    <form:checkbox value="Other" class="checkbox" path="size"/> Other
+                    <form:checkbox value="other" class="checkbox" path="size" label="Other" onclick="document.getElementById('txtOthrPrc').disabled=!this.checked;"/>
                     </label>
                   </div>
                   <div class="col-xs-7">
-                    <form:input type="text" class="form-control price" path="price"/>
+                    <form:input type="text" class="form-control price" path="price" id="txtOthrPrc" disabled="true" />
                   </div>
                 </div>
 
@@ -214,19 +197,26 @@
                 Item Type
               </label>
 
-              <div class="col-xs-5">
+              <div class="col-xs-7">
                 <label class="radio-inline">
-                  <form:radiobutton path="type" value="Veg"/> Veg
+                  <form:radiobutton path="type" value="veg" label="Veg" checked="true"/>
                 </label>
                 <label class="radio-inline">
-                  <form:radiobutton path="type" value="Non-veg"/> Non-veg
+                  <form:radiobutton path="type" value="non-veg" label="Non-veg"/>
+                </label>
+                <label class="radio-inline">
+                  <form:radiobutton path="type" value="carbonated" label="Carbonated"/>
+                </label>
+                <label class="radio-inline">
+                  <form:radiobutton path="type" value="non-carbonated" label="Non-carbonated"/>
                 </label>
               </div>
 
-              <div class="col-xs-4">
+              <div class="col-xs-2">
                 <span id="itmTypeErr" class="input-group-error"></span>
               </div>
             </div>
+            <br>
           </div>
 
           <div class="form-group">
@@ -264,11 +254,7 @@
           <div class="row" align="right">
             <div class="col-xs-3">
             </div>
-            <div class="col-xs-3" align="right">
-              <form:button type="button" class="btn btn-success btn-group-xs bckToHome"
-                      id="Back"><span
-                      class="glyphicon glyphicon-chevron-left"></span> back to home
-              </form:button>
+            <div class="col-xs-3">
             </div>
             <div class="col-xs-3" align="center">
               <form:button type="submit" class="btn btn-success btn-group-xs" id="btnAddItem"><span
@@ -277,7 +263,7 @@
               </form:button>
             </div>
             <div class="col-xs-3" align="left">
-              <form:button type="button" class="btn btn-success" id="btnAddClear" onclick="this.form.reset();">Clear</form:button>
+              <form:button type="button" class="btn btn-success" id="btnAddClear" onclick="this.form.reset();">Reset</form:button>
             </div>
           </div>
         </fieldset>

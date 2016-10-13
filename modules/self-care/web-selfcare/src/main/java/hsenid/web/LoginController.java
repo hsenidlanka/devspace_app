@@ -1,11 +1,14 @@
 package hsenid.web;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
@@ -16,28 +19,41 @@ import java.net.URLConnection;
 
 
 @Controller
+@PropertySource("classpath:config.properties")
 public class LoginController {
-    private final static Logger logger = LogManager.getLogger(LoginController.class);
+    @Value("${api.url.register}")
+    private String registerUrl;
 
-    String tst = null;
+    @Value("${api.url.login}")
+    private String loginUrl;
+
+    @Value("${api.connect.timeout}")
+    private int connectTimeout;
+
+    @Value("${api.read.timeout}")
+    private int readTimeout;
+
+    final static Logger logger = LoggerFactory.getLogger(LoginController.class);
+    String toLoginJsonString = null;
+
 
     @RequestMapping("login")
     public JSONObject login(HttpServletRequest request) throws JSONException {
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        logger.error("username " + username);
-        logger.error("password " + password);
-        String string = "{" + "username" + ":" + username + "," + "password" + ":" + password + "}";
-        JSONObject jsonObject = new JSONObject(string);
+
+        String loginDetailString = SendStringBuilds.sendString("{","username",":",username,",","password",":",password, "}");
+
+        JSONObject jsonObject = new JSONObject(loginDetailString);
 
         try {
-            URL url = new URL("http://localhost:2222/pizza-shefu/api/v1.0/customers/login/");
+            URL url = new URL(loginUrl);
             URLConnection connection = url.openConnection();
             connection.setDoOutput(true);
             connection.setRequestProperty("Content-Type", "application/json");
-            connection.setConnectTimeout(5000);
-            connection.setReadTimeout(5000);
+            connection.setConnectTimeout(connectTimeout);
+            connection.setReadTimeout(readTimeout);
             OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream());
             out.write(jsonObject.toString());
             out.close();
@@ -51,28 +67,24 @@ public class LoginController {
             }
 
             in.close();
-            tst = "{" + "username" + ":" + username + "," + "password" + ":" + password + "}";
 
             JSONObject reply = new JSONObject(sb.toString());
             int status = reply.getInt("code");
-            logger.error("status code " + status);
-            logger.error(status);
             if (status == 200) {
-                logger.error("success");
             } else if (status == 401) {
-//                return "unathorised";
             }
 
         } catch (Exception e) {
-            logger.error("Exception occur. Reason -> " + e.getMessage());
+            logger.error(e.getMessage());
         }
-        JSONObject authorizeJson = new JSONObject(tst);
+
+        JSONObject authorizeJson = new JSONObject(loginDetailString);
 
         return authorizeJson;
     }
 
 
-    @RequestMapping("/register")
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String register(HttpServletRequest regRequest) throws JSONException {
 
         String addressL3 = null;
@@ -93,18 +105,16 @@ public class LoginController {
         }
 
 
-        String string = "{" + "title" + ":" + title + "," + "firstName" + ":" + firstName + "," + "lastName" + ":" + lastName + "," + "email" + ":" + email + "," + "addressL1" + ":" + addressL1 + "," + "addressL2" + ":" + addressL2 + "," + "addressL3" + ":" + addressL3 + "," + "username" + ":" + username + "," + "password" + ":" + password + "," + "mobile" + ":" + mobile + "}";
-        JSONObject jsonObject = new JSONObject(string);
-
-//        logger.error(string);
+        String registerDetails = SendStringBuilds.sendString("{","title",":",title,"," + "firstName" + ":" + firstName + "," + "lastName" + ":" + lastName + "," + "email" + ":" + email + "," + "addressL1" + ":" + addressL1 + "," + "addressL2" + ":" + addressL2 + "," + "addressL3" + ":",addressL3,",","username",":",username,",","password",":",password,",","mobile",":",mobile,"}");
+        JSONObject jsonObject = new JSONObject(registerDetails);
 
         try {
-            URL url = new URL("http://localhost:2222/pizza-shefu/api/v1.0/customers/register/");
+            URL url = new URL(registerUrl);
             URLConnection connection = url.openConnection();
             connection.setDoOutput(true);
             connection.setRequestProperty("Content-Type", "application/json");
-            connection.setConnectTimeout(5000);
-            connection.setReadTimeout(5000);
+            connection.setConnectTimeout(connectTimeout);
+            connection.setReadTimeout(readTimeout);
             OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream());
             out.write(jsonObject.toString());
             out.close();
@@ -121,9 +131,7 @@ public class LoginController {
 
             JSONObject reply = new JSONObject(sb.toString());
             int status = reply.getInt("code");
-            logger.error(status);
             if (status == 201) {
-                logger.error("success");
                 return "locations";
             }
 
@@ -131,7 +139,7 @@ public class LoginController {
             logger.error("Exception occur. Reason -> " + e.getMessage());
         }
 
-        return "aboutus";
+        return "/home/aboutus";
     }
 
 
@@ -141,20 +149,16 @@ public class LoginController {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        logger.error("username " + username);
-        logger.error("password " + password);
-
-        String string = "{" + "username" + ":" + username + "," + "password" + ":" + password + "}";
-
-        JSONObject jsonObject = new JSONObject(string);
+        String loginDetailString = SendStringBuilds.sendString("{","username",":",username,",","password",":",password, "}");
+        JSONObject jsonObject = new JSONObject(loginDetailString);
 
         try {
-            URL url = new URL("http://localhost:2222/pizza-shefu/api/v1.0/customers/login/");
+            URL url = new URL(loginUrl);
             URLConnection connection = url.openConnection();
             connection.setDoOutput(true);
             connection.setRequestProperty("Content-Type", "application/json");
-            connection.setConnectTimeout(5000);
-            connection.setReadTimeout(5000);
+            connection.setConnectTimeout(connectTimeout);
+            connection.setReadTimeout(readTimeout);
             OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream());
             out.write(jsonObject.toString());
             out.close();
@@ -168,24 +172,17 @@ public class LoginController {
             }
             in.close();
 
-            tst = "{" + "username" + ":" + username + "," + "password" + ":" + password + "}";
-            logger.error("send json " + tst);
-
+//            toLoginJsonString = "{" + "username" + ":" + username + "," + "password" + ":" + password + "}";
 
             JSONObject reply = new JSONObject(sb.toString());
             int status = reply.getInt("code");
-            logger.error("status code " + status);
-            logger.error(status);
             if (status == 200) {
-                logger.error("success");
                 return "aboutus";
             }
 
         } catch (Exception e) {
             logger.error("Exception occur. Reason -> " + e.getMessage());
         }
-        JSONObject test = new JSONObject(tst);
-//        return test;
         return "location";
     }
 

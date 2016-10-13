@@ -37,4 +37,13 @@ public class ShoppingCart {
         this.customerUsername = customerUsername;
         this.guestMobile = guestMobile;
     }
+
+    @Override
+    public String toString() {
+        return "ShoppingCart{" +
+                "netCost=" + netCost +
+                ", customerUsername='" + customerUsername + '\'' +
+                ", guestMobile='" + guestMobile + '\'' +
+                '}';
+    }
 }
