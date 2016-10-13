@@ -17,6 +17,13 @@
         <property name="description" value="credentials provided are not authorized."/>
     </bean>
 
+    <bean id="response403" class="hsl.devspace.app.coreserver.model.ErrorMessage">
+        <property name="status" value="forbidden"/>
+        <property name="errorCode" value="403"/>
+        <property name="errorMessage" value="HTTP_FORBIDDEN"/>
+        <property name="description" value="user has no permissions or a blocked user"/>
+    </bean>
+
     <bean id="response404" class="hsl.devspace.app.coreserver.model.ErrorMessage">
         <property name="status" value="error"/>
         <property name="errorCode" value="404"/>

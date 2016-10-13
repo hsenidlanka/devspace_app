@@ -1,5 +1,6 @@
 package hsl.devspace.app.coreserver.resources;
 
+import hsl.devspace.app.corelogic.domain.Category;
 import hsl.devspace.app.corelogic.repository.category.CategoryRepositoryImpl;
 import hsl.devspace.app.coreserver.common.Context;
 import hsl.devspace.app.coreserver.common.PropertyReader;
@@ -36,7 +37,8 @@ public class CategoryService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response getCategories(@javax.ws.rs.core.Context UriInfo uriInfo) {
-        List<Map<String, Object>> categoryList = categoryRepository.view();
+        List categoryList = categoryRepository.selectAll();
+        Category category;
         SuccessMessage successMessage = new SuccessMessage();
         successMessage.setCode(Response.Status.OK.getStatusCode());
         successMessage.setStatus("success");
@@ -45,12 +47,13 @@ public class CategoryService {
 
         if (categoryList.size() != 0) {
             successMessage.setMessage("categories retrieved");
-            for (Map<String, Object> map : categoryList) {
+            for (int i=0; i<categoryList.size(); i++) {
                 JSONObject jsonObject = new JSONObject();
-                jsonObject.put("name", map.get("name").toString());
-                jsonObject.put("description", map.get("description").toString());
+                category= (Category) categoryList.get(i);
+                jsonObject.put("name", category.getCategoryName());
+                jsonObject.put("description", category.getDescription());
                 successMessage.addData(jsonObject);
-                successMessage.addLink(BASE_URL+"subcategories/category/"+map.get("name").toString().replaceAll(" ","%20"), "subcategories of "+map.get("name").toString());
+                successMessage.addLink(BASE_URL+"subcategories/category/"+category.getCategoryName().replaceAll(" ","%20"), "subcategories of "+category.getCategoryName().toString());
             }
         } else {
             successMessage.setMessage("no categories to retrieve");

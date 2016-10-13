@@ -1,5 +1,6 @@
 package hsl.devspace.app.coreserver.resources;
 
+import hsl.devspace.app.corelogic.domain.Category;
 import hsl.devspace.app.corelogic.repository.category.SubCategoryRepositoryImpl;
 import hsl.devspace.app.coreserver.common.Context;
 import hsl.devspace.app.coreserver.common.PropertyReader;
@@ -36,20 +37,22 @@ public class SubCategoryService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response getSubCatogories(@javax.ws.rs.core.Context UriInfo uriInfo) {
-        List<Map<String, Object>> subcategoryList = subcategoryRepository.view();
+        List subcategoryList = subcategoryRepository.selectAll();
         SuccessMessage successMessage = new SuccessMessage();
         successMessage.setCode(Response.Status.OK.getStatusCode());
         successMessage.setStatus("success");
         String url = uriInfo.getAbsolutePath().toString();
         successMessage.addLink(url, "self");
+        Category category;
         if (subcategoryList.size() != 0) {
             successMessage.setMessage("sub-categories retrieved");
-            for (Map<String, Object> map : subcategoryList) {
+            for (int i = 0; i < subcategoryList.size(); i++) {
+                category = (Category) subcategoryList.get(i);
                 JSONObject jsonObject = new JSONObject();
-                jsonObject.put("name", map.get("name").toString());
-                jsonObject.put("description", map.get("description").toString());
+                jsonObject.put("name", category.getSubCategoryName());
+                jsonObject.put("description", category.getDescription());
                 successMessage.addData(jsonObject);
-                successMessage.addLink(BASE_URL + "items/subcategory/" + map.get("name").toString().replaceAll(" ", "%20"), map.get("name").toString() + " items");
+                successMessage.addLink(BASE_URL + "items/subcategory/" + category.getSubCategoryName().replaceAll(" ", "%20"), category.getSubCategoryName() + " items");
             }
         } else {
             successMessage.setMessage("no sub-categories to retrieve");
@@ -65,7 +68,7 @@ public class SubCategoryService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response getSubCatogoriesByCategory(@PathParam("categoryName") String categoryName, @javax.ws.rs.core.Context UriInfo uriInfo) {
-        List<Map<String, Object>> subcategories = subcategoryRepository.retrieveSubcatogories(categoryName);
+        List<String> subcategories = subcategoryRepository.retrieveSubcatogories(categoryName);
         SuccessMessage successMessage = new SuccessMessage();
         successMessage.setCode(Response.Status.OK.getStatusCode());
         successMessage.setStatus("success");
@@ -73,11 +76,11 @@ public class SubCategoryService {
         successMessage.addLink(url, "self");
         if (subcategories.size() != 0) {
             successMessage.setMessage("sub-categories for " + categoryName + " retrieved");
-            for (Map<String, Object> map : subcategories) {
+            for (int i = 0; i < subcategories.size(); i++) {
                 JSONObject jsonObject = new JSONObject();
-                jsonObject.put("name", map.get("name").toString());
+                jsonObject.put("name", subcategories.get(i));
                 successMessage.addData(jsonObject);
-                successMessage.addLink(BASE_URL + "items/subcategory/" + map.get("name").toString().replaceAll(" ", "%20"), "items of " + map.get("name").toString());
+                successMessage.addLink(BASE_URL + "items/subcategory/" + subcategories.get(i).replaceAll(" ", "%20"), "items of " + subcategories.get(i));
             }
         } else {
             successMessage.setMessage("no sub-categories to retrieve");
