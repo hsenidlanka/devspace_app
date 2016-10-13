@@ -37,28 +37,29 @@ public class PackageService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response getPackages(@javax.ws.rs.core.Context UriInfo uriInfo) {
-        List<Map<String, Object>> packageList = packageRepository.selectAll();
-        Response response;
-        SuccessMessage successMessage = new SuccessMessage();
-        successMessage.setCode(Response.Status.OK.getStatusCode());
-        successMessage.setStatus("success");
-        String url = uriInfo.getAbsolutePath().toString();
-        successMessage.addLink(url, "self");
-        if (packageList.size() != 0) {
-            successMessage.setMessage("packages retrieved");
-            for (Map<String, Object> map : packageList) {
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("PackageName", map.get("name").toString());
-                jsonObject.put("content", map.get("content").toString());
-                jsonObject.put("price", map.get("price").toString());
-                jsonObject.put("imagePath", map.get("image").toString());
-                successMessage.addData(jsonObject);
-            }
-        } else {
-            successMessage.setMessage("no packages to retrieve");
-        }
-        return Response.status(Response.Status.OK).entity(successMessage)
-                .header("Access-Control-Allow-Origin", propertyReader.readProperty("Access-Control-Allow-Origin"))
-                .build();
+        return null;
+//        List<Map<String, Object>> packageList = packageRepository.selectAll();
+//        Response response;
+//        SuccessMessage successMessage = new SuccessMessage();
+//        successMessage.setCode(Response.Status.OK.getStatusCode());
+//        successMessage.setStatus("success");
+//        String url = uriInfo.getAbsolutePath().toString();
+//        successMessage.addLink(url, "self");
+//        if (packageList.size() != 0) {
+//            successMessage.setMessage("packages retrieved");
+//            for (Map<String, Object> map : packageList) {
+//                JSONObject jsonObject = new JSONObject();
+//                jsonObject.put("PackageName", map.get("name").toString());
+//                jsonObject.put("content", map.get("content").toString());
+//                jsonObject.put("price", map.get("price").toString());
+//                jsonObject.put("imagePath", map.get("image").toString());
+//                successMessage.addData(jsonObject);
+//            }
+//        } else {
+//            successMessage.setMessage("no packages to retrieve");
+//        }
+//        return Response.status(Response.Status.OK).entity(successMessage)
+//                .header("Access-Control-Allow-Origin", propertyReader.readProperty("Access-Control-Allow-Origin"))
+//                .build();
     }
 }
