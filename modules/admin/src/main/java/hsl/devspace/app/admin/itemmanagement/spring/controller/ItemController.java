@@ -12,7 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.swing.*;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.Map;
@@ -40,24 +40,31 @@ public class ItemController {
     public String showAddItem(Model model) {
 
         List<Map<String, Object>> listCat = categoryRepository.viewCategoryList();
-        model.addAttribute("listCat",listCat);
+        model.addAttribute("listCat", listCat);
         model.addAttribute("command", new Item());
         return "addItem";
     }
 
     //For submitting the add new item
     @RequestMapping(value = "/add_item")
-    public String addItem(@ModelAttribute("newItem") Item newItem) throws SQLIntegrityConstraintViolationException {
+    public ModelAndView addItem(@ModelAttribute("newItem") Item newItem) throws SQLIntegrityConstraintViolationException {
 
-        System.out.println("First Name:" + newItem.getItemName());
+    String itemNm = newItem.getItemName();
+        boolean uniqueItemNm = item.checkAvailability(itemNm);
+        if (uniqueItemNm) {
+            int a = item.add(newItem);
+            if (a == 1)
+                JOptionPane.showMessageDialog(null, "Added new item " + itemNm, "Success",
+                        JOptionPane.INFORMATION_MESSAGE);
+            else
+                JOptionPane.showMessageDialog(null, "Server-side error. Cannot add the item !", "Error !",
+                        JOptionPane.ERROR_MESSAGE);
+        } else
+            JOptionPane.showMessageDialog(null,
+                    "Item name is already exists !" + itemNm, "Warning ",
+                    JOptionPane.WARNING_MESSAGE);
 
-        int a = item.add(newItem);
-        if (a == 1)
-            return "redirect:add";
-            // model.setViewName("addItem");
-        else
-            return "redirect:add";
-        //  return model;
+        return new ModelAndView("addItem", "command", newItem);   //  return model;
     }
 
     /**
@@ -72,8 +79,10 @@ public class ItemController {
 
     //to view the item table
     @RequestMapping(value = "/view/itemTable", method = RequestMethod.GET)
-    public @ResponseBody List<Map<String, Object>> viewItem(HttpServletRequest request){
-             return item.view();
+    public
+    @ResponseBody
+    List<Map<String, Object>> viewItem() {
+        return item.viewAllItemDetails();
     }
 
     @RequestMapping(value = "/view_item")
@@ -100,20 +109,20 @@ public class ItemController {
 
     @RequestMapping(value = "/edit_item")
     public ModelAndView editItem(@ModelAttribute("editItem") Item editItem) throws SQLIntegrityConstraintViolationException {
+
         ModelAndView model = new ModelAndView();
-        /*int y = item.update(editItem);
-            if (y==1)*/
+        List<Map<String, Object>> listCatEdit = categoryRepository.viewCategoryList();
+        model.addObject("listCatEdit", listCatEdit);
+        model.addObject("editItem", new Item());
 
         model.setViewName("editItem");
-        //            else
-        System.out.println("Error in updating item");
 
         return model;
     }
 
-/**
- * Delete Item view
- **//*
+    /**
+     * Delete Item view
+     *//*
    /* @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public ModelAndView showDeleteItem(){ return  new ModelAndView("itemDelete", "deleteItem",new Item()); }
     @RequestMapping(value = "view_item")
@@ -123,11 +132,14 @@ public class ItemController {
     }*/
 
 
-
     //controller method to get relevant subcategory
-    @RequestMapping(value="/getSubcats",method=RequestMethod.POST)
-    public @ResponseBody List<Map<String, Object>> getSubcatList(@RequestParam("categoryNm")String categoryNm){
+    @RequestMapping(value = "/getSubcats", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    List<Map<String, Object>> getSubcatList(@RequestParam("categoryNm") String categoryNm) {
 
         return subCategoryRepository.retrieveSubcatogories(categoryNm);
     }
+
+    //controller method to get the rel
 }

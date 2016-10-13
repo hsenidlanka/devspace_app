@@ -17,31 +17,38 @@ $(document).ready(function () {
                 title: 'Item ID',
                 sortable: true
             }, {
-                field: 'name',
+                field: 'item_name',
                 title: 'Item Name',
                 sortable: true
             },{
-                field: 'category',
+                field: 'category_name',
                 title: 'Category',
                 sortable: true
             },{
-                field: 'subcategory',
+                field: 'sub_category_name',
                 title: 'Sub-category',
                 sortable: true
             }, {
                 field: 'type',
                 title: 'Type',
                 sortable: true
-            }, {
-                field: 'images',
-                title: 'Images',
-                sortable: true
-            },{
+            }, /*{
                 field: 'price',
                 title: 'Item Price',
                 align: 'right',
                 sortable: true
-            }, {
+            },*/{
+                field: 'description',
+                title: 'Item desc',
+                align: 'right',
+                sortable: true
+            },
+                {
+                field: 'image',
+                title: 'Images',
+                sortable: true
+            },
+                {
                 field: 'operate',
                 title: 'Operations',
                 align: 'center',
