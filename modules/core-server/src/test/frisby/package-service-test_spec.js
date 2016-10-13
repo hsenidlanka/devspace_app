@@ -26,39 +26,39 @@ frisby.create('Package service test 01-correct url')
         "data": [
             {
                 "PackageName": "Christmas",
-                "price": "414.00",
+                "price": 414,
                 "imagePath": "/a/dummy/image/path/",
                 "content": "dummy content"
             },
             {
                 "PackageName": "New Year",
-                "price": "658.00",
+                "price": 658,
                 "imagePath": "/a/dummy/image/path/",
                 "content": "dummy content"
             },
             {
                 "PackageName": "Halloween",
-                "price": "154.22",
+                "price": 154.22,
                 "imagePath": "/a/dummy/image/path/",
                 "content": "dummy content"
             },
             {
                 "PackageName": "",
-                "price": "564.00",
+                "price": 564,
                 "imagePath": "/a/dummy/image/path/",
                 "content": "dummy content"
             },
             {
                 "PackageName": "Feasty",
-                "price": "256.25",
+                "price": 256.25,
                 "imagePath": "/a/dummy/image/path/",
                 "content": "dummy content"
             }
         ],
         "links": [
             {
-                "link": "http://localhost:2222/pizza-shefu/api/v1.0/packages/getall",
-                "rel": "self"
+                "rel": "self",
+                "link": "http://localhost:2222/pizza-shefu/api/v1.0/packages/getall"
             }
         ]
     })

@@ -39,6 +39,11 @@ public class WebApplicationExceptionHandler {
                 return Response.status(statusCode).entity(error401).type(MediaType.APPLICATION_JSON)
                         .header("Access-Control-Allow-Origin", propertyReader.readProperty("Access-Control-Allow-Origin"))
                         .build();
+            case 403:
+                ErrorMessage error403 = (ErrorMessage) context.getBean("response403");
+                return Response.status(statusCode).entity(error403).type(MediaType.APPLICATION_JSON)
+                        .header("Access-Control-Allow-Origin", propertyReader.readProperty("Access-Control-Allow-Origin"))
+                        .build();
             case 404:
                 ErrorMessage error404 = (ErrorMessage) context.getBean("response404");
                 return Response.status(statusCode).entity(error404).type(MediaType.APPLICATION_JSON)

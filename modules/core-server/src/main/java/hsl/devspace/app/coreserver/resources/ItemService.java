@@ -1,5 +1,6 @@
 package hsl.devspace.app.coreserver.resources;
 
+import hsl.devspace.app.corelogic.domain.Item;
 import hsl.devspace.app.corelogic.repository.category.CategoryRepositoryImpl;
 import hsl.devspace.app.corelogic.repository.category.SubCategoryRepositoryImpl;
 import hsl.devspace.app.corelogic.repository.item.ItemRepositoryImpl;
@@ -29,7 +30,7 @@ public class ItemService {
     CategoryRepositoryImpl categoryRepository = (CategoryRepositoryImpl) context.getBean("categoryRepoImpl");
     SubCategoryRepositoryImpl subcategoryRepository = (SubCategoryRepositoryImpl) context.getBean("subCategoryRepoImpl");
     ItemRepositoryImpl itemRepository = (ItemRepositoryImpl) context.getBean("itemRepoImpl");
-    PropertyReader propertyReader=new PropertyReader("header.properties");
+    PropertyReader propertyReader = new PropertyReader("header.properties");
 
     // Retrieve all items of a category
     @GET
@@ -38,27 +39,30 @@ public class ItemService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getItemsByCategory(@PathParam("categoryName") String categoryName, @javax.ws.rs.core.Context UriInfo uriInfo) {
         SuccessMessage successMessage = new SuccessMessage();
+        Item item;
+
         successMessage.setCode(Response.Status.OK.getStatusCode());
         successMessage.setStatus("success");
         String url = uriInfo.getAbsolutePath().toString();
         successMessage.addLink(url, "self");
         try {
-            List<Map<String, Object>> categoryList = categoryRepository.loadMenuItems(categoryName);
-            if (categoryList.size() > 0) {
+            List itemList = categoryRepository.loadMenuItems(categoryName);
+            if (itemList.size() != 0) {
                 successMessage.setMessage("items for category " + categoryName + " retrieved");
-                for (Map<String, Object> map : categoryList) {
+                for (int i = 0; i < itemList.size(); i++) {
+                    item = (Item) itemList.get(i);
                     JSONObject jsonObject = new JSONObject();
-                    jsonObject.put("name", map.get("name").toString());
-                    jsonObject.put("type", map.get("type").toString());
-                    jsonObject.put("description", map.get("description").toString());
-                    jsonObject.put("imagePath", map.get("image").toString());
+                    jsonObject.put("name", item.getItemName());
+                    jsonObject.put("type", item.getType());
+                    jsonObject.put("description", item.getDescription());
+                    jsonObject.put("imagePath", item.getImage());
                     successMessage.addData(jsonObject);
                 }
             } else {
                 successMessage.setMessage("no items to retrieve");
             }
         } catch (NullPointerException e) {
-            successMessage.setMessage("no items to retrieve");
+            successMessage.setMessage("no items to retrieve"+e.toString());
             return Response.status(Response.Status.OK).entity(successMessage).build();
         }
         return Response.status(Response.Status.OK).entity(successMessage)
@@ -73,20 +77,22 @@ public class ItemService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getItemsBySubCategory(@PathParam("subcategoryName") String subcategoryName, @javax.ws.rs.core.Context UriInfo uriInfo) {
         SuccessMessage successMessage = new SuccessMessage();
+        Item item;
         successMessage.setCode(Response.Status.OK.getStatusCode());
         successMessage.setStatus("success");
         String url = uriInfo.getAbsolutePath().toString();
         successMessage.addLink(url, "self");
         try {
-            List<Map<String, Object>> categoryList = subcategoryRepository.loadMenuItems(subcategoryName);
-            if (categoryList.size() > 0) {
+            List itemList = subcategoryRepository.loadMenuItems(subcategoryName);
+            if (itemList.size() > 0) {
                 successMessage.setMessage("items for subcategory " + subcategoryName + " retrieved");
-                for (Map<String, Object> map : categoryList) {
+                for (int i = 0; i < itemList.size(); i++) {
+                    item = (Item) itemList.get(i);
                     JSONObject jsonObject = new JSONObject();
-                    jsonObject.put("name", map.get("name").toString());
-                    jsonObject.put("type", map.get("type").toString());
-                    jsonObject.put("description", map.get("description").toString());
-                    jsonObject.put("imagePath", map.get("image").toString());
+                    jsonObject.put("name", item.getItemName());
+                    jsonObject.put("type", item.getType());
+                    jsonObject.put("description", item.getDescription());
+                    jsonObject.put("imagePath", item.getImage());
                     successMessage.addData(jsonObject);
                 }
             } else {

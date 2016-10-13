@@ -74,9 +74,9 @@ public class CustomerService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response login(User user, @javax.ws.rs.core.Context UriInfo uriInfo) {
-        boolean status = userRepository.loginAuthenticate(user.getUsername(), user.getPassword());
+        int status = userRepository.loginAuthenticate(user.getUsername(), user.getPassword());
         Response response;
-        if (status) {
+        if (status == 1) {
             SuccessMessage successMessage = new SuccessMessage();
             successMessage.setStatus("success");
             successMessage.setCode(Response.Status.OK.getStatusCode());
@@ -91,6 +91,8 @@ public class CustomerService {
             successMessage.addLink(url, "self");
             successMessage.addLink(BASE_URL + "customers/" + user.getUsername(), "profile");
             response = Response.status(Response.Status.OK).entity(successMessage).build();
+        } else if (status == 2) {
+            throw new WebApplicationException(403);
         } else {
             throw new WebApplicationException(401);
         }
@@ -103,27 +105,30 @@ public class CustomerService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserDetails(@PathParam("username") String userName, @javax.ws.rs.core.Context UriInfo uriInfo) {
-        List<Map<String, Object>> userData = userRepository.retrieveSelectedUserDetails(userName);
+        List users = userRepository.retrieveSelectedUserDetails(userName);
+        User user;
         SuccessMessage successMessage = new SuccessMessage();
         successMessage.setCode(Response.Status.OK.getStatusCode());
         successMessage.setStatus("success");
         String url = uriInfo.getAbsolutePath().toString();
         successMessage.addLink(url, "self");
         JSONObject jsonObject = new JSONObject();
-        if (userData.size() != 0) {
+        if (users.size() != 0) {
             successMessage.setMessage("customer data retrieved");
-            for (Map<String, Object> map : userData) {
-                jsonObject.put("title", map.get("title").toString());
-                jsonObject.put("firstName", map.get("first_name").toString());
-                jsonObject.put("lastName", map.get("last_name").toString());
-                jsonObject.put("username", map.get("username").toString());
-                jsonObject.put("email", map.get("email").toString());
-                jsonObject.put("addressLine01", map.get("address_line1").toString());
-                jsonObject.put("addressLine02", map.get("address_line2").toString());
-                if (map.get("address_line3") != null) {
-                    jsonObject.put("addressLine03", map.get("address_line3").toString());
+            for (int i = 0; i < users.size(); i++) {
+                user = (User) users.get(i);
+                jsonObject.put("title", user.getTitle());
+                jsonObject.put("firstName", user.getFirstName());
+                jsonObject.put("lastName", user.getLastName());
+                jsonObject.put("username", user.getUsername());
+                jsonObject.put("email", user.getEmail());
+                jsonObject.put("addressLine01", user.getAddressL1());
+                jsonObject.put("addressLine02", user.getAddressL2());
+                if (user.getAddressL3() != null) {
+                    jsonObject.put("addressLine03", user.getAddressL3());
                 }
-                jsonObject.put("mobile", map.get("mobile").toString());
+                jsonObject.put("mobile", user.getMobile());
+                jsonObject.put("registeredDate", user.getRegDate());
                 successMessage.addData(jsonObject);
             }
         } else {
