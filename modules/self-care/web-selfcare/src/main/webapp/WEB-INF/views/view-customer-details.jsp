@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <%@include file="include.jsp" %>
+    <%@include file="includes/include.jsp" %>
     <title><fmt:message key="view.title" bundle="${lang}"/></title>
 
 </head>
 
 <body style="overflow: visible">
 <div class="loader-anim"></div>
-<%@include file="NewHeader.jsp" %>
+<%@include file="includes/NewHeader.jsp" %>
 
 <div class="brand"></div>
 <center>
@@ -125,7 +125,7 @@
 
 </body>
 
-<%@include file="footer.jsp" %>
+<%@include file="includes/footer.jsp" %>
 
 <!-------------------------------------- Modal--------------------------------- -->
 <div id="passwordModal" class="modal fade" role="dialog">

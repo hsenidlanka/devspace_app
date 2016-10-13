@@ -4,7 +4,7 @@
     <title>Search Results</title>
     <link rel="shortcut icon" href="">
 
-    <%@include file="include.jsp" %>
+    <%@include file="includes/include.jsp" %>
 
     <script src="<c:url value="/resources/js/menu-operations.js"/>" ></script>
     <script src="<c:url value="/resources/js/search-operations.js"/>" ></script>
@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="loader-anim"></div>
-<%@include file="NewHeader.jsp" %>
+<%@include file="includes/NewHeader.jsp" %>
 
 <div class="main-div">
     <div class="section">

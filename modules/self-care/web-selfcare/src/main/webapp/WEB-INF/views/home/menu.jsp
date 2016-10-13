@@ -3,7 +3,7 @@
 <head lang="en">
     <title>Menu</title>
     <link rel="shortcut icon" href="">
-    <%@include file="include.jsp" %>
+    <%@include file="../includes/include.jsp" %>
     <script src="<c:url value="/resources/js/menu-operations.js"/>" ></script>
     <script src="<c:url value="/resources/js/jquery.contenthover.js"/>" ></script>
 
@@ -11,7 +11,7 @@
 
 </head>
 <body>
-<%@include file="NewHeader.jsp" %>
+<%@include file="../includes/NewHeader.jsp" %>
 
 <div id="myToast" class="toast-popup"></div>
 <div class="loader-anim"></div>

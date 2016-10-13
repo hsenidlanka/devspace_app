@@ -1,10 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@include file="signupmodal.jsp" %>
+<%@include file="../signupmodal.jsp" %>
 
 
 <nav class="navbar navbar-default ">
   <div class="container-fluid">
-    <div class="col-sm-4"><a href="home"> <img src="<c:url value="/resources/images/logo.png"/>" style="width:75px;height:65px;"></a></div>
+    <div class="col-sm-4"><a href="../home"> <img src="<c:url value="/resources/images/logo.png"/>" style="width:75px;height:65px;"></a></div>
 
     <div style="padding: 10px"></div>
     <div>
