@@ -139,18 +139,19 @@ public class StaffRepositoryImpl implements UserRepository {
         int result ;
         List<Map<String, Object>> mp1= jdbcTemplate.queryForList("SELECT status FROM staff WHERE BINARY username = ?",username);
         log.info("{}",mp1.get(0).get("status"));
-        if (mp1.get(0).get("status").toString().equals("active")) {
-            List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE BINARY username = ? AND BINARY password =sha1(?)", username, password);
-            log.info("{}",mp);
+        if(mp1.size()!=0) {
 
-            if (mp.size() != 0) {
-                log.info("{}",mp.get(0));
-                result = 1;
-            }
-            else result=0;
+            if (mp1.get(0).get("status").toString().equals("active")) {
+                List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE BINARY username = ? AND BINARY password =sha1(?)", username, password);
+                log.info("{}", mp);
 
-        }
-        else result=2;
+                if (mp.size() != 0) {
+                    log.info("{}", mp.get(0));
+                    result = 1;
+                } else result = 0;
+
+            } else result = 2;
+        }else result=0;
         log.info("{}",result);
 
         return result;
