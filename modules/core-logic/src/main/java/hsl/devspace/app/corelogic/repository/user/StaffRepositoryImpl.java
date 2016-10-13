@@ -187,7 +187,9 @@ public class StaffRepositoryImpl implements UserRepository {
             staff.setMobile(mp.get(i).get("mobile").toString());
             staff.setAddressL1(mp.get(i).get("address_line1").toString());
             staff.setAddressL2(mp.get(i).get("address_line2").toString());
-            staff.setAddressL3(mp.get(i).get("address_line3").toString());
+            if (mp.get(i).get("address_line3")!=null) {
+                staff.setAddressL3(mp.get(i).get("address_line3").toString());
+            }
             staff.setDesignation(mp.get(i).get("designation").toString());
             staff.setDepartment(mp.get(i).get("department").toString());
             staff.setBranch(mp.get(i).get("branch").toString());
@@ -219,7 +221,9 @@ public class StaffRepositoryImpl implements UserRepository {
             staff.setMobile(mp.get(i).get("mobile").toString());
             staff.setAddressL1(mp.get(i).get("address_line1").toString());
             staff.setAddressL2(mp.get(i).get("address_line2").toString());
-            staff.setAddressL3(mp.get(i).get("address_line3").toString());
+            if (mp.get(i).get("address_line3")!=null) {
+                staff.setAddressL3(mp.get(i).get("address_line3").toString());
+            }
             staff.setDesignation(mp.get(i).get("designation").toString());
             staff.setDepartment(mp.get(i).get("department").toString());
             staff.setBranch(mp.get(i).get("branch").toString());
@@ -276,7 +280,9 @@ public class StaffRepositoryImpl implements UserRepository {
             staff.setMobile(mp.get(i).get("mobile").toString());
             staff.setAddressL1(mp.get(i).get("address_line1").toString());
             staff.setAddressL2(mp.get(i).get("address_line2").toString());
-            staff.setAddressL3(mp.get(i).get("address_line3").toString());
+            if (mp.get(i).get("address_line3")!=null) {
+                staff.setAddressL3(mp.get(i).get("address_line3").toString());
+            }
             staff.setDesignation(mp.get(i).get("designation").toString());
             staff.setDepartment(mp.get(i).get("department").toString());
             staff.setBranch(mp.get(i).get("branch").toString());
@@ -310,7 +316,9 @@ public class StaffRepositoryImpl implements UserRepository {
             staff.setMobile(mp.get(i).get("mobile").toString());
             staff.setAddressL1(mp.get(i).get("address_line1").toString());
             staff.setAddressL2(mp.get(i).get("address_line2").toString());
-            staff.setAddressL3(mp.get(i).get("address_line3").toString());
+            if (mp.get(i).get("address_line3")!=null) {
+                staff.setAddressL3(mp.get(i).get("address_line3").toString());
+            }
             staff.setDesignation(mp.get(i).get("designation").toString());
             staff.setDepartment(mp.get(i).get("department").toString());
             staff.setBranch(mp.get(i).get("branch").toString());
@@ -340,7 +348,9 @@ public class StaffRepositoryImpl implements UserRepository {
             staff.setMobile(mp.get(i).get("mobile").toString());
             staff.setAddressL1(mp.get(i).get("address_line1").toString());
             staff.setAddressL2(mp.get(i).get("address_line2").toString());
-            staff.setAddressL3(mp.get(i).get("address_line3").toString());
+            if (mp.get(i).get("address_line3")!=null) {
+                staff.setAddressL3(mp.get(i).get("address_line3").toString());
+            }
             staff.setDesignation(mp.get(i).get("designation").toString());
             staff.setDepartment(mp.get(i).get("department").toString());
             staff.setBranch(mp.get(i).get("branch").toString());
@@ -400,7 +410,9 @@ public class StaffRepositoryImpl implements UserRepository {
             staff.setMobile(mp.get(i).get("mobile").toString());
             staff.setAddressL1(mp.get(i).get("address_line1").toString());
             staff.setAddressL2(mp.get(i).get("address_line2").toString());
-            staff.setAddressL3(mp.get(i).get("address_line3").toString());
+            if (mp.get(i).get("address_line3")!=null) {
+                staff.setAddressL3(mp.get(i).get("address_line3").toString());
+            }
             staff.setDesignation(mp.get(i).get("designation").toString());
             staff.setDepartment(mp.get(i).get("department").toString());
             staff.setBranch(mp.get(i).get("branch").toString());
@@ -431,7 +443,9 @@ public class StaffRepositoryImpl implements UserRepository {
             staff.setMobile(mp.get(i).get("mobile").toString());
             staff.setAddressL1(mp.get(i).get("address_line1").toString());
             staff.setAddressL2(mp.get(i).get("address_line2").toString());
-            staff.setAddressL3(mp.get(i).get("address_line3").toString());
+            if (mp.get(i).get("address_line3")!=null) {
+                staff.setAddressL3(mp.get(i).get("address_line3").toString());
+            }
             staff.setDesignation(mp.get(i).get("designation").toString());
             staff.setDepartment(mp.get(i).get("department").toString());
             staff.setBranch(mp.get(i).get("branch").toString());

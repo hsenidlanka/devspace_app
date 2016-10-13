@@ -149,7 +149,9 @@ public class UserRepositoryImpl implements UserRepository {
             customer.setEmail(mp.get(i).get("email").toString());
             customer.setAddressL1(mp.get(i).get("address_line1").toString());
             customer.setAddressL2(mp.get(i).get("address_line2").toString());
-            customer.setAddressL3(mp.get(i).get("address_line3").toString());
+            if (mp.get(i).get("address_line3")!=null) {
+                customer.setAddressL3(mp.get(i).get("address_line3").toString());
+           }
             customer.setMobile(mp.get(i).get("mobile").toString());
             customer.setRegDate(Date.valueOf(mp.get(i).get("registered_date").toString()));
             customer.setStatus(mp.get(i).get("status").toString());
@@ -179,7 +181,9 @@ public class UserRepositoryImpl implements UserRepository {
             customer.setEmail(mp.get(i).get("email").toString());
             customer.setAddressL1(mp.get(i).get("address_line1").toString());
             customer.setAddressL2(mp.get(i).get("address_line2").toString());
-            customer.setAddressL3(mp.get(i).get("address_line3").toString());
+            if (mp.get(i).get("address_line3")!=null) {
+                customer.setAddressL3(mp.get(i).get("address_line3").toString());
+            }
             customer.setMobile(mp.get(i).get("mobile").toString());
             customer.setRegDate(Date.valueOf(mp.get(i).get("registered_date").toString()));
             customer.setStatus(mp.get(i).get("status").toString());
@@ -237,7 +241,9 @@ public class UserRepositoryImpl implements UserRepository {
             customer.setEmail(mp.get(i).get("email").toString());
             customer.setAddressL1(mp.get(i).get("address_line1").toString());
             customer.setAddressL2(mp.get(i).get("address_line2").toString());
-            customer.setAddressL3(mp.get(i).get("address_line3").toString());
+            if (mp.get(i).get("address_line3")!=null) {
+                customer.setAddressL3(mp.get(i).get("address_line3").toString());
+            }
             customer.setMobile(mp.get(i).get("mobile").toString());
             customer.setRegDate(Date.valueOf(mp.get(i).get("registered_date").toString()));
             customer.setStatus(mp.get(i).get("status").toString());
@@ -267,7 +273,9 @@ public class UserRepositoryImpl implements UserRepository {
             customer.setEmail(mp.get(i).get("email").toString());
             customer.setAddressL1(mp.get(i).get("address_line1").toString());
             customer.setAddressL2(mp.get(i).get("address_line2").toString());
-            customer.setAddressL3(mp.get(i).get("address_line3").toString());
+            if (mp.get(i).get("address_line3")!=null) {
+                customer.setAddressL3(mp.get(i).get("address_line3").toString());
+            }
             customer.setMobile(mp.get(i).get("mobile").toString());
             customer.setRegDate(Date.valueOf(mp.get(i).get("registered_date").toString()));
             customer.setStatus(mp.get(i).get("status").toString());
@@ -297,7 +305,9 @@ public class UserRepositoryImpl implements UserRepository {
             customer.setEmail(mp.get(i).get("email").toString());
             customer.setAddressL1(mp.get(i).get("address_line1").toString());
             customer.setAddressL2(mp.get(i).get("address_line2").toString());
-            customer.setAddressL3(mp.get(i).get("address_line3").toString());
+            if (mp.get(i).get("address_line3")!=null) {
+                customer.setAddressL3(mp.get(i).get("address_line3").toString());
+            }
             customer.setMobile(mp.get(i).get("mobile").toString());
             customer.setRegDate(Date.valueOf(mp.get(i).get("registered_date").toString()));
             customer.setStatus(mp.get(i).get("status").toString());
@@ -354,7 +364,9 @@ public class UserRepositoryImpl implements UserRepository {
             customer.setEmail(mp.get(i).get("email").toString());
             customer.setAddressL1(mp.get(i).get("address_line1").toString());
             customer.setAddressL2(mp.get(i).get("address_line2").toString());
-            customer.setAddressL3(mp.get(i).get("address_line3").toString());
+            if (mp.get(i).get("address_line3")!=null) {
+                customer.setAddressL3(mp.get(i).get("address_line3").toString());
+            }
             customer.setMobile(mp.get(i).get("mobile").toString());
             customer.setRegDate(Date.valueOf(mp.get(i).get("registered_date").toString()));
             customer.setStatus(mp.get(i).get("status").toString());
@@ -383,7 +395,9 @@ public class UserRepositoryImpl implements UserRepository {
             customer.setEmail(mp.get(i).get("email").toString());
             customer.setAddressL1(mp.get(i).get("address_line1").toString());
             customer.setAddressL2(mp.get(i).get("address_line2").toString());
-            customer.setAddressL3(mp.get(i).get("address_line3").toString());
+            if (mp.get(i).get("address_line3")!=null) {
+                customer.setAddressL3(mp.get(i).get("address_line3").toString());
+            }
             customer.setMobile(mp.get(i).get("mobile").toString());
             customer.setRegDate(Date.valueOf(mp.get(i).get("registered_date").toString()));
             customer.setStatus(mp.get(i).get("status").toString());
