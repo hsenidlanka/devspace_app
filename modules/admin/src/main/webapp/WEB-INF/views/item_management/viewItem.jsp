@@ -118,9 +118,11 @@
         <div class="form-group">
           <label id="lblDeltItmMsg"><fmt:message key="item.deletemodal.warning.question"/> </label><br><br>
 
-          <div align="center">
-            <label id="lblDeltItmId"><fmt:message key="item.deletemodal.itemid"/> xxx</label><br>
-            <label id="lblDeltItmName"><fmt:message key="item.deletemodal.itemname"/> yyyyyy</label><br>
+          <div align="center" class="row">
+           <div class="col-xs-6" style="text-align: right"> <label ><fmt:message key="item.deletemodal.itemid"/></label></div>
+            <div class="col-xs-6" style="text-align: left">  <label id="lblDeltItmId" class="delete-lables"> </label></div><br>
+           <div class="col-xs-6" style="text-align: right"> <label ><fmt:message key="item.deletemodal.itemname"/></label></div>
+            <div class="col-xs-6" style="text-align: left"> <label id="lblDeltItmName" class="delete-lables"> </label></div><br>
           </div>
         </div>
       </div>

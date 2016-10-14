@@ -2,6 +2,7 @@ $(document).ready(function () {
 
         $('#tblItems').bootstrapTable({
             /*method: '',*/
+            dataType:'JSON',
             url: 'https://localhost:8443/admin/items/view/itemTable',
             height: 400,
             striped: true,
@@ -70,7 +71,7 @@ function operateFormatter(value, row, index){
         '<a class="edit" href="https://localhost:8443/admin/items/view/" title="Edit" id="linkEditItem">',
         '<i class="glyphicon glyphicon-edit">Edit</i>',
         '</a>&nbsp;&nbsp;&nbsp;&nbsp;',
-        '<a class="delete" href="javascript:void(0)" title="Delete" id="linkDeleteItem">',
+        '<a class="delete" title="Delete" id="linkDeleteItem">',
         '<i class="glyphicon glyphicon-remove">Delete</i>',
         '</a></center>'
     ].join('');
@@ -88,7 +89,14 @@ window.operateEvents = {
 
     },
 
-    'click .delete':function(){
+    'click .delete':function(e, value, row,index){
+
+        var dataDelt = JSON.stringify(row);
+        var deltObj = JSON.parse(dataDelt);
+
+      $('#lblDeltItmId').text(deltObj["id"]);
+        $('#lblDeltItmName').text(deltObj["item_name"]);
+
         $('#itemDeleteModal').modal('show');
     }
 }

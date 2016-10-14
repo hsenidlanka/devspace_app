@@ -68,7 +68,7 @@
                       <form:select class="form-control" id="selectCat" path="categoryName">
                         <form:option value="-" label="--Select Category--"/>
                          <c:forEach var="list" items="${listCat}">
-                           <form:option id="${list.key}" value="${list.get(\"name\")}">${list.get("name")}</form:option>
+                           <form:option id="${list}" value="${list}">${list}</form:option>
                          </c:forEach>
                       </form:select>
                 <span id="catErr" class="input-group-error"></span>
@@ -106,7 +106,7 @@
               <label for="txtItemName" class="col-xs-3 control-label"><fmt:message key="item.itemadd.form.itemname"/></label>
 
               <div class="col-xs-5">
-                <form:input class="form-control" id="txtItemName" type="text" path="itemName"/>
+                <form:input class="form-control" id="txtItemName" type="text" path="itemName" required="true"/>
               </div>
               <div class="col-xs-4">
                 <span id="itmNmErr" class="input-group-error"></span>

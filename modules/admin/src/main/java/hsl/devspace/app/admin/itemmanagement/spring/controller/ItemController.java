@@ -40,7 +40,8 @@ public class ItemController {
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String showAddItem(Model model) {
 
-        List<Map<String, Object>> listCat = categoryRepository.viewCategoryList();
+        List<String> listCat = categoryRepository.selectCategoryNames();
+
         model.addAttribute("listCat", listCat);
         model.addAttribute("command", new Item());
         return "item_management/addItem";
@@ -65,7 +66,7 @@ public class ItemController {
                     "Item name is already exists !" + itemNm, "Warning ",
                     JOptionPane.WARNING_MESSAGE);
            //return new ModelAndView("item_management/addItem", "command", newItem);
-            return new ModelAndView(new RedirectView("add"));
+            return new ModelAndView(new RedirectView("add_item"));
         }
 
         return new ModelAndView(new RedirectView("add"));
@@ -78,7 +79,7 @@ public class ItemController {
     //For view the search item form
     @RequestMapping(value = "/view", method = RequestMethod.GET)
     public ModelAndView showItemView() {
-        return new ModelAndView("itemView", "viewItem", new Item());
+        return new ModelAndView("/item_management/viewItem","itemView", new Item());
     }
 
     //to view the item table
@@ -92,12 +93,12 @@ public class ItemController {
     @RequestMapping(value = "/view_item")
     public ModelAndView view(@ModelAttribute("viewItem") Item viewItem) throws SQLIntegrityConstraintViolationException {
         ModelAndView model = new ModelAndView();
-        List<Map<String, Object>> x = item.view();
+      //  List<Map<String, Object>> x = item.view();
 
-        if (x != null)
+     /*   if (x != null)
             model.setViewName("item_management/viewItem");
         else
-            System.out.println("Error in viewing item");
+            System.out.println("Error in viewing item");*/
 
         return model;
     }
@@ -115,7 +116,7 @@ public class ItemController {
     public ModelAndView editItem(@ModelAttribute("editItem") Item editItem) throws SQLIntegrityConstraintViolationException {
 
         ModelAndView model = new ModelAndView();
-        List<Map<String, Object>> listCatEdit = categoryRepository.viewCategoryList();
+        List<String> listCatEdit = categoryRepository.selectCategoryNames();
         model.addObject("listCatEdit", listCatEdit);
         model.addObject("editItem", new Item());
 
@@ -140,7 +141,7 @@ public class ItemController {
     @RequestMapping(value = "/getSubcats", method = RequestMethod.POST)
     public
     @ResponseBody
-    List<Map<String, Object>> getSubcatList(@RequestParam("categoryNm") String categoryNm) {
+    List<String> getSubcatList(@RequestParam("categoryNm") String categoryNm) {
 
         return subCategoryRepository.retrieveSubcatogories(categoryNm);
     }

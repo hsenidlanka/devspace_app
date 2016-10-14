@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <title>Add new package</title>
     <!-- include common CSS, fonts and js -->
-    <jsp:include page="adminTop.jsp"/>
+    <jsp:include page="../adminTop.jsp"/>
 
     <%-- Other css --%>
     <spring:url value="/themes/hsenid/css/itemMgt.css" var="cssItem"/>
@@ -25,7 +25,7 @@
 <body>
 
 
-<jsp:include page="header.jsp"/>
+<jsp:include page="../header.jsp"/>
 
 <div class="brand">
     <div style="position: relative; left: -50%;">

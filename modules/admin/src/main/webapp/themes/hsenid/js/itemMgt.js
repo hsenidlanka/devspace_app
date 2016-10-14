@@ -9,7 +9,6 @@ $(document).ready(function () {
         }
     }
 
-
     /*
      * Function for redirecting to admin home page
      * */
@@ -67,10 +66,10 @@ $(document).ready(function () {
 
                 success: function(data){
                     var slctSubcat = $("#selectSubCat"), option= "";
-                 //   slctSubcat.empty();
+                   slctSubcat.empty();
 
                     for(var sb =0; sb<data.length; sb++){
-                        option = option + "<option value='" + data[sb].name + "'>" +data[sb].name + "</option>";
+                        option = option + "<option value='" + data[sb] + "'>" +data[sb]+ "</option>";
                     }
                     slctSubcat.append(option);
                 },
@@ -96,7 +95,7 @@ $(document).ready(function () {
                     slctSubcatEdt.empty();
 
                     for(var sb =0; sb<data.length; sb++){
-                        option = option + "<option value='" + data[sb].name + "'>" +data[sb].name + "</option>";
+                        option = option + "<option value='" + data[sb] + "'>" +data[sb] + "</option>";
                     }
                     slctSubcatEdt.append(option);
                 },

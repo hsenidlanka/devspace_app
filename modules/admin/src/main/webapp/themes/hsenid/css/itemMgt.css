@@ -138,3 +138,8 @@ legend.scheduler-border {
 #form-Item-Delete{
      padding: 10px;
  }
+.delete-lables{
+    color: #ff2d00;;
+    text-emphasis: filled;
+    text-align: left;
+}

@@ -105,7 +105,7 @@
                                         <form:select class="form-control" id="selectCatedt" path="categoryName">
                                             <form:option value="-" label="--Select Category--"/>
                                             <c:forEach var="listEdit" items="${listCatEdit}">
-                                                <form:option id="${listEdit.key}" value="${listEdit.get(\"name\")}">${listEdit.get("name")}</form:option>
+                                                <form:option id="${listEdit}" value="${listEdit}">${listEdit}</form:option>
                                             </c:forEach>
                                         </form:select>
                                 </div>
