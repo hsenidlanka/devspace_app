@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.swing.*;
 import java.sql.SQLIntegrityConstraintViolationException;
@@ -42,7 +43,7 @@ public class ItemController {
         List<Map<String, Object>> listCat = categoryRepository.viewCategoryList();
         model.addAttribute("listCat", listCat);
         model.addAttribute("command", new Item());
-        return "addItem";
+        return "item_management/addItem";
     }
 
     //For submitting the add new item
@@ -51,7 +52,7 @@ public class ItemController {
 
     String itemNm = newItem.getItemName();
         boolean uniqueItemNm = item.checkAvailability(itemNm);
-        if (uniqueItemNm) {
+        if (!uniqueItemNm) {
             int a = item.add(newItem);
             if (a == 1)
                 JOptionPane.showMessageDialog(null, "Added new item " + itemNm, "Success",
@@ -59,12 +60,15 @@ public class ItemController {
             else
                 JOptionPane.showMessageDialog(null, "Server-side error. Cannot add the item !", "Error !",
                         JOptionPane.ERROR_MESSAGE);
-        } else
+        } else{
             JOptionPane.showMessageDialog(null,
                     "Item name is already exists !" + itemNm, "Warning ",
                     JOptionPane.WARNING_MESSAGE);
+           //return new ModelAndView("item_management/addItem", "command", newItem);
+            return new ModelAndView(new RedirectView("add"));
+        }
 
-        return new ModelAndView("addItem", "command", newItem);   //  return model;
+        return new ModelAndView(new RedirectView("add"));
     }
 
     /**
@@ -91,7 +95,7 @@ public class ItemController {
         List<Map<String, Object>> x = item.view();
 
         if (x != null)
-            model.setViewName("viewItem");
+            model.setViewName("item_management/viewItem");
         else
             System.out.println("Error in viewing item");
 
@@ -104,7 +108,7 @@ public class ItemController {
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public ModelAndView showEditItem() {
-        return new ModelAndView("itemEdit", "editItem", new Item());
+        return new ModelAndView("item_management/itemEdit", "editItem", new Item());
     }
 
     @RequestMapping(value = "/edit_item")
@@ -115,7 +119,7 @@ public class ItemController {
         model.addObject("listCatEdit", listCatEdit);
         model.addObject("editItem", new Item());
 
-        model.setViewName("editItem");
+        model.setViewName("item_management/editItem");
 
         return model;
     }
