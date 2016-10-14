@@ -67,7 +67,7 @@ $(document).ready(function () {
 
                 success: function(data){
                     var slctSubcat = $("#selectSubCat"), option= "";
-                    slctSubcat.empty();
+                 //   slctSubcat.empty();
 
                     for(var sb =0; sb<data.length; sb++){
                         option = option + "<option value='" + data[sb].name + "'>" +data[sb].name + "</option>";
@@ -107,23 +107,16 @@ $(document).ready(function () {
 
         });
 
+    /*
+    * function for enabling text-boxes onclick of checkbox in add Item
+    **/
+        $(".sizechkbx").click(function () {
 
-/*$(".sizechkbx").click(function(){
+            $(this).parent().parent().next().find(".form-control").prop("disabled", !$(this).prop("checked"));
+        });
 
-})*/
-
-
-
-
-
- /*   function enableTextbox(chk, txt){
-        if(chk.checked == true)
-            txt.disable(false);
-       //(document).getElementById(txt).disabled = !chk;
-        *//*if(chk.is(':checked')) {
-            $(txt).find(txt).attr('disabled', false);
-        }*//*
-
-    }*/
-
+    /*function C(t, textBoxId) {
+        $("#" + textBoxId).prop("disabled", !$(t).prop("checked"));
+    }
+*/
 })
