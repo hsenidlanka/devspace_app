@@ -48,6 +48,7 @@ public class UserController {
     }
 
 
+
 //    customer user add is done in below methods
     @RequestMapping(value="/add",method=RequestMethod.GET)
     public ModelAndView showCustomer(){
