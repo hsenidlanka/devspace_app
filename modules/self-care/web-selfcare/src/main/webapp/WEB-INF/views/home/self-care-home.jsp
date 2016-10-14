@@ -31,7 +31,8 @@
 
         $(document).ready(function () {
 
-//            registration validation starts
+
+    //            registration validation starts
             $(function () {
                 $('form').validator({
                     validHandlers: {
@@ -60,15 +61,14 @@
                     $.ajax({
 
                         url: "register",
-                        type: 'get',
+                        type: 'post',
                         data: $('#adduser_form').serialize(),
-                        dataType: 'json',
                         success: function (result) {
-                            alert("success");
+                            console.log("success");
+
                         },
-                        error: function (xhr, status, error) {
-                            var err = eval("(" + xhr.responseText + ")");
-                            alert(err.Message);
+                        error: function () {
+                            $("#ajaccall").append("<b>Appended text</b>");
                         }
                     });
 
@@ -84,6 +84,8 @@
 <body>
 
 <%@include file="../includes/NewHeader.jsp" %>
+
+<p id="ajaccall"></p>
 
 
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -185,7 +187,7 @@
         <div class="col-sm-4">
 
             <label class="radio-inline">
-                <img style="width: 130px;height: 55px" src="http://www.moppadop.com/img/google-play-store-button.png">
+                <a href="https://play.google.com/store/apps"><img style="width: 130px;height: 55px" src="<c:url value="/resources/images/google-play-store-button.png"/>" ></a>
             </label>
         </div>
 

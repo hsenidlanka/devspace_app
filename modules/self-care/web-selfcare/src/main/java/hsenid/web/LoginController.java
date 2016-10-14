@@ -1,5 +1,6 @@
 package hsenid.web;
 
+import hsenid.web.supportclasses.SendStringBuilds;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.slf4j.Logger;
@@ -43,7 +44,7 @@ public class LoginController {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        String loginDetailString = SendStringBuilds.sendString("{","username",":",username,",","password",":",password, "}");
+        String loginDetailString = SendStringBuilds.sendString("{", "username", ":", username, ",", "password", ":", password, "}");
 
         JSONObject jsonObject = new JSONObject(loginDetailString);
 
@@ -84,7 +85,8 @@ public class LoginController {
     }
 
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @RequestMapping(value = "/register", method = RequestMethod.POST, produces="application/json")
+//    @ResponseBody
     public String register(HttpServletRequest regRequest) throws JSONException {
 
         String addressL3 = null;
@@ -150,6 +152,7 @@ public class LoginController {
         String password = request.getParameter("password");
 
         String loginDetailString = SendStringBuilds.sendString("{","username",":",username,",","password",":",password, "}");
+
         JSONObject jsonObject = new JSONObject(loginDetailString);
 
         try {

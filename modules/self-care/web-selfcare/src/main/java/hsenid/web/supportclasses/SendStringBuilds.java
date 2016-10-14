@@ -1,4 +1,4 @@
-package hsenid.web;
+package hsenid.web.supportclasses;
 
 public class SendStringBuilds {
 
