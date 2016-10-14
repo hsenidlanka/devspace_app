@@ -1,4 +1,3 @@
-/*
 package hsl.devspace.app.admin.itemmanagement.spring.controller;
 
 import hsl.devspace.app.corelogic.domain.Item;
@@ -34,11 +33,9 @@ public class ItemController {
     @Autowired
     private SubCategoryRepositoryImpl subCategoryRepository;
 
-    */
-/**
+    /**
      * Add new item view
-     *//*
-
+     */
     //For viewing the add item form
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String showAddItem(Model model) {
@@ -74,11 +71,9 @@ public class ItemController {
         return new ModelAndView(new RedirectView("add"));
     }
 
-    */
-/**
+    /**
      * View Item details view
-     *//*
-
+     */
 
     //For view the search item form
     @RequestMapping(value = "/view", method = RequestMethod.GET)
@@ -107,11 +102,9 @@ public class ItemController {
         return model;
     }
 
-    */
-/**
+    /**
      * Edit Item view
-     *//*
-
+     */
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public ModelAndView showEditItem() {
@@ -131,21 +124,16 @@ public class ItemController {
         return model;
     }
 
-    */
-/**
+    /**
      * Delete Item view
      *//*
-*/
-/*
-   */
-/* @RequestMapping(value = "/delete", method = RequestMethod.GET)
+   /* @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public ModelAndView showDeleteItem(){ return  new ModelAndView("itemDelete", "deleteItem",new Item()); }
     @RequestMapping(value = "view_item")
     public ModelAndView deleteItem(@ModelAttribute("deleteItem") hsl.devspace.app.corelogic.domain.Item deleteItem) throws SQLIntegrityConstraintViolationException {
         ModelAndView model = new ModelAndView();
         model.setViewName("");
-    }*//*
-
+    }*/
 
 
     //controller method to get relevant subcategory
@@ -158,4 +146,4 @@ public class ItemController {
     }
 
     //controller method to get the rel
-}*/
+}
