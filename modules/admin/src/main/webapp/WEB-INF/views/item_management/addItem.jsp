@@ -2,13 +2,14 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
 <head>
   <title>Add New Item</title>
   <!-- include common CSS, fonts and js -->
-  <jsp:include page="adminTop.jsp"/>
+  <jsp:include page="../adminTop.jsp"/>
 
   <%-- Other css --%>
   <spring:url value="/themes/hsenid/css/itemMgt.css" var="cssItem"/>
@@ -26,11 +27,12 @@
 </head>
 <body>
 
-<jsp:include page="header.jsp"/>
+<fmt:bundle basename="messages_en">
+<jsp:include page="../header.jsp"/>
 
 <div class="brand">
   <div style="position: relative; left: -50%;">
-    Item Management
+   <fmt:message key="item.itemadd.heading"/>
   </div>
 </div>
 <br>
@@ -38,9 +40,9 @@
 <div>
   <div id="add-item-breadcrumb-position">
     <ul class="breadcrumb breadcrumb-menu">
-      <li><a href="https://localhost:8443/admin/users/list">Home</a></li>
-      <li><a href="#">Item Management</a></li>
-      <li class="active"><a href="#">Add Item</a></li>
+      <li><a href="https://localhost:8443/admin/users/list"><fmt:message key="item.itemadd.breadcrumb.home"/></a></li>
+      <li><a href="#"><fmt:message key="item.itemadd.breadcrumb.itemmanagement"/></a></li>
+      <li class="active"><a href="#"><fmt:message key="item.itemadd.breadcrumb.additem"/></a></li>
     </ul>
   </div>
 </div>
@@ -48,20 +50,18 @@
 <div class="form-box" id="add-item-form-box">
   <div class="panel panel-default">
     <div class="panel-heading common-form-headings">
-      <h3 class="default-panel-headings">Add New Item</h3>
+      <h3 class="default-panel-headings"><fmt:message key="item.itemadd.panel.heading"/></h3>
     </div>
     <div class="panel-body">
 
       <form:form class="form-horizontal" role="form" id="frmAddItem" action="/admin/items/add_item" method="post" >
         <fieldset class="scheduler-border">
-          <legend class="scheduler-border">(*) Fields are read only</legend>
+          <legend class="scheduler-border"><fmt:message key="item.itemadd.form.legend"/></legend>
 
 
           <div class="form-group">
             <div class="row">
-              <label class="col-xs-3 control-label">
-                Category
-              </label>
+              <label class="col-xs-3 control-label"><fmt:message key="item.itemadd.form.category"/></label>
 
               <div class="col-xs-5">
 
@@ -75,15 +75,14 @@
               </div>
 
               <div class="col-xs-4">
-                <button type="button" class="btn btn-success" id="btnAddCat"><span class="glyphicon glyphicon-plus"></span> Add New Category</button>
+                <button type="button" class="btn btn-success" id="btnAddCat"><span class="glyphicon glyphicon-plus"></span><fmt:message key="item.itemadd.form.category.addnew"/> </button>
               </div>
             </div>
           </div>
 
           <div class="form-group">
             <div class="row">
-              <label class="col-xs-3 control-label">
-                Sub-category<div id="output"></div>
+              <label class="col-xs-3 control-label"><fmt:message key="item.itemadd.form.subcategory"/> <div id="output"></div>
               </label>
 
               <div class="col-xs-5">
@@ -96,9 +95,7 @@
               <div class="col-xs-4">
                 <button type="button" class="btn btn-success" id="btnAddSubCat"
                         onclick="window.location='addcategory.html'"><span
-                        class="glyphicon glyphicon-plus"></span> Add
-                  Sub-category
-                </button>
+                        class="glyphicon glyphicon-plus"></span><fmt:message key="item.itemadd.form.subcategory.addnew"/></button>
               </div>
             </div>
           </div>
@@ -106,9 +103,7 @@
 
           <div class="form-group">
             <div class="row">
-              <label for="txtItemName" class="col-xs-3 control-label">
-                Item Name
-              </label>
+              <label for="txtItemName" class="col-xs-3 control-label"><fmt:message key="item.itemadd.form.itemname"/></label>
 
               <div class="col-xs-5">
                 <form:input class="form-control" id="txtItemName" type="text" path="itemName"/>
@@ -121,18 +116,16 @@
 
           <div class="form-group">
             <div class="row">
-              <label class="col-xs-3 control-label">
-                Item Price
-              </label>
+              <label class="col-xs-3 control-label"><fmt:message key="item.itemadd.form.itemprice"/></label>
 
               <div class="col-xs-5">
 
                 <div class="row item-tbl-row item-tbl-hdr" style="text-align: center;">
                   <div class="col-xs-5">
-                    <strong>Size</strong>
+                    <strong><fmt:message key="item.itemadd.form.item.check.size"/></strong>
                   </div>
                   <div class="col-xs-7">
-                    <strong>Price</strong>
+                    <strong><fmt:message key="item.itemadd.form.item.text.price"/></strong>
                   </div>
                 </div>
 
@@ -140,7 +133,7 @@
 
                   <div class="col-xs-5">
                     <label class="checkbox-inline">
-                      <form:checkbox value="regular" class="checkbox sizechkbx" path="size" label="Regular" id="chkReg" onclick="document.getElementById('txtRegPrc').disabled=!this.checked;"/>
+                      <form:checkbox value="regular" class="checkbox sizechkbx" path="size" label="Regular" id="chkReg"/>
                     </label>
                   </div>
                   <div class="col-xs-7">
@@ -152,7 +145,7 @@
 
                   <div class="col-xs-5">
                     <label class="checkbox-inline">
-                      <form:checkbox value="medium" class="checkbox sizechkbx" path="size" label="Medium" onclick="document.getElementById('txtMedPrc').disabled=!this.checked;"/>
+                      <form:checkbox value="medium" class="checkbox sizechkbx" path="size" label="Medium"/>
                     </label>
                   </div>
                   <div class="col-xs-7">
@@ -164,7 +157,7 @@
 
                   <div class="col-xs-5">
                     <label class="checkbox-inline">
-                      <form:checkbox value="large" class="checkbox sizechkbx" path="size" label="Large" onclick="document.getElementById('txtLrgPrc').disabled=!this.checked;"/>
+                      <form:checkbox value="large" class="checkbox sizechkbx" path="size" label="Large" />
                     </label>
                   </div>
                   <div class="col-xs-7">
@@ -175,7 +168,7 @@
                 <div class="row item-tbl-row" id="addItmChkbxOthr">
                   <div class="col-xs-5">
                     <label class="checkbox-inline">
-                    <form:checkbox value="other" class="checkbox sizechkbx" path="size" label="Other" onclick="document.getElementById('txtOthrPrc').disabled=!this.checked;"/>
+                    <form:checkbox value="other" class="checkbox sizechkbx" path="size" label="Other"/>
                     </label>
                   </div>
                   <div class="col-xs-7">
@@ -193,9 +186,7 @@
 
           <div class="form-group">
             <div class="row">
-              <label class="col-xs-3 control-label">
-                Item Type
-              </label>
+              <label class="col-xs-3 control-label"><fmt:message key="item.itemadd.form.itemtype"/></label>
 
               <div class="col-xs-7">
                 <label class="radio-inline">
@@ -222,12 +213,12 @@
           <div class="form-group">
             <div class="row">
               <label for="btnUpldImage" class="col-xs-3 control-label">
-                Add Image/s
+                <fmt:message key="item.itemadd.form.itemimages"/>
               </label>
 
               <div class="col-xs-5">
                 <form:button type="button" class="btn btn-success" id="btnUpldImage" value="Browse">
-                  <span class="glyphicon glyphicon-upload"></span> Browse to Upload  Images</form:button>
+                  <span class="glyphicon glyphicon-upload"></span><fmt:message key="item.itemadd.form.button.upldimages"/></form:button>
               </div>
               <div class="col-xs-4">
                 <span id="itmImgErr" class="input-group-error"> </span>
@@ -258,12 +249,10 @@
             </div>
             <div class="col-xs-3" align="center">
               <form:button type="submit" class="btn btn-success btn-group-xs" id="btnAddItem"><span
-                      class="glyphicon glyphicon-plus"></span> Add
-                Item
-              </form:button>
+                      class="glyphicon glyphicon-plus"></span><fmt:message key="item.itemadd.form.button.submit"/></form:button>
             </div>
             <div class="col-xs-3" align="left">
-              <form:button type="button" class="btn btn-success" id="btnAddClear" onclick="this.form.reset();">Reset</form:button>
+              <form:button type="button" class="btn btn-success" id="btnAddClear" onclick="this.form.reset();"><fmt:message key="item.itemadd.form.button.reset"/> </form:button>
             </div>
           </div>
         </fieldset>
@@ -271,5 +260,6 @@
     </div>
   </div>
 </div>
+  </fmt:bundle>
 </body>
 </html>
