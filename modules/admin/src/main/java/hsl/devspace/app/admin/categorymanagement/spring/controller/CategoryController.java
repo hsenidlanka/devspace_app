@@ -29,16 +29,16 @@ public class CategoryController {
  /*   @RequestMapping(value = "/add", method = RequestMethod.GET)
    public ModelAndView showAddItem(ModelAndView modelAndView){
         Map<String, Object> model = new HashMap<String, Object>();
-        List<Map<String, Object>> listCat = categoryRepository.viewCategoryList();
+        List<Map<String, Object>> listCat = categoryRepository.selectCategoryNames();
         model.put("listCat",listCat);
         model.put("command",new Item());
         return new ModelAndView("addItem", "model", model);
     }*/
 
-   /* @RequestMapping(value = "/viewList", method = RequestMethod.GET)
+   /* @RequestMapping(value = "/selectNameAndDescription", method = RequestMethod.GET)
     public ModelAndView getCatList() {
         ModelAndView model = new ModelAndView("index");
-        List<Map<String, Object>> listCat = category.viewCategoryList();
+        List<Map<String, Object>> listCat = category.selectCategoryNames();
         model.addObject("listCat", listCat);
         return  new ModelAndView("catList", "getCategory", new Item()); }
 */
@@ -49,7 +49,7 @@ public class CategoryController {
     @RequestMapping(value = "/addCat", method = RequestMethod.GET)
     public ModelAndView showAddCateg(){
        /* ModelAndView model = new ModelAndView();
-        List<Map<String, Object>> listCat = category.viewCategoryList();
+        List<Map<String, Object>> listCat = category.selectCategoryNames();
         model.addObject("listCat", listCat);*/
         return  new ModelAndView("categAdd", "addCategory", new Category()); }
 
@@ -70,7 +70,7 @@ public class CategoryController {
     /*public ModelAndView retrieveCategoryTypes(@ModelAttribute("viewCatg") Category viewCat) throws SQLIntegrityConstraintViolationException {
        ModelAndView model = new ModelAndView("addItem");
 
-        List<Map<String, Object>> listCat = category.viewCategoryList();
+        List<Map<String, Object>> listCat = category.selectCategoryNames();
       //  model.addObject("list", categoryName);
       //  model.addObject(String.valueOf(listCat), viewCat.getCategoryName() );
         model.addObject("list", listCat );

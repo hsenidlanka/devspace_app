@@ -69,6 +69,10 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="transactionManager" ref="transactionManager"/>
     </bean>
+    <bean id="discountRepository" class="hsl.devspace.app.corelogic.repository.discount.DiscountRepositoryImpl">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="transactionManager" ref="transactionManager"/>
+    </bean>
 
     <tx:annotation-driven proxy-target-class="true"
                           transaction-manager="transactionManager" />
@@ -85,11 +89,11 @@
         <property name="username" value="root"/>
         <property name="password" value="root"/>
     </bean>
-    <!--<bean id="dataSource2"
+    <bean id="dataSource2"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
         <property name="url" value="jdbc:mysql://localhost:3306/project_dvspc2?useSSL=false"/>
         <property name="username" value="root"/>
         <property name="password" value="root"/>
-    </bean>-->
+    </bean>
 </beans>

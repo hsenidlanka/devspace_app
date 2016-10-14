@@ -475,7 +475,7 @@ public class StaffRepositoryImpl implements UserRepository {
             log.info("going updated");
 
             add(user);
-           // updateGroupStaff( des, username);
+            updateGroupStaff( des, username);
             log.info("updated");
             transactionManager.commit(stat);
         } catch (Exception e) {
@@ -493,8 +493,6 @@ public class StaffRepositoryImpl implements UserRepository {
     }
 
     }
-
-
 
 
 

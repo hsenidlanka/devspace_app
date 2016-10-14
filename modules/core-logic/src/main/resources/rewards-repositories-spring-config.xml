@@ -17,7 +17,6 @@
 
     <import resource="session-factory-config.xml"/>
 
-    <!--<bean id="emailOutboundQueueRepository" class="hms.mchoice.rewards.corelogic.repository.impl.EmailOutboundQueueRepositoryImpl"
-          p:jdbcTemplate-ref="jdbcTemplate"/>-->
+
 
 </beans>

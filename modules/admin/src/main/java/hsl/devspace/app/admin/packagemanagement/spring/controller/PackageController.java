@@ -65,7 +65,7 @@ public class PackageController {
     public ModelAndView update(@ModelAttribute("editPackage") hsl.devspace.app.corelogic.domain.Package newPackg) throws SQLIntegrityConstraintViolationException {
         ModelAndView model = new ModelAndView();
 
-/*int p = itemPackage.changeItemsInPackage();
+/*int p = itemPackage.updatePackage();
         if(p == 1)*/
 
         model.setViewName("editPckgPage");

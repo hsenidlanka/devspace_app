@@ -19,14 +19,14 @@
     <appender name="fileAppender2" class="org.apache.log4j.FileAppender">
         <param name="File" value="modules/core-logic/log4j_trace.log" />
         <param name="Append" value="true" />
-        <param name="Threshold" value="trace" />
+        <param name="Threshold" value="info" />
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="[%d{dd/MM/yy hh:mm:ss:sss z}] %5p %c{2}: %m%n"/>
         </layout>
     </appender>
 
     <root>
-        <priority value ="debug" />
+        <priority value ="info" />
         <appender-ref ref="console" />
         <appender-ref ref="fileAppender" />
         <appender-ref ref="fileAppender2" />
