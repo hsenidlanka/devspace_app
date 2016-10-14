@@ -3,8 +3,8 @@
 
     <Appenders>
 
-        <RollingFile name="FILE_TRACE" fileName="${RWD_LOG_ROOT}/trace_loggers/trace.log"
-                     filePattern="${RWD_LOG_ROOT}/logs/trace_loggers/trace-%d{MM-dd-yyyy}-%i.log.">
+        <RollingFile name="FILE_TRACE" fileName="/home/hsenid/Documents/MAVEN/devspace_app/logs/trace_loggers/trace.log"
+                     filePattern="/home/hsenid/Documents/MAVEN/devspace_app/logs/trace_loggers/trace-%d{MM-dd-yyyy}-%i.log.">
             <PatternLayout pattern="%-5p | %d{yyyy-MM-dd HH:mm:ss} | [%t] %C{2} (%F:%L) - %m%n"/>
 
             <ThresholdFilter level="ERROR" onMatch="DENY" onMismatch="ACCEPT"/>
@@ -16,8 +16,8 @@
             <DefaultRolloverStrategy max="2"/>
         </RollingFile>
 
-        <RollingFile name="FILE_ERROR" fileName="${RWD_LOG_ROOT}/error_loggers/error.log"
-                     filePattern="${RWD_LOG_ROOT}/error_loggers/error-%d{MM-dd-yyyy}-%i.log.">
+        <RollingFile name="FILE_ERROR" fileName="/home/hsenid/Documents/MAVEN/devspace_app/logs/error_loggers/error.log"
+                     filePattern="/home/hsenid/Documents/MAVEN/devspace_app/logs/error_loggers/error-%d{MM-dd-yyyy}-%i.log.">
 
             <PatternLayout pattern="%-5p | %d{yyyy-MM-dd HH:mm:ss} | [%t] %C{2} (%F:%L) - %m%n"/>
 

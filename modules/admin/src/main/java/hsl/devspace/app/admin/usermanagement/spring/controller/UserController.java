@@ -15,8 +15,11 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.servlet.http.HttpServletRequest;
 import javax.swing.*;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 /**
  * controller class containing handler methods which perform necessary handler methods
@@ -32,7 +35,10 @@ public class UserController {
        Each handler method uses this UserRepository object to perform necessary CRUD operation*/
 
     @Autowired
-    private UserRepository staffRepository, customerRepository;
+    private UserRepository customerRepository;
+
+    @Autowired
+    private UserRepository staffRepository;
 
 
     @RequestMapping(value="/list")
@@ -48,39 +54,6 @@ public class UserController {
         return new ModelAndView("userAdd", "command",new User());
     }
 
-    //controller method to validate the uniquness of username
-/*    @RequestMapping(value="/uniqueUsername",method=RequestMethod.POST)
-    public @ResponseBody String checkUser(@RequestParam("username") String uname ){
-        boolean usernameUnique ;
-       String returnType;
-
-        usernameUnique=staffRepository.checkUsernameUnique(uname);
-        if(!usernameUnique){
-                returnType= "Username available" + uname;
-        }else
-                returnType="Correct new username" + uname;
-
-        return returnType;
-    }*/
-
-/*
-    @RequestMapping(value="/addCustomer",method = RequestMethod.POST)
-    public String saveOrUpdate(@ModelAttribute("newUser")  User newUser,
-                               final RedirectAttributes redirectAttributes) throws SQLIntegrityConstraintViolationException {
-
-        boolean usernameUnique=staffRepository.checkUsernameUnique(newUser);
-        if(usernameUnique) {
-            int i = staffRepository.add(newUser);
-            if (i == 0)
-                return "redirect:add";
-            else {
-                redirectAttributes.addFlashAttribute("newUser", newUser);
-                redirectAttributes.addFlashAttribute("message", "Added Succcessfully");
-                return "redirect:add";
-            }
-        }
-        return "redirect:list";
-    }*/
 
 
     @RequestMapping(value="/addCustomer",method = RequestMethod.POST)
@@ -98,10 +71,11 @@ public class UserController {
                 if (i == 0)
                     JOptionPane.showMessageDialog(null, "Server side error...Could not insert");// put separate error pages
                 else {
-//                    return new ModelAndView(new RedirectView("successPage"));
+                    //return the user add success message
                     JOptionPane.showMessageDialog(null,"You have successfully added the user..!!");
                 }
             } else {
+                //return the unique username existance message
                 JOptionPane.showMessageDialog(null,"Error.. Username Exists already");
                 return new ModelAndView("userAdd", "command", newUser);
             }
@@ -122,6 +96,7 @@ public class UserController {
     }
 
 
+    //controller method to show a perticular user detail
     @RequestMapping(value="/showUser", method=RequestMethod.GET)
     public String showCustomer(@ModelAttribute("newUser") User newUser) {
         System.out.println("cust:" + newUser.getFirstName());
@@ -137,20 +112,44 @@ public class UserController {
 
     }
 
-    //handler method to retrieve the details of a particular staff user
-    @RequestMapping(value = "/view/staffTable", method = RequestMethod.GET)
-    public @ResponseBody List<Map<String, Object>> viewStaff(HttpServletRequest request){
-        List<Map<String, Object>> staffList = staffRepository.viewActiveUsers();
+/*    @RequestMapping(value = "/view/staffTable", method = RequestMethod.GET)
+    public @ResponseBody  List<User>  viewStaff(HttpServletRequest request){
+        List<User> staffList = staffRepository.selectActiveUsers();
 
         return staffList;
+    }*/
+    //handler method to retrieve the details of a particular staff user
+    @RequestMapping(value = "/view/staffTable", method = RequestMethod.GET)
+    public @ResponseBody  List<Map<String, Object>> viewStaff(@ModelAttribute("newUser")  User staffUser){
+        List<Map<String, Object>> out = new ArrayList<Map<String, Object>>();
+        List<User> staffList = staffRepository.selectActiveUsers();
+
+        for (int i=0;i<staffList.size();i++){
+            staffUser=staffList.get(i);
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("id", staffUser.getId());
+            map.put("username", staffUser.getUsername());
+            map.put("first_name", staffUser.getFirstName());
+            map.put("last_name", staffUser.getLastName());
+            map.put("mobile", staffUser.getMobile());
+            map.put("designation", staffUser.getDesignation());
+            map.put("department", staffUser.getDepartment());
+            map.put("branch", staffUser.getBranch());
+
+            LOG.info("newUser {}", staffUser);
+
+            out.add(map);
+            LOG.info("out {}",out);
+
+        }
+
+        return out ;
     }
 
     //handler method to retrieve the details of a particular customer user
     @RequestMapping(value = "/view/customerTable", method = RequestMethod.GET)
-    public @ResponseBody
-    List<Map<String, Object>> viewCustomer(HttpServletRequest request){
-        List<Map<String, Object>> customerList = customerRepository.viewActiveUsers();
-
+    public @ResponseBody List<User> viewCustomer(){
+        List<User> customerList= customerRepository.selectActiveUsers();
         return customerList;
     }
 
@@ -165,17 +164,37 @@ public class UserController {
 
     //handler method to retrieve the details of a particular banned staff user
     @RequestMapping(value = "/view/bannedstaffTable", method = RequestMethod.GET)
-    public @ResponseBody List<Map<String, Object>> viewBannedStaff(HttpServletRequest request){
-        List<Map<String, Object>> bannedstaffList = staffRepository.viewBlockedUsers();
+    public @ResponseBody  List<Map<String, Object>> viewBannedStaff(@ModelAttribute("newUser")  User staffUserb){
+        List<Map<String, Object>> outb = new ArrayList<Map<String, Object>>();
+        List<User> bannedstaffList = staffRepository.selectBlockedUsers();
 
-        return bannedstaffList;
+        for (int i=0;i<bannedstaffList.size();i++){
+            staffUserb=bannedstaffList.get(i);
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("id", staffUserb.getId());
+            map.put("username", staffUserb.getUsername());
+            map.put("first_name", staffUserb.getFirstName());
+            map.put("last_name", staffUserb.getLastName());
+            map.put("mobile", staffUserb.getMobile());
+            map.put("designation", staffUserb.getDesignation());
+            map.put("department", staffUserb.getDepartment());
+            map.put("branch", staffUserb.getBranch());
+
+            LOG.info("newUser {}", staffUserb);
+
+            outb.add(map);
+            LOG.info("out {}",outb);
+
+        }
+
+
+        return outb;
     }
 
     //handler method to retrieve the details of a particular banned customer user
     @RequestMapping(value = "/view/bannedcustomerTable", method = RequestMethod.GET)
-    public @ResponseBody
-    List<Map<String, Object>> viewBannedCustomer(HttpServletRequest request){
-        List<Map<String, Object>> bannedcustomerList = customerRepository.viewBlockedUsers();
+    public @ResponseBody List<User> viewBannedCustomer(HttpServletRequest request){
+        List<User> bannedcustomerList = customerRepository.selectBlockedUsers();
 
         return bannedcustomerList;
     }

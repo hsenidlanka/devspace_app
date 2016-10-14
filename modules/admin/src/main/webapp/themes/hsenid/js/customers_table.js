@@ -5,7 +5,7 @@ $(document).ready(function () {
                 url: 'https://localhost:8443/admin/users/view/customerTable',
                 height: 375,
                 pagination: true,
-                pageSize: 7,
+                pageSize: 6,
                 clickToSelect: true,
                 singleSelect: true,
                 minimumCountColumns: 3,

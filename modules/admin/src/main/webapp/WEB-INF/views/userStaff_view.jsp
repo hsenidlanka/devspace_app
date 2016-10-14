@@ -127,8 +127,8 @@
                     <label id="lblBlockStaffMsg">Do you really want to block this User ?</label><br><br>
 
                     <div align="center">
-                        <label id="lblBlockStaffId">Username : xxxxxx </label><br>
-                        <label id="lblBlockStaffName">Name : yyyyyy </label><br>
+                        <label id="lblBlockStaffId"> </label><br>
+                        <label id="lblBlockStaffName"></label><br>
                     </div>
                 </div>
             </div>

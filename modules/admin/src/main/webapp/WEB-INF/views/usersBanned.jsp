@@ -36,14 +36,12 @@
 </div>
 <br>
 
-<div class="breadcrumbPosition">
-    <div style="position: relative; left: -50%;">
+<div class="breadcrumbPosition" id="userBreadcrump">
         <ul class="breadcrumb breadcrumb-menu">
-            <li><a href="https://localhost:8443/users/list">Home</a></li>
-            <li><a href="https://localhost:8443/users/viewBlocked">User Management</a></li>
-            <li class="active"><a href="https://localhost:8443/users/add">View Users</a></li>
+            <li><a href="https://localhost:8443/admin/users/list">Home</a></li>
+            <li><a href="https://localhost:8443/admin/users/list">User Management</a></li>
+            <li class="active"><a href="https://localhost:8443/admin/users/viewBlocked">View Blocked Users</a></li>
         </ul>
-    </div>
 </div>
 <center>
     <div class="form-box" id="viewuser_box">

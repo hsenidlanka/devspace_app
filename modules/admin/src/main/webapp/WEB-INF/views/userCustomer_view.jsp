@@ -141,21 +141,23 @@
                     <label id="lblBlockCustomerMsg">Do you really want to block this User ?</label><br><br>
 
                     <div align="center">
-                        <label id="lblBlockCustomerId">Username : xxxxxx </label><br>
-                        <label id="lblBlockCustomerName">Name : yyyyyy </label><br>
+                        <label id="lblBlockCustomerId"></label><br>
+                        <label id="lblBlockCustomerName"></label><br>
                     </div>
                 </div>
             </div>
             <div class="modal-footer" align="right">
-                <button class="btn btn-success" type="button" value="Yes" id="btnBlockCustomer">Yes
+                <button class="btn btn-success" type="button" value="Yes" id="btnBlockCustomer" >Yes
                 </button>
-                <button class="btn btn-success" type="button" value="cancel" id="btnCnclBlockCustomer">
+                <button class="btn btn-success" type="button" id="btnCnclBlockCustomer" value="cancel"  data-dismiss="modal" aria-hidden="true">
                     No
                 </button>
             </div>
         </div>
     </div>
 </div>
+
+
 
 
 </body>
