@@ -75,6 +75,13 @@ public class Category {
         this.creator=creator;
         this.categoryName=categoryName;
     }
+    //category with Id (for update method)
+    public Category(int category_id,String categoryName, String description, String creator) {
+        this.category_id = category_id;
+        this.categoryName = categoryName;
+        this.description = description;
+        this.creator = creator;
+    }
 
     @Override
     public String toString() {
