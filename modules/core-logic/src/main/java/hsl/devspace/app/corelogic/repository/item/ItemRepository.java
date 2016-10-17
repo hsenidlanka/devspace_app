@@ -23,4 +23,5 @@ public interface ItemRepository {
     List<String> getAllCategories();
     List<Map<String, Object>> viewAllItemDetails();
     int updatePriceList(int id, List<Item> item2);
+    int updateItem(Item item,List<Item> item2);
 }

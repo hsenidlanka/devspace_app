@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
@@ -60,7 +61,7 @@ public class StaffRepositoryImpl implements UserRepository {
                 row = jdbcTemplate.update(sql, new Object[]{user.getTitle(), user.getUsername(), user.getPassword(), user.getFirstName(), user.getLastName(),
                         user.getEmail(), user.getMobile(), user.getAddressL1(), user.getAddressL2(), user.getAddressL3(), user.getDesignation(),
                         user.getDepartment(), user.getBranch()});
-                updateGroupStaff(des, un);
+               // updateGroupStaff(des, un);
 
 
                 log.info("{} staff inserted",row);
@@ -77,17 +78,18 @@ public class StaffRepositoryImpl implements UserRepository {
     /*insert into group staff table when adding a new staff member*/
     @Override
     public int updateGroupStaff(String des,String username) {
+        int row=0;
+    List<Map<String, Object>> mp1 = jdbcTemplate.queryForList("SELECT id FROM staff WHERE username=?", username);
+    List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT id FROM `group` WHERE name =?", des);
 
-        int row;
-    List<Map<String, Object>> mp1 = jdbcTemplate.queryForList("SELECT id FROM staff WHERE username=?",username);
-
-    List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT id FROM `group` WHERE name =?",des);
-
+        log.info(""+mp1.size());
+//if(mp.size()>0 && mp1.size()>0) {
     String sql = "INSERT INTO group_staff " +
-                "(group_id,staff_id) VALUES (?,?)";
+            "(group_id,staff_id) VALUES (?,?)";
 
-        row = jdbcTemplate.update(sql,new Object[]{mp.get(0).get("id"),mp1.get(0).get("id")});
-        log.info("{} group-staff updated",row);
+    row = jdbcTemplate.update(sql, new Object[]{Integer.parseInt(mp.get(0).get("id").toString()), Integer.parseInt(mp1.get(0).get("id").toString())});
+    //log.info("{} group-staff updated",row);
+//}
         return row;
 
     }
@@ -465,31 +467,40 @@ public class StaffRepositoryImpl implements UserRepository {
     }
 
     /*add a new staff member*/
-    public void addStaffMember(User user) {
+
+    @Transactional(propagation= Propagation.SUPPORTS)
+    public int addStaffMember(User user) {
         TransactionDefinition trDef = new DefaultTransactionDefinition();
         TransactionStatus stat = transactionManager.getTransaction(trDef);
-        String des=user.getDesignation();
-        String username=user.getUsername();
+       // String des=user.getDesignation();
+       // String username=user.getUsername();
+        int j=0;
         try {
             log.info("going updated");
-
             add(user);
-            updateGroupStaff( des, username);
+            List<Map<String,Object>> mp=jdbcTemplate.queryForList("SELECT username,designation FROM staff WHERE username=?", user.getUsername());
+            String des=mp.get(0).get("designation").toString();
+            String username=mp.get(0).get("username").toString();
+            log.info("{},{}",des,username);
+            updateGroupStaff(des, username);
             log.info("updated");
             transactionManager.commit(stat);
+            j=1;
         } catch (Exception e) {
+            log.info(e.getMessage());
             transactionManager.rollback(stat);
             log.info("rollbacked");
         }
+        return j;
 
     }
 
-    /*add a new staff member*/
+    /*add a new staff member*//*
     @Transactional
     public void addStaffMember2(User user) {
         add(user);
        // updateGroupStaff(user);
-    }
+    }*/
 
     }
 

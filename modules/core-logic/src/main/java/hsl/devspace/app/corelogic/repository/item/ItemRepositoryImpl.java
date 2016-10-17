@@ -163,6 +163,26 @@ public class ItemRepositoryImpl implements ItemRepository {
 
     }
 
+    /**update item table and size table*/
+    @Override
+    @Transactional(propagation= Propagation.REQUIRED)
+    public int updateItem(Item item, List<Item> item2) {
+        int j=0;
+        TransactionDefinition trDef = new DefaultTransactionDefinition();
+        TransactionStatus stat = transactionManager.getTransaction(trDef);
+        try {
+            update(item);
+            List<Map<String,Object>> mp=jdbcTemplate.queryForList("SELECT id FROM item WHERE `name`=?",item.getItemName());
+            int id2=Integer.parseInt(mp.get(0).get("id").toString());
+            updatePriceList(id2, item2);
+            transactionManager.commit(stat);
+            j=1;
+        } catch (Exception e) {
+            transactionManager.rollback(stat);
+        }
+        return j;
+    }
+
     /*Add new item*/
     @Override
     @Transactional(propagation= Propagation.REQUIRED)
