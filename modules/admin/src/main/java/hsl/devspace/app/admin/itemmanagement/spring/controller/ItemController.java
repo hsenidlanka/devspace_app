@@ -15,6 +15,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.swing.*;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -51,22 +52,34 @@ public class ItemController {
     @RequestMapping(value = "/add_item")
     public ModelAndView addItem(@ModelAttribute("newItem") Item newItem) throws SQLIntegrityConstraintViolationException {
 
-    String itemNm = newItem.getItemName();
+        String itemNm = newItem.getItemName();
+        double itemPrice = newItem.getPrice();
+        String itemSize = newItem.getSize();
+
+        Item newItem2 = new Item();
+        newItem2.setPrice(itemPrice);
+        newItem2.setSize(itemSize);
+
+        List<Item> items = new ArrayList<Item>();
+        for(int a=0; a<=items.size(); a++){
+            items.add(newItem2);
+        }
+
         boolean uniqueItemNm = item.checkAvailability(itemNm);
         if (!uniqueItemNm) {
-            int a = item.add(newItem);
-            if (a == 1)
-                JOptionPane.showMessageDialog(null, "Added new item " + itemNm, "Success",
-                        JOptionPane.INFORMATION_MESSAGE);
-            else
+            int a = item.addItem(newItem, items);
+            if (a != 1)
                 JOptionPane.showMessageDialog(null, "Server-side error. Cannot add the item !", "Error !",
-                        JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.ERROR_MESSAGE);
+            else
+            JOptionPane.showMessageDialog(null, "Added new item " + itemNm, "Success",
+                    JOptionPane.INFORMATION_MESSAGE);
         } else{
             JOptionPane.showMessageDialog(null,
-                    "Item name is already exists !" + itemNm, "Warning ",
+                    "Item name is already exists! " + itemNm, "Warning ",
                     JOptionPane.WARNING_MESSAGE);
-           //return new ModelAndView("item_management/addItem", "command", newItem);
-            return new ModelAndView(new RedirectView("add_item"));
+        //   return new ModelAndView("item_management/addItem", "command", newItem);
+          return new ModelAndView(new RedirectView("add_item"));
         }
 
         return new ModelAndView(new RedirectView("add"));
