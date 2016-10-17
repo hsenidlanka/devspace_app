@@ -6,6 +6,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.sql.DataSource;
@@ -140,26 +142,48 @@ public class ItemRepositoryImpl implements ItemRepository {
     @Override
     public int update(Item item) {
 
-        String sql = "UPDATE item SET name=? price=? description=? size=? type=? image=? sub_category_id=? WHERE id = ? ";
-        int row = jdbcTemplate.update(sql, new Object[]{item.getItemName(), item.getPrice(), item.getDescription(), item.getSize(), item.getType(), item.getImage(), item.getSubCategoryName(), item.getItemId()});
+        String sql = "UPDATE item SET description=? type_id=(SELECT type_id FROM type WHERE `name`=?) image=? sub_category_id=(SELECT id FROM sub_category WHERE name=?) WHERE `name`= ? ";
+        int row = jdbcTemplate.update(sql, new Object[]{item.getDescription(), item.getType(), item.getImage(), item.getSubCategoryName(), item.getItemName()});
         log.info("{} Item details changed",row);
         return row;
     }
 
+    /**update size table(prices) according to the updates of item table*/
+    @Override
+    public int updatePriceList(int id, List<Item> item2){
+        int row = 0;
+        for (int i = 0; i < item2.size(); i++) {
+            double price = item2.get(i).getPrice();
+            String size = item2.get(i).getSize();
+            String sql= "UPDATE size SET price=? WHERE size=? AND item_id=?";
+            row = jdbcTemplate.update(sql, new Object[]{price,size,id});
+            log.info("{} prices updated",row);
+        }
+        return row;
+
+    }
+
     /*Add new item*/
     @Override
-    public void addItem(Item item, List<Item> item2) {
+    @Transactional(propagation= Propagation.REQUIRED)
+    public int addItem(Item item,List<Item> item2) {
+        int j=0;
         TransactionDefinition trDef = new DefaultTransactionDefinition();
         TransactionStatus stat = transactionManager.getTransaction(trDef);
-        int id = item.getItemId();
+        //int id = item.getItemId();
         try {
             add(item);
-            updateSizeTable(id, item2);
+            List<Map<String,Object>> mp=jdbcTemplate.queryForList("SELECT id FROM item WHERE `name`=?",item.getItemName());
+            int id2=Integer.parseInt(mp.get(0).get("id").toString());
+            updateSizeTable(id2, item2);
             transactionManager.commit(stat);
+            j=1;
         } catch (Exception e) {
             transactionManager.rollback(stat);
         }
+        return j;
     }
+
 
     /*get top rated items of a given category*/
     @Override
@@ -192,7 +216,10 @@ public class ItemRepositoryImpl implements ItemRepository {
                 "s.name AS sub_category_name,t.name AS type,i.description,i.image FROM item i INNER JOIN sub_category s " +
                 "ON i.sub_category_id=s.id INNER JOIN type t ON i.type_id=t.type_id INNER JOIN category c ON c.id=s.category_id");
         */
-        List<Map<String, Object>> itemDetails = jdbcTemplate.queryForList("SELECT i.id,i.name AS item_name,c.name AS category_name, s.name AS sub_category_name,t.name AS type,i.description,i.image FROM item i INNER JOIN sub_category s ON i.sub_category_id=s.id INNER JOIN type t ON i.type_id=t.type_id INNER JOIN category c ON c.id=s.category_id");
+        List<Map<String, Object>> itemDetails = jdbcTemplate.queryForList("SELECT i.id,i.name AS item_name,c.name " +
+                "AS category_name, s.name AS sub_category_name,t.name AS type,i.description,i.image FROM item i" +
+                " INNER JOIN sub_category s ON i.sub_category_id=s.id INNER JOIN type t ON i.type_id=t.type_id " +
+                "INNER JOIN category c ON c.id=s.category_id");
         log.info("{}",itemDetails);
         return itemDetails;
     }
