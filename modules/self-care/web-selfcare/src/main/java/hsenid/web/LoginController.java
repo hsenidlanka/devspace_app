@@ -1,5 +1,6 @@
 package hsenid.web;
 
+import hsenid.web.bindclasses.BooleanResponse;
 import hsenid.web.bindclasses.ReplyFromServer;
 import hsenid.web.supportclasses.SendStringBuilds;
 import org.codehaus.jettison.json.JSONException;
@@ -196,23 +197,40 @@ public class LoginController {
         return "location";
     }
 
-    @RequestMapping(value = "UniqueUser", method = RequestMethod.GET)
-    public @ResponseBody ReplyFromServer uniqueUsername(HttpServletRequest request){
+    @RequestMapping(value = "/UniqueUser", method = RequestMethod.GET)
+    public @ResponseBody
+    BooleanResponse uniqueUsername(HttpServletRequest request){
 
         String checkName = request.getParameter("checkName");
-//        String checkName = "testre";
+//        String checkName = "testree";
         logger.info("unique user started");
         logger.info("check name "+ checkName);
         String urlForSearch = SendStringBuilds.sendString(customerSearchUrl, checkName);
+        BooleanResponse uniqueUser;
+
+        logger.info(urlForSearch);
 
         RestTemplate restTemplate = new RestTemplate();
+
         restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
 
         ReplyFromServer replyFromServer = restTemplate.getForObject(urlForSearch, ReplyFromServer.class);
-//        logger.info(replyFromServer.getMessage(), replyFromServer.getCode());
 
-//        logger.info(String.valueOf(replyFromServer.getData()));
-        return replyFromServer;
+        String serverMsg = replyFromServer.getMessage();
+        int sizeOfMsg= serverMsg.length();
+
+        if (sizeOfMsg == 23){
+            uniqueUser = new BooleanResponse(false);
+        }else{
+            uniqueUser = new BooleanResponse(true);
+        }
+
+
+        logger.info(String.valueOf(serverMsg.length()));
+
+        logger.info(replyFromServer.getMessage());
+
+        return uniqueUser;
     }
 
 
