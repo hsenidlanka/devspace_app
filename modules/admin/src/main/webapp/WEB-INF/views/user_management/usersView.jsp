@@ -1,6 +1,11 @@
+<html xmlns:jsp="http://java.sun.com/JSP/Page">
+
+<!--including JSTL to the page -->
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="spring" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <head>
 
     <!--include common CSS, fonts and js-->
@@ -22,21 +27,29 @@
 
 </head>
 <body>
+<fmt:setLocale value="En"/>
+<fmt:setBundle basename="messages_en" var="bundle1" />
+<fmt:setBundle basename="system" scope="session" var="bundle2"/>
 
 <jsp:include page="../header.jsp"/>
 
 <div class="brand">
     <div style="position: relative; left: -50%;">
-        User Management
+        <fmt:message key="user.heading" bundle="${bundle1}"/>
     </div>
 </div>
 <br>
 
-<div class="breadcrumbPosition" id="userBreadcrump">
+
+<div class="breadcrumbPosition" id="userviewBreadcrump">
         <ul class="breadcrumb breadcrumb-menu">
-            <li><a href="https://localhost:8443/admin/users/list">Home</a></li>
-            <li><a href="https://localhost:8443/admin/users/list">User Management</a></li>
-            <li class="active"><a href="https://localhost:8443/admin/users/view">View Users</a></li>
+
+            <fmt:message key="admin.home.url" var="url1" bundle="${bundle2}"/>
+            <fmt:message key="admin.usermanage.useradd.url" var="url2" bundle="${bundle2}"/>
+
+            <li><a href="<c:out value="${url1}"/>"><fmt:message key="user.breadcrumb.home" bundle="${bundle1}"/></a></li>
+            <li><a href="<c:out value="${url1}"/>"><fmt:message key="user.breadcrumb.usermanagement" bundle="${bundle1}"/></a></li>
+            <li class="active"><a href="<c:out value="${url2}"/>"><fmt:message key="user.userview.breadcrumb.viewuser" bundle="${bundle1}"/></a></li>
         </ul>
 </div>
 <center>
@@ -44,13 +57,15 @@
         <div class="panel panel-default">
 
             <div class="panel-heading common-form-headings">
-                <h3 class="default-panel-headings">View Users</h3>
+                <h3 class="default-panel-headings"><fmt:message key="user.userview.panel.heading" bundle="${bundle1}"/></h3>
             </div>
 
             <div class="panel-body">
                 <ul class="nav nav-pills red">
-                    <li class="active"><a data-toggle="pill" href="#home">Customers</a></li>
-                    <li><a data-toggle="pill" href="#menu1">Staff Members</a></li>
+                    <li class="active"><a data-toggle="pill" href="#home">
+                        <fmt:message key="user.userview.navpill.customer" bundle="${bundle1}"/></a></li>
+                    <li><a data-toggle="pill" href="#menu1">
+                        <fmt:message key="user.userview.navpill.staff" bundle="${bundle1}"/></a></li>
                 </ul>
                 <br>
                 <div class="tab-content">

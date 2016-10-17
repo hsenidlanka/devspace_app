@@ -2,9 +2,11 @@
 
 <!--including JSTL to the page -->
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="spring" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--<%@ taglib prefix="spring" uri="http://java.sun.com/jsp/jstl/core" %>--%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
 <head>
@@ -33,22 +35,28 @@
 </head>
 <body>
 <fmt:setLocale value="En"/>
-<fmt:bundle basename="messages_en">
+<fmt:setBundle basename="messages_en" var="bundle1" />
+<fmt:setBundle basename="system" scope="session" var="bundle2"/>
 
 <jsp:include page="../header.jsp"/>
 
 <div class="brand">
   <div style="position: relative; left: -50%;">
-      <fmt:message key="user.useradd.heading"/>
+      <fmt:message key="user.heading" bundle="${bundle1}"/>
   </div>
 </div>
 <br>
 <br>
 <div class="breadcrumbPosition" id="userBreadcrump">
     <ul class="breadcrumb breadcrumb-menu" >
-      <li><a href="https://localhost:8443/admin/users/list"> <fmt:message key="user.useradd.breadcrumb.home"/></a></li>
-      <li><a href="https://localhost:8443/admin/users/list"><fmt:message key="user.useradd.breadcrumb.usermanagement"/></a></li>
-      <li class="active"><a href="https://localhost:8443/admin/users/add"><fmt:message key="user.useradd.breadcrumb.adduser"/></a></li>
+
+            <fmt:message key="admin.home.url" var="url1" bundle="${bundle2}"/>
+            <fmt:message key="admin.usermanage.useradd.url" var="url2" bundle="${bundle2}"/>
+
+
+        <li><a href="<c:out value="${url1}"/>"><fmt:message key="user.breadcrumb.home" bundle="${bundle1}"/></a></li>
+      <li><a href="<c:out value="${url1}"/>"><fmt:message key="user.breadcrumb.usermanagement" bundle="${bundle1}"/></a></li>
+      <li class="active"><a href="<c:out value="${url2}"/>"><fmt:message key="user.useradd.breadcrumb.adduser" bundle="${bundle1}"/></a></li>
     </ul>
 </div>
 
@@ -57,11 +65,11 @@
     <div class="panel panel-default">
 
       <div class="panel-heading common-form-headings">
-        <h3 class="default-panel-headings "><fmt:message key="user.useradd.panel.heading"/></h3>
+        <h3 class="default-panel-headings "><fmt:message key="user.useradd.panel.heading" bundle="${bundle1}"/></h3>
       </div>
       <div class="panel-body">
         <form:form role="form" id="admin_adduser_form"  method="POST" class="form-horizontal"
-                   action="/admin/users/addCustomer"  >
+                   action="/admin/users/addCustomer">
 
           <fieldset class="scheduler-border">
             <legend class="scheduler-border" id="legendHeading"></legend>
@@ -69,19 +77,19 @@
             <div class="form-group">
                 <div class="row">
                     <label  class="col-xs-3 control-label">
-                        <fmt:message key="user.useradd.form.usertype"/>
+                        <fmt:message key="user.useradd.form.usertype" bundle="${bundle1}"/>
                     </label>
                   <div class="col-xs-8">
                     <div class="col-xs-4">
                       <label  class="radio-inline">
                         <input type="radio" name="radioName" id="customer" value="customer" checked="checked"/>
-                          <fmt:message key="user.useradd.form.usertype.customer"/>
+                          <fmt:message key="user.useradd.form.usertype.customer" bundle="${bundle1}"/>
                       </label>
                     </div>
                     <div class="col-xs-4">
                       <label  class="radio-inline">
                         <input  type="radio" name="radioName"  id="staff" value="staff"/>
-                          <fmt:message key="user.useradd.form.usertype.staff"/>
+                          <fmt:message key="user.useradd.form.usertype.staff" bundle="${bundle1}"/>
                       </label>
                     </div>
                   </div>
@@ -91,15 +99,15 @@
             <div class="form-group">
                 <div class="row">
                     <label  class="col-xs-3 control-label" >
-                        <fmt:message key="user.useradd.form.name"/>
+                        <fmt:message key="user.useradd.form.name" bundle="${bundle1}"/>
                     </label>
                   <div class="col-xs-8">
                     <div class="col-xs-6">
                       <div class="col-xs-4">
                         <form:select path="title" class="form-control" id="selectTitle" style="width: 65px">
-                          <form:option value="mr"><fmt:message key="user.useradd.form.title.mr"/></form:option>
-                          <form:option value="mrs"><fmt:message key="user.useradd.form.title.mrs"/></form:option>
-                          <form:option value="miss"><fmt:message key="user.useradd.form.title.miss"/></form:option>
+                          <form:option value="mr"><fmt:message key="user.useradd.form.title.mr" bundle="${bundle1}"/></form:option>
+                          <form:option value="mrs"><fmt:message key="user.useradd.form.title.mrs" bundle="${bundle1}" /></form:option>
+                          <form:option value="miss"><fmt:message key="user.useradd.form.title.miss" bundle="${bundle1}" /></form:option>
                         </form:select>
                       </div>
                       <div class="col-xs-5">
@@ -121,7 +129,7 @@
           <div class="form-group">
               <div class="row">
                 <label  class="col-xs-3 control-label" >
-                    <fmt:message key="user.useradd.form.address"/>
+                    <fmt:message key="user.useradd.form.address" bundle="${bundle1}" />
                 </label>
                 <div class="col-xs-8">
                   <div class="col-xs-12">
@@ -160,7 +168,7 @@
                       </div>
                       <div class="col-xs-6">
                           <div class="col-xs-12">
-                            <input path="provincein" class="form-control" id="province" placeholder="Province" type="text"/>
+                            <input  class="form-control" id="province" placeholder="Province" type="text"/>
                           </div>
                       </div>
                   </div>
@@ -169,9 +177,9 @@
 
               <div class="form-group">
                   <div class="row">
-                      <form:label path="mobile"  class="col-xs-3 control-label">
-                          <fmt:message key="user.useradd.form.mobile"/>
-                      </form:label>
+                      <label  class="col-xs-3 control-label">
+                          <fmt:message key="user.useradd.form.mobile" bundle="${bundle1}" />
+                      </label>
                       <div class="col-xs-8">
                           <div class="col-xs-6">
                               <div class="col-xs-12">
@@ -185,9 +193,9 @@
                   </div>
                   <div class="row"> <label class="control-label"></label>   </div>
                   <div class="row">
-                      <form:label path="email" class="col-xs-3 control-label">
-                          <fmt:message key="user.useradd.form.email"/>
-                      </form:label>
+                      <label  class="col-xs-3 control-label">
+                          <fmt:message key="user.useradd.form.email" bundle="${bundle1}" />
+                      </label>
                       <div class="col-xs-8">
                           <div class="col-xs-6">
                               <div class="col-xs-12">
@@ -201,9 +209,9 @@
                   </div>
                   <div class="row"> <label class="control-label"></label>   </div>
                   <div class="row">
-                      <form:label path="username" class="col-xs-3 control-label" >
-                          <fmt:message key="user.useradd.form.username"/>
-                      </form:label>
+                      <label  class="col-xs-3 control-label" >
+                          <fmt:message key="user.useradd.form.username" bundle="${bundle1}" />
+                      </label>
                       <div class="col-xs-8">
                           <div class="col-xs-6">
                               <div class="col-xs-12">
@@ -218,9 +226,9 @@
                   <div class="row"><label class=" control-label"></label></div>
 
                   <div class="row">
-                      <form:label path="password" class="col-xs-3 control-label" >
-                          <fmt:message key="user.useradd.form.password"/>
-                      </form:label>
+                      <label  class="col-xs-3 control-label" >
+                          <fmt:message key="user.useradd.form.password" bundle="${bundle1}" />
+                      </label>
                       <div class="col-xs-8">
                           <div class="col-xs-6">
                               <div class="col-xs-12">
@@ -235,13 +243,13 @@
                   </div>
                   <div class="row"><label class=" control-label"></label></div>
                   <div class="row">
-                      <form:label path="password" class="col-xs-3 control-label" >
-                          <fmt:message key="user.useradd.form.cpassword"/>
-                      </form:label>
+                      <label  class="col-xs-3 control-label" >
+                          <fmt:message key="user.useradd.form.cpassword" bundle="${bundle1}" />
+                      </label>
                       <div class="col-xs-8">
                           <div class="col-xs-6">
                               <div class="col-xs-12">
-                                  <form:input path="password" class="form-control" id="cpassword"
+                                  <input  class="form-control" id="cpassword"
                                               placeholder="Password Confirm" type="text" style="width: 260px"
                                               required="required" onchange="passwordsEqual(cpassword,password1)"/>
 
@@ -260,54 +268,54 @@
                    <legend class="scheduler-border" id="legendStaff"><fmt:message key="user.useradd.form.cpassword"/>
                    </legend>
                    <div class="row">
-                     <form:label path="designation" class="col-xs-4 control-label" >
-                         <fmt:message key="user.useradd.form.designation"/>
-                     </form:label>
-                       <form:label path="department" class="col-xs-4 control-label" >
-                           <fmt:message key="user.useradd.form.department"/>
-                       </form:label>
-                       <form:label path="branch" class="col-xs-4 control-label"  >
-                           <fmt:message key="user.useradd.form.branch"/>
-                       </form:label>
+                     <label  class="col-xs-4 control-label" >
+                         <fmt:message key="user.useradd.form.designation" bundle="${bundle1}" />
+                     </label>
+                       <label  class="col-xs-4 control-label" >
+                           <fmt:message key="user.useradd.form.department" bundle="${bundle1}" />
+                       </label>
+                       <label class="col-xs-4 control-label"  >
+                           <fmt:message key="user.useradd.form.branch" bundle="${bundle1}" />
+                       </label>
                    </div>
                      <div class="row">
                          <div class="col-xs-4">
                             <form:select path="designation" class="form-control" id="designation">
-                                <form:option value="GROUP_SYS_ADMIN"><fmt:message key="user.useradd.form.staff.designation1"/>
+                                <form:option value="GROUP_SYS_ADMIN"><fmt:message key="user.staff.designation1" bundle="${bundle1}" />
                                 </form:option>
-                                <form:option value="GROUP_ADM_MANAGER"><fmt:message key="user.useradd.form.staff.designation2"/>
+                                <form:option value="GROUP_ADM_MANAGER"><fmt:message key="user.staff.designation2" bundle="${bundle1}" />
                                 </form:option>
-                                <form:option value="GROUP_CC_MANAGER"><fmt:message key="user.useradd.form.staff.designation3"/>
+                                <form:option value="GROUP_CC_MANAGER"><fmt:message key="user.staff.designation3" bundle="${bundle1}" />
                                 </form:option>
-                                <form:option value="GROUP_CUSTOMERCARE"><fmt:message key="user.useradd.form.staff.designation4"/>
+                                <form:option value="GROUP_CUSTOMERCARE"><fmt:message key="user.staff.designation4" bundle="${bundle1}" />
                                 </form:option>
-                                <form:option value="GROUP_CUSTOMERCARE"><fmt:message key="user.useradd.form.staff.designation5"/>
+                                <form:option value="GROUP_CUSTOMERCARE"><fmt:message key="user.staff.designation5" bundle="${bundle1}" />
                                 </form:option>
-                                <form:option value="GROUP_RPT_MANAGER"><fmt:message key="user.useradd.form.staff.designation6"/>
+                                <form:option value="GROUP_RPT_MANAGER"><fmt:message key="user.staff.designation6" bundle="${bundle1}" />
                                 </form:option>
                             </form:select>
                          </div>
                          <div class="col-xs-4">
                             <form:select path="department" class="form-control" id="department">
-                                <form:option value="Finance"><fmt:message key="user.useradd.form.staff.department1"/>
+                                <form:option value="Finance"><fmt:message key="user.staff.department1" bundle="${bundle1}" />
                                 </form:option>
-                                <form:option value="Administration"><fmt:message key="user.useradd.form.staff.department2"/>
+                                <form:option value="Administration"><fmt:message key="user.staff.department2" bundle="${bundle1}" />
                                 </form:option>
-                                <form:option value="Logistic"><fmt:message key="user.useradd.form.staff.department3"/>
+                                <form:option value="Logistic"><fmt:message key="user.staff.department3" bundle="${bundle1}" />
                                 </form:option>
-                                <form:option value="Reporting"><fmt:message key="user.useradd.form.staff.department4"/>
+                                <form:option value="Reporting"><fmt:message key="user.staff.department4" bundle="${bundle1}" />
                                 </form:option>
                             </form:select>
                          </div>
                          <div class="col-xs-4">
                             <form:select path="branch" class="form-control" id="branch">
-                                <form:option value="Colombo"><fmt:message key="user.useradd.form.staff.branch1"/>
+                                <form:option value="Colombo"><fmt:message key="user.staff.branch1" bundle="${bundle1}" />
                                 </form:option>
-                                <form:option value="Gampaha"><fmt:message key="user.useradd.form.staff.branch2"/>
+                                <form:option value="Gampaha"><fmt:message key="user.staff.branch2" bundle="${bundle1}" />
                                 </form:option>
-                                <form:option value="Ja-Ela"><fmt:message key="user.useradd.form.staff.branch3"/>
+                                <form:option value="Ja-Ela"><fmt:message key="user.staff.branch3" bundle="${bundle1}" />
                                 </form:option>
-                                <form:option value="Kadana"><fmt:message key="user.useradd.form.staff.branch4"/>
+                                <form:option value="Kadana"><fmt:message key="user.staff.branch4" bundle="${bundle1}" />
                                 </form:option>
                             </form:select>
                          </div>
@@ -325,14 +333,14 @@
                           <div class="col-xs-6">
                               <div class="col-xs-5">
                                 <form:button type="reset" value="Reset" class="btn btn-success btn-md btnAddItem">
-                                    <fmt:message key="user.useradd.form.button.reset"/></form:button>
+                                    <fmt:message key="user.useradd.form.button.reset" bundle="${bundle1}" /></form:button>
                               </div>
                           </div>
                           <div class="col-xs-6">
                               <div class="col-xs-5">
                                 <form:button type="submit" class="btn btn-success btn-md" id="btnAddItem"><span
                                     class="glyphicon glyphicon-plus"></span>
-                                    <fmt:message key="user.useradd.form.button.submit"/>
+                                    <fmt:message key="user.useradd.form.button.submit" bundle="${bundle1}" />
                                 </form:button>
                               </div>
                           </div>
@@ -345,7 +353,9 @@
     </div>
   </div>
 </center>
-</fmt:bundle>
+
+<%--</fmt:setBundle>--%>
+
 </body>
 
 
