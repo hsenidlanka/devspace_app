@@ -56,12 +56,13 @@
             $("#submitBtn").off('click');
 
             $("#submitBtn").click(function () {
-                if ($('form').validator('check') <= 3) {
+//                alert($('form').validator('check'));
+                if ($('form').validator('check') <= 2) {
 
                     $.ajax({
 
-                        url: "register",
                         type: 'post',
+                        url: "register",
                         data: $('#adduser_form').serialize(),
                         success: function (result) {
                             console.log("success");
@@ -78,6 +79,61 @@
 
         });
     </script>
+    <script>
+        $(document).ready(function(){
+            $("#username").blur(function(){
+
+//                alert("blur worked");
+                var chkName = $("#username").val();
+//                alert(chkName);
+                $.ajax({
+
+
+                    type: "GET",
+                    // The URL for the request
+                    url: "BooleanResponse",
+                    // The data to send (will be converted to a query string)
+                    data: {
+                        checkName: chkName
+                    },
+
+                    // The type of data we expect back
+                    dataType: "json",
+                    success: function (data2) {
+
+                        if(!data2.userAvailable){
+                            $("#username").val('');
+                            alert("Username is taken. Add another.");
+                        }
+                    },
+                    error: function (data) {
+                        console.log("error work");
+                    }
+                });
+
+
+
+
+              /*  $.ajax({
+                    url: '/BooleanResponse',
+                    type: 'GET',
+                    dataType: 'json',
+                    data: {
+                        checkName : "testre"
+                    },
+                    error: function() {
+                        console.log("error function");
+                    },
+
+                    success: function(data) {
+                        console.log("succsess function");
+                    },
+
+                });*/
+            });
+        });
+    </script>
+
 
 </head>
 <!-------Header------------------------------------->

@@ -86,9 +86,9 @@
               </label>
 
               <div class="col-xs-5">
-                <select class="form-control" id="selectSubCat">
+                <form:select class="form-control" id="selectSubCat" path="subCategoryName">
 
-                </select>
+                </form:select>
                 <span id="subCatErr" class="input-group-error"></span>
               </div>
 

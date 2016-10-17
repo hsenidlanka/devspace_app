@@ -145,7 +145,7 @@
                                                placeholder="<fmt:message key="signup.email.example" bundle="${lang}"/>" required="" data-error-msg="Enter Email">
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" id="usernameblock">
                                     <label for="username" class="col-sm-2 control-label">
                                         <fmt:message key="signup.username" bundle="${lang}"/>
                                     </label>

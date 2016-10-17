@@ -1,5 +1,7 @@
 package hsenid.web;
 
+import hsenid.web.bindclasses.BooleanResponse;
+import hsenid.web.bindclasses.ReplyFromServer;
 import hsenid.web.supportclasses.SendStringBuilds;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
@@ -7,9 +9,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
@@ -27,6 +32,9 @@ public class LoginController {
 
     @Value("${api.url.login}")
     private String loginUrl;
+
+    @Value("${api.url.customer.search}")
+    private String customerSearchUrl;
 
     @Value("${api.connect.timeout}")
     private int connectTimeout;
@@ -188,6 +196,43 @@ public class LoginController {
         }
         return "location";
     }
+
+    @RequestMapping(value = "/UniqueUser", method = RequestMethod.GET)
+    public @ResponseBody
+    BooleanResponse uniqueUsername(HttpServletRequest request){
+
+        String checkName = request.getParameter("checkName");
+//        String checkName = "testree";
+        logger.info("unique user started");
+        logger.info("check name "+ checkName);
+        String urlForSearch = SendStringBuilds.sendString(customerSearchUrl, checkName);
+        BooleanResponse uniqueUser;
+
+        logger.info(urlForSearch);
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+
+        ReplyFromServer replyFromServer = restTemplate.getForObject(urlForSearch, ReplyFromServer.class);
+
+        String serverMsg = replyFromServer.getMessage();
+        int sizeOfMsg= serverMsg.length();
+
+        if (sizeOfMsg == 23){
+            uniqueUser = new BooleanResponse(false);
+        }else{
+            uniqueUser = new BooleanResponse(true);
+        }
+
+
+        logger.info(String.valueOf(serverMsg.length()));
+
+        logger.info(replyFromServer.getMessage());
+
+        return uniqueUser;
+    }
+
 
 
 }
