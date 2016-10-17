@@ -78,6 +78,32 @@
 
         });
     </script>
+    <script>
+        $(document).ready(function(){
+            $("#username").blur(function(){
+
+                alert("blur worked");
+
+                $.ajax({
+                    url: '/UniqueUser',
+                    type: 'GET',
+                    dataType: 'json',
+                    data: {
+                        checkName : "testre"
+                    },
+                    error: function() {
+                        console.log("error function");
+                    },
+
+                    success: function(data) {
+                        console.log("succsess function");
+                    },
+
+                });
+            });
+        });
+    </script>
+
 
 </head>
 <!-------Header------------------------------------->
