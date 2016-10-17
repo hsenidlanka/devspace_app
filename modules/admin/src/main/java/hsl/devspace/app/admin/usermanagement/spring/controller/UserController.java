@@ -14,6 +14,8 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.swing.*;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -40,49 +42,14 @@ public class UserController {
         return model;
     }
 
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
+
 //    customer user add is done in below methods
     @RequestMapping(value="/add",method=RequestMethod.GET)
     public ModelAndView showCustomer(){
         return new ModelAndView("user_management/userAdd", "command",new User());
     }
 
-    //controller method to validate the uniquness of username
-/*    @RequestMapping(value="/uniqueUsername",method=RequestMethod.POST)
-    public @ResponseBody String checkUser(@RequestParam("username") String uname ){
-        boolean usernameUnique ;
-       String returnType;
-
-        usernameUnique=staffRepository.checkUsernameUnique(uname);
-        if(!usernameUnique){
-                returnType= "Username available" + uname;
-        }else
-                returnType="Correct new username" + uname;
-
-        return returnType;
-    }*/
-
-/*
-    @RequestMapping(value="/addCustomer",method = RequestMethod.POST)
-    public String saveOrUpdate(@ModelAttribute("newUser")  User newUser,
-                               final RedirectAttributes redirectAttributes) throws SQLIntegrityConstraintViolationException {
-
-        boolean usernameUnique=staffRepository.checkUsernameUnique(newUser);
-        if(usernameUnique) {
-            int i = staffRepository.add(newUser);
-            if (i == 0)
-                return "redirect:add";
-            else {
-                redirectAttributes.addFlashAttribute("newUser", newUser);
-                redirectAttributes.addFlashAttribute("message", "Added Succcessfully");
-                return "redirect:add";
-            }
-        }
-        return "redirect:list";
-    }*/
 
 
     @RequestMapping(value="/addCustomer",method = RequestMethod.POST)
@@ -141,12 +108,6 @@ public class UserController {
 
     //handler method to retrieve the details of a particular staff user
     @RequestMapping(value = "/view/staffTable", method = RequestMethod.GET)
-<<<<<<< Updated upstream
-    public @ResponseBody List<Map<String, Object>> viewStaff(HttpServletRequest request){
-        List<Map<String, Object>> staffList = staffRepository.selectActiveUsers();
-
-        return staffList;
-=======
     public @ResponseBody  List<Map<String, Object>> viewStaff(@ModelAttribute("newUser")  User staffUser){
         List<Map<String, Object>> out = new ArrayList<Map<String, Object>>();
         List<User> staffList = staffRepository.selectActiveUsers();
@@ -168,18 +129,10 @@ public class UserController {
             LOG.info("out {}",out);
         }
         return out ;
->>>>>>> Stashed changes
     }
 
     //handler method to retrieve the details of a particular customer user
     @RequestMapping(value = "/view/customerTable", method = RequestMethod.GET)
-<<<<<<< Updated upstream
-    public @ResponseBody
-    List<Map<String, Object>> viewCustomer(HttpServletRequest request){
-        List<Map<String, Object>> customerList = customerRepository.selectActiveUsers();
-
-        return customerList;
-=======
     public @ResponseBody List<Map<String, Object>> viewCustomer(@ModelAttribute("newUser")  User customerUser){
         List<Map<String, Object>> outc = new ArrayList<Map<String, Object>>();
         List<User> customerList= customerRepository.selectActiveUsers();
@@ -201,7 +154,6 @@ public class UserController {
             LOG.info("out {}",outc);
         }
         return outc;
->>>>>>> Stashed changes
     }
 
 
@@ -215,12 +167,6 @@ public class UserController {
 
     //handler method to retrieve the details of a particular banned staff user
     @RequestMapping(value = "/view/bannedstaffTable", method = RequestMethod.GET)
-<<<<<<< Updated upstream
-    public @ResponseBody List<Map<String, Object>> viewBannedStaff(HttpServletRequest request){
-        List<Map<String, Object>> bannedstaffList = staffRepository.selectBlockedUsers();
-
-        return bannedstaffList;
-=======
     public @ResponseBody  List<Map<String, Object>> viewBannedStaff(@ModelAttribute("newUser")  User staffUserb){
         List<Map<String, Object>> outb = new ArrayList<Map<String, Object>>();
         List<User> bannedstaffList = staffRepository.selectBlockedUsers();
@@ -243,20 +189,13 @@ public class UserController {
         }
 
         return outb;
->>>>>>> Stashed changes
     }
 
     //handler method to retrieve the details of a particular banned customer user
     @RequestMapping(value = "/view/bannedcustomerTable", method = RequestMethod.GET)
-<<<<<<< Updated upstream
-    public @ResponseBody
-    List<Map<String, Object>> viewBannedCustomer(HttpServletRequest request){
-        List<Map<String, Object>> bannedcustomerList = customerRepository.selectBlockedUsers();
-=======
     public @ResponseBody List<Map<String, Object>>  viewBannedCustomer(@ModelAttribute("newUser")  User customerUserb){
         List<Map<String, Object>> outcb = new ArrayList<Map<String, Object>>();
         List<User> bannedcustomerList = customerRepository.selectBlockedUsers();
->>>>>>> Stashed changes
 
         for (int i=0;i<bannedcustomerList.size();i++){
             customerUserb=bannedcustomerList.get(i);
