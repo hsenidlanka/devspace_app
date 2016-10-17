@@ -58,7 +58,7 @@ public class CategoryController {
 
         ModelAndView model = new ModelAndView();
 
-        model.setViewName("addCategory");
+        model.setViewName("category_management/addCategory");
 
         return model;
     }

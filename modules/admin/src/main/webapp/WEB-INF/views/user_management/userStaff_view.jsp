@@ -135,7 +135,8 @@
             <div class="modal-footer" align="right">
                 <button class="btn btn-success" type="button" value="Yes" id="btnBlockStaff">Yes
                 </button>
-                <button class="btn btn-success" type="button" value="cancel" id="btnCnclBlockStaff">
+                <button class="btn btn-success" type="button" value="cancel" id="btnCnclBlockStaff" data-dismiss="modal"
+                        aria-hidden="true">
                     No
                 </button>
             </div>

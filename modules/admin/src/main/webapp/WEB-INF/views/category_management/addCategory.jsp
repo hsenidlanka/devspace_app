@@ -7,7 +7,7 @@
   <title>Add Category</title>
 
   <!-- include common CSS, fonts and js -->
-  <jsp:include page="adminTop.jsp"/>
+  <jsp:include page="../adminTop.jsp"/>
 
   <%-- Other css --%>
   <spring:url value="/themes/hsenid/css/add-category" var="cssCateg"/>
@@ -21,7 +21,7 @@
 
 <body>
 
-<jsp:include page="header.jsp"/>
+<jsp:include page="../header.jsp"/>
 
 <div class="brand">
   <div style="position: relative; left: -50%;">
@@ -184,7 +184,7 @@
 </div>
 
 <div class="footerposition">
-  <jsp:include page="footer.jsp"/>
+  <jsp:include page="../footer.jsp"/>
 
 </div>
 

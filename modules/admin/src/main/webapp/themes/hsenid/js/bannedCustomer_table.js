@@ -50,25 +50,55 @@ $(document).ready(function () {
 
 function operateFormatter4(value, row, index) {
     return [
-        '<a class="likebc" href="javascript:void(0)" title="LikeCustomer" >',
+        '<a class="viewc" href="javascript:void(0)" title="LikeCustomer" >',
         '<i class="glyphicon glyphicon-eye-open">View</i>',
         //'<em class="fa fa-pencil"></em>',
         '</a>  ',
-        '<a class="removebc" href="javascript:void(0)" title="Delete">',
+        '<a class="replacec" href="javascript:void(0)" title="Delete">',
         '<i class="glyphicon glyphicon-refresh">Restore</i>',
         '</a>'
     ].join('');
 }
 
-window.operateEvents4 = {
 
-    'click .likebc': function() {
+window.operateEvents4 = {
+    'click .viewc': function() {
         $('#blockCustomerModal').modal({show:true});
 
     },
-
-    'click .removebc': function() {
-        $('#replaceUserModal').modal({show:true});
-
+    'click .replacec': function(e, value, row, index) {
+        var data4 = JSON.stringify(row);
+        var objc4 = JSON.parse(data4);
+        $('#lblUnblockCustomerId').text(objc4["username"]);
+        $('#lblUnblockCustomerName').text("Name :"+objc4["first_name"]);
+        $('#replaceCustomerModal').modal({show:true});
     }
-}
+};
+
+//function to unbann a customer user selected
+$(document).ready(function(){
+    $("#btnUnblockCustomer").click(function(){
+        var uname = $('#lblUnblockCustomerId').text();
+        $.ajax({
+            //type: "POST",
+            url: "https://localhost:8443/admin/users/unblock/customer",
+            data: {"uname": uname},
+            success: function(msg){
+                if(msg == 1){
+                    alert("Unblocked the  user" + uname+" successfully!");
+                    $("#replaceCustomerModal").modal('hide');
+
+                }else{
+                    alert("Error in unblocking the user !");
+                    $("#replaceCustomerModal").modal('hide');
+                }
+
+            },
+            error:function(){
+                alert("ajax failed" +uname);
+            }
+        });
+
+    });
+});
+

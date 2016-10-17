@@ -420,7 +420,6 @@ public class StaffRepositoryImpl implements UserRepository {
             staff.setStatus(mp.get(i).get("status").toString());
             staffDetails.add(staff);
 
-
         }
         log.info("{}",staffDetails);
         return staffDetails;

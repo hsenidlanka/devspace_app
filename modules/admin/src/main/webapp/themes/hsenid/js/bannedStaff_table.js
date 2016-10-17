@@ -72,8 +72,39 @@ window.operateEvents3 = {
 
     },
 
-    'click .remove': function() {
-        $('#replaceUserModal').modal({show:true});
+    'click .remove': function(e, value, row, index) {
+        var data3 = JSON.stringify(row);
+        var objc3 = JSON.parse(data3);
+        $('#lblUnblockStaffId').text(objc3["username"]);
+        $('#lblUnblockStaffName').text("Name :"+objc3["first_name"]);
+        $('#replaceStaffModal').modal({show:true});
 
     }
-}
+};
+
+//function to unbann a staff user selected
+$(document).ready(function(){
+    $("#btnUnblockStaff").click(function(){
+        var uname = $('#lblUnblockStaffId').text();
+        $.ajax({
+            //type: "POST",
+            url: "https://localhost:8443/admin/users/unblock/staff",
+            data: {"uname": uname},
+            success: function(msg){
+                if(msg == 1){
+                    alert("Unblocked the  user" + uname+" successfully!");
+                    $("#replaceStaffModal").modal('hide');
+
+                }else{
+                    alert("Error in unblocking the user !");
+                    $("#replaceStaffModal").modal('hide');
+                }
+
+            },
+            error:function(){
+                alert("ajax failed" +uname);
+            }
+        });
+
+    });
+});

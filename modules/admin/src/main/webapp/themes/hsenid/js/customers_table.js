@@ -5,7 +5,7 @@ $(document).ready(function () {
                 url: 'https://localhost:8443/admin/users/view/customerTable',
                 height: 375,
                 pagination: true,
-                pageSize: 6,
+                pageSize: 7,
                 clickToSelect: true,
                 singleSelect: true,
                 minimumCountColumns: 3,
@@ -46,7 +46,7 @@ $(document).ready(function () {
                     events: operateEvents1
                 }]
             });
-})
+});
 
 function operateFormatter1(value, row, index) {
     return [
@@ -64,9 +64,11 @@ window.operateEvents1 = {
     'click .removec': function(e, value, row, index) {
         var data2 = JSON.stringify(row);
         var objc2 = JSON.parse(data2);
-        $('#lblBlockCustomerId').text("Username :"+objc2["username"]);
+        $('#lblBlockCustomerId').text(objc2["username"]);
         $('#lblBlockCustomerName').text("Name :"+objc2["first_name"]);
         $('#removeCustomerModal').modal({show:true});
+
+
 
     },
     'click .likec': function(e, value, row, index) {
@@ -84,4 +86,31 @@ window.operateEvents1 = {
         $('#replaceUserModal').modal({show:true});
 
     }
-}
+};
+
+//function to bann a customer user selected
+$(document).ready(function(){
+    $("#btnBlockCustomer").click(function(){
+        var uname = $('#lblBlockCustomerId').text();
+        $.ajax({
+            //type: "POST",
+            url: "https://localhost:8443/admin/users/block/customer",
+            data: {"uname": uname},
+            success: function(msg){
+                if(msg == 1){
+                    alert("Deleted the  user" + uname+" successfully!");
+                    $("#removeCustomerModal").modal('hide');
+
+                }else{
+                    alert("Error in deleting the user !");
+                    $("#removeCustomerModal").modal('hide');
+                }
+
+            },
+            error:function(){
+                alert("ajax failed" +uname);
+            }
+        });
+
+    });
+});

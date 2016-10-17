@@ -122,6 +122,37 @@
 </table>
 
 
+<!--modelto appear when replacing a banned Customer or Staff user -->
+<div class="modal fade" id="replaceStaffModal">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header deleteuser-modal-header-style">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
+                        class="glyphicon glyphicon-remove"></span></button>
+                <div align="center"><span class="glyphicon glyphicon-refresh"></span>Replace Blocked User
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label id="lblBlockStaffMsg">Do you really want to unblock this User ?</label><br><br>
+
+                    <div align="center">
+                        <label id="lblUnblockStaffId"></label><br>
+                        <label id="lblUnblockStaffName"></label><br>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" align="right">
+                <button class="btn btn-success" type="button" value="Yes" id="btnUnblockStaff">Yes
+                </button>
+                <button class="btn btn-success" type="button" value="cancel" id="btnCnclBlockStaff">
+                    No
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <!--modelto appear when viewing the details of the blocked user (STAFF) -->
 <div class="modal fade" id="blockedStaffModal">
@@ -134,9 +165,8 @@
                 </div>
             </div>
             <div class="modal-body">
-
-
-                <br> <div class="form-box">
+                <br>
+                <div class="form-box">
                 <div class="form-group">
                     <br>
                     <div class="row">

@@ -4,7 +4,7 @@
 <head>
 
     <!--include common CSS, fonts and js-->
-    <jsp:include page="adminTop.jsp"/>
+    <jsp:include page="../adminTop.jsp"/>
 
     <!--my css files-->
     <spring:url value="/themes/hsenid/css/userMgt.css" var="css1"/>
@@ -23,7 +23,7 @@
 </head>
 <body>
 
-<jsp:include page="header.jsp"/>
+<jsp:include page="../header.jsp"/>
 
 <div class="brand">
     <div style="position: relative; left: -50%;">

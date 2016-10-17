@@ -4,7 +4,7 @@
 <head>
 
     <!--include common CSS, fonts and js-->
-    <jsp:include page="adminTop.jsp"/>
+    <jsp:include page="../adminTop.jsp"/>
     <spring:url value="/themes/hsenid/css/form-elements.css" var="css2"/>
     <link href="${css2}" rel="stylesheet">
 
@@ -27,7 +27,7 @@
 </head>
 <body>
 
-<jsp:include page="header.jsp"/>
+<jsp:include page="../header.jsp"/>
 
 <div class="brand">
     <div style="position: relative; left: -50%;">
@@ -78,36 +78,6 @@
     </div>
 </center>
 
-<!--modelto appear when replacing a banned Customer or Staff user -->
-<div class="modal fade" id="replaceUserModal">
-    <div class="modal-dialog ">
-        <div class="modal-content">
-            <div class="modal-header deleteuser-modal-header-style">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
-                        class="glyphicon glyphicon-remove"></span></button>
-                <div align="center"><span class="glyphicon glyphicon-refresh"></span>Replace Blocked User
-                </div>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label id="lblBlockStaffMsg">Do you really want to unblock this User ?</label><br><br>
-
-                    <div align="center">
-                        <label id="lblBlockStaffId">Username : xxxxxx </label><br>
-                        <label id="lblBlockStaffName">Name : yyyyyy </label><br>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer" align="right">
-                <button class="btn btn-success" type="button" value="Yes" id="btnBlockStaff">Yes
-                </button>
-                <button class="btn btn-success" type="button" value="cancel" id="btnCnclBlockStaff">
-                    No
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 

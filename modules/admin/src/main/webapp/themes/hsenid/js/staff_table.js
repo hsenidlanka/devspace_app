@@ -5,7 +5,7 @@ $(document).ready(function () {
         url: 'https://localhost:8443/admin/users/view/staffTable',
         height: 350,
         pagination: true,
-        pageSize: 8,
+        pageSize: 7,
         clickToSelect: true,
         singleSelect: true,
         minimumCountColumns: 3,
@@ -64,14 +64,43 @@ function operateFormatter2(value, row, index) {
 }
 
 window.operateEvents2 = {
+
+
       'click .removes': function (e, value, row, index) {
           var data2 = JSON.stringify(row);
           var objc2 = JSON.parse(data2);
-          $('#lblBlockStaffId').text("Username :"+objc2["username"]);
+          $('#lblBlockStaffId').text(objc2["username"]);
           $('#lblBlockStaffName').text("Name :"+objc2["first_name"]);
         $('#removeStaffModal').modal({show:true});
 
         //alert('You click remove action, row: ');
 
     }
-}
+};
+
+//function to bann a staff user selected
+$(document).ready(function(){
+    $("#btnBlockStaff").click(function(){
+        var uname = $('#lblBlockStaffId').text();
+        $.ajax({
+            //type: "POST",
+            url: "https://localhost:8443/admin/users/block/staff",
+            data: {"uname": uname},
+            success: function(msg){
+                if(msg == 1){
+                    alert("Blocked the  user" + uname+" successfully!");
+                    $("#removeStaffModal").modal('hide');
+
+                }else{
+                    alert("Error in blocking the user !");
+                    $("#removeStaffModal").modal('hide');
+                }
+
+            },
+            error:function(){
+                alert("ajax failed" +uname);
+            }
+        });
+
+    });
+});

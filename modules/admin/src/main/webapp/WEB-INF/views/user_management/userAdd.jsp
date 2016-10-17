@@ -9,7 +9,7 @@
 
 <head>
   <!--include common CSS, fonts and js-->
-  <jsp:include page="adminTop.jsp"/>
+  <jsp:include page="../adminTop.jsp"/>
 
   <spring:url value="/themes/hsenid/css/userMgt.css" var="css1"/>
   <spring:url value="/themes/hsenid/css/form-elements.css" var="css2"/>
@@ -35,7 +35,7 @@
 <fmt:setLocale value="En"/>
 <fmt:bundle basename="messages_en">
 
-<jsp:include page="header.jsp"/>
+<jsp:include page="../header.jsp"/>
 
 <div class="brand">
   <div style="position: relative; left: -50%;">
@@ -348,39 +348,5 @@
 </fmt:bundle>
 </body>
 
-
-
-<!--modelto appear when banning a Customer or Staff user -->
-<div class="modal fade" id="removeCustomerModal">
-    <div class="modal-dialog ">
-        <div class="modal-content">
-            <div class="modal-header deleteuser-modal-header-style">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
-                        class="glyphicon glyphicon-remove"></span></button>
-                <div align="center"><span class="glyphicon glyphicon-trash"></span>
-                    <fmt:message key="user.customerblock.modal.title"/>
-                </div>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label id="lblBlockCustomerMsg"><fmt:message key="user.customerblock.modal.heading"/></label><br><br>
-
-
-                    <div align="center">
-                        <label id="lblBlockCustomerId"><fmt:message key="user.customerblock.modal.username"/> ${newUser.username} </label><br>
-                        <label id="lblBlockCustomerName"><fmt:message key="user.customerblock.modal.name"/> ${newUser.firstName}</label><br>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer" align="right">
-                <button class="btn btn-success" type="button" value="Yes" id="btnBlockCustomer">Yes
-                </button>
-                <button class="btn btn-success" type="button" value="cancel" id="btnCnclBlockCustomer" >
-                    No
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
 
 </html>
