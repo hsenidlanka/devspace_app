@@ -4,16 +4,20 @@ import hsenid.web.bindclasses.BooleanResponse;
 import hsenid.web.bindclasses.ReplyFromServer;
 import hsenid.web.supportclasses.SendStringBuilds;
 import org.codehaus.jettison.json.JSONException;
-import org.codehaus.jettison.json.JSONObject;
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
@@ -46,56 +50,45 @@ public class LoginController {
     String toLoginJsonString = null;
 
 
-    @RequestMapping("login")
-    public JSONObject login(HttpServletRequest request) throws JSONException {
+   @RequestMapping(value = "chechBlocked", produces = "application/json")
+   @ResponseBody
+   public BooleanResponse checkBlockedUser(HttpServletRequest request){
+//       String username = request.getParameter("username");
+       String username = request.getParameter("checkName");
+       String password = "";
 
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
+       JSONObject jsonObject = new JSONObject();
+       jsonObject.put("username", username);
+       jsonObject.put("password", password);
 
-        String loginDetailString = SendStringBuilds.sendString("{", "username", ":", username, ",", "password", ":", password, "}");
+       MultiValueMap<String, String> headers = new LinkedMultiValueMap<String, String>();
+       headers.add("Content-Type", "application/json");
+       HttpEntity<JSONObject> jsonObjectHttpEntity = new HttpEntity<JSONObject>(jsonObject, headers);
 
-        JSONObject jsonObject = new JSONObject(loginDetailString);
+       RestTemplate restTemplate = new RestTemplate();
 
-        try {
-            URL url = new URL(loginUrl);
-            URLConnection connection = url.openConnection();
-            connection.setDoOutput(true);
-            connection.setRequestProperty("Content-Type", "application/json");
-            connection.setConnectTimeout(connectTimeout);
-            connection.setReadTimeout(readTimeout);
-            OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream());
-            out.write(jsonObject.toString());
-            out.close();
+       try {
 
-            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            String ttt = null;
-            StringBuilder sb = new StringBuilder();
+           ReplyFromServer replyFromServer = restTemplate.postForObject(loginUrl, jsonObjectHttpEntity, ReplyFromServer.class);
 
-            while ((ttt = in.readLine()) != null) {
-                sb.append(ttt);
-            }
+       } catch (RestClientException e) {
+           String msg = e.getMessage().trim();
+           String[] splited = msg.split("\\s+");
+           if (splited[0].equals("403")){
 
-            in.close();
+               logger.error("Blocked Username={} Entered", username);
+               return new BooleanResponse(false);
+           }
+       }
 
-            JSONObject reply = new JSONObject(sb.toString());
-            int status = reply.getInt("code");
-            if (status == 200) {
-            } else if (status == 401) {
-            }
+       logger.info("Username is not blocked");
+       return new BooleanResponse(true);
 
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-        }
-
-        JSONObject authorizeJson = new JSONObject(loginDetailString);
-
-        return authorizeJson;
-    }
-
+   }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST, produces="application/json")
-//    @ResponseBody
-    public String register(HttpServletRequest regRequest) throws JSONException {
+    @ResponseBody
+    public BooleanResponse register(HttpServletRequest regRequest) throws JSONException {
 
         String addressL3 = null;
 
@@ -116,102 +109,49 @@ public class LoginController {
 
 
         String registerDetails = SendStringBuilds.sendString("{","title",":",title,"," + "firstName" + ":" + firstName + "," + "lastName" + ":" + lastName + "," + "email" + ":" + email + "," + "addressL1" + ":" + addressL1 + "," + "addressL2" + ":" + addressL2 + "," + "addressL3" + ":",addressL3,",","username",":",username,",","password",":",password,",","mobile",":",mobile,"}");
-        JSONObject jsonObject = new JSONObject(registerDetails);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("title",title);
+        jsonObject.put("firstName", firstName);
+        jsonObject.put("lastName", lastName);
+        jsonObject.put("email",email);
+        jsonObject.put("addressL1", addressL1);
+        jsonObject.put("addressL2", addressL2);
+        jsonObject.put("addressL3", addressL3);
+        jsonObject.put("username", username);
+        jsonObject.put("password", password);
+        jsonObject.put("mobile", mobile);
 
-        try {
-            URL url = new URL(registerUrl);
-            URLConnection connection = url.openConnection();
-            connection.setDoOutput(true);
-            connection.setRequestProperty("Content-Type", "application/json");
-            connection.setConnectTimeout(connectTimeout);
-            connection.setReadTimeout(readTimeout);
-            OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream());
-            out.write(jsonObject.toString());
-            out.close();
+        logger.info(jsonObject.toString());
 
-            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            String ttt = null;
-            StringBuilder sb = new StringBuilder();
+        RestTemplate restTemplate = new RestTemplate();
 
-            while ((ttt = in.readLine()) != null) {
-                sb.append(ttt);
-            }
+        MultiValueMap<String, String> headers = new LinkedMultiValueMap<String, String>();
+        headers.add("Content-Type", "application/json");
+        HttpEntity<JSONObject> httpEntity = new HttpEntity<JSONObject>(jsonObject, headers);
 
-            in.close();
+        try{
+            ReplyFromServer message = restTemplate.postForObject(registerUrl, httpEntity, ReplyFromServer.class);
+        }catch (Exception e){
+            logger.info(e.getMessage());
 
-            JSONObject reply = new JSONObject(sb.toString());
-            int status = reply.getInt("code");
-            if (status == 201) {
-                return "locations";
-            }
-
-        } catch (Exception e) {
-            logger.error("Exception occur. Reason -> " + e.getMessage());
         }
 
-        return "/home/aboutus";
+        return new BooleanResponse(true);
     }
 
 
-    @RequestMapping("/ltest")
-    public String ltest(HttpServletRequest request) throws JSONException {
-
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-
-        String loginDetailString = SendStringBuilds.sendString("{","username",":",username,",","password",":",password, "}");
-
-        JSONObject jsonObject = new JSONObject(loginDetailString);
-
-        try {
-            URL url = new URL(loginUrl);
-            URLConnection connection = url.openConnection();
-            connection.setDoOutput(true);
-            connection.setRequestProperty("Content-Type", "application/json");
-            connection.setConnectTimeout(connectTimeout);
-            connection.setReadTimeout(readTimeout);
-            OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream());
-            out.write(jsonObject.toString());
-            out.close();
-
-            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            String ttt = null;
-            StringBuilder sb = new StringBuilder();
-
-            while ((ttt = in.readLine()) != null) {
-                sb.append(ttt);
-            }
-            in.close();
-
-//            toLoginJsonString = "{" + "username" + ":" + username + "," + "password" + ":" + password + "}";
-
-            JSONObject reply = new JSONObject(sb.toString());
-            int status = reply.getInt("code");
-            if (status == 200) {
-                return "aboutus";
-            }
-
-        } catch (Exception e) {
-            logger.error("Exception occur. Reason -> " + e.getMessage());
-        }
-        return "location";
-    }
+//    Unique User search
 
     @RequestMapping(value = "/UniqueUser", method = RequestMethod.GET)
     public @ResponseBody
     BooleanResponse uniqueUsername(HttpServletRequest request){
 
         String checkName = request.getParameter("checkName");
-//        String checkName = "testree";
         logger.info("unique user started");
-        logger.info("check name "+ checkName);
         String urlForSearch = SendStringBuilds.sendString(customerSearchUrl, checkName);
         BooleanResponse uniqueUser;
 
-        logger.info(urlForSearch);
-
         RestTemplate restTemplate = new RestTemplate();
-
         restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
 
         ReplyFromServer replyFromServer = restTemplate.getForObject(urlForSearch, ReplyFromServer.class);

@@ -53,39 +53,4 @@ public class ReplyFromServer {
         this.data = data;
     }
 
-
-
-
-
-
-
-
-
-/*
-
-    {
-        "status": "success",
-            "code": 200,
-            "message": "customer data retrieved",
-            "data": [
-        {
-            "firstName": "Capricone",
-                "lastName": "Silver",
-                "registeredDate": "2016-09-13",
-                "addressLine03": "Axa town",
-                "mobile": "0859632586",
-                "addressLine02": "Town hall",
-                "addressLine01": "Creeps Lane",
-                "title": "Ms",
-                "email": "hulkmail!@gmail.com",
-                "username": "testre"
-        }
-        ],
-        "links": [
-        {
-            "rel": "self",
-                "link": "http://localhost:2222/pizza-shefu/api/v1.0/customers/testre/"
-        }
-        ]
-    }*/
 }
