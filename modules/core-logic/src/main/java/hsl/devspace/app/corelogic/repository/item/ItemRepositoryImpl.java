@@ -60,7 +60,7 @@ public class ItemRepositoryImpl implements ItemRepository {
     public int updateSizeTable(int id, List<Item> item2) {
         int row = 0;
         for (int i = 0; i < item2.size(); i++) {
-            double price = item2.get(i).getPrice();
+            String price = item2.get(i).getPrice();
             String size = item2.get(i).getSize();
             String sql = "INSERT INTO size" +
                     "(size,price,item_id) VALUES (?,?,?)";
@@ -153,7 +153,7 @@ public class ItemRepositoryImpl implements ItemRepository {
     public int updatePriceList(int id, List<Item> item2){
         int row = 0;
         for (int i = 0; i < item2.size(); i++) {
-            double price = item2.get(i).getPrice();
+            String price = item2.get(i).getPrice();
             String size = item2.get(i).getSize();
             String sql= "UPDATE size SET price=? WHERE size=? AND item_id=?";
             row = jdbcTemplate.update(sql, new Object[]{price,size,id});

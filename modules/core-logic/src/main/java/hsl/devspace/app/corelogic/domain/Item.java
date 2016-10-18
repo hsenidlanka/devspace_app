@@ -5,7 +5,7 @@ package hsl.devspace.app.corelogic.domain;
  */
 public class Item {
     private String itemName;
-    private double price;
+    private String price;
     private String description;
     private String size;
     private String type;
@@ -64,11 +64,11 @@ public class Item {
         this.itemName = itemName;
     }
 
-    public double getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
@@ -106,7 +106,7 @@ public class Item {
     public Item(){
 
     }
-    public Item(String itemName,double price,String description,String size,String type,String image,String subCategoryName){
+    public Item(String itemName,String price,String description,String size,String type,String image,String subCategoryName){
         this.itemName=itemName;
         this.price=price;
         this.description=description;
@@ -116,7 +116,7 @@ public class Item {
         this.subCategoryName=subCategoryName;
     }
 
-    public Item(String itemName, double price, String description, String size, String type, String image, String subCategoryName, int itemId) {
+    public Item(String itemName, String price, String description, String size, String type, String image, String subCategoryName, int itemId) {
         this.itemName = itemName;
         this.price = price;
         this.description = description;
@@ -135,7 +135,7 @@ public class Item {
         this.subCategoryName = subCategoryName;
     }
 
-    public Item(double price, String size) {
+    public Item(String price, String size) {
         this.price = price;
         this.size = size;
     }

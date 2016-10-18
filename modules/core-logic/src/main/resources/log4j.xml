@@ -30,7 +30,5 @@
         <appender-ref ref="console" />
         <appender-ref ref="fileAppender" />
         <appender-ref ref="fileAppender2" />
-
-
     </root>
 </log4j:configuration>
