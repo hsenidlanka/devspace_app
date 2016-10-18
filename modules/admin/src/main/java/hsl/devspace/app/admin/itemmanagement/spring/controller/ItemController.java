@@ -50,20 +50,37 @@ public class ItemController {
 
     //For submitting the add new item
     @RequestMapping(value = "/add_item")
-    public ModelAndView addItem(@ModelAttribute("newItem") Item newItem) throws SQLIntegrityConstraintViolationException {
+    public ModelAndView addItem(@ModelAttribute("newItem") Item newItem,
+                                @RequestParam("price")List<Double> listP) throws SQLIntegrityConstraintViolationException {
+
+      /*  List<Double> items2 = new ArrayList<Double>();
+        items2.add(newItem.getPrice());
+        LOGGER.trace("items2 "+ items2);*/
+
+        listP = new ArrayList<Double>();
+        listP.add(newItem.getPrice());
+
+        LOGGER.trace("List PR " + listP + listP.size());
 
         String itemNm = newItem.getItemName();
         double itemPrice = newItem.getPrice();
         String itemSize = newItem.getSize();
+
+        LOGGER.trace("ggg"+ itemNm);
+        LOGGER.trace("pp"+ itemPrice);
+        LOGGER.trace("ss"+ itemSize);
 
         Item newItem2 = new Item();
         newItem2.setPrice(itemPrice);
         newItem2.setSize(itemSize);
 
         List<Item> items = new ArrayList<Item>();
-        for(int a=0; a<=items.size(); a++){
+      //  for(int a=0; a<=items.size(); a++){
             items.add(newItem2);
-        }
+       // }
+
+        LOGGER.trace(items+ " List 2");
+        LOGGER.trace(newItem+ " List 342");
 
         boolean uniqueItemNm = item.checkAvailability(itemNm);
         if (!uniqueItemNm) {
