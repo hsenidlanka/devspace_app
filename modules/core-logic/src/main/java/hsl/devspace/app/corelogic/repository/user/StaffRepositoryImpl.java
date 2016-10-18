@@ -98,12 +98,24 @@ public class StaffRepositoryImpl implements UserRepository {
     @Override
     public int delete(String username) throws IllegalArgumentException {
 
-        user.setUsername(username);
+       // user.setUsername(username);
 
         String sql = "DELETE FROM staff WHERE username = ?";
-        int row = jdbcTemplate.update(sql, new Object[]{user.getUsername()});
+        int row = jdbcTemplate.update(sql, new Object[]{username});
         log.info("{} staff deleted",row);
         return row;
+
+    }
+
+    /**delete record from group-staff when user is deleted*/
+    public int deleteUserRecord(String username){
+        log.info("{} group_staff entered");
+
+        String sql = "DELETE FROM group_staff WHERE staff_id =(SELECT id FROM staff WHERE username=?)";
+        int row = jdbcTemplate.update(sql, new Object[]{username});
+        log.info("{} group_staff deleted",row);
+        return  row;
+
 
     }
 
@@ -173,12 +185,11 @@ public class StaffRepositoryImpl implements UserRepository {
 
     /*retrieve all details for a specific staff user*/
     @Override
-    public List<User> retrieveSelectedUserDetails(String username) {
+    public User retrieveSelectedUserDetails(String username) {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE BINARY username = ?", username);
-        List<User> staffDetails=new ArrayList<User>();
+        User staff = new User();
 
         for (int i=0;i<mp.size();i++){
-            User staff = new User();
             staff.setId(Integer.parseInt(mp.get(i).get("id").toString()));
             staff.setTitle(mp.get(i).get("title").toString());
             staff.setUsername(mp.get(i).get("username").toString());
@@ -197,12 +208,10 @@ public class StaffRepositoryImpl implements UserRepository {
             staff.setBranch(mp.get(i).get("branch").toString());
             staff.setRegDate(Date.valueOf(mp.get(i).get("register_date").toString()));
             staff.setStatus(mp.get(i).get("status").toString());
-            staffDetails.add(staff);
-
 
         }
-        log.info("{}",staffDetails);
-        return staffDetails;
+        log.info("{}",staff);
+        return staff;
     }
 
     /*retrieve details of all staff users*/
@@ -466,7 +475,7 @@ public class StaffRepositoryImpl implements UserRepository {
 
     }
 
-    /*add a new staff member*/
+    /**add a new staff member*/
 
     @Transactional(propagation= Propagation.SUPPORTS)
     public int addStaffMember(User user) {
@@ -495,12 +504,24 @@ public class StaffRepositoryImpl implements UserRepository {
 
     }
 
-    /*add a new staff member*//*
-    @Transactional
-    public void addStaffMember2(User user) {
-        add(user);
-       // updateGroupStaff(user);
-    }*/
+    /**delete staff member*/
+    @Transactional(propagation= Propagation.REQUIRED)
+    public int deleteStaff(String username){
+        TransactionDefinition trDef = new DefaultTransactionDefinition();
+        TransactionStatus stat = transactionManager.getTransaction(trDef);
+        int j=0;
+        try{
+            deleteUserRecord(username);
+            delete(username);
+            transactionManager.commit(stat);
+            j=1;
+        }catch (Exception e){
+            log.info(e.getMessage());
+            transactionManager.rollback(stat);
+            log.info("rollbacked");
+        }
+        return j;
+    }
 
     }
 

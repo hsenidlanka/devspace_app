@@ -27,7 +27,7 @@ public interface UserRepository {
 
     int modify(User user) throws SQLException, TransientDataAccessResourceException;
 
-    List<User> retrieveSelectedUserDetails(String username);
+    User retrieveSelectedUserDetails(String username);
     List<User> selectAll();
 
     int block(String username);

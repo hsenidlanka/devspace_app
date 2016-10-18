@@ -134,12 +134,11 @@ public class UserRepositoryImpl implements UserRepository {
 
     /*retrieve details for a specific customer*/
     @Override
-    public List<User> retrieveSelectedUserDetails(String username) {
+    public User retrieveSelectedUserDetails(String username) {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE BINARY username = ?", username);
-        List<User> customerDetails=new ArrayList<User>();
+        User customer = new User();
 
         for (int i=0;i<mp.size();i++){
-            User customer = new User();
             customer.setId(Integer.parseInt(mp.get(i).get("id").toString()));
             customer.setTitle(mp.get(i).get("title").toString());
             customer.setFirstName(mp.get(i).get("first_name").toString());
@@ -156,12 +155,11 @@ public class UserRepositoryImpl implements UserRepository {
             customer.setRegDate(Date.valueOf(mp.get(i).get("registered_date").toString()));
             customer.setStatus(mp.get(i).get("status").toString());
 
-            customerDetails.add(customer);
 
 
         }
-        log.info("{}",customerDetails);
-        return customerDetails;
+        log.info("{}",customer);
+        return customer;
     }
 
     /*view all customer details*/
