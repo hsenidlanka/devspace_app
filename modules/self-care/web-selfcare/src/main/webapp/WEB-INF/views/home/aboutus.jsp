@@ -40,7 +40,7 @@
 
 <a href="http://gazpo.com/downloads/tutorials/jquery/scrolltop/#" class="scrollup" style="display: none;">Scroll</a>
 
-<%@include file="../includes/loginload.jsp" %>
+<%--<%@include file="../includes/loginload.jsp" %>--%>
 <%@include file="../signupmodal.jsp" %>
 </body>
 </html>

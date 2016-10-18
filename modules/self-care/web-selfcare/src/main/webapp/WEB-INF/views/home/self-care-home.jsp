@@ -58,7 +58,7 @@
             $("#submitBtn").click(function () {
 //                alert($('form').validator('check'));
                 if ($('form').validator('check') <= 2) {
-
+//alert("form validator worlk");
                     $.ajax({
 
                         type: 'post',
@@ -66,14 +66,18 @@
                         data: $('#adduser_form').serialize(),
                         success: function (result) {
                             console.log("success");
-
+//                            jQuery.noConflict();
+                            $('#registerSuccesful').modal('show');
                         },
                         error: function () {
                             $("#ajaccall").append("<b>Appended text</b>");
                         }
                     });
 
+                }else{
+                    return false;
                 }
+
 
             });
 
@@ -81,6 +85,47 @@
     </script>
     <script>
         $(document).ready(function(){
+            $("#loginUsername").blur(function(){
+
+//                alert("blur worked");
+                var chkName = $("#loginUsername").val();
+//                alert(chkName);
+                $.ajax({
+
+
+                    type: "POST",
+                    // The URL for the request
+                    url: "chechBlocked",
+                    // The data to send (will be converted to a query string)
+                    data: {
+                        checkName: chkName
+                    },
+
+                    // The type of data we expect back
+                    dataType: "json",
+                    success: function (data2) {
+
+                        if(!data2.userAvailable){
+                            $("#loginUsername").val('');
+                            alert("Username is blocked");
+                        }else{
+                            return fasle;
+                        }
+                    },
+                    error: function (data) {
+                        console.log("error work");
+                    }
+                });
+
+            });
+
+
+
+
+
+
+
+
             $("#username").blur(function(){
 
 //                alert("blur worked");
@@ -91,7 +136,7 @@
 
                     type: "GET",
                     // The URL for the request
-                    url: "BooleanResponse",
+                    url: "UniqueUser",
                     // The data to send (will be converted to a query string)
                     data: {
                         checkName: chkName
@@ -111,26 +156,11 @@
                     }
                 });
 
-
-
-
-              /*  $.ajax({
-                    url: '/BooleanResponse',
-                    type: 'GET',
-                    dataType: 'json',
-                    data: {
-                        checkName : "testre"
-                    },
-                    error: function() {
-                        console.log("error function");
-                    },
-
-                    success: function(data) {
-                        console.log("succsess function");
-                    },
-
-                });*/
             });
+
+
+
+
         });
     </script>
 
@@ -255,6 +285,27 @@
 
 <!------------------------------signup modal --------------------------------------------->
 <%@include file="../signupmodal.jsp" %>
+
+<%--Login Successful modal--%>
+
+<div class="modal fade" id="registerSuccesful" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <p>User Account Creation Successful</p><br>
+
+                <p>Please login </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
 
 </body>
 </html>
