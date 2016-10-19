@@ -55,6 +55,7 @@ public class LoginController {
    public BooleanResponse checkBlockedUser(HttpServletRequest request){
 //       String username = request.getParameter("username");
        String username = request.getParameter("checkName");
+//       logger.info(username);
        String password = "";
 
        JSONObject jsonObject = new JSONObject();
@@ -78,6 +79,7 @@ public class LoginController {
 
                logger.error("Blocked Username={} Entered", username);
                return new BooleanResponse(false);
+
            }
        }
 
@@ -85,6 +87,36 @@ public class LoginController {
        return new BooleanResponse(true);
 
    }
+
+    @RequestMapping(value = "/login")
+    @ResponseBody
+    public BooleanResponse login(HttpServletRequest request){
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+//String username = "testre";
+//        String password = "password";
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("username", username);
+        jsonObject.put("password", password);
+
+        MultiValueMap<String, String> headers = new LinkedMultiValueMap<String, String>();
+        headers.add("Content-Type", "application/json");
+        HttpEntity<JSONObject> jsonObjectHttpEntity = new HttpEntity<JSONObject>(jsonObject, headers);
+
+        RestTemplate restTemplate = new RestTemplate();
+        ReplyFromServer replyFromServer = null;
+        try {
+            replyFromServer = restTemplate.postForObject(loginUrl, jsonObjectHttpEntity, ReplyFromServer.class);
+        } catch (RestClientException e) {
+            logger.error(e.getMessage());
+            return new BooleanResponse(false);
+        }
+//        logger.info(replyFromServer.getMessage());
+        return new BooleanResponse(true);
+    }
+
+
 
     @RequestMapping(value = "/register", method = RequestMethod.POST, produces="application/json")
     @ResponseBody

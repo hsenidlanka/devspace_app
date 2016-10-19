@@ -62,9 +62,6 @@
                                                placeholder="<fmt:message key="signup.first.name" bundle="${lang}"/>" required="" data-error-msg="Enter First Name">
                                     </div>
 
-                                    <%--<div class="col-sm-4">
-                                        <input class="form-control" id="lname" name="lname" type="text" placeholder="<fmt:message key="signup.last.name" bundle="${lang}"/>" required="" data-error-msg="Enter Valid Last Name" >
-                                    </div>--%>
                                 </div>
 
                                 <%----%>
@@ -90,13 +87,7 @@
                                     <div class="col-sm-5">
                                         <input name="address1" id="address1" class="form-control" type="text" placeholder="<fmt:message key="signup.addr1" bundle="${lang}"/>" required>
 
-                                        <%--<input class="form-control" required="" id="address1" name="address1" type="text" placeholder="<fmt:message key="signup.addr1" bundle="${lang}"/>" >--%>
                                     </div>
-<%--
-                                    <div class="col-sm-4">
-                                        <input class="form-control" name="address2" id="address2" type="text" placeholder="<fmt:message key="signup.addr2" bundle="${lang}"/>" required>
-                                        <input class="form-control" id="address2" name="address2" type="text" placeholder="<fmt:message key="signup.addr2" bundle="${lang}"/>" requied="" >
-                                    </div>--%>
                                 </div>
 
                                 <%----%>
@@ -185,7 +176,7 @@
 
                                 <%----%>
                                 <div class="form-group">
-                                    <button id="submitBtn" name="submitBtn" class="btn btn-success"><fmt:message key="signup.create.account" bundle="${lang}"/> </button>
+                                    <button id="submitBtn" name="submitBtn" class="btn btn-success"><fmt:message key="signup.create.account" bundle="${lang}"/></button>
                                     <button type="reset" class="btn btn-warning"><fmt:message key="signup.clear" bundle="${lang}"/></button>
 
                                 </div>

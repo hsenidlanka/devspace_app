@@ -55,7 +55,7 @@
 
               <div class="row form-group">
                   <div class="col-sm-3">
-                      <h3><label for="username">Username</label></h3>
+                      <h3><label for="loginUsername">Username</label></h3>
                   </div>
                   <div class="">
                       <input id="loginUsername" class="form-control" min="3" name="loginUsername" required="" type="text" data-error-msg="Username required !!!">
@@ -64,13 +64,13 @@
               </div>
 
               <div class="row  form-group">
-                  <label for="password">Password</label>
+                  <label for="loginPassword">Password</label>
                   <input id="loginPassword" name="loginPassword" class="form-control" min="3" required="" data-error-msg="Please provide Valid password !!!"
                          type="password">
               </div>
 
               <div class="row col-sm-offset-4">
-                  <button id="btn-submit" type="button" class="btn btn-primary btn-block">Submit</button>
+                  <button id="loginFormSubmit" name="loginFormSubmit" type="button" class="btn btn-primary btn-block">Submit</button>
               </div>
 
           </form>
@@ -79,7 +79,31 @@
         <div class="clear"></div>
 
       </div>
-
+        <!------------------------------signup modal --------------------------------------------->
+        <%@include file="../signupmodal.jsp" %>
     </div>
   </div>
 </div>
+
+
+<%--Login Successful modal--%>
+
+<div class="modal fade" id="registerSuccesful" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <p>User Account Creation Successful</p><br>
+
+                <p>Please login </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<%--Login Successful modal end--%>

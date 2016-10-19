@@ -3,7 +3,7 @@
     <properties>
         <!-- Format of the data written to log files. -->
         <property name="format">%d{yyyy-MMM-dd HH:mm:ss:sss} %p [%t] %c %m%n</property>
-        <property name="log_root">/home/hsenid/Projects/devspace_app/modules/core-server/logs</property>
+        <property name="log_root">../../logs</property>
     </properties>
 
     <Appenders>

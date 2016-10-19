@@ -34,3 +34,4 @@
 <script src="<c:url value="/resources/js/back-to-top.js"/>" ></script>
 
 <script src="<c:url value="/resources/js/validate-bootstrap.jquery.js"/>"></script>
+<script src="<c:url value="/resources/js/registerandlogin.js"/>"></script>
