@@ -50,10 +50,12 @@
     </Appenders>
 
     <Loggers>
-        <Root level="info">
+
+        <logger name="hsenid" level="info" additivity="false">
             <AppenderRef ref="web-selfcare-info-log" level="info"/>
             <AppenderRef ref="web-selfcare-error-log" level="error"/>
             <AppenderRef ref="web-selfcare-console-log" level="info"/>
-        </Root>
+        </logger>
+
     </Loggers>
 </Configuration>

@@ -31,8 +31,6 @@
 
         $(document).ready(function () {
 
-
-    //            registration validation starts
             $(function () {
                 $('form').validator({
                     validHandlers: {
@@ -46,7 +44,6 @@
                             return input.val() == bla;
 
                         }
-
                     }
                 });
 
@@ -56,9 +53,7 @@
             $("#submitBtn").off('click');
 
             $("#submitBtn").click(function () {
-//                alert($('form').validator('check'));
                 if ($('form').validator('check') <= 2) {
-//alert("form validator worlk");
                     $.ajax({
 
                         type: 'post',
@@ -85,13 +80,57 @@
     </script>
     <script>
         $(document).ready(function(){
+            $("#loginFormSubmit").off('click');
+
+            $("#loginFormSubmit").click(function () {
+//                alert($('form').validator('check'));
+                var loginUsername =  $("#loginUsername").val();
+                var loginPassword =  $("#loginPassword").val();
+
+                if ($('form').validator('check') <= 2) {
+
+                    $.ajax({
+
+                        type: 'post',
+                        url: "login",
+                        data: {username:loginUsername, password:loginPassword},
+                        success: function (result) {
+//                            alert(result.userAvailable);
+
+                            if(result.userAvailable){
+                                alert("Login Successful");
+                                $('#modal-login').modal('toggle');
+                            }else{
+                                alert("Invalied Username of Password");
+                            }
+
+                            console.log("success");
+//                            jQuery.noConflict();
+//                            $('#registerSuccesful').modal('show');
+//                            return true;
+
+                        },
+                        error: function () {
+                            $("#ajaccall").append("<b>Appended text</b>");
+                        }
+                    });
+
+                }else{
+                    return false;
+                }
+
+
+            });
+
+
+
+
             $("#loginUsername").blur(function(){
 
 //                alert("blur worked");
                 var chkName = $("#loginUsername").val();
 //                alert(chkName);
                 $.ajax({
-
 
                     type: "POST",
                     // The URL for the request
@@ -113,17 +152,12 @@
                         }
                     },
                     error: function (data) {
+                        alert("error worked");
                         console.log("error work");
                     }
                 });
 
             });
-
-
-
-
-
-
 
 
             $("#username").blur(function(){
