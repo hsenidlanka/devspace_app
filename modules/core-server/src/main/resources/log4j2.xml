@@ -50,10 +50,16 @@
     </Appenders>
 
     <Loggers>
-        <Root level="info">
+        <!--<Root level="info">
             <AppenderRef ref="core-server-info-log" level="info"/>
             <AppenderRef ref="core-server-error-log" level="error"/>
             <AppenderRef ref="core-server-console-log" level="info"/>
-        </Root>
+        </Root>-->
+
+        <Logger name="hsl.devspace.app.coreserver" level="info" additivity="false">
+            <AppenderRef ref="core-server-info-log" level="info"/>
+            <AppenderRef ref="core-server-error-log" level="error"/>
+            <AppenderRef ref="core-server-console-log" level="info"/>
+        </Logger>
     </Loggers>
 </Configuration>

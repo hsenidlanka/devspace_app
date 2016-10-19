@@ -112,7 +112,7 @@ public class CustomerService {
         String url = uriInfo.getAbsolutePath().toString();
         successMessage.addLink(url, "self");
         JSONObject jsonObject = new JSONObject();
-        if(user.getUsername()!=null){
+        if (user.getUsername() != null) {
             successMessage.setMessage("customer data retrieved");
             jsonObject.put("title", user.getTitle());
             jsonObject.put("firstName", user.getFirstName());
@@ -127,7 +127,7 @@ public class CustomerService {
             jsonObject.put("mobile", user.getMobile());
             jsonObject.put("registeredDate", user.getRegDate());
             successMessage.addData(jsonObject);
-        }else{
+        } else {
             successMessage.setMessage("no customer data to retrieve");
         }
 
