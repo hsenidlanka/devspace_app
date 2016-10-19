@@ -175,8 +175,7 @@ public class StaffRepositoryImpl implements UserRepository {
     @Override
     public int update(User user) throws TransientDataAccessResourceException, SQLException {
 
-        String sql = "UPDATE staff SET username=? password = ? first_name=? last_name=? email=? mobile=? address_line1=?" +
-                "address_line2=? address_line3=? designation=? department=? branch=? WHERE id = ? ";
+        String sql = "UPDATE staff SET username=? password = ? first_name=? last_name=? email=? mobile=? address_line1=? address_line2=? address_line3=? designation=? department=? branch=? WHERE id = ? ";
 
         int count = jdbcTemplate.update(sql, new Object[]{user.getUsername(), user.getPassword(),user.getFirstName(),user.getLastName(),user.getEmail(),
         user.getMobile(),user.getAddressL1(),user.getAddressL2(),user.getAddressL3(),user.getDesignation(),user.getDepartment(),user.getBranch(),user.getId()}, Integer.class);
@@ -188,7 +187,7 @@ public class StaffRepositoryImpl implements UserRepository {
     public int updateGroupStaffWithStaffModifications(User user){
         String sql="UPDATE group_staff SET group_id=(SELECT id FROM `group` WHERE `name`=?) WHERE staff_id=?";
         int count=jdbcTemplate.update(sql,new Object[]{user.getDesignation(),user.getId()});
-        log.info("{}",count);
+        log.info("{} staff group",count);
         return count;
     }
 
@@ -532,7 +531,7 @@ public class StaffRepositoryImpl implements UserRepository {
         return j;
     }
 
-    /**update staff membe*/
+    /**update staff member*/
     @Transactional(propagation= Propagation.REQUIRED)
     public int updateStaffMember(User user){
         TransactionDefinition trDef = new DefaultTransactionDefinition();
@@ -541,7 +540,7 @@ public class StaffRepositoryImpl implements UserRepository {
         try{
             updateGroupStaffWithStaffModifications(user);
             update(user);
-           transactionManager.commit(stat);
+            transactionManager.commit(stat);
             j=1;
         }catch (Exception e){
             log.info(e.getMessage());

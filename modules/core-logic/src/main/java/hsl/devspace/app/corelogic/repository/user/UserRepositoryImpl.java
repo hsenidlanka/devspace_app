@@ -408,6 +408,21 @@ public class UserRepositoryImpl implements UserRepository {
         return customerDetails;
     }
 
+    @Override
+    public int addStaffMember(User user) {
+        return 0;
+    }
+
+    @Override
+    public int deleteStaff(String username) {
+        return 0;
+    }
+
+    @Override
+    public int updateStaffMember(User user) {
+        return 0;
+    }
+
 
 }
 

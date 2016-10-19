@@ -41,6 +41,9 @@ public interface UserRepository {
     boolean checkUsernameUnique(User user);
     List<User> selectActiveUsers();
     List<User> selectBlockedUsers();
+    int addStaffMember(User user);
+    int deleteStaff(String username);
+    int updateStaffMember(User user);
 
 
 
