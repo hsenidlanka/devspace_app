@@ -173,14 +173,23 @@ public class StaffRepositoryImpl implements UserRepository {
 
     /*update username and password for a specific user*/
     @Override
-    public int modify(User user) throws TransientDataAccessResourceException, SQLException {
+    public int update(User user) throws TransientDataAccessResourceException, SQLException {
 
-        String sql = "UPDATE staff SET username=? password = ? WHERE username = ? ";
+        String sql = "UPDATE staff SET username=? password = ? first_name=? last_name=? email=? mobile=? address_line1=?" +
+                "address_line2=? address_line3=? designation=? department=? branch=? WHERE id = ? ";
 
-        int count = jdbcTemplate.update(sql, new Object[]{user.getUsername(), user.getPassword(), (user.getUsername())}, Integer.class);
+        int count = jdbcTemplate.update(sql, new Object[]{user.getUsername(), user.getPassword(),user.getFirstName(),user.getLastName(),user.getEmail(),
+        user.getMobile(),user.getAddressL1(),user.getAddressL2(),user.getAddressL3(),user.getDesignation(),user.getDepartment(),user.getBranch(),user.getId()}, Integer.class);
         log.info("{}",count);
         return count;
+    }
 
+    /**update group_staff table data on staff table updates*/
+    public int updateGroupStaffWithStaffModifications(User user){
+        String sql="UPDATE group_staff SET group_id=(SELECT id FROM `group` WHERE `name`=?) WHERE staff_id=?";
+        int count=jdbcTemplate.update(sql,new Object[]{user.getDesignation(),user.getId()});
+        log.info("{}",count);
+        return count;
     }
 
     /*retrieve all details for a specific staff user*/
@@ -521,6 +530,26 @@ public class StaffRepositoryImpl implements UserRepository {
             log.info("rollbacked");
         }
         return j;
+    }
+
+    /**update staff membe*/
+    @Transactional(propagation= Propagation.REQUIRED)
+    public int updateStaffMember(User user){
+        TransactionDefinition trDef = new DefaultTransactionDefinition();
+        TransactionStatus stat = transactionManager.getTransaction(trDef);
+        int j=0;
+        try{
+            updateGroupStaffWithStaffModifications(user);
+            update(user);
+           transactionManager.commit(stat);
+            j=1;
+        }catch (Exception e){
+            log.info(e.getMessage());
+            transactionManager.rollback(stat);
+            log.info("rollbacked");
+        }
+        return j;
+
     }
 
     }

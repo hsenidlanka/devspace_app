@@ -206,6 +206,24 @@ private int id;
         this.department=department;
         this.branch=branch;
     }
+    //staff update
+
+    public User(int id, String firstName, String lastName, String username, String password, String email, String addressL1, String addressL2, String addressL3, String mobile, String designation, String department, String branch) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.mobile = mobile;
+        this.addressL1 = addressL1;
+        this.addressL2 = addressL2;
+        this.addressL3 = addressL3;
+        this.designation = designation;
+        this.department = department;
+        this.branch = branch;
+    }
+
     //customer
     public User(String title,String firstName,String lastName,String username,String password,String email,String addressL1,
                 String addressL2,String addressL3,String mobile){
