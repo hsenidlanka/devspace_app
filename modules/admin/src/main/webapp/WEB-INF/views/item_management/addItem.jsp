@@ -217,8 +217,7 @@
               </label>
 
               <div class="col-xs-5">
-                <form:button type="button" class="btn btn-success" id="btnUpldImage" value="Browse">
-                  <span class="glyphicon glyphicon-upload"></span><fmt:message key="item.itemadd.form.button.upldimages"/></form:button>
+                <form:input type="file" class="btn btn-success" path="image" id="btnUpldImage" value="Browse"/>
               </div>
               <div class="col-xs-4">
                 <span id="itmImgErr" class="input-group-error"> </span>
