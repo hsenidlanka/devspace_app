@@ -1,14 +1,16 @@
 package hsenid.config;
 
 
-//import org.apache.log4j.PropertyConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+    final Logger logger = LoggerFactory.getLogger(WebAppInitializer.class);
+
     @Override
     protected String[] getServletMappings(){
-//        String log4jConfigFile = "/log4j2-test.xml";
-//        PropertyConfigurator.configure(log4jConfigFile);
+        logger.info("Web App Initialised!");
         return new String[]{"/"};
     }
 
