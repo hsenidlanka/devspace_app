@@ -128,7 +128,7 @@ public class UserRepositoryImpl implements UserRepository {
     public int update(User user) throws TransientDataAccessResourceException, SQLException {
 
         String sql = "UPDATE customer SET first_name=? last_name=? username=? password = ? email=? address_line1=? address_line2=? address_line3=? mobile=? WHERE id = ? ";
-        int count = jdbcTemplate.update(sql, new Object[]{user.getFirstName(),user.getLastName(),user.getUsername(), user.getPassword(),user.getEmail(),user.getAddressL1(),user.getAddressL2(),user.getAddressL3(),user.getMobile()}, Integer.class);
+        int count = jdbcTemplate.update(sql, new Object[]{user.getFirstName(),user.getLastName(),user.getUsername(), user.getPassword(),user.getEmail(),user.getAddressL1(),user.getAddressL2(),user.getAddressL3(),user.getMobile(),user.getId()}, Integer.class);
         log.info("{}",count);
         return count;
 
