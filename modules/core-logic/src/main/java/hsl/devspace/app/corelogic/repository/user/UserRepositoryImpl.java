@@ -94,10 +94,12 @@ public class UserRepositoryImpl implements UserRepository {
         return user.isConfirmed();
     }
 
-    /*authenticate username and password matched for a existing customer*/
-    //blocked=2
-    //credentials matched=1
-    //mismatched=0
+    /**
+     * authenticate username and password matched for a existing customer
+       blocked=2
+       credentials matched=1
+       mismatched=0
+    */
     @Override
     public int loginAuthenticate(String username,String password) {
 
@@ -123,10 +125,10 @@ public class UserRepositoryImpl implements UserRepository {
 
     /*change username and password for a customer*/
     @Override
-    public int modify(User user) throws TransientDataAccessResourceException, SQLException {
+    public int update(User user) throws TransientDataAccessResourceException, SQLException {
 
-        String sql = "UPDATE customer SET username=? password = ? WHERE username = ? ";
-        int count = jdbcTemplate.update(sql, new Object[]{user.getUsername(), user.getPassword(), (user.getUsername())}, Integer.class);
+        String sql = "UPDATE customer SET first_name=? last_name=? username=? password = ? email=? address_line1=? address_line2=? address_line3=? mobile=? WHERE id = ? ";
+        int count = jdbcTemplate.update(sql, new Object[]{user.getFirstName(),user.getLastName(),user.getUsername(), user.getPassword(),user.getEmail(),user.getAddressL1(),user.getAddressL2(),user.getAddressL3(),user.getMobile()}, Integer.class);
         log.info("{}",count);
         return count;
 

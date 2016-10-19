@@ -25,7 +25,7 @@ public interface UserRepository {
 
     int loginAuthenticate(String username,String password) throws SQLException;
 
-    int modify(User user) throws SQLException, TransientDataAccessResourceException;
+    int update(User user) throws SQLException, TransientDataAccessResourceException;
 
     User retrieveSelectedUserDetails(String username);
     List<User> selectAll();

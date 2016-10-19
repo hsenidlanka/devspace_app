@@ -220,6 +220,22 @@ private int id;
         this.addressL3 = addressL3;
         this.mobile=mobile;
     }
+
+    //for update customer
+
+    public User( String firstName, String lastName, String username, String password, String email, String addressL1, String addressL2, String addressL3, String mobile, int id) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.addressL1 = addressL1;
+        this.addressL2 = addressL2;
+        this.addressL3 = addressL3;
+        this.mobile = mobile;
+    }
+
     public User(String mobile){
         this.mobile=mobile;
     }
