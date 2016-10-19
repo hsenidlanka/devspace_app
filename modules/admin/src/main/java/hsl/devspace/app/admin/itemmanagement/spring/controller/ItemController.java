@@ -16,6 +16,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.swing.*;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -50,56 +51,54 @@ public class ItemController {
 
     //For submitting the add new item
     @RequestMapping(value = "/add_item")
-    public ModelAndView addItem(@ModelAttribute("newItem") Item newItem,
-                                @RequestParam("price")List<Double> listP) throws SQLIntegrityConstraintViolationException {
-
-      /*  List<Double> items2 = new ArrayList<Double>();
-        items2.add(newItem.getPrice());
-        LOGGER.trace("items2 "+ items2);*/
-
-        listP = new ArrayList<Double>();
-        listP.add(newItem.getPrice());
-
-        LOGGER.trace("List PR " + listP + listP.size());
+    public ModelAndView addItem(@ModelAttribute("newItem") Item newItem) throws SQLIntegrityConstraintViolationException {
 
         String itemNm = newItem.getItemName();
-        double itemPrice = newItem.getPrice();
+        String itemPrice = newItem.getPrice();
         String itemSize = newItem.getSize();
 
-        LOGGER.trace("ggg"+ itemNm);
-        LOGGER.trace("pp"+ itemPrice);
-        LOGGER.trace("ss"+ itemSize);
-
-        Item newItem2 = new Item();
-        newItem2.setPrice(itemPrice);
-        newItem2.setSize(itemSize);
+        List<String> sizelist = new ArrayList<String>(Arrays.asList(itemSize.split(",")));
+        List<String> pricelist = new ArrayList<String>(Arrays.asList(itemPrice.split(",")));
 
         List<Item> items = new ArrayList<Item>();
-      //  for(int a=0; a<=items.size(); a++){
-            items.add(newItem2);
-       // }
 
-        LOGGER.trace(items+ " List 2");
-        LOGGER.trace(newItem+ " List 342");
+            for(int s =0; s<sizelist.size(); s++){
+
+              Item listItem = new Item();
+                    listItem.setSize(sizelist.get(s));
+                    listItem.setPrice(pricelist.get(s));
+                items.add(listItem);
+
+            }
 
         boolean uniqueItemNm = item.checkAvailability(itemNm);
         if (!uniqueItemNm) {
             int a = item.addItem(newItem, items);
-            if (a != 1)
+            if (a != 1){
                 JOptionPane.showMessageDialog(null, "Server-side error. Cannot add the item !", "Error !",
                     JOptionPane.ERROR_MESSAGE);
-            else
-            JOptionPane.showMessageDialog(null, "Added new item " + itemNm, "Success",
-                    JOptionPane.INFORMATION_MESSAGE);
+                LOGGER.error("Server-side error in adding item "+ itemNm);
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Added new item " + itemNm, "Success",
+                        JOptionPane.INFORMATION_MESSAGE);
+                LOGGER.info("added New Item to database " + itemNm);
+                return new ModelAndView(new RedirectView("add"));
+            }
         } else{
             JOptionPane.showMessageDialog(null,
                     "Item name is already exists! " + itemNm, "Warning ",
                     JOptionPane.WARNING_MESSAGE);
-        //   return new ModelAndView("item_management/addItem", "command", newItem);
-          return new ModelAndView(new RedirectView("add_item"));
+            /*if(!items.isEmpty()){
+               items.clear();
+                LOGGER.trace("after clear " +items);
+            }*/
+            newItem.setPrice(" ");  LOGGER.trace("after clear price"+ itemPrice );
+            newItem.setSize(" ");  LOGGER.trace("after clear size" + itemSize);
+            //return "redirect:/getUser";
+            return new ModelAndView("item_management/addItem", "command", newItem);
         }
-
-        return new ModelAndView(new RedirectView("add"));
+       return new ModelAndView(new RedirectView("add"));
     }
 
     /**
@@ -139,7 +138,7 @@ public class ItemController {
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public ModelAndView showEditItem() {
-        return new ModelAndView("item_management/itemEdit", "editItem", new Item());
+        return new ModelAndView("item_management/editItem", "editItem", new Item());
     }
 
     @RequestMapping(value = "/edit_item")

@@ -65,4 +65,11 @@
         <property name="dataSource" ref="productionDataSource"/>
         <property name="transactionManager" ref="transactionManager"/>
     </bean>
+
+
+    <!-- Configure the multipart resolver -->
+    <!--<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        &lt;!&ndash; one of the properties available; the maximum file size in bytes &ndash;&gt;
+        <property name="maxUploadSize" value="100000"/>
+    </bean>-->
 </beans>
