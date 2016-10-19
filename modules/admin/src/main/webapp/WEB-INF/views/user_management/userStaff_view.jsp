@@ -169,5 +169,36 @@
     </div>
 </div>
 
+
+<!--modelto appear when editing the Staff user -->
+<div class="modal fade" id="editStaffModal">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header deleteuser-modal-header-style">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
+                        class="glyphicon glyphicon-remove"></span></button>
+                <div align="center"><span class="glyphicon glyphicon-trash"></span>
+                    <fmt:message key="user.staffblock.modal.title" bundle="${bundle1}" />
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+
+
+                </div>
+            </div>
+            <div class="modal-footer" align="right">
+                <button class="btn btn-success" type="button" value="Yes" id="btnBlockStaff">
+                    <fmt:message key="user.block.modal.button.yes" bundle="${bundle1}" />
+                </button>
+                <button class="btn btn-success" type="button" value="cancel" id="btnCnclBlockStaff" data-dismiss="modal"
+                        aria-hidden="true">
+                    <fmt:message key="user.block.modal.button.cancel" bundle="${bundle1}" />
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

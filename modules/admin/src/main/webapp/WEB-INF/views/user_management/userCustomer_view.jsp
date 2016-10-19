@@ -175,5 +175,66 @@
     </div>
 </div>
 
+<!--modelto appear when editing the Customer user -->
+<div class="modal fade" id="editCustomerModal">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header deleteuser-modal-header-style">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
+                        class="glyphicon glyphicon-remove"></span></button>
+                <div align="center"><span class="glyphicon glyphicon-education"></span>
+                    <fmt:message key="user.customer.edit.breadcrumb.view.edit" bundle="${bundle1}" />
+                </div>
+            </div>
+            <div class="modal-body">
+                <form:form role="form" id="edit_customer_form"  method="POST" class="form-horizontal"
+                           action="/admin/customer/editCustomer">
+
+                    <div class="form-group">
+                        <div class="row">
+                            <label  class="col-xs-3 control-label" >
+                                <fmt:message key="user.useradd.form.name" bundle="${bundle1}"/>
+                            </label>
+                            <div class="col-xs-8">
+                                <div class="col-xs-6">
+                                    <div class="col-xs-4">
+                                        <form:select path="title" class="form-control" id="selectTitle" style="width: 65px">
+                                            <form:option value="mr"><fmt:message key="user.useradd.form.title.mr" bundle="${bundle1}"/></form:option>
+                                            <form:option value="mrs"><fmt:message key="user.useradd.form.title.mrs" bundle="${bundle1}" /></form:option>
+                                            <form:option value="miss"><fmt:message key="user.useradd.form.title.miss" bundle="${bundle1}" /></form:option>
+                                        </form:select>
+                                    </div>
+                                    <div class="col-xs-5">
+                                        <form:input path="firstName" class="form-control" id="update-first-name"
+                                                    type="text"  style="width: 180px" required="required"/>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                        <%--<div class="col-xs-1"></div>--%>
+                                    <div class="col-xs-5">
+                                        <form:input path="lastName" class="form-control" id="update-last-name"
+                                                    type="text"  style="width: 200px"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><br>
+
+                </form:form>
+            </div>
+
+            <div class="modal-footer" align="right">
+                <button class="btn btn-success" type="button" value="Yes" id="btnEditStaff">
+                    <fmt:message key="user.block.modal.button.yes" bundle="${bundle1}" />
+                </button>
+                <button class="btn btn-success" type="button" value="cancel" id="btnCnclBlockStaff" data-dismiss="modal"
+                        aria-hidden="true">
+                    <fmt:message key="user.block.modal.button.cancel" bundle="${bundle1}" />
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

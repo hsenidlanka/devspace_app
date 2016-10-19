@@ -29,10 +29,13 @@
 
     <bean id="userValidator" class="hsl.devspace.app.admin.usermanagement.spring.validator.UserValidator"/>
 
+
     <!--It pulls values from a properties file into bean definitions.-->
     <bean id="connectionProperties"
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="location" value="classpath:connectivity.properties"/>
+        <property name="location" value="classpath:connectivity.properties ">
+
+        </property>
     </bean>
 
     <!--import the datasource configuration file from core-logic module-->
