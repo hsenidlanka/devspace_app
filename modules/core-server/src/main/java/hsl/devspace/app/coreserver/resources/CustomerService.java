@@ -105,35 +105,32 @@ public class CustomerService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserDetails(@PathParam("username") String userName, @javax.ws.rs.core.Context UriInfo uriInfo) {
-        List users = userRepository.retrieveSelectedUserDetails(userName);
-        User user;
+        User user = userRepository.retrieveSelectedUserDetails(userName);
         SuccessMessage successMessage = new SuccessMessage();
         successMessage.setCode(Response.Status.OK.getStatusCode());
         successMessage.setStatus("success");
         String url = uriInfo.getAbsolutePath().toString();
         successMessage.addLink(url, "self");
         JSONObject jsonObject = new JSONObject();
-        if (users.size() != 0) {
+        if(user.getUsername()!=null){
             successMessage.setMessage("customer data retrieved");
-            for (int i = 0; i < users.size(); i++) {
-                user = (User) users.get(i);
-                jsonObject.put("title", user.getTitle());
-                jsonObject.put("firstName", user.getFirstName());
-                jsonObject.put("lastName", user.getLastName());
-                jsonObject.put("username", user.getUsername());
-                jsonObject.put("email", user.getEmail());
-                jsonObject.put("addressLine01", user.getAddressL1());
-                jsonObject.put("addressLine02", user.getAddressL2());
-                if (user.getAddressL3() != null) {
-                    jsonObject.put("addressLine03", user.getAddressL3());
-                }
-                jsonObject.put("mobile", user.getMobile());
-                jsonObject.put("registeredDate", user.getRegDate());
-                successMessage.addData(jsonObject);
+            jsonObject.put("title", user.getTitle());
+            jsonObject.put("firstName", user.getFirstName());
+            jsonObject.put("lastName", user.getLastName());
+            jsonObject.put("username", user.getUsername());
+            jsonObject.put("email", user.getEmail());
+            jsonObject.put("addressLine01", user.getAddressL1());
+            jsonObject.put("addressLine02", user.getAddressL2());
+            if (user.getAddressL3() != null) {
+                jsonObject.put("addressLine03", user.getAddressL3());
             }
-        } else {
+            jsonObject.put("mobile", user.getMobile());
+            jsonObject.put("registeredDate", user.getRegDate());
+            successMessage.addData(jsonObject);
+        }else{
             successMessage.setMessage("no customer data to retrieve");
         }
+
         return Response.status(Response.Status.OK).entity(successMessage)
                 .header("Access-Control-Allow-Origin", propertyReader.readProperty("Access-Control-Allow-Origin"))
                 .build();
