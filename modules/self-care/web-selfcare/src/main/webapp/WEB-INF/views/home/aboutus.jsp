@@ -6,8 +6,9 @@
 
 </head>
 <body style="overflow: visible">
-<div class="loader-anim"></div>
 <%@include file="../includes/NewHeader.jsp" %>
+
+<div class="loader-anim"></div>
 <div class="col-sm-12"></div>
 
 <div class="brand"></div>
@@ -40,7 +41,5 @@
 
 <a href="http://gazpo.com/downloads/tutorials/jquery/scrolltop/#" class="scrollup" style="display: none;">Scroll</a>
 
-<%--<%@include file="../includes/loginload.jsp" %>--%>
-<%@include file="../signupmodal.jsp" %>
 </body>
 </html>

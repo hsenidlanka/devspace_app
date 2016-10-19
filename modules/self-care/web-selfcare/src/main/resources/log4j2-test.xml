@@ -50,7 +50,7 @@
     </Appenders>
 
     <Loggers>
-
+        <!--Root logger has removed to avoid library loggings-->
         <logger name="hsenid" level="info" additivity="false">
             <AppenderRef ref="web-selfcare-info-log" level="info"/>
             <AppenderRef ref="web-selfcare-error-log" level="error"/>

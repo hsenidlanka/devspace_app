@@ -79,7 +79,31 @@
         <div class="clear"></div>
 
       </div>
-
+        <!------------------------------signup modal --------------------------------------------->
+        <%@include file="../signupmodal.jsp" %>
     </div>
   </div>
 </div>
+
+
+<%--Login Successful modal--%>
+
+<div class="modal fade" id="registerSuccesful" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <p>User Account Creation Successful</p><br>
+
+                <p>Please login </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<%--Login Successful modal end--%>
