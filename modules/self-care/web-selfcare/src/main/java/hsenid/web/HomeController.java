@@ -9,12 +9,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @PropertySource("classpath:config.properties")
+/*
+* This controller is basically define to return every jsp file in the home page*/
 public class HomeController {
     @Value("${mongodb.url}")
     private String mongodbUrl;
 
     final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
+//    Mapped to home page
     @RequestMapping({"/", "/home"})
     public String home() {
         logger.info("Web Application Started");

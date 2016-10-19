@@ -21,16 +21,17 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.URL;
-import java.net.URLConnection;
 
-
+/*
+* This class controls requests come for login and user registrations including ajax requests*/
 @Controller
 @PropertySource("classpath:config.properties")
 public class LoginController {
+
+//    Defining logger
+    final static Logger logger = LoggerFactory.getLogger(LoginController.class);
+
+//    Setting properties from config.properties file
     @Value("${api.url.register}")
     private String registerUrl;
 
@@ -46,16 +47,11 @@ public class LoginController {
     @Value("${api.read.timeout}")
     private int readTimeout;
 
-    final static Logger logger = LoggerFactory.getLogger(LoginController.class);
-    String toLoginJsonString = null;
-
-
+//    Checking whether a user is blocked or not
    @RequestMapping(value = "chechBlocked", produces = "application/json")
    @ResponseBody
    public BooleanResponse checkBlockedUser(HttpServletRequest request){
-//       String username = request.getParameter("username");
        String username = request.getParameter("checkName");
-//       logger.info(username);
        String password = "";
 
        JSONObject jsonObject = new JSONObject();
@@ -88,13 +84,12 @@ public class LoginController {
 
    }
 
+//  check given user credentials are valid or not
     @RequestMapping(value = "/login")
     @ResponseBody
     public BooleanResponse login(HttpServletRequest request){
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-//String username = "testre";
-//        String password = "password";
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("username", username);
@@ -117,7 +112,7 @@ public class LoginController {
     }
 
 
-
+// call api to register the user
     @RequestMapping(value = "/register", method = RequestMethod.POST, produces="application/json")
     @ResponseBody
     public BooleanResponse register(HttpServletRequest regRequest) throws JSONException {
@@ -153,8 +148,6 @@ public class LoginController {
         jsonObject.put("password", password);
         jsonObject.put("mobile", mobile);
 
-        logger.info(jsonObject.toString());
-
         RestTemplate restTemplate = new RestTemplate();
 
         MultiValueMap<String, String> headers = new LinkedMultiValueMap<String, String>();
@@ -172,8 +165,7 @@ public class LoginController {
     }
 
 
-//    Unique User search
-
+//    check whether chosen user is already in the system
     @RequestMapping(value = "/UniqueUser", method = RequestMethod.GET)
     public @ResponseBody
     BooleanResponse uniqueUsername(HttpServletRequest request){

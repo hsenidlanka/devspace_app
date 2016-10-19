@@ -14,6 +14,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @EnableWebMvc
 @ComponentScan("hsenid.web")
 public class WebConfig extends WebMvcConfigurerAdapter {
+//    This is view resolver which map .jsp
     @Bean
     public ViewResolver viewResolver(){
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
