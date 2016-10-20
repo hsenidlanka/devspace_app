@@ -35,7 +35,6 @@
 
     <div>
         <a href="https://localhost:8443/admin/users/list"><img id="logo" src="<c:url value="/themes/hsenid/images/logo.png"/>" alt="logo"/></a>
-      <%--<a href="/web-selfcare/home"> <img src="<c:url value="/resources/images/logo.png"/>" style="width:75px;height:65px;"></a></div>--%>
 
     </div>
 
