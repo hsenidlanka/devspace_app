@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.swing.*;
+import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -63,7 +64,7 @@ public class UserController {
         if (userType.equals("staff")) {
             boolean usernameUnique = staffRepository.checkUsernameUnique(newUser);
             if (usernameUnique) {
-                int i = staffRepository.add(newUser);
+                int i = staffRepository.addStaffMember(newUser);
                 if (i == 0)
                     JOptionPane.showMessageDialog(null, "Server side error...Could not insert");// put separate error pages
                 else {
@@ -247,7 +248,52 @@ public class UserController {
         int i=customerRepository.unblock(uname);
         return i;
     }
+
+
+    //    customer user edit form is displayed in below handler method
+    @RequestMapping(value="customer/edit",method=RequestMethod.GET)
+    public @ResponseBody User showEditCustomer(@RequestParam("uname") String uname){
+
+        LOG.error("uname is {}",uname);
+
+        User customer=customerRepository.retrieveSelectedUserDetails(uname);
+        LOG.error("customer object {}",customer);
+
+        return customer ;
+    }
+
+
+    //handler method for sending customer edit form data to database
+    @RequestMapping(value="customer/editCustomer",method=RequestMethod.POST)
+    public ModelAndView editCustomer(@ModelAttribute("customer") User customer) throws SQLException {
+
+        boolean usernameUnique = customerRepository.checkUsernameUnique(customer);
+        if (usernameUnique) {
+            int i=customerRepository.update(customer);
+            if (i == 1)
+                JOptionPane.showMessageDialog(null,"You have successfully updated the user Customer..!!");
+
+        }else {
+            JOptionPane.showMessageDialog(null,"Error.. Username Exists already");
+
+        }
+
+        return new ModelAndView(new RedirectView("customer/edit"));
+    }
+
+    //   staff user edit form is displayed in below handler method
+    @RequestMapping(value="staff/edit",method=RequestMethod.GET)
+    public @ResponseBody User showEditStaff(@RequestParam("staff_uname") String staff_uname){
+
+        LOG.error("uname is {}",staff_uname);
+
+        User staff=staffRepository.retrieveSelectedUserDetails(staff_uname);
+        LOG.error("staff object {}",staff);
+
+        return staff ;
+    }
 }
+
 
 
 
