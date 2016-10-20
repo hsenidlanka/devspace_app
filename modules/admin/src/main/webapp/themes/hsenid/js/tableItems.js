@@ -7,7 +7,7 @@ $(document).ready(function () {
             height: 400,
             striped: true,
             pagination: true,
-            pageSize: 50,
+            pageSize: 10,
             pageList: [10, 25, 50, 100, 200],
             search: false,
             showColumns: false,
@@ -58,17 +58,31 @@ $(document).ready(function () {
             }]
         });
 
-        /*
-        *populating drop-down list according to the table's field
-        */
+    $("#btnDeltItm").click(function(){
+        var itemName = $("#lblDeltItmName").text();
+        $.ajax({
+            type:"POST",
+           // dataType:"JSON",
+            url:"https://localhost:8443/admin/items/delete_item",
+            data:{"itemName": itemName},
 
+            success: function(data){
+                    $.toaster({priority: 'success', title: 'Success', message: 'Deleted the item  '+itemName});
+                    setTimeout(function(){location.reload();}, 2000);
+            },
+            error: function(e){
+                $.toaster({ priority : 'danger', title : 'Error', message : 'Cannot delete the item ' +itemName});
+                setTimeout(function(){location.reload();}, 2000);
+            }
+        })
+    })
     
 });
 
 function operateFormatter(value, row, index){
     return[
         '<center>',
-        '<a class="edit" href="https://localhost:8443/admin/items/view/" title="Edit" id="linkEditItem">',
+        '<a class="edit" href="https://localhost:8443/admin/item_management/editItem" title="Edit" id="linkEditItem">',
         '<i class="glyphicon glyphicon-edit">Edit</i>',
         '</a>&nbsp;&nbsp;&nbsp;&nbsp;',
         '<a class="delete" title="Delete" id="linkDeleteItem">',
@@ -96,7 +110,10 @@ window.operateEvents = {
 
       $('#lblDeltItmId').text(deltObj["id"]);
         $('#lblDeltItmName').text(deltObj["item_name"]);
+        $('#lblDeltItmType').text(deltObj["category_name"]);
 
         $('#itemDeleteModal').modal('show');
     }
 }
+
+

@@ -57,6 +57,8 @@ public class ItemController {
         String itemPrice = newItem.getPrice();
         String itemSize = newItem.getSize();
 
+        LOGGER.trace(itemPrice + " item price");
+        LOGGER.trace(itemSize + " item size");
         List<String> sizelist = new ArrayList<String>(Arrays.asList(itemSize.split(",")));
         List<String> pricelist = new ArrayList<String>(Arrays.asList(itemPrice.split(",")));
 
@@ -68,7 +70,6 @@ public class ItemController {
                     listItem.setSize(sizelist.get(s));
                     listItem.setPrice(pricelist.get(s));
                 items.add(listItem);
-
             }
 
         boolean uniqueItemNm = item.checkAvailability(itemNm);
@@ -89,13 +90,9 @@ public class ItemController {
             JOptionPane.showMessageDialog(null,
                     "Item name is already exists! " + itemNm, "Warning ",
                     JOptionPane.WARNING_MESSAGE);
-            /*if(!items.isEmpty()){
-               items.clear();
-                LOGGER.trace("after clear " +items);
-            }*/
+
             newItem.setPrice(" ");  LOGGER.trace("after clear price"+ itemPrice );
             newItem.setSize(" ");  LOGGER.trace("after clear size" + itemSize);
-            //return "redirect:/getUser";
             return new ModelAndView("item_management/addItem", "command", newItem);
         }
        return new ModelAndView(new RedirectView("add"));
@@ -122,13 +119,6 @@ public class ItemController {
     @RequestMapping(value = "/view_item")
     public ModelAndView view(@ModelAttribute("viewItem") Item viewItem) throws SQLIntegrityConstraintViolationException {
         ModelAndView model = new ModelAndView();
-      //  List<Map<String, Object>> x = item.view();
-
-     /*   if (x != null)
-            model.setViewName("item_management/viewItem");
-        else
-            System.out.println("Error in viewing item");*/
-
         return model;
     }
 
@@ -137,36 +127,44 @@ public class ItemController {
      */
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
-    public ModelAndView showEditItem() {
-        return new ModelAndView("item_management/editItem", "editItem", new Item());
+    public ModelAndView showEditItem(ModelAndView modelVw) {
+
+        List<String> listCatEdit = categoryRepository.selectCategoryNames();
+        modelVw.addObject("listCatEdit", listCatEdit);
+        modelVw.addObject("editItem", new Item());
+        return modelVw;
     }
 
     @RequestMapping(value = "/edit_item")
     public ModelAndView editItem(@ModelAttribute("editItem") Item editItem) throws SQLIntegrityConstraintViolationException {
 
         ModelAndView model = new ModelAndView();
-        List<String> listCatEdit = categoryRepository.selectCategoryNames();
+       /* List<String> listCatEdit = categoryRepository.selectCategoryNames();
         model.addObject("listCatEdit", listCatEdit);
         model.addObject("editItem", new Item());
 
-        model.setViewName("item_management/editItem");
+        model.setViewName("item_management/editItem");*/
 
         return model;
     }
 
     /**
      * Delete Item view
-     *//*
-   /* @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public ModelAndView showDeleteItem(){ return  new ModelAndView("itemDelete", "deleteItem",new Item()); }
-    @RequestMapping(value = "view_item")
-    public ModelAndView deleteItem(@ModelAttribute("deleteItem") hsl.devspace.app.corelogic.domain.Item deleteItem) throws SQLIntegrityConstraintViolationException {
-        ModelAndView model = new ModelAndView();
-        model.setViewName("");
-    }*/
+     */
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    public ModelAndView showDeleteItem(){
+        return  new ModelAndView("itemDelete", "deleteItem", new Item());
+    }
+
+    @RequestMapping(value = "/delete_item", method = RequestMethod.POST)
+    public @ResponseBody int deleteItem(@RequestParam("itemName") String itemName) throws SQLIntegrityConstraintViolationException {
+
+        LOGGER.info("deleted Item from database " + itemName);
+        return item.deleteItem(itemName);
+    }
 
 
-    //controller method to get relevant subcategory
+    //controller method to load relevant subcategory
     @RequestMapping(value = "/getSubcats", method = RequestMethod.POST)
     public
     @ResponseBody
@@ -175,5 +173,7 @@ public class ItemController {
         return subCategoryRepository.retrieveSubcatogories(categoryNm);
     }
 
-    //controller method to get the rel
+    //controller method to set pagination on view item table
+   /* @RequestMapping(value = "/tablePagination", method = RequestMethod.GET)
+    public */
 }

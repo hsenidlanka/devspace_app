@@ -233,7 +233,7 @@
                           <div class="col-xs-6">
                               <div class="col-xs-12">
                                   <form:input path="password" class="form-control" id="password1" placeholder="Password"
-                                              type="text" style="width: 260px"  required="required"
+                                              type="password" style="width: 260px"  required="required"
                                               onchange="validatePassword(password1)"/>
 
                               </div>
@@ -250,7 +250,7 @@
                           <div class="col-xs-6">
                               <div class="col-xs-12">
                                   <input  class="form-control" id="cpassword"
-                                              placeholder="Password Confirm" type="text" style="width: 260px"
+                                              placeholder="Password Confirm" type="password" style="width: 260px"
                                               required="required" onchange="passwordsEqual(cpassword,password1)"/>
 
                               </div>
@@ -265,7 +265,7 @@
              <div class="form-group">
                  <div class="col-xs-12">
                  <fieldset class="scheduler-border" id="staffDetail">
-                   <legend class="scheduler-border" id="legendStaff"><fmt:message key="user.useradd.form.cpassword"/>
+                   <legend class="scheduler-border" id="legendStaff"><fmt:message key="user.useradd.form.staff.legend.title"/>
                    </legend>
                    <div class="row">
                      <label  class="col-xs-4 control-label" >
