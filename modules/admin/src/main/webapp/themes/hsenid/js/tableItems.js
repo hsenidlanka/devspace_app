@@ -2,7 +2,7 @@ $(document).ready(function () {
 
         $('#tblItems').bootstrapTable({
             /*method: '',*/
-           // dataType:'JSON',
+            dataType:'JSON',
             url: 'https://localhost:8443/admin/items/view/itemTable',
             height: 400,
             striped: true,
@@ -67,18 +67,12 @@ $(document).ready(function () {
             data:{"itemName": itemName},
 
             success: function(data){
-                /*    $.toaster({priority: 'success', title: 'Success', message: 'Deleted item . '+data});*/
-               /* if(data == 1){*/
-                    alert("Deleted the  item" + itemName+" successfully!");
-               /* }
-                else*/
-                  /*  alert("Error in deleting the item !"+e);*/
-                $("#itemDeleteModal").modal('hide');
+                    $.toaster({priority: 'success', title: 'Success', message: 'Deleted the item  '+itemName});
+                    setTimeout(function(){location.reload();}, 2000);
             },
             error: function(e){
-                alert("Error in deleting the item ! **  "+itemName+ e);
-                //$.toaster({ priority : 'danger', title : 'Error', message : 'Cannot add package. Check again ! ' +e});
-                $("#itemDeleteModal").modal('hide');
+                $.toaster({ priority : 'danger', title : 'Error', message : 'Cannot delete the item ' +itemName});
+                setTimeout(function(){location.reload();}, 2000);
             }
         })
     })

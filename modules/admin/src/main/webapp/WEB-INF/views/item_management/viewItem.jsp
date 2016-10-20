@@ -127,13 +127,13 @@
             <div class="col-xs-6" style="text-align: left"> <label id="lblDeltItmType" class="delete-lables"> </label></div><br>
           </div>
         </div>
-        <div style="text-align: center; z-index: 50000; width: 50%; margin: auto;" id="toaster"></div>
+        <div style="text-align: center; z-index: 50000; width: 75%; margin: auto;" id="toaster"></div>
       </div>
 
       <div class="modal-footer" align="right">
         <button class="btn btn-success" type="button" value="Yes" id="btnDeltItm"><fmt:message key="item.deletemodal.button.yes"/>
         </button>
-        <button class="btn btn-success" type="button" value="cancel" id="btnCnclDeltItm"><fmt:message key="item.deletemodal.button.no"/>
+        <button class="btn btn-success" type="button" value="cancel" id="btnCnclDeltItm" data-dismiss="modal"><fmt:message key="item.deletemodal.button.no"/>
         </button>
       </div>
         </fieldset>

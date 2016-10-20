@@ -93,8 +93,6 @@ public class ItemController {
 
             newItem.setPrice(" ");  LOGGER.trace("after clear price"+ itemPrice );
             newItem.setSize(" ");  LOGGER.trace("after clear size" + itemSize);
-            //newItem.setCategoryName();
-            //return "redirect:/getUser";
             return new ModelAndView("item_management/addItem", "command", newItem);
         }
        return new ModelAndView(new RedirectView("add"));
@@ -121,13 +119,6 @@ public class ItemController {
     @RequestMapping(value = "/view_item")
     public ModelAndView view(@ModelAttribute("viewItem") Item viewItem) throws SQLIntegrityConstraintViolationException {
         ModelAndView model = new ModelAndView();
-      //  List<Map<String, Object>> x = item.view();
-
-     /*   if (x != null)
-            model.setViewName("item_management/viewItem");
-        else
-            System.out.println("Error in viewing item");*/
-
         return model;
     }
 
@@ -164,19 +155,8 @@ public class ItemController {
     @RequestMapping(value = "/delete_item", method = RequestMethod.POST)
     public @ResponseBody int deleteItem(@RequestParam("itemName") String itemName) throws SQLIntegrityConstraintViolationException {
 
-        //String itemNm = item2.getItemName();
-
-        /*if (deltItem != 1){
-            JOptionPane.showMessageDialog(null, "Server-side error. Cannot delete the item !", "Error !",
-                    JOptionPane.ERROR_MESSAGE);
-            LOGGER.error("Server-side error in deleting item "+ itemNm);
-        }
-        else
-            JOptionPane.showMessageDialog(null, "Deleted item " + itemNm, "Success",
-                    JOptionPane.INFORMATION_MESSAGE);
-            LOGGER.info("deleted Item from database " + itemNm);*/
         LOGGER.info("deleted Item from database " + itemName);
-        return item.delete(itemName);
+        return item.deleteItem(itemName);
     }
 
 
