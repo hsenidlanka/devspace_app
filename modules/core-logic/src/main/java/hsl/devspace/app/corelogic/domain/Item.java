@@ -126,7 +126,6 @@ public class Item {
         this.subCategoryName = subCategoryName;
         this.itemId = itemId;
     }
-
     public Item(String itemName, String description, String type, String image, String subCategoryName) {
         this.itemName = itemName;
         this.description = description;

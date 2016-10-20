@@ -27,8 +27,8 @@ public class StaffRepositoryImpl implements UserRepository {
     User user = new User();
     private JdbcTemplate jdbcTemplate;
     private PlatformTransactionManager transactionManager;
-   // private static org.apache.log4j.Logger log = Logger.getLogger(UserRepositoryImpl.class);
-   org.slf4j.Logger log = LoggerFactory.getLogger(StaffRepositoryImpl.class);
+    // private static org.apache.log4j.Logger log = Logger.getLogger(UserRepositoryImpl.class);
+    org.slf4j.Logger log = LoggerFactory.getLogger(StaffRepositoryImpl.class);
 
 
     public void setDataSource(DataSource dataSource) {
@@ -50,21 +50,21 @@ public class StaffRepositoryImpl implements UserRepository {
         String un = user.getUsername();
         String pw = user.getPassword();
         String des = user.getDesignation();
-        if (un != "" && pw != "" ) {
-           // if (checkUsernameUnique(un)==true) {
+        if (un != "" && pw != "") {
+            // if (checkUsernameUnique(un)==true) {
 
 
-                String sql = "INSERT INTO staff " +
-                        "(title,username,password,first_name,last_name,email,mobile,address_line1,address_line2,address_line3," +
-                        "designation,department,branch,register_date,status) VALUES (?,?,sha1(?),?,?,?,?,?,?,?,?,?,?,CURRENT_DATE,1)";
+            String sql = "INSERT INTO staff " +
+                    "(title,username,password,first_name,last_name,email,mobile,address_line1,address_line2,address_line3," +
+                    "designation,department,branch,register_date,status) VALUES (?,?,sha1(?),?,?,?,?,?,?,?,?,?,?,CURRENT_DATE,1)";
 
-                row = jdbcTemplate.update(sql, new Object[]{user.getTitle(), user.getUsername(), user.getPassword(), user.getFirstName(), user.getLastName(),
-                        user.getEmail(), user.getMobile(), user.getAddressL1(), user.getAddressL2(), user.getAddressL3(), user.getDesignation(),
-                        user.getDepartment(), user.getBranch()});
-               // updateGroupStaff(des, un);
+            row = jdbcTemplate.update(sql, new Object[]{user.getTitle(), user.getUsername(), user.getPassword(), user.getFirstName(), user.getLastName(),
+                    user.getEmail(), user.getMobile(), user.getAddressL1(), user.getAddressL2(), user.getAddressL3(), user.getDesignation(),
+                    user.getDepartment(), user.getBranch()});
+            // updateGroupStaff(des, un);
 
 
-                log.info("{} staff inserted",row);
+            log.info("{} staff inserted", row);
 
             /*}else
                 log.info("username already available");*/
@@ -77,18 +77,18 @@ public class StaffRepositoryImpl implements UserRepository {
 
     /*insert into group staff table when adding a new staff member*/
     @Override
-    public int updateGroupStaff(String des,String username) {
-        int row=0;
-    List<Map<String, Object>> mp1 = jdbcTemplate.queryForList("SELECT id FROM staff WHERE username=?", username);
-    List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT id FROM `group` WHERE name =?", des);
+    public int updateGroupStaff(String des, String username) {
+        int row = 0;
+        List<Map<String, Object>> mp1 = jdbcTemplate.queryForList("SELECT id FROM staff WHERE username=?", username);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT id FROM `group` WHERE name =?", des);
 
-        log.info(""+mp1.size());
+        log.info("" + mp1.size());
 //if(mp.size()>0 && mp1.size()>0) {
-    String sql = "INSERT INTO group_staff " +
-            "(group_id,staff_id) VALUES (?,?)";
+        String sql = "INSERT INTO group_staff " +
+                "(group_id,staff_id) VALUES (?,?)";
 
-    row = jdbcTemplate.update(sql, new Object[]{Integer.parseInt(mp.get(0).get("id").toString()), Integer.parseInt(mp1.get(0).get("id").toString())});
-    //log.info("{} group-staff updated",row);
+        row = jdbcTemplate.update(sql, new Object[]{Integer.parseInt(mp.get(0).get("id").toString()), Integer.parseInt(mp1.get(0).get("id").toString())});
+        //log.info("{} group-staff updated",row);
 //}
         return row;
 
@@ -98,23 +98,25 @@ public class StaffRepositoryImpl implements UserRepository {
     @Override
     public int delete(String username) throws IllegalArgumentException {
 
-       // user.setUsername(username);
+        // user.setUsername(username);
 
         String sql = "DELETE FROM staff WHERE username = ?";
         int row = jdbcTemplate.update(sql, new Object[]{username});
-        log.info("{} staff deleted",row);
+        log.info("{} staff deleted", row);
         return row;
 
     }
 
-    /**delete record from group-staff when user is deleted*/
-    public int deleteUserRecord(String username){
+    /**
+     * delete record from group-staff when user is deleted
+     */
+    public int deleteUserRecord(String username) {
         log.info("{} group_staff entered");
 
         String sql = "DELETE FROM group_staff WHERE staff_id =(SELECT id FROM staff WHERE username=?)";
         int row = jdbcTemplate.update(sql, new Object[]{username});
-        log.info("{} group_staff deleted",row);
-        return  row;
+        log.info("{} group_staff deleted", row);
+        return row;
 
 
     }
@@ -128,14 +130,14 @@ public class StaffRepositoryImpl implements UserRepository {
         user.setUsername(username);
         user.setPassword(password);
         int verified = loginAuthenticate(username, password);
-        if (verified==1) {
+        if (verified == 1) {
 
             user.setPassword(nPw);
             System.out.println(user.getPassword());
 
             String sql = "UPDATE staff SET password = sha1(?) WHERE username = ? ";
             int row = jdbcTemplate.update(sql, new Object[]{user.getPassword(), user.getUsername()});
-            log.info("{} password changed",row);
+            log.info("{} password changed", row);
         } else log.info("cannot change password");
     }
 
@@ -150,10 +152,10 @@ public class StaffRepositoryImpl implements UserRepository {
     //mismatched=0
     @Override
     public int loginAuthenticate(String username, String password) {
-        int result ;
-        List<Map<String, Object>> mp1= jdbcTemplate.queryForList("SELECT status FROM staff WHERE BINARY username = ?",username);
-        log.info("{}",mp1.get(0).get("status"));
-        if(mp1.size()!=0) {
+        int result;
+        List<Map<String, Object>> mp1 = jdbcTemplate.queryForList("SELECT status FROM staff WHERE BINARY username = ?", username);
+        log.info("{}", mp1.get(0).get("status"));
+        if (mp1.size() != 0) {
 
             if (mp1.get(0).get("status").toString().equals("active")) {
                 List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE BINARY username = ? AND BINARY password =sha1(?)", username, password);
@@ -165,8 +167,8 @@ public class StaffRepositoryImpl implements UserRepository {
                 } else result = 0;
 
             } else result = 2;
-        }else result=0;
-        log.info("{}",result);
+        } else result = 0;
+        log.info("{}", result);
 
         return result;
     }
@@ -176,18 +178,20 @@ public class StaffRepositoryImpl implements UserRepository {
     public int update(User user) throws TransientDataAccessResourceException, SQLException {
 
         String sql = "UPDATE staff SET username=? password = ? first_name=? last_name=? email=? mobile=? address_line1=? address_line2=? address_line3=? designation=? department=? branch=? WHERE id = ? ";
-
-        int count = jdbcTemplate.update(sql, new Object[]{user.getUsername(), user.getPassword(),user.getFirstName(),user.getLastName(),user.getEmail(),
-        user.getMobile(),user.getAddressL1(),user.getAddressL2(),user.getAddressL3(),user.getDesignation(),user.getDepartment(),user.getBranch(),user.getId()}, Integer.class);
-        log.info("{}",count);
+        log.info("going to update");
+        int count = jdbcTemplate.update(sql, new Object[]{user.getUsername(), user.getPassword(), user.getFirstName(), user.getLastName(), user.getEmail(),
+                user.getMobile(), user.getAddressL1(), user.getAddressL2(), user.getAddressL3(), user.getDesignation(), user.getDepartment(), user.getBranch(), user.getId()}, Integer.class);
+        log.info("{}", count);
         return count;
     }
 
-    /**update group_staff table data on staff table updates*/
-    public int updateGroupStaffWithStaffModifications(User user){
-        String sql="UPDATE group_staff SET group_id=(SELECT id FROM `group` WHERE `name`=?) WHERE staff_id=?";
-        int count=jdbcTemplate.update(sql,new Object[]{user.getDesignation(),user.getId()});
-        log.info("{} staff group",count);
+    /**
+     * update group_staff table data on staff table updates
+     */
+    public int updateGroupStaffWithStaffModifications(User user) {
+        String sql = "UPDATE group_staff SET group_id=(SELECT id FROM `group` WHERE `name`=?) WHERE staff_id=?";
+        int count = jdbcTemplate.update(sql, new Object[]{user.getDesignation(), user.getId()});
+        log.info("{} staff group", count);
         return count;
     }
 
@@ -197,7 +201,7 @@ public class StaffRepositoryImpl implements UserRepository {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE BINARY username = ?", username);
         User staff = new User();
 
-        for (int i=0;i<mp.size();i++){
+        for (int i = 0; i < mp.size(); i++) {
             staff.setId(Integer.parseInt(mp.get(i).get("id").toString()));
             staff.setTitle(mp.get(i).get("title").toString());
             staff.setUsername(mp.get(i).get("username").toString());
@@ -208,7 +212,7 @@ public class StaffRepositoryImpl implements UserRepository {
             staff.setMobile(mp.get(i).get("mobile").toString());
             staff.setAddressL1(mp.get(i).get("address_line1").toString());
             staff.setAddressL2(mp.get(i).get("address_line2").toString());
-            if (mp.get(i).get("address_line3")!=null) {
+            if (mp.get(i).get("address_line3") != null) {
                 staff.setAddressL3(mp.get(i).get("address_line3").toString());
             }
             staff.setDesignation(mp.get(i).get("designation").toString());
@@ -218,7 +222,7 @@ public class StaffRepositoryImpl implements UserRepository {
             staff.setStatus(mp.get(i).get("status").toString());
 
         }
-        log.info("{}",staff);
+        log.info("{}", staff);
         return staff;
     }
 
@@ -226,9 +230,9 @@ public class StaffRepositoryImpl implements UserRepository {
     @Override
     public List<User> selectAll() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff");
-        List<User> staffDetails=new ArrayList<User>();
+        List<User> staffDetails = new ArrayList<User>();
 
-        for (int i=0;i<mp.size();i++){
+        for (int i = 0; i < mp.size(); i++) {
             User staff = new User();
             staff.setId(Integer.parseInt(mp.get(i).get("id").toString()));
             staff.setTitle(mp.get(i).get("title").toString());
@@ -240,7 +244,7 @@ public class StaffRepositoryImpl implements UserRepository {
             staff.setMobile(mp.get(i).get("mobile").toString());
             staff.setAddressL1(mp.get(i).get("address_line1").toString());
             staff.setAddressL2(mp.get(i).get("address_line2").toString());
-            if (mp.get(i).get("address_line3")!=null) {
+            if (mp.get(i).get("address_line3") != null) {
                 staff.setAddressL3(mp.get(i).get("address_line3").toString());
             }
             staff.setDesignation(mp.get(i).get("designation").toString());
@@ -252,7 +256,7 @@ public class StaffRepositoryImpl implements UserRepository {
 
 
         }
-        log.info("{}",staffDetails);
+        log.info("{}", staffDetails);
         return staffDetails;
     }
 
@@ -264,7 +268,7 @@ public class StaffRepositoryImpl implements UserRepository {
 
         String sql = "UPDATE staff SET status=2 WHERE username = ?";
         int row = jdbcTemplate.update(sql, new Object[]{user.getUsername()});
-        log.info("{} block status",row);
+        log.info("{} block status", row);
         return row;
     }
 
@@ -276,7 +280,7 @@ public class StaffRepositoryImpl implements UserRepository {
 
         String sql = "UPDATE staff SET status=1 WHERE username = ?";
         int row = jdbcTemplate.update(sql, new Object[]{user.getUsername()});
-        log.info("{} unblock status",row);
+        log.info("{} unblock status", row);
         return row;
     }
 
@@ -285,9 +289,9 @@ public class StaffRepositoryImpl implements UserRepository {
     public List<User> retrieveCustomersByDate(java.sql.Date date) {
 
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE register_date = ?", date);
-        List<User> staffDetails=new ArrayList<User>();
+        List<User> staffDetails = new ArrayList<User>();
 
-        for (int i=0;i<mp.size();i++){
+        for (int i = 0; i < mp.size(); i++) {
             User staff = new User();
             staff.setId(Integer.parseInt(mp.get(i).get("id").toString()));
             staff.setTitle(mp.get(i).get("title").toString());
@@ -299,7 +303,7 @@ public class StaffRepositoryImpl implements UserRepository {
             staff.setMobile(mp.get(i).get("mobile").toString());
             staff.setAddressL1(mp.get(i).get("address_line1").toString());
             staff.setAddressL2(mp.get(i).get("address_line2").toString());
-            if (mp.get(i).get("address_line3")!=null) {
+            if (mp.get(i).get("address_line3") != null) {
                 staff.setAddressL3(mp.get(i).get("address_line3").toString());
             }
             staff.setDesignation(mp.get(i).get("designation").toString());
@@ -311,19 +315,19 @@ public class StaffRepositoryImpl implements UserRepository {
 
 
         }
-        log.info("{}",staffDetails);
+        log.info("{}", staffDetails);
         return staffDetails;
     }
 
-/*
-    retrieve details of staff members registered between specified time period
-*/
+    /*
+        retrieve details of staff members registered between specified time period
+    */
     @Override
     public List<User> retrieveByDateRange(Date date1, Date date2) {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE register_date BETWEEN ? AND ?", date1, date2);
-        List<User> staffDetails=new ArrayList<User>();
+        List<User> staffDetails = new ArrayList<User>();
 
-        for (int i=0;i<mp.size();i++){
+        for (int i = 0; i < mp.size(); i++) {
             User staff = new User();
             staff.setId(Integer.parseInt(mp.get(i).get("id").toString()));
             staff.setTitle(mp.get(i).get("title").toString());
@@ -335,7 +339,7 @@ public class StaffRepositoryImpl implements UserRepository {
             staff.setMobile(mp.get(i).get("mobile").toString());
             staff.setAddressL1(mp.get(i).get("address_line1").toString());
             staff.setAddressL2(mp.get(i).get("address_line2").toString());
-            if (mp.get(i).get("address_line3")!=null) {
+            if (mp.get(i).get("address_line3") != null) {
                 staff.setAddressL3(mp.get(i).get("address_line3").toString());
             }
             staff.setDesignation(mp.get(i).get("designation").toString());
@@ -345,7 +349,7 @@ public class StaffRepositoryImpl implements UserRepository {
             staff.setStatus(mp.get(i).get("status").toString());
             staffDetails.add(staff);
         }
-        log.info("{}",staffDetails);
+        log.info("{}", staffDetails);
         return staffDetails;
     }
 
@@ -353,9 +357,9 @@ public class StaffRepositoryImpl implements UserRepository {
     @Override
     public List<User> filter(SQLType column, String filterValue) {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE ? = ?", column, filterValue);
-        List<User> staffDetails=new ArrayList<User>();
+        List<User> staffDetails = new ArrayList<User>();
 
-        for (int i=0;i<mp.size();i++){
+        for (int i = 0; i < mp.size(); i++) {
             User staff = new User();
             staff.setId(Integer.parseInt(mp.get(i).get("id").toString()));
             staff.setTitle(mp.get(i).get("title").toString());
@@ -367,7 +371,7 @@ public class StaffRepositoryImpl implements UserRepository {
             staff.setMobile(mp.get(i).get("mobile").toString());
             staff.setAddressL1(mp.get(i).get("address_line1").toString());
             staff.setAddressL2(mp.get(i).get("address_line2").toString());
-            if (mp.get(i).get("address_line3")!=null) {
+            if (mp.get(i).get("address_line3") != null) {
                 staff.setAddressL3(mp.get(i).get("address_line3").toString());
             }
             staff.setDesignation(mp.get(i).get("designation").toString());
@@ -379,7 +383,7 @@ public class StaffRepositoryImpl implements UserRepository {
 
 
         }
-        log.info("{}",staffDetails);
+        log.info("{}", staffDetails);
         return staffDetails;
 
     }
@@ -389,7 +393,7 @@ public class StaffRepositoryImpl implements UserRepository {
     public int countUsers() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff ");
         int count = mp.size();
-        log.info("{}",count);
+        log.info("{}", count);
         return count;
     }
 
@@ -408,16 +412,16 @@ public class StaffRepositoryImpl implements UserRepository {
             result = false;
             log.info("username already available");
         }
-        log.info("{}",result);
+        log.info("{}", result);
         return result;
     }
 
     @Override
     public List<User> selectActiveUsers() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE status=1");
-        List<User> staffDetails=new ArrayList<User>();
+        List<User> staffDetails = new ArrayList<User>();
 
-        for (int i=0;i<mp.size();i++){
+        for (int i = 0; i < mp.size(); i++) {
             User staff = new User();
             staff.setId(Integer.parseInt(mp.get(i).get("id").toString()));
             staff.setTitle(mp.get(i).get("title").toString());
@@ -429,7 +433,7 @@ public class StaffRepositoryImpl implements UserRepository {
             staff.setMobile(mp.get(i).get("mobile").toString());
             staff.setAddressL1(mp.get(i).get("address_line1").toString());
             staff.setAddressL2(mp.get(i).get("address_line2").toString());
-            if (mp.get(i).get("address_line3")!=null) {
+            if (mp.get(i).get("address_line3") != null) {
                 staff.setAddressL3(mp.get(i).get("address_line3").toString());
             }
             staff.setDesignation(mp.get(i).get("designation").toString());
@@ -440,16 +444,16 @@ public class StaffRepositoryImpl implements UserRepository {
             staffDetails.add(staff);
 
         }
-        log.info("{}",staffDetails);
+        log.info("{}", staffDetails);
         return staffDetails;
     }
 
     @Override
     public List<User> selectBlockedUsers() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE status=2");
-        List<User> staffDetails=new ArrayList<User>();
+        List<User> staffDetails = new ArrayList<User>();
 
-        for (int i=0;i<mp.size();i++){
+        for (int i = 0; i < mp.size(); i++) {
             User staff = new User();
             staff.setId(Integer.parseInt(mp.get(i).get("id").toString()));
             staff.setTitle(mp.get(i).get("title").toString());
@@ -461,7 +465,7 @@ public class StaffRepositoryImpl implements UserRepository {
             staff.setMobile(mp.get(i).get("mobile").toString());
             staff.setAddressL1(mp.get(i).get("address_line1").toString());
             staff.setAddressL2(mp.get(i).get("address_line2").toString());
-            if (mp.get(i).get("address_line3")!=null) {
+            if (mp.get(i).get("address_line3") != null) {
                 staff.setAddressL3(mp.get(i).get("address_line3").toString());
             }
             staff.setDesignation(mp.get(i).get("designation").toString());
@@ -473,36 +477,38 @@ public class StaffRepositoryImpl implements UserRepository {
 
 
         }
-        log.info("{}",staffDetails);
+        log.info("{}", staffDetails);
         return staffDetails;
     }
 
-    public void test(String des){
+    public void test(String des) {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT id FROM `group` ");
-        log.info("{}",mp);
+        log.info("{}", mp);
 
     }
 
-    /**add a new staff member*/
+    /**
+     * add a new staff member
+     */
 
-    @Transactional(propagation= Propagation.SUPPORTS)
+    @Transactional(propagation = Propagation.SUPPORTS)
     public int addStaffMember(User user) {
         TransactionDefinition trDef = new DefaultTransactionDefinition();
         TransactionStatus stat = transactionManager.getTransaction(trDef);
-       // String des=user.getDesignation();
-       // String username=user.getUsername();
-        int j=0;
+        // String des=user.getDesignation();
+        // String username=user.getUsername();
+        int j = 0;
         try {
             log.info("going updated");
             add(user);
-            List<Map<String,Object>> mp=jdbcTemplate.queryForList("SELECT username,designation FROM staff WHERE username=?", user.getUsername());
-            String des=mp.get(0).get("designation").toString();
-            String username=mp.get(0).get("username").toString();
-            log.info("{},{}",des,username);
+            List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT username,designation FROM staff WHERE username=?", user.getUsername());
+            String des = mp.get(0).get("designation").toString();
+            String username = mp.get(0).get("username").toString();
+            log.info("{},{}", des, username);
             updateGroupStaff(des, username);
             log.info("updated");
             transactionManager.commit(stat);
-            j=1;
+            j = 1;
         } catch (Exception e) {
             log.info(e.getMessage());
             transactionManager.rollback(stat);
@@ -512,18 +518,20 @@ public class StaffRepositoryImpl implements UserRepository {
 
     }
 
-    /**delete staff member*/
-    @Transactional(propagation= Propagation.REQUIRED)
-    public int deleteStaff(String username){
+    /**
+     * delete staff member
+     */
+    @Transactional(propagation = Propagation.REQUIRED)
+    public int deleteStaff(String username) {
         TransactionDefinition trDef = new DefaultTransactionDefinition();
         TransactionStatus stat = transactionManager.getTransaction(trDef);
-        int j=0;
-        try{
+        int j = 0;
+        try {
             deleteUserRecord(username);
             delete(username);
             transactionManager.commit(stat);
-            j=1;
-        }catch (Exception e){
+            j = 1;
+        } catch (Exception e) {
             log.info(e.getMessage());
             transactionManager.rollback(stat);
             log.info("rollbacked");
@@ -531,18 +539,20 @@ public class StaffRepositoryImpl implements UserRepository {
         return j;
     }
 
-    /**update staff member*/
-    @Transactional(propagation= Propagation.REQUIRED)
-    public int updateStaffMember(User user){
+    /**
+     * update staff member
+     */
+    @Transactional(propagation = Propagation.REQUIRED)
+    public int updateStaffMember(User user) {
         TransactionDefinition trDef = new DefaultTransactionDefinition();
         TransactionStatus stat = transactionManager.getTransaction(trDef);
-        int j=0;
-        try{
+        int j = 0;
+        try {
             updateGroupStaffWithStaffModifications(user);
             update(user);
             transactionManager.commit(stat);
-            j=1;
-        }catch (Exception e){
+            j = 1;
+        } catch (Exception e) {
             log.info(e.getMessage());
             transactionManager.rollback(stat);
             log.info("rollbacked");
@@ -551,7 +561,7 @@ public class StaffRepositoryImpl implements UserRepository {
 
     }
 
-    }
+}
 
 
 

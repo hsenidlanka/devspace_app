@@ -115,13 +115,24 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
     @Override
     public int update(String categoryName,String description) {
 
-        String sql = "UPDATE category SET name=? description = ? WHERE name = ? ";
+        String sql = "UPDATE category SET description = ? WHERE name = ? ";
 
-        int count = jdbcTemplate.update(sql, new Object[]{category.getCategoryName(), category.getSubCategoryName(), category.getCategoryName()}, Integer.class);
+        int count = jdbcTemplate.update(sql, new Object[]{ description, categoryName});
         log.info("{}",count);
         return count;
     }
+    //this method is for update from UI(to be changed)
+    public int updateCategory(Category cat) {
+        int id= cat.getCategory_id();
+        String name=cat.getCategoryName();
+        String desc=cat.getDescription();
 
+        String sql = "UPDATE category SET name=?, description = ? WHERE id = ? ";
+
+        int count = jdbcTemplate.update(sql, new Object[]{ name, desc,id});
+        log.info("{}",count);
+        return count;
+    }
     /*view name and description of all categories*/
     @Override
     public List<Category> selectNameAndDescription() {

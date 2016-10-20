@@ -117,7 +117,11 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
     /*update subcategory details*/
     @Override
     public int update(String subCategoryName,String description) {
-        return 0;
+        String sql = "UPDATE sub_category SET description = ? WHERE name = ? ";
+
+        int count = jdbcTemplate.update(sql, new Object[]{description,subCategoryName});
+        log.info("{}",count);
+        return count;
     }
 
     /*retrieve all subcategory names*/

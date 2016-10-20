@@ -234,6 +234,52 @@ public class ItemRepositoryImpl implements ItemRepository {
         return j;
     }
 
+    /**retrieve item details by id*/
+    @Override
+    public List<Map<String, Object>> retrieveSelectedItemDetails(int id) {
+        List<Map<String, Object>> itemDetails = jdbcTemplate.queryForList("SELECT i.id,i.name AS item_name,c.name " +
+                "AS category_name, s.name AS sub_category_name,t.name AS type,i.description,i.image FROM item i" +
+                " INNER JOIN sub_category s ON i.sub_category_id=s.id INNER JOIN type t ON i.type_id=t.type_id " +
+                "INNER JOIN category c ON c.id=s.category_id WHERE i.id=?",id);
+        log.info("{}",itemDetails);
+        return itemDetails;
+    }
+
+    /**retrieve sizes of a item  by item id*/
+    @Override
+    public List<Item> retrieveSelectedItemSizes(int id) {
+        List<Map<String, Object>> size=jdbcTemplate.queryForList("SELECT size,price FROM size WHERE item_id=?",id);
+        List<Item> items=new ArrayList<Item>();
+        for (int k=0;k<size.size();k++){
+            log.info("{}",size.get(k));
+            Item item=new Item();
+            item.setSize(size.get(k).get("size").toString());
+            item.setPrice(size.get(k).get("price").toString());
+            items.add(item);
+        }
+        log.info("**ITEMS{}",items);
+        return items;
+    }
+
+    /**retrieve selected data from item and size*/
+    @Override
+    @Transactional(propagation= Propagation.REQUIRED)
+    public int selectItemAndSize(int id) {
+        int j=0;
+        TransactionDefinition trDef = new DefaultTransactionDefinition();
+        TransactionStatus stat = transactionManager.getTransaction(trDef);
+        try {
+            retrieveSelectedItemDetails(id);
+            retrieveSelectedItemSizes(id);
+            transactionManager.commit(stat);
+            j=1;
+        } catch (Exception e) {
+            log.info(e.getMessage());
+            transactionManager.rollback(stat);
+        }
+        return j;
+    }
+
 
     /*get top rated items of a given category*/
     @Override
@@ -290,6 +336,7 @@ public class ItemRepositoryImpl implements ItemRepository {
         log.info("{}",mp);
         return mp;
     }
+
 
 
     }

@@ -26,4 +26,7 @@ public interface ItemRepository {
     int updateItem(Item item,List<Item> item2);
     int deleteFromSize(String itemName);
     int deleteItem(String itemName);
+    List<Map<String, Object>> retrieveSelectedItemDetails(int id);
+    List<Item> retrieveSelectedItemSizes(int id);
+    int selectItemAndSize(int id);
 }
