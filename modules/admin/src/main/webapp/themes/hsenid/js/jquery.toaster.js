@@ -143,7 +143,7 @@
 		},
 
 		'debug'        : false,
-		'timeout'      : 2000,
+		'timeout'      : 3000,
 		'stylesheet'   : null,
 		'donotdismiss' : []
 	};
