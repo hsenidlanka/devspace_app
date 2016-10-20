@@ -57,6 +57,8 @@ public class ItemController {
         String itemPrice = newItem.getPrice();
         String itemSize = newItem.getSize();
 
+        LOGGER.trace(itemPrice + " item price");
+        LOGGER.trace(itemSize + " item size");
         List<String> sizelist = new ArrayList<String>(Arrays.asList(itemSize.split(",")));
         List<String> pricelist = new ArrayList<String>(Arrays.asList(itemPrice.split(",")));
 
@@ -68,7 +70,6 @@ public class ItemController {
                     listItem.setSize(sizelist.get(s));
                     listItem.setPrice(pricelist.get(s));
                 items.add(listItem);
-
             }
 
         boolean uniqueItemNm = item.checkAvailability(itemNm);
@@ -89,12 +90,10 @@ public class ItemController {
             JOptionPane.showMessageDialog(null,
                     "Item name is already exists! " + itemNm, "Warning ",
                     JOptionPane.WARNING_MESSAGE);
-            /*if(!items.isEmpty()){
-               items.clear();
-                LOGGER.trace("after clear " +items);
-            }*/
+
             newItem.setPrice(" ");  LOGGER.trace("after clear price"+ itemPrice );
             newItem.setSize(" ");  LOGGER.trace("after clear size" + itemSize);
+            //newItem.setCategoryName();
             //return "redirect:/getUser";
             return new ModelAndView("item_management/addItem", "command", newItem);
         }
@@ -156,17 +155,32 @@ public class ItemController {
 
     /**
      * Delete Item view
-     *//*
-   /* @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public ModelAndView showDeleteItem(){ return  new ModelAndView("itemDelete", "deleteItem",new Item()); }
-    @RequestMapping(value = "view_item")
-    public ModelAndView deleteItem(@ModelAttribute("deleteItem") hsl.devspace.app.corelogic.domain.Item deleteItem) throws SQLIntegrityConstraintViolationException {
-        ModelAndView model = new ModelAndView();
-        model.setViewName("");
-    }*/
+     */
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    public ModelAndView showDeleteItem(){
+        return  new ModelAndView("itemDelete", "deleteItem", new Item());
+    }
+
+    @RequestMapping(value = "/delete_item", method = RequestMethod.POST)
+    public @ResponseBody int deleteItem(@RequestParam("itemName") String itemName) throws SQLIntegrityConstraintViolationException {
+
+        //String itemNm = item2.getItemName();
+
+        /*if (deltItem != 1){
+            JOptionPane.showMessageDialog(null, "Server-side error. Cannot delete the item !", "Error !",
+                    JOptionPane.ERROR_MESSAGE);
+            LOGGER.error("Server-side error in deleting item "+ itemNm);
+        }
+        else
+            JOptionPane.showMessageDialog(null, "Deleted item " + itemNm, "Success",
+                    JOptionPane.INFORMATION_MESSAGE);
+            LOGGER.info("deleted Item from database " + itemNm);*/
+        LOGGER.info("deleted Item from database " + itemName);
+        return item.delete(itemName);
+    }
 
 
-    //controller method to get relevant subcategory
+    //controller method to load relevant subcategory
     @RequestMapping(value = "/getSubcats", method = RequestMethod.POST)
     public
     @ResponseBody
@@ -175,5 +189,7 @@ public class ItemController {
         return subCategoryRepository.retrieveSubcatogories(categoryNm);
     }
 
-    //controller method to get the rel
+    //controller method to set pagination on view item table
+   /* @RequestMapping(value = "/tablePagination", method = RequestMethod.GET)
+    public */
 }

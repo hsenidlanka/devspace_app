@@ -14,14 +14,14 @@
   <link href="${cssItem}" rel="stylesheet">
 
   <%--  other javascripts --%>
-  <spring:url value="/themes/hsenid/js/itemMgt.js" var="itemJs"/>
+
   <spring:url value="/themes/hsenid/js/myAlerts.js" var="myAlerts"/>
   <spring:url value="/themes/hsenid/js/tableItems.js" var="tblViewItm"/>
+  <spring:url value="/themes/hsenid/js/itemMgt.js" var="itemJs"/>
 
-  <script src="${itemJs}"></script>
   <script src="${myAlerts}"></script>
   <script src="${tblViewItm}"></script>
-
+  <script src="${itemJs}"></script>
 
 </head>
 <body>
@@ -123,8 +123,11 @@
             <div class="col-xs-6" style="text-align: left">  <label id="lblDeltItmId" class="delete-lables"> </label></div><br>
            <div class="col-xs-6" style="text-align: right"> <label ><fmt:message key="item.deletemodal.itemname"/></label></div>
             <div class="col-xs-6" style="text-align: left"> <label id="lblDeltItmName" class="delete-lables"> </label></div><br>
+            <div class="col-xs-6" style="text-align: right"> <label ><fmt:message key="item.deletemodal.itemtype"/></label></div>
+            <div class="col-xs-6" style="text-align: left"> <label id="lblDeltItmType" class="delete-lables"> </label></div><br>
           </div>
         </div>
+        <div style="text-align: center; z-index: 50000; width: 50%; margin: auto;" id="toaster"></div>
       </div>
 
       <div class="modal-footer" align="right">

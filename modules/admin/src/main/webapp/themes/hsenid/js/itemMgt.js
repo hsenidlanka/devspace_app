@@ -114,8 +114,4 @@ $(document).ready(function () {
             $(this).parent().parent().next().find(".form-control").prop("disabled", !$(this).prop("checked"));
         });
 
-    /*function C(t, textBoxId) {
-        $("#" + textBoxId).prop("disabled", !$(t).prop("checked"));
-    }
-*/
 })

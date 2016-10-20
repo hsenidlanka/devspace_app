@@ -2,12 +2,12 @@ $(document).ready(function () {
 
         $('#tblItems').bootstrapTable({
             /*method: '',*/
-            dataType:'JSON',
+           // dataType:'JSON',
             url: 'https://localhost:8443/admin/items/view/itemTable',
             height: 400,
             striped: true,
             pagination: true,
-            pageSize: 50,
+            pageSize: 10,
             pageList: [10, 25, 50, 100, 200],
             search: false,
             showColumns: false,
@@ -58,10 +58,30 @@ $(document).ready(function () {
             }]
         });
 
-        /*
-        *populating drop-down list according to the table's field
-        */
+    $("#btnDeltItm").click(function(){
+        var itemName = $("#lblDeltItmName").text();
+        $.ajax({
+            type:"POST",
+           // dataType:"JSON",
+            url:"https://localhost:8443/admin/items/delete_item",
+            data:{"itemName": itemName},
 
+            success: function(data){
+                /*    $.toaster({priority: 'success', title: 'Success', message: 'Deleted item . '+data});*/
+               /* if(data == 1){*/
+                    alert("Deleted the  item" + itemName+" successfully!");
+               /* }
+                else*/
+                  /*  alert("Error in deleting the item !"+e);*/
+                $("#itemDeleteModal").modal('hide');
+            },
+            error: function(e){
+                alert("Error in deleting the item ! **  "+itemName+ e);
+                //$.toaster({ priority : 'danger', title : 'Error', message : 'Cannot add package. Check again ! ' +e});
+                $("#itemDeleteModal").modal('hide');
+            }
+        })
+    })
     
 });
 
@@ -96,7 +116,10 @@ window.operateEvents = {
 
       $('#lblDeltItmId').text(deltObj["id"]);
         $('#lblDeltItmName').text(deltObj["item_name"]);
+        $('#lblDeltItmType').text(deltObj["category_name"]);
 
         $('#itemDeleteModal').modal('show');
     }
 }
+
+
