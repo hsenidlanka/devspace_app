@@ -127,19 +127,23 @@ public class ItemController {
      */
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
-    public ModelAndView showEditItem() {
-        return new ModelAndView("item_management/editItem", "editItem", new Item());
+    public ModelAndView showEditItem(ModelAndView modelVw) {
+
+        List<String> listCatEdit = categoryRepository.selectCategoryNames();
+        modelVw.addObject("listCatEdit", listCatEdit);
+        modelVw.addObject("editItem", new Item());
+        return modelVw;
     }
 
     @RequestMapping(value = "/edit_item")
     public ModelAndView editItem(@ModelAttribute("editItem") Item editItem) throws SQLIntegrityConstraintViolationException {
 
         ModelAndView model = new ModelAndView();
-        List<String> listCatEdit = categoryRepository.selectCategoryNames();
+       /* List<String> listCatEdit = categoryRepository.selectCategoryNames();
         model.addObject("listCatEdit", listCatEdit);
         model.addObject("editItem", new Item());
 
-        model.setViewName("item_management/editItem");
+        model.setViewName("item_management/editItem");*/
 
         return model;
     }

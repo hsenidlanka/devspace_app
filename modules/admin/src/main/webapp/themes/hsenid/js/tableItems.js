@@ -82,7 +82,7 @@ $(document).ready(function () {
 function operateFormatter(value, row, index){
     return[
         '<center>',
-        '<a class="edit" href="https://localhost:8443/admin/items/view/" title="Edit" id="linkEditItem">',
+        '<a class="edit" href="https://localhost:8443/admin/item_management/editItem" title="Edit" id="linkEditItem">',
         '<i class="glyphicon glyphicon-edit">Edit</i>',
         '</a>&nbsp;&nbsp;&nbsp;&nbsp;',
         '<a class="delete" title="Delete" id="linkDeleteItem">',
