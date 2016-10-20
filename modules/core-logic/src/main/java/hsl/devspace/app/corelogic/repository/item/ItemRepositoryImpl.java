@@ -88,13 +88,22 @@ public class ItemRepositoryImpl implements ItemRepository {
     /*delete an item*/
     @Override
     public int delete(String itemName) {
-
-        item.setItemName(itemName);
+        //item.setItemName(itemName);
         String sql = "DELETE FROM item WHERE name = ?";
-        int row = jdbcTemplate.update(sql, new Object[]{item.getItemName()});
+        int row = jdbcTemplate.update(sql, new Object[]{itemName});
         log.info("{} item deleted",row);
         return row;
     }
+
+    /**delete from size when item deleted*/
+    @Override
+    public int deleteFromSize(String itemName){
+        String sql = "DELETE FROM `size` WHERE item_id =(SELECT id FROM item WHERE name=?)";
+        int row = jdbcTemplate.update(sql, new Object[]{itemName});
+        log.info("{} sizes deleted",row);
+        return row;
+    }
+
 
     /*view all item details*/
     @Override
@@ -178,12 +187,13 @@ public class ItemRepositoryImpl implements ItemRepository {
             transactionManager.commit(stat);
             j=1;
         } catch (Exception e) {
+            log.info(e.getMessage());
             transactionManager.rollback(stat);
         }
         return j;
     }
 
-    /*Add new item*/
+    /**Add new item*/
     @Override
     @Transactional(propagation= Propagation.REQUIRED)
     public int addItem(Item item,List<Item> item2) {
@@ -199,7 +209,27 @@ public class ItemRepositoryImpl implements ItemRepository {
             transactionManager.commit(stat);
             j=1;
         } catch (Exception e) {
+            log.info(e.getMessage());
             transactionManager.rollback(stat);
+        }
+        return j;
+    }
+
+    /**Delete item*/
+    @Override
+    public int deleteItem(String itemName){
+        int j=0;
+        TransactionDefinition trDef = new DefaultTransactionDefinition();
+        TransactionStatus stat = transactionManager.getTransaction(trDef);
+        try{
+            deleteFromSize(itemName);
+            delete(itemName);
+            transactionManager.commit(stat);
+            j=1;
+        }catch (Exception e){
+            log.info(e.getMessage());
+            transactionManager.rollback(stat);
+            log.error("rollbacked");
         }
         return j;
     }
