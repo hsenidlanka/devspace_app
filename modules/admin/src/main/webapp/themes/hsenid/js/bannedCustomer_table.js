@@ -62,15 +62,44 @@ function operateFormatter4(value, row, index) {
 
 
 window.operateEvents4 = {
-    'click .viewc': function() {
-        $('#blockedCustomerModal').modal({show:true});
+    'click .viewc': function(e, value, row, index) {
+        var data6 = JSON.stringify(row);
+        var objc6 = JSON.parse(data6);
+        var bcustomer_uname=objc6["username"];
+
+        $.ajax({
+            url: "https://localhost:8443/admin/users/bannedCustomer/detail",
+            data: {"bcustomer_uname": bcustomer_uname},
+            success: function(msg){
+
+                $('#currentbc_user').text(objc6["first_name"]);
+                $('#customerDetail_title').val(msg["title"]);
+                $('#customerDetail_first-name').val(msg["firstName"]);
+                $('#customerDetail_last-name').val(msg["lastName"]);
+                $('#customerDetail_addLine1').val(msg["addressL1"]);
+                $('#customerDetail_addLine2').val(msg["addressL2"]);
+                $('#customerDetail_city').val(msg["addressL3"]);
+                $('#customerDetail_mobile').val(msg["mobile"]);
+                $('#customerDetail_email').val(msg["email"]);
+                $('#customerDetail_username').val(msg["username"]);
+                $('#customerDetail_status').val(msg["status"]);
+                $('#customerDetail_reg').val(msg["registered_date"]);
+
+                $('#blockedCustomerModal').modal({show:true});
+
+            },
+            error:function(e){
+                alert("ajax failed" +uname+ ""+e);
+            }
+        });
+
 
     },
     'click .replacec': function(e, value, row, index) {
-        var data4 = JSON.stringify(row);
-        var objc4 = JSON.parse(data4);
-        $('#lblUnblockCustomerId').text(objc4["username"]);
-        $('#lblUnblockCustomerName').text("Name :"+objc4["first_name"]);
+        var data5 = JSON.stringify(row);
+        var objc5 = JSON.parse(data5);
+        $('#lblUnblockCustomerId').text(objc5["username"]);
+        $('#lblUnblockCustomerName').text("Name :"+objc5["first_name"]);
         $('#replaceCustomerModal').modal({show:true});
     }
 };

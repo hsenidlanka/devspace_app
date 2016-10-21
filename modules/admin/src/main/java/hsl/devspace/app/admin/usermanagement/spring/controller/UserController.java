@@ -292,6 +292,32 @@ public class UserController {
 
         return staff ;
     }
+
+    //   Banned staff user detail form is displayed here
+    @RequestMapping(value="bannedStaff/detail",method=RequestMethod.GET)
+    public @ResponseBody User showBannedStaff(@RequestParam("bstaff_uname") String bstaff_uname){
+
+        LOG.error("uname is {}",bstaff_uname);
+
+        User staff=staffRepository.retrieveSelectedUserDetails(bstaff_uname);
+        LOG.error("staff object {}",staff);
+
+        return staff ;
+    }
+
+    //   Banned customer user detail form is displayed here
+    @RequestMapping(value="bannedCustomer/detail",method=RequestMethod.GET)
+    public @ResponseBody User showBannedCustomer(@RequestParam("bcustomer_uname") String bcustomer_uname){
+
+        LOG.error("uname is {}",bcustomer_uname);
+
+        User customer=customerRepository.retrieveSelectedUserDetails(bcustomer_uname);
+        LOG.error("staff object {}",customer);
+
+        return customer ;
+    }
+
+
 }
 
 
