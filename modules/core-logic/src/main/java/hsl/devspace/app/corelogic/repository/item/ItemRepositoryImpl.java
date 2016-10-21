@@ -264,20 +264,24 @@ public class ItemRepositoryImpl implements ItemRepository {
     /**retrieve selected data from item and size*/
     @Override
     @Transactional(propagation= Propagation.REQUIRED)
-    public int selectItemAndSize(int id) {
-        int j=0;
+    public ReturnTypeResolver selectItemAndSize(int id) {
         TransactionDefinition trDef = new DefaultTransactionDefinition();
         TransactionStatus stat = transactionManager.getTransaction(trDef);
+        ReturnTypeResolver rv=new ReturnTypeResolver();
         try {
-            retrieveSelectedItemDetails(id);
-            retrieveSelectedItemSizes(id);
+            List<Map<String, Object>> selectedItem=retrieveSelectedItemDetails(id);
+            List<Item> selectedSize=retrieveSelectedItemSizes(id);
             transactionManager.commit(stat);
-            j=1;
+            rv.setSelectedItem(selectedItem);
+            rv.setSelectedSize(selectedSize);
         } catch (Exception e) {
             log.info(e.getMessage());
             transactionManager.rollback(stat);
         }
-        return j;
+        log.info("{}",rv.getSelectedItem());
+        log.info("{}",rv.getSelectedSize());
+
+        return rv;
     }
 
 
