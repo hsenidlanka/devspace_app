@@ -1,6 +1,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -85,22 +86,266 @@
         </fieldset>
 
         <br>
-
-        <%--<div class="row" align="left">
-          <div class="col-sm-4"></div>
-          <div class="col-sm-4"></div>
-          <div class="col-sm-4">
-            <form:button type="button" class="btn btn-success" id="btnViewItemBack"><span
-                    class="glyphicon glyphicon-chevron-left"></span> Back to home
-            </form:button>
-          </div>
-        </div>--%>
         <br>
       </form:form>
     </div>
 
   </div>
 </div>
+
+
+  <!--Modal for edit item-->
+  <div class="modal fade" id="itemEditModal">
+    <div class="modal-dialog ">
+      <div class="modal-content">
+        <div class="modal-header item-modal-header-style">
+          <button class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-pencil"></span></button>
+          <div align="center"><span class="glyphicon glyphicon-trash"></span><fmt:message key="item.deletemodal.title"/>
+          </div>
+        </div>
+        <form:form class="form-horizontal" role="form" id="frmEditItem" method="post">
+          <fieldset class="scheduler-border">
+            <legend class="scheduler-border"><fmt:message key="item.itemedit.form.legend"/> </legend>
+            <div class="modal-body">
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-xs-6">
+                    <div class="col-xs-4">
+                      <label class="control-label" style="float: right;">
+                        <fmt:message key="item.itemedit.form.name"/>
+                      </label>
+                    </div>
+                    <div class="col-xs-8">
+                      <form:input class="form-control" id="txtEditName" type="text" path="itemName"/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-xs-6">
+                    <div class="col-xs-4">
+                      <label class="control-label" style="float:right;">
+                        <fmt:message key="item.itemedit.form.category"/>
+                      </label>
+                    </div>
+                    <div class="col-xs-8">
+                      <form:select class="form-control" id="selectCatedt" path="categoryName">
+                        <form:option value="-" label="--Select Category--"/>
+                        <c:forEach var="listEdit" items="${listCatEdit}">
+                          <form:option id="${listEdit}" value="${listEdit}">${listEdit}</form:option>
+                        </c:forEach>
+                      </form:select>
+                    </div>
+
+                  </div>
+                  <div class="col-xs-6">
+                    <div class="col-xs-4">
+                      <label class="control-label" style="float: left;">
+                        <fmt:message key="item.itemedit.form.itemtype"/>
+                      </label>
+                    </div>
+                    <div class="col-xs-8">
+                      <label class="radio-inline">
+                        <form:radiobutton name="optEditType" value="veg" id="radioVeg" path="type" label="Veg" checked="true"/>
+                      </label>
+                      <label class="radio-inline">
+                        <form:radiobutton name="optEditType" value="non-veg" id="radioNveg" path="type" label="Non-veg"/>
+                      </label><br>
+                      <label class="radio-inline">
+                        <form:radiobutton name="optEditType" value="carbonated" id="radioCarbon" path="type" label="Carbonated"/>
+                      </label>
+                      <label class="radio-inline">
+                        <form:radiobutton name="optEditType" value="non-carbonated" id="radioNoncarbon" path="type" label="Non-carbonated"/>
+                      </label>
+                    </div>
+                  </div>
+                    <%--<div class="col-xs-6">
+                        <div class="col-xs-4">
+                            <label for="txtEditDesc" class="control-label">
+                                <fmt:message key="item.itemedit.form.desciption"/>
+                            </label>
+                        </div>
+
+                        <div class="col-xs-8">
+                            <form:textarea class="form-control" rows="5" id="txtEditDesc" path="description"/>
+                        </div>
+                    </div>--%>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-xs-6">
+                    <div class="col-xs-4">
+                      <label class="control-label" style="float: right">
+                        <fmt:message key="item.itemedit.form.subcategory"/>
+                      </label>
+                    </div>
+                    <div class="col-xs-8">
+                      <select class="form-control" id="slctEditSubCat">
+
+                      </select>
+                    </div>
+
+                  </div>
+                  <div class="col-xs-6">
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-xs-6">
+                    <div class="col-xs-4">
+                      <label class="control-label" style="float: right">
+                        <fmt:message key="item.itemedit.form.itemprice"/>
+                      </label>
+                    </div>
+
+                    <div class="col-xs-8">
+                      <div class="row item-tbl-row item-tbl-hdr">
+                        <div class="col-xs-5">
+                          <strong><fmt:message key="item.itemedit.form.item.check.size"/> </strong>
+                        </div>
+                        <div class="col-xs-7">
+                          <strong><fmt:message key="item.itemedit.form.item.text.price"/> </strong>
+                        </div>
+                      </div>
+
+                      <div class="row item-tbl-row" id="edtItmChkbxReg">
+
+                        <div class="col-xs-5">
+                          <label class="checkbox-inline">
+                            <form:checkbox value="regular" class="checkbox" path="size" label="Regular" onclick="document.getElementById('txtEdtPrcReg').disabled=!this.checked;"/>
+                          </label>
+                        </div>
+                        <div class="col-xs-7">
+                          <form:input id="txtEdtPrcReg" type="text" class="form-control price" path="price" disabled="true"/>
+                        </div>
+                      </div>
+
+                      <div class="row item-tbl-row" id="edtItmChkbxMed">
+
+                        <div class="col-xs-5">
+                          <label class="checkbox-inline">
+                            <form:checkbox value="medium" class="checkbox" path="size" label="Medium" onclick="document.getElementById('txtEdtPrcMed').disabled=!this.checked;"/>
+                          </label>
+                        </div>
+                        <div class="col-xs-7">
+                          <form:input type="text" id="txtEdtPrcMed" class="form-control price" path="price" disabled="true"/>
+                        </div>
+                      </div>
+
+                      <div class="row item-tbl-row" id="edtItmChkbxLrg">
+
+                        <div class="col-xs-5">
+                          <label class="checkbox-inline">
+                            <form:checkbox value="large" class="checkbox" path="size" label="Large" onclick="document.getElementById('txtEdtPrcLrg').disabled=!this.checked;"/>
+
+                          </label>
+                        </div>
+                        <div class="col-xs-7">
+                          <form:input id="txtEdtPrcLrg" type="text" class="form-control price" path="price" disabled="true"/>
+                        </div>
+                      </div>
+
+                      <div class="row item-tbl-row" id="edtItmChkbxOthr">
+                        <div class="col-xs-5">
+                          <label class="checkbox-inline">
+                            <form:checkbox value="other" class="checkbox" path="size" label="Other" onclick="document.getElementById('txtEdtPrcOthr').disabled=!this.checked;"/>
+
+                          </label>
+                        </div>
+                        <div class="col-xs-7">
+                          <form:input type="text" id="txtEdtPrcOthr" class="form-control price" path="price" disabled="true"/>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                  <div class="col-xs-6">
+                    <div class="col-xs-4">
+                      <label class="control-label">
+                        <fmt:message key="item.itemedit.form.itemimages"/>
+                      </label>
+                    </div>
+
+                    <div class="col-xs-8">
+                      <form:button type="button" class="btn btn-success" id="btnEditImage"><span
+                              class="glyphicon glyphicon-open"></span><fmt:message key="item.itemedit.form.button.upldimages"/>
+                      </form:button>
+                      <br><br>
+
+                      <div class="col-xs-8">
+                        <table class="table table-hover table-bordered table-condensed" id="">
+                          <tbody>
+                          <tr>
+                            <td><fmt:message key="item.itemedit.form.table.imagetag"/> </td>
+                            <td><input type="button" value="Update" class="form-control"></td>
+                            <td><input type="button" value="X" class="form-control"></td>
+                          </tr>
+                          <tr>
+                            <td><fmt:message key="item.itemedit.form.table.imagetag"/> </td>
+                            <td><input type="button" value="Update" class="form-control"></td>
+                            <td><input type="button" value="X" class="form-control"></td>
+                          </tr>
+                          <tr>
+                            <td><fmt:message key="item.itemedit.form.table.imagetag"/> </td>
+                            <td><input type="button" value="Update" class="form-control"></td>
+                            <td><input type="button" value="X" class="form-control"></td>
+                          </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-xs-12">
+                    <div class="col-xs-2" style="text-align: right">
+                      <label class="control-label">
+                        <fmt:message key="item.itemedit.form.itemtype"/>
+                      </label>
+                    </div>
+
+                    <div class="col-xs-10">
+                      <label class="radio-inline">
+                        <form:radiobutton name="optEditType" value="veg" id="radioVeg" path="type" label="Veg"/>
+                      </label>
+                      <label class="radio-inline">
+                        <form:radiobutton name="optEditType" value="non-veg" id="radioNveg" path="type" label="Non-veg"/>
+                      </label>
+                      <label class="radio-inline">
+                        <form:radiobutton name="optEditType" value="carbonated" id="radioCarbon" path="type" label="Carbonated"/>
+                      </label>
+                      <label class="radio-inline">
+                        <form:radiobutton name="optEditType" value="non-carbonated" id="radioNoncarbon" path="type" label="Non-carbonated"/>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div style="text-align: center; width: 75%; margin: auto;" id="toaster"></div>
+            </div>
+
+            <div class="modal-footer" align="right">
+              <button class="btn btn-success" type="button" value="Yes" id="btnDeltItm"><fmt:message key="item.deletemodal.button.yes"/>
+              </button>
+              <button class="btn btn-success" type="button" value="cancel" id="btnCnclDeltItm" data-dismiss="modal"><fmt:message key="item.deletemodal.button.no"/>
+              </button>
+            </div>
+          </fieldset>
+        </form:form>
+      </div>
+    </div>
+  </div>
+
+
 
 <!--Modal for delete item-->
 <div class="modal fade" id="itemDeleteModal">

@@ -127,12 +127,12 @@ public class ItemController {
      */
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
-    public ModelAndView showEditItem(ModelAndView modelVw) {
+    public ModelAndView showEditItem() {
 
-        List<String> listCatEdit = categoryRepository.selectCategoryNames();
+  /*      List<String> listCatEdit = categoryRepository.selectCategoryNames();
         modelVw.addObject("listCatEdit", listCatEdit);
-        modelVw.addObject("editItem", new Item());
-        return modelVw;
+        modelVw.addObject("command", new Item());*/
+        return new ModelAndView("item_management/editItem","command",new Item());
     }
 
     @RequestMapping(value = "/edit_item")

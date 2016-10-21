@@ -74,7 +74,7 @@
             </div>
             <br>
 
-            <form:form class="form-horizontal" role="form" id="frmEditItem" action="/edit_item" method="post" commandName="editItem" modelAttribute="editItem">
+           <%-- <form:form class="form-horizontal" role="form" id="frmEditItem" action="/edit_item" method="post" commandName="editItem" modelAttribute="editItem">
                 <fieldset class="scheduler-border">
                     <legend class="scheduler-border"><fmt:message key="item.itemedit.form.legend"/> </legend>
 
@@ -132,7 +132,7 @@
                                     </label>
                                 </div>
                             </div>
-                            <%--<div class="col-xs-6">
+                            &lt;%&ndash;<div class="col-xs-6">
                                 <div class="col-xs-4">
                                     <label for="txtEditDesc" class="control-label">
                                         <fmt:message key="item.itemedit.form.desciption"/>
@@ -142,7 +142,7 @@
                                 <div class="col-xs-8">
                                     <form:textarea class="form-control" rows="5" id="txtEditDesc" path="description"/>
                                 </div>
-                            </div>--%>
+                            </div>&ndash;%&gt;
                         </div>
                     </div>
 
@@ -302,7 +302,7 @@
                         </div>
                     </div>
 
-                    <%--<div class="form-group">
+                    &lt;%&ndash;<div class="form-group">
                         <div class="row">
                             <div class="col-xs-6">
                                 <div class="col-xs-4">
@@ -316,7 +316,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>--%>
+                    </div>&ndash;%&gt;
 
                     <br>
 
@@ -338,7 +338,7 @@
 
                     </div>
                 </fieldset>
-            </form:form>
+            </form:form>--%>
         </div>
 
     </div>

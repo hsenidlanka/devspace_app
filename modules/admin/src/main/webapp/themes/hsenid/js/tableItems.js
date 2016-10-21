@@ -82,7 +82,7 @@ $(document).ready(function () {
 function operateFormatter(value, row, index){
     return[
         '<center>',
-        '<a class="edit" href="https://localhost:8443/admin/item_management/editItem" title="Edit" id="linkEditItem">',
+        '<a class="edit" href="" title="Edit" id="linkEditItem">',
         '<i class="glyphicon glyphicon-edit">Edit</i>',
         '</a>&nbsp;&nbsp;&nbsp;&nbsp;',
         '<a class="delete" title="Delete" id="linkDeleteItem">',
@@ -98,8 +98,20 @@ window.operateEvents = {
         var data =JSON.stringify(row);
         var objct = JSON.parse(data);
 
-        $('#txtEditID').val(objct["id"]);
-        $('#txtEditeName').val(objct["name"]);
+        var itmId = objct["id"];
+        $.ajax({
+            type:"POST",
+            url:"https://localhost:8443/admin/items/edit_item",
+            data:{"itemId":itmId},
+            success: function(data){
+
+                $('#txtEditName').val(objct["item_name"]);
+                $('#selectCatedt').val(objct["category_name"]);
+                $('#slctEditSubCat').val(objct["sub_category_name"]);
+            }
+        })
+
+        $("#itemEditModal").modal('show');
 
     },
 
