@@ -63,7 +63,7 @@ function operateFormatter4(value, row, index) {
 
 window.operateEvents4 = {
     'click .viewc': function() {
-        $('#blockCustomerModal').modal({show:true});
+        $('#blockedCustomerModal').modal({show:true});
 
     },
     'click .replacec': function(e, value, row, index) {

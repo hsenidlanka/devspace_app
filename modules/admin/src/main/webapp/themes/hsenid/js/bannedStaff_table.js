@@ -68,7 +68,7 @@ function operateFormatter3(value, row, index) {
 window.operateEvents3 = {
 
     'click .likeb': function() {
-        $('#blockedStaffModal').modal({show:true});
+        $('#bannedStaffModal').modal({show:true});
 
     },
 

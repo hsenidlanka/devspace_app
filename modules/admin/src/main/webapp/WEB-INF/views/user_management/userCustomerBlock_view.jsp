@@ -171,5 +171,207 @@
     </div>
 </div>
 
+
+<!--modelto appear when editing the Customer user -->
+<div class="modal fade" id="blockedCustomerModal">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header deleteuser-modal-header-style">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
+                        class="glyphicon glyphicon-remove"></span></button>
+                <div align="center"><span class="glyphicon glyphicon-eye-open"></span>
+                    <fmt:message key="user.customer.update.modal.heading" bundle="${bundle1}" />
+                    <label id="current_user"></label>
+                </div>
+            </div>
+            <div class="modal-body">
+                <form:form role="form" id="update_customer_form"  method="POST" class="form-horizontal">
+                    <br>
+                    <div class="form-group">
+                        <div class="row">
+                            <label  class="col-xs-3 control-label" >
+                                <fmt:message key="user.useradd.form.name" bundle="${bundle1}"/>
+                            </label>
+                            <div class="col-xs-9">
+                                <div class="col-xs-6">
+                                    <div class="col-xs-5">
+                                        <form:input path="title" class="form-control" id="title"
+                                                    type="text" disabled="true"/>
+                                    </div>
+                                    <div class="col-xs-7">
+                                        <form:input path="firstName" class="form-control" id="update-first-name"
+                                                    type="text"  style="width: 140px" required="required"/>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                        <%--<div class="col-xs-4"></div>--%>
+                                    <div class="col-xs-12">
+                                        <form:input path="lastName" class="form-control" id="update-last-name" type="text"
+                                                    style="width: 160px"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><br>
+                    <div class="form-group">
+                        <div class="row">
+                            <label  class="col-xs-3 control-label" >
+                                <fmt:message key="user.useradd.form.address" bundle="${bundle1}"/>
+                            </label>
+                            <div class="col-xs-9">
+                                <div class="col-xs-12">
+                                    <div class="col-xs-12">
+                                        <form:input path="addressL1" class="form-control" id="update_addLine1"
+                                                    required="required" type="text"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <label  class="col-xs-3 control-label" >
+                            </label>
+                            <div class="col-xs-9">
+                                <div class="col-xs-12">
+                                    <div class="col-xs-12">
+                                        <form:input path="addressL2" class="form-control" id="update_addLine2" type="text"
+                                                    required="required"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <label  class="col-xs-3 control-label" >
+                            </label>
+                            <div class="col-xs-9">
+                                <div class="col-xs-6">
+                                    <div class="col-xs-12">
+                                        <form:input path="addressL3" class="form-control" id="update_city" type="text"
+                                                    style="width: 219px" required="required"/>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="col-xs-12">
+                                        <input  class="form-control" id="province" type="text"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><br>
+                    <div class="form-group">
+                        <div class="row">
+                            <label  class="col-xs-3 control-label" >
+                                <fmt:message key="user.useradd.form.mobile" bundle="${bundle1}" />
+                            </label>
+                            <div class="col-xs-9">
+                                <div class="col-xs-6">
+                                    <div class="col-xs-12">
+                                        <form:input path="mobile" class="form-control" id="update_mobile" type="text"
+                                                    style="width: 220px" required="required"/>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="col-xs-12">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <label  class="col-xs-3 control-label" >
+                                <fmt:message key="user.useradd.form.email" bundle="${bundle1}" />
+                            </label>
+                            <div class="col-xs-9">
+                                <div class="col-xs-6">
+                                    <div class="col-xs-12">
+                                        <form:input path="email" class="form-control" id="update_email" type="text"
+                                                    style="width: 220px" required="required"/>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="col-xs-12">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <label  class="col-xs-3 control-label" >
+                                <fmt:message key="user.useradd.form.username" bundle="${bundle1}" />
+                            </label>
+                            <div class="col-xs-9">
+                                <div class="col-xs-6">
+                                    <div class="col-xs-12">
+                                        <form:input path="username" class="form-control" id="update_username" type="text"
+                                                    style="width: 220px" required="required"/>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="col-xs-12">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <label  class="col-xs-3 control-label" >
+                                <fmt:message key="user.useradd.form.password" bundle="${bundle1}" />
+                            </label>
+                            <div class="col-xs-9">
+                                <div class="col-xs-6">
+                                    <div class="col-xs-12">
+                                        <form:input path="password" class="form-control" id="update_password" type="password"
+                                                    style="width: 220px"   onchange="validatePassword(update_password)" required="required"/>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="col-xs-12">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <label  class="col-xs-3 control-label" >
+                                <fmt:message key="user.useradd.form.cpassword" bundle="${bundle1}" />
+                            </label>
+                            <div class="col-xs-9">
+                                <div class="col-xs-6">
+                                    <div class="col-xs-12">
+                                        <input class="form-control" id="update_cpassword" type="password" style="width: 220px"
+                                               onchange="passwordsEqual(update_cpassword,update_password)" required="required"/>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="col-xs-12">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form:form>
+            </div>
+
+            <div class="modal-footer" align="right">
+                <button class="btn btn-success" type="button" value="Update" id="btnUpdateCustomer">
+                    <fmt:message key="user.customer.update.form.button" bundle="${bundle1}" />
+                </button>
+                <button class="btn btn-success" type="button" value="cancel" id="btnCnclUpdateStaff" data-dismiss="modal"
+                        aria-hidden="true">
+                    <fmt:message key="user.block.modal.button.cancel" bundle="${bundle1}" />
+                </button>
+            </div>
+        </div>
+    </
+
+
 </body>
 </html>
