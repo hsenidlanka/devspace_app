@@ -102,10 +102,17 @@ public class ItemController {
      * View Item details view
      */
 
-    //For view the search item form
+    //For view the item form
     @RequestMapping(value = "/view", method = RequestMethod.GET)
-    public ModelAndView showItemView() {
-        return new ModelAndView("/item_management/viewItem","itemView", new Item());
+    public ModelAndView showItemView(ModelAndView modelView) {
+
+        List<String> listCatEdit = categoryRepository.selectCategoryNames();
+        modelView.addObject("listCatEdit",listCatEdit);
+        modelView.addObject("command",new Item());
+        modelView.setViewName("/item_management/viewItem");
+
+        return modelView;
+       // return new ModelAndView("/item_management/viewItem","command", new Item());
     }
 
     //to view the item table
@@ -116,11 +123,6 @@ public class ItemController {
         return item.viewAllItemDetails();
     }
 
-    @RequestMapping(value = "/view_item")
-    public ModelAndView view(@ModelAttribute("viewItem") Item viewItem) throws SQLIntegrityConstraintViolationException {
-        ModelAndView model = new ModelAndView();
-        return model;
-    }
 
     /**
      * Edit Item view
@@ -129,23 +131,16 @@ public class ItemController {
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public ModelAndView showEditItem() {
 
-  /*      List<String> listCatEdit = categoryRepository.selectCategoryNames();
-        modelVw.addObject("listCatEdit", listCatEdit);
-        modelVw.addObject("command", new Item());*/
         return new ModelAndView("item_management/editItem","command",new Item());
     }
 
-    @RequestMapping(value = "/edit_item")
-    public ModelAndView editItem(@ModelAttribute("editItem") Item editItem) throws SQLIntegrityConstraintViolationException {
+    // retrieving values of a selected item to edit form
+    @RequestMapping(value = "/edit_item", method = RequestMethod.POST)
+    public @ResponseBody int retieveEditItem(@RequestParam("itemId") int itemId) {
 
-        ModelAndView model = new ModelAndView();
-       /* List<String> listCatEdit = categoryRepository.selectCategoryNames();
-        model.addObject("listCatEdit", listCatEdit);
-        model.addObject("editItem", new Item());
-
-        model.setViewName("item_management/editItem");*/
-
-        return model;
+        int e = item.selectItemAndSize(itemId);
+        LOGGER.info("itemId for edit " + itemId + ' ' + "e for edit "+e);
+        return e;
     }
 
     /**
@@ -163,6 +158,13 @@ public class ItemController {
         return item.deleteItem(itemName);
     }
 
+   /* //controller method to get category list to to edit form
+    @RequestMapping(value = "/getCatlist", method = RequestMethod.POST)
+    public List<String> getCatList(){
+
+        return item.getAllCategories();
+
+    }*/
 
     //controller method to load relevant subcategory
     @RequestMapping(value = "/getSubcats", method = RequestMethod.POST)
@@ -173,7 +175,12 @@ public class ItemController {
         return subCategoryRepository.retrieveSubcatogories(categoryNm);
     }
 
-    //controller method to set pagination on view item table
-   /* @RequestMapping(value = "/tablePagination", method = RequestMethod.GET)
-    public */
+    //controller method to get size and price of selected item
+    @RequestMapping(value = "/getPriceSize", method = RequestMethod.POST)
+    public @ResponseBody int getPriceSize(@RequestParam("itemId") int itemId){
+
+        LOGGER.trace("itemId for price"+ itemId);
+        return item.selectItemAndSize(itemId);
+    }
+
 }

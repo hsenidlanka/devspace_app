@@ -16,7 +16,7 @@ $(document).ready(function () {
         location.href = 'home.html';
     })
 
-    $('.btnAddItmPkg').click(function(){
+    $('.btnAddItmPkg').click(function () {
         $(this).replaceWith("<div class=\"add-status\"><span class=\"glyphicon glyphicon-ok\"></span> Added</div>");
     });
     /*
@@ -54,64 +54,87 @@ $(document).ready(function () {
         }
     })
 
-/*
-* populating the sub-category list in addItem.jsp
-**/
-        $("#selectCat").change(function(){
-            var categoryNm = $(this).val();
-            $.ajax({
-                type: "POST",
-                url: "https://localhost:8443/admin/items/getSubcats",
-                data: {"categoryNm" : categoryNm},
+    /*
+     * populating the sub-category list in addItem.jsp
+     **/
+    $("#selectCat").change(function () {
+        var categoryNm = $(this).val();
+        $.ajax({
+            type: "POST",
+            url: "https://localhost:8443/admin/items/getSubcats",
+            data: {"categoryNm": categoryNm},
 
-                success: function(data){
-                    var slctSubcat = $("#selectSubCat"), option= "";
-                   slctSubcat.empty();
+            success: function (data) {
+                var slctSubcat = $("#selectSubCat"), option = "";
+                slctSubcat.empty();
 
-                    for(var sb =0; sb<data.length; sb++){
-                        option = option + "<option value='" + data[sb] + "'>" +data[sb]+ "</option>";
-                    }
-                    slctSubcat.append(option);
-                },
-                error:function(e){
-                    alert("error " + e);
+                for (var sb = 0; sb < data.length; sb++) {
+                    option = option + "<option value='" + data[sb] + "'>" + data[sb] + "</option>";
                 }
-            });
-
+                slctSubcat.append(option);
+            },
+            error: function (e) {
+                alert("error " + e);
+            }
         });
 
-/*
-* populating the sub-category list in editItem.jsp
-**/
-        $("#selectCatedt").change(function(){
-            var categoryNm = $(this).val();
-            $.ajax({
-                type: "POST",
-                url: "https://localhost:8443/admin/items/getSubcats",
-                data: {"categoryNm" : categoryNm},
-
-                success: function(data){
-                    var slctSubcatEdt = $("#slctEditSubCat"), option= "";
-                    slctSubcatEdt.empty();
-
-                    for(var sb =0; sb<data.length; sb++){
-                        option = option + "<option value='" + data[sb] + "'>" +data[sb] + "</option>";
-                    }
-                    slctSubcatEdt.append(option);
-                },
-                error:function(e){
-                    alert("error " + e);
-                }
-            });
-
-        });
+    });
 
     /*
-    * function for enabling text-boxes onclick of checkbox in add Item
-    **/
-        $(".sizechkbx").click(function () {
+     * populating the sub-category list in editItem.jsp
+     **/
+    $("#selectCatedt").change(function () {
+        var categoryNm = $(this).val();
+        setSubCats(categoryNm);
+    });
 
-            $(this).parent().parent().next().find(".form-control").prop("disabled", !$(this).prop("checked"));
-        });
+
+    /*
+     * function for enabling text-boxes onclick of checkbox in add Item
+     **/
+    $(".sizechkbx").click(function () {
+
+        $(this).parent().parent().next().find(".form-control").prop("disabled", !$(this).prop("checked"));
+    });
 
 })
+
+/*
+* common function for loading sub-categories according to the selected category in edit item form
+**/
+function setSubCats(categoryNm) {
+    $.ajax({
+        type: "POST",
+        url: "https://localhost:8443/admin/items/getSubcats",
+        data: {"categoryNm": categoryNm},
+
+        success: function (data) {
+            var slctSubcatEdt = $("#slctEditSubCat"), option = "";
+            slctSubcatEdt.empty();
+
+            for (var sb = 0; sb < data.length; sb++) {
+                option = option + "<option value='" + data[sb] + "'>" + data[sb] + "</option>";
+            }
+            slctSubcatEdt.append(option);
+        },
+        error: function (e) {
+            alert("error " + e);
+        }
+    });
+
+}
+
+function setPriceSize(itemId){
+    $.ajax({
+        type:"POST",
+        url:"https://localhost:8443/admin/items/getPriceSize",
+        data:{"itemId":itemId},
+
+        success: function(data){
+            alert(data + "getPriceSize");
+        },
+        error: function(er){
+
+        }
+    })
+}

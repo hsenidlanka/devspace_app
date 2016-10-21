@@ -1,7 +1,6 @@
 $(document).ready(function () {
 
         $('#tblItems').bootstrapTable({
-            /*method: '',*/
             dataType:'JSON',
             url: 'https://localhost:8443/admin/items/view/itemTable',
             height: 400,
@@ -33,12 +32,12 @@ $(document).ready(function () {
                 field: 'type',
                 title: 'Type',
                 sortable: true
-            }, /*{
+            }, {
                 field: 'price',
                 title: 'Item Price',
                 align: 'right',
                 sortable: true
-            },*/{
+            },{
                 field: 'description',
                 title: 'Item desc',
                 align: 'right',
@@ -62,7 +61,6 @@ $(document).ready(function () {
         var itemName = $("#lblDeltItmName").text();
         $.ajax({
             type:"POST",
-           // dataType:"JSON",
             url:"https://localhost:8443/admin/items/delete_item",
             data:{"itemName": itemName},
 
@@ -82,7 +80,7 @@ $(document).ready(function () {
 function operateFormatter(value, row, index){
     return[
         '<center>',
-        '<a class="edit" href="" title="Edit" id="linkEditItem">',
+        '<a class="edit" title="Edit" id="linkEditItem">',
         '<i class="glyphicon glyphicon-edit">Edit</i>',
         '</a>&nbsp;&nbsp;&nbsp;&nbsp;',
         '<a class="delete" title="Delete" id="linkDeleteItem">',
@@ -98,21 +96,27 @@ window.operateEvents = {
         var data =JSON.stringify(row);
         var objct = JSON.parse(data);
 
-        var itmId = objct["id"];
+        var itemId = objct["id"];
         $.ajax({
             type:"POST",
             url:"https://localhost:8443/admin/items/edit_item",
-            data:{"itemId":itmId},
+            data:{"itemId": itemId},
             success: function(data){
 
-                $('#txtEditName').val(objct["item_name"]);
-                $('#selectCatedt').val(objct["category_name"]);
-                $('#slctEditSubCat').val(objct["sub_category_name"]);
+                if(data == 1){
+
+                  $("#txtEditName").val(objct["item_name"]);
+                  $("#selectCatedt").val(objct["category_name"]);
+                  setSubCats(objct["category_name"]);
+                    $("input:radio[name='optEditType'][value='"+ objct["type"] +"']").prop('checked', true);
+
+                  $('#itemEditModal').modal('show');
+                }
+            },
+            error:function(){
+             alert("error in edit item "+ e +' '+ itemId)
             }
         })
-
-        $("#itemEditModal").modal('show');
-
     },
 
     'click .delete':function(e, value, row,index){

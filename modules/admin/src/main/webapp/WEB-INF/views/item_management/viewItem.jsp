@@ -15,14 +15,14 @@
   <link href="${cssItem}" rel="stylesheet">
 
   <%--  other javascripts --%>
-
+  <spring:url value="/themes/hsenid/js/itemMgt.js" var="itemJs"/>
   <spring:url value="/themes/hsenid/js/myAlerts.js" var="myAlerts"/>
   <spring:url value="/themes/hsenid/js/tableItems.js" var="tblViewItm"/>
-  <spring:url value="/themes/hsenid/js/itemMgt.js" var="itemJs"/>
 
+  <script src="${itemJs}"></script>
   <script src="${myAlerts}"></script>
   <script src="${tblViewItm}"></script>
-  <script src="${itemJs}"></script>
+
 
 </head>
 <body>
@@ -95,15 +95,15 @@
 
 
   <!--Modal for edit item-->
-  <div class="modal fade" id="itemEditModal">
-    <div class="modal-dialog ">
+  <div class="modal fade" id="itemEditModal" style="z-index: 100000">
+    <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header item-modal-header-style">
           <button class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-pencil"></span></button>
           <div align="center"><span class="glyphicon glyphicon-trash"></span><fmt:message key="item.deletemodal.title"/>
           </div>
         </div>
-        <form:form class="form-horizontal" role="form" id="frmEditItem" method="post">
+        <form:form class="form-horizontal" role="form" id="frmEditItem" method="post" action="/admin/items/edit_item">
           <fieldset class="scheduler-border">
             <legend class="scheduler-border"><fmt:message key="item.itemedit.form.legend"/> </legend>
             <div class="modal-body">
@@ -140,13 +140,13 @@
                     </div>
 
                   </div>
-                  <div class="col-xs-6">
+                  <%--<div class="col-xs-6">
                     <div class="col-xs-4">
                       <label class="control-label" style="float: left;">
                         <fmt:message key="item.itemedit.form.itemtype"/>
                       </label>
                     </div>
-                    <div class="col-xs-8">
+                   &lt;%&ndash; <div class="col-xs-8">
                       <label class="radio-inline">
                         <form:radiobutton name="optEditType" value="veg" id="radioVeg" path="type" label="Veg" checked="true"/>
                       </label>
@@ -159,8 +159,8 @@
                       <label class="radio-inline">
                         <form:radiobutton name="optEditType" value="non-carbonated" id="radioNoncarbon" path="type" label="Non-carbonated"/>
                       </label>
-                    </div>
-                  </div>
+                    </div>&ndash;%&gt;
+                  </div>--%>
                     <%--<div class="col-xs-6">
                         <div class="col-xs-4">
                             <label for="txtEditDesc" class="control-label">
