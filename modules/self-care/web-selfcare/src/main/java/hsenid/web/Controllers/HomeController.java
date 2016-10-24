@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -42,16 +43,21 @@ public class HomeController {
         return "/home/createfeedback";
     }
 
+
+
     @RequestMapping(value = "/contactus", method = RequestMethod.GET)
     public ModelAndView contactus() {
         return new ModelAndView("/home/contactus", "contactus", new ContactUs());
     }
 
     @RequestMapping(value = "/sendContactus", method = RequestMethod.POST)
-    public ModelAndView sendContactus(){
-
+    public ModelAndView sendContactus(@ModelAttribute()){
         return new ModelAndView();
     }
+
+
+
+
 
     @RequestMapping("/aboutus")
     public String aboutus() {

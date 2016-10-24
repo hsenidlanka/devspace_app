@@ -1,4 +1,4 @@
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%--<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>--%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,7 +46,7 @@
                     <p style="font-size: xx-large;text-align: left"><fmt:message key="contactus" bundle="${lang}"/></p>
                 </div>
                 <div class="panel-body">
-                    <form:form id="contactus_form" action="sendContactus" method="post" modelAttribute="contactus" cssClass="form-horizontal">
+                    <form:form action="/sendContactus" method="post" modelAttribute="contactus" cssClass="form-horizontal">
 
                         <div class="form-group">
 
@@ -85,26 +85,27 @@
                                     "<fmt:message key="contactus.yourn" bundle="${lang}"/>"
                                 </form:select>
                             </div>
-                            <spring:message code="contactus.yourn" var="yourName"/>
+                                <%--<spring:message code="contactus.yourn" var="yourName"/>--%>
                             <div class="col-sm-4 row">
-                                <form:input path="name" cssClass="form-control" id="txt-fname" type="text" placeholder="${yourName}" />
+                                <form:input path="name" cssClass="form-control" id="txt-fname" type="text" placeholder="Test" />
                                 <label id="fname_error" class="error-labels"></label>
 
                             </div>
                         </div>
 
                         <div class="form-group">
-
-                            <form:label cssClass="col-sm-4 control-label" path="sss">
+                                <%--<form:input path="contactEmail"></form:input>--%>
+                            <form:label cssClass="col-sm-4 control-label" path="contactEmail">
                                 <fmt:message key="signup.email" bundle="${lang}"/> </form:label>
 
                             <div class="col-sm-6">
 
-                                <form:input cssClass="form-control" id="txt-email" type="text" placeholder="example@domain.com" path="email" />
+                                <form:input cssClass="form-control" id="txt-email" type="text" placeholder="example@domain.com" path="contactEmail" ></form:input>
                                 <label id="email_error" class="error-labels"></label>
 
                             </div>
                         </div>
+
                         <div class="form-group">
 
                             <form:label cssClass="col-sm-4 control-label" path="">
@@ -113,7 +114,7 @@
                             <div class="col-sm-6">
 
                                 <form:input cssClass="form-control" id="txt-contactno" type="text" placeholder="+94-XXXXXXXXXX" path="contactNo" />
-                                <label id="contactno_error" class="error-labels"></label>
+                                    <%--<label id="contactno_error" class="error-labels"></label>--%>
 
                             </div>
                         </div>
@@ -123,19 +124,19 @@
                                 <fmt:message key="contactus.message" bundle="${lang}"/></form:label>
 
                             <div class="col-sm-6">
-                                <spring:message code="contactus.your.inquiry" var="EnterMsg"/>
+                                    <%--<spring:message code="contactus.your.inquiry" var="EnterMsg"/>--%>
 
                                 <form:textarea path="msg" cssClass="form-control" id="txt-inquirymsg" type="text"
-                                          placeholder="${EnterMsg}" />
-                                <label id="inquirymsg_error" class="error-labels"></label>
+                                               placeholder="Testtextarea" />
+                                    <%--<label id="inquirymsg_error" class="error-labels"></label>--%>
 
                             </div>
                         </div>
 
 
                         <div class="form-group">
-                            <button id="btn-proceed-submit" type="submit" class="btn btn-success"
-                                    onclick="api_type('success')"><fmt:message key="contactus.submit" bundle="${lang}"/>
+                            <button id="btn-proceed-submit" type="submit" class="btn btn-success">
+                                <fmt:message key="contactus.submit" bundle="${lang}"/>
                             </button>
 
                         </div>

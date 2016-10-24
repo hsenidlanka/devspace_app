@@ -19,7 +19,7 @@ public class ContactUs {
 
     @NotNull
     @Email
-    private String email;
+    private String contactEmail;
 
     @NotNull
     @Size(min = 9, max = 10)
@@ -53,12 +53,20 @@ public class ContactUs {
         this.name = name;
     }
 
-    public String getEmail() {
-        return email;
+    public String getContactEmail() {
+        return contactEmail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setContactEmail(String contactEmail) {
+        this.contactEmail = contactEmail;
+    }
+
+    public String getContactNo() {
+        return contactNo;
+    }
+
+    public void setContactNo(String contactNo) {
+        this.contactNo = contactNo;
     }
 
     public String getMsg() {
@@ -68,5 +76,4 @@ public class ContactUs {
     public void setMsg(String msg) {
         this.msg = msg;
     }
-
 }
