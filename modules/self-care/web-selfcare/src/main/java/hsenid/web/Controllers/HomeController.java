@@ -38,20 +38,13 @@ public class HomeController {
         return "/home/locations";
     }
 
-    @RequestMapping("/createfeedback")
-    public String createfeedback() {
-        return "/home/createfeedback";
-    }
-
-
-
     @RequestMapping(value = "/contactus", method = RequestMethod.GET)
     public ModelAndView contactus() {
         return new ModelAndView("/home/contactus", "contactus", new ContactUs());
     }
 
     @RequestMapping(value = "/sendContactus", method = RequestMethod.POST)
-    public ModelAndView sendContactus(@ModelAttribute()){
+    public ModelAndView sendContactus(){
         return new ModelAndView();
     }
 
