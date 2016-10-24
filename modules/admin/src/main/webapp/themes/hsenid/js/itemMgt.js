@@ -131,7 +131,8 @@ function setPriceSize(itemId){
         data:{"itemId":itemId},
 
         success: function(data){
-            alert(data + "getPriceSize");
+            alert(itemId + " getPriceSize");
+            $(":checkbox[name='size'][value='large']").prop('checked', true);
         },
         error: function(er){
 
