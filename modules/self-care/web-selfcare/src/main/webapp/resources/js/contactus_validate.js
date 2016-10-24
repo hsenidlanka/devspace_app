@@ -1,9 +1,11 @@
+/*
 window.onload = function() {
     //get elements
-    var name1 = document.getElementById("name1");
-    var email1 = document.getElementById('email1');
-    var phone1 = document.getElementById("phone1");
-    var message1 = document.getElementById("message1");
+    //var name1 = document.getElementById("name1");
+    var name1 = $("#txt-fname").val();
+    var email1 =  $("txt-email").val();
+    var phone1 = $("txt-contactno").val();
+    var message1 = $("txt-inquirymsg").val();
     var typeselectIMGNm = document.getElementById("typeselectIMGNm");
     var typeselectIMGEm = document.getElementById("typeselectIMGEm");
     var typeselectIMGPh = document.getElementById("typeselectIMGPh");
@@ -51,3 +53,4 @@ window.onload = function() {
     };
 
 }
+*/

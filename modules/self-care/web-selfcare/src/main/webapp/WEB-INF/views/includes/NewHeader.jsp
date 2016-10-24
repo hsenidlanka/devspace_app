@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@include file="../signupmodal.jsp" %>
+<%@include file="signupmodal.jsp" %>
 
 
 <nav class="navbar navbar-default ">
@@ -80,7 +80,7 @@
 
       </div>
         <!------------------------------signup modal --------------------------------------------->
-        <%@include file="../signupmodal.jsp" %>
+        <%--<%@include file="signupmodal.jsp" %>--%>
     </div>
   </div>
 </div>

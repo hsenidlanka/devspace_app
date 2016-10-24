@@ -1,4 +1,4 @@
-package hsenid.web.bindclasses;
+package hsenid.web.models;
 
 public class Link {
     String rel;

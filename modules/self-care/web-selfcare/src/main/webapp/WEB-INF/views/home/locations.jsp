@@ -61,6 +61,6 @@
 <a href="http://gazpo.com/downloads/tutorials/jquery/scrolltop/#" class="scrollup" style="display: none;"><fmt:message key="location.scroll" bundle="${lang}"/></a>
 
 <%--<%@include file="../includes/loginload.jsp" %>--%>
-<%@include file="../signupmodal.jsp" %>
+<%@include file="../includes/signupmodal.jsp" %>
 </body>
 </html>

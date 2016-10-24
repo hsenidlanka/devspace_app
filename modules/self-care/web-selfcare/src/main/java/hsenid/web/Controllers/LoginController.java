@@ -1,7 +1,7 @@
-package hsenid.web;
+package hsenid.web.Controllers;
 
-import hsenid.web.bindclasses.BooleanResponse;
-import hsenid.web.bindclasses.ReplyFromServer;
+import hsenid.web.models.BooleanResponse;
+import hsenid.web.models.ReplyFromServer;
 import hsenid.web.supportclasses.SendStringBuilds;
 import org.codehaus.jettison.json.JSONException;
 import org.json.simple.JSONObject;
@@ -69,10 +69,11 @@ public class LoginController {
            ReplyFromServer replyFromServer = restTemplate.postForObject(loginUrl, jsonObjectHttpEntity, ReplyFromServer.class);
 
        } catch (RestClientException e) {
+
            String msg = e.getMessage().trim();
            String[] splited = msg.split("\\s+");
-           if (splited[0].equals("403")){
 
+           if (splited[0].equals("403")){
                logger.error("Blocked Username={} Entered", username);
                return new BooleanResponse(false);
 

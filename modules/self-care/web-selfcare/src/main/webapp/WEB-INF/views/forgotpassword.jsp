@@ -79,7 +79,7 @@
     </div>
 </center>
 <%@include file="includes/loginload.jsp" %>
-<%@include file="signupmodal.jsp" %>
+<%@include file="includes/signupmodal.jsp" %>
 
 
 </body>

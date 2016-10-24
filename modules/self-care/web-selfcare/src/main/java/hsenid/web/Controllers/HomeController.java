@@ -1,11 +1,14 @@
-package hsenid.web;
+package hsenid.web.Controllers;
 
+import hsenid.web.models.ContactUs;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @PropertySource("classpath:config.properties")
@@ -39,9 +42,15 @@ public class HomeController {
         return "/home/createfeedback";
     }
 
-    @RequestMapping("/contactus")
-    public String contactus() {
-        return "/home/contactus";
+    @RequestMapping(value = "/contactus", method = RequestMethod.GET)
+    public ModelAndView contactus() {
+        return new ModelAndView("/home/contactus", "contactus", new ContactUs());
+    }
+
+    @RequestMapping(value = "/sendContactus", method = RequestMethod.POST)
+    public ModelAndView sendContactus(){
+
+        return new ModelAndView();
     }
 
     @RequestMapping("/aboutus")

@@ -1,4 +1,4 @@
-package hsenid.web.bindclasses;
+package hsenid.web.models;
 
 /**
  * Created by hsenid on 10/17/16.

@@ -1,3 +1,4 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +10,7 @@
     <script src="<c:url value="/resources/js/contactus_validate.js"/>" ></script>
     <script src="<c:url value="/resources/js/loader.js"/>" ></script>
     <script src="<c:url value="/resources/js/validate-inputs.js"/>" ></script>
-    <script src="<c:url value="/resources/js/contactus.js"/>" type="text/javascript"></script>
+    <%--<script src="<c:url value="/resources/js/contactus.js"/>" type="text/javascript"></script>--%>
 
 </head>
 <div class="loader-anim"></div>
@@ -45,83 +46,87 @@
                     <p style="font-size: xx-large;text-align: left"><fmt:message key="contactus" bundle="${lang}"/></p>
                 </div>
                 <div class="panel-body">
-                    <form role="form" id="contactus_form" action="" method="post" class="form-horizontal">
+                    <form:form id="contactus_form" action="sendContactus" method="post" modelAttribute="contactus" cssClass="form-horizontal">
 
                         <div class="form-group">
 
-                            <label class="col-sm-4 control-label">
+                            <form:label cssClass="col-sm-4 control-label" path="inquiryType" for="typeOfRespond">
                                 <fmt:message key="contactus.inquiry" bundle="${lang}"/>
-                            </label>
+                            </form:label>
 
                             <div class="col-sm-2">
                                 <div class="dropdown">
 
-                                    <select class="form-control" required>
-                                        <option value="complaint"><fmt:message key="contactus.select.type" bundle="${lang}"/></option>
-                                        <option value="complaint"><fmt:message key="contactus.complaint" bundle="${lang}"/></option>
-                                        <option value="suggestion"><fmt:message key="contactus.suggestion" bundle="${lang}"/></option>
-                                        <option value="clarify"><fmt:message key="contactus.clarification" bundle="${lang}"/></option>
-                                        <option value="other"><fmt:message key="contactus.other" bundle="${lang}"/></option>
-                                    </select>
+                                    <form:select cssClass="form-control" path="inquiryType">
+
+                                        <form:option value="complaint"><fmt:message key="contactus.complaint" bundle="${lang}"/></form:option>
+                                        <form:option value="suggestion"><fmt:message key="contactus.suggestion" bundle="${lang}"/></form:option>
+                                        <form:option value="clarify"><fmt:message key="contactus.clarification" bundle="${lang}"/></form:option>
+                                        <form:option value="other"><fmt:message key="contactus.other" bundle="${lang}"/></form:option>
+
+                                    </form:select>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
 
-                            <label class="col-sm-4 control-label ">
+                            <form:label cssClass="col-sm-4 control-label " path="title" for="title">
                                 Your Name
-                            </label>
+                            </form:label>
 
                             <div class="dropdown col-sm-2">
 
-                                <select class="form-control" required>
-                                    <option value="mr"><fmt:message key="signup.mr" bundle="${lang}"/></option>
-                                    <option value="mrs"><fmt:message key="signup.mrs" bundle="${lang}"/></option>
-                                    <option value="miss"><fmt:message key="signup.miss" bundle="${lang}"/></option>
-
-                                </select>
+                                <form:select class="form-control" path="title">
+                                    <form:option value="mr"><fmt:message key="signup.mr" bundle="${lang}"/></form:option>
+                                    <form:option value="mrs"><fmt:message key="signup.mrs" bundle="${lang}"/></form:option>
+                                    <form:option value="miss"><fmt:message key="signup.miss" bundle="${lang}"/></form:option>
+                                    <form:option value="miss"><fmt:message key="signup.dr" bundle="${lang}"/></form:option>
+                                    <form:option value="miss"><fmt:message key="signup.rev" bundle="${lang}"/></form:option>
+                                    "<fmt:message key="contactus.yourn" bundle="${lang}"/>"
+                                </form:select>
                             </div>
+                            <spring:message code="contactus.yourn" var="yourName"/>
                             <div class="col-sm-4 row">
-                                <input class="form-control" id="txt-fname" type="text" placeholder="<fmt:message key="contactus.yourn" bundle="${lang}"/>" required>
+                                <form:input path="name" cssClass="form-control" id="txt-fname" type="text" placeholder="${yourName}" />
                                 <label id="fname_error" class="error-labels"></label>
 
                             </div>
                         </div>
+
                         <div class="form-group">
 
-                            <label class="col-sm-4 control-label">
-                                <fmt:message key="signup.email" bundle="${lang}"/> </label>
+                            <form:label cssClass="col-sm-4 control-label" path="sss">
+                                <fmt:message key="signup.email" bundle="${lang}"/> </form:label>
 
                             <div class="col-sm-6">
 
-                                <input class="form-control" id="txt-email" type="text" placeholder="example@domain.com"
-                                       required>
+                                <form:input cssClass="form-control" id="txt-email" type="text" placeholder="example@domain.com" path="email" />
                                 <label id="email_error" class="error-labels"></label>
 
                             </div>
                         </div>
                         <div class="form-group">
 
-                            <label class="col-sm-4 control-label">
-                                <fmt:message key="signup.phone" bundle="${lang}"/></label>
+                            <form:label cssClass="col-sm-4 control-label" path="">
+                                <fmt:message key="signup.phone" bundle="${lang}"/></form:label>
 
                             <div class="col-sm-6">
 
-                                <input class="form-control" id="txt-contactno" type="text" placeholder="+94-XXXXXXXXXX"
-                                       required>
+                                <form:input cssClass="form-control" id="txt-contactno" type="text" placeholder="+94-XXXXXXXXXX" path="contactNo" />
                                 <label id="contactno_error" class="error-labels"></label>
 
                             </div>
                         </div>
                         <div class="form-group">
 
-                            <label class="col-sm-4 control-label">
-                                <fmt:message key="contactus.message" bundle="${lang}"/></label>
+                            <form:label cssClass="col-sm-4 control-label" path="msg">
+                                <fmt:message key="contactus.message" bundle="${lang}"/></form:label>
 
                             <div class="col-sm-6">
+                                <spring:message code="contactus.your.inquiry" var="EnterMsg"/>
 
-                                <textarea class="form-control" id="txt-inquirymsg" type="text"
-                                          placeholder="<fmt:message key="contactus.your.inquiry" bundle="${lang}"/>" required></textarea>
+                                <form:textarea path="msg" cssClass="form-control" id="txt-inquirymsg" type="text"
+                                          placeholder="${EnterMsg}" />
                                 <label id="inquirymsg_error" class="error-labels"></label>
 
                             </div>
@@ -136,7 +141,7 @@
                         </div>
 
 
-                    </form>
+                    </form:form>
 
                 </div>
 

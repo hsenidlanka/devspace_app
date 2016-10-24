@@ -1,4 +1,4 @@
-package hsenid.web.bindclasses;
+package hsenid.web.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
