@@ -11,6 +11,15 @@ import java.util.Map;
 public class ReturnTypeResolver {
     private List<Map<String, Object>> selectedItem;
     private  List<Item> selectedSize;
+    private int row;
+
+    public int getRow() {
+        return row;
+    }
+
+    public void setRow(int row) {
+        this.row = row;
+    }
 
     public List<Map<String, Object>> getSelectedItem() {
         return selectedItem;
