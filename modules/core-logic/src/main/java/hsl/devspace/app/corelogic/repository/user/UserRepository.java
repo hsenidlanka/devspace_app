@@ -4,6 +4,7 @@ import hsl.devspace.app.corelogic.domain.User;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.TransientDataAccessResourceException;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.SQLType;
@@ -44,6 +45,8 @@ public interface UserRepository {
     int addStaffMember(User user);
     int deleteStaff(String username);
     int updateStaffMember(User user);
+    List<User> selectbyEndingDate(Date date);
+    List<User> selectbyStartingDate(Date date);
 
 
 
