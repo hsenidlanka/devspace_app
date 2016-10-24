@@ -14,7 +14,6 @@
       <ul class="nav navbar-nav navbar-right">
         <li><a href="menu"><fmt:message key="new.header.menu" bundle="${lang}"/></a></li>
         <li><a href="locations"><fmt:message key="new.header.location" bundle="${lang}"/></a></li>
-        <li><a href="createfeedback"><fmt:message key="new.header.feedback" bundle="${lang}"/></a></li>
         <li><a href="contactus"><fmt:message key="new.header.contact" bundle="${lang}"/></a></li>
         <li><a href="aboutus"><fmt:message key="new.header.about" bundle="${lang}"/></a></li>
         <li>

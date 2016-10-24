@@ -462,7 +462,7 @@ CREATE TABLE `size` (
   `size` varchar(10) NOT NULL,
   `price` decimal(10,2) NOT NULL,
   `item_id` int(10) NOT NULL,
-  PRIMARY KEY (`size`,`price`),
+  PRIMARY KEY (`size`,`item_id`),
   KEY `fk_size_1_idx` (`item_id`),
   CONSTRAINT `fk_size_1` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
