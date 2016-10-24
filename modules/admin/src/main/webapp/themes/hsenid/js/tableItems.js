@@ -105,11 +105,12 @@ window.operateEvents = {
 
                 if(data == 1){
 
-                  $("#txtEditName").val(objct["item_name"]);
-                  $("#selectCatedt").val(objct["category_name"]);
-                  setSubCats(objct["category_name"]);
-                    $("input:radio[name='optEditType'][value='"+ objct["type"] +"']").prop('checked', true);
+                  $("#txtEditName").val(objct["item_name"]); // set item_name field
+                  $("#selectCatedt").val(objct["category_name"]); // set category_name as selected
+                  setSubCats(objct["category_name"]); // set sub-category name
+                  $(":radio[value='"+ objct["type"] +"']").prop('checked', true); // set item_type as checked
 
+                    setPriceSize(itemId);
                   $('#itemEditModal').modal('show');
                 }
             },

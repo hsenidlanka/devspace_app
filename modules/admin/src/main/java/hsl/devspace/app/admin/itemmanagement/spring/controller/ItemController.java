@@ -112,7 +112,6 @@ public class ItemController {
         modelView.setViewName("/item_management/viewItem");
 
         return modelView;
-       // return new ModelAndView("/item_management/viewItem","command", new Item());
     }
 
     //to view the item table
@@ -122,7 +121,6 @@ public class ItemController {
     List<Map<String, Object>> viewItem() {
         return item.viewAllItemDetails();
     }
-
 
     /**
      * Edit Item view
@@ -157,14 +155,6 @@ public class ItemController {
         LOGGER.info("deleted Item from database " + itemName);
         return item.deleteItem(itemName);
     }
-
-   /* //controller method to get category list to to edit form
-    @RequestMapping(value = "/getCatlist", method = RequestMethod.POST)
-    public List<String> getCatList(){
-
-        return item.getAllCategories();
-
-    }*/
 
     //controller method to load relevant subcategory
     @RequestMapping(value = "/getSubcats", method = RequestMethod.POST)
