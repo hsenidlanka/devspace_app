@@ -15,7 +15,6 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 import javax.sql.DataSource;
 import java.sql.Date;
 import java.sql.SQLException;
-import java.sql.SQLType;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -355,8 +354,8 @@ public class StaffRepositoryImpl implements UserRepository {
 
     /*retrieve details of staff members filtered by a given attribute*/
     @Override
-    public List<User> filter(SQLType column, String filterValue) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE ? = ?", column, filterValue);
+    public List<User> filterByCity(String city) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE address_line3 = ?",city);
         List<User> staffDetails = new ArrayList<User>();
 
         for (int i = 0; i < mp.size(); i++) {

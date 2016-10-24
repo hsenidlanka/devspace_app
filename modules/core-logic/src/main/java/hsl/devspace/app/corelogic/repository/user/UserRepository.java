@@ -7,7 +7,6 @@ import org.springframework.dao.TransientDataAccessResourceException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
-import java.sql.SQLType;
 import java.util.List;
 
 /**
@@ -37,7 +36,7 @@ public interface UserRepository {
     public int updateGroupStaff(String des,String username);
     List<User> retrieveCustomersByDate(java.sql.Date date);
     List<User> retrieveByDateRange(java.sql.Date date1,java.sql.Date date2);
-    List<User>filter(SQLType column,String filterValue);
+    List<User>filterByCity(String city);
     int countUsers();
     boolean checkUsernameUnique(User user);
     List<User> selectActiveUsers();

@@ -4,7 +4,6 @@ import hsl.devspace.app.corelogic.domain.User;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
 import java.util.List;
@@ -66,11 +65,6 @@ public class GuestRepositoryImpl  {
         return result;
     }
 
-    /*add a new guest user*/
-    @Transactional
-    public void addGuest(User user){
-        add(user);
-    }
 
 
 
