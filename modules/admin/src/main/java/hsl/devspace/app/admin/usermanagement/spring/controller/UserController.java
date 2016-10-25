@@ -109,7 +109,10 @@ public class UserController {
 
     //handler method to retrieve the details of a particular staff user
     @RequestMapping(value = "/view/staffTable", method = RequestMethod.GET)
-    public @ResponseBody  List<Map<String, Object>> viewStaff(@ModelAttribute("newUser")  User staffUser){
+    public @ResponseBody  List<Map<String, Object>> viewStaff(@ModelAttribute("newUser")  User staffUser
+                                                     ){
+
+
         List<Map<String, Object>> out = new ArrayList<Map<String, Object>>();
         List<User> staffList = staffRepository.selectActiveUsers();
 
@@ -135,6 +138,9 @@ public class UserController {
     //handler method to retrieve the details of a particular customer user
     @RequestMapping(value = "/view/customerTable", method = RequestMethod.GET)
     public @ResponseBody List<Map<String, Object>> viewCustomer(@ModelAttribute("newUser")  User customerUser){
+
+
+
         List<Map<String, Object>> outc = new ArrayList<Map<String, Object>>();
         List<User> customerList= customerRepository.selectActiveUsers();
 

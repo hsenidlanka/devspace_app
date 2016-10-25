@@ -113,12 +113,16 @@ $(document).ready(function(){
             data: {"uname": uname},
             success: function(msg){
                 if(msg == 1){
-                    alert("Deleted the  user" + uname+" successfully!");
-                    $("#removeCustomerModal").modal('hide');
+
+                    $.toaster({priority: 'success', title: 'Success', message: 'Blocked the user successfully  '+uname});
+                    //$("#removeCustomerModal").modal('hide');
+                    setTimeout(function(){location.reload();}, 2000);
 
                 }else{
-                    alert("Error in deleting the user !");
-                    $("#removeCustomerModal").modal('hide');
+
+                    $.toaster({ priority : 'danger', title : 'Error', message : 'Cannot block the user ' +uname});
+                    //$("#removeCustomerModal").modal('hide');
+                    setTimeout(function(){location.reload();}, 2000);
                 }
 
             },

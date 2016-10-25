@@ -15,8 +15,8 @@ $(document).ready(function () {
 function showMe(){
 
     var regPeriod= document.getElementById("regPeriod");
-    var fname= document.getElementById("cname");
-    var city= document.getElementById("city");
+    var fname= document.getElementById("cnameSearch");
+    var city= document.getElementById("citySearch");
     var designation= document.getElementById("designation");
     var department= document.getElementById("department");
     var branch= document.getElementById("branch");
@@ -175,6 +175,43 @@ function passwordsEqual(fld1,fld2) {
 }
 
 
+ //ajax functions to filter the search results if an option is selected
+$(document).ready(function(){
+    $("#filterButton").click(function(){
+        var from = $('#fromDate').val();
+        var to=$('#toDate').val();
+        var name=$('#cnameSearch').val();
+        var city=$('#citySearch').val();
+
+        if((from == "") && (to == "") && (name == "") && (city == "--Select--")  ){
+            $.ajax({
+                //type: "POST",
+                url: "https://localhost:8443/admin/users/view/customerTable",
+                success: function (msg) {
+
+                    $('#tableCustomer').bootstrapTable('load', msg);
+                },
+                error: function () {
+                    alert("ajax failed" + uname);
+                }
+            });
+
+        }else{
+            $.ajax({
+                //type: "POST",
+                url: "https://localhost:8443/admin/userFilters/customerTable",
+                data: {"from": from, "to": to, "name":name, "city":city},
+                success: function (msg) {
+                    alert("ajax succ" + from +name +city);
+                    $('#tableCustomer').bootstrapTable('load', msg);
+                },
+                error: function () {
+                    alert("ajax failed" + uname);
+                }
+            });
+        }
+    });
+});
 
 
 /*

@@ -76,10 +76,10 @@
 
                     <div class="col-xs-4" style="width: 36%">
                         <div class="col-xs-8">
-                            <input class="form-control"  placeholder=" Name" type="text" id="cname"  >
+                            <input class="form-control"  placeholder=" Name" type="text" id="cnameSearch"  >
                         </div>
                         <div class="col-xs-1">
-                            <button type="button" class="btn btn-success" >
+                            <button type="button" class="btn btn-success" id="filterButton" >
                                 <span class="glyphicon glyphicon-search"></span>
                                 <fmt:message key="user.userview.customer.search" bundle="${bundle1}"/>
                             </button>
@@ -119,7 +119,8 @@
                     <!--name form-group-->
                     <div class="col-xs-4" style="width: 36%">
                         <div class="col-xs-8">
-                                <select class="form-control" id="city"  style="display: none;">
+                                <select class="form-control" id="citySearch"  style="display: none;">
+                                    <option><fmt:message key="user.customer.select" bundle="${bundle1}" /></option>
                                     <option><fmt:message key="user.customer.city1" bundle="${bundle1}" /></option>
                                     <option><fmt:message key="user.customer.city2" bundle="${bundle1}" /></option>
                                     <option><fmt:message key="user.customer.city3" bundle="${bundle1}" /></option>
@@ -161,6 +162,8 @@
                         <label id="lblBlockCustomerName"></label><br>
                     </div>
                 </div>
+                <div style="text-align: center; z-index: 50000; width: 75%; margin: auto;" id="toaster"></div>
+
             </div>
             <div class="modal-footer" align="right">
                 <button class="btn btn-success" type="button" value="Yes" id="btnBlockCustomer" >

@@ -209,18 +209,18 @@
                                 <div class="col-xs-6">
                                     <div class="col-xs-5">
                                         <%--<label class="control-label" id="staffDetail_title" ></label>--%>
-                                        <input class="form-control details" id="staffDetail_title" type="text"/>
+                                        <input class="form-control details" id="staffDetail_title" type="text" readonly/>
                                     </div>
                                     <div class="col-xs-7">
                                         <input class="form-control details" id="staffDetail_first-name" type="text"
-                                               style="width: 140px" />
+                                               style="width: 140px" readonly/>
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
                                         <%--<div class="col-xs-4"></div>--%>
                                     <div class="col-xs-12">
                                         <input  class="form-control details" id="staffDetail_last-name" type="text"
-                                                    style="width: 160px"/>
+                                                    style="width: 160px" readonly/>
                                     </div>
                                 </div>
                             </div>
@@ -235,7 +235,7 @@
                                 <div class="col-xs-12">
                                     <div class="col-xs-12">
                                         <input class="form-control details" id="staffDetail_addLine1" style="width:379px"
-                                               type="text" />
+                                               type="text" readonly />
                                     </div>
                                 </div>
                             </div>
@@ -249,7 +249,7 @@
                                 <div class="col-xs-12">
                                     <div class="col-xs-12">
                                         <input  class="form-control details" id="staffDetail_addLine2" type="text"
-                                                style="width: 379px" />
+                                                style="width: 379px" readonly/>
                                     </div>
                                 </div>
                             </div>
@@ -262,13 +262,13 @@
                             <div class="col-xs-9">
                                 <div class="col-xs-6">
                                     <div class="col-xs-12">
-                                        <input  class="form-control details" id="staffDetail_city"
-                                                type="text" style="width: 219px" />
+                                        <input  class="form-control details" id="staffDetail_city" type="text"
+                                                style="width: 219px" readonly/>
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
                                     <div class="col-xs-12">
-                                        <input  class="form-control details" id="province" type="text" />
+                                        <input  class="form-control details" id="province" type="text" readonly/>
                                     </div>
                                 </div>
                             </div>
@@ -283,7 +283,7 @@
                                 <div class="col-xs-6">
                                     <div class="col-xs-12">
                                         <input  class="form-control details" id="staffDetail_mobile" type="text"
-                                                style="width: 220px" />
+                                                style="width: 220px" readonly/>
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
@@ -302,7 +302,7 @@
                                 <div class="col-xs-6">
                                     <div class="col-xs-12">
                                         <input  class="form-control details" id="staffDetail_email" type="text"
-                                                    style="width: 220px" />
+                                                    style="width: 220px" readonly/>
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
@@ -322,7 +322,7 @@
                                 <div class="col-xs-6">
                                     <div class="col-xs-12">
                                         <input  class="form-control details" id="staffDetail_username" type="text"
-                                                    style="width: 220px" />
+                                                    style="width: 220px" readonly/>
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
@@ -342,7 +342,7 @@
                                 <div class="col-xs-6">
                                     <div class="col-xs-12">
                                         <input class="form-control details" id="staffDetail_designation" type="text"
-                                                    style="width: 220px" />
+                                                    style="width: 220px" readonly/>
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
@@ -360,8 +360,8 @@
                             <div class="col-xs-9">
                                 <div class="col-xs-6">
                                     <div class="col-xs-12">
-                                        <input class="form-control details" id="staffDetail_department"
-                                                    type="text" style="width: 220px" />
+                                        <input class="form-control details" id="staffDetail_department" type="text"
+                                               style="width: 220px" readonly/>
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
@@ -380,7 +380,7 @@
                                 <div class="col-xs-6">
                                     <div class="col-xs-12">
                                         <input class="form-control details" id="staffDetail_branch" type="text"
-                                                    style="width: 220px" />
+                                                    style="width: 220px" readonly/>
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
@@ -399,7 +399,7 @@
                                 <div class="col-xs-6">
                                     <div class="col-xs-12">
                                         <input class="form-control details" id="staffDetail_status" type="text"
-                                                style="width: 220px" />
+                                                style="width: 220px" readonly/>
                                     </div>
                                 </div>
                                 <div class="col-xs-6">

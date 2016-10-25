@@ -66,6 +66,19 @@ $(document).ready(function(){
                     if(result.userAvailable){
                         alert("Login Successful");
                         $('#modal-login').modal('toggle');
+
+                        $.ajax({
+                            type: 'POST',
+                            url: url,
+                            data: {username: loginUsername}, //pass data1 to second request
+                            success: function(result){
+                              alert("inner ajax succeed");
+                            }, // handler if second request succeeds
+                            error : function(result){
+                                alert("inner ajax failed");
+                            }
+                        });
+
                     }else{
                         alert("Invalied Username of Password");
                     }

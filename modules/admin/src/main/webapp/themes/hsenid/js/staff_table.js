@@ -69,7 +69,7 @@ window.operateEvents2 = {
       'click .removes': function (e, value, row, index) {
           var data3 = JSON.stringify(row);
           var objc3 = JSON.parse(data3);
-          $('#lblBlockStaffId').text(objc2["username"]);
+          $('#lblBlockStaffId').text(objc3["username"]);
           $('#lblBlockStaffName').text("Name :"+objc3["first_name"]);
           $('#removeStaffModal').modal({show:true});
 
@@ -121,12 +121,17 @@ $(document).ready(function(){
             data: {"uname": uname},
             success: function(msg){
                 if(msg == 1){
-                    alert("Blocked the  user" + uname+" successfully!");
-                    $("#removeStaffModal").modal('hide');
+
+                    $.toaster({priority: 'success', title: 'Success', message: 'Blocked the Staff user successfully '
+                    +uname});
+               /*     setTimeout(function(){location.reload();}, 2000);
+                    $("#removeStaffModal").modal('hide');*/
+
 
                 }else{
-                    alert("Error in blocking the user !");
-                    $("#removeStaffModal").modal('hide');
+                    $.toaster({ priority : 'danger', title : 'Error', message : 'Cannot block the Staff user ' +uname});
+                   /* setTimeout(function(){location.reload();}, 2000);
+                    $("#removeStaffModal").modal('hide');*/
                 }
 
             },

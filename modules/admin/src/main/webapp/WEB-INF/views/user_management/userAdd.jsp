@@ -22,13 +22,10 @@
 
   <spring:url value="/themes/hsenid/js/userMgt.js" var="js2"/>
   <!--include the jQuery toaster plugin's script-->
-  <spring:url value="/themes/hsenid/js/jquery.toaster.js" var="js3"/>
-  <spring:url value="/themes/hsenid/js/toaster.js" var="js4"/>
 
 
   <script src="${js2}"></script>
-  <script src="${js3}"></script>
-  <script src="${js4}"></script>
+
 
 <%--<spring:url value="/themes/hsenid/js/simpleToastMessage.js" var="js3"/>--%>
 
@@ -265,7 +262,8 @@
              <div class="form-group">
                  <div class="col-xs-12">
                  <fieldset class="scheduler-border" id="staffDetail">
-                   <legend class="scheduler-border" id="legendStaff"><fmt:message key="user.useradd.form.staff.legend.title"/>
+                   <legend class="scheduler-border" id="legendStaff"><fmt:message key="user.useradd.form.staff.legend.title"
+                                                                                  bundle="${bundle1}"/>
                    </legend>
                    <div class="row">
                      <label  class="col-xs-4 control-label" >

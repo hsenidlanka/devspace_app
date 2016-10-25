@@ -155,6 +155,8 @@
                         <label id="lblBlockStaffName"></label><br>
                     </div>
                 </div>
+                <div style="text-align: center; z-index: 50000; width: 75%; margin: auto;" id="toaster"></div>
+
             </div>
             <div class="modal-footer" align="right">
                 <button class="btn btn-success" type="button" value="Yes" id="btnBlockStaff">

@@ -17,8 +17,10 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -26,6 +28,7 @@ import javax.servlet.http.HttpServletRequest;
 * This class controls requests come for login and user registrations including ajax requests*/
 @Controller
 @PropertySource("classpath:config.properties")
+@SessionAttributes("username")
 public class LoginController {
 
 //    Defining logger
@@ -196,6 +199,26 @@ public class LoginController {
         logger.info(replyFromServer.getMessage());
 
         return uniqueUser;
+    }
+
+    @RequestMapping("sessionSetup")
+    @ResponseBody
+    public ReplyFromServer setupSession(HttpServletRequest request){
+//        String username = request.getParameter("username");
+        String username = "testre";
+
+        RestTemplate restTemplate = new RestTemplate();
+        String customerDetailUrl = SendStringBuilds.sendString(customerSearchUrl, username);
+
+        ReplyFromServer replyFromServer = null;
+        try {
+            replyFromServer = restTemplate.getForObject(customerDetailUrl, ReplyFromServer.class);
+            logger.info(replyFromServer.getMessage());
+        } catch (RestClientException e) {
+            logger.error("Reason for Exception -> {}", e.getMessage());
+        }
+
+        return replyFromServer;
     }
 
 

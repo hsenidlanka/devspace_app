@@ -124,6 +124,7 @@ function setSubCats(categoryNm) {
 
 }
 
+/*
 function setPriceSize(itemId){
     $.ajax({
         type:"POST",
@@ -138,4 +139,4 @@ function setPriceSize(itemId){
 
         }
     })
-}
+}*/

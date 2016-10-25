@@ -102,19 +102,18 @@ window.operateEvents = {
             url:"https://localhost:8443/admin/items/edit_item",
             data:{"itemId": itemId},
             success: function(data){
+                alert(data);
 
-                if(data == 1){
+                $("#txtEditName").val(objct["item_name"]); // set item_name field
+                $("#selectCatedt").val(objct["category_name"]); // set category_name as selected
+                setSubCats(objct["category_name"]); // set sub-category name
+                $(":radio[value='" + objct["type"] + "']").prop('checked', true); // set item_type as checked
 
-                  $("#txtEditName").val(objct["item_name"]); // set item_name field
-                  $("#selectCatedt").val(objct["category_name"]); // set category_name as selected
-                  setSubCats(objct["category_name"]); // set sub-category name
-                  $(":radio[value='"+ objct["type"] +"']").prop('checked', true); // set item_type as checked
-
-                    setPriceSize(itemId);
-                  $('#itemEditModal').modal('show');
-                }
+                /*setPriceSize(itemId);*/
+                $('#itemEditModal').modal('show');
             },
-            error:function(){
+            error:function(a,s,error){
+                alert(error);
              alert("error in edit item "+ e +' '+ itemId)
             }
         })
