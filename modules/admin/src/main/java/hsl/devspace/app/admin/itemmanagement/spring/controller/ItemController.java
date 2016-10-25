@@ -4,6 +4,7 @@ import hsl.devspace.app.corelogic.domain.Item;
 import hsl.devspace.app.corelogic.repository.category.CategoryRepository;
 import hsl.devspace.app.corelogic.repository.category.SubCategoryRepositoryImpl;
 import hsl.devspace.app.corelogic.repository.item.ItemRepository;
+import hsl.devspace.app.corelogic.repository.item.ReturnTypeResolver;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +16,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.swing.*;
 import java.sql.SQLIntegrityConstraintViolationException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping(value = "/items")
@@ -64,38 +62,39 @@ public class ItemController {
 
         List<Item> items = new ArrayList<Item>();
 
-            for(int s =0; s<sizelist.size(); s++){
+        for (int s = 0; s < sizelist.size(); s++) {
 
-              Item listItem = new Item();
-                    listItem.setSize(sizelist.get(s));
-                    listItem.setPrice(pricelist.get(s));
-                items.add(listItem);
-            }
+            Item listItem = new Item();
+            listItem.setSize(sizelist.get(s));
+            listItem.setPrice(pricelist.get(s));
+            items.add(listItem);
+        }
 
         boolean uniqueItemNm = item.checkAvailability(itemNm);
         if (!uniqueItemNm) {
             int a = item.addItem(newItem, items);
-            if (a != 1){
+            if (a != 1) {
                 JOptionPane.showMessageDialog(null, "Server-side error. Cannot add the item !", "Error !",
-                    JOptionPane.ERROR_MESSAGE);
-                LOGGER.error("Server-side error in adding item "+ itemNm);
-            }
-            else {
+                        JOptionPane.ERROR_MESSAGE);
+                LOGGER.error("Server-side error in adding item " + itemNm);
+            } else {
                 JOptionPane.showMessageDialog(null, "Added new item " + itemNm, "Success",
                         JOptionPane.INFORMATION_MESSAGE);
                 LOGGER.info("added New Item to database " + itemNm);
                 return new ModelAndView(new RedirectView("add"));
             }
-        } else{
+        } else {
             JOptionPane.showMessageDialog(null,
                     "Item name is already exists! " + itemNm, "Warning ",
                     JOptionPane.WARNING_MESSAGE);
 
-            newItem.setPrice(" ");  LOGGER.trace("after clear price"+ itemPrice );
-            newItem.setSize(" ");  LOGGER.trace("after clear size" + itemSize);
+            newItem.setPrice(" ");
+            LOGGER.trace("after clear price" + itemPrice);
+            newItem.setSize(" ");
+            LOGGER.trace("after clear size" + itemSize);
             return new ModelAndView("item_management/addItem", "command", newItem);
         }
-       return new ModelAndView(new RedirectView("add"));
+        return new ModelAndView(new RedirectView("add"));
     }
 
     /**
@@ -107,8 +106,8 @@ public class ItemController {
     public ModelAndView showItemView(ModelAndView modelView) {
 
         List<String> listCatEdit = categoryRepository.selectCategoryNames();
-        modelView.addObject("listCatEdit",listCatEdit);
-        modelView.addObject("command",new Item());
+        modelView.addObject("listCatEdit", listCatEdit);
+        modelView.addObject("command", new Item());
         modelView.setViewName("/item_management/viewItem");
 
         return modelView;
@@ -129,28 +128,47 @@ public class ItemController {
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public ModelAndView showEditItem() {
 
-        return new ModelAndView("item_management/editItem","command",new Item());
+        return new ModelAndView("item_management/editItem", "command", new Item());
     }
 
     // retrieving values of a selected item to edit form
     @RequestMapping(value = "/edit_item", method = RequestMethod.POST)
-    public @ResponseBody int retieveEditItem(@RequestParam("itemId") int itemId) {
+    public
+    @ResponseBody
+    List<String> retieveEditItem(@RequestParam("itemId") int itemId) {
 
-        int e = item.selectItemAndSize(itemId);
+       /* int e = item.selectItemAndSize(itemId);
         LOGGER.info("itemId for edit " + itemId + ' ' + "e for edit "+e);
-        return e;
+        return e;*/
+
+        ReturnTypeResolver e = item.selectItemAndSize(itemId);
+        List<Item> lst = e.getSelectedSize();
+       // Map<String, String> map=new HashMap<String, String>();
+       // List<Map<String, Object>> = new
+        List<String> sp = new ArrayList<String>();
+
+        for (int i = 0; i < lst.size(); i++) {
+            Item it=lst.get(i);
+
+            sp.add(it.getSize());
+            sp.add(it.getPrice());
+        }
+        LOGGER.info("itemId for edit " + itemId + ' ' + "e for edit " + e+ "  and sp = " + sp);
+        return sp;
     }
 
     /**
      * Delete Item view
      */
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public ModelAndView showDeleteItem(){
-        return  new ModelAndView("itemDelete", "deleteItem", new Item());
+    public ModelAndView showDeleteItem() {
+        return new ModelAndView("itemDelete", "deleteItem", new Item());
     }
 
     @RequestMapping(value = "/delete_item", method = RequestMethod.POST)
-    public @ResponseBody int deleteItem(@RequestParam("itemName") String itemName) throws SQLIntegrityConstraintViolationException {
+    public
+    @ResponseBody
+    int deleteItem(@RequestParam("itemName") String itemName) throws SQLIntegrityConstraintViolationException {
 
         LOGGER.info("deleted Item from database " + itemName);
         return item.deleteItem(itemName);
@@ -167,9 +185,14 @@ public class ItemController {
 
     //controller method to get size and price of selected item
     @RequestMapping(value = "/getPriceSize", method = RequestMethod.POST)
-    public @ResponseBody int getPriceSize(@RequestParam("itemId") int itemId){
+    public
+    @ResponseBody
+    ReturnTypeResolver getPriceSize(@RequestParam("itemId") int itemId) {
 
-        LOGGER.trace("itemId for price"+ itemId);
+       /* LOGGER.trace("itemId for price"+ itemId);
+        return item.selectItemAndSize(itemId);*/
+
+        LOGGER.trace("itemId for price" + itemId);
         return item.selectItemAndSize(itemId);
     }
 
