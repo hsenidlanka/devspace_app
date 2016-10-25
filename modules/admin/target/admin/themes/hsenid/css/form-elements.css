@@ -1,0 +1,42 @@
+.form-horizontal .control-label, .control-label{
+
+    /*vertical-align:middle;*/
+    /*text-align: left;*/
+}
+
+.form-group{
+    padding-bottom: 0px;
+    padding-top:1px ;
+}
+
+
+.nav-pills > li.active > a, .nav-pills > li.active > a:focus  {
+    color: #0d630d;
+    background-color: #dff0d8;
+    text-decoration: underline;
+    height: 40px;
+}
+.nav-pills > li.active > a:hover{
+    color: #0d630d;
+    background-color: rgba(69, 141, 19, 0);
+    height: 40px;
+
+}
+
+.nav > li > a {
+    font-size: large;
+    font-weight: 700;
+    color: #0d630d;
+}
+button.btn {
+    vertical-align: middle;
+    background-color: rgb(36, 90, 3);
+    font-weight: bold;
+    color: #e7ce98;
+}
+
+button.btn:hover { opacity: 0.6; color: #fff; }
+
+.checkbox-inline, .radio-inline {
+    padding-left: 17.8px;
+}
