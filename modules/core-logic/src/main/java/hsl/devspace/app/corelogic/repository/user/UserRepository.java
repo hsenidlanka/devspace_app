@@ -49,6 +49,8 @@ public interface UserRepository {
     List<User> filterByDepartment(String department);
     List<User> filterByDesignation(String designation);
     List<User> filterByBranch(String branch);
+    List<User>filterBlockedUsersByCity(String city);
+
 
 
 }

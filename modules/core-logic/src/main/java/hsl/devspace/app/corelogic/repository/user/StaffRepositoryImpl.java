@@ -355,7 +355,7 @@ public class StaffRepositoryImpl implements UserRepository {
     /*retrieve details of staff members filtered by a given attribute*/
     @Override
     public List<User> filterByCity(String city) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE address_line3 = ?",city);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE address_line3 = ? AND status='active'",city);
         List<User> staffDetails = new ArrayList<User>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -561,7 +561,7 @@ public class StaffRepositoryImpl implements UserRepository {
     }
 
     public List<User> selectbyStartingDate(Date date){
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE register_date >= ?", date);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE register_date >= ? AND status=1", date);
         List<User> staffDetails = new ArrayList<User>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -593,7 +593,7 @@ public class StaffRepositoryImpl implements UserRepository {
 
     }
     public List<User> selectbyEndingDate(Date date){
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE register_date <= ?", date);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE register_date <= ? AND status=1", date);
         List<User> staffDetails = new ArrayList<User>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -626,7 +626,7 @@ public class StaffRepositoryImpl implements UserRepository {
     }
 
     public List<User> filterByDesignation(String designation){
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE designation = ?",designation);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE designation = ? AND status=1",designation);
         List<User> staffDetails = new ArrayList<User>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -659,7 +659,7 @@ public class StaffRepositoryImpl implements UserRepository {
     }
 
     public List<User> filterByDepartment(String department){
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE department = ?",department);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE department = ? AND status=1",department);
         List<User> staffDetails = new ArrayList<User>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -691,7 +691,7 @@ public class StaffRepositoryImpl implements UserRepository {
 
     }
     public List<User> filterByBranch(String branch){
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE branch = ?",branch);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE branch = ? AND status=1",branch);
         List<User> staffDetails = new ArrayList<User>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -723,6 +723,38 @@ public class StaffRepositoryImpl implements UserRepository {
 
     }
 
+    @Override
+    public List<User> filterBlockedUsersByCity(String city) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE address_line3 = ? AND status=2",city);
+        List<User> staffDetails = new ArrayList<User>();
+
+        for (int i = 0; i < mp.size(); i++) {
+            User staff = new User();
+            staff.setId(Integer.parseInt(mp.get(i).get("id").toString()));
+            staff.setTitle(mp.get(i).get("title").toString());
+            staff.setUsername(mp.get(i).get("username").toString());
+            staff.setPassword(mp.get(i).get("password").toString());
+            staff.setFirstName(mp.get(i).get("first_name").toString());
+            staff.setLastName(mp.get(i).get("last_name").toString());
+            staff.setEmail(mp.get(i).get("email").toString());
+            staff.setMobile(mp.get(i).get("mobile").toString());
+            staff.setAddressL1(mp.get(i).get("address_line1").toString());
+            staff.setAddressL2(mp.get(i).get("address_line2").toString());
+            if (mp.get(i).get("address_line3") != null) {
+                staff.setAddressL3(mp.get(i).get("address_line3").toString());
+            }
+            staff.setDesignation(mp.get(i).get("designation").toString());
+            staff.setDepartment(mp.get(i).get("department").toString());
+            staff.setBranch(mp.get(i).get("branch").toString());
+            staff.setRegDate(Date.valueOf(mp.get(i).get("register_date").toString()));
+            staff.setStatus(mp.get(i).get("status").toString());
+            staffDetails.add(staff);
+
+
+        }
+        log.info("{}", staffDetails);
+        return staffDetails;
+    }
 
 
 }
