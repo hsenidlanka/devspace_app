@@ -247,9 +247,9 @@ public class ItemRepositoryImpl implements ItemRepository {
 
     /**retrieve sizes of a item  by item id*/
     @Override
-    public List<Map<String, Object>> retrieveSelectedItemSizes(int id) {
+    public List<Item> retrieveSelectedItemSizes(int id) {
         List<Map<String, Object>> size=jdbcTemplate.queryForList("SELECT size,price FROM size WHERE item_id=?",id);
-       /* List<Item> items=new ArrayList<Item>();
+        List<Item> items=new ArrayList<Item>();
         for (int k=0;k<size.size();k++){
             log.info("{}",size.get(k));
             Item item=new Item();
@@ -258,8 +258,7 @@ public class ItemRepositoryImpl implements ItemRepository {
             items.add(item);
         }
         log.info("**ITEMS{}",items);
-        return items;*/
-        return size;
+        return items;
     }
 
     /**retrieve selected data from item and size*/
@@ -271,7 +270,7 @@ public class ItemRepositoryImpl implements ItemRepository {
         ReturnTypeResolver rv=new ReturnTypeResolver();
         try {
             List<Map<String, Object>> selectedItem=retrieveSelectedItemDetails(id);
-            List<Map<String, Object>> selectedSize=retrieveSelectedItemSizes(id);
+            List<Item> selectedSize=retrieveSelectedItemSizes(id);
             transactionManager.commit(stat);
             rv.setSelectedItem(selectedItem);
             rv.setSelectedSize(selectedSize);
@@ -300,6 +299,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 
     }
 
+    /**select all available category names*/
     @Override
     public List<String> getAllCategories() {
         List<Map<String,Object>> mp=jdbcTemplate.queryForList("SELECT name FROM category");

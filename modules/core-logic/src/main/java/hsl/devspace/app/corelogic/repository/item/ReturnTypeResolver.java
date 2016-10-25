@@ -1,5 +1,7 @@
 package hsl.devspace.app.corelogic.repository.item;
 
+import hsl.devspace.app.corelogic.domain.Item;
+
 import java.util.List;
 import java.util.Map;
 
@@ -8,7 +10,7 @@ import java.util.Map;
  */
 public class ReturnTypeResolver {
     private List<Map<String, Object>> selectedItem;
-    private  List<Map<String, Object>>selectedSize;
+    private  List<Item> selectedSize;
     private int row;
 
     public int getRow() {
@@ -27,11 +29,11 @@ public class ReturnTypeResolver {
         this.selectedItem = selectedItem;
     }
 
-    public List<Map<String, Object>> getSelectedSize() {
+    public List<Item> getSelectedSize() {
         return selectedSize;
     }
 
-    public void setSelectedSize(List<Map<String, Object>> selectedSize) {
+    public void setSelectedSize(List<Item> selectedSize) {
         this.selectedSize = selectedSize;
     }
 }
