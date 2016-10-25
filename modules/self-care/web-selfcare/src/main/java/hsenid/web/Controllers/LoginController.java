@@ -94,6 +94,7 @@ public class LoginController {
    }
 
 //  check given user credentials are valid or not
+//  if valide set session and sent it.
     @RequestMapping(value = "/login")
     @ResponseBody
     public BooleanResponse login(HttpSession session,HttpServletRequest request){
@@ -215,34 +216,5 @@ public class LoginController {
 
         return uniqueUser;
     }
-
-  /*  @RequestMapping(value = "sessionSetup", method = RequestMethod.GET)
-    @ResponseBody
-    public ModelAndView setupSession(HttpServletRequest request){
-//        String username = request.getParameter("username");
-        String username = "testre";
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("/home/aboutus");
-        RestTemplate restTemplate = new RestTemplate();
-        String customerDetailUrl = SendStringBuilds.sendString(customerSearchUrl, username);
-
-        ReplyFromServer replyFromServer = null;
-        try {
-            replyFromServer = restTemplate.getForObject(customerDetailUrl, ReplyFromServer.class);
-            String name = SendStringBuilds.sendString(replyFromServer.getData().get(0).getFirstName(), " ", replyFromServer.getData().get(0).getLastName());
-
-            modelAndView.addObject("username", replyFromServer.getData().get(0).getUsername());
-            modelAndView.addObject("name", name);
-            modelAndView.addObject("email", replyFromServer.getData().get(0).getEmail());
-
-            return modelAndView;
-        } catch (RestClientException e) {
-            logger.error("Reason for Exception -> {}", e.getMessage());
-        }
-
-        return modelAndView;
-    }
-*/
-
 
 }

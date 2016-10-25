@@ -65,21 +65,6 @@ $(document).ready(function(){
                 success: function (result) {
                     if(result.userAvailable){
                         window.location = "/web-selfcare/";
-                       /* alert("Login Successful");
-                        $('#modal-login').modal('toggle');
-
-                        $.ajax({
-                            type: 'POST',
-                            url: url,
-                            data: {username: loginUsername}, //pass data1 to second request
-                            success: function(result){
-                              alert("inner ajax succeed");
-                            }, // handler if second request succeeds
-                            error : function(result){
-                                alert("inner ajax failed");
-                            }
-                        });*/
-
                     }else{
                         alert("Invalied Username of Password");
                     }
