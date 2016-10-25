@@ -2,6 +2,7 @@ package hsenid.web.Controllers;
 
 import hsenid.web.models.BooleanResponse;
 import hsenid.web.models.ReplyFromServer;
+import hsenid.web.models.UserData;
 import hsenid.web.supportclasses.SendStringBuilds;
 import org.codehaus.jettison.json.JSONException;
 import org.json.simple.JSONObject;
@@ -23,13 +24,17 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.List;
+import java.util.Map;
 
 /*
 * This class controls requests come for login and user registrations including ajax requests*/
 @Controller
 @PropertySource("classpath:config.properties")
-@SessionAttributes("username")
+@SessionAttributes({"username", "name", "email"})
 public class LoginController {
+    static String email;
 
 //    Defining logger
     final static Logger logger = LoggerFactory.getLogger(LoginController.class);
@@ -91,7 +96,7 @@ public class LoginController {
 //  check given user credentials are valid or not
     @RequestMapping(value = "/login")
     @ResponseBody
-    public BooleanResponse login(HttpServletRequest request){
+    public BooleanResponse login(HttpSession session,HttpServletRequest request){
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
@@ -107,11 +112,21 @@ public class LoginController {
         ReplyFromServer replyFromServer = null;
         try {
             replyFromServer = restTemplate.postForObject(loginUrl, jsonObjectHttpEntity, ReplyFromServer.class);
+            if(replyFromServer.getStatus().equals("success")){
+                RestTemplate restTemplate1 = new RestTemplate();
+                String userDataUrl = replyFromServer.getLinks().get(1).getLink();
+                logger.info(userDataUrl);
+                ReplyFromServer replyFromServer1 = restTemplate1.getForObject(userDataUrl, ReplyFromServer.class);
+                email = replyFromServer1.getData().get(0).getEmail();
+            }
+            logger.info(replyFromServer.getData().get(0).getEmail());
         } catch (RestClientException e) {
             logger.error(e.getMessage());
             return new BooleanResponse(false);
         }
-//        logger.info(replyFromServer.getMessage());
+
+        session.setAttribute("username", username);
+        session.setAttribute("email", email);
         return new BooleanResponse(true);
     }
 
@@ -171,8 +186,8 @@ public class LoginController {
 
 //    check whether chosen user is already in the system
     @RequestMapping(value = "/UniqueUser", method = RequestMethod.GET)
-    public @ResponseBody
-    BooleanResponse uniqueUsername(HttpServletRequest request){
+    @ResponseBody
+    public BooleanResponse uniqueUsername(HttpServletRequest request){
 
         String checkName = request.getParameter("checkName");
         logger.info("unique user started");
@@ -201,26 +216,33 @@ public class LoginController {
         return uniqueUser;
     }
 
-    @RequestMapping("sessionSetup")
+  /*  @RequestMapping(value = "sessionSetup", method = RequestMethod.GET)
     @ResponseBody
-    public ReplyFromServer setupSession(HttpServletRequest request){
+    public ModelAndView setupSession(HttpServletRequest request){
 //        String username = request.getParameter("username");
         String username = "testre";
-
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("/home/aboutus");
         RestTemplate restTemplate = new RestTemplate();
         String customerDetailUrl = SendStringBuilds.sendString(customerSearchUrl, username);
 
         ReplyFromServer replyFromServer = null;
         try {
             replyFromServer = restTemplate.getForObject(customerDetailUrl, ReplyFromServer.class);
-            logger.info(replyFromServer.getMessage());
+            String name = SendStringBuilds.sendString(replyFromServer.getData().get(0).getFirstName(), " ", replyFromServer.getData().get(0).getLastName());
+
+            modelAndView.addObject("username", replyFromServer.getData().get(0).getUsername());
+            modelAndView.addObject("name", name);
+            modelAndView.addObject("email", replyFromServer.getData().get(0).getEmail());
+
+            return modelAndView;
         } catch (RestClientException e) {
             logger.error("Reason for Exception -> {}", e.getMessage());
         }
 
-        return replyFromServer;
+        return modelAndView;
     }
-
+*/
 
 
 }

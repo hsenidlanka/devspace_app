@@ -64,7 +64,8 @@ $(document).ready(function(){
                 data: {username:loginUsername, password:loginPassword},
                 success: function (result) {
                     if(result.userAvailable){
-                        alert("Login Successful");
+                        window.location = "/web-selfcare/";
+                       /* alert("Login Successful");
                         $('#modal-login').modal('toggle');
 
                         $.ajax({
@@ -77,7 +78,7 @@ $(document).ready(function(){
                             error : function(result){
                                 alert("inner ajax failed");
                             }
-                        });
+                        });*/
 
                     }else{
                         alert("Invalied Username of Password");

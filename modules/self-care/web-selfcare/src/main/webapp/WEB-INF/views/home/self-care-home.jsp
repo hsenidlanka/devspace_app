@@ -41,8 +41,8 @@
 
 <%@include file="../includes/NewHeader.jsp" %>
 
-<p id="ajaccall"></p>
-
+<c:out value="${username}"></c:out>
+<c:out value="${email}"></c:out>
 
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->

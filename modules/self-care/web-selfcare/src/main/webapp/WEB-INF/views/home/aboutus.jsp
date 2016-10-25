@@ -7,7 +7,7 @@
 </head>
 <body style="overflow: visible">
 <%@include file="../includes/NewHeader.jsp" %>
-
+<%--<c:out value="${username}"></c:out>--%>
 <div class="loader-anim"></div>
 <div class="col-sm-12"></div>
 
@@ -24,6 +24,7 @@
                 </div>
                 <div class="panel-body">
                     <form role="form" id="adduser_form" action="" method="post" class="form-horizontal">
+
                         <p style="font-size: x-large">
                             <fmt:message key="aboutus.content" bundle="${lang}"/>
                         </p>
