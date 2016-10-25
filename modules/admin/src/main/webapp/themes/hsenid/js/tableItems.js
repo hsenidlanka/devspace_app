@@ -98,6 +98,7 @@ window.operateEvents = {
 
         var itemId = objct["id"];
         $.ajax({
+            dataType:"JSON",
             type:"POST",
             url:"https://localhost:8443/admin/items/edit_item",
             data:{"itemId": itemId},
