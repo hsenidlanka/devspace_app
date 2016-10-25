@@ -1,14 +1,14 @@
 swagger: '2.0'
 info:
   version: '1.0'
-  title: Pizza Shefu REST API
+  title: Pizza Shefu-REST API Documentation
   description: This documentation created to demonstrate the RESTful services in the system.
     Please follow the following steps to open this YAML file in Swagger Editor. 
     Open the url meioned below and paste this complete set of code or click file > import file.
     Browse and open this YAML file.
   #termsOfService: http://helloreverb.com/terms/
   contact:
-    name: hSenid Lanka team
+    name: hSenid Lanka Team
     #email: foo@example.com
     url: http://editor.swagger.io/
   #license:
@@ -82,6 +82,13 @@ paths:
             type: array
             items:
               $ref: '#/definitions/error-message'
+              
+        '403':
+          description: User has no permissions to login or blocked
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/error-message'              
               
         '415':
           description: Media type should be application/json
@@ -452,7 +459,7 @@ paths:
         - name: body
           in: body
           description: Coupon to validate
-          required: false
+          required: true
           schema:
             $ref: "#/definitions/coupon-validate"
             
@@ -501,7 +508,45 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/error-message'    
+              $ref: '#/definitions/error-message'  
+              
+  /contactus/add:
+    post: 
+      description: Add a new contact message
+      tags:
+        - contactus
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          description: New contact message to add.
+                       Correspondent values for inquiryType;
+                       1-complaint,
+                       2-Suggesion,
+                       3-clarify,
+                       4-other.
+                       
+          required: true
+          schema:
+            $ref: '#/definitions/contactus'
+            
+      responses:
+        '201':
+          description: New contact message added/created
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/success-message'
+              
+        '415':
+          description: Media type should be application/json
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/error-message'               
               
   /shopping-cart/add/item/{ItemName}/qty/{quantity}:
     post: 
@@ -1032,4 +1077,49 @@ definitions:
         type: string
         format: date
       customerMobile:
-        type: string            
+        type: string   
+        
+  contactus:
+      type: object
+      required:
+            - inquiryType
+            - title
+            - name
+            - email
+            - mobile
+            - message
+            
+      properties:
+        inquiryType:
+          type: number    
+        title:
+          type: string
+        name:
+          type: string          
+        email:
+          type: string
+        mobile:
+          type: string
+        message:
+          type: string
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          

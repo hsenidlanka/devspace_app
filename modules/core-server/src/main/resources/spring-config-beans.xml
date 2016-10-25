@@ -42,4 +42,9 @@
         <property name="dataSource" ref="productionDataSource"/>
         <property name="transactionManager" ref="transactionManager"/>
     </bean>
+
+    <bean id="contactUsRepoImpl" class="hsl.devspace.app.corelogic.repository.contact_us.ContactUsRepositoryImpl">
+        <property name="dataSource" ref="productionDataSource"/>
+        <property name="transactionManager" ref="transactionManager"/>
+    </bean>
 </beans>

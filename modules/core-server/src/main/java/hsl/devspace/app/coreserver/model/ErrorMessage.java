@@ -3,6 +3,8 @@ package hsl.devspace.app.coreserver.model;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonPropertyOrder;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * Created by Kasun Dinesh on 7/5/16.
  * This is the model/template of the error message to pass as a response.
