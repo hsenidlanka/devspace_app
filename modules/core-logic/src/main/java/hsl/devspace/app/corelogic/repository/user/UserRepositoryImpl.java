@@ -17,7 +17,7 @@ import java.util.Map;
 /**
  * Created by hsenid on 7/4/16.
  */
-public class UserRepositoryImpl implements UserRepository {
+public  class UserRepositoryImpl implements UserRepository {
     User user = new User();
     private JdbcTemplate jdbcTemplate;
     private PlatformTransactionManager transactionManager;
@@ -218,9 +218,10 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public int updateGroupStaff(String des,String username) {
+    public int updateGroupStaff(String des, String username) {
         return 0;
     }
+
 
     /*retrieve details of customer registered on a specific date*/
     @Override
@@ -258,7 +259,7 @@ public class UserRepositoryImpl implements UserRepository {
     /*retrieve details of customer registered between a specified date range*/
     @Override
     public List<User> retrieveByDateRange(Date date1, Date date2) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE registered_date BETWEEN ? AND ?", date1, date2);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE registered_date BETWEEN ? AND ? AND status='active'", date1, date2);
         List<User> customerDetails=new ArrayList<User>();
 
         for (int i=0;i<mp.size();i++){
@@ -422,6 +423,7 @@ public class UserRepositoryImpl implements UserRepository {
         return 0;
     }
 
+
     @Override
     public List<User> selectbyEndingDate(Date date) {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE registered_date <= ?", date);
@@ -481,6 +483,21 @@ public class UserRepositoryImpl implements UserRepository {
         }
         log.info("{}",customerDetails);
         return customerDetails;
+    }
+
+    @Override
+    public List<User> filterByDepartment(String department) {
+        return null;
+    }
+
+    @Override
+    public List<User> filterByDesignation(String designation) {
+        return null;
+    }
+
+    @Override
+    public List<User> filterByBranch(String branch) {
+        return null;
     }
 
 

@@ -46,7 +46,9 @@ public interface UserRepository {
     int updateStaffMember(User user);
     List<User> selectbyEndingDate(Date date);
     List<User> selectbyStartingDate(Date date);
-
+    List<User> filterByDepartment(String department);
+    List<User> filterByDesignation(String designation);
+    List<User> filterByBranch(String branch);
 
 
 }
