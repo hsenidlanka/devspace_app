@@ -100,100 +100,81 @@
       <div class="modal-content">
         <div class="modal-header item-modal-header-style">
           <button id="editModelClose" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove"></span></button>
-          <div align="center"><span class="glyphicon glyphicon-trash"></span><fmt:message key="item.itemedit.panel.heading"/>
+          <div align="center"><span class="glyphicon glyphicon-pencil"></span><fmt:message key="item.itemedit.panel.heading"/>
           </div>
         </div>
-        <form:form class="form-horizontal" role="form" id="frmEditItem" method="post" action="/admin/items/edit_item">
+        <form:form class="form-horizontal" role="form" id="frmEditItem" method="post" action="/admin/items/update_item">
           <fieldset class="scheduler-border">
             <legend class="scheduler-border"><fmt:message key="item.itemedit.form.legend"/> </legend>
             <div class="modal-body">
-              <div class="form-group">
-                <div class="row">
-                  <div class="col-xs-6">
-                    <div class="col-xs-4">
-                      <label class="control-label" style="float: right;">
-                        <fmt:message key="item.itemedit.form.name"/>
+
+              <div class="row">
+                <div class="col-xs-6">
+                <div class="form-group">
+                  <div class="row">
+
+                      <div class="col-xs-4">
+                        <label class="control-label" style="float: right;">
+                          <fmt:message key="item.itemedit.form.name"/>
+                        </label>
+                      </div>
+                      <div class="col-xs-8">
+                        <form:input class="form-control" id="txtEditName" type="text" path="itemName" readonly="true"/>
+                        <form:hidden path="itemId" id="hiddenId"/>
+                      </div>
+
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="row">
+
+                      <div class="col-xs-4">
+                        <label class="control-label" style="float:right;">
+                          <fmt:message key="item.itemedit.form.category"/>
+                        </label>
+                      </div>
+                      <div class="col-xs-8">
+                        <form:select class="form-control" id="selectCatedt" path="categoryName">
+                          <form:option value="-" label="--Select Category--"/>
+                          <c:forEach var="listEdit" items="${listCatEdit}">
+                            <form:option id="${listEdit}" value="${listEdit}">${listEdit}</form:option>
+                          </c:forEach>
+                        </form:select>
+                      </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="row">
+                      <div class="col-xs-4">
+                        <label class="control-label" style="float: right">
+                          <fmt:message key="item.itemedit.form.subcategory"/>
+                        </label>
+                      </div>
+                      <div class="col-xs-8">
+                        <select class="form-control" id="slctEditSubCat">
+
+                        </select>
+                      </div>
+                  </div>
+                </div>
+                </div>
+                <div class="col-xs-6">
+
+                    <div class="col-xs-4" style="text-align: right">
+                      <label for="txtEditDesc" class="control-label">
+                        <fmt:message key="item.itemedit.form.desciption"/>
                       </label>
                     </div>
+
                     <div class="col-xs-8">
-                      <form:input class="form-control" id="txtEditName" type="text" path="itemName"/>
+                      <form:textarea class="form-control" rows="5" id="txtEditDesc" path="description"/>
                     </div>
-                  </div>
+
                 </div>
               </div>
 
-              <div class="form-group">
-                <div class="row">
-                  <div class="col-xs-6">
-                    <div class="col-xs-4">
-                      <label class="control-label" style="float:right;">
-                        <fmt:message key="item.itemedit.form.category"/>
-                      </label>
-                    </div>
-                    <div class="col-xs-8">
-                      <form:select class="form-control" id="selectCatedt" path="categoryName">
-                        <form:option value="-" label="--Select Category--"/>
-                        <c:forEach var="listEdit" items="${listCatEdit}">
-                          <form:option id="${listEdit}" value="${listEdit}">${listEdit}</form:option>
-                        </c:forEach>
-                      </form:select>
-                    </div>
-
-                  </div>
-                  <%--<div class="col-xs-6">
-                    <div class="col-xs-4">
-                      <label class="control-label" style="float: left;">
-                        <fmt:message key="item.itemedit.form.itemtype"/>
-                      </label>
-                    </div>
-                   &lt;%&ndash; <div class="col-xs-8">
-                      <label class="radio-inline">
-                        <form:radiobutton name="optEditType" value="veg" id="radioVeg" path="type" label="Veg" checked="true"/>
-                      </label>
-                      <label class="radio-inline">
-                        <form:radiobutton name="optEditType" value="non-veg" id="radioNveg" path="type" label="Non-veg"/>
-                      </label><br>
-                      <label class="radio-inline">
-                        <form:radiobutton name="optEditType" value="carbonated" id="radioCarbon" path="type" label="Carbonated"/>
-                      </label>
-                      <label class="radio-inline">
-                        <form:radiobutton name="optEditType" value="non-carbonated" id="radioNoncarbon" path="type" label="Non-carbonated"/>
-                      </label>
-                    </div>&ndash;%&gt;
-                  </div>--%>
-                    <%--<div class="col-xs-6">
-                        <div class="col-xs-4">
-                            <label for="txtEditDesc" class="control-label">
-                                <fmt:message key="item.itemedit.form.desciption"/>
-                            </label>
-                        </div>
-
-                        <div class="col-xs-8">
-                            <form:textarea class="form-control" rows="5" id="txtEditDesc" path="description"/>
-                        </div>
-                    </div>--%>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <div class="row">
-                  <div class="col-xs-6">
-                    <div class="col-xs-4">
-                      <label class="control-label" style="float: right">
-                        <fmt:message key="item.itemedit.form.subcategory"/>
-                      </label>
-                    </div>
-                    <div class="col-xs-8">
-                      <select class="form-control" id="slctEditSubCat">
-
-                      </select>
-                    </div>
-
-                  </div>
-                  <div class="col-xs-6">
-                  </div>
-                </div>
-              </div>
 
               <div class="form-group">
                 <div class="row">
@@ -218,7 +199,7 @@
 
                         <div class="col-xs-5">
                           <label class="checkbox-inline">
-                            <form:checkbox id="chkedtReg" value="regular" class="checkbox" path="size" label="Regular" onclick="document.getElementById('txtEdtPrcReg').disabled=!this.checked;"/>
+                            <form:checkbox id="chkedtReg" value="regular" class="checkbox aa" path="size" label="Regular" onclick="document.getElementById('txtEdtPrcReg').disabled=!this.checked;"/>
                           </label>
                         </div>
                         <div class="col-xs-7">
@@ -230,7 +211,7 @@
 
                         <div class="col-xs-5">
                           <label class="checkbox-inline">
-                            <form:checkbox id="chkedtMed" value="medium" class="checkbox" path="size" label="Medium" onclick="document.getElementById('txtEdtPrcMed').disabled=!this.checked;"/>
+                            <form:checkbox id="chkedtMed" value="medium" class="checkbox aa" path="size" label="Medium" onclick="document.getElementById('txtEdtPrcMed').disabled=!this.checked;"/>
                           </label>
                         </div>
                         <div class="col-xs-7">
@@ -242,7 +223,7 @@
 
                         <div class="col-xs-5">
                           <label class="checkbox-inline">
-                            <form:checkbox id="chkedtLrg" value="large" class="checkbox" path="size" label="Large" onclick="document.getElementById('txtEdtPrcLrg').disabled=!this.checked;"/>
+                            <form:checkbox id="chkedtLrg" value="large" class="checkbox aa" path="size" label="Large" onclick="document.getElementById('txtEdtPrcLrg').disabled=!this.checked;"/>
 
                           </label>
                         </div>
@@ -254,7 +235,7 @@
                       <div class="row item-tbl-row" id="edtItmChkbxOthr">
                         <div class="col-xs-5">
                           <label class="checkbox-inline">
-                            <form:checkbox id="chkedtOthr" value="other" class="checkbox" path="size" label="Other" onclick="document.getElementById('txtEdtPrcOthr').disabled=!this.checked;"/>
+                            <form:checkbox id="chkedtOthr" value="other" class="checkbox aa" path="size" label="Other" onclick="document.getElementById('txtEdtPrcOthr').disabled=!this.checked;"/>
 
                           </label>
                         </div>
@@ -266,7 +247,7 @@
                     </div>
                   </div>
                   <div class="col-xs-6">
-                    <div class="col-xs-4">
+                    <div class="col-xs-4" style="text-align: right">
                       <label class="control-label">
                         <fmt:message key="item.itemedit.form.itemimages"/>
                       </label>
@@ -278,27 +259,6 @@
                       </form:button>
                       <br><br>
 
-                      <div class="col-xs-8">
-                        <table class="table table-hover table-bordered table-condensed" id="">
-                          <tbody>
-                          <tr>
-                            <td><fmt:message key="item.itemedit.form.table.imagetag"/> </td>
-                            <td><input type="button" value="Update" class="form-control"></td>
-                            <td><input type="button" value="X" class="form-control"></td>
-                          </tr>
-                          <tr>
-                            <td><fmt:message key="item.itemedit.form.table.imagetag"/> </td>
-                            <td><input type="button" value="Update" class="form-control"></td>
-                            <td><input type="button" value="X" class="form-control"></td>
-                          </tr>
-                          <tr>
-                            <td><fmt:message key="item.itemedit.form.table.imagetag"/> </td>
-                            <td><input type="button" value="Update" class="form-control"></td>
-                            <td><input type="button" value="X" class="form-control"></td>
-                          </tr>
-                          </tbody>
-                        </table>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -330,13 +290,13 @@
                   </div>
                 </div>
               </div>
-              <div style="text-align: center; width: 75%; margin: auto;" id="toaster"></div>
+              <div style="text-align: center; width: 75%; margin: auto;" id="toaster2"></div>
             </div>
 
             <div class="modal-footer" align="right">
-              <button class="btn btn-success" type="button" value="Yes" id="btnDeltItm"><fmt:message key="item.deletemodal.button.yes"/>
+              <button class="btn btn-success" type="submit" value="Yes" id="btnUpdtItm"><fmt:message key="item.itemedit.form.button.save"/>
               </button>
-              <button class="btn btn-success" type="button" value="cancel" id="btnCnclDeltItm" data-dismiss="modal"><fmt:message key="item.deletemodal.button.no"/>
+              <button class="btn btn-success" type="reset" value="cancel" id="btnCnclUpdtItm" data-dismiss="modal"><fmt:message key="item.itemedit.form.button.cancel"/>
               </button>
             </div>
           </fieldset>
@@ -389,3 +349,48 @@
 </fmt:bundle>
 </body>
 </html>
+
+<%--<div class="col-xs-6">
+                      <div class="col-xs-4">
+                        <label class="control-label" style="float: left;">
+                          <fmt:message key="item.itemedit.form.itemtype"/>
+                        </label>
+                      </div>
+                     &lt;%&ndash; <div class="col-xs-8">
+                        <label class="radio-inline">
+                          <form:radiobutton name="optEditType" value="veg" id="radioVeg" path="type" label="Veg" checked="true"/>
+                        </label>
+                        <label class="radio-inline">
+                          <form:radiobutton name="optEditType" value="non-veg" id="radioNveg" path="type" label="Non-veg"/>
+                        </label><br>
+                        <label class="radio-inline">
+                          <form:radiobutton name="optEditType" value="carbonated" id="radioCarbon" path="type" label="Carbonated"/>
+                        </label>
+                        <label class="radio-inline">
+                          <form:radiobutton name="optEditType" value="non-carbonated" id="radioNoncarbon" path="type" label="Non-carbonated"/>
+                        </label>
+                      </div>&ndash;%&gt;
+                    </div>--%>
+
+
+<%-- <div class="col-xs-8">
+   <table class="table table-hover table-bordered table-condensed" id="">
+     <tbody>
+     <tr>
+       <td><fmt:message key="item.itemedit.form.table.imagetag"/> </td>
+       <td><input type="button" value="Update" class="form-control"></td>
+       <td><input type="button" value="X" class="form-control"></td>
+     </tr>
+     <tr>
+       <td><fmt:message key="item.itemedit.form.table.imagetag"/> </td>
+       <td><input type="button" value="Update" class="form-control"></td>
+       <td><input type="button" value="X" class="form-control"></td>
+     </tr>
+     <tr>
+       <td><fmt:message key="item.itemedit.form.table.imagetag"/> </td>
+       <td><input type="button" value="Update" class="form-control"></td>
+       <td><input type="button" value="X" class="form-control"></td>
+     </tr>
+     </tbody>
+   </table>
+ </div>--%>

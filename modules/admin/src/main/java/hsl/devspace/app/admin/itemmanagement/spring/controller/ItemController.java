@@ -125,17 +125,20 @@ public class ItemController {
         return item.viewAllItemDetails();
     }
 
+
     /**
      * Edit Item view
      */
 
-    @RequestMapping(value = "/edit", method = RequestMethod.GET)
+  /*  @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public ModelAndView showEditItem() {
 
         return new ModelAndView("item_management/editItem", "command", new Item());
-    }
+    }*/
 
-    // retrieving values of a selected item to edit form
+    //
+    //* retrieving values of a selected item to edit form from the view table
+    //
     @RequestMapping(value = "/edit_item", method = RequestMethod.POST)
     public
     @ResponseBody
@@ -159,6 +162,59 @@ public class ItemController {
 
       return object.toJSONString();
     }
+
+    @RequestMapping(value = "/update_item", method = RequestMethod.POST)
+    public ModelAndView updateItem(@ModelAttribute("updateItem")Item itemUpdate) {
+
+        try {
+            int itmId = itemUpdate.getItemId();
+            String itmName = itemUpdate.getItemName();
+            String itmPriceEdit = itemUpdate.getPrice();
+            String itmSizeEdit = itemUpdate.getSize();
+
+            LOGGER.trace("itm Name and ID in edit " + itmName + " ID =" + itmId);
+            LOGGER.trace("itm price " + itmPriceEdit);
+            LOGGER.trace("itm size " + itmSizeEdit);
+
+            List<String> sizelistEdit = new ArrayList<String>(Arrays.asList(itmSizeEdit.split(",")));
+            List<String> pricelistEdit = new ArrayList<String>(Arrays.asList(itmPriceEdit.split(",")));
+
+            List<Item> edittedList = new ArrayList<Item>();
+
+            for (int a = 0; a < sizelistEdit.size(); a++) {
+                Item itemList = new Item();
+                itemList.setSize(sizelistEdit.get(a));
+                itemList.setPrice(pricelistEdit.get(a));
+                edittedList.add(itemList);
+            }
+            LOGGER.trace("edittedList " + edittedList);
+            LOGGER.trace("itemUpdate object " + itemUpdate);
+            LOGGER.error("edittedList err " + edittedList);
+            LOGGER.error("itemUpdate err " + itemUpdate);
+
+            int i = item.updateItem(itemUpdate, edittedList);
+            LOGGER.trace("  info i edit ", i);
+            LOGGER.error(String.valueOf(i), "  error in i edit", i);
+            if (i != 1) {
+                JOptionPane.showMessageDialog(null, "Server-side error. Cannot update the item !", "Error !",
+                        JOptionPane.ERROR_MESSAGE);
+                LOGGER.error("Server-side error in updating item " + itmName);
+                return new ModelAndView(new RedirectView("view"));
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Updated item details" + itmName, "Success",
+                        JOptionPane.INFORMATION_MESSAGE);
+                LOGGER.info("updated item successfully " + itmName);
+                return new ModelAndView(new RedirectView("view"));
+            }
+            //return new ModelAndView(new RedirectView("item_management/view"));
+        }catch (Exception er){
+            LOGGER.error("Exception "+er);
+        }
+
+        return new ModelAndView(new RedirectView("view"));
+    }
+
 
     /**
      * Delete Item view

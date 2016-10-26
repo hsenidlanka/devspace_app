@@ -97,7 +97,7 @@ $(document).ready(function () {
         $(this).parent().parent().next().find(".form-control").prop("disabled", !$(this).prop("checked"));
     });
 
-})
+});
 
 /*
 * common function for loading sub-categories according to the selected category in edit item form
@@ -123,24 +123,8 @@ function setSubCats(categoryNm) {
     });
 
 }
-
-    /*$('#editModelClose').click(function () {
-        $('#frmEditItem').reset();
-    })*/
-
-/*
-function setPriceSize(itemId){
-    $.ajax({
-        type:"POST",
-        url:"https://localhost:8443/admin/items/getPriceSize",
-        data:{"itemId":itemId},
-
-        success: function(data){
-            alert(itemId + " getPriceSize");
-            $(":checkbox[name='size'][value='large']").prop('checked', true);
-        },
-        error: function(er){
-
-        }
-    })
-}*/
+/*TO DO
+ *
+ * validate checkbox unclick-->textbox.val = " "
+ *
+ * */
