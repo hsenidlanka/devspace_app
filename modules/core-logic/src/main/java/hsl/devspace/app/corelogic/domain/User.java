@@ -208,8 +208,9 @@ private int id;
     }
     //staff update
 
-    public User(int id, String firstName, String lastName, String username, String password, String email, String addressL1, String addressL2, String addressL3, String mobile, String designation, String department, String branch) {
+    public User(int id,String title, String firstName, String lastName, String username, String password, String email, String addressL1, String addressL2, String addressL3, String mobile, String designation, String department, String branch) {
         this.id = id;
+        this.title=title;
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -241,8 +242,7 @@ private int id;
 
     //for update customer
 
-    public User( String firstName, String lastName, String username, String password, String email, String addressL1, String addressL2, String addressL3, String mobile, int id) {
-        this.id = id;
+    public User( String firstName, String lastName, String username, String password, String email, String addressL1, String addressL2, String addressL3, String mobile) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
