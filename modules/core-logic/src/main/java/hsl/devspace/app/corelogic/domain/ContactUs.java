@@ -89,13 +89,26 @@ public class ContactUs {
     public ContactUs() {
     }
 
-    public ContactUs(int inquiryType, String title, String name, String email, String mobile, String message, String type) {
-        this.inquiryType = inquiryType;
+    public ContactUs( String title, String name, String email, String mobile, String message, String type) {
         this.title = title;
         this.name = name;
         this.email = email;
         this.mobile = mobile;
         this.message = message;
         this.type = type;
+    }
+
+    @Override
+    public String toString() {
+        return "ContactUs{" +
+                "id=" + id +
+                ", inquiryType=" + inquiryType +
+                ", title='" + title + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", message='" + message + '\'' +
+                ", type='" + type + '\'' +
+                '}';
     }
 }

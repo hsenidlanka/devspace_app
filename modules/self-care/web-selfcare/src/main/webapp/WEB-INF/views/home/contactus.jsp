@@ -27,6 +27,19 @@
         visibility: hidden
     }
 </style>
+
+<script>
+    $( document ).ready(function() {
+        var username = "${username}";
+        var name = "${name}";
+        var mobile = "${mobile}";
+        var email = "${email}";
+
+        $("#txt-fname").val(name);
+        $("#txt-email").val(email);
+        $("#txt-contactno").val(mobile);
+    });
+</script>
 <body style="overflow: visible">
 <%@include file="../includes/NewHeader.jsp" %>
 
@@ -46,7 +59,7 @@
                     <p style="font-size: xx-large;text-align: left"><fmt:message key="contactus" bundle="${lang}"/></p>
                 </div>
                 <div class="panel-body">
-                    <form:form action="/sendContactus" method="post" modelAttribute="contactus" cssClass="form-horizontal">
+                    <form:form action="/web-selfcare/sendContactus" method="post" modelAttribute="contactus" cssClass="form-horizontal">
 
                         <div class="form-group">
 
@@ -59,10 +72,10 @@
 
                                     <form:select cssClass="form-control" path="inquiryType">
 
-                                        <form:option value="complaint"><fmt:message key="contactus.complaint" bundle="${lang}"/></form:option>
-                                        <form:option value="suggestion"><fmt:message key="contactus.suggestion" bundle="${lang}"/></form:option>
-                                        <form:option value="clarify"><fmt:message key="contactus.clarification" bundle="${lang}"/></form:option>
-                                        <form:option value="other"><fmt:message key="contactus.other" bundle="${lang}"/></form:option>
+                                        <form:option value="1"><fmt:message key="contactus.complaint" bundle="${lang}"/></form:option>
+                                        <form:option value="2"><fmt:message key="contactus.suggestion" bundle="${lang}"/></form:option>
+                                        <form:option value="3"><fmt:message key="contactus.clarification" bundle="${lang}"/></form:option>
+                                        <form:option value="4"><fmt:message key="contactus.other" bundle="${lang}"/></form:option>
 
                                     </form:select>
                                 </div>
@@ -127,7 +140,7 @@
                                     <%--<spring:message code="contactus.your.inquiry" var="EnterMsg"/>--%>
 
                                 <form:textarea path="msg" cssClass="form-control" id="txt-inquirymsg" type="text"
-                                               placeholder="Testtextarea" />
+                                               placeholder="Your Message" />
                                     <%--<label id="inquirymsg_error" class="error-labels"></label>--%>
 
                             </div>

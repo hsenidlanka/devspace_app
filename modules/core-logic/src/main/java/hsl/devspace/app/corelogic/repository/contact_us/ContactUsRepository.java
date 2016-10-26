@@ -2,6 +2,7 @@ package hsl.devspace.app.corelogic.repository.contact_us;
 
 import hsl.devspace.app.corelogic.domain.ContactUs;
 
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -9,5 +10,11 @@ import java.util.List;
  */
 public interface ContactUsRepository {
     int add(ContactUs contact);
+    List<ContactUs> selectAll();
     List<ContactUs> selectAllToReview();
+    List<ContactUs> selectAllReviewed();
+    List<ContactUs> selectByDate(Date date);
+    List<ContactUs> selectByType(String type);
+
+
 }

@@ -2,7 +2,6 @@ package hsenid.web.Controllers;
 
 import hsenid.web.models.BooleanResponse;
 import hsenid.web.models.ReplyFromServer;
-import hsenid.web.models.UserData;
 import hsenid.web.supportclasses.SendStringBuilds;
 import org.codehaus.jettison.json.JSONException;
 import org.json.simple.JSONObject;
@@ -21,12 +20,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.List;
-import java.util.Map;
 
 /*
 * This class controls requests come for login and user registrations including ajax requests*/
@@ -35,6 +31,8 @@ import java.util.Map;
 @SessionAttributes({"username", "name", "email"})
 public class LoginController {
     static String email;
+    static String name;
+    static String mobile;
 
 //    Defining logger
     final static Logger logger = LoggerFactory.getLogger(LoginController.class);
@@ -49,11 +47,6 @@ public class LoginController {
     @Value("${api.url.customer.search}")
     private String customerSearchUrl;
 
-    @Value("${api.connect.timeout}")
-    private int connectTimeout;
-
-    @Value("${api.read.timeout}")
-    private int readTimeout;
 
 //    Checking whether a user is blocked or not
    @RequestMapping(value = "chechBlocked", produces = "application/json")
@@ -113,21 +106,37 @@ public class LoginController {
         ReplyFromServer replyFromServer = null;
         try {
             replyFromServer = restTemplate.postForObject(loginUrl, jsonObjectHttpEntity, ReplyFromServer.class);
+
             if(replyFromServer.getStatus().equals("success")){
+
                 RestTemplate restTemplate1 = new RestTemplate();
                 String userDataUrl = replyFromServer.getLinks().get(1).getLink();
                 logger.info(userDataUrl);
                 ReplyFromServer replyFromServer1 = restTemplate1.getForObject(userDataUrl, ReplyFromServer.class);
+
+                String firstName = replyFromServer1.getData().get(0).getFirstName();
+                String lastName = replyFromServer1.getData().get(0).getLastName();
+
                 email = replyFromServer1.getData().get(0).getEmail();
+                mobile = replyFromServer1.getData().get(0).getMobile();
+                name = SendStringBuilds.sendString(firstName, " ", lastName);
+
             }
-            logger.info(replyFromServer.getData().get(0).getEmail());
+
+//            logger.info(replyFromServer.getData().get(0).getEmail());
+
         } catch (RestClientException e) {
             logger.error(e.getMessage());
             return new BooleanResponse(false);
         }
 
+//            Adding attributes to the session
+
         session.setAttribute("username", username);
         session.setAttribute("email", email);
+        session.setAttribute("name", name);
+        session.setAttribute("mobile", mobile);
+
         return new BooleanResponse(true);
     }
 
