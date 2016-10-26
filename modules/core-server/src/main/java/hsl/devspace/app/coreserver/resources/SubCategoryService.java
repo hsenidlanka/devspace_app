@@ -33,7 +33,7 @@ public class SubCategoryService {
 
     // Retrieve all the sub-categories
     @GET
-    @Path("/getall")
+    @Path("/list")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response getSubCatogories(@javax.ws.rs.core.Context UriInfo uriInfo) {

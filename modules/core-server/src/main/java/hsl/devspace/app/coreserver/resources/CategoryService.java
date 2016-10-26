@@ -33,7 +33,7 @@ public class CategoryService {
 
     // Retrieve all the categories
     @GET
-    @Path("/getall")
+    @Path("/list")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response getCategories(@javax.ws.rs.core.Context UriInfo uriInfo) {

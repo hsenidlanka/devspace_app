@@ -6,7 +6,7 @@ var base_url = "http://localhost:2222/pizza-shefu/api/v1.0";
 
 // Test get all the packages-correct.
 frisby.create('Package service test 01-correct url')
-    .get(base_url + '/packages/getall',
+    .get(base_url + '/packages/list',
     {
         headers: {'Content-Type': 'application/json'}
     })
@@ -58,7 +58,7 @@ frisby.create('Package service test 01-correct url')
         "links": [
             {
                 "rel": "self",
-                "link": "http://localhost:2222/pizza-shefu/api/v1.0/packages/getall"
+                "link": "http://localhost:2222/pizza-shefu/api/v1.0/packages/list"
             }
         ]
     })
@@ -66,7 +66,7 @@ frisby.create('Package service test 01-correct url')
 
 // Test get all the packages-wrong method.
 frisby.create('Package service test 01-wrong method')
-    .post(base_url + '/packages/getall',
+    .post(base_url + '/packages/list',
     {
         headers: {'Content-Type': 'application/json'}
     })

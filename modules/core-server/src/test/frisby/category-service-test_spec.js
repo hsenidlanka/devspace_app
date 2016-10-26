@@ -6,7 +6,7 @@ var base_url = "http://localhost:2222/pizza-shefu/api/v1.0";
 
 // Test get all categories-correct.
 frisby.create('Category service test 01-correct url')
-    .get(base_url + '/categories/getall',
+    .get(base_url + '/categories/list',
     {
         headers: {'Content-Type': 'application/json'}
     })
@@ -47,7 +47,7 @@ frisby.create('Category service test 01-correct url')
         ],
         "links": [
             {
-                "link": "http://localhost:2222/pizza-shefu/api/v1.0/categories/getall",
+                "link": "http://localhost:2222/pizza-shefu/api/v1.0/categories/list",
                 "rel": "self"
             },
             {
@@ -76,7 +76,7 @@ frisby.create('Category service test 01-correct url')
 
 // Test get all categories-wrong method.
 frisby.create('Category service test 01-wrong method')
-    .post(base_url + '/categories/getall',
+    .post(base_url + '/categories/list',
     {
         headers: {'Content-Type': 'application/json'}
     })

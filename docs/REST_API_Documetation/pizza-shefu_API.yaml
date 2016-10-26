@@ -167,7 +167,7 @@ paths:
             items:
               $ref: '#/definitions/error-message'
     
-  /categories/getall:
+  /categories/list:
     get: 
       description: Get details of all categories.
       tags:
@@ -214,7 +214,7 @@ paths:
             items:
               $ref: '#/definitions/error-message'
               
-  /subcategories/getall:
+  /subcategories/list:
     get: 
       description: Get details of all categories.
       tags:
@@ -422,7 +422,7 @@ paths:
             items:
               $ref: '#/definitions/error-message'
               
-  /packages/getall:
+  /packages/list:
     get: 
       description: Returns all categories with their respective attributes such as price, content, etc.
       tags:

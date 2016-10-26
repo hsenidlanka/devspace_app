@@ -35,7 +35,7 @@ public class PackageService {
 
     // Retrieve all the packages
     @GET
-    @Path("/getall")
+    @Path("/list")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response getPackages(@javax.ws.rs.core.Context UriInfo uriInfo) {

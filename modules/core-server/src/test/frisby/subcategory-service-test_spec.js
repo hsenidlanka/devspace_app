@@ -6,7 +6,7 @@ var base_url = "http://localhost:2222/pizza-shefu/api/v1.0";
 
 // Test get all the subcategories-correct.
 frisby.create('Get all sub categories test 01-correct url')
-    .get(base_url + '/subcategories/getall',
+    .get(base_url + '/subcategories/list',
     {
         headers: {'Content-Type': 'application/json'}
     })
@@ -48,7 +48,7 @@ frisby.create('Get all sub categories test 01-correct url')
         "links": [
             {
                 "rel": "self",
-                "link": "http://localhost:2222/pizza-shefu/api/v1.0/subcategories/getall"
+                "link": "http://localhost:2222/pizza-shefu/api/v1.0/subcategories/list"
             },
             {
                 "rel": "Ice creams items",
