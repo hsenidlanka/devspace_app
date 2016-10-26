@@ -117,12 +117,12 @@ $(document).ready(function(){
                     $.toaster({priority: 'success', title: 'Success', message: 'Unblocked the user successfully  '+uname});
                     setInterval(3000);
                     $("#replaceCustomerModal").modal('hide');
-                    setTimeout(function(){location.reload();}, 3000);
+                    setTimeout(function(){location.reload();}, 2000);
 
                 }else{
                     $.toaster({ priority : 'danger', title : 'Error', message : 'Cannot unblock the user ' +uname});
                     $("#replaceCustomerModal").modal('hide');
-                    setTimeout(function(){location.reload();}, 3000);
+                    setTimeout(function(){location.reload();}, 2000);
                 }
 
             },

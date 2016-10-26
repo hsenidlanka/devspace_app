@@ -124,10 +124,12 @@ $(document).ready(function(){
 
                     $.toaster({priority: 'success', title: 'Success', message: 'Unblocked the Staff user successfully  '+uname});
                     $("#replaceStaffModal").modal('hide');
+                    setTimeout(function(){location.reload();}, 2000);
 
                 }else{
                     $.toaster({ priority : 'danger', title : 'Error', message : 'Cannot unblock the Staff user ' +uname});
                     $("#replaceStaffModal").modal('hide');
+                    setTimeout(function(){location.reload();}, 2000);
                 }
 
             },
