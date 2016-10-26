@@ -86,3 +86,14 @@ legend.scheduler-border {
     font-weight: bolder;
     font-size: 20px;
 }
+
+#buttonView{
+  width: 75px;
+}
+.toaster{
+    position: fixed;
+    top: 230px;
+    right: 520px;
+    width: 300px;
+    z-index: 50000;
+}

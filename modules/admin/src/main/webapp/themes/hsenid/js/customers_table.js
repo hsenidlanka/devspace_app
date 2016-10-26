@@ -115,14 +115,14 @@ $(document).ready(function(){
                 if(msg == 1){
 
                     $.toaster({priority: 'success', title: 'Success', message: 'Blocked the user successfully  '+uname});
-                    //$("#removeCustomerModal").modal('hide');
-                    setTimeout(function(){location.reload();}, 2000);
+                    $("#removeCustomerModal").modal('hide');
+                    setTimeout(function(){location.reload();}, 3000);
 
                 }else{
 
                     $.toaster({ priority : 'danger', title : 'Error', message : 'Cannot block the user ' +uname});
-                    //$("#removeCustomerModal").modal('hide');
-                    setTimeout(function(){location.reload();}, 2000);
+                    $("#removeCustomerModal").modal('hide');
+                    setTimeout(function(){location.reload();}, 3000);
                 }
 
             },
@@ -135,6 +135,7 @@ $(document).ready(function(){
 });
 
 //function to edit a customer user selected
+/*
 $(document).ready(function(){
     $("#btnUpdateCustomer").click(function(){
 
@@ -173,4 +174,4 @@ $(document).ready(function(){
         })
         ;
     });
-});
+});*/

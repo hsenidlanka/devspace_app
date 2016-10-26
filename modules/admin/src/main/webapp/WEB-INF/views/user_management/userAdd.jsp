@@ -44,19 +44,27 @@
 </div>
 <br>
 <br>
+
+<%--breadcrumb div--%>
 <div class="breadcrumbPosition" id="userBreadcrump">
     <ul class="breadcrumb breadcrumb-menu" >
 
             <fmt:message key="admin.home.url" var="url1" bundle="${bundle2}"/>
             <fmt:message key="admin.usermanage.useradd.url" var="url2" bundle="${bundle2}"/>
 
-
-        <li><a href="<c:out value="${url1}"/>"><fmt:message key="user.breadcrumb.home" bundle="${bundle1}"/></a></li>
-      <li><a href="<c:out value="${url1}"/>"><fmt:message key="user.breadcrumb.usermanagement" bundle="${bundle1}"/></a></li>
-      <li class="active"><a href="<c:out value="${url2}"/>"><fmt:message key="user.useradd.breadcrumb.adduser" bundle="${bundle1}"/></a></li>
+        <li>
+            <a href="<c:out value="${url1}"/>"><fmt:message key="user.breadcrumb.home" bundle="${bundle1}"/></a>
+        </li>
+        <li>
+            <a href="<c:out value="${url1}"/>"><fmt:message key="user.breadcrumb.usermanagement" bundle="${bundle1}"/></a>
+        </li>
+        <li class="active">
+            <a href="<c:out value="${url2}"/>"><fmt:message key="user.useradd.breadcrumb.adduser" bundle="${bundle1}"/></a>
+        </li>
     </ul>
 </div>
 
+<%--form box div--%>
 <center>
   <div class="form-box" id="userAdd_box">
     <div class="panel panel-default">
@@ -102,9 +110,15 @@
                     <div class="col-xs-6">
                       <div class="col-xs-4">
                         <form:select path="title" class="form-control" id="selectTitle" style="width: 65px">
-                          <form:option value="mr"><fmt:message key="user.useradd.form.title.mr" bundle="${bundle1}"/></form:option>
-                          <form:option value="mrs"><fmt:message key="user.useradd.form.title.mrs" bundle="${bundle1}" /></form:option>
-                          <form:option value="miss"><fmt:message key="user.useradd.form.title.miss" bundle="${bundle1}" /></form:option>
+                          <form:option value="mr">
+                              <fmt:message key="user.useradd.form.title.mr" bundle="${bundle1}"/>
+                          </form:option>
+                          <form:option value="mrs">
+                              <fmt:message key="user.useradd.form.title.mrs" bundle="${bundle1}" />
+                          </form:option>
+                          <form:option value="miss">
+                              <fmt:message key="user.useradd.form.title.miss" bundle="${bundle1}" />
+                          </form:option>
                         </form:select>
                       </div>
                       <div class="col-xs-5">
@@ -170,105 +184,103 @@
                       </div>
                   </div>
               </div>
-          </div><br>
-
-              <div class="form-group">
-                  <div class="row">
-                      <label  class="col-xs-3 control-label">
-                          <fmt:message key="user.useradd.form.mobile" bundle="${bundle1}" />
-                      </label>
-                      <div class="col-xs-8">
-                          <div class="col-xs-6">
-                              <div class="col-xs-12">
-                                  <form:input path="mobile" class="form-control" id="mobileNo" placeholder="+94XXXXXXXXX"
+          </div>
+              <br>
+          <div class="form-group">
+              <div class="row">
+                  <label  class="col-xs-3 control-label">
+                      <fmt:message key="user.useradd.form.mobile" bundle="${bundle1}" />
+                  </label>
+                  <div class="col-xs-8">
+                      <div class="col-xs-6">
+                          <div class="col-xs-12">
+                              <form:input path="mobile" class="form-control" id="mobileNo" placeholder="+94XXXXXXXXX"
                                               type="text" style="width: 260px" pattern="^\(?(\+94)\)?([0-9]{9})$"
                                               required="required"/>
-                              </div>
                           </div>
-                          <div class="col-xs-6"></div>
                       </div>
+                      <div class="col-xs-6"></div>
                   </div>
-                  <div class="row"> <label class="control-label"></label>   </div>
-                  <div class="row">
-                      <label  class="col-xs-3 control-label">
-                          <fmt:message key="user.useradd.form.email" bundle="${bundle1}" />
-                      </label>
-                      <div class="col-xs-8">
-                          <div class="col-xs-6">
-                              <div class="col-xs-12">
-                                  <form:input path="email" class="form-control" id="email" placeholder="myname@example.com"
-                                              type="text" style="width: 260px" pattern="^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.
+              </div>
+              <div class="row"> <label class="control-label"></label>   </div>
+              <div class="row">
+                  <label  class="col-xs-3 control-label">
+                      <fmt:message key="user.useradd.form.email" bundle="${bundle1}" />
+                  </label>
+                  <div class="col-xs-8">
+                      <div class="col-xs-6">
+                          <div class="col-xs-12">
+                              <form:input path="email" class="form-control" id="email" placeholder="myname@example.com"
+                                              type="text" style="width: 260px"
+                                              pattern="^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.
                                               [a-zA-Z0-9-]+)*\.(([0-9]{1,3})|([a-zA-Z]{2,3}))$" required="required"/>
-                              </div>
                           </div>
-                          <div class="col-xs-6"></div>
                       </div>
+                      <div class="col-xs-6"></div>
                   </div>
-                  <div class="row"> <label class="control-label"></label>   </div>
-                  <div class="row">
-                      <label  class="col-xs-3 control-label" >
-                          <fmt:message key="user.useradd.form.username" bundle="${bundle1}" />
-                      </label>
-                      <div class="col-xs-8">
-                          <div class="col-xs-6">
-                              <div class="col-xs-12">
-                                  <form:input path="username" class="form-control" name="username_admin" id="username_admin"
+              </div>
+              <div class="row"> <label class="control-label"></label>   </div>
+              <div class="row">
+                  <label  class="col-xs-3 control-label" >
+                      <fmt:message key="user.useradd.form.username" bundle="${bundle1}" />
+                  </label>
+                  <div class="col-xs-8">
+                      <div class="col-xs-6">
+                          <div class="col-xs-12">
+                              <form:input path="username" class="form-control" name="username_admin" id="username_admin"
                                               placeholder="User Name" type="text" style="width: 260px" required="required"/>
 
-                              </div>
                           </div>
-                          <div class="col-xs-6"></div>
                       </div>
+                      <div class="col-xs-6"></div>
                   </div>
-                  <div class="row"><label class=" control-label"></label></div>
-
-                  <div class="row">
-                      <label  class="col-xs-3 control-label" >
-                          <fmt:message key="user.useradd.form.password" bundle="${bundle1}" />
-                      </label>
-                      <div class="col-xs-8">
-                          <div class="col-xs-6">
-                              <div class="col-xs-12">
-                                  <form:input path="password" class="form-control" id="password1" placeholder="Password"
+              </div>
+              <div class="row"><label class=" control-label"></label></div>
+              <div class="row">
+                  <label  class="col-xs-3 control-label" >
+                      <fmt:message key="user.useradd.form.password" bundle="${bundle1}" />
+                  </label>
+                  <div class="col-xs-8">
+                      <div class="col-xs-6">
+                          <div class="col-xs-12">
+                              <form:input path="password" class="form-control" id="password1" placeholder="Password"
                                               type="password" style="width: 260px"  required="required"
                                               onchange="validatePassword(password1)"/>
 
-                              </div>
                           </div>
-                          <div class="col-xs-6"></div>
                       </div>
+                      <div class="col-xs-6"></div>
                   </div>
-                  <div class="row"><label class=" control-label"></label></div>
-                  <div class="row">
-                      <label  class="col-xs-3 control-label" >
-                          <fmt:message key="user.useradd.form.cpassword" bundle="${bundle1}" />
-                      </label>
-                      <div class="col-xs-8">
-                          <div class="col-xs-6">
-                              <div class="col-xs-12">
-                                  <input  class="form-control" id="cpassword"
-                                              placeholder="Password Confirm" type="password" style="width: 260px"
-                                              required="required" onchange="passwordsEqual(cpassword,password1)"/>
-
-                              </div>
+              </div>
+              <div class="row"><label class=" control-label"></label></div>
+              <div class="row">
+                  <label  class="col-xs-3 control-label" >
+                      <fmt:message key="user.useradd.form.cpassword" bundle="${bundle1}" />
+                  </label>
+                  <div class="col-xs-8">
+                      <div class="col-xs-6">
+                          <div class="col-xs-12">
+                              <input  class="form-control" id="cpassword"
+                                      placeholder="Password Confirm" type="password" style="width: 260px"
+                                      required="required" onchange="passwordsEqual(cpassword,password1)"/>
                           </div>
-                          <div class="col-xs-6"></div>
                       </div>
+                      <div class="col-xs-6"></div>
                   </div>
-              </div><br>
+              </div>
+          </div><br>
 
-
-             <!--when the user is a customer-->
-             <div class="form-group">
-                 <div class="col-xs-12">
+          <!--when the user is a customer-->
+          <div class="form-group">
+              <div class="col-xs-12">
                  <fieldset class="scheduler-border" id="staffDetail">
                    <legend class="scheduler-border" id="legendStaff"><fmt:message key="user.useradd.form.staff.legend.title"
                                                                                   bundle="${bundle1}"/>
                    </legend>
                    <div class="row">
-                     <label  class="col-xs-4 control-label" >
-                         <fmt:message key="user.useradd.form.designation" bundle="${bundle1}" />
-                     </label>
+                       <label  class="col-xs-4 control-label" >
+                            <fmt:message key="user.useradd.form.designation" bundle="${bundle1}" />
+                       </label>
                        <label  class="col-xs-4 control-label" >
                            <fmt:message key="user.useradd.form.department" bundle="${bundle1}" />
                        </label>
@@ -276,20 +288,20 @@
                            <fmt:message key="user.useradd.form.branch" bundle="${bundle1}" />
                        </label>
                    </div>
-                     <div class="row">
+                   <div class="row">
                          <div class="col-xs-4">
                             <form:select path="designation" class="form-control" id="designation">
-                                <form:option value="GROUP_SYS_ADMIN"><fmt:message key="user.staff.designation1" bundle="${bundle1}" />
+                                <form:option value="System Admin"><fmt:message key="user.staff.designation1" bundle="${bundle1}" />
                                 </form:option>
-                                <form:option value="GROUP_ADM_MANAGER"><fmt:message key="user.staff.designation2" bundle="${bundle1}" />
+                                <form:option value="System Manager"><fmt:message key="user.staff.designation2" bundle="${bundle1}" />
                                 </form:option>
-                                <form:option value="GROUP_CC_MANAGER"><fmt:message key="user.staff.designation3" bundle="${bundle1}" />
+                                <form:option value="Customer Manager"><fmt:message key="user.staff.designation3" bundle="${bundle1}" />
                                 </form:option>
-                                <form:option value="GROUP_CUSTOMERCARE"><fmt:message key="user.staff.designation4" bundle="${bundle1}" />
+                                <form:option value="Cashier"><fmt:message key="user.staff.designation4" bundle="${bundle1}" />
                                 </form:option>
-                                <form:option value="GROUP_CUSTOMERCARE"><fmt:message key="user.staff.designation5" bundle="${bundle1}" />
+                                <form:option value="Main Chef"><fmt:message key="user.staff.designation5" bundle="${bundle1}" />
                                 </form:option>
-                                <form:option value="GROUP_RPT_MANAGER"><fmt:message key="user.staff.designation6" bundle="${bundle1}" />
+                                <form:option value="Reporting Manager"><fmt:message key="user.staff.designation6" bundle="${bundle1}" />
                                 </form:option>
                             </form:select>
                          </div>
@@ -319,32 +331,32 @@
                          </div>
                      </div><br>
                  </fieldset>
-                 </div>
-             </div>
+              </div>
+          </div>
 
-              <%--buttons--%>
-              <div class="form-group">
-                  <div class="row">
-                      <label  class="col-xs-3 control-label" >
-                      </label>
-                      <div class="col-xs-8">
-                          <div class="col-xs-6">
-                              <div class="col-xs-5">
-                                <form:button type="reset" value="Reset" class="btn btn-success btn-md btnAddItem">
-                                    <fmt:message key="user.useradd.form.button.reset" bundle="${bundle1}" /></form:button>
-                              </div>
+          <%--buttons--%>
+          <div class="form-group">
+              <div class="row">
+                  <label  class="col-xs-3 control-label" >
+                  </label>
+                  <div class="col-xs-8">
+                      <div class="col-xs-6">
+                          <div class="col-xs-5">
+                              <form:button type="reset" value="Reset" class="btn btn-success btn-md btnAddItem">
+                                  <fmt:message key="user.useradd.form.button.reset" bundle="${bundle1}" /></form:button>
                           </div>
-                          <div class="col-xs-6">
-                              <div class="col-xs-5">
-                                <form:button type="submit" class="btn btn-success btn-md" id="btnAddItem"><span
+                      </div>
+                      <div class="col-xs-6">
+                          <div class="col-xs-5">
+                              <form:button type="submit" class="btn btn-success btn-md" id="btnAddItem"><span
                                     class="glyphicon glyphicon-plus"></span>
-                                    <fmt:message key="user.useradd.form.button.submit" bundle="${bundle1}" />
-                                </form:button>
-                              </div>
+                                  <fmt:message key="user.useradd.form.button.submit" bundle="${bundle1}" />
+                              </form:button>
                           </div>
                       </div>
                   </div>
               </div>
+          </div>
           </fieldset>
         </form:form>
       </div>
@@ -352,9 +364,5 @@
   </div>
 </center>
 
-<%--</fmt:setBundle>--%>
-
 </body>
-
-
 </html>
