@@ -21,6 +21,7 @@
           <a href="shopping-cart"><img src="<c:url value="/resources/images/shopping-cart.png"/>"
                                             style="padding-left: 30px"></a>
         </li>
+    <c:if test="${empty username}">
         <li>
           <a class="form-group" data-toggle="modal" data-target="#modal-signup"><img
                   src="<c:url value="/resources/images/signup.png"/>" style=""></span>
@@ -32,6 +33,23 @@
           <a class="form-group-sm" data-toggle="modal" data-target="#modal-login"><img src="<c:url value="/resources/images/user2.png"/>" style=""></span> </a>
 
         </li>
+
+</c:if>
+<c:if test="${not empty username}">
+    <li>
+        <div class="dropdown">
+            <button class="btn btn-lg dropdown-toggle" type="button" data-toggle="dropdown">${name}<span class="caret"></span></button>
+
+            <ul class="dropdown-menu ">
+                <li><a class="btn-lg" href="#">Update Profile</a></li>
+                <li><a class="btn-lg" href="#">Log Out</a></li>
+            </ul>
+        </div>
+
+        <%--<a class="form-group-sm" ></a>--%>
+    </li>
+</c:if>
+
       </ul>
     </div>
   </div>

@@ -63,7 +63,7 @@
                         </div>
                         <div class="col-xs-4">
                             <label class="checkbox-inline">
-                                <input type="checkbox" value="3" id="branchCheck" onchange="showMeBlocked()">
+                                <input type="checkbox" value="3" id="branchbCheck" onchange="showMeBlocked()">
                                 <fmt:message key="user.userview.staff.filter.branch" bundle="${bundle1}"/>
                             </label>
                         </div>
@@ -76,7 +76,7 @@
                         <input class="form-control"  placeholder=" Name" type="text" id="bsname"  >
                     </div>
                     <div class="col-xs-1">
-                        <button type="button" class="btn btn-success" >
+                        <button type="button" class="btn btn-success" id="filterButtonStaffB">
                             <span class="glyphicon glyphicon-search"></span>
                             <fmt:message key="user.userview.staff.search" bundle="${bundle1}"/>
                         </button>
@@ -97,7 +97,8 @@
                         </label>
                     </div>
                     <div class="col-xs-8">
-                        <select class="form-control" >
+                        <select class="form-control" id="designation_db">
+                            <option><fmt:message key="user.customer.select" bundle="${bundle1}" /></option>
                             <option><fmt:message key="user.staff.designation1" bundle="${bundle1}" /></option>
                             <option><fmt:message key="user.staff.designation2" bundle="${bundle1}" /></option>
                             <option><fmt:message key="user.staff.designation3" bundle="${bundle1}" /></option>
@@ -115,7 +116,8 @@
                         </label>
                     </div>
                     <div class="col-xs-8">
-                        <select class="form-control">
+                        <select class="form-control" id="department_db">
+                            <option><fmt:message key="user.customer.select" bundle="${bundle1}" /></option>
                             <option><fmt:message key="user.staff.department1" bundle="${bundle1}" /></option>
                             <option><fmt:message key="user.staff.department2" bundle="${bundle1}" /></option>
                             <option><fmt:message key="user.staff.department3" bundle="${bundle1}" /></option>
@@ -131,7 +133,8 @@
                         </label>
                     </div>
                     <div class="col-xs-8">
-                        <select class="form-control"  >
+                        <select class="form-control" id="branch_db" >
+                            <option><fmt:message key="user.customer.select" bundle="${bundle1}" /></option>
                             <option><fmt:message key="user.staff.branch1" bundle="${bundle1}"/></option>
                             <option><fmt:message key="user.staff.branch2" bundle="${bundle1}"/></option>
                             <option><fmt:message key="user.staff.branch3" bundle="${bundle1}"/></option>
@@ -414,13 +417,10 @@
                 </form>
             </div>
 
-            <div class="modal-footer" align="right">
-                <button class="btn btn-success" type="button" value="Update" id="btnUpdateCustomer">
-                    <fmt:message key="user.customer.update.form.button" bundle="${bundle1}" />
-                </button>
-                <button class="btn btn-success" type="button" value="cancel" id="btnCnclUpdateStaff" data-dismiss="modal"
+            <div class="modal-footer" style="text-align: center">
+                <button class="btn btn-success" type="button" value="cancel" id="buttonView" data-dismiss="modal"
                         aria-hidden="true">
-                    <fmt:message key="user.block.modal.button.cancel" bundle="${bundle1}" />
+                    <fmt:message key="user.userview.button.ok" bundle="${bundle1}" />
                 </button>
             </div>
         </div>

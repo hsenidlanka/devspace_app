@@ -72,7 +72,7 @@ function showMeBlocked(){
 
     //blocked customers
     var blockcPeriod= document.getElementById("blockcPeriod");
-    var bcname= document.getElementById("bcname");
+    var bcname= document.getElementById("bcnameSearch");
     var blockcCity= document.getElementById("blockcCity");
 
 
@@ -89,7 +89,7 @@ function showMeBlocked(){
         departmentb.style.display = "none";
     }
 
-    if (  $("#branchCheck").is(":checked")){
+    if (  $("#branchbCheck").is(":checked")){
         branchb.style.display = "block";
     } else{
         branchb.style.display = "none";
@@ -120,8 +120,8 @@ function showMeBlocked(){
 
 //in userAdd form to validate the password entered
 
-function validatePassword() {
-    var fld= document.getElementById("password1")
+function validatePassword(fld) {
+    //var fld= document.getElementById("password1")
     var error = "";
     var illegalChars = /[\W_]/; // allow only letters and numbers
 
@@ -174,10 +174,11 @@ function passwordsEqual(fld1,fld2) {
     return true;
 }
 
+///////////////////////////////////////////  AJAX CALLS TO FILTER ACTIVE USERS  ////////////////////////////////////////////
 
- //ajax functions to filter the search results if an option is selected
+ //ajax functions to filter the search results of Customer Users if an option is selected
 $(document).ready(function(){
-    $("#filterButton").click(function(){
+    $("#filterButtonCustomer").click(function(){
         var from = $('#fromDate').val();
         var to=$('#toDate').val();
         var name=$('#cnameSearch').val();
@@ -191,52 +192,182 @@ $(document).ready(function(){
 
                     $('#tableCustomer').bootstrapTable('load', msg);
                 },
-                error: function () {
-                    alert("ajax failed" + uname);
+                error: function (e) {
+                    alert("ajax failed" + e);
                 }
             });
 
-        }else{
+        }
+        if( (city != "--Select--")  ){
             $.ajax({
                 //type: "POST",
-                url: "https://localhost:8443/admin/userFilters/customerTable",
-                data: {"from": from, "to": to, "name":name, "city":city},
+                url:"https://localhost:8443/admin/userFilters/customerTable/city",
+                data: {"city":city},
                 success: function (msg) {
-                    alert("ajax succ" + from +name +city);
+                    //alert("city ajax" + city);
                     $('#tableCustomer').bootstrapTable('load', msg);
                 },
-                error: function () {
-                    alert("ajax failed" + uname);
+                error: function (e) {
+                    alert("ajax failed" + city +e);
                 }
             });
         }
+        if( (from != "") || (to != "")){
+            $.ajax({
+                //type: "POST",
+                url: "https://localhost:8443/admin/userFilters/customerTable/date",
+                data: {"from": from, "to": to, "name":name},
+                success: function (msg) {
+                    //alert("ajax succ" + from +name +city);
+                    $('#tableCustomer').bootstrapTable('load', msg);
+                },
+                error: function (e) {
+                    alert("ajax failed" + e);
+                }
+            });
+        }
+        if( (from != "") && (to != "") && (city != "--Select--")){
+            $.ajax({
+                //type: "POST",
+                url: "https://localhost:8443/admin/userFilters/customerTable/date/city",
+                data: {"from": from, "to": to, "city":city},
+                success: function (msg) {
+                    //alert("ajax succ" + from +name +city);
+                    $('#tableCustomer').bootstrapTable('load', msg);
+                },
+                error: function (e) {
+                    alert("ajax failed" + e);
+                }
+            });
+        }
+
     });
 });
 
 
-/*
- function popup() {
- window.open("https://localhost:8443/admin/users/add", 'window', 'width=200,height=100');
- }
 
- function doAjaxPost(){
+//ajax functions to filter the search results of Staff Users if an option is selected
+$(document).ready(function(){
+    $("#filterButtonStaff").click(function(){
+        var designation= $('#designation_d').find(':selected').text();
+        var department=$('#department_d').find('option:selected').text();
+        var name=$('#cname').val();
+        var branch=$('#branch_d').find(':selected').text();
 
- var  name= $('#fname').val();
- $.ajax({
- type:"POST",
- url: "https://localhost:8443/admin/users/addCustomer",
- data: name,
- success:function(data){
+        if((designation == "--Select--") && (department == "--Select--") && (name == "") && (branch == "--Select--")  ){
 
- alert(data );
- },
- error:function(e){
- alert('Error' +e);
- }
+            $.ajax({
+                //type: "POST",
+                url: "https://localhost:8443/admin/users/view/staffTable",
+                success: function (msg) {
 
- });
- }
- */
+                    $('#tableStaff').bootstrapTable('load', msg);
+                },
+                error: function (e) {
+                    alert("ajax failed" + e);
+                }
+            });
+        }
+        if((!(designation == "--Select--")) || (!(department == "--Select--")) || (!(branch == "--Select--")) ){
+            $.ajax({
+                //type: "POST",
+                url: "https://localhost:8443/admin/userFilters/staffTable",
+                data:{"designation":designation,"department":department,"branch":branch,"name":name},
+                success: function (msg) {
+
+                    $('#tableStaff').bootstrapTable('load', msg);
+                },
+                error: function (e) {
+                    alert("ajax failed" + e);
+                }
+            });
+        }
+
+    });
+});
+
+////////////////////////////////////   AJAX CALLS TO FILTER INACTIVE USERS ///////////////////////////////////////////////
 
 
+//ajax functions to filter the search results of Customer Users if an option is selected(INACTIVE)
+$(document).ready(function(){
+    $("#filterButtonCustomerB").click(function(){
+        var from = $('#fromDateb').val();//means blocked date
+        var to=$('#toDateb').val();  //means to blocked date
+        var name=$('#bcnameSearch').val();
+        var city=$('#blockcCity').val();
+
+        if((from == "") && (to == "") && (name == "") && (city == "--Select--")  ){
+            $.ajax({
+                //type: "POST",
+                url: "https://localhost:8443/admin/users/view/bannedcustomerTable",
+                success: function (msg) {
+
+                    $('#tableBannedcustomer').bootstrapTable('load', msg);
+                },
+                error: function (e) {
+                    alert("ajax failed" + e);
+                }
+            });
+
+        }
+        if( (city != "--Select--")  ){
+            $.ajax({
+                //type: "POST",
+                url:"https://localhost:8443/admin/userFilters/bannedcustomerTable/city",
+                data: {"city":city},
+                success: function (msg) {
+                    //alert("city ajax" + city);
+                    $('#tableBannedcustomer').bootstrapTable('load', msg);
+                },
+                error: function (e) {
+                    alert("ajax failed" + city +e);
+                }
+            });
+        }
+
+
+    });
+});
+
+
+//ajax functions to filter the search results of Staff Users if an option is selected(INACTIVE)
+$(document).ready(function(){
+    $("#filterButtonStaffB").click(function(){
+        var designation= $('#designation_db').find(':selected').text();
+        var department=$('#department_db').find('option:selected').text();
+        var name=$('#bsname').val();
+        var branch=$('#branch_db').find(':selected').text();
+
+        if((designation == "--Select--") && (department == "--Select--") && (name == "") && (branch == "--Select--")  ){
+
+            $.ajax({
+                //type: "POST",
+                url: "https://localhost:8443/admin/users/view/bannedstaffTable",
+                success: function (msg) {
+
+                    $('#tableBannedstaff').bootstrapTable('load', msg);
+                },
+                error: function (e) {
+                    alert("ajax failed" + e);
+                }
+            });
+        }
+        if((!(designation == "--Select--")) || (!(department == "--Select--")) || (!(branch == "--Select--")) ){
+            $.ajax({
+                //type: "POST",
+                url: "https://localhost:8443/admin/userFilters/bannedstaffTable",
+                data:{"designation":designation,"department":department,"branch":branch,"name":name},
+                success: function (msg) {
+
+                    $('#tableBannedstaff').bootstrapTable('load', msg);
+                },
+                error: function (e) {
+                    alert("ajax failed" + e);
+                }
+            });
+        }
+
+    });
+});
 

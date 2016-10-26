@@ -1,14 +1,20 @@
 package hsenid.web.Controllers;
 
 import hsenid.web.models.ContactUs;
+import hsenid.web.models.ReplyFromServer;
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -16,10 +22,11 @@ import org.springframework.web.servlet.ModelAndView;
 /*
 * This controller is basically define to return every jsp file in the home page*/
 public class HomeController {
-    @Value("${mongodb.url}")
-    private String mongodbUrl;
 
     final Logger logger = LoggerFactory.getLogger(HomeController.class);
+
+    @Value("${api.url.contactUs.add}")
+    private String contactUsUrl;
 
 //    Mapped to home page
     @RequestMapping({"/", "/home"})
@@ -44,8 +51,42 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/sendContactus", method = RequestMethod.POST)
-    public ModelAndView sendContactus(){
-        return new ModelAndView();
+    public String sendContactus(@ModelAttribute ContactUs contactUs){
+
+//        logger.info("Send Contact {}",contactUs.getInquiryType());
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("inquiryType", contactUs.getInquiryType());
+        jsonObject.put("title", contactUs.getTitle());
+        jsonObject.put("name", contactUs.getName());
+        jsonObject.put("email", contactUs.getContactEmail());
+        jsonObject.put("mobile", contactUs.getContactNo());
+        jsonObject.put("message", contactUs.getMsg());
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        MultiValueMap<String, String> headers = new LinkedMultiValueMap<String, String>();
+        headers.add("Content-Type", "application/json");
+        HttpEntity<JSONObject> httpEntity = new HttpEntity<JSONObject>(jsonObject, headers);
+
+        try{
+            ReplyFromServer message = restTemplate.postForObject(contactUsUrl, httpEntity, ReplyFromServer.class);
+        }catch (Exception e){
+            logger.info(e.getMessage());
+
+        }
+//        jsonObject.put()
+
+
+        /*
+        * "{
+""inquiryType"":""1,2,3 or 4"",
+""title"":""value"",
+""name"":""value"",
+""email"":""value"",
+""mobile"":""value"",
+""message"":""value""
+}"*/
+        return "redirect:/";
     }
 
 

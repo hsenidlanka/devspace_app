@@ -79,7 +79,7 @@
                             <input class="form-control"  placeholder=" Name" type="text" id="cnameSearch"  >
                         </div>
                         <div class="col-xs-1">
-                            <button type="button" class="btn btn-success" id="filterButton" >
+                            <button type="button" class="btn btn-success" id="filterButtonCustomer" >
                                 <span class="glyphicon glyphicon-search"></span>
                                 <fmt:message key="user.userview.customer.search" bundle="${bundle1}"/>
                             </button>
@@ -162,7 +162,7 @@
                         <label id="lblBlockCustomerName"></label><br>
                     </div>
                 </div>
-                <div style="text-align: center; z-index: 50000; width: 75%; margin: auto;" id="toaster"></div>
+                <div  class="toaster"></div>
 
             </div>
             <div class="modal-footer" align="right">
@@ -316,7 +316,7 @@
                                 <div class="col-xs-6">
                                     <div class="col-xs-12">
                                         <form:input path="username" class="form-control" id="update_username" type="text"
-                                                    style="width: 220px" required="required"/>
+                                                    style="width: 220px" readonly="true"/>
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
@@ -364,17 +364,21 @@
                             </div>
                         </div>
                     </div>
+
+
+                    <form:button class="btn btn-success" type="submit" value="Update" id="btnUpdateCustomer">
+                        <fmt:message key="user.customer.update.form.button" bundle="${bundle1}" />
+                    </form:button>
+                    <form:button class="btn btn-success" type="button" value="cancel" id="btnCnclUpdateStaff" data-dismiss="modal"
+                                 aria-hidden="true">
+                        <fmt:message key="user.block.modal.button.cancel" bundle="${bundle1}" />
+                    </form:button>
+
                 </form:form>
             </div>
 
             <div class="modal-footer" align="right">
-                <button class="btn btn-success" type="button" value="Update" id="btnUpdateCustomer">
-                    <fmt:message key="user.customer.update.form.button" bundle="${bundle1}" />
-                </button>
-                <button class="btn btn-success" type="button" value="cancel" id="btnCnclUpdateStaff" data-dismiss="modal"
-                        aria-hidden="true">
-                    <fmt:message key="user.block.modal.button.cancel" bundle="${bundle1}" />
-                </button>
+
             </div>
         </div>
     </div>

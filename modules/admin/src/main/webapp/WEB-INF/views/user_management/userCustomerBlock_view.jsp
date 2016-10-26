@@ -74,10 +74,10 @@
 
                 <div class="col-xs-4" style="width: 36%">
                     <div class="col-xs-8">
-                        <input class="form-control"  placeholder=" Name" type="text" id="bcname"  >
+                        <input class="form-control"  placeholder=" Name" type="text" id="bcnameSearch"  >
                     </div>
                     <div class="col-xs-1">
-                        <button type="button" class="btn btn-success" >
+                        <button type="button" class="btn btn-success" id="filterButtonCustomerB">
                             <span class="glyphicon glyphicon-search"></span>
                             <fmt:message key="user.userview.customer.search" bundle="${bundle1}"/>
                         </button>
@@ -90,7 +90,7 @@
         <!--Filtering elements to be displayed as checkbox is checked     -->
         <div class="form-group">
             <div class="row">
-                <div class="col-xs-8" id="blockcPeriod"style="display: none; width: 64%" >
+                <div class="col-xs-8" id="blockcPeriod"style="display: none; width: 64%">
                     <div class="col-xs-2"  style="text-align: right">
                         <label class=" control-label">
                             <fmt:message key="user.userview.customer.filter.regDate.from" bundle="${bundle1}"/>
@@ -118,6 +118,7 @@
                 <div class="col-xs-4" style="width: 36%">
                     <div class="col-xs-8">
                         <select class="form-control" id="blockcCity"  style="display: none;">
+                            <option><fmt:message key="user.customer.select" bundle="${bundle1}" /></option>
                             <option><fmt:message key="user.customer.city1" bundle="${bundle1}" /></option>
                             <option><fmt:message key="user.customer.city2" bundle="${bundle1}" /></option>
                             <option><fmt:message key="user.customer.city3" bundle="${bundle1}" /></option>
@@ -342,13 +343,10 @@
                 </form>
             </div>
 
-            <div class="modal-footer" align="right">
-                <button class="btn btn-success" type="button" value="Update" id="btnUpdateCustomer">
-                    <fmt:message key="user.customer.update.form.button" bundle="${bundle1}" />
-                </button>
-                <button class="btn btn-success" type="button" value="cancel" id="btnCnclUpdateStaff" data-dismiss="modal"
+            <div class="modal-footer" style="text-align: center">
+                <button class="btn btn-success" type="button" value="cancel" id="buttonView" data-dismiss="modal"
                         aria-hidden="true">
-                    <fmt:message key="user.block.modal.button.cancel" bundle="${bundle1}" />
+                    <fmt:message key="user.userview.button.ok" bundle="${bundle1}" />
                 </button>
             </div>
         </div>

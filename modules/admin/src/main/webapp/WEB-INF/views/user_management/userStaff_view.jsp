@@ -57,7 +57,7 @@
 
                         </div>
                         <div class="col-xs-1">
-                            <button type="button" class="btn btn-success">
+                            <button type="button" class="btn btn-success" id="filterButtonStaff">
                                 <span class="glyphicon glyphicon-search"></span>
                                 <fmt:message key="user.userview.staff.search" bundle="${bundle1}"/>
                             </button>
@@ -78,7 +78,8 @@
                             </label>
                         </div>
                         <div class="col-xs-8">
-                            <select class="form-control" >
+                            <select class="form-control" id="designation_d" >
+                                <option><fmt:message key="user.customer.select" bundle="${bundle1}" /></option>
                                 <option><fmt:message key="user.staff.designation1" bundle="${bundle1}" /></option>
                                 <option><fmt:message key="user.staff.designation2" bundle="${bundle1}" /></option>
                                 <option><fmt:message key="user.staff.designation3" bundle="${bundle1}" /></option>
@@ -96,7 +97,8 @@
                             </label>
                         </div>
                         <div class="col-xs-8">
-                            <select class="form-control">
+                            <select class="form-control" id="department_d">
+                                <option><fmt:message key="user.customer.select" bundle="${bundle1}" /></option>
                                 <option><fmt:message key="user.staff.department1" bundle="${bundle1}" /></option>
                                 <option><fmt:message key="user.staff.department2" bundle="${bundle1}" /></option>
                                 <option><fmt:message key="user.staff.department3" bundle="${bundle1}" /></option>
@@ -112,7 +114,8 @@
                             </label>
                         </div>
                         <div class="col-xs-8">
-                            <select class="form-control"  >
+                            <select class="form-control" id="branch_d" >
+                                <option><fmt:message key="user.customer.select" bundle="${bundle1}" /></option>
                                 <option><fmt:message key="user.staff.branch1" bundle="${bundle1}"/></option>
                                 <option><fmt:message key="user.staff.branch2" bundle="${bundle1}"/></option>
                                 <option><fmt:message key="user.staff.branch3" bundle="${bundle1}"/></option>
@@ -155,7 +158,8 @@
                         <label id="lblBlockStaffName"></label><br>
                     </div>
                 </div>
-                <div style="text-align: center; z-index: 50000; width: 75%; margin: auto;" id="toaster"></div>
+                <%--<div class="toaster" style="position: absolute; top: 230px; right: 520px;width: 300px;  z-index: 50000;"></div>--%>
+                <toaster toaster-options="{'time-out': 3000,'position-class': 'toast-top-right'}"></toaster>
 
             </div>
             <div class="modal-footer" align="right">

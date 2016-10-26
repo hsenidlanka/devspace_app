@@ -30,10 +30,15 @@
     <bean id="userValidator" class="hsl.devspace.app.admin.usermanagement.spring.validator.UserValidator"/>
 
 
-    <!--It pulls values from a properties file into bean definitions.-->
+    <!--It pulls values from a properties file into bean definitions
+    enable to obtain values in a jsp file or in controller.-->
     <bean id="connectionProperties"
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="location" value="classpath:connectivity.properties ">
+        <property name="locations" >
+            <list>
+                <value>classpath:connectivity.properties</value>
+                <value>classpath:ValidationMessages.properties</value>
+            </list>
 
         </property>
     </bean>
@@ -67,9 +72,5 @@
     </bean>
 
 
-    <!-- Configure the multipart resolver -->
-    <!--<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        &lt;!&ndash; one of the properties available; the maximum file size in bytes &ndash;&gt;
-        <property name="maxUploadSize" value="100000"/>
-    </bean>-->
+
 </beans>

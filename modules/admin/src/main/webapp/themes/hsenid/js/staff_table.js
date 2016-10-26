@@ -124,14 +124,11 @@ $(document).ready(function(){
 
                     $.toaster({priority: 'success', title: 'Success', message: 'Blocked the Staff user successfully '
                     +uname});
-               /*     setTimeout(function(){location.reload();}, 2000);
-                    $("#removeStaffModal").modal('hide');*/
-
+                    $("#removeStaffModal").modal('hide');
 
                 }else{
                     $.toaster({ priority : 'danger', title : 'Error', message : 'Cannot block the Staff user ' +uname});
-                   /* setTimeout(function(){location.reload();}, 2000);
-                    $("#removeStaffModal").modal('hide');*/
+                    $("#removeStaffModal").modal('hide');
                 }
 
             },

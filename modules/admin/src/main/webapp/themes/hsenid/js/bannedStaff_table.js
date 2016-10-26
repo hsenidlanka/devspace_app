@@ -121,12 +121,15 @@ $(document).ready(function(){
             data: {"uname": uname},
             success: function(msg){
                 if(msg == 1){
-                    alert("Unblocked the  user" + uname+" successfully!");
+
+                    $.toaster({priority: 'success', title: 'Success', message: 'Unblocked the Staff user successfully  '+uname});
                     $("#replaceStaffModal").modal('hide');
+                    setTimeout(function(){location.reload();}, 2000);
 
                 }else{
-                    alert("Error in unblocking the user !");
+                    $.toaster({ priority : 'danger', title : 'Error', message : 'Cannot unblock the Staff user ' +uname});
                     $("#replaceStaffModal").modal('hide');
+                    setTimeout(function(){location.reload();}, 2000);
                 }
 
             },

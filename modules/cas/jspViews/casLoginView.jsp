@@ -33,7 +33,7 @@
         </c:when>
     </c:choose>
 
-    <div id="serviceui" class="serviceinfo">
+    <%--<div id="serviceui" class="serviceinfo">
         <table>
             <tr>
                 <td><img src="${registeredServiceLogo}"></td>
@@ -44,7 +44,7 @@
                 </td>
             </tr>
         </table>
-    </div>
+    </div>--%>
     <p/>
 </c:if>
 
