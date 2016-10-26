@@ -7,6 +7,7 @@ import hsl.devspace.app.corelogic.repository.item.ItemRepository;
 import hsl.devspace.app.corelogic.repository.item.ReturnTypeResolver;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +17,10 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.swing.*;
 import java.sql.SQLIntegrityConstraintViolationException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/items")
@@ -135,29 +139,25 @@ public class ItemController {
     @RequestMapping(value = "/edit_item", method = RequestMethod.POST)
     public
     @ResponseBody
-    List<String> retieveEditItem(@RequestParam("itemId") int itemId) {
-
-       /* int e = item.selectItemAndSize(itemId);
-        LOGGER.info("itemId for edit " + itemId + ' ' + "e for edit "+e);
-        return e;*/
+    String retieveEditItem(@RequestParam("itemId") int itemId) {
 
         ReturnTypeResolver e = item.selectItemAndSize(itemId);
         List<Item> lst = e.getSelectedSize();
-
-       // List<Map<String, Object>>  mapList=new ArrayList<Map<String, Object>>();
-
-       // Map<String, String> map=new HashMap<String, String>();
-
-        List<String> sp = new ArrayList<String>();
+        JSONObject object=new JSONObject();
+        LOGGER.info("content of lst  " + lst);
+        LOGGER.info("length of lst  " + lst.size());
 
         for (int i = 0; i < lst.size(); i++) {
             Item it=lst.get(i);
 
-            sp.add(it.getSize());
-            sp.add(it.getPrice());
+            object.put(it.getSize(),it.getPrice());
         }
-        LOGGER.info("itemId for edit " + itemId + ' ' + "e for edit " + e+ "  and sp = " + sp);
-        return sp;
+        LOGGER.info("itemId for edit " + itemId + ' ' + "e for edit " + e+ "  and sp = " + object.toJSONString());
+        LOGGER.info("e for edit " + e);
+        LOGGER.info("sp object = " + object);
+        LOGGER.info("sp  object.toJSONString = " + object.toJSONString());
+
+      return object.toJSONString();
     }
 
     /**

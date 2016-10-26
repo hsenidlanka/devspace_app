@@ -74,7 +74,9 @@ $(document).ready(function () {
             }
         })
     })
-    
+    $('#editModelClose').click(function () {
+        $('#frmEditItem').reset();
+    })
 });
 
 function operateFormatter(value, row, index){
@@ -98,19 +100,64 @@ window.operateEvents = {
 
         var itemId = objct["id"];
         $.ajax({
-            dataType:"JSON",
+            //dataType:"JSON",
+
             type:"POST",
             url:"https://localhost:8443/admin/items/edit_item",
             data:{"itemId": itemId},
             success: function(data){
-                alert(data);
+
+
+                var parsedData=JSON.parse(data);
+
+                //var keyData =Object.keys(parsedData);
+
+                $.each(parsedData, function(key, value) {
+                  //  alert(key + "=" + value);
+
+                    switch (key){
+
+                         case "regular":
+                            $('#chkedtReg').prop("checked",true);
+                            $('#txtEdtPrcReg').prop("disabled",false).val(value);
+                            break;
+                        case "medium":
+                            $('#chkedtMed').prop("checked",true);
+                            $('#txtEdtPrcMed').prop("disabled",false).val(value);
+                            break;
+                         case "large":
+                            $('#chkedtLrg').prop("checked",true);
+                             $('#txtEdtPrcLrg').prop("disabled",false).val(value);
+                            break;
+                         case "other":
+                            $('#chkedtOthr').prop("checked",true);
+                             $('#txtEdtPrcOthr').prop("disabled",false).val(value);
+                            break;
+                        default:
+                            /*$(":checkbox").prop("checked",false);
+                            $(".price").prop("disabled",true);*/
+                            /*$('#itemEditModal').on('hidden',function(){
+                                $('#frmEditItem').reset();
+                            });*/
+                            alert("error");
+                            break;
+                    }
+                });
+                /*for(var ele=0; ele<keyData.length; ele++ ){
+
+                    var price =keyData[ele];
+                    alert(price);
+
+                };*/
+
+                //alert(t.size+" "+ t.price+'  '+t.size+" "+ t.price+'  '+t.size+" "+ t.price);
+
 
                 $("#txtEditName").val(objct["item_name"]); // set item_name field
                 $("#selectCatedt").val(objct["category_name"]); // set category_name as selected
                 setSubCats(objct["category_name"]); // set sub-category name
                 $(":radio[value='" + objct["type"] + "']").prop('checked', true); // set item_type as checked
 
-                /*setPriceSize(itemId);*/
                 $('#itemEditModal').modal('show');
             },
             error:function(a,s,error){

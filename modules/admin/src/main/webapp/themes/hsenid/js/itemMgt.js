@@ -124,6 +124,10 @@ function setSubCats(categoryNm) {
 
 }
 
+    /*$('#editModelClose').click(function () {
+        $('#frmEditItem').reset();
+    })*/
+
 /*
 function setPriceSize(itemId){
     $.ajax({

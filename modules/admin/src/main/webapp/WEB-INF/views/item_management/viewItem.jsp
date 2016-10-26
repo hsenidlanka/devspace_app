@@ -95,12 +95,12 @@
 
 
   <!--Modal for edit item-->
-  <div class="modal fade" id="itemEditModal" style="z-index: 100000">
+  <div class="modal fade" id="itemEditModal" data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header item-modal-header-style">
-          <button class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-pencil"></span></button>
-          <div align="center"><span class="glyphicon glyphicon-trash"></span><fmt:message key="item.deletemodal.title"/>
+          <button id="editModelClose" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove"></span></button>
+          <div align="center"><span class="glyphicon glyphicon-trash"></span><fmt:message key="item.itemedit.panel.heading"/>
           </div>
         </div>
         <form:form class="form-horizontal" role="form" id="frmEditItem" method="post" action="/admin/items/edit_item">
@@ -218,7 +218,7 @@
 
                         <div class="col-xs-5">
                           <label class="checkbox-inline">
-                            <form:checkbox value="regular" class="checkbox" path="size" label="Regular" onclick="document.getElementById('txtEdtPrcReg').disabled=!this.checked;"/>
+                            <form:checkbox id="chkedtReg" value="regular" class="checkbox" path="size" label="Regular" onclick="document.getElementById('txtEdtPrcReg').disabled=!this.checked;"/>
                           </label>
                         </div>
                         <div class="col-xs-7">
@@ -230,7 +230,7 @@
 
                         <div class="col-xs-5">
                           <label class="checkbox-inline">
-                            <form:checkbox value="medium" class="checkbox" path="size" label="Medium" onclick="document.getElementById('txtEdtPrcMed').disabled=!this.checked;"/>
+                            <form:checkbox id="chkedtMed" value="medium" class="checkbox" path="size" label="Medium" onclick="document.getElementById('txtEdtPrcMed').disabled=!this.checked;"/>
                           </label>
                         </div>
                         <div class="col-xs-7">
@@ -242,7 +242,7 @@
 
                         <div class="col-xs-5">
                           <label class="checkbox-inline">
-                            <form:checkbox value="large" class="checkbox" path="size" label="Large" onclick="document.getElementById('txtEdtPrcLrg').disabled=!this.checked;"/>
+                            <form:checkbox id="chkedtLrg" value="large" class="checkbox" path="size" label="Large" onclick="document.getElementById('txtEdtPrcLrg').disabled=!this.checked;"/>
 
                           </label>
                         </div>
@@ -254,7 +254,7 @@
                       <div class="row item-tbl-row" id="edtItmChkbxOthr">
                         <div class="col-xs-5">
                           <label class="checkbox-inline">
-                            <form:checkbox value="other" class="checkbox" path="size" label="Other" onclick="document.getElementById('txtEdtPrcOthr').disabled=!this.checked;"/>
+                            <form:checkbox id="chkedtOthr" value="other" class="checkbox" path="size" label="Other" onclick="document.getElementById('txtEdtPrcOthr').disabled=!this.checked;"/>
 
                           </label>
                         </div>
