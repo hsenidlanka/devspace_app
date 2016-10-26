@@ -625,8 +625,8 @@ public class StaffRepositoryImpl implements UserRepository {
 
     }
 
-    public List<User> filterByDesignation(String designation){
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE designation = ? AND status=1",designation);
+    public List<User> filterByDesignation(String designation,String status){
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE designation = ? AND status=?",designation,status);
         List<User> staffDetails = new ArrayList<User>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -658,8 +658,8 @@ public class StaffRepositoryImpl implements UserRepository {
 
     }
 
-    public List<User> filterByDepartment(String department){
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE department = ? AND status=1",department);
+    public List<User> filterByDepartment(String department,String status){
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE department = ? AND status=?",department,status);
         List<User> staffDetails = new ArrayList<User>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -690,8 +690,8 @@ public class StaffRepositoryImpl implements UserRepository {
         return staffDetails;
 
     }
-    public List<User> filterByBranch(String branch){
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE branch = ? AND status=1",branch);
+    public List<User> filterByBranch(String branch,String status){
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE branch = ? AND status=?",branch,status);
         List<User> staffDetails = new ArrayList<User>();
 
         for (int i = 0; i < mp.size(); i++) {

@@ -486,17 +486,17 @@ public  class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<User> filterByDepartment(String department) {
+    public List<User> filterByDepartment(String department,String status) {
         return null;
     }
 
     @Override
-    public List<User> filterByDesignation(String designation) {
+    public List<User> filterByDesignation(String designation,String status) {
         return null;
     }
 
     @Override
-    public List<User> filterByBranch(String branch) {
+    public List<User> filterByBranch(String branch,String status) {
         return null;
     }
 
