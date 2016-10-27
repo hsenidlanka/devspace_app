@@ -176,10 +176,11 @@ public class StaffRepositoryImpl implements UserRepository {
     @Override
     public int update(User user) throws TransientDataAccessResourceException, SQLException {
 
-        String sql = "UPDATE staff SET username=? password = ? first_name=? last_name=? email=? mobile=? address_line1=? address_line2=? address_line3=? designation=? department=? branch=? WHERE id = ? ";
+
+        String sql = "UPDATE staff SET password =sha1(?), first_name=? ,last_name=? ,email=?, mobile=? ,address_line1=?, address_line2=? ,address_line3=?, designation=?, department=? ,branch=? WHERE username = ? ";
         log.info("going to update");
-        int count = jdbcTemplate.update(sql, new Object[]{user.getUsername(), user.getPassword(), user.getFirstName(), user.getLastName(), user.getEmail(),
-                user.getMobile(), user.getAddressL1(), user.getAddressL2(), user.getAddressL3(), user.getDesignation(), user.getDepartment(), user.getBranch(), user.getId()}, Integer.class);
+        int count = jdbcTemplate.update(sql, new Object[]{ user.getPassword(), user.getFirstName(), user.getLastName(), user.getEmail(),
+                user.getMobile(), user.getAddressL1(), user.getAddressL2(), user.getAddressL3(), user.getDesignation(), user.getDepartment(), user.getBranch(), user.getUsername()});
         log.info("{}", count);
         return count;
     }
@@ -188,8 +189,8 @@ public class StaffRepositoryImpl implements UserRepository {
      * update group_staff table data on staff table updates
      */
     public int updateGroupStaffWithStaffModifications(User user) {
-        String sql = "UPDATE group_staff SET group_id=(SELECT id FROM `group` WHERE `name`=?) WHERE staff_id=?";
-        int count = jdbcTemplate.update(sql, new Object[]{user.getDesignation(), user.getId()});
+        String sql = "UPDATE group_staff SET group_id=(SELECT id FROM `group` WHERE name=?) WHERE staff_id=(SELECT id from staff WHERE username=?)";
+        int count = jdbcTemplate.update(sql, new Object[]{user.getDesignation(), user.getUsername()});
         log.info("{} staff group", count);
         return count;
     }
