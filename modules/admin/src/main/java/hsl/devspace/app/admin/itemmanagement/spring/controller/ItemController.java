@@ -179,6 +179,10 @@ public class ItemController {
             List<String> sizelistEdit = new ArrayList<String>(Arrays.asList(itmSizeEdit.split(",")));
             List<String> pricelistEdit = new ArrayList<String>(Arrays.asList(itmPriceEdit.split(",")));
 
+            LOGGER.trace("asList size" + sizelistEdit);
+            LOGGER.trace("asList size()" + sizelistEdit.size());
+            LOGGER.trace("asList price" + pricelistEdit);
+
             List<Item> edittedList = new ArrayList<Item>();
 
             for (int a = 0; a < sizelistEdit.size(); a++) {
