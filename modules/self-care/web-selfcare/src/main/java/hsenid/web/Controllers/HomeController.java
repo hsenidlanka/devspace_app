@@ -74,22 +74,14 @@ public class HomeController {
             logger.info(e.getMessage());
 
         }
-//        jsonObject.put()
 
-
-        /*
-        * "{
-""inquiryType"":""1,2,3 or 4"",
-""title"":""value"",
-""name"":""value"",
-""email"":""value"",
-""mobile"":""value"",
-""message"":""value""
-}"*/
         return "redirect:/";
     }
 
-
+    @RequestMapping("/updateuser")
+    public String updateUser() {
+        return "/home/updateuser";
+    }
 
 
 
