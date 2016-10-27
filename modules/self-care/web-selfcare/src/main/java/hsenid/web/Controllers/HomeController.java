@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @PropertySource("classpath:config.properties")
 /*
@@ -79,10 +81,21 @@ public class HomeController {
     }
 
     @RequestMapping("/updateuser")
-    public String updateUser() {
+    public String updateUser(HttpSession session) {
+        logger.info("update user {}", session.getAttribute("username"));
+
         return "/home/updateuser";
     }
 
+    @RequestMapping("/logout")
+    public String logout(HttpSession session){
+
+        if(session!=null){
+            session.invalidate();
+        }
+        return "redirect:/";
+
+    }
 
 
     @RequestMapping("/aboutus")

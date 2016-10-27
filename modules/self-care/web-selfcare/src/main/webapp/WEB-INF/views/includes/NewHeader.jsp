@@ -41,8 +41,8 @@
             <button class="btn btn-lg dropdown-toggle" type="button" data-toggle="dropdown">${name}<span class="caret"></span></button>
 
             <ul class="dropdown-menu ">
-                <li><a class="btn-lg" href="#">Update Profile</a></li>
-                <li><a class="btn-lg" href="#">Log Out</a></li>
+                <li><a class="btn-lg" href="/web-selfcare/updateuser">Update Profile</a></li>
+                <li><a class="btn-lg" href="/web-selfcare/logout">Log Out</a></li>
             </ul>
         </div>
 
