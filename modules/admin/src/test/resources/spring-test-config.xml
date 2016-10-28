@@ -11,7 +11,7 @@
     <context:component-scan base-package="hsl.devspace.app.admin.test" />
 
 
-    <bean id="userController" class="hsl.devspace.app.admin.usermanagement.spring.controller.UserController">
+    <bean id="userController" class="hsl.devspace.app.admin.test.usermanagement.spring.controller.UserController">
     </bean>
     <bean id="staffRepository" class="hsl.devspace.app.corelogic.repository.user.StaffRepositoryImpl">
     </bean>
