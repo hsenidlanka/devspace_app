@@ -77,6 +77,26 @@ $(document).ready(function () {
         $(this).find('form')[0].reset();
         $(".price").prop("disabled", true);
     });
+
+    $("#txtViewSearchItem").keyup(function (){
+
+      var searchItm =   $(this).val();
+        $.ajax({
+            type: "POST",
+            url: "https://localhost:8443/admin/items/typeahedItmNm",
+            dataType: "json",
+            data: {"itemName": searchItm},
+            success: function (data) {
+
+                $('#txtViewSearchItem').typeahead({
+                    source: data
+                }).focus();
+            },
+            error: function(er){
+                alert("error inytpeahead ",er);
+            }
+        })
+    });
 });
 
 function operateFormatter(value, row, index) {
@@ -163,9 +183,3 @@ window.operateEvents = {
     }
 };
 
-
-/*TO DO
- *
- * validate checkbox unclick-->textbox.val = " "
- *
- * */

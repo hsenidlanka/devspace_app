@@ -255,10 +255,12 @@ public class ItemController {
     /*
     * typeahead function for item name
     **/
-/*
     @RequestMapping(value = "/typeahedItmNm", method = RequestMethod.POST)
-    public @ResponseBody List<Map<String, Object>>
-*/
+    public @ResponseBody List<Map<String, Object>> typeaheadName(@RequestParam("itemName") String itemName){
+
+        LOGGER.trace("typeaheaad "+ item.retrieveSelectedItemDetails(itemName) );
+        return item.retrieveSelectedItemDetails(itemName);
+    }
 
     //controller method to get size and price of selected item
  /*   @RequestMapping(value = "/getPriceSize", method = RequestMethod.POST)
