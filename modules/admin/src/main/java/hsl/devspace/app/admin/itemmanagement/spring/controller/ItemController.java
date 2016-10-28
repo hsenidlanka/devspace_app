@@ -231,10 +231,6 @@ public class ItemController {
     /**
      * Delete Item view
      */
-    @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public ModelAndView showDeleteItem() {
-        return new ModelAndView("itemDelete", "deleteItem", new Item());
-    }
 
     @RequestMapping(value = "/delete_item", method = RequestMethod.POST)
     public
@@ -245,7 +241,9 @@ public class ItemController {
         return item.deleteItem(itemName);
     }
 
-    //controller method to load relevant subcategory
+    /**
+    * controller method to load relevant subcategory for ajax calls
+    **/
     @RequestMapping(value = "/getSubcats", method = RequestMethod.POST)
     public
     @ResponseBody

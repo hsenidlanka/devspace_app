@@ -88,15 +88,6 @@ $(document).ready(function () {
         setSubCats(categoryNm);
     });
 
-
-    /*
-     * function for enabling text-boxes onclick of checkbox in add Item
-     **/
-    $(".sizechkbx").click(function () {
-
-        $(this).parent().parent().next().find(".form-control").prop("disabled", !$(this).prop("checked"));
-    });
-
 });
 
 /*
@@ -121,10 +112,12 @@ function setSubCats(categoryNm) {
             alert("error " + e);
         }
     });
-
 }
-/*TO DO
- *
- * validate checkbox unclick-->textbox.val = " "
- *
- * */
+
+/**
+ * validate checkbox unclick-->textbox value = " " & disabling
+ */
+function disableTxt(t, textBoxId) {
+    $("#" + textBoxId).prop("disabled", !$(t).prop("checked"));
+    $("#" + textBoxId).val(" ");
+}
