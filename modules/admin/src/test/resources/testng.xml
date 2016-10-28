@@ -4,13 +4,13 @@
 <suite name="Suite1">
     <test name="test1">
         <classes>
-            <class name="hsl.devspace.app.admin.test.UserControllerTest"/>
+            <class name="hsl.devspace.app.admin.test.usermanagement.UserControllerTest"/>
         </classes>
     </test>
 
-   <!-- <test name="test2">
+   <!-- <usermanagement name="test2">
         <classes>
             <class name="translater.YandexIntegraterTest"/>
         </classes>
-    </test>-->
+    </usermanagement>-->
 </suite>
