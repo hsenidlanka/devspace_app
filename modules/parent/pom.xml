@@ -47,6 +47,8 @@
         <core-logic.version>1.0.3</core-logic.version>
         <joda-time.version>2.9.4</joda-time.version>
         <validation-api.version>1.1.0.Final</validation-api.version>
+        <spring-test.version>4.3.3.RELEASE</spring-test.version>
+        <testng.version>6.9.10</testng.version>
 
 
         <RWD_LOG_ROOT>/home/hsenid/Documents/MAVEN/devspace_app/modules/admin</RWD_LOG_ROOT>
