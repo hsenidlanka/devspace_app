@@ -94,7 +94,7 @@
 
               <div class="col-xs-4">
                 <button type="button" class="btn btn-success" id="btnAddSubCat"
-                        onclick="window.location='addcategory.html'"><span
+                        onclick="window.location='#'"><span
                         class="glyphicon glyphicon-plus"></span><fmt:message key="item.itemadd.form.subcategory.addnew"/></button>
               </div>
             </div>
@@ -133,7 +133,7 @@
 
                   <div class="col-xs-5">
                     <label class="checkbox-inline">
-                      <form:checkbox value="regular" class="checkbox sizechkbx" path="size" label="Regular" id="chkReg"/>
+                      <form:checkbox value="regular" class="checkbox sizechkbx" path="size" label="Regular" id="chkReg" onclick="disableTxt(this, 'txtRegPrc')"/>
                     </label>
                   </div>
                   <div class="col-xs-7">
@@ -145,7 +145,7 @@
 
                   <div class="col-xs-5">
                     <label class="checkbox-inline">
-                      <form:checkbox value="medium" class="checkbox sizechkbx" path="size" label="Medium"/>
+                      <form:checkbox value="medium" class="checkbox sizechkbx" path="size" label="Medium" onclick="disableTxt(this, 'txtMedPrc')"/>
                     </label>
                   </div>
                   <div class="col-xs-7">
@@ -157,7 +157,7 @@
 
                   <div class="col-xs-5">
                     <label class="checkbox-inline">
-                      <form:checkbox value="large" class="checkbox sizechkbx" path="size" label="Large" />
+                      <form:checkbox value="large" class="checkbox sizechkbx" path="size" label="Large" onclick="disableTxt(this, 'txtLrgPrc')"/>
                     </label>
                   </div>
                   <div class="col-xs-7">

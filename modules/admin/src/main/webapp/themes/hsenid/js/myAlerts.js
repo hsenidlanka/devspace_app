@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-    $('#btnAddNewPkg').click(function () {
+    $('#btnAddNewPkg1').click(function () {
 
         //if success
        // $.toaster({ priority : 'success', title : 'Success', message : 'Added  new package .'});
@@ -9,7 +9,7 @@ $(document).ready(function(){
         $.toaster({ priority : 'danger', title : 'Error', message : 'Cannot add package. Check again ! '})
     })
 
-    $('#btnUpdtPkgDelt').click(function () {
+    $('#btnUpdtPkgDelt1').click(function () {
         //if success
         $.toaster({priority: 'success', title: 'Success', message: 'Package updates done .'})
 
@@ -18,7 +18,7 @@ $(document).ready(function(){
 
     })
 
-    $('#btnAddItem').click(function () {
+    $('#btnAddItem1').click(function () {
         //if success
         $.toaster({priority: 'success', title: 'Success', message: 'Added new item .'})
 
@@ -27,7 +27,7 @@ $(document).ready(function(){
 
     })
 
-    $('#btnEditItem').click(function (){
+    $('#btnEditItem1').click(function (){
 
         //if success
         $.toaster({priority: 'success', title: 'Success', message: 'Updated item details .'})

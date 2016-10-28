@@ -33,14 +33,9 @@ $(document).ready(function () {
             title: 'Type',
             sortable: true
         }, {
-            field: 'price',
-            title: 'Item Price',
-            align: 'right',
-            sortable: true
-        }, {
             field: 'description',
-            title: 'Item desc',
-            align: 'right',
+            title: 'Item description',
+            align: 'left',
             sortable: true
         },
             {
@@ -67,14 +62,12 @@ $(document).ready(function () {
             success: function (data) {
                 $.toaster({priority: 'success', title: 'Success', message: 'Deleted the item  ' + itemName});
                 setTimeout(function () {
-                    location.reload();
-                }, 2000);
+                    location.reload(); }, 3000);
             },
             error: function (e) {
                 $.toaster({priority: 'danger', title: 'Error', message: 'Cannot delete the item ' + itemName});
                 setTimeout(function () {
-                    location.reload();
-                }, 2000);
+                    location.reload(); }, 3000);
             }
         })
     });

@@ -166,6 +166,38 @@ paths:
             type: array
             items:
               $ref: '#/definitions/error-message'
+              
+  /customers/update:
+    post:
+      description: Register new user.
+      tags:
+        - customer
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          description: User object to update profile
+          required: true
+          schema:
+            $ref: "#/definitions/user"
+            
+      responses:
+        '201':
+          description: Profile updated
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/success-message'
+              
+        '415':
+          description: Media type should be application/json
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/error-message'      
     
   /categories/list:
     get: 

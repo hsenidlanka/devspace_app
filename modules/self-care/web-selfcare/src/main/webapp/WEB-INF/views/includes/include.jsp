@@ -7,7 +7,7 @@
 <fmt:setLocale value="en"/>
 <fmt:setBundle basename="messages" var="lang"/>
 
-<script src="<c:url value="/resources/js/jquery-2.2.4.min.js"/>"></script>
+<script src="<c:url value="/resources/js/jquery-1.9.1.js"/>"></script>
 
 <script src="<c:url value="/resources/js/bootstrap.min.js"/>" ></script>
 <link href="<c:url value="/resources/bootstrap-3.3.7/css/bootstrap.min_spacelab.css"/>" rel="stylesheet" integrity="sha384-L/tgI3wSsbb3f/nW9V6Yqlaw3Gj7mpE56LWrhew/c8MIhAYWZ/FNirA64AVkB5pI" crossorigin="anonymous">

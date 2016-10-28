@@ -153,9 +153,9 @@
                         </label>
                       </div>
                       <div class="col-xs-8">
-                        <select class="form-control" id="slctEditSubCat">
+                        <form:select class="form-control" id="slctEditSubCat" path="subCategoryName">
 
-                        </select>
+                        </form:select>
                       </div>
                   </div>
                 </div>
@@ -199,7 +199,7 @@
 
                         <div class="col-xs-5">
                           <label class="checkbox-inline">
-                            <form:checkbox id="chkedtReg" value="regular" class="checkbox aa" path="size" label="Regular" onclick="document.getElementById('txtEdtPrcReg').disabled=!this.checked;"/>
+                            <form:checkbox id="chkedtReg" value="regular" class="checkbox aa" path="size" label="Regular" onclick="disableTxt(this, 'txtEdtPrcReg')"/>
                           </label>
                         </div>
                         <div class="col-xs-7">
@@ -211,7 +211,7 @@
 
                         <div class="col-xs-5">
                           <label class="checkbox-inline">
-                            <form:checkbox id="chkedtMed" value="medium" class="checkbox aa" path="size" label="Medium" onclick="document.getElementById('txtEdtPrcMed').disabled=!this.checked;"/>
+                            <form:checkbox id="chkedtMed" value="medium" class="checkbox aa" path="size" label="Medium" onclick="disableTxt(this, 'txtEdtPrcMed')"/>
                           </label>
                         </div>
                         <div class="col-xs-7">
@@ -223,7 +223,7 @@
 
                         <div class="col-xs-5">
                           <label class="checkbox-inline">
-                            <form:checkbox id="chkedtLrg" value="large" class="checkbox aa" path="size" label="Large" onclick="document.getElementById('txtEdtPrcLrg').disabled=!this.checked;"/>
+                            <form:checkbox id="chkedtLrg" value="large" class="checkbox aa" path="size" label="Large" onclick="disableTxt(this, 'txtEdtPrcLrg')"/>
 
                           </label>
                         </div>
@@ -235,7 +235,7 @@
                       <div class="row item-tbl-row" id="edtItmChkbxOthr">
                         <div class="col-xs-5">
                           <label class="checkbox-inline">
-                            <form:checkbox id="chkedtOthr" value="other" class="checkbox aa" path="size" label="Other" onclick="document.getElementById('txtEdtPrcOthr').disabled=!this.checked;"/>
+                            <form:checkbox id="chkedtOthr" value="other" class="checkbox aa" path="size" label="Other" onclick="disableTxt(this, 'txtEdtPrcOthr')"/>
 
                           </label>
                         </div>

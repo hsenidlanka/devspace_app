@@ -15,6 +15,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import java.sql.SQLException;
 
 /**
  * Created by Kasun Dinesh on 6/29/16.
@@ -51,7 +52,9 @@ public class CustomerService {
             jsonObject.put("Email", user.getEmail());
             jsonObject.put("AddressLine01", user.getAddressL1());
             jsonObject.put("AddressLine02", user.getAddressL2());
-            jsonObject.put("AddressLine03", user.getAddressL3());
+            if (user.getAddressL3() != null) {
+                jsonObject.put("addressLine03", user.getAddressL3());
+            }
             jsonObject.put("mobile", user.getMobile());
             successMessage.addData(jsonObject);
 
@@ -82,7 +85,6 @@ public class CustomerService {
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("username", user.getUsername());
-            jsonObject.put("password", user.getPassword());
             successMessage.addData(jsonObject);
 
             String url = uriInfo.getAbsolutePath().toString();
@@ -132,5 +134,47 @@ public class CustomerService {
         return Response.status(Response.Status.OK).entity(successMessage)
                 .header("Access-Control-Allow-Origin", propertyReader.readProperty("Access-Control-Allow-Origin"))
                 .build();
+    }
+
+    // Update user profile
+    @PUT
+    @Path("/update")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updateCustomerProfile(User user, @javax.ws.rs.core.Context UriInfo uriInfo) {
+        Response response;
+        try {
+            int status = userRepository.update(user);
+            if(status>0){
+                SuccessMessage successMessage = new SuccessMessage();
+                successMessage.setStatus("success");
+                successMessage.setCode(Response.Status.OK.getStatusCode());
+                successMessage.setMessage("user profile updated");
+
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("title", user.getTitle());
+                jsonObject.put("firstName", user.getFirstName());
+                jsonObject.put("lastName", user.getLastName());
+                jsonObject.put("username", user.getUsername());
+                jsonObject.put("Email", user.getEmail());
+                jsonObject.put("AddressLine01", user.getAddressL1());
+                jsonObject.put("AddressLine02", user.getAddressL2());
+                if (user.getAddressL3() != null) {
+                    jsonObject.put("addressLine03", user.getAddressL3());
+                }
+                jsonObject.put("mobile", user.getMobile());
+                successMessage.addData(jsonObject);
+
+                String url = uriInfo.getAbsolutePath().toString();
+                successMessage.addLink(url, "self");
+
+                response = Response.status(Response.Status.CREATED).entity(successMessage).build();
+            }else{
+                throw new WebApplicationException(400);
+            }
+        } catch (SQLException e) {
+            throw new WebApplicationException(500);
+        }
+        return response;
     }
 }
