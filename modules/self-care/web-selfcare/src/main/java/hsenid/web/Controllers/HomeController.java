@@ -2,6 +2,7 @@ package hsenid.web.Controllers;
 
 import hsenid.web.models.ContactUs;
 import hsenid.web.models.ReplyFromServer;
+import hsenid.web.models.UpdateUser;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 @PropertySource("classpath:config.properties")
@@ -43,6 +46,18 @@ public class HomeController {
     @RequestMapping("/locations")
     public String locations() {
         return "/home/locations";
+    }
+
+    @RequestMapping("/sendUpdateUser")
+    public String sendUpdateUser(@ModelAttribute UpdateUser updateUser ){
+
+        return "";
+    }
+
+    @RequestMapping(value = "/updateuser", method = RequestMethod.GET)
+    public ModelAndView updateUser() {
+//        return "/home/updateuser";
+        return new ModelAndView("/home/updateuser", "updateuser", new UpdateUser());
     }
 
     @RequestMapping(value = "/contactus", method = RequestMethod.GET)
@@ -78,11 +93,15 @@ public class HomeController {
         return "redirect:/";
     }
 
-    @RequestMapping("/updateuser")
-    public String updateUser() {
-        return "/home/updateuser";
-    }
+    @RequestMapping("/logout")
+    public String logout(HttpSession session){
 
+        if(session!=null){
+            session.invalidate();
+        }
+        return "redirect:/";
+
+    }
 
 
     @RequestMapping("/aboutus")

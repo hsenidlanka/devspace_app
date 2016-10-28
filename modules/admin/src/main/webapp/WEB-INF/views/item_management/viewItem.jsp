@@ -153,9 +153,9 @@
                         </label>
                       </div>
                       <div class="col-xs-8">
-                        <select class="form-control" id="slctEditSubCat">
+                        <form:select class="form-control" id="slctEditSubCat" path="subCategoryName">
 
-                        </select>
+                        </form:select>
                       </div>
                   </div>
                 </div>

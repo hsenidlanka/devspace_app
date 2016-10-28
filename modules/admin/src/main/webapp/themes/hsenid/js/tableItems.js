@@ -33,14 +33,9 @@ $(document).ready(function () {
             title: 'Type',
             sortable: true
         }, {
-            field: 'price',
-            title: 'Item Price',
-            align: 'right',
-            sortable: true
-        }, {
             field: 'description',
-            title: 'Item desc',
-            align: 'right',
+            title: 'Item description',
+            align: 'left',
             sortable: true
         },
             {
