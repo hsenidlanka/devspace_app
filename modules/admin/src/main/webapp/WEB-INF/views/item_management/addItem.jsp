@@ -94,7 +94,7 @@
 
               <div class="col-xs-4">
                 <button type="button" class="btn btn-success" id="btnAddSubCat"
-                        onclick="window.location='addcategory.html'"><span
+                        onclick="window.location='#'"><span
                         class="glyphicon glyphicon-plus"></span><fmt:message key="item.itemadd.form.subcategory.addnew"/></button>
               </div>
             </div>

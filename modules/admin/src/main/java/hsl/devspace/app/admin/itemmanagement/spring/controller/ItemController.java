@@ -53,50 +53,55 @@ public class ItemController {
 
     //For submitting the add new item
     @RequestMapping(value = "/add_item")
-    public ModelAndView addItem(@ModelAttribute("newItem") Item newItem) throws SQLIntegrityConstraintViolationException {
+    public ModelAndView addItem(@ModelAttribute("newItem") Item newItem) {
 
-        String itemNm = newItem.getItemName();
-        String itemPrice = newItem.getPrice();
-        String itemSize = newItem.getSize();
+        try {
+            String itemNm = newItem.getItemName();
+            String itemPrice = newItem.getPrice();
+            String itemSize = newItem.getSize();
 
-        LOGGER.trace(itemPrice + " item price");
-        LOGGER.trace(itemSize + " item size");
-        List<String> sizelist = new ArrayList<String>(Arrays.asList(itemSize.split(",")));
-        List<String> pricelist = new ArrayList<String>(Arrays.asList(itemPrice.split(",")));
+            LOGGER.trace(itemPrice + " item price");
+            LOGGER.trace(itemSize + " item size");
+            List<String> sizelist = new ArrayList<String>(Arrays.asList(itemSize.split(",")));
+            List<String> pricelist = new ArrayList<String>(Arrays.asList(itemPrice.split(",")));
 
-        List<Item> items = new ArrayList<Item>();
+            List<Item> items = new ArrayList<Item>();
 
-        for (int s = 0; s < sizelist.size(); s++) {
+            for (int s = 0; s < sizelist.size(); s++) {
 
-            Item listItem = new Item();
-            listItem.setSize(sizelist.get(s));
-            listItem.setPrice(pricelist.get(s));
-            items.add(listItem);
-        }
-
-        boolean uniqueItemNm = item.checkAvailability(itemNm);
-        if (!uniqueItemNm) {
-            int a = item.addItem(newItem, items);
-            if (a != 1) {
-                JOptionPane.showMessageDialog(null, "Server-side error. Cannot add the item !", "Error !",
-                        JOptionPane.ERROR_MESSAGE);
-                LOGGER.error("Server-side error in adding item " + itemNm);
-            } else {
-                JOptionPane.showMessageDialog(null, "Added new item " + itemNm, "Success",
-                        JOptionPane.INFORMATION_MESSAGE);
-                LOGGER.info("added New Item to database " + itemNm);
-                return new ModelAndView(new RedirectView("add"));
+                Item listItem = new Item();
+                listItem.setSize(sizelist.get(s));
+                listItem.setPrice(pricelist.get(s));
+                items.add(listItem);
             }
-        } else {
-            JOptionPane.showMessageDialog(null,
-                    "Item name is already exists! " + itemNm, "Warning ",
-                    JOptionPane.WARNING_MESSAGE);
 
-            newItem.setPrice(" ");
-            LOGGER.trace("after clear price" + itemPrice);
-            newItem.setSize(" ");
-            LOGGER.trace("after clear size" + itemSize);
-            return new ModelAndView("item_management/addItem", "command", newItem);
+            boolean uniqueItemNm = item.checkAvailability(itemNm);
+            if (!uniqueItemNm) {
+                int a = item.addItem(newItem, items);
+                if (a != 1) {
+                    JOptionPane.showMessageDialog(null, "Server-side error. Cannot add the item !", "Error !",
+                            JOptionPane.ERROR_MESSAGE);
+                    LOGGER.error("Server-side error in adding item " + itemNm);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Added new item " + itemNm, "Success",
+                            JOptionPane.INFORMATION_MESSAGE);
+                    LOGGER.info("added New Item to database " + itemNm);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null,
+                        "Item name is already exists! " + itemNm, "Warning ",
+                        JOptionPane.WARNING_MESSAGE);
+
+                newItem.setPrice(" ");
+                LOGGER.trace("after clear price" + itemPrice);
+                newItem.setSize(" ");
+                LOGGER.trace("after clear size" + itemSize);
+                return new ModelAndView("item_management/addItem", "command", newItem);
+            }
+        }catch (Exception ex){
+            JOptionPane.showMessageDialog(null, "Error occured in adding item !", "Error !",
+                    JOptionPane.ERROR_MESSAGE);
+            LOGGER.error("Error in add item "+ ex.getMessage());
         }
         return new ModelAndView(new RedirectView("add"));
     }
@@ -113,6 +118,7 @@ public class ItemController {
         modelView.addObject("listCatEdit", listCatEdit);
         modelView.addObject("command", new Item());
         modelView.setViewName("/item_management/viewItem");
+        LOGGER.trace("list test "+ listCatEdit);
 
         return modelView;
     }
@@ -122,6 +128,7 @@ public class ItemController {
     public
     @ResponseBody
     List<Map<String, Object>> viewItem() {
+        LOGGER.info((item.viewAllItemDetails()) + " ffsf ");
         return item.viewAllItemDetails();
     }
 
@@ -130,14 +137,14 @@ public class ItemController {
      * Edit Item view
      */
 
-  /*  @RequestMapping(value = "/edit", method = RequestMethod.GET)
+    @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public ModelAndView showEditItem() {
 
         return new ModelAndView("item_management/editItem", "command", new Item());
-    }*/
+    }
 
     //
-    //* retrieving values of a selected item to edit form from the view table
+    //retrieving values of a selected item to edit form from the view table
     //
     @RequestMapping(value = "/edit_item", method = RequestMethod.POST)
     public
@@ -164,7 +171,7 @@ public class ItemController {
     }
 
     @RequestMapping(value = "/update_item", method = RequestMethod.POST)
-    public ModelAndView updateItem(@ModelAttribute("updateItem")Item itemUpdate) {
+    public ModelAndView updateItem(@ModelAttribute("itemUpdate") Item itemUpdate) {
 
         try {
             int itmId = itemUpdate.getItemId();
@@ -195,27 +202,28 @@ public class ItemController {
             LOGGER.trace("itemUpdate object " + itemUpdate);
             LOGGER.error("edittedList err " + edittedList);
             LOGGER.error("itemUpdate err " + itemUpdate);
+            LOGGER.trace("itemUpdate category " + itemUpdate.getCategoryName());
+            LOGGER.trace("itemUpdate sub-category " + itemUpdate.getSubCategoryName());
 
             int i = item.updateItem(itemUpdate, edittedList);
-            LOGGER.trace("  info i edit ", i);
-            LOGGER.error(String.valueOf(i), "  error in i edit", i);
+            LOGGER.trace(String.valueOf(i),"  info i edit ", i);
+            LOGGER.error("  error in i edit", i);
             if (i != 1) {
                 JOptionPane.showMessageDialog(null, "Server-side error. Cannot update the item !", "Error !",
                         JOptionPane.ERROR_MESSAGE);
                 LOGGER.error("Server-side error in updating item " + itmName);
-                return new ModelAndView(new RedirectView("view"));
             }
             else {
                 JOptionPane.showMessageDialog(null, "Updated item details" + itmName, "Success",
                         JOptionPane.INFORMATION_MESSAGE);
-                LOGGER.info("updated item successfully " + itmName);
-                return new ModelAndView(new RedirectView("view"));
-            }
-            //return new ModelAndView(new RedirectView("item_management/view"));
-        }catch (Exception er){
-            LOGGER.error("Exception "+er);
-        }
 
+                LOGGER.trace("itemUpdate category after" + itemUpdate.getCategoryName());
+                LOGGER.trace("itemUpdate sub-category after" + itemUpdate.getSubCategoryName());
+                LOGGER.info("updated item successfully " + itmName);
+            }
+        }catch (Exception er){
+            LOGGER.error("Exception "+er.getMessage());
+        }
         return new ModelAndView(new RedirectView("view"));
     }
 
@@ -247,16 +255,16 @@ public class ItemController {
     }
 
     //controller method to get size and price of selected item
-    @RequestMapping(value = "/getPriceSize", method = RequestMethod.POST)
+ /*   @RequestMapping(value = "/getPriceSize", method = RequestMethod.POST)
     public
     @ResponseBody
     ReturnTypeResolver getPriceSize(@RequestParam("itemId") int itemId) {
 
-       /* LOGGER.trace("itemId for price"+ itemId);
-        return item.selectItemAndSize(itemId);*/
+       *//* LOGGER.trace("itemId for price"+ itemId);
+        return item.selectItemAndSize(itemId);*//*
 
         LOGGER.trace("itemId for price" + itemId);
         return item.selectItemAndSize(itemId);
-    }
+    }*/
 
 }
