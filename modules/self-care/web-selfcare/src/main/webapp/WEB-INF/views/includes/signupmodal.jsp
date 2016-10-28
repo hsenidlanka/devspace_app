@@ -37,10 +37,10 @@
 
                                     <div class="col-sm-5">
                                         <label class="radio-inline">
-                                            <input type="radio" required="" name="title" data-error-msg="Select the Title" value="Mr."><fmt:message key="signup.mr" bundle="${lang}" />
+                                            <input type="radio" required="" name="title" data-error-msg="Select the Title" value="Mr"><fmt:message key="signup.mr" bundle="${lang}" />
                                         </label>
                                         <label class="radio-inline">
-                                            <input type="radio" required="" name="title" data-error-msg="Select the Title" value="Mrs."><fmt:message key="signup.mrs" bundle="${lang}"/>
+                                            <input type="radio" required="" name="title" data-error-msg="Select the Title" value="Mrs"><fmt:message key="signup.mrs" bundle="${lang}"/>
                                         </label>
                                         <label class="radio-inline" >
                                             <input type="radio" required="" name="title" data-error-msg="Select the Title" value="Miss"><fmt:message key="signup.miss" bundle="${lang}"/>

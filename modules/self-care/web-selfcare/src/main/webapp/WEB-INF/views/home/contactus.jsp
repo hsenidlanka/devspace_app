@@ -10,7 +10,6 @@
     <script src="<c:url value="/resources/js/contactus_validate.js"/>" ></script>
     <script src="<c:url value="/resources/js/loader.js"/>" ></script>
     <script src="<c:url value="/resources/js/validate-inputs.js"/>" ></script>
-    <%--<script src="<c:url value="/resources/js/contactus.js"/>" type="text/javascript"></script>--%>
 
 </head>
 <div class="loader-anim"></div>

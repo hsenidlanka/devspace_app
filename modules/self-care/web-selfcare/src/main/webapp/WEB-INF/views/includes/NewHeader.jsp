@@ -12,10 +12,10 @@
     </div>
     <div class="col-sm-8">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="menu"><fmt:message key="new.header.menu" bundle="${lang}"/></a></li>
-        <li><a href="locations"><fmt:message key="new.header.location" bundle="${lang}"/></a></li>
-        <li><a href="contactus"><fmt:message key="new.header.contact" bundle="${lang}"/></a></li>
-        <li><a href="aboutus"><fmt:message key="new.header.about" bundle="${lang}"/></a></li>
+        <li><a href="/web-selfcare/menu"><fmt:message key="new.header.menu" bundle="${lang}"/></a></li>
+        <li><a href="/web-selfcare/locations"><fmt:message key="new.header.location" bundle="${lang}"/></a></li>
+        <li><a href="/web-selfcare/contactus"><fmt:message key="new.header.contact" bundle="${lang}"/></a></li>
+        <li><a href="/web-selfcare/aboutus"><fmt:message key="new.header.about" bundle="${lang}"/></a></li>
         <li>
 
           <a href="shopping-cart"><img src="<c:url value="/resources/images/shopping-cart.png"/>"

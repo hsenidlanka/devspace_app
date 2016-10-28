@@ -30,11 +30,18 @@ import javax.servlet.http.HttpSession;
 @PropertySource("classpath:config.properties")
 @SessionAttributes({"username", "name", "email"})
 public class LoginController {
+
     static String email;
     static String name;
     static String mobile;
+    static String firstName;
+    static String lastName;
+    static String addr1;
+    static String addr2;
+    static String addr3;
+    static String title;
 
-//    Defining logger
+    //    Defining logger
     final static Logger logger = LoggerFactory.getLogger(LoginController.class);
 
 //    Setting properties from config.properties file
@@ -114,11 +121,14 @@ public class LoginController {
                 logger.info(userDataUrl);
                 ReplyFromServer replyFromServer1 = restTemplate1.getForObject(userDataUrl, ReplyFromServer.class);
 
-                String firstName = replyFromServer1.getData().get(0).getFirstName();
-                String lastName = replyFromServer1.getData().get(0).getLastName();
-
+                title = replyFromServer1.getData().get(0).getTitle();
+                firstName = replyFromServer1.getData().get(0).getFirstName();
+                lastName = replyFromServer1.getData().get(0).getLastName();
                 email = replyFromServer1.getData().get(0).getEmail();
                 mobile = replyFromServer1.getData().get(0).getMobile();
+                addr1 = replyFromServer1.getData().get(0).getAddressLine01();
+                addr2 = replyFromServer1.getData().get(0).getAddressLine02();
+                addr3 = replyFromServer1.getData().get(0).getAddressLine03();
                 name = SendStringBuilds.sendString(firstName, " ", lastName);
 
             }
@@ -131,11 +141,17 @@ public class LoginController {
         }
 
 //            Adding attributes to the session
-
+        session.setAttribute("title", title);
+        session.setAttribute("firstName", firstName);
+        session.setAttribute("lastName", lastName);
         session.setAttribute("username", username);
         session.setAttribute("email", email);
         session.setAttribute("name", name);
         session.setAttribute("mobile", mobile);
+        session.setAttribute("addr1", addr1);
+        session.setAttribute("addr2", addr2);
+        session.setAttribute("addr3", addr3);
+
 
         return new BooleanResponse(true);
     }

@@ -4,44 +4,80 @@
     <%@include file="../includes/include.jsp" %>
     <title>Update user ${username}</title>
 
+    <script>
+        $(document).ready(function () {
+
+            var username = "${username}";
+            var name = "${name}";
+
+            var title = "${title}";
+            var firstName = "${firstName}";
+            var lastName = "${lastName}";
+            var addr1 = "${addr1}";
+            var addr2 = "${addr2}";
+            var addr3 = "${addr3}";
+            var mobile = "${mobile}";
+            var email = "${email}";
+
+            $("#title").val(title);
+            $("#firstName").val(firstName);
+            $("#lastName").val(lastName);
+            $("#addr1").val(addr1);
+            $("#addr2").val(addr2);
+            $("#addr3").val(addr3);
+            $("#mobile").val(mobile);
+            $("#notEmail").val(email);
+
+        });
+    </script>
 
 </head>
 <body>
 <%@include file="../includes/NewHeader.jsp" %>
-
+${email}
 <div class="container" style="width: 65%">
 
-    <form class="well form-horizontal" action=" " method="post"  id="contact_form" >
+    <form:form cssClass="well form-horizontal" action="/sendUpdateUser" method="post" modelAttribute="" id="contact_form">
         <fieldset>
 
             <!-- Form Name -->
             <legend>Update User Profile</legend>
 
-            <!-- Text input-->
-
             <div class="form-group">
-                <label class="col-md-4 control-label">Title</label>
+                <form:label path="title2" for="title" cssClass="col-md-4 control-label">Title</form:label>
+
                 <div class="col-md-4 selectContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-                        <select name="state" class="form-control selectpicker" >
-                            <option>Mr</option>
-                            <option>Mrs</option>
-                            <option>Mrs</option>
-                            <option>Dr</option>
-                            <option>Rev</option>
-                        </select>
+                        <form:select path="title" id="title" name="title" cssClass="form-control">
+                            <form:option value="Mr">Mr</form:option>
+                            <form:option value="Mrs">Mrs</form:option>
+                            <form:option value="Ms">Ms</form:option>
+                            <form:option value="Dr">Dr</form:option>
+                            <form:option value="Rev">Rev</form:option>
+                        </form:select>
                     </div>
                 </div>
             </div>
 
-
             <div class="form-group">
-                <label class="col-md-4 control-label">First Name</label>
+                <form:label path="username" for="username" cssClass="col-md-4 control-label">First Name</form:label>
+
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input  name="first_name" placeholder="First Name" class="form-control"  type="text">
+                        <form:input path="username" id="notUsername" name="notUsername" placeholder="Username" cssClass="form-control" type="text"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <form:label path="firstName" for="firstName" cssClass="col-md-4 control-label">First Name</form:label>
+
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <form:input path="firstName" id="firstName" name="firstName" placeholder="First Name" cssClass="form-control" type="text"/>
                     </div>
                 </div>
             </div>
@@ -49,68 +85,72 @@
             <!--Last Name -->
 
             <div class="form-group">
-                <label class="col-md-4 control-label" >Last Name</label>
+                <form:label path="lastName" for="lastName" cssClass="col-md-4 control-label">Last Name</form:label>
+
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input name="last_name" placeholder="Last Name" class="form-control"  type="text">
+                        <form:input path="lastName" name="lastName" id="lastName" placeholder="Last Name" cssClass="form-control" type="text"/>
                     </div>
                 </div>
             </div>
 
-            <%--Address with three lines--%>
             <div class="form-group">
-                <label class="col-md-4 control-label">Address</label>
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                        <input name="address" placeholder="Address Line 1" class="form-control" type="text">
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                        <input name="address" placeholder="Address Line 2" class="form-control" type="text">
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                        <input name="address" placeholder="Address Line 3" class="form-control" type="text">
-                    </div>
-                </div>
-            </div>
+                <form:label path="email" for="email" cssClass="col-md-4 control-label">E-Mail</form:label>
 
-            <%--Mobile number--%>
-            <div class="form-group">
-                <label class="col-md-4 control-label">Mobile No</label>
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-                        <input name="phone" placeholder="(94)xx-xxxxxxx" class="form-control" type="text">
-                    </div>
-                </div>
-            </div>
-
-
-            <%-- E-mail --%>
-            <div class="form-group">
-                <label class="col-md-4 control-label">E-Mail</label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                        <input name="email" placeholder="E-Mail Address" class="form-control"  type="text">
+                        <form:input path="email" name="email" id="notEmail" placeholder="E-Mail Address" cssClass="form-control" type="text"/>
                     </div>
                 </div>
             </div>
 
-            <%--update buttom--%>
+                <%--Address with three lines--%>
+            <div class="form-group">
+                <form:label path="addressLine01" cssClass="col-md-4 control-label">Address</form:label>
+
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                        <form:input path="addressLine01" id="addr1" name="addr1" placeholder="Address Line 1" cssClass="form-control" type="text"/>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                        <form:input path="addressLine02" id="addr2" name="addr2" placeholder="Address Line 2" cssClass="form-control" type="text"/>
+                            <%--<input name="addr2" id="addr2" placeholder="Address Line 2" class="form-control" type="text">--%>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                        <form:input path="addressLine03" id="addr3" name="addr3" placeholder="Address Line 3" cssClass="form-control" type="text"/>
+                            <%--<input name="addr3" id="addr3" placeholder="Address Line 3" class="form-control" type="text">--%>
+                    </div>
+                </div>
+            </div>
+
+                <%--Mobile number--%>
+            <div class="form-group">
+                <form:label path="mobile" for="mobile" modelAttribute="updateuser" cssClass="col-md-4 control-label">Mobile No</form:label>
+
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+                        <form:input path="mobile" name="mobile" id="mobile" placeholder="(94)xx-xxxxxxx" cssClass="form-control" type="text"/>
+                    </div>
+                </div>
+            </div>
+
             <div class="form-group">
                 <label class="col-md-4 control-label"></label>
+
                 <div class="col-md-4">
-                    <button type="submit" class="btn btn-warning" >Update profile <span class="glyphicon glyphicon-send"></span></button>
+                    <button type="submit" class="btn btn-warning">Update profile <span class="glyphicon glyphicon-send"></span></button>
                 </div>
             </div>
 
         </fieldset>
-    </form>
+    </form:form>
 </div>
-</div><!-- /.container -->
+
 </body>
 </html>

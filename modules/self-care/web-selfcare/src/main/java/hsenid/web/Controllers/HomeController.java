@@ -2,6 +2,7 @@ package hsenid.web.Controllers;
 
 import hsenid.web.models.ContactUs;
 import hsenid.web.models.ReplyFromServer;
+import hsenid.web.models.UpdateUser;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,6 +48,18 @@ public class HomeController {
         return "/home/locations";
     }
 
+    @RequestMapping("/sendUpdateUser")
+    public String sendUpdateUser(@ModelAttribute UpdateUser updateUser ){
+
+        return "";
+    }
+
+    @RequestMapping(value = "/updateuser", method = RequestMethod.GET)
+    public ModelAndView updateUser() {
+//        return "/home/updateuser";
+        return new ModelAndView("/home/updateuser", "updateuser", new UpdateUser());
+    }
+
     @RequestMapping(value = "/contactus", method = RequestMethod.GET)
     public ModelAndView contactus() {
         return new ModelAndView("/home/contactus", "contactus", new ContactUs());
@@ -78,13 +91,6 @@ public class HomeController {
         }
 
         return "redirect:/";
-    }
-
-    @RequestMapping("/updateuser")
-    public String updateUser(HttpSession session) {
-        logger.info("update user {}", session.getAttribute("username"));
-
-        return "/home/updateuser";
     }
 
     @RequestMapping("/logout")
