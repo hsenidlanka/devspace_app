@@ -252,6 +252,14 @@ public class ItemController {
         return subCategoryRepository.retrieveSubcatogories(categoryNm);
     }
 
+    /*
+    * typeahead function for item name
+    **/
+/*
+    @RequestMapping(value = "/typeahedItmNm", method = RequestMethod.POST)
+    public @ResponseBody List<Map<String, Object>>
+*/
+
     //controller method to get size and price of selected item
  /*   @RequestMapping(value = "/getPriceSize", method = RequestMethod.POST)
     public
