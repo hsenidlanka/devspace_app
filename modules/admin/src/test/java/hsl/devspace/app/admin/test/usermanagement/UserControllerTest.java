@@ -1,6 +1,6 @@
-package hsl.devspace.app.admin.test;
+package hsl.devspace.app.admin.test.usermanagement;
 
-import hsl.devspace.app.admin.usermanagement.spring.controller.UserController;
+import hsl.devspace.app.admin.test.usermanagement.spring.controller.UserController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Before;
@@ -14,7 +14,7 @@ import static org.testng.AssertJUnit.assertTrue;
 /**
  * Created by hsenid on 9/21/16.
  */
-//@ContextConfiguration(locations = {"file:/spring-test-config.xml"})
+//@ContextConfiguration(locations = {"file:/spring-usermanagement-config.xml"})
 @ContextConfiguration(locations = {"classpath:**/spring-test-config.xml"})
 public class UserControllerTest extends AbstractTestNGSpringContextTests {
 
