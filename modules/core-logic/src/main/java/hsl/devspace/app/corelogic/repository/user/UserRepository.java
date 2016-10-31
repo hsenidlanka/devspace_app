@@ -19,7 +19,7 @@ public interface UserRepository {
 
     int delete(String username) throws SQLException;
 
-    void changePassword(String username, String password, String nPassw) throws SQLException;
+    int changePassword(String username, String password, String nPassw) throws SQLException;
 
     boolean confirmPassword() throws SQLException;
 
