@@ -11,9 +11,18 @@
     <context:component-scan base-package="hsl.devspace.app.admin.test" />
 
 
-    <bean id="userController" class="hsl.devspace.app.admin.test.usermanagement.spring.controller.UserController">
+    <bean id="userController" class="hsl.devspace.app.admin.usermanagement.spring.controller.UserController">
     </bean>
     <bean id="staffRepository" class="hsl.devspace.app.corelogic.repository.user.StaffRepositoryImpl">
     </bean>
+    <bean id="itemRepository" class="hsl.devspace.app.corelogic.repository.item.ItemRepositoryImpl">
+    </bean>
+    <bean id="categoryRepository" class="hsl.devspace.app.corelogic.repository.category.CategoryRepositoryImpl">
+    </bean>
+    <bean id="subcategoryRepository" class="hsl.devspace.app.corelogic.repository.category.SubCategoryRepositoryImpl">
+    </bean>
+    <bean id="itemController" class="hsl.devspace.app.admin.itemmanagement.spring.controller.ItemController">
+    </bean>
+
 
 </beans>

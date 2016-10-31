@@ -1,6 +1,6 @@
 package hsl.devspace.app.admin.test.itemmanagement;
 
-import hsl.devspace.app.admin.test.itemmanagement.spring.controller.ItemController;
+import hsl.devspace.app.admin.itemmanagement.spring.controller.ItemController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;

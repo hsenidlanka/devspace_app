@@ -6,6 +6,7 @@ import hsl.devspace.app.corelogic.repository.user.UserRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 /**
  * controller class containing handler methods which perform necessary handler methods
  */
@@ -27,6 +27,29 @@ import java.util.Map;
 @Controller
 @RequestMapping(value="/users")
 public class UserController {
+
+    /** reading the ValidationMessages property file using annotations**/
+    @Value("${insert.server.error}")
+    private String insertError;
+
+    @Value("${insert.staff.success}")
+    private String insertSuccessS;
+
+    @Value("${insert.user}")
+    private String insertUnsuccess;
+
+    @Value("${insert.customer.success}")
+    private String insertSuccessC;
+
+    @Value("${update.customer.success}")
+    private String updateSuccess;
+
+    @Value("${update.customer}")
+    private String updateFail;
+
+    @Value("${update.staff.success}")
+    private String updateSuccessStaff;
+
 
     private static final Logger LOG = LogManager.getLogger(UserController.class);
 
@@ -43,7 +66,7 @@ public class UserController {
         return model;
     }
 
-
+/////////////////////////////////////////////////////  USER ADD HANDLER METHODS //////////////////////////////////////////////////////
 
 //    customer user add is done in below methods
     @RequestMapping(value="/add",method=RequestMethod.GET)
@@ -66,13 +89,13 @@ public class UserController {
             if (usernameUnique) {
                 int i = staffRepository.addStaffMember(newUser);
                 if (i == 0)
-                    JOptionPane.showMessageDialog(null, "Server side error...Could not insert");// put separate error pages
+                    JOptionPane.showMessageDialog(null,insertError);// put separate error pages
                 else {
 //                    return new ModelAndView(new RedirectView("successPage"));
-                    JOptionPane.showMessageDialog(null,"You have successfully added the user..!!");
+                    JOptionPane.showMessageDialog(null,insertSuccessS);
                 }
             } else {
-                JOptionPane.showMessageDialog(null,"Error.. Username Exists already");
+                JOptionPane.showMessageDialog(null, insertUnsuccess);
                 return new ModelAndView("user_management/userAdd", "command", newUser);
             }
         }
@@ -81,10 +104,10 @@ public class UserController {
             if (usernameUnique) {
                 int i = customerRepository.add(newUser);
                 if (i == 1)
-                    JOptionPane.showMessageDialog(null,"You have successfully added the user Customer..!!");
+                    JOptionPane.showMessageDialog(null,insertSuccessC);
             }else {
 //                validationResult.rejectValue("username", "error.username.exists", "The username is already in use.");
-                JOptionPane.showMessageDialog(null,"Error.. Username Exists already");
+                JOptionPane.showMessageDialog(null, insertUnsuccess);
                 return new ModelAndView("user_management/userAdd", "command", newUser);
             }
         }
@@ -92,11 +115,7 @@ public class UserController {
     }
 
 
-    @RequestMapping(value="/showUser", method=RequestMethod.GET)
-    public String showCustomer(@ModelAttribute("newUser") User newUser) {
-        System.out.println("cust:" + newUser.getFirstName());
-        return "user_management/showUser";
-    }
+///////////////////////////////////////////////////// ACTIVE USERS VIEW HANDLER METHODS  ///////////////////////////////////////
 
     /** to handle the active users
      * includes active staff and customer users**/
@@ -109,9 +128,7 @@ public class UserController {
 
     //handler method to retrieve the details of a particular staff user
     @RequestMapping(value = "/view/staffTable", method = RequestMethod.GET)
-    public @ResponseBody  List<Map<String, Object>> viewStaff(@ModelAttribute("newUser")  User staffUser
-                                                     ){
-
+    public @ResponseBody  List<Map<String, Object>> viewStaff(@ModelAttribute("newUser")  User staffUser){
 
         List<Map<String, Object>> out = new ArrayList<Map<String, Object>>();
         List<User> staffList = staffRepository.selectActiveUsers();
@@ -139,8 +156,6 @@ public class UserController {
     @RequestMapping(value = "/view/customerTable", method = RequestMethod.GET)
     public @ResponseBody List<Map<String, Object>> viewCustomer(@ModelAttribute("newUser")  User customerUser){
 
-
-
         List<Map<String, Object>> outc = new ArrayList<Map<String, Object>>();
         List<User> customerList= customerRepository.selectActiveUsers();
 
@@ -163,6 +178,7 @@ public class UserController {
         return outc;
     }
 
+//////////////////////////////////////  BLOCKED USERS VIEW IN A TABLE HANDLER METHODS  ///////////////////////////////////////////////////
 
     /** to handle the blocked users
      * includes blocked customers and blocked staff members**/
@@ -223,6 +239,8 @@ public class UserController {
 
         return outcb;
     }
+///////////////////////////////////////////////  USER BLOCK AND UNBLOCK HANDLER METHODS  ///////////////////////////////////////////
+
     //handler method to block a user customer record
     @RequestMapping(value = "/block/customer", method = RequestMethod.GET)
     public @ResponseBody int blockCustomer(@RequestParam("uname") String uname){
@@ -255,6 +273,7 @@ public class UserController {
         return i;
     }
 
+/////////////////////////////////////////  USER UPDATE HANDLER METHODS   ///////////////////////////////////////////////////////
 
     //    customer user edit form is displayed in below handler method
     @RequestMapping(value="customer/edit",method=RequestMethod.GET)
@@ -268,23 +287,32 @@ public class UserController {
         return customer ;
     }
 
-
     //handler method for sending customer edit form data to database
     @RequestMapping(value="customer/editCustomer",method=RequestMethod.POST)
     public ModelAndView editCustomer(@ModelAttribute("customer") User customer) throws SQLException {
 
-        boolean usernameUnique = customerRepository.checkUsernameUnique(customer);
-        if (usernameUnique) {
+        String n1=customer.getFirstName();
+        String n2=customer.getLastName();
+        String n3=customer.getAddressL3();
+        String n4=customer.getUsername();
+        String n5=customer.getPassword();
+
+        LOG.error("EDIT CUSTOMER fname {}",n1);
+        LOG.error("EDIT CUSTOMER lname {}",n2);
+        LOG.error("EDIT CUSTOMER city {}",n3);
+        LOG.error("EDIT CUSTOMER uname {}",n4);
+        LOG.error("EDIT CUSTOMER password{}",n5);
+
+            customer.setUsername(n4);
             int i=customerRepository.update(customer);
+            LOG.error("EDIT CUSTOMER i {}",i);
+
             if (i == 1)
-                JOptionPane.showMessageDialog(null,"You have successfully updated the user Customer..!!");
+                JOptionPane.showMessageDialog(null, updateSuccess);
+            else
+                JOptionPane.showMessageDialog(null,updateFail);
 
-        }else {
-            JOptionPane.showMessageDialog(null,"Error.. Username Exists already");
-
-        }
-
-        return new ModelAndView(new RedirectView("customer/edit"));
+        return new ModelAndView(new RedirectView("/admin/users/view"));
     }
 
     //   staff user edit form is displayed in below handler method
@@ -298,6 +326,38 @@ public class UserController {
 
         return staff ;
     }
+
+
+    //handler method for sending customer edit form data to database
+    @RequestMapping(value="staff/editStaff",method=RequestMethod.POST)
+    public ModelAndView editStaff(@ModelAttribute("staff") User staff) throws SQLException {
+
+        String n1=staff.getFirstName();
+        String n2=staff.getLastName();
+        String n3=staff.getAddressL3();
+        String n4=staff.getUsername();
+        String n5=staff.getPassword();
+
+        LOG.error("EDIT STAFF fname {}",n1);
+        LOG.error("EDIT STAFF lname {}",n2);
+        LOG.error("EDIT STAFF city {}",n3);
+        LOG.error("EDIT STAFF uname {}",n4);
+        LOG.error("EDIT STAFF password{}",n5);
+
+        staff.setUsername(n4);
+        int i=staffRepository.updateStaffMember(staff);
+        LOG.error("EDIT CUSTOMER i {}",i);
+
+        if (i == 1)
+            JOptionPane.showMessageDialog(null, updateSuccessStaff);
+        else
+            JOptionPane.showMessageDialog(null,updateFail);
+
+        return new ModelAndView(new RedirectView("/admin/users/view"));
+    }
+
+
+////////////////////////////////////////////////  BLOCKED USER DETAIL VIEW HANDLER METHODS   ///////////////////////////////////////////////////
 
     //   Banned staff user detail form is displayed here
     @RequestMapping(value="bannedStaff/detail",method=RequestMethod.GET)

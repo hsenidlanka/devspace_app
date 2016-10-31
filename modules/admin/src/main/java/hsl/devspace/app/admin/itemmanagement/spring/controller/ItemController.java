@@ -118,7 +118,7 @@ public class ItemController {
         modelView.addObject("listCatEdit", listCatEdit);
         modelView.addObject("command", new Item());
         modelView.setViewName("/item_management/viewItem");
-        LOGGER.trace("list test "+ listCatEdit);
+        LOGGER.trace("list usermanagement "+ listCatEdit);
 
         return modelView;
     }

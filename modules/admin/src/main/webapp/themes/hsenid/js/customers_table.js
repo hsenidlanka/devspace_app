@@ -92,6 +92,7 @@ window.operateEvents1 = {
                 $('#update_email').val(msg["email"]);
                 $('#update_username').val(msg["username"]);
                 $('#update_password').val(msg["password"]);
+                $('#update_cpassword').val(msg["password"]);
 
                 $('#editCustomerModal').modal({show:true});
                 //alert(msg+""+a+""+b);
@@ -134,44 +135,3 @@ $(document).ready(function(){
     });
 });
 
-//function to edit a customer user selected
-/*
-$(document).ready(function(){
-    $("#btnUpdateCustomer").click(function(){
-
-        var user=$("#update-form-username").val();
-
-        var uf_name = $("#update-first-name").val();
-        var ul_name = $("#update-last-name").val();
-        var udate = $("#date2").val();
-        var ucountry = $("#update-country").val();
-        var ucity = $("#update-city").val();
-        var uemail = $("#update-form-email").val();
-        var umobile = $("#update-form-mobile").val();
-        var upw = $("#update_password").val();
-        var ugroup = $("#ugroup").val();
-
-        // alert("Updated User details of " + ucity);
-
-        $.ajax({
-
-            type:"POST",
-            url:"UpdateUserServlet",
-            data:{"uu_name":user,"uf_name":uf_name,"ul_name":ul_name,"udate":udate ,"ucountry":ucountry,"ucity":ucity,
-                "uemail":uemail,"umobile":umobile,"upw":upw, "ugroup":ugroup},
-
-            success:function(msg){
-
-                if(msg==1){
-                    alert("Updated User details of " + user);
-
-
-                }else{
-                    alert("Error in updating!");
-                    $("#myModal1").modal('hide');
-                }
-            }
-        })
-        ;
-    });
-});*/
