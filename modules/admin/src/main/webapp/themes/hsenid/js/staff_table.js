@@ -98,6 +98,7 @@ window.operateEvents2 = {
                 $('#updates_email').val(msg["email"]);
                 $('#updates_username').val(msg["username"]);
                 $('#updates_password').val(msg["password"]);
+                $('#updates_cpassword').val(msg["password"]);
                 $('#updates_designation').val(msg["designation"]);
                 $('#updates_department').val(msg["department"]);
                 $('#updates_branch').val(msg["branch"]);
@@ -125,10 +126,12 @@ $(document).ready(function(){
                     $.toaster({priority: 'success', title: 'Success', message: 'Blocked the Staff user successfully '
                     +uname});
                     $("#removeStaffModal").modal('hide');
+                    setTimeout(function(){location.reload();}, 2000);
 
                 }else{
                     $.toaster({ priority : 'danger', title : 'Error', message : 'Cannot block the Staff user ' +uname});
                     $("#removeStaffModal").modal('hide');
+                    setTimeout(function(){location.reload();}, 2000);
                 }
 
             },

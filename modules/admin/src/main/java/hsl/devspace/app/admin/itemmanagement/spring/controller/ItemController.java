@@ -118,7 +118,7 @@ public class ItemController {
         modelView.addObject("listCatEdit", listCatEdit);
         modelView.addObject("command", new Item());
         modelView.setViewName("/item_management/viewItem");
-        LOGGER.trace("list test "+ listCatEdit);
+        LOGGER.trace("list usermanagement "+ listCatEdit);
 
         return modelView;
     }
@@ -250,6 +250,16 @@ public class ItemController {
     List<String> getSubcatList(@RequestParam("categoryNm") String categoryNm) {
 
         return subCategoryRepository.retrieveSubcatogories(categoryNm);
+    }
+
+    /*
+    * typeahead function for item name
+    **/
+    @RequestMapping(value = "/typeahedItmNm", method = RequestMethod.POST)
+    public @ResponseBody List<Map<String, Object>> typeaheadName(@RequestParam("itemName") String itemName){
+
+        LOGGER.trace("typeaheaad "+ item.retrieveSelectedItemDetails(itemName) );
+        return item.retrieveSelectedItemDetails(itemName);
     }
 
     //controller method to get size and price of selected item

@@ -335,7 +335,8 @@
                                 <div class="col-xs-6">
                                     <div class="col-xs-12">
                                         <form:input path="password" class="form-control" id="update_password" type="password"
-                                                    style="width: 220px"   onchange="validatePassword(update_password)" required="required"/>
+                                                    style="width: 220px"   onchange="validatePassword(update_password)"
+                                                    required="required"/>
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
@@ -353,8 +354,9 @@
                             <div class="col-xs-9">
                                 <div class="col-xs-6">
                                     <div class="col-xs-12">
-                                        <input class="form-control" id="update_cpassword" type="password" style="width: 220px"
-                                               onchange="passwordsEqual(update_cpassword,update_password)" required="required"/>
+                                        <form:input path="password" class="form-control" id="update_cpassword" type="password"
+                                                   onchange="passwordsEqual(update_cpassword,update_password)"
+                                                   style="width: 220px" required="required"/>
                                     </div>
                                 </div>
                                 <div class="col-xs-6">

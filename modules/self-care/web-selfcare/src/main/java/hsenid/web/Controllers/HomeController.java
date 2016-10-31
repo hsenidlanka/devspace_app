@@ -1,8 +1,6 @@
 package hsenid.web.Controllers;
 
-import hsenid.web.models.ContactUs;
-import hsenid.web.models.ReplyFromServer;
-import hsenid.web.models.UpdateUser;
+import hsenid.web.models.*;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,11 +8,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -48,22 +45,27 @@ public class HomeController {
         return "/home/locations";
     }
 
-    @RequestMapping("/sendUpdateUser")
-    public String sendUpdateUser(@ModelAttribute UpdateUser updateUser ){
 
-        return "";
+    @GetMapping("/updateuser")
+    public String updateuser(HttpSession session, Model model){
+        model.addAttribute("updateuser", new UpdateUser());
+        return "/home/updateuser";
     }
 
-    @RequestMapping(value = "/updateuser", method = RequestMethod.GET)
-    public ModelAndView updateUser() {
-//        return "/home/updateuser";
-        return new ModelAndView("/home/updateuser", "updateuser", new UpdateUser());
+    @PostMapping("/updateuser")
+    public String submitUpdate(@ModelAttribute UpdateUser updateUser){
+        logger.info("uu name {}", updateUser.getEmail());
+        return "redirect:/updateuser";
     }
+
 
     @RequestMapping(value = "/contactus", method = RequestMethod.GET)
     public ModelAndView contactus() {
         return new ModelAndView("/home/contactus", "contactus", new ContactUs());
     }
+
+
+
 
     @RequestMapping(value = "/sendContactus", method = RequestMethod.POST)
     public String sendContactus(@ModelAttribute ContactUs contactUs){

@@ -315,7 +315,7 @@
                                 <div class="col-xs-6">
                                     <div class="col-xs-12">
                                         <form:input path="username" class="form-control" id="updates_username" type="text"
-                                                    style="width: 220px" required="required"/>
+                                                    style="width: 220px" readonly="true"/>
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
@@ -353,9 +353,9 @@
                             <div class="col-xs-9">
                                 <div class="col-xs-6">
                                     <div class="col-xs-12">
-                                        <input class="form-control" id="updates_cpassword" type="password" style="width: 220px"
-                                               onchange="passwordsEqual(update_cpassword,update_password)"
-                                               required="required"/>
+                                        <form:input path="password" class="form-control" id="updates_cpassword" type="password"
+                                                  onchange="passwordsEqual(update_cpassword,update_password)"
+                                                  style="width: 220px" required="required"/>
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
@@ -373,8 +373,27 @@
                             <div class="col-xs-9">
                                 <div class="col-xs-6">
                                     <div class="col-xs-12">
-                                        <form:input path="designation" class="form-control" id="updates_designation" type="text"
-                                               style="width: 220px" required="required"/>
+                                        <form:select path="designation" class="form-control" id="updates_designation"
+                                                     style="width: 220px">
+                                            <form:option value="System Admin">
+                                                <fmt:message key="user.staff.designation1" bundle="${bundle1}" />
+                                            </form:option>
+                                            <form:option value="System Manager">
+                                                <fmt:message key="user.staff.designation2" bundle="${bundle1}" />
+                                            </form:option>
+                                            <form:option value="Customer Manager">
+                                                <fmt:message key="user.staff.designation3" bundle="${bundle1}" />
+                                            </form:option>
+                                            <form:option value="Cashier">
+                                                <fmt:message key="user.staff.designation4" bundle="${bundle1}" />
+                                            </form:option>
+                                            <form:option value="Main Chef">
+                                                <fmt:message key="user.staff.designation5" bundle="${bundle1}" />
+                                            </form:option>
+                                            <form:option value="Reporting Manager">
+                                                <fmt:message key="user.staff.designation6" bundle="${bundle1}" />
+                                            </form:option>
+                                        </form:select>
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
@@ -392,8 +411,21 @@
                             <div class="col-xs-9">
                                 <div class="col-xs-6">
                                     <div class="col-xs-12">
-                                        <form:input path="department" class="form-control" id="updates_department"
-                                                    type="text" style="width: 220px" required="required"/>
+                                        <form:select path="department" class="form-control" id="updates_department"
+                                                     style="width: 220px">
+                                            <form:option value="Finance">
+                                                <fmt:message key="user.staff.department1" bundle="${bundle1}" />
+                                            </form:option>
+                                            <form:option value="Administration">
+                                                <fmt:message key="user.staff.department2" bundle="${bundle1}" />
+                                            </form:option>
+                                            <form:option value="Logistic">
+                                                <fmt:message key="user.staff.department3" bundle="${bundle1}" />
+                                            </form:option>
+                                            <form:option value="Reporting">
+                                                <fmt:message key="user.staff.department4" bundle="${bundle1}" />
+                                            </form:option>
+                                        </form:select>
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
@@ -411,8 +443,20 @@
                             <div class="col-xs-9">
                                 <div class="col-xs-6">
                                     <div class="col-xs-12">
-                                        <form:input path="branch" class="form-control" id="updates_branch" type="text"
-                                                    style="width: 220px" required="required"/>
+                                        <form:select path="branch" class="form-control" id="updates_branch" style="width: 220px">
+                                            <form:option value="Colombo">
+                                                <fmt:message key="user.staff.branch1" bundle="${bundle1}" />
+                                            </form:option>
+                                            <form:option value="Gampaha">
+                                                <fmt:message key="user.staff.branch2" bundle="${bundle1}" />
+                                            </form:option>
+                                            <form:option value="Ja-Ela">
+                                                <fmt:message key="user.staff.branch3" bundle="${bundle1}" />
+                                            </form:option>
+                                            <form:option value="Kadana">
+                                                <fmt:message key="user.staff.branch4" bundle="${bundle1}" />
+                                            </form:option>
+                                        </form:select>
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
@@ -422,17 +466,20 @@
                             </div>
                         </div>
                     </div>
+
+                    <form:button class="btn btn-success" type="submit" value="Update" id="btnUpdateStaff">
+                        <fmt:message key="user.customer.update.form.button" bundle="${bundle1}" />
+                    </form:button>
+                    <button class="btn btn-success" type="button" value="cancel" id="btnCnclUpdateStaff" data-dismiss="modal"
+                            aria-hidden="true">
+                        <fmt:message key="user.block.modal.button.cancel" bundle="${bundle1}" />
+                    </button>
+
                 </form:form>
             </div>
 
             <div class="modal-footer" align="right">
-                <button class="btn btn-success" type="submit" value="Update" id="btnUpdateStaff">
-                    <fmt:message key="user.customer.update.form.button" bundle="${bundle1}" />
-                </button>
-                <button class="btn btn-success" type="button" value="cancel" id="btnCnclUpdateStaff" data-dismiss="modal"
-                        aria-hidden="true">
-                    <fmt:message key="user.block.modal.button.cancel" bundle="${bundle1}" />
-                </button>
+
             </div>
         </div>
     </div>

@@ -3,11 +3,26 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="
 		http://www.springframework.org/schema/beans
-		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/beans/spring-beans.xsd
     http://www.springframework.org/schema/context
-	http://www.springframework.org/schema/context/spring-context-3.2.xsd
+	http://www.springframework.org/schema/context/spring-context.xsd
 	">
 
-    <context:component-scan base-package="hsl.devspace.app.admin" />
+    <context:component-scan base-package="hsl.devspace.app.admin.test" />
+
+
+    <bean id="userController" class="hsl.devspace.app.admin.usermanagement.spring.controller.UserController">
+    </bean>
+    <bean id="staffRepository" class="hsl.devspace.app.corelogic.repository.user.StaffRepositoryImpl">
+    </bean>
+    <bean id="itemRepository" class="hsl.devspace.app.corelogic.repository.item.ItemRepositoryImpl">
+    </bean>
+    <bean id="categoryRepository" class="hsl.devspace.app.corelogic.repository.category.CategoryRepositoryImpl">
+    </bean>
+    <bean id="subcategoryRepository" class="hsl.devspace.app.corelogic.repository.category.SubCategoryRepositoryImpl">
+    </bean>
+    <bean id="itemController" class="hsl.devspace.app.admin.itemmanagement.spring.controller.ItemController">
+    </bean>
+
 
 </beans>
