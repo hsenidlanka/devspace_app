@@ -130,7 +130,7 @@ public class ItemRepositoryImpl implements ItemRepository {
     public int count() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM item ");
         int count = mp.size();
-        log.debug("{}",count);
+        log.debug("{}", count);
         return count;
     }
 
@@ -143,7 +143,7 @@ public class ItemRepositoryImpl implements ItemRepository {
             String nm=mp.get(j).get("name").toString();
             itemNames.add(nm);
         }
-        log.info("{}",itemNames);
+        log.info("{}", itemNames);
         return itemNames;
     }
 
@@ -247,10 +247,11 @@ public class ItemRepositoryImpl implements ItemRepository {
 
     @Override
     public List<Map<String, Object>> retrieveSelectedItemDetails(String name) {
+        String key="%"+name+"%";
         List<Map<String, Object>> itemDetails = jdbcTemplate.queryForList("SELECT i.id,i.name AS item_name,c.name " +
                 "AS category_name, s.name AS sub_category_name,t.name AS type,i.description,i.image FROM item i" +
                 " INNER JOIN sub_category s ON i.sub_category_id=s.id INNER JOIN type t ON i.type_id=t.type_id " +
-                "INNER JOIN category c ON c.id=s.category_id WHERE i.name=?",name);
+                "INNER JOIN category c ON c.id=s.category_id WHERE i.name LIKE ?",key);
         log.info("{}",itemDetails);
         return itemDetails;
     }
@@ -295,7 +296,7 @@ public class ItemRepositoryImpl implements ItemRepository {
         log.info("ROW{}",rv.getRow());
         return rv;
     }
-
+    
 
     /**get top rated items of a given category*/
     @Override
