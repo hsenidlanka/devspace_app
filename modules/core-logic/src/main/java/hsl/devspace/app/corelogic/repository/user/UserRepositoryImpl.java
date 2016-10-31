@@ -73,8 +73,8 @@ public  class UserRepositoryImpl implements UserRepository {
 
     /*change password of a specific customer*/
     @Override
-    public void changePassword(String username, String password, String nPw) {
-
+    public int changePassword(String username, String password, String nPw) {
+        int row=0;
         user.setUsername(username);
         user.setPassword(password);
         int verified = loginAuthenticate(username,password);
@@ -83,9 +83,10 @@ public  class UserRepositoryImpl implements UserRepository {
             System.out.println(user.getPassword());
 
             String sql = "UPDATE customer SET password = sha1(?) WHERE username = ? ";
-            int row = jdbcTemplate.update(sql, new Object[]{user.getPassword(), user.getUsername()});
+             row = jdbcTemplate.update(sql, new Object[]{user.getPassword(), user.getUsername()});
             log.info(row + "password changed");
         } else log.info("cannot change password");
+        return row;
     }
 
     @Override
