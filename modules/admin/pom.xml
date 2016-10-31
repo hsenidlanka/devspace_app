@@ -25,32 +25,33 @@
         </dependency>
 
         <!--spring mvc testing dependencies-->
+        <!--to transform objects into url encoded String objects.-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.2.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.2.1</version>
+            <scope>test</scope>
+        </dependency>
 
         <!--when we are writing assertions for the responses.-->
-<!--        <dependency>
+        <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-all</artifactId>
             <version>1.3</version>
-            <scope>usermanagement</scope>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
-            <scope>usermanagement</scope>
-            <exclusions>
-                <exclusion>
-                    <artifactId>hamcrest-core</artifactId>
-                    <groupId>org.hamcrest</groupId>
-                </exclusion>
-            </exclusions>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
             <version>1.9.5</version>
-            <scope>usermanagement</scope>
-        </dependency>-->
+            <scope>test</scope>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-usermanagement -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -110,13 +111,19 @@
 
 
         <!-- Servlet -->
-        <dependency>
+     <!--   <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
-            <version>${servlet-api.version}</version>
+            <version>2.5</version>
             <scope>provided</scope>
-        </dependency>
+        </dependency>-->
 
+        <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${servlet-api.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -300,7 +307,7 @@
         <!-- Source files location. -->
         <sourceDirectory>src/main/java</sourceDirectory>
         <!-- Test source files location. -->
-        <testSourceDirectory>src/test/testng</testSourceDirectory>
+        <testSourceDirectory>src/test/java</testSourceDirectory>
 
         <resources>
             <!-- Resources used in admin module. -->
