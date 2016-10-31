@@ -65,7 +65,7 @@
 
         </div>
         <div class="col-sm-4">
-          <input class="form-control" id="txtViewSearchItem" type="text"/>
+          <input class="form-control typeahead" id="txtViewSearchItem" type="text"/>
         </div>
         <div class="col-sm-3">
           <button type="button" class="btn btn-success" id="btnViewSearchItem"><span

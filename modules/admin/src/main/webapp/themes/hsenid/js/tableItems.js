@@ -78,25 +78,7 @@ $(document).ready(function () {
         $(".price").prop("disabled", true);
     });
 
-    $("#txtViewSearchItem").keyup(function (){
 
-      var searchItm =   $(this).val();
-        $.ajax({
-            type: "POST",
-            url: "https://localhost:8443/admin/items/typeahedItmNm",
-            dataType: "json",
-            data: {"itemName": searchItm},
-            success: function (data) {
-
-                $('#txtViewSearchItem').typeahead({
-                    source: data
-                }).focus();
-            },
-            error: function(er){
-                alert("error inytpeahead ",er);
-            }
-        })
-    });
 });
 
 function operateFormatter(value, row, index) {
@@ -183,3 +165,29 @@ window.operateEvents = {
     }
 };
 
+
+/*
+*
+* To complete
+*
+* */
+$("#txtViewSearchItem").keyup(function (){
+    alert( "Handler for .keyup() called." );
+    var searchItm =   $("#txtViewSearchItem").val();
+    $.ajax({
+        type: "GET",
+        url: "https://localhost:8443/admin/items/typeahedItmNm",
+        dataType: "JSON",
+        data: {"searchItm": searchItm},
+        success: function (data) {
+
+            $('#txtViewSearchItem').typeahead({
+                name:'txtViewSearchItem',
+                source: data
+            }).focus();
+        },
+        error: function(er){
+            alert("error inytpeahead ",er);
+        }
+    })
+});
