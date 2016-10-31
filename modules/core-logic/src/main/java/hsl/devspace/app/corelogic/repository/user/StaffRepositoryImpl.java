@@ -135,7 +135,7 @@ public class StaffRepositoryImpl implements UserRepository {
             System.out.println(user.getPassword());
 
             String sql = "UPDATE staff SET password = sha1(?) WHERE username = ? ";
-           row = jdbcTemplate.update(sql, new Object[]{user.getPassword(), user.getUsername()});
+            row = jdbcTemplate.update(sql, new Object[]{user.getPassword(), user.getUsername()});
             log.info("{} password changed", row);
         } else log.info("cannot change password");
         return row;
