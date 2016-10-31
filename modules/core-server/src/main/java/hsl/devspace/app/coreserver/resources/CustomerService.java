@@ -177,4 +177,18 @@ public class CustomerService {
         }
         return response;
     }
+
+    // Update user password
+    @PUT
+    @Path("/password")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public void updateCustomerPassword(User user, @javax.ws.rs.core.Context UriInfo uriInfo){
+        Response response;
+        SuccessMessage successMessage=new SuccessMessage();
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("username",user.getUsername());
+//        jsonObject.put("password")
+//        successMessage.addData();
+    }
 }
