@@ -43,9 +43,9 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
         boolean availability = checkAvailability(catNm);
         if (availability == false) {
             String sql = "INSERT INTO category " +
-                    "(name,description,creator) VALUES (?,?,?)";
+                    "(name,description,image,creator,status) VALUES (?,?,?,?,?)";
 
-            row = jdbcTemplate.update(sql, new Object[]{category.getCategoryName(), category.getDescription(), category.getCreator()});
+            row = jdbcTemplate.update(sql, new Object[]{category.getCategoryName(), category.getDescription(),category.getImage(), category.getCreator(),category.getStatus()});
 
             log.info("{} new category inserted",row);
         } else
@@ -93,7 +93,9 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
                 category.setCategory_id(Integer.parseInt(mp.get(i).get("id").toString()));
                 category.setCategoryName(mp.get(i).get("name").toString());
                 category.setDescription(mp.get(i).get("description").toString());
+                category.setImage(mp.get(i).get("image").toString());
                 category.setCreator(mp.get(i).get("creator").toString());
+                category.setStatus(Integer.parseInt(mp.get(i).get("status").toString()));
                 categories.add(category);
            // }
 
@@ -121,15 +123,18 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
         log.info("{}",count);
         return count;
     }
+
     //this method is for update from UI(to be changed)
     public int updateCategory(Category cat) {
         int id= cat.getCategory_id();
         String name=cat.getCategoryName();
         String desc=cat.getDescription();
+        String image=cat.getImage();
+        int status=cat.getStatus();
 
-        String sql = "UPDATE category SET name=?, description = ? WHERE id = ? ";
+        String sql = "UPDATE category SET name=?, description = ?,image=?,status=? WHERE id = ? ";
 
-        int count = jdbcTemplate.update(sql, new Object[]{ name, desc,id});
+        int count = jdbcTemplate.update(sql, new Object[]{ name, desc,image,status,id});
         log.info("{}",count);
         return count;
     }

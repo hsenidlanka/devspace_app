@@ -44,7 +44,7 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
 
         if (availability == false) {
             String sql = "INSERT INTO sub_category " +
-                    "(name,description,creator,category_id) VALUES (?,?,?,(SELECT id FROM category WHERE name=?))";
+                    "(name,description,creator,category_id) VALUES (?,?,?,?,(SELECT id FROM category WHERE name=?))";
             row = jdbcTemplate.update(sql, new Object[]{category.getSubCategoryName(), category.getDescription(), category.getCreator(), category.getCategoryName()});
             log.info("{} new sub category inserted", row);
         } else
@@ -189,7 +189,8 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
             item.setSizePrice(size);
             item.setItemName(another.get(j).get("name").toString());
             item.setDescription(another.get(j).get("description").toString());
-            item.setType(another.get(j).get("type_id").toString());
+            List<Map<String, Object>> type = jdbcTemplate.queryForList("SELECT name FROM type WHERE type_id=?", another.get(j).get("type_id"));
+            item.setType(type.get(0).get("name").toString());
             item.setImage(another.get(j).get("image").toString());
             item.setSubCategoryId(Integer.parseInt(another.get(j).get("sub_category_id").toString()));
             itemList.add(item);
