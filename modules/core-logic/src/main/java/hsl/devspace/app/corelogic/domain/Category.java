@@ -10,6 +10,24 @@ public class Category {
     private String subCategoryName;
     private int category_id;
     private int subCategoryId;
+    private int status;
+    private String image;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
     public int getSubCategoryId() {
         return subCategoryId;
@@ -63,10 +81,12 @@ public class Category {
 
     }
     //category
-    public Category(String categoryName,String description,String creator){
+    public Category(String categoryName,String description,String image,String creator,int status){
         this.categoryName=categoryName;
         this.description=description;
+        this.image=image;
         this.creator=creator;
+        this.status=status;
     }
     //sub category
     public Category(String subCategoryName,String description,String creator,String categoryName){
@@ -76,10 +96,11 @@ public class Category {
         this.categoryName=categoryName;
     }
     //category with Id (for update method)
-    public Category(int category_id,String categoryName, String description, String creator) {
+    public Category(int category_id,String categoryName, String description,String image,String creator) {
         this.category_id = category_id;
         this.categoryName = categoryName;
         this.description = description;
+        this.image=image;
         this.creator = creator;
     }
 
@@ -88,6 +109,7 @@ public class Category {
         return "Category{" +
                 "categoryName='" + categoryName + '\'' +
                 ", description='" + description + '\'' +
+                ",image='" + image +'\'' +
                 ", creator='" + creator + '\'' +
                 ", subCategoryName='" + subCategoryName + '\'' +
                 ", category_id=" + category_id +
