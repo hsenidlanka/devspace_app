@@ -128,7 +128,7 @@
                 <version>2.19.1</version>
 
                 <configuration>
-                    <!-- Suite testng xml file to consider for test execution -->
+                    <!-- Suite testng xml file to consider for usermanagement execution -->
                     <skipTests>true</skipTests>
                     <suiteXmlFiles>
                         <suiteXmlFile>src/test/hsl/app/tester/testng.xml</suiteXmlFile>

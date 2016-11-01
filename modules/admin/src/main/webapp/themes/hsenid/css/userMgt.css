@@ -1,6 +1,7 @@
 #userAdd_box{
     width: 65%;
 }
+
 .form-box {
     margin-top: 0px;
 }
@@ -96,4 +97,12 @@ legend.scheduler-border {
     right: 520px;
     width: 300px;
     z-index: 50000;
+}
+
+
+#categoryAdd_box{
+    width: 55%;
+}
+.cat{
+    /*font-size: 44px;*/
 }
