@@ -28,7 +28,9 @@ CREATE TABLE `category` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `description` varchar(500) NOT NULL,
+  `image` varchar(500) NOT NULL ,
   `creator` varchar(100) NOT NULL,
+  `status` enum('visible','hidden') NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -508,6 +510,7 @@ CREATE TABLE `sub_category` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `description` varchar(500) NOT NULL,
+  `image` varchar(500) NOT NULL ,
   `creator` varchar(100) NOT NULL,
   `category_id` int(10) DEFAULT NULL,
   PRIMARY KEY (`id`),
