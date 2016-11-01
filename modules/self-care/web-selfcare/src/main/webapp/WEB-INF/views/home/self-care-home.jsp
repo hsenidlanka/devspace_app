@@ -36,9 +36,6 @@
 
 <%@include file="../includes/NewHeader.jsp" %>
 
-<c:out value="${username}"></c:out>
-<c:out value="${email}"></c:out>
-
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators" hidden="hidden">

@@ -1,6 +1,9 @@
 package hsenid.web.Controllers;
 
-import hsenid.web.models.*;
+import hsenid.web.models.ContactUs;
+import hsenid.web.models.ReplyFromServer;
+import hsenid.web.models.UpdateUser;
+import hsenid.web.supportclasses.SendStringBuilds;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,11 +14,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 @Controller
 @PropertySource("classpath:config.properties")
@@ -27,6 +34,9 @@ public class HomeController {
 
     @Value("${api.url.contactUs.add}")
     private String contactUsUrl;
+
+    @Value("${api.url.customer.update}")
+    private String customerUpdateUrl;
 
 //    Mapped to home page
     @RequestMapping({"/", "/home"})
@@ -53,13 +63,80 @@ public class HomeController {
     }
 
     @PostMapping("/updateuser")
-    public String submitUpdate(@ModelAttribute UpdateUser updateUser){
+    public String submitUpdate(@ModelAttribute @Valid UpdateUser updateUser, BindingResult bindingResult,HttpSession session, final RedirectAttributes redirectAttributes){
+
+        JSONObject jsonObject = new JSONObject();
+
+
+        if (bindingResult.hasErrors()){
+            logger.info("binding errors");
+        }
+
+        logger.info(String.valueOf(bindingResult.hasErrors()));
+
+        jsonObject.put("title", updateUser.getTitle());
+        jsonObject.put("firstName", updateUser.getFirstName());
+        jsonObject.put("lastName", updateUser.getLastName());
+        jsonObject.put("username", updateUser.getUsername());
+        jsonObject.put("email", updateUser.getEmail());
+        jsonObject.put("addressL1", updateUser.getAddressLine01());
+        jsonObject.put("addressL2", updateUser.getAddressLine02());
+        jsonObject.put("addressL3", updateUser.getAddressLine03());
+        jsonObject.put("mobile", updateUser.getMobile());
+
+//        logger.info(jsonObject.toString());
+
+        RestTemplate restTemplate = new RestTemplate();
+
+
+        try {
+            restTemplate.put(customerUpdateUrl, jsonObject);
+
+/*
+* Here we update the session for front end change*/
+            session.removeAttribute("title");
+            session.setAttribute("title", updateUser.getTitle());
+
+            session.removeAttribute("firstName");
+            session.setAttribute("firstName", updateUser.getFirstName());
+
+            session.removeAttribute("lastName");
+            session.setAttribute("lastName", updateUser.getLastName());
+
+            session.removeAttribute("email");
+            session.setAttribute("email", updateUser.getEmail());
+
+            String namebuild = SendStringBuilds.sendString(updateUser.getFirstName(), " ", updateUser.getLastName());
+            session.removeAttribute("name");
+            session.setAttribute("name", namebuild);
+
+            session.removeAttribute("mobile");
+            session.setAttribute("mobile", updateUser.getMobile());
+
+            session.removeAttribute("addr1");
+            session.setAttribute("addr1", updateUser.getAddressLine01());
+
+            session.removeAttribute("addr2");
+            session.setAttribute("addr2", updateUser.getAddressLine02());
+
+            session.removeAttribute("addr3");
+            session.setAttribute("addr3", updateUser.getAddressLine03());
+
+            redirectAttributes.addFlashAttribute("updatedMsg", "Profile updation Successful!!!");
+
+
+        } catch (RestClientException e) {
+            logger.info("update error {}", e.getMessage());
+            redirectAttributes.addFlashAttribute("updatedMsg", "Profile updation failed!!!");
+        }
+
+
         logger.info("uu name {}", updateUser.getEmail());
         return "redirect:/updateuser";
+
     }
 
-
-    @RequestMapping(value = "/contactus", method = RequestMethod.GET)
+    @GetMapping(value = "/contactus")
     public ModelAndView contactus() {
         return new ModelAndView("/home/contactus", "contactus", new ContactUs());
     }
@@ -67,8 +144,16 @@ public class HomeController {
 
 
 
-    @RequestMapping(value = "/sendContactus", method = RequestMethod.POST)
-    public String sendContactus(@ModelAttribute ContactUs contactUs){
+    @PostMapping(value = "/contactus" )
+    public String sendContactus(@Valid ContactUs contactUs, BindingResult bindingResult, RedirectAttributes redirectAttributes){
+
+        if (bindingResult.hasErrors()){
+            logger.info("binding errors");
+            return "redirect:/contactus";
+        }
+        redirectAttributes.addFlashAttribute("validForm", "dd");
+        logger.info(String.valueOf(bindingResult.hasErrors()));
+
 
 //        logger.info("Send Contact {}",contactUs.getInquiryType());
         JSONObject jsonObject = new JSONObject();
@@ -91,8 +176,8 @@ public class HomeController {
             logger.info(e.getMessage());
 
         }
-
-        return "redirect:/";
+        redirectAttributes.addFlashAttribute("validForm", "True");
+        return "redirect:/contactus";
     }
 
     @RequestMapping("/logout")
