@@ -510,7 +510,6 @@ CREATE TABLE `sub_category` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `description` varchar(500) NOT NULL,
-  `image` varchar(500) NOT NULL ,
   `creator` varchar(100) NOT NULL,
   `category_id` int(10) DEFAULT NULL,
   PRIMARY KEY (`id`),
