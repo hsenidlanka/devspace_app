@@ -81,10 +81,10 @@
           <div class="panel-body">
             <ul class="nav navbar-nav">
               <li>
-                <a href="https://localhost:8443/admin/category/add_category" class="panel-sub-menu2">Add Category</a>
+                <a href="https://localhost:8443/admin/category/add" class="panel-sub-menu2">Add Category</a>
               </li>
               <li>
-                <a href="view_categories.html" class="panel-sub-menu2">View Category</a>
+                <a href="https://localhost:8443/admin/category/view" class="panel-sub-menu2">View Category</a>
               </li>
             </ul>
           </div>
