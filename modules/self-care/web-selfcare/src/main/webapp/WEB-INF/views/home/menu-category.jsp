@@ -9,11 +9,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <html>
 <head>
-    <title>Menu-t</title>
+    <title>Menu-Categories</title>
     <link rel="shortcut icon" href="">
     <%@include file="../includes/include.jsp" %>
     <script src="<c:url value="/resources/js/menu-operations.js"/>"></script>
-    <script src="<c:url value="/resources/js/jquery.contenthover.js"/>"></script>
+    <link href="<c:url value="/resources/css/component.css"/>" rel="stylesheet" type="text/css">
+    <link href="<c:url value="/resources/css/default.css"/>" rel="stylesheet" type="text/css">
+    <script src="<c:url value="/resources/js/modernizr.custom.js"/>"></script>
 </head>
 <body>
 <%@include file="../includes/NewHeader.jsp" %>
@@ -51,21 +53,53 @@
                                         <div class="row" style="margin-top: 10px;">
                                     </c:if>
                                     <div class="col-md-3">
-                                        <img src="<c:url value="/resources/images/image_placeholder.gif"/>"
-                                             class="menu-images">
+                                        <ul class="grid cs-style-3">
+                                            <li>
+                                                <figure>
+                                                    <img src="<c:url value="/resources/images/image_placeholder.gif"/>"
+                                                         class="menu-images">
+                                                    <figcaption class="caption">
+                                                        <input type="hidden" id="menu-item-desc"
+                                                               value="<c:out value="${itemData.description}"/>"/>
 
-                                        <div class="contenthover">
-                                            <label id="menu-item-desc">${itemData.description}</label>
+                                                        <c:choose>
+                                                            <c:when test="${category eq 'Pizza'}">
+                                                                <c:set var="sizePrizeLength" value="${fn:length(itemData.price)}"/>
 
-                                            <div>
-                                                <button class="btn btn-success btn-xs btn-addtocart-<c:out value="${category}"/>">
-                                                    Add
-                                                    to
-                                                    cart
-                                                </button>
-                                            </div>
+                                                                <c:forEach begin="0" end="${sizePrizeLength-1}" varStatus="loop">
+                                                                    <c:out value="${loop}"/>
+                                                                </c:forEach>
+
+                                                                <c:out value="${itemData.price[1]['size']}-${itemData.price[1]['price']}"/>
+                                                                <a class="btn btn-success btn-xs btn-addtocart-<c:out value="${category}"/>">
+                                                                    Add
+                                                                    to
+                                                                    cart
+                                                                </a>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <div>
+                                                                    <label>Price:</label>
+                                                                </div>
+                                                                <div style="margin-top: 15px;">
+                                                                    <label class="add-to-cart-label-qty">QTY:</label>
+                                                                    <input class="spin add-to-cart-spin" type="number"
+                                                                           min="1" max="100" value="1">
+                                                                </div>
+                                                                <a class="btn btn-success btn-xs btn-addtocart">
+                                                                    Add
+                                                                    to
+                                                                    cart
+                                                                </a>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </figcaption>
+                                                </figure>
+                                            </li>
+                                        </ul>
+                                        <div style="text-align: center;">
+                                            <label id="menu-item-name">${itemData.name}</label>
                                         </div>
-                                        <label id="menu-item-name">${itemData.name}</label>
                                     </div>
                                 </c:forEach>
                             </c:when>
