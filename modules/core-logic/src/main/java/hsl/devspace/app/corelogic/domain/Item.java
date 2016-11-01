@@ -1,5 +1,8 @@
 package hsl.devspace.app.corelogic.domain;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * Created by hsenid on 9/19/16.
  */
@@ -15,6 +18,15 @@ public class Item {
     private String categoryName;
     private int typeId;
     private int subCategoryId;
+    List<Map<String, Object>> sizePrice;
+
+    public List<Map<String, Object>> getSizePrice() {
+        return sizePrice;
+    }
+
+    public void setSizePrice(List<Map<String, Object>> sizePrice) {
+        this.sizePrice = sizePrice;
+    }
 
     public int getTypeId() {
         return typeId;
@@ -103,29 +115,30 @@ public class Item {
     public void setSubCategoryName(String subCategoryName) {
         this.subCategoryName = subCategoryName;
     }
-    public Item(){
+
+    public Item() {
 
     }
-    public Item(String itemName,String price,String description,String size,String type,String image,String subCategoryName){
-        this.itemName=itemName;
-        this.price=price;
-        this.description=description;
-        this.size=size;
-        this.type=type;
-        this.image=image;
-        this.subCategoryName=subCategoryName;
-    }
 
-    public Item(String itemName, String price, String description, String size, String type, String image, String subCategoryName, int itemId) {
+    public Item(String itemName, String description, String size, String type, String image, String subCategoryName, List<Map<String, Object>> sizePrice) {
         this.itemName = itemName;
-        this.price = price;
         this.description = description;
         this.size = size;
         this.type = type;
         this.image = image;
         this.subCategoryName = subCategoryName;
+        this.sizePrice = sizePrice;
+    }
+
+    public Item(String itemName, String description, String type, String image, String subCategoryName, int itemId) {
+        this.itemName = itemName;
+        this.description = description;
+        this.type = type;
+        this.image = image;
+        this.subCategoryName = subCategoryName;
         this.itemId = itemId;
     }
+
     public Item(String itemName, String description, String type, String image, String subCategoryName) {
         this.itemName = itemName;
         this.description = description;
@@ -143,14 +156,15 @@ public class Item {
     public String toString() {
         return "Item{" +
                 "itemName='" + itemName + '\'' +
-                ", price=" + price +
+                //  ", price=" + price +
                 ", description='" + description + '\'' +
-                ", size='" + size + '\'' +
+                // ", size='" + size + '\'' +
                 ", type='" + type + '\'' +
                 ", image='" + image + '\'' +
                 ", subCategoryName='" + subCategoryName + '\'' +
                 ", itemId=" + itemId +
                 ", categoryName='" + categoryName + '\'' +
+                ", sizePrice='" + sizePrice + '\'' +
                 '}';
     }
 }
