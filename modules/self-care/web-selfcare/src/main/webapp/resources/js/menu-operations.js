@@ -3,11 +3,11 @@ $(document).ready(function () {
     $("#beverage-collapse").hide(menuThumbnailsOverlay());
 
     // Keep only one collapsible group open.
-    /*    $('.panel-heading a').on('click', function (e) {
-     if ($(this).parents('.panel').children('.panel-collapse').hasClass('in')) {
-     e.stopPropagation();
-     }
-     });*/
+    $('.panel-heading a').on('click', function (e) {
+        if ($(this).parents('.panel').children('.panel-collapse').hasClass('in')) {
+            e.stopPropagation();
+        }
+    });
 
     menuThumbnailsOverlay();
 
@@ -35,7 +35,7 @@ $(document).ready(function () {
         $("#menu-panel-heading").text("Menu-Beverages");
     });
 
-    $(".btn-addtocart-dessert").click(function () {
+    $(".btn-addtocart-desserts").click(function () {
         // Initialize the toast notification
         $.notify("Selected dessert added to the shopping cart.", {
             align: "center",
@@ -58,6 +58,10 @@ $(document).ready(function () {
     });
 
     $(".btn-addtocart-pizza").click(function () {
+        var itemDesc=$(this).closest(".contenthover").find("#menu-item-desc").text();
+        $("#item-desc-modal").text(itemDesc);
+        var itemName=$(this).closest(".col-md-3").find("#menu-item-name").text();
+        $("#item-title-modal").text(itemName);
         $("#add-to-cart-popup").modal('show');
     });
 
@@ -85,7 +89,7 @@ $(document).ready(function () {
                 color: "#fff",
                 background: "#D44950"
             });
-        }else{
+        } else {
             $("#txt-menu-search").css("border-color", "blue");
             window.location.href = "../pages/search-results.html";
         }
