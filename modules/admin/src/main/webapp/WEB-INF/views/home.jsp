@@ -18,7 +18,6 @@
 
 <jsp:include page="header.jsp"/>
 
-
 <%--urls read from system file--%>
 <fmt:message key="admin.itemmanagement.itemadd.url" var="itemAdd" bundle="${bundle2}"/>
 <fmt:message key="admin.itemmanagement.itemview.url" var="itemView" bundle="${bundle2}"/>
