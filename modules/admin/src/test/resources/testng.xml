@@ -13,11 +13,13 @@
             <class name="translater.YandexIntegraterTest"/>
         </classes>
     </usermanagement>-->
+<!--
 
     <test name="testViewItem">
         <classes>
             <class name="hsl.devspace.app.admin.test.itemmanagement.ItemControllerTest"/>
         </classes>
     </test>
+-->
 
 </suite>

@@ -1,5 +1,7 @@
 package hsl.devspace.app.corelogic.domain;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 import java.util.Map;
 
@@ -13,12 +15,29 @@ public class Item {
     private String size;
     private String type;
     private String image;
+    private MultipartFile imageUrl;
     private String subCategoryName;
     private int itemId;
     private String categoryName;
     private int typeId;
     private int subCategoryId;
     List<Map<String, Object>> sizePrice;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public MultipartFile getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(MultipartFile imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 
     public List<Map<String, Object>> getSizePrice() {
         return sizePrice;
@@ -100,13 +119,6 @@ public class Item {
         this.size = size;
     }
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
 
     public String getSubCategoryName() {
         return subCategoryName;
@@ -130,7 +142,15 @@ public class Item {
         this.sizePrice = sizePrice;
     }
 
-    public Item(String itemName, String description, String type, String image, String subCategoryName, int itemId) {
+    public Item(String itemName, String description, String type,MultipartFile imageUrl, String subCategoryName, int itemId) {
+        this.itemName = itemName;
+        this.description = description;
+        this.type = type;
+        this.imageUrl = imageUrl;
+        this.subCategoryName = subCategoryName;
+        this.itemId = itemId;
+    }
+    public Item(String itemName, String description, String type,String image, String subCategoryName, int itemId) {
         this.itemName = itemName;
         this.description = description;
         this.type = type;
@@ -167,4 +187,6 @@ public class Item {
                 ", sizePrice='" + sizePrice + '\'' +
                 '}';
     }
+
+
 }

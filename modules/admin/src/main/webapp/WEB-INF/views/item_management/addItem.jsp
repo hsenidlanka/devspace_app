@@ -168,7 +168,7 @@
                 <div class="row item-tbl-row" id="addItmChkbxOthr">
                   <div class="col-xs-5">
                     <label class="checkbox-inline">
-                    <form:checkbox value="other" class="checkbox sizechkbx" path="size" label="Other"/>
+                    <form:checkbox value="other" class="checkbox sizechkbx" path="size" label="Other" onclick="disableTxt(this, 'txtOthrPrc')"/>
                     </label>
                   </div>
                   <div class="col-xs-7">
@@ -217,7 +217,7 @@
               </label>
 
               <div class="col-xs-5">
-                <form:input type="file" class="btn btn-success" path="image" id="btnUpldImage" value="Browse"/>
+                <form:input type="file" class="btn btn-success" path="image" id="btnUpldImage" value="Browse" formenctype="multipart/form-data"/>
               </div>
               <div class="col-xs-4">
                 <span id="itmImgErr" class="input-group-error"> </span>

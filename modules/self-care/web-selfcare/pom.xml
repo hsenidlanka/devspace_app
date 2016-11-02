@@ -22,6 +22,7 @@
         <tiles.version>2.2.2</tiles.version>
         <final.name>web-selfcare</final.name>
         <spring.version>4.3.3.RELEASE</spring.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
