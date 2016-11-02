@@ -28,9 +28,51 @@ frisby.create('Get items of a category test 01-valid data')
             },
             {
                 "imagePath": "/a/dummy/image/path/",
+                "name": "Cheese Lover",
+                "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text",
+                "type": "veg"
+            },
+            {
+                "imagePath": "/a/dummy/image/path/",
                 "name": "Garlic Bread",
                 "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text",
                 "type": "carbonate"
+            },
+            {
+                "imagePath": "image/test",
+                "name": "Test pizza",
+                "description": "test",
+                "type": "veg"
+            },
+            {
+                "imagePath": "/image/test02",
+                "name": "Test pizza 2",
+                "description": "test 2",
+                "type": "non-veg"
+            },
+            {
+                "imagePath": "image/ny1",
+                "name": "Test NY1",
+                "description": "NY1",
+                "type": "veg"
+            },
+            {
+                "imagePath": "/image/path4",
+                "name": "Test NY2",
+                "description": "NY2",
+                "type": "non-veg"
+            },
+            {
+                "imagePath": "/image/path2",
+                "name": "Test NY3",
+                "description": "ny3",
+                "type": "veg"
+            },
+            {
+                "imagePath": "/image/path3",
+                "name": "Test NY4",
+                "description": "ny4",
+                "type": "veg"
             }
         ],
         "links": [
@@ -97,15 +139,33 @@ frisby.create('Get items of a subcategory test 01-valid data')
             },
             {
                 "imagePath": "/a/dummy/image/path/",
+                "name": "Cheese Lover",
+                "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text",
+                "type": "veg"
+            },
+            {
+                "imagePath": "/a/dummy/image/path/",
                 "name": "Garlic Bread",
                 "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text",
                 "type": "carbonate"
+            },
+            {
+                "imagePath": "image/test",
+                "name": "Test pizza",
+                "description": "test",
+                "type": "veg"
+            },
+            {
+                "imagePath": "/image/test02",
+                "name": "Test pizza 2",
+                "description": "test 2",
+                "type": "non-veg"
             }
         ],
         "links": [
             {
-                "rel": "self",
-                "link": "http://localhost:2222/pizza-shefu/api/v1.0/items/subcategory/Ice%20creams"
+                "link": "http://localhost:2222/pizza-shefu/api/v1.0/items/subcategory/Ice%20creams",
+                "rel": "self"
             }
         ]
     })

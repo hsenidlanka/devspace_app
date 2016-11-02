@@ -182,7 +182,7 @@ paths:
           description: User object to update profile
           required: true
           schema:
-            $ref: "#/definitions/user"
+            $ref: "#/definitions/user-update"
             
       responses:
         '201':
@@ -1072,6 +1072,38 @@ definitions:
           type: string
         mobile:
           type: string
+          
+  user-update:
+      type: object
+      required:
+            - title
+            - firstName
+            - lastName
+            - username
+            - email
+            - addressL1
+            - addressL2
+            - mobile
+            
+      properties:
+        title:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        username:
+          type: string
+        email:
+          type: string
+        addressL1:
+          type: string
+        addressL2:
+          type: string
+        addressL3:
+          type: string
+        mobile:
+          type: string          
           
   user-guest:
       type: object
