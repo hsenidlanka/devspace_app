@@ -205,4 +205,9 @@ public class HomeController {
         return "search-results";
     }
 
+    @RequestMapping("/search-menu")
+    public String searchMenu(){
+        return "search-menu";
+    }
+
 }
