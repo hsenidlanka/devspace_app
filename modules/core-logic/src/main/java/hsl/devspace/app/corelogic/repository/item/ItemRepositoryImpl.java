@@ -9,6 +9,7 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
@@ -39,18 +40,16 @@ public class ItemRepositoryImpl implements ItemRepository {
     @Override
     public int add(Item item) {
         int row = 0;
-        //String itmNm = item.getItemName();
         int id = item.getItemId();
-        //boolean availability = checkAvailability(itmNm);
+        MultipartFile img=item.getImageUrl();
+        String ims=img.getOriginalFilename();
 
-        // if (availability == false) {
         String sql = "INSERT INTO item" +
                 "(name,description,type_id,image,sub_category_id) VALUES (?,?,(SELECT type_id FROM type WHERE name=? ),?,(SELECT id FROM sub_category WHERE name=?))";
         row = jdbcTemplate.update(sql, new Object[]{item.getItemName(), item.getDescription(),
-                item.getType(), item.getImage(), item.getSubCategoryName()});
+                item.getType(), ims, item.getSubCategoryName()});
         log.info("{} new item inserted",row);
-        // } else
-        //log.info(row + "item already available");
+
 
         return id;
     }
@@ -121,7 +120,7 @@ public class ItemRepositoryImpl implements ItemRepository {
             items.add(item);
 
         }
-        log.info("{}",items);
+        log.info("{}", items);
         return items;
     }
 
@@ -152,7 +151,7 @@ public class ItemRepositoryImpl implements ItemRepository {
     public int update(Item item) {
 
         String sql = "UPDATE item SET description=?, type_id=(SELECT type_id FROM `type` WHERE `name`=?) ,image=?, sub_category_id=(SELECT id FROM sub_category WHERE name=?) WHERE name= ? ";
-        int row = jdbcTemplate.update(sql, new Object[]{item.getDescription(), item.getType(), item.getImage(), item.getSubCategoryName(), item.getItemName()});
+        int row = jdbcTemplate.update(sql, new Object[]{item.getDescription(), item.getType(), item.getImageUrl(), item.getSubCategoryName(), item.getItemName()});
         log.info("{} Item details changed",row);
         return row;
     }
@@ -296,7 +295,7 @@ public class ItemRepositoryImpl implements ItemRepository {
         log.info("ROW{}",rv.getRow());
         return rv;
     }
-    
+
 
     /**get top rated items of a given category*/
     @Override
