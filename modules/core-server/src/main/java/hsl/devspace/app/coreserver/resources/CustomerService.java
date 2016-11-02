@@ -145,7 +145,7 @@ public class CustomerService {
         Response response;
         try {
             int status = userRepository.update(user);
-            if(status>0){
+            if (status > 0) {
                 SuccessMessage successMessage = new SuccessMessage();
                 successMessage.setStatus("success");
                 successMessage.setCode(Response.Status.OK.getStatusCode());
@@ -169,7 +169,7 @@ public class CustomerService {
                 successMessage.addLink(url, "self");
 
                 response = Response.status(Response.Status.CREATED).entity(successMessage).build();
-            }else{
+            } else {
                 throw new WebApplicationException(400);
             }
         } catch (SQLException e) {
@@ -183,12 +183,22 @@ public class CustomerService {
     @Path("/password")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public void updateCustomerPassword(User user, @javax.ws.rs.core.Context UriInfo uriInfo){
+    public Response updateCustomerPassword(JSONObject jsonObject, @javax.ws.rs.core.Context UriInfo uriInfo) {
         Response response;
-        SuccessMessage successMessage=new SuccessMessage();
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("username",user.getUsername());
-//        jsonObject.put("password")
-//        successMessage.addData();
+        SuccessMessage successMessage = new SuccessMessage();
+        String username = jsonObject.get("username").toString();
+        String password = jsonObject.get("password").toString();
+        String newPassword = jsonObject.get("newPassword").toString();
+        userRepository.changePassword(username, password, newPassword);
+        successMessage.setStatus("success");
+        successMessage.setCode(Response.Status.OK.getStatusCode());
+        successMessage.setMessage("customer password updated successfully");
+        JSONObject object = new JSONObject();
+        object.put("username", username);
+        successMessage.addData(object);
+        String url = uriInfo.getAbsolutePath().toString();
+        successMessage.addLink(url, "self");
+        response = Response.status(Response.Status.OK).entity(successMessage).build();
+        return response;
     }
 }

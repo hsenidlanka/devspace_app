@@ -95,13 +95,14 @@ public class ItemService {
                     jsonObject.put("type", item.getType());
                     jsonObject.put("description", item.getDescription());
                     jsonObject.put("imagePath", item.getImage());
+                    jsonObject.put("price", item.getSizePrice());
                     successMessage.addData(jsonObject);
                 }
             } else {
                 successMessage.setMessage("no items to retrieve");
             }
         } catch (NullPointerException e) {
-            successMessage.setMessage("no items to retrieve");
+            successMessage.setMessage("no items to retrieve"+e);
             return Response.status(Response.Status.OK).entity(successMessage)
                     .header("Access-Control-Allow-Origin", propertyReader.readProperty("Access-Control-Allow-Origin"))
                     .build();

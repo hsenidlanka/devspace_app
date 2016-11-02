@@ -62,15 +62,26 @@
                                                         <input type="hidden" id="menu-item-desc"
                                                                value="<c:out value="${itemData.description}"/>"/>
 
+                                                        <c:set var="sizePriceLength"
+                                                               value="${fn:length(itemData.price)}"/>
                                                         <c:choose>
                                                             <c:when test="${category eq 'Pizza'}">
-                                                                <c:set var="sizePrizeLength" value="${fn:length(itemData.price)}"/>
+                                                                <c:forEach begin="0" end="${sizePriceLength-1}"
+                                                                           varStatus="loop">
 
-                                                                <c:forEach begin="0" end="${sizePrizeLength-1}" varStatus="loop">
-                                                                    <c:out value="${loop}"/>
+                                                                    <c:set var="size"
+                                                                           value="${itemData.price[loop.index]['size']}"/>
+                                                                    <c:set var="substringSize"
+                                                                           value="${fn:substring(size, 0, 1)}"/>
+                                                                    <c:set var="formattedSize"
+                                                                           value="${fn:toUpperCase(substringSize)}"/>
+
+                                                                    <c:out value="${formattedSize}"/>:&nbsp;
+                                                                    <label id="pizza-price-<c:out value="${itemData.price[loop.index]['size']}"/>">
+                                                                            ${itemData.price[loop.index]['price']}
+                                                                    </label><br>
                                                                 </c:forEach>
 
-                                                                <c:out value="${itemData.price[1]['size']}-${itemData.price[1]['price']}"/>
                                                                 <a class="btn btn-success btn-xs btn-addtocart-<c:out value="${category}"/>">
                                                                     Add
                                                                     to
@@ -80,6 +91,23 @@
                                                             <c:otherwise>
                                                                 <div>
                                                                     <label>Price:</label>
+                                                                    <label id="lbl-sizeprice"><c:out
+                                                                            value="${itemData.price[0]['price']}"/></label>
+                                                                    <select id="sizes" class="sizes-dropdowns"
+                                                                            style="text-transform: capitalize; font-size: small;">
+                                                                        <c:forEach begin="0" end="${sizePriceLength-1}"
+                                                                                   varStatus="loop">
+                                                                            <option value="<c:out value="${itemData.price[loop.index]['size']}"/>">
+                                                                                <c:out value="${itemData.price[loop.index]['size']}"/></option>
+                                                                        </c:forEach>
+                                                                    </select>
+                                                                    <c:forEach begin="0" end="${sizePriceLength-1}"
+                                                                               varStatus="loop">
+                                                                        <input type="hidden"
+                                                                               id="hiddenFld-<c:out value="${itemData.price[loop.index]['size']}"/>"
+                                                                               value="<c:out value="${itemData.price[loop.index]['price']}"/>"/>
+                                                                    </c:forEach>
+
                                                                 </div>
                                                                 <div style="margin-top: 15px;">
                                                                     <label class="add-to-cart-label-qty">QTY:</label>
@@ -115,18 +143,6 @@
         </div>
     </div>
 </div>
-
-
-<%--<c:forEach items="${subcategories}" var="subcategory">
-    <c:set var="subCat1" value="${subcategory.name}"/>
-    <c:set var="subCat2" value="${fn:replace(subCat1,
-                                ' ', '')}"/>
-    <c:out value="${subcategory.name}"/>
-
-    <c:forEach items="${requestScope[subCat2]}" var="itemData">
-        <c:out value="${itemData.name}"/><br>
-    </c:forEach>
-</c:forEach>--%>
 <%@include file="../includes/modals.jsp" %>
 </body>
 </html>

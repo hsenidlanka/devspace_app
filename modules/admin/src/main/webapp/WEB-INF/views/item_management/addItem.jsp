@@ -54,7 +54,7 @@
     </div>
     <div class="panel-body">
 
-      <form:form class="form-horizontal" role="form" id="frmAddItem" action="/admin/items/add_item" method="post" >
+      <form:form class="form-horizontal" role="form" id="frmAddItem" action="/admin/items/add_item" method="post" enctype="multipart/form-data">
         <fieldset class="scheduler-border">
           <legend class="scheduler-border"><fmt:message key="item.itemadd.form.legend"/></legend>
 
@@ -217,7 +217,7 @@
               </label>
 
               <div class="col-xs-5">
-                <form:input type="file" class="btn btn-success" path="image" id="btnUpldImage" value="Browse" formenctype="multipart/form-data"/>
+                <form:input type="file" class="btn btn-success" path="imageUrl" id="btnUpldImage" value="Browse" />
               </div>
               <div class="col-xs-4">
                 <span id="itmImgErr" class="input-group-error"> </span>

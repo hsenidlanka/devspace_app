@@ -28,7 +28,6 @@ frisby.create('Register customer test 01-valid data')
                 "Email": "frisby@kdm.com",
                 "AddressLine02": "abc",
                 "mobile": "123456789",
-                "AddressLine03": null,
                 "AddressLine01": "123",
                 "title": "Mr",
                 "username": "frisby123"
@@ -73,8 +72,7 @@ frisby.create('Register customer test 02-different http method')
 // Test customer login-correct data.
 frisby.create('Customer login test 01-correct data')
     .post(base_url + '/customers/login/', {
-        "username": "frisby123",
-        "password": "password"
+        "username": "frisby123"
     }, {json: true})
     .expectStatus(200)
     .inspectJSON()
@@ -91,8 +89,7 @@ frisby.create('Customer login test 01-correct data')
         "message": "username, password validated.",
         "data": [
             {
-                "password": "password",
-                "username": "frisby123"
+                "password": "password"
             }
         ],
         "links": [

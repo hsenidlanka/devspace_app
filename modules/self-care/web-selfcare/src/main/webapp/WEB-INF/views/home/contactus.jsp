@@ -64,8 +64,7 @@
                                                                                      bundle="${lang}"/></p>
                     </div>
                     <div class="panel-body">
-                        <form:form action="/web-selfcare/contactus" method="post" modelAttribute="contactus"
-                                   cssClass="form-horizontal">
+                        <form:form action="/web-selfcare/contactus" method="post" modelAttribute="contactus" cssClass="form-horizontal">
 
                             <div class="form-group">
 
