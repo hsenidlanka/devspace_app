@@ -171,6 +171,7 @@ window.operateEvents = {
 * To complete
 *
 * */
+/*
 $("#txtViewSearchItem").keyup(function (){
     alert( "Handler for .keyup() called." );
     var searchItm =   $("#txtViewSearchItem").val();
@@ -190,4 +191,4 @@ $("#txtViewSearchItem").keyup(function (){
             alert("error inytpeahead ",er);
         }
     })
-});
+});*/
