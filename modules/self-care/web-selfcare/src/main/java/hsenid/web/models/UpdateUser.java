@@ -1,37 +1,38 @@
 package hsenid.web.models;
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 public class UpdateUser {
 
-    @NotNull
+    @NotEmpty(message = "Please enter a title!")
     String title;
 
-    @NotNull
+    @NotEmpty(message = "Please enter your first name!")
     String firstName;
 
-    @NotNull
+    @NotEmpty(message = "Please enter your last name!")
     String lastName;
 
-    @NotNull
-    @Email
+    @NotEmpty(message = "Please enter a valid email!")
+    @Email(message = "Please enter a valid email!")
     String email;
 
-    @NotNull
+    @NotEmpty(message = "Please enter a valid username!")
     String username;
 
-    @NotNull
+    @Pattern(regexp = "^0[0-9]{9}$", message = "Please Enter Valid Contact Number!")
     String mobile;
 
-    @NotNull
+    @NotEmpty(message = "Please enter address line one")
     String addressLine01;
 
-    @NotNull
+    @NotEmpty(message = "Please enter address line two")
     String addressLine02;
 
-    @NotNull
     String addressLine03;
 
     public String getTitle() {

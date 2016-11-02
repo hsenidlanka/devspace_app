@@ -39,7 +39,7 @@
 
 <div class="container" style="width: 70%">
 
-    <form:form cssClass="well form-horizontal" action="/web-selfcare/updateuser" modelAttribute="updateuser" method="post">
+    <form:form action="/web-selfcare/updateuser" method="post" modelAttribute="updateuser" cssClass="well form-horizontal">
 
         <legend>Update profile</legend>
         <br>
@@ -57,6 +57,9 @@
                         <form:option value="Dr">Dr</form:option>
                         <form:option value="Rev">Rev</form:option>
                     </form:select>
+                    <div class="has-error">
+                        <form:errors path="title" class="help-inline"/>
+                    </div>
                 </div>
             </div>
         </div>
@@ -67,6 +70,9 @@
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                     <form:input id="usernamejs" path="username" readonly="true"/>
+                    <div class="has-error">
+                        <form:errors path="username" class="help-inline"/>
+                    </div>
                 </div>
             </div>
         </div>
@@ -77,6 +83,9 @@
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                     <form:input id="firstNamejs" path="firstName"/>
+                    <div class="has-error">
+                        <form:errors path="firstName" class="help-inline"/>
+                    </div>
                 </div>
             </div>
         </div>
@@ -86,7 +95,10 @@
             <div class="col-md-4 inputGroupContainer">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    <form:input id="lastNamejs" path="lastName"/>
+                    <form:input path="lastName" id="lastNamejs" />
+                    <div class="has-error">
+                        <form:errors path="lastName" class="help-inline"/>
+                    </div>
                 </div>
             </div>
         </div>
@@ -97,6 +109,9 @@
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
                     <form:input id="emailjs" path="email"/>
+                    <div class="has-error">
+                        <form:errors path="email" class="help-inline"/>
+                    </div>
                 </div>
             </div>
         </div>
@@ -107,6 +122,9 @@
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
                     <form:input id="mobilejs" path="mobile"/>
+                    <div class="has-error">
+                        <form:errors path="mobile" class="help-inline"/>
+                    </div>
                 </div>
             </div>
         </div>
@@ -117,14 +135,23 @@
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
                     <form:input id="addr1js" path="addressLine01"/>
+                    <div class="has-error">
+                        <form:errors path="addressLine01" class="help-inline"/>
+                    </div>
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
                     <form:input id="addr2js" path="addressLine02"/>
+                    <div class="has-error">
+                        <form:errors path="addressLine02" class="help-inline"/>
+                    </div>
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
                     <form:input id="addr3js" path="addressLine03"/>
+                    <div class="has-error">
+                        <form:errors path="addressLine03" class="help-inline"/>
+                    </div>
                 </div>
             </div>
         </div>
