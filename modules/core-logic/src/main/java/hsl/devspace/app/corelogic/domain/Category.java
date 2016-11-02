@@ -10,7 +10,7 @@ public class Category {
     private String subCategoryName;
     private int category_id;
     private int subCategoryId;
-    private int status;
+    private String status;
     private String image;
 
     public String getImage() {
@@ -21,11 +21,11 @@ public class Category {
         this.image = image;
     }
 
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -81,7 +81,7 @@ public class Category {
 
     }
     //category
-    public Category(String categoryName,String description,String image,String creator,int status){
+    public Category(String categoryName,String description,String image,String creator,String status){
         this.categoryName=categoryName;
         this.description=description;
         this.image=image;
@@ -114,6 +114,7 @@ public class Category {
                 ", subCategoryName='" + subCategoryName + '\'' +
                 ", category_id=" + category_id +
                 ", subCategoryId=" + subCategoryId +
+                ", status=" +status +
                 '}';
     }
 }

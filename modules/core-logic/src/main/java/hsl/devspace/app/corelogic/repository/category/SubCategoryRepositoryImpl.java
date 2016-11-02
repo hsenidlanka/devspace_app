@@ -105,6 +105,11 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
         return subCategories;
     }
 
+    @Override
+    public List<Category> selectAllVisible() {
+        return null;
+    }
+
     /*retrieve total no.of subcategories*/
     @Override
     public int count() {
