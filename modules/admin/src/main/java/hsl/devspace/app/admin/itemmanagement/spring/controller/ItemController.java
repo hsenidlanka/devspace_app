@@ -7,7 +7,7 @@ import hsl.devspace.app.corelogic.repository.item.ItemRepository;
 import hsl.devspace.app.corelogic.repository.item.ReturnTypeResolver;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.json.simple.JSONObject;
+import org.jose4j.json.internal.json_simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
