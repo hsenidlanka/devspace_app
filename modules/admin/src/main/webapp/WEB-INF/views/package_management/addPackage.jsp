@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <title>Add new package</title>
     <!-- include common CSS, fonts and js -->
-    <jsp:include page="adminTop.jsp"/>
+    <jsp:include page="../adminTop.jsp"/>
 
     <%-- Other css --%>
     <spring:url value="/themes/hsenid/css/itemMgt.css" var="cssItem"/>
@@ -25,7 +25,7 @@
 <body>
 
 
-<jsp:include page="header.jsp"/>
+<jsp:include page="../header.jsp"/>
 
 <div class="brand">
     <div style="position: relative; left: -50%;">
@@ -51,7 +51,7 @@
         </div>
         <div class="panel-body">
 
-            <form:form class="form-horizontal" role="form" id="frmAddPkg" method="post" modelAttribute="addPackage" commandName="addPackage" action="/add_package">
+            <form:form class="form-horizontal" role="form" id="frmAddPkg" method="post" action="/admin/packages/add_package">
                 <fieldset class="scheduler-border">
                     <legend class="scheduler-border">(*) Fields are read only</legend>
 
@@ -60,12 +60,13 @@
                         <div class="row">
                             <div class="col-xs-7">
                                 <label class="col-xs-5 control-label">
-                                    Package ID : &nbsp; *
+                                    Name :
                                 </label>
 
                                 <div class="col-xs-7">
-                                    <input class="form-control" type="text" id="txtAddPkgId" readonly="true"/>
+                                    <form:input class="form-control" type="text" id="txtAddPkgName" path="packName"/>
                                 </div>
+                                <span id="pkgNmErr" class="input-group-error"> </span>
                             </div>
                             <div class="col-xs-5">
                                 <label class="col-xs-5 control-label">
@@ -83,14 +84,7 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-xs-7">
-                                <label class="col-xs-5 control-label">
-                                    Name :
-                                </label>
 
-                                <div class="col-xs-7">
-                                    <form:input class="form-control" type="text" id="txtAddPkgName" path="packName"/>
-                                </div>
-                                <span id="pkgNmErr" class="input-group-error"> </span>
                             </div>
                         </div>
                     </div>

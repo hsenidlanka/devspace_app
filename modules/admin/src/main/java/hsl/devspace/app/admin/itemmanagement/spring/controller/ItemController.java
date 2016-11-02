@@ -61,14 +61,16 @@ public class ItemController {
 
     //For submitting the add new item
     @RequestMapping(value = "/add_item")
-    public ModelAndView addItem(@ModelAttribute("newItem") Item newItem, MultipartFile itemImage) {
+    public ModelAndView addItem(@ModelAttribute("newItem") Item newItem) {
 
         try {
             String itemNm = newItem.getItemName();
             String itemPrice = newItem.getPrice();
             String itemSize = newItem.getSize();
-            String imgFile = newItem.getImage();
-            //MultipartFile imgFile = newItem.getImage();
+
+            MultipartFile imgFile = newItem.getImageUrl();
+            String imgFileNm = imgFile.getOriginalFilename();
+            LOGGER.trace("multipart file  ="+imgFile);
 
             LOGGER.trace(itemPrice + " item price");
             LOGGER.trace(itemSize + " item size");
@@ -103,24 +105,35 @@ public class ItemController {
                             byte[] bytes = imgFile.getBytes();
 
                             // Creating the directory to store file
-                            String rootPath = System.getProperty("catalina.home");
-                            File dir = new File(rootPath + File.separator + "tempFiles");
+                            String rootPath = "/themes/hsenid/images/items/";
+                            LOGGER.trace("root path for img =" + rootPath);
+
+                            String realPathtoUpload = context.getRealPath(rootPath);
+                            LOGGER.trace("realPathtoUpload " + realPathtoUpload);
+
+                            File dir = new File(realPathtoUpload);
                                 if(!dir.exists())
                                     dir.mkdirs();
 
+                            LOGGER.info("Dir.... =", dir.getAbsolutePath());
+                            LOGGER.trace("made dir "+ dir);
+
                             //create the file on server
-                            File serverFile = new File(dir.getAbsolutePath() + File.separator + imgFile);//name of the image
+                            File serverFile = new File(dir.getAbsolutePath() + File.separator + itemNm + ".png");//name of the image
+                           LOGGER.trace("serverFile = "+serverFile);
                             BufferedOutputStream stream = new BufferedOutputStream(
                                     new FileOutputStream(serverFile));
                             stream.write(bytes);
                             stream.close();
+
                             LOGGER.trace("image save to server, Location= "+ serverFile.getAbsolutePath());
-                            LOGGER.trace("You successfully uploaded file=" + imgFile);
-                        } catch (Exception ex) {
+                            LOGGER.trace("You successfully uploaded file= " + imgFileNm);
+                        }
+                        catch (Exception ex) {
                             LOGGER.error("error in  getting image ", ex);
                         }
                     }else {
-                        LOGGER.error("You failed to upload " + imgFile + " because the file was empty.");
+                        LOGGER.error("You failed to upload " + imgFileNm + " because the file was empty.");
                     }
 
                     LOGGER.info("added New Item to database " + itemNm);

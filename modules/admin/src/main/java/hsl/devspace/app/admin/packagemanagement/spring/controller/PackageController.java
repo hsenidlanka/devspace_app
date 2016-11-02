@@ -28,23 +28,23 @@ public class PackageController {
 
 
     //For viewing the add package form
-    @RequestMapping(value = "/addPkg",method = RequestMethod.GET)
+    @RequestMapping(value = "/add",method = RequestMethod.GET)
     public ModelAndView showAddPackage(){
-        return new ModelAndView("pkgadd", "addPackage", new Package());
+        return new ModelAndView("package_management/addPackage", "command", new Package());
     }
 
     //For submitting the add new package
     @RequestMapping(value = "/add_package")
-    public ModelAndView add(@ModelAttribute("addPackage") hsl.devspace.app.corelogic.domain.Package newPackg) throws SQLIntegrityConstraintViolationException {
+    public ModelAndView add(@ModelAttribute("newPackg")Package newPackage) throws SQLIntegrityConstraintViolationException {
         ModelAndView model = new ModelAndView();
 
- int p = itemPackage.add(newPackg);
+/* int p = itemPackage.add(newPackg);
         if(p == 1)
 
             model.setViewName("addPackage");
   else
 
-            System.out.println("Error in package add");
+            System.out.println("Error in package add");*/
 
         return model;
     }
