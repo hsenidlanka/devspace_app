@@ -136,7 +136,7 @@ public class HomeController {
 
     }
 
-    @GetMapping(value = "/contactus")
+//    @GetMapping(value = "/contactus")
     public ModelAndView contactus() {
         return new ModelAndView("/home/contactus", "contactus", new ContactUs());
     }
@@ -144,12 +144,12 @@ public class HomeController {
 
 
 
-    @PostMapping(value = "/contactus" )
+//    @PostMapping(value = "/contactus" )
     public String sendContactus(@Valid ContactUs contactUs, BindingResult bindingResult, RedirectAttributes redirectAttributes){
 
         if (bindingResult.hasErrors()){
             logger.info("binding errors");
-            return "redirect:/contactus";
+            return "/home/contactus";
         }
         redirectAttributes.addFlashAttribute("validForm", "dd");
         logger.info(String.valueOf(bindingResult.hasErrors()));
@@ -177,7 +177,7 @@ public class HomeController {
 
         }
         redirectAttributes.addFlashAttribute("validForm", "True");
-        return "redirect:/contactus";
+        return "ghcontactus";
     }
 
     @RequestMapping("/logout")

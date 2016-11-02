@@ -1,54 +1,7 @@
 $(document).ready(function () {
-    $("#desserts-collapse").hide(menuThumbnailsOverlay());
-    $("#beverage-collapse").hide(menuThumbnailsOverlay());
-
-    // Keep only one collapsible group open.
-    $('.panel-heading a').on('click', function (e) {
-        if ($(this).parents('.panel').children('.panel-collapse').hasClass('in')) {
-            e.stopPropagation();
-        }
-    });
-
-    menuThumbnailsOverlay();
-
-    // Dynamically change the tab contents according to the selected menu
-    $(".tab-desserts").click(function () {
-        $("#pizza-collapse").hide();
-        $("#beverage-collapse").hide();
-        $("#desserts-collapse").show();
-        $("#menu-panel-heading").text("Menu-Desserts");
-    });
-
-    // Dynamically change the tab contents according to the selected menu
-    $(".tab-pizzas").click(function () {
-        $("#desserts-collapse").hide();
-        $("#beverage-collapse").hide();
-        $("#pizza-collapse").show();
-        $("#menu-panel-heading").text("Menu-Pizza");
-    });
-
-    // Dynamically change the tab contents according to the selected menu
-    $(".tab-beverages").click(function () {
-        $("#desserts-collapse").hide();
-        $("#pizza-collapse").hide();
-        $("#beverage-collapse").show();
-        $("#menu-panel-heading").text("Menu-Beverages");
-    });
-
-    $(".btn-addtocart-desserts").click(function () {
+    $(".btn-addtocart").click(function () {
         // Initialize the toast notification
-        $.notify("Selected dessert added to the shopping cart.", {
-            align: "center",
-            verticalAlign: "top",
-            type: 'toast',
-            delay: 2000,
-            animationType: "fade"
-        });
-    });
-
-    $(".btn-addtocart-beverage").click(function () {
-        // Initialize the toast notification
-        $.notify("Selected beverage added to the shopping cart.", {
+        $.notify("Selected item added to the shopping cart.", {
             align: "center",
             verticalAlign: "top",
             type: 'toast',
@@ -58,7 +11,7 @@ $(document).ready(function () {
     });
 
     $(".btn-addtocart-pizza").click(function () {
-        var itemDesc=$(this).closest(".contenthover").find("#menu-item-desc").text();
+        var itemDesc=$(this).closest(".caption").find("#menu-item-desc").val();
         $("#item-desc-modal").text(itemDesc);
         var itemName=$(this).closest(".col-md-3").find("#menu-item-name").text();
         $("#item-title-modal").text(itemName);
@@ -95,12 +48,3 @@ $(document).ready(function () {
         }
     });
 });
-
-// Configurations of the overlay description of the images of menu items
-function menuThumbnailsOverlay() {
-    $('.menu-images').contenthover({
-        overlay_background: '#000',
-        overlay_opacity: 0.8,
-        overlay_y_position: 'center'
-    });
-}

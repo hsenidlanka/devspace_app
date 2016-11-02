@@ -46,7 +46,7 @@
 <center>
 
 
-    <c:if test="${empty validForm}">
+    <%--<c:if test="${empty validForm}">--%>
 
         <div class="inner-bg">
             <div class="container">
@@ -88,6 +88,7 @@
 
                                         </form:select>
                                     </div>
+
 
                                 </div>
                             </div>
@@ -181,7 +182,7 @@
                 </div>
             </div>
         </div>
-    </c:if>
+    <%--</c:if>--%>
 
     <c:if test="${not empty validForm}">
         <div class="inner-bg">

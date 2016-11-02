@@ -95,7 +95,7 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
                 category.setDescription(mp.get(i).get("description").toString());
                 category.setImage(mp.get(i).get("image").toString());
                 category.setCreator(mp.get(i).get("creator").toString());
-                category.setStatus(Integer.parseInt(mp.get(i).get("status").toString()));
+                category.setStatus(mp.get(i).get("status").toString());
                 categories.add(category);
            // }
 
@@ -104,7 +104,29 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
         return categories;
     }
 
-   /*retrieve total no.of categories*/
+    @Override
+    public List<Category> selectAllVisible() {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category WHERE status='visible'");
+        List<Category> categories=new ArrayList<Category>();
+
+        for (int i=0;i<mp.size();i++){
+            //for(int j=0;j<mp.get(i).size();j++) {
+            Category category = new Category();
+            category.setCategory_id(Integer.parseInt(mp.get(i).get("id").toString()));
+            category.setCategoryName(mp.get(i).get("name").toString());
+            category.setDescription(mp.get(i).get("description").toString());
+            category.setImage(mp.get(i).get("image").toString());
+            category.setCreator(mp.get(i).get("creator").toString());
+            category.setStatus(mp.get(i).get("status").toString());
+
+            categories.add(category);
+            // }
+
+        }
+        log.info("{}",categories);
+        return categories;    }
+
+    /*retrieve total no.of categories*/
     @Override
     public int count() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category ");
@@ -130,7 +152,7 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
         String name=cat.getCategoryName();
         String desc=cat.getDescription();
         String image=cat.getImage();
-        int status=cat.getStatus();
+        String status=cat.getStatus();
 
         String sql = "UPDATE category SET name=?, description = ?,image=?,status=? WHERE id = ? ";
 

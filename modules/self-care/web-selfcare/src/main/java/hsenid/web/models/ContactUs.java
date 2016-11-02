@@ -1,16 +1,17 @@
 package hsenid.web.models;
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class ContactUs {
 
-    @NotNull
+    @NotNull @NotEmpty
     private String inquiryType;
 
-    @NotNull
+    @NotNull @NotEmpty
     private String title;
 
     @NotNull
@@ -18,7 +19,7 @@ public class ContactUs {
     private String name;
 
     @NotNull
-    @Email
+    @Email @NotEmpty
     private String contactEmail;
 
     @NotNull
