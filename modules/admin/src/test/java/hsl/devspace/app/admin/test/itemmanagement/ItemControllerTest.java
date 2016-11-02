@@ -1,3 +1,4 @@
+/*
 package hsl.devspace.app.admin.test.itemmanagement;
 
 import hsl.devspace.app.corelogic.repository.item.ItemRepository;
@@ -49,3 +50,4 @@ public class ItemControllerTest  {
 
 
 }
+*/
