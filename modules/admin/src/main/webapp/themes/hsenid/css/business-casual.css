@@ -158,8 +158,14 @@ body {
 }
 .panel-sub-menu1{
     margin: 0 5px 10px 80px;
+
 }
 .panel-sub-menu2{
     margin: 0 5px 10px 130px;
 }
 
+.file_upload{
+    background-color: rgba(216, 215, 214, 0.63);
+    color: black;
+    border-color: transparent;
+}
