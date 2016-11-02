@@ -24,10 +24,7 @@
           <div class="form-group row">
             <div class="col-sm-6" style="display:inline-block;">
               <label class="control-label">Size</label>
-              <select class="form-control">
-                <option>Small</option>
-                <option>Medium</option>
-                <option>Large</option>
+              <select class="form-control" id="addtocart-pizza-sizes">
               </select>
             </div>
             <div class="col-sm-6"></div>
@@ -57,10 +54,13 @@
           </div>
           <div class="form-group" style="margin-left:15px;">
             <label class="control-label" style="padding-right:15px;">Quantity:</label>
-            <input class="spin" type="number" min="1" max="100" value="1">
+            <input class="spin" type="number" min="1" max="100" value="1" style="width: 3em;">
             <label class="control-label"
                    style="padding-left:30px; padding-right:10px;">Price:&nbsp;&nbsp;</label>
-            <input type="text" disabled="" style="width:10em">
+            <input type="text" id="addtocart-pizza-price" readonly style="width:4em">
+            <label class="control-label"
+                   style="padding-left:30px; padding-right:10px;">Total:&nbsp;&nbsp;</label>
+            <input type="text" id="addtocart-pizza-total" readonly style="width:8em">
           </div>
         </form>
       </div>
