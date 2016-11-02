@@ -1,33 +1,36 @@
 package hsenid.web.models;
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 public class ContactUs {
 
-    @NotNull @NotEmpty
+
+    @NotEmpty
     private String inquiryType;
 
-    @NotNull @NotEmpty
+
+    @NotEmpty
     private String title;
 
-    @NotNull
-    @Size(min = 2)
+    @Length(min = 2, message = "Please Enter a valid name")
     private String name;
 
-    @NotNull
-    @Email @NotEmpty
+
+    @Email(message = "Please enter an valid email!")
+    @NotEmpty(message = "Please enter an valid email!")
     private String contactEmail;
 
-    @NotNull
-    @Size(min = 9, max = 10)
+    @Pattern(regexp = "^0[0-9]{9}$", message = "Please Enter Valid Contact Number!")
     private String contactNo;
 
-    @NotNull
-    @Size(min = 3)
+
+    @Length(min = 3, message = "Please Enter your message!")
     private String msg;
 
     public String getInquiryType() {

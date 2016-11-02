@@ -29,9 +29,10 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Bean
     public MessageSource messageSource() {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-        messageSource.setBasename("validationMsg/messages.properties");
+        messageSource.setBasename("messages.properties");
         return messageSource;
     }
+
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer){
         configurer.enable();

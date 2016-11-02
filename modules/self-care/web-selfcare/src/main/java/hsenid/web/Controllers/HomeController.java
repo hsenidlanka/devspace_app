@@ -177,7 +177,7 @@ public class HomeController {
 
         }
         redirectAttributes.addFlashAttribute("validForm", "True");
-        return "ghcontactus";
+        return "contactus";
     }
 
     @RequestMapping("/logout")
