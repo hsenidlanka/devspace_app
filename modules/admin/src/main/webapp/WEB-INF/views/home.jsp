@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -11,15 +12,31 @@
 
 </head>
 <body>
+<fmt:setLocale value="En"/>
+<fmt:setBundle basename="messages_en" var="bundle1" />
+<fmt:setBundle basename="system" scope="session" var="bundle2"/>
+
 <jsp:include page="header.jsp"/>
+
+<%--urls read from system file--%>
+<fmt:message key="admin.itemmanagement.itemadd.url" var="itemAdd" bundle="${bundle2}"/>
+<fmt:message key="admin.itemmanagement.itemview.url" var="itemView" bundle="${bundle2}"/>
+
+<fmt:message key="admin.categorymanage.categoryadd.url" var="categoryAdd" bundle="${bundle2}"/>
+<fmt:message key="admin.categorymanage.categoryview.url" var="categoryView" bundle="${bundle2}"/>
+
+<fmt:message key="admin.usermanage.useradd.url" var="userAdd" bundle="${bundle2}"/>
+<fmt:message key="admin.usermanage.userview.url" var="userView" bundle="${bundle2}"/>
+<fmt:message key="admin.usermanage.blocked.userview.url" var="blocked_userView" bundle="${bundle2}"/>
+
 
 
 <%--<spring:url value="header.jsp" var="page1"/>
 <link href="${page1}" rel="import">--%>
 
 
-<div class="home-title">Control Panel</div>
-<div class="address-bar">3481 Pizza Shefu | Ward Place, Colombo 07 | 123.456.7890</div>
+<div class="home-title"><fmt:message key="homepage.page.title" bundle="${bundle1}"/></div>
+<div class="address-bar"><fmt:message key="homepage.page.address" bundle="${bundle1}"/></div>
 
 <center>
   <div class="container">
@@ -27,20 +44,25 @@
       <div class="panel panel-default">
         <div class="panel-heading">
           <h2 class="panel-title">
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Item Management</a>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+              <fmt:message key="item.itemadd.heading" bundle="${bundle1}"/>
+            </a>
           </h2>
         </div>
         <div id="collapseOne" class="panel-collapse collapse ">
           <div class="panel-body">
             <ul class="nav navbar-nav">
               <li>
-                <a href="https://localhost:8443/admin/items/view" class="panel-sub-menu1">View Item</a>
+                <a href="<c:out value="${itemAdd}"/>" class="panel-sub-menu2" style="font-weight: bold;
+                font-size: 18px;">
+                  <fmt:message key="item.itemadd.breadcrumb.additem" bundle="${bundle1}"/>
+                </a>
               </li>
               <li>
-                <a href="https://localhost:8443/admin/items/add" class="panel-sub-menu1">Add Item</a>
-              </li>
-              <li>
-                <a href="https://localhost:8443/admin/items/edit" class="panel-sub-menu1">Edit Item</a>
+                <a href="<c:out value="${itemView}"/>" class="panel-sub-menu2" style="font-weight:bold;
+                font-size:18px;">
+                  <fmt:message key="item.itemview.breadcrumb.viewitem" bundle="${bundle1}"/>
+                </a>
               </li>
             </ul>
           </div>
@@ -57,14 +79,14 @@
           <div class="panel-body">
             <ul class="nav navbar-nav">
               <li>
-                <a href="https://localhost:8443/admin/packages/view_package" class="panel-sub-menu1">View Package</a>
+                <a href="https://localhost:8443/admin/packages/add_package" class="panel-sub-menu2" style="font-weight:bold;
+                font-size:18px;">Add Package</a>
               </li>
               <li>
-                <a href="https://localhost:8443/admin/packages/add_package" class="panel-sub-menu1">Add Package</a>
+                <a href="https://localhost:8443/admin/packages/view_package" class="panel-sub-menu2" style="font-weight:bold;
+                font-size:18px;">View Package</a>
               </li>
-              <li>
-                <a href="https://localhost:8443/admin/packages/edit_package" class="panel-sub-menu1">Edit Package</a>
-              </li>
+
             </ul>
           </div>
         </div>
@@ -74,17 +96,25 @@
       <div class="panel panel-default">
         <div class="panel-heading">
           <h4 class="panel-title">
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Category Management</a>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+              <fmt:message key="category.heading" bundle="${bundle1}"/>
+            </a>
           </h4>
         </div>
         <div id="collapseThree" class="panel-collapse collapse">
           <div class="panel-body">
             <ul class="nav navbar-nav">
               <li>
-                <a href="https://localhost:8443/admin/category/add" class="panel-sub-menu2">Add Category</a>
+                <a href="<c:out value="${categoryAdd}"/>" class="panel-sub-menu2" style="font-weight:bold;
+                font-size:18px;">
+                  <fmt:message key="category.categoryadd.breadcrumb.addcat" bundle="${bundle1}"/>
+                </a>
               </li>
               <li>
-                <a href="https://localhost:8443/admin/category/view" class="panel-sub-menu2">View Category</a>
+                <a href="<c:out value="${categoryView}"/>" class="panel-sub-menu2" style="font-weight:bold;
+                font-size:18px;">
+                  <fmt:message key="category.categoryadd.breadcrumb.viewcat" bundle="${bundle1}"/>
+                </a>
               </li>
             </ul>
           </div>
@@ -94,20 +124,31 @@
       <div class="panel panel-default">
         <div class="panel-heading">
           <h4 class="panel-title">
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">User Management</a>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+              <fmt:message key="user.heading" bundle="${bundle1}"/>
+            </a>
           </h4>
         </div>
         <div id="collapseFour" class="panel-collapse collapse">
           <div class="panel-body">
             <ul class="nav navbar-nav">
               <li>
-                <a href="https://localhost:8443/admin/users/add" class="panel-sub-menu1">Add Users</a>
+                <a href="<c:out value="${userAdd}"/>" class="panel-sub-menu1" style="font-weight:bold;
+                font-size:18px;">
+                  <fmt:message key="user.useradd.breadcrumb.adduser" bundle="${bundle1}"/>
+                </a>
               </li>
               <li>
-                <a href="https://localhost:8443/admin/users/view" class="panel-sub-menu1">View Users</a>
+                <a href="<c:out value="${userView}"/>" class="panel-sub-menu1" style="font-weight:bold;
+                font-size:18px;">
+                  <fmt:message key="user.userview.breadcrumb.viewuser" bundle="${bundle1}"/>
+                </a>
               </li>
               <li>
-                <a href="https://localhost:8443/admin/users/viewBlocked" class="panel-sub-menu1">Blocked Users</a>
+                <a href="<c:out value="${blocked_userView}"/>" class="panel-sub-menu1" style="font-weight:bold;
+                font-size:18px;">
+                  <fmt:message key="user.blockuserview.breadcrumb.viewuser" bundle="${bundle1}"/>
+                </a>
               </li>
             </ul>
           </div>
@@ -124,10 +165,12 @@
           <div class="panel-body">
             <ul class="nav navbar-nav">
               <li>
-                <a href="pendingcomments.html" class="panel-sub-menu2">Pending Comments</a>
+                <a href="pendingcomments.html" class="panel-sub-menu2" style="font-weight:bold;
+                font-size:18px;">Pending Comments</a>
               </li>
               <li>
-                <a href="pendingrating.html" class="panel-sub-menu2">Pending Ratings</a>
+                <a href="pendingrating.html" class="panel-sub-menu2" style="font-weight:bold;
+                font-size:18px;">Pending Ratings</a>
               </li>
             </ul>
           </div>

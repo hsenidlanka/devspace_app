@@ -16,7 +16,6 @@
     <name>admin</name>
     <url>http://maven.apache.org</url>
 
-
     <dependencies>
         <dependency>
             <groupId>hsenid</groupId>
@@ -26,11 +25,7 @@
 
         <!--spring mvc testing dependencies-->
         <!--to transform objects into url encoded String objects.-->
-<<<<<<< Updated upstream
      <!--   <dependency>
-=======
-    <!--    <dependency>
->>>>>>> Stashed changes
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
             <version>2.2.1</version>
@@ -41,13 +36,8 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.2.1</version>
             <scope>test</scope>
-<<<<<<< Updated upstream
         </dependency>-->
 
-=======
-        </dependency>
--->
->>>>>>> Stashed changes
         <!--when we are writing assertions for the responses.-->
        <!-- <dependency>
             <groupId>org.hamcrest</groupId>
