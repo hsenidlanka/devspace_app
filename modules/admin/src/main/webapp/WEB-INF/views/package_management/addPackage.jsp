@@ -1,5 +1,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -12,7 +15,9 @@
 
     <%-- Other css --%>
     <spring:url value="/themes/hsenid/css/itemMgt.css" var="cssItem"/>
+    <spring:url value="/themes/hsenid/css/packageMgt.css" var="cssPackage"/>
     <link href="${cssItem}" rel="stylesheet">
+    <link href="${cssPackage}" rel="stylesheet">
 
     <%--  other javascripts --%>
 
@@ -23,13 +28,15 @@
     <script src="${myAlerts}"></script>
 </head>
 <body>
-
+<fmt:setLocale value="En"/>
+<fmt:setBundle basename="messages_en" var="bundle1" />
+<fmt:setBundle basename="system" scope="session" var="bundle2"/>
 
 <jsp:include page="../header.jsp"/>
 
 <div class="brand">
     <div style="position: relative; left: -50%;">
-        Add New Package
+        <fmt:message key="package.heading" bundle="${bundle1}"/>
     </div>
 </div>
 <br>
@@ -37,9 +44,19 @@
 <div>
     <div id="add-pkg-breadcrumb-position">
         <ul class="breadcrumb breadcrumb-menu">
-            <li><a href="https://localhost:8443/admin/users/list">Home</a></li>
-            <li><a href="#">Package Management</a></li>
-            <li class="active"><a href="#">Add New Package</a></li>
+
+            <fmt:message key="admin.home.url" var="url1" bundle="${bundle2}"/>
+            <fmt:message key="admin.packagemanagement.pckgadd.url" var="url2" bundle="${bundle2}"/>
+
+            <li>
+                <a href="<c:out value="${url1}"/>"><fmt:message key="package.packageadd.breadcrumb.home" bundle="${bundle1}"/></a>
+            </li>
+            <li>
+                <a href="<c:out value="${url1}"/>"><fmt:message key="package.addpackage.heading" bundle="${bundle1}"/></a>
+            </li>
+            <li class="active">
+                <a href="<c:out value="${url2}"/>"><fmt:message key="package.addpackage.breadcrumb.addpkg" bundle="${bundle1}"/></a>
+            </li>
         </ul>
     </div>
 </div>
@@ -47,33 +64,33 @@
 <div class="form-box" id="add-pkg-form-box">
     <div class="panel panel-default">
         <div class="panel-heading common-form-headings">
-            <h3 class="default-panel-headings">Add New Package</h3>
+            <h3 class="default-panel-headings"><fmt:message key="package.packageadd.panel.heading" bundle="${bundle1}"/></h3>
         </div>
         <div class="panel-body">
 
             <form:form class="form-horizontal" role="form" id="frmAddPkg" method="post" action="/admin/packages/add_package">
                 <fieldset class="scheduler-border">
-                    <legend class="scheduler-border">(*) Fields are read only</legend>
+                    <legend class="scheduler-border"><fmt:message key="package.packageadd.form.legend" bundle="${bundle1}"/></legend>
 
 
                     <div class="form-group">
                         <div class="row">
                             <div class="col-xs-7">
-                                <label class="col-xs-5 control-label">
-                                    Name :
+                                <label class="col-xs-4 control-label">
+                                    <fmt:message key="package.packageadd.form.name" bundle="${bundle1}"/>
                                 </label>
 
-                                <div class="col-xs-7">
+                                <div class="col-xs-8">
                                     <form:input class="form-control" type="text" id="txtAddPkgName" path="packName"/>
                                 </div>
                                 <span id="pkgNmErr" class="input-group-error"> </span>
                             </div>
                             <div class="col-xs-5">
-                                <label class="col-xs-5 control-label">
-                                    Price :
+                                <label class="col-xs-4 control-label">
+                                    <fmt:message key="package.packageadd.form.packageprice" bundle="${bundle1}"/>
                                 </label>
 
-                                <div class="col-xs-7" align="right">
+                                <div class="col-xs-8" align="right">
                                     <form:input class="form-control price" type="text" id="txtAddPkgPrice" path="price"/>
                                     <span id="pkgPriceErr" class="input-group-error" style="float: left"> </span>
                                 </div>
@@ -92,28 +109,28 @@
                     <div class="form-group">
                         <div class="row">
                             <label class="col-xs-3 control-label">
-                                Package Detail :
+                                <fmt:message key="package.packageadd.form.packagedetails" bundle="${bundle1}"/>
                             </label>
                         </div>
                         <br>
 
-                        <div class="row">
-                            <div class="col-xs-2"></div>
-
-                            <div class="col-xs-10">
+                        <div class="row col-xs-12" style="margin-left: 1%;">
 
                                 <div class="row item-tbl-row item-tbl-hdr">
                                     <div class="col-xs-3">
-                                        <strong>Content</strong>
-                                    </div>
-                                    <div class="col-xs-4">
-                                        <strong>Name</strong>
-                                    </div>
-                                    <div class="col-xs-2">
-                                        <strong>Qty</strong>
+                                        <strong><fmt:message key="package.packageadd.form.packagedetails.content" bundle="${bundle1}"/></strong>
                                     </div>
                                     <div class="col-xs-3">
-                                        <strong>Status</strong>
+                                        <strong><fmt:message key="package.packageadd.form.packagedetails.itemname" bundle="${bundle1}"/></strong>
+                                    </div>
+                                <div class="col-xs-2">
+                                        <strong><fmt:message key="package.packageadd.form.packagedetails.itemsize" bundle="${bundle1}"/></strong>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <strong><fmt:message key="package.packageadd.form.packagedetails.qty" bundle="${bundle1}"/></strong>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <strong><fmt:message key="package.packageadd.form.packagedetails.status" bundle="${bundle1}"/></strong>
                                     </div>
                                 </div>
 
@@ -124,13 +141,18 @@
                                         Pizza
                                         </label>
                                     </div>
-                                    <div class="col-xs-4">
-                                        <form:input type="text" class="form-control price" path="price"/>
+                                    <div class="col-xs-3">
+                                        <form:select type="text" class="form-control" path="itemName">
+                                            <form:option value="-" label="---"/>
+                                        </form:select>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <form:select type="text" class="form-control" path=""/>
                                     </div>
                                     <div class="col-xs-2">
                                         <form:input class="qty-spinner" type="number" value="0" path="content"/>
                                     </div>
-                                    <div class="col-xs-3">
+                                    <div class="col-xs-2">
                                         <form:button type="button" value="" class="btn btn-success btnAddItmPkg" id="btnAddPkgPizza">
                                             <span class="glyphicon glyphicon-plus"></span>Add
                                         </form:button>
@@ -141,16 +163,23 @@
                                     <div class="col-xs-3">
                                         <label class="checkbox-inline">
                                         <form:checkbox value="pasta" class="checkbox" path="content"/>
-                                        Pasta/Appetizer
+                                        Salad
                                         </label>
                                     </div>
-                                    <div class="col-xs-4">
-                                        <form:input type="text" class="form-control price" path="price"/>
+                                    <div class="col-xs-3">
+                                        <form:select type="text" class="form-control" path="">
+                                            <form:option value="-" label="---"/>
+                                        </form:select>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <form:select type="text" class="form-control" path="">
+                                            <form:option value="-" label="---"/>
+                                        </form:select>
                                     </div>
                                     <div class="col-xs-2">
                                         <form:input class="qty-spinner" type="number" value="0" path="content"/>
                                     </div>
-                                    <div class="col-xs-3">
+                                    <div class="col-xs-2">
                                         <form:button type="button" value="" class="btn btn-success btnAddItmPkg" id="btnAddPkgPasta">
                                             <span class="glyphicon glyphicon-plus"></span>Add
                                         </form:button>
@@ -164,13 +193,18 @@
                                         Bevarage
                                         </label>
                                     </div>
-                                    <div class="col-xs-4">
-                                        <form:input type="text" class="form-control price" path="price"/>
+                                    <div class="col-xs-3">
+                                        <form:select type="text" class="form-control" path="">
+                                            <form:option value="-" label="---"/>
+                                        </form:select>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <form:select type="text" class="form-control" path=""/>
                                     </div>
                                     <div class="col-xs-2">
                                         <form:input class="qty-spinner" type="number" value="0" path="content"/>
                                     </div>
-                                    <div class="col-xs-3">
+                                    <div class="col-xs-2">
                                         <form:button type="button" value="" class="btn btn-success btnAddItmPkg" id="btnAddPkgBvrg">
                                             <span class="glyphicon glyphicon-plus"></span>Add
                                         </form:button>
@@ -184,13 +218,20 @@
                                         Salad
                                         </label>
                                     </div>
-                                    <div class="col-xs-4">
-                                        <form:input type="text" class="form-control price" path="price"/>
+                                    <div class="col-xs-3">
+                                        <form:select type="text" class="form-control" path="">
+                                            <form:option value="-" label="---"/>
+                                        </form:select>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <form:select type="text" class="form-control" path="">
+                                            <form:option value="-" label="---"/>
+                                        </form:select>
                                     </div>
                                     <div class="col-xs-2">
                                         <form:input class="qty-spinner" type="number" value="0" path="content"/>
                                     </div>
-                                    <div class="col-xs-3">
+                                    <div class="col-xs-2">
                                         <form:button type="button" value="" class="btn btn-success btnAddItmPkg" id="btnAddPkgSalad">
                                             <span class="glyphicon glyphicon-plus"></span>Add
                                         </form:button>
@@ -204,33 +245,39 @@
                                         Dessert
                                         </label>
                                     </div>
-                                    <div class="col-xs-4">
-                                        <form:input type="text" class="form-control price" path="price"/>
+                                    <div class="col-xs-3">
+                                        <form:select type="text" class="form-control" path="">
+                                            <form:option value="-" label="---"/>
+                                        </form:select>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <form:select type="text" class="form-control" path="">
+                                            <form:option value="-" label="---"/>
+                                        </form:select>
                                     </div>
                                     <div class="col-xs-2">
                                         <form:input class="qty-spinner" type="number" value="0" path="content"/>
                                     </div>
-                                    <div class="col-xs-3">
+                                    <div class="col-xs-2">
                                         <form:button type="button" value="" class="btn btn-success btnAddItmPkg" id="btnAddPkgDssrt">
                                             <span class="glyphicon glyphicon-plus"></span>Add
                                         </form:button>
                                     </div>
                                 </div>
-                            </div>
+                            <%--</div>--%>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="row">
                             <label class="col-xs-3 control-label">
-                                Add Image/s :
+                                <fmt:message key="package.packageadd.form.packageimages" bundle="${bundle1}"/>
                             </label>
 
                             <div class="col-xs-5">
                                <form:button type="button" class="btn btn-success" id="btnupldPkgImg"><span
-                                        class="glyphicon glyphicon-open"></span> Browse to Upload
-                                    Images
-                                </form:button><%--<input type="file" value="fg">--%>
+                                        class="glyphicon glyphicon-open"></span> <fmt:message key="package.packageadd.form.button.upldimages" bundle="${bundle1}"/>
+                                </form:button>
                                 <span id="pkgImgErr" class="input-group-error"> </span>
                             </div>
                         </div>
@@ -238,8 +285,8 @@
                     <br>
 
                     <div class="list-group row" style="margin:auto; width:50%; border:2px solid black; padding: 10px;">
-                        <label path="lblhidden"><h4>Hidden field</h4></label><br>
-                        <label id="newPkgName" path="lblpkgNmNew"><strong>Pacakage Name</strong></label> <br>
+                        <label><h4>Hidden field</h4></label><br>
+                        <label id="newPkgName"><strong>Pacakage Name</strong></label> <br>
                         <ul class="list-group">
                             <li class="list-group-item">Pkg item1
                                 <span class="badge">
@@ -294,12 +341,13 @@
                         </div>
                         <div class="col-xs-4" align="right">
                             <form:button type="button" class="btn btn-success bckToHome" id="btnPkgCancel"><span
-                                    class="glyphicon glyphicon-chevron-left"></span> Back to home
+                                    class="glyphicon glyphicon-chevron-left"></span>
+                                <fmt:message key="package.packageadd.form.button.submit" bundle="${bundle1}"/>
                             </form:button>
                         </div>
                         <div class="col-xs-4" align="left">
-                            <form:button type="button" class="btn btn-success btn-group-xs" id="btnAddNewPkg">Add
-                                Package
+                            <form:button type="button" class="btn btn-success btn-group-xs" id="btnAddNewPkg">
+                                <fmt:message key="package.packageadd.form.button.reset" bundle="${bundle1}"/>
                             </form:button>
                         </div>
                     </div>

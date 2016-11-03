@@ -2,6 +2,8 @@ package hsl.devspace.app.admin.packagemanagement.spring.controller;
 
 import hsl.devspace.app.corelogic.domain.Package;
 import hsl.devspace.app.corelogic.repository.Package.PackageRepository;
+import hsl.devspace.app.corelogic.repository.category.CategoryRepository;
+import hsl.devspace.app.corelogic.repository.item.ItemRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,22 +22,32 @@ public class PackageController {
     private static final Logger LOG = LogManager.getLogger(PackageController.class);
 
     @Autowired
-    private PackageRepository itemPackage;
+    private PackageRepository packageRepo;
+
+    @Autowired
+    private ItemRepository itemRepo;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
 
 /**
      * Add new package view
      **/
 
-
     //For viewing the add package form
     @RequestMapping(value = "/add",method = RequestMethod.GET)
     public ModelAndView showAddPackage(){
-        return new ModelAndView("package_management/addPackage", "command", new Package());
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("command", new Package());
+        modelAndView.setViewName("package_management/addPackage");
+
+        return modelAndView;
     }
 
     //For submitting the add new package
     @RequestMapping(value = "/add_package")
-    public ModelAndView add(@ModelAttribute("newPackg")Package newPackage) throws SQLIntegrityConstraintViolationException {
+    public ModelAndView add(@ModelAttribute("command")Package newPackage) throws SQLIntegrityConstraintViolationException {
         ModelAndView model = new ModelAndView();
 
 /* int p = itemPackage.add(newPackg);

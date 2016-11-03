@@ -1,6 +1,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -22,11 +24,15 @@
 
 <body>
 
-<object width="100%" data="header.html"></object>
+<fmt:setLocale value="En"/>
+<fmt:setBundle basename="messages_en" var="bundle1" />
+<fmt:setBundle basename="system" scope="session" var="bundle2"/>
+
+<jsp:include page="../header.jsp"/>
 
 <div class="brand">
     <div style="position: relative; left: -50%;">
-        Package Management
+        <fmt:message key="package.addpackage.heading" bundle="${bundle1}"/>
     </div>
 </div>
 <br>
@@ -34,9 +40,19 @@
 <div class="breadcrumbPosition">
     <div style="position: relative; left: -50%;">
         <ul class="breadcrumb breadcrumb-menu">
-            <li><a href="home.html">Home</a></li>
-            <li><a href="#">Package Management</a></li>
-            <li class="active"><a href="#">View Package</a></li>
+
+            <fmt:message key="admin.home.url" var="url1" bundle="${bundle2}"/>
+            <fmt:message key="admin.packagemanagement.pckgview.url" var="url2" bundle="${bundle2}"/>
+
+            <li>
+                <a href="<c:out value="${url1}"/>"><fmt:message key="package.packageadd.breadcrumb.home" bundle="${bundle1}"/></a>
+            </li>
+            <li>
+                <a href="<c:out value="${url1}"/>"><fmt:message key="package.addpackage.heading" bundle="${bundle1}"/></a>
+            </li>
+            <li class="active">
+                <a href="<c:out value="${url2}"/>"><fmt:message key="package.viewpackage.breadcrumb.viewpkg" bundle="${bundle1}"/></a>
+            </li>
         </ul>
     </div>
 </div>
@@ -58,7 +74,7 @@
 
                 </div>
                 <div class="col-sm-4">
-                    <form:input class="form-control" id="txtViewSearchPkg" type="text" path="txtpkgsrchVw"></form:input>
+                    <form:input class="form-control" id="txtViewSearchPkg" type="text" path="txtpkgsrchVw"/>
                 </div>
                 <div class="col-sm-3">
                     <form:button type="button" class="btn btn-success" id="btnViewSearchPkg"><span
