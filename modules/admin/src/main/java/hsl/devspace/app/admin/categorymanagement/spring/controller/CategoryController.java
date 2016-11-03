@@ -2,20 +2,20 @@ package hsl.devspace.app.admin.categorymanagement.spring.controller;
 
 import hsl.devspace.app.corelogic.domain.Category;
 import hsl.devspace.app.corelogic.repository.category.CategoryRepository;
+import hsl.devspace.app.corelogic.repository.category.SubCategoryRepositoryImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.swing.*;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.List;
 
 @Controller
 @RequestMapping("/category")
@@ -33,16 +33,37 @@ public class CategoryController {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    @Autowired
+    private SubCategoryRepositoryImpl subCategoryRepository;
+
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public ModelAndView showAddCateg(){
-        return  new ModelAndView("category_management/categoryAdd",  "command", new Category()); }
+    public String showAddCateg(Model model){
 
+        List<String> listCat = categoryRepository.selectCategoryNames();
+        LOG.error("Category Controller category list {}",listCat);
+        model.addAttribute("listCat", listCat);
+        model.addAttribute("command", new Category());
 
+        return "category_management/totalAdd";
+    }
+
+    //handler method to retrieve the details of a particular banned staff user
+    @RequestMapping(value = "/populateSubCategory", method = RequestMethod.GET)
+    public @ResponseBody
+    List<String> viewBannedStaff(@ModelAttribute("subCategory") Category subCategory,
+                                 @RequestParam("catName") String catName){
+
+        LOG.error("Category selected in populateCategry {}",catName);
+        List<String> outb = categoryRepository.viewSubCategories(subCategory.getCategoryName());
+        LOG.error("recieved sub category list",outb);
+
+        return outb;
+    }
 
     @RequestMapping(value="/addCategory",method = RequestMethod.POST)
-    public ModelAndView saveOrUpdate(@ModelAttribute("newCategory")  Category newCategory,
-                                     @RequestParam("radioName") String userType) throws SQLIntegrityConstraintViolationException {
+    public ModelAndView saveOrUpdate(@ModelAttribute("newCategory")  Category newCategory
+                                     ) throws SQLIntegrityConstraintViolationException {
 
         int i=categoryRepository.add(newCategory);
         if (i == 0)
