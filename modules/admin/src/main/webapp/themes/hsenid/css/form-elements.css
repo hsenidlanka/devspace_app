@@ -24,18 +24,18 @@
 }
 
 .nav > li > a {
-    font-size: large;
-    font-weight: 700;
+    font-size: medium;
+    font-weight: 500;
     color: #0d630d;
 }
-button.btn {
+/*button.btn {
     vertical-align: middle;
     background-color: rgb(36, 90, 3);
     font-weight: bold;
     color: #e7ce98;
-}
+}*/
 
-button.btn:hover { opacity: 0.6; color: #fff; }
+/*button.btn:hover { opacity: 0.6; color: #fff; }*/
 
 .checkbox-inline, .radio-inline {
     padding-left: 17.8px;

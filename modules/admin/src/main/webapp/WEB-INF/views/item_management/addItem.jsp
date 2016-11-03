@@ -217,7 +217,7 @@
               </label>
 
               <div class="col-xs-5">
-                <form:input type="file" class="btn btn-success" path="imageUrl" id="btnUpldImage" value="Browse" />
+                <form:input type="file" class="file_upload btn btn-default" path="imageUrl" id="btnUpldImage" value="Browse" />
               </div>
               <div class="col-xs-4">
                 <span id="itmImgErr" class="input-group-error"> </span>
