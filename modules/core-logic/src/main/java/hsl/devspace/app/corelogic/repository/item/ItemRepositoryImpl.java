@@ -271,6 +271,22 @@ public class ItemRepositoryImpl implements ItemRepository {
         return items;
     }
 
+    /**retrieve sizes of a item  by item name*/
+    @Override
+    public List<Item> retrieveSelectedItemSizes(String name) {
+        List<Map<String, Object>> size=jdbcTemplate.queryForList("SELECT size,price FROM size WHERE item_id=(SELECT id FROM item WHERE name=?)",name);
+        List<Item> items=new ArrayList<Item>();
+        for (int k=0;k<size.size();k++){
+            log.info("{}",size.get(k));
+            Item item=new Item();
+            item.setSize(size.get(k).get("size").toString());
+            item.setPrice(size.get(k).get("price").toString());
+            items.add(item);
+        }
+        log.info("**ITEMS{}",items);
+        return items;
+    }
+
     /**retrieve selected data from item and size*/
     @Override
     @Transactional(propagation= Propagation.REQUIRED)

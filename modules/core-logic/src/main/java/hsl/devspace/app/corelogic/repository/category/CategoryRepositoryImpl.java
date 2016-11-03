@@ -243,9 +243,12 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
             item.setItemId(Integer.parseInt(another.get(j).get("id").toString()));
             item.setItemName(another.get(j).get("name").toString());
             item.setDescription(another.get(j).get("description").toString());
-            item.setType(another.get(j).get("type").toString());
+            item.setType(another.get(j).get("type_id").toString());
             item.setImage(another.get(j).get("image").toString());
-            item.setSubCategoryId(Integer.parseInt(another.get(j).get("sub_category_id").toString()));
+            List<Map<String, Object>> mp5=jdbcTemplate.queryForList("SELECT name FROM sub_category WHERE id=?",another.get(j).get("sub_category_id"));
+            //item.setSubCategoryId(Integer.parseInt(another.get(j).get("sub_category_id").toString()));
+            item.setSubCategoryName(mp5.get(0).get("name").toString());
+
             itemList.add(item);
 
 

@@ -29,6 +29,7 @@ public interface ItemRepository {
     List<Map<String, Object>> retrieveSelectedItemDetails(int id);
     List<Map<String, Object>> retrieveSelectedItemDetails(String name);
     List<Item> retrieveSelectedItemSizes(int id);
+    List<Item> retrieveSelectedItemSizes(String name);
     ReturnTypeResolver selectItemAndSize(int id);
 
 }

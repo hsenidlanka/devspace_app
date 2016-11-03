@@ -176,9 +176,9 @@ public class Item {
     public String toString() {
         return "Item{" +
                 "itemName='" + itemName + '\'' +
-                //  ", price=" + price +
+                  ", price=" + price +
                 ", description='" + description + '\'' +
-                // ", size='" + size + '\'' +
+                 ", size='" + size + '\'' +
                 ", type='" + type + '\'' +
                 ", image='" + image + '\'' +
                 ", subCategoryName='" + subCategoryName + '\'' +
