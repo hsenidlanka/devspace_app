@@ -29,7 +29,8 @@
 <fmt:message key="admin.usermanage.userview.url" var="userView" bundle="${bundle2}"/>
 <fmt:message key="admin.usermanage.blocked.userview.url" var="blocked_userView" bundle="${bundle2}"/>
 
-
+<fmt:message key="admin.packagemanagement.pckgadd.url" var="pckgAdd" bundle="${bundle2}"/>
+<fmt:message key="admin.packagemanagement.pckgview.url" var="pckgView" bundle="${bundle2}"/>
 
 <%--<spring:url value="header.jsp" var="page1"/>
 <link href="${page1}" rel="import">--%>
@@ -79,12 +80,16 @@
           <div class="panel-body">
             <ul class="nav navbar-nav">
               <li>
-                <a href="https://localhost:8443/admin/packages/add_package" class="panel-sub-menu2" style="font-weight:bold;
-                font-size:18px;">Add Package</a>
+                <a href="<c:out value="${pckgAdd}"/>" class="panel-sub-menu2" style="font-weight:bold;
+                font-size:18px;">
+                <fmt:message key="package.addpackage.breadcrumb.addpkg" bundle="${bundle1}"/>
+                </a>
               </li>
               <li>
-                <a href="https://localhost:8443/admin/packages/view_package" class="panel-sub-menu2" style="font-weight:bold;
-                font-size:18px;">View Package</a>
+                <a href="<c:out value="${pckgView}"/>" class="panel-sub-menu2" style="font-weight:bold;
+                font-size:18px;">
+                <fmt:message key="package.viewpackage.breadcrumb.viewpkg" bundle="${bundle1}"/>
+                </a>
               </li>
 
             </ul>
