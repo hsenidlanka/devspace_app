@@ -30,9 +30,6 @@ public class HomeController {
 
     final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
-    @Value("${api.url.contactUs.add}")
-    private String contactUsUrl;
-
     @Value("${api.url.customer.update}")
     private String customerUpdateUrl;
 
@@ -159,10 +156,6 @@ public class HomeController {
         return "payment";
     }
 
-    @RequestMapping("/shopping-cart")
-    public String shoppingCart() {
-        return "shopping-cart";
-    }
 
     @RequestMapping("/forgotpassword")
     public String forgotpassword() {

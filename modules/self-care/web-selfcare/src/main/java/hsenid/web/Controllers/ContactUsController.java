@@ -42,10 +42,6 @@ public class ContactUsController {
         }
 
         redirectAttributes.addFlashAttribute("validForm", "dd");
-//        logger.info(String.valueOf(bindingResult.hasErrors()));
-
-
-//        logger.info("Send Contact {}",contactUs.getInquiryType());
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("inquiryType", contactus.getInquiryType());
         jsonObject.put("title", contactus.getTitle());
