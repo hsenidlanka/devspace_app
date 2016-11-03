@@ -89,7 +89,7 @@ $(document).ready(function () {
             });
         } else {
             $("#txt-menu-search").css("border-color", "blue");
-            window.location.href = "../pages/search-results.html";
+            window.location.href = "search-results";
         }
     });
 });

@@ -11,8 +11,6 @@ import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -57,7 +55,7 @@ public class ItemService {
                     jsonObject.put("name", item.getItemName());
                     jsonObject.put("type", item.getType());
                     jsonObject.put("description", item.getDescription());
-                    jsonObject.put("imagePath", item.getImage());
+                    jsonObject.put("imagePath", item.getImageUrl());
                     successMessage.addData(jsonObject);
                 }
             } else {
@@ -94,15 +92,14 @@ public class ItemService {
                     jsonObject.put("name", item.getItemName());
                     jsonObject.put("type", item.getType());
                     jsonObject.put("description", item.getDescription());
-                    jsonObject.put("imagePath", item.getImage());
-                    jsonObject.put("price", item.getSizePrice());
+                    jsonObject.put("imagePath", item.getImageUrl());
                     successMessage.addData(jsonObject);
                 }
             } else {
                 successMessage.setMessage("no items to retrieve");
             }
         } catch (NullPointerException e) {
-            successMessage.setMessage("no items to retrieve"+e);
+            successMessage.setMessage("no items to retrieve");
             return Response.status(Response.Status.OK).entity(successMessage)
                     .header("Access-Control-Allow-Origin", propertyReader.readProperty("Access-Control-Allow-Origin"))
                     .build();

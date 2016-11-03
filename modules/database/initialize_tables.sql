@@ -140,7 +140,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `item` WRITE;
 /*!40000 ALTER TABLE `item` DISABLE KEYS */;
-INSERT INTO `item` VALUES (1,'Thanduri Pizza','Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text',4,'/a/dummy/image/path/',1),(2,'Cheese Lover','Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text',3,'/a/dummy/image/path/',2),(3,'Chicken Lasanga','Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text',4,'/a/dummy/image/path/',3),(4,'Garlic Bread','Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text',1,'/a/dummy/image/path/',1),(5,'Sausage Rolls','Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text',1,'/a/dummy/image/path/',5),(6,'a','ddd',1,'dew',2);
+INSERT INTO `item` VALUES (1,'Thanduri Pizza','Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text',4,'/a/dummy/imageUrl/path/',1),(2,'Cheese Lover','Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text',3,'/a/dummy/imageUrl/path/',2),(3,'Chicken Lasanga','Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text',4,'/a/dummy/imageUrl/path/',3),(4,'Garlic Bread','Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text',1,'/a/dummy/imageUrl/path/',1),(5,'Sausage Rolls','Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text',1,'/a/dummy/imageUrl/path/',5),(6,'a','ddd',1,'dew',2);
 /*!40000 ALTER TABLE `item` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -170,7 +170,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `package` WRITE;
 /*!40000 ALTER TABLE `package` DISABLE KEYS */;
-INSERT INTO `package` VALUES (1,'Christmas','dummy content',414.00,'/a/dummy/image/path/'),(2,'New Year','dummy content',658.00,'/a/dummy/image/path/'),(3,'Halloween','dummy content',154.22,'/a/dummy/image/path/'),(4,'','dummy content',564.00,'/a/dummy/image/path/'),(5,'Feasty','dummy content',256.25,'/a/dummy/image/path/');
+INSERT INTO `package` VALUES (1,'Christmas','dummy content',414.00,'/a/dummy/imageUrl/path/'),(2,'New Year','dummy content',658.00,'/a/dummy/imageUrl/path/'),(3,'Halloween','dummy content',154.22,'/a/dummy/imageUrl/path/'),(4,'','dummy content',564.00,'/a/dummy/imageUrl/path/'),(5,'Feasty','dummy content',256.25,'/a/dummy/imageUrl/path/');
 /*!40000 ALTER TABLE `package` ENABLE KEYS */;
 UNLOCK TABLES;
 

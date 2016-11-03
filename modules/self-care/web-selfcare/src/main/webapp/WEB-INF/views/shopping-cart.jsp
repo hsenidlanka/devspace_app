@@ -134,7 +134,7 @@
                 </div>
             </div>
         </div>
-        <!-- Start-Suggestions image slider -->
+        <!-- Start-Suggestions imageUrl slider -->
         <div class="container">
             <div class="col-md-12">
                 <h3><fmt:message key="shopping.you" bundle="${lang}"/></h3>
@@ -203,7 +203,7 @@
                 <!--/well-->
             </div>
         </div>
-        <!-- End-Suggessions image slider -->
+        <!-- End-Suggessions imageUrl slider -->
     </div>
 </div>
 

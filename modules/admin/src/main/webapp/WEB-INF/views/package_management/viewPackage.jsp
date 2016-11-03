@@ -197,7 +197,7 @@
                             <div class="list-group row" style="margin:auto; padding: 5px;">
 
                                 <ul class="list-group">
-                                    <li class="list-group-item">image 1.png
+                                    <li class="list-group-item">imageUrl 1.png
                                 <span class="badge">
                                   <div class="itemList">
                                     <span class="glyphicon glyphicon-remove">
@@ -205,7 +205,7 @@
                                   </div>
                                 </span>
                                     </li>
-                                    <li class="list-group-item">image 1.png
+                                    <li class="list-group-item">imageUrl 1.png
                                 <span class="badge">
                                   <div class="itemList">
                                     <span class="glyphicon glyphicon-remove">
@@ -213,7 +213,7 @@
                                   </div>
                                 </span>
                                     </li>
-                                    <li class="list-group-item">image 1.png
+                                    <li class="list-group-item">imageUrl 1.png
                                 <span class="badge">
                                   <div class="itemList">
                                     <span class="glyphicon glyphicon-remove">

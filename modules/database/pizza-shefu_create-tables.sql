@@ -28,7 +28,7 @@ CREATE TABLE `category` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `description` varchar(500) NOT NULL,
-  `image` varchar(500) NOT NULL ,
+  `imageUrl` varchar(500) NOT NULL ,
   `creator` varchar(100) NOT NULL,
   `status` enum('visible','hidden') NOT NULL,
   PRIMARY KEY (`id`)
@@ -245,7 +245,7 @@ CREATE TABLE `item` (
   `name` varchar(100) NOT NULL,
   `description` varchar(500) NOT NULL,
   `type_id` int(10) NOT NULL,
-  `image` varchar(500) DEFAULT NULL,
+  `imageUrl` varchar(500) DEFAULT NULL,
   `sub_category_id` int(10) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_item_1_idx` (`type_id`),
@@ -301,7 +301,7 @@ CREATE TABLE `package` (
   `name` varchar(50) NOT NULL,
   `content` varchar(500) NOT NULL,
   `price` decimal(5,2) NOT NULL,
-  `image` varchar(45) DEFAULT NULL,
+  `imageUrl` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;

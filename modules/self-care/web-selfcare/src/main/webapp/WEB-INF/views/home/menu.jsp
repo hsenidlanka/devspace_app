@@ -52,7 +52,7 @@
                     </div>
 
                     <div class="col-md-3">
-                        <%@include file="../includes/menu-pizza-carousel.jsp" %>
+                        <%--<%@include file="../includes/menu-pizza-carousel.jsp" %>--%>
                     </div>
                 </div>
             </div>

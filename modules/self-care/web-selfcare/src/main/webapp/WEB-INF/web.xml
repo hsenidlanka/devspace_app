@@ -12,4 +12,15 @@
         <param-name>log4jConfigLocation</param-name>
         <param-value>/log4j2-test.xml</param-value>
     </context-param>
+    <!--<servlet>
+        <servlet-name>mvc-dispatcher</servlet-name>
+        <servlet-class>
+            org.springframework.web.servlet.DispatcherServlet
+        </servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>mvc-dispatcher</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>-->
 </web-app>

@@ -15,7 +15,7 @@
     <meta http-equiv="expires" content="0"/>
     <meta http-equiv="pragma" content="no-cache"/>
     <meta http-equiv="cache-control" content="max-age=0, no-cache, no-store, must-revalidate"/>
-    <link rel="shortcut icon" href="images/favicon.png" type="image/png" />
+    <link rel="shortcut icon" href="images/favicon.png" type="imageUrl/png" />
 
     <script type="text/javascript">
 
