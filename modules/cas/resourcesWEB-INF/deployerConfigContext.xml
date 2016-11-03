@@ -94,7 +94,7 @@
           class="org.jasig.cas.adaptors.jdbc.QueryDatabaseAuthenticationHandler"
           p:dataSource-ref="dataSource"
           p:passwordEncoder-ref="passwordEncoder"
-          p:sql="select password from users where lower(username)=lower(?)"/>
+          p:sql="select password from staff where lower(username)=lower(?)"/>
 
     <!-- Required for proxy ticket mechanism -->
     <bean id="proxyPrincipalResolver"
@@ -156,7 +156,7 @@
     <!--password encoder-->
     <bean id="passwordEncoder"
           class="org.jasig.cas.authentication.handler.DefaultPasswordEncoder"
-          c:encodingAlgorithm="MD5"
+          c:encodingAlgorithm="SHA1"
           p:characterEncoding="UTF-8" />
 
     <bean id="dataSource"
