@@ -1,5 +1,7 @@
 package hsl.devspace.app.corelogic.domain;
 
+import org.springframework.web.multipart.MultipartFile;
+
 /**
  * Created by hsenid on 9/15/16.
  */
@@ -13,6 +15,15 @@ public class Category {
     private int subCategoryId;
     private String status;
     private String image;
+    private MultipartFile imageUrl;
+
+    public MultipartFile getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(MultipartFile imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 
     public String getImage() {
         return image;
@@ -72,14 +83,30 @@ public class Category {
         this.category_id = category_id;
     }
 
+    public String getCatDescription() {
+        return catDescription;
+    }
+
+    public void setCatDescription(String catDescription) {
+        this.catDescription = catDescription;
+    }
+
+    public String getSubcatDescription() {
+        return subcatDescription;
+    }
+
+    public void setSubcatDescription(String subcatDescription) {
+        this.subcatDescription = subcatDescription;
+    }
+
     public Category(){
 
     }
     //category
-    public Category(String categoryName,String description,String image,String creator,String status){
+    public Category(String categoryName, String description, MultipartFile imageUrl, String creator, String status) {
         this.categoryName=categoryName;
         this.catDescription=description;
-        this.image=image;
+        this.imageUrl = imageUrl;
         this.creator=creator;
         this.status=status;
     }
@@ -103,29 +130,15 @@ public class Category {
     public String toString() {
         return "Category{" +
                 "categoryName='" + categoryName + '\'' +
-                ", description='" + catDescription + '\'' +
-                ",image='" + image +'\'' +
+                ", catDescription='" + catDescription + '\'' +
+                ", subcatDescription='" + subcatDescription + '\'' +
                 ", creator='" + creator + '\'' +
                 ", subCategoryName='" + subCategoryName + '\'' +
                 ", category_id=" + category_id +
                 ", subCategoryId=" + subCategoryId +
-                ", status=" +status +
+                ", status='" + status + '\'' +
+                ", image='" + image + '\'' +
+                ", imageUrl=" + imageUrl +
                 '}';
-    }
-
-    public String getCatDescription() {
-        return catDescription;
-    }
-
-    public void setCatDescription(String catDescription) {
-        this.catDescription = catDescription;
-    }
-
-    public String getSubcatDescription() {
-        return subcatDescription;
-    }
-
-    public void setSubcatDescription(String subcatDescription) {
-        this.subcatDescription = subcatDescription;
     }
 }

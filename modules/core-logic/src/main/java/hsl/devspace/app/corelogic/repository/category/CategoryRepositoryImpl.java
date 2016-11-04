@@ -8,6 +8,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
@@ -42,10 +43,12 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
         String catNm = category.getCategoryName();
         boolean availability = checkAvailability(catNm);
         if (availability == false) {
+            MultipartFile img = category.getImageUrl();
+            String ims = img.getOriginalFilename();
             String sql = "INSERT INTO category " +
                     "(name,description,image,creator,status) VALUES (?,?,?,?,?)";
 
-            row = jdbcTemplate.update(sql, new Object[]{category.getCategoryName(), category.getCatDescription(),category.getImage(), category.getCreator(),category.getStatus()});
+            row = jdbcTemplate.update(sql, new Object[]{category.getCategoryName(), category.getCatDescription(), ims, category.getCreator(), category.getStatus()});
 
             log.info("{} new category inserted",row);
         } else

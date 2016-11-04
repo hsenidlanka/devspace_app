@@ -1,5 +1,7 @@
 package hsl.devspace.app.corelogic.domain;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 
 /**
@@ -11,10 +13,18 @@ public class Package {
     private double price;
     private String image;
     private int packageId;
-
+    private MultipartFile imageUrl;
     private String categoryName;
     private String itemName;
     private List<Item> sizePrice;
+
+    public MultipartFile getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(MultipartFile imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 
     public String getCategoryName() {
         return categoryName;
@@ -87,6 +97,13 @@ public class Package {
         this.image = image;
     }
 
+    public Package(String packName, String content, double price, MultipartFile imageUrl) {
+        this.packName = packName;
+        this.content = content;
+        this.price = price;
+        this.imageUrl = imageUrl;
+    }
+
     public Package() {
     }
 
@@ -98,6 +115,7 @@ public class Package {
                 ", price=" + price +
                 ", image='" + image + '\'' +
                 ", packageId=" + packageId +
+                ", imageUrl=" + imageUrl +
                 ", categoryName='" + categoryName + '\'' +
                 ", itemName='" + itemName + '\'' +
                 ", sizePrice=" + sizePrice +

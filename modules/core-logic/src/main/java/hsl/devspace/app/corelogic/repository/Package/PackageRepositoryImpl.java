@@ -4,6 +4,7 @@ import hsl.devspace.app.corelogic.domain.Package;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
@@ -35,9 +36,11 @@ public class PackageRepositoryImpl implements PackageRepository  {
     @Override
     public int add(Package pack) {
         int row;
+        MultipartFile img = pack.getImageUrl();
+        String ims = img.getOriginalFilename();
         String sql = "INSERT INTO package " +
                 "(name,content,price,image) VALUES (?,?,?,?)";
-        row = jdbcTemplate.update(sql, new Object[]{pack.getPackName(),pack.getContent(),pack.getPrice(),pack.getImage()});
+        row = jdbcTemplate.update(sql, new Object[]{pack.getPackName(), pack.getContent(), pack.getPrice(), ims});
         log.info("{} new package added",row);
         return row;
     }
