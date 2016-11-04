@@ -1,5 +1,7 @@
 package hsl.devspace.app.corelogic.domain;
 
+import java.util.List;
+
 /**
  * Created by hsenid on 9/20/16.
  */
@@ -9,6 +11,34 @@ public class Package {
     private double price;
     private String image;
     private int packageId;
+
+    private String categoryName;
+    private String itemName;
+    private List<Item> sizePrice;
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
+    public List<Item> getSizePrice() {
+        return sizePrice;
+    }
+
+    public void setSizePrice(List<Item> sizePrice) {
+        this.sizePrice = sizePrice;
+    }
 
     public int getPackageId() {
         return packageId;
@@ -68,6 +98,9 @@ public class Package {
                 ", price=" + price +
                 ", image='" + image + '\'' +
                 ", packageId=" + packageId +
+                ", categoryName='" + categoryName + '\'' +
+                ", itemName='" + itemName + '\'' +
+                ", sizePrice=" + sizePrice +
                 '}';
     }
 }
