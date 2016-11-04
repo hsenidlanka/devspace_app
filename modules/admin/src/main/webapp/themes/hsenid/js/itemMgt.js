@@ -10,23 +10,6 @@ $(document).ready(function () {
     }
 
     /*
-     * Function for redirecting to admin home page
-     * */
-    $(".bckToHome").click(function () {
-        location.href = 'home.html';
-    })
-
-    $('.btnAddItmPkg').click(function () {
-        $(this).replaceWith("<div class=\"add-status\"><span class=\"glyphicon glyphicon-ok\"></span> Added</div>");
-    });
-    /*
-     * Function for loading package content to modal for editing
-     */
-    $("#lnkModalView").click(function () {
-        $("#pkgViewModal").modal();
-    })
-
-    /*
      * Price validation function to allow only 2 decimals
      * */
     $('.price').keypress(function (event) {
@@ -118,6 +101,7 @@ function setSubCats(categoryNm) {
  * validate checkbox unclick-->textbox value = " " & disabling
  */
 function disableTxt(t, textBoxId) {
+    //noinspection JSJQueryEfficiency
     $("#" + textBoxId).prop("disabled", !$(t).prop("checked"));
     $("#" + textBoxId).val(" ");
 }

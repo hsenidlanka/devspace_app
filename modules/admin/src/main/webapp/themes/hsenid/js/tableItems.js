@@ -37,8 +37,7 @@ $(document).ready(function () {
             title: 'Item description',
             align: 'left',
             sortable: true
-        },
-            {
+        },{
                 field: 'image',
                 title: 'Images',
                 sortable: true

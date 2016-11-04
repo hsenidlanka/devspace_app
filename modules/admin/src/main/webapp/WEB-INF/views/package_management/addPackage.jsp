@@ -68,7 +68,7 @@
         </div>
         <div class="panel-body">
 
-            <form:form class="form-horizontal" role="form" id="frmAddPkg" method="post" action="/admin/packages/add_package">
+            <form:form class="form-horizontal" role="form" id="frmAddPkg" method="post" action="/admin/packages/add_package" enctype="multipart/form-data">
                 <fieldset class="scheduler-border">
                     <legend class="scheduler-border"><fmt:message key="package.packageadd.form.legend" bundle="${bundle1}"/></legend>
 
@@ -142,7 +142,7 @@
                                         </label>
                                     </div>
                                     <div class="col-xs-3">
-                                        <form:select type="text" class="form-control" path="itemName">
+                                        <form:select type="text" class="form-control" path="">
                                             <form:option value="-" label="---"/>
                                         </form:select>
                                     </div>
@@ -275,9 +275,7 @@
                             </label>
 
                             <div class="col-xs-5">
-                               <form:button type="button" class="btn btn-success" id="btnupldPkgImg"><span
-                                        class="glyphicon glyphicon-open"></span> <fmt:message key="package.packageadd.form.button.upldimages" bundle="${bundle1}"/>
-                                </form:button>
+                                <form:input type="file" class="file_upload btn btn-default" path="image" id="savePkgImg" value="Browse" />
                                 <span id="pkgImgErr" class="input-group-error"> </span>
                             </div>
                         </div>

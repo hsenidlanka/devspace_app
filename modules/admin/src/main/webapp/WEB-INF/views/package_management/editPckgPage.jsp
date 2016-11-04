@@ -185,7 +185,7 @@
 </div>
 
 <!--Modal for edit package content -->
-<div class="modal fade" id="pkgViewModal">
+<%--<div class="modal fade" id="pkgViewModal">
     <div class="modal-dialog modal-md">
         <div class="modal-content">
 
@@ -350,6 +350,6 @@
             </div>
         </div>
     </div>
-</div>
+</div>--%>
 </body>
 </html>

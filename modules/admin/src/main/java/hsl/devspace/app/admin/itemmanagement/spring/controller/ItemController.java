@@ -43,7 +43,7 @@ public class ItemController {
     private SubCategoryRepositoryImpl subCategoryRepository;
 
     @Autowired
-    ServletContext context;
+   ServletContext context;
 
     /**
      * Add new item view
@@ -169,7 +169,7 @@ public class ItemController {
         modelView.addObject("listCatEdit", listCatEdit);
         modelView.addObject("command", new Item());
         modelView.setViewName("/item_management/viewItem");
-        LOGGER.trace("list usermanagement " + listCatEdit);
+        LOGGER.trace("list itemmgt " + listCatEdit);
 
         return modelView;
     }

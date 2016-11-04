@@ -11,15 +11,24 @@
     <meta charset="UTF-8">
     <title>View Package</title>
 
-    <!--include common CSS, fonts and js-->
-    <link rel="import" href="adminTop.html">
+    <!-- include common CSS, fonts and js -->
+    <jsp:include page="../adminTop.jsp"/>
 
-    <link href="../css/itemMgt.css" rel="stylesheet">
-    <script src="../js/jquery.toaster.js"></script>
-    <script src="../js/itemMgt.js"></script>
-    <script src="../js/tablePackges.js"></script>
-    <script src="../js/myAlerts.js"></script>
+    <%-- Other css --%>
+    <spring:url value="/themes/hsenid/css/itemMgt.css" var="cssItem"/>
+    <spring:url value="/themes/hsenid/css/packageMgt.css" var="cssPackage"/>
+    <link href="${cssItem}" rel="stylesheet">
+    <link href="${cssPackage}" rel="stylesheet">
 
+    <%--  other javascripts --%>
+
+    <spring:url value="/themes/hsenid/js/itemMgt.js" var="itemJs"/>
+    <spring:url value="/themes/hsenid/js/tablePackages.js" var="pkgTblView"/>
+    <spring:url value="/themes/hsenid/js/myAlerts.js" var="myAlerts"/>
+
+    <script src="${itemJs}"></script>
+    <script src="${pkgTblView}"></script>
+    <script src="${myAlerts}"></script>
 </head>
 
 <body>
@@ -36,23 +45,15 @@
     </div>
 </div>
 <br>
-
-<div class="breadcrumbPosition">
-    <div style="position: relative; left: -50%;">
+<div>
+    <div id="add-item-breadcrumb-position">
         <ul class="breadcrumb breadcrumb-menu">
-
             <fmt:message key="admin.home.url" var="url1" bundle="${bundle2}"/>
-            <fmt:message key="admin.packagemanagement.pckgview.url" var="url2" bundle="${bundle2}"/>
+            <fmt:message key="admin.packagemanagement.pckgadd.url" var="url2" bundle="${bundle2}"/>
 
-            <li>
-                <a href="<c:out value="${url1}"/>"><fmt:message key="package.packageadd.breadcrumb.home" bundle="${bundle1}"/></a>
-            </li>
-            <li>
-                <a href="<c:out value="${url1}"/>"><fmt:message key="package.addpackage.heading" bundle="${bundle1}"/></a>
-            </li>
-            <li class="active">
-                <a href="<c:out value="${url2}"/>"><fmt:message key="package.viewpackage.breadcrumb.viewpkg" bundle="${bundle1}"/></a>
-            </li>
+            <li><a href="<c:out value="${url1}"/>"><fmt:message key="package.packageadd.breadcrumb.home" bundle="${bundle1}"/></a></li>
+            <li><a href="<c:out value="${url1}"/>"><fmt:message key="package.heading" bundle="${bundle1}"/> </a></li>
+            <li class="active"><a href="<c:out value="${url2}"/>"><fmt:message key="package.viewpackage.breadcrumb.viewpkg" bundle="${bundle1}"/> </a></li>
         </ul>
     </div>
 </div>
@@ -68,24 +69,24 @@
             <div class="row itemSearchBar">
                 <div class="col-sm-1"></div>
                 <div class="col-sm-3">
-                    <form:label class="control-label" style="float: right;" path="lblpkgnmVw">
+                    <label class="control-label" style="float: right;">
                         Package Name :
-                    </form:label>
+                    </label>
 
                 </div>
                 <div class="col-sm-4">
-                    <form:input class="form-control" id="txtViewSearchPkg" type="text" path="txtpkgsrchVw"/>
+                    <input class="form-control" id="txtViewSearchPkg" type="text"/>
                 </div>
                 <div class="col-sm-3">
-                    <form:button type="button" class="btn btn-success" id="btnViewSearchPkg"><span
+                    <button type="button" class="btn btn-success" id="btnViewSearchPkg"><span
                             class="glyphicon glyphicon-search"></span> Search
-                    </form:button>
+                    </button>
                 </div>
                 <div class="col-sm-1"></div>
             </div>
             <br>
 
-            <form:form class="form-horizontal" role="form" id="frmViewPkg" action="/view_package" method="post">
+            <form:form class="form-horizontal" role="form" id="frmViewPkg" action="" method="post">
                 <fieldset class="scheduler-border">
                     <legend class="scheduler-border">Available Packages</legend>
 
@@ -119,27 +120,29 @@
     <div class="modal-dialog ">
         <div class="modal-content">
             <div class="modal-header item-modal-header-style">
-                <form:button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
-                        class="glyphicon glyphicon-remove"></span></form:button>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
+                        class="glyphicon glyphicon-remove"></span></button>
                 <div align="center"><span class="glyphicon glyphicon-trash"></span> Delete Package
                 </div>
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <form:label id="lblDeltPkgMsg" path="lblpkgdltmsg">Do you really want to delete this Package ?</form:label><br><br>
+                    <label id="lblDeltPkgMsg"><fmt:message key="package.deletemodal.warning.question" bundle="${bundle1}"/></label><br><br>
 
-                    <div align="center">
-                        <form:label id="lblDeltPkgId" path="lblpkgdltID">Package ID : xxxxxx </form:label><br>
-                        <form:label id="lblDeltPkgName" path="lblpkgDltNm">Pacakge Name : yyyyyy </form:label><br>
+                    <div align="center" class="row">
+                        <div class="col-xs-6" style="text-align: right"> <label ><fmt:message key="package.deletemodal.packageid" bundle="${bundle1}"/></label></div>
+                        <div class="col-xs-6" style="text-align: left">  <label id="lblDeltPkgId" class="delete-lables"> </label></div><br>
+                        <div class="col-xs-6" style="text-align: right"> <label ><fmt:message key="package.deletemodal.packagename" bundle="${bundle1}"/></label></div>
+                        <div class="col-xs-6" style="text-align: left"> <label id="lblDeltPkgName" class="delete-lables"> </label></div><br>
                     </div>
                 </div>
+                <div style="text-align: center; width: 75%; margin: auto;" id="toaster"></div>
             </div>
             <div class="modal-footer" align="right">
-                <form:button class="btn btn-success" type="button" value="Yes" id="btnDeltPkg">Yes
-                </form:button>
-                <form:button class="btn btn-success" type="button" value="cancel" id="btnCnclDeltPkg">
-                    No
-                </form:button>
+                <button class="btn btn-success" type="button" value="Yes" id="btnDeltPkg"><fmt:message key="package.deletemodal.button.yes" bundle="${bundle1}"/>
+                </button>
+                <button class="btn btn-success" type="button" value="cancel" id="btnCnclDeltPkg" data-dismiss="modal"><fmt:message key="package.deletemodal.button.no" bundle="${bundle1}"/>
+                </button>
             </div>
         </div>
     </div>
@@ -151,8 +154,8 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header item-modal-header-style">
-                <form:button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
-                        class="glyphicon glyphicon-remove"></span></form:button>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
+                        class="glyphicon glyphicon-remove"></span></button>
                 <div align="center"><span class="glyphicon glyphicon-pencil"></span> Edit Package
                 </div>
             </div>
@@ -166,22 +169,10 @@
 
                             <div class="row">
                                 <div class="col-xs-4" align="right">
-                                    <form:label id="lblEditPkgId" path="lblpkgEdtId">Package ID : * </form:label>
+                                    <label id="lblEditPkgNm">Package Name : </label>
                                 </div>
                                 <div class="col-xs-5">
-                                    <form:input type="text" id="txtEditPkgId" class="form-control" readonly="true" path="txtedtPkgID"></form:input>
-                                </div>
-                                <div class="col-xs-3" align="center">
-                                </div>
-                            </div>
-                            <br>
-
-                            <div class="row">
-                                <div class="col-xs-4" align="right">
-                                    <form:label id="lblEditPkgNm" path="lblpkgEDtNm">Package Name : </form:label>
-                                </div>
-                                <div class="col-xs-5">
-                                    <form:input class="form-control" type="text" id="txtEditPkgNm" path="txtedtpkgNm"></form:input>
+                                    <form:input class="form-control" type="text" id="txtEditPkgNm" path="packName"/>
                                 </div>
                                 <div class="col-xs-3">
                                 </div>
@@ -191,15 +182,15 @@
 
                             <div class="row">
                                 <div class="col-xs-4" align="right">
-                                    <form:label path="lblpkgCont">Package Content : </form:label>
+                                    <label>Package Content : </label>
                                 </div>
                                 <div class="col-xs-5">
-                                    <form:textarea class="form-control" id="editPkgCont" path="txtareapkgCont"></form:textarea>
+                                    <form:textarea class="form-control" id="editPkgCont" path="content"/>
                                 </div>
                                 <div class="col-xs-3" align="left">
-                                    <form:label id="lblEditPkgCont" onclick="" path="lbledtpkgCont"> <span
+                                    <label id="lblEditPkgCont" onclick=""> <span
                                             class="badge edit-pkg-Badges edt glyphicon glyphicon-edit"><a href="#" id="lnkModalView"> Edit</a></span>
-                                    </form:label>
+                                    </label>
                                 </div>
                             </div>
 
@@ -207,56 +198,21 @@
 
                             <div class="row">
                                 <div class="col-xs-4" align="right">
-                                    <form:label path="lblpkgImgEdt"> Package Images : </form:label>
+                                    <label> Package Images : </label>
                                 </div>
                                 <div class="col-xs-5">
-                            <div class="list-group row" style="margin:auto; padding: 5px;">
 
-                                <ul class="list-group">
-                                    <li class="list-group-item">imageUrl 1.png
-                                <span class="badge">
-                                  <div class="itemList">
-                                    <span class="glyphicon glyphicon-remove">
-                                    </span> <a href="">Remove</a>
-                                  </div>
-                                </span>
-                                    </li>
-                                    <li class="list-group-item">imageUrl 1.png
-                                <span class="badge">
-                                  <div class="itemList">
-                                    <span class="glyphicon glyphicon-remove">
-                                    </span> <a href="">Remove</a>
-                                  </div>
-                                </span>
-                                    </li>
-                                    <li class="list-group-item">imageUrl 1.png
-                                <span class="badge">
-                                  <div class="itemList">
-                                    <span class="glyphicon glyphicon-remove">
-                                    </span> <a href="">Remove</a>
-                                  </div>
-                                </span>
-                                    </li>
-
-                                    <li class="list-group-item">&nbsp;
-                                <span class="badge">
-                                  <div class="edit-pkg-Badges">
-                                    <span class="glyphicon glyphicon-plus">
-                                    </span> <a href="">Add New</a>
-                                  </div>
-                                </span>
-                                    </li>
-                                </ul>
-                            </div>
-</div>
+                                    <form:input type="file" class="file_upload btn btn-default" path="image" id="btnUpldImage" value="Browse" />
+                                    <br>
+                                </div>
                             <br>
 
                             <div class="row">
                                 <div class="col-xs-4" align="right">
-                                    <form:label path="lblpkgPrcEdt">Package Price : </form:label>
+                                    <label>Package Price : </label>
                                 </div>
                                 <div class="col-xs-5">
-                                    <form:input type="text" class="form-control price" id="editPkgPrice" placeholder="LKR 0.00" path="txtedtpkgPrc"></form:input>
+                                    <form:input type="text" class="form-control price" id="editPkgPrice" placeholder="LKR 0.00" path="price"/>
                                 </div>
                                 <div class="col-xs-3" align="center">
                                 </div>
@@ -270,12 +226,10 @@
             </div>
             <div style="text-align: center; z-index: 50000; width: 50%; margin: auto;" id="toaster"></div>
             <div class="modal-footer" align="right">
-                <form:button class="btn btn-success" type="button" value="Yes" id="btnUpdtPkgDelt">Update package details
-                </form:button>
-                <form:button class="btn btn-success" type="button" value="cancel" id="btnPkgBack">Back
-                </form:button>
-                <form:button class="btn btn-success" type="button" value="cancel" id="btnPkgCancel">Cancel
-                </form:button>
+                <button class="btn btn-success" type="button" value="Yes" id="btnUpdtPkgDelt">Update
+                </button>
+                <button class="btn btn-success" type="button" value="cancel" id="btnPkgCancel">Cancel
+                </button>
             </div>
         </div>
     </div>
@@ -293,7 +247,158 @@
                 <br>
 
                 <div id="editModalContent">
+                   <%-- <div class="row col-xs-12" style="margin-left: 1%;">
 
+                        <div class="row item-tbl-row item-tbl-hdr">
+                            <div class="col-xs-3">
+                                <strong><fmt:message key="package.packageadd.form.packagedetails.content" bundle="${bundle1}"/></strong>
+                            </div>
+                            <div class="col-xs-3">
+                                <strong><fmt:message key="package.packageadd.form.packagedetails.itemname" bundle="${bundle1}"/></strong>
+                            </div>
+                            <div class="col-xs-2">
+                                <strong><fmt:message key="package.packageadd.form.packagedetails.itemsize" bundle="${bundle1}"/></strong>
+                            </div>
+                            <div class="col-xs-2">
+                                <strong><fmt:message key="package.packageadd.form.packagedetails.qty" bundle="${bundle1}"/></strong>
+                            </div>
+                            <div class="col-xs-2">
+                                <strong><fmt:message key="package.packageadd.form.packagedetails.status" bundle="${bundle1}"/></strong>
+                            </div>
+                        </div>
+
+                        <div class="row item-tbl-row">
+                            <div class="col-xs-3">
+                                <label class="checkbox-inline">
+                                    <form:checkbox value="pizza" class="checkbox" path="content"/>
+                                    Pizza
+                                </label>
+                            </div>
+                            <div class="col-xs-3">
+                                <form:select type="text" class="form-control" path="">
+                                    <form:option value="-" label="---"/>
+                                </form:select>
+                            </div>
+                            <div class="col-xs-2">
+                                <form:select type="text" class="form-control" path=""/>
+                            </div>
+                            <div class="col-xs-2">
+                                <form:input class="qty-spinner" type="number" value="0" path="content"/>
+                            </div>
+                            <div class="col-xs-2">
+                                <form:button type="button" value="" class="btn btn-success btnAddItmPkg" id="btnAddPkgPizza">
+                                    <span class="glyphicon glyphicon-plus"></span>Add
+                                </form:button>
+                            </div>
+                        </div>
+
+                        <div class="row item-tbl-row">
+                            <div class="col-xs-3">
+                                <label class="checkbox-inline">
+                                    <form:checkbox value="pasta" class="checkbox" path="content"/>
+                                    Salad
+                                </label>
+                            </div>
+                            <div class="col-xs-3">
+                                <form:select type="text" class="form-control" path="">
+                                    <form:option value="-" label="---"/>
+                                </form:select>
+                            </div>
+                            <div class="col-xs-2">
+                                <form:select type="text" class="form-control" path="">
+                                    <form:option value="-" label="---"/>
+                                </form:select>
+                            </div>
+                            <div class="col-xs-2">
+                                <form:input class="qty-spinner" type="number" value="0" path="content"/>
+                            </div>
+                            <div class="col-xs-2">
+                                <form:button type="button" value="" class="btn btn-success btnAddItmPkg" id="btnAddPkgPasta">
+                                    <span class="glyphicon glyphicon-plus"></span>Add
+                                </form:button>
+                            </div>
+                        </div>
+
+                        <div class="row item-tbl-row">
+                            <div class="col-xs-3">
+                                <label class="checkbox-inline">
+                                    <form:checkbox value="bevrg" class="checkbox" path="content"/>
+                                    Bevarage
+                                </label>
+                            </div>
+                            <div class="col-xs-3">
+                                <form:select type="text" class="form-control" path="">
+                                    <form:option value="-" label="---"/>
+                                </form:select>
+                            </div>
+                            <div class="col-xs-2">
+                                <form:select type="text" class="form-control" path=""/>
+                            </div>
+                            <div class="col-xs-2">
+                                <form:input class="qty-spinner" type="number" value="0" path="content"/>
+                            </div>
+                            <div class="col-xs-2">
+                                <form:button type="button" value="" class="btn btn-success btnAddItmPkg" id="btnAddPkgBvrg">
+                                    <span class="glyphicon glyphicon-plus"></span>Add
+                                </form:button>
+                            </div>
+                        </div>
+
+                        <div class="row item-tbl-row">
+                            <div class="col-xs-3">
+                                <label class="checkbox-inline">
+                                    <form:checkbox value="salad" class="checkbox" path="content"/>
+                                    Salad
+                                </label>
+                            </div>
+                            <div class="col-xs-3">
+                                <form:select type="text" class="form-control" path="">
+                                    <form:option value="-" label="---"/>
+                                </form:select>
+                            </div>
+                            <div class="col-xs-2">
+                                <form:select type="text" class="form-control" path="">
+                                    <form:option value="-" label="---"/>
+                                </form:select>
+                            </div>
+                            <div class="col-xs-2">
+                                <form:input class="qty-spinner" type="number" value="0" path="content"/>
+                            </div>
+                            <div class="col-xs-2">
+                                <form:button type="button" value="" class="btn btn-success btnAddItmPkg" id="btnAddPkgSalad">
+                                    <span class="glyphicon glyphicon-plus"></span>Add
+                                </form:button>
+                            </div>
+                        </div>
+
+                        <div class="row item-tbl-row">
+                            <div class="col-xs-3">
+                                <label class="checkbox-inline">
+                                    <form:checkbox value="dessert" class="checkbox" path="content"/>
+                                    Dessert
+                                </label>
+                            </div>
+                            <div class="col-xs-3">
+                                <form:select type="text" class="form-control" path="">
+                                    <form:option value="-" label="---"/>
+                                </form:select>
+                            </div>
+                            <div class="col-xs-2">
+                                <form:select type="text" class="form-control" path="">
+                                    <form:option value="-" label="---"/>
+                                </form:select>
+                            </div>
+                            <div class="col-xs-2">
+                                <form:input class="qty-spinner" type="number" value="0" path="content"/>
+                            </div>
+                            <div class="col-xs-2">
+                                <form:button type="button" value="" class="btn btn-success btnAddItmPkg" id="btnAddPkgDssrt">
+                                    <span class="glyphicon glyphicon-plus"></span>Add
+                                </form:button>
+                            </div>
+                        </div>
+                        &lt;%&ndash;</div>&ndash;%&gt;
+                    </div>--%>
                 </div>
 
             </div>
