@@ -23,7 +23,7 @@
    <%-- <div class="form-box" id="categoryAdd_box">
     <div class="panel panel-default">--%>
         <div class="panel-body">
-            <form:form role="form" id="admin_addcatform"  method="POST" class="form-horizontal"
+            <form:form role="form" id="admin_addcatform"  method="POST" class="form-horizontal" enctype="multipart/form-data" accept-charset="utf-8"
                        action="/admin/category/addCategory">
                 <fieldset class="scheduler-border">
                     <legend class="scheduler-border" id="legendHeading"></legend>
@@ -54,7 +54,7 @@
 
                             <div class="col-xs-8">
                                 <div class="col-xs-12">
-                                    <form:textarea path="description" type="text" class="form-control" id="categorydes"
+                                    <form:textarea path="catDescription" type="text" class="form-control" id="categorydes"
                                         placeholder="Please Enter Category Description"></form:textarea>
                                 </div>
                             </div>
@@ -68,7 +68,7 @@
                             </label>
                             <div class="col-xs-8">
                                 <div class="col-xs-2">
-                                    <form:input type="file" class="file_upload btn btn-default" path="image" id="btnUpldImage"
+                                    <form:input type="file" class="file_upload btn btn-default" path="imageUrl" id="btnUpldImage"
                                                 value="Browse" cssStyle="width: 220px"/>
                                 </div>
                                 <div class="col-xs-4">
@@ -78,6 +78,28 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group"></div>
+                    <div class="form-group">
+                        <div class="row">
+                            <label for="viewability" class="col-xs-3 control-label" style="text-align: left;margin: 0 -60px 0 60px;">
+                                <fmt:message key="category.categoryadd.form.catvisibility" bundle="${bundle1}"/>
+                            </label>
+                            <div class="col-xs-8">
+                                <div class="col-xs-2">
+                                    <form:select path="status" class="form-control" id="viewability" style="width:75px">
+                                        <form:option value="1">
+                                            <fmt:message key="category.categoryadd.form.catvisibility.option1" bundle="${bundle1}"/>
+                                        </form:option>
+                                        <form:option value="0">
+                                            <fmt:message key="category.categoryadd.form.catvisibility.option2" bundle="${bundle1}" />
+                                        </form:option>
+                                    </form:select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                     <div class="form-group"></div>
 
                     <div class="form-group">
@@ -124,7 +146,7 @@
                                     </label>
                                 </div>
                                 <div class="col-xs-9">
-                                    <form:input path="" type="text" class="form-control"
+                                    <form:input path="subcatDescription" type="text" class="form-control"
                                                 placeholder="Please Enter Sub Category Description"/>
                                 </div>
                             </div>

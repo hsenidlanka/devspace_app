@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.swing.*;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
@@ -78,7 +80,9 @@ public class UserController {
 
     @RequestMapping(value="/addCustomer",method = RequestMethod.POST)
     public ModelAndView saveOrUpdate(@ModelAttribute("newUser")  User newUser,
-                                     @RequestParam("radioName") String userType,BindingResult validationResult) throws SQLIntegrityConstraintViolationException {
+                                     @RequestParam("radioName") String userType,BindingResult validationResult,
+                                     HttpServletRequest request, HttpServletResponse response) throws SQLIntegrityConstraintViolationException {
+
 
         if (validationResult.hasErrors()) {
             new ModelAndView("user_management/userAdd", "command", newUser);
@@ -297,11 +301,11 @@ public class UserController {
         String n4=customer.getUsername();
         String n5=customer.getPassword();
 
-        LOG.error("EDIT CUSTOMER fname {}",n1);
-        LOG.error("EDIT CUSTOMER lname {}",n2);
-        LOG.error("EDIT CUSTOMER city {}",n3);
-        LOG.error("EDIT CUSTOMER uname {}",n4);
-        LOG.error("EDIT CUSTOMER password{}",n5);
+        LOG.info("EDIT CUSTOMER fname {}",n1);
+        LOG.info("EDIT CUSTOMER lname {}",n2);
+        LOG.info("EDIT CUSTOMER city {}",n3);
+        LOG.info("EDIT CUSTOMER uname {}",n4);
+        LOG.info("EDIT CUSTOMER password{}",n5);
 
             customer.setUsername(n4);
             int i=customerRepository.update(customer);
@@ -319,10 +323,10 @@ public class UserController {
     @RequestMapping(value="staff/edit",method=RequestMethod.GET)
     public @ResponseBody User showEditStaff(@RequestParam("staff_uname") String staff_uname){
 
-        LOG.error("uname is {}",staff_uname);
+        LOG.info("uname is {}",staff_uname);
 
         User staff=staffRepository.retrieveSelectedUserDetails(staff_uname);
-        LOG.error("staff object {}",staff);
+        LOG.info("staff object {}",staff);
 
         return staff ;
     }
@@ -338,11 +342,11 @@ public class UserController {
         String n4=staff.getUsername();
         String n5=staff.getPassword();
 
-        LOG.error("EDIT STAFF fname {}",n1);
-        LOG.error("EDIT STAFF lname {}",n2);
-        LOG.error("EDIT STAFF city {}",n3);
-        LOG.error("EDIT STAFF uname {}",n4);
-        LOG.error("EDIT STAFF password{}",n5);
+        LOG.info("EDIT STAFF fname {}",n1);
+        LOG.info("EDIT STAFF lname {}",n2);
+        LOG.info("EDIT STAFF city {}",n3);
+        LOG.info("EDIT STAFF uname {}",n4);
+        LOG.info("EDIT STAFF password{}",n5);
 
         staff.setUsername(n4);
         int i=staffRepository.updateStaffMember(staff);
@@ -363,10 +367,10 @@ public class UserController {
     @RequestMapping(value="bannedStaff/detail",method=RequestMethod.GET)
     public @ResponseBody User showBannedStaff(@RequestParam("bstaff_uname") String bstaff_uname){
 
-        LOG.error("uname is {}",bstaff_uname);
+        LOG.info("uname is {}",bstaff_uname);
 
         User staff=staffRepository.retrieveSelectedUserDetails(bstaff_uname);
-        LOG.error("staff object {}",staff);
+        LOG.info("staff object {}",staff);
 
         return staff ;
     }
@@ -375,10 +379,10 @@ public class UserController {
     @RequestMapping(value="bannedCustomer/detail",method=RequestMethod.GET)
     public @ResponseBody User showBannedCustomer(@RequestParam("bcustomer_uname") String bcustomer_uname){
 
-        LOG.error("uname is {}",bcustomer_uname);
+        LOG.info("uname is {}",bcustomer_uname);
 
         User customer=customerRepository.retrieveSelectedUserDetails(bcustomer_uname);
-        LOG.error("staff object {}",customer);
+        LOG.info("staff object {}",customer);
 
         return customer ;
     }

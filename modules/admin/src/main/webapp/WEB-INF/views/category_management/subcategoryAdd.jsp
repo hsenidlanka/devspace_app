@@ -20,7 +20,7 @@
 
 <center>
   <div class="panel-body">
-    <form:form role="form" id="admin_addsubcatform"  method="POST" class="form-horizontal"
+    <form:form role="form" id="admin_addsubcatform"  method="POST" class="form-horizontal" enctype="multipart/form-data"
            action="/admin/category/addSubCategory">
       <fieldset class="scheduler-border">
         <legend class="scheduler-border" id="legendHeading"></legend>
@@ -28,7 +28,7 @@
         <div class="col-xs-6" >
           <div class="form-group">
             <div class="row">
-              <label  class="col-xs-8 control-label" >
+              <label  class="col-xs-8 control-label" style="font-size: 17px; font-style: italic" >
                 <fmt:message key="category.categoryadd.form.categories" bundle="${bundle1}"/>
               </label>
             </div>
@@ -36,10 +36,11 @@
               <c:forEach var="list" items="${listCat}">
                     <div class="row">
                         <div class="col-xs-2"></div>
-                        <div class=" col-xs-5 radio" style="text-align: left">
+                        <div class=" col-xs-6 radio" style="text-align: left">
                             <label class="cat" >
-                                <form:radiobutton path="categoryName" value=" ${list}" name="catName" />
-                                    ${list}
+                                <%--<form:radiobutton path="categoryName" value=" ${list}" name="catName" />--%>
+                                    <input type="radio" name="catName" value=" ${list}">${list}
+
                             </label>
                         </div>
                     </div>
@@ -47,7 +48,42 @@
               </c:forEach>
           </div>
         </div>
-        <div class="col-xs-6" style="display: none"></div>
+
+        <div class="col-xs-6" >
+            <div class="form-group">
+                <div class="row">
+                    <label  class="col-xs-10 control-label" style="font-size: 17px; font-style: italic"  >
+                        <fmt:message key="category.categoryadd.form.subcategories" bundle="${bundle1}"/>
+                    </label>
+                </div>
+                <br>
+
+                <div class="row">
+                    <div class="col-xs-2"></div>
+                        <div class=" col-xs-6 radio" style="text-align: left">
+                            <label class="cat" >
+                            <%--<form:radiobutton path="categoryName" value=" ${list}" name="catName" />--%>
+                                <input type="radio" name="catName" value=" Test">Test
+
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+          <div class="form-group">
+              <div class="row">
+                  <label  class="col-xs-6 control-label"   >
+                      <fmt:message key="category.categoryadd.form.subcategories" bundle="${bundle1}"/>
+                  </label>
+                  <label  class="col-xs-6 control-label"   >
+                      <fmt:message key="category.categoryadd.form.subcategories" bundle="${bundle1}"/>
+                  </label>
+
+
+              </div>
+          </div>
+
       </fieldset>
   </form:form>
 
