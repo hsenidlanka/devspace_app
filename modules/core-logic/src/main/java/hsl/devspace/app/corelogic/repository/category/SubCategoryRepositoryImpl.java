@@ -44,8 +44,8 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
 
         if (availability == false) {
             String sql = "INSERT INTO sub_category " +
-                    "(name,description,creator,category_id) VALUES (?,?,?,?,(SELECT id FROM category WHERE name=?))";
-            row = jdbcTemplate.update(sql, new Object[]{category.getSubCategoryName(), category.getDescription(), category.getCreator(), category.getCategoryName()});
+                    "(name,description,creator,category_id) VALUES (?,?,?,(SELECT id FROM category WHERE name=?))";
+            row = jdbcTemplate.update(sql, new Object[]{category.getSubCategoryName(), category.getSubcatDescription(), category.getCreator(), category.getCategoryName()});
             log.info("{} new sub category inserted", row);
         } else
             log.info("{} sub category already available", row);
@@ -93,7 +93,7 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
             Category category = new Category();
             category.setSubCategoryId(Integer.parseInt(mp.get(i).get("id").toString()));
             category.setSubCategoryName(mp.get(i).get("name").toString());
-            category.setDescription(mp.get(i).get("description").toString());
+            category.setSubcatDescription(mp.get(i).get("description").toString());
             category.setCreator(mp.get(i).get("creator").toString());
             category.setCategory_id(Integer.parseInt(mp.get(i).get("category_id").toString()));
 
@@ -138,7 +138,7 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
         for (int i = 0; i < mp.size(); i++) {
             Category category = new Category();
             category.setSubCategoryName(mp.get(i).get("name").toString());
-            category.setDescription(mp.get(i).get("description").toString());
+            category.setSubcatDescription(mp.get(i).get("description").toString());
             subCategories.add(category);
 
 

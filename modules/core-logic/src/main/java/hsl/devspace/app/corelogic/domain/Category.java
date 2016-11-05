@@ -5,7 +5,8 @@ package hsl.devspace.app.corelogic.domain;
  */
 public class Category {
     private String categoryName;
-    private String description;
+    private String catDescription;
+    private String subcatDescription;
     private String creator;
     private String subCategoryName;
     private int category_id;
@@ -53,13 +54,7 @@ public class Category {
         this.subCategoryName = subCategoryName;
     }
 
-    public String getDescription() {
-        return description;
-    }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     public String getCreator() {
         return creator;
@@ -83,7 +78,7 @@ public class Category {
     //category
     public Category(String categoryName,String description,String image,String creator,String status){
         this.categoryName=categoryName;
-        this.description=description;
+        this.catDescription=description;
         this.image=image;
         this.creator=creator;
         this.status=status;
@@ -91,7 +86,7 @@ public class Category {
     //sub category
     public Category(String subCategoryName,String description,String creator,String categoryName){
         this.subCategoryName=subCategoryName;
-        this.description=description;
+        this.subcatDescription=description;
         this.creator=creator;
         this.categoryName=categoryName;
     }
@@ -99,7 +94,7 @@ public class Category {
     public Category(int category_id,String categoryName, String description,String image,String creator) {
         this.category_id = category_id;
         this.categoryName = categoryName;
-        this.description = description;
+        this.catDescription = description;
         this.image=image;
         this.creator = creator;
     }
@@ -108,7 +103,7 @@ public class Category {
     public String toString() {
         return "Category{" +
                 "categoryName='" + categoryName + '\'' +
-                ", description='" + description + '\'' +
+                ", description='" + catDescription + '\'' +
                 ",image='" + image +'\'' +
                 ", creator='" + creator + '\'' +
                 ", subCategoryName='" + subCategoryName + '\'' +
@@ -116,5 +111,21 @@ public class Category {
                 ", subCategoryId=" + subCategoryId +
                 ", status=" +status +
                 '}';
+    }
+
+    public String getCatDescription() {
+        return catDescription;
+    }
+
+    public void setCatDescription(String catDescription) {
+        this.catDescription = catDescription;
+    }
+
+    public String getSubcatDescription() {
+        return subcatDescription;
+    }
+
+    public void setSubcatDescription(String subcatDescription) {
+        this.subcatDescription = subcatDescription;
     }
 }

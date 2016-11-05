@@ -45,7 +45,7 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
             String sql = "INSERT INTO category " +
                     "(name,description,image,creator,status) VALUES (?,?,?,?,?)";
 
-            row = jdbcTemplate.update(sql, new Object[]{category.getCategoryName(), category.getDescription(),category.getImage(), category.getCreator(),category.getStatus()});
+            row = jdbcTemplate.update(sql, new Object[]{category.getCategoryName(), category.getCatDescription(),category.getImage(), category.getCreator(),category.getStatus()});
 
             log.info("{} new category inserted",row);
         } else
@@ -92,7 +92,7 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
                 Category category = new Category();
                 category.setCategory_id(Integer.parseInt(mp.get(i).get("id").toString()));
                 category.setCategoryName(mp.get(i).get("name").toString());
-                category.setDescription(mp.get(i).get("description").toString());
+                category.setCatDescription(mp.get(i).get("description").toString());
                 category.setImage(mp.get(i).get("image").toString());
                 category.setCreator(mp.get(i).get("creator").toString());
                 category.setStatus(mp.get(i).get("status").toString());
@@ -114,7 +114,7 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
             Category category = new Category();
             category.setCategory_id(Integer.parseInt(mp.get(i).get("id").toString()));
             category.setCategoryName(mp.get(i).get("name").toString());
-            category.setDescription(mp.get(i).get("description").toString());
+            category.setCatDescription(mp.get(i).get("description").toString());
             category.setImage(mp.get(i).get("image").toString());
             category.setCreator(mp.get(i).get("creator").toString());
             category.setStatus(mp.get(i).get("status").toString());
@@ -150,7 +150,7 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
     public int updateCategory(Category cat) {
         int id= cat.getCategory_id();
         String name=cat.getCategoryName();
-        String desc=cat.getDescription();
+        String desc=cat.getCatDescription();
         String image=cat.getImage();
         String status=cat.getStatus();
 
@@ -169,7 +169,7 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
         for (int i=0;i<mp.size();i++){
                 Category category = new Category();
                 category.setCategoryName(mp.get(i).get("name").toString());
-                category.setDescription(mp.get(i).get("description").toString());
+                category.setCatDescription(mp.get(i).get("description").toString());
                 categories.add(category);
 
 
