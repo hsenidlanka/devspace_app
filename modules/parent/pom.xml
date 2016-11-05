@@ -1,14 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>hsenid</groupId>
-    <artifactId>parent</artifactId>
-    <packaging>pom</packaging>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>parent Maven Webapp</name>
-    <url>http://maven.apache.org</url>
+                 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+            <modelVersion>4.0.0</modelVersion>
+            <groupId>hsenid</groupId>
+            <artifactId>parent</artifactId>
+            <packaging>pom</packaging>
+            <version>0.0.1-SNAPSHOT</version>
+            <name>parent Maven Webapp</name>
+            <url>http://maven.apache.org</url>
 
-    <properties>
+            <properties>
         <cas.version>4.1.4</cas.version>
         <maven-jetty-plugin.version>9.3.0.v20150612</maven-jetty-plugin.version>
         <spring-expression.version>4.3.0.RELEASE</spring-expression.version>
@@ -61,17 +61,17 @@
         <repobasedir>/home/hsenid/my-repo</repobasedir>
     </properties>
 
-    <modules>
+            <modules>
         <module>../core-logic</module>
         <module>../core-server</module>
-        <module>../admin</module>
+        <!--<module>../admin</module>-->
         <module>../self-care/web-selfcare</module>
         <!--<module>../report-viewer</module>-->
         <module>../cas</module>
 
     </modules>
 
-    <build>
+            <build>
         <finalName>parent</finalName>
     </build>
-</project>
+        </project>

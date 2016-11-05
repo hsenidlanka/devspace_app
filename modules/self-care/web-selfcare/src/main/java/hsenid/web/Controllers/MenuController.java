@@ -1,8 +1,6 @@
 package hsenid.web.Controllers;
 
-import hsenid.web.models.ReplyFromServer;
 import hsenid.web.models.ServerResponseMessage;
-import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,14 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ForkJoinPool;
-import java.util.jar.JarEntry;
-
-/**
- * Created by hsenid on 10/26/16.
- */
 @Controller
 public class MenuController {
 
