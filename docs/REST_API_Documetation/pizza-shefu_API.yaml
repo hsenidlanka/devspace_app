@@ -1118,12 +1118,9 @@ definitions:
     type: object
     required:
           - couponCode
-          - customerMobile
     properties:
       couponCode:
         type: string
-      customerMobile:
-        type: string     
         
   coupon:
     type: object

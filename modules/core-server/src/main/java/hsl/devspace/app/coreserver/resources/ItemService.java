@@ -61,7 +61,7 @@ public class ItemService {
                 successMessage.setMessage("no items to retrieve");
             }
         } catch (NullPointerException e) {
-            successMessage.setMessage("no items to retrieve"+e.toString());
+            successMessage.setMessage("no items to retrieve" + e.toString());
             return Response.status(Response.Status.OK).entity(successMessage).build();
         }
         return Response.status(Response.Status.OK).entity(successMessage)
@@ -137,6 +137,37 @@ public class ItemService {
             return Response.status(Response.Status.OK).entity(successMessage)
                     .header("Access-Control-Allow-Origin", propertyReader.readProperty("Access-Control-Allow-Origin"))
                     .build();
+        }
+        return Response.status(Response.Status.OK).entity(successMessage)
+                .header("Access-Control-Allow-Origin", propertyReader.readProperty("Access-Control-Allow-Origin"))
+                .build();
+    }
+
+    // Search for a item
+    @GET
+    @Path("/search/{seachKey}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response searchItem(@PathParam("seachKey") String searchKey, @javax.ws.rs.core.Context UriInfo uriInfo) {
+        SuccessMessage successMessage = new SuccessMessage();
+        successMessage.setCode(Response.Status.OK.getStatusCode());
+        successMessage.setStatus("success");
+        String url = uriInfo.getAbsolutePath().toString();
+        successMessage.addLink(url, "self");
+        List<Map<String, Object>> listMap = itemRepository.retrieveSelectedItemDetails(searchKey);
+        if (listMap.size() == 0) {
+            successMessage.setMessage("no records found for the serach key "+searchKey);
+        } else {
+            successMessage.setMessage("records found for the search key " + searchKey);
+        }
+        for (Map<String, Object> map : listMap) {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("itemName", map.get("item_name"));
+            jsonObject.put("categoryName", map.get("category_name"));
+            jsonObject.put("subCategoryName", map.get("sub_category_name"));
+            jsonObject.put("type", map.get("type"));
+            jsonObject.put("description", map.get("description"));
+            successMessage.addData(jsonObject);
         }
         return Response.status(Response.Status.OK).entity(successMessage)
                 .header("Access-Control-Allow-Origin", propertyReader.readProperty("Access-Control-Allow-Origin"))
