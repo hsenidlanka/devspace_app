@@ -90,21 +90,26 @@ public class CouponRepositoryImpl implements CouponRepository {
 
     /*validate coupon whether it belongs to the correct user and active*/
     @Override
-    public boolean validateCoupon(String couponCode, String mobile) {
-        boolean result=false;
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT customer_mobile,status FROM coupon WHERE coupon_code=?", couponCode);
+    public Coupon validateCoupon(String couponCode) {
+        Coupon coupon1 = new Coupon();
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM coupon WHERE coupon_code=?", couponCode);
        log.info("{}",mp);
-        log.info("{}",mp.get(0).get("customer_mobile"));
-        if(mp.get(0).get("customer_mobile").equals(mobile) && mp.get(0).get("status").toString().equals("active")){
-            result=true;
+        if (mp.size() == 0) {
+            return coupon1;
+        }
+        if (mp.get(0).get("status").toString().equals("active")) {
+            coupon1.setCouponCode(mp.get(0).get("coupon_code").toString());
+            coupon1.setRate(Double.parseDouble(mp.get(0).get("rate").toString()));
+            coupon1.setExpireDate(Date.valueOf(mp.get(0).get("expire_date").toString()));
+            coupon1.setCustomerMobile(mp.get(0).get("customer_mobile").toString());
             log.info("coupon is valid");
 
         }
         else{
-            log.info("coupon not valid");
+            log.info("coupon not valid ");
         }
-        log.info("{}",result);
-        return result;
+        log.info("{}", coupon1);
+        return coupon1;
     }
 
 
