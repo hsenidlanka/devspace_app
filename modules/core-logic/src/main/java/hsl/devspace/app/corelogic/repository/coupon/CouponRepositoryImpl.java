@@ -92,18 +92,15 @@ public class CouponRepositoryImpl implements CouponRepository {
     @Override
     public Coupon validateCoupon(String couponCode) {
         Coupon coupon1 = new Coupon();
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM coupon WHERE coupon_code=?", couponCode);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM coupon WHERE coupon_code=? AND status='active'", couponCode);
        log.info("{}",mp);
-        if (mp.size() == 0) {
-            return coupon1;
-        }
-        if (mp.get(0).get("status").toString().equals("active")) {
+
+        if (mp.size() != 0) {
             coupon1.setCouponCode(mp.get(0).get("coupon_code").toString());
             coupon1.setRate(Double.parseDouble(mp.get(0).get("rate").toString()));
             coupon1.setExpireDate(Date.valueOf(mp.get(0).get("expire_date").toString()));
             coupon1.setCustomerMobile(mp.get(0).get("customer_mobile").toString());
             log.info("coupon is valid");
-
         }
         else{
             log.info("coupon not valid ");
