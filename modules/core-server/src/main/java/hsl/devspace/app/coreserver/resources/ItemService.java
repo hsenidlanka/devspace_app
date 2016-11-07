@@ -55,7 +55,6 @@ public class ItemService {
                     jsonObject.put("name", item.getItemName());
                     jsonObject.put("type", item.getType());
                     jsonObject.put("description", item.getDescription());
-                    jsonObject.put("imagePath", item.getImageUrl());
                     successMessage.addData(jsonObject);
                 }
             } else {
@@ -92,7 +91,7 @@ public class ItemService {
                     jsonObject.put("name", item.getItemName());
                     jsonObject.put("type", item.getType());
                     jsonObject.put("description", item.getDescription());
-                    jsonObject.put("imagePath", item.getImageUrl());
+                    jsonObject.put("price", item.getSizePrice());
                     successMessage.addData(jsonObject);
                 }
             } else {

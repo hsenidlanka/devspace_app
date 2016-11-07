@@ -62,11 +62,11 @@ public class CouponService {
     @Path("/validate")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response validateCoupon(Coupon coupon, @javax.ws.rs.core.Context UriInfo uriInfo) {
+    public Response validateCoupon(JSONObject jsonObjectRequest, @javax.ws.rs.core.Context UriInfo uriInfo) {
         Response response;
         try {
-            boolean status = couponRepository.validateCoupon(coupon.getCouponCode(), coupon.getCustomerMobile());
-            if (status) {
+            Coupon coupon = couponRepository.validateCoupon(jsonObjectRequest.get("couponCode").toString());
+            if (coupon.getCouponCode() != null) {
                 SuccessMessage successMessage = new SuccessMessage();
                 successMessage.setStatus("success");
                 successMessage.setCode(Response.Status.OK.getStatusCode());
@@ -74,6 +74,8 @@ public class CouponService {
 
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("couponCode", coupon.getCouponCode());
+                jsonObject.put("rate", coupon.getRate());
+                jsonObject.put("expireDate", coupon.getExpireDate());
                 jsonObject.put("customerMobile", coupon.getCustomerMobile());
                 successMessage.addData(jsonObject);
 

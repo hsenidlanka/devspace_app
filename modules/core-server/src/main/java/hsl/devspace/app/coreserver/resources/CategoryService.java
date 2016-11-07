@@ -51,7 +51,7 @@ public class CategoryService {
                 JSONObject jsonObject = new JSONObject();
                 category= (Category) categoryList.get(i);
                 jsonObject.put("name", category.getCategoryName());
-                jsonObject.put("description", category.getDescription());
+                jsonObject.put("description", category.getCatDescription());
                 successMessage.addData(jsonObject);
                 successMessage.addLink(BASE_URL+"subcategories/category/"+category.getCategoryName().replaceAll(" ","%20"), "subcategories of "+category.getCategoryName().toString());
             }
