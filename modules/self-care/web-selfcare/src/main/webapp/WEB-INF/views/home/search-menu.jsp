@@ -26,10 +26,12 @@
             <img class="icons" src="<c:url value="/resources/images/icons/menu.png"/>"/>
             <h3 id="menu-panel-heading" class="header-panel">Menu-Pizza</h3>
           </div>
+          <form:form method="POST" action="/web-selfcare/search-menu" modelAttribute="searchitemdata">
           <div style="display: inline-block; float:right;">
             <div class="form-group">
               <div class="col-sm-10" style="padding-right: 0px;">
-                <input id="txt-menu-search" name="txt-menu-search" type="text" class="form-control input-sm" />
+                <form:input path="searchItem" id="txt-menu-search" name="txt-menu-search" type="text"
+                            class="form-control input-sm"/>
               </div>
               <div class="col-sm-2" style="padding-left: 2px;">
                 <button class="btn btn-primary input-sm" id="btn-menu-search"><span><i
@@ -43,6 +45,8 @@
               <label class="checkbox-inline"><input type="checkbox" value="search-desserts" checked>Desserts</label>
               <label class="checkbox-inline"><input type="checkbox" value="search-beverages" checked>Beverages</label>
             </div>
+          </div>
+          </form:form>
           </div>
         </div>
       </div>

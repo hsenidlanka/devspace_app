@@ -26,7 +26,7 @@
                     <div style="display: inline-block; float:right;">
                         <div class="form-group">
                             <div class="col-sm-10" style="padding-right: 0px;">
-                                <input type="text" class="form-control input-sm" placeholder="Search">
+                                <input type="text" class="form-control input-sm" placeholder="Search" name="txt-search-menu">
                             </div>
                             <div class="col-sm-2" style="padding-left: 2px;">
                                 <button class="btn btn-primary input-sm"><span><i

@@ -1,6 +1,5 @@
 package hsenid.web.Controllers;
 
-import hsenid.web.models.ContactUs;
 import hsenid.web.models.UpdateUser;
 import hsenid.web.supportclasses.SendStringBuilds;
 import org.json.simple.JSONObject;
@@ -193,7 +192,7 @@ public class HomeController {
         return "delivery-summary";
     }
 
-    @RequestMapping("search-results")
+    @RequestMapping("/search-results")
     public String searchResults(){
         return "search-results";
     }
