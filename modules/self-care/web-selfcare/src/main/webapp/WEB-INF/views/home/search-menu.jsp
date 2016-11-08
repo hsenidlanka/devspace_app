@@ -39,12 +39,12 @@
               </div>
             </div>
             <div style="margin-top: 40px;">
-              <label>Filter:</label>
-              <label class="checkbox-inline"><input type="checkbox" value="search-pizza"
-                                                    checked>Pizzas</label>
-              <label class="checkbox-inline"><input type="checkbox" value="search-desserts" checked>Desserts</label>
-              <label class="checkbox-inline"><input type="checkbox" value="search-beverages" checked>Beverages</label>
-            </div>
+                <%--  <label>Filter:</label>
+                  <label class="checkbox-inline"><input type="checkbox" value="search-pizza"
+                                                        checked>Pizzas</label>
+                  <label class="checkbox-inline"><input type="checkbox" value="search-desserts" checked>Desserts</label>
+                  <label class="checkbox-inline"><input type="checkbox" value="search-beverages" checked>Beverages</label>
+                --%></div>
           </div>
           </form:form>
           </div>

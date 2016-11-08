@@ -33,7 +33,7 @@ public class SearchMenuController {
     @Value("${api.base.url}")
     private String baseUrl;
 
-    @Value("${api.url.subcategory.items}")
+    @Value("${api.url.items.searchName}")
     private String searchItemNameUrl;
 
 
@@ -44,9 +44,7 @@ public class SearchMenuController {
 
     @RequestMapping(value = "/search-menu", method = RequestMethod.POST)
     public String sendSearchItem(@ModelAttribute("searchitemdata") @Valid SearchItemData searchitemdata, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
-        if (result.hasErrors()) {
-            return "/home/contactus";
-        }
+
 
         redirectAttributes.addFlashAttribute("validForm", "dd");
         JSONObject jsonObject = new JSONObject();
@@ -69,5 +67,10 @@ public class SearchMenuController {
         }
         redirectAttributes.addFlashAttribute("validForm", "True");
         return "redirect:/search-results";
+    }
+
+    @RequestMapping(value = "/search-results", method = RequestMethod.GET)
+    public ModelAndView loadSearchItems() {
+        return new ModelAndView("/search-results", "searchitemdata", new SearchItemData());
     }
 }
