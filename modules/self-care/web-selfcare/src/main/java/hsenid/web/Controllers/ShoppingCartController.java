@@ -3,6 +3,7 @@ package hsenid.web.Controllers;
 
 import hsenid.web.models.BooleanResponse;
 import hsenid.web.models.ReplyFromServer;
+import hsenid.web.models.ServerResponseMessage;
 import hsenid.web.supportclasses.SendStringBuilds;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
@@ -44,11 +45,11 @@ public class ShoppingCartController {
 
     @GetMapping("/validcoupen")
     @ResponseBody
-    public BooleanResponse checkForValidCoupen(HttpServletRequest request){
+    public String checkForValidCoupen(HttpServletRequest request){
 
         String completeUrl = SendStringBuilds.sendString(baseUrl, checkValidCoupenUrl);
 
-        String coupenToCheck = request.getParameter("checkCoupen");
+        String coupenToCheck = request.getParameter("checkCoupon");
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("couponCode", coupenToCheck);
         RestTemplate restTemplate = new RestTemplate();
@@ -57,13 +58,15 @@ public class ShoppingCartController {
         headers.add("Content-Type", "application/json");
         HttpEntity<JSONObject> httpEntity = new HttpEntity<JSONObject>(jsonObject, headers);
 
+        String rate="0";
         try {
-            ReplyFromServer replyFromServer = restTemplate.postForObject(completeUrl, httpEntity, ReplyFromServer.class);
+            ServerResponseMessage responseMessage = restTemplate.postForObject(completeUrl, httpEntity, ServerResponseMessage.class);
+            rate=responseMessage.getData().get(0).get("rate").toString();
         } catch (RestClientException e) {
             logger.error(e.getMessage());
-            return new BooleanResponse(false);
+            return rate;
         }
         logger.info("knock knock {}", coupenToCheck);
-        return new BooleanResponse(true);
+        return rate;
     }
 }

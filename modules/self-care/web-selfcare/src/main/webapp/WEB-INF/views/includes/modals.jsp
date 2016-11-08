@@ -32,7 +32,7 @@
           <div class="form-group row">
             <div class="col-sm-6" style="display:inline-block; margin-top:5px;">
               <label class="control-label">Toppings</label>
-              <select class="form-control">
+              <select class="form-control" id="addtocart-pizza-toppings1">
                 <option>Topping 01</option>
                 <option>Topping 02</option>
                 <option>Topping 03</option>
@@ -40,7 +40,7 @@
             </div>
             <div class="col-sm-6" style="display:inline-block; margin-top:5px;">
               <label class="control-label">&nbsp;</label>
-              <select class="form-control">
+              <select class="form-control" id="addtocart-pizza-toppings2">
                 <option>Topping 01</option>
                 <option>Topping 02</option>
                 <option>Topping 03</option>
@@ -50,11 +50,11 @@
           <div class="form-group" style="display:inline-block; margin-top:5px; margin-left:15px;">
             <label class="control-label">Special Instructions</label>
             <textarea class="form-control" cols="80"
-                      placeholder="Mention any special instructions"></textarea>
+                      placeholder="Mention any special instructions" id="addtocart-pizza-instructs"></textarea>
           </div>
           <div class="form-group" style="margin-left:15px;">
             <label class="control-label" style="padding-right:15px;">Quantity:</label>
-            <input class="spin" type="number" min="1" max="100" value="1" style="width: 3em;">
+            <input id="addtocart-pizza-qty" class="spin" type="number" min="1" max="100" value="1" style="width: 3em;">
             <label class="control-label"
                    style="padding-left:30px; padding-right:10px;">Price:&nbsp;&nbsp;</label>
             <input type="text" id="addtocart-pizza-price" readonly style="width:4em">

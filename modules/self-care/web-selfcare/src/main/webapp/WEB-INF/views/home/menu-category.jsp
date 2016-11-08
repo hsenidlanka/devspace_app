@@ -64,6 +64,7 @@
 
                                                         <c:set var="sizePriceLength"
                                                                value="${fn:length(itemData.price)}"/>
+
                                                         <c:choose>
                                                             <c:when test="${category eq 'Pizza'}">
                                                                 <c:forEach begin="0" end="${sizePriceLength-1}"
@@ -81,7 +82,6 @@
                                                                             ${itemData.price[loop.index]['price']}
                                                                     </label><br>
                                                                 </c:forEach>
-
                                                                 <a class="btn btn-success btn-xs btn-addtocart-<c:out value="${category}"/>">
                                                                     Add
                                                                     to

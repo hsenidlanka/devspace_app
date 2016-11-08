@@ -59,12 +59,30 @@ $(document).ready(function () {
         calculateTotal();
     });
 
-    $(':input[type="number"]').change(function(){
+    $(':input[type="number"]').change(function () {
         calculateTotal();
     });
 
     $(".btn-popup-add-to-cart-pizza").click(function () {
         $("#add-to-cart-popup").modal('hide');
+        $.ajax({
+            type: "POST",
+            url: "/web-selfcare/menu/add-to-cart",
+            data: {
+                "itemTitle": $("#item-title-modal").text(),
+                "itemDescription":$("#item-desc-modal").text(),
+                "itemSize":$("#addtocart-pizza-sizes").val(),
+                "itemTopping1":$("#addtocart-pizza-toppings1").val(),
+                "itemTopping2":$("#addtocart-pizza-toppings2").val(),
+                "itemInstructs":$("#addtocart-pizza-instructs").val(),
+                "itemQty":$("#addtocart-pizza-qty").val(),
+                "itemPrice":$("#addtocart-pizza-price").val(),
+                "itemTotal":$("#addtocart-pizza-total").val()
+            },
+            success: function (result) {
+            }
+        });
+
         // Initialize the toast notification
         $.notify("Selected pizza added to the shopping cart.", {
             align: "center",
@@ -94,7 +112,7 @@ $(document).ready(function () {
     });
 });
 
-function calculateTotal(){
+function calculateTotal() {
     var price = $("#addtocart-pizza-price").val();
     var quantity = $(':input[type="number"]').val()
     var total = price * quantity;

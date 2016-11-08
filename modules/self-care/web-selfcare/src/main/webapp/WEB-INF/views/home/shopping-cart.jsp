@@ -2,38 +2,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <html>
 <head>
-    <%@include file="includes/include.jsp" %>
+    <%@include file="../includes/include.jsp" %>
     <title><fmt:message key="shopping" bundle="${lang}"/></title>
     <link rel="shortcut icon" href="">
     <script src="<c:url value="/resources/js/cart-operations.js"/>" type="text/javascript"></script>
-    <script>
-
-        $(document).ready(function () {
-            $("#txt-coupon").blur(function () {
-                var coupen = $("#txt-coupon").val();
-//                alert("Test blur");
-                $.ajax({
-                    type: 'get',
-                    url: "validcoupen",
-                    data: {checkCoupen: coupen},
-                    dataType: 'json',
-                    success: function (result) {
-//                        alert("Suucess coupen")
-                        alert(result.userAvailable);
-
-                    },
-                    error: function () {
-                        alert("failed coup")
-                    }
-                });
-            });
-        });
-
-    </script>
 </head>
 <body>
 <div class="loader-anim"></div>
-<%@include file="includes/NewHeader.jsp" %>
+<%@include file="../includes/NewHeader.jsp" %>
 <% request.setAttribute("cartItemsMap", request.getSession().getAttribute("cartItems")); %>
 <div class="main-div">
     <div class="section">
@@ -47,7 +23,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-8">
-                            <table class="table table-bordered table-condensed" id="table-cart">
+                            <table class="table" id="table-cart">
                                 <thead>
                                 <tr>
                                     <th><fmt:message key="summary.descrip" bundle="${lang}"/></th>
@@ -59,20 +35,19 @@
                                 </thead>
                                 <tbody>
                                 <c:forEach items="${cartItemsMap}" var="entry">
-
                                     <tr>
-                                        <td style="vertical-align: middle; text-align: left;"><img
+                                        <td class="item-title" style="vertical-align: middle; text-align: left;"><img
                                                 src="<c:url value="/resources/images/image_placeholder.gif"/>"
-                                                height="100px" width="100px"><c:out
-                                                value="${entry.itemTitle}"/>
+                                                height="100px" width="100px">
+                                            <c:out value="${entry.itemTitle}"/>
                                         </td>
-                                        <td style='vertical-align: middle; text-align: center;'><c:out
+                                        <td style='vertical-align: middle; text-align: right;'><c:out
                                                 value="${entry.itemPrice}"/></td>
                                         <td style="vertical-align: middle;"><input class="spin" type="number" min="1"
                                                                                    max="100"
                                                                                    value='<c:out value="${entry.itemQty}"/>'>
                                         </td>
-                                        <td style="vertical-align: middle; text-align: center;" class="tot-price"><c:out
+                                        <td style="vertical-align: middle; text-align: right;" class="tot-price"><c:out
                                                 value="${entry.itemTotal}"/>
                                         </td>
                                         <td style="vertical-align: middle;"><a class="mod"><i
@@ -80,7 +55,6 @@
                                             <a class="del"><i class="glyphicon glyphicon-remove"></i> Remove</a>
                                     </tr>
                                 </c:forEach>
-
                                 </tbody>
                             </table>
                             <%--<div class="col-md-12">
@@ -98,18 +72,18 @@
 
                         <div class="col-md-4">
                             <div class="login-card">
-                                <img src="<c:url value="/resources/images/icons/invoice.png"/>" , width="40px"
+                                <img src="<c:url value="/resources/images/icons/invoice.png"/>" width="40px"
                                      height="40px"/>
 
                                 <h2 style="display: inline;"><fmt:message key="shopping.total" bundle="${lang}"/></h2>
                                 <hr>
                                 <h5><fmt:message key="shopping.apply" bundle="${lang}"/></h5>
 
-                                <div id="coupon-alert-div" class="alert alert-danger" hidden="">
+                                <div id="coupon-alert-div" class="alert alert-danger" hidden="true">
                                     <p id="coupon-validate-msg"></p>
                                 </div>
                                 <div>
-                                    <input type="text" id="txt-coupon" size="25" class="form-control">
+                                    <input type="text" id="txt-coupon" size="25" class="form-control"/>
                                     <br>
                                 </div>
                                 <div id="div-submit">

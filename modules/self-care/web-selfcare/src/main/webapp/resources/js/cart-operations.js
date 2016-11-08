@@ -17,13 +17,13 @@ $(document).ready(function () {
     $(".mod").click(function () {
         $("#modify-item-popup").modal("show");
         $('#modifyOk').off('click');
-        $('#modifyOk').click(function(){
+        $('#modifyOk').click(function () {
             $.notify("Shopping cart updated.", {
                 align: "center",
                 verticalAlign: "top",
                 type: 'toast',
                 delay: 2000,
-                animationType:"fade"
+                animationType: "fade"
             });
             $("#modify-item-popup").modal("hide");
         });
@@ -35,6 +35,23 @@ $(document).ready(function () {
         $("#delete-confirm-popup").modal('show');
         $('#removeOk').off('click');
         $('#removeOk').click(function () {
+            //$.ajax({
+            //    type: "POST",
+            //    url: "/web-selfcare/menu/add-to-cart",
+            //    data: {
+            //        "itemTitle": $("#item-title-modal").text(),
+            //        "itemDescription":$("#item-desc-modal").text(),
+            //        "itemSize":$("#addtocart-pizza-sizes").val(),
+            //        "itemTopping1":$("#addtocart-pizza-toppings1").val(),
+            //        "itemTopping2":$("#addtocart-pizza-toppings2").val(),
+            //        "itemInstructs":$("#addtocart-pizza-instructs").val(),
+            //        "itemQty":$("#addtocart-pizza-qty").val(),
+            //        "itemPrice":$("#addtocart-pizza-price").val(),
+            //        "itemTotal":$("#addtocart-pizza-total").val()
+            //    },
+            //    success: function (result) {
+            //    }
+            //});
             closest.remove(); // remove the closest table row
             calculateTotal(".tot-price");
             recalculateTotals();
@@ -44,7 +61,7 @@ $(document).ready(function () {
                 verticalAlign: "top",
                 type: 'toast',
                 delay: 2000,
-                animationType:"fade"
+                animationType: "fade"
             });
             if ($("#label-tot").val() !== 0) {
                 $("#coupon-submit").prop('disabled', false);
@@ -82,37 +99,46 @@ $(document).ready(function () {
 // Validate the coupon
 function couponValidator() {
     var enteredCouponVal = $("#txt-coupon").val();
-    if (enteredCouponVal.length === 0) {
+    if (enteredCouponVal.length == 0) {
         $("#coupon-validate-msg").text("Enter coupon code to validate.");
         $("#coupon-alert-div").attr('class', 'alert alert-danger');
         $("#coupon-alert-div").show();
         return false;
-    } else if (enteredCouponVal !== "abc123") {
-        $("#coupon-validate-msg").text("Invalid coupon code.");
-        $("#coupon-alert-div").attr("class", "alert alert-danger");
-        $("#coupon-alert-div").show();
-        return false;
     } else {
-        $("#coupon-alert-div").attr("class", "alert alert-success");
-        $("#coupon-validate-msg").text("Coupon code validated.");
-        $("#coupon-alert-div").show();
-        var discount = $("#label-tot").text() * 20 / 100;
-        $("#label-dis").text(discount.toFixed(2));
-        $("#txt-coupon").attr("disabled",true);
-        calculateDicountedTotal();
-        calculateNetAmount();
-        return true;
+        $.ajax({
+            type: 'get',
+            url: "validcoupen",
+            data: {"checkCoupon": enteredCouponVal},
+            success: function (result) {
+                if ($.trim(result) > 0) {
+                    $("#coupon-alert-div").attr("class", "alert alert-success");
+                    $("#coupon-validate-msg").text("Coupon code validated.");
+                    $("#coupon-alert-div").show();
+                    var discount = $("#label-tot").text() * 20 / 100;
+                    $("#label-dis").text(discount.toFixed(2));
+                    $("#txt-coupon").attr("disabled", true);
+                    calculateDicountedTotal();
+                    calculateNetAmount();
+                    return true;
+                } else {
+                    $("#coupon-validate-msg").text("Coupon code is not valid.");
+                    $("#coupon-alert-div").attr('class', 'alert alert-danger');
+                    $("#coupon-alert-div").show();
+                    return false;
+                }
+            }
+        });
     }
 }
 
 // Re-calculate the total upon the modifications to the shopping cart
-function recalculateTotals(){
-    if($("#coupon-alert-div").hasClass("alert alert-success")){
+function recalculateTotals() {
+    if ($("#coupon-alert-div").hasClass("alert alert-success")) {
         var discount = $("#label-tot").text() * 20 / 100;
         $("#label-dis").text(discount.toFixed(2));
         calculateDicountedTotal();
         calculateNetAmount();
-    }else{
+    } else {
         calculateDicountedTotal();
         calculateNetAmount();
     }
