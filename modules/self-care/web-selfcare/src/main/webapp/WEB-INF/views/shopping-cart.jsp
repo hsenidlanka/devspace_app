@@ -6,7 +6,30 @@
     <link rel="shortcut icon" href="">
 
     <script src="<c:url value="/resources/js/cart-operations.js"/>" type="text/javascript"></script>
+    <script>
 
+        $( document ).ready(function() {
+            $("#txt-coupon").blur(function(){
+                var coupen = $("#txt-coupon").val();
+//                alert("Test blur");
+                $.ajax({
+                    type: 'get',
+                    url: "validcoupen",
+                    data: {checkCoupen:coupen},
+                    dataType: 'json',
+                    success: function (result) {
+//                        alert("Suucess coupen")
+                        alert(result.userAvailable);
+
+                    },
+                    error: function () {
+                        alert("failed coup")
+                    }
+                });
+            });
+        });
+
+    </script>
 </head>
 <body>
 <div class="loader-anim"></div>
@@ -15,7 +38,7 @@
     <div class="section">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <img class="icons" src="<c:url value="/resources/images/icons/shopping-cart.png"/>" />
+                <img class="icons" src="<c:url value="/resources/images/icons/shopping-cart.png"/>"/>
 
                 <h3 class="header-panel"><fmt:message key="shopping" bundle="${lang}"/></h3>
             </div>
@@ -34,7 +57,8 @@
                                 </tr>
                                 <tr>
                                     <td style="vertical-align: middle; text-align: left;"><img
-                                            src="<c:url value="/resources/images/gourmet-pizza-100x100.jpg"/>" "../"> Sample item 01
+                                            src="<c:url value="/resources/images/gourmet-pizza-100x100.jpg"/>" "../">
+                                        Sample item 01
                                     </td>
                                     <td style="vertical-align: middle; text-align: center;">450.00</td>
                                     <td style="vertical-align: middle;"><input class="spin" type="number" min="1"
@@ -60,7 +84,8 @@
                                 </tr>
                                 <tr>
                                     <td style="vertical-align: middle; text-align: left;"><img
-                                            src="<c:url value="/resources/images/Whole-Pizza-100x100.jpg"/>" > Sample item 03
+                                            src="<c:url value="/resources/images/Whole-Pizza-100x100.jpg"/>"> Sample
+                                        item 03
                                     </td>
                                     <td style="vertical-align: middle; text-align: center;">450.00</td>
                                     <td style="vertical-align: middle;"><input class="spin" type="number" min="1"
@@ -88,7 +113,8 @@
 
                         <div class="col-md-4">
                             <div class="login-card">
-                                <img src="<c:url value="/resources/images/icons/invoice.png"/>", width="40px" height="40px"/>
+                                <img src="<c:url value="/resources/images/icons/invoice.png"/>" , width="40px"
+                                     height="40px"/>
 
                                 <h2 style="display: inline;"><fmt:message key="shopping.total" bundle="${lang}"/></h2>
                                 <hr>
@@ -108,7 +134,8 @@
                                 <div style="margin-top: 30px;">
                                     <label><strong><fmt:message key="pay.total" bundle="${lang}"/> <label
                                             id="label-tot">0.00</label></strong></label><br>
-                                    <label><strong><fmt:message key="shopping.discount" bundle="${lang}"/> <label id="label-dis">0.00</label></strong></label>
+                                    <label><strong><fmt:message key="shopping.discount" bundle="${lang}"/> <label
+                                            id="label-dis">0.00</label></strong></label>
                                 </div>
                                 <hr>
                                 <div>
@@ -118,14 +145,16 @@
                                             id="label-serv">5</label></strong></label>
                                 </div>
                                 <div style="margin-top: 10px; border: groove; border-color: #62c462; border-width: thin;">
-                                    <p id="net-amount-text"><strong><fmt:message key="shopping.net" bundle="${lang}"/></strong></p>
+                                    <p id="net-amount-text"><strong><fmt:message key="shopping.net"
+                                                                                 bundle="${lang}"/></strong></p>
 
                                     <p id="net-amount-field">0.00</p>
                                 </div>
                                 <div style="margin-top: 5px;">
                                     <button type="submit" class="btn btn-success" id="checkoutButton"
                                             style="width: 100%;">
-                                        <span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;<fmt:message key="shopping.proceed" bundle="${lang}"/>
+                                        <span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;<fmt:message
+                                            key="shopping.proceed" bundle="${lang}"/>
                                     </button>
                                 </div>
                             </div>
@@ -145,20 +174,32 @@
                         <div class="carousel-inner">
                             <div class="item active">
                                 <div class="row">
-                                    <div class="col-sm-3"><a href="#x"><img src="<c:url value="/resources/images/pizzas/02.jpg"/>" class="img-responsive"></a>
+                                    <div class="col-sm-3"><a href="#x"><img
+                                            src="<c:url value="/resources/images/pizzas/02.jpg"/>"
+                                            class="img-responsive"></a>
                                         <h4>Item title</h4>
+
                                         <p>Item description</p>
                                     </div>
-                                    <div class="col-sm-3"><a href="#x"><img src="<c:url value="/resources/images/desserts/cake%2003.jpg"/>" class="img-responsive"></a>
+                                    <div class="col-sm-3"><a href="#x"><img
+                                            src="<c:url value="/resources/images/desserts/cake%2003.jpg"/>"
+                                            class="img-responsive"></a>
                                         <h4>Item title</h4>
+
                                         <p>Item description</p>
                                     </div>
-                                    <div class="col-sm-3"><a href="#x"><img src="<c:url value="/resources/images/desserts/ice-cream%2002.jpg"/>" class="img-responsive"></a>
+                                    <div class="col-sm-3"><a href="#x"><img
+                                            src="<c:url value="/resources/images/desserts/ice-cream%2002.jpg"/>"
+                                            class="img-responsive"></a>
                                         <h4>Item title</h4>
+
                                         <p>Item description</p>
                                     </div>
-                                    <div class="col-sm-3"><a href="#x"><img src="<c:url value="/resources/images/pizzas/22.png"/>" class="img-responsive"></a>
+                                    <div class="col-sm-3"><a href="#x"><img
+                                            src="<c:url value="/resources/images/pizzas/22.png"/>"
+                                            class="img-responsive"></a>
                                         <h4>Item title</h4>
+
                                         <p>Item description</p>
                                     </div>
                                 </div>
@@ -166,26 +207,30 @@
 
                             <div class="item">
                                 <div class="row">
-                                    <div class="col-sm-3"><a href="#x"><img src="<c:url value="/resources/images/beverages/coffee%2003.jpg"/>"
-                                                                            class="img-responsive"></a>
+                                    <div class="col-sm-3"><a href="#x"><img
+                                            src="<c:url value="/resources/images/beverages/coffee%2003.jpg"/>"
+                                            class="img-responsive"></a>
                                         <h4>Item title</h4>
 
                                         <p>Item description</p>
                                     </div>
-                                    <div class="col-sm-3"><a href="#x"><img src="<c:url value="/resources/images/desserts/pudding%2003.jpg"/>"
-                                                                            class="img-responsive"></a>
+                                    <div class="col-sm-3"><a href="#x"><img
+                                            src="<c:url value="/resources/images/desserts/pudding%2003.jpg"/>"
+                                            class="img-responsive"></a>
                                         <h4>Item title</h4>
 
                                         <p>Item description</p>
                                     </div>
-                                    <div class="col-sm-3"><a href="#x"><img src="<c:url value="/resources/images/pizzas/21.jpg"/>"
-                                                                            class="img-responsive"></a>
+                                    <div class="col-sm-3"><a href="#x"><img
+                                            src="<c:url value="/resources/images/pizzas/21.jpg"/>"
+                                            class="img-responsive"></a>
                                         <h4>Item title</h4>
 
                                         <p>Item description</p>
                                     </div>
-                                    <div class="col-sm-3"><a href="#x"><img src="<c:url value="/resources/images/pizzas/12.jpg"/>"
-                                                                            class="img-responsive"></a>
+                                    <div class="col-sm-3"><a href="#x"><img
+                                            src="<c:url value="/resources/images/pizzas/12.jpg"/>"
+                                            class="img-responsive"></a>
                                         <h4>Item title</h4>
 
                                         <p>Item description</p>
@@ -195,8 +240,10 @@
                             </div>
                         </div>
                         <!--/carousel-inner-->
-                        <a class="left carousel-control cart-carousel-control" href="#myCarousel" data-slide="prev">‹</a>
-                        <a class="right carousel-control cart-carousel-control" href="#myCarousel" data-slide="next">›</a>
+                        <a class="left carousel-control cart-carousel-control" href="#myCarousel"
+                           data-slide="prev">‹</a>
+                        <a class="right carousel-control cart-carousel-control" href="#myCarousel"
+                           data-slide="next">›</a>
                     </div>
                     <!--/myCarousel-->
                 </div>
@@ -213,7 +260,8 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h3 class="modal-title" id="myModalLabel" contenteditable="true"><fmt:message key="shopping.proceed" bundle="${lang}"/></h3>
+                <h3 class="modal-title" id="myModalLabel" contenteditable="true"><fmt:message key="shopping.proceed"
+                                                                                              bundle="${lang}"/></h3>
             </div>
             <div class="modal-body">
                 <p><fmt:message key="shopping.login.reg" bundle="${lang}"/>
@@ -223,13 +271,16 @@
 
                 <div style="text-align:center">
                     <div style="padding:5px;">
-                        <a class="btn btn-primary" style="width:300px;"><fmt:message key="shopping.login.system" bundle="${lang}"/></a>
+                        <a class="btn btn-primary" style="width:300px;"><fmt:message key="shopping.login.system"
+                                                                                     bundle="${lang}"/></a>
                     </div>
                     <div style="padding:5px;">
-                        <a class="btn btn-primary" style="width:300px;"><fmt:message key="shopping.create" bundle="${lang}"/></a>
+                        <a class="btn btn-primary" style="width:300px;"><fmt:message key="shopping.create"
+                                                                                     bundle="${lang}"/></a>
                     </div>
                     <div style="padding:5px;">
-                        <a class="btn btn-primary" style="width:300px;" href="delivery.html"><fmt:message key="shopping.guest" bundle="${lang}"/></a>
+                        <a class="btn btn-primary" style="width:300px;" href="delivery.html"><fmt:message
+                                key="shopping.guest" bundle="${lang}"/></a>
                     </div>
                 </div>
             </div>
@@ -246,7 +297,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <img class="icons" src="<c:url value="/resources/images/icons/shopping-cart-remove.png"/>" >
+                <img class="icons" src="<c:url value="/resources/images/icons/shopping-cart-remove.png"/>">
                 <h4 class="modal-title header-panel"><fmt:message key="shopping.remove" bundle="${lang}"/></h4>
             </div>
             <div class="modal-body">
@@ -254,7 +305,8 @@
 
                 <div class="thumbnail"
                      style="height:auto; border: none;">
-                    <img src="<c:url value="/resources/images/Whole-Pizza-100x100.jpg"/>" class="img-responsive" align="left">
+                    <img src="<c:url value="/resources/images/Whole-Pizza-100x100.jpg"/>" class="img-responsive"
+                         align="left">
 
                     <div class="caption">
                         <h4>&nbsp;Thumbnail label</h4>
@@ -277,7 +329,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <img class="icons" src="<c:url value="/resources/images/icons/shopping-cart-modify.png"/>" >
+                <img class="icons" src="<c:url value="/resources/images/icons/shopping-cart-modify.png"/>">
                 <h4 class="modal-title header-panel"><fmt:message key="shopping.modify" bundle="${lang}"/></h4>
             </div>
             <div class="modal-body">
@@ -289,6 +341,7 @@
 
                     <div class="caption">
                         <h4>&nbsp; Item Title</h4>
+
                         <p>&nbsp; Some description about the item.</p>
                     </div>
                 </div>
