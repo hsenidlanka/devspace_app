@@ -92,7 +92,7 @@ public class CouponRepositoryImpl implements CouponRepository {
     @Override
     public Coupon validateCoupon(String couponCode) {
         Coupon coupon1 = new Coupon();
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM coupon WHERE coupon_code=? AND status='active'", couponCode);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM coupon WHERE BINARY coupon_code= ? AND status='active'", couponCode);
        log.info("{}",mp);
 
         if (mp.size() != 0) {
