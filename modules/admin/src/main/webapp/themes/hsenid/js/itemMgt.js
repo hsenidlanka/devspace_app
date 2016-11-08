@@ -101,7 +101,6 @@ function setSubCats(categoryNm) {
  * validate checkbox unclick-->textbox value = " " & disabling
  */
 function disableTxt(t, textBoxId) {
-    //noinspection JSJQueryEfficiency
     $("#" + textBoxId).prop("disabled", !$(t).prop("checked"));
     $("#" + textBoxId).val(" ");
 }

@@ -1,5 +1,6 @@
 package hsl.devspace.app.admin.packagemanagement.spring.controller;
 
+import hsl.devspace.app.corelogic.domain.Item;
 import hsl.devspace.app.corelogic.domain.Package;
 import hsl.devspace.app.corelogic.repository.Package.PackageRepository;
 import hsl.devspace.app.corelogic.repository.category.CategoryRepository;
@@ -47,6 +48,20 @@ public class PackageController {
         return "package_management/addPackage";
     }
 
+    /**
+     * controller method to load relevant item list for selected category name
+     */
+    @RequestMapping(value = "/getItemNames", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    List<Item> getItemList(@RequestParam("categoryNm") String categoryNm) {
+
+        List<Item> menutITems = categoryRepository.loadMenuItems(categoryNm);
+        LOGGER.trace("loadmenu items = "+ menutITems);
+        LOGGER.error("loadmenu items = " + menutITems);
+        return menutITems;
+    }
+
     //For submitting the add new package
     @RequestMapping(value = "/add_package")
     public ModelAndView add(@ModelAttribute("command") Package newPackage) throws SQLIntegrityConstraintViolationException {
@@ -76,7 +91,7 @@ public class PackageController {
 
     //For submitting the add new package
     @RequestMapping(value = "/edit_package")
-    public ModelAndView update(@ModelAttribute("editPackage") hsl.devspace.app.corelogic.domain.Package newPackg) throws SQLIntegrityConstraintViolationException {
+    public ModelAndView update(@ModelAttribute("editPackage")Package newPackg) throws SQLIntegrityConstraintViolationException {
         ModelAndView model = new ModelAndView();
 
 /*int p = itemPackage.updatePackage();

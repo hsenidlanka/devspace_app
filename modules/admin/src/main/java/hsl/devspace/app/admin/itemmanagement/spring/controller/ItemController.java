@@ -118,6 +118,17 @@ public class ItemController {
                             LOGGER.info("Dir.... =", dir.getAbsolutePath());
                             LOGGER.trace("made dir "+ dir);
 
+                            // create local directory place
+                            String localPathtoUpload ="/home/hsenid/devspace_app/modules/admin/src/main/" +
+                                    "webapp/themes/hsenid/images/items/";
+                            LOGGER.error("realPathtoUpload " + localPathtoUpload);
+
+                            File dir2 = new File(localPathtoUpload);
+                            if(!dir2.exists())
+                                dir2.mkdirs();
+
+                            LOGGER.error("made dir " + dir2);
+
                             //create the file on server
                             File serverFile = new File(dir.getAbsolutePath() + File.separator + itemNm + ".png");//name of the image
                            LOGGER.trace("serverFile = "+serverFile);
@@ -128,6 +139,18 @@ public class ItemController {
 
                             LOGGER.trace("image save to server, Location= "+ serverFile.getAbsolutePath());
                             LOGGER.trace("You successfully uploaded file= " + imgFileNm);
+
+
+                            //create the file on local machine
+                            File localFile = new File(dir2.getAbsolutePath() + File.separator + itemNm + ".png");//name of the image
+                            LOGGER.error("serverFile = " + localFile);
+                            BufferedOutputStream stream2 = new BufferedOutputStream(
+                                    new FileOutputStream(localFile));
+                            stream2.write(bytes);
+                            stream2.close();
+
+                            LOGGER.error("image save to local, Location= " + localFile.getAbsolutePath());
+                            LOGGER.error("You successfully uploaded file= " + imgFileNm);
                         }
                         catch (Exception ex) {
                             LOGGER.error("error in  getting image ", ex);
