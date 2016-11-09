@@ -170,7 +170,10 @@ UNLOCK TABLES;
 
 LOCK TABLES `package` WRITE;
 /*!40000 ALTER TABLE `package` DISABLE KEYS */;
-INSERT INTO `package` VALUES (1,'Christmas','dummy content',414.00,'/a/dummy/imageUrl/path/'),(2,'New Year','dummy content',658.00,'/a/dummy/imageUrl/path/'),(3,'Halloween','dummy content',154.22,'/a/dummy/imageUrl/path/'),(4,'','dummy content',564.00,'/a/dummy/imageUrl/path/'),(5,'Feasty','dummy content',256.25,'/a/dummy/imageUrl/path/');
+INSERT INTO `package`
+VALUES (1, 'Christmas', 414.00, '/a/dummy/imageUrl/path/'), (2, 'New Year', 658.00, '/a/dummy/imageUrl/path/'),
+  (3, 'Halloween', 154.22, '/a/dummy/imageUrl/path/'), (4, '', 564.00, '/a/dummy/imageUrl/path/'),
+  (5, 'Feasty', 256.25, '/a/dummy/imageUrl/path/');
 /*!40000 ALTER TABLE `package` ENABLE KEYS */;
 UNLOCK TABLES;
 

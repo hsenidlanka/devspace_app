@@ -299,7 +299,6 @@ DROP TABLE IF EXISTS `package`;
 CREATE TABLE `package` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
-  `content` varchar(500) NOT NULL,
   `price` decimal(5,2) NOT NULL,
   `imageUrl` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
