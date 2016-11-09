@@ -21,11 +21,39 @@ $(document).ready(function () {
         var slctElement = $(this).parent().parent().next().find(".form-control").attr('id');
         var selectedItm = $(this).parent().parent().next().next().find(".form-control").attr('id');
 
+        var slctElementVal = $(this).parent().parent().next().find(".form-control").val();
+        var selectedItmVal = $(this).parent().parent().next().next().find(".form-control").val();
+        var qtyVal = $(this).parent().parent().next().next().next().find(".form-control").val();
+        var btnId = $(this).parent().parent().next().next().next().next().find(".form-control").val();
+
         console.log($(this).parent().parent().next().find(".form-control").css('color', 'green'));
         console.log($(this).parent().parent().next().next().find(".form-control").css('color', 'rgb(167, 68, 7)'));
 
         setItemList(categoryNm, slctElement, selectedItm);
     });
+
+    /*
+    * Package summary
+    **/
+$('#txtAddPkgName').focusout(function(){
+   var pkgName = $(this).val();
+    $('#newPkgName').text(pkgName);
+
+});
+$('#txtAddPkgPrice').focusout(function(){
+   var pkgPrice = $(this).val();
+    $('#newPkgPice').text(pkgPrice);
+
+});
+/*
+* big deal package
+* */
+
+
+    function contentPackge(){
+
+
+    }
 
 
 });
@@ -91,4 +119,8 @@ function generate(selectedItm, slctElement) {
             alert(er);
         }
     });
+};
+
+function addtoSummary(itemNm, qty, btnID){
+
 }
