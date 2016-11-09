@@ -64,12 +64,13 @@ public class HomeController {
         logger.info(String.valueOf(bindingResult.hasErrors()));
 
         if (bindingResult.hasErrors()){
-            logger.info("binding errors");
+//            logger.info("binding errors");
             return "/home/updateuser";
         }
 
-        logger.info(String.valueOf(bindingResult.hasErrors()));
+//        logger.info(String.valueOf(bindingResult.hasErrors()));
 
+        logger.info("title value {}", updateuser.getTitle());
         jsonObject.put("title", updateuser.getTitle());
         jsonObject.put("firstName", updateuser.getFirstName());
         jsonObject.put("lastName", updateuser.getLastName());
@@ -81,7 +82,7 @@ public class HomeController {
         jsonObject.put("mobile", updateuser.getMobile());
 
 //        logger.info(jsonObject.toString());
-
+//logger.info(jsonObject.toString());
         RestTemplate restTemplate = new RestTemplate();
 
 

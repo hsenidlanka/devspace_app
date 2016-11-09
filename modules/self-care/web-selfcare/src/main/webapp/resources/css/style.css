@@ -73,6 +73,10 @@ h2, h3 {
     width: 80px;
 }
 
+/*hr{
+    color: black;
+}*/
+
 hr {
     height: 2px !important;
     border: 10px;
