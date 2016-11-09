@@ -106,7 +106,8 @@ public class Package {
     /**
      * ADD CONTENT
      */
-    public Package(String itemName, int quantity, String size) {
+    public Package(String packName, String itemName, int quantity, String size) {
+        this.packName = packName;
         this.itemName = itemName;
         this.quantity = quantity;
         this.size = size;
@@ -138,6 +139,8 @@ public class Package {
                 ", categoryName='" + categoryName + '\'' +
                 ", itemName='" + itemName + '\'' +
                 ", sizePrice=" + sizePrice +
+                ", quantity=" + quantity +
+                ", size='" + size + '\'' +
                 '}';
     }
 }

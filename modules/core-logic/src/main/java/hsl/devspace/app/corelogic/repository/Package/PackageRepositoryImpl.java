@@ -4,6 +4,11 @@ import hsl.devspace.app.corelogic.domain.Package;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.sql.DataSource;
@@ -19,7 +24,6 @@ public class PackageRepositoryImpl implements PackageRepository  {
     private JdbcTemplate jdbcTemplate;
     private PlatformTransactionManager transactionManager;
     org.slf4j.Logger log = LoggerFactory.getLogger(PackageRepositoryImpl.class);
-    //private static org.apache.log4j.Logger log = Logger.getLogger(PackageRepositoryImpl.class);
 
 
     public void setDataSource(DataSource dataSource) {
@@ -95,11 +99,17 @@ public class PackageRepositoryImpl implements PackageRepository  {
     }
 
     @Override
-    public int addContent(Package content) {
-        int row;
-        String sql = "INSERT INTO package_item " +
-                "(item_id,quantity,size) VALUES (SELECT id FROM item WHERE name=?,?,?)";
-        row = jdbcTemplate.update(sql, new Object[]{content.getItemName(), content.getQuantity(), content.getSize()});
+    public int addContent(List<Package> content) {
+        int row = 0;
+        for (int i = 0; i < content.size(); i++) {
+            String packName = content.get(i).getPackName();
+            String itemName = content.get(i).getItemName();
+            int quantity = content.get(i).getQuantity();
+            String size = content.get(i).getSize();
+            String sql = "INSERT INTO package_item " +
+                    "(package_id,item_id,quantity,size) VALUES (SELECT id FROM package WHERE name=?,SELECT id FROM item WHERE name=?,?,?)";
+            row = jdbcTemplate.update(sql, new Object[]{packName, itemName, quantity, size});
+        }
         log.info("{} new content added", row);
         return row;
     }
@@ -116,6 +126,24 @@ public class PackageRepositoryImpl implements PackageRepository  {
         }
         log.info("{}", result);
         return result;
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED)
+    public int addPackage(Package pack, List<Package> content) {
+        int j = 0;
+        TransactionDefinition trDef = new DefaultTransactionDefinition();
+        TransactionStatus stat = transactionManager.getTransaction(trDef);
+        try {
+            add(pack);
+            addContent(content);
+            transactionManager.commit(stat);
+            j = 1;
+        } catch (Exception e) {
+            log.info(e.getMessage());
+            transactionManager.rollback(stat);
+        }
+        return j;
     }
 
 }
