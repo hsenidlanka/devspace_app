@@ -18,7 +18,7 @@
         <li><a href="/web-selfcare/aboutus"><fmt:message key="new.header.about" bundle="${lang}"/></a></li>
         <li>
 
-          <a href="shopping-cart"><img src="<c:url value="/resources/images/shopping-cart.png"/>"
+          <a href="/web-selfcare/shopping-cart"><img src="<c:url value="/resources/images/shopping-cart.png"/>"
                                             style="padding-left: 30px"></a>
         </li>
     <c:if test="${empty username}">

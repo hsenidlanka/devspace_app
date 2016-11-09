@@ -29,11 +29,14 @@ $(document).ready(function () {
     // Remove item from the shopping cart
     $(".del").click(function () {
         var closest = $(this).closest('tr'); // find the closest table row
-        //var itemTitle = $.trim(closest.find("td.item-title").text());
-        //var itemPrice = $.trim(closest.find("td.item-price").text());
-        //var itemQty = $.trim(closest.find(".item-qty").val());
+        var itemTitle = $.trim(closest.find("td.item-title").text());
+        var itemPrice = $.trim(closest.find("td.item-price").text());
+        var itemQty = $.trim(closest.find(".item-qty").val());
         var itemIndex = $.trim(closest.find("td.item-index").text());
         $("#delete-confirm-popup").modal('show');
+        $("#header-item-title").text("Item name: "+itemTitle);
+        $("#p-item-price").text("Price: "+itemPrice);
+        $("#p-item-qty").text("Quantity: "+itemQty);
         $('#removeOk').off('click');
         $('#removeOk').click(function () {
             $.ajax({
