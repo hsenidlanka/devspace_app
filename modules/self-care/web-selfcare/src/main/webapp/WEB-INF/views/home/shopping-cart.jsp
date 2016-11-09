@@ -6,6 +6,103 @@
     <title><fmt:message key="shopping" bundle="${lang}"/></title>
     <link rel="shortcut icon" href="">
     <script src="<c:url value="/resources/js/cart-operations.js"/>" type="text/javascript"></script>
+    <style>
+        table {
+            background: #f5f5f5;
+            border-collapse: separate;
+            box-shadow: inset 0 1px 0 #fff;
+            font-size: 16px;
+            line-height: 24px;
+            margin: 0px auto;
+            text-align: left;
+            width: 800px;
+        }
+
+        th {
+            background: url(http://jackrugile.com/images/misc/noise-diagonal.png), linear-gradient(#777, #444);
+            border-left: 1px solid #555;
+            border-right: 1px solid #777;
+            border-top: 1px solid #555;
+            border-bottom: 1px solid #333;
+            box-shadow: inset 0 1px 0 #999;
+            color: #fff;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 10px 15px;
+            position: relative;
+            text-shadow: 0 1px 0 #000;
+        }
+
+        th:after {
+            background: linear-gradient(rgba(255,255,255,0), rgba(255,255,255,.08));
+            content: '';
+            display: block;
+            height: 25%;
+            left: 0;
+            margin: 1px 0 0 0;
+            position: absolute;
+            top: 25%;
+            width: 100%;
+        }
+
+        th:first-child {
+            border-left: 1px solid #777;
+            box-shadow: inset 1px 1px 0 #999;
+        }
+
+        th:last-child {
+            box-shadow: inset -1px 1px 0 #999;
+        }
+
+        td {
+            border-right: 1px solid #fff;
+            border-left: 1px solid #e8e8e8;
+            border-top: 1px solid #fff;
+            border-bottom: 1px solid #e8e8e8;
+            padding: 10px 15px;
+            position: relative;
+            transition: all 300ms;
+        }
+
+        td:first-child {
+            box-shadow: inset 1px 0 0 #fff;
+        }
+
+        td:last-child {
+            border-right: 1px solid #e8e8e8;
+            box-shadow: inset -1px 0 0 #fff;
+        }
+
+        tr {
+            background: url(http://jackrugile.com/images/misc/noise-diagonal.png);
+        }
+
+        tr:nth-child(odd) td {
+            background: #f1f1f1 url(http://jackrugile.com/images/misc/noise-diagonal.png);
+        }
+
+        tr:last-of-type td {
+            box-shadow: inset 0 -1px 0 #fff;
+        }
+
+        tr:last-of-type td:first-child {
+            box-shadow: inset 1px -1px 0 #fff;
+        }
+
+        tr:last-of-type td:last-child {
+            box-shadow: inset -1px -1px 0 #fff;
+        }
+
+        tbody:hover td {
+            color: transparent;
+            text-shadow: 0 0 3px #aaa;
+        }
+
+        tbody:hover tr:hover td {
+            color: #444;
+            text-shadow: 0 1px 0 #fff;
+        }
+    </style>
 </head>
 <body>
 <div class="loader-anim"></div>
@@ -26,7 +123,9 @@
                             <table class="table" id="table-cart">
                                 <thead>
                                 <tr>
-                                    <th><fmt:message key="summary.descrip" bundle="${lang}"/></th>
+                                    <th style="display:none;">Index</th>
+                                    <th><fmt:message key="summary.item.image" bundle="${lang}"/></th>
+                                    <th><fmt:message key="summary.item.name" bundle="${lang}"/></th>
                                     <th><fmt:message key="summary.price" bundle="${lang}"/></th>
                                     <th><fmt:message key="summary.qty" bundle="${lang}"/></th>
                                     <th><fmt:message key="summary.total" bundle="${lang}"/></th>
@@ -34,25 +133,33 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${cartItemsMap}" var="entry">
+                                <c:forEach items="${cartItemsMap}" var="entry" varStatus="iteration">
                                     <tr>
+                                        <td class="item-index" style="display:none;"><c:out
+                                                value="${iteration.index}"/></td>
                                         <td class="item-title" style="vertical-align: middle; text-align: left;"><img
                                                 src="<c:url value="/resources/images/image_placeholder.gif"/>"
                                                 height="100px" width="100px">
+                                        </td>
+                                        <td class="item-title" style='vertical-align: middle; text-align: left;'>
                                             <c:out value="${entry.itemTitle}"/>
                                         </td>
-                                        <td style='vertical-align: middle; text-align: right;'><c:out
-                                                value="${entry.itemPrice}"/></td>
-                                        <td style="vertical-align: middle;"><input class="spin" type="number" min="1"
+                                        <td class="item-price" style='vertical-align: middle; text-align: center;'>
+                                            <c:out
+                                                    value="${entry.itemPrice}"/></td>
+                                        <td style="vertical-align: middle;"><input class="spin item-qty" type="number"
+                                                                                   min="1"
                                                                                    max="100"
-                                                                                   value='<c:out value="${entry.itemQty}"/>'>
+                                                                                   value='<c:out value="${entry.itemQty}"/>'
+                                                                                   style="width: 50px;">
                                         </td>
-                                        <td style="vertical-align: middle; text-align: right;" class="tot-price"><c:out
+                                        <td style="vertical-align: middle; text-align: center;" class="tot-price"><c:out
                                                 value="${entry.itemTotal}"/>
                                         </td>
-                                        <td style="vertical-align: middle;"><a class="mod"><i
-                                                class="glyphicon glyphicon-edit"></i> Edit</a>&nbsp;
+                                        <td style="vertical-align: middle;">
+                                                <%--<a class="mod"><i class="glyphicon glyphicon-edit"></i> Edit</a>&nbsp;--%>
                                             <a class="del"><i class="glyphicon glyphicon-remove"></i> Remove</a>
+                                        </td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
@@ -77,30 +184,37 @@
 
                                 <h2 style="display: inline;"><fmt:message key="shopping.total" bundle="${lang}"/></h2>
                                 <hr>
-                                <h5><fmt:message key="shopping.apply" bundle="${lang}"/></h5>
+                                <h5 style="margin-bottom: 5px;"><fmt:message key="shopping.apply"
+                                                                             bundle="${lang}"/></h5>
 
                                 <div id="coupon-alert-div" class="alert alert-danger" hidden="true">
                                     <p id="coupon-validate-msg"></p>
                                 </div>
                                 <div>
-                                    <input type="text" id="txt-coupon" size="25" class="form-control"/>
-                                    <br>
+                                    <input type="text" class="form-control" id="txt-coupon" size="25">
                                 </div>
+                                <br>
+
                                 <div id="div-submit">
                                     <input type="submit" id="coupon-submit" value="validate"
-                                           class="btn btn-primary btn-xs">
+                                           class="btn btn-primary btn-sm">
                                 </div>
                                 <div style="margin-top: 30px;">
                                     <label><strong><fmt:message key="pay.total" bundle="${lang}"/> <label
                                             id="label-tot">0.00</label></strong></label><br>
-                                    <label><strong><fmt:message key="shopping.discount" bundle="${lang}"/> <label
+                                    <label style="margin-top: 5px;"><strong><fmt:message key="shopping.discount.rate"
+                                                                                         bundle="${lang}"/> <label
+                                            id="label-dis-rate">0.00</label></strong></label><br>
+                                    <label style="margin-top: 5px;"><strong><fmt:message key="shopping.discount.amount"
+                                                                                         bundle="${lang}"/> <label
                                             id="label-dis">0.00</label></strong></label>
                                 </div>
                                 <hr>
                                 <div>
                                     <label><strong><fmt:message key="shopping.discount.total" bundle="${lang}"/> <label
                                             id="label-distot">0.00</label></strong></label><br>
-                                    <label><strong><fmt:message key="shopping.service" bundle="${lang}"/> <label
+                                    <label style="margin-top: 5px;"><strong><fmt:message key="shopping.service"
+                                                                                         bundle="${lang}"/> <label
                                             id="label-serv">5</label></strong></label>
                                 </div>
                                 <div style="margin-top: 10px; border: groove; border-color: #62c462; border-width: thin;">
@@ -264,13 +378,15 @@
 
                 <div class="thumbnail"
                      style="height:auto; border: none;">
-                    <img src="<c:url value="/resources/images/Whole-Pizza-100x100.jpg"/>" class="img-responsive"
-                         align="left">
+                    <img src="<c:url value="/resources/images/image_placeholder.gif"/>" class="img-responsive"
+                         align="left" width="100px" height="100px">
 
                     <div class="caption">
-                        <h4>&nbsp;Thumbnail label</h4>
+                        <h3 id="header-item-title">&nbsp;</h3>
 
-                        <p>&nbsp;Some description about the item.</p>
+                        <p id="p-item-price">&nbsp;</p>
+
+                        <p id="p-item-qty">&nbsp;</p>
                     </div>
                 </div>
             </div>
@@ -367,7 +483,6 @@
         </div>
     </div>
 </div>
-
 <%--<a href="#" class="scrollup"></a>--%>
 </body>
 </html>
