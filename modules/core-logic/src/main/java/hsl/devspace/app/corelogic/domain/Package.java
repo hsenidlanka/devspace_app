@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Package {
     private String packName;
-    private String content;
+    // private String content;
     private double price;
     private String image;
     private int packageId;
@@ -17,6 +17,25 @@ public class Package {
     private String categoryName;
     private String itemName;
     private List<Item> sizePrice;
+
+    private int quantity;
+    private String size;
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
 
     public MultipartFile getImageUrl() {
         return imageUrl;
@@ -66,13 +85,7 @@ public class Package {
         this.packName = packName;
     }
 
-    public String getContent() {
-        return content;
-    }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
 
     public double getPrice() {
         return price;
@@ -90,16 +103,23 @@ public class Package {
         this.image = image;
     }
 
-    public Package(String packName, String content, double price, String image) {
+    /**
+     * ADD CONTENT
+     */
+    public Package(String itemName, int quantity, String size) {
+        this.itemName = itemName;
+        this.quantity = quantity;
+        this.size = size;
+    }
+
+    public Package(String packName, double price, String image) {
         this.packName = packName;
-        this.content = content;
         this.price = price;
         this.image = image;
     }
 
-    public Package(String packName, String content, double price, MultipartFile imageUrl) {
+    public Package(String packName, double price, MultipartFile imageUrl) {
         this.packName = packName;
-        this.content = content;
         this.price = price;
         this.imageUrl = imageUrl;
     }
@@ -111,7 +131,6 @@ public class Package {
     public String toString() {
         return "Package{" +
                 "packName='" + packName + '\'' +
-                ", content='" + content + '\'' +
                 ", price=" + price +
                 ", image='" + image + '\'' +
                 ", packageId=" + packageId +

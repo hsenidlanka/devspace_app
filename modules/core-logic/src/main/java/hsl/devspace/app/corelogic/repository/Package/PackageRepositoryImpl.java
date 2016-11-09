@@ -18,8 +18,8 @@ public class PackageRepositoryImpl implements PackageRepository  {
     //Package pkg=new Package();
     private JdbcTemplate jdbcTemplate;
     private PlatformTransactionManager transactionManager;
-    //private static org.apache.log4j.Logger log = Logger.getLogger(PackageRepositoryImpl.class);
     org.slf4j.Logger log = LoggerFactory.getLogger(PackageRepositoryImpl.class);
+    //private static org.apache.log4j.Logger log = Logger.getLogger(PackageRepositoryImpl.class);
 
 
     public void setDataSource(DataSource dataSource) {
@@ -39,8 +39,8 @@ public class PackageRepositoryImpl implements PackageRepository  {
         MultipartFile img = pack.getImageUrl();
         String ims = img.getOriginalFilename();
         String sql = "INSERT INTO package " +
-                "(name,content,price,image) VALUES (?,?,?,?)";
-        row = jdbcTemplate.update(sql, new Object[]{pack.getPackName(), pack.getContent(), pack.getPrice(), ims});
+                "(name,price,image) VALUES (?,?,?)";
+        row = jdbcTemplate.update(sql, new Object[]{pack.getPackName(), pack.getPrice(), ims});
         log.info("{} new package added",row);
         return row;
     }
@@ -58,8 +58,8 @@ public class PackageRepositoryImpl implements PackageRepository  {
     /*update details of package*/
     @Override
     public int updatePackage(Package updatedPackage) {
-        String sql = "UPDATE package SET content=?,price=?,image=? WHERE name = ? ";
-        int row = jdbcTemplate.update(sql, new Object[]{updatedPackage.getContent(),updatedPackage.getPrice(),updatedPackage.getImage(),updatedPackage.getPackName()});
+        String sql = "UPDATE package SET price=?,image=? WHERE name = ? ";
+        int row = jdbcTemplate.update(sql, new Object[]{updatedPackage.getPrice(), updatedPackage.getImage(), updatedPackage.getPackName()});
         log.info("{}",row);
         return row;
     }
@@ -84,7 +84,6 @@ public class PackageRepositoryImpl implements PackageRepository  {
             Package packages = new Package();
             packages.setPackageId(Integer.parseInt(mp.get(i).get("id").toString()));
             packages.setPackName(mp.get(i).get("name").toString());
-            packages.setContent(mp.get(i).get("content").toString());
             packages.setPrice(Double.parseDouble(mp.get(i).get("price").toString()));
             packages.setImage(mp.get(i).get("image").toString());
             pack.add(packages);
@@ -93,6 +92,30 @@ public class PackageRepositoryImpl implements PackageRepository  {
         }
         log.info("{}",pack);
         return pack;
+    }
+
+    @Override
+    public int addContent(Package content) {
+        int row;
+        String sql = "INSERT INTO package_item " +
+                "(item_id,quantity,size) VALUES (SELECT id FROM item WHERE name=?,?,?)";
+        row = jdbcTemplate.update(sql, new Object[]{content.getItemName(), content.getQuantity(), content.getSize()});
+        log.info("{} new content added", row);
+        return row;
+    }
+
+    /**
+     * if unique -> true
+     */
+    @Override
+    public boolean checkUniquePackage(String packName) {
+        boolean result = false;
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM package WHERE name=?", packName);
+        if (mp.size() == 0) {
+            result = true;
+        }
+        log.info("{}", result);
+        return result;
     }
 
 }
