@@ -1,9 +1,6 @@
 // This JavaScript file contains the operations of shopping cart.
 $(document).ready(function () {
-    calculateTotal(".tot-price");
-    calculateDicountedTotal();
-    calculateNetAmount();
-
+    initCalculations();
     $('#myCarousel').carousel({
         interval: 5000
     })
@@ -32,63 +29,69 @@ $(document).ready(function () {
     // Remove item from the shopping cart
     $(".del").click(function () {
         var closest = $(this).closest('tr'); // find the closest table row
+        //var itemTitle = $.trim(closest.find("td.item-title").text());
+        //var itemPrice = $.trim(closest.find("td.item-price").text());
+        //var itemQty = $.trim(closest.find(".item-qty").val());
+        var itemIndex = $.trim(closest.find("td.item-index").text());
         $("#delete-confirm-popup").modal('show');
         $('#removeOk').off('click');
         $('#removeOk').click(function () {
-            //$.ajax({
-            //    type: "POST",
-            //    url: "/web-selfcare/menu/add-to-cart",
-            //    data: {
-            //        "itemTitle": $("#item-title-modal").text(),
-            //        "itemDescription":$("#item-desc-modal").text(),
-            //        "itemSize":$("#addtocart-pizza-sizes").val(),
-            //        "itemTopping1":$("#addtocart-pizza-toppings1").val(),
-            //        "itemTopping2":$("#addtocart-pizza-toppings2").val(),
-            //        "itemInstructs":$("#addtocart-pizza-instructs").val(),
-            //        "itemQty":$("#addtocart-pizza-qty").val(),
-            //        "itemPrice":$("#addtocart-pizza-price").val(),
-            //        "itemTotal":$("#addtocart-pizza-total").val()
-            //    },
-            //    success: function (result) {
-            //    }
-            //});
-            closest.remove(); // remove the closest table row
-            calculateTotal(".tot-price");
-            recalculateTotals();
-            $("#delete-confirm-popup").modal('hide');
-            $.notify("Selected item removed from the shopping cart.", {
-                align: "center",
-                verticalAlign: "top",
-                type: 'toast',
-                delay: 2000,
-                animationType: "fade"
+            $.ajax({
+                type: "POST",
+                url: "/web-selfcare/shopping-cart/removeitem",
+                data: {
+                    /*"itemTitle": itemTitle,
+                     "itemPrice": itemPrice,
+                     "itemQty": itemQty*/
+                    "itemIndex": itemIndex
+                },
+                success: function (result) {
+                    if (result) {
+                        closest.remove(); // remove the closest table row
+                        calculateTotal(".tot-price");
+                        recalculateTotals();
+                        $("#delete-confirm-popup").modal('hide');
+                        $.notify("Selected item removed from the shopping cart.", {
+                            align: "center",
+                            verticalAlign: "top",
+                            type: 'toast',
+                            delay: 2000,
+                            animationType: "fade"
+                        });
+                        if ($("#label-tot").val() !== 0) {
+                            $("#coupon-submit").prop('disabled', false);
+                            $("#checkoutButton").prop('disabled', false);
+                        } else {
+                            $("#coupon-submit").prop('disabled', true);
+                            $("#checkoutButton").prop('disabled', true);
+                        }
+                        location.reload();
+                    }
+                }
             });
-            if ($("#label-tot").val() !== 0) {
-                $("#coupon-submit").prop('disabled', false);
-                $("#checkoutButton").prop('disabled', false);
-            } else {
-                $("#coupon-submit").prop('disabled', true);
-                $("#checkoutButton").prop('disabled', true);
-            }
         });
     });
 
     $(".spin").click(function () {
         var qty = $(this).val();
-        var price = $(this).closest('tr').children('td:eq(1)').text();
+        var price = $(this).closest('tr').children('td:eq(3)').text();
         var total = qty * price;
-        $(this).closest('tr').children('td:eq(3)').text(total.toFixed(2));
+        var itemIndex = $.trim($(this).closest('tr').find('td.item-index').text());
+        $(this).closest('tr').children('td:eq(5)').text(total.toFixed(2));
         calculateTotal(".tot-price");
         recalculateTotals();
+        storeQtyOnSession(itemIndex, qty);
     });
 
     $(".spin").keyup(function () {
         var qty = $(this).val();
-        var price = $(this).closest('tr').children('td:eq(1)').text();
+        var price = $(this).closest('tr').children('td:eq(3)').text();
         var total = qty * price;
-        $(this).closest('tr').children('td:eq(3)').text(total.toFixed(2));
+        var itemIndex = $.trim($(this).closest('tr').find('td.item-index').text());
+        $(this).closest('tr').children('td:eq(5)').text(total.toFixed(2));
         calculateTotal(".tot-price");
         recalculateTotals();
+        storeQtyOnSession(itemIndex, qty);
     });
 
     $("#checkoutButton").click(function () {
@@ -104,19 +107,26 @@ function couponValidator() {
         $("#coupon-alert-div").attr('class', 'alert alert-danger');
         $("#coupon-alert-div").show();
         return false;
+    } else if ($("#label-tot").text() === "0.00") {
+        $("#coupon-validate-msg").text("Add items to cart to apply coupon.");
+        $("#coupon-alert-div").attr('class', 'alert alert-danger');
+        $("#coupon-alert-div").show();
+        return false;
     } else {
         $.ajax({
-            type: 'get',
-            url: "validcoupen",
+            type: 'POST',
+            url: "/web-selfcare/shopping-cart/validatecoupon",
             data: {"checkCoupon": enteredCouponVal},
             success: function (result) {
-                if ($.trim(result) > 0) {
+                var couponCodeRate = $.trim(result);
+                if (couponCodeRate > 0) {
                     $("#coupon-alert-div").attr("class", "alert alert-success");
                     $("#coupon-validate-msg").text("Coupon code validated.");
                     $("#coupon-alert-div").show();
-                    var discount = $("#label-tot").text() * 20 / 100;
+                    var discount = $("#label-tot").text() * couponCodeRate / 100;
                     $("#label-dis").text(discount.toFixed(2));
-                    $("#txt-coupon").attr("disabled", true);
+                    $("#label-dis-rate").text(couponCodeRate);
+                    $("#txt-coupon").attr("readonly", true);
                     calculateDicountedTotal();
                     calculateNetAmount();
                     return true;
@@ -168,4 +178,29 @@ function calculateDicountedTotal(element) {
 function calculateNetAmount() {
     var discountedTotal = $("#label-distot").text();
     $("#net-amount-field").text(parseFloat(discountedTotal * 105 / 100).toFixed(2));
+}
+
+// Store quantity details on the session when quantity gets updated
+function storeQtyOnSession(itemIndex, quantity) {
+    $.ajax({
+        type: 'POST',
+        url: "/web-selfcare/shopping-cart/updateitem",
+        data: {"ItemIndex": itemIndex, "itemQty": quantity},
+        success: function (result) {
+        }
+    });
+}
+
+function initCalculations() {
+    calculateTotal(".tot-price");
+    calculateDicountedTotal();
+    calculateNetAmount();
+    $('.spin').each(function(i, obj) {
+        var qty = $(this).val();
+        var price = $(this).closest('tr').children('td:eq(3)').text();
+        var total = qty * price;
+        $(this).closest('tr').children('td:eq(5)').text(total.toFixed(2));
+        calculateTotal(".tot-price");
+        recalculateTotals();
+    });
 }

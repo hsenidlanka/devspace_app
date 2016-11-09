@@ -26,7 +26,9 @@
                             <table class="table" id="table-cart">
                                 <thead>
                                 <tr>
-                                    <th><fmt:message key="summary.descrip" bundle="${lang}"/></th>
+                                    <th style="display:none;">Index</th>
+                                    <th><fmt:message key="summary.item.image" bundle="${lang}"/></th>
+                                    <th><fmt:message key="summary.item.name" bundle="${lang}"/></th>
                                     <th><fmt:message key="summary.price" bundle="${lang}"/></th>
                                     <th><fmt:message key="summary.qty" bundle="${lang}"/></th>
                                     <th><fmt:message key="summary.total" bundle="${lang}"/></th>
@@ -34,25 +36,29 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${cartItemsMap}" var="entry">
+                                <c:forEach items="${cartItemsMap}" var="entry" varStatus="iteration">
                                     <tr>
+                                        <td class="item-index" style="display:none;"><c:out value="${iteration.index}"/></td>
                                         <td class="item-title" style="vertical-align: middle; text-align: left;"><img
                                                 src="<c:url value="/resources/images/image_placeholder.gif"/>"
                                                 height="100px" width="100px">
+                                        </td>
+                                        <td class="item-title" style='vertical-align: middle; text-align: left;'>
                                             <c:out value="${entry.itemTitle}"/>
                                         </td>
-                                        <td style='vertical-align: middle; text-align: right;'><c:out
+                                        <td class="item-price" style='vertical-align: middle; text-align: center;'><c:out
                                                 value="${entry.itemPrice}"/></td>
-                                        <td style="vertical-align: middle;"><input class="spin" type="number" min="1"
+                                        <td style="vertical-align: middle;"><input class="spin item-qty" type="number" min="1"
                                                                                    max="100"
-                                                                                   value='<c:out value="${entry.itemQty}"/>'>
+                                                                                   value='<c:out value="${entry.itemQty}"/>' style="width: 50px;">
                                         </td>
-                                        <td style="vertical-align: middle; text-align: right;" class="tot-price"><c:out
+                                        <td style="vertical-align: middle; text-align: center;" class="tot-price"><c:out
                                                 value="${entry.itemTotal}"/>
                                         </td>
-                                        <td style="vertical-align: middle;"><a class="mod"><i
-                                                class="glyphicon glyphicon-edit"></i> Edit</a>&nbsp;
+                                        <td style="vertical-align: middle;">
+                                            <%--<a class="mod"><i class="glyphicon glyphicon-edit"></i> Edit</a>&nbsp;--%>
                                             <a class="del"><i class="glyphicon glyphicon-remove"></i> Remove</a>
+                                        </td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
@@ -83,9 +89,10 @@
                                     <p id="coupon-validate-msg"></p>
                                 </div>
                                 <div>
-                                    <input type="text" id="txt-coupon" size="25" class="form-control"/>
-                                    <br>
+                                    <input type="text" class="form-control" id="txt-coupon" size="25">
                                 </div>
+                                <br>
+
                                 <div id="div-submit">
                                     <input type="submit" id="coupon-submit" value="validate"
                                            class="btn btn-primary btn-xs">
@@ -93,7 +100,9 @@
                                 <div style="margin-top: 30px;">
                                     <label><strong><fmt:message key="pay.total" bundle="${lang}"/> <label
                                             id="label-tot">0.00</label></strong></label><br>
-                                    <label><strong><fmt:message key="shopping.discount" bundle="${lang}"/> <label
+                                    <label><strong><fmt:message key="shopping.discount.rate" bundle="${lang}"/> <label
+                                            id="label-dis-rate">0.00</label></strong></label><br>
+                                    <label><strong><fmt:message key="shopping.discount.amount" bundle="${lang}"/> <label
                                             id="label-dis">0.00</label></strong></label>
                                 </div>
                                 <hr>
