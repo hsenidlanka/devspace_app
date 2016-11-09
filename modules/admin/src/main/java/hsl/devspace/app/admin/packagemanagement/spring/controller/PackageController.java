@@ -84,7 +84,12 @@ public class PackageController {
 
     //For submitting the add new package
     @RequestMapping(value = "/add_package")
-    public ModelAndView add(@ModelAttribute("command") Package newPackage) throws SQLIntegrityConstraintViolationException {
+    public ModelAndView addPackage(@ModelAttribute("command") Package newPackage){
+        try{
+
+        }catch (Exception ex){
+
+        }
         ModelAndView model = new ModelAndView();
 
 /* int p = itemPackage.add(newPackg);
