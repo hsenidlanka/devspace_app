@@ -8,6 +8,7 @@ import hsl.devspace.app.corelogic.repository.category.SubCategoryRepositoryImpl;
 import hsl.devspace.app.corelogic.repository.item.ItemRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jose4j.json.internal.json_simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -61,6 +62,25 @@ public class PackageController {
         LOGGER.error("loadmenu items = " + menutITems);
         return menutITems;
     }
+
+    @RequestMapping(value = "/getSizePrice",method = RequestMethod.POST)
+    public @ResponseBody String getSizeList(@RequestParam("itemName") String itemName){
+
+        LOGGER.trace("itemNm for sizePrice = "+itemName);
+        List<Item> sizeList = item.retrieveSelectedItemSizes(itemName);
+
+        JSONObject jsonObject = new JSONObject();
+        for (int x = 0; x <sizeList.size() ; x++) {
+            Item list = sizeList.get(x);
+
+            jsonObject.put(list.getSize(), list.getPrice());
+        }
+        LOGGER.info("itemnm for edit " + itemName + ' ' + "size list for add " + sizeList + "  and sp = " + jsonObject.toJSONString());
+        LOGGER.info("sp  object.toJSONString = " + jsonObject.toJSONString());
+        LOGGER.trace("load size list = "+sizeList);
+        return jsonObject.toJSONString();
+    }
+
 
     //For submitting the add new package
     @RequestMapping(value = "/add_package")
