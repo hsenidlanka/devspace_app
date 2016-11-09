@@ -2,6 +2,7 @@ package hsenid.web.Controllers;
 
 import hsenid.web.models.ReplyFromServer;
 import hsenid.web.models.SearchItemData;
+import hsenid.web.models.ServerResponseMessage;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,9 +16,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
@@ -43,13 +44,12 @@ public class SearchMenuController {
     }
 
     @RequestMapping(value = "/search-menu", method = RequestMethod.POST)
-    public String sendSearchItem(@ModelAttribute("searchitemdata") @Valid SearchItemData searchitemdata, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
+    public ModelAndView sendSearchItem(@ModelAttribute("searchitemdata") @Valid SearchItemData searchitemdata, BindingResult result, Model model) {
 
 
-        redirectAttributes.addFlashAttribute("validForm", "dd");
+        // redirectAttributes.addFlashAttribute("validForm", "dd");
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("searchItem", searchitemdata.getSearchItem());
-
 
         RestTemplate restTemplate = new RestTemplate();
 
@@ -60,17 +60,29 @@ public class SearchMenuController {
         String searchUrl = baseUrl + searchItemNameUrl;
 
         try {
-            ReplyFromServer message = restTemplate.postForObject(searchUrl, httpEntity, ReplyFromServer.class);
+            ReplyFromServer data = restTemplate.postForObject(searchUrl, httpEntity, ReplyFromServer.class);
+            model.addAttribute("items", data);
+            logger.info("{}", data);
+
         } catch (Exception e) {
             logger.info(e.getMessage());
 
         }
-        redirectAttributes.addFlashAttribute("validForm", "True");
-        return "redirect:/search-results";
+
+        // redirectAttributes.addFlashAttribute("validForm", "True");
+        return new ModelAndView("/search-results", "searchitemdata", new SearchItemData());
     }
 
     @RequestMapping(value = "/search-results", method = RequestMethod.GET)
-    public ModelAndView loadSearchItems() {
-        return new ModelAndView("/search-results", "searchitemdata", new SearchItemData());
+    public ModelAndView loadSearchItems(@RequestParam String searchitemdata) {
+        // @ModelAttribute("searchresultsdata") ModelAndView modelAndView
+        //return new ModelAndView("/search-results", "searchresultsdata", new SearchResultsData());
+        ModelAndView modelAndView = new ModelAndView("home/search-results");
+        RestTemplate restTemplate = new RestTemplate();
+        String url = baseUrl + searchItemNameUrl + searchitemdata;
+        ServerResponseMessage responseMessage = restTemplate.getForObject(url, ServerResponseMessage.class);
+        modelAndView.addObject("items", responseMessage.getData());
+        return modelAndView;
     }
+
 }

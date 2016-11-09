@@ -57,6 +57,8 @@
                                     <div id="search-pizza" class="panel-collapse collapse in">
                                         <div class="panel-body">
                                             <div class="row">
+                                                <c:forEach items="${items}" var="searchresultsdata" varStatus="loop">
+
                                                 <div class="col-md-3">
                                                     <img src="<c:url value="/resources/images/pizzas/15.jpg"/>"
                                                          class="img-responsive menu-images">
@@ -73,7 +75,8 @@
                                                     </div>
                                                     <h4>A title</h4>
                                                 </div>
-                                                <div class="col-md-3">
+                                                </c:forEach>
+                                                <%--<div class="col-md-3">
                                                     <img src="<c:url value="/resources/images/pizzas/12.jpg"/>"
                                                          class="img-responsive menu-images">
 
@@ -190,7 +193,7 @@
                                                                 to
                                                                 cart
                                                             </button>
-                                                        </div>
+                                                        </div>--%>
                                                     </div>
                                                     <h4>A title</h4>
                                                 </div>

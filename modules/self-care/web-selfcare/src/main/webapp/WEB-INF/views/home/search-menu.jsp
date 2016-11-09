@@ -26,7 +26,7 @@
             <img class="icons" src="<c:url value="/resources/images/icons/menu.png"/>"/>
             <h3 id="menu-panel-heading" class="header-panel">Menu-Pizza</h3>
           </div>
-          <form:form method="POST" action="/web-selfcare/search-menu" modelAttribute="searchitemdata">
+          <form:form method="POST" modelAttribute="searchitemdata">
           <div style="display: inline-block; float:right;">
             <div class="form-group">
               <div class="col-sm-10" style="padding-right: 0px;">
