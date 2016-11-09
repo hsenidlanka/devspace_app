@@ -242,7 +242,8 @@ private int id;
 
     //for update customer
 
-    public User( String firstName, String lastName, String username,  String email, String addressL1, String addressL2, String addressL3, String mobile) {
+    public User(String title, String firstName, String lastName, String username, String email, String addressL1, String addressL2, String addressL3, String mobile) {
+        this.title = title;
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
