@@ -113,12 +113,11 @@
 
             </div>
 
-            <%--cc--%>
             <hr>
 
             <div class="form-group">
                 <form:label path="firstName" for="firstName" cssClass="col-md-2 control-label">
-                    <p align="right">FirstName</p>
+                    <p align="right">First Name</p>
                 </form:label>
 
                 <div class="col-md-10">
@@ -135,7 +134,7 @@
             <div class="form-group">
 
                 <form:label path="lastName" for="lastName" cssClass="col-md-2 control-label">
-                    <p align="right">LastName</p>
+                    <p align="right">Last Name</p>
                 </form:label>
 
                 <div class="col-md-10">

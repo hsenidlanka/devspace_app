@@ -22,7 +22,8 @@
                 <li>
                     <a href="/web-selfcare/shopping-cart"><img
                             src="<c:url value="/resources/images/shopping-cart.png"/>"
-                            style="padding-left: 30px;vertical-align: top;"><span class="badge"><c:out value="${fn:length(cartItemsMap)}"/></span></a>
+                            style="padding-left: 30px;vertical-align: top;"><span class="badge"><c:out
+                            value="${fn:length(cartItemsMap)}"/></span></a>
                 </li>
                 <c:if test="${empty username}">
                     <li>
@@ -76,28 +77,32 @@
             <div class="modal-body">
                 <form name="loginForm" id="loginForm" novalidate="novalidate" action="3" method="post">
 
+
                     <div class="row form-group">
-                        <div class="col-sm-3">
-                            <h3><label for="loginUsername">Username</label></h3>
+                        <div class="col-sm-2">
+                            <label class="control-label" for="loginUsername">Username</label>
                         </div>
                         <div class="">
-                            <input id="loginUsername" class="form-control" min="3" name="loginUsername" required=""
-                                   type="text" data-error-msg="Username required !!!">
+                            <input id="loginUsername" style="width:60%;" class="col-sm-10" min="3" name="loginUsername"
+                                   required="" type="text" data-error-msg="Username required !!!">
                         </div>
 
                     </div>
 
                     <div class="row  form-group">
-                        <label for="loginPassword">Password</label>
-                        <input id="loginPassword" name="loginPassword" class="form-control" min="3" required=""
-                               data-error-msg="Please provide Valid password !!!"
-                               type="password">
+                        <div class="col-sm-2"><label for="loginPassword">Password</label></div>
+                        <input id="loginPassword" style="width:60%;" name="loginPassword" class="col-sm-10" min="3"
+                               required="" data-error-msg="Please provide Valid password !!!" type="password">
                     </div>
 
-                    <div class="row col-sm-offset-4">
-                        <button id="loginFormSubmit" name="loginFormSubmit" type="button"
-                                class="btn btn-primary btn-block">Submit
-                        </button>
+                    <div class="row">
+                        <div class="col-sm-3"></div>
+                        <div class="col-sm-3">
+                            <button id="loginFormSubmit" name="loginFormSubmit" type="button"
+                                    class="btn btn-primary btn-block">Submit
+                            </button>
+                        </div>
+                        <div class="col-sm-6"></div>
                     </div>
 
                 </form>

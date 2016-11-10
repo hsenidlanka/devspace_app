@@ -1,7 +1,8 @@
-/**
+/*
+/!**
 *  validate-bootstrap.jquery v 0.10.6
 *  @psalmody https://github.com/psalmody/validate-bootstrap.jquery
-*/
+*!/
 (function($) {
 
   $.fn.validator = function(options) {
@@ -48,8 +49,12 @@
             message = typeof(message) == 'undefined' ? msg : message;
             if (formGroup.find(helpBlockSelecter).length) formGroup.find(helpBlockSelecter).remove();
             var helpBlock = $('<div class="' + settings.helpBlockClass + '"></div>').html(message);
+            //formGroup.append('<br class="has-error"><br class="has-error"><center>');
             formGroup.append(helpBlock);
+            //formGroup.append('</center>');
+            //formGroup
             formGroup.addClass('has-error');
+
           };
           var removeErrors = function(obj) {
             obj = typeof(obj) == 'undefined' ? formGroup : obj;
@@ -233,3 +238,4 @@
   };
 
 }(jQuery));
+*/
