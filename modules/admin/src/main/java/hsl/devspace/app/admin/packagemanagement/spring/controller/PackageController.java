@@ -85,20 +85,17 @@ public class PackageController {
     //For submitting the add new package
     @RequestMapping(value = "/add_package")
     public ModelAndView addPackage(@ModelAttribute("command") Package newPackage){
-        try{
 
-        }catch (Exception ex){
-
-        }
         ModelAndView model = new ModelAndView();
-
-/* int p = itemPackage.add(newPackg);
-        if(p == 1)
-
-            model.setViewName("addPackage");
-  else
-
-            System.out.println("Error in package add");*/
+        String pkgName = newPackage.getPackName();
+        try{
+            boolean uniqePknm = packageRepo.checkUniquePackage(pkgName);
+            //
+            //
+            //
+        }catch (Exception ex){
+            LOGGER.error("error in add new pkg {}",ex);
+        }
 
         return model;
     }
