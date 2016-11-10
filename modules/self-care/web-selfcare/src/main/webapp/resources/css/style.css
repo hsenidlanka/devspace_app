@@ -171,3 +171,14 @@ table {
 .qty-cell{
     text-align: center;
 }
+
+.badge{
+    position: absolute;
+    top: 6px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #16b4ff;
+    color: white;
+    text-align: center;
+}

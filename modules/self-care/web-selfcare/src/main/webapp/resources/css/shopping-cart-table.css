@@ -22,6 +22,7 @@ th {
     padding: 10px 15px;
     position: relative;
     text-shadow: 0 1px 0 #000;
+    text-align: center;
 }
 
 th:after {
@@ -100,25 +101,27 @@ tbody:hover tr:hover td {
 
 .item-title {
     vertical-align: middle;
-    text-align: left;
+    text-align: center;
 }
 
 .item-price {
     vertical-align: middle;
-    text-align: center;
+    text-align: right;
 }
 
 .item-qty {
     vertical-align: middle;
+    text-align: center;
 }
 
 .tot-price {
     vertical-align: middle;
-    text-align: center;
+    text-align: right;
 }
 
 .item-remove {
     vertical-align: middle;
+    text-align: center;
 }
 
 .empty-cart {
