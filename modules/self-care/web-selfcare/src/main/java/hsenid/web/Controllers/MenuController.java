@@ -72,7 +72,7 @@ public class MenuController {
 
     @RequestMapping(value = "/menu/add-to-cart", method = RequestMethod.POST)
     @ResponseBody
-    public void addToCart(HttpSession session, HttpServletRequest request) {
+    public boolean addToCart(HttpSession session, HttpServletRequest request) {
         if (session.getAttribute("cartItems") == null || session.getAttribute("cartItems") == "") {
             List<Map<String, String>> cartItems = new ArrayList<Map<String, String>>();
             session.setAttribute("cartItems", cartItems);
@@ -101,5 +101,6 @@ public class MenuController {
         map.put("itemTotal", itemTotal);
         cartItems.add(map);
         session.setAttribute("cartItems", cartItems);
+        return true;
     }
 }
