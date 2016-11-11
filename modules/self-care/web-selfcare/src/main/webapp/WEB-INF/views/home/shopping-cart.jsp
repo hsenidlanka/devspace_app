@@ -5,104 +5,8 @@
     <%@include file="../includes/include.jsp" %>
     <title><fmt:message key="shopping" bundle="${lang}"/></title>
     <link rel="shortcut icon" href="">
+    <link rel="stylesheet" href="<c:url value="/resources/css/shopping-cart-table.css"/>"/>
     <script src="<c:url value="/resources/js/cart-operations.js"/>" type="text/javascript"></script>
-    <style>
-        table {
-            background: #f5f5f5;
-            border-collapse: separate;
-            box-shadow: inset 0 1px 0 #fff;
-            font-size: 16px;
-            line-height: 24px;
-            margin: 0px auto;
-            text-align: left;
-            width: 800px;
-        }
-
-        th {
-            background: url(http://jackrugile.com/images/misc/noise-diagonal.png), linear-gradient(#777, #444);
-            border-left: 1px solid #555;
-            border-right: 1px solid #777;
-            border-top: 1px solid #555;
-            border-bottom: 1px solid #333;
-            box-shadow: inset 0 1px 0 #999;
-            color: #fff;
-            font-size: 14px;
-            font-weight: bold;
-            padding: 10px 15px;
-            position: relative;
-            text-shadow: 0 1px 0 #000;
-        }
-
-        th:after {
-            background: linear-gradient(rgba(255,255,255,0), rgba(255,255,255,.08));
-            content: '';
-            display: block;
-            height: 25%;
-            left: 0;
-            margin: 1px 0 0 0;
-            position: absolute;
-            top: 25%;
-            width: 100%;
-        }
-
-        th:first-child {
-            border-left: 1px solid #777;
-            box-shadow: inset 1px 1px 0 #999;
-        }
-
-        th:last-child {
-            box-shadow: inset -1px 1px 0 #999;
-        }
-
-        td {
-            border-right: 1px solid #fff;
-            border-left: 1px solid #e8e8e8;
-            border-top: 1px solid #fff;
-            border-bottom: 1px solid #e8e8e8;
-            padding: 10px 15px;
-            position: relative;
-            transition: all 300ms;
-        }
-
-        td:first-child {
-            box-shadow: inset 1px 0 0 #fff;
-        }
-
-        td:last-child {
-            border-right: 1px solid #e8e8e8;
-            box-shadow: inset -1px 0 0 #fff;
-        }
-
-        tr {
-            background: url(http://jackrugile.com/images/misc/noise-diagonal.png);
-        }
-
-        tr:nth-child(odd) td {
-            background: #f1f1f1 url(http://jackrugile.com/images/misc/noise-diagonal.png);
-        }
-
-        tr:last-of-type td {
-            box-shadow: inset 0 -1px 0 #fff;
-        }
-
-        tr:last-of-type td:first-child {
-            box-shadow: inset 1px -1px 0 #fff;
-        }
-
-        tr:last-of-type td:last-child {
-            box-shadow: inset -1px -1px 0 #fff;
-        }
-
-        tbody:hover td {
-            color: transparent;
-            text-shadow: 0 0 3px #aaa;
-        }
-
-        tbody:hover tr:hover td {
-            color: #444;
-            text-shadow: 0 1px 0 #fff;
-        }
-    </style>
 </head>
 <body>
 <div class="loader-anim"></div>
@@ -133,35 +37,47 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${cartItemsMap}" var="entry" varStatus="iteration">
-                                    <tr>
-                                        <td class="item-index" style="display:none;"><c:out
-                                                value="${iteration.index}"/></td>
-                                        <td class="item-title" style="vertical-align: middle; text-align: left;"><img
-                                                src="<c:url value="/resources/images/image_placeholder.gif"/>"
-                                                height="100px" width="100px">
-                                        </td>
-                                        <td class="item-title" style='vertical-align: middle; text-align: left;'>
-                                            <c:out value="${entry.itemTitle}"/>
-                                        </td>
-                                        <td class="item-price" style='vertical-align: middle; text-align: center;'>
-                                            <c:out
-                                                    value="${entry.itemPrice}"/></td>
-                                        <td style="vertical-align: middle;"><input class="spin item-qty" type="number"
-                                                                                   min="1"
-                                                                                   max="100"
-                                                                                   value='<c:out value="${entry.itemQty}"/>'
-                                                                                   style="width: 50px;">
-                                        </td>
-                                        <td style="vertical-align: middle; text-align: center;" class="tot-price"><c:out
-                                                value="${entry.itemTotal}"/>
-                                        </td>
-                                        <td style="vertical-align: middle;">
-                                                <%--<a class="mod"><i class="glyphicon glyphicon-edit"></i> Edit</a>&nbsp;--%>
-                                            <a class="del"><i class="glyphicon glyphicon-remove"></i> Remove</a>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
+                                <c:choose>
+                                    <c:when test="${fn:length(cartItemsMap) > 0}">
+                                        <c:forEach items="${cartItemsMap}" var="entry" varStatus="iteration">
+                                            <tr>
+                                                <td class="item-index"><c:out
+                                                        value="${iteration.index}"/></td>
+                                                <td class="item-title"
+                                                    style="vertical-align: middle; text-align: left;"><img
+                                                        src="<c:url value="/resources/images/image_placeholder.gif"/>"
+                                                        height="100px" width="100px">
+                                                </td>
+                                                <td class="item-title">
+                                                    <c:out value="${entry.itemTitle}"/>
+                                                </td>
+                                                <td class="item-price">
+                                                    <c:out
+                                                            value="${entry.itemPrice}"/></td>
+                                                <td class="item-qty"><input class="spin item-qty"
+                                                                            type="number"
+                                                                            min="1"
+                                                                            max="100"
+                                                                            value='<c:out value="${entry.itemQty}"/>'
+                                                                            style="width: 50px;">
+                                                </td>
+                                                <td class="tot-price"><c:out
+                                                        value="${entry.itemTotal}"/>
+                                                </td>
+                                                <td class="item-remove">
+                                                        <%--<a class="mod"><i class="glyphicon glyphicon-edit"></i> Edit</a>&nbsp;--%>
+                                                    <a class="del"><i class="glyphicon glyphicon-remove"></i> Remove</a>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <tr>
+                                            <td class="empty-cart" colspan="6"><fmt:message
+                                                    bundle="${lang}" key="shopping.empty.cart"/></td>
+                                        </tr>
+                                    </c:otherwise>
+                                </c:choose>
                                 </tbody>
                             </table>
                             <%--<div class="col-md-12">

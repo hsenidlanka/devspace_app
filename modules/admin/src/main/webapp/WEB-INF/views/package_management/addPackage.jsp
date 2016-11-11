@@ -152,7 +152,7 @@
                                         </form:select>
                                     </div>
                                     <div class="col-xs-2">
-                                        <input class="qty-spinner" type="number" value="0" min="0"/>
+                                        <input class="qty-spinner" type="number" min="0" id="pzzaQty"/>
                                     </div>
                                     <div class="col-xs-2">
                                         <form:button type="button" value="" class="btn btn-success btnAddItmPkg" id="btnAddPkgPizza">
@@ -164,7 +164,7 @@
                                 <div class="row item-tbl-row">
                                     <div class="col-xs-2">
                                         <label class="checkbox-inline">
-                                        <form:checkbox value="Salad" class="checkbox chkbxPkgCat" path=""/>
+                                        <form:checkbox value="Salad" class="checkbox chkbxPkgCat" path="" id="chkPkgSld"/>
                                         Salad
                                         </label>
                                     </div>
@@ -179,7 +179,7 @@
                                         </form:select>
                                     </div>
                                     <div class="col-xs-2">
-                                        <form:input class="qty-spinner" type="number" value="0" path="" min="0"/>
+                                        <input class="qty-spinner" type="number" id="sldQty" min="0"/>
                                     </div>
                                     <div class="col-xs-2">
                                         <form:button type="button" value="" class="btn btn-success btnAddItmPkg" id="btnAddPkgSalad">
@@ -191,7 +191,7 @@
                                 <div class="row item-tbl-row">
                                     <div class="col-xs-2">
                                         <label class="checkbox-inline">
-                                        <form:checkbox value="Beverage" class="checkbox chkbxPkgCat" path=""/>
+                                        <form:checkbox value="Beverage" class="checkbox chkbxPkgCat" path="" id="chkPkgBvrg"/>
                                         Beverage
                                         </label>
                                     </div>
@@ -201,12 +201,12 @@
                                         </form:select>
                                     </div>
                                     <div class="col-xs-3">
-                                        <form:select type="text" class="form-control" path="" id="szpr3">
+                                        <form:select type="text" class="form-control" path="" id="szprc3">
                                             <form:option value="-" label="---"/>
                                         </form:select>
                                     </div>
                                     <div class="col-xs-2">
-                                        <form:input class="qty-spinner" type="number" value="0" path="" min="0"/>
+                                        <input class="qty-spinner" type="number" id="bvgQty" min="0"/>
                                     </div>
                                     <div class="col-xs-2">
                                         <form:button type="button" value="" class="btn btn-success btnAddItmPkg" id="btnAddPkgBvrg">
@@ -218,7 +218,7 @@
                                 <div class="row item-tbl-row">
                                     <div class="col-xs-2">
                                         <label class="checkbox-inline">
-                                        <form:checkbox value="Topping" class="checkbox chkbxPkgCat" path=""/>
+                                        <form:checkbox value="Topping" class="checkbox chkbxPkgCat" path="" id="chkPkgTppg"/>
                                         Topping
                                         </label>
                                     </div>
@@ -233,7 +233,7 @@
                                         </form:select>
                                     </div>
                                     <div class="col-xs-2">
-                                        <form:input class="qty-spinner" type="number" value="0" path="" min="0"/>
+                                        <input class="qty-spinner" type="number" id="tppgQty" min="0"/>
                                     </div>
                                     <div class="col-xs-2">
                                         <form:button type="button" value="" class="btn btn-success btnAddItmPkg" id="btnAddPkgSalad">
@@ -245,7 +245,7 @@
                                 <div class="row item-tbl-row">
                                     <div class="col-xs-2">
                                         <label class="checkbox-inline">
-                                        <form:checkbox value="desserts" class="checkbox chkbxPkgCat" path=""/>
+                                        <form:checkbox value="desserts" class="checkbox chkbxPkgCat" path="" id="chkPkgDssrt"/>
                                         Dessert
                                         </label>
                                     </div>
@@ -260,7 +260,7 @@
                                         </form:select>
                                     </div>
                                     <div class="col-xs-2">
-                                        <form:input class="qty-spinner" type="number" value="0" path="" min="0"/>
+                                        <input class="qty-spinner" type="number" min="0" id="dssrtQty"/>
                                     </div>
                                     <div class="col-xs-2">
                                         <form:button type="button" value="" class="btn btn-success btnAddItmPkg" id="btnAddPkgDssrt">
@@ -285,7 +285,7 @@
                     </div>
                     <br>
 
-                    <div class="list-group row" style="margin:auto; width:50%; border:2px solid black; padding: 10px;">
+                    <%--<div class="list-group row" style="margin:auto; width:50%; border:2px solid black; padding: 10px;">
                         <label><h4>Package Summary</h4></label><br>
                         <label id="newPkgName"><strong>Pacakage Name</strong></label> <br>
                         <ul class="list-group">
@@ -332,7 +332,7 @@
 
                         </ul>
                     </div>
-                    <br><br>
+                    <br><br>--%>
 
                     <div style="text-align: center; z-index: 50000; width: 50%; margin: auto;" id="toaster"></div>
                     <br>
@@ -341,13 +341,13 @@
                         <div class="col-xs-4">
                         </div>
                         <div class="col-xs-4" align="right">
-                            <form:button type="button" class="btn btn-success bckToHome" id="btnPkgCancel"><span
-                                    class="glyphicon glyphicon-chevron-left"></span>
+                            <form:button type="button" class="btn btn-success" id="btnAddNewPkg" onclick="contentPackge()"><span
+                                    class="glyphicon glyphicon-plus"></span>
                                 <fmt:message key="package.packageadd.form.button.submit" bundle="${bundle1}"/>
                             </form:button>
                         </div>
                         <div class="col-xs-4" align="left">
-                            <form:button type="button" class="btn btn-success btn-group-xs" id="btnAddNewPkg">
+                            <form:button type="reset" class="btn btn-success btn-group-xs" id="btnPkgCancel">
                                 <fmt:message key="package.packageadd.form.button.reset" bundle="${bundle1}"/>
                             </form:button>
                         </div>

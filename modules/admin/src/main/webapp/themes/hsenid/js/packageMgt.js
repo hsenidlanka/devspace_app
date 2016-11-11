@@ -21,11 +21,6 @@ $(document).ready(function () {
         var slctElement = $(this).parent().parent().next().find(".form-control").attr('id');
         var selectedItm = $(this).parent().parent().next().next().find(".form-control").attr('id');
 
-        var slctElementVal = $(this).parent().parent().next().find(".form-control").val();
-        var selectedItmVal = $(this).parent().parent().next().next().find(".form-control").val();
-        var qtyVal = $(this).parent().parent().next().next().next().find(".form-control").val();
-        var btnId = $(this).parent().parent().next().next().next().next().find(".form-control").val();
-
         console.log($(this).parent().parent().next().find(".form-control").css('color', 'green'));
         console.log($(this).parent().parent().next().next().find(".form-control").css('color', 'rgb(167, 68, 7)'));
 
@@ -45,15 +40,7 @@ $('#txtAddPkgPrice').focusout(function(){
     $('#newPkgPice').text(pkgPrice);
 
 });
-/*
-* big deal package
-* */
 
-
-    function contentPackge(){
-
-
-    }
 
 
 });
@@ -119,8 +106,99 @@ function generate(selectedItm, slctElement) {
             alert(er);
         }
     });
-};
-
-function addtoSummary(itemNm, qty, btnID){
-
 }
+
+function contentPackge(){
+    jsonObj = [];
+
+    if($('#chkPkgPzza').is(':checked')){
+        var itemVal = $('#slctItmPkgPzza').val();
+        var sizeVal = $("#szpr1").val();
+        var qtyVal = $("#pzzaQty").val();
+
+        content = {};
+        content["item"] = itemVal;
+        content["size"] = sizeVal;
+        content["qty"] = qtyVal;
+
+        jsonObj.push(content);
+        jsonString = JSON.stringify(jsonObj);
+    }
+    if($('#chkPkgSld').is(':checked')){
+        var itemVal2 = $('#slctItmPkgSalad').val();
+        var sizeVal2 = $("#szprc2").val();
+        var qtyVal2 = $("#sldQty").val();
+
+        content = {};
+        content["item"] = itemVal2;
+        content["size"] = sizeVal2;
+        content["qty"] = qtyVal2;
+
+        jsonObj.push(content);
+        jsonString = JSON.stringify(jsonObj);
+    }
+    if($('#chkPkgBvrg').is(':checked')){
+        var itemVal3 = $('#slctItmPkgBvrg').val();
+        var sizeVal3 = $("#szprc3").val();
+        var qtyVal3 = $("#bvgQty").val();
+
+        content = {};
+        content["item"] = itemVal3;
+        content["size"] = sizeVal3;
+        content["qty"] = qtyVal3;
+
+        jsonObj.push(content);
+        jsonString = JSON.stringify(jsonObj);
+    }
+    if($('#chkPkgTppg').is(':checked')){
+        var itemVal4 = $('#slctItmPkgToppng').val();
+        var sizeVal4 = $("#szpr4").val();
+        var qtyVal4 = $("#tppgQty").val();
+
+        content = {};
+        content["item"] = itemVal4;
+        content["size"] = sizeVal4;
+        content["qty"] = qtyVal4;
+
+        jsonObj.push(content);
+        jsonString = JSON.stringify(jsonObj);
+    }
+    if($('#chkPkgDssrt').is(':checked')){
+        var itemVal5 = $('#slctItmPkgDssrt').val();
+        var sizeVal5 = $("#szpr5").val();
+        var qtyVal5 = $("#dssrtQty").val();
+
+        content = {};
+        content["item"] = itemVal5;
+        content["size"] = sizeVal5;
+        content["qty"] = qtyVal5;
+
+        jsonObj.push(content);
+        jsonString = JSON.stringify(jsonObj);
+    }
+
+    console.log(jsonObj);
+    console.log(jsonString);
+}
+
+/*
+
+$.each( '.chkbxPkgCat', function( key, value ) {
+    jsonObj = [];
+    if($('.chkbxPkgCat').is(':checked')){
+        var itemVal = $('#slctItmPkgPzza').val();
+        var sizeVal = $("#szpr1").val();
+        var qtyVal = $("#pzzaQty").val();
+
+        content = {};
+        content["item"] = itemVal;
+        content["size"] = sizeVal;
+        content["qty"] = qtyVal;
+
+        jsonObj.push(content);
+        jsonString = JSON.stringify(jsonObj);
+    }
+    alert(key, value);
+    console.log(jsonObj);
+    console.log(jsonString);
+});*/

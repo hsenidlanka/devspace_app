@@ -54,10 +54,12 @@
                                             <a data-toggle="collapse" href="#search-pizza">Pizza</a>
                                         </h4>
                                     </div>
+
                                     <div id="search-pizza" class="panel-collapse collapse in">
                                         <div class="panel-body">
                                             <div class="row">
-                                                <c:forEach items="${items}" var="searchresultsdata" varStatus="loop">
+                                                <%--<c:forEach items="${searchitemdata}" var="searchresultsdata" varStatus="loop">--%>
+                                                <label>"${searchitemdata}"</label>
 
                                                 <div class="col-md-3">
                                                     <img src="<c:url value="/resources/images/pizzas/15.jpg"/>"
@@ -75,7 +77,8 @@
                                                     </div>
                                                     <h4>A title</h4>
                                                 </div>
-                                                </c:forEach>
+                                                <%--</c:forEach>--%>
+
                                                 <%--<div class="col-md-3">
                                                     <img src="<c:url value="/resources/images/pizzas/12.jpg"/>"
                                                          class="img-responsive menu-images">

@@ -51,10 +51,12 @@ $(document).ready(function(){
 
     //Login form submition
 
-    $("#loginFormSubmit").off('click');
+    //$("#loginFormSubmit").off('click');
     $("#loginFormSubmit").click(function () {
-        var loginUsername =  $("#loginUsername").val();
-        var loginPassword =  $("#loginPassword").val();
+        var loginUsername =  $.trim($("#loginUsername").val());
+        var loginPassword =  $.trim($("#loginPassword").val());
+
+        alert(loginUsername.length + ' ' + loginPassword.length)
 
         if ($('form').validator('check') <= 2) {
 

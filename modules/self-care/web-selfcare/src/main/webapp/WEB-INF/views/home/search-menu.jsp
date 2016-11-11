@@ -32,11 +32,24 @@
               <div class="col-sm-10" style="padding-right: 0px;">
                 <form:input path="searchItem" id="txt-menu-search" name="txt-menu-search" type="text"
                             class="form-control input-sm"/>
+
               </div>
               <div class="col-sm-2" style="padding-left: 2px;">
                 <button class="btn btn-primary input-sm" id="btn-menu-search"><span><i
                         class="glyphicon glyphicon-search"></i></span></button>
               </div>
+              <script>
+                $.ajax("home/search-menu")
+                        .done(function (result) {
+                          alert(result.data[0].itemName);
+                        })
+                        .fail(function () {
+                          alert("error");
+                        })
+                        .always(function () {
+                          alert("complete");
+                        });
+              </script>
             </div>
             <div style="margin-top: 40px;">
                 <%--  <label>Filter:</label>
@@ -47,7 +60,8 @@
                 --%></div>
           </div>
           </form:form>
-          </div>
+
+        </div>
         </div>
       </div>
       <div class="panel-body">
