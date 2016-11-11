@@ -39,8 +39,7 @@
                         <div class=" col-xs-6 radio" style="text-align: left">
                             <label class="cat" >
                                 <%--<form:radiobutton path="categoryName" value=" ${list}" name="catName" />--%>
-                                    <input type="radio" name="catName" value=" ${list}">${list}
-
+                                    <input type="radio" name="catName" value=" ${list}" required="required" >${list}
                             </label>
                         </div>
                     </div>
@@ -49,40 +48,114 @@
           </div>
         </div>
 
-        <div class="col-xs-6" >
+        <div class="col-xs-6" style="visibility: hidden" >
             <div class="form-group">
                 <div class="row">
-                    <label  class="col-xs-10 control-label" style="font-size: 17px; font-style: italic"  >
+                    <img id="image" src="" alt="logo" style="width: 200px; height: 150px;margin: 10px 0 -20px -20px;"/>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <label  class="col-xs-10 control-label" id="subcat_label" style="font-size: 17px; font-style: italic ">
                         <fmt:message key="category.categoryadd.form.subcategories" bundle="${bundle1}"/>
                     </label>
                 </div>
-                <br>
-
                 <div class="row">
                     <div class="col-xs-2"></div>
-                        <div class=" col-xs-6 radio" style="text-align: left">
-                            <label class="cat" >
-                            <%--<form:radiobutton path="categoryName" value=" ${list}" name="catName" />--%>
-                                <input type="radio" name="catName" value=" Test">Test
+                    <div class=" col-xs-6 radio" style="text-align: left">
+                        <label id="subcat" >
 
-                            </label>
-                        </div>
+                        </label>
                     </div>
                 </div>
             </div>
+        </div>
+          <%--<fieldset class="scheduler-border" style="padding-right: 300px;">--%>
+              <legend class="scheduler-border">
+                  <fmt:message key="category.categoryadd.form.add.subcategories" bundle="${bundle1}"/>
+              </legend>
 
+
+              <div class="row col-xs-12" style="margin-left: 1%;">
+
+                  <div class="row item-tbl-row item-tbl-hdr" style="width:600px;">
+                      <div class="col-xs-4">
+                          <strong><fmt:message key="category.categoryadd.form.subcatname" bundle="${bundle1}"/></strong>
+                      </div>
+                      <div class="col-xs-5">
+                          <strong><fmt:message key="category.categoryadd.form.subcatdescription" bundle="${bundle1}"/></strong>
+                      </div>
+                      <div class="col-xs-3">
+                          <%--<strong><fmt:message key="package.packageadd.form.packagedetails.itemsize" bundle="${bundle1}"/></strong>--%>
+                      </div>
+                  </div>
+
+                  <div class="row item-tbl-row" style="width:600px;">
+                      <div class="col-xs-4">
+                          <label class="checkbox-inline">
+                              <form:input path="subCategoryName" type="text" class="form-control" id="subcategoryname"
+                                          required="required" placeholder="Enter Category Name"
+                                          cssStyle="margin: 0 0 0 -25px;width: 200px;"/>
+                          </label>
+                      </div>
+                      <div class="col-xs-5">
+                          <form:textarea path="subcatDescription" type="text" class="form-control" id="categorydes"
+                                         placeholder="Enter Category Description" cssStyle="margin: 5px 10px 0 10px;
+    width: 230px;"></form:textarea>
+                      </div>
+                      <div class="col-xs-3">
+                          <a href="http://www.w3schools.com" style="margin: 30px 0 0 10px;">Add Sub-Category</a>
+                      </div>
+
+                  </div>
+
+                  <div class="row item-tbl-row" style="width:600px;">
+                      <div class="col-xs-4">
+                          <label class="checkbox-inline">
+                              <form:input path="subCategoryName" type="text" class="form-control" id="subcategoryname"
+                                          placeholder="Enter Category Name" cssStyle=" margin: 0 0 0 -25px;
+    width: 200px;"/>
+                          </label>
+                      </div>
+                      <div class="col-xs-5">
+                          <form:textarea path="subcatDescription" type="text" class="form-control" id="categorydes"
+                                         placeholder="Enter Category Description" cssStyle="margin: 5px 10px 0 10px;
+    width: 230px;"></form:textarea>
+                      </div>
+                      <div class="col-xs-3">
+                          <a href="http://www.w3schools.com" style="margin: 30px 0 0 10px;">Add Sub-Category</a>
+                      </div>
+                  </div>
+              </div>
+
+              <%--buttons--%>
           <div class="form-group">
               <div class="row">
-                  <label  class="col-xs-6 control-label"   >
-                      <fmt:message key="category.categoryadd.form.subcategories" bundle="${bundle1}"/>
+                  <label  class="col-xs-3 control-label" >
                   </label>
-                  <label  class="col-xs-6 control-label"   >
-                      <fmt:message key="category.categoryadd.form.subcategories" bundle="${bundle1}"/>
-                  </label>
+                  <div class="col-xs-8">
+                      <div class="col-xs-2">
 
+                          <form:button type="reset" value="Reset" class="btn btn-success btn-md btnAddItem">
+                              <fmt:message key="user.useradd.form.button.reset" bundle="${bundle1}" /></form:button>
 
+                      </div>
+                      <div class="col-xs-10">
+
+                          <form:button type="submit" class="btn btn-success btn-md" id="btnAddItem"><span
+                                  class="glyphicon glyphicon-plus"></span>
+                              <fmt:message key="category.add.submit.button" bundle="${bundle1}" />
+                          </form:button>
+
+                      </div>
+                  </div>
               </div>
           </div>
+
+
+          <%--</fieldset>--%>
+
 
       </fieldset>
   </form:form>

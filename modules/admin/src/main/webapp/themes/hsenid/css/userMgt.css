@@ -34,10 +34,10 @@ fieldset.scheduler-border {
 legend.scheduler-border {
     width: auto;
     font-size: 1.2em;
-    font-weight: bold;
-    /*text-align: left;*/
-    padding: 0px 10px;
-    border-bottom: none;
+    /* font-weight: bold; */
+    /* text-align: left; */
+    padding: 0px 440px 0 0;
+    /* border-bottom: none; */
 }
 
 #checkboxDiv {
@@ -105,4 +105,15 @@ legend.scheduler-border {
 }
 .cat{
     /*font-size: 44px;*/
+}
+.item-tbl-hdr {
+    background-color: rgba(204, 204, 209, 0.81);
+    border-color: rgba(204, 204, 209, 0.81);
+    text-align: center;
+}
+.item-tbl-row {
+    border: 1px solid #999999;
+    /*border-radius: 4px;*/
+    padding: 4px;
+    /*margin: auto;*/
 }

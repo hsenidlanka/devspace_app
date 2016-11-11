@@ -187,50 +187,6 @@
 </center>
 
 
-<div id="myModal" class="modal fade" role="dialog" style="top: 25%; height: 70%">
-    <div class="modal-dialog">
-
-        <div class="modal-content">
-
-            <div class="panel panel-default">
-                <div class="panel-heading common-form-headings" style="vertical-align:middle">
-                    <h3 class="modal-title" style="text-align:center;"><span class="glyphicon glyphicon-ok"> </span>
-                        Category Successfully Submitted !!!</h3>
-
-                </div>
-            </div>
-
-            <div class="modal-body" style="padding-bottom: 5%">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <h4>
-                                You have successfully submittted the category<br><br>
-                                What do you want to do next?<br>
-                        </h4>
-
-                    </div>
-                </div>
-
-
-                <div class="row" style="padding-top: 5%">
-                    <div class="col-sm-4" style="text-align: right">
-                        <button class="btn btn-success">Add New Category</button>
-                    </div>
-                    <div class="col-sm-4" style="text-align: center">
-                        <button class="btn btn-success">Home</button>
-                    </div>
-                    <div class="col-sm-4" style="text-align: left">
-                        <button class="btn btn-success">View Categories</button>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-</div>
-
 <div class="footerposition">
     <link rel="import" href="footer.html">
 
