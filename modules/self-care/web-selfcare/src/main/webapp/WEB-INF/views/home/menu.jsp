@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
-    <title>Menu</title>
+    <title><fmt:message key="menu.title" bundle="${lang}"/></title>
     <link rel="shortcut icon" href="">
     <%@include file="../includes/include.jsp" %>
     <link href="<c:url value="/resources/css/component.css"/>" rel="stylesheet" type="text/css">

@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+@Controller
 @PropertySource("classpath:config.properties")
 public class UpdateUserController {
 
@@ -33,6 +35,7 @@ public class UpdateUserController {
         model.addAttribute("updateuser", new User());
         return "/home/update-user";
     }
+
 
     @PostMapping("/update-user")
     public String submitUpdate(@ModelAttribute("updateuser") @Valid User updateuser, BindingResult bindingResult, HttpSession session, RedirectAttributes redirectAttributes) {
@@ -61,9 +64,8 @@ public class UpdateUserController {
         try {
             restTemplate.put(customerUpdateUrl, jsonObject);
 
-/*
-* Here we update the session for front end change
-* */
+            /* Here we update the session for front end change*/
+
             session.removeAttribute("title");
             session.setAttribute("title", updateuser.getTitle());
 

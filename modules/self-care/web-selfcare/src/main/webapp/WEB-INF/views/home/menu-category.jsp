@@ -1,15 +1,8 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: hsenid
-  Date: 10/27/16
-  Time: 1:09 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <html>
 <head>
-    <title>Menu-Categories</title>
+    <title><fmt:message key="menu.category.title" bundle="${lang}"/></title>
     <link rel="shortcut icon" href="">
     <%@include file="../includes/include.jsp" %>
     <script src="<c:url value="/resources/js/menu-operations.js"/>"></script>
@@ -30,9 +23,10 @@
                 <div style="display: inline-block;">
                     <img class="icons" src="<c:url value="/resources/images/icons/menu.png"/>"/>
 
-                    <h3 id="menu-panel-heading" class="header-panel"><fmt:message key="menu.main.panel.header"
-                                                                                  bundle="${lang}"/> <c:out
-                            value="${category}"/></h3>
+                    <h3 id="menu-panel-heading" class="header-panel">
+                        <fmt:message key="menu.main.panel.header" bundle="${lang}"/>
+                        <c:out value="${category}"/>
+                    </h3>
                 </div>
             </div>
 
