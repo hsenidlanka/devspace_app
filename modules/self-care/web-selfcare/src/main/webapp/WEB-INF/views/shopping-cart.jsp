@@ -33,7 +33,7 @@
 </head>
 <body>
 <div class="loader-anim"></div>
-<%@include file="includes/NewHeader.jsp" %>
+<%@include file="includes/new-header.jsp" %>
 <% request.setAttribute("cartItemsMap", request.getSession().getAttribute("cartItems")); %>
 <div class="main-div">
     <div class="section">
@@ -50,7 +50,7 @@
                             <table class="table table-bordered table-condensed" id="table-cart">
                                 <thead>
                                 <tr>
-                                    <th><fmt:message key="summary.descrip" bundle="${lang}"/></th>
+                                    <th><fmt:message key="summary.description" bundle="${lang}"/></th>
                                     <th><fmt:message key="summary.price" bundle="${lang}"/></th>
                                     <th><fmt:message key="summary.qty" bundle="${lang}"/></th>
                                     <th><fmt:message key="summary.total" bundle="${lang}"/></th>
@@ -119,7 +119,7 @@
                                 <div style="margin-top: 30px;">
                                     <label><strong><fmt:message key="pay.total" bundle="${lang}"/> <label
                                             id="label-tot">0.00</label></strong></label><br>
-                                    <label><strong><fmt:message key="shopping.discount" bundle="${lang}"/> <label
+                                    <label><strong><fmt:message key="shopping.discount.rate" bundle="${lang}"/> <label
                                             id="label-dis">0.00</label></strong></label>
                                 </div>
                                 <hr>

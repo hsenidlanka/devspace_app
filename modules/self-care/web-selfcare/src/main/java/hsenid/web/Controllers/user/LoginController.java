@@ -108,6 +108,7 @@ public class LoginController {
         String uname = request.getParameter(username);
         String pword = request.getParameter(password);
 
+//        logger.info(uname+pword);
         JSONObject jsonObject = new JSONObject();
         jsonObject.put(username, uname);
         jsonObject.put(password, pword);
@@ -159,7 +160,6 @@ public class LoginController {
         session.setAttribute("addr1", addr12);
         session.setAttribute("addr2", addr22);
         session.setAttribute("addr3", addr33);
-
 
         return new BooleanResponse(true);
     }

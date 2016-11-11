@@ -53,7 +53,7 @@ public class PackageService {
                 JSONObject jsonObject = new JSONObject();
                 pack = (Package) packageList.get(i);
                 jsonObject.put("PackageName", pack.getPackName());
-                jsonObject.put("content", pack.getContent());
+//                jsonObject.put("content", pack.getContent());
                 jsonObject.put("price", pack.getPrice());
                 jsonObject.put("imagePath", pack.getImage());
                 successMessage.addData(jsonObject);

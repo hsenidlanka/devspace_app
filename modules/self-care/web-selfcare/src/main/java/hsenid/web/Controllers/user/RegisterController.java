@@ -32,12 +32,6 @@ public class RegisterController {
 
     final static Logger logger = LoggerFactory.getLogger(RegisterController.class);
 
-/*
-    final static String title = "title";
-    final static String username ="username";
-    final static String password ="password";
-*/
-
     // call api to register the user
     @RequestMapping(value = "/register", method = RequestMethod.POST, produces="application/json")
     @ResponseBody

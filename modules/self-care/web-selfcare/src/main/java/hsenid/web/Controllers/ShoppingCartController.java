@@ -62,10 +62,9 @@ public class ShoppingCartController {
             ServerResponseMessage responseMessage = restTemplate.postForObject(completeUrl, httpEntity, ServerResponseMessage.class);
             rate = responseMessage.getData().get(0).get("rate").toString();
         } catch (RestClientException e) {
-            logger.error(e.getMessage());
+            logger.error("Error validating the coupon.", e);
             return rate;
         }
-        logger.info("knock knock {}", couponToCheck);
         return rate;
     }
 
