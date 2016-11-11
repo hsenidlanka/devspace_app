@@ -6,7 +6,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
-public class UpdateUser {
+public class User {
 
     @NotEmpty(message = "Please enter a title!")
     String title;

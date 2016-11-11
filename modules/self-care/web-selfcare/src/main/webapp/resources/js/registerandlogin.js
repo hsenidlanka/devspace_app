@@ -1,31 +1,83 @@
 $(document).ready(function(){
 
-    //Data validation using plugin http://www.jqueryscript.net/form/Simplest-jQuery-Form-Validator-For-Bootstrap-Validate-Bootstrap.html
-    //plugin has change accordingly
+    var loginUsername =  $.trim($("#loginUsername").val());
+    var loginPassword =  $.trim($("#loginPassword").val());
 
-    $(function () {
-        $('form').validator({
-            validHandlers: {
+    if(loginUsername.length <= 0){
+        $('<p>Username</p>').appendTo('#usernameError');
+    }
 
-                '.mobileno': function (input) {
-                    return /^[0-9]{10}$/.test(input.val());
+    if(loginPassword.length <= 0){
+        $('<p>Password</p>').appendTo('#passwordError');
+    }
 
-                },
-                '.password': function (input) {
-                    var bla = $('#rePassword').val();
-                    return input.val() == bla;
+    /*  var loginUsername2 =  $.trim($("#loginUsername").val());
+     var loginPassword2 =  $.trim($("#loginPassword").val());*/
 
-                }
-            }
-        });
+/*
+    if(loginUsername2.length > 0){
+        $('#usernameError').empty();
+    }
+    if(loginPassword2.length > 0){
+        $('#passwordError').empty();
+    }
+*/
+    //alert("test");
+    $("#loginUsername").blur(function(){
+        var loginUsername =  $.trim($("#loginUsername").val());
+        var loginPassword =  $.trim($("#loginPassword").val());
+
+        if(loginUsername.length > 0){
+            $('#usernameError').empty();
+        }
+
+        alert("Username blur");
+        if(loginPassword.length > 0){
+            $('#passwordError').empty();
+        }
+
+        if(loginUsername.length <= 0){
+            $('<p>Provide your username</p>').appendTo('#usernameError');
+        }
+
+        if(loginPassword.length <= 0){
+            $('<p>Give a valid password</p>').appendTo('#passwordError');
+        }
 
     });
+    /* $(function () {
+         $('form').validator({
+             validHandlers: {
+
+                 '.mobileno': function (input) {
+                     return /^[0-9]{10}$/.test(input.val());
+
+                 },
+                 '.password': function (input) {
+                     var bla = $('#rePassword').val();
+                     return input.val() == bla;
+
+                 }
+             }
+         });
+
+     });*/
 
     //Registration form submission
 
     $("#submitBtn").off('click');
     $("#submitBtn").click(function () {
-        if ($('form').validator('check') <= 2) {
+        var loginUsername =  $.trim($("#loginUsername").val());
+        var loginPassword =  $.trim($("#loginPassword").val());
+
+        if(loginUsername.length <= 0){
+            $('<p>Username</p>').appendTo('#usernameError');
+        }
+
+        if(loginPassword.length <= 0){
+            $('<p>Password</p>').appendTo('#passwordError');
+        }
+        if (0) {
             $.ajax({
 
                 type: 'post',
@@ -56,9 +108,11 @@ $(document).ready(function(){
         var loginUsername =  $.trim($("#loginUsername").val());
         var loginPassword =  $.trim($("#loginPassword").val());
 
-        alert(loginUsername.length + ' ' + loginPassword.length)
+        //alert(loginUsername.length + ' ' + loginPassword.length)
 
-        if ($('form').validator('check') <= 2) {
+
+
+        if (1) {
 
             $.ajax({
                 type: 'post',

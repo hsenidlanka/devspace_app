@@ -8,7 +8,7 @@
 
 <body style="overflow: visible">
 <div class="loader-anim"></div>
-<%@include file="includes/NewHeader.jsp" %>
+<%@include file="includes/new-header.jsp" %>
 
 <div class="brand"></div>
 <center>

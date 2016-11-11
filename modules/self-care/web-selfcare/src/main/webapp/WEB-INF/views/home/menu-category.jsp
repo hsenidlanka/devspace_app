@@ -20,7 +20,7 @@
     <script src="<c:url value="/resources/js/teskly.viewitle.js"/>"></script>
 </head>
 <body>
-<%@include file="../includes/NewHeader.jsp" %>
+<%@include file="../includes/new-header.jsp" %>
 <div class="loader-anim"></div>
 
 <div class="main-div">
