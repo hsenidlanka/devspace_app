@@ -2,9 +2,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <html>
 <head>
+    <%@include file="../includes/include.jsp" %>
     <title><fmt:message key="menu.category.title" bundle="${lang}"/></title>
     <link rel="shortcut icon" href="">
-    <%@include file="../includes/include.jsp" %>
     <script src="<c:url value="/resources/js/menu-operations.js"/>"></script>
     <link href="<c:url value="/resources/css/component.css"/>" rel="stylesheet" type="text/css">
     <link href="<c:url value="/resources/css/default.css"/>" rel="stylesheet" type="text/css">

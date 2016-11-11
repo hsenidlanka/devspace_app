@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
+    <%@include file="../includes/include.jsp" %>
     <title><fmt:message key="menu.title" bundle="${lang}"/></title>
     <link rel="shortcut icon" href="">
-    <%@include file="../includes/include.jsp" %>
     <link href="<c:url value="/resources/css/component.css"/>" rel="stylesheet" type="text/css">
     <link href="<c:url value="/resources/css/default.css"/>" rel="stylesheet" type="text/css">
     <script src="<c:url value="/resources/js/modernizr.custom.js"/>"></script>
 </head>
 <body>
-<%@include file="../includes/NewHeader.jsp" %>
+<%@include file="../includes/new-header.jsp" %>
 <div class="loader-anim"></div>
 <div class="main-div">
     <div class="section">

@@ -25,8 +25,8 @@
 
 <link href="<c:url value="/resources/css/css.css"/>" rel="stylesheet" type="text/css">
 
-<link href="<c:url value="/resources/css/scroll_top.css"/>" rel="stylesheet" type="text/css">
-<script src="<c:url value="/resources/js/scroll_top.js"/>" ></script>
+<%--<link href="<c:url value="/resources/css/scroll_top.css"/>" rel="stylesheet" type="text/css">--%>
+<%--<script src="<c:url value="/resources/js/scroll_top.js"/>" ></script>--%>
 
 <link href="<c:url value="/resources/css/notify.css"/>" rel="stylesheet" type="text/css">
 <script src="<c:url value="/resources/js/notify.js"/>"></script>

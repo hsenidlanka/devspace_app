@@ -1,13 +1,12 @@
 $(document).ready(function () {
     var priceMap;
     $(".btn-addtocart").click(function () {
-        var itemPrice=$.trim($(this).closest('div').find('#lbl-sizeprice').text());
-        var itemSize=$.trim($(this).closest('div').find('.sizes-dropdowns').val());
-        var itemQty=$.trim($(this).closest('div').find('.add-to-cart-spin').val());
-        var itemName=$.trim($(this).closest('ul').closest('div').find('#menu-item-name').text());
-        var itemDesc=$.trim($(this).closest('.caption').find('#menu-item-desc').val());
-        var itemTotal=itemPrice*itemQty;
-        alert(itemTotal.toFixed(2));
+        var itemPrice = $.trim($(this).closest('div').find('#lbl-sizeprice').text());
+        var itemSize = $.trim($(this).closest('div').find('.sizes-dropdowns').val());
+        var itemQty = $.trim($(this).closest('div').find('.add-to-cart-spin').val());
+        var itemName = $.trim($(this).closest('ul').closest('div').find('#menu-item-name').text());
+        var itemDesc = $.trim($(this).closest('.caption').find('#menu-item-desc').val());
+        var itemTotal = itemPrice * itemQty;
         $.ajax({
             type: "POST",
             url: "/web-selfcare/menu/add-to-cart",
@@ -32,7 +31,7 @@ $(document).ready(function () {
                         delay: 2000,
                         animationType: "fade"
                     });
-                }else{
+                } else {
                     // Initialize the toast notification
                     $.notify("Error adding item to the shopping cart.", {
                         align: "center",
@@ -125,7 +124,7 @@ $(document).ready(function () {
                         delay: 2000,
                         animationType: "fade"
                     });
-                }else{
+                } else {
                     // Initialize the toast notification
                     $.notify("Error adding item to the shopping cart.", {
                         align: "center",
