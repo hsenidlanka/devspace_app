@@ -13,7 +13,7 @@
 
 </head>
 <body>
-<%@include file="../includes/NewHeader.jsp" %>
+<%@include file="../includes/new-header.jsp" %>
 
 <div id="myToast" class="toast-popup"></div>
 <div class="loader-anim"></div>
@@ -26,11 +26,11 @@
             <img class="icons" src="<c:url value="/resources/images/icons/menu.png"/>"/>
             <h3 id="menu-panel-heading" class="header-panel">Menu-Pizza</h3>
           </div>
-          <form modelAttribute="searchitemdata">
+          <form>
           <div style="display: inline-block; float:right;">
             <div class="form-group">
               <div class="col-sm-10" style="padding-right: 0px;">
-                <input path="searchItem" id="txt-menu-search" name="txt-menu-search" type="text"
+                <input id="txt-menu-search" name="txt-menu-search" type="text"
                             class="form-control input-sm"/>
 
               </div>

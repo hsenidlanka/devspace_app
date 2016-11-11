@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="loader-anim"></div>
-<%@include file="includes/NewHeader.jsp" %>
+<%@include file="includes/new-header.jsp" %>
 <c:out value="${test}"/>
 <c:out value="${it}"/>
 <div class="main-div">
@@ -34,13 +34,7 @@
                                         class="glyphicon glyphicon-search"></i></span></button>
                             </div>
                         </div>
-                        <div style="margin-top: 40px;">
-                            <label>Filter:</label>
-                            <label class="checkbox-inline"><input type="checkbox" id="chkbox-search-pizza" value="search-pizza"
-                                                                  checked>Pizzas</label>
-                            <label class="checkbox-inline"><input type="checkbox" id="chkbox-search-dessert" value="search-desserts" checked>Desserts</label>
-                            <label class="checkbox-inline"><input type="checkbox" id="chkbox-search-beverage" value="search-beverages" checked>Beverages</label>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -59,15 +53,18 @@
                                     <div id="search-pizza" class="panel-collapse collapse in">
                                         <div class="panel-body">
                                             <div class="row">
-                                                <%--<c:forEach items="${searchitemdata}" var="searchresultsdata" varStatus="loop">--%>
-                                                    <label>${searchitemdata}</label>
+                                                <c:forEach items="${it}" var="item">
+                                                    <div style="margin-top: 15px;">
 
                                                 <div class="col-md-3">
                                                     <img src="<c:url value="/resources/images/pizzas/15.jpg"/>"
                                                          class="img-responsive menu-images">
 
                                                     <div class="contenthover">
-                                                        Item description goes here.
+                                                        <h3><c:out value="${item.itemName}"/></h3>
+
+
+                                                        <c:out value="${item.description}"/>
                                                         <div>
                                                             <button class="btn btn-success btn-xs btn-addtocart-pizza">
                                                                 Add
@@ -76,138 +73,18 @@
                                                             </button>
                                                         </div>
                                                     </div>
-                                                    <h4>A title</h4>
+
                                                 </div>
 
-                                                <%--</c:forEach>--%>
-
-                                                <%--<div class="col-md-3">
-                                                    <img src="<c:url value="/resources/images/pizzas/12.jpg"/>"
-                                                         class="img-responsive menu-images">
-
-                                                    <div class="contenthover">
-                                                        Item description goes here.
-                                                        <div>
-                                                            <button class="btn btn-success btn-xs btn-addtocart-pizza">
-                                                                Add
-                                                                to
-                                                                cart
-                                                            </button>
-                                                        </div>
                                                     </div>
-                                                    <h4>A title</h4>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <img src="<c:url value="/resources/images/pizzas/21.jpg"/>"
-                                                         class="img-responsive menu-images">
-
-                                                    <div class="contenthover">
-                                                        Item description goes here.
-                                                        <div>
-                                                            <button class="btn btn-success btn-xs btn-addtocart-pizza">
-                                                                Add
-                                                                to
-                                                                cart
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                    <h4>A title</h4>
+                                                </c:forEach>
+                                            </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="panel-group" id="search-desserts-collapse">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">
-                                            <a data-toggle="collapse" href="#search-dessert">Desserts</a>
-                                        </h4>
-                                    </div>
-                                    <div id="search-dessert" class="panel-collapse collapse in">
-                                        <div class="panel-body">
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <img src="<c:url value="/resources/images/desserts/pudding%2001.jpg"/>"
-                                                         class="img-responsive menu-images">
-
-                                                    <div class="contenthover">
-                                                        Item description goes here.
-                                                        <div>
-                                                            <label class="add-to-cart-label-qty">QTY:</label>
-                                                            <input class="spin add-to-cart-spin" type="number"
-                                                                   min="1" max="100" value="1">
-                                                            <button class="btn btn-success btn-xs btn-addtocart-dessert">
-                                                                Add
-                                                                to
-                                                                cart
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                    <h4>A title</h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="panel-group" id="search-beverages-collapse">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">
-                                            <a data-toggle="collapse" href="#search-beverages">Beverages</a>
-                                        </h4>
-                                    </div>
-                                    <div id="search-beverages" class="panel-collapse collapse in">
-                                        <div class="panel-body">
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <img src="<c:url value="/resources/images/beverages/coffee%2005.jpg"/>"
-                                                         class="img-responsive menu-images">
-
-                                                    <div class="contenthover">
-                                                        Item description goes here.
-                                                        <div>
-                                                            <label class="add-to-cart-label-qty">QTY:</label>
-                                                            <input class="spin add-to-cart-spin" type="number"
-                                                                   min="1" max="100" value="1">
-                                                            <button class="btn btn-success btn-xs btn-addtocart-beverage">
-                                                                Add
-                                                                to
-                                                                cart
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                    <h4>A title</h4>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <img src="<c:url value="/resources/images/beverages/soft-drink%2002.jpg"/>"
-                                                         class="img-responsive menu-images">
-
-                                                    <div class="contenthover">
-                                                        Item description goes here.
-                                                        <div>
-                                                            <label class="add-to-cart-label-qty">QTY:</label>
-                                                            <input class="spin add-to-cart-spin" type="number"
-                                                                   min="1" max="100" value="1">
-                                                            <button class="btn btn-success btn-xs btn-addtocart-beverage">
-                                                                Add
-                                                                to
-                                                                cart
-                                                            </button>
-                                                        </div>--%>
-                                                    </div>
-                                                    <h4>A title</h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
                         <div class="col-md-3">
                             <h4>Sugessions for you...</h4>
@@ -251,7 +128,8 @@
                                 </a>
                             </div>
                         </div>
-
+                    </div>
+                </div>
                     </div>
                 </div>
             </div>
