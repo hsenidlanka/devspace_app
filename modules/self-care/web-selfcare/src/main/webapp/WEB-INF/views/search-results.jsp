@@ -13,7 +13,8 @@
 <body>
 <div class="loader-anim"></div>
 <%@include file="includes/NewHeader.jsp" %>
-
+<c:out value="${test}"/>
+<c:out value="${it}"/>
 <div class="main-div">
     <div class="section">
         <div class="panel panel-default">
@@ -59,7 +60,7 @@
                                         <div class="panel-body">
                                             <div class="row">
                                                 <%--<c:forEach items="${searchitemdata}" var="searchresultsdata" varStatus="loop">--%>
-                                                <label>"${searchitemdata}"</label>
+                                                    <label>${searchitemdata}</label>
 
                                                 <div class="col-md-3">
                                                     <img src="<c:url value="/resources/images/pizzas/15.jpg"/>"
@@ -77,6 +78,7 @@
                                                     </div>
                                                     <h4>A title</h4>
                                                 </div>
+
                                                 <%--</c:forEach>--%>
 
                                                 <%--<div class="col-md-3">

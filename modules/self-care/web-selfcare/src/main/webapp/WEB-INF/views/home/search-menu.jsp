@@ -26,11 +26,11 @@
             <img class="icons" src="<c:url value="/resources/images/icons/menu.png"/>"/>
             <h3 id="menu-panel-heading" class="header-panel">Menu-Pizza</h3>
           </div>
-          <form:form method="POST" modelAttribute="searchitemdata">
+          <form modelAttribute="searchitemdata">
           <div style="display: inline-block; float:right;">
             <div class="form-group">
               <div class="col-sm-10" style="padding-right: 0px;">
-                <form:input path="searchItem" id="txt-menu-search" name="txt-menu-search" type="text"
+                <input path="searchItem" id="txt-menu-search" name="txt-menu-search" type="text"
                             class="form-control input-sm"/>
 
               </div>
@@ -38,7 +38,7 @@
                 <button class="btn btn-primary input-sm" id="btn-menu-search"><span><i
                         class="glyphicon glyphicon-search"></i></span></button>
               </div>
-              <script>
+              <%--<script>
                 $.ajax("home/search-menu")
                         .done(function (result) {
                           alert(result.data[0].itemName);
@@ -49,7 +49,7 @@
                         .always(function () {
                           alert("complete");
                         });
-              </script>
+              </script>--%>
             </div>
             <div style="margin-top: 40px;">
                 <%--  <label>Filter:</label>
@@ -59,7 +59,7 @@
                   <label class="checkbox-inline"><input type="checkbox" value="search-beverages" checked>Beverages</label>
                 --%></div>
           </div>
-          </form:form>
+          </form>
 
         </div>
         </div>
@@ -1594,4 +1594,24 @@
   </div>
 </div>
 </body>
+<script>
+
+  $("#btn-menu-search").click(function () {
+    var searchKey = $("#txt-menu-search").val();
+    $.ajax({
+      type: "GET",
+      url: "/web-selfcare/search-menu/" + searchKey,
+      /*      data: {
+       "id": userId,
+       "ufname": $('#ufname').val()
+       },*/
+      success: function (result) {
+
+
+      }
+    });
+  });
+
+
+</script>
 </html>
