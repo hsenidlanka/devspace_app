@@ -19,7 +19,10 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/category")
@@ -33,6 +36,9 @@ public class CategoryController {
 
     @Value("${insert.category.success}")
     private String insertSuccess;
+
+    @Value("${insert.subcategory.success}")
+    private String insertSubSuccess;
 
     @Autowired
     private CategoryRepository categoryRepository, subcategoryRepository;
@@ -135,7 +141,7 @@ public class CategoryController {
                         String catName= categoryObject.getCategoryName();
 
                         //create the file on server
-                        File serverFile = new File(dir.getAbsolutePath() + File.separator + catName + ".png");//name of the image
+                        File serverFile = new File(dir.getAbsolutePath() + File.separator + catName + ".jpg");//name of the image
                         LOG.error("serverFile = " + serverFile);
                         BufferedOutputStream stream = new BufferedOutputStream(
                                 new FileOutputStream(serverFile));
@@ -146,7 +152,7 @@ public class CategoryController {
 
 
                         //create the file on local machine
-                        File localFile = new File(dir2.getAbsolutePath() + File.separator + catName + ".png");//name of the image
+                        File localFile = new File(dir2.getAbsolutePath() + File.separator + catName + ".jpg");//name of the image
                         LOG.error("serverFile = " + localFile);
                         BufferedOutputStream stream2 = new BufferedOutputStream(
                                 new FileOutputStream(localFile));
@@ -169,16 +175,106 @@ public class CategoryController {
 
     }
 
+    //handler method to insert the new Category data to database
+    @RequestMapping(value="/addSubCategory")
+    public ModelAndView addSubCategory( @ModelAttribute("subcategoryObject") Category subcategoryObject,
+                                     @RequestParam("catName") String catName) throws SQLIntegrityConstraintViolationException {
+
+
+        subcategoryObject.setCreator("admin");
+
+        String catName2=catName.replaceAll("\\s", "");
+        LOG.error(catName2);
+        subcategoryObject.setCategoryName(catName2);
+        LOG.error(subcategoryObject.getCategoryName());
+
+        int i=subcategoryRepository.add(subcategoryObject);
+        LOG.error("I value {}",i);
+
+        if (i ==1) {
+            JOptionPane.showMessageDialog(null, insertSubSuccess);
+        }else
+            JOptionPane.showMessageDialog(null, insertError);
+
+        return new ModelAndView(new RedirectView("add"));
+
+    }
+
 ///////////////////////////////////////////////////// CATEGORY VIEW HANDLER METHODS  ///////////////////////////////////////
 
-    /** to handle the active users
-     * includes active staff and customer users**/
+    /** to handle category and subcategory
+     * view functions**/
 
+    //handler method to view the Category View page
     @RequestMapping(value = "/view", method = RequestMethod.GET)
     public ModelAndView showCategoryList(){
         return new ModelAndView("category_management/categoryView", "command",new Category());
 
     }
 
+    //handler method to view the Category View page
+    @RequestMapping(value = "/view/subCategory", method = RequestMethod.GET)
+    public ModelAndView showSubCategoryList(){
+        return new ModelAndView("category_management/subcategoryView", "command",new Category());
 
+    }
+
+    //handler method to retrieve the details of categories to view
+    @RequestMapping(value = "/view/categoryTable", method = RequestMethod.GET)
+    public @ResponseBody List<Map<String, Object>> viewCategories(@ModelAttribute("category")  Category category){
+
+        List<Map<String, Object>> outc = new ArrayList<Map<String, Object>>();
+        List<Category> categoryList= categoryRepository.selectAll();
+
+        for (int i=0;i<categoryList.size();i++){
+            category=categoryList.get(i);
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("id", category.getCategory_id());
+            map.put("name", category.getCategoryName());
+            map.put("description",category.getCatDescription());
+            map.put("creator", category.getCreator());
+            map.put("status", category.getStatus());
+
+
+            LOG.info("newCategory {}", category);
+            outc.add(map);
+            LOG.info("out {}",outc);
+        }
+        return outc;
+    }
+
+    //handler method to retrieve the details of sub-categories to view
+    @RequestMapping(value = "/view/subcategoryTable", method = RequestMethod.GET)
+    public @ResponseBody List<Map<String, Object>> viewSubCategories(@ModelAttribute("subcategory")  Category subcategory){
+
+        List<Map<String, Object>> outc = new ArrayList<Map<String, Object>>();
+        List<Category> subcategoryList= subcategoryRepository.selectAll();
+
+        for (int i=0;i<subcategoryList.size();i++){
+            subcategory=subcategoryList.get(i);
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("id", subcategory.getCategory_id());
+            map.put("name", subcategory.getCategoryName());
+            map.put("description", subcategory.getCatDescription());
+            map.put("creator", subcategory.getCreator());
+            map.put("status", subcategory.getStatus());
+
+
+            LOG.info("newCategory {}", subcategory);
+            outc.add(map);
+            LOG.info("out {}",outc);
+        }
+        return outc;
+    }
+
+
+///////////////////////////////////////////////////// CATEGORY EDIT HANDLER METHODS  ///////////////////////////////////////
+
+//handler method to delete a category record
+@RequestMapping(value = "/edit", method = RequestMethod.GET)
+public @ResponseBody int editCategory(@RequestParam("name") String name, @RequestParam("description") String description){
+
+    int i=categoryRepository.update(name,description);
+    return i;
+}
 }

@@ -40,7 +40,7 @@
                             <div class="col-xs-8">
                                 <div class="col-xs-12">
                                     <form:input path="categoryName" type="text" class="form-control" id="categoryname"
-                                     placeholder="Please Enter Category Name"/>
+                                     placeholder="Please Enter Category Name" required="required"/>
                                 </div>
                             </div>
                         </div>
@@ -98,71 +98,56 @@
                             </div>
                         </div>
                     </div>
-
-
-                    <div class="form-group"></div>
-
-                    <div class="form-group">
-                        <div class="row">
-                            <label class="col-xs-3 control-label">
-                            </label>
-                            <div class="col-xs-8">
-                                <div class="col-xs-4">
-                                    <label class="control-label" style="font-style: italic">
-                                        <fmt:message key="category.categoryadd.form.subcat1" bundle="${bundle1}"/>
-                                    </label>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="row">
-                            <label class="col-xs-3 control-label">
-                            </label>
-                            <div class="col-xs-8">
-                                <div class="col-xs-3" style="text-align: left">
-                                    <label for="subcategory" class="control-label ">
-                                        <fmt:message key="category.categoryadd.form.subcatname" bundle="${bundle1}"/>
-                                    </label>
-                                </div>
-                                <div class="col-xs-9">
-                                    <form:input path="subCategoryName" type="text" class="form-control" id="subcategory"
-                                           placeholder="Please Enter Sub Category Name"/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="row">
-                            <label class="col-xs-3 control-label">
-                            </label>
-                            <div class="col-xs-8">
-                                <div class="col-xs-3">
-                                    <label  class="control-label ">
-                                        <fmt:message key="category.categoryadd.form.subcatdescription" bundle="${bundle1}"/>
-                                    </label>
-                                </div>
-                                <div class="col-xs-9">
-                                    <form:input path="subcatDescription" type="text" class="form-control"
-                                                placeholder="Please Enter Sub Category Description"/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="form-group"></div>
                     <br>
+                    <div class="form-group">
+                        <legend class="scheduler-border">
+                            <fmt:message key="category.categoryadd.form.add.subcategories" bundle="${bundle1}"/>
+                        </legend>
 
-                        <%--buttons--%>
+
+                        <div class="row subcat_add_table col-xs-12" style="margin-left: 1%;">
+
+                            <div class="row subcat-tbl-row subcat-tbl-hdr" style="width:600px;">
+                                <div class="col-xs-4">
+                                    <strong><fmt:message key="category.categoryadd.form.subcatname" bundle="${bundle1}"/></strong>
+                                </div>
+                                <div class="col-xs-5">
+                                    <strong><fmt:message key="category.categoryadd.form.subcatdescription" bundle="${bundle1}"/></strong>
+                                </div>
+                                <div class="col-xs-3">
+                                        <%--<strong><fmt:message key="package.packageadd.form.packagedetails.itemsize" bundle="${bundle1}"/></strong>--%>
+                                </div>
+                            </div>
+
+                            <div class="row subcat-tbl-row">
+                                <div class="col-xs-4">
+                                    <label class="checkbox-inline">
+                                        <form:input path="subCategoryName" type="text" class="form-control" id="subcategoryname"
+                                                    required="required" placeholder="Enter Subcategory Name"/>
+                                    </label>
+                                </div>
+                                <div class="col-xs-5">
+                                    <form:textarea path="subcatDescription" type="text" class="form-control" id="subcategorydes"
+                                                   placeholder="Enter Subcategory Description" ></form:textarea>
+                                </div>
+                                <div class="col-xs-3">
+                                    <a href="#" class="addsub ">
+                                        <span class="glyphicon glyphicon-plus">New Subcategory</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group"></div>
+
+                    <%--buttons--%>
                     <div class="form-group">
                         <div class="row">
                             <label  class="col-xs-3 control-label" >
                             </label>
                             <div class="col-xs-8">
                                 <div class="col-xs-2">
-
                                         <form:button type="reset" value="Reset" class="btn btn-success btn-md btnAddItem">
                                             <fmt:message key="user.useradd.form.button.reset" bundle="${bundle1}" /></form:button>
 
@@ -171,7 +156,7 @@
 
                                         <form:button type="submit" class="btn btn-success btn-md" id="btnAddItem"><span
                                                 class="glyphicon glyphicon-plus"></span>
-                                            <fmt:message key="user.useradd.form.button.submit" bundle="${bundle1}" />
+                                            <fmt:message key="category.add.submit.button" bundle="${bundle1}" />
                                         </form:button>
 
                                 </div>
@@ -186,7 +171,7 @@
 
 
 <div class="footerposition">
-    <link rel="import" href="footer.html">
+    <%--<jsp:include page="../footer.jsp"/>--%>
 
 </div>
 

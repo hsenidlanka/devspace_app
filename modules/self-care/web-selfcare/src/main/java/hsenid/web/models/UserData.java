@@ -1,7 +1,7 @@
 package hsenid.web.models;
 
 
-public class UserData extends UpdateUser{
+public class UserData extends User {
 
     String registeredDate;
 

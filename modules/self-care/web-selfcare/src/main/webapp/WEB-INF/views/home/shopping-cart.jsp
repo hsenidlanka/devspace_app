@@ -10,7 +10,7 @@
 </head>
 <body>
 <div class="loader-anim"></div>
-<%@include file="../includes/NewHeader.jsp" %>
+<%@include file="../includes/new-header.jsp" %>
 <% request.setAttribute("cartItemsMap", request.getSession().getAttribute("cartItems")); %>
 <div class="main-div">
     <div class="section">

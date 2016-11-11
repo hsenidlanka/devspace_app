@@ -77,9 +77,9 @@
               </legend>
 
 
-              <div class="row col-xs-12" style="margin-left: 1%;">
+              <div class="row subcat_add_table col-xs-12" style="margin-left: 1%;">
 
-                  <div class="row item-tbl-row item-tbl-hdr" style="width:600px;">
+                  <div class="row subcat-tbl-row subcat-tbl-hdr" style="width:600px;">
                       <div class="col-xs-4">
                           <strong><fmt:message key="category.categoryadd.form.subcatname" bundle="${bundle1}"/></strong>
                       </div>
@@ -91,43 +91,27 @@
                       </div>
                   </div>
 
-                  <div class="row item-tbl-row" style="width:600px;">
+                  <div class="row subcat-tbl-row">
                       <div class="col-xs-4">
                           <label class="checkbox-inline">
                               <form:input path="subCategoryName" type="text" class="form-control" id="subcategoryname"
-                                          required="required" placeholder="Enter Category Name"
-                                          cssStyle="margin: 0 0 0 -25px;width: 200px;"/>
+                                          required="required" placeholder="Enter Subcategory Name"/>
                           </label>
                       </div>
                       <div class="col-xs-5">
-                          <form:textarea path="subcatDescription" type="text" class="form-control" id="categorydes"
-                                         placeholder="Enter Category Description" cssStyle="margin: 5px 10px 0 10px;
-    width: 230px;"></form:textarea>
+                          <form:textarea path="subcatDescription" type="text" class="form-control" id="subcategorydes"
+                                         placeholder="Enter Subcategory Description" ></form:textarea>
                       </div>
                       <div class="col-xs-3">
-                          <a href="http://www.w3schools.com" style="margin: 30px 0 0 10px;">Add Sub-Category</a>
-                      </div>
-
-                  </div>
-
-                  <div class="row item-tbl-row" style="width:600px;">
-                      <div class="col-xs-4">
-                          <label class="checkbox-inline">
-                              <form:input path="subCategoryName" type="text" class="form-control" id="subcategoryname"
-                                          placeholder="Enter Category Name" cssStyle=" margin: 0 0 0 -25px;
-    width: 200px;"/>
-                          </label>
-                      </div>
-                      <div class="col-xs-5">
-                          <form:textarea path="subcatDescription" type="text" class="form-control" id="categorydes"
-                                         placeholder="Enter Category Description" cssStyle="margin: 5px 10px 0 10px;
-    width: 230px;"></form:textarea>
-                      </div>
-                      <div class="col-xs-3">
-                          <a href="http://www.w3schools.com" style="margin: 30px 0 0 10px;">Add Sub-Category</a>
+                          <a href="#" class="addsub ">
+                              <span class="glyphicon glyphicon-plus">New Subcategory</span>
+                          </a>
                       </div>
                   </div>
               </div>
+          <div class="form-group"></div>
+          <br>
+
 
               <%--buttons--%>
           <div class="form-group">
@@ -145,7 +129,7 @@
 
                           <form:button type="submit" class="btn btn-success btn-md" id="btnAddItem"><span
                                   class="glyphicon glyphicon-plus"></span>
-                              <fmt:message key="category.add.submit.button" bundle="${bundle1}" />
+                              <fmt:message key="category.add.subcategory.submit.button" bundle="${bundle1}" />
                           </form:button>
 
                       </div>

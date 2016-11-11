@@ -46,3 +46,28 @@ $(document).ready(function(){
 
 
 }*/
+
+$(document).ready(function(){
+    var counter = 1;
+    $('.subcat_add_table').on('click','.addsub',function(){
+
+        event.preventDefault();
+
+     /*   var newRow = jQuery('<tr><td><input type="text" name="first_name' +
+        counter + '"/></td><td><input type="text" name="last_name' +
+        counter + '"/></td></tr>');
+        counter++;*/
+
+        var newRow=jQuery('<div class="row subcat-tbl-row"><div class="col-xs-4">' +
+        '<label class="checkbox-inline"><div contenteditable><form:input path="subCategoryName" type="text" class="form-control" id="subcategoryname" required="required" placeholder="Enter Category Name"/>' +
+        '</div></label></div><div class="col-xs-5"><div contenteditable><form:textarea path="subcatDescription" type="text" class="form-control" id="subcategorydes" placeholder="Enter Category Description" >' +
+        '</form:textarea></div></div> <div class="col-xs-3"> <a href="#" class="addsub"> <span class=" glyphicon glyphicon-plus"></span> ' +
+        '</a> <a href="#" class="deletesub"> <span class=" glyphicon glyphicon-minus"></span> </a> </div>');
+
+        $('.subcat_add_table').append(newRow);
+        $(".deletesub").on('click',function(){
+            $(this).parent().parent().remove();
+        });
+    });
+
+});

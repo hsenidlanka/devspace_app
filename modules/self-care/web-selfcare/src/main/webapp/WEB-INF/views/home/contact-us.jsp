@@ -55,7 +55,7 @@
     </script>
 </head>
 <body>
-<%@include file="../includes/NewHeader.jsp" %>
+<%@include file="../includes/new-header.jsp" %>
 
 <div id='browser'>
     <div id='browser-bar'>

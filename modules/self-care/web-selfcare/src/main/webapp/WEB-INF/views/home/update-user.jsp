@@ -81,7 +81,7 @@
 </style>
 
 <body>
-<%@include file="../includes/NewHeader.jsp" %>
+    <%@include file="../includes/new-header.jsp" %>
 <div class="container" style="width: 60%">
 
     <center>
