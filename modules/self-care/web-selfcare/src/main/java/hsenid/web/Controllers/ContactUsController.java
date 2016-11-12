@@ -23,7 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/contactus")
+@RequestMapping("/contact-us")
 public class ContactUsController {
     final Logger logger = LoggerFactory.getLogger(ContactUsController.class);
 
@@ -32,13 +32,13 @@ public class ContactUsController {
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView newContactUs(){
-        return new ModelAndView("/home/contactus","contactus", new ContactUs());
+        return new ModelAndView("/home/contact-us","contactus", new ContactUs());
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public String sendConctUs(@ModelAttribute("contactus") @Valid ContactUs contactus, BindingResult result, Model model, RedirectAttributes redirectAttributes){
         if (result.hasErrors()){
-            return "/home/contactus";
+            return "/home/contact-us";
         }
 
         redirectAttributes.addFlashAttribute("validForm", "dd");
@@ -63,7 +63,7 @@ public class ContactUsController {
 
         }
         redirectAttributes.addFlashAttribute("validForm", "True");
-        return "redirect:/contactus";
+        return "redirect:/contact-us";
 //        return "/home/self-care-home";
     }
 }

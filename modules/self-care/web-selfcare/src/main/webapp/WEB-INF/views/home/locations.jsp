@@ -10,7 +10,7 @@
 <!--------------Body------------------------->
 <body style="overflow: visible" >
 
-<%@include file="../includes/NewHeader.jsp" %>
+<%@include file="../includes/new-header.jsp" %>
 
 <%--'https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyAWJ-UMsacU4LmjA3dtfctz2UsPl5s2tZw'--%>
 
@@ -61,6 +61,6 @@
 <a href="http://gazpo.com/downloads/tutorials/jquery/scrolltop/#" class="scrollup" style="display: none;"><fmt:message key="location.scroll" bundle="${lang}"/></a>
 
 <%--<%@include file="../includes/loginload.jsp" %>--%>
-<%@include file="../includes/signupmodal.jsp" %>
+<%@include file="../includes/signup-modal.jsp" %>
 </body>
 </html>

@@ -46,7 +46,7 @@
 <!-------Header------------------------------------->
 <body>
 
-<%@include file="../includes/NewHeader.jsp" %>
+<%@include file="../includes/new-header.jsp" %>
 
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
@@ -55,7 +55,6 @@
         <li data-target="#myCarousel" data-slide-to="1"></li>
         <li data-target="#myCarousel" data-slide-to="2"></li>
         <li data-target="#myCarousel" data-slide-to="3"></li>
-
     </ol>
 
     <!-- Wrapper for slides -->

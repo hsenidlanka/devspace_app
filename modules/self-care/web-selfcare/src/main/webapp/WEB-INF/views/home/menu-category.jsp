@@ -15,10 +15,12 @@
     <script src="<c:url value="/resources/js/menu-operations.js"/>"></script>
     <link href="<c:url value="/resources/css/component.css"/>" rel="stylesheet" type="text/css">
     <link href="<c:url value="/resources/css/default.css"/>" rel="stylesheet" type="text/css">
+    <link href="<c:url value="/resources/css/teskly.viewitle.css"/>" rel="stylesheet" type="text/css">
     <script src="<c:url value="/resources/js/modernizr.custom.js"/>"></script>
+    <script src="<c:url value="/resources/js/teskly.viewitle.js"/>"></script>
 </head>
 <body>
-<%@include file="../includes/NewHeader.jsp" %>
+<%@include file="../includes/new-header.jsp" %>
 <div class="loader-anim"></div>
 
 <div class="main-div">
@@ -54,7 +56,7 @@
                                     </c:if>
                                     <div class="col-md-3">
                                         <ul class="grid cs-style-3">
-                                            <li>
+                                            <li data-teskly-viewitle="<c:out value="${itemData.description}"/>">
                                                 <figure>
                                                     <img src="<c:url value="/resources/images/image_placeholder.gif"/>"
                                                          class="menu-images">
@@ -125,7 +127,7 @@
                                                 </figure>
                                             </li>
                                         </ul>
-                                        <div style="text-align: center;">
+                                        <div class="itemdata-name" style="text-align: center;">
                                             <label id="menu-item-name">${itemData.name}</label>
                                         </div>
                                     </div>
@@ -144,5 +146,8 @@
     </div>
 </div>
 <%@include file="../includes/modals.jsp" %>
+<script>
+    jQuery(document).viewitle();
+</script>
 </body>
 </html>

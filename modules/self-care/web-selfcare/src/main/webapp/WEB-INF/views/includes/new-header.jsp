@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@include file="signupmodal.jsp" %>
+<%@include file="signup-modal.jsp" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <nav class="navbar navbar-default ">
@@ -16,8 +16,8 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/web-selfcare/menu"><fmt:message key="new.header.menu" bundle="${lang}"/></a></li>
                 <li><a href="/web-selfcare/locations"><fmt:message key="new.header.location" bundle="${lang}"/></a></li>
-                <li><a href="/web-selfcare/contactus"><fmt:message key="new.header.contact" bundle="${lang}"/></a></li>
-                <li><a href="/web-selfcare/aboutus"><fmt:message key="new.header.about" bundle="${lang}"/></a></li>
+                <li><a href="/web-selfcare/contact-us"><fmt:message key="new.header.contact" bundle="${lang}"/></a></li>
+                <li><a href="/web-selfcare/about-us"><fmt:message key="new.header.about" bundle="${lang}"/></a></li>
 
                 <li>
                     <a href="/web-selfcare/shopping-cart"><img
@@ -47,7 +47,7 @@
                                     class="caret"></span></button>
 
                             <ul class="dropdown-menu ">
-                                <li><a class="btn-lg" href="/web-selfcare/updateuser">Update Profile</a></li>
+                                <li><a class="btn-lg" href="/web-selfcare/update-user">Update Profile</a></li>
                                 <li><a class="btn-lg" href="/web-selfcare/logout">Log Out</a></li>
                             </ul>
                         </div>
@@ -67,11 +67,23 @@
         <div class="modal-content" style="width: 750px">
 
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">x</button>
-                <center><p class="modal-title" style="font-size: x-large">
-
-                    <h1 style="font-size: larger;color: #22ca1f"><fmt:message key="new.header.loginto"
-                                                                              bundle="${lang}"/></h1></p></center>
+                <%--<button type="button" class="close" data-dismiss="modal">x</button>--%>
+                <div class="panel-heading" style="height: 50px">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <p style="text-align: center">Update User Profile</p>
+                        </div>
+                        <div class="col-sm-5">
+                        </div>
+                        <div class="col-sm-3">
+                            <button data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                    </div>
+                </div>
+                <%--<center>
+                    <p class="modal-title" style="font-size: x-large">
+                    <h1 style="font-size: larger;color: #22ca1f"><fmt:message key="new.header.loginto" bundle="${lang}"/></h1>
+                </center>--%>
             </div>
 
             <div class="modal-body">
@@ -86,13 +98,24 @@
                             <input id="loginUsername" style="width:60%;" class="col-sm-10" min="3" name="loginUsername"
                                    required="" type="text" data-error-msg="Username required !!!">
                         </div>
+                    </div>
 
+                    <div class="row">
+                        <div class="col-sm-4"></div>
+                        <div id="usernameError" class="error-labels col-sm-4"></div>
+                        <div class="col-sm-4"></div>
                     </div>
 
                     <div class="row  form-group">
                         <div class="col-sm-2"><label for="loginPassword">Password</label></div>
                         <input id="loginPassword" style="width:60%;" name="loginPassword" class="col-sm-10" min="3"
                                required="" data-error-msg="Please provide Valid password !!!" type="password">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-4"></div>
+                        <div id="passwordError" class="error-labels col-sm-4"></div>
+                        <div class="col-sm-4"></div>
                     </div>
 
                     <div class="row">
@@ -112,7 +135,7 @@
 
             </div>
             <!------------------------------signup modal --------------------------------------------->
-            <%--<%@include file="signupmodal.jsp" %>--%>
+            <%--<%@include file="signup-modal.jsp" %>--%>
         </div>
     </div>
 </div>

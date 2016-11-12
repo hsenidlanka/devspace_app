@@ -6,7 +6,7 @@
 
 </head>
 <body style="overflow: visible">
-<%@include file="../includes/NewHeader.jsp" %>
+<%@include file="../includes/new-header.jsp" %>
 <%--<c:out value="${username}"></c:out>--%>
 <div class="loader-anim"></div>
 <div class="col-sm-12"></div>

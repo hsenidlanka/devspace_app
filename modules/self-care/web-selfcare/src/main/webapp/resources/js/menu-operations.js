@@ -1,13 +1,49 @@
 $(document).ready(function () {
     var priceMap;
     $(".btn-addtocart").click(function () {
-        // Initialize the toast notification
-        $.notify("Selected item added to the shopping cart.", {
-            align: "center",
-            verticalAlign: "top",
-            type: 'toast',
-            delay: 2000,
-            animationType: "fade"
+        var itemPrice=$.trim($(this).closest('div').find('#lbl-sizeprice').text());
+        var itemSize=$.trim($(this).closest('div').find('.sizes-dropdowns').val());
+        var itemQty=$.trim($(this).closest('div').find('.add-to-cart-spin').val());
+        var itemName=$.trim($(this).closest('ul').closest('div').find('#menu-item-name').text());
+        var itemDesc=$.trim($(this).closest('.caption').find('#menu-item-desc').val());
+        var itemTotal=itemPrice*itemQty;
+        alert(itemTotal.toFixed(2));
+        $.ajax({
+            type: "POST",
+            url: "/web-selfcare/menu/add-to-cart",
+            data: {
+                "itemTitle": itemName,
+                "itemDescription": itemDesc,
+                "itemSize": itemSize,
+                "itemTopping1": "",
+                "itemTopping2": "",
+                "itemInstructs": "",
+                "itemQty": itemQty,
+                "itemPrice": itemPrice,
+                "itemTotal": $("#addtocart-pizza-total").val()
+            },
+            success: function (result) {
+                if (result) {
+                    // Initialize the toast notification
+                    $.notify("Selected item added to the shopping cart.", {
+                        align: "center",
+                        verticalAlign: "top",
+                        type: 'toast',
+                        delay: 2000,
+                        animationType: "fade"
+                    });
+                }else{
+                    // Initialize the toast notification
+                    $.notify("Error adding item to the shopping cart.", {
+                        align: "center",
+                        verticalAlign: "top",
+                        type: 'toast',
+                        delay: 2000,
+                        animationType: "fade",
+                        color: "#fff", background: "#d44950"
+                    });
+                }
+            }
         });
     });
 
@@ -70,26 +106,37 @@ $(document).ready(function () {
             url: "/web-selfcare/menu/add-to-cart",
             data: {
                 "itemTitle": $("#item-title-modal").text(),
-                "itemDescription":$("#item-desc-modal").text(),
-                "itemSize":$("#addtocart-pizza-sizes").val(),
-                "itemTopping1":$("#addtocart-pizza-toppings1").val(),
-                "itemTopping2":$("#addtocart-pizza-toppings2").val(),
-                "itemInstructs":$("#addtocart-pizza-instructs").val(),
-                "itemQty":$("#addtocart-pizza-qty").val(),
-                "itemPrice":$("#addtocart-pizza-price").val(),
-                "itemTotal":$("#addtocart-pizza-total").val()
+                "itemDescription": $("#item-desc-modal").text(),
+                "itemSize": $("#addtocart-pizza-sizes").val(),
+                "itemTopping1": $("#addtocart-pizza-toppings1").val(),
+                "itemTopping2": $("#addtocart-pizza-toppings2").val(),
+                "itemInstructs": $("#addtocart-pizza-instructs").val(),
+                "itemQty": $("#addtocart-pizza-qty").val(),
+                "itemPrice": $("#addtocart-pizza-price").val(),
+                "itemTotal": $("#addtocart-pizza-total").val()
             },
             success: function (result) {
+                if (result) {
+                    // Initialize the toast notification
+                    $.notify("Selected pizza added to the shopping cart.", {
+                        align: "center",
+                        verticalAlign: "top",
+                        type: 'toast',
+                        delay: 2000,
+                        animationType: "fade"
+                    });
+                }else{
+                    // Initialize the toast notification
+                    $.notify("Error adding item to the shopping cart.", {
+                        align: "center",
+                        verticalAlign: "top",
+                        type: 'toast',
+                        delay: 2000,
+                        animationType: "fade",
+                        color: "#fff", background: "#d44950"
+                    });
+                }
             }
-        });
-
-        // Initialize the toast notification
-        $.notify("Selected pizza added to the shopping cart.", {
-            align: "center",
-            verticalAlign: "top",
-            type: 'toast',
-            delay: 2000,
-            animationType: "fade"
         });
     });
 
