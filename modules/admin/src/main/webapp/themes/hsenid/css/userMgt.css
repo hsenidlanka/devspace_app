@@ -103,17 +103,5 @@ legend.scheduler-border {
 #categoryAdd_box{
     width: 55%;
 }
-.cat{
-    /*font-size: 44px;*/
-}
-.item-tbl-hdr {
-    background-color: rgba(204, 204, 209, 0.81);
-    border-color: rgba(204, 204, 209, 0.81);
-    text-align: center;
-}
-.item-tbl-row {
-    border: 1px solid #999999;
-    /*border-radius: 4px;*/
-    padding: 4px;
-    /*margin: auto;*/
-}
+
+

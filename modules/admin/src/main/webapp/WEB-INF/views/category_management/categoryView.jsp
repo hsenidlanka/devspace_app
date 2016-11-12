@@ -9,8 +9,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <head>
-    <meta charset="UTF-8">
-    <title>View Sub Categories</title>
+
+    <title>View Categories</title>
     <jsp:include page="../adminTop.jsp"/>
 
     <spring:url value="/themes/hsenid/css/userMgt.css" var="css1"/>
@@ -18,6 +18,9 @@
 
     <link href="${css1}" rel="stylesheet">
     <link href="${css2}" rel="stylesheet">
+
+    <spring:url value="/themes/hsenid/js/category_table.js" var="js2"/>
+    <script src="${js2}"></script>
 
 
 </head>
@@ -59,7 +62,7 @@
 <div class="row">
 <div class="viewcategorysize">
     <center>
-        <div class="panel panel-default " style="width: 80%">
+        <div class="panel panel-default " style="width:85%">
 
             <div class="panel-heading common-form-headings">
                 <h3 class="default-panel-headings">View All Sub Category</h3>
@@ -68,7 +71,7 @@
 
             <div class="panel-body" >
 
-
+                <%--search tab--%>
                 <div class="row" style="text-align: center">
                     <div class="col-md-3"></div>
 
@@ -85,98 +88,24 @@
                     </div>
 
                     <div class="col-md-3"></div>
-
                 </div>
                 <br>
-                <div class="table-responsive " style="width: 100%">
-                    <table class="table table-bordered" width="100%">
-                        <thead>
-                        <tr>
-                            <th class="col-md-1">Id</th>
-                            <th class="col-md-2">Name</th>
-                            <th class="col-md-6">Description</th>
-                            <th class="col-md-3">Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody >
-                        <tr>
-                            <td style="vertical-align:middle">001</td>
-                            <td style="vertical-align:middle"><a href="viewsubcategories.html">Pizza</a></td>
-                            <td style="vertical-align:middle">The ever famous Butter Masala Chicken together with a layer of cream cheese, fresh oinions, coriander, ginger and garlic, blanketed with a layer of Mozzarella chees</td>
-                            <td style="vertical-align:middle">
-                                <a data-toggle="modal" data-target="#modifyModel" href="#modifyModel">Modify <span class="glyphicon glyphicon-edit"></span></a>
-                                &nbsp;&nbsp;
-                                <a data-toggle="modal" data-target="#deleteModal" href="#deleteModal">Delete <span class="glyphicon glyphicon-remove"></span></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="vertical-align:middle">002</td>
-                            <td style="vertical-align:middle"><a href="viewsubcategories.html">Pasta</a></td>
-                            <td style="vertical-align:middle">Freshly cooked pasta with prawns, vegetables & sliced mushrooms baked with a white cream sauce and mozzarella cheese</td>
-                            <td style="vertical-align:middle">
-                                <a data-toggle="modal" data-target="#modifyModel" href="#modifyModel">Modify <span class="glyphicon glyphicon-edit"></span></a>
-                                &nbsp;&nbsp;
-                                <a data-toggle="modal" data-target="#deleteModal" href="#deleteModal">Delete <span class="glyphicon glyphicon-remove"></span></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="vertical-align:middle">003</td>
-                            <td style="vertical-align:middle"><a href="viewsubcategories.html">Beverage</a></td>
-                            <td style="vertical-align:middle">Freshly cooked pasta with prawns, vegetables & sliced mushrooms baked with a white cream sauce and mozzarella cheese</td>
-                            <td style="vertical-align:middle">
-                                <a data-toggle="modal" data-target="#modifyModel" href="#modifyModel">Modify <span class="glyphicon glyphicon-edit"></span></a>
-                                &nbsp;&nbsp;
-                                <a data-toggle="modal" data-target="#deleteModal" href="#deleteModal">Delete <span class="glyphicon glyphicon-remove"></span></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="vertical-align:middle">005</td>
-                            <td style="vertical-align:middle"><a href="viewsubcategories.html">Toppings</a></td>
-                            <td style="vertical-align:middle">Freshly cooked pasta with prawns, vegetables & sliced mushrooms baked with a white cream sauce and mozzarella cheese</td>
-                            <td style="vertical-align:middle">
-                                <a data-toggle="modal" data-target="#modifyModel" href="#modifyModel">Modify <span class="glyphicon glyphicon-edit"></span></a>
-                                &nbsp;&nbsp;
-                                <a data-toggle="modal" data-target="#deleteModal" href="#deleteModal">Delete <span class="glyphicon glyphicon-remove"></span></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="vertical-align:middle">006</td>
-                            <td style="vertical-align:middle"><a href="viewsubcategories.html">Salads</a></td>
-                            <td style="vertical-align:middle">Freshly cooked pasta with prawns, vegetables & sliced mushrooms baked with a white cream sauce and mozzarella cheese</td>
-                            <td style="vertical-align:middle">
-                                <a data-toggle="modal" data-target="#modifyModel" href="#modifyModel">Modify <span class="glyphicon glyphicon-edit"></span></a>
-                                &nbsp;&nbsp;
-                                <a data-toggle="modal" data-target="#deleteModal" href="#deleteModal">Delete <span class="glyphicon glyphicon-remove"></span></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="vertical-align:middle">007</td>
-                            <td style="vertical-align:middle"><a href="viewsubcategories.html">Desserts</a></td>
-                            <td style="vertical-align:middle">Freshly cooked pasta with prawns, vegetables & sliced mushrooms baked with a white cream sauce and mozzarella cheese</td>
-                            <td style="vertical-align:middle">
-                                <a data-toggle="modal" data-target="#modifyModel" href="#modifyModel">Modify <span class="glyphicon glyphicon-edit"></span></a>
-                                &nbsp;&nbsp;
-                                <a data-toggle="modal" data-target="#deleteModal" href="#deleteModal">Delete <span class="glyphicon glyphicon-remove"></span></a>
-                            </td>
-                        </tr>
-                        </tbody>
+
+                    <%--include the bootstrap table with category list--%>
+                    <table  id="tableCategory">
                     </table>
-                </div>
             </div>
 
         </div>
     </center>
-
 </div>
 </div>
 
-<div class="modal fade" id="deleteModal" role="dialog" style="top: 25%">
-
+<div class="modal fade" id="deleteModal1">
     <div class="modal-dialog">
-
         <!-- Modal content-->
         <div class="modal-content">
-            <div class="modal-header" style="text-align: center">
+            <div class="modal-header deleteuser-modal-header-style" style="text-align: center">
 
                 <h3 class="modal-title"> <span class="glyphicon glyphicon-trash"></span> Are you sure&nbsp;?</h3>
             </div>
@@ -200,9 +129,7 @@
             </div>
 
         </div>
-
     </div>
-
 </div>
 
 
@@ -274,7 +201,8 @@
 <br><br>
 <br>
 <div class="footerposition">
-    <object width="100%" data="footer.html"></object>
+    <%--<object width="100%" data="footer.html"></object>--%>
+    <%--<jsp:include page="../footer.jsp"/>--%>
 </div>
 
 </body>

@@ -13,11 +13,14 @@
 
   <spring:url value="/themes/hsenid/css/userMgt.css" var="css1"/>
   <spring:url value="/themes/hsenid/css/form-elements.css" var="css2"/>
+  <spring:url value="/themes/hsenid/css/view_categories.css" var="css3"/>
   <spring:url value="/themes/hsenid/js/categoryMgt.js" var="js1"/>
 
   <script src="${js1}"></script>
   <link href="${css1}" rel="stylesheet">
   <link href="${css2}" rel="stylesheet">
+  <link href="${css3}" rel="stylesheet">
+
 
   <meta charset="UTF-8">
   <title>Add Category</title>
