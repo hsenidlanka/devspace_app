@@ -15,9 +15,11 @@
 
     <spring:url value="/themes/hsenid/css/userMgt.css" var="css1"/>
     <spring:url value="/themes/hsenid/css/form-elements.css" var="css2"/>
+    <spring:url value="/themes/hsenid/css/view_categories.css" var="css3"/>
 
     <link href="${css1}" rel="stylesheet">
     <link href="${css2}" rel="stylesheet">
+    <link href="${css3}" rel="stylesheet">
 
     <spring:url value="/themes/hsenid/js/category_table.js" var="js2"/>
     <script src="${js2}"></script>
@@ -72,23 +74,24 @@
             <div class="panel-body" >
 
                 <%--search tab--%>
-                <div class="row" style="text-align: center">
-                    <div class="col-md-3"></div>
+                    <div class="row categorySearch" >
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-3">
+                            <label class="control-label" style="float: right;">
+                                <fmt:message key="category.categoryview.searchbar.label"  bundle="${bundle1}"/>
+                            </label>
 
-                    <div class="col-md-2">
-                        <input type="text">
+                        </div>
+                        <div class="col-sm-4">
+                            <input class="form-control typeahead" id="txtViewSearchCategory" type="text"/>
+                        </div>
+                        <div class="col-sm-3">
+                            <button type="button" class="btn btn-success" id="btnViewSearchItem"><span class="glyphicon glyphicon-search">
+                            </span><fmt:message key="category.categoryview.searchbar.button"  bundle="${bundle1}"/>
+                            </button>
+                        </div>
+                        <div class="col-sm-1"></div>
                     </div>
-
-                    <div class="col-md-2"></div>
-
-                    <div class="col-md-2">
-                        <button class="btn btn-success" style="width: 100%">
-                            Search
-                        </button>
-                    </div>
-
-                    <div class="col-md-3"></div>
-                </div>
                 <br>
 
                     <%--include the bootstrap table with category list--%>
@@ -101,52 +104,72 @@
 </div>
 </div>
 
+<%--modal to delete the category selected--%>
 <div class="modal fade" id="deleteModal1">
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header deleteuser-modal-header-style" style="text-align: center">
-
-                <h3 class="modal-title"> <span class="glyphicon glyphicon-trash"></span> Are you sure&nbsp;?</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
+                        class="glyphicon glyphicon-remove"></span>
+                </button>
+                <div align="center">
+                    <span class="glyphicon glyphicon-trash"></span>
+                    <fmt:message key="category.categorydelete.modal.heading" bundle="${bundle1}" />
+                </div>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
                     <fieldset>
-
-
                         <div class="form-group" style="text-align: center">
-                            <p>You are about to delete category "Lorem" <br>and <br>It's Sub categories</p>
+                            <label id="lblDeleteCategoryMsg">
+                                <fmt:message key="category.categorydelete.modal.message1" bundle="${bundle1}" />
+                            </label><br>
+                            <label id="lblDeleteCategoryId"></label><br>
                         </div>
-                        <div class="form-group row" style="text-align: center">
-                            <div class="col-xs-3"></div>
-                            <div class="col-xs-2" ><button class="btn btn-success">  Approve <span class="glyphicon glyphicon-ok"></span></button></div>
-                            <div class="col-xs-2"></div>
-                            <div class="col-xs-2" ><button class="btn btn-success"> Cancel <span class="glyphicon glyphicon-remove"></span></button></div>
-                            <div class="col-xs-3"></div>
+                        <div class="form-group" style="text-align: center">
+                            <label style="font-style: italic">
+                                <fmt:message key="category.categorydelete.modal.message2" bundle="${bundle1}" />
+                            </label>
                         </div>
                     </fieldset>
                 </form>
+            </div>
+            <div class="modal-footer" align="right">
+                <div class="form-group row" style="text-align: center">
+                    <div class="col-xs-3"></div>
+                    <div class="col-xs-2" >
+                        <button class="btn btn-success" id="btnDeleteCategory">
+                            <fmt:message key="category.categorydelete.modal.approve" bundle="${bundle1}" />
+                            <span class="glyphicon glyphicon-ok"></span>
+                        </button>
+                    </div>
+                    <div class="col-xs-2"></div>
+                    <div class="col-xs-2" >
+                        <button class="btn btn-success"  data-dismiss="modal" aria-hidden="true">
+                            <fmt:message key="category.categorydelete.modal.cancel" bundle="${bundle1}" />
+                        <span class="glyphicon glyphicon-remove"></span></button></div>
+                    <div class="col-xs-3"></div>
+                </div>
             </div>
 
         </div>
     </div>
 </div>
 
-
-<div class="modal fade" id="modifyModel" role="dialog" style="top: 15%">
+<%--modal to edit the category selected--%>
+<div class="modal fade" id="modifyModel">
     <div class="modal-dialog">
 
         <!-- Modal content-->
         <div class="modal-content">
-            <div class="modal-header" style="text-align: center">
+            <div class="modal-header deleteuser-modal-header-style" style="text-align: center">
 
                 <h3 class="modal-title">Modify Category &nbsp;<span class="glyphicon glyphicon-edit"></span></h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
                     <fieldset>
-
-
                         <div class="form-group">
                             <label for="categoryid" class="control-label col-sm-4" style="">Category Id :</label>
 
@@ -163,28 +186,23 @@
 
                             </div>
                         </div>
-
-
-
                         <div class="form-group">
                             <label for="categoryname" class="control-label col-sm-4">Category Description :</label>
-
                             <div class="col-sm-8">
                                 <input class="form-control" placeholder="Please Enter Description" type="text">
-
                             </div>
                         </div>
-
-
-                        <div class="form-group" style="text-align: center">
+                        <div class="modal-footer" align="right">
                             <div class="col-sm-6" style="text-align: right">
-                                <button class="btn btn-success btn-lg" type="button" data-toggle="modal" data-target="#myModal">
-                                    <span class="glyphicon glyphicon-ok"></span> Submit Category
+                                <button class="btn btn-success btn-lg" type="button" data-toggle="modal" >
+                                    <span class="glyphicon glyphicon-ok"></span>
+                                    <fmt:message key="category.categoryedit.modal.approve" bundle="${bundle1}" />
                                 </button>
                             </div>
                             <div class="col-sm-6">
-                                <button class="btn btn-success btn-lg">
-                                    <span class="glyphicon glyphicon-remove"></span> Cancel
+                                <button class="btn btn-success btn-lg" data-dismiss="modal" aria-hidden="true">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                    <fmt:message key="category.categorydelete.modal.cancel" bundle="${bundle1}" />
                                 </button>
                             </div>
                         </div>

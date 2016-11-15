@@ -232,19 +232,19 @@ public class CategoryController {
         List<Map<String, Object>> outc = new ArrayList<Map<String, Object>>();
         List<Category> categoryList= categoryRepository.selectAll();
 
-        for (int i=0;i<categoryList.size();i++){
-            category=categoryList.get(i);
+        for (Category aCategoryList : categoryList) {
+            category = aCategoryList;
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("id", category.getCategory_id());
             map.put("name", category.getCategoryName());
-            map.put("description",category.getCatDescription());
+            map.put("description", category.getCatDescription());
             map.put("creator", category.getCreator());
             map.put("status", category.getStatus());
 
 
             LOG.info("newCategory {}", category);
             outc.add(map);
-            LOG.info("out {}",outc);
+            LOG.info("out {}", outc);
         }
         return outc;
     }
@@ -256,8 +256,8 @@ public class CategoryController {
         List<Map<String, Object>> outc = new ArrayList<Map<String, Object>>();
         List<Category> subcategoryList= subcategoryRepository.selectAll();
 
-        for (int i=0;i<subcategoryList.size();i++){
-            subcategory=subcategoryList.get(i);
+        for (Category aSubcategoryList : subcategoryList) {
+            subcategory = aSubcategoryList;
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("id", subcategory.getCategory_id());
             map.put("name", subcategory.getCategoryName());
@@ -268,7 +268,7 @@ public class CategoryController {
 
             LOG.info("newCategory {}", subcategory);
             outc.add(map);
-            LOG.info("out {}",outc);
+            LOG.info("out {}", outc);
         }
         return outc;
     }
@@ -282,5 +282,31 @@ public @ResponseBody int editCategory(@RequestParam("name") String name, @Reques
 
     int i=categoryRepository.update(name,description);
     return i;
+}
+
+
+
+
+///////////////////////////////////////////////////// CATEGORY DELETE HANDLER METHODS  ///////////////////////////////////////
+@RequestMapping(value = "/delete", method = RequestMethod.GET)
+public @ResponseBody int deleteCategory(@RequestParam("catName") String catName){
+    LOG.error("category name to delete:{}",catName);
+    //retrieve the subcategory list for that category
+    List<String> subcatList=categoryRepository.viewSubCategories(catName);
+    LOG.error("subcategory list:{}",subcatList);
+
+    //delete the subcategory list obtained
+    for (int i=0; i< subcatList.size();i++){
+        int subcatReturn=subcategoryRepository.delete(subcatList.get(i));
+        if(subcatReturn==0)
+            break;
+    }
+    //finally delete the category
+    int catdeleteReturn=categoryRepository.delete(catName);
+    LOG.error("delete result:{}",catdeleteReturn);
+
+
+    return catdeleteReturn;
+
 }
 }
