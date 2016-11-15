@@ -19,6 +19,7 @@ public class ReplyFromServer {
     public void setStatus(String status) {
         this.status = status;
     }
+
     @JsonProperty("code")
     public int getCode() {
         return code;
@@ -27,6 +28,7 @@ public class ReplyFromServer {
     public void setCode(int code) {
         this.code = code;
     }
+
     @JsonProperty("message")
     public String getMessage() {
         return message;

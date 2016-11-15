@@ -130,7 +130,7 @@
 
 
 
-            <form:form action="/web-selfcare/contactus" method="post" modelAttribute="contactus">
+            <form:form action="/web-selfcare/contact-us" method="post" modelAttribute="contactus">
 
 
                 <form:select cssClass="form-control" path="inquiryType">

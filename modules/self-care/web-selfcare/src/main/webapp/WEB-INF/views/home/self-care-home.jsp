@@ -3,10 +3,12 @@
 <head>
 
     <%@include file="../includes/include.jsp" %>
-    <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
     <div class="loader-anim"></div>
 
-    <title><fmt:message key="home.title" bundle="${lang}"/></title>
+    <title>
+        <fmt:message key="home.title" bundle="${lang}"/>
+    </title>
+
     <script src="<c:url value="/resources/js/validate-bootstrap.jquery.js"/>"></script>
 
     <style>
@@ -34,16 +36,11 @@
             -o-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%);
         }
-
-
     </style>
-
-
-
-
-
 </head>
+
 <!-------Header------------------------------------->
+
 <body>
 
 <%@include file="../includes/new-header.jsp" %>

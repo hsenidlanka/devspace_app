@@ -109,15 +109,8 @@ $(document).ready(function(){
         var loginPassword =  $.trim($("#loginPassword").val());
 
         //alert(loginUsername.length + ' ' + loginPassword.length)
-<<<<<<< Updated upstream
-
-
 
         if (1) {
-=======
-
-        if (/*$('form').validator('check') <= 2*/1) {
->>>>>>> Stashed changes
 
             $.ajax({
                 type: 'post',
@@ -144,7 +137,6 @@ $(document).ready(function(){
 
 
     });
-
 
     //Check a username is blocked or not
 
