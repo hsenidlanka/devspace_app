@@ -85,6 +85,9 @@ window.operateEvents = {
 
         var pkgId = objct["packageId"];
 
+        $("#txtEditPkgNm").val(objct["packName"]);
+        $("#editPkgPrice").val(objct["price"]);
+
         $('#pkgEditModal').modal('show');
     },
 

@@ -138,7 +138,7 @@
                                     <div class="col-xs-2">
                                         <label class="checkbox-inline">
                                         <form:checkbox value="pizza" class="checkbox chkbxPkgCat" path="categoryName" id="chkPkgPzza"/>
-                                        Pizza
+                                            <fmt:message key="package.packageadd.form.checkbox.pizza" bundle="${bundle1}"/>
                                         </label>
                                     </div>
                                     <div class="col-xs-3">
@@ -165,7 +165,7 @@
                                     <div class="col-xs-2">
                                         <label class="checkbox-inline">
                                         <form:checkbox value="Salad" class="checkbox chkbxPkgCat" path="" id="chkPkgSld"/>
-                                        Salad
+                                            <fmt:message key="package.packageadd.form.checkbox.salad" bundle="${bundle1}"/>
                                         </label>
                                     </div>
                                     <div class="col-xs-3">
@@ -192,7 +192,7 @@
                                     <div class="col-xs-2">
                                         <label class="checkbox-inline">
                                         <form:checkbox value="Beverage" class="checkbox chkbxPkgCat" path="" id="chkPkgBvrg"/>
-                                        Beverage
+                                            <fmt:message key="package.packageadd.form.checkbox.beverage" bundle="${bundle1}"/>
                                         </label>
                                     </div>
                                     <div class="col-xs-3">
@@ -219,7 +219,7 @@
                                     <div class="col-xs-2">
                                         <label class="checkbox-inline">
                                         <form:checkbox value="Topping" class="checkbox chkbxPkgCat" path="" id="chkPkgTppg"/>
-                                        Topping
+                                            <fmt:message key="package.packageadd.form.checkbox.topping" bundle="${bundle1}"/>
                                         </label>
                                     </div>
                                     <div class="col-xs-3">
@@ -246,7 +246,7 @@
                                     <div class="col-xs-2">
                                         <label class="checkbox-inline">
                                         <form:checkbox value="desserts" class="checkbox chkbxPkgCat" path="" id="chkPkgDssrt"/>
-                                        Dessert
+                                            <fmt:message key="package.packageadd.form.checkbox.pizza" bundle="${bundle1}"/>
                                         </label>
                                     </div>
                                     <div class="col-xs-3">
