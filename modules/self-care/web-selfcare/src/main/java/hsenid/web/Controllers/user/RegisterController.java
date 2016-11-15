@@ -76,7 +76,7 @@ public class RegisterController {
         try{
             ReplyFromServer message = restTemplate.postForObject(registerUrl, httpEntity, ReplyFromServer.class);
         }catch (Exception e){
-            logger.info(e.getMessage());
+            logger.error(e.getMessage());
 
         }
 
@@ -103,9 +103,9 @@ public class RegisterController {
         String serverMsg = replyFromServer.getMessage();
         int sizeOfMsg= serverMsg.length();
 
-        if (sizeOfMsg == 23){
+        if (sizeOfMsg == 23) {
             uniqueUser = new BooleanResponse(false);
-        }else{
+        } else {
             uniqueUser = new BooleanResponse(true);
         }
 

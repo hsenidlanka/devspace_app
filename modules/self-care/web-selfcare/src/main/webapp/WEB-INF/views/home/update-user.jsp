@@ -23,6 +23,7 @@
             $('input:radio[name="titlejs"]').filter('[value=' + titlejs + ']').attr('checked', true);
 
 //            $("#titlejs").val(titlejs);
+
             $("#firstNamejs").val($.trim(firstNamejs));
             $("#lastNamejs").val(lastNamejs);
             $("#addr1js").val(addr1js);
@@ -47,12 +48,6 @@
         box-shadow: 0 10px 10px -10px #88C470 inset !important;
     }
 
-    b {
-        text-align: justify;
-        font-style: italic;
-        font-size: 36px;
-    }
-
     .updatesuccess {
         font-size: 27px;
     }
@@ -62,160 +57,167 @@
 <body>
 <%@include file="../includes/new-header.jsp" %>
 <div class="container" style="width: 60%">
-    <form:form action="/web-selfcare/update-user" method="post" modelAttribute="updateuser"
-               cssClass="well form-horizontal">
-        <b><fmt:message key="update.user.title" bundle="${lang}"/>?</b>
-        <p class="updatesuccess">${updatedMsg}</p>
-        <hr>
-        <div class="form-group">
-            <label class="control-label col-sm-2"><p align="right"><fmt:message key="signup.title" bundle="${lang}"/></p></label>
+    <div class="panel panel-success">
+        <form:form action="/web-selfcare/update-user" method="post" modelAttribute="updateuser"
+                   cssClass="well form-horizontal">
 
-            <div class="row col-sm-10">
-
-                <form:radiobutton path="title" name="titlejs" id="titlejs" value="Mr"/>Mr
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <form:radiobutton path="title" id="titlejs" name="titlejs" value="Mrs"/>Mrs
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <form:radiobutton path="title" id="titlejs" name="titlejs" value="Ms"/>Ms
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <form:radiobutton path="title" id="titlejs" value="Dr"/>Dr
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <form:radiobutton path="title" id="titlejs" value="Rev"/>Rev
-
+            <div class="panel-heading">
+                <p style="font-size: xx-large;text-align: left"><fmt:message key="update.user.title"
+                                                                             bundle="${lang}"/>?</p>
             </div>
-            <div class="row">
-                <form:errors path="title" cssClass="help-inline" cssStyle="color: red"/>
-            </div>
+            <p class="updatesuccess">${updatedMsg}</p>
 
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"><p><fmt:message key="signup.title" bundle="${lang}"/></p></label>
 
-        </div>
+                    <div class="row col-sm-9">
 
-        <hr>
+                        <form:radiobutton path="title" name="titlejs" id="titlejs" value="Mr"/>Mr
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <form:radiobutton path="title" id="titlejs" name="titlejs" value="Mrs"/>Mrs
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <form:radiobutton path="title" id="titlejs" name="titlejs" value="Ms"/>Ms
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <form:radiobutton path="title" id="titlejs" value="Dr"/>Dr
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <form:radiobutton path="title" id="titlejs" value="Rev"/>Rev
 
-        <div class="form-group">
-            <form:label path="firstName" for="firstName" cssClass="col-md-2 control-label">
-                <p align="right">First Name</p>
-            </form:label>
-
-            <div class="col-md-10">
-                <div class="row inline">
-                    <form:input id="firstNamejs" path="firstName" cssClass="enjoy-css" cssStyle="width: 72%"/>
-                </div>
-                <div class="row">
-                    <form:errors path="firstName" cssClass="help-inline" cssStyle="color: red"/>
-                </div>
-            </div>
-        </div>
-        <%----%>
-        <hr>
-        <div class="form-group">
-
-            <form:label path="lastName" for="lastName" cssClass="col-md-2 control-label">
-                <p align="right">Last Name</p>
-            </form:label>
-
-            <div class="col-md-10">
-                <div class="row inline">
-                    <form:input path="lastName" id="lastNamejs" cssStyle="width: 72%"/>
-                </div>
-                <div class="row">
-                    <form:errors path="lastName" cssClass="help-inline" cssStyle="color: red"/>
-                </div>
-            </div>
-
-        </div>
-        <hr>
-        <div class="form-group">
-            <form:label path="username" for="username" cssClass="control-label col-sm-2">
-                <p align="right">Username</p>
-            </form:label>
-
-            <div class="col-sm-10">
-                <div class="row inline">
-                    <form:input id="usernamejs" path="username" cssStyle="width:72%" readonly="true"/>
-                </div>
-                <div class="row">
-                    <form:errors path="username" cssClass="help-inline" cssStyle="color: red"/>
-                </div>
-            </div>
-        </div>
-        <hr>
-        <div class="form-group">
-            <form:label path="email" for="email" cssClass="col-md-2 control-label">
-                <p align="right">Email</p>
-            </form:label>
-
-            <div class="col-sm-10">
-                <div class="row inline">
-                    <form:input id="emailjs" path="email" cssStyle="width:72%"/>
-                </div>
-                <div class="row">
-                    <form:errors path="email" cssClass="help-inline" cssStyle="color: red"/>
-                </div>
-            </div>
-
-        </div>
-        <hr>
-        <div class="form-group">
-            <form:label path="mobile" for="mobile" cssClass="col-md-2 control-label">
-                <p align="right">Mobile</p>
-            </form:label>
-
-            <div class="col-sm-10">
-                <div class="row inline">
-                    <form:input id="mobilejs" path="mobile" cssStyle="width:72%"/>
-                </div>
-                <div class="row">
-                    <form:errors path="mobile" cssClass="help-inline" cssStyle="color: red"/>
-                </div>
-            </div>
-        </div>
-        <hr>
-        <div class="form-group">
-            <form:label path="addressLine01" for="addressLine01" cssClass="col-md-2 control-label">
-                <p align="right">Address</p>
-            </form:label>
-            <div class="col-sm-10">
-
-                <div class="row">
-                    <div class="row inline">
-                        <form:input id="addr1js" path="addressLine01" cssStyle="width:72%"/>
                     </div>
                     <div class="row">
-                        <form:errors path="addressLine01" cssClass="help-inline" cssStyle="color: red"/>
+                        <form:errors path="title" cssClass="help-inline" cssStyle="color: red"/>
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <div class="form-group">
+                    <form:label path="firstName" for="firstName" cssClass="col-md-3 control-label">
+                        <p >First Name</p>
+                    </form:label>
+
+                    <div class="col-md-9">
+                        <div class="row inline">
+                            <form:input id="firstNamejs" path="firstName" cssStyle="width: 72%"/>
+                        </div>
+                        <div class="row">
+                            <form:errors path="firstName" cssClass="help-inline" cssStyle="color: red"/>
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="row inline">
-                        <form:input id="addr2js" path="addressLine02" cssStyle="width:72%"/>
+                    <%----%>
+                <hr>
+                <div class="form-group">
+
+                    <form:label path="lastName" for="lastName" cssClass="col-md-3 control-label">
+                        <p>Last Name</p>
+                    </form:label>
+
+                    <div class="col-md-9">
+                        <div class="row inline">
+                            <form:input path="lastName" id="lastNamejs" cssStyle="width: 72%"/>
+                        </div>
+                        <div class="row">
+                            <form:errors path="lastName" cssClass="help-inline" cssStyle="color: red"/>
+                        </div>
                     </div>
-                    <div class="row">
-                        <form:errors path="addressLine02" cssClass="help-inline" cssStyle="color: red"/>
+
+                </div>
+                <hr>
+                <div class="form-group">
+                    <form:label path="username" for="username" cssClass="control-label col-sm-3">
+                        <p>Username</p>
+                    </form:label>
+
+                    <div class="col-sm-9">
+                        <div class="row inline">
+                            <form:input id="usernamejs" path="username" cssStyle="width:72%" readonly="true"/>
+                        </div>
+                        <div class="row">
+                            <form:errors path="username" cssClass="help-inline" cssStyle="color: red"/>
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="row inline">
-                        <form:input id="addr3js" path="addressLine03" cssStyle="width:72%"/>
+                <hr>
+                <div class="form-group">
+                    <form:label path="email" for="email" cssClass="col-md-3 control-label">
+                        <p>Email</p>
+                    </form:label>
+
+                    <div class="col-sm-9">
+                        <div class="row inline">
+                            <form:input id="emailjs" path="email" cssStyle="width:72%"/>
+                        </div>
+                        <div class="row">
+                            <form:errors path="email" cssClass="help-inline" cssStyle="color: red"/>
+                        </div>
                     </div>
-                    <div class="row">
-                        <form:errors path="addressLine03" cssClass="help-inline" cssStyle="color: red"/>
+
+                </div>
+                <hr>
+                <div class="form-group">
+                    <form:label path="mobile" for="mobile" cssClass="col-md-3 control-label">
+                        <p>Mobile</p>
+                    </form:label>
+
+                    <div class="col-sm-9">
+                        <div class="row inline">
+                            <form:input id="mobilejs" path="mobile" cssStyle="width:72%"/>
+                        </div>
+                        <div class="row">
+                            <form:errors path="mobile" cssClass="help-inline" cssStyle="color: red"/>
+                        </div>
                     </div>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <form:label path="addressLine01" for="addressLine01" cssClass="col-md-3 control-label">
+                        <p>Address</p>
+                    </form:label>
+                    <div class="col-sm-9">
+                        <div class="row">
+                            <div class="row inline">
+                                <form:input id="addr1js" path="addressLine01" cssStyle="width:72%"/>
+                            </div>
+                            <div class="row">
+                                <form:errors path="addressLine01" cssClass="help-inline" cssStyle="color: red"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="row inline">
+                                <form:input id="addr2js" path="addressLine02" cssStyle="width:72%"/>
+                            </div>
+                            <div class="row">
+                                <form:errors path="addressLine02" cssClass="help-inline" cssStyle="color: red"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="row inline">
+                                <form:input id="addr3js" path="addressLine03" cssStyle="width:72%"/>
+                            </div>
+                            <div class="row">
+                                <form:errors path="addressLine03" cssClass="help-inline" cssStyle="color: red"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+<br>
+                <div class="form-group">
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-4">
+                        <button type="submit" class="btn btn-warning">
+                            <fmt:message key="update.user.profile" bundle="${lang}"/> <span
+                                class="glyphicon glyphicon-send"></span>
+                        </button>
+                    </div>
+                    <div class="col-sm-4"></div>
+
                 </div>
             </div>
-        </div>
-        <hr>
-
-        <div class="form-group">
-            <div class="col-sm-4"></div>
-            <div class="col-sm-4">
-                <button type="submit" class="btn btn-warning">Update Profile<span
-                        class="glyphicon glyphicon-send"></span></button>
-            </div>
-            <div class="col-sm-4"></div>
-
-        </div>
-    </form:form>
-
+        </form:form>
+    </div>
 </div>
 </body>
 

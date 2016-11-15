@@ -59,7 +59,7 @@ public class ContactUsController {
         try{
             ReplyFromServer message = restTemplate.postForObject(contactUsUrl, httpEntity, ReplyFromServer.class);
         }catch (Exception e){
-            logger.info(e.getMessage());
+            logger.error(e.getMessage());
 
         }
         redirectAttributes.addFlashAttribute("validForm", "True");

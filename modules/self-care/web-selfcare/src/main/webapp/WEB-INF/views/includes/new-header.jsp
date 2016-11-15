@@ -47,17 +47,15 @@
                                     class="caret"></span></button>
 
                             <ul class="dropdown-menu ">
-                                <li><a class="btn-lg" href="/web-selfcare/update-user">Update Profile</a></li>
-                                <li><a class="btn-lg" href="/web-selfcare/logout">Log Out</a></li>
+                                <li><a class="btn-lg" href="/web-selfcare/update-user"><fmt:message key="update.user.profile" bundle="${lang}"/></a></li>
+                                <li><a class="btn-lg" href="/web-selfcare/logout"><fmt:message key="new.header.log.out" bundle="${lang}"/></a></li>
                             </ul>
                         </div>
-                            <%--<a class="form-group-sm" ></a>--%>
                     </li>
                 </c:if>
             </ul>
         </div>
     </div>
-
 </nav>
 
 <!------------------------------login modal--------------------------->
@@ -71,7 +69,7 @@
                 <div class="panel-heading" style="height: 50px">
                     <div class="row">
                         <div class="col-sm-4">
-                            <p style="text-align: center">Update User Profile</p>
+                            <p style="text-align: center"><fmt:message key="new.header.update.user" bundle="${lang}"/></p>
                         </div>
                         <div class="col-sm-5">
                         </div>
@@ -80,10 +78,7 @@
                         </div>
                     </div>
                 </div>
-                <%--<center>
-                    <p class="modal-title" style="font-size: x-large">
-                    <h1 style="font-size: larger;color: #22ca1f"><fmt:message key="new.header.loginto" bundle="${lang}"/></h1>
-                </center>--%>
+
             </div>
 
             <div class="modal-body">
@@ -122,7 +117,7 @@
                         <div class="col-sm-3"></div>
                         <div class="col-sm-3">
                             <button id="loginFormSubmit" name="loginFormSubmit" type="button"
-                                    class="btn btn-primary btn-block">Submit
+                                    class="btn btn-success">Submit
                             </button>
                         </div>
                         <div class="col-sm-6"></div>
@@ -135,7 +130,6 @@
 
             </div>
             <!------------------------------signup modal --------------------------------------------->
-            <%--<%@include file="signup-modal.jsp" %>--%>
         </div>
     </div>
 </div>

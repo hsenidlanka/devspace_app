@@ -45,6 +45,12 @@
                                         <label class="radio-inline" >
                                             <input type="radio" required="" name="title" data-error-msg="Select the Title" value="Miss"><fmt:message key="signup.miss" bundle="${lang}"/>
                                         </label>
+                                        <label class="radio-inline" >
+                                            <input type="radio" required="" name="title" data-error-msg="Select the Title" value="Dr"><fmt:message key="signup.dr" bundle="${lang}"/>
+                                        </label>
+                                        <label class="radio-inline" >
+                                            <input type="radio" required="" name="title" data-error-msg="Select the Title" value="Rev"><fmt:message key="signup.rev" bundle="${lang}"/>
+                                        </label>
                                     </div>
 
                                 </div>
@@ -177,13 +183,11 @@
                                 <%----%>
                                 <div class="form-group">
                                     <button id="submitBtn" name="submitBtn" class="btn btn-success"><fmt:message key="signup.create.account" bundle="${lang}"/></button>
-                                    <button type="reset" class="btn btn-warning"><fmt:message key="signup.clear" bundle="${lang}"/></button>
+                                    <button type="reset" class="btn btn-success"><fmt:message key="signup.clear" bundle="${lang}"/></button>
 
                                 </div>
                                 <div class="form-group">
-                                    <a class="form-group-sm" data-toggle="modal" data-target="#modal-login"
-                                       data-dismiss="modal"><fmt:message key="signup.already" bundle="${lang}"/></a>
-
+                                    <a class="form-group-sm" data-toggle="modal" data-target="#modal-login" data-dismiss="modal"><fmt:message key="signup.already" bundle="${lang}"/></a>
                                 </div>
 
 
