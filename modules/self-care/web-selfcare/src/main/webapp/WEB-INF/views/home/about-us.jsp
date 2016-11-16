@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>About us</title>
     <%@include file="../includes/include.jsp" %>
+    <title><fmt:message key="about.us.title" bundle="${lang}"/></title>
 
 </head>
 <body style="overflow: visible">
@@ -15,7 +15,6 @@
 <div class="inner-bg">
     <div class="container">
         <div class="col-sm-12" style="height: 60px"></div>
-
 
         <div>
             <div class="panel panel-success col-sm-2" style="width: 700px">
@@ -40,7 +39,7 @@
     </div>
 </div>
 
-<a href="http://gazpo.com/downloads/tutorials/jquery/scrolltop/#" class="scrollup" style="display: none;">Scroll</a>
+<a href="http://gazpo.com/downloads/tutorials/jquery/scrolltop/#" class="scrollup" style="display: none;"></a>
 
 </body>
 </html>

@@ -37,7 +37,7 @@ public class CategoryService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response getCategories(@javax.ws.rs.core.Context UriInfo uriInfo) {
-        List categoryList = categoryRepository.selectAll();
+        List categoryList = categoryRepository.selectAllVisible();
         Category category;
         SuccessMessage successMessage = new SuccessMessage();
         successMessage.setCode(Response.Status.OK.getStatusCode());

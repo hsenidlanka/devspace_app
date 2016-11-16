@@ -151,84 +151,227 @@
 
 <!--Modal for edit package-->
 <div class="modal fade" id="pkgEditModal">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header item-modal-header-style">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
                         class="glyphicon glyphicon-remove"></span></button>
-                <div align="center"><span class="glyphicon glyphicon-pencil"></span> Edit Package
+                <div align="center"><span class="glyphicon glyphicon-pencil"></span><fmt:message key="package.packageedit.panel.heading" bundle="${bundle1}"/>
                 </div>
             </div>
             <div class="modal-body">
 
                 <form:form class="form-horizontal" role="form" id="frmEditPkg" action="/edit_package">
                     <fieldset class="scheduler-border">
-                        <legend class="scheduler-border">(*) Edit relevant fields</legend>
+                        <legend class="scheduler-border"><fmt:message key="package.packageedit.form.legend" bundle="${bundle1}"/></legend>
 
                         <div class="form-group">
 
                             <div class="row">
-                                <div class="col-xs-4" align="right">
-                                    <label id="lblEditPkgNm">Package Name : </label>
+                                <div class="col-xs-3" align="right">
+                                    <label id="lblEditPkgNm"><fmt:message key="package.packageedit.form.pkgname" bundle="${bundle1}"/></label>
                                 </div>
-                                <div class="col-xs-5">
-                                    <form:input class="form-control" type="text" id="txtEditPkgNm" path="packName"/>
-                                </div>
-                                <div class="col-xs-3">
+                                <div class="col-xs-4">
+                                    <form:input class="form-control" type="text" id="txtEditPkgNm" path="packName" readonly="true"/>
                                 </div>
                             </div>
 
-                            <br>
+                            <br><br>
 
                             <div class="row">
-                                <div class="col-xs-4" align="right">
-                                    <label>Package Content : </label>
+                                <div class="col-xs-3" align="right">
+                                    <label><fmt:message key="package.packageedit.form.packagedetails" bundle="${bundle1}"/> </label>
                                 </div>
-                                <div class="col-xs-5">
-                                    <form:textarea class="form-control" id="editPkgCont" path="content"/>
-                                </div>
-                                <div class="col-xs-3" align="left">
-                                    <label id="lblEditPkgCont" onclick=""> <span
-                                            class="badge edit-pkg-Badges edt glyphicon glyphicon-edit"><a href="#" id="lnkModalView"> Edit</a></span>
-                                    </label>
+                                <div class="row col-xs-9" style="padding-left: 30px;">
+
+                                    <div class="row item-tbl-row item-tbl-hdr">
+                                        <div class="col-xs-2">
+                                            <strong><fmt:message key="package.packageedit.form.packagedetails.content" bundle="${bundle1}"/></strong>
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <strong><fmt:message key="package.packageedit.form.packagedetails.itemname" bundle="${bundle1}"/></strong>
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <strong><fmt:message key="package.packageedit.form.packagedetails.itemsize" bundle="${bundle1}"/></strong>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <strong><fmt:message key="package.packageedit.form.packagedetails.qty" bundle="${bundle1}"/></strong>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <strong><fmt:message key="package.packageedit.form.packagedetails.status" bundle="${bundle1}"/></strong>
+                                        </div>
+                                    </div>
+
+                                    <div class="row item-tbl-row">
+                                        <div class="col-xs-2">
+                                            <label class="checkbox-inline">
+                                                <form:checkbox value="pizza" class="checkbox chkbxPkgCat" path="categoryName" id="chkPkgPzzaEdit"/>
+                                                <fmt:message key="package.packageedit.form.checkbox.pizza" bundle="${bundle1}"/>
+                                            </label>
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <form:select type="text" class="form-control" path="itemName" id="slctItmPkgPzzaEdit">
+                                                <form:option value="-" label="---"/>
+                                            </form:select>
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <form:select type="text" class="form-control" path="" id="szpr1Edit">
+                                                <form:option value="-" label="---"/>
+                                            </form:select>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <input class="qty-spinner" type="number" min="0" id="pzzaQtyEdit"/>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <form:button type="button" value="" class="btn btn-success btnAddItmPkg" id="btnAddPkgPizzaEdit">
+                                                <span class="glyphicon glyphicon-plus"></span>Add
+                                            </form:button>
+                                        </div>
+                                    </div>
+
+                                    <div class="row item-tbl-row">
+                                        <div class="col-xs-2">
+                                            <label class="checkbox-inline">
+                                                <form:checkbox value="Salad" class="checkbox chkbxPkgCat" path="" id="chkPkgSldEdit"/>
+                                                <fmt:message key="package.packageedit.form.checkbox.salad" bundle="${bundle1}"/>
+                                            </label>
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <form:select type="text" class="form-control" path="itemName" id="slctItmPkgSaladEdit">
+                                                <form:option value="-" label="---"/>
+                                            </form:select>
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <form:select type="text" class="form-control" path="" id="szprc2Edit">
+                                                <form:option value="-" label="---"/>
+                                            </form:select>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <input class="qty-spinner" type="number" id="sldQtyEdit" min="0"/>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <form:button type="button" value="" class="btn btn-success btnAddItmPkg" id="btnAddPkgSaladEdit">
+                                                <span class="glyphicon glyphicon-plus"></span>Add
+                                            </form:button>
+                                        </div>
+                                    </div>
+
+                                    <div class="row item-tbl-row">
+                                        <div class="col-xs-2">
+                                            <label class="checkbox-inline">
+                                                <form:checkbox value="Beverage" class="checkbox chkbxPkgCat" path="" id="chkPkgBvrgEdit"/>
+                                                <fmt:message key="package.packageedit.form.checkbox.beverage" bundle="${bundle1}"/>
+                                            </label>
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <form:select type="text" class="form-control slctItmPkg" path="itemName" id="slctItmPkgBvrgEdit">
+                                                <form:option value="-" label="---"/>
+                                            </form:select>
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <form:select type="text" class="form-control" path="" id="szprc3Edit">
+                                                <form:option value="-" label="---"/>
+                                            </form:select>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <input class="qty-spinner" type="number" id="bvgQty" min="0"/>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <form:button type="button" value="" class="btn btn-success btnAddItmPkg" id="btnAddPkgBvrgEdit">
+                                                <span class="glyphicon glyphicon-plus"></span>Add
+                                            </form:button>
+                                        </div>
+                                    </div>
+
+                                    <div class="row item-tbl-row">
+                                        <div class="col-xs-2">
+                                            <label class="checkbox-inline">
+                                                <form:checkbox value="Topping" class="checkbox chkbxPkgCat" path="" id="chkPkgTppgEdit"/>
+                                                <fmt:message key="package.packageedit.form.checkbox.topping" bundle="${bundle1}"/>
+                                            </label>
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <form:select type="text" class="form-control slctItmPkg" path="itemName" id="slctItmPkgToppngEdit">
+                                                <form:option value="-" label="---"/>
+                                            </form:select>
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <form:select type="text" class="form-control" path="" id="szpr4Edit">
+                                                <form:option value="-" label="---"/>
+                                            </form:select>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <input class="qty-spinner" type="number" id="tppgQtyEdit" min="0"/>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <form:button type="button" value="" class="btn btn-success btnAddItmPkg" id="btnAddPkgSaladEdit">
+                                                <span class="glyphicon glyphicon-plus"></span>Add
+                                            </form:button>
+                                        </div>
+                                    </div>
+
+                                    <div class="row item-tbl-row">
+                                        <div class="col-xs-2">
+                                            <label class="checkbox-inline">
+                                                <form:checkbox value="desserts" class="checkbox chkbxPkgCat" path="" id="chkPkgDssrtEdit"/>
+                                                <fmt:message key="package.packageedit.form.checkbox.dessert" bundle="${bundle1}"/>
+                                            </label>
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <form:select type="text" class="form-control" path="itemName" id="slctItmPkgDssrtEdit">
+                                                <form:option value="-" label="---"/>
+                                            </form:select>
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <form:select type="text" class="form-control" path="" id="szpr5Edit">
+                                                <form:option value="-" label="---"/>
+                                            </form:select>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <input class="qty-spinner" type="number" min="0" id="dssrtQtyEdit"/>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <form:button type="button" value="" class="btn btn-success btnAddItmPkg" id="btnAddPkgDssrtEdit">
+                                                <span class="glyphicon glyphicon-plus"></span>Add
+                                            </form:button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
-                            <br>
+                            <br><br>
 
                             <div class="row">
-                                <div class="col-xs-4" align="right">
-                                    <label> Package Images : </label>
+                                <div class="col-xs-3" align="right">
+                                    <label><fmt:message key="package.packageeditform.packageimages" bundle="${bundle1}"/></label>
                                 </div>
                                 <div class="col-xs-5">
 
-                                    <form:input type="file" class="file_upload btn btn-default" path="image" id="btnUpldImage" value="Browse" />
+                                    <form:input type="file" class="file_upload btn btn-default" path="image" id="btnUpldImageEdit" value="Browse" />
                                     <br>
                                 </div>
-                            <br>
+                            </div>
+                            <br><br>
 
                             <div class="row">
-                                <div class="col-xs-4" align="right">
-                                    <label>Package Price : </label>
+                                <div class="col-xs-3" align="right">
+                                    <label><fmt:message key="package.packageeditform.packageprice" bundle="${bundle1}"/> </label>
                                 </div>
-                                <div class="col-xs-5">
+                                <div class="col-xs-3">
                                     <form:input type="text" class="form-control price" id="editPkgPrice" placeholder="LKR 0.00" path="price"/>
-                                </div>
-                                <div class="col-xs-3" align="center">
                                 </div>
                             </div>
 
                         </div>
-                            </div>
                     </fieldset>
                 </form:form>
 
             </div>
             <div style="text-align: center; z-index: 50000; width: 50%; margin: auto;" id="toaster"></div>
             <div class="modal-footer" align="right">
-                <button class="btn btn-success" type="button" value="Yes" id="btnUpdtPkgDelt">Update
+                <button class="btn btn-success" type="button" value="Yes" id="btnUpdtPkgDelt"><fmt:message key="package.packageedit.form.button.submit" bundle="${bundle1}"/>
                 </button>
-                <button class="btn btn-success" type="button" value="cancel" id="btnPkgCancel">Cancel
+                <button class="btn btn-success" type="button" value="cancel" id="btnPkgCancel"><fmt:message key="package.packageedit.form.button.reset" bundle="${bundle1}"/>
                 </button>
             </div>
         </div>
@@ -246,8 +389,8 @@
                         class="glyphicon glyphicon-remove"></span></button>
                 <br>
 
-                <div id="editModalContent">
-                   <%-- <div class="row col-xs-12" style="margin-left: 1%;">
+                <%--<div id="editModalContent">
+                    <div class="row col-xs-12" style="margin-left: 1%;">
 
                         <div class="row item-tbl-row item-tbl-hdr">
                             <div class="col-xs-3">
@@ -398,8 +541,8 @@
                             </div>
                         </div>
                         &lt;%&ndash;</div>&ndash;%&gt;
-                    </div>--%>
-                </div>
+                    </div>
+                </div>--%>
 
             </div>
 

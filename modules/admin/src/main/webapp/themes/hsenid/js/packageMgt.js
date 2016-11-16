@@ -174,11 +174,32 @@ function contentPackge(){
         content["qty"] = qtyVal5;
 
         jsonObj.push(content);
-        jsonString = JSON.stringify(jsonObj);
+
     }
 
     console.log(jsonObj);
     console.log(jsonString);
+    jsonString = JSON.stringify(jsonObj);
+    $.ajax({
+        url: "https://localhost:8443/admin/packages/add_package",
+      //  data:{"test":JSON.stringify(jsonObj)},
+        data:{"test":jsonObj},
+       // type: "POST",
+        success:function(result){
+            alert(result);
+            console.log("json result = "+result);
+            console.log("json result item= "+result["item"]);
+            console.log(Object.keys(result));
+            console.log(Object.values(result));
+            console.log(Object.entries(result));
+
+
+          /*  for (var i=0; i<result.length; i++){
+                    console.log("Item: "+result[i].item);
+                    console.log("Size: "+result[i].size);
+                }*/
+        }
+    });
 }
 
 /*

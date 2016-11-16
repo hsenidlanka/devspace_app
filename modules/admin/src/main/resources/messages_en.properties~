@@ -1,3 +1,4 @@
+
  ######################################------Home Page Labels -----------##############################################3
 
 homepage.page.title=Control Panel
@@ -232,7 +233,7 @@ package.packageadd.form.checkbox.beverage=Beverage
 package.packageadd.form.checkbox.topping=Topping
 package.packageadd.form.checkbox.dessert=Dessert
 package.packageadd.form.packageimages=Add Image/s
-package.packageadd.form.button.upldimages=Browse to Upload  Images
+package.packageadd.form.button.upldimages=Browse
 package.packageadd.form.button.reset=Reset
 package.packageadd.form.button.submit=Add Package
 
@@ -260,7 +261,6 @@ package.packageeditform.packageimages=Package Images
 package.packageeditform.packageprice=Package Price*
 package.packageedit.form.button.reset=Reset
 package.packageedit.form.button.submit=Update Package
-
 
 #-----Delete Pacakge----#
 package.deletemodal.packageid= Package ID :

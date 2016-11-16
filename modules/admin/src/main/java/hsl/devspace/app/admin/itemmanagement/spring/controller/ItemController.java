@@ -5,9 +5,9 @@ import hsl.devspace.app.corelogic.repository.category.CategoryRepository;
 import hsl.devspace.app.corelogic.repository.category.SubCategoryRepositoryImpl;
 import hsl.devspace.app.corelogic.repository.item.ItemRepository;
 import hsl.devspace.app.corelogic.repository.item.ReturnTypeResolver;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.jose4j.json.internal.json_simple.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,7 +31,8 @@ import java.util.Map;
 @RequestMapping(value = "/items")
 public class ItemController {
 
-    private static final Logger LOGGER = LogManager.getLogger(ItemController.class);
+    //private static final Logger LOGGER = LogManager.getLogger(ItemController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ItemController.class);
 
     @Autowired
     private ItemRepository item;
@@ -70,10 +71,10 @@ public class ItemController {
 
             MultipartFile imgFile = newItem.getImageUrl();
             String imgFileNm = imgFile.getOriginalFilename();
-            LOGGER.trace("multipart file  ="+imgFile);
+            LOGGER.trace("multipart file =, {}",imgFile);
 
-            LOGGER.trace(itemPrice + " item price");
-            LOGGER.trace(itemSize + " item size");
+            LOGGER.trace("Item price =, {} ",itemPrice);
+            LOGGER.trace("Item size = , {}",itemSize);
             List<String> sizelist = new ArrayList<String>(Arrays.asList(itemSize.split(",")));
             List<String> pricelist = new ArrayList<String>(Arrays.asList(itemPrice.split(",")));
 
@@ -106,60 +107,60 @@ public class ItemController {
 
                             // Creating the directory to store file
                             String rootPath = "/themes/hsenid/images/items/";
-                            LOGGER.trace("root path for img =" + rootPath);
+                            LOGGER.trace("root path for img =, {}", rootPath);
 
                             String realPathtoUpload = context.getRealPath(rootPath);
-                            LOGGER.trace("realPathtoUpload " + realPathtoUpload);
+                            LOGGER.trace("realPathtoUpload = , {} ", realPathtoUpload);
 
                             File dir = new File(realPathtoUpload);
                                 if(!dir.exists())
                                     dir.mkdirs();
 
-                            LOGGER.info("Dir.... =", dir.getAbsolutePath());
-                            LOGGER.trace("made dir "+ dir);
+                            LOGGER.info("Dir.... = ,{}", dir.getAbsolutePath());
+                            LOGGER.trace("made dir =, {}", dir);
 
                             // create local directory place
                             String localPathtoUpload ="/home/hsenid/devspace_app/modules/admin/src/main/" +
                                     "webapp/themes/hsenid/images/items/";
-                            LOGGER.error("realPathtoUpload " + localPathtoUpload);
+                            LOGGER.error("realPathtoUpload =, {}" , localPathtoUpload);
 
                             File dir2 = new File(localPathtoUpload);
                             if(!dir2.exists())
                                 dir2.mkdirs();
 
-                            LOGGER.error("made dir " + dir2);
+                            LOGGER.error("made dir= ,{}", dir2);
 
                             //create the file on server
                             File serverFile = new File(dir.getAbsolutePath() + File.separator + itemNm + ".png");//name of the image
-                           LOGGER.trace("serverFile = "+serverFile);
+                           LOGGER.trace("serverFile = ,{}", serverFile);
                             BufferedOutputStream stream = new BufferedOutputStream(
                                     new FileOutputStream(serverFile));
                             stream.write(bytes);
                             stream.close();
 
-                            LOGGER.trace("image save to server, Location= "+ serverFile.getAbsolutePath());
-                            LOGGER.trace("You successfully uploaded file= " + imgFileNm);
+                            LOGGER.trace("image save to server, Location=, {}", serverFile.getAbsolutePath());
+                            LOGGER.trace("You successfully uploaded file=, {}", imgFileNm);
 
 
                             //create the file on local machine
                             File localFile = new File(dir2.getAbsolutePath() + File.separator + itemNm + ".png");//name of the image
-                            LOGGER.error("serverFile = " + localFile);
+                            LOGGER.error("serverFile = {}", localFile);
                             BufferedOutputStream stream2 = new BufferedOutputStream(
                                     new FileOutputStream(localFile));
                             stream2.write(bytes);
                             stream2.close();
 
-                            LOGGER.error("image save to local, Location= " + localFile.getAbsolutePath());
-                            LOGGER.error("You successfully uploaded file= " + imgFileNm);
+                            LOGGER.error("image save to local, Location= {}" , localFile.getAbsolutePath());
+                            LOGGER.error("You successfully uploaded file= {}" , imgFileNm);
                         }
                         catch (Exception ex) {
-                            LOGGER.error("error in  getting image ", ex);
+                            LOGGER.error("error in  getting image {}", ex);
                         }
                     }else {
-                        LOGGER.error("You failed to upload " + imgFileNm + " because the file was empty.");
+                        LOGGER.error("You failed to upload {}" , imgFileNm ," because the file was empty.");
                     }
 
-                    LOGGER.info("added New Item to database " + itemNm);
+                    LOGGER.info("added New Item to database {}" , itemNm);
                 }
             } else {
                 JOptionPane.showMessageDialog(null,
@@ -167,15 +168,15 @@ public class ItemController {
                         JOptionPane.WARNING_MESSAGE);
 
                 newItem.setPrice(" ");
-                LOGGER.trace("after clear price" + itemPrice);
+                LOGGER.trace("after clear price = {}" , itemPrice);
                 newItem.setSize(" ");
-                LOGGER.trace("after clear size" + itemSize);
+                LOGGER.trace("after clear size = {}" , itemSize);
                 return new ModelAndView("item_management/addItem", "command", newItem);
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Error occured in adding item !", "Error !",
                     JOptionPane.ERROR_MESSAGE);
-            LOGGER.error("Error in add item " + ex.getMessage());
+            LOGGER.error("Error in add item {}",ex.getMessage());
         }
         return new ModelAndView(new RedirectView("add"));
     }
@@ -192,7 +193,7 @@ public class ItemController {
         modelView.addObject("listCatEdit", listCatEdit);
         modelView.addObject("command", new Item());
         modelView.setViewName("/item_management/viewItem");
-        LOGGER.trace("list itemmgt " + listCatEdit);
+        LOGGER.trace("list itemmgt = {}" , listCatEdit);
 
         return modelView;
     }
@@ -202,7 +203,7 @@ public class ItemController {
     public
     @ResponseBody
     List<Map<String, Object>> viewItem() {
-        LOGGER.info((item.viewAllItemDetails()) + " ffsf ");
+        LOGGER.info( "View all item details {} ",(item.viewAllItemDetails()));
         return item.viewAllItemDetails();
     }
 
@@ -228,19 +229,15 @@ public class ItemController {
         ReturnTypeResolver e = item.selectItemAndSize(itemId);
         List<Item> lst = e.getSelectedSize();
         JSONObject object = new JSONObject();
-        LOGGER.info("content of lst  " + lst);
-        LOGGER.info("length of lst  " + lst.size());
+        LOGGER.info("content of lst  {}" , lst);
+        LOGGER.info("length of lst {}" , lst.size());
 
         for (int i = 0; i < lst.size(); i++) {
             Item it = lst.get(i);
 
             object.put(it.getSize(), it.getPrice());
         }
-        LOGGER.info("itemId for edit " + itemId + ' ' + "e for edit " + e + "  and sp = " + object.toJSONString());
-        LOGGER.info("e for edit " + e);
-        LOGGER.info("sp object = " + object);
-        LOGGER.info("sp  object.toJSONString = " + object.toJSONString());
-
+        LOGGER.info("ItemId for edit {}", itemId , ' ' , "e for edit {}", e, "  and sp = {}", object.toJSONString());
         return object.toJSONString();
     }
 
@@ -253,16 +250,16 @@ public class ItemController {
             String itmPriceEdit = itemUpdate.getPrice();
             String itmSizeEdit = itemUpdate.getSize();
 
-            LOGGER.trace("itm Name and ID in edit " + itmName + " ID =" + itmId);
-            LOGGER.trace("itm price " + itmPriceEdit);
-            LOGGER.trace("itm size " + itmSizeEdit);
+            LOGGER.trace("Item Name and ID in edit {}" , itmName , " ID ={}", itmId);
+            LOGGER.trace("Item price {}", itmPriceEdit);
+            LOGGER.trace("Item size {}", itmSizeEdit);
 
             List<String> sizelistEdit = new ArrayList<String>(Arrays.asList(itmSizeEdit.split(",")));
             List<String> pricelistEdit = new ArrayList<String>(Arrays.asList(itmPriceEdit.split(",")));
 
-            LOGGER.trace("asList size" + sizelistEdit);
-            LOGGER.trace("asList size()" + sizelistEdit.size());
-            LOGGER.trace("asList price" + pricelistEdit);
+            LOGGER.trace("AsList sizeList {}" , sizelistEdit);
+            LOGGER.trace("AsList size {}" , sizelistEdit.size());
+            LOGGER.trace("AsList price {}" , pricelistEdit);
 
             List<Item> edittedList = new ArrayList<Item>();
 
@@ -272,16 +269,16 @@ public class ItemController {
                 itemList.setPrice(pricelistEdit.get(a));
                 edittedList.add(itemList);
             }
-            LOGGER.trace("edittedList " + edittedList);
-            LOGGER.trace("itemUpdate object " + itemUpdate);
-            LOGGER.error("edittedList err " + edittedList);
-            LOGGER.error("itemUpdate err " + itemUpdate);
-            LOGGER.trace("itemUpdate category " + itemUpdate.getCategoryName());
-            LOGGER.trace("itemUpdate sub-category " + itemUpdate.getSubCategoryName());
+            LOGGER.trace("edittedList {}" , edittedList);
+            LOGGER.trace("itemUpdate object {}", itemUpdate);
+            LOGGER.error("edittedList err {}", edittedList);
+            LOGGER.error("itemUpdate err {}", itemUpdate);
+            LOGGER.trace("itemUpdate category {}", itemUpdate.getCategoryName());
+            LOGGER.trace("itemUpdate sub-category {}", itemUpdate.getSubCategoryName());
 
             int i = item.updateItem(itemUpdate, edittedList);
             LOGGER.trace(String.valueOf(i), "  info i edit ", i);
-            LOGGER.error("  error in i edit", i);
+            LOGGER.error("error in i edit {}", i);
             if (i != 1) {
                 JOptionPane.showMessageDialog(null, "Server-side error. Cannot update the item !", "Error !",
                         JOptionPane.ERROR_MESSAGE);
@@ -290,9 +287,9 @@ public class ItemController {
                 JOptionPane.showMessageDialog(null, "Updated item details" + itmName, "Success",
                         JOptionPane.INFORMATION_MESSAGE);
 
-                LOGGER.trace("itemUpdate category after" + itemUpdate.getCategoryName());
-                LOGGER.trace("itemUpdate sub-category after" + itemUpdate.getSubCategoryName());
-                LOGGER.info("updated item successfully " + itmName);
+                LOGGER.trace("ItemUpdate category after {}", itemUpdate.getCategoryName());
+                LOGGER.trace("ItemUpdate sub-category after {}" , itemUpdate.getSubCategoryName());
+                LOGGER.info("Updated item successfully {}", itmName);
             }
         } catch (Exception er) {
             LOGGER.error("Exception " + er.getMessage());
@@ -310,7 +307,7 @@ public class ItemController {
     @ResponseBody
     int deleteItem(@RequestParam("itemName") String itemName) throws SQLIntegrityConstraintViolationException {
 
-        LOGGER.info("deleted Item from database " + itemName);
+        LOGGER.info("deleted Item from database {}", itemName);
         return item.deleteItem(itemName);
     }
 

@@ -5,6 +5,7 @@ import hsl.devspace.app.coreserver.model.ServerModel;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -15,7 +16,7 @@ import org.springframework.context.ApplicationContext;
  */
 public class InitServer {
     ApplicationContext context = Context.appContext;
-    //    private static final Logger log = LogManager.getLogger(InitServer.class);
+//    private static final Logger log = org.apache.logging.log4j.LogManager.getLogger(InitServer.class);
     private static final Logger log = LoggerFactory.getLogger(InitServer.class);
     Server server;
 

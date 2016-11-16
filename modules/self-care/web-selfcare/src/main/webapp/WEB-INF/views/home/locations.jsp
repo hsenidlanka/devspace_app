@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Locations</title>
     <%@include file="../includes/include.jsp" %>
+    <title><fmt:message key="update.user.title" bundle="${lang}"/></title>
     <div class="loader-anim"></div>
 </head>
 
