@@ -90,22 +90,23 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category");
         List<Category> categories=new ArrayList<Category>();
 
-        for (int i=0;i<mp.size();i++){
+        for (Map<String, Object> aMp : mp) {
             //for(int j=0;j<mp.get(i).size();j++) {
-                Category category = new Category();
-                category.setCategory_id(Integer.parseInt(mp.get(i).get("id").toString()));
-                category.setCategoryName(mp.get(i).get("name").toString());
-                category.setCatDescription(mp.get(i).get("description").toString());
-                category.setImage(mp.get(i).get("image").toString());
-                category.setCreator(mp.get(i).get("creator").toString());
-                category.setStatus(mp.get(i).get("status").toString());
-                categories.add(category);
-           // }
-
+            Category category = new Category();
+            category.setCategory_id(Integer.parseInt(aMp.get("id").toString()));
+            category.setCategoryName(aMp.get("name").toString());
+            category.setCatDescription(aMp.get("description").toString());
+            category.setImage(aMp.get("image").toString());
+            category.setCreator(aMp.get("creator").toString());
+            category.setStatus(aMp.get("status").toString());
+            categories.add(category);
+            // }
         }
-        log.info("{}",categories);
+        log.info("msg {}",categories);
         return categories;
     }
+
+
 
     @Override
     public List<Category> selectAllVisible() {

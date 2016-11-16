@@ -45,7 +45,8 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
         if (availability == false) {
             String sql = "INSERT INTO sub_category " +
                     "(name,description,creator,category_id) VALUES (?,?,?,(SELECT id FROM category WHERE name=?))";
-            row = jdbcTemplate.update(sql, new Object[]{category.getSubCategoryName(), category.getSubcatDescription(), category.getCreator(), category.getCategoryName()});
+            row = jdbcTemplate.update(sql, new Object[]{category.getSubCategoryName(), category.getSubcatDescription(),
+                    category.getCreator(), category.getCategoryName()});
             log.info("{} new sub category inserted", row);
         } else
             log.info("{} sub category already available", row);
