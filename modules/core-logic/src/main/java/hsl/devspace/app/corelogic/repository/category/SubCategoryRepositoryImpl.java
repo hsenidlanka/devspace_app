@@ -105,6 +105,11 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
         log.info("{}", subCategories);
         return subCategories;
     }
+    /*retrieve the details of a given category */
+    @Override
+    public Category selectCategoryDetail(int categoryId) {
+        return null;
+    }
 
     @Override
     public List<Category> selectAllVisible() {

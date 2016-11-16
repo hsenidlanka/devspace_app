@@ -105,6 +105,23 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
         log.info("msg {}",categories);
         return categories;
     }
+    /*retrieve the details of a given category */
+    @Override
+    public Category selectCategoryDetail(int categoryId) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category WHERE id = ?",categoryId);
+
+            Category category = new Category();
+            category.setCategory_id(Integer.parseInt(mp.get(0).get("id").toString()));
+            category.setCategoryName(mp.get(0).get("name").toString());
+            category.setCatDescription(mp.get(0).get("description").toString());
+            category.setImage(mp.get(0).get("image").toString());
+            category.setCreator(mp.get(0).get("creator").toString());
+            category.setStatus(mp.get(0).get("status").toString());
+
+
+        log.info("msg {}",category);
+        return category;
+    }
 
 
 

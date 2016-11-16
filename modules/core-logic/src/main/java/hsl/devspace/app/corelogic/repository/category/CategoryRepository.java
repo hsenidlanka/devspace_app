@@ -16,6 +16,7 @@ public interface CategoryRepository {
     boolean checkAvailability(String categoryName);
     public int delete(String categoryName);
     List<Category> selectAll();
+    public Category selectCategoryDetail(int categoryId);
     List<Category> selectAllVisible();
     int count();
     int update(String name,String description);
