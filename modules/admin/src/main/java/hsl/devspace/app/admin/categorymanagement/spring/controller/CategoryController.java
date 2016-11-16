@@ -18,6 +18,7 @@ import javax.swing.*;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,6 +40,13 @@ public class CategoryController {
 
     @Value("${insert.subcategory.success}")
     private String insertSubSuccess;
+
+   /** reading system.properties file using annotations **/
+   @Value("${admin.categoryimage.server.location}")
+   private String serverPath;
+
+    @Value("{admin.categoryimage.localmachine.location}")
+    private String localPathtoUpload;
 
     @Autowired
     private CategoryRepository categoryRepository, subcategoryRepository;
@@ -70,10 +78,10 @@ public class CategoryController {
     List<String> populateSubcategoryList(@RequestParam("categorySel") String categorySel){
 
         String str=categorySel.replaceAll("\\s","");
-        LOG.error("str {}",str);
+        LOG.info("str {}", str);
 
         List<String> outb =subcategoryRepository.retrieveSubcatogories(str);
-        LOG.error("recieved sub category list {}",outb);
+        LOG.trace("recieved sub category list {}", outb);
 
         return outb;
     }
@@ -81,123 +89,121 @@ public class CategoryController {
     //handler method to insert the new Category data to database
     @RequestMapping(value="/addCategory")
     public ModelAndView saveOrUpdate(@ModelAttribute("categoryObject")  Category categoryObject,
-                                     @ModelAttribute("subcategoryObject") Category subcategoryObject
-                                    )
-                                     throws SQLIntegrityConstraintViolationException {
+                                     @RequestParam("subcategory_name[]") String[] subcategory_name,
+                                     @RequestParam("subcategory_des[]") String[] subcategory_des
+                                    ) throws SQLIntegrityConstraintViolationException {
 
+        //set the creator in category object
         categoryObject.setCreator("admin");
-        LOG.trace("Add Category category object {}", categoryObject);
+        LOG.error("Add Category category object {}", categoryObject);
 
         //for the image file uploaded
         MultipartFile imgFile=categoryObject.getImageUrl();
         String imgFileName=imgFile.getOriginalFilename();
-        LOG.error("multipart file  =" + imgFile);
+        LOG.error("image file name  =" + imgFile.getOriginalFilename());
 
-        int i=categoryRepository.add(categoryObject);
+        int catAdd=categoryRepository.add(categoryObject);
+        if(catAdd ==1) {
+            for (int j=0;j< subcategory_name.length;j++) {
 
-        if (i == 0)
-            JOptionPane.showMessageDialog(null, insertError);// put separate error pages
-        else {
-            subcategoryObject.setCreator("admin");
-            LOG.trace("Add Category Sub-category object {}", subcategoryObject);
+                String subcatName=subcategory_name[j];
+                String subcatDescription= subcategory_des[j];
+                LOG.info("subcat name {} and des:{}",subcatName,subcatDescription);
 
-            int j=subcategoryRepository.add(subcategoryObject);
-            if (j ==1) {
-                JOptionPane.showMessageDialog(null, insertSuccess);
+                //set the properties for the sucategory
+                categoryObject.setSubCategoryName(subcatName);
+                categoryObject.setSubcatDescription(subcatDescription);
+                categoryObject.setCreator("admin");
 
-                   /*
-                    * save images to directory*/
-                if (!imgFile.isEmpty()) {
-                    try {
-                        byte[] bytes = imgFile.getBytes();
-
-                        // Creating the directory to store file
-                        String rootPath = "/themes/hsenid/images/categories/";
-                        LOG.error("root path for img =" + rootPath);
-
-                        String realPathtoUpload = context.getRealPath(rootPath);
-                        LOG.error("realPathtoUpload " + realPathtoUpload);
-
-                        File dir = new File(realPathtoUpload);
-                        if(!dir.exists())
-                            dir.mkdirs();
-
-                        LOG.error("Dir.... =", dir.getAbsolutePath());
-                        LOG.error("made dir " + dir);
-
-                        // create local directory place
-                        String localPathtoUpload ="/home/hsenid/Documents/MAVEN/devspace_app/modules/admin/src/main/" +
-                                "webapp/themes/hsenid/images/categories/";
-                        LOG.error("realPathtoUpload " + localPathtoUpload);
-
-                        File dir2 = new File(localPathtoUpload);
-                        if(!dir2.exists())
-                            dir2.mkdirs();
-
-                        LOG.error("made dir " + dir2);
-
-
-                        //get category name
-                        String catName= categoryObject.getCategoryName();
-
-                        //create the file on server
-                        File serverFile = new File(dir.getAbsolutePath() + File.separator + catName + ".jpg");//name of the image
-                        LOG.error("serverFile = " + serverFile);
-                        BufferedOutputStream stream = new BufferedOutputStream(
-                                new FileOutputStream(serverFile));
-                        stream.write(bytes);
-                        stream.close();
-
-                        LOG.error("image save to server, Location= " + serverFile.getAbsolutePath());
-
-
-                        //create the file on local machine
-                        File localFile = new File(dir2.getAbsolutePath() + File.separator + catName + ".jpg");//name of the image
-                        LOG.error("serverFile = " + localFile);
-                        BufferedOutputStream stream2 = new BufferedOutputStream(
-                                new FileOutputStream(localFile));
-                        stream2.write(bytes);
-                        stream2.close();
-
-                        LOG.error("image save to local, Location= " + localFile.getAbsolutePath());
-                        LOG.error("You successfully uploaded file= " + imgFileName);
-
-                    }
-                    catch (Exception ex) {
-                        LOG.error("error in  getting image ", ex);
-                    }
-                }else {
-                    LOG.error("You failed to upload " + imgFileName + " because the file was empty.");
+                int subcatAdd=subcategoryRepository.add(categoryObject);
+                LOG.info("subcat add return is: {}",subcatAdd);
+                if (subcatAdd ==0) {
+                    JOptionPane.showMessageDialog(null, insertError);
+                    break;
                 }
             }
-        }
-        return new ModelAndView(new RedirectView("add"));
+            JOptionPane.showMessageDialog(null, insertSuccess);
 
+            //to upload the image
+                if (!imgFile.isEmpty()) {
+                    //get category name
+                    String catName= categoryObject.getCategoryName();
+
+                    //create a directory in server and upload the image there
+                    String realPathtoUpload = context.getRealPath(serverPath);
+                    LOG.info("realPathtoUpload " + realPathtoUpload);
+                    uploadFile(imgFile,realPathtoUpload,catName);
+
+                    //create a directory in local machine and upload the image there
+                    uploadFile(imgFile,localPathtoUpload,catName);
+
+                }else {
+                    LOG.error("You failed to upload " + imgFileName + "because the file was empty.");
+                }
+        } else if(catAdd == 0)
+            JOptionPane.showMessageDialog(null, insertError);// put separate error pages
+
+    return new ModelAndView(new RedirectView("add"));
     }
+
+    private void uploadFile( MultipartFile image, String filePath, String fileName){
+        try {
+            byte[] bytes = image.getBytes();
+            //directory made
+            File dir = new File(filePath);
+            if(!dir.exists())
+                dir.mkdirs();
+
+            //file made
+            File createFile = new File(dir.getAbsolutePath() + File.separator + fileName + ".jpg");//name of the image
+            BufferedOutputStream stream = new BufferedOutputStream(
+                    new FileOutputStream(createFile));
+            stream.write(bytes);
+            stream.close();
+
+        } catch (IOException e) {
+            LOG.error("error in  getting image ", e);
+        }
+    }
+
 
     //handler method to insert the new Category data to database
     @RequestMapping(value="/addSubCategory")
     public ModelAndView addSubCategory( @ModelAttribute("subcategoryObject") Category subcategoryObject,
-                                     @RequestParam("catName") String catName) throws SQLIntegrityConstraintViolationException {
-
-
-        subcategoryObject.setCreator("admin");
+                                     @RequestParam("catName") String catName,
+                                     @RequestParam("subcategory_name[]") String[] subcategory_name,
+                                     @RequestParam("subcategory_des[]") String[] subcategory_des) throws SQLIntegrityConstraintViolationException {
 
         String catName2=catName.replaceAll("\\s", "");
-        LOG.error(catName2);
-        subcategoryObject.setCategoryName(catName2);
-        LOG.error(subcategoryObject.getCategoryName());
+        LOG.info(catName2);
 
-        int i=subcategoryRepository.add(subcategoryObject);
-        LOG.error("I value {}",i);
+        LOG.info(subcategoryObject.getCategoryName());
 
-        if (i ==1) {
-            JOptionPane.showMessageDialog(null, insertSubSuccess);
-        }else
-            JOptionPane.showMessageDialog(null, insertError);
+        for (int j=0;j<subcategory_name.length;j++) {
+            String subcatName=subcategory_name[j];
+            String subcatDescription= subcategory_des[j];
 
+            //set the object values
+            subcategoryObject.setSubCategoryName(subcatName);
+            subcategoryObject.setSubcatDescription(subcatDescription);
+            subcategoryObject.setCreator("admin");
+            subcategoryObject.setCategoryName(catName2);
+
+            LOG.info("subcategory name list {}", subcategory_name[j]);
+            LOG.info("subcategory des {}", subcategory_des[j]);
+
+            int i = subcategoryRepository.add(subcategoryObject);
+            LOG.info("I value {}",i);
+            if(i ==1) {
+                continue;
+            }
+            else if (i ==0)
+                JOptionPane.showMessageDialog(null, insertError);
+                break;
+
+        }
+        JOptionPane.showMessageDialog(null, insertSubSuccess);
         return new ModelAndView(new RedirectView("add"));
-
     }
 
 ///////////////////////////////////////////////////// CATEGORY VIEW HANDLER METHODS  ///////////////////////////////////////

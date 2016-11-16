@@ -100,13 +100,14 @@
                     </div>
                     <div class="form-group"></div>
                     <br>
+                    <%--subcategory addition grid--%>
                     <div class="form-group">
                         <legend class="scheduler-border">
                             <fmt:message key="category.categoryadd.form.add.subcategories" bundle="${bundle1}"/>
                         </legend>
 
 
-                        <div class="row subcat_add_table col-xs-12" style="margin-left: 1%;">
+                        <div class="row cat_add_table col-xs-12" style="margin-left: 1%;">
 
                             <div class="row subcat-tbl-row subcat-tbl-hdr" style="width:600px;">
                                 <div class="col-xs-4">
@@ -123,16 +124,16 @@
                             <div class="row subcat-tbl-row">
                                 <div class="col-xs-4">
                                     <label class="checkbox-inline">
-                                        <form:input path="subCategoryName" type="text" class="form-control" id="subcategoryname"
+                                        <input name="subcategory_name[]" type="text" class="form-control" id="subcategoryname"
                                                     required="required" placeholder="Enter Subcategory Name"/>
                                     </label>
                                 </div>
                                 <div class="col-xs-5">
-                                    <form:textarea path="subcatDescription" type="text" class="form-control" id="subcategorydes"
-                                                   placeholder="Enter Subcategory Description" ></form:textarea>
+                                    <textarea name="subcategory_des[]"  class="form-control" id="subcategorydes"
+                                                   placeholder="Enter Subcategory Description" ></textarea>
                                 </div>
                                 <div class="col-xs-3">
-                                    <a href="#" class="addsub ">
+                                    <a href="#" class="addcat ">
                                         <span class="glyphicon glyphicon-plus">New Subcategory</span>
                                     </a>
                                 </div>

@@ -38,30 +38,18 @@ $(document).ready(function(){
 
 });
 
-//js to load the image as radio button is clicked
-/*function imgurl_display(){
-    var  img=
-    document.getElementById("category").innerHTML = "<img src='/themes/hsenid/images/categories/cat2.png'>";
 
-
-
-}*/
-
+//in the new sub-category addition page to add grid rows
 $(document).ready(function(){
     var counter = 1;
     $('.subcat_add_table').on('click','.addsub',function(){
 
         event.preventDefault();
 
-     /*   var newRow = jQuery('<tr><td><input type="text" name="first_name' +
-        counter + '"/></td><td><input type="text" name="last_name' +
-        counter + '"/></td></tr>');
-        counter++;*/
-
         var newRow=jQuery('<div class="row subcat-tbl-row"><div class="col-xs-4">' +
-        '<label class="checkbox-inline"><div contenteditable><form:input path="subCategoryName" type="text" class="form-control" id="subcategoryname" required="required" placeholder="Enter Category Name"/>' +
-        '</div></label></div><div class="col-xs-5"><div contenteditable><form:textarea path="subcatDescription" type="text" class="form-control" id="subcategorydes" placeholder="Enter Category Description" >' +
-        '</form:textarea></div></div> <div class="col-xs-3"> <a href="#" class="addsub"> <span class=" glyphicon glyphicon-plus"></span> ' +
+        '<label class="checkbox-inline"><div contenteditable><input name="subcategory_name[]" type="text" class="form-control" id="subcategoryname" required="required" placeholder="Enter Category Name"/>' +
+        '</div></label></div><div class="col-xs-5"><div contenteditable><textarea name="subcategory_des[]" class="form-control" id="subcategorydes" placeholder="Enter Category Description" >' +
+        '</textarea></div></div> <div class="col-xs-3"> <a href="#" class="addsub"> <span class=" glyphicon glyphicon-plus"></span> ' +
         '</a> <a href="#" class="deletesub"> <span class=" glyphicon glyphicon-minus"></span> </a> </div>');
 
         $('.subcat_add_table').append(newRow);
@@ -69,5 +57,27 @@ $(document).ready(function(){
             $(this).parent().parent().remove();
         });
     });
+});
 
+
+//in the category addition page to add grid rows for a subcategory addition
+$(document).ready(function(){
+    var counter = 1;
+    $('.cat_add_table').on('click','.addcat',function(){
+
+        event.preventDefault();
+
+        var newRow=jQuery('<div class="row subcat-tbl-row"><div class="col-xs-4">' +
+        '<label class="checkbox-inline"><div contenteditable><input name="subcategory_name[]" type="text" class="form-control" id="subcategoryname" required="required" placeholder="Enter Category Name"/>' +
+        '</div></label></div><div class="col-xs-5"><div contenteditable><textarea name="subcategory_des[]" class="form-control" id="subcategorydes" placeholder="Enter Category Description" >' +
+        '</textarea></div></div> <div class="col-xs-3"> <a href="#" class="addcat"> <span class=" glyphicon glyphicon-plus"></span> ' +
+        '</a> <a href="#" class="deletecat"> <span class=" glyphicon glyphicon-minus"></span> </a> </div>');
+
+        $('.cat_add_table').append(newRow);
+        $(".deletecat").on('click',function(){
+            $(this).parent().parent().remove();
+        });
+
+
+    });
 });

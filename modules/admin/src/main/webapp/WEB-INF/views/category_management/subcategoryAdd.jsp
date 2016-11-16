@@ -64,7 +64,7 @@
                 <div class="row">
                     <div class="col-xs-2"></div>
                     <div class=" col-xs-6 radio" style="text-align: left">
-                        <label id="subcat" >
+                        <label id="subcat" class="col-xs-6 control-label">
 
                         </label>
                     </div>
@@ -77,7 +77,7 @@
               </legend>
 
 
-              <div class="row subcat_add_table col-xs-12" style="margin-left: 1%;">
+              <div class="row subcat_add_table col-xs-12" id="subcat_table" style="margin-left: 1%;">
 
                   <div class="row subcat-tbl-row subcat-tbl-hdr" style="width:600px;">
                       <div class="col-xs-4">
@@ -94,13 +94,13 @@
                   <div class="row subcat-tbl-row">
                       <div class="col-xs-4">
                           <label class="checkbox-inline">
-                              <form:input path="subCategoryName" type="text" class="form-control" id="subcategoryname"
+                              <input name="subcategory_name[]" type="text" class="form-control" id="subcategoryname"
                                           required="required" placeholder="Enter Subcategory Name"/>
                           </label>
                       </div>
                       <div class="col-xs-5">
-                          <form:textarea path="subcatDescription" type="text" class="form-control" id="subcategorydes"
-                                         placeholder="Enter Subcategory Description" ></form:textarea>
+                          <textarea name="subcategory_des[]"  class="form-control" id="subcategorydes"
+                                         placeholder="Enter Subcategory Description" ></textarea>
                       </div>
                       <div class="col-xs-3">
                           <a href="#" class="addsub ">
@@ -120,26 +120,18 @@
                   </label>
                   <div class="col-xs-8">
                       <div class="col-xs-2">
-
                           <form:button type="reset" value="Reset" class="btn btn-success btn-md btnAddItem">
                               <fmt:message key="user.useradd.form.button.reset" bundle="${bundle1}" /></form:button>
-
                       </div>
                       <div class="col-xs-10">
-
                           <form:button type="submit" class="btn btn-success btn-md" id="btnAddItem"><span
                                   class="glyphicon glyphicon-plus"></span>
                               <fmt:message key="category.add.subcategory.submit.button" bundle="${bundle1}" />
                           </form:button>
-
                       </div>
                   </div>
               </div>
           </div>
-
-
-          <%--</fieldset>--%>
-
 
       </fieldset>
   </form:form>
