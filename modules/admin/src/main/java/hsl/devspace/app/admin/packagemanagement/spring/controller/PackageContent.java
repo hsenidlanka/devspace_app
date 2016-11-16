@@ -18,9 +18,5 @@ public class PackageContent {
 
     public void setQty(int qty1) { this.qty = qty1; }
 
-   /* @Override
-    public String toString() {
-        return "Content [item=" + item+ ", size= " + size+",qty= " +qty+"]";
-    }*/
 
 }

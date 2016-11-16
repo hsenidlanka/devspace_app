@@ -39,6 +39,7 @@
         <fmt:message key="package.heading" bundle="${bundle1}"/>
     </div>
 </div>
+
 <br>
 
 <div>
@@ -59,6 +60,7 @@
             </li>
         </ul>
     </div>
+
 </div>
 
 <div class="form-box" id="add-pkg-form-box">
@@ -71,7 +73,6 @@
             <form:form class="form-horizontal" role="form" id="frmAddPkg" method="post" action="/admin/packages/add_package" enctype="multipart/form-data">
                 <fieldset class="scheduler-border">
                     <legend class="scheduler-border"><fmt:message key="package.packageadd.form.legend" bundle="${bundle1}"/></legend>
-
 
                     <div class="form-group">
                         <div class="row">
@@ -134,25 +135,26 @@
                                     </div>
                                 </div>
 
-                                <div class="row item-tbl-row">
+                                <div class="row rowtbl item-tbl-row" id="tbladdPkgCont">
                                     <div class="col-xs-2">
                                         <label class="checkbox-inline">
-                                        <form:checkbox value="pizza" class="checkbox chkbxPkgCat" path="categoryName" id="chkPkgPzza"/>
-                                            <fmt:message key="package.packageadd.form.checkbox.pizza" bundle="${bundle1}"/>
+                                        <form:checkbox value="pizza" class="checkbox chkbxPkgCat" path="categoryName" id="chkPkgCat"/>
+                                            <label class="chkbxPkgCat1"></label>
+                                            <%--<fmt:message key="package.packageadd.form.checkbox.pizza" bundle="${bundle1}"/>--%>
                                         </label>
                                     </div>
                                     <div class="col-xs-3">
-                                        <form:select type="text" class="form-control" path="itemName" id="slctItmPkgPzza">
+                                        <form:select type="text" class="form-control" path="itemName" id="slctItmPkgCat">
                                             <form:option value="-" label="---"/>
                                         </form:select>
                                     </div>
                                     <div class="col-xs-3">
-                                        <form:select type="text" class="form-control" path="" id="szpr1">
+                                        <form:select type="text" class="form-control" path="" id="szpr">
                                             <form:option value="-" label="---"/>
                                         </form:select>
                                     </div>
                                     <div class="col-xs-2">
-                                        <input class="qty-spinner" type="number" min="0" id="pzzaQty"/>
+                                        <input class="qty-spinner" type="number" min="0" id="contQty"/>
                                     </div>
                                     <div class="col-xs-2">
                                         <form:button type="button" value="" class="btn btn-success btnAddItmPkg" id="btnAddPkgPizza">
@@ -160,8 +162,9 @@
                                         </form:button>
                                     </div>
                                 </div>
+                            <div id="tstDiv"></div>
 
-                                <div class="row item-tbl-row">
+                                <%--<div class="row item-tbl-row">
                                     <div class="col-xs-2">
                                         <label class="checkbox-inline">
                                         <form:checkbox value="Salad" class="checkbox chkbxPkgCat" path="" id="chkPkgSld"/>
@@ -267,7 +270,7 @@
                                             <span class="glyphicon glyphicon-plus"></span>Add
                                         </form:button>
                                     </div>
-                                </div>
+                                </div>--%>
                         </div>
                     </div>
 <br>
