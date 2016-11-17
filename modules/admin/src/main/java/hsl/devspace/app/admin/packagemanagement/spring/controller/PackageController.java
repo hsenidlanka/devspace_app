@@ -116,34 +116,38 @@ public class PackageController {
     @RequestMapping(value = "/add_package")
     public
     @ResponseBody
-    ModelAndView addPackage(@ModelAttribute("command") Package newPackage,
+    ModelAndView addPackage(@ModelAttribute("newPackage") Package newPackage,
                             HttpServletRequest request) {
 
+        LOGGER.error("package objct {}",newPackage);
         String s = request.getParameter("test");
         LOGGER.trace("test val = {}", s);
 
         ObjectMapper objectMapper = new ObjectMapper();
-        List<PackageContent> cats = null;
-
+        List<Package> cats = null;
+        String pkgName = newPackage.getPackName();
         try {
-            String pkgName = newPackage.getPackName();
-            List<PackageContent> contList = new ArrayList<PackageContent>();
 
-            cats = objectMapper.readValue(s, new TypeReference<List<PackageContent>>() {
+            LOGGER.trace("new packg name {}",pkgName);
+            List<Package> contList = new ArrayList<Package>();
+
+            cats = objectMapper.readValue(s, new TypeReference<List<Package>>() {
             });
-            for (PackageContent cont : cats) {
+            for (Package cont : cats) {
                 LOGGER.trace("cont= {} ", cont);
-                PackageContent details = new PackageContent();
-                details.setItem(cont.getItem());LOGGER.trace("item detail {}",details.getItem());
-                details.setSize(cont.getSize());LOGGER.trace("item detail {}", cont.getSize());
-                details.setQty(cont.getQty());LOGGER.trace("item detail {}", cont.getQty());
 
+                /*details.setItem(cont.getItem());LOGGER.trace("item detail {}",details.getItem());*/
+                Package details = new Package(cont.getItemName(),cont.getQuantity(),cont.getSize());
                 contList.add(details);
             }
-            LOGGER.error("contlist details {}", contList.get(0).getQty());
-            boolean uniquePknm = packageRepo.checkUniquePackage(pkgName);
+            LOGGER.error("contlist details {}", contList.get(0).getQuantity(),contList.get(0).getSize(),contList.get(0).getItemName());
+            LOGGER.error("contlist details2 {}", contList);
 
-            /*if (uniquePknm) {
+            boolean uniquePknm = packageRepo.checkUniquePackage(pkgName);
+            LOGGER.trace("unique ad pkg {}",uniquePknm);
+            LOGGER.error("unique ad pkg {}",uniquePknm);
+
+            if (uniquePknm) {
                 int a = packageRepo.addPackage(newPackage, contList);
                 LOGGER.info("a in add package {} ", a);
 
@@ -161,7 +165,7 @@ public class PackageController {
                         JOptionPane.WARNING_MESSAGE);
 
                 return new ModelAndView("package_management/addPackage", "command", newPackage);
-            }*/
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error occured in adding package !", "Error !",
                     JOptionPane.ERROR_MESSAGE);

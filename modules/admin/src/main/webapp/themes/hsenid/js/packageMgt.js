@@ -148,9 +148,9 @@ function contentPackge() {
         var qtyVal = $("#contQty0").val();
 
         content = {};
-        content["item"] = itemVal;
+        content["itemName"] = itemVal;
         content["size"] = sizeVal;
-        content["qty"] = qtyVal;
+        content["quantity"] = qtyVal;
 
         jsonObj.push(content);
         jsonString = JSON.stringify(jsonObj);
@@ -161,9 +161,9 @@ function contentPackge() {
         var qtyVal2 = $("#contQty1").val();
 
         content = {};
-        content["item"] = itemVal2;
+        content["itemName"] = itemVal2;
         content["size"] = sizeVal2;
-        content["qty"] = qtyVal2;
+        content["quantity"] = qtyVal2;
 
         jsonObj.push(content);
         jsonString = JSON.stringify(jsonObj);
@@ -174,9 +174,9 @@ function contentPackge() {
         var qtyVal3 = $("#contQty2").val();
 
         content = {};
-        content["item"] = itemVal3;
+        content["itemName"] = itemVal3;
         content["size"] = sizeVal3;
-        content["qty"] = qtyVal3;
+        content["quantity"] = qtyVal3;
 
         jsonObj.push(content);
         jsonString = JSON.stringify(jsonObj);
@@ -187,9 +187,9 @@ function contentPackge() {
         var qtyVal4 = $("#contQty3").val();
 
         content = {};
-        content["item"] = itemVal4;
+        content["itemName"] = itemVal4;
         content["size"] = sizeVal4;
-        content["qty"] = qtyVal4;
+        content["quantity"] = qtyVal4;
 
         jsonObj.push(content);
         jsonString = JSON.stringify(jsonObj);
@@ -200,9 +200,9 @@ function contentPackge() {
         var qtyVal5 = $("#contQty4").val();
 
         content = {};
-        content["item"] = itemVal5;
+        content["itemName"] = itemVal5;
         content["size"] = sizeVal5;
-        content["qty"] = qtyVal5;
+        content["quantity"] = qtyVal5;
 
         jsonObj.push(content);
 
@@ -213,10 +213,13 @@ function contentPackge() {
     jsonString = JSON.stringify(jsonObj);
 
     $.ajax({
-        url: "https://localhost:8443/admin/packages/add_package",
+        url: "./add_package/",
         data:{"test":JSON.stringify(jsonObj)},
         // type: "POST",
         success: function (result) {
+            console.log("result from server ",+result);
+            console.log("result from server2 ",+result.toString());
+            console.log("result from server3 ",+result.toArray());
         }
     });
 }
@@ -231,9 +234,9 @@ function contentPackge() {
  var qtyVal = $("#pzzaQty").val();
 
  content = {};
- content["item"] = itemVal;
+ content["itemName"] = itemVal;
  content["size"] = sizeVal;
- content["qty"] = qtyVal;
+ content["quantity"] = qtyVal;
 
  jsonObj.push(content);
  jsonString = JSON.stringify(jsonObj);
