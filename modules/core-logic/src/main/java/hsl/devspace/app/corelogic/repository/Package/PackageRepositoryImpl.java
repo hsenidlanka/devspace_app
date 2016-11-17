@@ -45,7 +45,7 @@ public class PackageRepositoryImpl implements PackageRepository  {
         String sql = "INSERT INTO package " +
                 "(name,price,image) VALUES (?,?,?)";
         row = jdbcTemplate.update(sql, new Object[]{pack.getPackName(), pack.getPrice(), ims});
-        log.info("{} new package added",row);
+        log.debug("{} new package added", row);
         return row;
     }
 
@@ -55,18 +55,32 @@ public class PackageRepositoryImpl implements PackageRepository  {
 
         String sql = "DELETE FROM package WHERE name = ?";
         int row = jdbcTemplate.update(sql, new Object[]{packageName});
-        log.info("{} package deleted",row);
+        log.debug("{} package deleted", row);
         return row;
     }
 
     /*update details of package*/
     @Override
-    public int updatePackage(Package updatedPackage) {
+    public int update(Package updatedPackage) {
+
+        MultipartFile img = updatedPackage.getImageUrl();
+        String ims = img.getOriginalFilename();
         String sql = "UPDATE package SET price=?,image=? WHERE name = ? ";
-        int row = jdbcTemplate.update(sql, new Object[]{updatedPackage.getPrice(), updatedPackage.getImage(), updatedPackage.getPackName()});
-        log.info("{}",row);
+        int row = jdbcTemplate.update(sql, new Object[]{updatedPackage.getPrice(), ims, updatedPackage.getPackName()});
+        log.debug("{}", row);
         return row;
     }
+
+    public int updateContent(List<Package> content) {
+        int row = 0;
+        for (int i = 0; i < content.size(); i++) {
+            String sql = "UPDATE package_item SET item_id=(SELECT id FROM item WHERE name=?),quantity=?,size=? WHERE package_id =(SELECT id FROM package WHERE name=?) ";
+            row = jdbcTemplate.update(sql, new Object[]{content.get(0).getItemName(), content.get(0).getQuantity(), content.get(0).getSize(), content.get(0).getPackName()});
+        }
+        log.debug("{}", row);
+        return row;
+    }
+
 
     /*change price of a package*/
     @Override
@@ -74,7 +88,7 @@ public class PackageRepositoryImpl implements PackageRepository  {
 
         String sql = "UPDATE package SET price=?  WHERE name = ? ";
         int row = jdbcTemplate.update(sql, new Object[]{price, packageName});
-        log.info("{}",row);
+        log.debug("{}", row);
         return row;
     }
 
@@ -94,7 +108,7 @@ public class PackageRepositoryImpl implements PackageRepository  {
 
 
         }
-        log.info("{}",pack);
+        log.debug("{}", pack);
         return pack;
     }
 
@@ -110,7 +124,7 @@ public class PackageRepositoryImpl implements PackageRepository  {
                     "(package_id,item_id,quantity,size) VALUES (SELECT id FROM package WHERE name=?,SELECT id FROM item WHERE name=?,?,?)";
             row = jdbcTemplate.update(sql, new Object[]{packName, itemName, quantity, size});
         }
-        log.info("{} new content added", row);
+        log.debug("{} new content added", row);
         return row;
     }
 
@@ -124,7 +138,7 @@ public class PackageRepositoryImpl implements PackageRepository  {
         if (mp.size() == 0) {
             result = true;
         }
-        log.info("{}", result);
+        log.debug("{}", result);
         return result;
     }
 
@@ -140,10 +154,52 @@ public class PackageRepositoryImpl implements PackageRepository  {
             transactionManager.commit(stat);
             j = 1;
         } catch (Exception e) {
-            log.info(e.getMessage());
+            log.debug(e.getMessage());
             transactionManager.rollback(stat);
         }
         return j;
     }
 
+    @Override
+    public int deleteContent(String packageName) {
+        String sql = "DELETE FROM package_item WHERE package_id = (SELECT id FROM package WHERE name=?)";
+        int row = jdbcTemplate.update(sql, new Object[]{packageName});
+        log.debug("{} package deleted", row);
+        return row;
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED)
+    public int deletePackage(String packageName) {
+        int j = 0;
+        TransactionDefinition trDef = new DefaultTransactionDefinition();
+        TransactionStatus stat = transactionManager.getTransaction(trDef);
+        try {
+            delete(packageName);
+            deleteContent(packageName);
+            transactionManager.commit(stat);
+            j = 1;
+        } catch (Exception e) {
+            log.debug(e.getMessage());
+            transactionManager.rollback(stat);
+        }
+        return j;
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    public int updatePackage(Package updatedPackage, List<Package> content) {
+        int j = 0;
+        TransactionDefinition trDef = new DefaultTransactionDefinition();
+        TransactionStatus stat = transactionManager.getTransaction(trDef);
+        try {
+            update(updatedPackage);
+            updateContent(content);
+            transactionManager.commit(stat);
+            j = 1;
+        } catch (Exception e) {
+            log.debug(e.getMessage());
+            transactionManager.rollback(stat);
+        }
+        return j;
+    }
 }
