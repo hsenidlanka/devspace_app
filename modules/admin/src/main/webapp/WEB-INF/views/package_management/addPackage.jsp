@@ -344,7 +344,7 @@
                         <div class="col-xs-4">
                         </div>
                         <div class="col-xs-4" align="right">
-                            <form:button type="button" class="btn btn-success" id="btnAddNewPkg" onclick="contentPackge()"><span
+                            <form:button type="submit" class="btn btn-success" id="btnAddNewPkg" onclick="contentPackge()"><span
                                     class="glyphicon glyphicon-plus"></span>
                                 <fmt:message key="package.packageadd.form.button.submit" bundle="${bundle1}"/>
                             </form:button>
