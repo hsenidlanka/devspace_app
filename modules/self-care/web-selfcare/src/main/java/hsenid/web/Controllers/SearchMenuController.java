@@ -32,15 +32,16 @@ public class SearchMenuController {
         return new ModelAndView("/home/search-menu");
     }
 
-    @RequestMapping(value = {"web-selfcare/search-menu/{searchItem}", "{searchItem}?searchItem={searchItem}"}, method = RequestMethod.GET)
+    @RequestMapping(value = "search-menu/{searchItem}", method = RequestMethod.GET)
     //@ResponseBody
     public ModelAndView generateSearchItem(@PathVariable String searchItem) {
         ModelAndView modelAndView = new ModelAndView("search-results");
-        logger.info(searchItem);
+        logger.info(searchItem + "item");
 
         // modelAndView.addObject("searchItem", searchItem);
         RestTemplate restTemplate = new RestTemplate();
         String getItemUrl = SendStringBuilds.sendString(baseUrl, searchItemNameUrl, searchItem);
+        logger.info(getItemUrl + " url");
 
         ServerResponseMessage searchItemResponse = restTemplate.getForObject(getItemUrl, ServerResponseMessage.class);
         modelAndView.addObject("it", searchItemResponse.getData());

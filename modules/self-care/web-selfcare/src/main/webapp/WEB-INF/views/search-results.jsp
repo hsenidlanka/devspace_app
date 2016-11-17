@@ -230,5 +230,27 @@
 </div>
 
 <a href="#" class="scrollup"></a>
+<script>
+    $("#btn-menu-search").click(function () {
+        var searchKey = $("#txt-menu-search").val();
+        if ($("#txt-menu-search").val().length == 0) {
+            $("#txt-menu-search").css("border-color", "red");
+            $.notify(" Search field is empty...", {
+                align: "center",
+                verticalAlign: "top",
+                delay: 2000,
+                animationType: "fade",
+                color: "#fff",
+                background: "#D44950"
+            });
+        } else {
+            window.location.href = "http://localhost:8080/web-selfcare/search-menu/" + searchKey;
+
+        }
+
+    });
+
+
+</script>
 </body>
 </html>
