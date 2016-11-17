@@ -110,33 +110,38 @@ $(document).ready(function(){
 
         //alert(loginUsername.length + ' ' + loginPassword.length)
 
+
+
         if (1) {
 
-            $.ajax({
-                type: 'post',
-                url: "login",
-                data: {username:loginUsername, password:loginPassword},
-                success: function (result) {
-                    if(result.userAvailable){
-                        window.location = "/web-selfcare/";
-                    }else{
-                        alert("Invalied Username of Password");
+            if (/*$('form').validator('check') <= 2*/1) {
+
+                $.ajax({
+                    type: 'post',
+                    url: "login",
+                    data: {username: loginUsername, password: loginPassword},
+                    success: function (result) {
+                        if (result.userAvailable) {
+                            window.location = "/web-selfcare/";
+                        } else {
+                            alert("Invalied Username of Password");
+                        }
+
+                        console.log("success");
+
+                    },
+                    error: function () {
+                        $("#ajaccall").append("<b>Appended text</b>");
                     }
+                });
 
-                    console.log("success");
-
-                },
-                error: function () {
-                    $("#ajaccall").append("<b>Appended text</b>");
-                }
-            });
-
-        }else{
-            return false;
+            } else {
+                return false;
+            }
         }
 
-
     });
+
 
     //Check a username is blocked or not
 
@@ -201,4 +206,4 @@ $(document).ready(function(){
         });
 
     });
-});
+    });
