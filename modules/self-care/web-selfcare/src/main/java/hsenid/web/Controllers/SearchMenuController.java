@@ -1,6 +1,5 @@
 package hsenid.web.Controllers;
 
-import hsenid.web.models.SearchItemData;
 import hsenid.web.models.ServerResponseMessage;
 import hsenid.web.supportclasses.SendStringBuilds;
 import org.slf4j.Logger;
@@ -30,13 +29,15 @@ public class SearchMenuController {
 
     @RequestMapping(value = "/search-menu", method = RequestMethod.GET)
     public ModelAndView loadSearchMenuPage() {
-        return new ModelAndView("/home/search-menu", "searchitemdata", new SearchItemData());
+        return new ModelAndView("/home/search-menu");
     }
 
-    @RequestMapping(value = "/search-menu/{searchItem}", method = RequestMethod.GET)
-//    @ResponseBody
+    @RequestMapping(value = {"web-selfcare/search-menu/{searchItem}", "{searchItem}?searchItem={searchItem}"}, method = RequestMethod.GET)
+    //@ResponseBody
     public ModelAndView generateSearchItem(@PathVariable String searchItem) {
         ModelAndView modelAndView = new ModelAndView("search-results");
+        logger.info(searchItem);
+
         // modelAndView.addObject("searchItem", searchItem);
         RestTemplate restTemplate = new RestTemplate();
         String getItemUrl = SendStringBuilds.sendString(baseUrl, searchItemNameUrl, searchItem);
@@ -45,9 +46,10 @@ public class SearchMenuController {
         modelAndView.addObject("it", searchItemResponse.getData());
         modelAndView.addObject("test", searchItem);
         return modelAndView;
+
     }
 
-   /* @RequestMapping(value = "/search-results", method = RequestMethod.GET)
+    /*@RequestMapping(value = "/search-results", method = RequestMethod.GET)
     public ModelAndView newLoadSearch() {
         return new ModelAndView("/search-results", "searchitemdata", new SearchItemData());
     }*/

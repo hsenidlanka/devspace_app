@@ -13,8 +13,8 @@
 <body>
 <div class="loader-anim"></div>
 <%@include file="includes/new-header.jsp" %>
-<c:out value="${test}"/>
-<c:out value="${it}"/>
+<%--<c:out value="${test}"/>
+<c:out value="${it}"/>--%>
 <div class="main-div">
     <div class="section">
         <div class="panel panel-default">
@@ -27,10 +27,11 @@
                     <div style="display: inline-block; float:right;">
                         <div class="form-group">
                             <div class="col-sm-10" style="padding-right: 0px;">
-                                <input type="text" class="form-control input-sm" placeholder="Search" name="txt-search-menu">
+                                <input type="text" class="form-control input-sm" placeholder="Search"
+                                       name="txt-search-menu" id="txt-menu-search">
                             </div>
                             <div class="col-sm-2" style="padding-left: 2px;">
-                                <button class="btn btn-primary input-sm"><span><i
+                                <button class="btn btn-primary input-sm" id="btn-menu-search" type="button"><span><i
                                         class="glyphicon glyphicon-search"></i></span></button>
                             </div>
                         </div>
@@ -53,8 +54,13 @@
                                     <div id="search-pizza" class="panel-collapse collapse in">
                                         <div class="panel-body">
                                             <div class="row">
+                                                <c:if test="${ empty it}">
+                                                    <h1><c:out value="No matching items found"/></h1>
+
+                                                </c:if>
                                                 <c:forEach items="${it}" var="item">
-                                                    <div style="margin-top: 15px;">
+
+                                                <div style="margin-top: 15px;">
 
                                                 <div class="col-md-3">
                                                     <img src="<c:url value="/resources/images/pizzas/15.jpg"/>"
