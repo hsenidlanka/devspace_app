@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -215,9 +214,9 @@ LOGGER.trace("invokingg {}",newPackage);
         try {
          String packNm =  request.getParameter("pkgName");
          double packPrc = Double.parseDouble((request.getParameter("pkgPrice")));
-         String packImg =  request.getParameter("pkgImg");
+       //  String packImg =  request.getParameter("pkgImg");
+         String packImg =  "imageTest.png";
 
-            MultipartFile img = newPackage.getImageUrl();
             newPackage.setPackName(packNm);
             newPackage.setPrice(packPrc);
             newPackage.setImage(packImg);
@@ -225,7 +224,6 @@ LOGGER.trace("invokingg {}",newPackage);
         //    newPackage.setImageUrl(packImg);
             LOGGER.error("package objct22 {}", newPackage);
             LOGGER.error("package objct-img url {}", newPackage.getImageUrl());
-            LOGGER.error("package objct-img url2 {}", img);
 
 
             String s = request.getParameter("test");

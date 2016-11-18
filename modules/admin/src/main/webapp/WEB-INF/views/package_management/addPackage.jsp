@@ -183,7 +183,7 @@
                             </label>
 
                             <div class="col-xs-5">
-                                <form:input type="file" class="file_upload btn btn-default" path="image" id="savePkgImg" value="Browse" />
+                                <form:input type="file" class="file_upload btn btn-default" path="" id="savePkgImg" value="Browse" />
                                 <span id="pkgImgErr" class="input-group-error"> </span>
                             </div>
                         </div>
