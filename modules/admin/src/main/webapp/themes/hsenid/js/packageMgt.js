@@ -7,11 +7,11 @@ $(document).ready(function () {
         $("#pkgViewModal").modal();
     });
 
-    $('.btnAddItmPkg').click(function () {
+    /*$('.btnAddItmPkg').click(function () {
         // if(($('.chkbxPkgCat').prop('checked()',true))){
         $(this).replaceWith("<div class=\"add-status\"><span class=\"glyphicon glyphicon-ok\"></span> Added</div>");
         //  }
-    });
+    });*/
 
 
     ///////////////////////////////////////////
@@ -141,6 +141,7 @@ function generate(selectedItm, slctElement) {
 
 function contentPackge() {
     jsonObj = [];
+    content={};
 
     if ($('#chkPkgCat0').is(':checked')) {
         var itemVal = $('#slctItmPkgCat0').val();
@@ -207,19 +208,36 @@ function contentPackge() {
         jsonObj.push(content);
 
     }
+    var pkgName = $("#txtAddPkgName").val();
+    var pkgPrice = $("#txtAddPkgPrice").val();
+    var pkgImg = $("#savePkgImg").val();
 
+   /* content["packName"] = pkgName;
+    content["price"] = pkgPrice;
+    content["imageUrl"] = pkgImg;
+
+    jsonObj.push(content);
+*/
     console.log("pp "+jsonObj);
     console.log("pp2 "+jsonString);
-    jsonString = JSON.stringify(jsonObj);
 
     $.ajax({
-        url: "./add_package/",
-        data:{"test":JSON.stringify(jsonObj)},
-        // type: "POST",
+        url: "https://localhost:8443/admin/packages/add_package",
+        data:{"test":JSON.stringify(jsonObj), "pkgName":pkgName, "pkgPrice":pkgPrice, "pkgImg":pkgImg},
+         type: "POST",
         success: function (result) {
-            console.log("result from server ",+result);
-            console.log("result from server2 ",+result.toString());
-            console.log("result from server3 ",+result.toArray());
+            //$( "#btnAddNewPkg" ).submit(function( event ) {
+            //    result.preventDefault();showloadingif();
+              //  setTimeout(function(){ $("#frmAddPkg").submit(); }, 3000);
+           // });
+            /*if((result.length) != 0){
+                $(".btnAddItmPkg").replaceWith("<div class=\"add-status\"><span class=\"glyphicon glyphicon-ok\"></span> Finish</div>");
+            }*/
+
+            //console.log("result from server2 ",+result.length);
+        },
+        error:function(e){
+            alert(e);
         }
     });
 }
