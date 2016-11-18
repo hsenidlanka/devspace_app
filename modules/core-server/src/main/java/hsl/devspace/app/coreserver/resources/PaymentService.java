@@ -24,9 +24,9 @@ import java.net.URL;
  */
 
 @Path("/payment")
-public class Devspc {
+public class PaymentService {
 
-    private static final Logger log = LoggerFactory.getLogger(Devspc.class);
+    private static final Logger log = LoggerFactory.getLogger(PaymentService.class);
 
     @POST
     @Path("/pay")
