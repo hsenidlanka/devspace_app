@@ -40,11 +40,11 @@ public class PackageRepositoryImpl implements PackageRepository  {
     @Override
     public int add(Package pack) {
         int row;
-        MultipartFile img = pack.getImageUrl();
-        String ims = img.getOriginalFilename();
+       /* MultipartFile img = pack.getImageUrl();
+        String ims = img.getOriginalFilename();*/
         String sql = "INSERT INTO package " +
                 "(name,price,image) VALUES (?,?,?)";
-        row = jdbcTemplate.update(sql, new Object[]{pack.getPackName(), pack.getPrice(), ims});
+        row = jdbcTemplate.update(sql, new Object[]{pack.getPackName(), pack.getPrice(), pack.getImage()});
         log.debug("{} new package added", row);
         return row;
     }
