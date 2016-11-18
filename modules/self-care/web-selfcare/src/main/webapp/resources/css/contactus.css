@@ -30,7 +30,7 @@ a {
 #browser {
     margin: 10px auto;
     color: white;
-    width: 80%;
+    width: 90%;
     -webkit-box-shadow: 2px 5px 15px rgba(0, 0, 0, 0.5);
     -moz-box-shadow: 2px 5px 15px rgba(0, 0, 0, 0.5);
     box-shadow: 2px 5px 15px rgba(0, 0, 0, 0.5);
@@ -135,7 +135,7 @@ a {
 }
 #content #left #map .map-locator {
     position: absolute;
-    top: 70%;
+    top: 82%;
     left: 58%;
     border-radius: 15px;
     height: 30px;
