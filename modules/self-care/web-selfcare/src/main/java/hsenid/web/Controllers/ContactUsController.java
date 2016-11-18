@@ -41,7 +41,7 @@ public class ContactUsController {
             return "/home/contact-us";
         }
 
-        redirectAttributes.addFlashAttribute("validForm", "dd");
+
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("inquiryType", contactus.getInquiryType());
         jsonObject.put("title", contactus.getTitle());
@@ -58,11 +58,13 @@ public class ContactUsController {
 
         try{
             ReplyFromServer message = restTemplate.postForObject(contactUsUrl, httpEntity, ReplyFromServer.class);
-        }catch (Exception e){
+            redirectAttributes.addFlashAttribute("validForm", "notempty");
+        }catch (Exception e ){
+            redirectAttributes.addFlashAttribute("invalidForm", "Internal Server error!!!<br><br>");
             logger.error(e.getMessage());
 
         }
-        redirectAttributes.addFlashAttribute("validForm", "True");
+//        redirectAttributes.addFlashAttribute("validForm", "True");
         return "redirect:/contact-us";
 //        return "/home/self-care-home";
     }
