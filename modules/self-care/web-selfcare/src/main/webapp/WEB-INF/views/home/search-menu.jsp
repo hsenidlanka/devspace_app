@@ -1609,7 +1609,7 @@
         background: "#D44950"
       });
     } else {
-      window.location.href = window.location.href + searchKey;
+      window.location.href = window.location.href + "/" + searchKey;
 
     }
     /*$.ajax({
