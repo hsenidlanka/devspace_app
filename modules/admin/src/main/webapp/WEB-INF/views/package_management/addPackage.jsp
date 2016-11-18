@@ -138,7 +138,7 @@
                                 <div class="row rowtbl item-tbl-row" id="tbladdPkgCont">
                                     <div class="col-xs-2">
                                         <label class="checkbox-inline">
-                                        <form:checkbox value="pizza" class="checkbox chkbxPkgCat" path="categoryName" id="chkPkgCat"/>
+                                        <form:checkbox value="pizza" class="checkbox chkbxPkgCat" path="" id="chkPkgCat"/>
                                             <label class="chkbxPkgCat1"></label>
                                             <%--<fmt:message key="package.packageadd.form.checkbox.pizza" bundle="${bundle1}"/>--%>
                                         </label>
@@ -149,128 +149,30 @@
                                         </form:select>
                                     </div>
                                     <div class="col-xs-3">
-                                        <form:select type="text" class="form-control" path="" id="szpr">
+                                        <form:select type="text" class="form-control" path="size" id="szpr">
                                             <form:option value="-" label="---"/>
                                         </form:select>
                                     </div>
                                     <div class="col-xs-2">
-                                        <input class="qty-spinner" type="number" min="0" id="contQty"/>
+                                        <form:input class="qty-spinner" type="number" min="0" id="contQty" path="quantity"/>
                                     </div>
                                     <div class="col-xs-2">
-                                        <form:button type="button" value="" class="btn btn-success btnAddItmPkg" id="btnAddPkgPizza">
+                                        <%--<form:button type="button" value="" class="btn btn-success btnAddItmPkg" id="btnAddPkgPizza">
                                             <span class="glyphicon glyphicon-plus"></span>Add
-                                        </form:button>
+                                        </form:button>--%>
                                     </div>
                                 </div>
                             <div id="tstDiv"></div>
-
-                                <%--<div class="row item-tbl-row">
-                                    <div class="col-xs-2">
-                                        <label class="checkbox-inline">
-                                        <form:checkbox value="Salad" class="checkbox chkbxPkgCat" path="" id="chkPkgSld"/>
-                                            <fmt:message key="package.packageadd.form.checkbox.salad" bundle="${bundle1}"/>
-                                        </label>
-                                    </div>
-                                    <div class="col-xs-3">
-                                        <form:select type="text" class="form-control" path="itemName" id="slctItmPkgSalad">
-                                            <form:option value="-" label="---"/>
-                                        </form:select>
-                                    </div>
-                                    <div class="col-xs-3">
-                                        <form:select type="text" class="form-control" path="" id="szprc2">
-                                            <form:option value="-" label="---"/>
-                                        </form:select>
-                                    </div>
-                                    <div class="col-xs-2">
-                                        <input class="qty-spinner" type="number" id="sldQty" min="0"/>
-                                    </div>
-                                    <div class="col-xs-2">
-                                        <form:button type="button" value="" class="btn btn-success btnAddItmPkg" id="btnAddPkgSalad">
-                                            <span class="glyphicon glyphicon-plus"></span>Add
-                                        </form:button>
-                                    </div>
+                            <br>
+                            <div class="row" id="tstDivButton">
+                                <div class="col-xs-10">
                                 </div>
-
-                                <div class="row item-tbl-row">
-                                    <div class="col-xs-2">
-                                        <label class="checkbox-inline">
-                                        <form:checkbox value="Beverage" class="checkbox chkbxPkgCat" path="" id="chkPkgBvrg"/>
-                                            <fmt:message key="package.packageadd.form.checkbox.beverage" bundle="${bundle1}"/>
-                                        </label>
-                                    </div>
-                                    <div class="col-xs-3">
-                                        <form:select type="text" class="form-control slctItmPkg" path="itemName" id="slctItmPkgBvrg">
-                                            <form:option value="-" label="---"/>
-                                        </form:select>
-                                    </div>
-                                    <div class="col-xs-3">
-                                        <form:select type="text" class="form-control" path="" id="szprc3">
-                                            <form:option value="-" label="---"/>
-                                        </form:select>
-                                    </div>
-                                    <div class="col-xs-2">
-                                        <input class="qty-spinner" type="number" id="bvgQty" min="0"/>
-                                    </div>
-                                    <div class="col-xs-2">
-                                        <form:button type="button" value="" class="btn btn-success btnAddItmPkg" id="btnAddPkgBvrg">
-                                            <span class="glyphicon glyphicon-plus"></span>Add
-                                        </form:button>
-                                    </div>
+                                <div class="col-xs-2">
+                                    <button type="button" value="" class="btn btn-success btnAddItmPkg" id="btnCreateCont"  >
+                                        <span class="glyphicon glyphicon-plus"></span>Create
+                                    </button>
                                 </div>
-
-                                <div class="row item-tbl-row">
-                                    <div class="col-xs-2">
-                                        <label class="checkbox-inline">
-                                        <form:checkbox value="Topping" class="checkbox chkbxPkgCat" path="" id="chkPkgTppg"/>
-                                            <fmt:message key="package.packageadd.form.checkbox.topping" bundle="${bundle1}"/>
-                                        </label>
-                                    </div>
-                                    <div class="col-xs-3">
-                                        <form:select type="text" class="form-control slctItmPkg" path="itemName" id="slctItmPkgToppng">
-                                            <form:option value="-" label="---"/>
-                                        </form:select>
-                                    </div>
-                                    <div class="col-xs-3">
-                                        <form:select type="text" class="form-control" path="" id="szpr4">
-                                            <form:option value="-" label="---"/>
-                                        </form:select>
-                                    </div>
-                                    <div class="col-xs-2">
-                                        <input class="qty-spinner" type="number" id="tppgQty" min="0"/>
-                                    </div>
-                                    <div class="col-xs-2">
-                                        <form:button type="button" value="" class="btn btn-success btnAddItmPkg" id="btnAddPkgSalad">
-                                            <span class="glyphicon glyphicon-plus"></span>Add
-                                        </form:button>
-                                    </div>
-                                </div>
-
-                                <div class="row item-tbl-row">
-                                    <div class="col-xs-2">
-                                        <label class="checkbox-inline">
-                                        <form:checkbox value="desserts" class="checkbox chkbxPkgCat" path="" id="chkPkgDssrt"/>
-                                            <fmt:message key="package.packageadd.form.checkbox.pizza" bundle="${bundle1}"/>
-                                        </label>
-                                    </div>
-                                    <div class="col-xs-3">
-                                        <form:select type="text" class="form-control" path="itemName" id="slctItmPkgDssrt">
-                                            <form:option value="-" label="---"/>
-                                        </form:select>
-                                    </div>
-                                    <div class="col-xs-3">
-                                        <form:select type="text" class="form-control" path="" id="szpr5">
-                                            <form:option value="-" label="---"/>
-                                        </form:select>
-                                    </div>
-                                    <div class="col-xs-2">
-                                        <input class="qty-spinner" type="number" min="0" id="dssrtQty"/>
-                                    </div>
-                                    <div class="col-xs-2">
-                                        <form:button type="button" value="" class="btn btn-success btnAddItmPkg" id="btnAddPkgDssrt">
-                                            <span class="glyphicon glyphicon-plus"></span>Add
-                                        </form:button>
-                                    </div>
-                                </div>--%>
+                            </div>
                         </div>
                     </div>
 <br>
@@ -344,9 +246,9 @@
                         <div class="col-xs-4">
                         </div>
                         <div class="col-xs-4" align="right">
-                            <form:button type="submit" class="btn btn-success" id="btnAddNewPkg" onclick="contentPackge()"><span
+                            <form:button type="button" class="btn btn-success" id="btnAddNewPkg" onclick="contentPackge();"><span
                                     class="glyphicon glyphicon-plus"></span>
-                                <fmt:message key="package.packageadd.form.button.submit" bundle="${bundle1}"/>
+                                <fmt:message key="package.packageadd.form.button.add" bundle="${bundle1}"/>
                             </form:button>
                         </div>
                         <div class="col-xs-4" align="left">
