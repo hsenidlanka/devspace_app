@@ -37,7 +37,7 @@
                 <!-- Roll over the file next day. -->
                 <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
                 <!-- Maximum file size for the log file. Data will move to a new file after exceeding this limit. -->
-                <SizeBasedTriggeringPolicy size="2 MB"/>
+                <SizeBasedTriggeringPolicy size="1 MB"/>
             </Policies>
             <!-- Maximum number of files to keep. -->
             <DefaultRolloverStrategy max="20"/>
