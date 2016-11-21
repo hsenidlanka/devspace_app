@@ -34,7 +34,7 @@
 
                     <li>
 
-                        <a class="form-group-sm" data-toggle="modal" data-target="#modal-login"><img src="<c:url value="/resources/images/user2.png"/>" style=""></span> </a>
+                        <a id="loginBtn" class="form-group-sm" data-toggle="modal" data-target="#modal-login"><img src="<c:url value="/resources/images/user2.png"/>" style=""></span> </a>
                     </li>
 
                 </c:if>
@@ -98,9 +98,9 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-sm-4"></div>
-                        <div id="usernameError" class="error-labels col-sm-4"></div>
-                        <div class="col-sm-4"></div>
+                        <div class="col-sm-2"></div>
+                        <div id="usernameError" class="error-labels col-sm-10" ></div>
+                        <%--<div class="col-sm-4"></div>--%>
                     </div>
 
                     <div class="row  form-group">
@@ -110,21 +110,27 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-sm-4"></div>
-                        <div id="passwordError" class="error-labels col-sm-4"></div>
-                        <div class="col-sm-4"></div>
+                        <div class="col-sm-2"></div>
+                        <div id="passwordError" class="error-labels col-sm-10"></div>
+                        <%--<div class="col-sm-4"></div>--%>
                     </div>
 
                     <div class="row">
-                        <div class="col-sm-3"></div>
+                        <div class="col-sm-4"></div>
                         <div class="col-sm-3">
                             <button id="loginFormSubmit" name="loginFormSubmit" type="button"
-                                    class="btn btn-success">Submit
+                                    class="btn btn-success"><fmt:message key="new.header.login" bundle="${lang}"/>
                             </button>
                         </div>
                         <div class="col-sm-6"></div>
                     </div>
-
+                    <div class="row"><br></div>
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <p align="center"><a href="#">Forget my password?</a></p>
+                        </div>
+                        <div class="col-sm-2"></div>
+                    </div>
                 </form>
 
                 <!-- end-account -->

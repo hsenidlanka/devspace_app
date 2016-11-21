@@ -33,6 +33,7 @@ public class UpdateUserController {
     @GetMapping("/update-user")
     public String updateuser(HttpSession session, Model model) {
         model.addAttribute("updateuser", new User());
+
         return "/home/update-user";
     }
 

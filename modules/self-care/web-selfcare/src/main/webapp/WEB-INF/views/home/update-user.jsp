@@ -38,7 +38,6 @@
 
     </script>
 
-
 </head>
 <style>
 
@@ -56,6 +55,8 @@
 
 <body>
 <%@include file="../includes/new-header.jsp" %>
+${username}
+
 <div class="container" style="width: 60%">
     <div class="panel panel-success">
         <form:form action="/web-selfcare/update-user" method="post" modelAttribute="updateuser"
@@ -73,7 +74,7 @@
 
                     <div class="row col-sm-9">
 
-                        <form:radiobutton path="title" name="titlejs" id="titlejs" value="Mr"/>Mr
+                        <form:radiobutton path="title" id="titlejs" name="titlejs" value="Mr"/>Mr
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <form:radiobutton path="title" id="titlejs" name="titlejs" value="Mrs"/>Mrs
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
