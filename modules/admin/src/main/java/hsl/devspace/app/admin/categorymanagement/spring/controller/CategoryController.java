@@ -2,8 +2,8 @@ package hsl.devspace.app.admin.categorymanagement.spring.controller;
 
 import hsl.devspace.app.corelogic.domain.Category;
 import hsl.devspace.app.corelogic.repository.category.CategoryRepository;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -20,16 +20,15 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLIntegrityConstraintViolationException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/category")
 public class CategoryController {
 
-    private static final Logger LOG = LogManager.getLogger(CategoryController.class);
+//    private static final Logger LOG = LogManager.getLogger(CategoryController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CategoryController.class);
+
 
     /** reading the ValidationMessages property file using annotations**/
     @Value("${insert.server.error}")
@@ -40,6 +39,12 @@ public class CategoryController {
 
     @Value("${insert.subcategory.success}")
     private String insertSubSuccess;
+
+    @Value("${update.category.success}")
+    private  String updateSuccess;
+
+    @Value("${update.category}")
+    private String updateFail;
 
    /** reading system.properties file using annotations **/
    @Value("${admin.categoryimage.server.location}")
@@ -218,12 +223,6 @@ public class CategoryController {
 
     }
 
-    //handler method to view the Category View page
-    @RequestMapping(value = "/view/subCategory", method = RequestMethod.GET)
-    public ModelAndView showSubCategoryList(){
-        return new ModelAndView("category_management/subcategoryView", "command",new Category());
-
-    }
 
     //handler method to retrieve the details of categories to view
     @RequestMapping(value = "/view/categoryTable", method = RequestMethod.GET)
@@ -234,13 +233,21 @@ public class CategoryController {
 
         for (Category aCategoryList : categoryList) {
             category = aCategoryList;
+            //to change the visibility to meaningful word
+            String visibility=category.getStatus();
+            String v1=null;
+            if(visibility.equals("1")) {
+              v1 = "Yes";
+            }else {
+              v1 = "No";
+            }
+
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("id", category.getCategory_id());
             map.put("name", category.getCategoryName());
             map.put("description", category.getCatDescription());
             map.put("creator", category.getCreator());
-            map.put("status", category.getStatus());
-
+            map.put("status", v1);
 
             LOG.info("newCategory {}", category);
             outc.add(map);
@@ -249,51 +256,68 @@ public class CategoryController {
         return outc;
     }
 
-    //handler method to retrieve the details of sub-categories to view
-    @RequestMapping(value = "/view/subcategoryTable", method = RequestMethod.GET)
-    public @ResponseBody List<Map<String, Object>> viewSubCategories(@ModelAttribute("subcategory")  Category subcategory){
-
-        List<Map<String, Object>> outc = new ArrayList<Map<String, Object>>();
-        List<Category> subcategoryList= subcategoryRepository.selectAll();
-
-        for (Category aSubcategoryList : subcategoryList) {
-            subcategory = aSubcategoryList;
-            Map<String, Object> map = new HashMap<String, Object>();
-            map.put("id", subcategory.getCategory_id());
-            map.put("name", subcategory.getCategoryName());
-            map.put("description", subcategory.getCatDescription());
-            map.put("creator", subcategory.getCreator());
-            map.put("status", subcategory.getStatus());
 
 
-            LOG.info("newCategory {}", subcategory);
-            outc.add(map);
-            LOG.info("out {}", outc);
-        }
-        return outc;
-    }
 
 
 ///////////////////////////////////////////////////// CATEGORY EDIT HANDLER METHODS  ///////////////////////////////////////
 
-//handler method to delete a category record
+//handler method to retrieve the edit details in a category record
 @RequestMapping(value = "/edit", method = RequestMethod.GET)
-public @ResponseBody int editCategory(@RequestParam("name") String name, @RequestParam("description") String description){
+public @ResponseBody  Map<String, Object> editCategory(@RequestParam("id") int id){
 
-    int i=categoryRepository.update(name,description);
-    return i;
+    LOG.info("the selected category id{}", id);
+
+    Category category=categoryRepository.selectCategoryDetail(id);
+    LOG.info("the selected category detail{}", category);
+
+    Map<String, Object> map = new HashMap<String, Object>();
+        map.put("id", category.getCategory_id());
+        map.put("name",category.getCategoryName());
+        map.put("description",category.getCatDescription());
+        map.put("creator",category.getCreator());
+        map.put("image",category.getImage());
+        map.put("status",category.getStatus());
+
+    return map;
 }
 
+//handler method for sending customer edit form data to database
+@RequestMapping(value="/editCategory",method=RequestMethod.POST)
+public ModelAndView saveEditCategory(@ModelAttribute("editCategory") Category editCategory) {
 
+        String n1=editCategory.getCategoryName();
+        String n2=editCategory.getCatDescription();
+        int n3=editCategory.getCategory_id();
+        String n4=editCategory.getStatus();
+
+        LOG.info("EDIT CATEGORY name {}", n1);
+        LOG.info("EDIT CATEGORY description {}", n2);
+        LOG.info("EDIT CATEGORY id {}", n3);
+        LOG.info("EDIT CATEGORY status {}", n4);
+
+        //function to update the category detail except image
+        int i=categoryRepository.updateCategory(editCategory);
+        LOG.info("EDIT CUSTOMER i {}", i);
+
+        if (i == 1)
+            JOptionPane.showMessageDialog(null, updateSuccess);
+        else
+            JOptionPane.showMessageDialog(null,updateFail);
+
+return new ModelAndView(new RedirectView("/admin/category/view"));
+}
 
 
 ///////////////////////////////////////////////////// CATEGORY DELETE HANDLER METHODS  ///////////////////////////////////////
 @RequestMapping(value = "/delete", method = RequestMethod.GET)
 public @ResponseBody int deleteCategory(@RequestParam("catName") String catName){
-    LOG.error("category name to delete:{}",catName);
+
+    LOG.info("category name to delete:{}", catName);
+
     //retrieve the subcategory list for that category
     List<String> subcatList=categoryRepository.viewSubCategories(catName);
-    LOG.error("subcategory list:{}",subcatList);
+    LOG.info("subcategory list:{}", subcatList);
 
     //delete the subcategory list obtained
     for (int i=0; i< subcatList.size();i++){
@@ -303,10 +327,8 @@ public @ResponseBody int deleteCategory(@RequestParam("catName") String catName)
     }
     //finally delete the category
     int catdeleteReturn=categoryRepository.delete(catName);
-    LOG.error("delete result:{}",catdeleteReturn);
-
+    LOG.info("delete result:{}", catdeleteReturn);
 
     return catdeleteReturn;
-
 }
 }
