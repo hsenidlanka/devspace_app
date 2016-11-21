@@ -110,11 +110,27 @@ public class Category {
         this.creator=creator;
         this.status=status;
     }
+    //category(for admin category update )
+    public Category(int category_id,String categoryName, String description,String status) {
+        this.category_id = category_id;
+        this.categoryName=categoryName;
+        this.catDescription=description;
+        this.status=status;
+    }
     //sub category
     public Category(String subCategoryName,String description,String creator,String categoryName){
         this.subCategoryName=subCategoryName;
         this.subcatDescription=description;
         this.creator=creator;
+        this.categoryName=categoryName;
+    }
+    //sub category for subcategory details for a given category
+    public Category(int subcategory_id,int category_id, String subCategoryName,String description,String creator,String categoryName){
+        this.subCategoryId=subcategory_id;
+        this.subCategoryName=subCategoryName;
+        this.subcatDescription=description;
+        this.creator=creator;
+        this.category_id=category_id;
         this.categoryName=categoryName;
     }
     //category with Id (for update method)
