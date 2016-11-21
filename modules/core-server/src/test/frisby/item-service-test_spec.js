@@ -21,64 +21,20 @@ frisby.create('Get items of a category test 01-valid data')
         "message": "items for category pizza retrieved",
         "data": [
             {
-                "imagePath": "/a/dummy/image/path/",
                 "name": "Thanduri Pizza",
-                "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text",
-                "type": "non-veg"
+                "description": "Some description of Thanduri Pizza",
+                "type": "4"
             },
             {
-                "imagePath": "/a/dummy/image/path/",
-                "name": "Cheese Lover",
-                "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text",
-                "type": "veg"
-            },
-            {
-                "imagePath": "/a/dummy/image/path/",
                 "name": "Garlic Bread",
-                "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text",
-                "type": "carbonate"
-            },
-            {
-                "imagePath": "image/test",
-                "name": "Test pizza",
-                "description": "test",
-                "type": "veg"
-            },
-            {
-                "imagePath": "/image/test02",
-                "name": "Test pizza 2",
-                "description": "test 2",
-                "type": "non-veg"
-            },
-            {
-                "imagePath": "image/ny1",
-                "name": "Test NY1",
-                "description": "NY1",
-                "type": "veg"
-            },
-            {
-                "imagePath": "/image/path4",
-                "name": "Test NY2",
-                "description": "NY2",
-                "type": "non-veg"
-            },
-            {
-                "imagePath": "/image/path2",
-                "name": "Test NY3",
-                "description": "ny3",
-                "type": "veg"
-            },
-            {
-                "imagePath": "/image/path3",
-                "name": "Test NY4",
-                "description": "ny4",
-                "type": "veg"
+                "description": "Garlic Bread-some description is here.",
+                "type": "1"
             }
         ],
         "links": [
             {
-                "link": "http://localhost:2222/pizza-shefu/api/v1.0/items/category/pizza",
-                "rel": "self"
+                "rel": "self",
+                "link": "http://localhost:2222/pizza-shefu/api/v1.0/items/category/pizza"
             }
         ]
     })
@@ -114,7 +70,7 @@ frisby.create('Get items of a category test 02-non existing data')
 
 // Test get items of a subcategory-valid data.
 frisby.create('Get items of a subcategory test 01-valid data')
-    .get(base_url + '/items/subcategory/Ice%20creams',
+    .get(base_url + '/items/subcategory/ice%20creams',
     {
         headers: {'Content-Type': 'application/json'}
     })
@@ -129,43 +85,47 @@ frisby.create('Get items of a subcategory test 01-valid data')
     .expectJSON({
         "status": "success",
         "code": 200,
-        "message": "items for subcategory Ice creams retrieved",
+        "message": "items for subcategory ice creams retrieved",
         "data": [
             {
-                "imagePath": "/a/dummy/image/path/",
+                "price": [
+                    {
+                        "size": "large",
+                        "price": 1280
+                    },
+                    {
+                        "size": "medium",
+                        "price": 890
+                    },
+                    {
+                        "size": "regular",
+                        "price": 560
+                    }
+                ],
                 "name": "Thanduri Pizza",
-                "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text",
-                "type": "non-veg"
+                "description": "Some description of Thanduri Pizza",
+                "type": "non-carbonated"
             },
             {
-                "imagePath": "/a/dummy/image/path/",
-                "name": "Cheese Lover",
-                "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text",
-                "type": "veg"
-            },
-            {
-                "imagePath": "/a/dummy/image/path/",
+                "price": [
+                    {
+                        "size": "medium",
+                        "price": 390
+                    },
+                    {
+                        "size": "regular",
+                        "price": 240
+                    }
+                ],
                 "name": "Garlic Bread",
-                "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text",
-                "type": "carbonate"
-            },
-            {
-                "imagePath": "image/test",
-                "name": "Test pizza",
-                "description": "test",
+                "description": "Garlic Bread-some description is here.",
                 "type": "veg"
-            },
-            {
-                "imagePath": "/image/test02",
-                "name": "Test pizza 2",
-                "description": "test 2",
-                "type": "non-veg"
             }
         ],
         "links": [
             {
-                "link": "http://localhost:2222/pizza-shefu/api/v1.0/items/subcategory/Ice%20creams",
-                "rel": "self"
+                "rel": "self",
+                "link": "http://localhost:2222/pizza-shefu/api/v1.0/items/subcategory/ice%20creams"
             }
         ]
     })

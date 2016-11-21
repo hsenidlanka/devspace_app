@@ -189,16 +189,20 @@ public class CustomerService {
         String username = jsonObject.get("username").toString();
         String password = jsonObject.get("password").toString();
         String newPassword = jsonObject.get("newPassword").toString();
-        userRepository.changePassword(username, password, newPassword);
-        successMessage.setStatus("success");
-        successMessage.setCode(Response.Status.OK.getStatusCode());
-        successMessage.setMessage("customer password updated successfully");
-        JSONObject object = new JSONObject();
-        object.put("username", username);
-        successMessage.addData(object);
-        String url = uriInfo.getAbsolutePath().toString();
-        successMessage.addLink(url, "self");
-        response = Response.status(Response.Status.OK).entity(successMessage).build();
+        int stat = userRepository.changePassword(username, password, newPassword);
+        if (stat > 0) {
+            successMessage.setStatus("success");
+            successMessage.setCode(Response.Status.OK.getStatusCode());
+            successMessage.setMessage("customer password updated successfully");
+            JSONObject object = new JSONObject();
+            object.put("username", username);
+            successMessage.addData(object);
+            String url = uriInfo.getAbsolutePath().toString();
+            successMessage.addLink(url, "self");
+            response = Response.status(Response.Status.OK).entity(successMessage).build();
+        } else {
+            throw new WebApplicationException(401);
+        }
         return response;
     }
 }
