@@ -168,10 +168,12 @@
             <div class="modal-footer" align="right">
                 <button class="btn btn-success" type="button" value="Yes" id="btnBlockCustomer" >
                     <fmt:message key="user.block.modal.button.yes" bundle="${bundle1}" />
+                    <span class="glyphicon glyphicon-ok"></span>
                 </button>
                 <button class="btn btn-success" type="button" id="btnCnclBlockCustomer" value="cancel"
                         data-dismiss="modal" aria-hidden="true">
                     <fmt:message key="user.block.modal.button.cancel" bundle="${bundle1}" />
+                    <span class="glyphicon glyphicon-remove"></span>
                 </button>
             </div>
         </div>
