@@ -141,6 +141,7 @@ $(document).ready(function () {
 
     // Validate the search textbox
     $("#btn-menu-search").click(function () {
+        var letters = /^[0-9a-zA-Z]+$/;
         if ($("#txt-menu-search").val().length == 0) {
             $("#txt-menu-search").css("border-color", "red");
             $.notify(" Search field is empty...", {
@@ -151,9 +152,10 @@ $(document).ready(function () {
                 color: "#fff",
                 background: "#D44950"
             });
+
         } else {
             $("#txt-menu-search").css("border-color", "blue");
-            window.location.href = "";
+            window.location.href = "search-results";
         }
     });
 });

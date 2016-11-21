@@ -5,7 +5,7 @@ public class PackageContent {
     public String item;
     public String size;
     public int qty;
-
+public PackageContent(){}
     public String getItem(){ return item; }
 
     public void setItem(String item1){ this.item = item1; }
@@ -18,9 +18,9 @@ public class PackageContent {
 
     public void setQty(int qty1) { this.qty = qty1; }
 
-   /* @Override
-    public String toString() {
-        return "Content [item=" + item+ ", size= " + size+",qty= " +qty+"]";
-    }*/
-
+    public PackageContent(String item, String size, int qty){
+        this.item=item;
+        this.size=size;
+        this.qty=qty;
+    }
 }

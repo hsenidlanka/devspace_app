@@ -6,7 +6,7 @@
   <title>Menu</title>
   <link rel="shortcut icon" href="">
   <%@include file="../includes/include.jsp" %>
-  <script src="<c:url value="/resources/js/menu-operations.js"/>" ></script>
+  <script src="<c:url value="/resources/js/menu-operations.js"/>"></script>
   <script src="<c:url value="/resources/js/jquery.contenthover.js"/>" ></script>
 
 
@@ -35,7 +35,7 @@
 
               </div>
               <div class="col-sm-2" style="padding-left: 2px;">
-                <button class="btn btn-primary input-sm" id="btn-menu-search"><span><i
+                <button class="btn btn-primary input-sm" id="btn-menu-search" type="button"><span><i
                         class="glyphicon glyphicon-search"></i></span></button>
               </div>
               <%--<script>
@@ -1593,25 +1593,40 @@
     </div>
   </div>
 </div>
-</body>
-<script>
 
+
+<script>
   $("#btn-menu-search").click(function () {
     var searchKey = $("#txt-menu-search").val();
-    $.ajax({
+    if ($("#txt-menu-search").val().length == 0) {
+      $("#txt-menu-search").css("border-color", "red");
+      $.notify(" Search field is empty...", {
+        align: "center",
+        verticalAlign: "top",
+        delay: 2000,
+        animationType: "fade",
+        color: "#fff",
+        background: "#D44950"
+      });
+    } else {
+      window.location.href = window.location.href + "/" + searchKey;
+
+    }
+    /*$.ajax({
       type: "GET",
-      url: "/web-selfcare/search-menu/" + searchKey,
-      /*      data: {
-       "id": userId,
-       "ufname": $('#ufname').val()
-       },*/
+//      dataType:'JSON',
+     url: searchKey,
+     data: {"searchItem": searchKey},
       success: function (result) {
-
-
+        alert("success", result);
+      },
+      error: function (e) {
+        alert("error", e);
       }
-    });
+     });*/
   });
 
 
 </script>
+</body>
 </html>

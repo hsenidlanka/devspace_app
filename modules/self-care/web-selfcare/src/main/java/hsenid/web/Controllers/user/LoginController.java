@@ -67,6 +67,7 @@ public class LoginController {
    @ResponseBody
    public BooleanResponse checkBlockedUser(HttpServletRequest request){
        String uname = request.getParameter("checkName");
+//       String uname = "kkalla";
        String pword = "";
 
        JSONObject jsonObject = new JSONObject();

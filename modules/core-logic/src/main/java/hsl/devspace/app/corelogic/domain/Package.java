@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Package {
     private String packName;
-    // private String content;
+    private String content;
     private double price;
     private String image;
     private int packageId;
@@ -20,6 +20,14 @@ public class Package {
 
     private int quantity;
     private String size;
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 
     public int getQuantity() {
         return quantity;
@@ -125,6 +133,12 @@ public class Package {
         this.imageUrl = imageUrl;
     }
 
+    public Package(String itemName, int quantity, String size) {
+        this.itemName = itemName;
+        this.quantity = quantity;
+        this.size = size;
+    }
+
     public Package() {
     }
 
@@ -132,6 +146,7 @@ public class Package {
     public String toString() {
         return "Package{" +
                 "packName='" + packName + '\'' +
+                ", content='" + content + '\'' +
                 ", price=" + price +
                 ", image='" + image + '\'' +
                 ", packageId=" + packageId +

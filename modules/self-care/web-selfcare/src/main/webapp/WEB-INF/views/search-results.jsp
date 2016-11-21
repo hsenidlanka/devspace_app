@@ -1,4 +1,4 @@
-                                 <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head lang="en">
     <title>Search Results</title>
@@ -6,31 +6,33 @@
 
     <%@include file="includes/include.jsp" %>
 
-    <script src="<c:url value="/resources/js/menu-operations.js"/>" ></script>
-    <script src="<c:url value="/resources/js/search-operations.js"/>" ></script>
-    <script src="<c:url value="/resources/js/jquery.contenthover.js"/>" ></script>
+    <script src="<c:url value="/resources/js/menu-operations.js"/>"></script>
+    <script src="<c:url value="/resources/js/search-operations.js"/>"></script>
+    <script src="<c:url value="/resources/js/jquery.contenthover.js"/>"></script>
 </head>
 <body>
 <div class="loader-anim"></div>
 <%@include file="includes/new-header.jsp" %>
-<c:out value="${test}"/>
-<c:out value="${it}"/>
+<%--<c:out value="${test}"/>
+<c:out value="${it}"/>--%>
 <div class="main-div">
     <div class="section">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div>
                     <div style="display: inline-block;">
-                        <img class="icons" src="<c:url value="/resources/images/icons/search-result.png"/>" >
+                        <img class="icons" src="<c:url value="/resources/images/icons/search-result.png"/>">
+
                         <h3 id="menu-panel-heading" class="header-panel">Search Results</h3>
                     </div>
                     <div style="display: inline-block; float:right;">
                         <div class="form-group">
                             <div class="col-sm-10" style="padding-right: 0px;">
-                                <input type="text" class="form-control input-sm" placeholder="Search" name="txt-search-menu">
+                                <input type="text" class="form-control input-sm" placeholder="Search"
+                                       name="txt-search-menu" id="txt-menu-search">
                             </div>
                             <div class="col-sm-2" style="padding-left: 2px;">
-                                <button class="btn btn-primary input-sm"><span><i
+                                <button class="btn btn-primary input-sm" id="btn-menu-search" type="button"><span><i
                                         class="glyphicon glyphicon-search"></i></span></button>
                             </div>
                         </div>
@@ -43,47 +45,275 @@
                     <div class="row">
                         <div class="col-md-9">
                             <div class="panel-group" id="search-pizza-collapse">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">
-                                            <a data-toggle="collapse" href="#search-pizza">Pizza</a>
-                                        </h4>
-                                    </div>
+                                <c:choose>
+                                    <c:when test="${ empty it}">
+                                        <div style="color: #28921f;height: 30px;background-color: #628c10;padding: 6%;margin-bottom: 10px">
+                                            <h1 style="font-size: larger;color: #e6ceac"><c:out
+                                                    value="No matching items found ...Surf our menu instead!!!"/></h1>
+                                        </div>
+                                        <script>
+                                            $.notify(" No matching items found...", {
+                                                align: "center",
+                                                verticalAlign: "top",
+                                                delay: 2000,
+                                                animationType: "fade",
+                                                color: "#fff",
+                                                background: "#58b068"
+                                            });
+                                        </script>
 
-                                    <div id="search-pizza" class="panel-collapse collapse in">
-                                        <div class="panel-body">
-                                            <div class="row">
-                                                <c:forEach items="${it}" var="item">
-                                                    <div style="margin-top: 15px;">
-
-                                                <div class="col-md-3">
-                                                    <img src="<c:url value="/resources/images/pizzas/15.jpg"/>"
-                                                         class="img-responsive menu-images">
-
-                                                    <div class="contenthover">
-                                                        <h3><c:out value="${item.itemName}"/></h3>
-
-
-                                                        <c:out value="${item.description}"/>
-                                                        <div>
-                                                            <button class="btn btn-success btn-xs btn-addtocart-pizza">
-                                                                Add
-                                                                to
-                                                                cart
-                                                            </button>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-
-                                                    </div>
-                                                </c:forEach>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" href="#search-pizza">Pizza</a>
+                                                </h4>
                                             </div>
+
+                                            <div id="search-pizza" class="panel-collapse collapse in">
+                                                <div class="panel-body">
+                                                    <div class="row">
+                                                            <%--<c:if test="${ empty it}">
+                                                                <div style="color: #28921f;height: 40px;background-color: #628c10;padding: 6%">
+                                                                    <h1 style="font-size: larger;color: #e6ceac"><c:out value="No matching items found ...Surf our menu instead!!!"/></h1>
+                                                                </div>
+                                                                <script>
+                                                                    $.notify(" No matching items found...", {
+                                                                        align: "center",
+                                                                        verticalAlign: "top",
+                                                                        delay: 2000,
+                                                                        animationType: "fade",
+                                                                        color: "#fff",
+                                                                        background: "#58b068"
+                                                                    });
+                                                                </script>
+
+                                                            </c:if>--%>
+                                                        <c:forEach items="${it}" var="item">
+                                                            <c:choose>
+                                                                <c:when test="${item.categoryName=='Pizza'}">
+
+                                                                    <div style="margin-top: 15px;">
+
+                                                                        <div class="col-md-3">
+                                                                            <img src="<c:url value="/resources/images/pizzas/22.png"/>"
+                                                                                 class="img-responsive menu-images">
+
+                                                                            <div class="contenthover">
+                                                                                <h3><c:out
+                                                                                        value="${item.itemName}"/></h3>
+
+
+                                                                                <c:out value="${item.description}"/>
+                                                                                <div>
+                                                                                    <button class="btn btn-success btn-xs btn-addtocart-pizza">
+                                                                                        Add
+                                                                                        to
+                                                                                        cart
+                                                                                    </button>
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                </c:when>
+                                                            </c:choose>
+                                                        </c:forEach>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
+
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" href="#search-pizza2">Beverage</a>
+                                                </h4>
+                                            </div>
+
+                                            <div id="search-pizza2" class="panel-collapse collapse in">
+                                                <div class="panel-body">
+                                                    <div class="row">
+
+                                                        <c:forEach items="${it}" var="item">
+                                                            <c:choose>
+                                                                <c:when test="${item.categoryName=='Beverage'}">
+
+                                                                    <div style="margin-top: 15px;">
+
+                                                                        <div class="col-md-3">
+                                                                            <img src="<c:url value="/resources/images/beverages/coffee%2004.jpg"/>"
+                                                                                 class="img-responsive menu-images">
+
+                                                                            <div class="contenthover">
+                                                                                <h3><c:out
+                                                                                        value="${item.itemName}"/></h3>
+
+
+                                                                                <c:out value="${item.description}"/>
+                                                                                <div>
+                                                                                    <button class="btn btn-success btn-xs btn-addtocart-pizza">
+                                                                                        Add
+                                                                                        to
+                                                                                        cart
+                                                                                    </button>
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                </c:when>
+                                                            </c:choose>
+                                                        </c:forEach>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" href="#search-pizza3">Topping</a>
+                                                </h4>
+                                            </div>
+
+                                            <div id="search-pizza3" class="panel-collapse collapse in">
+                                                <div class="panel-body">
+                                                    <div class="row">
+
+                                                        <c:forEach items="${it}" var="item">
+                                                            <c:choose>
+                                                                <c:when test="${item.categoryName=='Topping'}">
+
+                                                                    <div style="margin-top: 15px;">
+
+                                                                        <div class="col-md-3">
+                                                                            <img src="<c:url value="/resources/images/desserts/pudding%2001.jpg"/>"
+                                                                                 class="img-responsive menu-images">
+
+                                                                            <div class="contenthover">
+                                                                                <h3><c:out
+                                                                                        value="${item.itemName}"/></h3>
+
+
+                                                                                <c:out value="${item.description}"/>
+                                                                                <div>
+                                                                                    <button class="btn btn-success btn-xs btn-addtocart-pizza">
+                                                                                        Add
+                                                                                        to
+                                                                                        cart
+                                                                                    </button>
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                </c:when>
+                                                            </c:choose>
+                                                        </c:forEach>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" href="#search-pizza4">Desserts</a>
+                                                </h4>
+                                            </div>
+
+                                            <div id="search-pizza4" class="panel-collapse collapse in">
+                                                <div class="panel-body">
+                                                    <div class="row">
+
+                                                        <c:forEach items="${it}" var="item">
+                                                            <c:choose>
+                                                                <c:when test="${item.categoryName=='Desserts'}">
+
+                                                                    <div style="margin-top: 15px;">
+
+                                                                        <div class="col-md-3">
+                                                                            <img src="<c:url value="/resources/images/desserts/pudding%2001.jpg"/>"
+                                                                                 class="img-responsive menu-images">
+
+                                                                            <div class="contenthover">
+                                                                                <h3><c:out
+                                                                                        value="${item.itemName}"/></h3>
+
+
+                                                                                <c:out value="${item.description}"/>
+                                                                                <div>
+                                                                                    <button class="btn btn-success btn-xs btn-addtocart-pizza">
+                                                                                        Add
+                                                                                        to
+                                                                                        cart
+                                                                                    </button>
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                </c:when>
+                                                            </c:choose>
+                                                        </c:forEach>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" href="#search-pizza5">Salad</a>
+                                                </h4>
+                                            </div>
+
+                                            <div id="search-pizza5" class="panel-collapse collapse in">
+                                                <div class="panel-body">
+                                                    <div class="row">
+
+                                                        <c:forEach items="${it}" var="item">
+                                                            <c:choose>
+                                                                <c:when test="${item.categoryName=='Salad'}">
+
+                                                                    <div style="margin-top: 15px;">
+
+                                                                        <div class="col-md-3">
+                                                                            <img src="<c:url value="/resources/images/desserts/salads%2001.jpg"/>"
+                                                                                 class="img-responsive menu-images">
+
+                                                                            <div class="contenthover">
+                                                                                <h3><c:out
+                                                                                        value="${item.itemName}"/></h3>
+
+
+                                                                                <c:out value="${item.description}"/>
+                                                                                <div>
+                                                                                    <button class="btn btn-success btn-xs btn-addtocart-pizza">
+                                                                                        Add
+                                                                                        to
+                                                                                        cart
+                                                                                    </button>
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                </c:when>
+                                                            </c:choose>
+                                                        </c:forEach>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>
+                        </div>
 
 
                         <div class="col-md-3">
@@ -101,19 +331,19 @@
                                 <!-- Wrapper for slides -->
                                 <div class="carousel-inner" role="listbox">
                                     <div class="item active">
-                                        <img src="<c:url value="/resources/images/beverages/Bergers-Catering-Cold-Beverages-400x600.jpg"/>" >
+                                        <img src="<c:url value="/resources/images/beverages/Bergers-Catering-Cold-Beverages-400x600.jpg"/>">
                                     </div>
 
                                     <div class="item">
-                                        <img src="<c:url value="/resources/images/desserts/flourless-chocolate-cake-8-400x600.jpg"/>" >
+                                        <img src="<c:url value="/resources/images/desserts/flourless-chocolate-cake-8-400x600.jpg"/>">
                                     </div>
 
                                     <div class="item">
-                                        <img src="<c:url value="/resources/images/pizzas/c3fc09ff6816d3ec759a68680c61f736.jpg"/>" >
+                                        <img src="<c:url value="/resources/images/pizzas/c3fc09ff6816d3ec759a68680c61f736.jpg"/>">
                                     </div>
 
                                     <div class="item">
-                                        <img src="<c:url value="/resources/images/desserts/millionaires-shortbread-bars-no-bake-dessert-400x600.jpg"/>" >
+                                        <img src="<c:url value="/resources/images/desserts/millionaires-shortbread-bars-no-bake-dessert-400x600.jpg"/>">
                                     </div>
                                 </div>
 
@@ -130,11 +360,11 @@
                         </div>
                     </div>
                 </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
+</div>
+</div>
 </div>
 
 <!-- Add to cart with customization popup -->
@@ -224,5 +454,27 @@
 </div>
 
 <a href="#" class="scrollup"></a>
+<script>
+    $("#btn-menu-search").click(function () {
+        var searchKey = $("#txt-menu-search").val();
+        if ($("#txt-menu-search").val().length == 0) {
+            $("#txt-menu-search").css("border-color", "red");
+            $.notify(" Search field is empty...", {
+                align: "center",
+                verticalAlign: "top",
+                delay: 2000,
+                animationType: "fade",
+                color: "#fff",
+                background: "#D44950"
+            });
+        } else {
+            window.location.href = "http://localhost:8080/web-selfcare/search-menu/" + searchKey;
+
+        }
+
+    });
+
+
+</script>
 </body>
 </html>

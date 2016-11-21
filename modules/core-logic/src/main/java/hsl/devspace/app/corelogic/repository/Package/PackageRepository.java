@@ -11,13 +11,15 @@ import java.util.List;
 public interface PackageRepository {
     int add(hsl.devspace.app.corelogic.domain.Package pack) throws SQLIntegrityConstraintViolationException;
     int delete(String packageName);
-    int updatePackage(hsl.devspace.app.corelogic.domain.Package updatedPackage);
+
+    int update(hsl.devspace.app.corelogic.domain.Package updatedPackage);
     int changePrice(String packageName,double price);
     List<hsl.devspace.app.corelogic.domain.Package> selectAll();
-
     int addContent(List<hsl.devspace.app.corelogic.domain.Package> content);
-
     boolean checkUniquePackage(String packName);
-
     int addPackage(hsl.devspace.app.corelogic.domain.Package pack, List<Package> content);
+
+    int deleteContent(String packageName);
+
+    int deletePackage(String packageName);
 }

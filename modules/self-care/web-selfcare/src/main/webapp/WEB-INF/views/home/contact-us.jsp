@@ -46,13 +46,20 @@
                     selectedLocation = $this.data('location');
 
             $li.addClass('active').siblings('li').removeClass('active');
-
             //Update #map bkimage with the image from the location
             $('#map').css('background-image', 'url(' + selectedMap + ')');
             //update tooltip 'address'
             $('.selectedLocation').text(selectedLocation);
         });
     </script>
+
+    
+    <style>
+        .successContact{
+            margin-top: 70%;
+            margin-bottom: 70%;
+        }
+    </style>
 </head>
 <body>
 <%@include file="../includes/new-header.jsp" %>
@@ -62,28 +69,27 @@
         <div class='circles'></div>
         <div class='circles'></div>
         <div class='circles'></div>
-        <p>Contact Us</p>
+        <p><fmt:message key="new.header.contact" bundle="${lang}"/></p>
         <span class='arrow entypo-resize-full'></span>
     </div>
     <div id='content'>
         <div id='left'>
             <div id='map'>
-                <p>Where To Find Us</p>
-
+                <p><fmt:message key="contactus.where.to.find" bundle="${lang}"/></p>
                 <div class='map-locator'>
                     <div class='tooltip'>
                         <ul>
                             <li>
                                 <span class='entypo-location'></span>
-                                <span class='selectedLocation'>Sri Lanka</span>
+                                <span class='selectedLocation'><fmt:message key="location.sri" bundle="${lang}"/></span>
                             </li>
                             <li>
                                 <span class='entypo-mail'></span>
-                                <a href='#'>pizzashefu@mail.com</a>
+                                <a href='#'><fmt:message key="contactus.email" bundle="${lang}"/></a>
                             </li>
                             <li>
                                 <span class='entypo-phone'></span>
-                                0412249549
+                                <fmt:message key="contactus.number" bundle="${lang}"/>
                             </li>
                         </ul>
                     </div>
@@ -108,7 +114,7 @@
             </ul>
         </div>
         <div id='right'>
-            <p>Connect</p>
+            <p style="color: whitesmoke"><fmt:message key="contactus.connect" bundle="${lang}"/></p>
 
             <div id='social'>
                 <a class='social'>
@@ -128,10 +134,11 @@
                 </a>
             </div>
 
+            <c:if test="${empty validForm}">
 
 
             <form:form action="/web-selfcare/contact-us" method="post" modelAttribute="contactus">
-
+                    ${invalidForm}
 
                 <form:select cssClass="form-control" path="inquiryType">
 
@@ -163,7 +170,7 @@
                     <form:errors path="title" class="help-inline"/>
                 </div>
 
-                <form:input path="name" cssClass="form-control" id="txt-fname" type="text" placeholder="Test"/>
+                <form:input path="name" cssClass="form-control" id="txt-fname" type="text" placeholder="Your Name"/>
                 <%--<label id="fname_error" class="error-labels"></label>--%>
                 <div class="has-error">
                     <form:errors path="name" class="help-inline"/>
@@ -199,13 +206,19 @@
 
             </form:form>
 
-            <p>other way</p>
+            </c:if>
+            <c:if test="${not empty validForm}">
+            <div class="successContact"><center>Your Form Successfully Submitted</center></div>
+            </c:if>
+
+
+            <p style="color: whitesmoke">other way</p>
 
             <p class='other entypo-mail'>
-                <a href='#'>pizzashefu@mail.com</a>
+                <a href='#'><fmt:message key="contactus.email" bundle="${lang}"/></a>
             </p>
 
-            <p class='other entypo-phone'>(+9441)2290632</p>
+            <p class='other entypo-phone'><fmt:message key="contactus.number" bundle="${lang}"/></p>
         </div>
     </div>
 </div>

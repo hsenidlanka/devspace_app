@@ -7,40 +7,71 @@ $(document).ready(function () {
         $("#pkgViewModal").modal();
     });
 
-    $('.btnAddItmPkg').click(function () {
-       // if(($('.chkbxPkgCat').prop('checked()',true))){
-            $(this).replaceWith("<div class=\"add-status\"><span class=\"glyphicon glyphicon-ok\"></span> Added</div>");
-      //  }
+    /*$('.btnAddItmPkg').click(function () {
+        // if(($('.chkbxPkgCat').prop('checked()',true))){
+        $(this).replaceWith("<div class=\"add-status\"><span class=\"glyphicon glyphicon-ok\"></span> Added</div>");
+        //  }
+    });*/
+
+
+    ///////////////////////////////////////////
+    $.ajax({
+        type: 'POST',
+        url: 'https://localhost:8443/admin/packages/getCatListContent',
+        success: function (res) {
+
+             console.log("dddd = " + res + res.length);
+
+             var n = res.length;
+
+             for (i = 0; i < n; i++) {
+             $('.rowtbl:first').clone().after("#id")
+             .appendTo('#tstDiv')
+             .find('.chkbxPkgCat').val(res[i]).end()
+             .find('.chkbxPkgCat1').text(res[i]).end()
+             .find('*[id]').each(function () {
+             $(this).attr('id', $(this).attr('id') + i)
+             })
+             }
+              $('.rowtbl:first').hide();
+        },
+        error: function (e) {
+            alert(e);
+        }
     });
 
     /*
      * populating the item list in add Package.jsp
      **/
-    $(".chkbxPkgCat").click(function () {
+    $(document.body).on('click','.chkbxPkgCat',function(){
         var categoryNm = $(this).val();
         var slctElement = $(this).parent().parent().next().find(".form-control").attr('id');
         var selectedItm = $(this).parent().parent().next().next().find(".form-control").attr('id');
 
+        console.log($(this).val());
         console.log($(this).parent().parent().next().find(".form-control").css('color', 'green'));
         console.log($(this).parent().parent().next().next().find(".form-control").css('color', 'rgb(167, 68, 7)'));
 
         setItemList(categoryNm, slctElement, selectedItm);
     });
 
+    $(".chkbxPkgCat").click(function () {
+
+    });
+
     /*
-    * Package summary
-    **/
-$('#txtAddPkgName').focusout(function(){
-   var pkgName = $(this).val();
-    $('#newPkgName').text(pkgName);
+     * Package summary
+     **/
+    $('#txtAddPkgName').focusout(function () {
+        var pkgName = $(this).val();
+        $('#newPkgName').text(pkgName);
 
-});
-$('#txtAddPkgPrice').focusout(function(){
-   var pkgPrice = $(this).val();
-    $('#newPkgPice').text(pkgPrice);
+    });
+    $('#txtAddPkgPrice').focusout(function () {
+        var pkgPrice = $(this).val();
+        $('#newPkgPice').text(pkgPrice);
 
-});
-
+    });
 
 
 });
@@ -108,118 +139,127 @@ function generate(selectedItm, slctElement) {
     });
 }
 
-function contentPackge(){
+function contentPackge() {
     jsonObj = [];
+    content={};
 
-    if($('#chkPkgPzza').is(':checked')){
-        var itemVal = $('#slctItmPkgPzza').val();
-        var sizeVal = $("#szpr1").val();
-        var qtyVal = $("#pzzaQty").val();
+    if ($('#chkPkgCat0').is(':checked')) {
+        var itemVal = $('#slctItmPkgCat0').val();
+        var sizeVal = $("#szpr0").val();
+        var qtyVal = $("#contQty0").val();
 
         content = {};
-        content["item"] = itemVal;
+        content["itemName"] = itemVal;
         content["size"] = sizeVal;
-        content["qty"] = qtyVal;
+        content["quantity"] = qtyVal;
 
         jsonObj.push(content);
         jsonString = JSON.stringify(jsonObj);
     }
-    if($('#chkPkgSld').is(':checked')){
-        var itemVal2 = $('#slctItmPkgSalad').val();
-        var sizeVal2 = $("#szprc2").val();
-        var qtyVal2 = $("#sldQty").val();
+    if ($('#chkPkgCat1').is(':checked')) {
+        var itemVal2 = $('#slctItmPkgCat1').val();
+        var sizeVal2 = $("#szpr1").val();
+        var qtyVal2 = $("#contQty1").val();
 
         content = {};
-        content["item"] = itemVal2;
+        content["itemName"] = itemVal2;
         content["size"] = sizeVal2;
-        content["qty"] = qtyVal2;
+        content["quantity"] = qtyVal2;
 
         jsonObj.push(content);
         jsonString = JSON.stringify(jsonObj);
     }
-    if($('#chkPkgBvrg').is(':checked')){
-        var itemVal3 = $('#slctItmPkgBvrg').val();
-        var sizeVal3 = $("#szprc3").val();
-        var qtyVal3 = $("#bvgQty").val();
+    if ($('#chkPkgCat2').is(':checked')) {
+        var itemVal3 = $('#slctItmPkgCat2').val();
+        var sizeVal3 = $("#szpr2").val();
+        var qtyVal3 = $("#contQty2").val();
 
         content = {};
-        content["item"] = itemVal3;
+        content["itemName"] = itemVal3;
         content["size"] = sizeVal3;
-        content["qty"] = qtyVal3;
+        content["quantity"] = qtyVal3;
 
         jsonObj.push(content);
         jsonString = JSON.stringify(jsonObj);
     }
-    if($('#chkPkgTppg').is(':checked')){
-        var itemVal4 = $('#slctItmPkgToppng').val();
-        var sizeVal4 = $("#szpr4").val();
-        var qtyVal4 = $("#tppgQty").val();
+    if ($('#chkPkgCat3').is(':checked')) {
+        var itemVal4 = $('#slctItmPkgCat3').val();
+        var sizeVal4 = $("#szpr3").val();
+        var qtyVal4 = $("#contQty3").val();
 
         content = {};
-        content["item"] = itemVal4;
+        content["itemName"] = itemVal4;
         content["size"] = sizeVal4;
-        content["qty"] = qtyVal4;
+        content["quantity"] = qtyVal4;
 
         jsonObj.push(content);
         jsonString = JSON.stringify(jsonObj);
     }
-    if($('#chkPkgDssrt').is(':checked')){
-        var itemVal5 = $('#slctItmPkgDssrt').val();
-        var sizeVal5 = $("#szpr5").val();
-        var qtyVal5 = $("#dssrtQty").val();
+    if ($('#chkPkgCat4').is(':checked')) {
+        var itemVal5 = $('#slctItmPkgCat4').val();
+        var sizeVal5 = $("#szpr4").val();
+        var qtyVal5 = $("#contQty4").val();
 
         content = {};
-        content["item"] = itemVal5;
+        content["itemName"] = itemVal5;
         content["size"] = sizeVal5;
-        content["qty"] = qtyVal5;
+        content["quantity"] = qtyVal5;
 
         jsonObj.push(content);
 
     }
+    var pkgName = $("#txtAddPkgName").val();
+    var pkgPrice = $("#txtAddPkgPrice").val();
+    var pkgImg = $("#savePkgImg").val();
 
-    console.log(jsonObj);
-    console.log(jsonString);
-    jsonString = JSON.stringify(jsonObj);
+   /* content["packName"] = pkgName;
+    content["price"] = pkgPrice;
+    content["imageUrl"] = pkgImg;
+
+    jsonObj.push(content);
+*/
+    console.log("pp "+jsonObj);
+    console.log("pp2 "+jsonString);
+
     $.ajax({
         url: "https://localhost:8443/admin/packages/add_package",
-      //  data:{"test":JSON.stringify(jsonObj)},
-        data:{"test":jsonObj},
-       // type: "POST",
-        success:function(result){
-            alert(result);
-            console.log("json result = "+result);
-            console.log("json result item= "+result["item"]);
-            console.log(Object.keys(result));
-            console.log(Object.values(result));
-            console.log(Object.entries(result));
+        data:{"test":JSON.stringify(jsonObj), "pkgName":pkgName, "pkgPrice":pkgPrice, "pkgImg":pkgImg},
+         type: "POST",
+        success: function (result) {
+            //$( "#btnAddNewPkg" ).submit(function( event ) {
+            //    result.preventDefault();showloadingif();
+              //  setTimeout(function(){ $("#frmAddPkg").submit(); }, 3000);
+           // });
+            /*if((result.length) != 0){
+                $(".btnAddItmPkg").replaceWith("<div class=\"add-status\"><span class=\"glyphicon glyphicon-ok\"></span> Finish</div>");
+            }*/
 
-
-          /*  for (var i=0; i<result.length; i++){
-                    console.log("Item: "+result[i].item);
-                    console.log("Size: "+result[i].size);
-                }*/
+            //console.log("result from server2 ",+result.length);
+        },
+        error:function(e){
+            alert(e);
         }
     });
 }
 
 /*
 
-$.each( '.chkbxPkgCat', function( key, value ) {
-    jsonObj = [];
-    if($('.chkbxPkgCat').is(':checked')){
-        var itemVal = $('#slctItmPkgPzza').val();
-        var sizeVal = $("#szpr1").val();
-        var qtyVal = $("#pzzaQty").val();
+ $.each( '.chkbxPkgCat', function( key, value ) {
+ jsonObj = [];
+ if($('.chkbxPkgCat').is(':checked')){
+ var itemVal = $('#slctItmPkgPzza').val();
+ var sizeVal = $("#szpr1").val();
+ var qtyVal = $("#pzzaQty").val();
 
-        content = {};
-        content["item"] = itemVal;
-        content["size"] = sizeVal;
-        content["qty"] = qtyVal;
+ content = {};
+ content["itemName"] = itemVal;
+ content["size"] = sizeVal;
+ content["quantity"] = qtyVal;
 
-        jsonObj.push(content);
-        jsonString = JSON.stringify(jsonObj);
-    }
-    alert(key, value);
-    console.log(jsonObj);
-    console.log(jsonString);
-});*/
+ jsonObj.push(content);
+ jsonString = JSON.stringify(jsonObj);
+ }
+ alert(key, value);
+ console.log(jsonObj);
+ console.log(jsonString);
+ });*/
