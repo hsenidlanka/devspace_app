@@ -19,15 +19,8 @@
             margin: auto;
         }
 
-        #tst {
-            color: red;
-            font-weight: lighter;
-            font-size: smaller;
-            text-align: left;
-            display: block;
-        }
 
-        #modal-login {
+        .modal-login {
             position: absolute;
             left: 50%;
             top: 50%;
@@ -37,6 +30,8 @@
             transform: translate(-50%, -50%);
         }
     </style>
+
+
 </head>
 
 <!-------Header------------------------------------->
@@ -58,22 +53,18 @@
     <div class="carousel-inner" role="listbox">
 
         <div class="item active">
-            <img src="<c:url value="/resources/images/53debcce3a030pizza_transparent_png.png"/>" alt="" width="100"
-                 height="220">
+            <img src="<c:url value="/resources/images/carousel1.png"/>" >
         </div>
 
         <div class="item">
-            <img src="<c:url value="/resources/images/SeafoodDeluxe.png"/>"
-                 alt="" width="100" height="100">
+            <img src="<c:url value="/resources/images/caraousel2.png"/>" >
         </div>
 
         <div class="item">
-            <img src="<c:url value="/resources/images/tagliatelle_roasted_squash.png"/>" alt=""
-                 width="460" height="300">
+            <img src="<c:url value="/resources/images/carousel3.png"/>" >
         </div>
         <div class="item">
-            <img src="<c:url value="/resources/images/Kids_Ice_Cream_Sundae.png"/>"
-                 alt="" width="460" height="300">
+            <img src="<c:url value="/resources/images/carousel4.png"/>">
         </div>
 
     </div>

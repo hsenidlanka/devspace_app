@@ -26,23 +26,23 @@ frisby.create('Get all sub categories test 01-correct url')
         "data": [
             {
                 "name": "Ice creams",
-                "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text"
+                "description": null
             },
             {
                 "name": "Chicken",
-                "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text"
+                "description": null
             },
             {
                 "name": "Italian",
-                "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text"
+                "description": null
             },
             {
                 "name": "Soft Drinks",
-                "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text"
+                "description": null
             },
             {
                 "name": "Alcohol",
-                "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text"
+                "description": null
             }
         ],
         "links": [

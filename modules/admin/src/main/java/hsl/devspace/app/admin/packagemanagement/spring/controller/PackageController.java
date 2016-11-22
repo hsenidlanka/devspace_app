@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -112,121 +111,26 @@ public class PackageController {
         return jsonObject.toJSONString();
     }
 
-    ////////////////////////////
-
-  /*  @RequestMapping(value = "/createContPkg")
-    public
-    @ResponseBody
-    List<Package> createPkgCont(HttpServletRequest request){
-
-        String s = request.getParameter("test");
-        LOGGER.trace("test val = {}", s);
-
-        ObjectMapper objectMapper1 = new ObjectMapper();
-        List<Package> cats;
-        List<Package> contList1 = new ArrayList<Package>();
-
-        try {
-            cats = objectMapper1.readValue(s, new TypeReference<List<Package>>() {});
-
-            for (Package cont : cats) {
-                LOGGER.trace("cont= {} ", cont);
-                Package details = new Package(cont.getItemName(),cont.getQuantity(),cont.getSize());
-                contList1.add(details);
-            }
-            LOGGER.error("contlist details {}", contList1.get(0).getQuantity()+contList1.get(0).getSize()+contList1.get(0).getItemName());
-            LOGGER.error("contlist details2 {}", contList1);
-
-        } catch (IOException e) {
-          LOGGER.error("errorr  {}",e.getMessage());
-        }
-        return contList1;
-    }*/
-
-/*
-
-    //For submitting the form for add new package
-    @RequestMapping(value = "/add_package", method = RequestMethod.POST)
-    public ModelAndView addPackage(@ModelAttribute("newPackage") Package newPackage) {
-LOGGER.trace("invokingg {}",newPackage);
-        try {
-            LOGGER.trace("package objct {}",newPackage);
-            LOGGER.error("package objct {}",newPackage);
-            String pkgName = newPackage.getPackName();
-
-            LOGGER.trace("pkg name {}",pkgName);
-            LOGGER.error("pkg name {}",pkgName);
-        }catch (Exception e){
-            LOGGER.error("error in package add {}", e.getMessage());
-        }
-
-        //int count = categoryRepository.count();
-
-       */
-/* try {
-            LOGGER.trace("new packg name {}",pkgName);
-            List<Package> contList = new ArrayList<Package>();
-
-            boolean uniquePknm = packageRepo.checkUniquePackage(pkgName);
-            LOGGER.trace("unique ad pkg {}",uniquePknm);
-            LOGGER.error("unique ad pkg {}",uniquePknm);
-
-            if (uniquePknm) {
-                int a = packageRepo.addPackage(newPackage, contList);
-                LOGGER.info("a in add package {} ", a);
-
-                if (a == 1) {
-                    JOptionPane.showMessageDialog(null, "Server-side error. Cannot add the package !", "Error !",
-                            JOptionPane.ERROR_MESSAGE);
-                    LOGGER.error("Server-side error in adding itemRepo " + pkgName);
-                } else {
-                    JOptionPane.showMessageDialog(null, "Added new package " + pkgName, "Success",
-                            JOptionPane.INFORMATION_MESSAGE);
-                }
-            } else {
-                JOptionPane.showMessageDialog(null,
-                        "Item name is already exists! " + pkgName, "Warning ",
-                        JOptionPane.WARNING_MESSAGE);
-
-                return new ModelAndView("package_management/addPackage", "command", newPackage);
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error occured in adding package !", "Error !",
-                    JOptionPane.ERROR_MESSAGE);
-            LOGGER.error("error in package add {}", e.getMessage());
-        }*//*
-
-
-        return new ModelAndView("item_management/addItem", "command", newPackage);
-        //return new ModelAndView(new RedirectView("add"));
-    }
-
-*/
-
-
     //For submitting the form for add new package
     @RequestMapping(value = "/add_package", method = RequestMethod.POST)
     public ModelAndView addPackage(@ModelAttribute("newPackage") Package newPackage,
                                   /* @RequestParam("pkgImg") MultipartFile packImg,*/
                                    HttpServletRequest request) {
 
-        //Package newPackage = new Package();
         LOGGER.error("package objct11 {}", newPackage);
         try {
          String packNm =  request.getParameter("pkgName");
-         double packPrc = Double.parseDouble((request.getParameter("pkgPrice")));
-         String packImg =  request.getParameter("pkgImg");
+         String pkgPrice = request.getParameter("pkgPrice");
+         String packImg =request.getParameter("pkgImg");
 
-            MultipartFile img = newPackage.getImageUrl();
+         double packPrc = Double.parseDouble(pkgPrice);
+
             newPackage.setPackName(packNm);
             newPackage.setPrice(packPrc);
             newPackage.setImage(packImg);
 
-        //    newPackage.setImageUrl(packImg);
             LOGGER.error("package objct22 {}", newPackage);
-            LOGGER.error("package objct-img url {}", newPackage.getImageUrl());
-            LOGGER.error("package objct-img url2 {}", img);
-
+            LOGGER.error("package objct-img url {}", newPackage.getImage());
 
             String s = request.getParameter("test");
             LOGGER.trace("test val = {}", s);
@@ -246,7 +150,9 @@ LOGGER.trace("invokingg {}",newPackage);
                 Package details = new Package(cont.getItemName(), cont.getQuantity(), cont.getSize());
                 contList.add(details);
             }
-            LOGGER.error("contlist details {}", contList.get(0).getQuantity(), contList.get(0).getSize(), contList.get(0).getItemName());
+            LOGGER.error("contlist details qy {}", contList.get(0).getQuantity());
+            LOGGER.error("contlist details size {}", contList.get(0).getSize());
+            LOGGER.error("contlist details itmnm {}", contList.get(0).getItemName());
             LOGGER.error("contlist details2 {}", contList);
 
             boolean uniquePknm = packageRepo.checkUniquePackage(pkgName);
@@ -255,18 +161,19 @@ LOGGER.trace("invokingg {}",newPackage);
             if (uniquePknm) {
                 int a = packageRepo.addPackage(newPackage, contList);
                 LOGGER.info("a in add package {} ", a);
+                LOGGER.trace("item name from pkg controller {}",contList.get(0).getItemName());
 
                 if (a != 1) {
-
                     JOptionPane.showMessageDialog(null, "Server-side error. Cannot add the package !", "Error !",
                             JOptionPane.ERROR_MESSAGE);
-                    LOGGER.error("Server-side error in adding itemRepo " + pkgName);
+                    LOGGER.error("Server-side error in adding package " + pkgName);
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Added new package " + pkgName, "Success",
                             JOptionPane.INFORMATION_MESSAGE);
                     LOGGER.trace("added new package {}", pkgName);
                 }
+
             } else {
                 JOptionPane.showMessageDialog(null,
                         "Item name is already exists! " + pkgName, "Warning ",
@@ -277,7 +184,7 @@ LOGGER.trace("invokingg {}",newPackage);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error occured in adding package !", "Error !",
                     JOptionPane.ERROR_MESSAGE);
-            LOGGER.error("error in package add {}", e.getLocalizedMessage());
+            LOGGER.error("error in package add {}", e);
         }
 
         return new ModelAndView(new RedirectView("add"));
@@ -290,7 +197,7 @@ LOGGER.trace("invokingg {}",newPackage);
 
 
     //For viewing the edit package form
-    @RequestMapping(value = "/edtPkg", method = RequestMethod.GET)
+    @RequestMapping(value = "/editPkg", method = RequestMethod.GET)
     public ModelAndView showEditPackage() {
         return new ModelAndView("pkgedt", "editPackage", new Package());
     }

@@ -34,9 +34,7 @@
 
                     <li>
 
-                        <a class="form-group-sm" data-toggle="modal" data-target="#modal-login"><img
-                                src="<c:url value="/resources/images/user2.png"/>" style=""></span> </a>
-
+                        <a id="loginBtn" class="form-group-sm" data-toggle="modal" data-target="#modal-login"><img src="<c:url value="/resources/images/user2.png"/>" style=""></span> </a>
                     </li>
 
                 </c:if>
@@ -58,21 +56,25 @@
     </div>
 </nav>
 
+<style>
+    body.modal-open {
+        overflow: auto;
+    }
+</style>
+
 <!------------------------------login modal--------------------------->
 
-<div id="modal-login" class="modal fade">
+<div id="modal-login" class="modal-login modal fade">
     <div class="modal-dialog modal-lg">
-        <div class="modal-content" style="width: 750px">
+        <div class="modal-content" >
 
             <div class="modal-header">
-                <%--<button type="button" class="close" data-dismiss="modal">x</button>--%>
-                <div class="panel-heading" style="height: 50px">
+                <div class="panel-heading" style="width: 87%">
                     <div class="row">
                         <div class="col-sm-4">
-                            <p style="text-align: center"><fmt:message key="new.header.update.user" bundle="${lang}"/></p>
+                            <p style="font-size: xx-large;text-align: left"><fmt:message key="new.header.login" bundle="${lang}"/></p>
                         </div>
-                        <div class="col-sm-5">
-                        </div>
+                        <div class="col-sm-5"></div>
                         <div class="col-sm-3">
                             <button data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
@@ -81,7 +83,7 @@
 
             </div>
 
-            <div class="modal-body">
+            <div class="modal-body" style="width: 87%">
                 <form name="loginForm" id="loginForm" novalidate="novalidate" action="3" method="post">
 
 
@@ -96,9 +98,9 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-sm-4"></div>
-                        <div id="usernameError" class="error-labels col-sm-4"></div>
-                        <div class="col-sm-4"></div>
+                        <div class="col-sm-2"></div>
+                        <div id="usernameError" class="error-labels col-sm-10" ></div>
+                        <%--<div class="col-sm-4"></div>--%>
                     </div>
 
                     <div class="row  form-group">
@@ -108,21 +110,27 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-sm-4"></div>
-                        <div id="passwordError" class="error-labels col-sm-4"></div>
-                        <div class="col-sm-4"></div>
+                        <div class="col-sm-2"></div>
+                        <div id="passwordError" class="error-labels col-sm-10"></div>
+                        <%--<div class="col-sm-4"></div>--%>
                     </div>
 
                     <div class="row">
-                        <div class="col-sm-3"></div>
+                        <div class="col-sm-4"></div>
                         <div class="col-sm-3">
                             <button id="loginFormSubmit" name="loginFormSubmit" type="button"
-                                    class="btn btn-success">Submit
+                                    class="btn btn-success"><fmt:message key="new.header.login" bundle="${lang}"/>
                             </button>
                         </div>
                         <div class="col-sm-6"></div>
                     </div>
-
+                    <div class="row"><br></div>
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <p align="center"><a href="#">Forget my password?</a></p>
+                        </div>
+                        <div class="col-sm-2"></div>
+                    </div>
                 </form>
 
                 <!-- end-account -->

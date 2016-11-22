@@ -17,11 +17,6 @@
     <url>http://maven.apache.org</url>
 
     <dependencies>
-        <dependency>
-            <groupId>hsenid</groupId>
-            <artifactId>core-logic</artifactId>
-            <version>0.0.3</version>
-        </dependency>
 
         <!--spring mvc testing dependencies-->
         <!--to transform objects into url encoded String objects.-->
@@ -302,6 +297,11 @@
             <version>2.7</version>
         </dependency>
 
+        <dependency>
+            <groupId>hsenid</groupId>
+            <artifactId>core-logic</artifactId>
+            <version>0.0.3</version>
+        </dependency>
     </dependencies>
 
 

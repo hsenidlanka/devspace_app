@@ -32,6 +32,9 @@
 <fmt:message key="admin.packagemanagement.pckgadd.url" var="pckgAdd" bundle="${bundle2}"/>
 <fmt:message key="admin.packagemanagement.pckgview.url" var="pckgView" bundle="${bundle2}"/>
 
+<fmt:message key="admin.notificationmanagement.comments.view.url" var="commentsView" bundle="${bundle2}"/>
+<fmt:message key="admin.notificationmanagement.ratings.view.url" var="ratingsView" bundle="${bundle2}"/>
+
 <%--<spring:url value="header.jsp" var="page1"/>
 <link href="${page1}" rel="import">--%>
 
@@ -170,12 +173,16 @@
           <div class="panel-body">
             <ul class="nav navbar-nav">
               <li>
-                <a href="pendingcomments.html" class="panel-sub-menu2" style="font-weight:bold;
-                font-size:18px;">Pending Comments</a>
+                <a href="<c:out value="${commentsView}"/>" class="panel-sub-menu2" style="font-weight:bold;
+                font-size:18px;">
+                  <fmt:message key="notification.commentsview.breadcrumb.view" bundle="${bundle1}"/>
+                </a>
               </li>
               <li>
-                <a href="pendingrating.html" class="panel-sub-menu2" style="font-weight:bold;
-                font-size:18px;">Pending Ratings</a>
+                <a href="<c:out value="${ratingsView}"/>" class="panel-sub-menu2" style="font-weight:bold;
+                font-size:18px;">
+                  <fmt:message key="notification.ratingssview.breadcrumb.view" bundle="${bundle1}"/>
+                </a>
               </li>
             </ul>
           </div>

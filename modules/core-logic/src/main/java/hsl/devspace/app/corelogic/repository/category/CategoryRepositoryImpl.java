@@ -83,6 +83,10 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
         log.info("{} category deleted",row);
         return row;
     }
+    @Override
+    public List<Category> viewSubCategoriesforCategory(String catName){
+        return null;
+    }
 
     /*view all category details */
     @Override
@@ -110,6 +114,7 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
     public Category selectCategoryDetail(int categoryId) {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category WHERE id = ?",categoryId);
 
+
             Category category = new Category();
             category.setCategory_id(Integer.parseInt(mp.get(0).get("id").toString()));
             category.setCategoryName(mp.get(0).get("name").toString());
@@ -123,7 +128,11 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
         return category;
     }
 
-
+    /*retrieve the details of a chosen sub-category */
+    @Override
+    public Category selectSubCategoryDetail(int subcategoryId) {
+        return null;
+    }
 
     @Override
     public List<Category> selectAllVisible() {
@@ -167,17 +176,19 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
         return count;
     }
 
+
     //this method is for update from UI(to be changed)
+    @Override
     public int updateCategory(Category cat) {
         int id= cat.getCategory_id();
         String name=cat.getCategoryName();
         String desc=cat.getCatDescription();
-        String image=cat.getImage();
+//        String image=cat.getImage();
         String status=cat.getStatus();
 
-        String sql = "UPDATE category SET name=?, description = ?,image=?,status=? WHERE id = ? ";
+        String sql = "UPDATE category SET name=?, description = ?,status = ? WHERE id = ? ";
 
-        int count = jdbcTemplate.update(sql, new Object[]{ name, desc,image,status,id});
+        int count = jdbcTemplate.update(sql, new Object[]{ name, desc,status,id});
         log.info("{}",count);
         return count;
     }

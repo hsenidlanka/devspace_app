@@ -7,33 +7,29 @@ $(document).ready(function () {
         $("#pkgViewModal").modal();
     });
 
-    /*$('.btnAddItmPkg').click(function () {
-        // if(($('.chkbxPkgCat').prop('checked()',true))){
-        $(this).replaceWith("<div class=\"add-status\"><span class=\"glyphicon glyphicon-ok\"></span> Added</div>");
-        //  }
-    });*/
 
-
-    ///////////////////////////////////////////
+/*
+* Function for clone and appending content table dynamically
+**/
     $.ajax({
         type: 'POST',
         url: 'https://localhost:8443/admin/packages/getCatListContent',
         success: function (res) {
 
-             console.log("dddd = " + res + res.length);
+            console.log("dddd = " + res + res.length);
 
-             var n = res.length;
+            var n = res.length;
 
-             for (i = 0; i < n; i++) {
-             $('.rowtbl:first').clone().after("#id")
-             .appendTo('#tstDiv')
-             .find('.chkbxPkgCat').val(res[i]).end()
-             .find('.chkbxPkgCat1').text(res[i]).end()
-             .find('*[id]').each(function () {
-             $(this).attr('id', $(this).attr('id') + i)
-             })
-             }
-              $('.rowtbl:first').hide();
+            for (i = 0; i < n; i++) {
+                $('.rowtbl:first').clone().after("#id")
+                    .appendTo('#tstDiv')
+                    .find('.chkbxPkgCat').val(res[i]).end()
+                    .find('.chkbxPkgCat1').text(res[i]).end()
+                    .find('*[id]').each(function () {
+                        $(this).attr('id', $(this).attr('id') + i)
+                    })
+            }
+            $('.rowtbl:first').hide();
         },
         error: function (e) {
             alert(e);
@@ -43,7 +39,7 @@ $(document).ready(function () {
     /*
      * populating the item list in add Package.jsp
      **/
-    $(document.body).on('click','.chkbxPkgCat',function(){
+    $(document.body).on('click', '.chkbxPkgCat', function () {
         var categoryNm = $(this).val();
         var slctElement = $(this).parent().parent().next().find(".form-control").attr('id');
         var selectedItm = $(this).parent().parent().next().next().find(".form-control").attr('id');
@@ -55,23 +51,10 @@ $(document).ready(function () {
         setItemList(categoryNm, slctElement, selectedItm);
     });
 
-    $(".chkbxPkgCat").click(function () {
-
-    });
-
-    /*
-     * Package summary
-     **/
-    $('#txtAddPkgName').focusout(function () {
-        var pkgName = $(this).val();
-        $('#newPkgName').text(pkgName);
-
-    });
-    $('#txtAddPkgPrice').focusout(function () {
-        var pkgPrice = $(this).val();
-        $('#newPkgPice').text(pkgPrice);
-
-    });
+    /* function disableTxt(t, textBoxId) {
+     $("#" + textBoxId).prop("disabled", !$(t).prop("checked"));
+     $("#" + textBoxId).val(" ");
+     }*/
 
 
 });
@@ -129,7 +112,7 @@ function generate(selectedItm, slctElement) {
             var sizePriceList = $("#" + selectedItm), option = "";
             sizePriceList.empty();
             $.each(keys, function (index, value) {
-                option = option + "<option value='" + parsedData[value] + "'>" + value + "-" + parsedData[value] + "</option>";
+                option = option + "<option value='" + value + "'>" + value + "-" + parsedData[value] + "</option>";
             });
             sizePriceList.append(option);
         },
@@ -141,7 +124,7 @@ function generate(selectedItm, slctElement) {
 
 function contentPackge() {
     jsonObj = [];
-    content={};
+    content = {};
 
     if ($('#chkPkgCat0').is(':checked')) {
         var itemVal = $('#slctItmPkgCat0').val();
@@ -212,32 +195,31 @@ function contentPackge() {
     var pkgPrice = $("#txtAddPkgPrice").val();
     var pkgImg = $("#savePkgImg").val();
 
-   /* content["packName"] = pkgName;
-    content["price"] = pkgPrice;
-    content["imageUrl"] = pkgImg;
+    console.log("pp " + jsonObj);
+    console.log("pp2 " + jsonString);
 
-    jsonObj.push(content);
-*/
-    console.log("pp "+jsonObj);
-    console.log("pp2 "+jsonString);
+ /*   if (jsonObj.length() == 0) {
+        $.toaster({priority: 'warning', title: 'Warning !', message: 'Please fill the package content for ' + pkgName});
+    }*/
 
     $.ajax({
         url: "https://localhost:8443/admin/packages/add_package",
-        data:{"test":JSON.stringify(jsonObj), "pkgName":pkgName, "pkgPrice":pkgPrice, "pkgImg":pkgImg},
-         type: "POST",
+        data: {"test": JSON.stringify(jsonObj), "pkgName": pkgName, "pkgPrice": pkgPrice, "pkgImg": pkgImg},
+        type: "POST",
         success: function (result) {
-            //$( "#btnAddNewPkg" ).submit(function( event ) {
-            //    result.preventDefault();showloadingif();
-              //  setTimeout(function(){ $("#frmAddPkg").submit(); }, 3000);
-           // });
-            /*if((result.length) != 0){
-                $(".btnAddItmPkg").replaceWith("<div class=\"add-status\"><span class=\"glyphicon glyphicon-ok\"></span> Finish</div>");
-            }*/
+            $("#btnAddNewPkg").submit(function (event) {
+                event.preventDefault();
+                showloadingif();
 
-            //console.log("result from server2 ",+result.length);
+                setTimeout(function () {
+                    $("#frmAddPkg").submit();
+                }, 3000);
+            });
+            window.location.href += "#last";
+            location.reload(true);
         },
-        error:function(e){
-            alert(e);
+        error: function (e) {
+         //   $.toaster({priority: 'danger', title: 'Error', message: 'Cannot add the package ' + pkgName});
         }
     });
 }
@@ -263,3 +245,11 @@ function contentPackge() {
  console.log(jsonObj);
  console.log(jsonString);
  });*/
+
+///
+/*if((result.length) != 0){
+ $(".btnAddItmPkg").replaceWith("<div class=\"add-status\"><span class=\"glyphicon glyphicon-ok\"></span> Finish</div>");
+ }*/
+
+/*TO DO*/
+//automate jsonObject fetching*/

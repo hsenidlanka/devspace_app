@@ -1,3 +1,4 @@
+/*
 package hsl.devspace.app.admin.packagemanagement.spring.controller;
 
 public class PackageContent {
@@ -24,3 +25,4 @@ public PackageContent(){}
         this.qty=qty;
     }
 }
+*/

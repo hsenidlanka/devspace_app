@@ -16,10 +16,13 @@ public interface CategoryRepository {
     boolean checkAvailability(String categoryName);
     public int delete(String categoryName);
     List<Category> selectAll();
+    public List<Category> viewSubCategoriesforCategory(String catName);
     public Category selectCategoryDetail(int categoryId);
+    public Category selectSubCategoryDetail(int subcategoryId);
     List<Category> selectAllVisible();
     int count();
     int update(String name,String description);
+    public int updateCategory(Category cat);
     List<Category> selectNameAndDescription();
     void createCategory1(Category cat);
     List<String> retrieveCategoryTypes(String categoryName);

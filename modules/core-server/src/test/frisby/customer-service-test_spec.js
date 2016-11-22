@@ -72,7 +72,8 @@ frisby.create('Register customer test 02-different http method')
 // Test customer login-correct data.
 frisby.create('Customer login test 01-correct data')
     .post(base_url + '/customers/login/', {
-        "username": "frisby123"
+        "username": "frisby123",
+        "password": "password"
     }, {json: true})
     .expectStatus(200)
     .inspectJSON()
@@ -89,7 +90,7 @@ frisby.create('Customer login test 01-correct data')
         "message": "username, password validated.",
         "data": [
             {
-                "password": "password"
+                "username": "frisby123"
             }
         ],
         "links": [
@@ -397,5 +398,107 @@ frisby.create('Getting customer profile test 03-username case')
                 "rel": "self"
             }
         ]
+    })
+    .toss();
+
+// Test customer login-blocked username.
+frisby.create('Customer login test-blocked user')
+    .post(base_url + '/customers/login/', {
+        "username": "testre",
+        "password": "password"
+    }, {json: true})
+    .expectStatus(403)
+    .inspectJSON()
+    .expectJSONTypes({
+        code: Number,
+        description: String,
+        errorMessage: String,
+        status: String
+    })
+    .expectJSON({
+        "code": 403,
+        "description": "user has no permissions or a blocked user",
+        "errorMessage": "HTTP_FORBIDDEN",
+        "status": "forbidden"
+    })
+    .toss();
+
+// Test customer change password 01-success.
+frisby.create('Customer change password 01-success')
+    .put(base_url + '/customers/password', {
+        "username": "frisby123",
+        "password": "password",
+        "newPassword": "password"
+    }, {json: true})
+    .expectStatus(200)
+    .inspectJSON()
+    .expectJSONTypes({
+        status: String,
+        code: Number,
+        message: String,
+        data: {},
+        links: {}
+    })
+    .expectJSON({
+        "status": "success",
+        "code": 200,
+        "message": "customer password updated successfully",
+        "data": [
+            {
+                "username": "frisby123"
+            }
+        ],
+        "links": [
+            {
+                "link": "http://localhost:2222/pizza-shefu/api/v1.0/customers/password",
+                "rel": "self"
+            }
+        ]
+    })
+    .toss();
+
+// Test customer-change password with a correct username but wrong old password.
+frisby.create('Customer change password 02-correct username but wrong old username')
+    .put(base_url + '/customers/password', {
+        "username": "frisby123",
+        "password": "password2",
+        "newPassword": "password"
+    }, {json: true})
+    .expectStatus(401)
+    .inspectJSON()
+    .expectJSONTypes({
+        code: Number,
+        description: String,
+        errorMessage: String,
+        status: String
+    })
+    .expectJSON({
+        "status": "unauthorized",
+        "code": 401,
+        "errorMessage": "HTTP_UNAUTHORIZED",
+        "description": "credentials provided are not authorized."
+    })
+    .toss();
+
+// Test customer-change password with a correct old password but wrong username.
+frisby.create('Customer change password 03-correct old password but wrong username')
+    .put(base_url + '/customers/password', {
+        "username": "frisby12",
+        "password": "password",
+        "newPassword": "password"
+    }, {json: true})
+    .expectStatus(401)
+    .inspectJSON()
+    .expectJSONTypes({
+        code: Number,
+        description: String,
+        errorMessage: String,
+        status: String
+    })
+    .expectJSON({
+        "status": "unauthorized",
+        "code": 401,
+        "errorMessage": "HTTP_UNAUTHORIZED",
+        "description": "credentials provided are not authorized."
     })
     .toss();

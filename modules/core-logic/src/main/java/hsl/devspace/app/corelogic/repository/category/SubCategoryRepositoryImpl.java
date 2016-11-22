@@ -105,11 +105,51 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
         log.info("{}", subCategories);
         return subCategories;
     }
+
+    /*view all details of subcategories for a given category name*/
+    @Override
+    public List<Category> viewSubCategoriesforCategory(String catName) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM sub_category WHERE category_id=(SELECT id FROM category WHERE NAME =?)", catName);
+        List<Category> subCategories = new ArrayList<Category>();
+
+        for (int i = 0; i < mp.size(); i++) {
+            Category category = new Category();
+            category.setSubCategoryId(Integer.parseInt(mp.get(i).get("id").toString()));
+            category.setSubCategoryName(mp.get(i).get("name").toString());
+            category.setSubcatDescription(mp.get(i).get("description").toString());
+            category.setCreator(mp.get(i).get("creator").toString());
+            category.setCategory_id(Integer.parseInt(mp.get(i).get("category_id").toString()));
+
+            subCategories.add(category);
+        }
+        log.info("{}", subCategories);
+        return subCategories;
+    }
+
+
+
     /*retrieve the details of a given category */
     @Override
     public Category selectCategoryDetail(int categoryId) {
         return null;
     }
+
+    /*retrieve the details of a chosen sub-category */
+    @Override
+    public Category selectSubCategoryDetail(int subcategoryId) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM sub_category WHERE id = ?",subcategoryId);
+
+
+        Category category = new Category();
+        category.setSubCategoryId(Integer.parseInt(mp.get(0).get("id").toString()));
+        category.setSubCategoryName(mp.get(0).get("name").toString());
+        category.setSubcatDescription(mp.get(0).get("description").toString());
+        category.setCreator(mp.get(0).get("creator").toString());
+
+        log.info("msg {}",category);
+        return category;
+    }
+
 
     @Override
     public List<Category> selectAllVisible() {
@@ -132,6 +172,19 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
 
         int count = jdbcTemplate.update(sql, new Object[]{description, subCategoryName});
         log.info("{}", count);
+        return count;
+    }
+
+    @Override
+    public int updateCategory(Category cat) {
+        int id= cat.getSubCategoryId();
+        String name=cat.getSubCategoryName();
+        String desc=cat.getSubcatDescription();
+
+        String sql = "UPDATE sub_category SET name=?, description = ? WHERE id = ? ";
+
+        int count = jdbcTemplate.update(sql, new Object[]{ name, desc,id});
+        log.info("{}",count);
         return count;
     }
 
