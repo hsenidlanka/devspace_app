@@ -6,6 +6,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by hsenid on 9/19/16.
@@ -36,5 +38,13 @@ public class FeedbackRepositoryImpl implements FeedbackRepository{
         row = jdbcTemplate.update(sql, new Object[]{feedback.getComment(),feedback.getNumberOfStars(),feedback.getCustomerUserName(),feedback.getItemName()});
         log.info("{} new feedback added",row);
         return row;
+    }
+
+    /*retrieve feedback details*/
+    @Override
+    public List<Map<String, Object>> view() {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT f.id,f.date,f.time,f.comment,c.username FROM feedback f,customer c WHERE f.customer_id=c.id");
+        log.info("{}", mp);
+        return mp;
     }
 }
