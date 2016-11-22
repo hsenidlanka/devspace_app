@@ -113,15 +113,16 @@ public class PackageRepositoryImpl implements PackageRepository  {
     }
 
     @Override
-    public int addContent(List<Package> content) {
+    public int addContent(String packName, List<Package> content) {
         int row = 0;
         for (int i = 0; i < content.size(); i++) {
-            String packName = content.get(i).getPackName();
+            //String packName = content.get(i).getPackName();
             String itemName = content.get(i).getItemName();
+            log.error("Item name in core logic {}",itemName);
             int quantity = content.get(i).getQuantity();
             String size = content.get(i).getSize();
             String sql = "INSERT INTO package_item " +
-                    "(package_id,item_id,quantity,size) VALUES (SELECT id FROM package WHERE name=?,SELECT id FROM item WHERE name=?,?,?)";
+                    "(package_id,item_id,quantity,size) VALUES ((SELECT id FROM package WHERE name=?),(SELECT id FROM item WHERE name=?),?,?)";
             row = jdbcTemplate.update(sql, new Object[]{packName, itemName, quantity, size});
         }
         log.debug("{} new content added", row);
@@ -150,7 +151,7 @@ public class PackageRepositoryImpl implements PackageRepository  {
         TransactionStatus stat = transactionManager.getTransaction(trDef);
         try {
             add(pack);
-            addContent(content);
+            addContent(pack.getPackName(), content);
             transactionManager.commit(stat);
             j = 1;
         } catch (Exception e) {
