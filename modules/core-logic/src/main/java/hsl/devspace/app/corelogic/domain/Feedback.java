@@ -11,7 +11,7 @@ public class Feedback {
     private Time time;
     private String comment;
     private int numberOfStars;
-    private int customerId;
+    private String customerUserName;
     private String itemName;
 
     public Date getDate() {
@@ -46,12 +46,12 @@ public class Feedback {
         this.numberOfStars = numberOfStars;
     }
 
-    public int getCustomerId() {
-        return customerId;
+    public String getCustomerUserName() {
+        return customerUserName;
     }
 
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
+    public void setCustomerUserName(String customerUserName) {
+        this.customerUserName = customerUserName;
     }
 
     public String getItemName() {
@@ -62,12 +62,12 @@ public class Feedback {
         this.itemName = itemName;
     }
 
-    public Feedback(Date date, Time time, String comment, int numberOfStars, int customerId, String itemName) {
+    public Feedback(Date date, Time time, String comment, int numberOfStars, String customerUserName, String itemName) {
         this.date = date;
         this.time = time;
         this.comment = comment;
         this.numberOfStars = numberOfStars;
-        this.customerId = customerId;
+        this.customerUserName = customerUserName;
         this.itemName = itemName;
     }
 
@@ -81,7 +81,7 @@ public class Feedback {
                 ", time=" + time +
                 ", comment='" + comment + '\'' +
                 ", numberOfStars=" + numberOfStars +
-                ", customerId=" + customerId +
+                ", customerId=" + customerUserName +
                 ", itemName='" + itemName + '\'' +
                 '}';
     }
