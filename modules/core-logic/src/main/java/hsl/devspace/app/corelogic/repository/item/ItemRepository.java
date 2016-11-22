@@ -32,4 +32,6 @@ public interface ItemRepository {
     List<Item> retrieveSelectedItemSizes(String name);
     ReturnTypeResolver selectItemAndSize(int id);
 
+    List<Map<String, Object>> getToppings();
+
 }

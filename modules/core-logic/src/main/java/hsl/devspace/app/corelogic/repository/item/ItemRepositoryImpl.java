@@ -371,6 +371,17 @@ public class ItemRepositoryImpl implements ItemRepository {
         return mp;
     }
 
+    /*select name and price of toppings*/
+    @Override
+    public List<Map<String, Object>> getToppings() {
+        List<Map<String, Object>> category = jdbcTemplate.queryForList("SELECT i.name,si.price FROM item i,size si WHERE i.id=si.item_id" +
+                " AND i.sub_category_id=(SELECT id FROM sub_category WHERE category_id=" +
+                "(SELECT id FROM category WHERE name ='Topping')) ");
+        log.info("{}", category);
+        return category;
+
+    }
+
 
 
 }
