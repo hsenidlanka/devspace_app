@@ -1,13 +1,5 @@
 $(document).ready(function () {
 
-    /*
-     * Function for loading package content to modal for editing
-     */
-    $("#lnkModalView").click(function () {
-        $("#pkgViewModal").modal();
-    });
-
-
 /*
 * Function for clone and appending content table dynamically
 **/
@@ -22,7 +14,7 @@ $(document).ready(function () {
 
             for (i = 0; i < n; i++) {
                 $('.rowtbl:first').clone().after("#id")
-                    .appendTo('#tstDiv')
+                    .appendTo('.tstDiv')
                     .find('.chkbxPkgCat').val(res[i]).end()
                     .find('.chkbxPkgCat1').text(res[i]).end()
                     .find('*[id]').each(function () {
@@ -33,6 +25,8 @@ $(document).ready(function () {
         },
         error: function (e) {
             alert(e);
+            console.log("Error dd ",e);
+            console.log(e.message);
         }
     });
 
@@ -60,7 +54,7 @@ $(document).ready(function () {
 });
 function setItemList(categoryNm, slctElement, selectedItm) {
     $.ajax({
-        type: "POST",
+        //type: "POST",
         url: "https://localhost:8443/admin/packages/getItemNames",
         data: {"categoryNm": categoryNm},
 
@@ -83,13 +77,13 @@ function setItemList(categoryNm, slctElement, selectedItm) {
 
         },
         error: function (e) {
-            alert("error " + e.message);
+            alert("error " + e);
         }
 
     });
 }
 /*
- * Common function for populate item size and price
+ * Common function for populate item size and price in
  **/
 function generate(selectedItm, slctElement) {
     var selectedName = $("#" + slctElement).val();

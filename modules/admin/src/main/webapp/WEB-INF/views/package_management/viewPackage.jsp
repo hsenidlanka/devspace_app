@@ -23,10 +23,12 @@
     <%--  other javascripts --%>
 
     <spring:url value="/themes/hsenid/js/itemMgt.js" var="itemJs"/>
+    <spring:url value="/themes/hsenid/js/packageMgt.js" var="pkgMgt"/>
     <spring:url value="/themes/hsenid/js/tablePackages.js" var="pkgTblView"/>
     <spring:url value="/themes/hsenid/js/myAlerts.js" var="myAlerts"/>
 
     <script src="${itemJs}"></script>
+    <script src="${pkgMgt}"></script>
     <script src="${pkgTblView}"></script>
     <script src="${myAlerts}"></script>
 </head>
@@ -184,24 +186,6 @@
                                 </div>
                                 <div class="row col-xs-9" style="padding-left: 30px;">
 
-                                   <%-- <div class="row item-tbl-row item-tbl-hdr">
-                                        <div class="col-xs-2">
-                                            <strong><fmt:message key="package.packageedit.form.packagedetails.content" bundle="${bundle1}"/></strong>
-                                        </div>
-                                        <div class="col-xs-3">
-                                            <strong><fmt:message key="package.packageedit.form.packagedetails.itemname" bundle="${bundle1}"/></strong>
-                                        </div>
-                                        <div class="col-xs-3">
-                                            <strong><fmt:message key="package.packageedit.form.packagedetails.itemsize" bundle="${bundle1}"/></strong>
-                                        </div>
-                                        <div class="col-xs-2">
-                                            <strong><fmt:message key="package.packageedit.form.packagedetails.qty" bundle="${bundle1}"/></strong>
-                                        </div>
-                                        <div class="col-xs-2">
-                                            <strong><fmt:message key="package.packageedit.form.packagedetails.status" bundle="${bundle1}"/></strong>
-                                        </div>
-                                    </div>--%>
-
                                        <div class="row col-xs-12" style="margin-left: 1%;">
 
                                            <div class="row item-tbl-row item-tbl-hdr">
@@ -224,7 +208,6 @@
                                                    <label class="checkbox-inline">
                                                        <form:checkbox value="pizza" class="checkbox chkbxPkgCat" path="" id="chkPkgCat"/>
                                                        <label class="chkbxPkgCat1"></label>
-                                                           <%--<fmt:message key="package.packageadd.form.checkbox.pizza" bundle="${bundle1}"/>--%>
                                                    </label>
                                                </div>
                                                <div class="col-xs-4">
@@ -241,36 +224,10 @@
                                                    <form:input class="qty-spinner" type="number" min="0" id="contQty" path="quantity"/>
                                                </div>
                                            </div>
-                                           <div id="tstDiv2"></div>
+                                           <div class="tstDiv"></div>
                                            <br>
                                        </div>
 
-                                    <div class="row item-tbl-row">
-                                        <div class="col-xs-2">
-                                            <label class="checkbox-inline">
-                                                <form:checkbox value="pizza" class="checkbox chkbxPkgCat" path="categoryName" id="chkPkgPzzaEdit"/>
-                                                <fmt:message key="package.packageedit.form.checkbox.pizza" bundle="${bundle1}"/>
-                                            </label>
-                                        </div>
-                                        <div class="col-xs-3">
-                                            <form:select type="text" class="form-control" path="itemName" id="slctItmPkgPzzaEdit">
-                                                <form:option value="-" label="---"/>
-                                            </form:select>
-                                        </div>
-                                        <div class="col-xs-3">
-                                            <form:select type="text" class="form-control" path="" id="szpr1Edit">
-                                                <form:option value="-" label="---"/>
-                                            </form:select>
-                                        </div>
-                                        <div class="col-xs-2">
-                                            <input class="qty-spinner" type="number" min="0" id="pzzaQtyEdit"/>
-                                        </div>
-                                        <div class="col-xs-2">
-                                            <form:button type="button" value="" class="btn btn-success btnAddItmPkg" id="btnAddPkgPizzaEdit">
-                                                <span class="glyphicon glyphicon-plus"></span>Add
-                                            </form:button>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
 
@@ -307,186 +264,6 @@
                 <button class="btn btn-success" type="button" value="Yes" id="btnUpdtPkgDelt"><fmt:message key="package.packageedit.form.button.submit" bundle="${bundle1}"/>
                 </button>
                 <button class="btn btn-success" type="button" value="cancel" id="btnPkgCancel"><fmt:message key="package.packageedit.form.button.reset" bundle="${bundle1}"/>
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<!--Modal for edit package content -->
-<div class="modal fade" id="pkgViewModal">
-    <div class="modal-dialog modal-md">
-        <div class="modal-content">
-
-            <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
-                        class="glyphicon glyphicon-remove"></span></button>
-                <br>
-
-                <%--<div id="editModalContent">
-                    <div class="row col-xs-12" style="margin-left: 1%;">
-
-                        <div class="row item-tbl-row item-tbl-hdr">
-                            <div class="col-xs-3">
-                                <strong><fmt:message key="package.packageadd.form.packagedetails.content" bundle="${bundle1}"/></strong>
-                            </div>
-                            <div class="col-xs-3">
-                                <strong><fmt:message key="package.packageadd.form.packagedetails.itemname" bundle="${bundle1}"/></strong>
-                            </div>
-                            <div class="col-xs-2">
-                                <strong><fmt:message key="package.packageadd.form.packagedetails.itemsize" bundle="${bundle1}"/></strong>
-                            </div>
-                            <div class="col-xs-2">
-                                <strong><fmt:message key="package.packageadd.form.packagedetails.qty" bundle="${bundle1}"/></strong>
-                            </div>
-                            <div class="col-xs-2">
-                                <strong><fmt:message key="package.packageadd.form.packagedetails.status" bundle="${bundle1}"/></strong>
-                            </div>
-                        </div>
-
-                        <div class="row item-tbl-row">
-                            <div class="col-xs-3">
-                                <label class="checkbox-inline">
-                                    <form:checkbox value="pizza" class="checkbox" path="content"/>
-                                    Pizza
-                                </label>
-                            </div>
-                            <div class="col-xs-3">
-                                <form:select type="text" class="form-control" path="">
-                                    <form:option value="-" label="---"/>
-                                </form:select>
-                            </div>
-                            <div class="col-xs-2">
-                                <form:select type="text" class="form-control" path=""/>
-                            </div>
-                            <div class="col-xs-2">
-                                <form:input class="qty-spinner" type="number" value="0" path="content"/>
-                            </div>
-                            <div class="col-xs-2">
-                                <form:button type="button" value="" class="btn btn-success btnAddItmPkg" id="btnAddPkgPizza">
-                                    <span class="glyphicon glyphicon-plus"></span>Add
-                                </form:button>
-                            </div>
-                        </div>
-
-                        <div class="row item-tbl-row">
-                            <div class="col-xs-3">
-                                <label class="checkbox-inline">
-                                    <form:checkbox value="pasta" class="checkbox" path="content"/>
-                                    Salad
-                                </label>
-                            </div>
-                            <div class="col-xs-3">
-                                <form:select type="text" class="form-control" path="">
-                                    <form:option value="-" label="---"/>
-                                </form:select>
-                            </div>
-                            <div class="col-xs-2">
-                                <form:select type="text" class="form-control" path="">
-                                    <form:option value="-" label="---"/>
-                                </form:select>
-                            </div>
-                            <div class="col-xs-2">
-                                <form:input class="qty-spinner" type="number" value="0" path="content"/>
-                            </div>
-                            <div class="col-xs-2">
-                                <form:button type="button" value="" class="btn btn-success btnAddItmPkg" id="btnAddPkgPasta">
-                                    <span class="glyphicon glyphicon-plus"></span>Add
-                                </form:button>
-                            </div>
-                        </div>
-
-                        <div class="row item-tbl-row">
-                            <div class="col-xs-3">
-                                <label class="checkbox-inline">
-                                    <form:checkbox value="bevrg" class="checkbox" path="content"/>
-                                    Bevarage
-                                </label>
-                            </div>
-                            <div class="col-xs-3">
-                                <form:select type="text" class="form-control" path="">
-                                    <form:option value="-" label="---"/>
-                                </form:select>
-                            </div>
-                            <div class="col-xs-2">
-                                <form:select type="text" class="form-control" path=""/>
-                            </div>
-                            <div class="col-xs-2">
-                                <form:input class="qty-spinner" type="number" value="0" path="content"/>
-                            </div>
-                            <div class="col-xs-2">
-                                <form:button type="button" value="" class="btn btn-success btnAddItmPkg" id="btnAddPkgBvrg">
-                                    <span class="glyphicon glyphicon-plus"></span>Add
-                                </form:button>
-                            </div>
-                        </div>
-
-                        <div class="row item-tbl-row">
-                            <div class="col-xs-3">
-                                <label class="checkbox-inline">
-                                    <form:checkbox value="salad" class="checkbox" path="content"/>
-                                    Salad
-                                </label>
-                            </div>
-                            <div class="col-xs-3">
-                                <form:select type="text" class="form-control" path="">
-                                    <form:option value="-" label="---"/>
-                                </form:select>
-                            </div>
-                            <div class="col-xs-2">
-                                <form:select type="text" class="form-control" path="">
-                                    <form:option value="-" label="---"/>
-                                </form:select>
-                            </div>
-                            <div class="col-xs-2">
-                                <form:input class="qty-spinner" type="number" value="0" path="content"/>
-                            </div>
-                            <div class="col-xs-2">
-                                <form:button type="button" value="" class="btn btn-success btnAddItmPkg" id="btnAddPkgSalad">
-                                    <span class="glyphicon glyphicon-plus"></span>Add
-                                </form:button>
-                            </div>
-                        </div>
-
-                        <div class="row item-tbl-row">
-                            <div class="col-xs-3">
-                                <label class="checkbox-inline">
-                                    <form:checkbox value="dessert" class="checkbox" path="content"/>
-                                    Dessert
-                                </label>
-                            </div>
-                            <div class="col-xs-3">
-                                <form:select type="text" class="form-control" path="">
-                                    <form:option value="-" label="---"/>
-                                </form:select>
-                            </div>
-                            <div class="col-xs-2">
-                                <form:select type="text" class="form-control" path="">
-                                    <form:option value="-" label="---"/>
-                                </form:select>
-                            </div>
-                            <div class="col-xs-2">
-                                <form:input class="qty-spinner" type="number" value="0" path="content"/>
-                            </div>
-                            <div class="col-xs-2">
-                                <form:button type="button" value="" class="btn btn-success btnAddItmPkg" id="btnAddPkgDssrt">
-                                    <span class="glyphicon glyphicon-plus"></span>Add
-                                </form:button>
-                            </div>
-                        </div>
-                        &lt;%&ndash;</div>&ndash;%&gt;
-                    </div>
-                </div>--%>
-
-            </div>
-
-            <div class="modal-footer" align="right">
-                <button class="btn btn-success" type="button" value="Yes" id="btnSvEditPkgCont">Save edits
-                </button>
-                <button class="btn btn-success" type="button" value="cancel">Back
-                </button>
-                <button class="btn btn-success" type="button" value="clear">Clear
                 </button>
             </div>
         </div>

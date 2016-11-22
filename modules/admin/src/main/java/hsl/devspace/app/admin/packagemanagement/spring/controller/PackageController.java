@@ -13,15 +13,21 @@ import org.jose4j.json.internal.json_simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.swing.*;
-import java.sql.SQLIntegrityConstraintViolationException;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +36,24 @@ import java.util.List;
 public class PackageController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PackageController.class);
+
+    @Value("${insert.server.error}")
+    private String insertServerError;
+
+    @Value("${insert.package.success}")
+    private String insertSuccess;
+
+    @Value("${insert.package.error}")
+    private String insertError;
+
+    @Value("${insert.package.unique.error}")
+    private String insertUniqueErr;
+
+    @Value("${update.package.success}")
+    private String updateSuccess;
+
+    @Value("${update.package.sever.error}")
+    private String updateServerErr;
 
     @Autowired
     private ItemRepository itemRepo;
@@ -42,6 +66,15 @@ public class PackageController {
 
     @Autowired
     private SubCategoryRepositoryImpl subCategoryRepository;
+
+    @Autowired
+    ServletContext context;
+
+    @Value("${admin.packgageimage.server.location}")
+    private String serverPath;
+
+    @Value("{admin.packageimage.localmachine.location}")
+    private String localPathtoUpload;
 
     /**
      * Add new package view
@@ -81,7 +114,7 @@ public class PackageController {
     /**
      * controller method to load relevant item list for selected category name
      */
-    @RequestMapping(value = "/getItemNames", method = RequestMethod.POST)
+    @RequestMapping(value = "/getItemNames")
     public
     @ResponseBody
     List<Item> getItemList(@RequestParam("categoryNm") String categoryNm) {
@@ -125,6 +158,10 @@ public class PackageController {
 
          double packPrc = Double.parseDouble(pkgPrice);
 
+          /*  MultipartFile imgFile = newPackage.getImageUrl();
+            String imgFileNm = imgFile.getOriginalFilename();
+            LOGGER.trace("multipart file =, {}",imgFile);
+*/
             newPackage.setPackName(packNm);
             newPackage.setPrice(packPrc);
             newPackage.setImage(packImg);
@@ -164,58 +201,50 @@ public class PackageController {
                 LOGGER.trace("item name from pkg controller {}",contList.get(0).getItemName());
 
                 if (a != 1) {
-                    JOptionPane.showMessageDialog(null, "Server-side error. Cannot add the package !", "Error !",
+                    JOptionPane.showMessageDialog(null, insertServerError, "Error !",
                             JOptionPane.ERROR_MESSAGE);
                     LOGGER.error("Server-side error in adding package " + pkgName);
 
                 } else {
-                    JOptionPane.showMessageDialog(null, "Added new package " + pkgName, "Success",
+                    JOptionPane.showMessageDialog(null, insertSuccess + pkgName, "Success",
                             JOptionPane.INFORMATION_MESSAGE);
+
+                     /*
+                    * save images to directory
+                    **/
+                    /*if (!imgFile.isEmpty()) {
+                        try {
+                            // Creating the directory to store file in server
+                            String realPathtoUpload = context.getRealPath(serverPath);
+                            LOGGER.trace("realPathtoUpload = , {} ", realPathtoUpload);
+                            uploadFile(imgFile,realPathtoUpload,pkgName);
+
+                            //create a directory in local machine and upload imGE
+                            uploadFile(imgFile,localPathtoUpload,pkgName);
+                        }
+                        catch (Exception ex) {
+                            LOGGER.error("error in  getting image {}", ex);
+                        }
+                    }else {
+                        LOGGER.error("You failed to upload {}" , imgFileNm ," because the file was empty.");
+                    }*/
+
                     LOGGER.trace("added new package {}", pkgName);
                 }
 
             } else {
-                JOptionPane.showMessageDialog(null,
-                        "Item name is already exists! " + pkgName, "Warning ",
+                JOptionPane.showMessageDialog(null, insertUniqueErr + pkgName, "Warning ",
                         JOptionPane.WARNING_MESSAGE);
 
                 return new ModelAndView("package_management/addPackage", "command", newPackage);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error occured in adding package !", "Error !",
+            JOptionPane.showMessageDialog(null, insertError, "Error !",
                     JOptionPane.ERROR_MESSAGE);
             LOGGER.error("error in package add {}", e);
         }
 
         return new ModelAndView(new RedirectView("add"));
-    }
-
-
-    /**
-     * Edit package view
-     */
-
-
-    //For viewing the edit package form
-    @RequestMapping(value = "/editPkg", method = RequestMethod.GET)
-    public ModelAndView showEditPackage() {
-        return new ModelAndView("pkgedt", "editPackage", new Package());
-    }
-
-    //For submitting the add new package
-    @RequestMapping(value = "/edit_package")
-    public ModelAndView update(@ModelAttribute("editPackage") Package newPackg) throws SQLIntegrityConstraintViolationException {
-        ModelAndView model = new ModelAndView();
-
-/*int p = itemPackage.updatePackage();
-        if(p == 1)*/
-
-        model.setViewName("editPckgPage");
-/*  else*/
-
-        System.out.println("Error in package update");
-
-        return model;
     }
 
     /*
@@ -242,6 +271,34 @@ public class PackageController {
         return listPkg;
     }
 
+
+
+    /**
+     * Edit package view
+     */
+
+    //
+    //retrieving values of a selected category-content to edit form
+    //
+    @RequestMapping(value = "/edit_package")
+    public @ResponseBody String retrievePkgCont(@RequestParam("pkgId") int itemId){
+
+
+        return "";
+    }
+
+    //
+    //Update_package details
+    //
+    @RequestMapping(value = "/update_package", method = RequestMethod.POST)
+    public ModelAndView updatePackage(@ModelAttribute("pkgUpdate") Package pkgUpdate) {
+
+
+
+        return new ModelAndView(new RedirectView("view"));
+    }
+
+
     /*
     * Delete Package
     **/
@@ -257,4 +314,27 @@ public class PackageController {
         return packageRepo.delete(packName);
     }
 
+
+    /*
+   * Method for saving images to directories
+   **/
+    private void uploadFile( MultipartFile image, String filePath, String fileName){
+        try {
+            byte[] bytes = image.getBytes();
+            //directory made
+            File dir = new File(filePath);
+            if(!dir.exists())
+                dir.mkdirs();
+
+            //file made
+            File createFile = new File(dir.getAbsolutePath() + File.separator + fileName + ".jpg");//name of the image
+            BufferedOutputStream stream = new BufferedOutputStream(
+                    new FileOutputStream(createFile));
+            stream.write(bytes);
+            stream.close();
+
+        } catch (IOException e) {
+            LOGGER.error("error in  getting image ", e);
+        }
+    }
 }

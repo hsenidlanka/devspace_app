@@ -130,9 +130,6 @@
                                     <div class="col-xs-3">
                                         <strong><fmt:message key="package.packageadd.form.packagedetails.qty" bundle="${bundle1}"/></strong>
                                     </div>
-                                   <%-- <div class="col-xs-2">
-                                        <strong><fmt:message key="package.packageadd.form.packagedetails.status" bundle="${bundle1}"/></strong>
-                                    </div>--%>
                                 </div>
 
                                 <div class="row rowtbl item-tbl-row" id="tbladdPkgCont">
@@ -157,7 +154,7 @@
                                         <form:input class="qty-spinner" type="number" min="0" id="contQty" path="quantity"/>
                                     </div>
                                 </div>
-                            <div id="tstDiv"></div>
+                            <div class="tstDiv"></div>
                             <br>
                         </div>
                     </div>

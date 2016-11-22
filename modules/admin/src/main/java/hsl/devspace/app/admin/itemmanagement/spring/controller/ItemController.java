@@ -9,6 +9,7 @@ import org.jose4j.json.internal.json_simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,7 @@ import javax.swing.*;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,6 +36,24 @@ public class ItemController {
     //private static final Logger LOGGER = LogManager.getLogger(ItemController.class);
     private static final Logger LOGGER = LoggerFactory.getLogger(ItemController.class);
 
+    @Value("${insert.server.error}")
+    private String insertServerError;
+
+    @Value("${insert.item.success}")
+    private String insertSuccess;
+
+    @Value("${insert.item.error}")
+    private String insertError;
+
+    @Value("${insert.item.unique.error}")
+    private String insertUniqueErr;
+
+    @Value("${update.item.success}")
+    private String updateSuccess;
+
+    @Value("${update.item.sever.error}")
+    private String updateServerErr;
+
     @Autowired
     private ItemRepository item;
 
@@ -44,7 +64,13 @@ public class ItemController {
     private SubCategoryRepositoryImpl subCategoryRepository;
 
     @Autowired
-   ServletContext context;
+    ServletContext context;
+
+    @Value("${admin.itemimage.server.location}")
+    private String serverPath;
+
+    @Value("${admin.itemimage.localmachine.location}")
+    private String localPathtoUpload;
 
     /**
      * Add new item view
@@ -71,10 +97,10 @@ public class ItemController {
 
             MultipartFile imgFile = newItem.getImageUrl();
             String imgFileNm = imgFile.getOriginalFilename();
-            LOGGER.trace("multipart file =, {}",imgFile);
+            LOGGER.trace("multipart file =, {}", imgFile);
 
-            LOGGER.trace("Item price =, {} ",itemPrice);
-            LOGGER.trace("Item size = , {}",itemSize);
+            LOGGER.trace("Item price =, {} ", itemPrice);
+            LOGGER.trace("Item size = , {}", itemSize);
             List<String> sizelist = new ArrayList<String>(Arrays.asList(itemSize.split(",")));
             List<String> pricelist = new ArrayList<String>(Arrays.asList(itemPrice.split(",")));
 
@@ -92,91 +118,48 @@ public class ItemController {
             if (!uniqueItemNm) {
                 int a = item.addItem(newItem, items);
                 if (a != 1) {
-                    JOptionPane.showMessageDialog(null, "Server-side error. Cannot add the item !", "Error !",
+                    JOptionPane.showMessageDialog(null, insertServerError, "Error",
                             JOptionPane.ERROR_MESSAGE);
                     LOGGER.error("Server-side error in adding item " + itemNm);
                 } else {
-                    JOptionPane.showMessageDialog(null, "Added new item " + itemNm, "Success",
+                    JOptionPane.showMessageDialog(null, insertSuccess + itemNm, "Success",
                             JOptionPane.INFORMATION_MESSAGE);
 
                     /*
-                    * save images to directory*/
+                    * save images to directory
+                    **/
                     if (!imgFile.isEmpty()) {
                         try {
-                            byte[] bytes = imgFile.getBytes();
-
-                            // Creating the directory to store file
-                            String rootPath = "/themes/hsenid/images/items/";
-                            LOGGER.trace("root path for img =, {}", rootPath);
-
-                            String realPathtoUpload = context.getRealPath(rootPath);
+                            // Creating the directory to store file in server
+                            String realPathtoUpload = context.getRealPath(serverPath);
                             LOGGER.trace("realPathtoUpload = , {} ", realPathtoUpload);
+                            uploadFile(imgFile, realPathtoUpload, itemNm);
 
-                            File dir = new File(realPathtoUpload);
-                                if(!dir.exists())
-                                    dir.mkdirs();
-
-                            LOGGER.info("Dir.... = ,{}", dir.getAbsolutePath());
-                            LOGGER.trace("made dir =, {}", dir);
-
-                            // create local directory place
-                            String localPathtoUpload ="/home/hsenid/devspace_app/modules/admin/src/main/" +
-                                    "webapp/themes/hsenid/images/items/";
-                            LOGGER.error("realPathtoUpload =, {}" , localPathtoUpload);
-
-                            File dir2 = new File(localPathtoUpload);
-                            if(!dir2.exists())
-                                dir2.mkdirs();
-
-                            LOGGER.error("made dir= ,{}", dir2);
-
-                            //create the file on server
-                            File serverFile = new File(dir.getAbsolutePath() + File.separator + itemNm + ".png");//name of the image
-                           LOGGER.trace("serverFile = ,{}", serverFile);
-                            BufferedOutputStream stream = new BufferedOutputStream(
-                                    new FileOutputStream(serverFile));
-                            stream.write(bytes);
-                            stream.close();
-
-                            LOGGER.trace("image save to server, Location=, {}", serverFile.getAbsolutePath());
-                            LOGGER.trace("You successfully uploaded file=, {}", imgFileNm);
-
-
-                            //create the file on local machine
-                            File localFile = new File(dir2.getAbsolutePath() + File.separator + itemNm + ".png");//name of the image
-                            LOGGER.error("serverFile = {}", localFile);
-                            BufferedOutputStream stream2 = new BufferedOutputStream(
-                                    new FileOutputStream(localFile));
-                            stream2.write(bytes);
-                            stream2.close();
-
-                            LOGGER.error("image save to local, Location= {}" , localFile.getAbsolutePath());
-                            LOGGER.error("You successfully uploaded file= {}" , imgFileNm);
-                        }
-                        catch (Exception ex) {
+                            //create a directory in local machine and upload imGE
+                            uploadFile(imgFile, localPathtoUpload, itemNm);
+                        } catch (Exception ex) {
                             LOGGER.error("error in  getting image {}", ex);
                         }
-                    }else {
-                        LOGGER.error("You failed to upload {}" , imgFileNm ," because the file was empty.");
+                    } else {
+                        LOGGER.error("You failed to upload {}", imgFileNm, " because the file was empty.");
                     }
 
-                    LOGGER.info("added New Item to database {}" , itemNm);
+                    LOGGER.info("added New Item to database {}", itemNm);
                 }
             } else {
-                JOptionPane.showMessageDialog(null,
-                        "Item name is already exists! " + itemNm, "Warning ",
+                JOptionPane.showMessageDialog(null, insertUniqueErr + itemNm, "Warning ",
                         JOptionPane.WARNING_MESSAGE);
 
                 newItem.setPrice(" ");
-                LOGGER.trace("after clear price = {}" , itemPrice);
+                LOGGER.trace("after clear price = {}", itemPrice);
                 newItem.setSize(" ");
-                LOGGER.trace("after clear size = {}" , itemSize);
+                LOGGER.trace("after clear size = {}", itemSize);
                 return new ModelAndView("item_management/addItem", "command", newItem);
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Error occured in adding item !", "Error !",
+            JOptionPane.showMessageDialog(null, insertError, "Error !",
                     JOptionPane.ERROR_MESSAGE);
-            LOGGER.error("Error in add item {}",ex.getMessage());
+            LOGGER.error("Error in add item {}", ex.getMessage());
         }
         return new ModelAndView(new RedirectView("add"));
     }
@@ -193,7 +176,7 @@ public class ItemController {
         modelView.addObject("listCatEdit", listCatEdit);
         modelView.addObject("command", new Item());
         modelView.setViewName("/item_management/viewItem");
-        LOGGER.trace("list itemmgt = {}" , listCatEdit);
+        LOGGER.trace("list itemmgt = {}", listCatEdit);
 
         return modelView;
     }
@@ -203,7 +186,7 @@ public class ItemController {
     public
     @ResponseBody
     List<Map<String, Object>> viewItem() {
-        LOGGER.info( "View all item details {} ",(item.viewAllItemDetails()));
+        LOGGER.info("View all item details {} ", (item.viewAllItemDetails()));
         return item.viewAllItemDetails();
     }
 
@@ -229,15 +212,15 @@ public class ItemController {
         ReturnTypeResolver e = item.selectItemAndSize(itemId);
         List<Item> lst = e.getSelectedSize();
         JSONObject object = new JSONObject();
-        LOGGER.info("content of lst  {}" , lst);
-        LOGGER.info("length of lst {}" , lst.size());
+        LOGGER.info("content of lst  {}", lst);
+        LOGGER.info("length of lst {}", lst.size());
 
         for (int i = 0; i < lst.size(); i++) {
             Item it = lst.get(i);
 
             object.put(it.getSize(), it.getPrice());
         }
-        LOGGER.info("ItemId for edit {}", itemId , ' ' , "e for edit {}", e, "  and sp = {}", object.toJSONString());
+        LOGGER.info("ItemId for edit {}", itemId, ' ', "e for edit {}", e, "  and sp = {}", object.toJSONString());
         return object.toJSONString();
     }
 
@@ -250,16 +233,16 @@ public class ItemController {
             String itmPriceEdit = itemUpdate.getPrice();
             String itmSizeEdit = itemUpdate.getSize();
 
-            LOGGER.trace("Item Name and ID in edit {}" , itmName , " ID ={}", itmId);
+            LOGGER.trace("Item Name and ID in edit {}", itmName, " ID ={}", itmId);
             LOGGER.trace("Item price {}", itmPriceEdit);
             LOGGER.trace("Item size {}", itmSizeEdit);
 
             List<String> sizelistEdit = new ArrayList<String>(Arrays.asList(itmSizeEdit.split(",")));
             List<String> pricelistEdit = new ArrayList<String>(Arrays.asList(itmPriceEdit.split(",")));
 
-            LOGGER.trace("AsList sizeList {}" , sizelistEdit);
-            LOGGER.trace("AsList size {}" , sizelistEdit.size());
-            LOGGER.trace("AsList price {}" , pricelistEdit);
+            LOGGER.trace("AsList sizeList {}", sizelistEdit);
+            LOGGER.trace("AsList size {}", sizelistEdit.size());
+            LOGGER.trace("AsList price {}", pricelistEdit);
 
             List<Item> edittedList = new ArrayList<Item>();
 
@@ -269,7 +252,7 @@ public class ItemController {
                 itemList.setPrice(pricelistEdit.get(a));
                 edittedList.add(itemList);
             }
-            LOGGER.trace("edittedList {}" , edittedList);
+            LOGGER.trace("edittedList {}", edittedList);
             LOGGER.trace("itemUpdate object {}", itemUpdate);
             LOGGER.error("edittedList err {}", edittedList);
             LOGGER.error("itemUpdate err {}", itemUpdate);
@@ -280,15 +263,15 @@ public class ItemController {
             LOGGER.trace(String.valueOf(i), "  info i edit ", i);
             LOGGER.error("error in i edit {}", i);
             if (i != 1) {
-                JOptionPane.showMessageDialog(null, "Server-side error. Cannot update the item !", "Error !",
+                JOptionPane.showMessageDialog(null, updateServerErr, "Error !",
                         JOptionPane.ERROR_MESSAGE);
                 LOGGER.error("Server-side error in updating item " + itmName);
             } else {
-                JOptionPane.showMessageDialog(null, "Updated item details" + itmName, "Success",
+                JOptionPane.showMessageDialog(null, updateSuccess + itmName, "Success",
                         JOptionPane.INFORMATION_MESSAGE);
 
                 LOGGER.trace("ItemUpdate category after {}", itemUpdate.getCategoryName());
-                LOGGER.trace("ItemUpdate sub-category after {}" , itemUpdate.getSubCategoryName());
+                LOGGER.trace("ItemUpdate sub-category after {}", itemUpdate.getSubCategoryName());
                 LOGGER.info("Updated item successfully {}", itmName);
             }
         } catch (Exception er) {
@@ -323,28 +306,27 @@ public class ItemController {
     }
 
     /*
-    * Image upload handler
+    * Method for saving images to directories
     **/
-   /* @RequestMapping(value = "/saveItemImages", method = RequestMethod.POST)
-    public String addImage(Item item1, ResourceLoader resourceLoader,MultipartFile multipartFile){
+    private void uploadFile(MultipartFile image, String filePath, String fileName) {
+        try {
+            byte[] bytes = image.getBytes();
+            //directory made
+            File dir = new File(filePath);
+            if (!dir.exists())
+                dir.mkdirs();
 
-        String name =item1.getImage();
-        String relativeWebPath = "/themes/hsenid/images/itemImages";
-        String absoluteFilePath = context.getRealPath(relativeWebPath);
-        File uploadFile = new File(absoluteFilePath,name);
+            //file made
+            File createFile = new File(dir.getAbsolutePath() + File.separator + fileName + ".jpg");//name of the image
+            BufferedOutputStream stream = new BufferedOutputStream(
+                    new FileOutputStream(createFile));
+            stream.write(bytes);
+            stream.close();
 
-        if(!multipartFile.isEmpty()){
-             try {
-                 byte[] bytes = multipartFile.getBytes();
-                 BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(name)));
-                 stream.write(bytes);
-                 stream.close();
-             }catch (Exception ex){
-                 LOGGER.error("error in saveImage ", ex);
-             }
+        } catch (IOException e) {
+            LOGGER.error("error in  getting image ", e);
         }
-        return "";
-    }*/
+    }
 
 
     /*
@@ -359,37 +341,3 @@ public class ItemController {
     }*/
 
 }
-
-
-/*
-*
-* if (!imgFile.isEmpty()) {
-                        try {
-                            String imgUploadDir = "/themes/hsenid/images/itemImagesSave/";
-                            //File imgUploadDir = new File(System.getProperty("admin.itemimage.location"));
-                            String realPathtoUploads = context.getRealPath(imgUploadDir);
-
-                            if (!new File(realPathtoUploads).exists()) {
-                                try {
-                                    new File(realPathtoUploads).mkdir();
-                                    LOGGER.trace("realpathtoUpload = {} ", realPathtoUploads);
-                                } catch (Exception ex) {
-                                    LOGGER.error(" error in mkdir {}", ex);
-                                }
-                            }else{
-                                //String orginalNm = itemImage.getOriginalFilename();
-                                String orginalNm = imgFile;
-                                LOGGER.trace("oriignal name = " + orginalNm);
-
-                                String filePath = realPathtoUploads + orginalNm;
-                                LOGGER.trace("filepath = " + filePath);
-                                File dest = new File(filePath);
-                                LOGGER.trace("dest = " + dest);
-                                itemImage.transferTo(dest);
-                            }
-                        } catch (Exception ex) {
-                            LOGGER.error("error in  getting image ", ex);
-                        }
-                    }
-                    *
-                    */
