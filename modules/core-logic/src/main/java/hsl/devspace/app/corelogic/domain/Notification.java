@@ -5,4 +5,5 @@ package hsl.devspace.app.corelogic.domain;
  */
 public class Notification {
 
+
 }

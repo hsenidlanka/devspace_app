@@ -32,7 +32,7 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
     }
 
     public void setTransactionManager(PlatformTransactionManager transactionManager) {
-        this.transactionManager = transactionManager;
+       this.transactionManager = transactionManager;
 
     }
 
@@ -83,6 +83,10 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
         log.info("{} category deleted",row);
         return row;
     }
+    @Override
+    public List<Category> viewSubCategoriesforCategory(String catName){
+        return null;
+    }
 
     /*view all category details */
     @Override
@@ -110,20 +114,25 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
     public Category selectCategoryDetail(int categoryId) {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category WHERE id = ?",categoryId);
 
-        Category category = new Category();
-        category.setCategory_id(Integer.parseInt(mp.get(0).get("id").toString()));
-        category.setCategoryName(mp.get(0).get("name").toString());
-        category.setCatDescription(mp.get(0).get("description").toString());
-        category.setImage(mp.get(0).get("image").toString());
-        category.setCreator(mp.get(0).get("creator").toString());
-        category.setStatus(mp.get(0).get("status").toString());
+
+            Category category = new Category();
+            category.setCategory_id(Integer.parseInt(mp.get(0).get("id").toString()));
+            category.setCategoryName(mp.get(0).get("name").toString());
+            category.setCatDescription(mp.get(0).get("description").toString());
+            category.setImage(mp.get(0).get("image").toString());
+            category.setCreator(mp.get(0).get("creator").toString());
+            category.setStatus(mp.get(0).get("status").toString());
 
 
         log.info("msg {}",category);
         return category;
     }
 
-
+    /*retrieve the details of a chosen sub-category */
+    @Override
+    public Category selectSubCategoryDetail(int subcategoryId) {
+        return null;
+    }
 
     @Override
     public List<Category> selectAllVisible() {
@@ -167,17 +176,19 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
         return count;
     }
 
+
     //this method is for update from UI(to be changed)
+    @Override
     public int updateCategory(Category cat) {
         int id= cat.getCategory_id();
         String name=cat.getCategoryName();
         String desc=cat.getCatDescription();
-        String image=cat.getImage();
+//        String image=cat.getImage();
         String status=cat.getStatus();
 
-        String sql = "UPDATE category SET name=?, description = ?,image=?,status=? WHERE id = ? ";
+        String sql = "UPDATE category SET name=?, description = ?,status = ? WHERE id = ? ";
 
-        int count = jdbcTemplate.update(sql, new Object[]{ name, desc,image,status,id});
+        int count = jdbcTemplate.update(sql, new Object[]{ name, desc,status,id});
         log.info("{}",count);
         return count;
     }
@@ -188,10 +199,10 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
         List<Category> categories=new ArrayList<Category>();
 
         for (int i=0;i<mp.size();i++){
-            Category category = new Category();
-            category.setCategoryName(mp.get(i).get("name").toString());
-            category.setCatDescription(mp.get(i).get("description").toString());
-            categories.add(category);
+                Category category = new Category();
+                category.setCategoryName(mp.get(i).get("name").toString());
+                category.setCatDescription(mp.get(i).get("description").toString());
+                categories.add(category);
 
 
         }
@@ -232,7 +243,7 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
     /*retrieve all items in a specific category*/
     @Override
     public List<Item> loadMenuItems(String catName) {
-        // List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM item WHERE sub_category_id=(SELECT id FROM sub_category WHERE category_id=(SELECT id FROM category WHERE name=?))",catName);
+       // List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM item WHERE sub_category_id=(SELECT id FROM sub_category WHERE category_id=(SELECT id FROM category WHERE name=?))",catName);
         List<Map<String, Object>> mp1=jdbcTemplate.queryForList("SELECT id FROM category WHERE name=?", catName);
         List<Map<String, Object>> mp=null;
         List<Map<String,Object>> another=new ArrayList<Map<String, Object>>();
@@ -278,7 +289,7 @@ public class CategoryRepositoryImpl  implements CategoryRepository {
         return itemList;
     }
 
-    /*view all sub categories of a specific category*/
+/*view all sub categories of a specific category*/
     @Override
     public List<String> viewSubCategories(String catName) {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT name FROM sub_category WHERE category_id=(SELECT id FROM category WHERE name =?)",catName);
