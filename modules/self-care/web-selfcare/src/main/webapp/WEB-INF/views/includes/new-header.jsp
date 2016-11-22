@@ -27,7 +27,7 @@
                 </li>
                 <c:if test="${empty username}">
                     <li>
-                        <a class="form-group" data-toggle="modal" data-target="#modal-signup"><img
+                        <a id="signUpBtn" class="form-group" data-toggle="modal" data-target="#modal-signup"><img
                                 src="<c:url value="/resources/images/signup.png"/>" style=""></span>
                         </a>
                     </li>

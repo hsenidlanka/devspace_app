@@ -4,19 +4,16 @@ import hsenid.web.models.BooleanResponse;
 import hsenid.web.models.ReplyFromServer;
 import hsenid.web.models.User;
 import hsenid.web.supportclasses.SendStringBuilds;
-import org.codehaus.jettison.json.JSONException;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpEntity;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.client.RestClientException;
@@ -26,10 +23,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /*
-* This class controls requests come for login and user registrations including ajax requests*/
+* This class controls requests come for login and user registrations including ajax requests
+* */
 @Controller
 @PropertySource("classpath:config.properties")
-@SessionAttributes({"username", "name2", "email2"})
 public class LoginController {
 
     final static String title= "title";

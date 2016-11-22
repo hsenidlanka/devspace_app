@@ -18,12 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
-
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @PropertySource("classpath:config.properties")
 public class RegisterController {
+
     @Value("${api.url.register}")
     private String registerUrl;
 
@@ -39,33 +39,33 @@ public class RegisterController {
 
         String addressL3 = null;
 
-        String title = regRequest.getParameter("title2");
+        String title = regRequest.getParameter("title");
         String firstName = regRequest.getParameter("fname");
         String lastName = regRequest.getParameter("lname");
-        String username = regRequest.getParameter("username");
-        String email = regRequest.getParameter("email2");
-        String password = regRequest.getParameter("password");
         String addressL1 = regRequest.getParameter("address1");
         String addressL2 = regRequest.getParameter("address2");
         addressL3 = regRequest.getParameter("address3");
         String mobile = regRequest.getParameter("mobileNo");
+        String email = regRequest.getParameter("email");
+        String password = regRequest.getParameter("password");
+        String username = regRequest.getParameter("uname");
 
         if (addressL3.length() < 1) {
             addressL3 = null;
         }
-
-        String registerDetails = SendStringBuilds.sendString("{", "title2", ":", title, "," + "firstName2" + ":" + firstName + "," + "lastName2" + ":" + lastName + "," + "email2" + ":" + email + "," + "addressL1" + ":" + addressL1 + "," + "addressL2" + ":" + addressL2 + "," + "addressL3" + ":", addressL3, ",", "username", ":", username, ",", "password", ":", password, ",", "mobile2", ":", mobile, "}");
+//        logger.info("{} {} {} {} {} {} {} {} username-{} {}", title, firstName, lastName, addressL1, addressL2, addressL3, mobile, email, username, password);
+//        String registerDetails = SendStringBuilds.sendString("{", "title", ":", title, "," + "firstName" + ":" + firstName + "," + "lastName" + ":" + lastName + "," + "email" + ":" + email + "," + "addressL1" + ":" + addressL1 + "," + "addressL2" + ":" + addressL2 + "," + "addressL3" + ":", addressL3, ",", "username", ":", username, ",", "password", ":", password, ",", "mobile", ":", mobile, "}");
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("title",title);
-        jsonObject.put("firstName2", firstName);
-        jsonObject.put("lastName2", lastName);
-        jsonObject.put("email2",email);
+        jsonObject.put("firstName", firstName);
+        jsonObject.put("lastName", lastName);
+        jsonObject.put("email",email);
         jsonObject.put("addressL1", addressL1);
         jsonObject.put("addressL2", addressL2);
         jsonObject.put("addressL3", addressL3);
-        jsonObject.put(username, username);
+        jsonObject.put("username", username);
         jsonObject.put("password", password);
-        jsonObject.put("mobile2", mobile);
+        jsonObject.put("mobile", mobile);
 
         RestTemplate restTemplate = new RestTemplate();
 
@@ -77,7 +77,7 @@ public class RegisterController {
             ReplyFromServer message = restTemplate.postForObject(registerUrl, httpEntity, ReplyFromServer.class);
         }catch (Exception e){
             logger.error(e.getMessage());
-
+            return new BooleanResponse(false);
         }
 
         return new BooleanResponse(true);
