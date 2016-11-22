@@ -146,7 +146,6 @@ public class ItemService {
     // Search for a item
     @GET
     @Path("/search/{seachKey}")
-    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response searchItem(@PathParam("seachKey") String searchKey, @javax.ws.rs.core.Context UriInfo uriInfo) {
         SuccessMessage successMessage = new SuccessMessage();
@@ -156,7 +155,7 @@ public class ItemService {
         successMessage.addLink(url, "self");
         List<Map<String, Object>> listMap = itemRepository.retrieveSelectedItemDetails(searchKey);
         if (listMap.size() == 0) {
-            successMessage.setMessage("no records found for the serach key "+searchKey);
+            successMessage.setMessage("no records found for the serach key " + searchKey);
         } else {
             successMessage.setMessage("records found for the search key " + searchKey);
         }
@@ -168,6 +167,33 @@ public class ItemService {
             jsonObject.put("type", map.get("type"));
             jsonObject.put("description", map.get("description"));
             successMessage.addData(jsonObject);
+        }
+        return Response.status(Response.Status.OK).entity(successMessage)
+                .header("Access-Control-Allow-Origin", propertyReader.readProperty("Access-Control-Allow-Origin"))
+                .build();
+    }
+
+    // Retrieve all toppings with price
+    @GET
+    @Path("/toppings")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getToppings(@javax.ws.rs.core.Context UriInfo uriInfo) {
+        SuccessMessage successMessage = new SuccessMessage();
+        successMessage.setCode(Response.Status.OK.getStatusCode());
+        successMessage.setStatus("success");
+        String url = uriInfo.getAbsolutePath().toString();
+        successMessage.addLink(url, "self");
+        List<Map<String, Object>> toppingsListMap = itemRepository.getToppings();
+        if (toppingsListMap.size() == 0) {
+            successMessage.setMessage("no toppings found");
+        } else {
+            successMessage.setMessage("toppings retrieved");
+            for (Map<String, Object> map : toppingsListMap) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("name", map.get("name"));
+                jsonObject.put("price", map.get("price"));
+                successMessage.addData(jsonObject);
+            }
         }
         return Response.status(Response.Status.OK).entity(successMessage)
                 .header("Access-Control-Allow-Origin", propertyReader.readProperty("Access-Control-Allow-Origin"))

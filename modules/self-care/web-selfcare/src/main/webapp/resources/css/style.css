@@ -182,3 +182,11 @@ table {
     color: white;
     text-align: center;
 }
+
+.del{
+    color: #ff2752;
+}
+
+.del:hover{
+    color: #ff2752;
+}

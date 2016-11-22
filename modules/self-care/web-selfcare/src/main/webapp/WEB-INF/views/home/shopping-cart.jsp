@@ -41,6 +41,8 @@
                                     <c:when test="${fn:length(cartItemsMap) > 0}">
                                         <c:forEach items="${cartItemsMap}" var="entry" varStatus="iteration">
                                             <tr>
+                                                <td class="item-toppingsTotal"><c:out
+                                                    value="${entry.itemToppingsTotal}"/></td>
                                                 <td class="item-index"><c:out
                                                         value="${iteration.index}"/></td>
                                                 <td class="item-title"

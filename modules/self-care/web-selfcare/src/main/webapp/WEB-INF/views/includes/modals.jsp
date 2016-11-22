@@ -33,17 +33,11 @@
             <div class="col-sm-6" style="display:inline-block; margin-top:5px;">
               <label class="control-label">Toppings</label>
               <select class="form-control" id="addtocart-pizza-toppings1">
-                <option>Topping 01</option>
-                <option>Topping 02</option>
-                <option>Topping 03</option>
               </select>
             </div>
             <div class="col-sm-6" style="display:inline-block; margin-top:5px;">
               <label class="control-label">&nbsp;</label>
               <select class="form-control" id="addtocart-pizza-toppings2">
-                <option>Topping 01</option>
-                <option>Topping 02</option>
-                <option>Topping 03</option>
               </select>
             </div>
           </div>
