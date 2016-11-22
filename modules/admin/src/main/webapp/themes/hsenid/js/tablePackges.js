@@ -1,12 +1,12 @@
 $(document).ready(function () {
 
     $('#tblPackages').bootstrapTable({
-        /*method: '',*/
-        url: '../js/data2.json',
+        dataType: 'JSON',
+        url: 'https://localhost:8443/admin/packages/view/itemTable',
         height: 400,
         striped: true,
         pagination: true,
-        pageSize: 50,
+        pageSize: 10,
         pageList: [10, 25, 50, 100, 200],
         search: false,
         showColumns: false,
