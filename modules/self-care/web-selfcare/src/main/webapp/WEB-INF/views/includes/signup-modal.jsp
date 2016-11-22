@@ -1,8 +1,4 @@
-<div class="modal fade" id="modal-signup" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true"
-     style="width: 1200px;height: 700px;">
-
-    <!--<div class="modal-dialog">-->
-    <%--<fmt:message key="footer.hotline" bundle="${lang}"/>--%>
+<div class="modal fade" id="modal-signup" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" style="width: 77%; margin-left: 5%;">
 
     <div class="modal-body" style="width: 1500px;height: 700px;">
         <div class="brand"></div>
@@ -13,14 +9,13 @@
                     <div class="panel panel-success">
                         <div class="panel-heading" style="height: 50px">
                             <div class="row">
-                                <div class="col-sm-4">
+                                <div class="col-sm-6">
                                     <p style="font-size: xx-large;text-align: left"><fmt:message key="signup.create.new" bundle="${lang}"/></p>
                                 </div>
-                                <div class="col-sm-5">
-                                </div>
-                                <div class="col-sm-3">
+                                <div class="col-sm-4">
                                     <button data-dismiss="modal" aria-hidden="true">&times;</button>
                                 </div>
+                                <div class="col-sm-2"></div>
                             </div>
                         </div>
 
@@ -165,9 +160,6 @@
 
                                 </div>
 
-                                <%----%>
-
-
                                 <div class="form-group">
                                     <label for="rePassword" class="col-sm-2 control-label">
                                         Confirm Password
@@ -179,22 +171,24 @@
                                     </div>
                                 </div>
 
-
-                                <%----%>
                                 <div class="form-group">
-                                    <button id="submitBtn" name="submitBtn" class="btn btn-success"><fmt:message key="signup.create.account" bundle="${lang}"/></button>
-                                    <button type="reset" class="btn btn-success"><fmt:message key="signup.clear" bundle="${lang}"/></button>
+                                    <div class="col-sm-2"></div>
+                                    <div class="col-sm-4">
+                                        <button id="submitBtn" name="submitBtn" class="btn btn-success"><fmt:message key="signup.create.account" bundle="${lang}"/></button>
+                                        <button type="reset" class="btn btn-success"><fmt:message key="signup.clear" bundle="${lang}"/></button>
+                                    </div>
+                                    <div class="col-sm-6"></div>
 
                                 </div>
-                                <div class="form-group">
-                                    <a class="form-group-sm" data-toggle="modal" data-target="#modal-login" data-dismiss="modal"><fmt:message key="signup.already" bundle="${lang}"/></a>
-                                </div>
 
+                                <div class="form-group">
+                                    <div class="col-sm-2"></div>
+                                    <div class="col-sm-4"><a class="form-group-sm" data-toggle="modal" data-target="#modal-login" data-dismiss="modal"><fmt:message key="signup.already" bundle="${lang}"/></a></div>
+                                    <div class="col-sm-6"></div>
+                                </div>
 
                             </form>
-
                         </div>
-
                     </div>
                 </div>
             </div>

@@ -121,18 +121,18 @@
                                     <div class="col-xs-2">
                                         <strong><fmt:message key="package.packageadd.form.packagedetails.content" bundle="${bundle1}"/></strong>
                                     </div>
-                                    <div class="col-xs-3">
+                                    <div class="col-xs-4">
                                         <strong><fmt:message key="package.packageadd.form.packagedetails.itemname" bundle="${bundle1}"/></strong>
                                     </div>
                                 <div class="col-xs-3">
                                         <strong><fmt:message key="package.packageadd.form.packagedetails.itemsize" bundle="${bundle1}"/></strong>
                                     </div>
-                                    <div class="col-xs-2">
+                                    <div class="col-xs-3">
                                         <strong><fmt:message key="package.packageadd.form.packagedetails.qty" bundle="${bundle1}"/></strong>
                                     </div>
-                                    <div class="col-xs-2">
+                                   <%-- <div class="col-xs-2">
                                         <strong><fmt:message key="package.packageadd.form.packagedetails.status" bundle="${bundle1}"/></strong>
-                                    </div>
+                                    </div>--%>
                                 </div>
 
                                 <div class="row rowtbl item-tbl-row" id="tbladdPkgCont">
@@ -143,7 +143,7 @@
                                             <%--<fmt:message key="package.packageadd.form.checkbox.pizza" bundle="${bundle1}"/>--%>
                                         </label>
                                     </div>
-                                    <div class="col-xs-3">
+                                    <div class="col-xs-4">
                                         <form:select type="text" class="form-control" path="itemName" id="slctItmPkgCat">
                                             <form:option value="-" label="---"/>
                                         </form:select>
@@ -153,26 +153,12 @@
                                             <form:option value="-" label="---"/>
                                         </form:select>
                                     </div>
-                                    <div class="col-xs-2">
+                                    <div class="col-xs-3">
                                         <form:input class="qty-spinner" type="number" min="0" id="contQty" path="quantity"/>
-                                    </div>
-                                    <div class="col-xs-2">
-                                        <%--<form:button type="button" value="" class="btn btn-success btnAddItmPkg" id="btnAddPkgPizza">
-                                            <span class="glyphicon glyphicon-plus"></span>Add
-                                        </form:button>--%>
                                     </div>
                                 </div>
                             <div id="tstDiv"></div>
                             <br>
-                            <div class="row" id="tstDivButton">
-                                <div class="col-xs-10">
-                                </div>
-                                <div class="col-xs-2">
-                                    <button type="button" value="" class="btn btn-success btnAddItmPkg" id="btnCreateCont"  >
-                                        <span class="glyphicon glyphicon-plus"></span>Create
-                                    </button>
-                                </div>
-                            </div>
                         </div>
                     </div>
 <br>
@@ -189,55 +175,6 @@
                         </div>
                     </div>
                     <br>
-
-                    <%--<div class="list-group row" style="margin:auto; width:50%; border:2px solid black; padding: 10px;">
-                        <label><h4>Package Summary</h4></label><br>
-                        <label id="newPkgName"><strong>Pacakage Name</strong></label> <br>
-                        <ul class="list-group">
-                            <li class="list-group-item">Pkg item1
-                                <span class="badge">
-                                  <div class="itemList">
-                                    <span class="glyphicon glyphicon-remove">
-                                    </span> <a href="">Remove</a>
-                                  </div>
-                                </span>
-                            </li>
-                            <li class="list-group-item">Pkg item2
-                                <span class="badge">
-                                  <div class="itemList">
-                                    <span class="glyphicon glyphicon-remove">
-                                    </span> <a href="">Remove</a>
-                                  </div>
-                                </span>
-                            </li>
-                            <li class="list-group-item">Pkg item3
-                                <span class="badge">
-                                  <div class="itemList">
-                                    <span class="glyphicon glyphicon-remove">
-                                    </span> <a href="">Remove</a>
-                                  </div>
-                                </span>
-                            </li>
-                            <li class="list-group-item">Price
-                                <span class="badge">
-                                  <div class="itemList">
-                                    <span class="glyphicon glyphicon-remove">
-                                    </span> <a href="">Remove</a>
-                                  </div>
-                                </span>
-                            </li>
-                            <li class="list-group-item">Images
-                                <span class="badge">
-                                  <div class="itemList">
-                                    <span class="glyphicon glyphicon-remove">
-                                    </span> <a href="">Remove</a>
-                                  </div>
-                                </span>
-                            </li>
-
-                        </ul>
-                    </div>
-                    <br><br>--%>
 
                     <div style="text-align: center; z-index: 50000; width: 50%; margin: auto;" id="toaster"></div>
                     <br>

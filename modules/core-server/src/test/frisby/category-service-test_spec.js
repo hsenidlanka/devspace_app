@@ -33,42 +33,26 @@ frisby.create('Category service test 01-correct url')
                 "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown"
             },
             {
-                "name": "Topping",
-                "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown"
-            },
-            {
                 "name": "Desserts",
-                "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown"
-            },
-            {
-                "name": "Salad",
                 "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown"
             }
         ],
         "links": [
             {
-                "link": "http://localhost:2222/pizza-shefu/api/v1.0/categories/list",
-                "rel": "self"
+                "rel": "self",
+                "link": "http://localhost:2222/pizza-shefu/api/v1.0/categories/list"
             },
             {
-                "link": "http://localhost:2222/pizza-shefu/api/v1.0/subcategories/category/Pizza",
-                "rel": "subcategories of Pizza"
+                "rel": "subcategories of Pizza",
+                "link": "http://localhost:2222/pizza-shefu/api/v1.0/subcategories/category/Pizza"
             },
             {
-                "link": "http://localhost:2222/pizza-shefu/api/v1.0/subcategories/category/Beverage",
-                "rel": "subcategories of Beverage"
+                "rel": "subcategories of Beverage",
+                "link": "http://localhost:2222/pizza-shefu/api/v1.0/subcategories/category/Beverage"
             },
             {
-                "link": "http://localhost:2222/pizza-shefu/api/v1.0/subcategories/category/Topping",
-                "rel": "subcategories of Topping"
-            },
-            {
-                "link": "http://localhost:2222/pizza-shefu/api/v1.0/subcategories/category/Desserts",
-                "rel": "subcategories of Desserts"
-            },
-            {
-                "link": "http://localhost:2222/pizza-shefu/api/v1.0/subcategories/category/Salad",
-                "rel": "subcategories of Salad"
+                "rel": "subcategories of Desserts",
+                "link": "http://localhost:2222/pizza-shefu/api/v1.0/subcategories/category/Desserts"
             }
         ]
     })

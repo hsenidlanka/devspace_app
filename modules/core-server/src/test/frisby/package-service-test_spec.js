@@ -27,32 +27,27 @@ frisby.create('Package service test 01-correct url')
             {
                 "PackageName": "Christmas",
                 "price": 414,
-                "imagePath": "/a/dummy/image/path/",
-                "content": "dummy content"
+                "imagePath": "/a/dummy/image/path/"
             },
             {
                 "PackageName": "New Year",
                 "price": 658,
-                "imagePath": "/a/dummy/image/path/",
-                "content": "dummy content"
+                "imagePath": "/a/dummy/image/path/"
             },
             {
                 "PackageName": "Halloween",
                 "price": 154.22,
-                "imagePath": "/a/dummy/image/path/",
-                "content": "dummy content"
+                "imagePath": "/a/dummy/image/path/"
             },
             {
                 "PackageName": "",
                 "price": 564,
-                "imagePath": "/a/dummy/image/path/",
-                "content": "dummy content"
+                "imagePath": "/a/dummy/image/path/"
             },
             {
                 "PackageName": "Feasty",
                 "price": 256.25,
-                "imagePath": "/a/dummy/image/path/",
-                "content": "dummy content"
+                "imagePath": "/a/dummy/image/path/"
             }
         ],
         "links": [

@@ -11,7 +11,6 @@ import javax.sql.DataSource;
  * Created by hsenid on 9/19/16.
  */
 public class FeedbackRepositoryImpl implements FeedbackRepository{
-    Feedback fd=new Feedback();
     private JdbcTemplate jdbcTemplate;
     private PlatformTransactionManager transactionManager;
     //private static org.apache.log4j.Logger log = Logger.getLogger(FeedbackRepositoryImpl.class);
@@ -32,9 +31,9 @@ public class FeedbackRepositoryImpl implements FeedbackRepository{
     public int add(Feedback feedback) {
         int row;
         String sql = "INSERT INTO feedback " +
-                "(date,time,comment,number_of_stars,customer_id,item_id) VALUES (?,?,?,?,?,(SELECT id FROM item WHERE name=?))";
+                "(date,time,comment,number_of_stars,customer_id,item_id) VALUES (CURDATE(),CURTIME(),?,?,(SELECT id FROM customer WHERE username=?),(SELECT id FROM item WHERE name=?))";
 
-        row = jdbcTemplate.update(sql, new Object[]{fd.getDate(),fd.getTime(),fd.getComment(),fd.getNumberOfStars(),fd.getCustomerId(),fd.getItemName()});
+        row = jdbcTemplate.update(sql, new Object[]{feedback.getComment(),feedback.getNumberOfStars(),feedback.getCustomerUserName(),feedback.getItemName()});
         log.info("{} new feedback added",row);
         return row;
     }

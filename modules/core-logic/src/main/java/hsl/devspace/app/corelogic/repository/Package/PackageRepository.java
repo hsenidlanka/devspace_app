@@ -15,7 +15,7 @@ public interface PackageRepository {
     int update(hsl.devspace.app.corelogic.domain.Package updatedPackage);
     int changePrice(String packageName,double price);
     List<hsl.devspace.app.corelogic.domain.Package> selectAll();
-    int addContent(List<hsl.devspace.app.corelogic.domain.Package> content);
+    int addContent(String packName, List<hsl.devspace.app.corelogic.domain.Package> content);
     boolean checkUniquePackage(String packName);
     int addPackage(hsl.devspace.app.corelogic.domain.Package pack, List<Package> content);
 

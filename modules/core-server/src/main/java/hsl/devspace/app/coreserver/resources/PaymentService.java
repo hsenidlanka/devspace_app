@@ -33,7 +33,6 @@ public class PaymentService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response purchase(JSONObject jsonObject, @javax.ws.rs.core.Context UriInfo uriInfo) {
-        log.info("Start reading json response");
         SuccessMessage successMessage = new SuccessMessage();
         Response response;
         String url = uriInfo.getAbsolutePath().toString();
@@ -88,10 +87,10 @@ public class PaymentService {
             }
         } catch (MalformedURLException e) {
             successMessage.setMessage(e.getMessage());
-            log.error("Error reading json response ", e);
+            log.error("Error processing json response ", e);
         } catch (SdpException e) {
             successMessage.setMessage(e.getMessage());
-            log.error("Error reading json response ", e);
+            log.error("Error processing json response ", e);
         }
         response = Response.status(Response.Status.OK).entity(successMessage).build();
         return response;

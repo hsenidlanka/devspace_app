@@ -1,143 +1,152 @@
-$(document).ready(function(){
+$(document).ready(function () {
 
-    var loginUsername =  $.trim($("#loginUsername").val());
-    var loginPassword =  $.trim($("#loginPassword").val());
+    var loginUsername = $.trim($("#loginUsername").val());
+    var loginPassword = $.trim($("#loginPassword").val());
 
-    if(loginUsername.length <= 0){
-        $('<p>Username</p>').appendTo('#usernameError');
-    }
+    /*
+     if(loginUsername.length <= 0){
+     $('<p>Username</p>').appendTo('#usernameError');
+     }
 
-    if(loginPassword.length <= 0){
-        $('<p>Password</p>').appendTo('#passwordError');
-    }
+     if(loginPassword.length <= 0){
+     $('<p>Password</p>').appendTo('#passwordError');
+     }
+     */
 
     /*  var loginUsername2 =  $.trim($("#loginUsername").val());
      var loginPassword2 =  $.trim($("#loginPassword").val());*/
 
-/*
-    if(loginUsername2.length > 0){
-        $('#usernameError').empty();
-    }
-    if(loginPassword2.length > 0){
-        $('#passwordError').empty();
-    }
-*/
+    /*
+     if(loginUsername2.length > 0){
+     $('#usernameError').empty();
+     }
+     if(loginPassword2.length > 0){
+     $('#passwordError').empty();
+     }
+     */
     //alert("test");
-    $("#loginUsername").blur(function(){
-        var loginUsername =  $.trim($("#loginUsername").val());
-        var loginPassword =  $.trim($("#loginPassword").val());
+    /* $("#loginUsername").blur(function(){
+     var loginUsername =  $.trim($("#loginUsername").val());
+     var loginPassword =  $.trim($("#loginPassword").val());
 
-        if(loginUsername.length > 0){
-            $('#usernameError').empty();
-        }
+     if(loginUsername.length > 0){
+     $('#usernameError').empty();
+     }
 
-        alert("Username blur");
-        if(loginPassword.length > 0){
-            $('#passwordError').empty();
-        }
+     alert("Username blur");
+     if(loginPassword.length > 0){
+     $('#passwordError').empty();
+     }
 
-        if(loginUsername.length <= 0){
-            $('<p>Provide your username</p>').appendTo('#usernameError');
-        }
+     if(loginUsername.length <= 0){
+     $('<p>Provide your username</p>').appendTo('#usernameError');
+     }
 
-        if(loginPassword.length <= 0){
-            $('<p>Give a valid password</p>').appendTo('#passwordError');
-        }
+     if(loginPassword.length <= 0){
+     $('<p>Give a valid password</p>').appendTo('#passwordError');
+     }
 
-    });
+     });*/
     /* $(function () {
-         $('form').validator({
-             validHandlers: {
+     $('form').validator({
+     validHandlers: {
 
-                 '.mobileno': function (input) {
-                     return /^[0-9]{10}$/.test(input.val());
+     '.mobileno': function (input) {
+     return /^[0-9]{10}$/.test(input.val());
 
-                 },
-                 '.password': function (input) {
-                     var bla = $('#rePassword').val();
-                     return input.val() == bla;
+     },
+     '.password': function (input) {
+     var bla = $('#rePassword').val();
+     return input.val() == bla;
 
-                 }
-             }
-         });
+     }
+     }
+     });
 
      });*/
 
     //Registration form submission
 
-    $("#submitBtn").off('click');
-    $("#submitBtn").click(function () {
-        var loginUsername =  $.trim($("#loginUsername").val());
-        var loginPassword =  $.trim($("#loginPassword").val());
+    /* $("#submitBtn").off('click');
+     $("#submitBtn").click(function () {
 
-        if(loginUsername.length <= 0){
-            $('<p>Username</p>').appendTo('#usernameError');
-        }
+     var loginUsername =  $.trim($("#loginUsername").val());
+     var loginPassword =  $.trim($("#loginPassword").val());
 
-        if(loginPassword.length <= 0){
-            $('<p>Password</p>').appendTo('#passwordError');
-        }
-        if (0) {
-            $.ajax({
+     if(loginUsername.length <= 0){
+     $('<p>Username</p>').appendTo('#usernameError');
+     }
 
-                type: 'post',
-                url: "register",
-                data: $('#adduser_form').serialize(),
-                success: function (result) {
-                    console.log("success");
-                    $('#registerSuccesful').modal('show');
-                },
-                error: function () {
-                    $("#ajaccall").append("<b>Appended text</b>");
-                }
-            });
+     if(loginPassword.length <= 0){
+     $('<p>Password</p>').appendTo('#passwordError');
+     }
+     if (loginUsername.length >= 0 && loginPassword.length >= 0) {
+     $.ajax({
 
-        }else{
-            return false;
-        }
+     type: 'post',
+     url: "register",
+     data: $('#adduser_form').serialize(),
+     success: function (result) {
+     console.log("success");
+     $('#registerSuccesful').modal('show');
+     },
+     error: function () {
+     $("#ajaccall").append("<b>Appended text</b>");
+     }
+     });
+
+     }else{
+     return false;
+     }
 
 
-    });
-
+     });
+     */
 
 
     //Login form submition
 
     //$("#loginFormSubmit").off('click');
-    $("#loginFormSubmit").click(function () {
-        var loginUsername =  $.trim($("#loginUsername").val());
-        var loginPassword =  $.trim($("#loginPassword").val());
 
+    $("#loginBtn").click(function () {
+        $('#usernameError').empty();
+        $('#passwordError').empty();
+    });
+
+    $("#loginFormSubmit").click(function () {
+        var loginUsername = $.trim($("#loginUsername").val());
+        var loginPassword = $.trim($("#loginPassword").val());
+        $('#usernameError').empty();
+        $('#passwordError').empty();
         //alert(loginUsername.length + ' ' + loginPassword.length)
 
 
+        if (loginUsername.length > 0 && loginPassword.length > 0) {
 
-        if (1) {
-
-            if (/*$('form').validator('check') <= 2*/1) {
-
-                $.ajax({
-                    type: 'post',
-                    url: "login",
-                    data: {username: loginUsername, password: loginPassword},
-                    success: function (result) {
-                        if (result.userAvailable) {
-                            window.location = "/web-selfcare/";
-                        } else {
-                            alert("Invalied Username of Password");
-                        }
-
-                        console.log("success");
-
-                    },
-                    error: function () {
-                        $("#ajaccall").append("<b>Appended text</b>");
+            $.ajax({
+                type: 'post',
+                url: "login",
+                data: {username: loginUsername, password: loginPassword},
+                success: function (result) {
+                    if (result.userAvailable) {
+                        window.location = "/web-selfcare/";
+                    } else {
+                        alert("Invalied Username of Password");
                     }
-                });
-
-            } else {
-                return false;
+                    console.log("success");
+                },
+                error: function () {
+                    $("#ajaccall").append("<b>Appended text</b>");
+                }
+            });
+        } else {
+            if(loginUsername.length <= 0){
+                $('<p align="left" style="color: red; margin-left: -12px; margin-top: -12px; margin-bottom: 12px;">Please provide a valid username</p>').appendTo('#usernameError');
             }
+            if(loginPassword.length <= 0){
+                $('<p align="left" style="color: red;  margin-left: -12px; margin-top: -12px; margin-bottom: 12px;">Please provide a valid password</p>').appendTo('#passwordError');
+            }
+            return false;
         }
 
     });
@@ -145,7 +154,7 @@ $(document).ready(function(){
 
     //Check a username is blocked or not
 
-    $("#loginUsername").blur(function(){
+    $("#loginUsername").blur(function () {
         var chkName = $("#loginUsername").val();
         $.ajax({
 
@@ -161,10 +170,10 @@ $(document).ready(function(){
             dataType: "json",
             success: function (data2) {
 
-                if(!data2.userAvailable){
+                if (!data2.userAvailable) {
                     $("#loginUsername").val('');
                     alert("Username is blocked");
-                }else{
+                } else {
                     return fasle;
                 }
             },
@@ -178,7 +187,7 @@ $(document).ready(function(){
 
     //Check unique username
 
-    $("#username").blur(function(){
+    $("#username").blur(function () {
         var chkName = $("#username").val();
         $.ajax({
 
@@ -195,7 +204,7 @@ $(document).ready(function(){
             dataType: "json",
             success: function (data2) {
 
-                if(!data2.userAvailable){
+                if (!data2.userAvailable) {
                     $("#username").val('');
                     alert("Username is taken. Add another.");
                 }
@@ -206,4 +215,4 @@ $(document).ready(function(){
         });
 
     });
-    });
+});

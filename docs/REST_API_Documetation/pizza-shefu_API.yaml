@@ -6,6 +6,8 @@ info:
     Please follow the following steps to open this YAML file in Swagger Editor. 
     Open the url meioned below and paste this complete set of code or click file > import file.
     Browse and open this YAML file.
+    Also, you may find a Microsoft Excel sheet containing this documentation from the following link.
+    https://1drv.ms/x/s!AgR5Dn7i6sy0gs53WranWWSu6GVZeg
   #termsOfService: http://helloreverb.com/terms/
   contact:
     name: hSenid Lanka Team
@@ -578,7 +580,40 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/error-message'               
+              $ref: '#/definitions/error-message'  
+              
+  /feedbacks/add:
+    post: 
+      description: Add a feedback for a selected item
+      tags:
+        - feedbacks
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          description: feedback object containing the data related to the feedback.
+                       
+          required: true
+          schema:
+            $ref: '#/definitions/feedback'
+            
+      responses:
+        '201':
+          description: Feedback added
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/success-message'
+              
+        '415':
+          description: Media type should be application/json
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/error-message' 
               
   /shopping-cart/add/item/{ItemName}/qty/{quantity}:
     post: 
@@ -1162,6 +1197,24 @@ definitions:
         mobile:
           type: string
         message:
+          type: string
+          
+  feedback:
+      type: object
+      required:
+            - comment
+            - numberOfStars
+            - customerUserName
+            - itemName
+            
+      properties:
+        comment:
+          type: number    
+        numberOfStars:
+          type: string
+        customerUserName:
+          type: string          
+        itemName:
           type: string
           
           

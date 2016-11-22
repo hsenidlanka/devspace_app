@@ -21,10 +21,6 @@ $(document).ready(function(){
             title: 'Package Name',
             sortable: true
         },{
-            field: 'content',
-            title: 'Package Content Name',
-            sortable: true
-        },{
             field: 'price',
             title: 'Package Price',
             align: 'right',
