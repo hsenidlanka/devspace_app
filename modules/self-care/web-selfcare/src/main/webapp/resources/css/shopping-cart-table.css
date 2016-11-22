@@ -105,6 +105,10 @@ tbody:hover tr:hover td {
     display: none;
 }
 
+#table-cart td{
+    vertical-align: middle;
+}
+
 .item-title {
     vertical-align: middle;
     text-align: center;

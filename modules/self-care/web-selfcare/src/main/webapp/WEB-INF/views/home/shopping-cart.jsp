@@ -262,15 +262,15 @@
 
                 <div style="text-align:center">
                     <div style="padding:5px;">
-                        <a class="btn btn-primary" style="width:300px;"><fmt:message key="shopping.login.system"
+                        <a class="btn btn-primary" id="btn-cart-login" style="width:300px;"><fmt:message key="shopping.login.system"
                                                                                      bundle="${lang}"/></a>
                     </div>
                     <div style="padding:5px;">
-                        <a class="btn btn-primary" style="width:300px;"><fmt:message key="shopping.create"
+                        <a class="btn btn-primary" id="btn-cart-signup" style="width:300px;"><fmt:message key="shopping.create"
                                                                                      bundle="${lang}"/></a>
                     </div>
                     <div style="padding:5px;">
-                        <a class="btn btn-primary" style="width:300px;" href="delivery.html"><fmt:message
+                        <a class="btn btn-primary" style="width:300px;" href="/web-selfcare/delivery"><fmt:message
                                 key="shopping.guest" bundle="${lang}"/></a>
                     </div>
                 </div>

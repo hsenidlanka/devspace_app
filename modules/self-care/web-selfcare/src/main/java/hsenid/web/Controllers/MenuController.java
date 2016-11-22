@@ -41,28 +41,31 @@ public class MenuController {
     @Value("${api.url.items.toppings}")
     private String toppingsUrl;
 
+    // Load menu page
     @RequestMapping(value = "/menu", method = RequestMethod.GET)
     public ModelAndView loadMenuPage(HttpSession session) {
+        // Shopping cart session
         if (session.getAttribute("cartItems") == null || session.getAttribute("cartItems") == "") {
             List<Map<String, String>> cartItems = new ArrayList<Map<String, String>>();
             session.setAttribute("cartItems", cartItems);
         }
         ModelAndView modelAndView = new ModelAndView("home/menu");
         RestTemplate restTemplate = new RestTemplate();
-        String url = baseUrl + categoryListUrl;
+        String url = baseUrl + categoryListUrl; // Get categories
         ServerResponseMessage responseMessage = restTemplate.getForObject(url, ServerResponseMessage.class);
         modelAndView.addObject("categories", responseMessage.getData());
         return modelAndView;
     }
 
+    // Show item of a specific category
     @RequestMapping(value = "/menu/{category}", method = RequestMethod.GET)
     public ModelAndView generateRelevantMenu(@PathVariable String category) {
         ModelAndView modelAndView = new ModelAndView("home/menu-category");
         modelAndView.addObject("category", category);
 
         RestTemplate restTemplate = new RestTemplate();
-        String getSubcatUrl = baseUrl + subcategoryListUrl + category;
-        String getItemsUrl = baseUrl + subcategoryItemsUrl;
+        String getSubcatUrl = baseUrl + subcategoryListUrl + category; // Get sub-categories
+        String getItemsUrl = baseUrl + subcategoryItemsUrl; // Get items
 
         ServerResponseMessage subcategoriesResponse = restTemplate.getForObject(getSubcatUrl, ServerResponseMessage.class);
         modelAndView.addObject("subcategories", subcategoriesResponse.getData());
@@ -75,6 +78,13 @@ public class MenuController {
         return modelAndView;
     }
 
+    /*
+    When user add an item to the cart, item data will be saved to the session.
+    Session has an attribute called cartItems which holds the shopping cart item details.
+    Item details will be saved in a list of map.
+    One map contains details of a single item as key value pairs.
+    When there are more items, there will be more map objects in the list.
+    */
     @RequestMapping(value = "/menu/add-to-cart", method = RequestMethod.POST)
     @ResponseBody
     public boolean addToCart(HttpSession session, HttpServletRequest request) {
@@ -90,12 +100,12 @@ public class MenuController {
         String itemSize = request.getParameter("itemSize");
         String itemTopping1 = request.getParameter("itemTopping1");
         String itemTopping1Price = "0";
-        if(request.getParameter("itemTopping1Price")!=null){
+        if (request.getParameter("itemTopping1Price") != null) {
             itemTopping1Price = request.getParameter("itemTopping1Price");
         }
         String itemTopping2 = request.getParameter("itemTopping2");
         String itemTopping2Price = "0";
-        if(request.getParameter("itemTopping2Price")!=null){
+        if (request.getParameter("itemTopping2Price") != null) {
             itemTopping2Price = request.getParameter("itemTopping2Price");
         }
         String itemInstructs = request.getParameter("itemInstructs");
@@ -109,7 +119,7 @@ public class MenuController {
         map.put("itemTopping1", itemTopping1);
         map.put("itemTopping2", itemTopping2);
         double toppingsTotal = Double.parseDouble(itemTopping1Price) + Double.parseDouble(itemTopping2Price);
-        map.put("itemToppingsTotal", toppingsTotal+"");
+        map.put("itemToppingsTotal", toppingsTotal + "");
         map.put("itemInstructs", itemInstructs);
         map.put("itemQty", itemQty);
         map.put("itemPrice", itemPrice);
@@ -119,6 +129,7 @@ public class MenuController {
         return true;
     }
 
+    // Get the details of available topping to customize the pizza before adding to the shopping cart.
     @RequestMapping(value = "/menu/toppings", method = RequestMethod.GET)
     @ResponseBody
     public JSONArray getToppings() {

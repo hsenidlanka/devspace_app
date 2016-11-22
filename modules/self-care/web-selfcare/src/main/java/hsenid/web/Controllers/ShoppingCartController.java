@@ -1,8 +1,6 @@
 package hsenid.web.Controllers;
 
 
-import hsenid.web.models.BooleanResponse;
-import hsenid.web.models.ReplyFromServer;
 import hsenid.web.models.ServerResponseMessage;
 import hsenid.web.supportclasses.SendStringBuilds;
 import org.json.simple.JSONObject;
@@ -11,11 +9,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
@@ -42,10 +41,10 @@ public class ShoppingCartController {
         return modelAndView;
     }
 
+    // Validate the coupon code
     @RequestMapping(value = "/shopping-cart/validatecoupon", method = RequestMethod.POST)
     @ResponseBody
     public String checkForValidCoupon(HttpServletRequest request) {
-
         String completeUrl = SendStringBuilds.sendString(baseUrl, checkValidCoupenUrl);
 
         String couponToCheck = request.getParameter("checkCoupon");
@@ -68,6 +67,10 @@ public class ShoppingCartController {
         return rate;
     }
 
+    /*
+    When customer remove an item from the shopping cart, particular item should be
+    removed from the session.
+     */
     @RequestMapping(value = "/shopping-cart/removeitem", method = RequestMethod.POST)
     @ResponseBody
     public String removeItemFromCart(HttpSession session, HttpServletRequest request) {
@@ -92,6 +95,10 @@ public class ShoppingCartController {
         return itemIndex;
     }
 
+    /*
+    When customer changes the item quantity in the shopping cart, parallelly the session
+    data holding the shopping cart details needs to be updated. Following method handles it.
+    */
     @RequestMapping(value = "/shopping-cart/updateitem", method = RequestMethod.POST)
     @ResponseBody
     public void updateCartSessionData(HttpSession session, HttpServletRequest request) {
@@ -100,5 +107,16 @@ public class ShoppingCartController {
         String itemQty = request.getParameter("itemQty");
         cartItemList.get(Integer.parseInt(itemIndex)).put("itemQty", itemQty);
         session.setAttribute("cartItems", cartItemList);
+    }
+
+    // Check whether customer is logged in to the system
+    @RequestMapping(value = "/shopping-cart/proceed", method = RequestMethod.GET)
+    @ResponseBody
+    public int proceedToCheckout(HttpSession session) {
+        if (session.getAttribute("username") != null) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }

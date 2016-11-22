@@ -101,20 +101,49 @@ $(document).ready(function () {
     });
 
     $("#checkoutButton").click(function () {
-        $("#proceed-checkout-confirm").modal('show');
+        if(!$("td.empty-cart").length){
+            $.ajax({
+                type: "GET",
+                url: "/web-selfcare/shopping-cart/proceed",
+                success: function (result) {
+                    if (result == 1) {
+                        window.location.href="/web-selfcare/delivery";
+                    } else {
+                        $("#proceed-checkout-confirm").modal('show');
+                        $("#btn-cart-login").click(function () {
+                            $("#proceed-checkout-confirm").modal('hide');
+                            $("#modal-login").modal('show');
+                        });
+                        $("#btn-cart-signup").click(function () {
+                            $("#proceed-checkout-confirm").modal('hide');
+                            $("#modal-signup").modal('show');
+                        });
+                    }
+                }
+            });
+        }else{
+            $.notify("There are no items to checkout.", {
+                align: "center",
+                verticalAlign: "top",
+                delay: 2000,
+                animationType: "fade",
+                color: "#fff",
+                background: "#D44950"
+            });
+        }
     });
 });
 
 // Validate the coupon
 function couponValidator() {
     var enteredCouponVal = $("#txt-coupon").val();
-    if (enteredCouponVal.length == 0) {
-        $("#coupon-validate-msg").text("Enter coupon code to validate.");
+    if($("#label-tot").text() === "0.00"){
+        $("#coupon-validate-msg").text("Add items to cart to apply coupon.");
         $("#coupon-alert-div").attr('class', 'alert alert-danger');
         $("#coupon-alert-div").show();
         return false;
-    } else if ($("#label-tot").text() === "0.00") {
-        $("#coupon-validate-msg").text("Add items to cart to apply coupon.");
+    } else if (enteredCouponVal.length == 0) {
+        $("#coupon-validate-msg").text("Enter coupon code to validate.");
         $("#coupon-alert-div").attr('class', 'alert alert-danger');
         $("#coupon-alert-div").show();
         return false;
