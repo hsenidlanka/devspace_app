@@ -1,5 +1,6 @@
 package hsl.devspace.app.corelogic.repository.Package;
 
+import hsl.devspace.app.corelogic.domain.Item;
 import hsl.devspace.app.corelogic.domain.Package;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -19,7 +20,7 @@ import java.util.Map;
 /**
  * Created by hsenid on 9/20/16.
  */
-public class PackageRepositoryImpl implements PackageRepository  {
+public class PackageRepositoryImpl implements PackageRepository {
     //Package pkg=new Package();
     private JdbcTemplate jdbcTemplate;
     private PlatformTransactionManager transactionManager;
@@ -84,7 +85,7 @@ public class PackageRepositoryImpl implements PackageRepository  {
 
     /*change price of a package*/
     @Override
-    public int changePrice(String packageName,double price) {
+    public int changePrice(String packageName, double price) {
 
         String sql = "UPDATE package SET price=?  WHERE name = ? ";
         int row = jdbcTemplate.update(sql, new Object[]{price, packageName});
@@ -96,9 +97,9 @@ public class PackageRepositoryImpl implements PackageRepository  {
     @Override
     public List<Package> selectAll() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM package");
-        List<Package> pack=new ArrayList<Package>();
+        List<Package> pack = new ArrayList<Package>();
 
-        for (int i=0;i<mp.size();i++){
+        for (int i = 0; i < mp.size(); i++) {
             Package packages = new Package();
             packages.setPackageId(Integer.parseInt(mp.get(i).get("id").toString()));
             packages.setPackName(mp.get(i).get("name").toString());
@@ -118,7 +119,7 @@ public class PackageRepositoryImpl implements PackageRepository  {
         for (int i = 0; i < content.size(); i++) {
             //String packName = content.get(i).getPackName();
             String itemName = content.get(i).getItemName();
-            log.error("Item name in core logic {}",itemName);
+            log.error("Item name in core logic {}", itemName);
             int quantity = content.get(i).getQuantity();
             String size = content.get(i).getSize();
             String sql = "INSERT INTO package_item " +
@@ -187,6 +188,7 @@ public class PackageRepositoryImpl implements PackageRepository  {
         return j;
     }
 
+    @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public int updatePackage(Package updatedPackage, List<Package> content) {
         int j = 0;
@@ -203,4 +205,45 @@ public class PackageRepositoryImpl implements PackageRepository  {
         }
         return j;
     }
+
+    public ReturnTypeResolver getContentDetails(String packageName) {
+        List<Map<String, Object>> itemName = new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> sizes = new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> category = new ArrayList<Map<String, Object>>();
+        ReturnTypeResolver rv = new ReturnTypeResolver();
+        List<Item> items = new ArrayList<Item>();
+
+
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT id FROM package WHERE name=?", packageName);
+        List<Map<String, Object>> mp2 = jdbcTemplate.queryForList("SELECT item_id FROM package_item WHERE package_id=?", mp.get(0).get("id"));
+
+        for (int i = 0; i < mp2.size(); i++) {
+            //Item itemObject=new Item();
+            //List<Map<String, Object>> mp1 = jdbcTemplate.queryForList("SELECT i.name AS item_name,s.size,c.name AS category FROM item i,size s,category c,package_item p WHERE i.id=p.item_id AND p.package_id=? AND s.item_id=p.item_id AND ", mp.get(0).get("id"));
+            List<Map<String, Object>> mp1 = jdbcTemplate.queryForList("SELECT name,id FROM item WHERE id=?", mp2.get(i).get("item_id"));
+            log.info("{}", mp1);
+            List<Map<String, Object>> mp3 = jdbcTemplate.queryForList("SELECT size,item_id FROM size WHERE item_id=?", mp2.get(i).get("item_id"));
+            log.info("{}", mp3);
+            List<Map<String, Object>> mp4 = jdbcTemplate.queryForList("SELECT c.name FROM category c WHERE id=(SELECT category_id FROM sub_category WHERE id=(SELECT sub_category_id FROM item WHERE id=?))", mp2.get(i).get("item_id"));
+            log.info("{}", mp4);
+            // itemObject.setItemName(mp1.get(i).get("name").toString());
+            // itemObject.setCategoryName(mp4.get(i).get("name").toString());
+            itemName.addAll(mp1);
+            sizes.addAll(mp3);
+            category.addAll(mp4);
+            //  items.add(itemObject);
+
+
+        }
+
+        rv.setItemName(itemName);
+        // rv.setItems(items);
+        rv.setSizes(sizes);
+        rv.setCategory(category);
+        log.info("pack{},{},{}", itemName, sizes, category);
+        //log.info("get{} {}",rv.getItems(),rv.getSizes());
+        return rv;
+
+    }
+
 }

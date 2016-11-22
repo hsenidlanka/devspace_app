@@ -22,4 +22,6 @@ public interface PackageRepository {
     int deleteContent(String packageName);
 
     int deletePackage(String packageName);
+
+    int updatePackage(Package updatedPackage, List<Package> content);
 }
