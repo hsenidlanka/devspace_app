@@ -101,6 +101,10 @@ tbody:hover tr:hover td {
     display: none;
 }
 
+.item-toppingsTotal{
+    display: none;
+}
+
 .item-title {
     vertical-align: middle;
     text-align: center;

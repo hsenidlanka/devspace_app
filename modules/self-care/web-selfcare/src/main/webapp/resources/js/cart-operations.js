@@ -1,6 +1,7 @@
 // This JavaScript file contains the operations of shopping cart.
 $(document).ready(function () {
     initCalculations();
+
     $('#myCarousel').carousel({
         interval: 5000
     })
@@ -34,9 +35,9 @@ $(document).ready(function () {
         var itemQty = $.trim(closest.find(".item-qty").val());
         var itemIndex = $.trim(closest.find("td.item-index").text());
         $("#delete-confirm-popup").modal('show');
-        $("#header-item-title").text("Item name: "+itemTitle);
-        $("#p-item-price").text("Price: "+itemPrice);
-        $("#p-item-qty").text("Quantity: "+itemQty);
+        $("#header-item-title").text("Item name: " + itemTitle);
+        $("#p-item-price").text("Price: " + itemPrice);
+        $("#p-item-qty").text("Quantity: " + itemQty);
         $('#removeOk').off('click');
         $('#removeOk').click(function () {
             $.ajax({
@@ -77,10 +78,11 @@ $(document).ready(function () {
 
     $(".spin").click(function () {
         var qty = $(this).val();
-        var price = $(this).closest('tr').children('td:eq(3)').text();
-        var total = qty * price;
+        var price = $(this).closest('tr').children('td:eq(4)').text();
+        var toppingsTotal = $(this).closest('tr').children('td:eq(0)').text();
+        var total = (qty * price) + parseInt(toppingsTotal);
         var itemIndex = $.trim($(this).closest('tr').find('td.item-index').text());
-        $(this).closest('tr').children('td:eq(5)').text(total.toFixed(2));
+        $(this).closest('tr').children('td:eq(6)').text(total.toFixed(2));
         calculateTotal(".tot-price");
         recalculateTotals();
         storeQtyOnSession(itemIndex, qty);
@@ -88,10 +90,11 @@ $(document).ready(function () {
 
     $(".spin").keyup(function () {
         var qty = $(this).val();
-        var price = $(this).closest('tr').children('td:eq(3)').text();
-        var total = qty * price;
+        var price = $(this).closest('tr').children('td:eq(4)').text();
+        var toppingsTotal = $(this).closest('tr').children('td:eq(0)').text();
+        var total = (qty * price) + parseInt(toppingsTotal);
         var itemIndex = $.trim($(this).closest('tr').find('td.item-index').text());
-        $(this).closest('tr').children('td:eq(5)').text(total.toFixed(2));
+        $(this).closest('tr').children('td:eq(6)').text(total.toFixed(2));
         calculateTotal(".tot-price");
         recalculateTotals();
         storeQtyOnSession(itemIndex, qty);
@@ -198,11 +201,12 @@ function initCalculations() {
     calculateTotal(".tot-price");
     calculateDicountedTotal();
     calculateNetAmount();
-    $('.spin').each(function(i, obj) {
+    $('.spin').each(function (i, obj) {
         var qty = $(this).val();
-        var price = $(this).closest('tr').children('td:eq(3)').text();
-        var total = qty * price;
-        $(this).closest('tr').children('td:eq(5)').text(total.toFixed(2));
+        var price = $(this).closest('tr').children('td:eq(4)').text();
+        var toppingsTotal = $(this).closest('tr').children('td:eq(0)').text();
+        var total = (qty * price) + parseInt(toppingsTotal);
+        $(this).closest('tr').children('td:eq(6)').text(total.toFixed(2));
         calculateTotal(".tot-price");
         recalculateTotals();
     });

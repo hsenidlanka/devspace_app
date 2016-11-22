@@ -7,7 +7,6 @@
     <link rel="shortcut icon" href="">
     <script src="<c:url value="/resources/js/cart-operations.js"/>" type="text/javascript"></script>
     <script>
-
         $(document).ready(function () {
             $("#txt-coupon").blur(function () {
                 var coupen = $("#txt-coupon").val();
@@ -28,7 +27,6 @@
                 });
             });
         });
-
     </script>
 </head>
 <body>

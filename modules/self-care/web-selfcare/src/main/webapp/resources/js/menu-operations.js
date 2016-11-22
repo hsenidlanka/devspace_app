@@ -1,5 +1,7 @@
 $(document).ready(function () {
     var priceMap;
+    var toppingsMap;
+    var selectedTopping;
     $(".btn-addtocart").click(function () {
         var itemPrice = $.trim($(this).closest('div').find('#lbl-sizeprice').text());
         var itemSize = $.trim($(this).closest('div').find('.sizes-dropdowns').val());
@@ -82,7 +84,36 @@ $(document).ready(function () {
         price = $.trim($(this).closest(".caption").find(priceFieldId).text());
         $("#addtocart-pizza-price").val(price);
 
+        $.ajax({
+            type: "GET",
+            url: "/web-selfcare/menu/toppings",
+            dataType: "json",
+            success: function (result) {
+                toppingsMap = new Object();
+                var toppingsSelect1 = $("#addtocart-pizza-toppings1"), options = '';
+                var toppingsSelect2 = $("#addtocart-pizza-toppings2"), options = '';
+                toppingsSelect1.empty();
+                toppingsSelect2.empty();
+                options += "<option value='select a topping' selected>Select a topping</option>";
+                toppingsMap["select a topping"] = 0;
+                for (var i = 0; i < result.length; i++) {
+                    options += "<option value='" + result[i].name + "'>" + result[i].name + " (Rs. " + result[i].price.toFixed(2) + ")" + "</option>";
+                    toppingsMap[result[i].name] = result[i].price;
+                }
+                toppingsSelect1.append(options);
+                toppingsSelect2.append(options);
+            }
+        });
+
         $("#add-to-cart-popup").modal('show');
+        calculateTotal();
+    });
+
+    $("#addtocart-pizza-toppings1").change(function () {
+        calculateTotal();
+    });
+
+    $("#addtocart-pizza-toppings2").change(function () {
         calculateTotal();
     });
 
@@ -108,7 +139,9 @@ $(document).ready(function () {
                 "itemDescription": $("#item-desc-modal").text(),
                 "itemSize": $("#addtocart-pizza-sizes").val(),
                 "itemTopping1": $("#addtocart-pizza-toppings1").val(),
+                "itemTopping1Price": toppingsMap[$("#addtocart-pizza-toppings1").val()],
                 "itemTopping2": $("#addtocart-pizza-toppings2").val(),
+                "itemTopping2Price": toppingsMap[$("#addtocart-pizza-toppings2").val()],
                 "itemInstructs": $("#addtocart-pizza-instructs").val(),
                 "itemQty": $("#addtocart-pizza-qty").val(),
                 "itemPrice": $("#addtocart-pizza-price").val(),
@@ -158,11 +191,27 @@ $(document).ready(function () {
             window.location.href = "search-results";
         }
     });
-});
 
-function calculateTotal() {
-    var price = $("#addtocart-pizza-price").val();
-    var quantity = $(':input[type="number"]').val()
-    var total = price * quantity;
-    $("#addtocart-pizza-total").val(total.toFixed(2));
-}
+    function calculateTotal() {
+        var topping1Price = 0;
+        var topping2Price = 0;
+        var selectedTopping1 = $("#addtocart-pizza-toppings1").val();
+        var selectedTopping2 = $("#addtocart-pizza-toppings2").val();
+        if (selectedTopping1 == null) {
+            selectedTopping1 = "select a topping";
+        }
+        if (selectedTopping2 == null) {
+            selectedTopping2 = "select a topping";
+        }
+        if (selectedTopping1 != "select a topping") {
+            topping1Price = toppingsMap[selectedTopping1];
+        }
+        if (selectedTopping2 != "select a topping") {
+            topping2Price = toppingsMap[selectedTopping2];
+        }
+        var price = $("#addtocart-pizza-price").val();
+        var quantity = $(':input[type="number"]').val()
+        var total = (price * quantity) + topping1Price + topping2Price;
+        $("#addtocart-pizza-total").val(total.toFixed(2));
+    }
+});
