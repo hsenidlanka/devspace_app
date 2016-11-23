@@ -9,7 +9,6 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
@@ -63,10 +62,10 @@ public class PackageRepositoryImpl implements PackageRepository {
     @Override
     public int update(Package updatedPackage) {
 
-        MultipartFile img = updatedPackage.getImageUrl();
-        String ims = img.getOriginalFilename();
+       /* MultipartFile img = updatedPackage.getImageUrl();
+        String ims = img.getOriginalFilename();*/
         String sql = "UPDATE package SET price=?,image=? WHERE name = ? ";
-        int row = jdbcTemplate.update(sql, new Object[]{updatedPackage.getPrice(), ims, updatedPackage.getPackName()});
+        int row = jdbcTemplate.update(sql, new Object[]{updatedPackage.getPrice(), updatedPackage.getImage(), updatedPackage.getPackName()});
         log.debug("{}", row);
         return row;
     }

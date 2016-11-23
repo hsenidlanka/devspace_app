@@ -9,7 +9,6 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
@@ -41,13 +40,13 @@ public class ItemRepositoryImpl implements ItemRepository {
     public int add(Item item) {
         int row = 0;
         int id = item.getItemId();
-        MultipartFile img=item.getImageUrl();
-        String ims=img.getOriginalFilename();
+        /*MultipartFile img=item.getImageUrl();
+        String ims=img.getOriginalFilename();*/
 
         String sql = "INSERT INTO item" +
                 "(name,description,type_id,image,sub_category_id) VALUES (?,?,(SELECT type_id FROM type WHERE name=? ),?,(SELECT id FROM sub_category WHERE name=?))";
         row = jdbcTemplate.update(sql, new Object[]{item.getItemName(), item.getDescription(),
-                item.getType(), ims, item.getSubCategoryName()});
+                item.getType(), item.getImage(), item.getSubCategoryName()});
         log.info("{} new item inserted",row);
 
 
