@@ -23,12 +23,15 @@
                     <div style="display: inline-block;">
                         <img class="icons" src="<c:url value="/resources/images/icons/search-result.png"/>">
 
-                        <h3 id="menu-panel-heading" class="header-panel">Search Results</h3>
+                        <h3 id="menu-panel-heading" class="header-panel"><fmt:message
+                                key="searrchresults.main.panel.header"
+                                bundle="${lang}"/></h3>
                     </div>
                     <div style="display: inline-block; float:right;">
                         <div class="form-group">
                             <div class="col-sm-10" style="padding-right: 0px;">
-                                <input type="text" class="form-control input-sm" placeholder="Search"
+                                <input type="text" class="form-control input-sm" placeholder="<fmt:message key="searchresults.search.placeholder"
+                                                                                      bundle="${lang}"/>"
                                        name="txt-search-menu" id="txt-menu-search">
                             </div>
                             <div class="col-sm-2" style="padding-left: 2px;">
@@ -47,7 +50,7 @@
                             <div class="panel-group" id="search-pizza-collapse">
                                 <c:choose>
                                     <c:when test="${ empty it}">
-                                        <div style="color: #28921f;height: 30px;background-color: #628c10;padding: 6%;margin-bottom: 10px">
+                                        <div style="color: #28921f;height: 30px;background-color: #628c10;padding: 6%;margin-bottom: 10px;">
                                             <h1 style="font-size: larger;color: #e6ceac"><c:out
                                                     value="No matching items found ...Surf our menu instead!!!"/></h1>
                                         </div>
@@ -67,7 +70,9 @@
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
                                                 <h4 class="panel-title">
-                                                    <a data-toggle="collapse" href="#search-pizza">Pizza</a>
+                                                    <a data-toggle="collapse" href="#search-pizza"><fmt:message
+                                                            key="searchresults.pizza"
+                                                            bundle="${lang}"/></a>
                                                 </h4>
                                             </div>
 
@@ -108,9 +113,9 @@
                                                                                 <c:out value="${item.description}"/>
                                                                                 <div>
                                                                                     <button class="btn btn-success btn-xs btn-addtocart-pizza">
-                                                                                        Add
-                                                                                        to
-                                                                                        cart
+                                                                                        <fmt:message
+                                                                                                key="searchresults.button.addtocart"
+                                                                                                bundle="${lang}"/>
                                                                                     </button>
                                                                                 </div>
                                                                             </div>
@@ -129,7 +134,9 @@
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
                                                 <h4 class="panel-title">
-                                                    <a data-toggle="collapse" href="#search-pizza2">Beverage</a>
+                                                    <a data-toggle="collapse" href="#search-pizza2"><fmt:message
+                                                            key="searchresults.beverage"
+                                                            bundle="${lang}"/></a>
                                                 </h4>
                                             </div>
 
@@ -155,9 +162,9 @@
                                                                                 <c:out value="${item.description}"/>
                                                                                 <div>
                                                                                     <button class="btn btn-success btn-xs btn-addtocart-pizza">
-                                                                                        Add
-                                                                                        to
-                                                                                        cart
+                                                                                        <fmt:message
+                                                                                                key="searchresults.button.addtocart"
+                                                                                                bundle="${lang}"/>
                                                                                     </button>
                                                                                 </div>
                                                                             </div>
@@ -175,7 +182,9 @@
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
                                                 <h4 class="panel-title">
-                                                    <a data-toggle="collapse" href="#search-pizza3">Topping</a>
+                                                    <a data-toggle="collapse" href="#search-pizza3"><fmt:message
+                                                            key="searchresults.topping"
+                                                            bundle="${lang}"/></a>
                                                 </h4>
                                             </div>
 
@@ -201,9 +210,9 @@
                                                                                 <c:out value="${item.description}"/>
                                                                                 <div>
                                                                                     <button class="btn btn-success btn-xs btn-addtocart-pizza">
-                                                                                        Add
-                                                                                        to
-                                                                                        cart
+                                                                                        <fmt:message
+                                                                                                key="searchresults.button.addtocart"
+                                                                                                bundle="${lang}"/>
                                                                                     </button>
                                                                                 </div>
                                                                             </div>
@@ -221,7 +230,9 @@
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
                                                 <h4 class="panel-title">
-                                                    <a data-toggle="collapse" href="#search-pizza4">Desserts</a>
+                                                    <a data-toggle="collapse" href="#search-pizza4"><fmt:message
+                                                            key="searchresults.dessert"
+                                                            bundle="${lang}"/></a>
                                                 </h4>
                                             </div>
 
@@ -236,7 +247,7 @@
                                                                     <div style="margin-top: 15px;">
 
                                                                         <div class="col-md-3">
-                                                                            <img src="<c:url value="/resources/images/desserts/pudding%2001.jpg"/>"
+                                                                            <img src="<c:url value="/resources/images/desserts/cake%2002.jpg"/>"
                                                                                  class="img-responsive menu-images">
 
                                                                             <div class="contenthover">
@@ -247,9 +258,9 @@
                                                                                 <c:out value="${item.description}"/>
                                                                                 <div>
                                                                                     <button class="btn btn-success btn-xs btn-addtocart-pizza">
-                                                                                        Add
-                                                                                        to
-                                                                                        cart
+                                                                                        <fmt:message
+                                                                                                key="searchresults.button.addtocart"
+                                                                                                bundle="${lang}"/>
                                                                                     </button>
                                                                                 </div>
                                                                             </div>
@@ -267,7 +278,9 @@
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
                                                 <h4 class="panel-title">
-                                                    <a data-toggle="collapse" href="#search-pizza5">Salad</a>
+                                                    <a data-toggle="collapse" href="#search-pizza5"><fmt:message
+                                                            key="searchresults.salad"
+                                                            bundle="${lang}"/></a>
                                                 </h4>
                                             </div>
 
@@ -293,9 +306,9 @@
                                                                                 <c:out value="${item.description}"/>
                                                                                 <div>
                                                                                     <button class="btn btn-success btn-xs btn-addtocart-pizza">
-                                                                                        Add
-                                                                                        to
-                                                                                        cart
+                                                                                        <fmt:message
+                                                                                                key="searchresults.button.addtocart"
+                                                                                                bundle="${lang}"/>
                                                                                     </button>
                                                                                 </div>
                                                                             </div>
@@ -317,7 +330,8 @@
 
 
                         <div class="col-md-3">
-                            <h4>Sugessions for you...</h4>
+                            <h4><fmt:message key="searchresults.suggestions"
+                                             bundle="${lang}"/></h4>
 
                             <div id="myCarousel1" class="carousel slide" data-ride="carousel1">
                                 <!-- Indicators -->
@@ -432,9 +446,11 @@
                         </div>
                     </div>
                     <div class="form-group" style="display:inline-block; margin-top:10px; margin-left:15px;">
-                        <label class="control-label">Special Instructions</label>
+                        <label class="control-label"><fmt:message key="searchresults.specialinstructions"
+                                                                  bundle="${lang}"/></label>
                         <textarea class="form-control" cols="35"
-                                  placeholder="Mention any special instructions"></textarea>
+                                  placeholder="<fmt:message key="searchresults.specialinstructions.placeholder"
+                            bundle="${lang}"/>"></textarea>
                     </div>
                     <div class="form-group" style="margin-left:15px;">
                         <label class="control-label" style="padding-right:15px;">Quantity:</label>
@@ -447,7 +463,8 @@
             </div>
             <div class="modal-footer" style="margin-top:-20px;">
                 <a class="btn btn-default" data-dismiss="modal">Cancel</a>
-                <button class="btn btn-success btn-popup-add-to-cart-pizza">Add to Cart</button>
+                <button class="btn btn-success btn-popup-add-to-cart-pizza"><fmt:message key="searchresults.addToCart"
+                                                                                         bundle="${lang}"/></button>
             </div>
         </div>
     </div>
