@@ -34,7 +34,7 @@
                 <div style="margin-top: 30px;">
                     <div class="radio" style="text-align: center; font-size: medium;">
                         <label><fmt:message key="delivery.prefer" bundle="${lang}"/></label>
-                        <label><input type="radio" name="optradio" id="radio-delivery" value="delivery" checked>A
+                        <label><input type="radio" name="optradio" id="radio-delivery" value="delivery" checked>
                             <fmt:message key="delivery" bundle="${lang}"/></label>&nbsp;
                         <label><input type="radio" name="optradio" id="radio-pickup" value="pickup"><fmt:message
                                 key="delivery.pickup" bundle="${lang}"/></label>
@@ -102,26 +102,22 @@
                                                                                       bundle="${lang}"/></label>
                                             <label id="address_error" class="error-labels"></label>
                                             <input class="form-control" type="text" id="txt-deliadd01"
-                                                   placeholder="<fmt:message key="delivery.building" bundle="${lang}"/>">
+                                                   placeholder="<fmt:message key="delivery.addr1" bundle="${lang}"/>">
 
-                                            <div style="margin-top: 5px;">
+                                            <div style="margin-top: 13px;">
                                                 <input class="form-control" id="txt-deliadd02" type="text"
                                                        placeholder="<fmt:message key="delivery.addr2" bundle="${lang}"/>">
                                             </div>
-                                            <div style="margin-top: 5px;">
+                                            <div style="margin-top: 13px;">
                                                 <input class="form-control" id="txt-deliadd03" type="text"
                                                        placeholder="<fmt:message key="delivery.addr3" bundle="${lang}"/>">
                                             </div>
-                                            <div style="margin-top: 5px;">
-                                                <input class="form-control" id="txt-deliadd04" type="text"
-                                                       placeholder="<fmt:message key="delivery.city" bundle="${lang}"/>">
-                                            </div>
                                         </div>
-                                        <div class="form-group" style="margin-top: 20px;">
+                                        <div class="form-group" style="margin-top: 16px;">
                                             <label class="control-label"><fmt:message key="delivery.description"
                                                                                       bundle="${lang}"/></label>
-                                            <textarea class="form-control"
-                                                      placeholder="<fmt:message key="delivery.describe" bundle="${lang}"/>"></textarea>
+                                            <textarea class="form-control txtarea-delivery-description"
+                                                      placeholder="<fmt:message key="delivery.describe" bundle="${lang}"/>" rows="3"></textarea>
                                         </div>
                                         <div>
                                             <a class="btn btn-success btn-proceed-payment btn-submit-proceed"
@@ -176,14 +172,11 @@
                                                 <option><fmt:message key="delivery.kaluthara"
                                                                      bundle="${lang}"/></option>
                                             </select>
-
-                                            <p class="help-block"><fmt:message key="delivery.example"
-                                                                               bundle="${lang}"/></p>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label"><fmt:message key="delivery.branch.address"
                                                                                       bundle="${lang}"/></label>
-                                            <textarea class="form-control" disabled></textarea>
+                                            <textarea class="form-control txtarea-branch-address" rows="5" readonly></textarea>
                                         </div>
                                         <div>
                                             <a class="btn btn-success btn-proceed-payment"
