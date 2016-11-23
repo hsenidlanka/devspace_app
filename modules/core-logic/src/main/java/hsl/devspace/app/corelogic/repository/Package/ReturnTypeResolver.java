@@ -1,44 +1,44 @@
 package hsl.devspace.app.corelogic.repository.Package;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by hsenid on 10/21/16.
  */
 public class ReturnTypeResolver {
-    private List<Map<String, Object>> itemName;
-    private List<Map<String, Object>> sizes;
-    private List<Map<String, Object>> category;
 
-    public List<Map<String, Object>> getItemName() {
-        return itemName;
+    private String item;
+    private List<String> size;
+    private String categoryName;
+
+    public String getItem() {
+        return item;
     }
 
-    public void setItemName(List<Map<String, Object>> itemName) {
-        this.itemName = itemName;
+    public void setItem(String item) {
+        this.item = item;
     }
 
-    public List<Map<String, Object>> getSizes() {
-        return sizes;
+    public List<String> getSize() {
+        return size;
     }
 
-    public void setSizes(List<Map<String, Object>> sizes) {
-        this.sizes = sizes;
+    public void setSize(List<String> size) {
+        this.size = size;
     }
 
-    public List<Map<String, Object>> getCategory() {
-        return category;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setCategory(List<Map<String, Object>> category) {
-        this.category = category;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
-    public ReturnTypeResolver(List<Map<String, Object>> itemName, List<Map<String, Object>> sizes, List<Map<String, Object>> category) {
-        this.itemName = itemName;
-        this.sizes = sizes;
-        this.category = category;
+    public ReturnTypeResolver(String item, List<String> size, String categoryName) {
+        this.item = item;
+        this.size = size;
+        this.categoryName = categoryName;
     }
 
     public ReturnTypeResolver() {
@@ -47,9 +47,9 @@ public class ReturnTypeResolver {
     @Override
     public String toString() {
         return "ReturnTypeResolver{" +
-                "itemName=" + itemName +
-                ", sizes=" + sizes +
-                ", category=" + category +
+                ", item='" + item + '\'' +
+                ", size=" + size +
+                ", categoryName='" + categoryName + '\'' +
                 '}';
     }
 }

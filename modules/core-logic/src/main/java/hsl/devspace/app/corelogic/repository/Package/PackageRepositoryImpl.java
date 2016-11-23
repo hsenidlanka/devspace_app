@@ -212,24 +212,29 @@ public class PackageRepositoryImpl implements PackageRepository {
         List<ReturnTypeResolver> items = new ArrayList<ReturnTypeResolver>();
 
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT id FROM package WHERE name=?", packageName);
-        List<Map<String, Object>> mp2 = jdbcTemplate.queryForList("SELECT item_id FROM package_item WHERE package_id=?", mp.get(0).get("id"));
+        if (mp.size() > 0) {
+            List<Map<String, Object>> mp2 = jdbcTemplate.queryForList("SELECT item_id FROM package_item WHERE package_id=?", mp.get(0).get("id"));
 
-        for (int i = 0; i < mp2.size(); i++) {
-            ReturnTypeResolver rv = new ReturnTypeResolver();
+            for (int i = 0; i < mp2.size(); i++) {
+                ReturnTypeResolver rv = new ReturnTypeResolver();
+                List<String> sizes = new ArrayList<String>();
 
-            List<Map<String, Object>> mp1 = jdbcTemplate.queryForList("SELECT name FROM item WHERE id=?", mp2.get(i).get("item_id"));
-            List<Map<String, Object>> mp3 = jdbcTemplate.queryForList("SELECT size FROM size WHERE item_id=?", mp2.get(i).get("item_id"));
-            List<Map<String, Object>> mp4 = jdbcTemplate.queryForList("SELECT c.name FROM category c WHERE id=(SELECT category_id FROM sub_category WHERE id=(SELECT sub_category_id FROM item WHERE id=?))", mp2.get(i).get("item_id"));
+                List<Map<String, Object>> mp1 = jdbcTemplate.queryForList("SELECT name FROM item WHERE id=?", mp2.get(i).get("item_id"));
+                List<Map<String, Object>> mp3 = jdbcTemplate.queryForList("SELECT size FROM size WHERE item_id=?", mp2.get(i).get("item_id"));
+                List<Map<String, Object>> mp4 = jdbcTemplate.queryForList("SELECT c.name FROM category c WHERE id=(SELECT category_id FROM sub_category WHERE id=(SELECT sub_category_id FROM item WHERE id=?))", mp2.get(i).get("item_id"));
 
-            rv.setItemName(mp1);
-            rv.setSizes(mp3);
-            rv.setCategory(mp4);
-            items.add(rv);
+                rv.setItem(mp1.get(0).get("name").toString());
+                for (int j = 0; j < mp3.size(); j++) {
+                    sizes.add(mp3.get(j).get("size").toString());
+                }
+                rv.setSize(sizes);
+                rv.setCategoryName(mp4.get(0).get("name").toString());
 
+                items.add(rv);
+
+            }
         }
         log.info("pack {}", items);
-        log.info("pack {}", items.get(0).getSizes().get(0).get("size"));
-
         return items;
 
     }
