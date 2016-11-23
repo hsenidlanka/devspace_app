@@ -101,13 +101,13 @@ $(document).ready(function () {
     });
 
     $("#checkoutButton").click(function () {
-        if(!$("td.empty-cart").length){
+        if (!$("td.empty-cart").length) {
             $.ajax({
                 type: "GET",
                 url: "/web-selfcare/shopping-cart/proceed",
                 success: function (result) {
                     if (result == 1) {
-                        window.location.href="/web-selfcare/delivery";
+                        window.location.href = "/web-selfcare/delivery";
                     } else {
                         $("#proceed-checkout-confirm").modal('show');
                         $("#btn-cart-login").click(function () {
@@ -121,7 +121,7 @@ $(document).ready(function () {
                     }
                 }
             });
-        }else{
+        } else {
             $.notify("There are no items to checkout.", {
                 align: "center",
                 verticalAlign: "top",
@@ -137,7 +137,7 @@ $(document).ready(function () {
 // Validate the coupon
 function couponValidator() {
     var enteredCouponVal = $("#txt-coupon").val();
-    if($("#label-tot").text() === "0.00"){
+    if ($("#label-tot").text() === "0.00") {
         $("#coupon-validate-msg").text("Add items to cart to apply coupon.");
         $("#coupon-alert-div").attr('class', 'alert alert-danger');
         $("#coupon-alert-div").show();
@@ -179,10 +179,23 @@ function couponValidator() {
 // Re-calculate the total upon the modifications to the shopping cart
 function recalculateTotals() {
     if ($("#coupon-alert-div").hasClass("alert alert-success")) {
-        var discount = $("#label-tot").text() * 20 / 100;
-        $("#label-dis").text(discount.toFixed(2));
-        calculateDicountedTotal();
-        calculateNetAmount();
+        var enteredCouponVal = $("#txt-coupon").val();
+        $.ajax({
+            type: 'POST',
+            url: "/web-selfcare/shopping-cart/validatecoupon",
+            data: {"checkCoupon": enteredCouponVal},
+            success: function (result) {
+                var couponCodeRate = $.trim(result);
+                if (couponCodeRate > 0) {
+                    var discount = $("#label-tot").text() * couponCodeRate / 100;
+                    $("#label-dis").text(discount.toFixed(2));
+                    $("#label-dis-rate").text(couponCodeRate);
+                    $("#txt-coupon").attr("readonly", true);
+                    calculateDicountedTotal();
+                    calculateNetAmount();
+                }
+            }
+        });
     } else {
         calculateDicountedTotal();
         calculateNetAmount();
@@ -220,7 +233,10 @@ function storeQtyOnSession(itemIndex, quantity) {
     $.ajax({
         type: 'POST',
         url: "/web-selfcare/shopping-cart/updateitem",
-        data: {"ItemIndex": itemIndex, "itemQty": quantity},
+        data: {
+            "ItemIndex": itemIndex,
+            "itemQty": quantity
+        },
         success: function (result) {
         }
     });
