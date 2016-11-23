@@ -163,7 +163,7 @@
             </div>
             <div class="modal-body">
 
-                <form:form class="form-horizontal" role="form" id="frmEditPkg" action="/edit_package">
+                <form:form class="form-horizontal" role="form" id="frmEditPkg" action="/admin/packages/update_package">
                     <fieldset class="scheduler-border">
                         <legend class="scheduler-border"><fmt:message key="package.packageedit.form.legend" bundle="${bundle1}"/></legend>
 
@@ -238,8 +238,7 @@
                                     <label><fmt:message key="package.packageeditform.packageimages" bundle="${bundle1}"/></label>
                                 </div>
                                 <div class="col-xs-5">
-
-                                    <form:input type="file" class="file_upload btn btn-default" path="image" id="btnUpldImageEdit" value="Browse" />
+                                    <form:input type="file" class="file_upload btn btn-default" path="" id="btnUpldImageEdit" value="Browse" />
                                     <br>
                                 </div>
                             </div>
@@ -256,16 +255,17 @@
 
                         </div>
                     </fieldset>
-                </form:form>
+
 
             </div>
             <div style="text-align: center; z-index: 50000; width: 50%; margin: auto;" id="toaster"></div>
             <div class="modal-footer" align="right">
-                <button class="btn btn-success" type="button" value="Yes" id="btnUpdtPkgDelt"><fmt:message key="package.packageedit.form.button.submit" bundle="${bundle1}"/>
-                </button>
-                <button class="btn btn-success" type="button" value="cancel" id="btnPkgCancel"><fmt:message key="package.packageedit.form.button.reset" bundle="${bundle1}"/>
-                </button>
+                <form:button class="btn btn-success" type="button" value="Yes" id="btnUpdtPkg" onclick="contentPackgeEdit()"><fmt:message key="package.packageedit.form.button.submit" bundle="${bundle1}"/>
+                </form:button>
+                <form:button class="btn btn-success" type="reset" value="cancel" id="btnUpPkgCancel"><fmt:message key="package.packageedit.form.button.reset" bundle="${bundle1}"/>
+                </form:button>
             </div>
+            </form:form>
         </div>
     </div>
 </div>
