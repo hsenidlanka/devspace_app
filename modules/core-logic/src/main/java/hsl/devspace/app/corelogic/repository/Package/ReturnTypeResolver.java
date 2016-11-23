@@ -1,7 +1,5 @@
 package hsl.devspace.app.corelogic.repository.Package;
 
-import hsl.devspace.app.corelogic.domain.Item;
-
 import java.util.List;
 import java.util.Map;
 
@@ -12,15 +10,6 @@ public class ReturnTypeResolver {
     private List<Map<String, Object>> itemName;
     private List<Map<String, Object>> sizes;
     private List<Map<String, Object>> category;
-    List<Item> items;
-
-    public List<Item> getItems() {
-        return items;
-    }
-
-    public void setItems(List<Item> items) {
-        this.items = items;
-    }
 
     public List<Map<String, Object>> getItemName() {
         return itemName;
@@ -44,5 +33,23 @@ public class ReturnTypeResolver {
 
     public void setCategory(List<Map<String, Object>> category) {
         this.category = category;
+    }
+
+    public ReturnTypeResolver(List<Map<String, Object>> itemName, List<Map<String, Object>> sizes, List<Map<String, Object>> category) {
+        this.itemName = itemName;
+        this.sizes = sizes;
+        this.category = category;
+    }
+
+    public ReturnTypeResolver() {
+    }
+
+    @Override
+    public String toString() {
+        return "ReturnTypeResolver{" +
+                "itemName=" + itemName +
+                ", sizes=" + sizes +
+                ", category=" + category +
+                '}';
     }
 }

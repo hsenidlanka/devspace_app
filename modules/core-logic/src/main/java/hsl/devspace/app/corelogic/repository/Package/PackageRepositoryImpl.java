@@ -1,6 +1,5 @@
 package hsl.devspace.app.corelogic.repository.Package;
 
-import hsl.devspace.app.corelogic.domain.Item;
 import hsl.devspace.app.corelogic.domain.Package;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -206,44 +205,34 @@ public class PackageRepositoryImpl implements PackageRepository {
         return j;
     }
 
-    public ReturnTypeResolver getContentDetails(String packageName) {
-        List<Map<String, Object>> itemName = new ArrayList<Map<String, Object>>();
-        List<Map<String, Object>> sizes = new ArrayList<Map<String, Object>>();
-        List<Map<String, Object>> category = new ArrayList<Map<String, Object>>();
-        ReturnTypeResolver rv = new ReturnTypeResolver();
-        List<Item> items = new ArrayList<Item>();
+    /*retrieve content details of a given package*/
+    @Override
+    public List<ReturnTypeResolver> getContentDetails(String packageName) {
 
+        List<ReturnTypeResolver> items = new ArrayList<ReturnTypeResolver>();
 
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT id FROM package WHERE name=?", packageName);
         List<Map<String, Object>> mp2 = jdbcTemplate.queryForList("SELECT item_id FROM package_item WHERE package_id=?", mp.get(0).get("id"));
 
         for (int i = 0; i < mp2.size(); i++) {
-            //Item itemObject=new Item();
-            //List<Map<String, Object>> mp1 = jdbcTemplate.queryForList("SELECT i.name AS item_name,s.size,c.name AS category FROM item i,size s,category c,package_item p WHERE i.id=p.item_id AND p.package_id=? AND s.item_id=p.item_id AND ", mp.get(0).get("id"));
-            List<Map<String, Object>> mp1 = jdbcTemplate.queryForList("SELECT name,id FROM item WHERE id=?", mp2.get(i).get("item_id"));
-            log.info("{}", mp1);
-            List<Map<String, Object>> mp3 = jdbcTemplate.queryForList("SELECT size,item_id FROM size WHERE item_id=?", mp2.get(i).get("item_id"));
-            log.info("{}", mp3);
-            List<Map<String, Object>> mp4 = jdbcTemplate.queryForList("SELECT c.name FROM category c WHERE id=(SELECT category_id FROM sub_category WHERE id=(SELECT sub_category_id FROM item WHERE id=?))", mp2.get(i).get("item_id"));
-            log.info("{}", mp4);
-            // itemObject.setItemName(mp1.get(i).get("name").toString());
-            // itemObject.setCategoryName(mp4.get(i).get("name").toString());
-            itemName.addAll(mp1);
-            sizes.addAll(mp3);
-            category.addAll(mp4);
-            //  items.add(itemObject);
+            ReturnTypeResolver rv = new ReturnTypeResolver();
 
+            List<Map<String, Object>> mp1 = jdbcTemplate.queryForList("SELECT name FROM item WHERE id=?", mp2.get(i).get("item_id"));
+            List<Map<String, Object>> mp3 = jdbcTemplate.queryForList("SELECT size FROM size WHERE item_id=?", mp2.get(i).get("item_id"));
+            List<Map<String, Object>> mp4 = jdbcTemplate.queryForList("SELECT c.name FROM category c WHERE id=(SELECT category_id FROM sub_category WHERE id=(SELECT sub_category_id FROM item WHERE id=?))", mp2.get(i).get("item_id"));
+
+            rv.setItemName(mp1);
+            rv.setSizes(mp3);
+            rv.setCategory(mp4);
+            items.add(rv);
 
         }
+        log.info("pack {}", items);
+        log.info("pack {}", items.get(0).getSizes().get(0).get("size"));
 
-        rv.setItemName(itemName);
-        // rv.setItems(items);
-        rv.setSizes(sizes);
-        rv.setCategory(category);
-        log.info("pack{},{},{}", itemName, sizes, category);
-        //log.info("get{} {}",rv.getItems(),rv.getSizes());
-        return rv;
+        return items;
 
     }
+
 
 }
