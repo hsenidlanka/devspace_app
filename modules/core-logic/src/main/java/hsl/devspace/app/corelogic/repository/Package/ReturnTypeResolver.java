@@ -47,7 +47,7 @@ public class ReturnTypeResolver {
     @Override
     public String toString() {
         return "ReturnTypeResolver{" +
-                ", item='" + item + '\'' +
+                "item='" + item + '\'' +
                 ", size=" + size +
                 ", categoryName='" + categoryName + '\'' +
                 '}';
