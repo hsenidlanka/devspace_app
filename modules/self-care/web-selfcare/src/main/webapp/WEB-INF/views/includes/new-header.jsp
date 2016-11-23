@@ -41,13 +41,13 @@
                 <c:if test="${not empty username}">
                     <li>
                         <div class="dropdown">
-                            <button class="btn btn-lg dropdown-toggle" type="button" data-toggle="dropdown">${name}<span
+                            <button class="btn btn-lg btn-link dropbtn" type="button" data-toggle="dropdown">${name}<span
                                     class="caret"></span></button>
 
-                            <ul class="dropdown-menu ">
-                                <li><a class="btn-lg" href="/web-selfcare/update-user"><fmt:message key="update.user.profile" bundle="${lang}"/></a></li>
-                                <li><a class="btn-lg" href="/web-selfcare/logout"><fmt:message key="new.header.log.out" bundle="${lang}"/></a></li>
-                            </ul>
+                            <div class="dropdown-menu">
+                                <a class="btn-lg" href="/web-selfcare/update-user"><fmt:message key="update.user.profile" bundle="${lang}"/></a>
+                                <a class="btn-lg" href="/web-selfcare/logout"><fmt:message key="new.header.log.out" bundle="${lang}"/></a>
+                            </div>
                         </div>
                     </li>
                 </c:if>
@@ -111,7 +111,7 @@
 
                     <div class="row">
                         <div class="col-sm-2"></div>
-                        <div id="passwordError" class="error-labels col-sm-10"></div>
+                        <div id="passwordError2" class="error-labels col-sm-10"></div>
                         <%--<div class="col-sm-4"></div>--%>
                     </div>
 

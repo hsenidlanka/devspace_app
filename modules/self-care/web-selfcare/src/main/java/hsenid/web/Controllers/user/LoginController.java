@@ -35,16 +35,6 @@ public class LoginController {
 
     User user = new User();
 
-    static String email2;
-    static String name2;
-    static String mobile2;
-    static String firstName2;
-    static String lastName2;
-    static String addr12;
-    static String addr22;
-    static String addr33;
-    static String title2;
-
     //    Defining logger
     final static Logger logger = LoggerFactory.getLogger(LoginController.class);
 
@@ -64,7 +54,6 @@ public class LoginController {
    @ResponseBody
    public BooleanResponse checkBlockedUser(HttpServletRequest request){
        String uname = request.getParameter("checkName");
-//       String uname = "kkalla";
        String pword = "";
 
        JSONObject jsonObject = new JSONObject();
@@ -124,7 +113,7 @@ public class LoginController {
 
                 RestTemplate restTemplate1 = new RestTemplate();
                 String userDataUrl = replyFromServer.getLinks().get(1).getLink();
-                logger.info(userDataUrl);
+//                logger.info(userDataUrl);
                 ReplyFromServer replyFromServer1 = restTemplate1.getForObject(userDataUrl, ReplyFromServer.class);
 
                 user.setTitle(replyFromServer1.getData().get(0).getTitle());
@@ -132,32 +121,23 @@ public class LoginController {
                 user.setLastName(replyFromServer1.getData().get(0).getLastName());
                 user.setEmail(replyFromServer1.getData().get(0).getEmail());
                 user.setMobile(replyFromServer1.getData().get(0).getMobile());
+                user.setUsername(replyFromServer1.getData().get(0).getUsername());
                 user.setAddressLine01(replyFromServer1.getData().get(0).getAddressLine01());
                 user.setAddressLine02(replyFromServer1.getData().get(0).getAddressLine02());
                 user.setAddressLine03(replyFromServer1.getData().get(0).getAddressLine03());
 
-//                name2 = SendStringBuilds.sendString(firstName2, " ", lastName2);
 
             }
-
-//            logger.info(replyFromServer.getData().get(0).getEmail());
 
         } catch (RestClientException e) {
             logger.error(e.getMessage());
             return new BooleanResponse(false);
         }
 
+
 //            Adding attributes to the session
-        session.setAttribute(title, title2);
-        session.setAttribute("firstName", firstName2);
-        session.setAttribute("lastName", lastName2);
-        session.setAttribute("username", username);
-        session.setAttribute("email", email2);
+        session.setAttribute("username", user.getUsername());
         session.setAttribute("name", SendStringBuilds.sendString(user.getFirstName(), " ", user.getLastName()));
-        session.setAttribute("mobile", mobile2);
-        session.setAttribute("addr1", addr12);
-        session.setAttribute("addr2", addr22);
-        session.setAttribute("addr3", addr33);
 
         return new BooleanResponse(true);
     }

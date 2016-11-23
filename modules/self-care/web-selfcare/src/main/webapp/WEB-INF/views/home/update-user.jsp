@@ -4,39 +4,45 @@
 
     <%@include file="../includes/include.jsp" %>
     <title><fmt:message key="update.user.title" bundle="${lang}"/> ${username}</title>
-
     <script>
         $(document).ready(function () {
 
             var usernamejs = "${username}";
-            var namejs = "${name}";
-
-            var titlejs = "${title}";
-            var firstNamejs = "${firstName}";
-            var lastNamejs = "${lastName}";
-            var addr1js = "${addr1}";
-            var addr2js = "${addr2}";
-            var addr3js = "${addr3}";
-            var mobilejs = "${mobile}";
-            var emailjs = "${email}";
-
-            $('input:radio[name="titlejs"]').filter('[value=' + titlejs + ']').attr('checked', true);
-
-//            $("#titlejs").val(titlejs);
-
-            $("#firstNamejs").val($.trim(firstNamejs));
-            $("#lastNamejs").val(lastNamejs);
-            $("#addr1js").val(addr1js);
-            $("#addr2js").val(addr2js);
-            $("#addr3js").val(addr3js);
-            $("#mobilejs").val(mobilejs);
-            $("#emailjs").val(emailjs);
             $("#usernamejs").val(usernamejs);
+
+            $.ajax({
+
+                type: "GET",
+                // The URL for the request
+                url: "sendUserData",
+                // The data to send (will be converted to a query string)
+                data: {
+                    username: usernamejs
+                },
+
+                // The type of data we expect back
+                dataType: "json",
+                success: function (data2) {
+                    $('#'+data2.title).prop('checked', true);
+                    $("#firstNamejs").val(data2.firstName);
+                    $("#lastNamejs").val(data2.lastName);
+                    $("#addr1js").val(data2.addressLine01);
+                    $("#addr2js").val(data2.addressLine02);
+                    $("#addr3js").val(data2.addressLine03);
+                    $("#mobilejs").val(data2.mobile);
+                    $("#emailjs").val(data2.email);
+                },
+                error: function (data) {
+                    alert("Data Retrive failed");
+                    console.log("error work");
+                }
+            });
 
         });
 
-
     </script>
+
+
 
 </head>
 <style>
@@ -48,41 +54,42 @@
     }
 
     .updatesuccess {
-        font-size: 27px;
+        /*font-size: 27px;*/
     }
 
 </style>
 
 <body>
 <%@include file="../includes/new-header.jsp" %>
-${username}
 
 <div class="container" style="width: 60%">
+    
     <div class="panel panel-success">
+
         <form:form action="/web-selfcare/update-user" method="post" modelAttribute="updateuser"
-                   cssClass="well form-horizontal">
+                   cssClass="form-horizontal">
 
             <div class="panel-heading">
                 <p style="font-size: xx-large;text-align: left"><fmt:message key="update.user.title"
                                                                              bundle="${lang}"/>?</p>
             </div>
-            <p class="updatesuccess">${updatedMsg}</p>
 
             <div class="panel-body">
+                <div class="updatesuccess">${updatedMsg}</div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label"><p><fmt:message key="signup.title" bundle="${lang}"/></p></label>
 
                     <div class="row col-sm-9">
 
-                        <form:radiobutton path="title" id="titlejs" name="titlejs" value="Mr"/>Mr
+                        <form:radiobutton path="title" id="Mr" name="titlejs" value="Mr"/>Mr
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <form:radiobutton path="title" id="titlejs" name="titlejs" value="Mrs"/>Mrs
+                        <form:radiobutton path="title" id="Mrs" name="titlejs" value="Mrs"/>Mrs
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <form:radiobutton path="title" id="titlejs" name="titlejs" value="Ms"/>Ms
+                        <form:radiobutton path="title" id="Ms" name="titlejs" value="Ms"/>Ms
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <form:radiobutton path="title" id="titlejs" value="Dr"/>Dr
+                        <form:radiobutton path="title" id="Dr" name="titlejs" value="Dr"/>Dr
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <form:radiobutton path="title" id="titlejs" value="Rev"/>Rev
+                        <form:radiobutton path="title" id="Rev" name="titlejs" value="Rev"/>Rev
 
                     </div>
                     <div class="row">
@@ -185,7 +192,7 @@ ${username}
                                 <form:errors path="addressLine01" cssClass="help-inline" cssStyle="color: red"/>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row" style="margin-top: 7px">
                             <div class="row inline">
                                 <form:input id="addr2js" path="addressLine02" cssStyle="width:72%"/>
                             </div>
@@ -193,7 +200,7 @@ ${username}
                                 <form:errors path="addressLine02" cssClass="help-inline" cssStyle="color: red"/>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row" style="margin-top: 7px">
                             <div class="row inline">
                                 <form:input id="addr3js" path="addressLine03" cssStyle="width:72%"/>
                             </div>
@@ -205,7 +212,8 @@ ${username}
                 </div>
                 <hr>
 <br>
-                <div class="form-group">
+
+                <div class="row" style="margin-bottom: 11px">
                     <div class="col-sm-4"></div>
                     <div class="col-sm-4">
                         <button type="submit" class="btn btn-warning">
@@ -214,8 +222,9 @@ ${username}
                         </button>
                     </div>
                     <div class="col-sm-4"></div>
-
                 </div>
+
+
             </div>
         </form:form>
     </div>

@@ -186,19 +186,18 @@ $(document).ready(function () {
 
     $("#loginBtn").click(function () {
         $('#usernameError').empty();
-        $('#passwordError').empty();
+        $('#passwordError2').empty();
     });
 
     $("#loginFormSubmit").click(function () {
         var loginUsername = $.trim($("#loginUsername").val());
         var loginPassword = $.trim($("#loginPassword").val());
+
         $('#usernameError').empty();
-        $('#passwordError').empty();
-        //alert(loginUsername.length + ' ' + loginPassword.length)
+        $('#passwordError2').empty();
 
 
         if (loginUsername.length > 0 && loginPassword.length > 0) {
-
             $.ajax({
                 type: 'post',
                 url: "login",
@@ -215,12 +214,13 @@ $(document).ready(function () {
                     $("#ajaccall").append("<b>Appended text</b>");
                 }
             });
+
         } else {
             if (loginUsername.length <= 0) {
                 $('<p align="left" style="color: red; margin-left: -12px; margin-top: -12px; margin-bottom: 12px;">Please provide a valid username</p>').appendTo('#usernameError');
             }
             if (loginPassword.length <= 0) {
-                $('<p align="left" style="color: red;  margin-left: -12px; margin-top: -12px; margin-bottom: 12px;">Please provide a valid password</p>').appendTo('#passwordError');
+                $('<p align="left" style="color: red; margin-left: -12px; margin-top: -12px; margin-bottom: 12px;">Please provide a valid password</p>').appendTo('#passwordError2');
             }
             return false;
         }

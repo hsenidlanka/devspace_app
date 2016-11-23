@@ -9,8 +9,6 @@
         <fmt:message key="home.title" bundle="${lang}"/>
     </title>
 
-    <script src="<c:url value="/resources/js/validate-bootstrap.jquery.js"/>"></script>
-
     <style>
         .carousel-inner > .item > img,
         .carousel-inner > .item > a > img {
@@ -19,16 +17,43 @@
             margin: auto;
         }
 
-
-        .modal-login {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            -moz-transform: translate(-50%, -50%);
-            -webkit-transform: translate(-50%, -50%);
-            -o-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
+        .dropbtn {
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
         }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        }
+
+        .dropdown-menu a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            background-color: #e0e0e0;
+        }
+
+        .dropdown-menu a:hover {background-color: whitesmoke}
     </style>
 
 
