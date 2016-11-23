@@ -103,9 +103,7 @@ public class PackageController {
             String list2 = catList.get(p);
             jsonArray.add(list2);
         }
-        LOGGER.error("json array of catList {}", catList);
-        LOGGER.trace("json array of cats2 {}", jsonArray.toString());
-        LOGGER.trace("json array of cats3 {}", jsonArray);
+        LOGGER.trace("json array of catList {}", catList, "json array of cats3 {}", jsonArray);
 
         return jsonArray;
     }
@@ -119,10 +117,9 @@ public class PackageController {
     @ResponseBody
     List<Item> getItemList(@RequestParam("categoryNm") String categoryNm) {
 
-        LOGGER.error(categoryNm);
+        LOGGER.trace(categoryNm);
         List<Item> menuItems = categoryRepository.loadMenuItems(categoryNm);
         LOGGER.trace("Load menu items = {}", menuItems);
-        LOGGER.error("Load menu items = {}", menuItems);
         return menuItems;
     }
 
@@ -148,15 +145,15 @@ public class PackageController {
     @RequestMapping(value = "/add_package", method = RequestMethod.POST)
     public ModelAndView addPackage(@ModelAttribute("newPackage") Package newPackage,
                                   /* @RequestParam("pkgImg") MultipartFile packImg,*/
-                                   HttpServletRequest request) {
+                                  HttpServletRequest request) {
 
         LOGGER.error("package objct11 {}", newPackage);
         try {
-         String packNm =  request.getParameter("pkgName");
-         String pkgPrice = request.getParameter("pkgPrice");
-         String packImg =request.getParameter("pkgImg");
+            String packNm = request.getParameter("pkgName");
+            String pkgPrice = request.getParameter("pkgPrice");
+            String packImg = request.getParameter("pkgImg");
 
-         double packPrc = Double.parseDouble(pkgPrice);
+            double packPrc = Double.parseDouble(pkgPrice);
 
           /*  MultipartFile imgFile = newPackage.getImageUrl();
             String imgFileNm = imgFile.getOriginalFilename();
@@ -166,8 +163,8 @@ public class PackageController {
             newPackage.setPrice(packPrc);
             newPackage.setImage(packImg);
 
-            LOGGER.error("package objct22 {}", newPackage);
-            LOGGER.error("package objct-img url {}", newPackage.getImage());
+            LOGGER.trace("package objct22 {}", newPackage);
+            LOGGER.trace("package objct-img url {}", newPackage.getImage());
 
             String s = request.getParameter("test");
             LOGGER.trace("test val = {}", s);
@@ -198,7 +195,7 @@ public class PackageController {
             if (uniquePknm) {
                 int a = packageRepo.addPackage(newPackage, contList);
                 LOGGER.info("a in add package {} ", a);
-                LOGGER.trace("item name from pkg controller {}",contList.get(0).getItemName());
+                LOGGER.trace("item name from pkg controller {}", contList.get(0).getItemName());
 
                 if (a != 1) {
                     JOptionPane.showMessageDialog(null, insertServerError, "Error !",
@@ -267,10 +264,8 @@ public class PackageController {
     List<Package> viewPackage() {
         List<Package> listPkg = packageRepo.selectAll();
         LOGGER.trace("list pkgs  {}", listPkg);
-        LOGGER.error("list pkgs {}", listPkg);
         return listPkg;
     }
-
 
 
     /**
@@ -281,10 +276,31 @@ public class PackageController {
     //retrieving values of a selected category-content to edit form
     //
     @RequestMapping(value = "/edit_package")
-    public @ResponseBody String retrievePkgCont(@RequestParam("pkgId") int itemId){
+    public ModelAndView retrievePkgCont(@ModelAttribute("editPackage") Package editPackage,
+                           HttpServletRequest request) {
+
+        String s =request.getParameter("test2");
+        LOGGER.trace("edit obj val = {}",s);
+        try {
+            String edtName = request.getParameter("pkgName2");
+            String edtImg = request.getParameter("pkgImg2");
+            String edtPrice= request.getParameter("pkgPrice2");
+            double edtPrc= Double.parseDouble(edtPrice);
+
+            LOGGER.trace("edit pkgName {}",edtName);
+            LOGGER.trace("edit pkgImg {}",edtImg);
+            LOGGER.trace("edit pkgPrc {}",edtPrc);
+
+            editPackage.setPrice(edtPrc);
+            editPackage.setImage(edtImg);
 
 
-        return "";
+
+        } catch (Exception e) {
+            LOGGER.error("Error in edit package {}",e);
+        }
+
+        return new  ModelAndView(new RedirectView("view")) ;
     }
 
     //
@@ -293,8 +309,17 @@ public class PackageController {
     @RequestMapping(value = "/update_package", method = RequestMethod.POST)
     public ModelAndView updatePackage(@ModelAttribute("pkgUpdate") Package pkgUpdate) {
 
+        try {
+         /*   int pkgId = pkgUpdate.getPackageId();
+            String pkgName = pkgUpdate.getPackName();
+            double pkgPrc = pkgUpdate.getPrice();
 
+            LOGGER.trace("pkgNm for update pkg {}", pkgName);
+*/
 
+        } catch (Exception e) {
+            LOGGER.error("error in update package {}", e);
+        }
         return new ModelAndView(new RedirectView("view"));
     }
 
@@ -318,12 +343,12 @@ public class PackageController {
     /*
    * Method for saving images to directories
    **/
-    private void uploadFile( MultipartFile image, String filePath, String fileName){
+    private void uploadFile(MultipartFile image, String filePath, String fileName) {
         try {
             byte[] bytes = image.getBytes();
             //directory made
             File dir = new File(filePath);
-            if(!dir.exists())
+            if (!dir.exists())
                 dir.mkdirs();
 
             //file made

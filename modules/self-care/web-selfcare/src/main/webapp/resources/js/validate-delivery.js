@@ -38,18 +38,24 @@ $(document).ready(function () {
         validateDeliveryAddress01();
     });
 
-    $("#txt-deliadd04").keyup(function () {
-        validateDeliveryAddress04();
+    $("#txt-deliadd02").keyup(function () {
+        validateDeliveryAddress02();
     });
-    $("#txt-deliadd04").focusout(function () {
-        validateDeliveryAddress04();
+    $("#txt-deliadd02").focusout(function () {
+        validateDeliveryAddress02();
     });
 
     $("#btn-delivery-submit").click(function () {
-        if (validateFirstName() == false || validateLastName() == false || validateContactNo() == false || validateEmail() == false || validateDeliveryAddress01() == false || validateDeliveryAddress04() == false) {
+        var isFirstNameValid = validateFirstName();
+        var isLastNameValid = validateLastName();
+        var isContactNoValid = validateContactNo();
+        var isEmailValid = validateEmail();
+        var isAddress01Valid = validateDeliveryAddress01();
+        var isAddress02Valid = validateDeliveryAddress02();
+        if (isFirstNameValid == false || isLastNameValid == false || isContactNoValid == false || isEmailValid == false || isAddress01Valid == false || isAddress02Valid == false) {
             $("#validation-error-popup").modal('show');
-        }else{
-            window.location='../pages/delivery-summary.html';
+        } else {
+            window.location = '../pages/delivery-summary.html';
         }
     });
 });
@@ -152,14 +158,14 @@ function validateDeliveryAddress01() {
 }
 
 //Validate the delivery address field 04
-function validateDeliveryAddress04() {
-    if ($("#txt-deliadd04").val().length == 0) {
+function validateDeliveryAddress02() {
+    if ($("#txt-deliadd02").val().length == 0) {
         $("#address_error").show();
-        $("#txt-deliadd04").css("background-color", background_color);
-        $("#address_error").text("Please enter the mandatory fields.");
+        $("#txt-deliadd02").css("background-color", background_color);
+        $("#address_error").text("Please enter the mandatory fields highlighted.");
         return false;
     } else {
-        $("#txt-deliadd04").css("background-color", "white");
+        $("#txt-deliadd02").css("background-color", "white");
         $("#address_error").hide();
     }
 }

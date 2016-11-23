@@ -117,7 +117,7 @@ function generate(selectedItm, slctElement) {
 }
 
 function contentPackge() {
-    jsonObj = [];
+    jsonObj2 = [];
     content = {};
 
     if ($('#chkPkgCat0').is(':checked')) {
@@ -130,8 +130,8 @@ function contentPackge() {
         content["size"] = sizeVal;
         content["quantity"] = qtyVal;
 
-        jsonObj.push(content);
-        jsonString = JSON.stringify(jsonObj);
+        jsonObj2.push(content);
+        jsonString = JSON.stringify(jsonObj2);
     }
     if ($('#chkPkgCat1').is(':checked')) {
         var itemVal2 = $('#slctItmPkgCat1').val();
@@ -143,8 +143,8 @@ function contentPackge() {
         content["size"] = sizeVal2;
         content["quantity"] = qtyVal2;
 
-        jsonObj.push(content);
-        jsonString = JSON.stringify(jsonObj);
+        jsonObj2.push(content);
+        jsonString = JSON.stringify(jsonObj2);
     }
     if ($('#chkPkgCat2').is(':checked')) {
         var itemVal3 = $('#slctItmPkgCat2').val();
@@ -156,8 +156,8 @@ function contentPackge() {
         content["size"] = sizeVal3;
         content["quantity"] = qtyVal3;
 
-        jsonObj.push(content);
-        jsonString = JSON.stringify(jsonObj);
+        jsonObj2.push(content);
+        jsonString = JSON.stringify(jsonObj2);
     }
     if ($('#chkPkgCat3').is(':checked')) {
         var itemVal4 = $('#slctItmPkgCat3').val();
@@ -169,8 +169,8 @@ function contentPackge() {
         content["size"] = sizeVal4;
         content["quantity"] = qtyVal4;
 
-        jsonObj.push(content);
-        jsonString = JSON.stringify(jsonObj);
+        jsonObj2.push(content);
+        jsonString = JSON.stringify(jsonObj2);
     }
     if ($('#chkPkgCat4').is(':checked')) {
         var itemVal5 = $('#slctItmPkgCat4').val();
@@ -182,23 +182,23 @@ function contentPackge() {
         content["size"] = sizeVal5;
         content["quantity"] = qtyVal5;
 
-        jsonObj.push(content);
+        jsonObj2.push(content);
 
     }
     var pkgName = $("#txtAddPkgName").val();
     var pkgPrice = $("#txtAddPkgPrice").val();
     var pkgImg = $("#savePkgImg").val();
 
-    console.log("pp " + jsonObj);
+    console.log("pp " + jsonObj2);
     console.log("pp2 " + jsonString);
 
- /*   if (jsonObj.length() == 0) {
+ /*   if (jsonObj2.length() == 0) {
         $.toaster({priority: 'warning', title: 'Warning !', message: 'Please fill the package content for ' + pkgName});
     }*/
 
     $.ajax({
         url: "https://localhost:8443/admin/packages/add_package",
-        data: {"test": JSON.stringify(jsonObj), "pkgName": pkgName, "pkgPrice": pkgPrice, "pkgImg": pkgImg},
+        data: {"test": JSON.stringify(jsonObj2), "pkgName": pkgName, "pkgPrice": pkgPrice, "pkgImg": pkgImg},
         type: "POST",
         success: function (result) {
             $("#btnAddNewPkg").submit(function (event) {
@@ -221,7 +221,7 @@ function contentPackge() {
 /*
 
  $.each( '.chkbxPkgCat', function( key, value ) {
- jsonObj = [];
+ jsonObj2 = [];
  if($('.chkbxPkgCat').is(':checked')){
  var itemVal = $('#slctItmPkgPzza').val();
  var sizeVal = $("#szpr1").val();
@@ -232,11 +232,11 @@ function contentPackge() {
  content["size"] = sizeVal;
  content["quantity"] = qtyVal;
 
- jsonObj.push(content);
- jsonString = JSON.stringify(jsonObj);
+ jsonObj2.push(content);
+ jsonString = JSON.stringify(jsonObj2);
  }
  alert(key, value);
- console.log(jsonObj);
+ console.log(jsonObj2);
  console.log(jsonString);
  });*/
 

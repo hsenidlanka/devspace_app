@@ -254,8 +254,6 @@ public class ItemController {
             }
             LOGGER.trace("edittedList {}", edittedList);
             LOGGER.trace("itemUpdate object {}", itemUpdate);
-            LOGGER.error("edittedList err {}", edittedList);
-            LOGGER.error("itemUpdate err {}", itemUpdate);
             LOGGER.trace("itemUpdate category {}", itemUpdate.getCategoryName());
             LOGGER.trace("itemUpdate sub-category {}", itemUpdate.getSubCategoryName());
 
