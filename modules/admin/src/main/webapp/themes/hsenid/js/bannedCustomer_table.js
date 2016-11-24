@@ -6,6 +6,7 @@ $(document).ready(function () {
         height: 375,
         pagination: true,
         pageSize: 7,
+        pageList:[10,20,30],
         clickToSelect: true,
         singleSelect: true,
         minimumCountColumns: 3,

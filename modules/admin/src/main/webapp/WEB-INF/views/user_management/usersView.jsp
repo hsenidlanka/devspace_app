@@ -14,16 +14,20 @@
     <!--my css files-->
     <spring:url value="/themes/hsenid/css/userMgt.css" var="css1"/>
     <spring:url value="/themes/hsenid/css/form-elements.css" var="css2"/>
+    <spring:url value="/themes/hsenid/css/jquery_ui.css" var="css3"/>
 
     <link href="${css1}" rel="stylesheet">
     <link href="${css2}" rel="stylesheet">
+    <link href="${css3}" rel="stylesheet">
 
     <spring:url value="/themes/hsenid/js/userMgt.js" var="js3"/>
+    <spring:url value="/themes/hsenid/js/jquery_ui.min.js" var="js4"/>
     <script src="${js3}"></script>
+    <script src="${js4}"></script>
 
     <!--datepicker-->
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+   <%-- <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>--%>
 
 </head>
 <body>
@@ -39,7 +43,6 @@
     </div>
 </div>
 <br>
-
 
 <div class="breadcrumbPosition" id="userviewBreadcrump">
         <ul class="breadcrumb breadcrumb-menu">

@@ -210,8 +210,7 @@
                                 <fmt:message key="category.categoryedit.modal.image" bundle="${bundle1}" />
                             </label>
                             <div class="col-sm-8">
-                                  <img src="${pageContext.request.contextPath}/themes/hsenid/images/categories/Pizza.jpg">
-                                <form:label path="image" id="imagecat"> </form:label>
+                                  <img  id="imageUrl"/>
                             </div>
                         </div>
 
@@ -221,7 +220,7 @@
                             </label>
                             <div class="col-sm-8">
                                 <form:input type="file" class="file_upload btn btn-default" path="imageUrl" id="editbtnUpldImage"
-                                            value="Browse" cssStyle="width: 220px"/>
+                                           cssStyle="width: 220px"/>
                             </div>
                         </div>
                         <div class="form-group">

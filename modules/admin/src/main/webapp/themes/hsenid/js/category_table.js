@@ -6,9 +6,10 @@ $(document).ready(function () {
         height: 375,
         pagination: true,
         pageSize: 3,
+        pageList:[3,6,12],
         clickToSelect: true,
         singleSelect: true,
-        minimumCountColumns: 3,
+        minimumCountColumns: 2,
         columns: [{
             //field: 'id',
             field:'id',
@@ -101,6 +102,8 @@ window.operateEvents5 = {
         var data1 = JSON.stringify(row);
         var objc1 = JSON.parse(data1);
         var id= objc1["id"];
+        var name= objc1["name"];
+
 
         $.ajax({
             //type: "POST",
@@ -108,14 +111,17 @@ window.operateEvents5 = {
             data: {"id":id},
             success: function(msg){
                 var name=msg["name"];
+                var image1=msg["image"];
+                //alert("image name"+image1);
+                var  url="https://localhost:8443/admin/themes/hsenid/images/categories/" +image1;
+                //alert(url);
+                $('#imageUrl').attr('src',url);
                 $('#categoryid').val(id);
                 $('#editcategoryname').val(msg["name"]);
                 $('#editcategorydes').val(msg["description"]);
                 $('#editvisibility').val(msg["status"]);
-                //$('#imagecat').text(msg["image"]);
 
                 $('#modifyModel').modal({show:true});
-                //alert(msg+""+a+""+b);
             },
             error:function(e){
                 alert("ajax failed");
