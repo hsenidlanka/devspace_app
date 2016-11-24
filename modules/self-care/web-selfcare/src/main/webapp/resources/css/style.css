@@ -150,7 +150,7 @@ table {
 }
 
 .summary-row {
-    display:table-row;
+    display: table-row;
 }
 
 .summary-cell {
@@ -159,20 +159,20 @@ table {
     border: 1px solid #bfbfbf;
 }
 
-.summary-table-header{
+.summary-table-header {
     font-weight: bold;
     text-align: center;
 }
 
-.price-cell{
+.price-cell {
     text-align: right;
 }
 
-.qty-cell{
+.qty-cell {
     text-align: center;
 }
 
-.badge{
+.badge {
     position: absolute;
     top: 6px;
     width: 20px;
@@ -183,10 +183,18 @@ table {
     text-align: center;
 }
 
-.del{
+.del {
     color: #ff2752;
 }
 
-.del:hover{
+.del:hover {
     color: #ff2752;
+}
+
+.txtarea-branch-address {
+    resize: none;
+}
+
+.txtarea-delivery-description {
+    resize: vertical;
 }

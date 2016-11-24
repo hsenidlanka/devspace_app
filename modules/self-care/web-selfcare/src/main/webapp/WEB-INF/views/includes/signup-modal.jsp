@@ -66,34 +66,32 @@
                                 <div class="form-group">
 
                                     <label class="col-sm-2 control-label">
-                                        <fmt:message key="signup.name" bundle="${lang}"/>
+                                        <fmt:message key="signup.first.name" bundle="${lang}"/>
                                     </label>
 
                                     <div class="col-sm-5">
-                                        <input class="form-control" id="fname" name="fname" type="text" placeholder="<fmt:message key="signup.first.name" bundle="${lang}"/>">
+                                        <input class="form-control" id="fname" name="fname" type="text" placeholder="<fmt:message key="signup.first.name" bundle="${lang}"/>*">
                                     </div>
 
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-2"></div>
                                     <div id="fnameError" class="error-labels col-sm-10"></div>
-                                    <%--<div class="col-sm-4"></div>--%>
                                 </div>
-                                <%----%>
+
 
                                 <div class="form-group">
                                     <label for="lname" class="col-sm-2 control-label">
-                                        Last Name
+                                        <fmt:message key="signup.last.name" bundle="${lang}"/>
                                     </label>
 
                                     <div class="col-sm-5">
-                                        <input class="form-control" id="lname" name="lname" type="text" placeholder="<fmt:message key="signup.last.name" bundle="${lang}"/>">
+                                        <input class="form-control" id="lname" name="lname" type="text" placeholder="<fmt:message key="signup.last.name" bundle="${lang}"/>*">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-2"></div>
                                     <div id="lnameError" class="error-labels col-sm-10"></div>
-                                    <%--<div class="col-sm-4"></div>--%>
                                 </div>
                                 <%----%>
 
@@ -111,7 +109,6 @@
                                 <div class="row">
                                     <div class="col-sm-2"></div>
                                     <div id="address1Error" class="error-labels col-sm-10"></div>
-                                    <%--<div class="col-sm-4"></div>--%>
                                 </div>
                                 <%----%>
                                 <div class="form-group">
@@ -126,7 +123,6 @@
                                 <div class="row">
                                     <div class="col-sm-2"></div>
                                     <div id="address2Error" class="error-labels col-sm-10"></div>
-                                    <%--<div class="col-sm-4"></div>--%>
                                 </div>
 
                                 <%----%>
@@ -142,7 +138,6 @@
                                 <div class="row">
                                     <div class="col-sm-2"></div>
                                     <div id="address3Error" class="error-labels col-sm-10"></div>
-                                    <%--<div class="col-sm-4"></div>--%>
                                 </div>
 
                                 <div class="form-group">
@@ -151,14 +146,13 @@
                                     </label>
 
                                     <div class="col-sm-5">
-                                        <input class="mobileno form-control" id="mobileNo" name="mobileNo" type="text" placeholder="0-XXXXXXXXXX">
+                                        <input class="mobileno form-control" id="mobileNo" name="mobileNo" type="text" placeholder="0-XXXXXXXXXX*">
                                     </div>
 
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-2"></div>
                                     <div id="mobileNoError" class="error-labels col-sm-10"></div>
-                                    <%--<div class="col-sm-4"></div>--%>
                                 </div>
 
                                 <div class="form-group">
@@ -167,13 +161,12 @@
                                     </label>
 
                                     <div class="col-sm-5">
-                                        <input class="form-control" id="email" name="email" type="email" placeholder="<fmt:message key="signup.email.example" bundle="${lang}"/>">
+                                        <input class="form-control" id="email" name="email" type="email" placeholder="<fmt:message key="signup.email.example" bundle="${lang}"/>*">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-2"></div>
                                     <div id="emailError" class="error-labels col-sm-10"></div>
-                                    <%--<div class="col-sm-4"></div>--%>
                                 </div>
 
                                 <div class="form-group" id="usernameblock">
@@ -182,13 +175,12 @@
                                     </label>
 
                                     <div class="col-sm-5">
-                                        <input class="username form-control" id="uname" name="uname" type="text" placeholder="<fmt:message key="signup.username" bundle="${lang}"/>">
+                                        <input class="username form-control" id="uname" name="uname" type="text" placeholder="<fmt:message key="signup.username" bundle="${lang}"/>*">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-2"></div>
                                     <div id="unameError" class="error-labels col-sm-10"></div>
-                                    <%--<div class="col-sm-4"></div>--%>
                                 </div>
 
                                 <div class="form-group">
@@ -197,28 +189,26 @@
                                     </label>
 
                                     <div class="col-sm-5">
-                                        <input class="password form-control" id="password" name="password" type="password" placeholder="<fmt:message key="signup.password" bundle="${lang}"/>">
+                                        <input class="password form-control" id="password" name="password" type="password" placeholder="<fmt:message key="signup.password" bundle="${lang}"/>*">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-2"></div>
                                     <div id="passwordError" class="error-labels col-sm-10"></div>
-                                    <%--<div class="col-sm-4"></div>--%>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="rePassword" class="col-sm-2 control-label">
-                                        Confirm Password
+                                        <fmt:message key="sign.confirm.password" bundle="${lang}"/>
                                     </label>
 
                                     <div class="col-sm-5">
-                                        <input class="form-control" name="rePassword" id="rePassword" type="password" placeholder="<fmt:message key="signup.password.re" bundle="${lang}"/>">
+                                        <input class="form-control" name="rePassword" id="rePassword" type="password" placeholder="<fmt:message key="signup.password.re" bundle="${lang}"/>*">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-2"></div>
                                     <div id="rePasswordError" class="error-labels col-sm-10"></div>
-                                    <%--<div class="col-sm-4"></div>--%>
                                 </div>
 
                                 <div class="form-group">

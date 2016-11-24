@@ -127,7 +127,6 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
     }
 
 
-
     /*retrieve the details of a given category */
     @Override
     public Category selectCategoryDetail(int categoryId) {
@@ -137,7 +136,7 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
     /*retrieve the details of a chosen sub-category */
     @Override
     public Category selectSubCategoryDetail(int subcategoryId) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM sub_category WHERE id = ?",subcategoryId);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM sub_category WHERE id = ?", subcategoryId);
 
 
         Category category = new Category();
@@ -146,7 +145,7 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
         category.setSubcatDescription(mp.get(0).get("description").toString());
         category.setCreator(mp.get(0).get("creator").toString());
 
-        log.info("msg {}",category);
+        log.info("msg {}", category);
         return category;
     }
 
@@ -177,14 +176,14 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
 
     @Override
     public int updateCategory(Category cat) {
-        int id= cat.getSubCategoryId();
-        String name=cat.getSubCategoryName();
-        String desc=cat.getSubcatDescription();
+        int id = cat.getSubCategoryId();
+        String name = cat.getSubCategoryName();
+        String desc = cat.getSubcatDescription();
 
         String sql = "UPDATE sub_category SET name=?, description = ? WHERE id = ? ";
 
-        int count = jdbcTemplate.update(sql, new Object[]{ name, desc,id});
-        log.info("{}",count);
+        int count = jdbcTemplate.update(sql, new Object[]{name, desc, id});
+        log.info("{}", count);
         return count;
     }
 
@@ -217,6 +216,21 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
         }
         log.info("{}", subCatName);
         return subCatName;
+    }
+
+    @Override
+    public boolean checkAvailabilityOnUpdate(int id, String categoryName) {
+        boolean result;
+
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM sub_category WHERE  name=? AND id !=?", categoryName, id);
+        log.info("{}", mp);
+
+        if (mp.size() != 0) {
+            result = true;
+        } else
+            result = false;
+        log.info("{}", result);
+        return result;
     }
 
 
