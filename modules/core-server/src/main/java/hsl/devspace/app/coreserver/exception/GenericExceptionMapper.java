@@ -20,7 +20,7 @@ public class GenericExceptionMapper implements ExceptionMapper<Exception> {
         WebApplicationExceptionHandler webApplicationExceptionHandler=new WebApplicationExceptionHandler();
         ErrorMessage errorMessage = new ErrorMessage();
         errorMessage.setStatus("error");
-        errorMessage.setErrorCode(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+        errorMessage.setErrorCode(String.valueOf(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode()));
         errorMessage.setErrorMessage(exception.toString());
         errorMessage.setDescription("internal server error occurred.");
         Response response500 = Response
