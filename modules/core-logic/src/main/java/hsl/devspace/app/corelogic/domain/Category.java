@@ -111,12 +111,13 @@ public class Category {
         this.status=status;
     }
     //category(for admin category update )
-    public Category(int category_id,String categoryName, String description,String status) {
+   /* public Category(int category_id,String categoryName, String description,String status, String image) {
         this.category_id = category_id;
         this.categoryName=categoryName;
         this.catDescription=description;
         this.status=status;
-    }
+        this.image=image;
+    }*/
     //sub category
     public Category(String subCategoryName,String description,String creator,String categoryName){
         this.subCategoryName=subCategoryName;

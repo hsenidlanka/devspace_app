@@ -291,8 +291,8 @@ public  class UserRepositoryImpl implements UserRepository {
 
     /*retrieve details of customers by a given attribute*/
     @Override
-    public List<User> filterByCity(String city) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE address_line3 = ? AND status='active'",city);
+    public List<User> filterByCity(String city, String status) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE address_line3 = ? AND status= ? ",city,status);
         List<User> customerDetails=new ArrayList<User>();
 
         for (int i=0;i<mp.size();i++){
@@ -303,7 +303,7 @@ public  class UserRepositoryImpl implements UserRepository {
             customer.setLastName(mp.get(i).get("last_name").toString());
             customer.setUsername(mp.get(i).get("username").toString());
             customer.setPassword(mp.get(i).get("password").toString());
-            customer.setEmail(mp.get(i).get("email").toString());
+            customer.setEmail(mp.get(i).get("email").toString()); 
             customer.setAddressL1(mp.get(i).get("address_line1").toString());
             customer.setAddressL2(mp.get(i).get("address_line2").toString());
             if (mp.get(i).get("address_line3")!=null) {
@@ -325,8 +325,8 @@ public  class UserRepositoryImpl implements UserRepository {
     /*retrieve total no.of customers*/
     @Override
     public int countUsers() {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT(*) FROM customer ");
-        int count = Integer.parseInt(mp.get(0).get("total").toString());
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer ");
+        int count = mp.size();
         log.info("{}",count);
         return count;
     }
@@ -534,9 +534,9 @@ public  class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<User> selectAllByNameTypeAhead(String nameKey) {
+    public List<User> selectAllByNameTypeAhead(String nameKey, String status) {
         String key = "%" + nameKey + "%";
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE username LIKE ?", key);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE username LIKE ? AND status = ?", key,status);
         List<User> customerDetails = new ArrayList<User>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -567,4 +567,3 @@ public  class UserRepositoryImpl implements UserRepository {
 
 
 }
-

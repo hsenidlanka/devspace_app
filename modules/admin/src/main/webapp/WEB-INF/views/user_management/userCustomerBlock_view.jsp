@@ -16,13 +16,13 @@
     <script>
         //datepicker
         $(document).ready(function() {
-            $("#fromDate").datepicker({
+            $("#fromDateb").datepicker({
                 "changeMonth":true,
                 "changeYear":true
 
             });
 
-            $("#toDate").datepicker({
+            $("#toDateb").datepicker({
                 "changeMonth":true,
                 "changeYear":true
             });
@@ -42,81 +42,33 @@
 
         <div class="form-group">
             <div class="row">
-                <div class="col-xs-8" style="width: 64%  ">
-                    <div class="col-xs-2"  style="text-align: right">
+                <div class="col-xs-8" style="width: 45%  ">
+                    <div class="col-xs-3"  style="text-align: right">
                         <label class=" control-label" >
                             <fmt:message key="user.userview.customer.label.filter" bundle="${bundle1}"/>
                         </label>
                     </div>
                     <!--checkboxes to select-->
-                    <div class="col-xs-10" id="checkboxDiv">
+                    <div class="col-xs-9" id="checkboxDiv">
                         <div class="col-xs-5">
-                            <label class="checkbox-inline">
-                                <input type="checkbox" value="1" id="blockcCheck" onchange="showMeBlocked()">
-                                <fmt:message key="user.blockuserview.customer.filter.blockDate" bundle="${bundle1}"/>
-                            </label>
-                        </div>
-                        <div class="col-xs-3">
                             <label class="checkbox-inline">
                                 <input  type="checkbox" value="2" id="bcCheck" onchange="showMeBlocked()" checked>
                                 <fmt:message key="user.userview.customer.filter.name" bundle="${bundle1}"/>
                             </label>
                         </div>
-                        <div class="col-xs-4">
+                        <div class="col-xs-5">
                             <label class="checkbox-inline">
                                 <input type="checkbox" value="3" id="citycCheck" onchange="showMeBlocked()">
                                 <fmt:message key="user.userview.customer.filter.livingArea" bundle="${bundle1}"/>
                             </label>
                         </div>
+
                     </div>
                     <!--<div class="col-xs-2"></div>-->
                 </div>
 
-                <div class="col-xs-4" style="width: 36%">
-                    <div class="col-xs-8">
-                        <input class="form-control"  placeholder=" Name" type="text" id="bcnameSearch"  >
-                    </div>
-                    <div class="col-xs-1">
-                        <button type="button" class="btn btn-success" id="filterButtonCustomerB">
-                            <span class="glyphicon glyphicon-search"></span>
-                            <fmt:message key="user.userview.customer.search" bundle="${bundle1}"/>
-                        </button>
-                    </div>
-                    <div class="col-xs-4"></div>
-                </div>
-            </div>
-        </div>
-
-        <!--Filtering elements to be displayed as checkbox is checked     -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-xs-8" id="blockcPeriod"style="display: none; width: 64%">
-                    <div class="col-xs-2"  style="text-align: right">
-                        <label class=" control-label">
-                            <fmt:message key="user.userview.customer.filter.regDate.from" bundle="${bundle1}"/>
-                        </label>
-                    </div>
-                    <div class="col-xs-10">
-                        <div class="col-xs-4">
-                            <input class="form-control" id="fromDateb" type="text"
-                                   placeholder="Click on me" style="width: 130px">
-                        </div>
-                        <div class="col-xs-1">
-                            <label class=" control-label">
-                                <fmt:message key="user.userview.customer.filter.regDate.to" bundle="${bundle1}"/>
-                            </label>
-                        </div>
-                        <div class="col-xs-4">
-                            <input class="form-control" id="toDateb" placeholder="Click on me"
-                                   type="text" style="width: 130px">
-                        </div>
-                    </div>
-                </div>
-
-                <!--next half-->
-                <!--name form-group-->
-                <div class="col-xs-4" style="width: 36%">
-                    <div class="col-xs-8">
+                <div class="col-xs-4" style="width: 50%">
+                    <div class="col-xs-4">
                         <select class="form-control" id="blockcCity"  style="display: none;">
                             <option><fmt:message key="user.customer.select" bundle="${bundle1}" /></option>
                             <option><fmt:message key="user.customer.city1" bundle="${bundle1}" /></option>
@@ -125,10 +77,21 @@
                             <option><fmt:message key="user.customer.city4" bundle="${bundle1}" /></option>
                         </select>
                     </div>
-                    <div class="col-xs-4"></div>
+                    <div class="col-xs-6">
+                        <input class="form-control"  placeholder=" Name" type="text" id="bcnameSearch"  >
+                    </div>
+                    <div class="col-xs-1">
+                        <button type="button" class="btn btn-success" id="filterButtonCustomerB">
+                            <span class="glyphicon glyphicon-search"></span>
+                            <fmt:message key="user.userview.customer.search" bundle="${bundle1}"/>
+                        </button>
+                    </div>
+                    <div class="col-xs-1"></div>
+
                 </div>
             </div>
         </div>
+
     </fieldset>
 </div>
 

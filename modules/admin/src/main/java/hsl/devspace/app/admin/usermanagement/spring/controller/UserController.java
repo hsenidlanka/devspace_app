@@ -214,7 +214,6 @@ public class UserController {
             outb.add(map);
             LOG.info("out {}",outb);
         }
-
         return outb;
     }
 

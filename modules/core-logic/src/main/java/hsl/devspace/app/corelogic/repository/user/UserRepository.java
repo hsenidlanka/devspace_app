@@ -36,7 +36,7 @@ public interface UserRepository {
     public int updateGroupStaff(String des,String username);
     List<User> retrieveCustomersByDate(java.sql.Date date);
     List<User> retrieveByDateRange(java.sql.Date date1,java.sql.Date date2);
-    List<User>filterByCity(String city);
+    List<User>filterByCity(String city,String status);
     int countUsers();
     boolean checkUsernameUnique(User user);
     List<User> selectActiveUsers();
@@ -52,7 +52,7 @@ public interface UserRepository {
     List<User> filterByBranch(String branch,String status);
     List<User>filterBlockedUsersByCity(String city);
 
-    List<User> selectAllByNameTypeAhead(String nameKey);
+    List<User> selectAllByNameTypeAhead(String nameKey, String status);
 
 
 

@@ -261,10 +261,10 @@ public class StaffRepositoryImpl implements UserRepository {
         return staffDetails;
     }
 
-    public List<User> selectAllByNameTypeAhead(String nameKey) {
+    public List<User> selectAllByNameTypeAhead(String nameKey, String status) {
         String key = "%" + nameKey + "%";
 
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE username LIKE ?", key);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE username LIKE ? AND status= ?", key,status);
         List<User> staffDetails = new ArrayList<User>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -388,8 +388,13 @@ public class StaffRepositoryImpl implements UserRepository {
         return staffDetails;
     }
 
-    /*retrieve details of staff members filtered by a given attribute*/
     @Override
+    public List<User> filterByCity(String city, String status) {
+        return null;
+    }
+
+    /*retrieve details of staff members filtered by a given attribute*/
+/*    @Override
     public List<User> filterByCity(String city) {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE address_line3 = ? AND status='active'",city);
         List<User> staffDetails = new ArrayList<User>();
@@ -421,13 +426,13 @@ public class StaffRepositoryImpl implements UserRepository {
         log.info("{}", staffDetails);
         return staffDetails;
 
-    }
+    }*/
 
     /*retrieve the total no.of staff members*/
     @Override
     public int countUsers() {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT(*) FROM staff ");
-        int count = Integer.parseInt(mp.get(0).get("total").toString());
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff ");
+        int count = mp.size();
         log.info("{}", count);
         return count;
     }
@@ -822,7 +827,11 @@ public class StaffRepositoryImpl implements UserRepository {
     }
 
 
+
 }
+
+
+
 
 
 

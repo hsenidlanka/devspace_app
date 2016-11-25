@@ -63,7 +63,7 @@
 
     <modules>
         <module>../core-logic</module>
-        <module>../core-server</module>
+        <!--<module>../core-server</module>-->
         <module>../admin</module>
         <module>../self-care/web-selfcare</module>
         <!--<module>../report-viewer</module>-->

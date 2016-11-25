@@ -11,18 +11,17 @@
 <head>
     <!--include common CSS, fonts and js-->
     <jsp:include page="../adminTop.jsp"/>
-    <spring:url value="/themes/hsenid/css/form-elements.css" var="css2"/>
-    <link href="${css2}" rel="stylesheet">
 
     <!--my css files-->
     <spring:url value="/themes/hsenid/css/userMgt.css" var="css1"/>
-    <spring:url value="/themes/hsenid/css/jquery_ui.css" var="css2"/>
+    <spring:url value="/themes/hsenid/css/form-elements.css" var="css2"/>
+    <spring:url value="/themes/hsenid/css/jquery_ui.css" var="css3"/>
+    <link href="${css1}" rel="stylesheet">
+    <link href="${css2}" rel="stylesheet">
+    <link href="${css3}" rel="stylesheet">
 
     <spring:url value="/themes/hsenid/js/userMgt.js" var="js1"/>
     <spring:url value="/themes/hsenid/js/jquery_ui.min.js" var="js4"/>
-
-    <link href="${css2}" rel="stylesheet">
-    <link href="${css1}" rel="stylesheet">
     <script src="${js1}"></script>
     <script src="${js4}"></script>
 

@@ -67,7 +67,6 @@ function showMeBlocked(){
     var branchb= document.getElementById("branchb");
 
     //blocked customers
-    var blockcPeriod= document.getElementById("blockcPeriod");
     var bcname= document.getElementById("bcnameSearch");
     var blockcCity= document.getElementById("blockcCity");
 
@@ -92,11 +91,7 @@ function showMeBlocked(){
 
 
     //blocked customer filters
-    if (  $("#blockcCheck").is(":checked")){
-        blockcPeriod.style.display = "block";
-    } else{
-        blockcPeriod.style.display = "none";
-    }
+
 
     if (  $("#bcCheck").is(":checked")){
         bcname.style.display = "block";
@@ -240,7 +235,6 @@ $(document).ready(function(){
 });
 
 
-
 //ajax functions to filter the search results of Staff Users if an option is selected
 $(document).ready(function(){
     $("#filterButtonStaff").click(function(){
@@ -291,6 +285,7 @@ $(document).ready(function(){
         var to=$('#toDateb').val();  //means to blocked date
         var name=$('#bcnameSearch').val();
         var city=$('#blockcCity').val();
+        alert(name);
 
         if((from == "") && (to == "") && (name == "") && (city == "--Select--")  ){
             $.ajax({
@@ -306,11 +301,11 @@ $(document).ready(function(){
             });
 
         }
-        if( (city != "--Select--")  ){
+        if( (city != "--Select--") || (name != "")  ){
             $.ajax({
                 //type: "POST",
                 url:"https://localhost:8443/admin/userFilters/bannedcustomerTable/city",
-                data: {"city":city},
+                data: {"city":city, "name":name},
                 success: function (msg) {
                     //alert("city ajax" + city);
                     $('#tableBannedcustomer').bootstrapTable('load', msg);
