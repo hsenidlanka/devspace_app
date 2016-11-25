@@ -55,7 +55,9 @@ $(document).ready(function () {
         if (isFirstNameValid == false || isLastNameValid == false || isContactNoValid == false || isEmailValid == false || isAddress01Valid == false || isAddress02Valid == false) {
             $("#validation-error-popup").modal('show');
         } else {
-            window.location = '../pages/delivery-summary.html';
+            var del = $('input[name=radiodelwhen]:checked').val();
+            alert(del);
+            //window.location = '../pages/delivery-summary.html';
         }
     });
 });
@@ -104,14 +106,15 @@ function validateLastName() {
 
 // Validate the tel no
 function validateContactNo() {
-    if ($("#txt-contactno").val().length != 11) {
+    if ($("#txt-contactno").val().length != 10) {
         $("#contactno_error").show();
         $("#txt-contactno").css("background-color", background_color);
         $("#contactno_error").text("Telephone no should contain 11 characters without the leading zero.");
         return false;
     } else {
         var inputVal = $("#txt-contactno").val();
-        var telReg = /^94[^0]\d+$/;
+        //var telReg = /^94[^0]\d+$/;
+        var telReg = /^0\d+$/;
         if (!telReg.test(inputVal)) {
             $("#contactno_error").show();
             $("#txt-contactno").css("background-color", background_color);

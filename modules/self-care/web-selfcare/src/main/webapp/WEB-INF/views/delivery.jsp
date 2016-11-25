@@ -8,6 +8,8 @@
     <script src="<c:url value="/resources/js/bootstrap-datepicker.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/delivery-operations.js"/>"></script>
     <link href="<c:url value="/resources/css/progress-wizard.min.css"/>" rel="stylesheet">
+    <link href="<c:url value="/resources/css/bootstrap-timepicker.css"/>" rel="stylesheet">
+    <script src="<c:url value="/resources/js/bootstrap-timepicker.js"/>"></script>
     <script src="<c:url value="/resources/js/datepicker.js"/>"></script>
     <script src="<c:url value="/resources/js/validate-delivery.js"/>"></script>
 </head>
@@ -53,7 +55,7 @@
                             <input type="text" id="date" name="date">
                             &nbsp;&nbsp;<fmt:message key="delivery.time" bundle="${lang}"/>
                             <div class="input-group" style="display: inline-block; vertical-align: middle;">
-                                <input id="timepicker1" type="text">
+                                <input id="timepicker1" class="bootstrap-timepicker1" type="text">
                             </div>
                         </div>
 
@@ -70,7 +72,7 @@
                                         <label id="fname_error" class="error-labels"></label>
                                         <input class="form-control" id="txt-fname"
                                                placeholder="<fmt:message key="delivery.enter.first" bundle="${lang}"/>"
-                                               type="email">
+                                               type="text">
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label" for="txt-lname"><fmt:message key="signup.last.name"
@@ -149,7 +151,7 @@
                             </label>
                             &nbsp;&nbsp;<fmt:message key="delivery.time" bundle="${lang}"/>
                             <div class="input-group" style="display: inline-block; vertical-align: middle;">
-                                <input id="timepicker2" type="text">
+                                <input id="timepicker2" class="bootstrap-timepicker2" type="text">
                             </div>
                         </div>
 

@@ -3,6 +3,16 @@ $(document).ready(function () {
     $("#date").prop("disabled", true);
     $("#timepicker1").prop("disabled", true);
     $("#timepicker2").prop("disabled", true);
+    $('.bootstrap-timepicker1').timepicker({
+        minuteStep: 1,
+        template: 'modal',
+        appendWidgetTo: 'body',
+        showSeconds: true,
+        showMeridian: false,
+        defaultTime: false
+    });
+    $('.bootstrap-timepicker2').timepicker();
+    fillDeliveryFormData();
 
     // Dynamically change the content according to the delivery options
     $("input[type=radio][name=optradio]").change(function () {
@@ -38,3 +48,24 @@ $(document).ready(function () {
         }
     });
 });
+
+function fillDeliveryFormData() {
+    $.ajax({
+        type: 'get',
+        dataType: "json",
+        url: "delivery/get-customer-data",
+        success: function (result) {
+            if (result.length > 0) {
+                $("#txt-fname").val(result[0].firstName);
+                $("#txt-lname").val(result[0].lastName);
+                $("#txt-deliadd01").val(result[0].addressLine01);
+                $("#txt-deliadd02").val(result[0].addressLine02);
+                if (typeof result[0].addressLine03 !== "undefined") {
+                    $("#txt-deliadd03").val(result[0].addressLine03);
+                }
+                $("#txt-email").val(result[0].email);
+                $("#txt-contactno").val(result[0].mobile);
+            }
+        }
+    });
+}
