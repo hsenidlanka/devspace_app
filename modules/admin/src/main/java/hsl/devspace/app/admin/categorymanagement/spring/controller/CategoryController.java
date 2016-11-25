@@ -50,7 +50,7 @@ public class CategoryController {
    @Value("${admin.categoryimage.server.location}")
    private String serverPath;
 
-    @Value("{admin.categoryimage.localmachine.location}")
+    @Value("${admin.categoryimage.localmachine.location}")
     private String localPathtoUpload;
 
     @Autowired
@@ -59,7 +59,7 @@ public class CategoryController {
     @Autowired
     ServletContext context;
 
-
+    private int subcatAdd=0;
 
 ///////////////////////////////////////////////////// CATEGORY INSERT HANDLER METHODS  ///////////////////////////////////////
 
@@ -100,13 +100,15 @@ public class CategoryController {
 
         //set the creator in category object
         categoryObject.setCreator("admin");
-        LOG.error("Add Category category object {}", categoryObject);
+        LOG.info("Add Category category object {}", categoryObject);
 
         //for the image file uploaded
         MultipartFile imgFile=categoryObject.getImageUrl();
         String imgFileName=imgFile.getOriginalFilename();
-        LOG.error("image file name  =" + imgFile.getOriginalFilename());
+        LOG.info("image file name  =" + imgFile.getOriginalFilename());
 
+        //set the image name equal to that of category name
+        categoryObject.setImage(categoryObject.getCategoryName()+".jpg");
         int catAdd=categoryRepository.add(categoryObject);
         if(catAdd ==1) {
             for (int j=0;j< subcategory_name.length;j++) {
@@ -120,14 +122,16 @@ public class CategoryController {
                 categoryObject.setSubcatDescription(subcatDescription);
                 categoryObject.setCreator("admin");
 
-                int subcatAdd=subcategoryRepository.add(categoryObject);
+                subcatAdd=subcategoryRepository.add(categoryObject);
                 LOG.info("subcat add return is: {}",subcatAdd);
                 if (subcatAdd ==0) {
-                    JOptionPane.showMessageDialog(null, insertError);
                     break;
                 }
             }
-            JOptionPane.showMessageDialog(null, insertSuccess);
+            if (subcatAdd ==0)
+                JOptionPane.showMessageDialog(null, insertError);
+            else
+                JOptionPane.showMessageDialog(null, insertSuccess);
 
             //to upload the image
                 if (!imgFile.isEmpty()) {
@@ -278,6 +282,7 @@ public @ResponseBody  Map<String, Object> editCategory(@RequestParam("id") int i
         map.put("creator",category.getCreator());
         map.put("image",category.getImage());
         map.put("status",category.getStatus());
+    LOG.error("The Category edit map{}", map);
 
     return map;
 }
@@ -296,6 +301,7 @@ public ModelAndView saveEditCategory(@ModelAttribute("editCategory") Category ed
         LOG.info("EDIT CATEGORY id {}", n3);
         LOG.info("EDIT CATEGORY status {}", n4);
 
+        editCategory.setImage(editCategory.getCategoryName()+".jpg");
         //function to update the category detail except image
         int i=categoryRepository.updateCategory(editCategory);
         LOG.info("EDIT CUSTOMER i {}", i);

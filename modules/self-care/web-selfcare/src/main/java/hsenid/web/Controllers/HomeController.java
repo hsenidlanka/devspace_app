@@ -49,8 +49,6 @@ public class HomeController {
         return "/home/locations";
     }
 
-
-
     @RequestMapping("/logout")
     public String logout(HttpSession session){
 

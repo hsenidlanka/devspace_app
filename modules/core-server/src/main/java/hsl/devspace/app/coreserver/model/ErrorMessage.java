@@ -3,8 +3,6 @@ package hsl.devspace.app.coreserver.model;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonPropertyOrder;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
 /**
  * Created by Kasun Dinesh on 7/5/16.
  * This is the model/template of the error message to pass as a response.
@@ -12,14 +10,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 @JsonPropertyOrder({"status", "code", "errorMessage", "description"})
 public class ErrorMessage {
     private String status; // State of the request
-    private int errorCode; // HTTP status code
+    private String errorCode; // HTTP status code
     private String errorMessage; // Error message returned
     private String description; // Error description
 
     public ErrorMessage() {
     }
 
-    public ErrorMessage(String status, int errorCode, String errorMessage, String description) {
+    public ErrorMessage(String status, String errorCode, String errorMessage, String description) {
         this.status = status;
         this.errorCode = errorCode;
         this.errorMessage = errorMessage;
@@ -36,11 +34,11 @@ public class ErrorMessage {
     }
 
     @JsonProperty("code")
-    public int getErrorCode() {
+    public String getErrorCode() {
         return errorCode;
     }
 
-    public void setErrorCode(int errorCode) {
+    public void setErrorCode(String errorCode) {
         this.errorCode = errorCode;
     }
 

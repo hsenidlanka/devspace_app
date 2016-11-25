@@ -50,7 +50,6 @@ public class FilterController {
         LOG.error("toSql {}",sqltoDate);
         LOG.error("name {}",name);
 
-
         List<Map<String, Object>> outDate = new ArrayList<Map<String, Object>>();
 
         if((!from.equals("")) && (!to.equals(""))){
@@ -181,80 +180,170 @@ public class FilterController {
                                             String department, @RequestParam("branch") String branch,
                                             @RequestParam("name") String name){
 
-
        List<Map<String, Object>> outStaff = new ArrayList<Map<String, Object>>();
 
         //query for designation select filtering
-        if(!(designation.equals("--Select--"))) {
-            List<Map<String, Object>> outStaff1 = new ArrayList<Map<String, Object>>();
-            List<User> staffList1 = staffRepository.filterByDesignation(designation,"active");
+        if((!(designation.equals("--Select--"))) && ((branch.equals("--Select--"))) && ((department.equals("--Select--")))) {
+            List<Map<String, Object>> designationList=designationSelect(designation);
+            return designationList;
 
-            for (User staffUser : staffList1) {
-                Map<String, Object> map = new HashMap<String, Object>();
-                map.put("id", staffUser.getId());
-                map.put("username", staffUser.getUsername());
-                map.put("first_name", staffUser.getFirstName());
-                map.put("last_name", staffUser.getLastName());
-                map.put("mobile", staffUser.getMobile());
-                map.put("designation", staffUser.getDesignation());
-                map.put("department", staffUser.getDepartment());
-                map.put("branch", staffUser.getBranch());
-
-                LOG.info("newUser {}", staffUser);
-                outStaff1.add(map);
-                LOG.info("out {}", outStaff1);
-            }
-            LOG.error("Filter by designation {}", designation);
-            return outStaff1;
         }
         //query for department select filtering
-        if(!(department.equals("--Select--"))) {
-            List<Map<String, Object>> outStaff2 = new ArrayList<Map<String, Object>>();
-            List<User> staffList2 = staffRepository.filterByDepartment(department,"active");
+        if((!(department.equals("--Select--"))) && ((branch.equals("--Select--"))) && ((designation.equals("--Select--")))){
+            List<Map<String, Object>> depList=departmentSelect(department);
+            return depList;
 
-            for (User staffUser : staffList2) {
-                Map<String, Object> map = new HashMap<String, Object>();
-                map.put("id", staffUser.getId());
-                map.put("username", staffUser.getUsername());
-                map.put("first_name", staffUser.getFirstName());
-                map.put("last_name", staffUser.getLastName());
-                map.put("mobile", staffUser.getMobile());
-                map.put("designation", staffUser.getDesignation());
-                map.put("department", staffUser.getDepartment());
-                map.put("branch", staffUser.getBranch());
-
-                LOG.info("newUser {}", staffUser);
-                outStaff2.add(map);
-                LOG.info("out {}", outStaff2);
-            }
-            LOG.error("Filter by department {}", department);
-            return outStaff2;
         }
 
         //query for branch select filtering
-        if(!(branch.equals("--Select--"))) {
-            List<Map<String, Object>> outStaff3 = new ArrayList<Map<String, Object>>();
-            List<User> staffList3 = staffRepository.filterByBranch(branch,"active");
+        if((!(branch.equals("--Select--"))) && ((designation.equals("--Select--"))) && ((department.equals("--Select--")))){
+            List<Map<String, Object>> branchList=branchSelect(branch);
+            return branchList;
+        }
 
-            for (User staffUser : staffList3) {
-                Map<String, Object> map = new HashMap<String, Object>();
-                map.put("id", staffUser.getId());
-                map.put("username", staffUser.getUsername());
-                map.put("first_name", staffUser.getFirstName());
-                map.put("last_name", staffUser.getLastName());
-                map.put("mobile", staffUser.getMobile());
-                map.put("designation", staffUser.getDesignation());
-                map.put("department", staffUser.getDepartment());
-                map.put("branch", staffUser.getBranch());
+        //query for branch and department select filtering
+        if((!(branch.equals("--Select--"))) && (!(department.equals("--Select--"))) &&((designation.equals("--Select--")))) {
 
-                LOG.info("newUser {}", staffUser);
-                outStaff3.add(map);
-                LOG.info("out {}", outStaff3);
-            }
-            LOG.error("Filter by branch {}", branch);
-            return outStaff3;
+            List<Map<String, Object>> branchList=branchSelect(branch);
+            List<Map<String, Object>> depList=departmentSelect(department);
+
+            //to get the intersection of the two lists outCityDate1 and outCityDate2
+            ArrayList<Map<String, Object>> common= new ArrayList<Map<String, Object>>(branchList);
+            common.retainAll(depList);
+            return common;
+        }
+        //query for designation and department select filtering
+        if((!(designation.equals("--Select--"))) && (!(department.equals("--Select--"))) && ((branch.equals("--Select--"))) ) {
+
+            List<Map<String, Object>> designationList=designationSelect(designation);
+            List<Map<String, Object>> depList=departmentSelect(department);
+
+            //to get the intersection of the two lists outCityDate1 and outCityDate2
+            ArrayList<Map<String, Object>> common= new ArrayList<Map<String, Object>>(designationList);
+            common.retainAll(depList);
+            return common;
+        }
+        //query for designation and branch select filtering
+        if((!(designation.equals("--Select--"))) && ((department.equals("--Select--"))) && (!(branch.equals("--Select--"))) ) {
+
+            List<Map<String, Object>> designationList=designationSelect(designation);
+            List<Map<String, Object>> branchList=branchSelect(branch);
+
+            //to get the intersection of the two lists outCityDate1 and outCityDate2
+            ArrayList<Map<String, Object>> common= new ArrayList<Map<String, Object>>(designationList);
+            common.retainAll(branchList);
+            return common;
+        }
+
+        //query for designation and branch select filtering
+        if((!(designation.equals("--Select--"))) && (!(department.equals("--Select--"))) && (!(branch.equals("--Select--"))) ) {
+
+            List<Map<String, Object>> designationDepList=designationDepSelect(department,designation);
+            List<Map<String, Object>> branchList=branchSelect(branch);
+
+            //to get the intersection of the two lists outCityDate1 and outCityDate2
+            ArrayList<Map<String, Object>> common= new ArrayList<Map<String, Object>>(designationDepList);
+            common.retainAll(branchList);
+
+            return common;
         }
         return outStaff;
+    }
+
+    //method for filtering database values based on the designation
+    public List<Map<String, Object>> designationSelect(String designation ){
+        List<Map<String, Object>> outStaff1 = new ArrayList<Map<String, Object>>();
+        List<User> staffList1 = staffRepository.filterByDesignation(designation,"active");
+
+        for (User staffUser : staffList1) {
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("id", staffUser.getId());
+            map.put("username", staffUser.getUsername());
+            map.put("first_name", staffUser.getFirstName());
+            map.put("last_name", staffUser.getLastName());
+            map.put("mobile", staffUser.getMobile());
+            map.put("designation", staffUser.getDesignation());
+            map.put("department", staffUser.getDepartment());
+            map.put("branch", staffUser.getBranch());
+
+            LOG.info("newUser {}", staffUser);
+            outStaff1.add(map);
+            LOG.info("out {}", outStaff1);
+        }
+        LOG.error("Filter by designation {}", designation);
+        return outStaff1;
+    }
+
+    //method for filtering database values based on the designation and department
+    public List<Map<String, Object>> designationDepSelect(String department,String designation ){
+        List<Map<String, Object>> outStaff1 = new ArrayList<Map<String, Object>>();
+        List<User> staffList1 = staffRepository.filterByDepartmentDesig(department, designation, "active");
+
+        for (User staffUser : staffList1) {
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("id", staffUser.getId());
+            map.put("username", staffUser.getUsername());
+            map.put("first_name", staffUser.getFirstName());
+            map.put("last_name", staffUser.getLastName());
+            map.put("mobile", staffUser.getMobile());
+            map.put("designation", staffUser.getDesignation());
+            map.put("department", staffUser.getDepartment());
+            map.put("branch", staffUser.getBranch());
+
+            LOG.info("newUser {}", staffUser);
+            outStaff1.add(map);
+            LOG.info("out {}", outStaff1);
+        }
+        LOG.info("Filter by designation {}", designation);
+        return outStaff1;
+    }
+
+    //
+    public List<Map<String, Object>> branchSelect(String branch){
+        List<Map<String, Object>> outStaff3 = new ArrayList<Map<String, Object>>();
+        List<User> staffList3 = staffRepository.filterByBranch(branch,"active");
+
+        for (User staffUser : staffList3) {
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("id", staffUser.getId());
+            map.put("username", staffUser.getUsername());
+            map.put("first_name", staffUser.getFirstName());
+            map.put("last_name", staffUser.getLastName());
+            map.put("mobile", staffUser.getMobile());
+            map.put("designation", staffUser.getDesignation());
+            map.put("department", staffUser.getDepartment());
+            map.put("branch", staffUser.getBranch());
+
+            LOG.info("newUser {}", staffUser);
+            outStaff3.add(map);
+            LOG.info("out {}", outStaff3);
+        }
+        LOG.error("Filter by branch {}", branch);
+        return outStaff3;
+    }
+
+    public List<Map<String, Object>> departmentSelect(String department){
+        List<Map<String, Object>> outStaff2 = new ArrayList<Map<String, Object>>();
+        List<User> staffList2 = staffRepository.filterByDepartment(department,"active");
+
+        for (User staffUser : staffList2) {
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("id", staffUser.getId());
+            map.put("username", staffUser.getUsername());
+            map.put("first_name", staffUser.getFirstName());
+            map.put("last_name", staffUser.getLastName());
+            map.put("mobile", staffUser.getMobile());
+            map.put("designation", staffUser.getDesignation());
+            map.put("department", staffUser.getDepartment());
+            map.put("branch", staffUser.getBranch());
+
+            LOG.info("newUser {}", staffUser);
+            outStaff2.add(map);
+            LOG.info("out {}", outStaff2);
+        }
+        LOG.error("Filter by department {}", department);
+        return outStaff2;
+
     }
 
 //////////////////////////////////////////////////////  INACTIVE USER Filter options handling ////////////////////////////

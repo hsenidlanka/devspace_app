@@ -495,6 +495,9 @@ public  class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    public List<User> filterByDepartmentDesig(String department,String designation,String status){return  null;}
+
+    @Override
     public List<User> filterByBranch(String branch,String status) {
         return null;
     }

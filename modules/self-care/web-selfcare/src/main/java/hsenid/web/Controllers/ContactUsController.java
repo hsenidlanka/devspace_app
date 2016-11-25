@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
@@ -59,13 +58,11 @@ public class ContactUsController {
         try{
             ReplyFromServer message = restTemplate.postForObject(contactUsUrl, httpEntity, ReplyFromServer.class);
             redirectAttributes.addFlashAttribute("validForm", "notempty");
-        }catch (Exception e ){
+        }
+        catch (Exception e){
             redirectAttributes.addFlashAttribute("invalidForm", "Internal Server error!!!<br><br>");
             logger.error(e.getMessage());
-
         }
-//        redirectAttributes.addFlashAttribute("validForm", "True");
         return "redirect:/contact-us";
-//        return "/home/self-care-home";
     }
 }

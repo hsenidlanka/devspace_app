@@ -48,6 +48,7 @@ public interface UserRepository {
     List<User> selectbyStartingDate(Date date);
     List<User> filterByDepartment(String department,String status);
     List<User> filterByDesignation(String designation,String status);
+    public List<User> filterByDepartmentDesig(String department,String designation,String status);
     List<User> filterByBranch(String branch,String status);
     List<User>filterBlockedUsersByCity(String city);
 

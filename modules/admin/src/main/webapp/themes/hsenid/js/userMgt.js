@@ -58,13 +58,9 @@ function showMe(){
     } else{
         branch.style.display = "none";
     }
-
-
 }
 
-
 function showMeBlocked(){
-
     //blocked staff users
     var designationb= document.getElementById("designationb");
     var departmentb= document.getElementById("departmentb");
@@ -74,7 +70,6 @@ function showMeBlocked(){
     var blockcPeriod= document.getElementById("blockcPeriod");
     var bcname= document.getElementById("bcnameSearch");
     var blockcCity= document.getElementById("blockcCity");
-
 
     //blocked staff filter
     if (  $("#blockCheck").is(":checked")){
@@ -212,7 +207,7 @@ $(document).ready(function(){
                 }
             });
         }
-        if( (from != "") || (to != "")){
+        if( (from != "") && (to != "")){
             $.ajax({
                 //type: "POST",
                 url: "https://localhost:8443/admin/userFilters/customerTable/date",

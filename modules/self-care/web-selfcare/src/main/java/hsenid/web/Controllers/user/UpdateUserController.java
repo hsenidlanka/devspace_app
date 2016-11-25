@@ -74,7 +74,6 @@ public class UpdateUserController {
             restTemplate.put(customerUpdateUrl, jsonObject);
             redirectAttributes.addFlashAttribute("updatedMsg", "Profile updation Successful!!!");
 
-
         } catch (RestClientException e) {
             logger.error("update error {}", e.getMessage());
             redirectAttributes.addFlashAttribute("updatedMsg", "Profile updation failed!!!");
@@ -82,17 +81,16 @@ public class UpdateUserController {
         return "redirect:/update-user";
     }
 
+//    This method send json object which includes user's details
     @GetMapping("sendUserData")
     @ResponseBody
     public User sendUserData(HttpServletRequest request){
         User user = new User();
         String username = request.getParameter("username");
-//        String username = "testre";
         String userDetails = SendStringBuilds.sendString(customerDataSendUrl, username);
 
 
         RestTemplate restTemplate1 = new RestTemplate();
-//                logger.info(userDataUrl);
         ReplyFromServer replyFromServer1 = restTemplate1.getForObject(userDetails, ReplyFromServer.class);
 
         user.setTitle(replyFromServer1.getData().get(0).getTitle());
@@ -105,7 +103,6 @@ public class UpdateUserController {
         user.setAddressLine02(replyFromServer1.getData().get(0).getAddressLine02());
         user.setAddressLine03(replyFromServer1.getData().get(0).getAddressLine03());
 
-//        logger.info("{} {}",user.getFirstName(), user.getUsername());
         return user;
     }
 }

@@ -15,6 +15,9 @@
     <spring:url value="/themes/hsenid/css/notificationMgt.css" var="css1"/>
     <link href="${css1}" rel="stylesheet">
 
+    <spring:url value="/themes/hsenid/js/comments_table.js" var="js1"/>
+    <script src="${js1}"></script>
+
 
 
 </head>
@@ -62,80 +65,8 @@
                     <div class="row commentsSearch">
                     </div>
                     <br>
-                    <table class="tableComments">
-                            <thead>
-                            <tr>
-                                <th class="col-md-1">Id</th>
-                                <th class="col-md-3">Username</th>
-                                <th class="col-md-5">Comment</th>
-                                <th class="col-md-3">Actions</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td style="vertical-align:middle">001</td>
-                                <td style="vertical-align:middle">Harold Finch</td>
-                                <td style="vertical-align:middle">Lorem Ipsum is simply dummy text of the printing and</td>
-
-                                <td style="vertical-align:middle">
-                                    <a data-toggle="modal" data-target="#approveModel" href="#approveModel">Approve <span class="glyphicon glyphicon-edit"></span></a>
-                                    &nbsp;&nbsp;
-                                    <a data-toggle="modal" data-target="#discardModel" href="#discardModel">Discard <span class="glyphicon glyphicon-remove"></span></a>
-                                </td>
-
-                            </tr>
-                            <tr>
-                                <td style="vertical-align:middle">001</td>
-                                <td style="vertical-align:middle">John Reese</td>
-                                <td style="vertical-align:middle">Lorem Ipsum is simply dummy text of the printing and</td>
-                                <td style="vertical-align:middle">
-                                    <a data-toggle="modal" data-target="#approveModel" href="#approveModel">Approve <span class="glyphicon glyphicon-edit"></span></a>
-                                    &nbsp;&nbsp;
-                                    <a data-toggle="modal" data-target="#discardModel" href="#discardModel">Discard <span class="glyphicon glyphicon-remove"></span></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="vertical-align:middle">001</td>
-                                <td style="vertical-align:middle">Joss Carter</td>
-                                <td style="vertical-align:middle">Lorem Ipsum is simply dummy text of the printing and</td>
-                                <td style="vertical-align:middle">
-                                    <a data-toggle="modal" data-target="#approveModel" href="#approveModel">Approve <span class="glyphicon glyphicon-edit"></span></a>
-                                    &nbsp;&nbsp;
-                                    <a data-toggle="modal" data-target="#discardModel" href="#discardModel">Discard <span class="glyphicon glyphicon-remove"></span></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="vertical-align:middle">001</td>
-                                <td style="vertical-align:middle">Root</td>
-                                <td style="vertical-align:middle">Lorem Ipsum is simply dummy text of the printing and</td>
-                                <td style="vertical-align:middle">
-                                    <a data-toggle="modal" data-target="#approveModel" href="#approveModel">Approve <span class="glyphicon glyphicon-edit"></span></a>
-                                    &nbsp;&nbsp;
-                                    <a data-toggle="modal" data-target="#discardModel" href="#discardModel">Discard <span class="glyphicon glyphicon-remove"></span></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="vertical-align:middle">001</td>
-                                <td style="vertical-align:middle">Sameen Shaw</td>
-                                <td style="vertical-align:middle">Lorem Ipsum is simply dummy text of the printing and</td>
-                                <td style="vertical-align:middle">
-                                    <a data-toggle="modal" data-target="#approveModel" href="#approveModel">Approve <span class="glyphicon glyphicon-edit"></span></a>
-                                    &nbsp;&nbsp;
-                                    <a data-toggle="modal" data-target="#discardModel" href="#discardModel">Discard <span class="glyphicon glyphicon-remove"></span></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="vertical-align:middle">001</td>
-                                <td style="vertical-align:middle">Lionel Fusco</td>
-                                <td style="vertical-align:middle">Lorem Ipsum is simply dummy text of the printing and</td>
-                                <td style="vertical-align:middle">
-                                    <a data-toggle="modal" data-target="#approveModel" href="#approveModel">Approve <span class="glyphicon glyphicon-edit"></span></a>
-                                    &nbsp;&nbsp;
-                                    <a data-toggle="modal" data-target="#discardModel" href="#discardModel">Discard <span class="glyphicon glyphicon-remove"></span></a>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+                    <table id="tableComments">
+                    </table>
 
                 </div>
             </div>
@@ -145,15 +76,7 @@
 </center>
 </div>
 
-<div class="paginationPosition">
-    <ul class="pagination">
-        <li><a href="#">1</a></li>
-        <li class="active"><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-    </ul>
-</div>
+
 
 <div class="modal fade modalposition" id="approveModel" role="dialog" style="top: 15%">
     <div class="modal-dialog">
