@@ -23,7 +23,7 @@
 
     <script>
         $(document).ready(function () {
-            var username = "${username}";
+
             var name = "${name}";
             var mobile = "${mobile}";
             var email = "${email}";
@@ -118,19 +118,19 @@
 
             <div id='social'>
                 <a class='social'>
-                    <span class='entypo-facebook'></span>
+                    <span class='fa fa-facebook-official'></span>
                 </a>
                 <a class='social'>
-                    <span class='entypo-twitter'></span>
+                    <span class='fa fa-twitter'></span>
                 </a>
                 <a class='social'>
-                    <span class='entypo-linkedin'></span>
+                    <span class='fa fa-linkedin'></span>
                 </a>
                 <a class='social'>
-                    <span class='entypo-gplus'></span>
+                    <span class='fa fa-google-plus'></span>
                 </a>
                 <a class='social'>
-                    <span class='entypo-instagrem'></span>
+                    <span class='fa fa-instagram'></span>
                 </a>
             </div>
 
@@ -214,11 +214,11 @@
 
             <p style="color: whitesmoke">other way</p>
 
-            <p class='other entypo-mail'>
+            <p class='other fa fa-envelope'>
                 <a href='#'><fmt:message key="contactus.email" bundle="${lang}"/></a>
             </p>
 
-            <p class='other entypo-phone'><fmt:message key="contactus.number" bundle="${lang}"/></p>
+            <p class='other fa fa-phone'> <fmt:message key="contactus.number" bundle="${lang}"/></p>
         </div>
     </div>
 </div>

@@ -95,7 +95,6 @@ public class LoginController {
         String uname = request.getParameter(username);
         String pword = request.getParameter(password);
 
-//        logger.info(uname+pword);
         JSONObject jsonObject = new JSONObject();
         jsonObject.put(username, uname);
         jsonObject.put(password, pword);
@@ -126,14 +125,12 @@ public class LoginController {
                 user.setAddressLine02(replyFromServer1.getData().get(0).getAddressLine02());
                 user.setAddressLine03(replyFromServer1.getData().get(0).getAddressLine03());
 
-
             }
 
         } catch (RestClientException e) {
             logger.error(e.getMessage());
             return new BooleanResponse(false);
         }
-
 
 //            Adding attributes to the session
         session.setAttribute("username", user.getUsername());

@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
 <fmt:setLocale value="en"/>
 <fmt:setBundle basename="messages" var="lang"/>
 
@@ -35,3 +34,5 @@
 <script src="<c:url value="/resources/js/back-to-top.js"/>" ></script>
 
 <script src="<c:url value="/resources/js/registerandlogin.js"/>"></script>
+
+<link rel="stylesheet" href="<c:url value="/resources/font-awesome-4.7.0/css/font-awesome.min.css"/>">

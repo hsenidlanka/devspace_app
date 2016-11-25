@@ -53,8 +53,7 @@ public class RegisterController {
         if (addressL3.length() < 1) {
             addressL3 = null;
         }
-//        logger.info("{} {} {} {} {} {} {} {} username-{} {}", title, firstName, lastName, addressL1, addressL2, addressL3, mobile, email, username, password);
-//        String registerDetails = SendStringBuilds.sendString("{", "title", ":", title, "," + "firstName" + ":" + firstName + "," + "lastName" + ":" + lastName + "," + "email" + ":" + email + "," + "addressL1" + ":" + addressL1 + "," + "addressL2" + ":" + addressL2 + "," + "addressL3" + ":", addressL3, ",", "username", ":", username, ",", "password", ":", password, ",", "mobile", ":", mobile, "}");
+
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("title",title);
         jsonObject.put("firstName", firstName);
@@ -108,8 +107,6 @@ public class RegisterController {
         } else {
             uniqueUser = new BooleanResponse(true);
         }
-
-//        logger.info(replyFromServer.getMessage());
 
         return uniqueUser;
     }
