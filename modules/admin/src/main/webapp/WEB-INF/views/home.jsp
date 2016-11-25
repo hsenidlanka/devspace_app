@@ -56,6 +56,7 @@
         <div id="collapseOne" class="panel-collapse collapse ">
           <div class="panel-body">
             <ul class="nav navbar-nav">
+             <li><img src="<c:url value="/themes/hsenid/images/packagecol.png"/>"/></li>
               <li>
                 <a href="<c:out value="${itemAdd}"/>" class="panel-sub-menu2" style="font-weight: bold;
                 font-size: 18px;">
@@ -81,7 +82,9 @@
         </div>
         <div id="collapseTwo" class="panel-collapse collapse">
           <div class="panel-body">
+
             <ul class="nav navbar-nav">
+              <li><img src="<c:url value="/themes/hsenid/images/packge.png"/>"/></li>
               <li>
                 <a href="<c:out value="${pckgAdd}"/>" class="panel-sub-menu2" style="font-weight:bold;
                 font-size:18px;">
@@ -112,6 +115,7 @@
         <div id="collapseThree" class="panel-collapse collapse">
           <div class="panel-body">
             <ul class="nav navbar-nav">
+              <li><img src="<c:url value="/themes/hsenid/images/notify.png"/>"/></li>
               <li>
                 <a href="<c:out value="${categoryAdd}"/>" class="panel-sub-menu2" style="font-weight:bold;
                 font-size:18px;">
@@ -140,6 +144,7 @@
         <div id="collapseFour" class="panel-collapse collapse">
           <div class="panel-body">
             <ul class="nav navbar-nav">
+              <li><img src="<c:url value="/themes/hsenid/images/user.png"/>"/></li>
               <li>
                 <a href="<c:out value="${userAdd}"/>" class="panel-sub-menu1" style="font-weight:bold;
                 font-size:18px;">
@@ -172,6 +177,7 @@
         <div id="collapseFive" class="panel-collapse collapse">
           <div class="panel-body">
             <ul class="nav navbar-nav">
+              <li><img src="<c:url value="/themes/hsenid/images/feedback.png"/>"/></li>
               <li>
                 <a href="<c:out value="${commentsView}"/>" class="panel-sub-menu2" style="font-weight:bold;
                 font-size:18px;">

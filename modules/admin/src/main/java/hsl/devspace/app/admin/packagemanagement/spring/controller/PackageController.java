@@ -52,6 +52,9 @@ public class PackageController {
     @Value("${update.package.success}")
     private String updateSuccess;
 
+    @Value("${update.package.error}")
+    private String updateError;
+
     @Value("${update.package.sever.error}")
     private String updateServerErr;
 
@@ -155,13 +158,12 @@ public class PackageController {
 
             double packPrc = Double.parseDouble(pkgPrice);
 
-          /*  MultipartFile imgFile = newPackage.getImageUrl();
-            String imgFileNm = imgFile.getOriginalFilename();
-            LOGGER.trace("multipart file =, {}",imgFile);
-*/
+            MultipartFile imgFile = newPackage.getImageUrl();
+            LOGGER.trace("realPathtoUpload package = {}",imgFile);
+
             newPackage.setPackName(packNm);
             newPackage.setPrice(packPrc);
-            newPackage.setImage(packImg);
+            newPackage.setImage(packNm+".jpg");
 
             LOGGER.trace("package objct22 {}", newPackage);
             LOGGER.trace("package objct-img url {}", newPackage.getImage());
@@ -210,10 +212,11 @@ public class PackageController {
                     * save images to directory
                     **/
                     /*if (!imgFile.isEmpty()) {
+                        LOGGER.error("empty file ?? {}",!imgFile.isEmpty());
                         try {
                             // Creating the directory to store file in server
                             String realPathtoUpload = context.getRealPath(serverPath);
-                            LOGGER.trace("realPathtoUpload = , {} ", realPathtoUpload);
+                            LOGGER.trace("realPathtoUpload package = , {} ", realPathtoUpload);
                             uploadFile(imgFile,realPathtoUpload,pkgName);
 
                             //create a directory in local machine and upload imGE
@@ -223,9 +226,9 @@ public class PackageController {
                             LOGGER.error("error in  getting image {}", ex);
                         }
                     }else {
-                        LOGGER.error("You failed to upload {}" , imgFileNm ," because the file was empty.");
-                    }*/
-
+                        LOGGER.error("You failed to upload {}" , imgFile ," because the file was empty.");
+                    }
+*/
                     LOGGER.trace("added new package {}", pkgName);
                 }
 
@@ -279,8 +282,6 @@ public class PackageController {
     public ModelAndView retrievePkgCont(@ModelAttribute("editPackage") Package editPackage,
                            HttpServletRequest request) {
 
-        String s =request.getParameter("test2");
-        LOGGER.trace("edit obj val = {}",s);
         try {
             String edtName = request.getParameter("pkgName2");
             String edtImg = request.getParameter("pkgImg2");
@@ -293,10 +294,49 @@ public class PackageController {
 
             editPackage.setPrice(edtPrc);
             editPackage.setImage(edtImg);
+            editPackage.setPackName(edtName);
 
+            LOGGER.trace("package objct22 {}", editPackage);
+            LOGGER.trace("package objc imgUrl {}", editPackage.getImageUrl());
+
+
+            String sEdit =request.getParameter("test2");
+           /* if(sEdit.equals("")){
+                JOptionPane.showMessageDialog(null, "Content is empty ! ", "Error !",
+                        JOptionPane.ERROR_MESSAGE);
+            }*/
+            LOGGER.trace("edit obj val = {}",sEdit);
+
+            ObjectMapper objectMapperEdt = new ObjectMapper();
+            List<Package> catsedt = null;
+            List<Package> contListEdt = new ArrayList<Package>();
+
+            catsedt = objectMapperEdt.readValue(sEdit, new TypeReference<List<Package>>() {
+            });
+            for (Package contEdt : catsedt) {
+                LOGGER.trace("cont edit= {} ", contListEdt);
+
+                Package details = new Package(contEdt.getItemName(), contEdt.getQuantity(), contEdt.getSize());
+                contListEdt.add(details);
+            }
+            LOGGER.error("contlistEdt details itmnm {}", contListEdt.get(0).getItemName());
+            LOGGER.error("contlistEdt details2 {}", contListEdt);
+
+            int i =packageRepo.updatePackage(editPackage, contListEdt);
+
+            if(i != 1 ){
+                JOptionPane.showMessageDialog(null, updateError, "Error !",
+                        JOptionPane.ERROR_MESSAGE);
+                LOGGER.error("Server-side error in updateing package " + edtName);
+            }else{
+                JOptionPane.showMessageDialog(null, updateSuccess + edtName, "Success",
+                        JOptionPane.INFORMATION_MESSAGE);
+            }
 
 
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, updateServerErr, "Error !",
+                    JOptionPane.ERROR_MESSAGE);
             LOGGER.error("Error in edit package {}",e);
         }
 

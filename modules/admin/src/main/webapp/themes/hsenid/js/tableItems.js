@@ -37,12 +37,7 @@ $(document).ready(function () {
             title: 'Item description',
             align: 'left',
             sortable: true
-        },{
-                field: 'image',
-                title: 'Images',
-                sortable: true
-            },
-            {
+        }, {
                 field: 'operate',
                 title: 'Operations',
                 align: 'center',
@@ -61,12 +56,14 @@ $(document).ready(function () {
             success: function (data) {
                 $.toaster({priority: 'success', title: 'Success', message: 'Deleted the item  ' + itemName});
                 setTimeout(function () {
-                    location.reload(); }, 3000);
+                    location.reload();
+                }, 3000);
             },
             error: function (e) {
                 $.toaster({priority: 'danger', title: 'Error', message: 'Cannot delete the item ' + itemName});
                 setTimeout(function () {
-                    location.reload(); }, 3000);
+                    location.reload();
+                }, 3000);
             }
         })
     });
@@ -77,7 +74,33 @@ $(document).ready(function () {
         $(".price").prop("disabled", true);
     });
 
+    /*
+     *
+     * To complete
+     *
+     * */
+    $("#txtViewSearchItem").keyup(function () {
 
+        var searchItm = $("#txtViewSearchItem").val();
+        var temp = ['asd', 'efr', 'gtew', 'plkm'];
+        $.ajax({
+            type: "GET",
+            url: "https://localhost:8443/admin/items/typeahedItmNm",
+            //dataType: "JSON",
+            data: {"searchItm": searchItm},
+            success: function (data) {
+                var parsedData = JSON.parse(data);
+
+                alert(parsedData.key + parsedData.value);
+                $('#txtViewSearchItem').typeahead({
+                    source: data
+                }).focus();
+            },
+            error: function (er) {
+                alert("error in typeahead ", er);
+            }
+        })
+    });
 });
 
 function operateFormatter(value, row, index) {
@@ -165,29 +188,4 @@ window.operateEvents = {
 };
 
 
-/*
-*
-* To complete
-*
-* */
-/*
-$("#txtViewSearchItem").keyup(function (){
-    alert( "Handler for .keyup() called." );
-    var searchItm =   $("#txtViewSearchItem").val();
-    $.ajax({
-        type: "GET",
-        url: "https://localhost:8443/admin/items/typeahedItmNm",
-        dataType: "JSON",
-        data: {"searchItm": searchItm},
-        success: function (data) {
 
-            $('#txtViewSearchItem').typeahead({
-                name:'txtViewSearchItem',
-                source: data
-            }).focus();
-        },
-        error: function(er){
-            alert("error inytpeahead ",er);
-        }
-    })
-});*/

@@ -9,7 +9,7 @@ body {
 }
 
 .container {
-    width: 60%;
+    width: 50%;
 }
 
 .home-title {
@@ -157,11 +157,11 @@ body {
     
 }
 .panel-sub-menu1{
-    margin: 0 5px 10px 80px;
+    margin: 0 5px 10px 25px;
 
 }
 .panel-sub-menu2{
-    margin: 0 5px 10px 130px;
+    margin: 0 5px 10px 80px;
 }
 
 .file_upload{

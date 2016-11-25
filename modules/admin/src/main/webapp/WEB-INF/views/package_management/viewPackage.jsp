@@ -206,7 +206,7 @@
                                            <div class="row rowtbl item-tbl-row" id="tbladdPkgCont">
                                                <div class="col-xs-2">
                                                    <label class="checkbox-inline">
-                                                       <form:checkbox value="pizza" class="checkbox chkbxPkgCat" path="" id="chkPkgCat"/>
+                                                       <form:checkbox value="pizza" class="checkbox chkbxPkgCat" path="imageUrl" id="chkPkgCat"/>
                                                        <label class="chkbxPkgCat1"></label>
                                                    </label>
                                                </div>

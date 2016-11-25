@@ -166,7 +166,7 @@
                             </label>
 
                             <div class="col-xs-5">
-                                <form:input type="file" class="file_upload btn btn-default" path="" id="savePkgImg" value="Browse" />
+                                <form:input type="file" class="file_upload btn btn-default" path="imageUrl" id="savePkgImg" value="Browse" />
                                 <span id="pkgImgErr" class="input-group-error"> </span>
                             </div>
                         </div>
@@ -180,7 +180,7 @@
                         <div class="col-xs-4">
                         </div>
                         <div class="col-xs-4" align="right">
-                            <form:button type="button" class="btn btn-success" id="btnAddNewPkg" onclick="contentPackge();"><span
+                            <form:button type="submit" class="btn btn-success" id="btnAddNewPkg" onclick="contentPackge();"><span
                                     class="glyphicon glyphicon-plus"></span>
                                 <fmt:message key="package.packageadd.form.button.add" bundle="${bundle1}"/>
                             </form:button>

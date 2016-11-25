@@ -33,7 +33,9 @@
 <spring:url value="/themes/hsenid/js/jquery.toaster.js" var="jsToast"/>
 <script src="${jsToast}"></script>
 
-
+<%--bootstrap typeahead--%>
+<spring:url value="/themes/hsenid/bootstrap/js/bootstrap-typeahead.js" var="jsTypeahead"/>
+<script src="${jsTypeahead}"></script>
 
 
 

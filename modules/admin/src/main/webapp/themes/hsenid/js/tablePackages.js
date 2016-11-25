@@ -22,7 +22,7 @@ $(document).ready(function(){
             sortable: true
         },{
             field: 'price',
-            title: 'Package Price',
+            title: 'Package Price (LKR)',
             align: 'right',
             sortable: true
         },{
@@ -181,7 +181,7 @@ function contentPackgeEdit() {
         data: {"test2": JSON.stringify(jsonObj2), "pkgName2": pkgName, "pkgPrice2": pkgPrice, "pkgImg2": pkgImg},
         type: "POST",
         success: function (result) {
-            $("#btnUpdtPkg").submit(function (event) {
+            $("#btnUpdtPkg").click(function (event) {
                 event.preventDefault();
                 showloadingif();
 
@@ -194,6 +194,7 @@ function contentPackgeEdit() {
         },
         error: function (e) {
             //   $.toaster({priority: 'danger', title: 'Error', message: 'Cannot add the package ' + pkgName});
+            alert("error "+ e);
         }
     });
 }

@@ -6,6 +6,7 @@ import hsl.devspace.app.corelogic.repository.category.SubCategoryRepositoryImpl;
 import hsl.devspace.app.corelogic.repository.item.ItemRepository;
 import hsl.devspace.app.corelogic.repository.item.ReturnTypeResolver;
 import org.jose4j.json.internal.json_simple.JSONObject;
+import org.json.simple.JSONArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,13 +92,15 @@ public class ItemController {
     public ModelAndView addItem(@ModelAttribute("newItem") Item newItem) {
 
         try {
+            LOGGER.trace("item obj vals = {}",newItem);
+
             String itemNm = newItem.getItemName();
             String itemPrice = newItem.getPrice();
             String itemSize = newItem.getSize();
 
             MultipartFile imgFile = newItem.getImageUrl();
             String imgFileNm = imgFile.getOriginalFilename();
-            LOGGER.trace("multipart file =, {}", imgFile);
+            LOGGER.trace("multipart file itemMgt =, {}", imgFile);
 
             LOGGER.trace("Item price =, {} ", itemPrice);
             LOGGER.trace("Item size = , {}", itemSize);
@@ -113,7 +116,7 @@ public class ItemController {
                 listItem.setPrice(pricelist.get(s));
                 items.add(listItem);
             }
-
+            newItem.setImage(itemNm+".jpg");
             boolean uniqueItemNm = item.checkAvailability(itemNm);
             if (!uniqueItemNm) {
                 int a = item.addItem(newItem, items);
@@ -330,12 +333,14 @@ public class ItemController {
     /*
     * typeahead function for item name
     **/
-   /* @RequestMapping(value = "/typeahedItmNm", method = RequestMethod.GET)
+    @RequestMapping(value = "/typeahedItmNm", method = RequestMethod.GET)
     public @ResponseBody List<Map<String, Object>> typeaheadName(@RequestParam("searchItm") String itemName){
 
+        JSONArray array = new JSONArray();
+
+
         LOGGER.trace("typeaheaad "+ item.retrieveSelectedItemDetails(itemName) );
-        LOGGER.error("typeaheaad "+ item.retrieveSelectedItemDetails(itemName) );
         return item.retrieveSelectedItemDetails(itemName);
-    }*/
+    }
 
 }
