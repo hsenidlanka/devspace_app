@@ -303,7 +303,7 @@ public  class UserRepositoryImpl implements UserRepository {
             customer.setLastName(mp.get(i).get("last_name").toString());
             customer.setUsername(mp.get(i).get("username").toString());
             customer.setPassword(mp.get(i).get("password").toString());
-            customer.setEmail(mp.get(i).get("email").toString());
+            customer.setEmail(mp.get(i).get("email").toString()); 
             customer.setAddressL1(mp.get(i).get("address_line1").toString());
             customer.setAddressL2(mp.get(i).get("address_line2").toString());
             if (mp.get(i).get("address_line3")!=null) {
