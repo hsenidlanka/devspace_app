@@ -113,6 +113,26 @@ public class PackageRepositoryImpl implements PackageRepository {
         return pack;
     }
 
+    @Override
+    public List<Package> selectAllByNamePattern(String packName) {
+        String key = "%" + packName + "%";
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM package WHERE name LIKE ?", key);
+        List<Package> pack = new ArrayList<Package>();
+
+        for (int i = 0; i < mp.size(); i++) {
+            Package packages = new Package();
+            packages.setPackageId(Integer.parseInt(mp.get(i).get("id").toString()));
+            packages.setPackName(mp.get(i).get("name").toString());
+            packages.setPrice(Double.parseDouble(mp.get(i).get("price").toString()));
+            packages.setImage(mp.get(i).get("image").toString());
+            pack.add(packages);
+
+
+        }
+        log.info("{}", pack);
+        return pack;
+    }
+
     /*Add content to a given package*/
     @Override
     public int addContent(String packName, List<Package> content) {

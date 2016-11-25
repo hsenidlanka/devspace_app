@@ -36,4 +36,6 @@ public interface PackageRepository {
     int updateContent(List<Package> content);
 
     int count();
+
+    List<Package> selectAllByNamePattern(String packName);
 }
