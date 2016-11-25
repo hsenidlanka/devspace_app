@@ -70,6 +70,8 @@ public class PackageRepositoryImpl implements PackageRepository {
         return row;
     }
 
+    /*update content of a specific package*/
+    @Override
     public int updateContent(List<Package> content) {
         int row = 0;
         for (int i = 0; i < content.size(); i++) {
@@ -111,6 +113,7 @@ public class PackageRepositoryImpl implements PackageRepository {
         return pack;
     }
 
+    /*Add content to a given package*/
     @Override
     public int addContent(String packName, List<Package> content) {
         int row = 0;
@@ -142,6 +145,7 @@ public class PackageRepositoryImpl implements PackageRepository {
         return result;
     }
 
+    /*Add all the details of a package*/
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public int addPackage(Package pack, List<Package> content) {
@@ -160,6 +164,7 @@ public class PackageRepositoryImpl implements PackageRepository {
         return j;
     }
 
+    /*Delete all the content of a specific package*/
     @Override
     public int deleteContent(String packageName) {
         String sql = "DELETE FROM package_item WHERE package_id = (SELECT id FROM package WHERE name=?)";
@@ -168,6 +173,7 @@ public class PackageRepositoryImpl implements PackageRepository {
         return row;
     }
 
+    /*Delete all the details of a package*/
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public int deletePackage(String packageName) {
@@ -186,6 +192,7 @@ public class PackageRepositoryImpl implements PackageRepository {
         return j;
     }
 
+    /*Update all the details of a given package*/
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public int updatePackage(Package updatedPackage, List<Package> content) {
@@ -238,5 +245,13 @@ public class PackageRepositoryImpl implements PackageRepository {
 
     }
 
+    /*get total count of packages*/
+    @Override
+    public int count() {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT(*) AS total FROM package ");
+        int count = Integer.parseInt(mp.get(0).get("total").toString());
+        log.info("{}", count);
+        return count;
+    }
 
 }

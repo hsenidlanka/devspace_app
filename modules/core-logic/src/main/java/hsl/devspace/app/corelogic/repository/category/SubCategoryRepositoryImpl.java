@@ -158,8 +158,8 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
     /*retrieve total no.of subcategories*/
     @Override
     public int count() {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM sub_category ");
-        int count = mp.size();
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT(*) AS total FROM sub_category ");
+        int count = Integer.parseInt(mp.get(0).get("total").toString());
         log.info("{}", count);
         return count;
     }

@@ -261,6 +261,40 @@ public class StaffRepositoryImpl implements UserRepository {
         return staffDetails;
     }
 
+    public List<User> selectAllByNameTypeAhead(String nameKey) {
+        String key = "%" + nameKey + "%";
+
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE username LIKE ?", key);
+        List<User> staffDetails = new ArrayList<User>();
+
+        for (int i = 0; i < mp.size(); i++) {
+            User staff = new User();
+            staff.setId(Integer.parseInt(mp.get(i).get("id").toString()));
+            staff.setTitle(mp.get(i).get("title").toString());
+            staff.setUsername(mp.get(i).get("username").toString());
+            staff.setPassword(mp.get(i).get("password").toString());
+            staff.setFirstName(mp.get(i).get("first_name").toString());
+            staff.setLastName(mp.get(i).get("last_name").toString());
+            staff.setEmail(mp.get(i).get("email").toString());
+            staff.setMobile(mp.get(i).get("mobile").toString());
+            staff.setAddressL1(mp.get(i).get("address_line1").toString());
+            staff.setAddressL2(mp.get(i).get("address_line2").toString());
+            if (mp.get(i).get("address_line3") != null) {
+                staff.setAddressL3(mp.get(i).get("address_line3").toString());
+            }
+            staff.setDesignation(mp.get(i).get("designation").toString());
+            staff.setDepartment(mp.get(i).get("department").toString());
+            staff.setBranch(mp.get(i).get("branch").toString());
+            staff.setRegDate(Date.valueOf(mp.get(i).get("register_date").toString()));
+            staff.setStatus(mp.get(i).get("status").toString());
+            staffDetails.add(staff);
+
+
+        }
+        log.info("{}", staffDetails);
+        return staffDetails;
+    }
+
     /*block a certain staff member*/
     @Override
     public int block(String username) {
@@ -392,8 +426,8 @@ public class StaffRepositoryImpl implements UserRepository {
     /*retrieve the total no.of staff members*/
     @Override
     public int countUsers() {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff ");
-        int count = mp.size();
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT(*) FROM staff ");
+        int count = Integer.parseInt(mp.get(0).get("total").toString());
         log.info("{}", count);
         return count;
     }

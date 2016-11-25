@@ -177,8 +177,8 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     /*retrieve total no.of categories*/
     @Override
     public int count() {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category ");
-        int count = mp.size();
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT count(*) AS total FROM category ");
+        int count = Integer.parseInt(mp.get(0).get("total").toString());
         log.info("{}", count);
         return count;
     }

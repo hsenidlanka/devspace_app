@@ -126,9 +126,9 @@ public class ItemRepositoryImpl implements ItemRepository {
     /*retrieve no.of items*/
     @Override
     public int count() {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM item ");
-        int count = mp.size();
-        log.debug("{}", count);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT(*) AS total FROM item ");
+        int count = Integer.parseInt(mp.get(0).get("total").toString());
+        log.info("{}", count);
         return count;
     }
 

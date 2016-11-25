@@ -32,4 +32,8 @@ public interface PackageRepository {
     int updatePackage(Package updatedPackage, List<Package> content);
 
     List<ReturnTypeResolver> getContentDetails(String packageName);
+
+    int updateContent(List<Package> content);
+
+    int count();
 }

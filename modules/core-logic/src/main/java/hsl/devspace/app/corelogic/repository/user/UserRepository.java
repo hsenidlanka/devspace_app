@@ -51,6 +51,8 @@ public interface UserRepository {
     List<User> filterByBranch(String branch,String status);
     List<User>filterBlockedUsersByCity(String city);
 
+    List<User> selectAllByNameTypeAhead(String nameKey);
+
 
 
 }

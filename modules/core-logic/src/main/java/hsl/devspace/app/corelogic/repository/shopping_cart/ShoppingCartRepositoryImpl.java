@@ -55,8 +55,8 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
     /*cart count for a specific customer*/
     @Override
     public int countPerCustomer(String customerUsername) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM shopping_cart WHERE customer_id=(SELECT id FROM customer WHERE username=?)",customerUsername);
-        int count = mp.size();
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT(*) AS total FROM shopping_cart WHERE customer_id=(SELECT id FROM customer WHERE username=?)", customerUsername);
+        int count = Integer.parseInt(mp.get(0).get("total").toString());
         log.info("{}",count);
         return count;
     }
@@ -64,8 +64,8 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
     /*cart count for a specific guest*/
     @Override
     public int countPerGuest(String mobile) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM shopping_cart WHERE guest_id=(SELECT id FROM guest WHERE mobile=?)",mobile);
-        int count = mp.size();
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT(*) AS total FROM shopping_cart WHERE guest_id=(SELECT id FROM guest WHERE mobile=?)", mobile);
+        int count = Integer.parseInt(mp.get(0).get("total").toString());
         log.info("{}",count);
         return count;
     }
@@ -73,8 +73,8 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
     /*retrieve no.of carts for the customers(registered)*/
     @Override
     public int countTotalCustomerCarts() {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM shopping_cart WHERE customer_id>0 ");
-        int count = mp.size();
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT(*) AS total FROM shopping_cart WHERE customer_id>0 ");
+        int count = Integer.parseInt(mp.get(0).get("total").toString());
         log.info("{}",count);
         return count;
     }
@@ -82,8 +82,8 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
     /*retrieve no.of carts for the guests*/
     @Override
     public int countTotalGuestCarts() {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM shopping_cart WHERE guest_id>0 ");
-        int count = mp.size();
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT(*) AS total FROM shopping_cart WHERE guest_id>0 ");
+        int count = Integer.parseInt(mp.get(0).get("total").toString());
         log.info("{}",count);
         return count;
     }
