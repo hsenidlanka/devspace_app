@@ -31,6 +31,41 @@ public class FilterController {
 
 //////////////////////////////////////////////////////////////  ACTIVE USER Filter options handle //////////////////////////////////////////
 
+
+    /** handler  method to filter the customer user data based on typeahead usernames **/
+    @RequestMapping(value = "/customerTable/typeheadName/data", method = RequestMethod.GET)
+    public @ResponseBody
+    List<Map<String, Object>> typeheadNameFilterData (@RequestParam("cname") String cname){
+        List<Map<String, Object>> nameList=nameSelect(cname,"active");
+        return  nameList;
+    }
+
+    /** handler  method to filter the customer usernames based on typeahead usernames **/
+    @RequestMapping(value = "/customerTable/typeheadName", method = RequestMethod.GET)
+    public @ResponseBody
+    List<String> typeheadNameFilter (@RequestParam("cname") String cname){
+        List<String> nameList=customerRepository.selectNameByNameTypeAhead(cname, "active");
+        return  nameList;
+    }
+
+    /** handler  method to filter the customer user data based on typeahead usernames **/
+    @RequestMapping(value = "/staffTable/typeheadName/data", method = RequestMethod.GET)
+    public @ResponseBody
+    List<Map<String, Object>> typeheadNameFilterDataStaff (@RequestParam("sname") String sname){
+        List<Map<String, Object>> nameList=nameSelectStaff(sname, "active");
+        return  nameList;
+    }
+
+    /** handler  method to filter the customer usernames based on typeahead usernames **/
+    @RequestMapping(value = "/staffTable/typeheadName", method = RequestMethod.GET)
+    public @ResponseBody
+    List<String> typeheadNameFilterStaff (@RequestParam("sname") String sname){
+        List<String> nameList=staffRepository.selectNameByNameTypeAhead(sname, "active");
+        return  nameList;
+    }
+
+
+
     /** handler  method to filter
      * the search data on the registered date**/
     @RequestMapping(value = "/customerTable/date", method = RequestMethod.GET)
@@ -173,7 +208,7 @@ public class FilterController {
         }
         //query for department select filtering
         if((!(department.equals("--Select--"))) && ((branch.equals("--Select--"))) && ((designation.equals("--Select--")))){
-            List<Map<String, Object>> depList=departmentSelect(department,"avtive");
+            List<Map<String, Object>> depList=departmentSelect(department,"active");
             return depList;
 
         }
@@ -490,6 +525,28 @@ public class FilterController {
             map.put("registered_date", customerUser.getRegDate());
 
             LOG.info("newUser {}", customerUser);
+            outNameList.add(map);
+            LOG.info("out {}", outNameList);
+        }
+        return outNameList;
+    }
+
+    //function to obtain the Staff List with typed name
+    public List<Map<String, Object>> nameSelectStaff(String name, String status) {
+        List<Map<String, Object>> outNameList = new ArrayList<Map<String, Object>>();
+        List<User> staffList2 = staffRepository.selectAllByNameTypeAhead(name,status);
+
+        for (int i = 0; i < staffList2.size(); i++) {
+            User staffUser = staffList2.get(i);
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("id", staffUser.getId());
+            map.put("username", staffUser.getUsername());
+            map.put("first_name", staffUser.getFirstName());
+            map.put("mobile", staffUser.getMobile());
+            map.put("designation", staffUser.getDesignation());
+            map.put("department", staffUser.getDepartment());
+            map.put("branch", staffUser.getBranch());
+            LOG.info("newUser {}", staffUser);
             outNameList.add(map);
             LOG.info("out {}", outNameList);
         }
