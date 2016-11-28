@@ -565,5 +565,19 @@ public  class UserRepositoryImpl implements UserRepository {
         return customerDetails;
     }
 
+    public List<String> selectNameByNameTypeAhead(String nameKey, String status) {
+        String key = "%" + nameKey + "%";
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT username FROM customer WHERE username LIKE ? AND status = ?", key, status);
+        List<String> customerDetails = new ArrayList<String>();
+
+        for (int i = 0; i < mp.size(); i++) {
+            String a = mp.get(i).get("username").toString();
+
+            customerDetails.add(a);
+
+        }
+        log.info("{}", customerDetails);
+        return customerDetails;
+    }
 
 }

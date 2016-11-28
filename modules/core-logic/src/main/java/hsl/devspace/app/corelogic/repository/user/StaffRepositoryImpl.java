@@ -295,6 +295,22 @@ public class StaffRepositoryImpl implements UserRepository {
         return staffDetails;
     }
 
+    public List<String> selectNameByNameTypeAhead(String nameKey, String status) {
+        String key = "%" + nameKey + "%";
+
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT username FROM staff WHERE username LIKE ? AND status= ?", key, status);
+        List<String> staffDetails = new ArrayList<String>();
+
+        for (int i = 0; i < mp.size(); i++) {
+            String a = mp.get(i).get("username").toString();
+            staffDetails.add(a);
+
+
+        }
+        log.info("{}", staffDetails);
+        return staffDetails;
+    }
+
     /*block a certain staff member*/
     @Override
     public int block(String username) {
