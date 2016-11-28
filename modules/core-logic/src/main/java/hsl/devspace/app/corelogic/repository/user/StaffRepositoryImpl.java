@@ -295,6 +295,7 @@ public class StaffRepositoryImpl implements UserRepository {
         return staffDetails;
     }
 
+    @Override
     public List<String> selectNameByNameTypeAhead(String nameKey, String status) {
         String key = "%" + nameKey + "%";
 
