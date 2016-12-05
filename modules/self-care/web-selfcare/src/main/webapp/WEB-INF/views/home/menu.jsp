@@ -35,16 +35,16 @@
                         <div class="row" style="margin-top: 10px;">
                             </c:if>
                             <div class="col-md-3">
-                                    <ul class="grid cs-style-3">
-                                        <li>
-                                            <figure><img src="<c:url value="/resources/images/image_placeholder.gif"/>">
-                                                <figcaption>
-                                                    <h3>${category.name}</h3>
-                                                    <a href="menu\<c:out value="${category.name}"/>">Browse</a>
-                                                </figcaption>
-                                            </figure>
-                                        </li>
-                                    </ul>
+                                <ul class="grid cs-style-3">
+                                    <li>
+                                        <figure><img src="${category.baseUrl}${category.name}.jpg" style="height: 200px;width: 200px">
+                                            <figcaption>
+                                                <h3>${category.name}</h3>
+                                                <a href="menu\<c:out value="${category.name}"/>">Browse</a>
+                                            </figcaption>
+                                        </figure>
+                                    </li>
+                                </ul>
                                 <div style="text-align: center;">${category.name}</div>
                             </div>
                             </c:forEach>

@@ -52,8 +52,8 @@
                                         <ul class="grid cs-style-3">
                                             <li data-teskly-viewitle="<c:out value="${itemData.description}"/>">
                                                 <figure>
-                                                    <img src="<c:url value="/resources/images/image_placeholder.gif"/>"
-                                                         class="menu-images">
+
+                                                    <img class="menu-images" src="<c:url value="/resources/images/image_placeholder.gif"/>">
                                                     <figcaption class="caption">
                                                         <input type="hidden" id="menu-item-desc"
                                                                value="<c:out value="${itemData.description}"/>"/>
