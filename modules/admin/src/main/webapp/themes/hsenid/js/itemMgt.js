@@ -1,12 +1,25 @@
 $(document).ready(function () {
 
-    function validateInputs() {
-
-        var itmName = document.getElementById('txtItemName');
-        if (itmName.value == '') {
+    $("#txtItemName").focusout(function(){
+        if($(this).val()==''){
             document.getElementById('itmNmErr').innerHTML = 'Item Name should not be empty !';
             $(this).addClass('invalid-input');
+        }else{
+            $(this).removeClass('invalid-input');
         }
+    });
+
+
+/*
+* Common function for validate inputs
+* */
+    function validateInputs(val,fieldId,message) {
+
+        if($(fieldId).val()==val){
+            document.getElementById('').innerHTML = message;
+            return false;
+        }
+        return true;
     }
 
     /*
@@ -104,3 +117,13 @@ function disableTxt(t, textBoxId) {
     $("#" + textBoxId).prop("disabled", !$(t).prop("checked"));
     $("#" + textBoxId).val(" ");
 }
+
+/*$("#btnAddCat").click(function(){
+    alert("click");
+    //location.href="https://localhost:8443/admin/category/add";
+});*/
+/*
+function toAddcat(){
+    alert("clerrr");
+    location.href="https://localhost:8443/admin/category/add";
+}*/

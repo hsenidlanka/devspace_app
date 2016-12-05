@@ -92,11 +92,7 @@
                 <span id="subCatErr" class="input-group-error"></span>
               </div>
 
-              <div class="col-xs-4">
-                <button type="button" class="btn btn-success" id="btnAddSubCat"
-                        onclick="window.location='#'"><span
-                        class="glyphicon glyphicon-plus"></span><fmt:message key="item.itemadd.form.subcategory.addnew"/></button>
-              </div>
+              <div class="col-xs-4"></div>
             </div>
           </div>
 
@@ -106,7 +102,7 @@
               <label for="txtItemName" class="col-xs-3 control-label"><fmt:message key="item.itemadd.form.itemname"/></label>
 
               <div class="col-xs-5">
-                <form:input class="form-control" id="txtItemName" type="text" path="itemName" required="true"/>
+                <form:input class="form-control" id="txtItemName" type="text" path="itemName"/>
               </div>
               <div class="col-xs-4">
                 <span id="itmNmErr" class="input-group-error"></span>
@@ -242,15 +238,13 @@
           <div style="text-align: center; z-index: 50000; width: 50%; margin: auto;" id="toaster"></div>
 
           <div class="row" align="right">
-            <div class="col-xs-3">
+            <div class="col-xs-4">
             </div>
-            <div class="col-xs-3">
-            </div>
-            <div class="col-xs-3" align="center">
+            <div class="col-xs-4" align="center">
               <form:button type="submit" class="btn btn-success btn-group-xs" id="btnAddItem"><span
                       class="glyphicon glyphicon-plus"></span><fmt:message key="item.itemadd.form.button.submit"/></form:button>
             </div>
-            <div class="col-xs-3" align="left">
+            <div class="col-xs-4" align="left">
               <form:button type="button" class="btn btn-success" id="btnAddClear" onclick="this.form.reset();"><fmt:message key="item.itemadd.form.button.reset"/> </form:button>
             </div>
           </div>

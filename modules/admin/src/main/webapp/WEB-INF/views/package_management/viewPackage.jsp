@@ -98,19 +98,6 @@
                     </table>
 
                 </fieldset>
-
-                <br>
-
-                <div class="row" align="left">
-                    <div class="col-sm-4"></div>
-                    <div class="col-sm-4"></div>
-                    <div class="col-sm-4">
-                        <button type="button" class="btn btn-success bckToHome" id="btnViewPkgBack"><span
-                                class="glyphicon glyphicon-chevron-left"></span> Back to home
-                        </button>
-                    </div>
-                </div>
-                <br>
             </form:form>
         </div>
 
@@ -175,6 +162,9 @@
                                 </div>
                                 <div class="col-xs-4">
                                     <form:input class="form-control" type="text" id="txtEditPkgNm" path="packName" readonly="true"/>
+                                </div>
+                                <div class="col-xs-4">
+                                    <span id="pkgNmErrEdt" class="input-group-error"></span>
                                 </div>
                             </div>
 
@@ -249,7 +239,10 @@
                                     <label><fmt:message key="package.packageeditform.packageprice" bundle="${bundle1}"/> </label>
                                 </div>
                                 <div class="col-xs-3">
-                                    <form:input type="text" class="form-control price" id="editPkgPrice" placeholder="LKR 0.00" path="price"/>
+                                    <form:input type="text" class="form-control price" id="editPkgPrice" value="0.00" path="price"/>
+                                </div>
+                                <div class="col-xs-3">
+                                    <span id="pkgPriceErrEdt" class="input-group-error"></span>
                                 </div>
                             </div>
 
@@ -260,9 +253,9 @@
             </div>
             <div style="text-align: center; z-index: 50000; width: 50%; margin: auto;" id="toaster"></div>
             <div class="modal-footer" align="right">
-                <form:button class="btn btn-success" type="button" value="Yes" id="btnUpdtPkg" onclick="contentPackgeEdit()"><fmt:message key="package.packageedit.form.button.submit" bundle="${bundle1}"/>
+                <form:button class="btn btn-success" type="submit" value="Yes" id="btnUpdtPkg" onclick="contentPackgeEdit()"><fmt:message key="package.packageedit.form.button.submit" bundle="${bundle1}"/>
                 </form:button>
-                <form:button class="btn btn-success" type="reset" value="cancel" id="btnUpPkgCancel"><fmt:message key="package.packageedit.form.button.reset" bundle="${bundle1}"/>
+                <form:button class="btn btn-success" type="reset" value="cancel" id="btnUpPkgCancel" data-dismiss="modal"><fmt:message key="package.packageedit.form.button.reset" bundle="${bundle1}"/>
                 </form:button>
             </div>
             </form:form>

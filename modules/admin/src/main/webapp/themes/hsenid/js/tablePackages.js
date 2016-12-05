@@ -100,6 +100,12 @@ window.operateEvents = {
 };
 
 function contentPackgeEdit() {
+
+    $('#frmEditPkg').on('submit',function(e){
+        e.preventDefault();
+        return false;
+    });
+
     jsonObj2 = [];
     content = {};
 
@@ -180,21 +186,18 @@ function contentPackgeEdit() {
         url: "https://localhost:8443/admin/packages/edit_package",
         data: {"test2": JSON.stringify(jsonObj2), "pkgName2": pkgName, "pkgPrice2": pkgPrice, "pkgImg2": pkgImg},
         type: "POST",
-        success: function (result) {
-            $("#btnUpdtPkg").click(function (event) {
-                event.preventDefault();
-                showloadingif();
+        success: function () {
 
-                setTimeout(function () {
-                    $("#frmEditPkg").submit();
-                }, 3000);
-            });
+            setTimeout(function () {
+                $('#frmEditPkg').submit();
+            }, 5000);
+
             window.location.href += "#last";
             location.reload(true);
         },
         error: function (e) {
-            //   $.toaster({priority: 'danger', title: 'Error', message: 'Cannot add the package ' + pkgName});
-            alert("error "+ e);
+              $.toaster({priority: 'danger', title: 'Error', message: 'Cannot update the package ' + pkgName});
+          //  alert("error "+ e);
         }
     });
 }

@@ -151,6 +151,7 @@ public class PackageController {
                                   HttpServletRequest request) {
 
         LOGGER.error("package objct11 {}", newPackage);
+        LOGGER.error("package objct11 img url{}", newPackage.getImageUrl());
         try {
             String packNm = request.getParameter("pkgName");
             String pkgPrice = request.getParameter("pkgPrice");
@@ -227,8 +228,7 @@ public class PackageController {
                         }
                     }else {
                         LOGGER.error("You failed to upload {}" , imgFile ," because the file was empty.");
-                    }
-*/
+                    }*/
                     LOGGER.trace("added new package {}", pkgName);
                 }
 
@@ -343,25 +343,6 @@ public class PackageController {
         return new  ModelAndView(new RedirectView("view")) ;
     }
 
-    //
-    //Update_package details
-    //
-    @RequestMapping(value = "/update_package", method = RequestMethod.POST)
-    public ModelAndView updatePackage(@ModelAttribute("pkgUpdate") Package pkgUpdate) {
-
-        try {
-         /*   int pkgId = pkgUpdate.getPackageId();
-            String pkgName = pkgUpdate.getPackName();
-            double pkgPrc = pkgUpdate.getPrice();
-
-            LOGGER.trace("pkgNm for update pkg {}", pkgName);
-*/
-
-        } catch (Exception e) {
-            LOGGER.error("error in update package {}", e);
-        }
-        return new ModelAndView(new RedirectView("view"));
-    }
 
 
     /*

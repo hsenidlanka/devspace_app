@@ -1,5 +1,30 @@
 $(document).ready(function () {
 
+
+    $("#txtAddPkgName").focusout(function(){
+        if($(this).val()==''){
+            document.getElementById('pkgNmErr').innerHTML = 'Package Name should not be empty !';
+            $(this).addClass('invalid-input');
+        }
+    });
+
+    $("#txtAddPkgPrice").focusout(function(){
+        if($(this).val()=='0.0' || null){
+            document.getElementById('pkgPriceErr').innerHTML = 'Package price should not be empty !';
+            $(this).addClass('invalid-input');
+        }else{
+            $(this).removeClass('invalid-input');
+        }
+    });
+    $("#editPkgPrice").focusout(function(){
+        if($(this).val()=='0.00' || null){
+            document.getElementById('pkgPriceErrEdt').innerHTML = 'Package price should not be empty !';
+            $(this).addClass('invalid-input');
+        }else{
+            $(this).removeClass('invalid-input');
+        }
+    });
+
     /*
      * Price validation function to allow only 2 decimals
      * */
@@ -144,7 +169,13 @@ function generate(selectedItm, slctElement) {
     });
 }
 
-function contentPackge(event) {
+function contentPackge() {
+
+    $('#frmAddPkg').on('submit',function(e){
+        e.preventDefault();
+        return false;
+    });
+
     jsonObj2 = [];
     content = {};
 
@@ -229,14 +260,11 @@ function contentPackge(event) {
         data: {"test": JSON.stringify(jsonObj2), "pkgName": pkgName, "pkgPrice": pkgPrice, "pkgImg": pkgImg},
         type: "POST",
         success: function () {
-            $("#btnAddNewPkg").click(function(event) {
-                event.preventDefault();
-                showloadingif();
 
                 setTimeout(function() {
                     $("#frmAddPkg").submit();
                 }, 3000);
-            });
+
             window.location.href += "#last";
             location.reload(true);
         },

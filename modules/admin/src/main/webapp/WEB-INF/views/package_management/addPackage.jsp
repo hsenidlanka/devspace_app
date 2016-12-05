@@ -82,9 +82,10 @@
                                 </label>
 
                                 <div class="col-xs-8">
-                                    <form:input class="form-control" type="text" id="txtAddPkgName" path="packName"/>
+                                    <form:input class="form-control" type="text" id="txtAddPkgName" path="packName"/><span
+                                        id="pkgNmErr" class="input-group-error"> </span>
                                 </div>
-                                <span id="pkgNmErr" class="input-group-error"> </span>
+
                             </div>
                             <div class="col-xs-5">
                                 <label class="col-xs-4 control-label">
