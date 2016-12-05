@@ -14,6 +14,6 @@
  - start tomcat by running `./startup.sh` file in the bin directory 
 
 #### How to access the application
- - In the browser type ``
+ - In the browser type `https://localhost/admin/PizzaShefu`
 
 
