@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -28,25 +29,48 @@ public class DeliveryController {
     @Value("${api.url.customers.search}")
     private String customerSearchUrl;
 
-/*    // Load menu page
-    @RequestMapping(value = "/delivery", method = RequestMethod.GET)
-    public ModelAndView loadDeliveryPage() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("delivery");
-        return modelAndView;
-    }*/
-
-    @RequestMapping(value = "/delivery/get-customer-data", method = RequestMethod.GET)
+    @RequestMapping(value = "/delivery/get-delivery-data", method = RequestMethod.GET)
     @ResponseBody
-    public JSONArray getCustomerDetails(HttpSession session) {
-        RestTemplate restTemplate = new RestTemplate();
-        String getToppingsUrl = baseUrl + customerSearchUrl + session.getAttribute("username");
-        ServerResponseMessage responseMessage = restTemplate.getForObject(getToppingsUrl, ServerResponseMessage.class);
-        JSONArray jsonArray = new JSONArray();
-        for (int i = 0; i < responseMessage.getData().size(); i++) {
-            JSONObject jsonObject = responseMessage.getData().get(i);
-            jsonArray.add(jsonObject);
+    public JSONArray getDeliveryDetails(HttpSession session) {
+        if (session.getAttribute("deliveryDetails") == null || session.getAttribute("deliveryDetails") == "") {
+            JSONArray deliveryDetails = new JSONArray();
+            session.setAttribute("deliveryDetails", deliveryDetails);
         }
-        return jsonArray;
+        JSONArray deliveryDetailsJson = (JSONArray) session.getAttribute("deliveryDetails");
+        if (deliveryDetailsJson.size() > 0) {
+            return deliveryDetailsJson;
+        } else {
+            RestTemplate restTemplate = new RestTemplate();
+            String getToppingsUrl = baseUrl + customerSearchUrl + session.getAttribute("username");
+            ServerResponseMessage responseMessage = restTemplate.getForObject(getToppingsUrl, ServerResponseMessage.class);
+            JSONArray jsonArray = new JSONArray();
+            for (int i = 0; i < responseMessage.getData().size(); i++) {
+                JSONObject jsonObject = responseMessage.getData().get(i);
+                jsonArray.add(jsonObject);
+            }
+            return jsonArray;
+        }
+    }
+
+    @RequestMapping(value = "/delivery/save-delivery-data", method = RequestMethod.POST)
+    @ResponseBody
+    public void saveDeliveryDetails(HttpSession session, HttpServletRequest request) {
+        if (session.getAttribute("deliveryDetails") == null || session.getAttribute("deliveryDetails") == "") {
+            JSONArray deliveryDetails = new JSONArray();
+            session.setAttribute("deliveryDetails", deliveryDetails);
+        }
+        JSONArray deliveryDetailsJson = (JSONArray) session.getAttribute("deliveryDetails");
+        deliveryDetailsJson.clear();
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("firstName", request.getParameter("firstName"));
+        jsonObject.put("lastName", request.getParameter("lastName"));
+        jsonObject.put("addressLine01", request.getParameter("address01"));
+        jsonObject.put("addressLine02", request.getParameter("address02"));
+        jsonObject.put("addressLine03", request.getParameter("address03"));
+        jsonObject.put("email", request.getParameter("email"));
+        jsonObject.put("mobile", request.getParameter("contactNo"));
+        jsonObject.put("description", request.getParameter("description"));
+        deliveryDetailsJson.add(jsonObject);
+        session.setAttribute("deliveryDetails", deliveryDetailsJson);
     }
 }

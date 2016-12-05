@@ -4,14 +4,21 @@ $(document).ready(function () {
     $("#timepicker1").prop("disabled", true);
     $("#timepicker2").prop("disabled", true);
     $('.bootstrap-timepicker1').timepicker({
-        minuteStep: 1,
-        template: 'modal',
-        appendWidgetTo: 'body',
-        showSeconds: true,
+        minuteStep: 5,
         showMeridian: false,
-        defaultTime: false
+        icons: {
+            up: 'fa fa-chevron-up',
+            down: 'fa fa-chevron-down'
+        }
     });
-    $('.bootstrap-timepicker2').timepicker();
+    $('.bootstrap-timepicker2').timepicker({
+        minuteStep: 5,
+        showMeridian: false,
+        icons: {
+            up: 'fa fa-chevron-up',
+            down: 'fa fa-chevron-down'
+        }
+    });
     fillDeliveryFormData();
 
     // Dynamically change the content according to the delivery options
@@ -53,7 +60,7 @@ function fillDeliveryFormData() {
     $.ajax({
         type: 'get',
         dataType: "json",
-        url: "delivery/get-customer-data",
+        url: "delivery/get-delivery-data",
         success: function (result) {
             if (result.length > 0) {
                 $("#txt-fname").val(result[0].firstName);
@@ -65,6 +72,9 @@ function fillDeliveryFormData() {
                 }
                 $("#txt-email").val(result[0].email);
                 $("#txt-contactno").val(result[0].mobile);
+                if (typeof result[0].description !== "undefined") {
+                    $("#txtarea-delivery-description").val(result[0].description);
+                }
             }
         }
     });
