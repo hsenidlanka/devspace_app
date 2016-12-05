@@ -56,7 +56,7 @@ Is CN=localhost, OU=localhost, O=localhost, L=localhost, ST=localhost, C=SL corr
     truststorePass="changeit" /></code></pre>
 
 **(vi)** Check the connection as the following the link.
-<code>[https://localhost:8443/cas]</code>
+<code>[https://localhost:8443/cas](https://localhost:8443/cas)</code>
 <br/>
 
 
@@ -72,5 +72,5 @@ Is CN=localhost, OU=localhost, O=localhost, L=localhost, ST=localhost, C=SL corr
 
 ###How to run###
 
-* Open your browser and type the url as <pre><code>[https://localhost:8443/cas/admin/users/list]</code></pre>
+* Open your browser and type the url as <pre><code>[https://localhost:8443/cas/admin/users/list](https://localhost:8443/cas/admin/users/list)</code></pre>
 * You should be then navigated to the login page of admin module.
