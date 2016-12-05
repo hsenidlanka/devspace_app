@@ -1,6 +1,6 @@
 
 # Pizza Shefu Admin Module
-       The admin module is for the Administration purposes of the Pizza Shefu. The main management areas include Users Management including customers and staff, Item Management, Category Management,Package Management and Notification Management.   
+The admin module is for the Administration purposes of the Pizza Shefu. The main management areas include Users Management including customers and staff, Item Management, Category Management,Package Management and Notification Management.   
 
 #### Prerequisities
  - core-logic 0.0.3 as a dependency in pom.xml file
