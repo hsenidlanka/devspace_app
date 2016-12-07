@@ -56,14 +56,14 @@ public class MenuController {
         RestTemplate restTemplate = new RestTemplate();
         String url = baseUrl + categoryListUrl; // Get categories
         ServerResponseMessage responseMessage = restTemplate.getForObject(url, ServerResponseMessage.class);
-        logger.info(String.valueOf(responseMessage.getData().size()));
+//        logger.info(String.valueOf(responseMessage.getData().size()));
 
         for (int i=0; i < responseMessage.getData().size() ; i++){
             responseMessage.getData().get(i).put("baseUrl", imageBaseUrl);
         }
 
         modelAndView.addObject("categories", responseMessage.getData());
-        logger.info(String.valueOf(responseMessage.getData()));
+//        logger.info(String.valueOf(responseMessage.getData()));
         return modelAndView;
     }
 
