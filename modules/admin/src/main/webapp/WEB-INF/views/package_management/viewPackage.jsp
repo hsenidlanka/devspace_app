@@ -8,7 +8,6 @@
 <html>
 <head lang="en">
 
-    <meta charset="UTF-8">
     <title>View Package</title>
 
     <!-- include common CSS, fonts and js -->
@@ -150,7 +149,7 @@
             </div>
             <div class="modal-body">
 
-                <form:form class="form-horizontal" role="form" id="frmEditPkg" action="/admin/packages/update_package">
+                <form:form class="form-horizontal" role="form" method="post" id="frmEditPkg" action="/admin/packages/edit_package" enctype="multipart/form-data">
                     <fieldset class="scheduler-border">
                         <legend class="scheduler-border"><fmt:message key="package.packageedit.form.legend" bundle="${bundle1}"/></legend>
 
@@ -176,7 +175,7 @@
                                 </div>
                                 <div class="row col-xs-9" style="padding-left: 30px;">
 
-                                       <div class="row col-xs-12" style="margin-left: 1%;">
+                                       <div class="row col-xs-12">
 
                                            <div class="row item-tbl-row item-tbl-hdr">
                                                <div class="col-xs-2">
@@ -193,10 +192,10 @@
                                                </div>
                                            </div>
 
-                                           <div class="row rowtbl item-tbl-row" id="tbladdPkgCont">
+                                           <div class="row rowtbl item-tbl-row" id="tbleditPkgCont">
                                                <div class="col-xs-2">
                                                    <label class="checkbox-inline">
-                                                       <form:checkbox value="pizza" class="checkbox chkbxPkgCat" path="imageUrl" id="chkPkgCat"/>
+                                                       <form:checkbox value="pizza" class="checkbox chkbxPkgCat" path="" id="chkPkgCat"/>
                                                        <label class="chkbxPkgCat1"></label>
                                                    </label>
                                                </div>
@@ -211,10 +210,15 @@
                                                    </form:select>
                                                </div>
                                                <div class="col-xs-3">
-                                                   <form:input class="qty-spinner" type="number" min="0" id="contQty" path="quantity"/>
+                                                   <form:input class="form-control qty-spinner" type="number" min="0" id="contQty" path="quantity"/>
                                                </div>
                                            </div>
                                            <div class="tstDiv"></div>
+                                           <br>
+                                           <div class="addTo" style="text-align: right">
+                                               <button class="btn btn-success btnAddItmPkg" type="button" id="addToEdit" value="add" onclick="contentPackageEdit()"><span
+                                                       class="glyphicon glyphicon-plus"></span>Create Package Content</button>
+                                           </div>
                                            <br>
                                        </div>
 
@@ -228,7 +232,7 @@
                                     <label><fmt:message key="package.packageeditform.packageimages" bundle="${bundle1}"/></label>
                                 </div>
                                 <div class="col-xs-5">
-                                    <form:input type="file" class="file_upload btn btn-default" path="" id="btnUpldImageEdit" value="Browse" />
+                                    <form:input type="file" class="file_upload btn btn-default" path="imageUrl" id="btnUpldImageEdit" value="Browse" />
                                     <br>
                                 </div>
                             </div>
@@ -247,17 +251,18 @@
                             </div>
 
                         </div>
-                    </fieldset>
+
 
 
             </div>
             <div style="text-align: center; z-index: 50000; width: 50%; margin: auto;" id="toaster"></div>
             <div class="modal-footer" align="right">
-                <form:button class="btn btn-success" type="submit" value="Yes" id="btnUpdtPkg" onclick="contentPackgeEdit()"><fmt:message key="package.packageedit.form.button.submit" bundle="${bundle1}"/>
+                <form:button class="btn btn-success" type="submit" value="Yes" id="btnUpdtPkg"><fmt:message key="package.packageedit.form.button.submit" bundle="${bundle1}"/>
                 </form:button>
                 <form:button class="btn btn-success" type="reset" value="cancel" id="btnUpPkgCancel" data-dismiss="modal"><fmt:message key="package.packageedit.form.button.reset" bundle="${bundle1}"/>
                 </form:button>
             </div>
+            </fieldset>
             </form:form>
         </div>
     </div>

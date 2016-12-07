@@ -1,26 +1,27 @@
+var categoryNm;
+
 $(document).ready(function () {
 
-
-    $("#txtAddPkgName").focusout(function(){
-        if($(this).val()==''){
+    $("#txtAddPkgName").focusout(function () {
+        if ($(this).val() == '') {
             document.getElementById('pkgNmErr').innerHTML = 'Package Name should not be empty !';
             $(this).addClass('invalid-input');
         }
     });
 
-    $("#txtAddPkgPrice").focusout(function(){
-        if($(this).val()=='0.0' || null){
+    $("#txtAddPkgPrice").focusout(function () {
+        if ($(this).val() == '0.0' || null) {
             document.getElementById('pkgPriceErr').innerHTML = 'Package price should not be empty !';
             $(this).addClass('invalid-input');
-        }else{
+        } else {
             $(this).removeClass('invalid-input');
         }
     });
-    $("#editPkgPrice").focusout(function(){
-        if($(this).val()=='0.00' || null){
+    $("#editPkgPrice").focusout(function () {
+        if ($(this).val() == '0.00' || null) {
             document.getElementById('pkgPriceErrEdt').innerHTML = 'Package price should not be empty !';
             $(this).addClass('invalid-input');
-        }else{
+        } else {
             $(this).removeClass('invalid-input');
         }
     });
@@ -53,9 +54,9 @@ $(document).ready(function () {
         }
     })
 
-/*
-* Function for clone and appending content table dynamically
-**/
+    /*
+     * Function for clone and appending content table dynamically
+     **/
     $.ajax({
         type: 'POST',
         url: 'https://localhost:8443/admin/packages/getCatListContent',
@@ -78,41 +79,61 @@ $(document).ready(function () {
         },
         error: function (e) {
             alert(e);
-            console.log("Error dd ",e);
+            console.log("Error dd ", e);
             console.log(e.message);
         }
     });
 
     /*
-     * populating the item list in add Package.jsp
+     * populating the item list in add Package.jsp and contentEdit in viewPackage.jsp
      **/
     $(document.body).on('click', '.chkbxPkgCat', function () {
-        var categoryNm = $(this).val();
+
+        categoryNm = $(this).val();
         var slctElement = $(this).parent().parent().next().find(".form-control").attr('id');
         var selectedItm = $(this).parent().parent().next().next().find(".form-control").attr('id');
+        var selectedQty = $(this).parent().parent().next().next().next().find(".form-control");
 
+        //
         console.log($(this).val());
         console.log($(this).parent().parent().next().find(".form-control").css('color', 'green'));
         console.log($(this).parent().parent().next().next().find(".form-control").css('color', 'rgb(167, 68, 7)'));
+        //
 
-        setItemList(categoryNm, slctElement, selectedItm);
+        if ($(this).is(":checked")) {
+            setItemList(categoryNm, slctElement, selectedItm);
+            $(this).parent().parent().next().next().next().find(".form-control").val('1');
+
+            selectedQty.click(function () {
+                if ($.trim($(this).val()) == "0") {
+                    selectedQty.css({"border-color": "red", "border-width": "2px"});
+                }
+                else {
+                    selectedQty.css({"border-color": "", "border-width": ""});
+                }
+            });
+
+        } else {
+            $(this).parent().parent().next().find(".form-control").val('');
+            $(this).parent().parent().next().next().find(".form-control").val('');
+            $(this).parent().parent().next().next().next().find(".form-control").val('0');
+            selectedQty.css({"border-color": "", "border-width": ""});
+        }
     });
-
-    /* function disableTxt(t, textBoxId) {
-     $("#" + textBoxId).prop("disabled", !$(t).prop("checked"));
-     $("#" + textBoxId).val(" ");
-     }*/
-
-
 });
-function setItemList(categoryNm, slctElement, selectedItm) {
+
+
+/*
+* function for getting item name list according to the selected category
+**/
+function setItemList(categoryNmVal, slctElementVal, selectedItmVal) {
+
     $.ajax({
-        //type: "POST",
         url: "https://localhost:8443/admin/packages/getItemNames",
-        data: {"categoryNm": categoryNm},
+        data: {"categoryNm": categoryNmVal},
 
         success: function (data) {
-            var slctItemsPkg = $("#" + slctElement), option = "";
+            var slctItemsPkg = $("#" + slctElementVal), option = "";
             slctItemsPkg.empty();
 
             for (var itm = 0; itm < data.length; itm++) {
@@ -121,20 +142,20 @@ function setItemList(categoryNm, slctElement, selectedItm) {
             slctItemsPkg.append(option);
 
             //get default size price on load
-            generate(selectedItm, slctElement);
+            generate(selectedItmVal, slctElementVal);
 
             //get size price on change
-            $("#" + slctElement).change(function () {
-                generate(selectedItm, slctElement);
+            $("#" + slctElementVal).change(function () {
+                generate(selectedItmVal, slctElementVal);
             });
 
         },
         error: function (e) {
-            alert("error " + e);
+            alert("error 2" + e);
         }
-
     });
 }
+
 /*
  * Common function for populate item size and price in
  **/
@@ -142,7 +163,6 @@ function generate(selectedItm, slctElement) {
     var selectedName = $("#" + slctElement).val();
 
     $.ajax({
-        // dataType:'JSON',
         type: "POST",
         url: "https://localhost:8443/admin/packages/getSizePrice",
         data: {"itemName": selectedName},
@@ -169,137 +189,43 @@ function generate(selectedItm, slctElement) {
     });
 }
 
-function contentPackge() {
-
-    $('#frmAddPkg').on('submit',function(e){
-        e.preventDefault();
-        return false;
-    });
-
+/*
+* function for creating package content
+**/
+function contentCreate() {
     jsonObj2 = [];
-    content = {};
 
-    if ($('#chkPkgCat0').is(':checked')) {
-        var itemVal = $('#slctItmPkgCat0').val();
-        var sizeVal = $("#szpr0").val();
-        var qtyVal = $("#contQty0").val();
-
+    $('.chkbxPkgCat').each(function () {
         content = {};
-        content["itemName"] = itemVal;
-        content["size"] = sizeVal;
-        content["quantity"] = qtyVal;
+        if ($(this).is(':checked')) {
 
-        jsonObj2.push(content);
-        jsonString = JSON.stringify(jsonObj2);
-    }
-    if ($('#chkPkgCat1').is(':checked')) {
-        var itemVal2 = $('#slctItmPkgCat1').val();
-        var sizeVal2 = $("#szpr1").val();
-        var qtyVal2 = $("#contQty1").val();
+            var itmval = $(this).parent().parent().next().find(".form-control").val();
+            var slcted = $(this).parent().parent().next().next().find(".form-control").val();
+            var selctqty = $(this).parent().parent().next().next().next().find(".form-control").val();
 
-        content = {};
-        content["itemName"] = itemVal2;
-        content["size"] = sizeVal2;
-        content["quantity"] = qtyVal2;
+            content["itemName"] = itmval;
+            content["size"] = slcted;
+            content["quantity"] = selctqty;
 
-        jsonObj2.push(content);
-        jsonString = JSON.stringify(jsonObj2);
-    }
-    if ($('#chkPkgCat2').is(':checked')) {
-        var itemVal3 = $('#slctItmPkgCat2').val();
-        var sizeVal3 = $("#szpr2").val();
-        var qtyVal3 = $("#contQty2").val();
-
-        content = {};
-        content["itemName"] = itemVal3;
-        content["size"] = sizeVal3;
-        content["quantity"] = qtyVal3;
-
-        jsonObj2.push(content);
-        jsonString = JSON.stringify(jsonObj2);
-    }
-    if ($('#chkPkgCat3').is(':checked')) {
-        var itemVal4 = $('#slctItmPkgCat3').val();
-        var sizeVal4 = $("#szpr3").val();
-        var qtyVal4 = $("#contQty3").val();
-
-        content = {};
-        content["itemName"] = itemVal4;
-        content["size"] = sizeVal4;
-        content["quantity"] = qtyVal4;
-
-        jsonObj2.push(content);
-        jsonString = JSON.stringify(jsonObj2);
-    }
-    if ($('#chkPkgCat4').is(':checked')) {
-        var itemVal5 = $('#slctItmPkgCat4').val();
-        var sizeVal5 = $("#szpr4").val();
-        var qtyVal5 = $("#contQty4").val();
-
-        content = {};
-        content["itemName"] = itemVal5;
-        content["size"] = sizeVal5;
-        content["quantity"] = qtyVal5;
-
-        jsonObj2.push(content);
-
-    }
-    var pkgName = $("#txtAddPkgName").val();
-    var pkgPrice = $("#txtAddPkgPrice").val();
-    var pkgImg = $("#savePkgImg").val();
-
+            jsonObj2.push(content);
+            jsonString = JSON.stringify(jsonObj2);
+        }
+    });
     console.log("pp " + jsonObj2);
-    console.log("pp2 " + jsonString);
-
- /*   if (jsonObj2.length() == 0) {
-        $.toaster({priority: 'warning', title: 'Warning !', message: 'Please fill the package content for ' + pkgName});
-    }*/
+    console.log("pp " + jsonObj2[0]['quantity']);
+    console.log("pp24 " + jsonString);
 
     $.ajax({
-        url: "https://localhost:8443/admin/packages/add_package",
-        data: {"test": JSON.stringify(jsonObj2), "pkgName": pkgName, "pkgPrice": pkgPrice, "pkgImg": pkgImg},
-        type: "POST",
+        url: "https://localhost:8443/admin/packages/add_content",
+        data: {"test": JSON.stringify(jsonObj2)},
+        type: "GET",
         success: function () {
-
-                setTimeout(function() {
-                    $("#frmAddPkg").submit();
-                }, 3000);
-
-            window.location.href += "#last";
-            location.reload(true);
+            $('.btnAddItmPkg').replaceWith("<div class=\"add-status\"><span class=\"glyphicon glyphicon-ok\"></span> Content Created</div>");
         },
         error: function (e) {
-         //   $.toaster({priority: 'danger', title: 'Error', message: 'Cannot add the package ' + pkgName});
+            alert("error occurred  ", e);
+            console.log("error occurred  ", e);
+            //   $.toaster({priority: 'danger', title: 'Error', message: 'Cannot add the package ' + pkgName});
         }
     });
 }
-
-/*
-
- $.each( '.chkbxPkgCat', function( key, value ) {
- jsonObj2 = [];
- if($('.chkbxPkgCat').is(':checked')){
- var itemVal = $('#slctItmPkgPzza').val();
- var sizeVal = $("#szpr1").val();
- var qtyVal = $("#pzzaQty").val();
-
- content = {};
- content["itemName"] = itemVal;
- content["size"] = sizeVal;
- content["quantity"] = qtyVal;
-
- jsonObj2.push(content);
- jsonString = JSON.stringify(jsonObj2);
- }
- alert(key, value);
- console.log(jsonObj2);
- console.log(jsonString);
- });*/
-
-///
-/*if((result.length) != 0){
- $(".btnAddItmPkg").replaceWith("<div class=\"add-status\"><span class=\"glyphicon glyphicon-ok\"></span> Finish</div>");
- }*/
-
-/*TO DO*/
-//automate jsonObject fetching*/
