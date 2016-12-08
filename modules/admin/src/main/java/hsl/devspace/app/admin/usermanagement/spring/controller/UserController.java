@@ -62,12 +62,12 @@ public class UserController {
     private UserRepository staffRepository, customerRepository;
 
 
-    @RequestMapping(value="/list")
+  /*  @RequestMapping(value="/list")
     public ModelAndView listContact(ModelAndView model)  {
         model.setViewName("home");
         return model;
     }
-
+*/
 /////////////////////////////////////////////////////  USER ADD HANDLER METHODS //////////////////////////////////////////////////////
 
 //    customer user add is done in below methods
@@ -76,13 +76,10 @@ public class UserController {
         return new ModelAndView("user_management/userAdd", "command",new User());
     }
 
-
-
     @RequestMapping(value="/addCustomer",method = RequestMethod.POST)
     public ModelAndView saveOrUpdate(@ModelAttribute("newUser")  User newUser,
                                      @RequestParam("radioName") String userType,BindingResult validationResult,
                                      HttpServletRequest request, HttpServletResponse response) throws SQLIntegrityConstraintViolationException {
-
 
         if (validationResult.hasErrors()) {
             new ModelAndView("user_management/userAdd", "command", newUser);

@@ -74,7 +74,6 @@
                                 <div class="col-xs-4">
                                     <span id="itmImgErr" class="input-group-error"> </span>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -117,7 +116,7 @@
                                     <strong><fmt:message key="category.categoryadd.form.subcatdescription" bundle="${bundle1}"/></strong>
                                 </div>
                                 <div class="col-xs-3">
-                                        <%--<strong><fmt:message key="package.packageadd.form.packagedetails.itemsize" bundle="${bundle1}"/></strong>--%>
+                                        <strong><fmt:message key="category.categoryadd.form.addOrRemove" bundle="${bundle1}"/></strong>
                                 </div>
                             </div>
 
@@ -134,8 +133,10 @@
                                 </div>
                                 <div class="col-xs-3">
                                     <a href="#" class="addcat ">
-                                        <span class="glyphicon glyphicon-plus">New Subcategory</span>
+                                        <span class="glyphicon glyphicon-plus"></span>
                                     </a>
+                                    <a href="#" class="deletecat">
+                                        <span class=" glyphicon glyphicon-minus"></span> </a>
                                 </div>
                             </div>
                         </div>

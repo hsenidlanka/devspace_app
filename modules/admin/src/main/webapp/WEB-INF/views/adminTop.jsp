@@ -3,31 +3,31 @@
 
 
 <!-- CSS -->
-<spring:url value="../themes/hsenid/bootstrap/css/bootstrap.min.css" var="css1"/>
-<spring:url value="../themes/hsenid/css/business-casual.css" var="css2"/>
+<spring:url value="/themes/hsenid/bootstrap/css/bootstrap.min.css" var="bootstrapCss"/>
+<link href="${bootstrapCss}" rel="stylesheet">
 
-<link href="${css1}" rel="stylesheet">
-<link href="${css2}" rel="stylesheet">
+<spring:url value="/themes/hsenid/css/business-casual.css" var="formalCss"/>
+<link href="${formalCss}" rel="stylesheet">
 
 
 <!-- Javascript -->
-<spring:url value="/themes/hsenid/bootstrap/js/jquery-3.1.0.min.js" var="js1"/>
-<spring:url value="/themes/hsenid/bootstrap/js/bootstrap.min.js" var="js2"/>
+<spring:url value="/themes/hsenid/bootstrap/js/jquery-3.1.0.min.js" var="jqueryJs"/>
+<spring:url value="/themes/hsenid/bootstrap/js/bootstrap.min.js" var="bootstrapJs"/>
 
-<script src="${js1}"></script>
-<script src="${js2}"></script>
+<script src="${jqueryJs}"></script>
+<script src="${bootstrapJs}"></script>
 
 
 <!-- Fonts -->
-<spring:url value="/themes/hsenid/bootstrap/css/fonts.css" var="css4"/>
-<link href="${css4}" rel="stylesheet">
+<spring:url value="/themes/hsenid/bootstrap/css/fonts.css" var="fontCss"/>
+<link href="${fontCss}" rel="stylesheet">
 
 <!--bootstrap table-->
-<spring:url value="/themes/hsenid/bootstrap/css/bootstrap-table.min.css" var="css1"/>
-<link href="${css1}" rel="stylesheet">
+<spring:url value="/themes/hsenid/bootstrap/css/bootstrap-table.min.css" var="cssTable"/>
+<link href="${cssTable}" rel="stylesheet">
 
-<spring:url value="/themes/hsenid/bootstrap/js/bootstrap-table.min.js" var="js3"/>
-<script src="${js3}"></script>
+<spring:url value="/themes/hsenid/bootstrap/js/bootstrap-table.min.js" var="tableJs"/>
+<script src="${tableJs}"></script>
 
 <%--jquery toaster--%>
 <spring:url value="/themes/hsenid/js/jquery.toaster.js" var="jsToast"/>

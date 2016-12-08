@@ -15,7 +15,6 @@ $(document).ready(function(){
         //alert("category"+" "+categorySel );
 
             $.ajax({
-
                 url: "https://localhost:8443/admin/category/populateSubCategory",
                 data: {"categorySel":categorySel},
                 success: function (msg) {
@@ -32,7 +31,6 @@ $(document).ready(function(){
                 error: function (e) {
                     alert("ajax failed" + e);
                 }
-
             });
     });
 
@@ -50,7 +48,7 @@ $(document).ready(function(){
         '<label class="checkbox-inline"><div contenteditable><input name="subcategory_name[]" type="text" class="form-control" id="subcategoryname" required="required" placeholder="Enter Category Name"/>' +
         '</div></label></div><div class="col-xs-5"><div contenteditable><textarea name="subcategory_des[]" class="form-control" id="subcategorydes" placeholder="Enter Category Description" >' +
         '</textarea></div></div> <div class="col-xs-3"> <a href="#" class="addsub"> <span class=" glyphicon glyphicon-plus"></span> ' +
-        '</a> <a href="#" class="deletesub"> <span class=" glyphicon glyphicon-minus"></span> </a> </div>');
+        '</a> <a href="#" class="deletesub"> <span class="glyphicon glyphicon-minus"></span></a></div>');
 
         $('.subcat_add_table').append(newRow);
         $(".deletesub").on('click',function(){

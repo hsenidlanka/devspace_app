@@ -28,6 +28,9 @@
             color: black;
         }
     </style>
+    <spring:url value="/themes/hsenid/js/logout.js" var="jsLogout"/>
+    <script src="${jsLogout}"></script>
+
 </head>
 <body>
 
@@ -39,7 +42,9 @@
     </div>
 
     <div>
+        <%--<a id="logout" href="<c:url value="https://localhost:8443/admin/PizzaShefu/logout"/>">Log Out</a>--%>
         <a id="logout" href="#">Log Out</a>
+
     </div>
 
 </div>

@@ -5,30 +5,32 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
-
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping(value = "/cas")
-//@SessionAttributes("welcomeForm")
+@RequestMapping(value ="/PizzaShefu")
+@SessionAttributes("thought")
 public class WelcomeController {
 
     private static final Logger LOG = LogManager.getLogger(WelcomeController.class);
-    private static final String view = "casLoginView";
+    private static final String view = "home";
+    HttpServletRequest request;
 
-    @RequestMapping(value ="/login", method= RequestMethod.GET)
-    public ModelAndView initWelcome(@RequestParam(value = "error", required = false) String error) throws Exception {
-
+   @RequestMapping(value ="/")
+    public String initWelcome()  {
         LOG.trace("inside the welcome initiate service method");
 
-        ModelAndView model = new ModelAndView();
-        if (error != null) {
-            model.addObject("error", "Invalid username and password!");
-        }
-        model.setViewName(view);
-        return model;
+        return view;
+    }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout(HttpSession session){
+        session.invalidate();
+       return "redirect:https://localhost:8443/cas/logout";
+//        return "1";
     }
 
 }

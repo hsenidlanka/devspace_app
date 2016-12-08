@@ -5,8 +5,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+
   <!--include common CSS, fonts and js-->
   <jsp:include page="adminTop.jsp"/>
+
+ <%-- <spring:url value="/themes/hsenid/bootstrap/css/bootstrap-table.min.css" var="css1"/>
+  <link href="${css1}" rel="stylesheet">--%>
   <spring:url value="/themes/hsenid/css/form-elements.css" var="css2"/>
   <link href="${css2}" rel="stylesheet">
 
@@ -97,7 +101,6 @@
                 <fmt:message key="package.viewpackage.breadcrumb.viewpkg" bundle="${bundle1}"/>
                 </a>
               </li>
-
             </ul>
           </div>
         </div>
