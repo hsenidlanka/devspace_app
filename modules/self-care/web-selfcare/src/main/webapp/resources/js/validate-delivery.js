@@ -55,9 +55,22 @@ $(document).ready(function () {
         if (isFirstNameValid == false || isLastNameValid == false || isContactNoValid == false || isEmailValid == false || isAddress01Valid == false || isAddress02Valid == false) {
             $("#validation-error-popup").modal('show');
         } else {
-            var del = $('input[name=radiodelwhen]:checked').val();
-            alert(del);
-            //window.location = '../pages/delivery-summary.html';
+            //var del = $('input[name=radiodelwhen]:checked').val();
+            $.ajax({
+                type: "post",
+                url: "delivery/save-delivery-data",
+                data: {
+                    "firstName":$("#txt-fname").val(),
+                    "lastName":$("#txt-lname").val(),
+                    "contactNo":$("#txt-contactno").val(),
+                    "email":$("#txt-email").val(),
+                    "address01":$("#txt-deliadd01").val(),
+                    "address02":$("#txt-deliadd02").val(),
+                    "address03":$("#txt-deliadd03").val(),
+                    "description":$("#txtarea-delivery-description").val()
+                }
+            });
+            window.location = 'delivery-summary';
         }
     });
 });
@@ -130,8 +143,9 @@ function validateContactNo() {
 //Validate the email address
 function validateEmail() {
     if ($("#txt-email").val().length == 0) {
-        $("#txt-email").css("background-color", "white");
-        $("#email_error").hide();
+        $("#email_error").show();
+        $("#txt-email").css("background-color", background_color);
+        $("#email_error").text("Please enter a email.");
     } else {
         var inputVal = $("#txt-email").val();
         var emailReg = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;

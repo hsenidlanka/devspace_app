@@ -52,8 +52,9 @@
                                         <ul class="grid cs-style-3">
                                             <li data-teskly-viewitle="<c:out value="${itemData.description}"/>">
                                                 <figure>
-                                                    <img src="<c:url value="/resources/images/image_placeholder.gif"/>"
-                                                         class="menu-images">
+
+                                                    <img class="menu-images"
+                                                         src="<c:url value="/resources/images/image_placeholder.gif"/>">
                                                     <figcaption class="caption">
                                                         <input type="hidden" id="menu-item-desc"
                                                                value="<c:out value="${itemData.description}"/>"/>
@@ -73,9 +74,8 @@
                                                                     <c:set var="formattedSize"
                                                                            value="${fn:toUpperCase(substringSize)}"/>
 
-                                                                    <c:out value="${formattedSize}"/>:&nbsp;
-                                                                    <label id="pizza-price-<c:out value="${itemData.price[loop.index]['size']}"/>">
-                                                                            ${itemData.price[loop.index]['price']}
+                                                                    <c:out value="${formattedSize}"/>:&nbsp;<label id="pizza-price-<c:out
+                                                                        value="${itemData.price[loop.index]['size']}"/>">${itemData.price[loop.index]['price']}
                                                                     </label><br>
                                                                 </c:forEach>
                                                                 <a class="btn btn-success btn-xs btn-addtocart-<c:out value="${category}"/>">
@@ -86,35 +86,44 @@
                                                             </c:when>
                                                             <c:otherwise>
                                                                 <div>
-                                                                    <label>Price:</label>
-                                                                    <label id="lbl-sizeprice"><c:out
-                                                                            value="${itemData.price[0]['price']}"/></label>
-                                                                    <select id="sizes" class="sizes-dropdowns"
-                                                                            style="text-transform: capitalize; font-size: small;">
-                                                                        <c:forEach begin="0" end="${sizePriceLength-1}"
-                                                                                   varStatus="loop">
-                                                                            <option value="<c:out value="${itemData.price[loop.index]['size']}"/>">
-                                                                                <c:out value="${itemData.price[loop.index]['size']}"/></option>
-                                                                        </c:forEach>
-                                                                    </select>
-                                                                    <c:forEach begin="0" end="${sizePriceLength-1}"
-                                                                               varStatus="loop">
-                                                                        <input type="hidden"
-                                                                               id="hiddenFld-<c:out value="${itemData.price[loop.index]['size']}"/>"
-                                                                               value="<c:out value="${itemData.price[loop.index]['price']}"/>"/>
-                                                                    </c:forEach>
+                                                                    <div class="row">
+                                                                        <label>Price:</label>
+                                                                        <label id="lbl-sizeprice"><c:out
+                                                                                value="${itemData.price[0]['price']}"/></label>
+                                                                    </div>
 
+                                                                    <div class="row">
+
+                                                                        <div class="col-sm-6">
+                                                                            
+                                                                            <select id="sizes" class="sizes-dropdowns"
+                                                                                    style="text-transform: capitalize; font-size: small;">
+                                                                                <c:forEach begin="0" end="${sizePriceLength-1}" varStatus="loop">
+                                                                                    <option value="<c:out value="${itemData.price[loop.index]['size']}"/>">
+                                                                                        <c:out value="${itemData.price[loop.index]['size']}"/></option>
+                                                                                </c:forEach>
+                                                                            </select>
+                                                                            <c:forEach begin="0"
+                                                                                       end="${sizePriceLength-1}"
+                                                                                       varStatus="loop">
+                                                                                <input type="hidden" id="hiddenFld-<c:out value="${itemData.price[loop.index]['size']}"/>" value="<c:out value="${itemData.price[loop.index]['price']}"/>"/>
+                                                                            </c:forEach>
+                                                                            
+                                                                        </div>
+
+                                                                            <%--style="margin-top: 15px;"--%>
+                                                                        <div class="col-sm-6">
+                                                                                <%--<label class="add-to-cart-label-qty">QTY:</label>--%>
+
+                                                                            <input style="margin-left: 5px" class="spin add-to-cart-spin" type="number" min="1" max="100" value="1">
+                                                                        </div>
+
+                                                                    </div>
                                                                 </div>
-                                                                <div style="margin-top: 15px;">
-                                                                    <label class="add-to-cart-label-qty">QTY:</label>
-                                                                    <input class="spin add-to-cart-spin" type="number"
-                                                                           min="1" max="100" value="1">
+                                                                <%--style="margin-top: 15px"--%>
+                                                                <div class="row" >
+                                                                    <a style="" class="btn btn-success btn-xs btn-addtocart"><i class="fa fa-plus" aria-hidden="true"></i></a>
                                                                 </div>
-                                                                <a class="btn btn-success btn-xs btn-addtocart">
-                                                                    Add
-                                                                    to
-                                                                    cart
-                                                                </a>
                                                             </c:otherwise>
                                                         </c:choose>
                                                     </figcaption>

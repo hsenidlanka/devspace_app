@@ -4,16 +4,11 @@
     <%@include file="includes/include.jsp" %>
     <title><fmt:message key="delivery.payment" bundle="${lang}"/></title>
     <link rel="shortcut icon" href="">
-
-
     <link rel="stylesheet" href="<c:url value="/resources/css/progress-wizard.min.css"/>" >
     <script src="<c:url value="/resources/js/payment-operations.js"/>" ></script>
-
-
 </head>
 <body>
 <div class="loader-anim"></div>
-
 <%@include file="includes/new-header.jsp" %>
 
 <div class="main-div">
@@ -39,9 +34,10 @@
                             <div class="col-md-12">
                                 <form role="form">
                                     <div class="form-group">
-                                        <div class="checkbox">
+                                        <div class="sender-checkbox">
                                             <label>
-                                                <input type="checkbox"><fmt:message key="payment.same" bundle="${lang}"/></label>
+                                                <input type="checkbox" id="checkbox-same-sender" name="checkbox-same-sender"><fmt:message key="payment.same" bundle="${lang}"/>
+                                            </label>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -73,7 +69,9 @@
                                     <input type="radio" name="paymentradio" id="radio-delivery" value="payondel"
                                            checked=""><fmt:message key="payment.on.delivery" bundle="${lang}"/></label>&nbsp;&nbsp;
                                 <label>
-                                    <input type="radio" name="paymentradio" id="radio-pickup" value="payonline"><fmt:message key="payment.onlin" bundle="${lang}"/></label>
+                                    <input type="radio" name="paymentradio" id="radio-pickup" value="paymobile"><fmt:message key="payment.by.mobile" bundle="${lang}"/></label>
+                                <label style="margin-left: 10px;">
+                                    <input type="radio" name="paymentradio" id="radio-pic" value="paycard"><fmt:message key="payment.by.card" bundle="${lang}"/></label>
                             </div>
                             <a class="btn btn-success btn-proceed-payment" id="btn-pay"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;<fmt:message key="payment.cont" bundle="${lang}"/></a>
                         </div>

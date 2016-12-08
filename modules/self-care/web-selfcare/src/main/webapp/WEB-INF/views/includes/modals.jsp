@@ -3,7 +3,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
         <img class="icons" src="<c:url value="/resources/images/icons/shopping-cart-add.png"/>">
         <h4 class="modal-title header-panel">Customize and Add to Cart</h4>
       </div>

@@ -26,10 +26,6 @@ $(document).ready(function(){
             align: 'right',
             sortable: true
         },{
-            field: 'image',
-            title: 'Package Image',
-            sortable: true
-        },{
             field: 'operate',
             title: 'Operations',
             align: 'center',
@@ -99,102 +95,47 @@ window.operateEvents = {
     }
 };
 
-function contentPackgeEdit() {
+
+/*
+ * function for editing package content
+ **/
+function contentPackageEdit() {
+
     jsonObj2 = [];
-    content = {};
-
-    if ($('#chkPkgCat0').is(':checked')) {
-        var itemVal = $('#slctItmPkgCat0').val();
-        var sizeVal = $("#szpr0").val();
-        var qtyVal = $("#contQty0").val();
-
+    $('.chkbxPkgCat').each(function () {
         content = {};
-        content["itemName"] = itemVal;
-        content["size"] = sizeVal;
-        content["quantity"] = qtyVal;
+        if ($(this).is(':checked')) {
 
-        jsonObj2.push(content);
-        jsonString = JSON.stringify(jsonObj2);
-    }
-    if ($('#chkPkgCat1').is(':checked')) {
-        var itemVal2 = $('#slctItmPkgCat1').val();
-        var sizeVal2 = $("#szpr1").val();
-        var qtyVal2 = $("#contQty1").val();
+            var itmval = $(this).parent().parent().next().find(".form-control").val();
+            var slcted = $(this).parent().parent().next().next().find(".form-control").val();
+            var selctqty = $(this).parent().parent().next().next().next().find(".form-control").val();
 
-        content = {};
-        content["itemName"] = itemVal2;
-        content["size"] = sizeVal2;
-        content["quantity"] = qtyVal2;
+            content["itemName"] = itmval;
+            content["size"] = slcted;
+            content["quantity"] = selctqty;
 
-        jsonObj2.push(content);
-        jsonString = JSON.stringify(jsonObj2);
-    }
-    if ($('#chkPkgCat2').is(':checked')) {
-        var itemVal3 = $('#slctItmPkgCat2').val();
-        var sizeVal3 = $("#szpr2").val();
-        var qtyVal3 = $("#contQty2").val();
-
-        content = {};
-        content["itemName"] = itemVal3;
-        content["size"] = sizeVal3;
-        content["quantity"] = qtyVal3;
-
-        jsonObj2.push(content);
-        jsonString = JSON.stringify(jsonObj2);
-    }
-    if ($('#chkPkgCat3').is(':checked')) {
-        var itemVal4 = $('#slctItmPkgCat3').val();
-        var sizeVal4 = $("#szpr3").val();
-        var qtyVal4 = $("#contQty3").val();
-
-        content = {};
-        content["itemName"] = itemVal4;
-        content["size"] = sizeVal4;
-        content["quantity"] = qtyVal4;
-
-        jsonObj2.push(content);
-        jsonString = JSON.stringify(jsonObj2);
-    }
-    if ($('#chkPkgCat4').is(':checked')) {
-        var itemVal5 = $('#slctItmPkgCat4').val();
-        var sizeVal5 = $("#szpr4").val();
-        var qtyVal5 = $("#contQty4").val();
-
-        content = {};
-        content["itemName"] = itemVal5;
-        content["size"] = sizeVal5;
-        content["quantity"] = qtyVal5;
-
-        jsonObj2.push(content);
-        jsonString = JSON.stringify(jsonObj2);
-    }
-    var pkgName = $("#txtEditPkgNm").val();
-    var pkgPrice = $("#editPkgPrice").val();
-    var pkgImg = $("#btnUpldImageEdit").val();
-
+            jsonObj2.push(content);
+            jsonString = JSON.stringify(jsonObj2);
+        }
+    });
     console.log("pp " + jsonObj2);
-   //console.log("pp2 " + jsonString);
+    console.log("pp " + jsonObj2[0]['quantity']);
+    console.log("pp24 " + jsonString);
 
+    var pkgName = $("#txtEditPkgNm").val();
 
     $.ajax({
-        url: "https://localhost:8443/admin/packages/edit_package",
-        data: {"test2": JSON.stringify(jsonObj2), "pkgName2": pkgName, "pkgPrice2": pkgPrice, "pkgImg2": pkgImg},
-        type: "POST",
-        success: function (result) {
-            $("#btnUpdtPkg").click(function (event) {
-                event.preventDefault();
-                showloadingif();
-
-                setTimeout(function () {
-                    $("#frmEditPkg").submit();
-                }, 3000);
-            });
-            window.location.href += "#last";
-            location.reload(true);
+        url: "https://localhost:8443/admin/packages/edit_content",
+        data: {"test2": JSON.stringify(jsonObj2)},
+        type: "GET",
+        success: function () {
+            $('.btnAddItmPkg').replaceWith("<div class=\"add-status\"><span class=\"glyphicon glyphicon-ok\"></span> Content Created</div>");
         },
         error: function (e) {
-            //   $.toaster({priority: 'danger', title: 'Error', message: 'Cannot add the package ' + pkgName});
-            alert("error "+ e);
+              $.toaster({priority: 'danger', title: 'Error', message: 'Cannot update the package ' + pkgName});
+            alert("error ddddd"+ e);
+            console.log("error occurred  ",e);
         }
     });
 }
+

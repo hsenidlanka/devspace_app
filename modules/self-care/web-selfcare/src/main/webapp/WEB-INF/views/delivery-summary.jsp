@@ -5,14 +5,15 @@
     <title><fmt:message key="summary" bundle="${lang}"/></title>
     <link rel="shortcut icon" href="">
     <link rel="stylesheet" href="<c:url value="/resources/css/progress-wizard.min.css"/>" >
+    <script src="<c:url value="/resources/js/delivery-summary.js"/>" ></script>
 
 </head>
 <body>
 
 <div class="loader-anim"></div>
 
-<%@include file="includes/NewHeader.jsp" %>
-
+<%@include file="includes/new-header.jsp" %>
+<% request.setAttribute("cartItemsMap", request.getSession().getAttribute("cartItems")); %>
 <div class="main-div">
     <div class="section">
         <div class="panel panel-default">
@@ -37,24 +38,24 @@
                                         <div class="summary-cell qty-cell"><fmt:message key="summary.qty" bundle="${lang}"/></div>
                                         <div class="summary-cell"><fmt:message key="summary.total" bundle="${lang}"/></div>
                                     </div>
-                                    <div class="summary-row">
-                                        <div class="summary-cell">Sample item 02</div>
-                                        <div class="summary-cell price-cell">450.00</div>
-                                        <div class="summary-cell qty-cell">1</div>
-                                        <div class="summary-cell price-cell">450.00</div>
-                                    </div>
-                                    <div class="summary-row">
-                                        <div class="summary-cell">Sample item 01</div>
-                                        <div class="summary-cell price-cell">650.00</div>
-                                        <div class="summary-cell qty-cell">1</div>
-                                        <div class="summary-cell price-cell">650.00</div>
-                                    </div>
-                                    <div class="summary-row">
-                                        <div class="summary-cell">Sample item 03</div>
-                                        <div class="summary-cell price-cell">450.00</div>
-                                        <div class="summary-cell qty-cell">1</div>
-                                        <div class="summary-cell price-cell">450.00</div>
-                                    </div>
+                                    <c:forEach items="${cartItemsMap}" var="entry" varStatus="iteration">
+                                        <div class="summary-row">
+                                            <c:set var="itemPrice" value="${entry.itemPrice}"/>
+                                            <c:set var="itemQty" value="${entry.itemQty}"/>
+                                            <c:set var="itemTotal" value="${itemPrice*itemQty}"/>
+
+                                            <div class="summary-cell"><c:out value="${entry.itemTitle}"/></div>
+                                            <div class="summary-cell price-cell">
+                                                <fmt:formatNumber type="currency" currencySymbol=""
+                                                                  maxFractionDigits="2" value="${entry.itemPrice}"/>
+                                            </div>
+                                            <div class="summary-cell qty-cell"><c:out value="${entry.itemQty}"/></div>
+                                            <div class="summary-cell price-cell">
+                                                <fmt:formatNumber type="currency" currencySymbol=""
+                                                                  maxFractionDigits="2" value="${itemTotal}"/>
+                                            </div>
+                                        </div>
+                                    </c:forEach>
                                 </div>
                             </div>
                         </div>
@@ -79,7 +80,7 @@
                                         </div>
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control" id="text-date" placeholder="<fmt:message key="summary.date" bundle="${lang}"/>"
-                                                   disabled>
+                                                   readonly>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -88,7 +89,7 @@
                                         </div>
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control" id="text-time" placeholder="Time"
-                                                   disabled>
+                                                   readonly>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -96,7 +97,7 @@
                                             <label class="control-label"><fmt:message key="delivery.first" bundle="${lang}"/></label>
                                         </div>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" disabled>
+                                            <input type="text" id="del-fname" class="form-control" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -104,7 +105,7 @@
                                             <label class="control-label"><fmt:message key="signup.last.name" bundle="${lang}"/></label>
                                         </div>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" disabled>
+                                            <input type="text" id="del-lname" class="form-control" readonly>
                                         </div>
                                     </div>
                                 </form>
@@ -117,7 +118,7 @@
                                             <label class="control-label"><fmt:message key="delivery.contact" bundle="${lang}"/></label>
                                         </div>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" disabled>
+                                            <input type="text" id="del-contactno" class="form-control" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -125,15 +126,15 @@
                                             <label class="control-label"><fmt:message key="signup.address" bundle="${lang}"/></label>
                                         </div>
                                         <div class="col-sm-10">
-                                            <textarea class="form-control" disabled></textarea>
+                                            <textarea class="form-control" id="del-address" readonly></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-2">
-                                            <label class="control-label"><fmt:message key="summary.descrip" bundle="${lang}"/></label>
+                                            <label class="control-label"><fmt:message key="summary.description" bundle="${lang}"/></label>
                                         </div>
                                         <div class="col-sm-10">
-                                            <textarea class="form-control" disabled></textarea>
+                                            <textarea class="form-control" id="del-description" readonly></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -144,10 +145,10 @@
                         </div>
                     </div>
                 </div>
+
                 <button class="btn btn-primary btn-editdelidetails" onclick="location.href='delivery'">
                     <span class="glyphicon glyphicon-edit"></span>&nbsp;<fmt:message key="summary.edit.delivery" bundle="${lang}"/>
                 </button>
-
 
                 <div class="section3">
                     <div class="container" style="width:800px;">
@@ -158,7 +159,7 @@
                                 <form class="form-horizontal" role="form">
                                     <div class="form-group">
                                         <div class="col-sm-12">
-                                            <textarea class="form-control" disabled="" rows="10" disabled></textarea>
+                                            <textarea class="form-control" readonly rows="10" disabled></textarea>
                                         </div>
                                     </div>
                                 </form>

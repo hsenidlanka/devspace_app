@@ -82,9 +82,10 @@
                                 </label>
 
                                 <div class="col-xs-8">
-                                    <form:input class="form-control" type="text" id="txtAddPkgName" path="packName"/>
+                                    <form:input class="form-control" type="text" id="txtAddPkgName" path="packName"/><span
+                                        id="pkgNmErr" class="input-group-error"> </span>
                                 </div>
-                                <span id="pkgNmErr" class="input-group-error"> </span>
+
                             </div>
                             <div class="col-xs-5">
                                 <label class="col-xs-4 control-label">
@@ -151,10 +152,15 @@
                                         </form:select>
                                     </div>
                                     <div class="col-xs-3">
-                                        <form:input class="qty-spinner" type="number" min="0" id="contQty" path="quantity"/>
+                                        <form:input class="form-control qty-spinner" type="number" min="0" id="contQty" path="quantity"/>
                                     </div>
                                 </div>
                             <div class="tstDiv"></div>
+                            <br>
+                            <div class="addTo" style="text-align: right">
+                                <button class="btn btn-success btnAddItmPkg" type="button" id="addTo" value="add" onclick="contentCreate()"><span
+                                        class="glyphicon glyphicon-plus"></span>Create Package Content</button>
+                            </div>
                             <br>
                         </div>
                     </div>
@@ -180,7 +186,7 @@
                         <div class="col-xs-4">
                         </div>
                         <div class="col-xs-4" align="right">
-                            <form:button type="submit" class="btn btn-success" id="btnAddNewPkg" onclick="contentPackge();"><span
+                            <form:button type="submit" class="btn btn-success" id="btnAddNewPkg"><span
                                     class="glyphicon glyphicon-plus"></span>
                                 <fmt:message key="package.packageadd.form.button.add" bundle="${bundle1}"/>
                             </form:button>

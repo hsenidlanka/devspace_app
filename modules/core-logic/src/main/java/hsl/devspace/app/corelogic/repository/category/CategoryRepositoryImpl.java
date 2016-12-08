@@ -116,7 +116,9 @@ public class CategoryRepositoryImpl implements CategoryRepository {
             category.setCategory_id(Integer.parseInt(aMp.get("id").toString()));
             category.setCategoryName(aMp.get("name").toString());
             category.setCatDescription(aMp.get("description").toString());
-            category.setImage(aMp.get("image").toString());
+            if (aMp.get("image") != null) {
+                category.setImage(aMp.get("image").toString());
+            }
             category.setCreator(aMp.get("creator").toString());
             category.setStatus(aMp.get("status").toString());
             categories.add(category);
@@ -136,7 +138,9 @@ public class CategoryRepositoryImpl implements CategoryRepository {
         category.setCategory_id(Integer.parseInt(mp.get(0).get("id").toString()));
         category.setCategoryName(mp.get(0).get("name").toString());
         category.setCatDescription(mp.get(0).get("description").toString());
-        category.setImage(mp.get(0).get("image").toString());
+        if (mp.get(0).get("image") != null) {
+            category.setImage(mp.get(0).get("image").toString());
+        }
         category.setCreator(mp.get(0).get("creator").toString());
         category.setStatus(mp.get(0).get("status").toString());
 
@@ -162,7 +166,9 @@ public class CategoryRepositoryImpl implements CategoryRepository {
             category.setCategory_id(Integer.parseInt(mp.get(i).get("id").toString()));
             category.setCategoryName(mp.get(i).get("name").toString());
             category.setCatDescription(mp.get(i).get("description").toString());
-            category.setImage(mp.get(i).get("image").toString());
+            if (mp.get(i).get("image") != null) {
+                category.setImage(mp.get(i).get("image").toString());
+            }
             category.setCreator(mp.get(i).get("creator").toString());
             category.setStatus(mp.get(i).get("status").toString());
 

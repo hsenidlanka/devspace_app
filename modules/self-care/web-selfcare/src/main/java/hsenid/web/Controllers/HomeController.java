@@ -80,9 +80,14 @@ public class HomeController {
         return "view-customer-details";
     }
 
-    @RequestMapping("/pay")
-    public String pay() {
-        return "pay";
+    @RequestMapping("/pay-card")
+    public String payCard() {
+        return "pay-card";
+    }
+
+    @RequestMapping("/pay-mobile")
+    public String payMobile() {
+        return "pay-mobile";
     }
 
     @RequestMapping("/success")
