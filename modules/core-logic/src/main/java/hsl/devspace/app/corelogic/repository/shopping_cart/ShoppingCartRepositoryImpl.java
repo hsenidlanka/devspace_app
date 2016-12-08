@@ -5,8 +5,14 @@ import hsl.devspace.app.corelogic.domain.ShoppingCart;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.sql.DataSource;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -38,10 +44,15 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
                 "(net_cost,customer_id,guest_id) VALUES (?,(SELECT id FROM customer WHERE username=?),(SELECT id FROM guest WHERE mobile=?))";
         row = jdbcTemplate.update(sql, new Object[]{shoppingCart.getNetCost(),shoppingCart.getCustomerUsername(),shoppingCart.getGuestMobile()});
         log.info("{} new shopping cart added",row);
-        return row;
+        List<Map<String, Object>> mp4 = jdbcTemplate.queryForList("SELECT MAX(id) FROM shopping_cart");
+        int id = Integer.parseInt(mp4.get(0).get("id").toString());
+        return id;
     }
 
-    public void addProductsToCart(List<Map<String, Object>> items) {
+    /*Add products in the cart to table*/
+    @Override
+    public List<Integer> addProductsToCart(List<Map<String, Object>> items) {
+        List<Integer> productList = new ArrayList<Integer>();
         for (int i = 0; i < items.size(); i++) {
             String productName = items.get(i).get("itemName").toString();
             int quantity = Integer.parseInt(items.get(i).get("quantity").toString());
@@ -57,9 +68,43 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
             String sql = "INSERT INTO product " +
                     "(type,type_id,quantity) VALUES (?,?,?)";
             jdbcTemplate.update(sql, new Object[]{type, id, quantity});
+            List<Map<String, Object>> mp4 = jdbcTemplate.queryForList("SELECT MAX(id) FROM product");
+            id = Integer.parseInt(mp4.get(0).get("id").toString());
+            productList.add(id);
+        }
+        return productList;
+
+    }
+
+    /*update cart and the products contain*/
+    @Override
+    public void updateCartProductTable(int cartId, List<Integer> productIdList) {
+        for (int i = 0; i < productIdList.size(); i++) {
+            int productId = productIdList.get(i);
+            String sql = "INSERT INTO shopping_cart_product " +
+                    "(shopping_cart_id,product_id) VALUES (?,?)";
+            jdbcTemplate.update(sql, new Object[]{cartId, productId});
         }
 
     }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public void generateCartProcess(ShoppingCart shoppingCart, List<Map<String, Object>> items) {
+        TransactionDefinition trDef = new DefaultTransactionDefinition();
+        TransactionStatus stat = transactionManager.getTransaction(trDef);
+        try {
+            int cartId = addCart(shoppingCart);
+            List<Integer> productIdList = addProductsToCart(items);
+            updateCartProductTable(cartId, productIdList);
+            log.info("updated");
+
+        } catch (Exception e) {
+            log.info(e.getMessage());
+            transactionManager.rollback(stat);
+            log.info("rollbacked");
+        }
+    }
+
 
     /*delete a cart*/
     @Override
