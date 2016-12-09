@@ -287,4 +287,13 @@ public class PackageRepositoryImpl implements PackageRepository {
         return packNames;
     }
 
+    @Override
+    public int paginate(int limit, int page) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM package LIMIT ? OFFSET ?", limit, page);
+        int count = mp.size();
+        log.info("{}", count);
+        return count;
+
+    }
+
 }
