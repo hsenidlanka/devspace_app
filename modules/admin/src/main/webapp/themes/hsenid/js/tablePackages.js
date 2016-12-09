@@ -54,6 +54,60 @@ $(document).ready(function(){
             }
         })
     });
+
+    $("#txtViewSearchPkg").keyup(function(){
+        $.ajax({
+            type: "GET",
+            url: "https://localhost:8443/admin/packages/typeahedPkgNm",
+            dataType: "JSON",
+            success: function (data) {
+                console.log(data);
+                $('#txtViewSearchPkg').typeahead({
+                    source: data
+                }).focus();
+            },
+            error: function (er) {
+                console.log("error in typeahead "+er)
+            }
+        })
+    });
+
+    /*
+     * load data on request typeahead
+     **/
+    $("#btnViewSearchPkg").click(function(){
+
+        var srchPkgNm = $("#txtViewSearchPkg").val();
+        if(srchPkgNm.length>0){
+
+            $.ajax({
+                url:"https://localhost:8443/admin/packages/loadSearchPackage",
+                datatype:"JSON",
+                data:{"srchPkgNm":srchPkgNm},
+                success:function(data){
+                    $("#tblPackages").bootstrapTable('load',data);
+                    console.log(data);
+                },
+                error: function(e){
+                    alert("error, load search item"+e);
+                    console.log("error, load search item"+e)
+                }
+            })
+        }else{
+            //  $('#pagination').show();
+            //  $('#pagination2').hide();
+
+            $.ajax({
+                url:'https://localhost:8443/admin/packages/view/packageTable',
+                dataType: 'JSON',
+                // data:{"initPage":"1"},
+                success: function(data){
+
+                    $('#tblPackages').bootstrapTable('load', data);
+                }
+            })
+        }
+    });
 });
 
 function operateFormatter(value, row, index) {

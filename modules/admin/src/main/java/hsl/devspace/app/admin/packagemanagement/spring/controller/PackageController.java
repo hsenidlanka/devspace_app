@@ -433,4 +433,22 @@ public class PackageController {
             LOGGER.error("error in  getting image ", e);
         }
     }
+
+
+    /*
+    * typeahead function for package name
+    **/
+  /*  @RequestMapping(value = "/typeahedPkgNm", method = RequestMethod.GET)
+    public @ResponseBody List<String> typeaheadName(){
+
+      //  return packageRepo.();
+    }*/
+
+    @RequestMapping(value = "/loadSearchPackage", method = RequestMethod.GET)
+    public @ResponseBody
+    List<Package> loadSearchItem(@RequestParam("pkgName") String pkgName){
+
+        LOGGER.trace("load search Item "+ packageRepo.selectAllByNamePattern(pkgName));
+        return  packageRepo.selectAllByNamePattern(pkgName);
+    }
 }
