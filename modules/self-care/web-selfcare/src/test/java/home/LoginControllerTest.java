@@ -1,8 +1,6 @@
 package home;
 
 import hsenid.config.WebConfig;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
@@ -14,28 +12,35 @@ import org.springframework.web.context.WebApplicationContext;
 import org.testng.annotations.Test;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
-
 
 @Test
 @WebAppConfiguration
 @ContextConfiguration(classes = WebConfig.class)
-public class ContactUsControllerTest extends AbstractTestNGSpringContextTests {
-    final Logger logger = LoggerFactory.getLogger(ContactUsControllerTest.class);
-
+public class LoginControllerTest extends AbstractTestNGSpringContextTests {
     @Autowired
     private WebApplicationContext wac;
 
     private MockMvc mockMvc;
 
     @Test
-    public void getViewTest() throws Exception {
+    public void testCheckNotBlockedUser() throws Exception {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
-        this.mockMvc.perform(get("/contact-us")
-                .accept(MediaType.ALL))
+        this.mockMvc.perform(get("/chechBlocked")
+                .param("checkName", "testre")
+                .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(view().name("/home/contact-us"));
+                .andExpect(content().json("{'userAvailable':true}"));
     }
 
+    @Test
+    public void testCheckBlockedUser() throws Exception {
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+        this.mockMvc.perform(get("/chechBlocked")
+                .param("checkName", "block")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().json("{'userAvailable':false}"));
+    }
 }

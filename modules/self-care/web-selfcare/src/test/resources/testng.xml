@@ -2,7 +2,10 @@
 <suite name="Test1">
     <test name="Creepy">
         <classes>
-            <class name="home.edasd"/>
+            <class name="home.ContactUsControllerTest"/>
+            <class name="home.HomeControllerTest"/>
+            <class name="home.MenuControllerTest"/>
+            <class name="home.RegisterControllerTest"/>
             <class name="home.UpdateUserControllerTest"/>
         </classes>
     </test>
