@@ -274,4 +274,17 @@ public class PackageRepositoryImpl implements PackageRepository {
         return count;
     }
 
+    /*retrieve name of packages as a list*/
+    @Override
+    public List<String> getPackageNameList() {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT name FROM package");
+        List<String> packNames = new ArrayList<String>();
+        for (int j = 0; j < mp.size(); j++) {
+            String nm = mp.get(j).get("name").toString();
+            packNames.add(nm);
+        }
+        log.info("{}", packNames);
+        return packNames;
+    }
+
 }

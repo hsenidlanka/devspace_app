@@ -38,4 +38,6 @@ public interface PackageRepository {
     int count();
 
     List<Package> selectAllByNamePattern(String packName);
+
+    List<String> getPackageNameList();
 }
