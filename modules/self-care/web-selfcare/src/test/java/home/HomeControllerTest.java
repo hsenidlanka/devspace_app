@@ -13,9 +13,7 @@ import org.springframework.web.context.WebApplicationContext;
 import org.testng.annotations.Test;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @Test
 @WebAppConfiguration
@@ -30,20 +28,39 @@ public class HomeControllerTest extends AbstractTestNGSpringContextTests {
     @Test
     public void homeTest() throws Exception {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
-        this.mockMvc.perform(get("/home", "/").accept(MediaType.ALL)).andExpect(status().isOk()).andExpect(view().name("/home/self-care-home"));
+        this.mockMvc.perform(get("/home", "/")
+                .accept(MediaType.ALL))
+                .andExpect(status().isOk())
+                .andExpect(view().name("/home/self-care-home"));
     }
 
     @Test
     public void menuTest() throws Exception {
-        this.mockMvc.perform(get("/menu").accept(MediaType.ALL)).andExpect(status().isOk()).andExpect(view().name("home/menu"));
+        this.mockMvc.perform(get("/menu")
+                .accept(MediaType.ALL))
+                .andExpect(status().isOk())
+                .andExpect(view().name("home/menu"));
     }
     @Test
     public void locationTest() throws Exception {
-        this.mockMvc.perform(get("/locations").accept(MediaType.ALL)).andExpect(status().isOk()).andExpect(view().name("/home/locations"));
+        this.mockMvc.perform(get("/locations")
+                .accept(MediaType.ALL))
+                .andExpect(status().isOk())
+                .andExpect(view().name("/home/locations"));
+    }
+    @Test
+    public void aboutus() throws Exception {
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+        this.mockMvc.perform(get("/about-us")
+                .accept(MediaType.ALL))
+                .andExpect(status().isOk())
+                .andExpect(view().name("/home/about-us"));
     }
     @Test
     public void logoutTest() throws Exception {
-        this.mockMvc.perform(get("/logout").accept(MediaType.ALL)).andExpect(redirectedUrl("/"));
+        this.mockMvc.perform(get("/logout")
+                .accept(MediaType.ALL))
+                .andExpect(redirectedUrl("/"));
     }
 
 }

@@ -274,4 +274,26 @@ public class PackageRepositoryImpl implements PackageRepository {
         return count;
     }
 
+    /*retrieve name of packages as a list*/
+    @Override
+    public List<String> getPackageNameList() {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT name FROM package");
+        List<String> packNames = new ArrayList<String>();
+        for (int j = 0; j < mp.size(); j++) {
+            String nm = mp.get(j).get("name").toString();
+            packNames.add(nm);
+        }
+        log.info("{}", packNames);
+        return packNames;
+    }
+
+    @Override
+    public int paginate(int limit, int page) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM package LIMIT ? OFFSET ?", limit, page);
+        int count = mp.size();
+        log.info("{}", count);
+        return count;
+
+    }
+
 }

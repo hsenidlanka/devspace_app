@@ -38,12 +38,12 @@ $(document).ready(function () {
             align: 'left',
             sortable: true
         }, {
-                field: 'operate',
-                title: 'Operations',
-                align: 'center',
-                formatter: operateFormatter,
-                events: operateEvents
-            }]
+            field: 'operate',
+            title: 'Operations',
+            align: 'center',
+            formatter: operateFormatter,
+            events: operateEvents
+        }]
     });
 
     $("#btnDeltItm").click(function () {
@@ -75,31 +75,61 @@ $(document).ready(function () {
     });
 
     /*
-     *
-     * To complete
-     *
+     * typeahead function for load itemnames
      * */
     $("#txtViewSearchItem").keyup(function () {
 
-        var searchItm = $("#txtViewSearchItem").val();
-        var temp = ['asd', 'efr', 'gtew', 'plkm'];
         $.ajax({
             type: "GET",
             url: "https://localhost:8443/admin/items/typeahedItmNm",
-            //dataType: "JSON",
-            data: {"searchItm": searchItm},
+            dataType: "JSON",
             success: function (data) {
-                var parsedData = JSON.parse(data);
-
-                alert(parsedData.key + parsedData.value);
+                console.log(data);
                 $('#txtViewSearchItem').typeahead({
                     source: temp
                 }).focus();
             },
             error: function (er) {
-                alert("error in typeahead ", er);
+                console.log("error in typeahead "+er)
             }
         })
+    });
+
+    /*
+    * load data on request typeahead
+    **/
+    $("#btnViewSearchItem").click(function(){
+
+        var srchItmNm = $("#txtViewSearchItem").val();
+        if(srchItmNm.length>0){
+
+            $.ajax({
+                url:"https://localhost:8443/admin/items/loadSearchItem",
+                datatype:"JSON",
+                data:{"srchItmNm":srchItmNm},
+                success:function(data){
+                    $("#tblItems").bootstrapTable('load',data);
+                    console.log(data);
+                },
+                error: function(e){
+                    alert("error, load search item"+e);
+                    console.log("error, load search item"+e)
+                }
+            })
+        }else{
+          //  $('#pagination').show();
+          //  $('#pagination2').hide();
+
+            $.ajax({
+                url:'https://localhost:8443/admin/items/view/itemTable',
+                dataType: 'JSON',
+               // data:{"initPage":"1"},
+                success: function(data){
+
+                    $('#tblItems').bootstrapTable('load', data);
+                }
+            })
+        }
     });
 });
 

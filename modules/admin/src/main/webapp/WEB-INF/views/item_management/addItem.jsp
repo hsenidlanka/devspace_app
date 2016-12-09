@@ -41,7 +41,7 @@
   <div id="add-item-breadcrumb-position">
     <ul class="breadcrumb breadcrumb-menu">
       <li><a href="https://localhost:8443/admin/users/list"><fmt:message key="item.itemadd.breadcrumb.home"/></a></li>
-      <li><a href="#"><fmt:message key="item.itemadd.breadcrumb.itemmanagement"/></a></li>
+      <li><a href="https://localhost:8443/admin/users/list"><fmt:message key="item.itemadd.breadcrumb.itemmanagement"/></a></li>
       <li class="active"><a href="#"><fmt:message key="item.itemadd.breadcrumb.additem"/></a></li>
     </ul>
   </div>

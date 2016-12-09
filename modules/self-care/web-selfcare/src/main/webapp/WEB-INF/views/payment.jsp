@@ -4,8 +4,9 @@
     <%@include file="includes/include.jsp" %>
     <title><fmt:message key="delivery.payment" bundle="${lang}"/></title>
     <link rel="shortcut icon" href="">
-    <link rel="stylesheet" href="<c:url value="/resources/css/progress-wizard.min.css"/>" >
-    <script src="<c:url value="/resources/js/payment-operations.js"/>" ></script>
+    <link rel="stylesheet" href="<c:url value="/resources/css/progress-wizard.min.css"/>">
+    <script src="<c:url value="/resources/js/payment-operations.js"/>"></script>
+    <script src="<c:url value="/resources/js/hover.zoom.js"/>"></script>
 </head>
 <body>
 <div class="loader-anim"></div>
@@ -15,66 +16,46 @@
     <div class="section">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <img class="icons" src="<c:url value="/resources/images/icons/payment-method.png"/>" >
+                <img class="icons" src="<c:url value="/resources/images/icons/payment-method.png"/>">
+
                 <h3 class="header-panel"><fmt:message key="payment.setup" bundle="${lang}"/></h3>
             </div>
             <div class="panel-body">
                 <ul class="progress-indicator">
-                    <li class="completed"><span class="bubble"></span><fmt:message key="delivery" bundle="${lang}"/></li>
-                    <li class="active"><span class="bubble"></span><fmt:message key="delivery.payment" bundle="${lang}"/></li>
+                    <li class="completed"><span class="bubble"></span><fmt:message key="delivery" bundle="${lang}"/>
+                    </li>
+                    <li class="active"><span class="bubble"></span><fmt:message key="delivery.payment"
+                                                                                bundle="${lang}"/></li>
                     <li><span class="bubble"></span><fmt:message key="delivery.verify" bundle="${lang}"/></li>
                     <li><span class="bubble"></span><fmt:message key="delivery.success" bundle="${lang}"/></li>
                 </ul>
 
                 <div class="container" style="width:1000px;">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h4>Sender details</h4>
-                            <hr>
-                            <div class="col-md-12">
-                                <form role="form">
-                                    <div class="form-group">
-                                        <div class="sender-checkbox">
-                                            <label>
-                                                <input type="checkbox" id="checkbox-same-sender" name="checkbox-same-sender"><fmt:message key="payment.same" bundle="${lang}"/>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label"><fmt:message key="delivery.first" bundle="${lang}"/></label>
-                                        <input class="form-control" type="text">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label"><fmt:message key="signup.last.name" bundle="${lang}"/></label>
-                                        <input class="form-control" type="text">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label"><fmt:message key="signup.email" bundle="${lang}"/></label>
-                                        <input class="form-control" type="text">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label"><fmt:message key="delivery.contact" bundle="${lang}"/></label>
-                                        <input class="form-control" type="text">
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <h4><fmt:message key="payment.prefer" bundle="${lang}"/></h4>
-                            <hr>
-                            <label><fmt:message key="payment.method" bundle="${lang}"/>&nbsp;</label>
+                    <div class="row" style="padding-left: 50px;">
+                        <div class="col-md-3">
+                            <a href="success" class="zoom" id="pay-delivery"
+                               data-toggle="tooltip" data-placement="top" title="Make payment on delivery."><img
+                                    class="icons2" src="<c:url value="/resources/images/icons/delivery-xxl.png"/>"/></a>
 
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="paymentradio" id="radio-delivery" value="payondel"
-                                           checked=""><fmt:message key="payment.on.delivery" bundle="${lang}"/></label>&nbsp;&nbsp;
-                                <label>
-                                    <input type="radio" name="paymentradio" id="radio-pickup" value="paymobile"><fmt:message key="payment.by.mobile" bundle="${lang}"/></label>
-                                <label style="margin-left: 10px;">
-                                    <input type="radio" name="paymentradio" id="radio-pic" value="paycard"><fmt:message key="payment.by.card" bundle="${lang}"/></label>
-                            </div>
-                            <a class="btn btn-success btn-proceed-payment" id="btn-pay"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;<fmt:message key="payment.cont" bundle="${lang}"/></a>
+                            <h3 class="payment-icon-headings">Pay on Delivery</h3>
                         </div>
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3">
+                            <a href="pay-mobile" class="zoom" id="pay-mobile" data-toggle="tooltip"
+                               data-placement="top" title="Make payment using mobile phone."><img class="icons2"
+                                                                                                  src="<c:url value="/resources/images/icons/mobile-payment.png"/>"/></a>
+
+                            <h3 class="payment-icon-headings">Pay by Mobile</h3>
+                        </div>
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3">
+                            <a href="pay-card" class="zoom" id="pay-card" data-toggle="tooltip"
+                               data-placement="top" title="Make payment using Visa/Master card."><img class="icons2"
+                                                                                                      src="<c:url value="/resources/images/icons/credit-cards-icon-25.png"/>"/></a>
+
+                            <h3 class="payment-icon-headings">Pay by Card</h3>
+                        </div>
+                        <div class="col-md-1"></div>
                     </div>
                 </div>
             </div>

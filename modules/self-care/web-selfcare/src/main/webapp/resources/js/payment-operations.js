@@ -1,15 +1,19 @@
 $(document).ready(function () {
-    $("input[type=checkbox][name=checkbox-same-sender]").change(function () {
+    $('#pay-delivery').hoverZoom({
+        speed: 450,
+        overlayOpacity: 0.4,
+        zoom: 5
     });
 
-    $("#btn-pay").click(function () {
-        var selectedVal = $("input[type=radio][name=paymentradio]:checked").val();
-        if (selectedVal == "payondel") {
-            window.location.href = "success";
-        } else if (selectedVal == "paymobile") {
-            window.location.href = "pay-mobile";
-        } else {
-            window.location.href = "pay-card";
-        }
+    $('#pay-mobile').hoverZoom({
+        speed: 450,
+        overlayOpacity: 0.4,
+        zoom: 5
+    });
+
+    $('#pay-card').hoverZoom({
+        speed: 450,
+        overlayOpacity: 0.4,
+        zoom: 5
     });
 });

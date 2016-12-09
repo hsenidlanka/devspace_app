@@ -34,13 +34,11 @@ public class UpdateUserController {
     @Value("${api.url.customer.update}")
     private String customerUpdateUrl;
 
-
     @Value("${api.url.customer.search}")
     private String customerDataSendUrl;
 
     @GetMapping("/update-user")
     public String updateuser(HttpSession session, Model model) {
-
         model.addAttribute("updateuser", new User());
         return "/home/update-user";
 

@@ -38,4 +38,8 @@ public interface PackageRepository {
     int count();
 
     List<Package> selectAllByNamePattern(String packName);
+
+    List<String> getPackageNameList();
+
+    int paginate(int limit, int page);
 }

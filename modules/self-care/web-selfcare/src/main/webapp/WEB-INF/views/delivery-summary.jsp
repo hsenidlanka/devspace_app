@@ -76,19 +76,19 @@
                                 <form class="form-horizontal" role="form">
                                     <div class="form-group">
                                         <div class="col-sm-2">
-                                            <label for="text-date" class="control-label"><fmt:message key="summary.date" bundle="${lang}"/></label>
+                                            <label class="control-label"><fmt:message key="summary.date" bundle="${lang}"/></label>
                                         </div>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="text-date" placeholder="<fmt:message key="summary.date" bundle="${lang}"/>"
+                                            <input type="text" class="form-control" id="delsum-text-date" placeholder="<fmt:message key="summary.date" bundle="${lang}"/>"
                                                    readonly>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-2">
-                                            <label for="text-time" class="control-label"><fmt:message key="summary.time" bundle="${lang}"/></label>
+                                            <label class="control-label"><fmt:message key="summary.time" bundle="${lang}"/></label>
                                         </div>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="text-time" placeholder="Time"
+                                            <input type="text" class="form-control" id="delsum-text-time" placeholder="Time"
                                                    readonly>
                                         </div>
                                     </div>

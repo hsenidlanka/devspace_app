@@ -5,6 +5,7 @@
     <title><fmt:message key="pickup" bundle="${lang}"/></title>
     <link rel="shortcut icon" href="">
     <link href="<c:url value="/resources/css/progress-wizard.min.css"/>" rel="stylesheet">
+    <script src="<c:url value="/resources/js/pickup-summary.js"/>" ></script>
 </head>
 <body>
 <div class="loader-anim"></div>
@@ -77,14 +78,14 @@
                                 <div class="form-group">
                                     <label class="control-label" for="text-picktime"><fmt:message key="summary.time"
                                                                                                   bundle="${lang}"/></label>
-                                    <input class="form-control" id="text-picktime" type="text" disabled>
+                                    <input class="form-control" id="text-picktime" type="text" readonly>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label class="control-label" for="text-branch"><fmt:message key="pickup.branch"
                                                                                                 bundle="${lang}"/></label>
-                                    <input class="form-control" id="text-branch" type="text" disabled>
+                                    <input class="form-control" id="text-branch" type="text" readonly>
                                 </div>
                             </div>
                         </div>

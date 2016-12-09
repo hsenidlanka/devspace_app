@@ -47,7 +47,7 @@ public class ItemRepositoryImpl implements ItemRepository {
                 "(name,description,type_id,image,sub_category_id) VALUES (?,?,(SELECT type_id FROM type WHERE name=? ),?,(SELECT id FROM sub_category WHERE name=?))";
         row = jdbcTemplate.update(sql, new Object[]{item.getItemName(), item.getDescription(),
                 item.getType(), item.getImage(), item.getSubCategoryName()});
-        log.info("{} new item inserted",row);
+        log.info("{} new item inserted", row);
 
 
         return id;
@@ -63,7 +63,7 @@ public class ItemRepositoryImpl implements ItemRepository {
             String sql = "INSERT INTO size" +
                     "(size,price,item_id) VALUES (?,?,?)";
             row = jdbcTemplate.update(sql, new Object[]{size, price, id});
-            log.info("{} size updated",row);
+            log.info("{} size updated", row);
         }
         return row;
     }
@@ -74,12 +74,12 @@ public class ItemRepositoryImpl implements ItemRepository {
 
         boolean result;
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM item WHERE  name=?", itemName);
-        log.info("{}",mp);
+        log.info("{}", mp);
 
         if (mp.size() != 0) {
             result = true;
         } else result = false;
-        log.info("{}",result);
+        log.info("{}", result);
         return result;
     }
 
@@ -89,16 +89,18 @@ public class ItemRepositoryImpl implements ItemRepository {
         //item.setItemName(itemName);
         String sql = "DELETE FROM item WHERE name = ?";
         int row = jdbcTemplate.update(sql, new Object[]{itemName});
-        log.info("{} item deleted",row);
+        log.info("{} item deleted", row);
         return row;
     }
 
-    /**delete from size when item deleted*/
+    /**
+     * delete from size when item deleted
+     */
     @Override
-    public int deleteFromSize(String itemName){
+    public int deleteFromSize(String itemName) {
         String sql = "DELETE FROM `size` WHERE item_id =(SELECT id FROM item WHERE name=?)";
         int row = jdbcTemplate.update(sql, new Object[]{itemName});
-        log.info("{} sizes deleted",row);
+        log.info("{} sizes deleted", row);
         return row;
     }
 
@@ -107,8 +109,8 @@ public class ItemRepositoryImpl implements ItemRepository {
     @Override
     public List<Item> selectAll() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM item");
-        List<Item> items=new ArrayList<Item>();
-        for (int i=0;i<mp.size();i++){
+        List<Item> items = new ArrayList<Item>();
+        for (int i = 0; i < mp.size(); i++) {
             Item item = new Item();
             item.setItemId(Integer.parseInt(mp.get(i).get("id").toString()));
             item.setItemName(mp.get(i).get("name").toString());
@@ -136,9 +138,9 @@ public class ItemRepositoryImpl implements ItemRepository {
     @Override
     public List<String> selectNameList() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT name FROM item");
-        List<String> itemNames=new ArrayList<String>();
-        for (int j=0;j<mp.size();j++){
-            String nm=mp.get(j).get("name").toString();
+        List<String> itemNames = new ArrayList<String>();
+        for (int j = 0; j < mp.size(); j++) {
+            String nm = mp.get(j).get("name").toString();
             itemNames.add(nm);
         }
         log.info("{}", itemNames);
@@ -151,39 +153,43 @@ public class ItemRepositoryImpl implements ItemRepository {
 
         String sql = "UPDATE item SET description=?, type_id=(SELECT type_id FROM `type` WHERE `name`=?) ,image=?, sub_category_id=(SELECT id FROM sub_category WHERE name=?) WHERE name= ? ";
         int row = jdbcTemplate.update(sql, new Object[]{item.getDescription(), item.getType(), item.getImageUrl(), item.getSubCategoryName(), item.getItemName()});
-        log.info("{} Item details changed",row);
+        log.info("{} Item details changed", row);
         return row;
     }
 
-    /**update size table(prices) according to the updates of item table*/
+    /**
+     * update size table(prices) according to the updates of item table
+     */
     @Override
-    public int updatePriceList(int id, List<Item> item2){
+    public int updatePriceList(int id, List<Item> item2) {
         int row = 0;
         for (int i = 0; i < item2.size(); i++) {
             String price = item2.get(i).getPrice();
             String size = item2.get(i).getSize();
-            String sql= "UPDATE size SET price=? WHERE size=? AND item_id=?";
-            row = jdbcTemplate.update(sql, new Object[]{price,size,id});
-            log.info("{} prices updated",row);
+            String sql = "UPDATE size SET price=? WHERE size=? AND item_id=?";
+            row = jdbcTemplate.update(sql, new Object[]{price, size, id});
+            log.info("{} prices updated", row);
         }
         return row;
 
     }
 
-    /**update item table and size table*/
+    /**
+     * update item table and size table
+     */
     @Override
-    @Transactional(propagation= Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRED)
     public int updateItem(Item item, List<Item> item2) {
-        int j=0;
+        int j = 0;
         TransactionDefinition trDef = new DefaultTransactionDefinition();
         TransactionStatus stat = transactionManager.getTransaction(trDef);
         try {
             update(item);
-            List<Map<String,Object>> mp=jdbcTemplate.queryForList("SELECT id FROM item WHERE `name`=?",item.getItemName());
-            int id2=Integer.parseInt(mp.get(0).get("id").toString());
+            List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT id FROM item WHERE `name`=?", item.getItemName());
+            int id2 = Integer.parseInt(mp.get(0).get("id").toString());
             updatePriceList(id2, item2);
             transactionManager.commit(stat);
-            j=1;
+            j = 1;
         } catch (Exception e) {
             log.info(e.getMessage());
             transactionManager.rollback(stat);
@@ -191,21 +197,23 @@ public class ItemRepositoryImpl implements ItemRepository {
         return j;
     }
 
-    /**Add new item*/
+    /**
+     * Add new item
+     */
     @Override
-    @Transactional(propagation= Propagation.REQUIRED)
-    public int addItem(Item item,List<Item> item2) {
-        int j=0;
+    @Transactional(propagation = Propagation.REQUIRED)
+    public int addItem(Item item, List<Item> item2) {
+        int j = 0;
         TransactionDefinition trDef = new DefaultTransactionDefinition();
         TransactionStatus stat = transactionManager.getTransaction(trDef);
         //int id = item.getItemId();
         try {
             add(item);
-            List<Map<String,Object>> mp=jdbcTemplate.queryForList("SELECT id FROM item WHERE `name`=?",item.getItemName());
-            int id2=Integer.parseInt(mp.get(0).get("id").toString());
+            List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT id FROM item WHERE `name`=?", item.getItemName());
+            int id2 = Integer.parseInt(mp.get(0).get("id").toString());
             updateSizeTable(id2, item2);
             transactionManager.commit(stat);
-            j=1;
+            j = 1;
         } catch (Exception e) {
             log.info(e.getMessage());
             transactionManager.rollback(stat);
@@ -213,18 +221,20 @@ public class ItemRepositoryImpl implements ItemRepository {
         return j;
     }
 
-    /**Delete item*/
+    /**
+     * Delete item
+     */
     @Override
-    public int deleteItem(String itemName){
-        int j=0;
+    public int deleteItem(String itemName) {
+        int j = 0;
         TransactionDefinition trDef = new DefaultTransactionDefinition();
         TransactionStatus stat = transactionManager.getTransaction(trDef);
-        try{
+        try {
             deleteFromSize(itemName);
             delete(itemName);
             transactionManager.commit(stat);
-            j=1;
-        }catch (Exception e){
+            j = 1;
+        } catch (Exception e) {
             log.info(e.getMessage());
             transactionManager.rollback(stat);
             log.error("rollbacked");
@@ -232,70 +242,78 @@ public class ItemRepositoryImpl implements ItemRepository {
         return j;
     }
 
-    /**retrieve item details by id*/
+    /**
+     * retrieve item details by id
+     */
     @Override
     public List<Map<String, Object>> retrieveSelectedItemDetails(int id) {
         List<Map<String, Object>> itemDetails = jdbcTemplate.queryForList("SELECT i.id,i.name AS item_name,c.name " +
                 "AS category_name, s.name AS sub_category_name,t.name AS type,i.description,i.image FROM item i" +
                 " INNER JOIN sub_category s ON i.sub_category_id=s.id INNER JOIN type t ON i.type_id=t.type_id " +
-                "INNER JOIN category c ON c.id=s.category_id WHERE i.id=?",id);
-        log.info("{}",itemDetails);
+                "INNER JOIN category c ON c.id=s.category_id WHERE i.id=?", id);
+        log.info("{}", itemDetails);
         return itemDetails;
     }
 
     @Override
     public List<Map<String, Object>> retrieveSelectedItemDetails(String name) {
-        String key="%"+name+"%";
+        String key = "%" + name + "%";
         List<Map<String, Object>> itemDetails = jdbcTemplate.queryForList("SELECT i.id,i.name AS item_name,c.name " +
                 "AS category_name, s.name AS sub_category_name,t.name AS type,i.description,i.image FROM item i" +
                 " INNER JOIN sub_category s ON i.sub_category_id=s.id INNER JOIN type t ON i.type_id=t.type_id " +
-                "INNER JOIN category c ON c.id=s.category_id WHERE i.name LIKE ?",key);
-        log.info("{}",itemDetails);
+                "INNER JOIN category c ON c.id=s.category_id WHERE i.name LIKE ?", key);
+        log.info("{}", itemDetails);
         return itemDetails;
     }
 
-    /**retrieve sizes of a item  by item id*/
+    /**
+     * retrieve sizes of a item  by item id
+     */
     @Override
     public List<Item> retrieveSelectedItemSizes(int id) {
-        List<Map<String, Object>> size=jdbcTemplate.queryForList("SELECT size,price FROM size WHERE item_id=?",id);
-        List<Item> items=new ArrayList<Item>();
-        for (int k=0;k<size.size();k++){
-            log.info("{}",size.get(k));
-            Item item=new Item();
+        List<Map<String, Object>> size = jdbcTemplate.queryForList("SELECT size,price FROM size WHERE item_id=?", id);
+        List<Item> items = new ArrayList<Item>();
+        for (int k = 0; k < size.size(); k++) {
+            log.info("{}", size.get(k));
+            Item item = new Item();
             item.setSize(size.get(k).get("size").toString());
             item.setPrice(size.get(k).get("price").toString());
             items.add(item);
         }
-        log.info("**ITEMS{}",items);
+        log.info("**ITEMS{}", items);
         return items;
     }
 
-    /**retrieve sizes of a item  by item name*/
+    /**
+     * retrieve sizes of a item  by item name
+     */
     @Override
     public List<Item> retrieveSelectedItemSizes(String name) {
-        List<Map<String, Object>> size=jdbcTemplate.queryForList("SELECT size,price FROM size WHERE item_id=(SELECT id FROM item WHERE name=?)",name);
-        List<Item> items=new ArrayList<Item>();
-        for (int k=0;k<size.size();k++){
-            log.info("{}",size.get(k));
-            Item item=new Item();
+        List<Map<String, Object>> size = jdbcTemplate.queryForList("SELECT size,price FROM size WHERE item_id=(SELECT id FROM item WHERE name=?)", name);
+        List<Item> items = new ArrayList<Item>();
+        for (int k = 0; k < size.size(); k++) {
+            log.info("{}", size.get(k));
+            Item item = new Item();
             item.setSize(size.get(k).get("size").toString());
             item.setPrice(size.get(k).get("price").toString());
             items.add(item);
         }
-        log.info("**ITEMS{}",items);
+        log.info("**ITEMS{}", items);
         return items;
     }
 
-    /**retrieve selected data from item and size*/
+    /**
+     * retrieve selected data from item and size
+     */
     @Override
-    @Transactional(propagation= Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRED)
     public ReturnTypeResolver selectItemAndSize(int id) {
         TransactionDefinition trDef = new DefaultTransactionDefinition();
         TransactionStatus stat = transactionManager.getTransaction(trDef);
-        ReturnTypeResolver rv=new ReturnTypeResolver();
+        ReturnTypeResolver rv = new ReturnTypeResolver();
         try {
-            List<Map<String, Object>> selectedItem=retrieveSelectedItemDetails(id);
-            List<Item> selectedSize=retrieveSelectedItemSizes(id);
+            List<Map<String, Object>> selectedItem = retrieveSelectedItemDetails(id);
+            List<Item> selectedSize = retrieveSelectedItemSizes(id);
             transactionManager.commit(stat);
             rv.setSelectedItem(selectedItem);
             rv.setSelectedSize(selectedSize);
@@ -305,35 +323,39 @@ public class ItemRepositoryImpl implements ItemRepository {
             log.info(e.getMessage());
             transactionManager.rollback(stat);
         }
-        log.info("ITEM{}",rv.getSelectedItem());
-        log.info("SIZE{}",rv.getSelectedSize());
-        log.info("ROW{}",rv.getRow());
+        log.info("ITEM{}", rv.getSelectedItem());
+        log.info("SIZE{}", rv.getSelectedSize());
+        log.info("ROW{}", rv.getRow());
         return rv;
     }
 
 
-    /**get top rated items of a given category*/
+    /**
+     * get top rated items of a given category
+     */
     @Override
     public List<Map<String, Object>> getTopRatedItemsOfACategory(String categoryName) {
 
         List<Map<String, Object>> mp1 = jdbcTemplate.queryForList("SELECT sum(number_of_stars) AS total_stars, i.name AS item_name, sc.name AS subcategory_name," +
                 " c.name AS category_name FROM feedback f, item i, sub_category sc, category c WHERE f.item_id=i.id AND i.sub_category_id=sc.id" +
                 " AND sc.category_id=c.id AND c.name=? GROUP BY i.name ORDER BY total_stars desc LIMIT 2", categoryName);
-        log.info("{}",mp1);
+        log.info("{}", mp1);
         return mp1;
 
     }
 
-    /**select all available category names*/
+    /**
+     * select all available category names
+     */
     @Override
     public List<String> getAllCategories() {
-        List<Map<String,Object>> mp=jdbcTemplate.queryForList("SELECT name FROM category");
-        List<String> categoryList=new ArrayList<String>();
-        for (int j=0;j<mp.size();j++){
-            String nm=mp.get(j).get("name").toString();
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT name FROM category");
+        List<String> categoryList = new ArrayList<String>();
+        for (int j = 0; j < mp.size(); j++) {
+            String nm = mp.get(j).get("name").toString();
             categoryList.add(nm);
         }
-        log.info("{}",categoryList);
+        log.info("{}", categoryList);
         return categoryList;
     }
 
@@ -349,7 +371,7 @@ public class ItemRepositoryImpl implements ItemRepository {
                 " INNER JOIN sub_category s ON i.sub_category_id=s.id INNER JOIN type t ON i.type_id=t.type_id " +
                 "INNER JOIN category c ON c.id=s.category_id");
 
-        log.info("{}",itemDetails);
+        log.info("{}", itemDetails);
         return itemDetails;
     }
 
@@ -364,9 +386,9 @@ public class ItemRepositoryImpl implements ItemRepository {
                     " c.name AS category_name FROM feedback f, item i, sub_category sc, category c WHERE f.item_id=i.id AND i.sub_category_id=sc.id" +
                     " AND sc.category_id=c.id AND c.name=? GROUP BY i.name ORDER BY total_stars desc LIMIT 2", category.get(i).get("name"));
             mp.addAll(mp1);
-            log.info("{}",mp1);
+            log.info("{}", mp1);
         }
-        log.info("{}",mp);
+        log.info("{}", mp);
         return mp;
     }
 
@@ -381,6 +403,14 @@ public class ItemRepositoryImpl implements ItemRepository {
 
     }
 
+    @Override
+    public int paginate(int limit, int page) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM item LIMIT ? OFFSET ?", limit, page);
+        int count = mp.size();
+        log.info("{}", count);
+        return count;
+
+    }
 
 
 }

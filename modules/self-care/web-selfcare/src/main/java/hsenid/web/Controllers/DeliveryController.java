@@ -15,9 +15,6 @@ import org.springframework.web.client.RestTemplate;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-/**
- * Created by hsenid on 11/22/16.
- */
 @Controller
 public class DeliveryController {
 
@@ -70,7 +67,36 @@ public class DeliveryController {
         jsonObject.put("email", request.getParameter("email"));
         jsonObject.put("mobile", request.getParameter("contactNo"));
         jsonObject.put("description", request.getParameter("description"));
+        jsonObject.put("date", request.getParameter("date"));
+        jsonObject.put("time", request.getParameter("time"));
         deliveryDetailsJson.add(jsonObject);
         session.setAttribute("deliveryDetails", deliveryDetailsJson);
+    }
+
+    @RequestMapping(value = "/delivery/save-pickup-data", method = RequestMethod.POST)
+    @ResponseBody
+    public void savePickupDetails(HttpSession session, HttpServletRequest request) {
+        if (session.getAttribute("pickupDetails") == null || session.getAttribute("pickupDetails") == "") {
+            JSONArray pickupDetails = new JSONArray();
+            session.setAttribute("pickupDetails", pickupDetails);
+        }
+        JSONArray pickupDetailsJson = (JSONArray) session.getAttribute("pickupDetails");
+        pickupDetailsJson.clear();
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("time", request.getParameter("time"));
+        jsonObject.put("branch", request.getParameter("branch"));
+        pickupDetailsJson.add(jsonObject);
+        session.setAttribute("pickupDetails", pickupDetailsJson);
+    }
+
+    @RequestMapping(value = "/delivery/get-pickup-data", method = RequestMethod.GET)
+    @ResponseBody
+    public JSONArray getPickupDetails(HttpSession session) {
+        if (session.getAttribute("pickupDetails") == null || session.getAttribute("pickupDetails") == "") {
+            JSONArray pickupDetails = new JSONArray();
+            session.setAttribute("pickupDetails", pickupDetails);
+        }
+        JSONArray pickupDetailsJson = (JSONArray) session.getAttribute("pickupDetails");
+        return pickupDetailsJson;
     }
 }

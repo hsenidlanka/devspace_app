@@ -6,7 +6,6 @@ import hsl.devspace.app.corelogic.repository.category.SubCategoryRepositoryImpl;
 import hsl.devspace.app.corelogic.repository.item.ItemRepository;
 import hsl.devspace.app.corelogic.repository.item.ReturnTypeResolver;
 import org.jose4j.json.internal.json_simple.JSONObject;
-import org.json.simple.JSONArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -210,7 +209,7 @@ public class ItemController {
     @RequestMapping(value = "/edit_item", method = RequestMethod.POST)
     public
     @ResponseBody
-    String retieveEditItem(@RequestParam("itemId") int itemId) {
+    String retrieveEditItem(@RequestParam("itemId") int itemId) {
 
         ReturnTypeResolver e = item.selectItemAndSize(itemId);
         List<Item> lst = e.getSelectedSize();
@@ -334,13 +333,15 @@ public class ItemController {
     * typeahead function for item name
     **/
     @RequestMapping(value = "/typeahedItmNm", method = RequestMethod.GET)
-    public @ResponseBody List<Map<String, Object>> typeaheadName(@RequestParam("searchItm") String itemName){
+    public @ResponseBody List<String> typeaheadName(){
 
-        JSONArray array = new JSONArray();
-
-
-        LOGGER.trace("typeaheaad "+ item.retrieveSelectedItemDetails(itemName) );
-        return item.retrieveSelectedItemDetails(itemName);
+        return item.selectNameList();
     }
 
+    @RequestMapping(value = "/loadSearchItem", method = RequestMethod.GET)
+    public @ResponseBody List<Map<String, Object>> loadSearchItem(@RequestParam("srchItmNm") String itemName){
+
+        LOGGER.trace("load search Item "+ item.retrieveSelectedItemDetails(itemName));
+        return  item.retrieveSelectedItemDetails(itemName);
+    }
 }

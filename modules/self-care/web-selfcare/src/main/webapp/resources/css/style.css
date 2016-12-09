@@ -125,13 +125,18 @@ table {
     height: 50px;
 }
 
+.icons2 {
+    width: 200px;
+    height: 200px;
+}
+
 #net-amount-text {
     text-align: center;
     text-decoration: underline;
     font-size: large;
 }
 
-#net-amount-field {
+#net-amount-field, #payment-amount-field {
     text-align: center;
     font-weight: bolder;
     font-size: xx-large;
@@ -198,3 +203,35 @@ table {
 .txtarea-delivery-description {
     resize: vertical;
 }
+
+/* Start-Hover zoom plugin styles */
+.zoom {
+    padding-left: 10px;
+    padding-top: 10px;
+    width: 220px;
+    height: 220px;
+    display: block;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #ddd;
+}
+
+.zoom img {
+    display: none;
+}
+
+.zoomOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: none;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.payment-icon-headings {
+    text-align: center;
+}
+/* End-Hover zoom plugin styles */

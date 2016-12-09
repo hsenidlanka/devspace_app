@@ -1,8 +1,12 @@
 $(document).ready(function () {
+    var date = new Date();
+    var str = date.getFullYear() + "-" + getFormattedPartTime(date.getMonth()) + "-" + getFormattedPartTime(date.getDate());
+    $(".del-date").val(str);
+
     $("#pickup-div").hide();
-    $("#date").prop("disabled", true);
-    $("#timepicker1").prop("disabled", true);
-    $("#timepicker2").prop("disabled", true);
+    $("#date").prop("readonly", true);
+    $("#timepicker1").prop("readonly", true);
+    $("#timepicker2").prop("readonly", true);
     $('.bootstrap-timepicker1').timepicker({
         minuteStep: 5,
         showMeridian: false,
@@ -19,6 +23,7 @@ $(document).ready(function () {
             down: 'fa fa-chevron-down'
         }
     });
+
     fillDeliveryFormData();
 
     // Dynamically change the content according to the delivery options
@@ -27,6 +32,7 @@ $(document).ready(function () {
         if (selectedVal == "pickup") {
             $("#delivery-div").hide();
             $("#pickup-div").show();
+            fillPickupFormData();
         } else {
             $("#pickup-div").hide();
             $("#delivery-div").show();
@@ -37,11 +43,16 @@ $(document).ready(function () {
     $("input[type=radio][name=radiodelwhen]").change(function () {
         var selectedVal = $("input[type=radio][name=radiodelwhen]:checked").val();
         if (selectedVal == "del-later") {
-            $("#date").prop("disabled", false);
-            $("#timepicker1").prop("disabled", false);
+            $("#date").prop("readonly", false);
+            $("#timepicker1").prop("readonly", false);
         } else {
-            $("#date").prop("disabled", true);
-            $("#timepicker1").prop("disabled", true);
+            var date = new Date();
+            var str = date.getFullYear() + "-" + getFormattedPartTime(date.getMonth()) + "-" + getFormattedPartTime(date.getDate());
+            $(".del-date").val(str);
+            var time = date.getHours() + ":" + getFormattedPartTime(date.getMinutes());
+            $(".del-time").val(time);
+            $("#date").prop("readonly", true);
+            $("#timepicker1").prop("readonly", true);
         }
     });
 
@@ -49,9 +60,11 @@ $(document).ready(function () {
     $("input[type=radio][name=radiopickwhen]").change(function () {
         var selectedVal = $("input[type=radio][name=radiopickwhen]:checked").val();
         if (selectedVal == "pick-later") {
-            $("#timepicker2").prop("disabled", false);
+            $("#timepicker2").prop("readonly", false);
         } else {
-            $("#timepicker2").prop("disabled", true);
+            var time = date.getHours() + ":" + getFormattedPartTime(date.getMinutes());
+            $(".pickup-time").val(time);
+            $("#timepicker2").prop("readonly", true);
         }
     });
 });
@@ -78,4 +91,24 @@ function fillDeliveryFormData() {
             }
         }
     });
+}
+
+function fillPickupFormData() {
+    $.ajax({
+        type: 'get',
+        dataType: "json",
+        url: "delivery/get-pickup-data",
+        success: function (result) {
+            if (result.length > 0) {
+                $(".pickup-time").val(result[0].time);
+                $("#pickup-branch").val(result[0].branch);
+            }
+        }
+    });
+}
+
+function getFormattedPartTime(partTime) {
+    if (partTime < 10)
+        return "0" + partTime;
+    return partTime;
 }
