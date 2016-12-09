@@ -48,6 +48,7 @@ public class FilterController {
         return  nameList;
     }
 
+
     /** handler  method to filter the customer user data based on typeahead usernames **/
     @RequestMapping(value = "/staffTable/typeheadName/data", method = RequestMethod.GET)
     public @ResponseBody
