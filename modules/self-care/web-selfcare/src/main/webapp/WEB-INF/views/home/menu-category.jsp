@@ -37,7 +37,7 @@
                         <c:set var="subCat2" value="${fn:replace(subCat1,
                                 ' ', '')}"/>
                         <div style="margin-top: 15px;">
-                            <c:out value="${subcategory.name}"/>
+                            <h4><c:out value="${subcategory.name}"/></h4>
                             <c:out value="${subcategory.description}"/>
                         </div>
                         <div class="row" style="margin-top: 15px;">
@@ -78,19 +78,20 @@
                                                                         value="${itemData.price[loop.index]['size']}"/>">${itemData.price[loop.index]['price']}
                                                                     </label><br>
                                                                 </c:forEach>
-                                                                <a class="btn btn-success btn-xs btn-addtocart-<c:out value="${category}"/>">
+                                                                <a class="btn menu-add-to-cart-btn btn-success btn-xs btn-addtocart-<c:out value="${category}"/>">
                                                                     Add
                                                                     to
                                                                     cart
                                                                 </a>
                                                             </c:when>
                                                             <c:otherwise>
-                                                                <div>
-                                                                    <label>Price:</label>
-                                                                    <label id="lbl-sizeprice"><c:out
+                                                                <div class="row" style="margin-top: 15px;">
+                                                                    <label style="float: left; font-size: small">Price:</label>
+                                                                    <label id="lbl-sizeprice"
+                                                                           style="float: left;"><c:out
                                                                             value="${itemData.price[0]['price']}"/></label>
                                                                     <select id="sizes" class="sizes-dropdowns"
-                                                                            style="text-transform: capitalize; font-size: small;">
+                                                                            style="text-transform: capitalize; font-size: small; float: right; width: 80px; height: 20px">
                                                                         <c:forEach begin="0" end="${sizePriceLength-1}"
                                                                                    varStatus="loop">
                                                                             <option value="<c:out value="${itemData.price[loop.index]['size']}"/>">
@@ -105,15 +106,14 @@
                                                                     </c:forEach>
 
                                                                 </div>
-                                                                <div style="margin-top: 15px;">
+                                                                <div style="float: left;margin-top: 10px;">
                                                                     <label class="add-to-cart-label-qty">QTY:</label>
                                                                     <input class="spin add-to-cart-spin" type="number"
                                                                            min="1" max="100" value="1">
                                                                 </div>
-                                                                <a class="btn btn-success btn-xs btn-addtocart">
-                                                                    Add
-                                                                    to
-                                                                    cart
+                                                                <a class="btn menu-add-to-cart-btn btn-success btn-xs btn-addtocart"
+                                                                   style="float: right;margin-bottom: -15px;">
+                                                                    Add to cart
                                                                 </a>
                                                             </c:otherwise>
                                                         </c:choose>

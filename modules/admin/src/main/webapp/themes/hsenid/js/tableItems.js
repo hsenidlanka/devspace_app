@@ -86,7 +86,7 @@ $(document).ready(function () {
             success: function (data) {
                 console.log(data);
                 $('#txtViewSearchItem').typeahead({
-                    source: temp
+                    source: data
                 }).focus();
             },
             error: function (er) {
@@ -139,7 +139,7 @@ function operateFormatter(value, row, index) {
         '<a class="edit" title="Edit" id="linkEditItem">',
         '<i class="glyphicon glyphicon-edit">Edit</i>',
         '</a>&nbsp;&nbsp;&nbsp;&nbsp;',
-        '<a class="delete" title="Delete" id="linkDeleteItem">',
+        '<a class="deleteItem" title="Delete" id="linkDeleteItem">',
         '<i class="glyphicon glyphicon-remove">Delete</i>',
         '</a></center>'
     ].join('');

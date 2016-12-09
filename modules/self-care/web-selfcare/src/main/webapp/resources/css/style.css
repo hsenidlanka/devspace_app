@@ -1,5 +1,15 @@
 /*@import url(https://fonts.googleapis.com/css?family=Lato:400,700);*/
 
+h1, h2, h3, h4, h5 {
+    font-family: LatoLight;
+    font-weight: 400;
+}
+
+p, label, th, td {
+    font-family: OpenSans !important;
+    font-weight: 400;
+}
+
 .main-div {
     text-align: center;
 }
@@ -34,7 +44,6 @@
 
 body {
     background-image: url(../images/brown-wallpaper.jpg);
-    font-family: 'Lato', sans-serif;
 }
 
 .btn-editcart, .btn-editdelidetails, .btn-editpickdetails {
@@ -56,10 +65,6 @@ body {
     width: 45%;
     display: inline-block;
     float: right;
-}
-
-h2, h3 {
-    font-family: 'Lato', sans-serif;
 }
 
 .btn-delivery-reset {
@@ -134,12 +139,18 @@ table {
     text-align: center;
     text-decoration: underline;
     font-size: large;
+    color: #286090;
 }
 
 #net-amount-field, #payment-amount-field {
     text-align: center;
     font-weight: bolder;
     font-size: xx-large;
+    color: #0c75d2;
+}
+
+.carousel-arrows{
+    color: #000000;
 }
 
 .cart-carousel-control {
@@ -234,4 +245,9 @@ table {
 .payment-icon-headings {
     text-align: center;
 }
+
 /* End-Hover zoom plugin styles */
+
+.menu-add-to-cart-btn{
+    font-size: 10px;
+}

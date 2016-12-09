@@ -63,19 +63,19 @@
 </head>
 <body>
 <%@include file="../includes/new-header.jsp" %>
-
+<div class="loader-anim"></div>
 <div id='browser'>
     <div id='browser-bar'>
         <div class='circles'></div>
         <div class='circles'></div>
         <div class='circles'></div>
-        <p><fmt:message key="new.header.contact" bundle="${lang}"/></p>
+        <h2 style="color: #f5f5f5; text-align: center;"><fmt:message key="new.header.contact" bundle="${lang}"/></h2>
         <span class='arrow entypo-resize-full'></span>
     </div>
     <div id='content'>
         <div id='left'>
             <div id='map'>
-                <p><fmt:message key="contactus.where.to.find" bundle="${lang}"/></p>
+                <h4 style="color: #f5f5f5;"><fmt:message key="contactus.where.to.find" bundle="${lang}"/></h4>
                 <div class='map-locator'>
                     <div class='tooltip'>
                         <ul>

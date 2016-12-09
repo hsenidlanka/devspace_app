@@ -1,0 +1,15 @@
+/*
+This css file contains the fonts defined.
+Main goal is to maintain the consistency.
+*/
+@font-face {
+    font-family: LatoLight;
+    src: url(../fonts/LatoLig.ttf),
+    url(../fonts/LatoLig.woff);
+}
+
+@font-face {
+    font-family: OpenSans;
+    src: url(../fonts/OpenSansRegular.ttf),
+    url(../fonts/OpenSansRegular.woff);
+}
