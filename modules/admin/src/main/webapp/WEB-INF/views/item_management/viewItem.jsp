@@ -42,7 +42,7 @@
   <div id="add-item-breadcrumb-position">
     <ul class="breadcrumb breadcrumb-menu">
       <li><a href="https://localhost:8443/admin/users/list"><fmt:message key="item.itemview.breadcrumb.home"/> </a></li>
-      <li><a href="#"><fmt:message key="item.itemview.breadcrumb.itemmanagement"/> </a></li>
+      <li><a href="https://localhost:8443/admin/users/list"><fmt:message key="item.itemview.breadcrumb.itemmanagement"/> </a></li>
       <li class="active"><a href="#"><fmt:message key="item.itemview.breadcrumb.viewitem"/> </a></li>
     </ul>
   </div>
@@ -84,7 +84,10 @@
           <table id="tblItems">
 
           </table>
-
+          <div id="pagination" class="text-center">
+          </div>
+          <div id="pagination2" class="text-center">
+          </div>
         </fieldset>
 
         <br>

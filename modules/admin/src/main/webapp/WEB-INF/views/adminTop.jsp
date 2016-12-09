@@ -37,5 +37,9 @@
 <spring:url value="/themes/hsenid/bootstrap/js/bootstrap-typeahead.js" var="jsTypeahead"/>
 <script src="${jsTypeahead}"></script>
 
+<%--bootstrap paginator--%>
+<spring:url value="/themes/hsenid/bootstrap/js/simple-bootstrap-paginator.js" var="jsPaginator"/>
+<script src="${jsPaginator}"></script>
+
 
 
