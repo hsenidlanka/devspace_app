@@ -143,3 +143,6 @@ legend.scheduler-border {
     text-emphasis: filled;
     text-align: left;
 }
+.deleteItem{
+    color: red;
+}
