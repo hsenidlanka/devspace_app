@@ -34,8 +34,8 @@ public class DeliveryRepositoryImpl implements DeliveryRepository {
         String sql = "INSERT INTO delivery " +
                 "(agent_name,recepient_name,recepient_address,delivery_date,delivery_time,delivery_status,description,staff_id,delivery_method_id) VALUES (?,?,?,?,?,?,?,(SELECT id FROM staff WHERE name=?),(SELECT id FROM delivery_method WHERE name=?))";
 
-        row = jdbcTemplate.update(sql, new Object[]{del.getAgentName(), del.getRecepientName(), del.getRecepientAddress(),
-                del.getDeliveryDate(), del.getDeliveryTime(), del.getDeliveryStatus(), del.getDescription(), del.getAgentName(), del.getDeliveryMethod()});
+        row = jdbcTemplate.update(sql, new Object[]{delivery.getAgentName(), delivery.getRecepientName(), delivery.getRecepientAddress(),
+                delivery.getDeliveryDate(), delivery.getDeliveryTime(), delivery.getDeliveryStatus(), delivery.getDescription(), delivery.getAgentName(), delivery.getDeliveryMethod()});
         log.info("{} new delivery inserted",row);
         return row;
     }

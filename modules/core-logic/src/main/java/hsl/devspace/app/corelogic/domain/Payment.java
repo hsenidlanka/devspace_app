@@ -105,6 +105,14 @@ public class Payment {
     public Payment() {
     }
 
+    public Payment(String paymentMethodName, String paymentStatus, String orderType, String userMobile, String staffName) {
+        this.paymentMethodName = paymentMethodName;
+        this.paymentStatus = paymentStatus;
+        this.orderType = orderType;
+        this.userMobile = userMobile;
+        this.staffName = staffName;
+    }
+
     @Override
     public String toString() {
         return "Payment{" +
