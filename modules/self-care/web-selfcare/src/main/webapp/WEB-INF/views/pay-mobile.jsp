@@ -6,8 +6,8 @@
 
     <link rel="shortcut icon" href="">
     <link rel="stylesheet" href="<c:url value="/resources/css/progress-wizard.min.css"/>">
-    <script src="<c:url value="/resources/js/validate-pay.js"/>" ></script>
-    <script src="<c:url value="/resources/js/pay-operations.js"/>" ></script>
+    <script src="<c:url value="/resources/js/validate-pay.js"/>"></script>
+    <script src="<c:url value="/resources/js/pay-operations.js"/>"></script>
 
 </head>
 <body>
@@ -20,14 +20,19 @@
     <div class="section">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <img class="icons" src="<c:url value="/resources/images/icons/pay.png"/>" >
+                <img class="icons" src="<c:url value="/resources/images/icons/pay.png"/>">
+
                 <h3 class="header-panel"><fmt:message key="pay" bundle="${lang}"/></h3>
             </div>
             <div class="panel-body">
                 <ul class="progress-indicator">
-                    <li class="completed"><span class="bubble"></span><fmt:message key="delivery" bundle="${lang}"/></li>
-                    <li class="completed"><span class="bubble"></span><fmt:message key="delivery.payment" bundle="${lang}"/> Payment</li>
-                    <li class="active"><span class="bubble"></span><fmt:message key="delivery.verify" bundle="${lang}"/></li>
+                    <li class="completed"><span class="bubble"></span><fmt:message key="delivery" bundle="${lang}"/>
+                    </li>
+                    <li class="completed"><span class="bubble"></span><fmt:message key="delivery.payment"
+                                                                                   bundle="${lang}"/> Payment
+                    </li>
+                    <li class="active"><span class="bubble"></span><fmt:message key="delivery.verify" bundle="${lang}"/>
+                    </li>
                     <li><span class="bubble"></span> <fmt:message key="delivery.success" bundle="${lang}"/></li>
                 </ul>
                 <div class="container" style="width:800px;">
@@ -37,21 +42,28 @@
                                 <div style="margin-top: 20px; margin-bottom: 20px; border: groove; border-color: #62c462; border-width: thin;">
                                     <p id="net-amount-text"><strong><fmt:message key="pay.amount.payable"
                                                                                  bundle="${lang}"/></strong></p>
+
                                     <p id="payment-amount-field">0.00</p>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label"><fmt:message key="pay.mobile.no" bundle="${lang}"/></label>
+                                    <label class="control-label"><fmt:message key="pay.mobile.no"
+                                                                              bundle="${lang}"/></label>
                                     <label id="mobileno_error" class="error-labels"></label>
                                     <input class="form-control" id="txt-mobile-no"
-                                           placeholder="<fmt:message key="pay.enter.mobile" bundle="${lang}"/>" type="text">
+                                           placeholder="<fmt:message key="pay.enter.mobile" bundle="${lang}"/>"
+                                           type="text">
                                 </div>
                                 <div style="margin-top: 5px; width: 40%; margin-left: 25%; float: right;">
-                                    <a class="btn btn-success btn-proceed-payment" id="btn-confirm-mobilepay" style="width:100%;"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;<fmt:message key="pay.amount" bundle="${lang}"/></a>
+                                    <a class="btn btn-success btn-proceed-payment" id="btn-confirm-mobilepay"
+                                       style="width:100%;"><span
+                                            class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;<fmt:message
+                                            key="pay.amount" bundle="${lang}"/></a>
                                 </div>
                             </form>
                         </div>
                         <div class="col-md-6">
-                            <img src="<c:url value="/resources/images/payment/mobile-payments-icon@2x-1.png"/>" width="100%;">
+                            <img src="<c:url value="/resources/images/payment/mobile-payments-icon@2x-1.png"/>"
+                                 width="100%;">
                         </div>
                     </div>
                 </div>
@@ -65,15 +77,15 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <img class="icons" src="<c:url value="/resources/images/icons/pay-confirm.png"/>" >
+                <img class="icons" src="<c:url value="/resources/images/icons/pay-confirm.png"/>">
                 <h4 class="modal-title header-panel"><fmt:message key="pay.confirm" bundle="${lang}"/></h4>
             </div>
             <div class="modal-body">
                 <fmt:message key="pay.msg" bundle="${lang}"/>
             </div>
             <div class="modal-footer">
-                <a class="btn btn-default" id="btn-pay-cancel" data-dismiss="modal"><fmt:message key="pay.cancel" bundle="${lang}"/></a>
+                <a class="btn btn-default" id="btn-pay-cancel" data-dismiss="modal"><fmt:message key="pay.cancel"
+                                                                                                 bundle="${lang}"/></a>
                 <a class="btn btn-success" id="btn-pay-popup"><fmt:message key="pay.modal.ok" bundle="${lang}"/></a>
             </div>
         </div>
@@ -85,7 +97,9 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title"><img src="<c:url value="/resources/images/icons/error.png"/>" width="100px" height="100px">&nbsp;&nbsp;<fmt:message key="pay.vali.err" bundle="${lang}"/></h2>
+                <h2 class="modal-title"><img src="<c:url value="/resources/images/icons/error.png"/>" width="100px"
+                                             height="100px">&nbsp;&nbsp;<fmt:message key="pay.vali.err"
+                                                                                     bundle="${lang}"/></h2>
             </div>
             <div class="modal-body">
                 <p style="font-size: medium;"><fmt:message key="pay.error" bundle="${lang}"/>
@@ -103,10 +117,12 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title"><img src="<c:url value="/resources/images/icons/error.png"/>" width="100px" height="100px">&nbsp;&nbsp;<fmt:message key="pay.fail.error" bundle="${lang}"/></h2>
+                <h2 class="modal-title"><img src="<c:url value="/resources/images/icons/error.png"/>" width="100px"
+                                             height="100px">&nbsp;&nbsp;<fmt:message key="pay.fail.error"
+                                                                                     bundle="${lang}"/></h2>
             </div>
             <div class="modal-body">
-                <p style="font-size: medium;"><fmt:message key="pay.error" bundle="${lang}"/>
+                <p style="font-size: medium;"><fmt:message key="pay.fail.error.msg" bundle="${lang}"/>
                 </p>
             </div>
             <div class="modal-footer">

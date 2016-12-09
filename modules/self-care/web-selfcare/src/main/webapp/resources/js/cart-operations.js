@@ -13,17 +13,13 @@ $(document).ready(function () {
     }
 
     $("#coupon-submit").click(function () {
-        if($("#coupon-submit").val()=="remove"){
+        if ($("#coupon-submit").val() == "remove") {
             removeCoupon();
-        }else{
+        } else {
             couponValidator();
         }
 
     });
-
-/*    $("#coupon-remove").click(function () {
-        removeCoupon();
-    });*/
 
     $(".mod").click(function () {
         $("#modify-item-popup").modal("show");
@@ -91,7 +87,7 @@ $(document).ready(function () {
         var qty = $(this).val();
         var price = $(this).closest('tr').children('td:eq(4)').text();
         var toppingsTotal = $(this).closest('tr').children('td:eq(0)').text();
-        var total = (qty * price) + parseInt(toppingsTotal);
+        var total = (parseFloat(price) + parseFloat(toppingsTotal)) * qty;
         var itemIndex = $.trim($(this).closest('tr').find('td.item-index').text());
         $(this).closest('tr').children('td:eq(6)').text(total.toFixed(2));
         calculateTotal(".tot-price");
@@ -177,7 +173,7 @@ function couponValidator() {
                     calculateDicountedTotal();
                     calculateNetAmount();
                     $("#coupon-submit").val("remove");
-                    $("#coupon-submit").attr('class','btn btn-danger btn-sm');
+                    $("#coupon-submit").attr('class', 'btn btn-danger btn-sm');
                     return true;
                 } else {
                     $("#coupon-validate-msg").text("Coupon code is not valid.");
@@ -190,7 +186,7 @@ function couponValidator() {
     }
 }
 
-function removeCoupon(){
+function removeCoupon() {
     if ($("#txt-coupon").val().length > 0) {
         $.ajax({
             type: "GET",
@@ -199,7 +195,7 @@ function removeCoupon(){
                 $("#txt-coupon").val("");
                 $("#txt-coupon").attr("readonly", false);
                 $("#coupon-submit").text("validate");
-                $("#coupon-submit").attr('class','btn btn-primary btn-sm');
+                $("#coupon-submit").attr('class', 'btn btn-primary btn-sm');
                 location.reload();
             }
         });
