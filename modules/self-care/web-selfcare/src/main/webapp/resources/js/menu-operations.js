@@ -106,6 +106,8 @@ $(document).ready(function () {
         });
 
         $("#add-to-cart-popup").modal('show');
+        $("#addtocart-pizza-qty").val(1);
+        $("#addtocart-pizza-instructs").val("");
         calculateTotal();
     });
 
@@ -211,7 +213,7 @@ $(document).ready(function () {
         }
         var price = $("#addtocart-pizza-price").val();
         var quantity = $(':input[type="number"]').val()
-        var total = (price * quantity) + topping1Price + topping2Price;
+        var total = (parseFloat(price) + parseFloat(topping1Price) + parseFloat(topping2Price)) * quantity;
         $("#addtocart-pizza-total").val(total.toFixed(2));
     }
 });

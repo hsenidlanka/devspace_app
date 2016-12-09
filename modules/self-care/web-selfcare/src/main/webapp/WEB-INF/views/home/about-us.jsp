@@ -24,7 +24,7 @@
                 <div class="panel-body">
                     <form role="form" id="adduser_form" action="" method="post" class="form-horizontal">
 
-                        <p style="font-size: x-large">
+                        <p style="font-size: medium; line-height: 35px;">
                             <fmt:message key="aboutus.content" bundle="${lang}"/>
                         </p>
 

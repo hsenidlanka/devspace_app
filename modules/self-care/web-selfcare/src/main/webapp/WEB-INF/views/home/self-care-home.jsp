@@ -35,7 +35,7 @@
             position: absolute;
             background-color: #f9f9f9;
             min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
         }
 
         .dropdown-menu a {
@@ -53,7 +53,9 @@
             background-color: #e0e0e0;
         }
 
-        .dropdown-menu a:hover {background-color: whitesmoke}
+        .dropdown-menu a:hover {
+            background-color: whitesmoke
+        }
     </style>
 
 
@@ -78,15 +80,15 @@
     <div class="carousel-inner" role="listbox">
 
         <div class="item active">
-            <img src="<c:url value="/resources/images/carousel1.png"/>" >
+            <img src="<c:url value="/resources/images/carousel1.png"/>">
         </div>
 
         <div class="item">
-            <img src="<c:url value="/resources/images/caraousel2.png"/>" >
+            <img src="<c:url value="/resources/images/caraousel2.png"/>">
         </div>
 
         <div class="item">
-            <img src="<c:url value="/resources/images/carousel3.png"/>" >
+            <img src="<c:url value="/resources/images/carousel3.png"/>">
         </div>
         <div class="item">
             <img src="<c:url value="/resources/images/carousel4.png"/>">
@@ -107,13 +109,15 @@
 
     <div class="col-sm-2">
         <span>
-            <a href="payment"> <img src="<c:url value="/resources/images/ordernow3.png"/>" style="width: 185px;height: 148px"></a>
+            <a href="payment"> <img src="<c:url value="/resources/images/ordernow3.png"/>"
+                                    style="width: 185px;height: 148px"></a>
         </span>
     </div>
 
     <div class="col-sm-2">
         <span>
-            <a href="menu"> <img src="<c:url value="/resources/images/ordernow2.png"/>" style="width: 185px;height: 148px"></a>
+            <a href="menu"> <img src="<c:url value="/resources/images/ordernow2.png"/>"
+                                 style="width: 185px;height: 148px"></a>
         </span>
     </div>
     <div class="col-sm-2"></div>
@@ -121,11 +125,13 @@
 
     <div class="col-sm-4" style="padding-top: 80px;padding-left: 260px">
         <span>
-            <a href="http://www.facebook.com/"> <img src="<c:url value="/resources/images/facebook-flat.png"/>" style="padding-right: 10px"></a>
+            <a href="http://www.facebook.com/"> <img src="<c:url value="/resources/images/facebook-flat.png"/>"
+                                                     style="padding-right: 10px"></a>
         </span>
 
         <span>
-            <a href="http://www.twitter.com"> <img src="<c:url value="/resources/images/twitter-flat.png"/>" style="padding-right: 10px"></a>
+            <a href="http://www.twitter.com"> <img src="<c:url value="/resources/images/twitter-flat.png"/>"
+                                                   style="padding-right: 10px"></a>
         </span>
 
         <span>
@@ -142,31 +148,30 @@
         <label class="col-sm-4 control-label">
             <div style="height: 22px"></div>
 
-            <p class="text-muted" style="color: #545454"><fmt:message key="footer.text" bundle="${lang}"/> <a href="https://www.hsenidmobile.com/"
-                                                                        style="color:#313131 "><fmt:message key="company" bundle="${lang}"/> </a></p>
+            <p class="text-muted" style="color: #545454"><fmt:message key="footer.text" bundle="${lang}"/> <a
+                    href="https://www.hsenidmobile.com/"
+                    style="color:#313131 "><fmt:message key="company" bundle="${lang}"/> </a></p>
         </label>
 
         <div class="col-sm-4">
-
             <label class="  ">
                 <div style="height: 22px"></div>
-
-                <h5 style="color: #313131"><fmt:message key="footer.hotline" bundle="${lang}"/>  <fmt:message key="footer.mobile" bundle="${lang}"/></h5>
-
-
+                <h5 style="color: #313131"><fmt:message key="footer.hotline" bundle="${lang}"/> <fmt:message
+                        key="footer.mobile" bundle="${lang}"/></h5>
             </label>
         </div>
         <div class="col-sm-4">
 
             <label class="radio-inline">
-                <a href="https://play.google.com/store/apps"><img style="width: 130px;height: 55px" src="<c:url value="/resources/images/google-play-store-button.png"/>" ></a>
+                <a href="https://play.google.com/store/apps"><img style="width: 130px;height: 55px"
+                                                                  src="<c:url value="/resources/images/google-play-store-button.png"/>"></a>
             </label>
         </div>
 
     </div>
-    <ul class="nav pull-right scroll-top">
+    <%--<ul class="nav pull-right scroll-top">
         <li><a href="#" title="Scroll to top"><i class="glyphicon glyphicon-chevron-up"></i></a></li>
-    </ul>
+    </ul>--%>
 </div>
 
 </body>

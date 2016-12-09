@@ -23,8 +23,8 @@
                 </div>
             </div>
             <div class="panel-body">
-                <h1><fmt:message key="menu.main.panel.subheader"
-                                 bundle="${lang}"/></h1>
+                <h4><fmt:message key="menu.main.panel.subheader"
+                                 bundle="${lang}"/></h4>
 
                 <div class="row" style="margin-top: 15px;">
                     <div class="col-md-9">
