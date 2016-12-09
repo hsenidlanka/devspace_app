@@ -35,11 +35,6 @@
                     <div>
                         <h4><fmt:message key="delivery.success" bundle="${lang}"/>Your order has placed successfully...Here are some details of your order.</h4>
                     </div>
-                    <div><label><fmt:message key="success.id" bundle="${lang}"/></label></div>
-                    <div><label><fmt:message key="success.date" bundle="${lang}"/></label></div>
-                    <div><label><fmt:message key="shopping.total" bundle="${lang}"/>:</label></div>
-                    <div><label><fmt:message key="success.type" bundle="${lang}"/></label></div>
-                    <div><label><fmt:message key="success.status" bundle="${lang}"/></label></div>
 
                     <div>
                         <a href="home"><fmt:message key="success.click" bundle="${lang}"/></a>

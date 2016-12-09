@@ -4,9 +4,6 @@ import org.json.simple.JSONObject;
 
 import java.util.List;
 
-/**
- * Created by hsenid on 10/26/16.
- */
 public class ServerResponseMessage {
     private String status;
     private int code;

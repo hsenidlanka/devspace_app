@@ -44,7 +44,7 @@ public class ShoppingCartController {
     // Validate the coupon code
     @RequestMapping(value = "/shopping-cart/validatecoupon", method = RequestMethod.POST)
     @ResponseBody
-    public String checkForValidCoupon(HttpServletRequest request) {
+    public String checkForValidCoupon(HttpServletRequest request, HttpSession session) {
         String completeUrl = SendStringBuilds.sendString(baseUrl, checkValidCoupenUrl);
 
         String couponToCheck = request.getParameter("checkCoupon");
@@ -60,11 +60,20 @@ public class ShoppingCartController {
         try {
             ServerResponseMessage responseMessage = restTemplate.postForObject(completeUrl, httpEntity, ServerResponseMessage.class);
             rate = responseMessage.getData().get(0).get("rate").toString();
+            session.setAttribute("couponCode", couponToCheck);
         } catch (RestClientException e) {
             logger.error("Error validating the coupon.", e);
+            session.setAttribute("couponCode", "");
             return rate;
         }
         return rate;
+    }
+
+    // Validate the coupon code
+    @RequestMapping(value = "/shopping-cart/removecoupon", method = RequestMethod.GET)
+    @ResponseBody
+    public void removeCouponCode(HttpSession session, HttpServletRequest request) {
+        session.setAttribute("couponCode","");
     }
 
     /*
@@ -112,7 +121,8 @@ public class ShoppingCartController {
     // Check whether customer is logged in to the system
     @RequestMapping(value = "/shopping-cart/proceed", method = RequestMethod.GET)
     @ResponseBody
-    public int proceedToCheckout(HttpSession session) {
+    public int proceedToCheckout(HttpServletRequest request, HttpSession session) {
+        session.setAttribute("cartTotal",request.getParameter("total"));
         if (session.getAttribute("username") != null) {
             return 1;
         } else {

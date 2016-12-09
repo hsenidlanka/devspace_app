@@ -8,8 +8,24 @@ $(document).ready(function () {
 
     $("#coupon-alert-div").hide();
 
+    if ($("#txt-coupon").val() != "") {
+        couponValidator();
+    }
+
     $("#coupon-submit").click(function () {
         couponValidator();
+    });
+
+    $("#coupon-remove").click(function () {
+        $.ajax({
+            type: "GET",
+            url: "/web-selfcare/shopping-cart/removecoupon",
+            success: function (result) {
+                $("#txt-coupon").val("");
+                $("#txt-coupon").attr("readonly", false);
+                location.reload();
+            }
+        });
     });
 
     $(".mod").click(function () {
@@ -105,6 +121,7 @@ $(document).ready(function () {
             $.ajax({
                 type: "GET",
                 url: "/web-selfcare/shopping-cart/proceed",
+                data: {"total": $("#net-amount-field").text()},
                 success: function (result) {
                     if (result == 1) {
                         window.location.href = "/web-selfcare/delivery";

@@ -55,7 +55,7 @@
                             <input type="text" class="del-date" id="date" name="date">
                             &nbsp;&nbsp;<fmt:message key="delivery.time" bundle="${lang}"/>
                             <div class="input-group" style="display: inline-block; vertical-align: middle;">
-                                <input id="timepicker1" class="bootstrap-timepicker1" type="text">
+                                <input id="timepicker1" class="bootstrap-timepicker1 del-time" type="text">
                             </div>
                         </div>
 
@@ -118,8 +118,10 @@
                                         <div class="form-group" style="margin-top: 16px;">
                                             <label class="control-label"><fmt:message key="delivery.description"
                                                                                       bundle="${lang}"/></label>
-                                            <textarea class="form-control txtarea-delivery-description" id="txtarea-delivery-description"
-                                                      placeholder="<fmt:message key="delivery.describe" bundle="${lang}"/>" rows="3"></textarea>
+                                            <textarea class="form-control txtarea-delivery-description"
+                                                      id="txtarea-delivery-description"
+                                                      placeholder="<fmt:message key="delivery.describe" bundle="${lang}"/>"
+                                                      rows="3"></textarea>
                                         </div>
                                         <div>
                                             <a class="btn btn-success btn-proceed-payment btn-submit-proceed"
@@ -151,7 +153,7 @@
                             </label>
                             &nbsp;&nbsp;<fmt:message key="delivery.time" bundle="${lang}"/>
                             <div class="input-group" style="display: inline-block; vertical-align: middle;">
-                                <input id="timepicker2" class="bootstrap-timepicker2" type="text">
+                                <input id="timepicker2" class="bootstrap-timepicker2 pickup-time" type="text">
                             </div>
                         </div>
 
@@ -167,23 +169,24 @@
                                         <div class="form-group">
                                             <label class="control-label"><fmt:message key="delivery.pickup.branch"
                                                                                       bundle="${lang}"/></label>
-                                            <select class="form-control">
-                                                <option><fmt:message key="delivery.colombo" bundle="${lang}"/></option>
-                                                <option><fmt:message key="delivery.galle" bundle="${lang}"/></option>
-                                                <option><fmt:message key="delivery.matara" bundle="${lang}"/></option>
-                                                <option><fmt:message key="delivery.kaluthara"
-                                                                     bundle="${lang}"/></option>
+                                            <select class="form-control" id="pickup-branch">
+                                                <option value="<fmt:message key="delivery.colombo" bundle="${lang}"/>">
+                                                    <fmt:message key="delivery.colombo" bundle="${lang}"/></option>
+                                                <option value="<fmt:message key="delivery.galle" bundle="${lang}"/>">
+                                                    <fmt:message key="delivery.galle" bundle="${lang}"/></option>
+                                                <option value="<fmt:message key="delivery.matara" bundle="${lang}"/>">
+                                                    <fmt:message key="delivery.matara" bundle="${lang}"/></option>
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label"><fmt:message key="delivery.branch.address"
                                                                                       bundle="${lang}"/></label>
-                                            <textarea class="form-control txtarea-branch-address" rows="5" readonly></textarea>
+                                            <textarea class="form-control txtarea-branch-address" rows="5"
+                                                      readonly></textarea>
                                         </div>
                                         <div>
                                             <a class="btn btn-success btn-proceed-payment"
-                                               style="width: 45%; display: inline-block; float: right;"
-                                               href="pickup-summary"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;<fmt:message
+                                               id="btn-pickup-submit" style="width: 45%; display: inline-block; float: right;"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;<fmt:message
                                                     key="delivery.proceed" bundle="${lang}"/></a>
                                             <button type="reset" class="btn btn-success" value="Reset"
                                                     style="width: 45%; display: inline-block; float: right; margin-right:5px">

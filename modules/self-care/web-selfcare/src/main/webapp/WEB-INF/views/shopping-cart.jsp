@@ -6,7 +6,7 @@
     <title><fmt:message key="shopping" bundle="${lang}"/></title>
     <link rel="shortcut icon" href="">
     <script src="<c:url value="/resources/js/cart-operations.js"/>" type="text/javascript"></script>
-    <script>
+    <%--<script>
         $(document).ready(function () {
             $("#txt-coupon").blur(function () {
                 var coupen = $("#txt-coupon").val();
@@ -27,12 +27,13 @@
                 });
             });
         });
-    </script>
+    </script>--%>
 </head>
 <body>
 <div class="loader-anim"></div>
 <%@include file="includes/new-header.jsp" %>
 <% request.setAttribute("cartItemsMap", request.getSession().getAttribute("cartItems")); %>
+<% request.setAttribute("coupon", session.getAttribute("couponCode")); %>
 <div class="main-div">
     <div class="section">
         <div class="panel panel-default">
@@ -107,11 +108,11 @@
                                     <p id="coupon-validate-msg"></p>
                                 </div>
                                 <div>
-                                    <input type="text" id="txt-coupon" size="25" class="form-control">
+                                    <input type="text" id="txt-coupon" size="25" class="form-control" value="${cartItemsMap}">
                                     <br>
                                 </div>
                                 <div id="div-submit">
-                                    <input type="submit" id="coupon-submit" value="validate"
+                                    <input type="button" id="coupon-submit" value="validate"
                                            class="btn btn-primary btn-xs">
                                 </div>
                                 <div style="margin-top: 30px;">

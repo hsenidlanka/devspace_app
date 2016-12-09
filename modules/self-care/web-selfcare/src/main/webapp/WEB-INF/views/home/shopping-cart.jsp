@@ -12,6 +12,7 @@
 <div class="loader-anim"></div>
 <%@include file="../includes/new-header.jsp" %>
 <% request.setAttribute("cartItemsMap", request.getSession().getAttribute("cartItems")); %>
+<% request.setAttribute("coupon", request.getSession().getAttribute("couponCode")); %>
 <div class="main-div">
     <div class="section">
         <div class="panel panel-default">
@@ -109,11 +110,13 @@
                                     <p id="coupon-validate-msg"></p>
                                 </div>
                                 <div>
-                                    <input type="text" class="form-control" id="txt-coupon" size="25">
+                                    <input type="text" class="form-control" id="txt-coupon" size="25" value="${coupon}">
                                 </div>
                                 <br>
 
                                 <div id="div-submit">
+                                    <input type="button" id="coupon-remove" value="remove"
+                                           class="btn btn-danger btn-sm">
                                     <input type="submit" id="coupon-submit" value="validate"
                                            class="btn btn-primary btn-sm">
                                 </div>

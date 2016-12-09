@@ -55,23 +55,44 @@ $(document).ready(function () {
         if (isFirstNameValid == false || isLastNameValid == false || isContactNoValid == false || isEmailValid == false || isAddress01Valid == false || isAddress02Valid == false) {
             $("#validation-error-popup").modal('show');
         } else {
-            //var del = $('input[name=radiodelwhen]:checked').val();
+            var selectedVal = $("input[type=radio][name=radiodelwhen]:checked").val();
+            if (selectedVal != "del-later" || $(".del-date").val()=="") {
+                var date = new Date();
+                var str = date.getFullYear() + "-" + getFormattedPartTime(date.getMonth()) + "-" + getFormattedPartTime(date.getDate());
+                $(".del-date").val(str);
+                var time = date.getHours() + ":" + getFormattedPartTime(date.getMinutes());
+                $(".del-time").val(time);
+            }
             $.ajax({
                 type: "post",
                 url: "delivery/save-delivery-data",
                 data: {
-                    "firstName":$("#txt-fname").val(),
-                    "lastName":$("#txt-lname").val(),
-                    "contactNo":$("#txt-contactno").val(),
-                    "email":$("#txt-email").val(),
-                    "address01":$("#txt-deliadd01").val(),
-                    "address02":$("#txt-deliadd02").val(),
-                    "address03":$("#txt-deliadd03").val(),
-                    "description":$("#txtarea-delivery-description").val()
+                    "firstName": $("#txt-fname").val(),
+                    "lastName": $("#txt-lname").val(),
+                    "contactNo": $("#txt-contactno").val(),
+                    "email": $("#txt-email").val(),
+                    "address01": $("#txt-deliadd01").val(),
+                    "address02": $("#txt-deliadd02").val(),
+                    "address03": $("#txt-deliadd03").val(),
+                    "description": $("#txtarea-delivery-description").val(),
+                    "date": $(".del-date").val(),
+                    "time": $(".del-time").val()
                 }
             });
             window.location = 'delivery-summary';
         }
+    });
+
+    $("#btn-pickup-submit").click(function(){
+        $.ajax({
+            type: "post",
+            url: "delivery/save-pickup-data",
+            data: {
+                "time": $(".pickup-time").val(),
+                "branch": $("#pickup-branch").val()
+            }
+        });
+        window.location = 'pickup-summary';
     });
 });
 
