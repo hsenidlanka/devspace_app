@@ -79,7 +79,7 @@
 
               <div class="row subcat_add_table col-xs-12" id="subcat_table" style="margin-left: 1%;">
 
-                  <div class="row subcat-tbl-row subcat-tbl-hdr" style="width:600px;">
+                  <div class="row subcat-tbl-row1 subcat-tbl-hdr" style="width:600px;">
                       <div class="col-xs-4">
                           <strong><fmt:message key="category.categoryadd.form.subcatname" bundle="${bundle1}"/></strong>
                       </div>
@@ -104,7 +104,10 @@
                       </div>
                       <div class="col-xs-3">
                           <a href="#" class="addsub ">
-                              <span class="glyphicon glyphicon-plus">New Subcategory</span>
+                              <span class="glyphicon glyphicon-plus"></span>
+                          </a>
+                          <a href="#" class="deletesub">
+                              <span class=" glyphicon glyphicon-minus"></span>
                           </a>
                       </div>
                   </div>

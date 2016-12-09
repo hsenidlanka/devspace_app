@@ -1,5 +1,17 @@
 #userAdd_box{
-    width: 65%;
+    width: 55%;
+}
+#tableCustomer{
+    font-size: 14px;
+}
+#tableStaff{
+    font-size: 14px;
+}
+#tableBannedstaff{
+    font-size: 14px;
+}
+#tableBannedcustomer{
+    font-size: 14px;
 }
 
 .form-box {

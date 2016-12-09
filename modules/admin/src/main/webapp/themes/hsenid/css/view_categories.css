@@ -14,7 +14,18 @@
     padding: 4px;
     width:600px;
 }
+.cat-tbl-row{
+    border: 1px solid #999999;
+    /*border-radius: 4px;*/
+    padding: 4px;
+    width:600px;
+}
 .subcat-tbl-hdr {
+    background-color: rgba(204, 204, 209, 0.81);
+    border-color: rgba(204, 204, 209, 0.81);
+    text-align: center;
+}
+.cat-tbl-hdr {
     background-color: rgba(204, 204, 209, 0.81);
     border-color: rgba(204, 204, 209, 0.81);
     text-align: center;

@@ -3,9 +3,9 @@ $(document).ready(function () {
     $('#tableStaff').bootstrapTable({
 
         url: 'https://localhost:8443/admin/users/view/staffTable',
-        height: 350,
+        height: 357,
         pagination: true,
-        pageSize: 7,
+        pageSize: 8,
         clickToSelect: true,
         singleSelect: true,
         minimumCountColumns: 3,

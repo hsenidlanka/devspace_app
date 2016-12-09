@@ -32,5 +32,4 @@ public class WelcomeController {
        return "redirect:https://localhost:8443/cas/logout";
 //        return "1";
     }
-
 }
