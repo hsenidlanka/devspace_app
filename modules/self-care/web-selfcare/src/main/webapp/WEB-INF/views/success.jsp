@@ -37,12 +37,12 @@
 
                 <div class="container" style="width:1000px; margin-top: 30px;">
                     <div style="text-align: center;">
-                        <img src="<c:url value="/resources/images/icons/success.png"/>"  width="100px" height="100px">
+                        <img src="<c:url value="/resources/images/icons/success.png"/>"  width="120px" height="120px">
 
                         <h1><fmt:message key="success.thank" bundle="${lang}"/></h1>
                     </div>
                     <div>
-                        <h4><fmt:message key="delivery.success" bundle="${lang}"/>Your order has placed successfully...Here are some details of your order.</h4>
+                        <h4><fmt:message key="success.your.order" bundle="${lang}"/></h4>
                     </div>
 
                     <div>

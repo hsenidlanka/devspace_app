@@ -12,7 +12,6 @@ $(document).ready(function () {
         } else {
             $("#confirm-payment-popup").modal('show');
         }
-
     });
 
     $("#btn-confirm-mobilepay").click(function () {

@@ -99,7 +99,7 @@ $(document).ready(function () {
         var qty = $(this).val();
         var price = $(this).closest('tr').children('td:eq(4)').text();
         var toppingsTotal = $(this).closest('tr').children('td:eq(0)').text();
-        var total = (qty * price) + parseInt(toppingsTotal);
+        var total = (parseFloat(price) + parseFloat(toppingsTotal)) * qty;
         var itemIndex = $.trim($(this).closest('tr').find('td.item-index').text());
         $(this).closest('tr').children('td:eq(6)').text(total.toFixed(2));
         calculateTotal(".tot-price");
@@ -276,7 +276,7 @@ function initCalculations() {
         var qty = $(this).val();
         var price = $(this).closest('tr').children('td:eq(4)').text();
         var toppingsTotal = $(this).closest('tr').children('td:eq(0)').text();
-        var total = (qty * price) + parseInt(toppingsTotal);
+        var total = (parseFloat(price) + parseFloat(toppingsTotal)) * qty;
         $(this).closest('tr').children('td:eq(6)').text(total.toFixed(2));
         calculateTotal(".tot-price");
         recalculateTotals();
