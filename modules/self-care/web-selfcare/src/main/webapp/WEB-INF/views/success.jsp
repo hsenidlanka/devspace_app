@@ -5,8 +5,7 @@
     <link rel="shortcut icon" href="">
 
     <%@include file="includes/include.jsp" %>
-    <link rel="stylesheet" href="<c:url value="/resources/css/progress-wizard.min.css"/>" >
-
+    <%@include file="includes/smart-wizard.jsp" %>
 </head>
 <body>
 <div class="loader-anim"></div>
@@ -19,14 +18,24 @@
                 <h3 class="header-panel">Order placed</h3>
             </div>
             <div class="panel-body">
-                <ul class="progress-indicator">
-                    <li class="completed"><span class="bubble"></span><fmt:message key="delivery" bundle="${lang}"/></li>
-                    <li class="completed"><span class="bubble"></span><fmt:message key="delivery.payment" bundle="${lang}"/></li>
-                    <li class="completed"><span class="bubble"></span><fmt:message key="delivery.verify" bundle="${lang}"/></li>
-                    <li class="completed"><span class="bubble"></span><fmt:message key="delivery.success" bundle="${lang}"/></li>
-                </ul>
+                <div id="smartwizard">
+                    <ul>
+                        <li class="done"><a href=""><fmt:message key="delivery" bundle="${lang}"/><br/>
+                            <small><fmt:message key="delivery.msg" bundle="${lang}"/></small>
+                        </a></li>
+                        <li class="done"><a href=""><fmt:message key="delivery.payment" bundle="${lang}"/><br/>
+                            <small><fmt:message key="delivery.payment.msg" bundle="${lang}"/></small>
+                        </a></li>
+                        <li class="done"><a href=""><fmt:message key="delivery.verify" bundle="${lang}"/><br/>
+                            <small><fmt:message key="delivery.verify.msg" bundle="${lang}"/></small>
+                        </a></li>
+                        <li class="done"><a href=""><fmt:message key="delivery.success" bundle="${lang}"/><br/>
+                            <small><fmt:message key="delivery.success.msg" bundle="${lang}"/></small>
+                        </a></li>
+                    </ul>
+                </div>
 
-                <div class="container" style="width:800px;;">
+                <div class="container" style="width:1000px; margin-top: 30px;">
                     <div style="text-align: center;">
                         <img src="<c:url value="/resources/images/icons/success.png"/>"  width="100px" height="100px">
 
@@ -45,5 +54,14 @@
     </div>
 </div>
 <a href="#" class="scrollup"></a>
+<script>
+    $('#smartwizard').smartWizard({
+        selected:5,
+        theme:'arrows',
+        anchorSettings:{
+            anchorClickable: false
+        }
+    });
+</script>
 </body>
 </html>

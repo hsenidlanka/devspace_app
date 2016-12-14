@@ -5,10 +5,10 @@
     <title><fmt:message key="delivery.payment" bundle="${lang}"/>Payment</title>
 
     <link rel="shortcut icon" href="">
-    <link rel="stylesheet" href="<c:url value="/resources/css/progress-wizard.min.css"/>">
     <script src="<c:url value="/resources/js/validate-pay.js"/>"></script>
     <script src="<c:url value="/resources/js/pay-operations.js"/>"></script>
 
+    <%@include file="includes/smart-wizard.jsp" %>
 </head>
 <body>
 
@@ -25,17 +25,23 @@
                 <h3 class="header-panel"><fmt:message key="pay" bundle="${lang}"/></h3>
             </div>
             <div class="panel-body">
-                <ul class="progress-indicator">
-                    <li class="completed"><span class="bubble"></span><fmt:message key="delivery" bundle="${lang}"/>
-                    </li>
-                    <li class="completed"><span class="bubble"></span><fmt:message key="delivery.payment"
-                                                                                   bundle="${lang}"/> Payment
-                    </li>
-                    <li class="active"><span class="bubble"></span><fmt:message key="delivery.verify" bundle="${lang}"/>
-                    </li>
-                    <li><span class="bubble"></span> <fmt:message key="delivery.success" bundle="${lang}"/></li>
-                </ul>
-                <div class="container" style="width:800px;">
+                <div id="smartwizard">
+                    <ul>
+                        <li class="done"><a href=""><fmt:message key="delivery" bundle="${lang}"/><br/>
+                            <small><fmt:message key="delivery.msg" bundle="${lang}"/></small>
+                        </a></li>
+                        <li class="done"><a href=""><fmt:message key="delivery.payment" bundle="${lang}"/><br/>
+                            <small><fmt:message key="delivery.payment.msg" bundle="${lang}"/></small>
+                        </a></li>
+                        <li><a href=""><fmt:message key="delivery.verify" bundle="${lang}"/><br/>
+                            <small><fmt:message key="delivery.verify.msg" bundle="${lang}"/></small>
+                        </a></li>
+                        <li><a href=""><fmt:message key="delivery.success" bundle="${lang}"/><br/>
+                            <small><fmt:message key="delivery.success.msg" bundle="${lang}"/></small>
+                        </a></li>
+                    </ul>
+                </div>
+                <div class="container" style="width:1000px;">
                     <div class="row">
                         <div class="col-md-6" style="margin-top: 20px;">
                             <form role="form">
@@ -132,5 +138,14 @@
     </div>
 </div>
 <a href="#" class="scrollup"></a>
+<script>
+    $('#smartwizard').smartWizard({
+        selected: 2,
+        theme:'arrows',
+        anchorSettings:{
+            anchorClickable: false
+        }
+    });
+</script>
 </body>
 </html>

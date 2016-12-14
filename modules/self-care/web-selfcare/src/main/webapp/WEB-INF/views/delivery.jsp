@@ -7,11 +7,12 @@
     <link href="<c:url value="/resources/css/bootstrap-datepicker3.css"/>" rel="stylesheet"/>
     <script src="<c:url value="/resources/js/bootstrap-datepicker.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/delivery-operations.js"/>"></script>
-    <link href="<c:url value="/resources/css/progress-wizard.min.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/bootstrap-timepicker.css"/>" rel="stylesheet">
     <script src="<c:url value="/resources/js/bootstrap-timepicker.js"/>"></script>
     <script src="<c:url value="/resources/js/datepicker.js"/>"></script>
     <script src="<c:url value="/resources/js/validate-delivery.js"/>"></script>
+
+    <%@include file="includes/smart-wizard.jsp" %>
 </head>
 
 <body>
@@ -26,12 +27,29 @@
                 <h3 class="header-panel"><fmt:message key="delivery" bundle="${lang}"/></h3>
             </div>
             <div class="panel-body">
-                <ul class="progress-indicator">
+                <%--<ul class="progress-indicator">
                     <li class="active"><span class="bubble"></span> <fmt:message key="delivery" bundle="${lang}"/></li>
                     <li><span class="bubble"></span><fmt:message key="delivery.payment" bundle="${lang}"/></li>
                     <li><span class="bubble"></span><fmt:message key="delivery.verify" bundle="${lang}"/></li>
                     <li><span class="bubble"></span><fmt:message key="delivery.success" bundle="${lang}"/></li>
-                </ul>
+                </ul>--%>
+
+                <div id="smartwizard">
+                    <ul>
+                        <li><a href=""><fmt:message key="delivery" bundle="${lang}"/><br/>
+                            <small><fmt:message key="delivery.msg" bundle="${lang}"/></small>
+                        </a></li>
+                        <li><a href=""><fmt:message key="delivery.payment" bundle="${lang}"/><br/>
+                            <small><fmt:message key="delivery.payment.msg" bundle="${lang}"/></small>
+                        </a></li>
+                        <li><a href=""><fmt:message key="delivery.verify" bundle="${lang}"/><br/>
+                            <small><fmt:message key="delivery.verify.msg" bundle="${lang}"/></small>
+                        </a></li>
+                        <li><a href=""><fmt:message key="delivery.success" bundle="${lang}"/><br/>
+                            <small><fmt:message key="delivery.success.msg" bundle="${lang}"/></small>
+                        </a></li>
+                    </ul>
+                </div>
 
                 <div style="margin-top: 30px;">
                     <div class="radio" style="text-align: center; font-size: medium;">
@@ -186,7 +204,9 @@
                                         </div>
                                         <div>
                                             <a class="btn btn-success btn-proceed-payment"
-                                               id="btn-pickup-submit" style="width: 45%; display: inline-block; float: right;"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;<fmt:message
+                                               id="btn-pickup-submit"
+                                               style="width: 45%; display: inline-block; float: right;"><span
+                                                    class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;<fmt:message
                                                     key="delivery.proceed" bundle="${lang}"/></a>
                                             <button type="reset" class="btn btn-success" value="Reset"
                                                     style="width: 45%; display: inline-block; float: right; margin-right:5px">
@@ -232,5 +252,14 @@
     </div>
 </div>
 <a href="#" class="scrollup"></a>
+<script>
+    $('#smartwizard').smartWizard({
+        selected: 0,
+        theme:'arrows',
+        anchorSettings:{
+            anchorClickable: false
+        }
+    });
+</script>
 </body>
 </html>
