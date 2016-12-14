@@ -40,7 +40,6 @@ public class RegisterControllerTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testUniqueUsernameNotIn() throws Exception {
-//        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
         this.mockMvc.perform(get("/UniqueUser")
                 .param("checkName", "notauser")
                 .accept(MediaType.APPLICATION_JSON))
@@ -52,7 +51,6 @@ public class RegisterControllerTest extends AbstractTestNGSpringContextTests {
     public void testRegisterSuccess() throws Exception {
         Random random = new Random();
         int userInt = random.nextInt(100000) + 1;
-//        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
         this.mockMvc.perform(post("/register")
                 .param("title", "Mr")
                 .param("fname", "mockTest")
@@ -73,7 +71,6 @@ public class RegisterControllerTest extends AbstractTestNGSpringContextTests {
     public void testRegisterFailedUsername() throws Exception {
         Random random = new Random();
         int userInt = random.nextInt(100000) + 1;
-//        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
         this.mockMvc.perform(post("/register")
                 .param("title", "Mr")
                 .param("fname", "mockTest")
@@ -90,8 +87,8 @@ public class RegisterControllerTest extends AbstractTestNGSpringContextTests {
                 .andExpect(content().json("{'userAvailable':false}"));
     }
 
-    @Test
-    public void testRegisterFailedUsernamae() throws Exception {
+    /*@Test
+    public void testRegisterFailedUsernamye() throws Exception {
         Random random = new Random();
         int userInt = random.nextInt(100000) + 1;
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
@@ -109,6 +106,6 @@ public class RegisterControllerTest extends AbstractTestNGSpringContextTests {
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().json("{'userAvailable':false}"));
-    }
+    }*/
 
 }
