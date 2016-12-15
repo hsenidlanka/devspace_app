@@ -10,7 +10,7 @@ $(document).ready(function () {
     $("#pagination2").hide();
 
     $.ajax({
-        url: 'PaginationTable',
+        url: 'https://localhost:8443/admin/items/view/itemPaginationTable',
         success: function (recCount) {
             pag.simplePaginator('setTotalPages', Math.ceil(recCount / 10));
         }
@@ -43,7 +43,7 @@ $(document).ready(function () {
         pageChange: function (page) {
 
             $.ajax({
-                url: '',
+                url: 'https://localhost:8443/admin/items/loadSearchItem',
                 dataType: "json",
                 data: {"initPage": page},
                 success: function (data) {

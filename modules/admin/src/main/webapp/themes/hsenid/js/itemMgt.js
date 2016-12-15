@@ -77,7 +77,7 @@ $(document).ready(function () {
     });
 
     /*
-     * populating the sub-category list in editItem.jsp
+     * populating the sub-category list in editItem
      **/
     $("#selectCatedt").change(function () {
         var categoryNm = $(this).val();
