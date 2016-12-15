@@ -45,7 +45,7 @@ $(document).ready(function () {
             $.ajax({
                 url: 'https://localhost:8443/admin/items/loadSearchItem',
                 dataType: "json",
-                data: {"initPage": page,"pgLimit":pgLimit},
+                data: {"initPage": page, "pgLimit": pgLimit},
                 success: function (data) {
                     $('#tblItems').bootstrapTable('load', data);
                 }

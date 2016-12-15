@@ -331,7 +331,7 @@ public class ItemController {
 
 
     /*
-    * typeahead function for item name
+    * typeahead function calling method for item name
     **/
     @RequestMapping(value = "/typeahedItmNm", method = RequestMethod.GET)
     public @ResponseBody List<String> typeaheadName(){
@@ -339,6 +339,10 @@ public class ItemController {
         return item.selectNameList();
     }
 
+
+    /*
+   *reloading item table view on search & paginating basis
+   * */
     @RequestMapping(value = "/loadSearchItem", method = RequestMethod.GET)
     public @ResponseBody List<Map<String, Object>> loadSearchItem(HttpServletRequest request){
 
@@ -361,6 +365,9 @@ public class ItemController {
         return itemDetails;
     }
 
+    /*
+    *getting record count for loading item table with pagination
+    **/
     @RequestMapping(value = "/itemPaginationTable", method = RequestMethod.GET)
     public @ResponseBody int loadPagination(){
         return item.count();

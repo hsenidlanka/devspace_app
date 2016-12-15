@@ -30,7 +30,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/packages")
@@ -437,7 +436,7 @@ public class PackageController {
 
 
     /*
-    * typeahead function for package name
+    * typeahead function calling method for package name
     **/
     @RequestMapping(value = "/typeahedPkgNm", method = RequestMethod.GET)
     public @ResponseBody List<String> typeaheadPkgName(){
@@ -445,6 +444,9 @@ public class PackageController {
         return packageRepo.getPackageNameList();
     }
 
+    /*
+    *reloading pkg table view on search & paginating basis
+    * */
     @RequestMapping(value = "/loadSearchPackage", method = RequestMethod.GET)
     public @ResponseBody
     List<Package> loadSearchItem(HttpServletRequest request){
@@ -455,19 +457,22 @@ public class PackageController {
         String pgLimt = request.getParameter("pgLimit");
         int pgLimit = Integer.parseInt(pgLimt);
 
-        List<Map<String, Object>> pkgDetails;
+        List<Package> pkgDetails;
+        LOGGER.trace("load package name 1 {}", pkgName);
 
         if(pkgName!=null){
-
+            pkgDetails = packageRepo.paginateSelectAllByNamePattern(pkgName,pgLimit,initPg);
+            LOGGER.trace("selected package {}",pkgDetails);
         }else{
-
+            pkgDetails=packageRepo.paginateSelectAll(pgLimit,initPg);
+            LOGGER.trace("load package {}",pkgDetails);
         }
-
-
-        LOGGER.trace("load search Item "+ packageRepo.selectAllByNamePattern(pkgName));
-        return  packageRepo.selectAllByNamePattern(pkgName);
+        return pkgDetails;
     }
 
+    /*
+    *getting record count for loading pkg table with pagination
+    **/
     @RequestMapping(value = "/packagePaginationTable", method = RequestMethod.GET)
     public @ResponseBody int loadPagination(){
         return packageRepo.count();

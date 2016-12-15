@@ -1,42 +1,48 @@
-$(document).ready(function(){
+$(document).ready(function () {
 
     var pgLimit = 10;
+    var pkgName = $("#txtViewSearchPkg").val();
 
-    $("#tblPackages").bootstrapTable({
-        dataType:'JSON',
-        url: 'https://localhost:8443/admin/packages/view/packageTable',
-        height: 400,
-        striped: true,
-        pagination: true,
-        pageSize: 10,
-        pageList: [10, 25, 50, 100, 200],
-        search: false,
-        showColumns: false,
-        showRefresh: false,
-        minimumCountColumns: 2,
-        columns: [{
-            field: 'packageId',
-            title: 'Package ID',
-            sortable: true
-        }, {
-            field: 'packName',
-            title: 'Package Name',
-            sortable: true
-        },{
-            field: 'price',
-            title: 'Package Price (LKR)',
-            align: 'right',
-            sortable: true
-        },{
-            field: 'operate',
-            title: 'Operations',
-            align: 'center',
-            formatter: operateFormatter,
-            events: operateEvents
-        }]
+    $.ajax({
+        url: "https://localhost:8443/admin/packages/loadSearchPackage",
+        dataType: "json",
+        data: {"pkgName": pkgName, "initPage": "1", "pgLimit": pgLimit},
+        success: function (result) {
+
+            $("#tblPackages").bootstrapTable({
+                height: 400,
+                striped: true,
+                pagination: false,
+                pageSize: 10,
+                pageList: [10, 25, 50, 100, 200],
+                search: false,
+                showColumns: false,
+                showRefresh: false,
+                minimumCountColumns: 2,
+                columns: [{
+                    field: 'packageId',
+                    title: 'Package ID',
+                    sortable: true
+                }, {
+                    field: 'packName',
+                    title: 'Package Name',
+                    sortable: true
+                }, {
+                    field: 'price',
+                    title: 'Package Price (LKR)',
+                    align: 'right',
+                    sortable: true
+                }, {
+                    field: 'operate',
+                    title: 'Operations',
+                    align: 'center',
+                    formatter: operateFormatter,
+                    events: operateEvents
+                }],
+                data: result
+            });
+        }
     });
-
-
     $("#btnDeltPkg").click(function () {
         var pkgName = $("#lblDeltPkgName").text();
         $.ajax({
@@ -47,12 +53,14 @@ $(document).ready(function(){
             success: function (data) {
                 $.toaster({priority: 'success', title: 'Success', message: 'Deleted the item  ' + pkgName});
                 setTimeout(function () {
-                    location.reload(); }, 3000);
+                    location.reload();
+                }, 3000);
             },
             error: function (e) {
                 $.toaster({priority: 'danger', title: 'Error', message: 'Cannot delete the item ' + pkgName});
                 setTimeout(function () {
-                    location.reload(); }, 3000);
+                    location.reload();
+                }, 3000);
             }
         })
     });
@@ -60,7 +68,7 @@ $(document).ready(function(){
     /*
      * typeahead function for load pkgNames
      * */
-    $("#txtViewSearchPkg").keyup(function(){
+    $("#txtViewSearchPkg").keyup(function () {
         $.ajax({
             type: "GET",
             url: "https://localhost:8443/admin/packages/typeahedPkgNm",
@@ -72,7 +80,7 @@ $(document).ready(function(){
                 }).focus();
             },
             error: function (er) {
-                console.log("error in typeahead "+er)
+                console.log("error in typeahead " + er)
             }
         })
     });
@@ -101,10 +109,10 @@ $(document).ready(function(){
         pageChange: function (page) {
 
             $.ajax({
-                url:'https://localhost:8443/admin/packages/loadSearchPackage',
+                url: 'https://localhost:8443/admin/packages/loadSearchPackage',
                 dataType: "json",
-                data:{"srchPkgNm":$("#txtViewSearchPkg").val(), "initPage": page, "pgLimit":pgLimit},
-                success: function(data){
+                data: {"srchPkgNm": $("#txtViewSearchPkg").val(), "initPage": page, "pgLimit": pgLimit},
+                success: function (data) {
 
                     $('#tblPackages').bootstrapTable('load', data);
                 }
@@ -115,26 +123,26 @@ $(document).ready(function(){
     /*
      * load data on request typeahead
      **/
-    $("#btnViewSearchPkg").click(function(){
+    $("#btnViewSearchPkg").click(function () {
 
-        var srchPkgNm = $("#txtViewSearchPkg").val();
+        // var srchPkgNm = $("#txtViewSearchPkg").val();
 
-        if(srchPkgNm.length>0){
+        if ($("#txtViewSearchPkg").val().length > 0) {
 
             $('#pagination3').hide();
             $('#pagination4').show();
 
             $.ajax({
-                url:"https://localhost:8443/admin/packages/loadSearchPackage",
-                datatype:"JSON",
-                data:{"srchPkgNm":srchPkgNm,"initPage":"1", "pgLimit":pgLimit},
-                success:function(data){
-                    $("#tblPackages").bootstrapTable('load',data);
+                url: "https://localhost:8443/admin/packages/loadSearchPackage",
+                datatype: "JSON",
+                data: {"srchPkgNm": $("#txtViewSearchPkg").val(), "initPage": "1", "pgLimit": pgLimit},
+                success: function (data) {
+                    $("#tblPackages").bootstrapTable('load', data);
                     console.log(data);
                 },
-                error: function(e){
-                    alert("error, load search item"+e);
-                    console.log("error, load search item"+e)
+                error: function (e) {
+                    alert("error, load search item" + e);
+                    console.log("error, load search item" + e)
                 }
             })
 
@@ -142,23 +150,23 @@ $(document).ready(function(){
              *Setting the number of pages according to the number of records
              */
             $.ajax({
-                url:'https://localhost:8443/admin/packages/packagePaginationTable',
-                data:{"srchPkgNm": $("#txtViewSearchPkg").val()},
-                success: function(recCount){
+                url: 'https://localhost:8443/admin/packages/packagePaginationTable',
+                data: {"srchPkgNm": $("#txtViewSearchPkg").val()},
+                success: function (recCount) {
 
-                    pag2.simplePaginator('setTotalPages',Math.ceil(recCount/10));
+                    pag2.simplePaginator('setTotalPages', Math.ceil(recCount / 10));
                 }
             })
 
-        }else{
-              $('#pagination3').show();
-              $('#pagination4').hide();
+        } else {
+            $('#pagination3').show();
+            $('#pagination4').hide();
 
             $.ajax({
-                url:'https://localhost:8443/admin/packages/loadSearchPackage',
+                url: 'https://localhost:8443/admin/packages/loadSearchPackage',
                 dataType: 'JSON',
-                 data:{"initPage":"1","pgLimit":pgLimit},
-                success: function(data){
+                data: {"initPage": "1", "pgLimit": pgLimit},
+                success: function (data) {
 
                     $('#tblPackages').bootstrapTable('load', data);
                 }
@@ -243,9 +251,9 @@ function contentPackageEdit() {
             $('.btnAddItmPkg').replaceWith("<div class=\"add-status\"><span class=\"glyphicon glyphicon-ok\"></span> Content Created</div>");
         },
         error: function (e) {
-              $.toaster({priority: 'danger', title: 'Error', message: 'Cannot update the package ' + pkgName});
-            alert("error ddddd"+ e);
-            console.log("error occurred  ",e);
+            $.toaster({priority: 'danger', title: 'Error', message: 'Cannot update the package ' + pkgName});
+            alert("error ddddd" + e);
+            console.log("error occurred  ", e);
         }
     });
 }

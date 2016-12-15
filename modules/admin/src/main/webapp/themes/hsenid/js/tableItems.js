@@ -1,52 +1,59 @@
-
 $(document).ready(function () {
 
     var pgLimit = 10;
+    var pkgName = $("#txtViewSearchItem").val();
 
-    $('#tblItems').bootstrapTable({
-        dataType: 'JSON',
-        url: 'https://localhost:8443/admin/items/view/itemTable',
-        height: 400,
-        striped: true,
-        pagination: false,
-        pageSize: 10,
-        pageList: [10, 25, 50, 100, 200],
-        search: false,
-        showColumns: false,
-        showRefresh: false,
-        minimumCountColumns: 2,
-        columns: [{
-            field: 'id',
-            title: 'Item ID',
-            sortable: true
-        }, {
-            field: 'item_name',
-            title: 'Item Name',
-            sortable: true
-        }, {
-            field: 'category_name',
-            title: 'Category',
-            sortable: true
-        }, {
-            field: 'sub_category_name',
-            title: 'Sub-category',
-            sortable: true
-        }, {
-            field: 'type',
-            title: 'Type',
-            sortable: true
-        }, {
-            field: 'description',
-            title: 'Item description',
-            align: 'left',
-            sortable: true
-        }, {
-            field: 'operate',
-            title: 'Operations',
-            align: 'center',
-            formatter: operateFormatter,
-            events: operateEvents
-        }]
+    $.ajax({
+        url: "https://localhost:8443/admin/items/loadSearchItem",
+        dataType: "json",
+        data: {"srchItmNm": pkgName, "initPage": "1", "pgLimit": pgLimit},
+        success: function (result) {
+
+            $('#tblItems').bootstrapTable({
+                height: 400,
+                striped: true,
+                pagination: false,
+                pageSize: 10,
+                pageList: [10, 25, 50, 100, 200],
+                search: false,
+                showColumns: false,
+                showRefresh: false,
+                minimumCountColumns: 2,
+                columns: [{
+                    field: 'id',
+                    title: 'Item ID',
+                    sortable: true
+                }, {
+                    field: 'item_name',
+                    title: 'Item Name',
+                    sortable: true
+                }, {
+                    field: 'category_name',
+                    title: 'Category',
+                    sortable: true
+                }, {
+                    field: 'sub_category_name',
+                    title: 'Sub-category',
+                    sortable: true
+                }, {
+                    field: 'type',
+                    title: 'Type',
+                    sortable: true
+                }, {
+                    field: 'description',
+                    title: 'Item description',
+                    align: 'left',
+                    sortable: true
+                }, {
+                    field: 'operate',
+                    title: 'Operations',
+                    align: 'center',
+                    formatter: operateFormatter,
+                    events: operateEvents
+                }],
+                data: result
+            });
+        }
     });
 
     $("#btnDeltItm").click(function () {
@@ -93,7 +100,7 @@ $(document).ready(function () {
                 }).focus();
             },
             error: function (er) {
-                console.log("error in typeahead "+er)
+                console.log("error in typeahead " + er)
             }
         })
     });
@@ -122,10 +129,10 @@ $(document).ready(function () {
         pageChange: function (page) {
 
             $.ajax({
-                url:'https://localhost:8443/admin/items/loadSearchItem',
+                url: 'https://localhost:8443/admin/items/loadSearchItem',
                 dataType: "json",
-                data:{"srchItmNm":$("#txtViewSearchItem").val(), "initPage": page, "pgLimit":pgLimit},
-                success: function(data){
+                data: {"srchItmNm": $("#txtViewSearchItem").val(), "initPage": page, "pgLimit": pgLimit},
+                success: function (data) {
 
                     $('#tblItems').bootstrapTable('load', data);
                 }
@@ -134,27 +141,26 @@ $(document).ready(function () {
     });
 
     /*
-    * load data on request typeahead
-    **/
-    $("#btnViewSearchItem").click(function(){
+     * load data on request typeahead
+     **/
+    $("#btnViewSearchItem").click(function () {
 
-        if($("#txtViewSearchItem").val().length>0){
+        if ($("#txtViewSearchItem").val().length > 0) {
 
             $('#pagination').hide();
             $('#pagination2').show();
 
             $.ajax({
-                url:"https://localhost:8443/admin/items/loadSearchItem",
-                datatype:"JSON",
-                data:{"srchItmNm":$("#txtViewSearchItem").val(), "pgLimit":pgLimit, "initPage": "1"},
-                success:function(data)
-                {
-                    $("#tblItems").bootstrapTable('load',data);
+                url: "https://localhost:8443/admin/items/loadSearchItem",
+                datatype: "JSON",
+                data: {"srchItmNm": $("#txtViewSearchItem").val(), "pgLimit": pgLimit, "initPage": "1"},
+                success: function (data) {
+                    $("#tblItems").bootstrapTable('load', data);
                     console.log(data);
                 },
-                error: function(e){
-                    alert("error, load search item"+e);
-                    console.log("error, load search item"+e)
+                error: function (e) {
+                    alert("error, load search item" + e);
+                    console.log("error, load search item" + e)
                 }
             })
 
@@ -162,23 +168,23 @@ $(document).ready(function () {
              *Setting the number of pages according to the number of records
              */
             $.ajax({
-                url:'https://localhost:8443/admin/items/itemPaginationTable',
-                data:{"srchItmNm": $("#txtViewSearchItem").val()},
-                success: function(recCount){
+                url: 'https://localhost:8443/admin/items/itemPaginationTable',
+                data: {"srchItmNm": $("#txtViewSearchItem").val()},
+                success: function (recCount) {
 
-                    pag2.simplePaginator('setTotalPages',Math.ceil(recCount/10));
+                    pag2.simplePaginator('setTotalPages', Math.ceil(recCount / 10));
                 }
             })
         }
-        else{
+        else {
             $('#pagination').show();
             $('#pagination2').hide();
 
             $.ajax({
-                url:'https://localhost:8443/admin/items/loadSearchItem',
+                url: 'https://localhost:8443/admin/items/loadSearchItem',
                 dataType: 'JSON',
-                data:{"initPage":"1", "pgLimit":pgLimit},
-                success: function(data){
+                data: {"initPage": "1", "pgLimit": pgLimit},
+                success: function (data) {
 
                     $('#tblItems').bootstrapTable('load', data);
                 }
