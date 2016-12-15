@@ -30,6 +30,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/packages")
@@ -446,9 +447,29 @@ public class PackageController {
 
     @RequestMapping(value = "/loadSearchPackage", method = RequestMethod.GET)
     public @ResponseBody
-    List<Package> loadSearchItem(@RequestParam("srchPkgNm") String pkgName){
+    List<Package> loadSearchItem(HttpServletRequest request){
+
+        String pkgName = request.getParameter("srchPkgNm");
+        String pgInit = request.getParameter("initPage");
+        int initPg = Integer.parseInt(pgInit);
+        String pgLimt = request.getParameter("pgLimit");
+        int pgLimit = Integer.parseInt(pgLimt);
+
+        List<Map<String, Object>> pkgDetails;
+
+        if(pkgName!=null){
+
+        }else{
+
+        }
+
 
         LOGGER.trace("load search Item "+ packageRepo.selectAllByNamePattern(pkgName));
         return  packageRepo.selectAllByNamePattern(pkgName);
+    }
+
+    @RequestMapping(value = "/packagePaginationTable", method = RequestMethod.GET)
+    public @ResponseBody int loadPagination(){
+        return packageRepo.count();
     }
 }

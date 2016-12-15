@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+    var pgLimit = 10;
+
     $("#tblPackages").bootstrapTable({
         dataType:'JSON',
         url: 'https://localhost:8443/admin/packages/view/packageTable',
@@ -55,6 +57,9 @@ $(document).ready(function(){
         })
     });
 
+    /*
+     * typeahead function for load pkgNames
+     * */
     $("#txtViewSearchPkg").keyup(function(){
         $.ajax({
             type: "GET",
@@ -72,18 +77,57 @@ $(document).ready(function(){
         })
     });
 
+    var pag2 = $('#pagination4').simplePaginator({
+
+        // the number of total pages
+        totalPages: 7,
+
+        // maximum of visible buttons
+        maxButtonsVisible: 5,
+
+        // page selected
+        currentPage: 1,
+
+        // text labels for buttons
+        nextLabel: 'next',
+        prevLabel: 'prev',
+        firstLabel: 'first',
+        lastLabel: 'last',
+
+        // specify if the paginator click in the currentButton
+        clickCurrentPage: true,
+
+        // called when a page is changed.
+        pageChange: function (page) {
+
+            $.ajax({
+                url:'https://localhost:8443/admin/packages/loadSearchPackage',
+                dataType: "json",
+                data:{"srchPkgNm":$("#txtViewSearchPkg").val(), "initPage": page, "pgLimit":pgLimit},
+                success: function(data){
+
+                    $('#tblPackages').bootstrapTable('load', data);
+                }
+            })
+        }
+    });
+
     /*
      * load data on request typeahead
      **/
     $("#btnViewSearchPkg").click(function(){
 
         var srchPkgNm = $("#txtViewSearchPkg").val();
+
         if(srchPkgNm.length>0){
+
+            $('#pagination3').hide();
+            $('#pagination4').show();
 
             $.ajax({
                 url:"https://localhost:8443/admin/packages/loadSearchPackage",
                 datatype:"JSON",
-                data:{"srchPkgNm":srchPkgNm},
+                data:{"srchPkgNm":srchPkgNm,"initPage":"1", "pgLimit":pgLimit},
                 success:function(data){
                     $("#tblPackages").bootstrapTable('load',data);
                     console.log(data);
@@ -93,14 +137,27 @@ $(document).ready(function(){
                     console.log("error, load search item"+e)
                 }
             })
+
+            /**
+             *Setting the number of pages according to the number of records
+             */
+            $.ajax({
+                url:'https://localhost:8443/admin/packages/packagePaginationTable',
+                data:{"srchPkgNm": $("#txtViewSearchPkg").val()},
+                success: function(recCount){
+
+                    pag2.simplePaginator('setTotalPages',Math.ceil(recCount/10));
+                }
+            })
+
         }else{
-            //  $('#pagination').show();
-            //  $('#pagination2').hide();
+              $('#pagination3').show();
+              $('#pagination4').hide();
 
             $.ajax({
-                url:'https://localhost:8443/admin/packages/view/packageTable',
+                url:'https://localhost:8443/admin/packages/loadSearchPackage',
                 dataType: 'JSON',
-                // data:{"initPage":"1"},
+                 data:{"initPage":"1","pgLimit":pgLimit},
                 success: function(data){
 
                     $('#tblPackages').bootstrapTable('load', data);
