@@ -96,6 +96,10 @@
 
                     </table>
 
+                    <div id="ppagination" class="text-center">
+                    </div>
+                    <div id="ppagination2" class="text-center">
+                    </div>
                 </fieldset>
             </form:form>
         </div>

@@ -187,7 +187,8 @@ public class ItemController {
     @RequestMapping(value = "/view/itemTable", method = RequestMethod.GET)
     public
     @ResponseBody
-    List<Map<String, Object>> viewItem() {
+    List<Map<String, Object>> viewItem(@RequestParam("itmnm") String itemnm,
+                                       @RequestParam("initpg")int initpg) {
         LOGGER.info("View all item details {} ", (item.viewAllItemDetails()));
         return item.viewAllItemDetails();
     }
@@ -339,9 +340,16 @@ public class ItemController {
     }
 
     @RequestMapping(value = "/loadSearchItem", method = RequestMethod.GET)
-    public @ResponseBody List<Map<String, Object>> loadSearchItem(@RequestParam("srchItmNm") String itemName){
+    public @ResponseBody List<Map<String, Object>> loadSearchItem(@RequestParam("srchItmNm") String itemName,
+                                                                  @RequestParam("initPage") int initPage,
+                                                                  @RequestParam("pgLimit")int pgLimit){
 
         LOGGER.trace("load search Item "+ item.retrieveSelectedItemDetails(itemName));
         return  item.retrieveSelectedItemDetails(itemName);
+    }
+
+    @RequestMapping(value = "/itemPaginationTable", method = RequestMethod.GET)
+    public int loadPagination(){
+        return item.count();
     }
 }

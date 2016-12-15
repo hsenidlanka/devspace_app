@@ -1,3 +1,5 @@
+var pgLimit = 10;
+var initPage =1;
 $(document).ready(function () {
 
     $('#tblItems').bootstrapTable({
@@ -5,7 +7,7 @@ $(document).ready(function () {
         url: 'https://localhost:8443/admin/items/view/itemTable',
         height: 400,
         striped: true,
-        pagination: true,
+        pagination: false,
         pageSize: 10,
         pageList: [10, 25, 50, 100, 200],
         search: false,
@@ -117,11 +119,11 @@ $(document).ready(function () {
                 }
             })
         }else{
-          //  $('#pagination').show();
-          //  $('#pagination2').hide();
+            $('#pagination').show();
+            $('#pagination2').hide();
 
             $.ajax({
-                url:'https://localhost:8443/admin/items/view/itemTable',
+                url:'https://localhost:8443/admin/items/view/',
                 dataType: 'JSON',
                // data:{"initPage":"1"},
                 success: function(data){
