@@ -2,8 +2,6 @@ package hsl.devspace.app.corelogic.repository.shopping_cart;
 
 import hsl.devspace.app.corelogic.domain.Delivery;
 import hsl.devspace.app.corelogic.domain.Item;
-import hsl.devspace.app.corelogic.domain.Payment;
-import hsl.devspace.app.corelogic.domain.ShoppingCart;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -40,14 +38,38 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 
     /*Add new cart*/
     @Override
-    public int addCart(ShoppingCart shoppingCart) {
-        int row;
-        String sql = "INSERT INTO shopping_cart " +
-                "(net_cost,customer_id,guest_id) VALUES (?,(SELECT id FROM customer WHERE username=?),(SELECT id FROM guest WHERE mobile=?))";
-        row = jdbcTemplate.update(sql, new Object[]{shoppingCart.getNetCost(), shoppingCart.getCustomerUsername(), shoppingCart.getGuestMobile()});
-        log.info("{} new shopping cart added", row);
+    public int addCart(double netCost, String username) {
+        List<Map<String, Object>> usernameCustomer = jdbcTemplate.queryForList("SELECT id FROM customer WHERE username=?", username);
+        if (usernameCustomer.size() != 0) {
+            String sql = "INSERT INTO shopping_cart " +
+                    "(net_cost,customer_id,guest_id) VALUES (?,?,NULL)";
+            jdbcTemplate.update(sql, new Object[]{netCost, usernameCustomer.get(0).get("id")});
+            log.info("{} new shopping cart added");
+
+
+        } else {
+            List<Map<String, Object>> usernameGuest = jdbcTemplate.queryForList("SELECT id FROM guest WHERE mobile=?", username);
+            if (usernameGuest.size() != 0) {
+                String sql = "INSERT INTO shopping_cart " +
+                        "(net_cost,customer_id,guest_id) VALUES (?,NULL ,?)";
+                jdbcTemplate.update(sql, new Object[]{netCost, usernameGuest.get(0).get("id")});
+                log.info("{} new shopping cart added");
+
+            } else {
+                String sql = "INSERT INTO guest " +
+                        "(mobile) VALUES (?)";
+                jdbcTemplate.update(sql, new Object[]{username});
+                List<Map<String, Object>> mp4 = jdbcTemplate.queryForList("SELECT MAX(id) FROM guest");
+                String sql2 = "INSERT INTO shopping_cart (net_cost,customer_id,guest_id) VALUES (?,NULL,?)";
+                jdbcTemplate.update(sql2, new Object[]{netCost, mp4.get(0).get("MAX(id)")});
+                log.info("{} new shopping cart added");
+
+            }
+        }
+
         List<Map<String, Object>> mp4 = jdbcTemplate.queryForList("SELECT MAX(id) FROM shopping_cart");
-        int id = Integer.parseInt(mp4.get(0).get("id").toString());
+        int id = Integer.parseInt(mp4.get(0).get("MAX(id)").toString());
+        log.info("{}", id);
         return id;
     }
 
@@ -55,23 +77,31 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
     @Override
     public List<Integer> addProductsToCart(List<Map<String, Object>> items) {
         List<Integer> productList = new ArrayList<Integer>();
+        int id;
+        String type;
+        int toppingId1;
+        int toppingId2;
         for (int i = 0; i < items.size(); i++) {
             String productName = items.get(i).get("itemName").toString();
             int quantity = Integer.parseInt(items.get(i).get("quantity").toString());
             List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT id FROM item WHERE name=?", productName);
-            int id = Integer.parseInt(mp.get(0).get("id").toString());
-            String type = "item";
-            if (mp.size() == 0) {
+            if (mp.size() != 0) {
+                id = Integer.parseInt(mp.get(0).get("id").toString());
+                type = "item";
+            } else {
                 List<Map<String, Object>> mp1 = jdbcTemplate.queryForList("SELECT id FROM package WHERE name=?", productName);
                 id = Integer.parseInt(mp1.get(0).get("id").toString());
                 type = "package";
             }
+            toppingId1 = Integer.parseInt(items.get(i).get("topping_id1").toString());
+            toppingId2 = Integer.parseInt(items.get(i).get("topping_id2").toString());
+
 
             String sql = "INSERT INTO product " +
-                    "(type,type_id,quantity) VALUES (?,?,?)";
-            jdbcTemplate.update(sql, new Object[]{type, id, quantity});
+                    "(type,type_id,quantity,topping_id1,topping_id2) VALUES (?,?,?,?,?)";
+            jdbcTemplate.update(sql, new Object[]{type, id, quantity, toppingId1, toppingId2});
             List<Map<String, Object>> mp4 = jdbcTemplate.queryForList("SELECT MAX(id) FROM product");
-            id = Integer.parseInt(mp4.get(0).get("id").toString());
+            id = Integer.parseInt(mp4.get(0).get("MAX(id)").toString());
             productList.add(id);
         }
         return productList;
@@ -92,14 +122,24 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 
     /*Add shopping cart to payment process*/
     @Override
-    public int add(Payment payment, int cartId, int deliveryId) {
+    public int add(String paymentMethodName, int cartId, int deliveryId) {
         int row;
-        String sql = "INSERT INTO payment_transaction " +
-                "(date,time,amount,payment_status,order_type,customer_id,staff_id,payment_method_id,delivery_id,guest_id)" +
-                " VALUES (CURRENT_DATE,CURRENT_TIME ,(SELECT net_cost FROM shopping_cart WHERE id=?),?,?,(SELECT id FROM customer WHERE mobile=?),(SELECT id FROM staff WHERE username=?),(SELECT id FROM payment_method WHERE name=?),?,(SELECT id FROM guest WHERE mobile=?))";
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM shopping_cart WHERE id=?", cartId);
+        if (mp.get(0).get("customer_id") != null) {
+            String sql = "INSERT INTO payment_transaction " +
+                    "(date,time,amount,payment_status,order_type,customer_id,payment_method_id,delivery_id)" +
+                    " VALUES (CURRENT_DATE,CURRENT_TIME ,(SELECT net_cost FROM shopping_cart WHERE id=?),?,?,?,(SELECT id FROM payment_method WHERE name=?),?)";
 
-        row = jdbcTemplate.update(sql, new Object[]{cartId, payment.getPaymentStatus(), payment.getOrderType(), payment.getUserMobile(), payment.getStaffName(), payment.getPaymentMethodName(), deliveryId, payment.getUserMobile()});
-        log.info("{} payment inserted", row);
+            row = jdbcTemplate.update(sql, new Object[]{cartId, "pending", "online", mp.get(0).get("customer_id").toString(), paymentMethodName, deliveryId});
+            log.info("{} payment inserted", row);
+        } else {
+            String sql = "INSERT INTO payment_transaction " +
+                    "(date,time,amount,payment_status,order_type,payment_method_id,delivery_id,guest_id)" +
+                    " VALUES (CURRENT_DATE,CURRENT_TIME ,(SELECT net_cost FROM shopping_cart WHERE id=?),?,?,(SELECT id FROM payment_method WHERE name=?),?,?)";
+
+            row = jdbcTemplate.update(sql, new Object[]{cartId, "pending", "online", paymentMethodName, deliveryId, mp.get(0).get("guest_id").toString()});
+            log.info("{} payment inserted", row);
+        }
         return row;
     }
 
@@ -108,27 +148,28 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
     public int add(Delivery del) {
         int row;
         String sql = "INSERT INTO delivery " +
-                "(agent_name,recepient_name,recepient_address,delivery_date,delivery_time,delivery_status,description,staff_id,delivery_method_id) VALUES (?,?,?,?,?,?,?,(SELECT id FROM staff WHERE name=?),(SELECT id FROM delivery_method WHERE name=?))";
+                "(recepient_name,recepient_address,delivery_date,delivery_time,delivery_status,description,delivery_method_id) VALUES (?,?,?,?,?,?,(SELECT id FROM delivery_method WHERE name=?))";
 
-        row = jdbcTemplate.update(sql, new Object[]{del.getAgentName(), del.getRecepientName(), del.getRecepientAddress(),
-                del.getDeliveryDate(), del.getDeliveryTime(), del.getDeliveryStatus(), del.getDescription(), del.getAgentName(), del.getDeliveryMethod()});
+        row = jdbcTemplate.update(sql, new Object[]{del.getRecepientName(), del.getRecepientAddress(),
+                del.getDeliveryDate(), del.getDeliveryTime(), "pending", del.getDescription(), del.getDeliveryMethod()});
         log.info("{} new delivery inserted", row);
         List<Map<String, Object>> mp4 = jdbcTemplate.queryForList("SELECT MAX(id) FROM delivery");
-        int deliveryId = Integer.parseInt(mp4.get(0).get("id").toString());
+        int deliveryId = Integer.parseInt(mp4.get(0).get("MAX(id)").toString());
+
         return deliveryId;
     }
 
     /*complete process for shopping cart with payment and delivery*/
     @Transactional(propagation = Propagation.SUPPORTS)
-    public void generateCartProcess(ShoppingCart shoppingCart, List<Map<String, Object>> items, Delivery del, Payment payment) {
+    public void generateCartProcess(double netCost, String username, List<Map<String, Object>> items, Delivery del, String paymentMethodName) {
         TransactionDefinition trDef = new DefaultTransactionDefinition();
         TransactionStatus stat = transactionManager.getTransaction(trDef);
         try {
-            int cartId = addCart(shoppingCart);
+            int cartId = addCart(netCost, username);
             List<Integer> productIdList = addProductsToCart(items);
             updateCartProductTable(cartId, productIdList);
             int deliveryId = add(del);
-            add(payment, cartId, deliveryId);
+            add(paymentMethodName, cartId, deliveryId);
             log.info("updated");
 
         } catch (Exception e) {
