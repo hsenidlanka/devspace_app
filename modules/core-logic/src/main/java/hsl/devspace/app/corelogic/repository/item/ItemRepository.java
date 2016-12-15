@@ -59,4 +59,6 @@ public interface ItemRepository {
 
     List<Map<String, Object>> paginateSelectedItemDetails(String name, int limit, int page);
 
+    List<Map<String, Object>> viewAllItemDetails(int limit, int page);
+
 }
