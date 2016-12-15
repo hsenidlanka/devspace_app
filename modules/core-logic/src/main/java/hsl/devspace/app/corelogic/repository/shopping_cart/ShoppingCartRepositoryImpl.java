@@ -93,8 +93,11 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
                 id = Integer.parseInt(mp1.get(0).get("id").toString());
                 type = "package";
             }
-            toppingId1 = Integer.parseInt(items.get(i).get("topping_id1").toString());
-            toppingId2 = Integer.parseInt(items.get(i).get("topping_id2").toString());
+            List<Map<String, Object>> top1 = jdbcTemplate.queryForList("SELECT id FROM item WHERE name=?", items.get(i).get("topping_name1").toString());
+            List<Map<String, Object>> top2 = jdbcTemplate.queryForList("SELECT id FROM item WHERE name=?", items.get(i).get("topping_name2").toString());
+
+            toppingId1 = Integer.parseInt(top1.get(0).get("id").toString());
+            toppingId2 = Integer.parseInt(top2.get(0).get("id").toString());
 
 
             String sql = "INSERT INTO product " +
