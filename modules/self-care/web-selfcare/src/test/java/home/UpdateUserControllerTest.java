@@ -26,21 +26,41 @@ public class UpdateUserControllerTest extends AbstractTestNGSpringContextTests {
 
     private MockMvc mockMvc;
 
-    @Test
-    public void testUpdateUserDataSuccess() throws Exception {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
-        this.mockMvc.perform(get("/sendUserData")
-                .param("username", "testre")
-                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.username", is("testre")));
+    @DataProvider
+    public Object[][] usernamesForUserDataSend() {
+        return new Object[][]{{"testre"},
+                {"kkalla"},
+                {"block"},
+                {"tagtest"}
+        };
+
     }
 
-    @Test
-    public void testUpdateUserDataFailed() throws Exception {
+
+    @Test(dataProvider = "usernamesForUserDataSend")
+    public void testUpdateUserDataSuccess(String username) throws Exception {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
         this.mockMvc.perform(get("/sendUserData")
-                .param("username", "notauser123")
+                .param("username", username)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.username", is(username)));
+    }
+
+    @DataProvider
+    public Object[][] usernamesForNotUsers() {
+        return new Object[][]{{"notauser"},
+                {"3872t8732823879383879"},
+                {"%#$%&&%$%&&*(())]"},
+                {"dgdhs1728*&^%$#"},
+                {"     "}};
+
+    }
+    @Test(dataProvider = "usernamesForNotUsers")
+    public void testUpdateUserDataFailed(String notUsernam) throws Exception {
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+        this.mockMvc.perform(get("/sendUserData")
+                .param("username", notUsernam)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.username", is((Object) null)));
