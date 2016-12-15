@@ -9,7 +9,7 @@ $(document).ready(function () {
     $("#customer").click(function(){
         $("#staffDetail").hide();
     });
-});
+
 
 //customerView js
 function showMe(){
@@ -163,7 +163,7 @@ function passwordsEqual(fld1,fld2) {
 /*
  * typeahead function to filter data in Customer table
  */
-$(document).ready(function () {
+
 $("#cnameSearch").keyup(function () {
     var cname = $("#cnameSearch").val();
 
@@ -205,7 +205,7 @@ $("#cnameSearch").keyup(function () {
             url: "https://localhost:8443/admin/userFilters/staffTable/typeheadName/data",
             data: {"sname": sname},
             success: function (data) {
-                alert(" value"+ data);
+                //alert(" value"+ data);
                 $('#tableStaff').bootstrapTable('load', data);
 
             }
@@ -218,7 +218,7 @@ $("#cnameSearch").keyup(function () {
             url: "https://localhost:8443/admin/userFilters/staffTable/typeheadName",
             data: {"sname": sname},
             success: function (data) {
-                alert(" value"+ data);
+                //alert(" value"+ data);
 
                 $('#snameSearch').typeahead({
                     source: data
@@ -226,14 +226,79 @@ $("#cnameSearch").keyup(function () {
             }
         })
     });
-});
 
 
+
+/////////////////////////////////////////// TYPEHEAD FUNCTION FOR NAME FILTER BANNED USERS/////////////////////////////////
+
+    /*
+     * typeahead function to filter data in Banned Customers table
+     */
+    $("#bcnameSearch").keyup(function () {
+        var bcname = $("#bcnameSearch").val();
+
+        $.ajax({
+            url: "https://localhost:8443/admin/userFilters/bannedCustomerTable/typeheadName",
+            data: {"bcname": bcname},
+            success: function (data) {
+                //alert(" value"+ data);
+                $('#bcnameSearch').typeahead({
+                    source: data
+                }).focus();
+            }
+        })
+    });
+    $("#bcnameSearch").keyup(function () {
+        var bcname = $("#bcnameSearch").val();
+
+        $.ajax({
+            url: "https://localhost:8443/admin/userFilters/bannedCustomerTable/typeheadName/data",
+            data: {"bcname": bcname},
+            success: function (data) {
+                //alert(" value"+ data);
+                $('#tableBannedcustomer').bootstrapTable('load', data);
+
+            }
+        })
+    });
+
+
+    /*
+     * typeahead function to filter data in Banned Staff table
+     */
+    $("#bsname").keyup(function () {
+        var bsname = $("#bsname").val();
+        $.ajax({
+            url: "https://localhost:8443/admin/userFilters/bannedStaffTable/typeheadName",
+            data: {"bsname": bsname},
+            success: function (data) {
+                //alert(" value"+ data);
+
+                $('#bsname').typeahead({
+                    source: data
+                }).focus();
+            }
+        })
+    });
+
+    $("#bsname").keyup(function () {
+        var bsname = $("#bsname").val();
+
+        $.ajax({
+            url: "https://localhost:8443/admin/userFilters/bannedStaffTable/typeheadName/data",
+            data: {"bsname": bsname},
+            success: function (data) {
+                //alert(" value"+ data);
+                $('#tableBannedstaff').bootstrapTable('load', data);
+
+            }
+        })
+    });
 
 ///////////////////////////////////////////  AJAX CALLS TO FILTER ACTIVE USERS  ////////////////////////////////////////////
 
  //ajax functions to filter the search results of Customer Users if an option is selected
-$(document).ready(function(){
+
     $("#filterButtonCustomer").click(function(){
         var from = $('#fromDate').val();
         var to=$('#toDate').val();
@@ -298,11 +363,11 @@ $(document).ready(function(){
         }
 
     });
-});
+
 
 
 //ajax functions to filter the search results of Staff Users if an option is selected
-$(document).ready(function(){
+
     $("#filterButtonStaff").click(function(){
         var designation= $('#designation_d').find(':selected').text();
         var department=$('#department_d').find('option:selected').text();
@@ -339,13 +404,13 @@ $(document).ready(function(){
         }
 
     });
-});
+
 
 ////////////////////////////////////   AJAX CALLS TO FILTER INACTIVE USERS ///////////////////////////////////////////////
 
 
 //ajax functions to filter the search results of Customer Users if an option is selected(INACTIVE)
-$(document).ready(function(){
+
     $("#filterButtonCustomerB").click(function(){
 
         var name=$('#bcnameSearch').val();
@@ -383,11 +448,11 @@ $(document).ready(function(){
 
 
     });
-});
+
 
 
 //ajax functions to filter the search results of Staff Users if an option is selected(INACTIVE)
-$(document).ready(function(){
+
     $("#filterButtonStaffB").click(function(){
         var designation= $('#designation_db').find(':selected').text();
         var department=$('#department_db').find('option:selected').text();

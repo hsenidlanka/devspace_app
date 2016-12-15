@@ -34,11 +34,11 @@ $(document).ready(function(){
             });
     });
 
-});
+
 
 
 //in the new sub-category addition page to add grid rows
-$(document).ready(function(){
+
     var counter = 1;
     $('.subcat_add_table').on('click','.addsub',function(){
 
@@ -52,20 +52,22 @@ $(document).ready(function(){
 
         $('.subcat_add_table').append(newRow);
         $(".deletesub").on('click',function(){
-            $(this).parent().parent().remove();
+            if($('.subcat-tbl-row').length > 1) {
+                $(this).parent().parent().remove();
+            }
         });
     });
-});
+
 
 
 //in the category addition page to add grid rows for a subcategory addition
-$(document).ready(function(){
+
     var counter = 1;
     $('.cat_add_table').on('click','.addcat',function(){
 
         event.preventDefault();
 
-        var newRow=jQuery('<div class="row subcat-tbl-row"><div class="col-xs-4">' +
+        var newRow=jQuery('<div class="row cat-tbl-row"><div class="col-xs-4">' +
         '<label class="checkbox-inline"><div contenteditable><input name="subcategory_name[]" type="text" class="form-control" id="subcategoryname" required="required" placeholder="Enter Category Name"/>' +
         '</div></label></div><div class="col-xs-5"><div contenteditable><textarea name="subcategory_des[]" class="form-control" id="subcategorydes" placeholder="Enter Category Description" >' +
         '</textarea></div></div> <div class="col-xs-3"> <a href="#" class="addcat"> <span class=" glyphicon glyphicon-plus"></span> ' +
@@ -73,9 +75,11 @@ $(document).ready(function(){
 
         $('.cat_add_table').append(newRow);
         $(".deletecat").on('click',function(){
-            $(this).parent().parent().remove();
+            if($('.cat-tbl-row').length > 1) {
+                $(this).parent().parent().remove();
+            }else
+                $.toaster({ priority : 'danger', title : 'Error', message : 'Minimum of One subcategory has to added '});
         });
-
-
     });
+
 });

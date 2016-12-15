@@ -15,6 +15,8 @@
 <script src="<c:url value="/resources/js/bootstrap.min.js"/>" ></script>
 <link href="<c:url value="/resources/bootstrap-3.3.7/css/bootstrap.min_spacelab.css"/>" rel="stylesheet">
 
+<link href="<c:url value="/resources/css/fonts.css"/>" rel="stylesheet" type="text/css">
+
 <link href="<c:url value="/resources/css/homeStyle.css"/>" rel="stylesheet" type="text/css">
 
 <link href="<c:url value="/resources/css/style.css"/>" rel="stylesheet" type="text/css" media="all"/>

@@ -106,6 +106,8 @@ $(document).ready(function () {
         });
 
         $("#add-to-cart-popup").modal('show');
+        $("#addtocart-pizza-qty").val(1);
+        $("#addtocart-pizza-instructs").val("");
         calculateTotal();
     });
 
@@ -130,7 +132,6 @@ $(document).ready(function () {
     });
 
     $(".btn-popup-add-to-cart-pizza").click(function () {
-        $("#add-to-cart-popup").modal('hide');
         $.ajax({
             type: "POST",
             url: "/web-selfcare/menu/add-to-cart",
@@ -148,6 +149,7 @@ $(document).ready(function () {
                 "itemTotal": $("#addtocart-pizza-total").val()
             },
             success: function (result) {
+                $("#add-to-cart-popup").modal('hide');
                 if (result) {
                     // Initialize the toast notification
                     $.notify("Selected pizza added to the shopping cart.", {
@@ -211,7 +213,7 @@ $(document).ready(function () {
         }
         var price = $("#addtocart-pizza-price").val();
         var quantity = $(':input[type="number"]').val()
-        var total = (price * quantity) + topping1Price + topping2Price;
+        var total = (parseFloat(price) + parseFloat(topping1Price) + parseFloat(topping2Price)) * quantity;
         $("#addtocart-pizza-total").val(total.toFixed(2));
     }
 });

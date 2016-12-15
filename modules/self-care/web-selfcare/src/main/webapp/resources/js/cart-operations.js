@@ -13,19 +13,12 @@ $(document).ready(function () {
     }
 
     $("#coupon-submit").click(function () {
-        couponValidator();
-    });
+        if ($("#coupon-submit").val() == "remove") {
+            removeCoupon();
+        } else {
+            couponValidator();
+        }
 
-    $("#coupon-remove").click(function () {
-        $.ajax({
-            type: "GET",
-            url: "/web-selfcare/shopping-cart/removecoupon",
-            success: function (result) {
-                $("#txt-coupon").val("");
-                $("#txt-coupon").attr("readonly", false);
-                location.reload();
-            }
-        });
     });
 
     $(".mod").click(function () {
@@ -47,13 +40,11 @@ $(document).ready(function () {
     $(".del").click(function () {
         var closest = $(this).closest('tr'); // find the closest table row
         var itemTitle = $.trim(closest.find("td.item-title").text());
-        var itemPrice = $.trim(closest.find("td.item-price").text());
-        var itemQty = $.trim(closest.find(".item-qty").val());
+        var itemQty = $.trim(closest.find("input.item-qty").val());
         var itemIndex = $.trim(closest.find("td.item-index").text());
         $("#delete-confirm-popup").modal('show');
-        $("#header-item-title").text("Item name: " + itemTitle);
-        $("#p-item-price").text("Price: " + itemPrice);
-        $("#p-item-qty").text("Quantity: " + itemQty);
+        $("#header-item-title").text("   Item name: " + itemTitle);
+        $("#p-item-qty").text("   Quantity: " + itemQty);
         $('#removeOk').off('click');
         $('#removeOk').click(function () {
             $.ajax({
@@ -96,7 +87,7 @@ $(document).ready(function () {
         var qty = $(this).val();
         var price = $(this).closest('tr').children('td:eq(4)').text();
         var toppingsTotal = $(this).closest('tr').children('td:eq(0)').text();
-        var total = (qty * price) + parseInt(toppingsTotal);
+        var total = (parseFloat(price) + parseFloat(toppingsTotal)) * qty;
         var itemIndex = $.trim($(this).closest('tr').find('td.item-index').text());
         $(this).closest('tr').children('td:eq(6)').text(total.toFixed(2));
         calculateTotal(".tot-price");
@@ -108,7 +99,7 @@ $(document).ready(function () {
         var qty = $(this).val();
         var price = $(this).closest('tr').children('td:eq(4)').text();
         var toppingsTotal = $(this).closest('tr').children('td:eq(0)').text();
-        var total = (qty * price) + parseInt(toppingsTotal);
+        var total = (parseFloat(price) + parseFloat(toppingsTotal)) * qty;
         var itemIndex = $.trim($(this).closest('tr').find('td.item-index').text());
         $(this).closest('tr').children('td:eq(6)').text(total.toFixed(2));
         calculateTotal(".tot-price");
@@ -181,6 +172,8 @@ function couponValidator() {
                     $("#txt-coupon").attr("readonly", true);
                     calculateDicountedTotal();
                     calculateNetAmount();
+                    $("#coupon-submit").val("remove");
+                    $("#coupon-submit").attr('class', 'btn btn-danger btn-sm');
                     return true;
                 } else {
                     $("#coupon-validate-msg").text("Coupon code is not valid.");
@@ -188,6 +181,22 @@ function couponValidator() {
                     $("#coupon-alert-div").show();
                     return false;
                 }
+            }
+        });
+    }
+}
+
+function removeCoupon() {
+    if ($("#txt-coupon").val().length > 0) {
+        $.ajax({
+            type: "GET",
+            url: "/web-selfcare/shopping-cart/removecoupon",
+            success: function (result) {
+                $("#txt-coupon").val("");
+                $("#txt-coupon").attr("readonly", false);
+                $("#coupon-submit").text("validate");
+                $("#coupon-submit").attr('class', 'btn btn-primary btn-sm');
+                location.reload();
             }
         });
     }
@@ -267,7 +276,7 @@ function initCalculations() {
         var qty = $(this).val();
         var price = $(this).closest('tr').children('td:eq(4)').text();
         var toppingsTotal = $(this).closest('tr').children('td:eq(0)').text();
-        var total = (qty * price) + parseInt(toppingsTotal);
+        var total = (parseFloat(price) + parseFloat(toppingsTotal)) * qty;
         $(this).closest('tr').children('td:eq(6)').text(total.toFixed(2));
         calculateTotal(".tot-price");
         recalculateTotals();

@@ -3,7 +3,7 @@ $(document).ready(function () {
     $('#tableBannedstaff').bootstrapTable({
 
         url: 'https://localhost:8443/admin/users/view/bannedstaffTable',
-        height: 375,
+        height: 320,
         pagination: true,
         pageSize: 7,
         clickToSelect: true,

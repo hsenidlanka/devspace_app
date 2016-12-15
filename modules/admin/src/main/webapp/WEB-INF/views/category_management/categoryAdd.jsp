@@ -106,9 +106,9 @@
                         </legend>
 
 
-                        <div class="row cat_add_table col-xs-12" style="margin-left: 1%;">
+                        <div class="row cat_add_table col-xs-12" id="cat_table" style="margin-left: 1%;">
 
-                            <div class="row subcat-tbl-row subcat-tbl-hdr" style="width:600px;">
+                            <div class="row cat-tbl-row1 cat-tbl-hdr" style="width:600px;">
                                 <div class="col-xs-4">
                                     <strong><fmt:message key="category.categoryadd.form.subcatname" bundle="${bundle1}"/></strong>
                                 </div>
@@ -120,7 +120,7 @@
                                 </div>
                             </div>
 
-                            <div class="row subcat-tbl-row">
+                            <div class="row cat-tbl-row">
                                 <div class="col-xs-4">
                                     <label class="checkbox-inline">
                                         <input name="subcategory_name[]" type="text" class="form-control" id="subcategoryname"

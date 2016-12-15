@@ -55,8 +55,9 @@
                                                     <c:out value="${entry.itemTitle}"/>
                                                 </td>
                                                 <td class="item-price">
-                                                    <c:out
-                                                            value="${entry.itemPrice}"/></td>
+                                                    <fmt:formatNumber type="currency" currencySymbol=""
+                                                                      maxFractionDigits="2" value="${entry.itemPrice}"/>
+                                                    </td>
                                                 <td class="item-qty"><input class="spin item-qty"
                                                                             type="number"
                                                                             min="1"
@@ -115,8 +116,8 @@
                                 <br>
 
                                 <div id="div-submit">
-                                    <input type="button" id="coupon-remove" value="remove"
-                                           class="btn btn-danger btn-sm">
+                                    <%--<input type="button" id="coupon-remove" value="remove"
+                                           class="btn btn-danger btn-sm">--%>
                                     <input type="submit" id="coupon-submit" value="validate"
                                            class="btn btn-primary btn-sm">
                                 </div>
@@ -235,9 +236,9 @@
                         </div>
                         <!--/carousel-inner-->
                         <a class="left carousel-control cart-carousel-control" href="#myCarousel"
-                           data-slide="prev">‹</a>
+                           data-slide="prev"><i class="fa fa-chevron-circle-left carousel-arrows" aria-hidden="true"></i></a>
                         <a class="right carousel-control cart-carousel-control" href="#myCarousel"
-                           data-slide="next">›</a>
+                           data-slide="next"><i class="fa fa-chevron-circle-right carousel-arrows" aria-hidden="true"></i></a>
                     </div>
                     <!--/myCarousel-->
                 </div>
@@ -304,9 +305,6 @@
 
                     <div class="caption">
                         <h3 id="header-item-title">&nbsp;</h3>
-
-                        <p id="p-item-price">&nbsp;</p>
-
                         <p id="p-item-qty">&nbsp;</p>
                     </div>
                 </div>
@@ -369,17 +367,11 @@
                         <div class="col-sm-6" style="display:inline-block; margin-top:-10px;">
                             <label class="control-label">Toppings</label>
                             <select class="form-control">
-                                <option>Topping 01</option>
-                                <option>Topping 02</option>
-                                <option>Topping 03</option>
                             </select>
                         </div>
                         <div class="col-sm-6" style="display:inline-block; margin-top:-10px;">
                             <label class="control-label">&nbsp;</label>
                             <select class="form-control">
-                                <option>Topping 01</option>
-                                <option>Topping 02</option>
-                                <option>Topping 03</option>
                             </select>
                         </div>
                     </div>

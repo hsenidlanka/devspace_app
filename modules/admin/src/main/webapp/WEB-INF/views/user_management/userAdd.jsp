@@ -123,14 +123,14 @@
                       </div>
                       <div class="col-xs-5">
                         <form:input path="firstName" class="form-control" id="fname" placeholder="First Name"
-                                    type="text"  style="width: 180px" required="required"/>
+                                    type="text"  style="width: 150px" required="required"/>
                       </div>
                     </div>
                     <div class="col-xs-6">
                       <%--<div class="col-xs-1"></div>--%>
                       <div class="col-xs-5">
                         <form:input path="lastName" class="form-control" id="lname" placeholder="Last Name"
-                                    type="text"  style="width: 200px"/>
+                                    type="text"  style="width: 170px"/>
                       </div>
                     </div>
                 </div>
@@ -174,7 +174,7 @@
                       <div class="col-xs-6">
                           <div class="col-xs-12">
                             <form:input path="addressL3" class="form-control" id="city" placeholder="City" type="text"
-                                        style="width: 260px" required="required"/>
+                                        style="width: 200px" required="required"/>
                           </div>
                       </div>
                       <div class="col-xs-6">

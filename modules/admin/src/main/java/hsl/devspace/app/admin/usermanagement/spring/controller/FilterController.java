@@ -48,6 +48,7 @@ public class FilterController {
         return  nameList;
     }
 
+
     /** handler  method to filter the customer user data based on typeahead usernames **/
     @RequestMapping(value = "/staffTable/typeheadName/data", method = RequestMethod.GET)
     public @ResponseBody
@@ -274,6 +275,37 @@ public class FilterController {
     /**Below handler methods are for the filter options of
      ** the Customer Users(InActive) **/
 
+    /** handler  method to filter the banned customer user data based on typeahead usernames **/
+    @RequestMapping(value = "/bannedCustomerTable/typeheadName/data", method = RequestMethod.GET)
+    public @ResponseBody
+    List<Map<String, Object>> typeheadBannedNameFilterData (@RequestParam("bcname") String bcname){
+        List<Map<String, Object>> nameListB=nameSelect(bcname,"inactive");
+        return  nameListB;
+    }
+
+    /** handler  method to filter the  banned customer usernames based on typeahead usernames **/
+    @RequestMapping(value = "/bannedCustomerTable/typeheadName", method = RequestMethod.GET)
+    public @ResponseBody
+    List<String> typeheadBannedNameFilter (@RequestParam("bcname") String bcname){
+        List<String> nameListB=customerRepository.selectNameByNameTypeAhead(bcname, "inactive");
+        return  nameListB;
+    }
+
+    /** handler  method to filter the customer user data based on typeahead usernames **/
+    @RequestMapping(value = "/bannedStaffTable/typeheadName/data", method = RequestMethod.GET)
+    public @ResponseBody
+    List<Map<String, Object>> typeheadBannedNameFilterDataStaff (@RequestParam("bsname") String bsname){
+        List<Map<String, Object>> nameListB=nameSelectStaff(bsname, "inactive");
+        return  nameListB;
+    }
+
+    /** handler  method to filter the customer usernames based on typeahead usernames **/
+    @RequestMapping(value = "/bannedStaffTable/typeheadName", method = RequestMethod.GET)
+    public @ResponseBody
+    List<String> typeheadBannedNameFilterStaff (@RequestParam("bsname") String bsname){
+        List<String> nameListB=staffRepository.selectNameByNameTypeAhead(bsname, "inactive");
+        return  nameListB;
+    }
 
     /** handler method  to filter
      * the search data on the registered date**/

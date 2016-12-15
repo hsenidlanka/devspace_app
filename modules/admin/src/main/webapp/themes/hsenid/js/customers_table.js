@@ -3,9 +3,9 @@ $(document).ready(function () {
             $('#tableCustomer').bootstrapTable({
 
                 url: 'https://localhost:8443/admin/users/view/customerTable',
-                height: 375,
+                height: 392,
                 pagination: true,
-                pageSize: 7,
+                pageSize: 8,
                 clickToSelect: true,
                 singleSelect: true,
                 minimumCountColumns: 3,
@@ -14,34 +14,41 @@ $(document).ready(function () {
                     field:'id',
                     title: 'ID :',
                     sortable: true,
-                    align:'left'
+                    align:'left',
+                    font: 14
                 },{
                     field: 'username',
                     title: 'Username :',
                     sortable: true,
                     align:'left',
-                    searchable:true
+                    searchable:true,
+                    font: 14
                 }, {
                     field: 'first_name',
                     title: 'First Name :',
                     align:'left',
-                    sortable: true
+                    sortable: true,
+                    font: 14
                 }, {
                     field: 'mobile',
                     title: 'Phone No :',
-                    align:'left'
+                    align:'left',
+                    size: 14
                 }, {
                     field: 'address_line3',
                     title: 'City:',
-                    align:'left'
+                    align:'left',
+                    size: 14
                 },{
                     field: 'registered_date',
                     title: 'Registered Date:',
-                    align:'left'
+                    align:'left',
+                    font: 14
                 }, {
                     field: 'Options',
                     title: 'Operations :',
                     align: 'center',
+                    font_size: 14,
                     formatter: operateFormatter1,
                     events: operateEvents1
                 }]

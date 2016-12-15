@@ -238,14 +238,16 @@
           <div style="text-align: center; z-index: 50000; width: 50%; margin: auto;" id="toaster"></div>
 
           <div class="row" align="right">
-            <div class="col-xs-4">
+            <div class="col-xs-3">
             </div>
-            <div class="col-xs-4" align="center">
+            <div class="col-xs-3" align="center">
               <form:button type="submit" class="btn btn-success btn-group-xs" id="btnAddItem"><span
                       class="glyphicon glyphicon-plus"></span><fmt:message key="item.itemadd.form.button.submit"/></form:button>
             </div>
-            <div class="col-xs-4" align="left">
+            <div class="col-xs-3" align="left">
               <form:button type="button" class="btn btn-success" id="btnAddClear" onclick="this.form.reset();"><fmt:message key="item.itemadd.form.button.reset"/> </form:button>
+            </div>
+            <div class="col-xs-3">
             </div>
           </div>
         </fieldset>

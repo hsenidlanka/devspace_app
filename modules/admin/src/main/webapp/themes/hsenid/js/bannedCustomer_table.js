@@ -3,7 +3,7 @@ $(document).ready(function () {
     $('#tableBannedcustomer').bootstrapTable({
 
         url: 'https://localhost:8443/admin/users/view/bannedcustomerTable',
-        height: 375,
+        height: 360,
         pagination: true,
         pageSize: 7,
         pageList:[10,20,30],
