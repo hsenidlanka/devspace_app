@@ -42,4 +42,8 @@ public interface PackageRepository {
     List<String> getPackageNameList();
 
     int paginate(int limit, int page);
+
+    List<Package> paginateSelectAll(int limit, int page);
+
+    List<Package> paginateSelectAllByNamePattern(String packName, int limit, int page);
 }
