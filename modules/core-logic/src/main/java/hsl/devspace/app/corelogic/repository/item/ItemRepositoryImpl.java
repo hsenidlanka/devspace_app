@@ -412,5 +412,16 @@ public class ItemRepositoryImpl implements ItemRepository {
 
     }
 
+    @Override
+    public List<Map<String, Object>> paginateSelectedItemDetails(String name, int limit, int page) {
+        String key = "%" + name + "%";
+        List<Map<String, Object>> itemDetails = jdbcTemplate.queryForList("SELECT i.id,i.name AS item_name,c.name " +
+                "AS category_name, s.name AS sub_category_name,t.name AS type,i.description,i.image FROM item i" +
+                " INNER JOIN sub_category s ON i.sub_category_id=s.id INNER JOIN type t ON i.type_id=t.type_id " +
+                "INNER JOIN category c ON c.id=s.category_id WHERE i.name LIKE ? LIMIT ? OFFSET ?", key, limit, page);
+        log.info("{}", itemDetails);
+        return itemDetails;
+    }
+
 
 }
