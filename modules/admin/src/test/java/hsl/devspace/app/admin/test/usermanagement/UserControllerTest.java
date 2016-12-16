@@ -1,11 +1,10 @@
-/*
 package hsl.devspace.app.admin.test.usermanagement;
 
 import hsl.devspace.app.corelogic.repository.user.UserRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Before;
-import org.mockito.Mockito;
+//import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -17,10 +16,8 @@ import org.testng.annotations.Test;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-*/
-/**
- * Created by hsenid on 9/21/16.
- *//*
+
+
 
 @ContextConfiguration(locations = {"classpath:spring-test-config.xml"})
 @WebAppConfiguration //ensures that the application context loaded for our tests is a WebApplicationContext
@@ -39,7 +36,7 @@ public class UserControllerTest  {
     //resets the service mock before each test and create a new MOckMvc
     @Before
     public void setup(){
-        Mockito.reset(staffRepository);
+//        Mockito.reset(staffRepository);
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
     }
 
@@ -55,4 +52,3 @@ public class UserControllerTest  {
 
 
 }
-*/
