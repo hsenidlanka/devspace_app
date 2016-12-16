@@ -61,7 +61,7 @@ public class ContactUsController {
         }
         catch (Exception e){
             redirectAttributes.addFlashAttribute("invalidForm", "Internal Server error!!!<br><br>");
-            logger.error(e.getMessage());
+            logger.error("ContactUs Submission failed. Reason -> {}",e.getMessage());
         }
         return "redirect:/contact-us";
     }

@@ -27,11 +27,20 @@ public class LoginControllerTest extends AbstractTestNGSpringContextTests {
 
     private MockMvc mockMvc;
 
-    @Test
-    public void testCheckNotBlockedUser() throws Exception {
+    @DataProvider
+    public Object[][] notBlockedUsername() {
+        return new Object[][]{
+                {"testre"},
+                {"tagtest"},
+                {"kkalla"}
+        };
+    }
+
+    @Test(dataProvider = "notBlockedUsername")
+    public void testCheckNotBlockedUser(String username) throws Exception {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
         this.mockMvc.perform(get("/chechBlocked")
-                .param("checkName", "testre")
+                .param("checkName", username)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().json("{'userAvailable':true}"));

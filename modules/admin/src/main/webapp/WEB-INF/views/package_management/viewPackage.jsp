@@ -25,11 +25,13 @@
     <spring:url value="/themes/hsenid/js/packageMgt.js" var="pkgMgt"/>
     <spring:url value="/themes/hsenid/js/tablePackages.js" var="pkgTblView"/>
     <spring:url value="/themes/hsenid/js/myAlerts.js" var="myAlerts"/>
+    <spring:url value="/themes/hsenid/js/packagePagination.js" var="pkgPaginate"/>
 
     <script src="${itemJs}"></script>
     <script src="${pkgMgt}"></script>
     <script src="${pkgTblView}"></script>
     <script src="${myAlerts}"></script>
+    <script src="${pkgPaginate}"></script>
 </head>
 
 <body>
@@ -96,9 +98,9 @@
 
                     </table>
 
-                    <div id="ppagination" class="text-center">
+                    <div id="pagination3" class="text-center">
                     </div>
-                    <div id="ppagination2" class="text-center">
+                    <div id="pagination4" class="text-center">
                     </div>
                 </fieldset>
             </form:form>

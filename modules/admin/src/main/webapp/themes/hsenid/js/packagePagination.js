@@ -7,16 +7,16 @@ $(document).ready(function () {
     /**
      * ajax function for getting records count
      */
-    $("#pagination2").hide();
+    $("#pagination4").hide();
 
     $.ajax({
-        url: 'https://localhost:8443/admin/items/itemPaginationTable',
+        url: 'https://localhost:8443/admin/packages/packagePaginationTable',
         success: function (recCount) {
             pag.simplePaginator('setTotalPages', Math.ceil(recCount / 10));
         }
     })
 
-    var pag = $('#pagination').simplePaginator({
+    var pag = $('#pagination3').simplePaginator({
         // options here
 
         // the number of total pages
@@ -43,11 +43,11 @@ $(document).ready(function () {
         pageChange: function (page) {
 
             $.ajax({
-                url: 'https://localhost:8443/admin/items/loadSearchItem',
+                url: 'https://localhost:8443/admin/packages/loadSearchPackage',
                 dataType: "json",
-                data: {"initPage": page, "pgLimit": pgLimit},
+                data: {"initPage": page,"pgLimit":pgLimit},
                 success: function (data) {
-                    $('#tblItems').bootstrapTable('load', data);
+                    $('#tblPackages').bootstrapTable('load', data);
                 }
             })
         }
