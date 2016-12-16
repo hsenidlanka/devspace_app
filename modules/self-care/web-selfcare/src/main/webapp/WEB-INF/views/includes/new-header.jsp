@@ -1,6 +1,23 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="signup-modal.jsp" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<style>
+    .navbar-login {
+        width: 305px;
+        padding: 10px;
+        padding-bottom: 0px;
+    }
+
+    .navbar-login-session {
+        padding: 10px;
+        padding-bottom: 0px;
+        padding-top: 0px;
+    }
+
+    .icon-size {
+        font-size: 87px;
+    }
+</style>
 
 <nav class="navbar navbar-default ">
     <div class="container-fluid">
@@ -28,27 +45,69 @@
                 <c:if test="${empty username}">
                     <li>
                         <a id="signUpBtn" class="form-group" data-toggle="modal" data-target="#modal-signup"><img
-                                src="<c:url value="/resources/images/signup.png"/>" style=""></span>
-                        </a>
+                                src="<c:url value="/resources/images/signup.png"/>" style=""></a>
                     </li>
 
                     <li>
 
-                        <a id="loginBtn" class="form-group-sm" data-toggle="modal" data-target="#modal-login"><img src="<c:url value="/resources/images/user2.png"/>" style=""></span> </a>
+                        <a id="loginBtn" class="form-group-sm" data-toggle="modal" data-target="#modal-login"><img
+                                src="<c:url value="/resources/images/user2.png"/>" style=""></span> </a>
                     </li>
 
                 </c:if>
                 <c:if test="${not empty username}">
-                    <li>
-                        <div class="dropdown">
-                            <button class="btn btn-lg btn-link dropbtn" type="button" data-toggle="dropdown">${name}<span
-                                    class="caret"></span></button>
+                    <li class="dropdown">
 
-                            <div class="dropdown-menu">
-                                <a class="btn-lg" href="/web-selfcare/update-user"><fmt:message key="update.user.profile" bundle="${lang}"/></a>
-                                <a class="btn-lg" href="/web-selfcare/logout"><fmt:message key="new.header.log.out" bundle="${lang}"/></a>
-                            </div>
-                        </div>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <%--<span class="glyphicon glyphicon-user"></span> --%>
+                            <strong>${name}</strong>
+                            <span class="glyphicon glyphicon-chevron-down"></span>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li>
+                                <div class="navbar-login">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <p class="text-center">
+                                                <span class="glyphicon glyphicon-user icon-size"></span>
+                                            </p>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <p class="text-center"><strong>Welcome Back !</strong></p>
+
+                                            <p class="text-center"><strong>${name}</strong></p>
+
+                                            <p class="text-center small">${email}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <div class="navbar-login navbar-login-session">
+                                    <div class="row">
+                                        <div class="col-xs-6" >
+                                            <a href="#" class="btn btn-primary" >View Profile</a>
+                                        </div>
+                                        <div class="col-xs-6" >
+                                                <a href="/web-selfcare/logout" class="btn btn-danger">
+                                                    <span style="vertical-align: middle"><i class="fa fa-power-off" aria-hidden="true"></i> Log Out</span>
+                                                </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                            <%--<div class="dropdown">
+                                <button class="btn btn-lg btn-link dropbtn" type="button" data-toggle="dropdown">${name}<span
+                                        class="caret"></span></button>
+
+                                <div class="dropdown-menu">
+                                    <a class="btn-lg" href="/web-selfcare/update-user"><fmt:message key="update.user.profile" bundle="${lang}"/></a>
+                                    <a class="btn-lg" href="/web-selfcare/logout"><fmt:message key="new.header.log.out" bundle="${lang}"/></a>
+                                </div>
+                            </div>--%>
                     </li>
                 </c:if>
             </ul>
@@ -66,13 +125,14 @@
 
 <div id="modal-login" class="modal-login modal fade">
     <div class="modal-dialog modal-lg">
-        <div class="modal-content" >
+        <div class="modal-content">
 
             <div class="modal-header">
                 <div class="panel-heading" style="width: 87%">
                     <div class="row">
                         <div class="col-sm-4">
-                            <p style="font-size: xx-large;text-align: left"><fmt:message key="new.header.login" bundle="${lang}"/></p>
+                            <p style="font-size: xx-large;text-align: left"><fmt:message key="new.header.login"
+                                                                                         bundle="${lang}"/></p>
                         </div>
                         <div class="col-sm-5"></div>
                         <div class="col-sm-3">
@@ -99,7 +159,7 @@
 
                     <div class="row">
                         <div class="col-sm-2"></div>
-                        <div id="usernameError" class="error-labels col-sm-10" ></div>
+                        <div id="usernameError" class="error-labels col-sm-10"></div>
                         <%--<div class="col-sm-4"></div>--%>
                     </div>
 
