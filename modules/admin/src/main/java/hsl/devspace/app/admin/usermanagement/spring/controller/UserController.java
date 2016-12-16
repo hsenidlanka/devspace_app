@@ -3,8 +3,8 @@ package hsl.devspace.app.admin.usermanagement.spring.controller;
 
 import hsl.devspace.app.corelogic.domain.User;
 import hsl.devspace.app.corelogic.repository.user.UserRepository;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -53,7 +53,7 @@ public class UserController {
     private String updateSuccessStaff;
 
 
-    private static final Logger LOG = LogManager.getLogger(UserController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(UserController.class);
 
     /*  this annotation allows Spring inject an instance of UserRepositoryImpl into this controller automatically.
        Each handler method uses this UserRepository object to perform necessary CRUD operation*/
