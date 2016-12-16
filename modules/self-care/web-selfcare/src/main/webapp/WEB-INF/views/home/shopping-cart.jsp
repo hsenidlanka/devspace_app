@@ -56,7 +56,7 @@
                                                 </td>
                                                 <td class="item-price">
                                                     <fmt:formatNumber type="currency" currencySymbol=""
-                                                                      maxFractionDigits="2" value="${entry.itemPrice}"/>
+                                                                      maxFractionDigits="2" groupingUsed="false" value="${entry.itemPrice}"/>
                                                     </td>
                                                 <td class="item-qty"><input class="spin item-qty"
                                                                             type="number"
@@ -291,7 +291,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
                 <img class="icons" src="<c:url value="/resources/images/icons/shopping-cart-remove.png"/>">
                 <h4 class="modal-title header-panel"><fmt:message key="shopping.remove" bundle="${lang}"/></h4>
             </div>

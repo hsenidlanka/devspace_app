@@ -88,7 +88,7 @@
                                 <div class="navbar-login navbar-login-session">
                                     <div class="row">
                                         <div class="col-xs-6" >
-                                            <a href="#" class="btn btn-primary" >View Profile</a>
+                                            <a href="/web-selfcare/profile" class="btn btn-primary" >View Profile</a>
                                         </div>
                                         <div class="col-xs-6" >
                                                 <a href="/web-selfcare/logout" class="btn btn-danger">

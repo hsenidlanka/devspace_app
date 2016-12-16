@@ -56,6 +56,10 @@ public class DeliveryController {
             JSONArray deliveryDetails = new JSONArray();
             session.setAttribute("deliveryDetails", deliveryDetails);
         }
+        if (session.getAttribute("deliveryMethod") == null || session.getAttribute("deliveryMethod") == "") {
+            session.setAttribute("deliveryMethod", "");
+        }
+        session.setAttribute("deliveryMethod", "Door Step");
         JSONArray deliveryDetailsJson = (JSONArray) session.getAttribute("deliveryDetails");
         deliveryDetailsJson.clear();
         JSONObject jsonObject = new JSONObject();
@@ -80,6 +84,10 @@ public class DeliveryController {
             JSONArray pickupDetails = new JSONArray();
             session.setAttribute("pickupDetails", pickupDetails);
         }
+        if (session.getAttribute("deliveryMethod") == null || session.getAttribute("deliveryMethod") == "") {
+            session.setAttribute("deliveryMethod", "");
+        }
+        session.setAttribute("deliveryMethod", "pickup");
         JSONArray pickupDetailsJson = (JSONArray) session.getAttribute("pickupDetails");
         pickupDetailsJson.clear();
         JSONObject jsonObject = new JSONObject();

@@ -1,9 +1,7 @@
 package hsl.devspace.app.coreserver.resources;
 
-import hsl.devspace.app.corelogic.domain.*;
 import hsl.devspace.app.corelogic.domain.Package;
 import hsl.devspace.app.corelogic.repository.Package.PackageRepositoryImpl;
-import hsl.devspace.app.corelogic.repository.user.GuestRepositoryImpl;
 import hsl.devspace.app.coreserver.common.Context;
 import hsl.devspace.app.coreserver.common.PropertyReader;
 import hsl.devspace.app.coreserver.model.SuccessMessage;
@@ -20,7 +18,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Kasun Dinesh on 9/29/16.

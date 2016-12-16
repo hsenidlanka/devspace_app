@@ -27,6 +27,11 @@ public class HomeController {
         return "/home/self-care-home";
     }
 
+    @RequestMapping("/profile")
+    public String viewProfile() {
+        return "/home/profile";
+    }
+
     @RequestMapping("/menu")
     public String menu() {
         return "/home/menu";
@@ -45,7 +50,6 @@ public class HomeController {
             logger.info("User Logged out.");
         }
         return "redirect:/";
-
     }
 
     @RequestMapping("/about-us")
