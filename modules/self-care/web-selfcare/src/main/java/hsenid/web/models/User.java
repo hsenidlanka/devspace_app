@@ -3,34 +3,36 @@ package hsenid.web.models;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 public class User {
 
-    @NotEmpty(message = "Please enter a title!")
+    @Pattern(regexp = "^(?!\\s*$|\\s).*$", message = "Please enter a title!")
     String title;
 
-    @NotEmpty(message = "Please enter your first name!")
+    @Pattern(regexp = "^(?!\\s*$|\\s).*$",  message = "Please enter your first name!")
     String firstName;
 
-    @NotEmpty(message = "Please enter your last name!")
+    @Pattern(regexp = "^(?!\\s*$|\\s).*$", message = "Please enter your last name!")
     String lastName;
 
     @NotEmpty(message = "Please enter a valid email!")
     @Email(message = "Please enter a valid email!")
     String email;
 
-    @NotEmpty(message = "Please enter a valid username!")
+    @Pattern(regexp = "^(?!\\s*$|\\s).*$", message = "Please enter a valid username!")
     String username;
 
     @Pattern(regexp = "^0[0-9]{9}$", message = "Please Enter Valid Contact Number!")
     String mobile;
 
-    @NotEmpty(message = "Please enter address line one")
+    @Pattern(regexp = "^(?!\\s*$|\\s).*$", message = "Please enter address line one")
     String addressLine01;
 
-    @NotEmpty(message = "Please enter address line two")
+    @Pattern(regexp = "^(?!\\s*$|\\s).*$", message = "Please enter address line two")
     String addressLine02;
 
     String addressLine03;

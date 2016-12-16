@@ -46,7 +46,7 @@ public class UpdateUserController {
 
 
     @PostMapping("/update-user")
-    public String submitUpdate(@ModelAttribute("updateuser") @Valid User updateuser, BindingResult bindingResult, HttpSession session, RedirectAttributes redirectAttributes) {
+    public String submitUpdate(@ModelAttribute("updateuser") @Valid User updateuser, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
         JSONObject jsonObject = new JSONObject();
         logger.info(String.valueOf(bindingResult.hasErrors()));
@@ -60,9 +60,9 @@ public class UpdateUserController {
         jsonObject.put("lastName", updateuser.getLastName());
         jsonObject.put("username", updateuser.getUsername());
         jsonObject.put("email", updateuser.getEmail());
-        jsonObject.put("addressL1", updateuser.getAddressLine01());
-        jsonObject.put("addressL2", updateuser.getAddressLine02());
-        jsonObject.put("addressL3", updateuser.getAddressLine03());
+        jsonObject.put("addressL01", updateuser.getAddressLine01());
+        jsonObject.put("addressL02", updateuser.getAddressLine02());
+        jsonObject.put("addressL03", updateuser.getAddressLine03());
         jsonObject.put("mobile", updateuser.getMobile());
 
         RestTemplate restTemplate = new RestTemplate();
@@ -83,24 +83,32 @@ public class UpdateUserController {
     @GetMapping("sendUserData")
     @ResponseBody
     public User sendUserData(HttpServletRequest request){
+
         User user = new User();
         String username = request.getParameter("username");
         String userDetails = SendStringBuilds.sendString(customerDataSendUrl, username);
 
 
         RestTemplate restTemplate1 = new RestTemplate();
-        ReplyFromServer replyFromServer1 = restTemplate1.getForObject(userDetails, ReplyFromServer.class);
-
-        user.setTitle(replyFromServer1.getData().get(0).getTitle());
-        user.setFirstName(replyFromServer1.getData().get(0).getFirstName());
-        user.setLastName(replyFromServer1.getData().get(0).getLastName());
-        user.setEmail(replyFromServer1.getData().get(0).getEmail());
-        user.setMobile(replyFromServer1.getData().get(0).getMobile());
-        user.setUsername(replyFromServer1.getData().get(0).getUsername());
-        user.setAddressLine01(replyFromServer1.getData().get(0).getAddressLine01());
-        user.setAddressLine02(replyFromServer1.getData().get(0).getAddressLine02());
-        user.setAddressLine03(replyFromServer1.getData().get(0).getAddressLine03());
-
+        try {
+            ReplyFromServer replyFromServer1 = restTemplate1.getForObject(userDetails, ReplyFromServer.class);
+            try {
+                user.setTitle(replyFromServer1.getData().get(0).getTitle());
+                user.setFirstName(replyFromServer1.getData().get(0).getFirstName());
+                user.setLastName(replyFromServer1.getData().get(0).getLastName());
+                user.setEmail(replyFromServer1.getData().get(0).getEmail());
+                user.setMobile(replyFromServer1.getData().get(0).getMobile());
+                user.setUsername(replyFromServer1.getData().get(0).getUsername());
+                user.setAddressLine01(replyFromServer1.getData().get(0).getAddressLine01());
+                user.setAddressLine02(replyFromServer1.getData().get(0).getAddressLine02());
+                user.setAddressLine03(replyFromServer1.getData().get(0).getAddressLine03());
+                return user;
+            } catch (Exception e) {
+                logger.error(e.getMessage());
+            }
+        } catch (RestClientException e) {
+            logger.error("Sending User data failed! Reason = {}", e.getMessage());
+        }
         return user;
     }
 }

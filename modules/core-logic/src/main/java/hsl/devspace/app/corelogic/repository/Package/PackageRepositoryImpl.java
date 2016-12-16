@@ -296,4 +296,43 @@ public class PackageRepositoryImpl implements PackageRepository {
 
     }
 
+    @Override
+    public List<Package> paginateSelectAll(int limit, int page) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM package LIMIT ? OFFSET ?", limit, page - 1);
+        List<Package> pack = new ArrayList<Package>();
+
+        for (int i = 0; i < mp.size(); i++) {
+            Package packages = new Package();
+            packages.setPackageId(Integer.parseInt(mp.get(i).get("id").toString()));
+            packages.setPackName(mp.get(i).get("name").toString());
+            packages.setPrice(Double.parseDouble(mp.get(i).get("price").toString()));
+            packages.setImage(mp.get(i).get("image").toString());
+            pack.add(packages);
+
+
+        }
+        log.debug("{}", pack);
+        return pack;
+    }
+
+    @Override
+    public List<Package> paginateSelectAllByNamePattern(String packName, int limit, int page) {
+        String key = "%" + packName + "%";
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM package WHERE name LIKE ? LIMIT ? OFFSET ?", key, limit, page - 1);
+        List<Package> pack = new ArrayList<Package>();
+
+        for (int i = 0; i < mp.size(); i++) {
+            Package packages = new Package();
+            packages.setPackageId(Integer.parseInt(mp.get(i).get("id").toString()));
+            packages.setPackName(mp.get(i).get("name").toString());
+            packages.setPrice(Double.parseDouble(mp.get(i).get("price").toString()));
+            packages.setImage(mp.get(i).get("image").toString());
+            pack.add(packages);
+
+
+        }
+        log.info("{}", pack);
+        return pack;
+    }
+
 }

@@ -18,12 +18,12 @@
   <spring:url value="/themes/hsenid/js/itemMgt.js" var="itemJs"/>
   <spring:url value="/themes/hsenid/js/myAlerts.js" var="myAlerts"/>
   <spring:url value="/themes/hsenid/js/tableItems.js" var="tblViewItm"/>
- <%-- <spring:url value="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js" var="typeaheadscrpt"/>--%>
+  <spring:url value="/themes/hsenid/js/itemPagination.js" var="itmPaging"/>
 
   <script src="${itemJs}"></script>
   <script src="${myAlerts}"></script>
   <script src="${tblViewItm}"></script>
-  <%--<script src="${typeaheadscrpt}"></script>--%>
+  <script src="${itmPaging}"></script>
 
 
 </head>

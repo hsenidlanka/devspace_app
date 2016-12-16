@@ -132,7 +132,6 @@ $(document).ready(function () {
     });
 
     $(".btn-popup-add-to-cart-pizza").click(function () {
-        $("#add-to-cart-popup").modal('hide');
         $.ajax({
             type: "POST",
             url: "/web-selfcare/menu/add-to-cart",
@@ -150,6 +149,7 @@ $(document).ready(function () {
                 "itemTotal": $("#addtocart-pizza-total").val()
             },
             success: function (result) {
+                $("#add-to-cart-popup").modal('hide');
                 if (result) {
                     // Initialize the toast notification
                     $.notify("Selected pizza added to the shopping cart.", {

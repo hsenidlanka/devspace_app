@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.swing.*;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -330,7 +331,7 @@ public class ItemController {
 
 
     /*
-    * typeahead function for item name
+    * typeahead function calling method for item name
     **/
     @RequestMapping(value = "/typeahedItmNm", method = RequestMethod.GET)
     public @ResponseBody List<String> typeaheadName(){
@@ -338,10 +339,37 @@ public class ItemController {
         return item.selectNameList();
     }
 
-    @RequestMapping(value = "/loadSearchItem", method = RequestMethod.GET)
-    public @ResponseBody List<Map<String, Object>> loadSearchItem(@RequestParam("srchItmNm") String itemName){
 
-        LOGGER.trace("load search Item "+ item.retrieveSelectedItemDetails(itemName));
-        return  item.retrieveSelectedItemDetails(itemName);
+    /*
+   *reloading item table view on search & paginating basis
+   * */
+    @RequestMapping(value = "/loadSearchItem", method = RequestMethod.GET)
+    public @ResponseBody List<Map<String, Object>> loadSearchItem(HttpServletRequest request){
+
+        String itmNm = request.getParameter("srchItmNm");
+        String pgInit = request.getParameter("initPage");
+        int initPg = Integer.parseInt(pgInit);
+        String pgLimt = request.getParameter("pgLimit");
+        int pgLimit = Integer.parseInt(pgLimt);
+
+        List<Map<String, Object>> itemDetails;
+        LOGGER.trace("load item name 1 {}", itmNm);
+
+        if(itmNm!=null){
+            itemDetails= item.paginateSelectedItemDetails(itmNm,pgLimit,initPg);
+            LOGGER.trace("selected item {}",itemDetails);
+        }else {
+            itemDetails=item.viewAllItemDetails(pgLimit, initPg);
+            LOGGER.trace("load item {}",itemDetails);
+        }
+        return itemDetails;
+    }
+
+    /*
+    *getting record count for loading item table with pagination
+    **/
+    @RequestMapping(value = "/itemPaginationTable", method = RequestMethod.GET)
+    public @ResponseBody int loadPagination(){
+        return item.count();
     }
 }

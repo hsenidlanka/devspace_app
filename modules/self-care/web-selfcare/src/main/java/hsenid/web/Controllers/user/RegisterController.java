@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
+
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
@@ -33,7 +34,7 @@ public class RegisterController {
     final static Logger logger = LoggerFactory.getLogger(RegisterController.class);
 
     // call api to register the user
-    @RequestMapping(value = "/register", method = RequestMethod.POST, produces="application/json")
+    @RequestMapping(value = "/register", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
     public BooleanResponse register(HttpServletRequest regRequest) throws JSONException {
 
@@ -53,12 +54,19 @@ public class RegisterController {
         if (addressL3.length() < 1) {
             addressL3 = null;
         }
+        String mobileRegex = "^0[0-9]{9}$";
+        String emailRegex = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
+
+        if ( !(title.length() > 1) && !(firstName.length() > 1) && !(lastName.length() > 1) && !(addressL1.length() > 2) && !(addressL2.length() > 2) && !email.matches(emailRegex) && !mobile.matches(mobileRegex) && (username.length()>2)) {
+            logger.error("RegisterController recieved invalid details");
+            return new BooleanResponse(false);
+        }
 
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("title",title);
+        jsonObject.put("title", title);
         jsonObject.put("firstName", firstName);
         jsonObject.put("lastName", lastName);
-        jsonObject.put("email",email);
+        jsonObject.put("email", email);
         jsonObject.put("addressL1", addressL1);
         jsonObject.put("addressL2", addressL2);
         jsonObject.put("addressL3", addressL3);
@@ -72,9 +80,9 @@ public class RegisterController {
         headers.add("Content-Type", "application/json");
         HttpEntity<JSONObject> httpEntity = new HttpEntity<JSONObject>(jsonObject, headers);
 
-        try{
+        try {
             ReplyFromServer message = restTemplate.postForObject(registerUrl, httpEntity, ReplyFromServer.class);
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.error(e.getMessage());
             return new BooleanResponse(false);
         }
@@ -83,11 +91,10 @@ public class RegisterController {
     }
 
 
-
     //    check whether chosen user is already in the system
     @RequestMapping(value = "/UniqueUser", method = RequestMethod.GET)
     @ResponseBody
-    public BooleanResponse uniqueUsername(HttpServletRequest request){
+    public BooleanResponse uniqueUsername(HttpServletRequest request) {
 
         String checkName = request.getParameter("checkName");
         logger.info("unique user started");
@@ -100,7 +107,7 @@ public class RegisterController {
         ReplyFromServer replyFromServer = restTemplate.getForObject(urlForSearch, ReplyFromServer.class);
 
         String serverMsg = replyFromServer.getMessage();
-        int sizeOfMsg= serverMsg.length();
+        int sizeOfMsg = serverMsg.length();
 
         if (sizeOfMsg == 23) {
             uniqueUser = new BooleanResponse(false);

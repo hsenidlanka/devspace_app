@@ -55,8 +55,9 @@
                                                     <c:out value="${entry.itemTitle}"/>
                                                 </td>
                                                 <td class="item-price">
-                                                    <c:out
-                                                            value="${entry.itemPrice}"/></td>
+                                                    <fmt:formatNumber type="currency" currencySymbol=""
+                                                                      maxFractionDigits="2" value="${entry.itemPrice}"/>
+                                                    </td>
                                                 <td class="item-qty"><input class="spin item-qty"
                                                                             type="number"
                                                                             min="1"

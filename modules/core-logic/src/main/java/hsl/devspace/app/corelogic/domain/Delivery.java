@@ -95,6 +95,15 @@ public class Delivery {
     public Delivery() {
     }
 
+    public Delivery(String recepientName, String recepientAddress, Date deliveryDate, Time deliveryTime, String description, String deliveryMethod) {
+        this.recepientName = recepientName;
+        this.recepientAddress = recepientAddress;
+        this.deliveryDate = deliveryDate;
+        this.deliveryTime = deliveryTime;
+        this.description = description;
+        this.deliveryMethod = deliveryMethod;
+    }
+
     @Override
     public String toString() {
         return "Delivery{" +
