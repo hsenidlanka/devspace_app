@@ -44,6 +44,13 @@
             <version>6.8</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>1.9.5</version>
+            <scope>test</scope>
+        </dependency>
         <!--We are using Spring Test Framework as Intergration testing enviroment-->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -51,6 +58,7 @@
             <version>${spring.version}</version>
             <scope>test</scope>
         </dependency>
+
         <!-- Depenedencies need for test End here-->
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-usermanagement -->
         <dependency>
@@ -309,8 +317,6 @@
             <version>0.0.3</version>
         </dependency>
     </dependencies>
-
-
 
     <build>
         <finalName>admin</finalName>
