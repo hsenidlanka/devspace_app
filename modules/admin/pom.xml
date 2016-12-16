@@ -62,12 +62,12 @@
             <version>1.7.21</version>
         </dependency>-->
         <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-slf4j-impl -->
-        <dependency>
+    <!--    <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-slf4j-impl</artifactId>
             <version>2.7</version>
         </dependency>
-
+-->
 
 
         <!--DB dependencies -->
@@ -227,10 +227,6 @@
                 <exclusion>
                     <groupId>org.apache.logging.log4j</groupId>
                     <artifactId>log4j-slf4j-impl</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>log4j</groupId>
-                    <artifactId>log4j</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
