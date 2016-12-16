@@ -1,7 +1,7 @@
 package hsl.devspace.app.corelogic.domain;
 
-import java.sql.Time;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 /**
  * Created by hsenid on 9/19/16.
@@ -10,8 +10,8 @@ public class Delivery {
     private String agentName;
     private String recepientName;
     private String recepientAddress;
-    private Date deliveryDate;
-    private Time deliveryTime;
+    private LocalDate deliveryDate;
+    private LocalTime deliveryTime;
     private String deliveryStatus;
     private String description;
     private String deliveryMethod;
@@ -40,19 +40,19 @@ public class Delivery {
         this.recepientAddress = recepientAddress;
     }
 
-    public Date getDeliveryDate() {
+    public LocalDate getDeliveryDate() {
         return deliveryDate;
     }
 
-    public void setDeliveryDate(Date deliveryDate) {
+    public void setDeliveryDate(LocalDate deliveryDate) {
         this.deliveryDate = deliveryDate;
     }
 
-    public Time getDeliveryTime() {
+    public LocalTime getDeliveryTime() {
         return deliveryTime;
     }
 
-    public void setDeliveryTime(Time deliveryTime) {
+    public void setDeliveryTime(LocalTime deliveryTime) {
         this.deliveryTime = deliveryTime;
     }
 
@@ -80,8 +80,8 @@ public class Delivery {
         this.deliveryMethod = deliveryMethod;
     }
 
-    public Delivery(String agentName, String recepientName, String recepientAddress, Date deliveryDate,
-                    Time deliveryTime, String deliveryStatus, String description, String deliveryMethod) {
+    public Delivery(String agentName, String recepientName, String recepientAddress, LocalDate deliveryDate,
+                    LocalTime deliveryTime, String deliveryStatus, String description, String deliveryMethod) {
         this.agentName = agentName;
         this.recepientName = recepientName;
         this.recepientAddress = recepientAddress;
@@ -95,7 +95,7 @@ public class Delivery {
     public Delivery() {
     }
 
-    public Delivery(String recepientName, String recepientAddress, Date deliveryDate, Time deliveryTime, String description, String deliveryMethod) {
+    public Delivery(String recepientName, String recepientAddress, LocalDate deliveryDate, LocalTime deliveryTime, String description, String deliveryMethod) {
         this.recepientName = recepientName;
         this.recepientAddress = recepientAddress;
         this.deliveryDate = deliveryDate;
@@ -105,7 +105,7 @@ public class Delivery {
     }
 
     //For pickup
-    public Delivery(Date deliveryDate, Time deliveryTime, String deliveryMethod) {
+    public Delivery(LocalDate deliveryDate, LocalTime deliveryTime, String deliveryMethod) {
         this.deliveryDate = deliveryDate;
         this.deliveryTime = deliveryTime;
         this.deliveryMethod = deliveryMethod;
