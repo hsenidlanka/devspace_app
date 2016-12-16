@@ -75,7 +75,8 @@
                                                                            value="${fn:toUpperCase(substringSize)}"/>
 
                                                                     <c:out value="${formattedSize}"/>:&nbsp;<label id="pizza-price-<c:out
-                                                                        value="${itemData.price[loop.index]['size']}"/>">${itemData.price[loop.index]['price']}
+                                                                        value="${itemData.price[loop.index]['size']}"/>"><fmt:formatNumber type="currency" currencySymbol=""
+                                                                                                                                           maxFractionDigits="2" groupingUsed="false" value="${itemData.price[loop.index]['price']}"/>
                                                                     </label><br>
                                                                 </c:forEach>
                                                                 <a class="btn menu-add-to-cart-btn btn-success btn-xs btn-addtocart-<c:out value="${category}"/>">
@@ -88,8 +89,8 @@
                                                                 <div class="row" style="margin-top: 15px;">
                                                                     <label style="float: left; font-size: small">Price:</label>
                                                                     <label id="lbl-sizeprice"
-                                                                           style="float: left;"><c:out
-                                                                            value="${itemData.price[0]['price']}"/></label>
+                                                                           style="float: left;"><fmt:formatNumber type="currency" currencySymbol=""
+                                                                                                                  maxFractionDigits="2" groupingUsed="false" value="${itemData.price[0]['price']}"/></label>
                                                                     <select id="sizes" class="sizes-dropdowns"
                                                                             style="text-transform: capitalize; font-size: small; float: right; width: 80px; height: 20px">
                                                                         <c:forEach begin="0" end="${sizePriceLength-1}"
