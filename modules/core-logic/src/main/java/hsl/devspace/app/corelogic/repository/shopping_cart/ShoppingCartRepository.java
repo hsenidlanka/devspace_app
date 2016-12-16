@@ -35,6 +35,10 @@ public interface ShoppingCartRepository {
     int add(Delivery del);
 
     int add(String paymentMethodName, int cartId, int deliveryId);
+
+    int updateDelivery(String agentName,String staffUsername,int deliveryId);
+
+    int updatePayment(int paymentId,String staffUsername);
 //    void addPackageToCart(int packageId);
 //    void modifyPackageInCart();
 //    void removePackageFromCart(int packageId);

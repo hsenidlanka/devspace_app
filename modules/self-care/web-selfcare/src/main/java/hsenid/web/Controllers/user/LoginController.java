@@ -135,6 +135,8 @@ public class LoginController {
 //            Adding attributes to the session
         session.setAttribute("username", user.getUsername());
         session.setAttribute("name", SendStringBuilds.sendString(user.getFirstName(), " ", user.getLastName()));
+        session.setAttribute("email", user.getEmail());
+
 
         return new BooleanResponse(true);
     }
