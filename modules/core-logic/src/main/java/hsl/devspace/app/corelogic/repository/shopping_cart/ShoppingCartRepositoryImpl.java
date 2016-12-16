@@ -99,10 +99,11 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
             toppingId1 = Integer.parseInt(top1.get(0).get("id").toString());
             toppingId2 = Integer.parseInt(top2.get(0).get("id").toString());
 
+            String size = items.get(i).get("size").toString();
 
             String sql = "INSERT INTO product " +
-                    "(type,type_id,quantity,topping_id1,topping_id2) VALUES (?,?,?,?,?)";
-            jdbcTemplate.update(sql, new Object[]{type, id, quantity, toppingId1, toppingId2});
+                    "(type,type_id,size,quantity,topping_id1,topping_id2) VALUES (?,?,?,?,?)";
+            jdbcTemplate.update(sql, new Object[]{type, id, size, quantity, toppingId1, toppingId2});
             List<Map<String, Object>> mp4 = jdbcTemplate.queryForList("SELECT MAX(id) FROM product");
             id = Integer.parseInt(mp4.get(0).get("MAX(id)").toString());
             productList.add(id);
@@ -149,16 +150,35 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
     /*Add shopping cart to delivery process*/
     @Override
     public int add(Delivery del) {
+        int deliveryId = 0;
         int row;
-        String sql = "INSERT INTO delivery " +
-                "(recepient_name,recepient_address,delivery_date,delivery_time,delivery_status,description,delivery_method_id) VALUES (?,?,?,?,?,?,(SELECT id FROM delivery_method WHERE name=?))";
+        if (del.getDeliveryMethod() == "pickup") {
+            String sql = "INSERT INTO delivery " +
+                    "(delivery_date,delivery_time,delivery_status,delivery_method_id) VALUES (?,?,?,(SELECT id FROM delivery_method WHERE name=?))";
 
-        row = jdbcTemplate.update(sql, new Object[]{del.getRecepientName(), del.getRecepientAddress(),
-                del.getDeliveryDate(), del.getDeliveryTime(), "pending", del.getDescription(), del.getDeliveryMethod()});
-        log.info("{} new delivery inserted", row);
-        List<Map<String, Object>> mp4 = jdbcTemplate.queryForList("SELECT MAX(id) FROM delivery");
-        int deliveryId = Integer.parseInt(mp4.get(0).get("MAX(id)").toString());
+            row = jdbcTemplate.update(sql, new Object[]{del.getDeliveryDate(), del.getDeliveryTime(), "pending", del.getDeliveryMethod()});
+            log.info("{} new pickup inserted", row);
+            List<Map<String, Object>> mp4 = jdbcTemplate.queryForList("SELECT MAX(id) FROM delivery");
+            deliveryId = Integer.parseInt(mp4.get(0).get("MAX(id)").toString());
 
+        } else {
+
+            String recName = del.getRecepientName();
+            String recAddress = del.getRecepientAddress();
+            if (recName == null || recAddress == null) {
+                log.info("All required fields are not filled");
+            } else {
+                String sql = "INSERT INTO delivery " +
+                        "(recepient_name,recepient_address,delivery_date,delivery_time,delivery_status,description,delivery_method_id) VALUES (?,?,?,?,?,?,(SELECT id FROM delivery_method WHERE name=?))";
+                row = jdbcTemplate.update(sql, new Object[]{recName, recAddress,
+                        del.getDeliveryDate(), del.getDeliveryTime(), "pending", del.getDescription(), del.getDeliveryMethod()});
+                log.info("{} new delivery inserted", row);
+                List<Map<String, Object>> mp4 = jdbcTemplate.queryForList("SELECT MAX(id) FROM delivery");
+                deliveryId = Integer.parseInt(mp4.get(0).get("MAX(id)").toString());
+            }
+
+        }
+        log.info("{}", deliveryId);
         return deliveryId;
     }
 
@@ -247,6 +267,21 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
     public void removeItemFromCart(int itemId) {
 
     }
+
+    @Override
+    public int updateDelivery(String agentName, String staffUsername, int deliveryId) {
+        String sql = "UPDATE delivery SET agent_name=?,delivery_status=?,staff_id=(SELECT id FROM staff WHERE username=?) WHERE id = ?";
+        int row = jdbcTemplate.update(sql, new Object[]{agentName, "processing", staffUsername, deliveryId});
+        return row;
+    }
+
+    @Override
+    public int updatePayment(int paymentId, String staffUsername) {
+        String sql = "UPDATE payment_transaction staff_id=(SELECT id FROM staff WHERE username=?) WHERE id = ?";
+        int row = jdbcTemplate.update(sql, new Object[]{staffUsername, paymentId});
+        return row;
+    }
+
 
   /*  @Override
     public void addPackageToCart(int packageId) {}*/

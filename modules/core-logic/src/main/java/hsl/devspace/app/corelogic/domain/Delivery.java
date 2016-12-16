@@ -104,6 +104,13 @@ public class Delivery {
         this.deliveryMethod = deliveryMethod;
     }
 
+    //For pickup
+    public Delivery(Date deliveryDate, Time deliveryTime, String deliveryMethod) {
+        this.deliveryDate = deliveryDate;
+        this.deliveryTime = deliveryTime;
+        this.deliveryMethod = deliveryMethod;
+    }
+
     @Override
     public String toString() {
         return "Delivery{" +
