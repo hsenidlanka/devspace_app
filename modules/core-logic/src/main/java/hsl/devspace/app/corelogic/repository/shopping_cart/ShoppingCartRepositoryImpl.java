@@ -69,7 +69,11 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 
         List<Map<String, Object>> mp4 = jdbcTemplate.queryForList("SELECT MAX(id) FROM shopping_cart");
         int id = Integer.parseInt(mp4.get(0).get("MAX(id)").toString());
+        List<Map<String, Object>> mp5 = jdbcTemplate.queryForList("SELECT * FROM shopping_cart WHERE id=?", id);
+
         log.info("{}", id);
+        log.info("mp5 {}", mp5);
+
         return id;
     }
 
@@ -84,6 +88,8 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
         for (int i = 0; i < items.size(); i++) {
             String productName = items.get(i).get("itemName").toString();
             int quantity = Integer.parseInt(items.get(i).get("quantity").toString());
+            String size = items.get(i).get("size").toString();
+
             List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT id FROM item WHERE name=?", productName);
             if (mp.size() != 0) {
                 id = Integer.parseInt(mp.get(0).get("id").toString());
@@ -93,17 +99,22 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
                 id = Integer.parseInt(mp1.get(0).get("id").toString());
                 type = "package";
             }
-            List<Map<String, Object>> top1 = jdbcTemplate.queryForList("SELECT id FROM item WHERE name=?", items.get(i).get("topping_name1").toString());
-            List<Map<String, Object>> top2 = jdbcTemplate.queryForList("SELECT id FROM item WHERE name=?", items.get(i).get("topping_name2").toString());
 
-            toppingId1 = Integer.parseInt(top1.get(0).get("id").toString());
-            toppingId2 = Integer.parseInt(top2.get(0).get("id").toString());
+            if (items.get(i).get("topping_name1") != null) {
+                List<Map<String, Object>> top1 = jdbcTemplate.queryForList("SELECT id FROM item WHERE name=?", items.get(i).get("topping_name1").toString());
+                List<Map<String, Object>> top2 = jdbcTemplate.queryForList("SELECT id FROM item WHERE name=?", items.get(i).get("topping_name2").toString());
 
-            String size = items.get(i).get("size").toString();
+                toppingId1 = Integer.parseInt(top1.get(0).get("id").toString());
+                toppingId2 = Integer.parseInt(top2.get(0).get("id").toString());
+                String sql = "INSERT INTO product " +
+                        "(type,type_id,size,quantity,topping_id1,topping_id2) VALUES (?,?,?,?,?,?)";
+                jdbcTemplate.update(sql, new Object[]{type, id, size, quantity, toppingId1, toppingId2});
+            } else {
+                String sql = "INSERT INTO product " +
+                        "(type,type_id,size,quantity) VALUES (?,?,?,?)";
+                jdbcTemplate.update(sql, new Object[]{type, id, size, quantity});
+            }
 
-            String sql = "INSERT INTO product " +
-                    "(type,type_id,size,quantity,topping_id1,topping_id2) VALUES (?,?,?,?,?)";
-            jdbcTemplate.update(sql, new Object[]{type, id, size, quantity, toppingId1, toppingId2});
             List<Map<String, Object>> mp4 = jdbcTemplate.queryForList("SELECT MAX(id) FROM product");
             id = Integer.parseInt(mp4.get(0).get("MAX(id)").toString());
             productList.add(id);
@@ -144,6 +155,10 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
             row = jdbcTemplate.update(sql, new Object[]{cartId, "pending", "online", paymentMethodName, deliveryId, mp.get(0).get("guest_id").toString()});
             log.info("{} payment inserted", row);
         }
+        List<Map<String, Object>> mp4 = jdbcTemplate.queryForList("SELECT MAX(id) FROM payment_transaction");
+        int id = Integer.parseInt(mp4.get(0).get("MAX(id)").toString());
+        List<Map<String, Object>> mp5 = jdbcTemplate.queryForList("SELECT * FROM payment_transaction WHERE id=?", id);
+        log.info("pay{}", mp5);
         return row;
     }
 
