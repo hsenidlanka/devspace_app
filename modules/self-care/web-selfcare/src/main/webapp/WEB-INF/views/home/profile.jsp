@@ -32,8 +32,19 @@
         .navbar-brand {
             color: #666666;
         }
-
     </style>
+
+
+    <script>
+
+        $( document ).ready(function() {
+            load_home()
+        });
+
+        function load_home() {
+            document.getElementById("content").innerHTML='<object type="text/html" data="profile-info" ></object>';
+        }
+    </script>
 </head>
 <body>
 <%@include file="../includes/new-header.jsp" %>
@@ -47,7 +58,7 @@
         <li><a href="#">Link5</a></li>
     </ul>
 </div>
-<div class="container">
+<div class="container" id="content">
 
 </div>
 </body>
