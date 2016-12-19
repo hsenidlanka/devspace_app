@@ -70,10 +70,10 @@
                             <label><input type="radio" name="radiodelwhen" value="del-later"><fmt:message
                                     key="delivery.later" bundle="${lang}"/>&nbsp;&nbsp;&nbsp;<fmt:message
                                     key="delivery.date" bundle="${lang}"/></label>
-                            <input type="text" class="del-date" id="date" name="date">
+                            <input type="text" class="del-date" id="date" name="date" style="height:auto;">
                             &nbsp;&nbsp;<fmt:message key="delivery.time" bundle="${lang}"/>
                             <div class="input-group" style="display: inline-block; vertical-align: middle;">
-                                <input id="timepicker1" class="bootstrap-timepicker1 del-time" type="text">
+                                <input id="timepicker1" class="bootstrap-timepicker1 del-time" type="text" style="height: auto;">
                             </div>
                         </div>
 
@@ -171,7 +171,7 @@
                             </label>
                             &nbsp;&nbsp;<fmt:message key="delivery.time" bundle="${lang}"/>
                             <div class="input-group" style="display: inline-block; vertical-align: middle;">
-                                <input id="timepicker2" class="bootstrap-timepicker2 pickup-time" type="text">
+                                <input id="timepicker2" class="bootstrap-timepicker2 pickup-time" type="text" style="height: auto;">
                             </div>
                         </div>
 

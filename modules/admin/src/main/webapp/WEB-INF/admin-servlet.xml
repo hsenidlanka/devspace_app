@@ -18,7 +18,7 @@
 
     <mvc:resources mapping="/themes/**" location="/themes/" />
     <!--<mvc:view-controller path="/" view-name="home"/>-->
-    <!--<context:component-scan base-package="hsl.devspace.app.admin.test.*"/>-->
+    <context:component-scan base-package="hsl.devspace.app.admin.test.*"/>
 
     <!--<mvc:resources mapping="/resources/**" location="/resources/" />-->
 

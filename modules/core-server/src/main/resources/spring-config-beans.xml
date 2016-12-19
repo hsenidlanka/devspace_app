@@ -49,4 +49,9 @@
         <property name="dataSource" ref="productionDataSource"/>
         <property name="transactionManager" ref="transactionManager"/>
     </bean>
+
+    <bean id="shoppingCartRepoImpl" class="hsl.devspace.app.corelogic.repository.shopping_cart.ShoppingCartRepositoryImpl">
+        <property name="dataSource" ref="productionDataSource"/>
+        <property name="transactionManager" ref="transactionManager"/>
+    </bean>
 </beans>
