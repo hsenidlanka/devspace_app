@@ -100,7 +100,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     }
 
     @Override
-    public List<Category> viewSubCategoriesforCategory(String catName) {
+    public List<Category> viewSubCategoriesforCategory(String catName, int limit, int page) {
         return null;
     }
 
@@ -226,6 +226,11 @@ public class CategoryRepositoryImpl implements CategoryRepository {
         }
         log.info("{}", categories);
         return categories;
+    }
+
+    @Override
+    public List<Category> selectSubCategoryForCategoryTypeAhead(String catName, String subCategoryKey, int limit, int page) {
+        return null;
     }
 
     /*retrieve total no.of categories*/

@@ -108,8 +108,8 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
 
     /*view all details of subcategories for a given category name*/
     @Override
-    public List<Category> viewSubCategoriesforCategory(String catName) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM sub_category WHERE category_id=(SELECT id FROM category WHERE NAME =?)", catName);
+    public List<Category> viewSubCategoriesforCategory(String catName, int limit, int page) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM sub_category WHERE category_id=(SELECT id FROM category WHERE NAME =? LIMIT ? OFFSET ?)", catName, limit, page - 1);
         List<Category> subCategories = new ArrayList<Category>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -280,7 +280,7 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
     @Override
     public List<Category> selectAllTypeAhead(String catName, int limit, int page) {
         String key = "%" + catName + "%";
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM sub_category LIKE ? LIMIT ? OFFSET ?", key, limit, page - 1);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM sub_category WHERE name LIKE ? LIMIT ? OFFSET ?", key, limit, page - 1);
         List<Category> subCategories = new ArrayList<Category>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -303,6 +303,26 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
     @Override
     public List<Category> selectAllVisibleTypeAhead(String catName, int limit, int page) {
         return null;
+    }
+
+    @Override
+    public List<Category> selectSubCategoryForCategoryTypeAhead(String catName, String subCategoryKey, int limit, int page) {
+        String key = "%" + subCategoryKey + "%";
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM sub_category WHERE category_id=(SELECT id FROM category WHERE NAME =?) AND name LIKE ? LIMIT ? OFFSET ?", catName, key, limit, page - 1);
+        List<Category> subCategories = new ArrayList<Category>();
+
+        for (int i = 0; i < mp.size(); i++) {
+            Category category = new Category();
+            category.setSubCategoryId(Integer.parseInt(mp.get(i).get("id").toString()));
+            category.setSubCategoryName(mp.get(i).get("name").toString());
+            category.setSubcatDescription(mp.get(i).get("description").toString());
+            category.setCreator(mp.get(i).get("creator").toString());
+            category.setCategory_id(Integer.parseInt(mp.get(i).get("category_id").toString()));
+
+            subCategories.add(category);
+        }
+        log.info("{}", subCategories);
+        return subCategories;
     }
 
 

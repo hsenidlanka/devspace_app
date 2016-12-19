@@ -20,7 +20,7 @@ public interface CategoryRepository {
 
     List<Category> selectAll();
 
-    public List<Category> viewSubCategoriesforCategory(String catName);
+    public List<Category> viewSubCategoriesforCategory(String catName, int limit, int page);
 
     public Category selectCategoryDetail(int categoryId);
 
@@ -59,6 +59,10 @@ public interface CategoryRepository {
     List<Category> selectAllTypeAhead(String catName, int limit, int page);
 
     List<Category> selectAllVisibleTypeAhead(String catName, int limit, int page);
+
+    List<Category> selectSubCategoryForCategoryTypeAhead(String catName, String subCategoryKey, int limit, int page);
+
+
 
 
 }
