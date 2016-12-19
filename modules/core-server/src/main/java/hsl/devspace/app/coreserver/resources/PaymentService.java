@@ -1,10 +1,14 @@
 package hsl.devspace.app.coreserver.resources;
 
 import hms.kite.samples.api.SdpException;
+import hms.kite.samples.api.caas.ChargingRequestSender;
+import hms.kite.samples.api.caas.messages.ChargingRequestResponse;
+import hms.kite.samples.api.caas.messages.DirectDebitRequest;
 import hms.kite.samples.api.sms.SmsRequestSender;
 import hms.kite.samples.api.sms.messages.MtSmsReq;
 import hms.kite.samples.api.sms.messages.MtSmsResp;
 import hsl.devspace.app.corelogic.domain.Delivery;
+import hsl.devspace.app.corelogic.repository.coupon.CouponRepositoryImpl;
 import hsl.devspace.app.corelogic.repository.shopping_cart.ShoppingCartRepositoryImpl;
 import hsl.devspace.app.coreserver.common.Context;
 import hsl.devspace.app.coreserver.common.PropertyReader;
@@ -16,10 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
@@ -41,6 +42,7 @@ public class PaymentService {
     private static final Logger log = LoggerFactory.getLogger(PaymentService.class);
     ApplicationContext context = Context.appContext;
     ShoppingCartRepositoryImpl shoppingCartRepository = (ShoppingCartRepositoryImpl) context.getBean("shoppingCartRepoImpl");
+    CouponRepositoryImpl couponRepository = (CouponRepositoryImpl) context.getBean("couponRepoImpl");
     private ServerModel serverModel = (ServerModel) context.getBean("serverModel");
     final String BASE_URL = serverModel.getBaseUrl();
     PropertyReader propertyReader = new PropertyReader("devspace.properties");
@@ -52,54 +54,47 @@ public class PaymentService {
     @Path("/pay")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public int purchase(JSONObject jsonObject, @javax.ws.rs.core.Context UriInfo uriInfo) {
+    public Response purchase(JSONObject jsonObject, @javax.ws.rs.core.Context UriInfo uriInfo) {
         SuccessMessage successMessage = new SuccessMessage();
         ErrorMessage errorMessage = new ErrorMessage();
         Response response;
-        try {
-            String url = uriInfo.getAbsolutePath().toString();
-            String username = jsonObject.get("username").toString();
-            String subscriberId = jsonObject.get("subscriberId").toString();
-            String amount = jsonObject.get("amount").toString();
-            String paymentMethod = jsonObject.get("paymentMethod").toString();
-            String couponCode = jsonObject.get("couponCode").toString();
 
-//            log.info("username: {}", username);
-//            log.info("subscriberId: {}", subscriberId);
-//            log.info("amount: {}", amount);
-//            log.info("paymentMethod: {}", paymentMethod);
-//            log.info("couponCode: {}", couponCode);
+        String url = uriInfo.getAbsolutePath().toString();
+        String username = jsonObject.get("username").toString();
+        String subscriberId = jsonObject.get("subscriberId").toString();
+        String amount = jsonObject.get("amount").toString();
+        String paymentMethod = jsonObject.get("paymentMethod").toString();
+        String couponCode = jsonObject.get("couponCode").toString();
 
-            List<Map<String, Object>> itemsListMap = (List<Map<String, Object>>) jsonObject.get("items");
-            Map<String, String> deliveryDataMap = (Map<String, String>) jsonObject.get("delivery");
+//        log.info("username: {}", username);
+//        log.info("subscriberId: {}", subscriberId);
+//        log.info("amount: {}", amount);
+//        log.info("paymentMethod: {}", paymentMethod);
+//        log.info("couponCode: {}", couponCode);
 
-            DateTimeFormatter formatter =
-                    DateTimeFormatter.ofPattern("yyyy-MM-dd");
-//            log.info("DATE: {}",deliveryDataMap.get("date"));
-            LocalDate date = LocalDate.parse(deliveryDataMap.get("date").replaceAll(" ", ""), formatter);
-            formatter = DateTimeFormatter.ofPattern("HH:mm");
-            LocalTime time = LocalTime.parse(deliveryDataMap.get("time"), formatter);
-//            log.info("TIME: {}",deliveryDataMap.get("time"));
+        List<Map<String, Object>> itemsListMap = (List<Map<String, Object>>) jsonObject.get("items");
+        Map<String, String> deliveryDataMap = (Map<String, String>) jsonObject.get("delivery");
 
-            Delivery delivery = new Delivery();
-            delivery.setRecepientName(deliveryDataMap.get("recepientName"));
-            delivery.setRecepientAddress(deliveryDataMap.get("recepientAddress"));
-            delivery.setDeliveryDate(date);
-            delivery.setDeliveryTime(time);
-            delivery.setDescription(deliveryDataMap.get("description"));
-            delivery.setDeliveryMethod(deliveryDataMap.get("method"));
+        DateTimeFormatter formatter =
+                DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//        log.info("DATE: {}", deliveryDataMap.get("date"));
+        LocalDate date = LocalDate.parse(deliveryDataMap.get("date").replaceAll(" ", ""), formatter);
+        formatter = DateTimeFormatter.ofPattern("H:mm");
+        LocalTime time = LocalTime.parse(deliveryDataMap.get("time"), formatter);
+//        log.info("TIME: {}", deliveryDataMap.get("time"));
 
+        Delivery delivery = new Delivery();
+        delivery.setRecepientName(deliveryDataMap.get("recepientName"));
+        delivery.setRecepientAddress(deliveryDataMap.get("recepientAddress"));
+        delivery.setDeliveryDate(date);
+        delivery.setDeliveryTime(time);
+        delivery.setDescription(deliveryDataMap.get("description"));
+        delivery.setDeliveryMethod(deliveryDataMap.get("method"));
 
 //        log.info("itemsList: {}", itemsListMap);
 //        log.info("deliveryData: {}", deliveryDataMap);
-log.info("start to flush");
-            shoppingCartRepository.generateCartProcess(Double.parseDouble(amount), username, itemsListMap, delivery, paymentMethod);
-            log.info("end flush");
-        } catch (Exception e) {
-            log.error("EXCEPTION PAY: {}", e);
-        }
-        return 200;
-        /*String applicationId = propertyReader.readProperty("service.application.id");
+
+        String applicationId = propertyReader.readProperty("service.application.id");
         String password = propertyReader.readProperty("service.password");
         String externalTrxId = String.valueOf(System.currentTimeMillis());
 
@@ -119,6 +114,9 @@ log.info("start to flush");
 
             switch (paymentStatusCode) {
                 case "S1000":
+                    shoppingCartRepository.generateCartProcess(Double.parseDouble(amount), username, itemsListMap, delivery, paymentMethod);
+                    log.info("new checkout processed successfully.");
+                    couponRepository.add("",subscriberId.replaceFirst("94","0"));
                     successMessage.setStatus("success");
                     successMessage.setCode(Response.Status.OK.getStatusCode());
                     successMessage.addLink(url, "self");
@@ -173,7 +171,7 @@ log.info("start to flush");
             log.error("Error processing json response ", e);
             throw new WebApplicationException(500);
         }
-        return response;*/
+        return response;
     }
 
     // Method to send a sms notification upon a successful payment
