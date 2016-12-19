@@ -12,18 +12,15 @@ import org.springframework.web.context.WebApplicationContext;
 import org.testng.annotations.Test;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 @Test
-@WebAppConfiguration //ensures that the application context loaded for our tests is a WebApplicationContext
-@ContextConfiguration(locations = {"classpath:spring-test-config.xml",
-                                    //"classpath:../webapp/WEB-INF/admin-servlet.xml",
-                                    "classpath:testng.xml" })
-
+@ContextConfiguration(locations = {"classpath:spring-test-config.xml","classpath:testng.xml"})
+@WebAppConfiguration()
 public class ItemControllerTest extends AbstractTestNGSpringContextTests {
 
     private static final Logger LOGGER = LogManager.getLogger(ItemControllerTest.class);
-
 
     @Autowired
     public WebApplicationContext webApplicationContext;
@@ -39,16 +36,17 @@ public class ItemControllerTest extends AbstractTestNGSpringContextTests {
     @Test
     public void testItemPage() {
        try {
-           LOGGER.info("In Test method -- WAC = "+this.webApplicationContext);
            this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
-            this.mockMvc.perform(get("https://localhost:8443/admin/items/view"))
-                    .andExpect(status().is(404))
+            this.mockMvc.perform(get("/items/view"))
+                    .andExpect(status().isOk())
                     .andExpect(view().name("/item_management/viewItem"));
                    // .andExpect(forwardedUrl("/item_management/viewItem"));
         } catch (Exception e) {
             LOGGER.error("error in item test1 {}", e);
        }
     }
+
+
 
     /*@Test
     public void testItemAdd() {
