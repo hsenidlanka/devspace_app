@@ -358,5 +358,67 @@ public class CategoryRepositoryImpl implements CategoryRepository {
         }
     }
 
+    public List<Category> paginateSelectAll(int limit, int page) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category LIMIT ? OFFSET ?", limit, page - 1);
+        List<Category> categories = new ArrayList<Category>();
+
+        for (Map<String, Object> aMp : mp) {
+            //for(int j=0;j<mp.get(i).size();j++) {
+            Category category = new Category();
+            category.setCategory_id(Integer.parseInt(aMp.get("id").toString()));
+            category.setCategoryName(aMp.get("name").toString());
+            category.setCatDescription(aMp.get("description").toString());
+            if (aMp.get("image") != null) {
+                category.setImage(aMp.get("image").toString());
+            }
+            category.setCreator(aMp.get("creator").toString());
+            category.setStatus(aMp.get("status").toString());
+            categories.add(category);
+            // }
+        }
+        log.info("msg {}", categories);
+        return categories;
+    }
+
+    public List<Category> paginateSelectAllVisible(int limit, int page) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category WHERE status='visible' LIMIT ? OFFSET ?", limit, page - 1);
+        List<Category> categories = new ArrayList<Category>();
+
+        for (int i = 0; i < mp.size(); i++) {
+            //for(int j=0;j<mp.get(i).size();j++) {
+            Category category = new Category();
+            category.setCategory_id(Integer.parseInt(mp.get(i).get("id").toString()));
+            category.setCategoryName(mp.get(i).get("name").toString());
+            category.setCatDescription(mp.get(i).get("description").toString());
+            if (mp.get(i).get("image") != null) {
+                category.setImage(mp.get(i).get("image").toString());
+            }
+            category.setCreator(mp.get(i).get("creator").toString());
+            category.setStatus(mp.get(i).get("status").toString());
+
+            categories.add(category);
+            // }
+
+        }
+        log.info("{}", categories);
+        return categories;
+    }
+
+    public List<Category> paginateSelectNameAndDescription(int limit, int page) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT name,description FROM category LIMIT ? OFFSET ?", limit, page - 1);
+        List<Category> categories = new ArrayList<Category>();
+
+        for (int i = 0; i < mp.size(); i++) {
+            Category category = new Category();
+            category.setCategoryName(mp.get(i).get("name").toString());
+            category.setCatDescription(mp.get(i).get("description").toString());
+            categories.add(category);
+
+
+        }
+        log.info("{}", categories);
+        return categories;
+    }
+
 
 }

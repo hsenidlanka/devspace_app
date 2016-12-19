@@ -50,5 +50,11 @@ public interface CategoryRepository {
 
     boolean checkAvailabilityOnUpdate(int id, String categoryName);
 
+    List<Category> paginateSelectAll(int limit, int page);
+
+    List<Category> paginateSelectAllVisible(int limit, int page);
+
+    List<Category> paginateSelectNameAndDescription(int limit, int page);
+
 
 }

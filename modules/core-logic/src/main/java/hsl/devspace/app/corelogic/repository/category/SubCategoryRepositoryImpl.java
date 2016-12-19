@@ -233,6 +233,50 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
         return result;
     }
 
+    @Override
+    public List<Category> paginateSelectAll(int limit, int page) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM sub_category LIMIT ? OFFSET ?", limit, page - 1);
+        List<Category> subCategories = new ArrayList<Category>();
+
+        for (int i = 0; i < mp.size(); i++) {
+            //for(int j=0;j<mp.get(i).size();j++) {
+            Category category = new Category();
+            category.setSubCategoryId(Integer.parseInt(mp.get(i).get("id").toString()));
+            category.setSubCategoryName(mp.get(i).get("name").toString());
+            category.setSubcatDescription(mp.get(i).get("description").toString());
+            category.setCreator(mp.get(i).get("creator").toString());
+            category.setCategory_id(Integer.parseInt(mp.get(i).get("category_id").toString()));
+
+            subCategories.add(category);
+            // }
+
+        }
+        log.info("{}", subCategories);
+        return subCategories;
+    }
+
+    @Override
+    public List<Category> paginateSelectAllVisible(int limit, int page) {
+        return null;
+    }
+
+    @Override
+    public List<Category> paginateSelectNameAndDescription(int limit, int page) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT name,description FROM sub_category LIMIT ? OFFSET ?", limit, page - 1);
+        List<Category> subCategories = new ArrayList<Category>();
+
+        for (int i = 0; i < mp.size(); i++) {
+            Category category = new Category();
+            category.setSubCategoryName(mp.get(i).get("name").toString());
+            category.setSubcatDescription(mp.get(i).get("description").toString());
+            subCategories.add(category);
+
+
+        }
+        log.info("{}", subCategories);
+        return subCategories;
+    }
+
 
     /*Add new category*/
     @Override
