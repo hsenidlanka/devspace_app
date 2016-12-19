@@ -52,6 +52,16 @@ public class CouponRepositoryImpl implements CouponRepository {
         return row;
     }
 
+    /*change status when used*/
+    @Override
+    public int changeStatusToUsed(String couponCode) {
+        int row;
+        String sql = "UPDATE coupon SET status=2 WHERE coupon_code=?";
+        row = jdbcTemplate.update(sql, new Object[]{couponCode});
+        log.info("change status to used");
+        return row;
+    }
+
     /*view all the details of active(valid) coupons*/
     @Override
     public  List<Coupon> selectActiveCoupons() {

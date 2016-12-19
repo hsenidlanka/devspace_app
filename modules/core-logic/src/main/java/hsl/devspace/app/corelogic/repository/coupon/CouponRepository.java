@@ -16,4 +16,6 @@ public interface CouponRepository {
     boolean ifExpired(String couponCode);
 
     Coupon validateCoupon(String couponCode);
+
+    int changeStatusToUsed(String couponCode);
 }
