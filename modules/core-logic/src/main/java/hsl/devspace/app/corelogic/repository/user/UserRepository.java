@@ -29,7 +29,7 @@ public interface UserRepository {
 
     User retrieveSelectedUserDetails(String username);
 
-    List<User> selectAll();
+    List<User> selectAll(int limit, int page);
 
     int block(String username);
 
@@ -37,19 +37,19 @@ public interface UserRepository {
 
     public int updateGroupStaff(String des, String username);
 
-    List<User> retrieveCustomersByDate(java.sql.Date date);
+    List<User> retrieveCustomersByDate(java.sql.Date date, int limit, int page);
 
-    List<User> retrieveByDateRange(java.sql.Date date1, java.sql.Date date2);
+    List<User> retrieveByDateRange(java.sql.Date date1, java.sql.Date date2, int limit, int page);
 
-    List<User> filterByCity(String city, String status);
+    List<User> filterByCity(String city, String status, int limit, int page);
 
     int countUsers();
 
     boolean checkUsernameUnique(User user);
 
-    List<User> selectActiveUsers();
+    List<User> selectActiveUsers(int limit, int page);
 
-    List<User> selectBlockedUsers();
+    List<User> selectBlockedUsers(int limit, int page);
 
     int addStaffMember(User user);
 
@@ -57,23 +57,23 @@ public interface UserRepository {
 
     int updateStaffMember(User user);
 
-    List<User> selectbyEndingDate(Date date);
+    List<User> selectbyEndingDate(Date date, int limit, int page);
 
-    List<User> selectbyStartingDate(Date date);
+    List<User> selectbyStartingDate(Date date, int limit, int page);
 
-    List<User> filterByDepartment(String department, String status);
+    List<User> filterByDepartment(String department, String status, int limit, int page);
 
-    List<User> filterByDesignation(String designation, String status);
+    List<User> filterByDesignation(String designation, String status, int limit, int page);
 
-    public List<User> filterByDepartmentDesig(String department, String designation, String status);
+    public List<User> filterByDepartmentDesig(String department, String designation, String status, int limit, int page);
 
-    List<User> filterByBranch(String branch, String status);
+    List<User> filterByBranch(String branch, String status, int limit, int page);
 
-    List<User> filterBlockedUsersByCity(String city);
+    List<User> filterBlockedUsersByCity(String city, int limit, int page);
 
-    List<User> selectAllByNameTypeAhead(String nameKey, String status);
+    List<User> selectAllByNameTypeAhead(String nameKey, String status, int limit, int page);
 
-    List<String> selectNameByNameTypeAhead(String nameKey, String status);
+    List<String> selectNameByNameTypeAhead(String nameKey, String status, int limit, int page);
 
 
 }

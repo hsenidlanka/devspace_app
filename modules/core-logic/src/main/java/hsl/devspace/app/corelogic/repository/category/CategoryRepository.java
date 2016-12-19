@@ -56,5 +56,9 @@ public interface CategoryRepository {
 
     List<Category> paginateSelectNameAndDescription(int limit, int page);
 
+    List<Category> selectAllTypeAhead(String catName, int limit, int page);
+
+    List<Category> selectAllVisibleTypeAhead(String catName, int limit, int page);
+
 
 }

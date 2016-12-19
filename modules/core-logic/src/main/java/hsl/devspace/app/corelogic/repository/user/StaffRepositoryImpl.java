@@ -229,8 +229,8 @@ public class StaffRepositoryImpl implements UserRepository {
 
     /*retrieve details of all staff users*/
     @Override
-    public List<User> selectAll() {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff");
+    public List<User> selectAll(int limit, int page) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff LIMIT ? OFFSET ?", limit, page - 1);
         List<User> staffDetails = new ArrayList<User>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -261,10 +261,10 @@ public class StaffRepositoryImpl implements UserRepository {
         return staffDetails;
     }
 
-    public List<User> selectAllByNameTypeAhead(String nameKey, String status) {
+    public List<User> selectAllByNameTypeAhead(String nameKey, String status, int limit, int page) {
         String key = "%" + nameKey + "%";
 
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE username LIKE ? AND status= ?", key,status);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE username LIKE ? AND status= ? LIMIT ? OFFSET ?", key, status, limit, page - 1);
         List<User> staffDetails = new ArrayList<User>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -296,10 +296,10 @@ public class StaffRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<String> selectNameByNameTypeAhead(String nameKey, String status) {
+    public List<String> selectNameByNameTypeAhead(String nameKey, String status, int limit, int page) {
         String key = "%" + nameKey + "%";
 
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT username FROM staff WHERE username LIKE ? AND status= ?", key, status);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT username FROM staff WHERE username LIKE ? AND status=? LIMIT ? OFFSET ?", key, status, limit, page - 1);
         List<String> staffDetails = new ArrayList<String>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -338,9 +338,9 @@ public class StaffRepositoryImpl implements UserRepository {
 
     /*retrieve details of staff members registered on a specific date*/
     @Override
-    public List<User> retrieveCustomersByDate(java.sql.Date date) {
+    public List<User> retrieveCustomersByDate(java.sql.Date date, int limit, int page) {
 
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE register_date = ?", date);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE register_date = ? LIMIT ? OFFSET ?", date, limit, page - 1);
         List<User> staffDetails = new ArrayList<User>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -375,8 +375,8 @@ public class StaffRepositoryImpl implements UserRepository {
         retrieve details of staff members registered between specified time period
     */
     @Override
-    public List<User> retrieveByDateRange(Date date1, Date date2) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE register_date BETWEEN ? AND ? AND status='active'", date1, date2);
+    public List<User> retrieveByDateRange(Date date1, Date date2, int limit, int page) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE register_date BETWEEN ? AND ? AND status='active' LIMIT ? OFFSET ?", date1, date2, limit, page - 1);
         List<User> staffDetails = new ArrayList<User>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -406,7 +406,7 @@ public class StaffRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<User> filterByCity(String city, String status) {
+    public List<User> filterByCity(String city, String status, int limit, int page) {
         return null;
     }
 
@@ -474,8 +474,8 @@ public class StaffRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<User> selectActiveUsers() {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE status=1");
+    public List<User> selectActiveUsers(int limit, int page) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE status=1 LIMIT ? OFFSET ?", limit, page - 1);
         List<User> staffDetails = new ArrayList<User>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -506,8 +506,8 @@ public class StaffRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<User> selectBlockedUsers() {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE status=2");
+    public List<User> selectBlockedUsers(int limit, int page) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE status=2 LIMIT ? OFFSET ?", limit, page - 1);
         List<User> staffDetails = new ArrayList<User>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -618,40 +618,8 @@ public class StaffRepositoryImpl implements UserRepository {
 
     }
 
-    public List<User> selectbyStartingDate(Date date){
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE register_date >= ? AND status=1", date);
-        List<User> staffDetails = new ArrayList<User>();
-
-        for (int i = 0; i < mp.size(); i++) {
-            User staff = new User();
-            staff.setId(Integer.parseInt(mp.get(i).get("id").toString()));
-            staff.setTitle(mp.get(i).get("title").toString());
-            staff.setUsername(mp.get(i).get("username").toString());
-            staff.setPassword(mp.get(i).get("password").toString());
-            staff.setFirstName(mp.get(i).get("first_name").toString());
-            staff.setLastName(mp.get(i).get("last_name").toString());
-            staff.setEmail(mp.get(i).get("email").toString());
-            staff.setMobile(mp.get(i).get("mobile").toString());
-            staff.setAddressL1(mp.get(i).get("address_line1").toString());
-            staff.setAddressL2(mp.get(i).get("address_line2").toString());
-            if (mp.get(i).get("address_line3") != null) {
-                staff.setAddressL3(mp.get(i).get("address_line3").toString());
-            }
-            staff.setDesignation(mp.get(i).get("designation").toString());
-            staff.setDepartment(mp.get(i).get("department").toString());
-            staff.setBranch(mp.get(i).get("branch").toString());
-            staff.setRegDate(Date.valueOf(mp.get(i).get("register_date").toString()));
-            staff.setStatus(mp.get(i).get("status").toString());
-            staffDetails.add(staff);
-
-
-        }
-        log.info("{}", staffDetails);
-        return staffDetails;
-
-    }
-    public List<User> selectbyEndingDate(Date date){
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE register_date <= ? AND status=1", date);
+    public List<User> selectbyStartingDate(Date date, int limit, int page) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE register_date >= ? AND status=1 LIMIT ? OFFSET ?", date, limit, page - 1);
         List<User> staffDetails = new ArrayList<User>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -683,8 +651,8 @@ public class StaffRepositoryImpl implements UserRepository {
 
     }
 
-    public List<User> filterByDesignation(String designation,String status){
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE designation = ? AND status=?",designation,status);
+    public List<User> selectbyEndingDate(Date date, int limit, int page) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE register_date <= ? AND status=1 LIMIT ? OFFSET ?", date, limit, page - 1);
         List<User> staffDetails = new ArrayList<User>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -716,8 +684,41 @@ public class StaffRepositoryImpl implements UserRepository {
 
     }
 
-    public List<User> filterByDepartment(String department,String status){
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE department = ? AND status=?",department,status);
+    public List<User> filterByDesignation(String designation, String status, int limit, int page) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE designation = ? AND status=? LIMIT ? OFFSET ?", designation, status, limit, page - 1);
+        List<User> staffDetails = new ArrayList<User>();
+
+        for (int i = 0; i < mp.size(); i++) {
+            User staff = new User();
+            staff.setId(Integer.parseInt(mp.get(i).get("id").toString()));
+            staff.setTitle(mp.get(i).get("title").toString());
+            staff.setUsername(mp.get(i).get("username").toString());
+            staff.setPassword(mp.get(i).get("password").toString());
+            staff.setFirstName(mp.get(i).get("first_name").toString());
+            staff.setLastName(mp.get(i).get("last_name").toString());
+            staff.setEmail(mp.get(i).get("email").toString());
+            staff.setMobile(mp.get(i).get("mobile").toString());
+            staff.setAddressL1(mp.get(i).get("address_line1").toString());
+            staff.setAddressL2(mp.get(i).get("address_line2").toString());
+            if (mp.get(i).get("address_line3") != null) {
+                staff.setAddressL3(mp.get(i).get("address_line3").toString());
+            }
+            staff.setDesignation(mp.get(i).get("designation").toString());
+            staff.setDepartment(mp.get(i).get("department").toString());
+            staff.setBranch(mp.get(i).get("branch").toString());
+            staff.setRegDate(Date.valueOf(mp.get(i).get("register_date").toString()));
+            staff.setStatus(mp.get(i).get("status").toString());
+            staffDetails.add(staff);
+
+
+        }
+        log.info("{}", staffDetails);
+        return staffDetails;
+
+    }
+
+    public List<User> filterByDepartment(String department, String status, int limit, int page) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE department = ? AND status=? LIMIT ? OFFSET ?", department, status, limit, page - 1);
         List<User> staffDetails = new ArrayList<User>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -746,8 +747,8 @@ public class StaffRepositoryImpl implements UserRepository {
         return staffDetails;
     }
 
-    public List<User> filterByDepartmentDesig(String department,String designation,String status){
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE department = ? AND status=? AND designation = ?",department,status,designation);
+    public List<User> filterByDepartmentDesig(String department, String designation, String status, int limit, int page) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE department = ? AND status=? AND designation = ? LIMIT ? OFFSET ?", department, status, designation, limit, page - 1);
         List<User> staffDetails = new ArrayList<User>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -777,8 +778,8 @@ public class StaffRepositoryImpl implements UserRepository {
 
     }
 
-    public List<User> filterByBranch(String branch,String status){
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE branch = ? AND status=?",branch,status);
+    public List<User> filterByBranch(String branch, String status, int limit, int page) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE branch = ? AND status=? LIMIT ? OFFSET ?", branch, status, limit, page - 1);
         List<User> staffDetails = new ArrayList<User>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -811,8 +812,8 @@ public class StaffRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<User> filterBlockedUsersByCity(String city) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE address_line3 = ? AND status=2",city);
+    public List<User> filterBlockedUsersByCity(String city, int limit, int page) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE address_line3 = ? AND status=2 LIMIT ? OFFSET ?", city, limit, page - 1);
         List<User> staffDetails = new ArrayList<User>();
 
         for (int i = 0; i < mp.size(); i++) {

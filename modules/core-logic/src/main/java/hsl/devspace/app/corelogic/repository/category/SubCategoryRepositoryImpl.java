@@ -277,6 +277,34 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
         return subCategories;
     }
 
+    @Override
+    public List<Category> selectAllTypeAhead(String catName, int limit, int page) {
+        String key = "%" + catName + "%";
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM sub_category LIKE ? LIMIT ? OFFSET ?", key, limit, page - 1);
+        List<Category> subCategories = new ArrayList<Category>();
+
+        for (int i = 0; i < mp.size(); i++) {
+            //for(int j=0;j<mp.get(i).size();j++) {
+            Category category = new Category();
+            category.setSubCategoryId(Integer.parseInt(mp.get(i).get("id").toString()));
+            category.setSubCategoryName(mp.get(i).get("name").toString());
+            category.setSubcatDescription(mp.get(i).get("description").toString());
+            category.setCreator(mp.get(i).get("creator").toString());
+            category.setCategory_id(Integer.parseInt(mp.get(i).get("category_id").toString()));
+
+            subCategories.add(category);
+            // }
+
+        }
+        log.info("{}", subCategories);
+        return subCategories;
+    }
+
+    @Override
+    public List<Category> selectAllVisibleTypeAhead(String catName, int limit, int page) {
+        return null;
+    }
+
 
     /*Add new category*/
     @Override
