@@ -38,6 +38,9 @@ public class ShoppingCart {
         this.guestMobile = guestMobile;
     }
 
+    public ShoppingCart() {
+    }
+
     @Override
     public String toString() {
         return "ShoppingCart{" +
