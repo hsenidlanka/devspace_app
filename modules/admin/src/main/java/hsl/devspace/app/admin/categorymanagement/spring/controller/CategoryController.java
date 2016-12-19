@@ -2,8 +2,8 @@ package hsl.devspace.app.admin.categorymanagement.spring.controller;
 
 import hsl.devspace.app.corelogic.domain.Category;
 import hsl.devspace.app.corelogic.repository.category.CategoryRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.swing.*;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -26,8 +27,8 @@ import java.util.*;
 @RequestMapping("/category")
 public class CategoryController {
 
-//    private static final Logger LOG = LogManager.getLogger(CategoryController.class);
-    private static final Logger LOG = LoggerFactory.getLogger(CategoryController.class);
+    private static final Logger LOG = LogManager.getLogger(CategoryController.class);
+//    private static final Logger LOG = LoggerFactory.getLogger(CategoryController.class);
 
 
     /** reading the ValidationMessages property file using annotations**/
@@ -69,7 +70,7 @@ public class CategoryController {
     public String showAddCateg(Model model){
 
         List<String> listCat = categoryRepository.selectCategoryNames();
-        LOG.error("Category Controller category list {}",listCat);
+        LOG.info("Category Controller category list {}", listCat);
         model.addAttribute("listCat", listCat);
         model.addAttribute("command", new Category());
 
@@ -227,23 +228,65 @@ public class CategoryController {
 
     }
 
+///////////////////////////////////////////////////// CATEGORY VIEW PAGINATION WITH TYPEAHEAD ///////////////////////////////////////
+
+    /*
+   * typeahead function calling method for category name
+   **/
+    @RequestMapping(value = "/typeahedCategoryNm", method = RequestMethod.GET)
+    public @ResponseBody List<String> typeaheadName(){
+        return categoryRepository.selectCategoryNames();
+    }
+
 
     //handler method to retrieve the details of categories to view
     @RequestMapping(value = "/view/categoryTable", method = RequestMethod.GET)
-    public @ResponseBody List<Map<String, Object>> viewCategories(@ModelAttribute("category")  Category category){
+    public @ResponseBody List<Map<String, Object>> viewCategories(@ModelAttribute("category")  Category category,
+                                                                  HttpServletRequest request) {
+
+        LOG.trace("Inside the category table load method");
+
+        String searchCatNm=request.getParameter("searchCatNm");
+        LOG.info("searchCatName{}",searchCatNm);
+        String initPage =request.getParameter("initPage");
+        String pgLimit=request.getParameter("pgLimit");
+
+        //cast the initial page and page limits in pagination to integers
+        int initPg = Integer.parseInt(initPage);
+        int limitPg = Integer.parseInt(pgLimit);
+
+        LOG.info("page limits{} {}", initPage, limitPg);
 
         List<Map<String, Object>> outc = new ArrayList<Map<String, Object>>();
-        List<Category> categoryList= categoryRepository.selectAll();
 
-        for (Category aCategoryList : categoryList) {
+        if( searchCatNm !=null){
+            LOG.trace("Category name SELECTED");
+            List<Category> categoryList1= categoryRepository.selectAllTypeAhead(searchCatNm,limitPg,initPg);
+            LOG.info("category with name selected {}",categoryList1);
+            outc=unSerializeCat(category,categoryList1);
+
+        }else {
+            LOG.trace("Category name not selected");
+            List<Category> categoryList2= categoryRepository.paginateSelectAll(limitPg,initPg);
+            LOG.info("category list returned from query{}",categoryList2);
+            outc=unSerializeCat(category,categoryList2);
+
+        }
+        return outc;
+    }
+
+    private List<Map<String, Object>> unSerializeCat(Category category,  List<Category> catList ){
+        List<Map<String, Object>> outc = new ArrayList<Map<String, Object>>();
+
+        for (Category aCategoryList : catList) {
             category = aCategoryList;
             //to change the visibility to meaningful word
             String visibility=category.getStatus();
             String v1=null;
             if(visibility.equals("1")) {
-              v1 = "Yes";
+                v1 = "Yes";
             }else {
-              v1 = "No";
+                v1 = "No";
             }
 
             Map<String, Object> map = new HashMap<String, Object>();
@@ -258,6 +301,16 @@ public class CategoryController {
             LOG.info("out {}", outc);
         }
         return outc;
+    }
+
+    /*
+*getting record count for loading item table with pagination
+**/
+    @RequestMapping(value = "/CategoryPaginationTable", method = RequestMethod.GET)
+    public @ResponseBody int loadPagination(){
+
+        LOG.info("Category Count is {}",categoryRepository.count());
+        return categoryRepository.count();
     }
 
 

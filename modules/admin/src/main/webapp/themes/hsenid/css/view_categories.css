@@ -44,3 +44,7 @@
     width: 300px;
     height: 200px;
 }
+.pagination > li > a {
+    color: #57ad06 !important;
+    font-weight: bold !important;
+}

@@ -1,24 +1,22 @@
 /*
- * default pagination function
+ * default pagination function for sub-category view
  */
 
 $(document).ready(function () {
-    var pgLimit = 10;
+    var pgLimit = 3;
     /**
      * ajax function for getting records count
      */
-    $("#pagination2").hide();
+    $("#pagination2SubCat").hide();
 
     $.ajax({
-        url: 'https://localhost:8443/admin/items/itemPaginationTable',
+        url: 'https://localhost:8443/admin/SubCategoryPaginationTable',
         success: function (recCount) {
-            pag.simplePaginator('setTotalPages', Math.ceil(recCount / 10));
+            pag.simplePaginator('setTotalPages', Math.ceil(recCount / 3));
         }
-    })
+    });
 
-    var pag = $('#pagination').simplePaginator({
-        // options here
-
+    var pag = $('#paginationSubCat').simplePaginator({
         // the number of total pages
         totalPages: 7,
 
@@ -40,17 +38,17 @@ $(document).ready(function () {
         clickCurrentPage: true,
 
         // called when a page is changed.
-        pageChange: function (page ) {
-
+        pageChange: function (page) {
+            var value1=$("table").attr("data-value");
             $.ajax({
-                url: 'https://localhost:8443/admin/items/loadSearchItem',
+                url: 'https://localhost:8443/admin/view/subcategoryTable/'+value1,
                 dataType: "json",
                 data: {"initPage": page, "pgLimit": pgLimit},
                 success: function (data) {
-                    $('#tblItems').bootstrapTable('load', data);
+                    $('#tableCategory').bootstrapTable('load', data);
                 }
             })
         }
     });
-})
+});
 
