@@ -100,15 +100,25 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
                 type = "package";
             }
 
-            if (items.get(i).get("topping_name1") != null) {
-                List<Map<String, Object>> top1 = jdbcTemplate.queryForList("SELECT id FROM item WHERE name=?", items.get(i).get("topping_name1").toString());
-                List<Map<String, Object>> top2 = jdbcTemplate.queryForList("SELECT id FROM item WHERE name=?", items.get(i).get("topping_name2").toString());
+            List<Map<String, Object>> top1 = jdbcTemplate.queryForList("SELECT id FROM item WHERE name=?", items.get(i).get("topping_name1").toString());
+            List<Map<String, Object>> top2 = jdbcTemplate.queryForList("SELECT id FROM item WHERE name=?", items.get(i).get("topping_name2").toString());
 
+            if (top1.size() != 0 && top2.size() != 0) {
                 toppingId1 = Integer.parseInt(top1.get(0).get("id").toString());
                 toppingId2 = Integer.parseInt(top2.get(0).get("id").toString());
                 String sql = "INSERT INTO product " +
                         "(type,type_id,size,quantity,topping_id1,topping_id2) VALUES (?,?,?,?,?,?)";
                 jdbcTemplate.update(sql, new Object[]{type, id, size, quantity, toppingId1, toppingId2});
+            } else if (top1.size() != 0) {
+                toppingId1 = Integer.parseInt(top1.get(0).get("id").toString());
+                String sql = "INSERT INTO product " +
+                        "(type,type_id,size,quantity,topping_id1) VALUES (?,?,?,?,?)";
+                jdbcTemplate.update(sql, new Object[]{type, id, size, quantity, toppingId1});
+            } else if (top2.size() != 0) {
+                toppingId2 = Integer.parseInt(top2.get(0).get("id").toString());
+                String sql = "INSERT INTO product " +
+                        "(type,type_id,size,quantity,topping_id2) VALUES (?,?,?,?,?)";
+                jdbcTemplate.update(sql, new Object[]{type, id, size, quantity, toppingId2});
             } else {
                 String sql = "INSERT INTO product " +
                         "(type,type_id,size,quantity) VALUES (?,?,?,?)";
@@ -208,6 +218,8 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
             updateCartProductTable(cartId, productIdList);
             int deliveryId = add(del);
             add(paymentMethodName, cartId, deliveryId);
+            transactionManager.commit(stat);
+
             log.info("updated");
 
         } catch (Exception e) {
@@ -274,13 +286,17 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 
     @Override
     public void modifyItemInCart(Item item) {
-
-
+     /*   String sql = "UPDATE product SET size=?,quantity=?,topping_id1=?,topping_id2=? WHERE id = ?";
+        int row = jdbcTemplate.update(sql, new Object[]{});
+*/
     }
 
     @Override
-    public void removeItemFromCart(int itemId) {
-
+    public int removeItemFromCart(int productId) {
+        String sql = "DELETE FROM product WHERE id = ?";
+        int row = jdbcTemplate.update(sql, new Object[]{productId});
+        log.info("{} deleted", row);
+        return row;
     }
 
     @Override
