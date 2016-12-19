@@ -8,7 +8,7 @@
     <link href="<c:url value="/resources/css/error.css"/>" rel="stylesheet" type="text/css">
 </head>
 <body>
-<p>Message: <c:out value="${requestScope['javax.servlet.error.message']}"/></p>
+<%--<p>Message: <c:out value="${requestScope['javax.servlet.error.message']}"/></p>--%>
 <div class="not-found" style="width: 900px;">
     <div class="notfound-top">
         <h1><fmt:message key="error404.code" bundle="${lang}"/></h1>
