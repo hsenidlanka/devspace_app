@@ -166,8 +166,8 @@ public  class UserRepositoryImpl implements UserRepository {
 
     /*view all customer details*/
     @Override
-    public List<User> selectAll() {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer");
+    public List<User> selectAll(int limit, int page) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer LIMIT ? OFFSET ?", limit, page - 1);
         List<User> customerDetails=new ArrayList<User>();
 
         for (int i=0;i<mp.size();i++){
@@ -226,9 +226,9 @@ public  class UserRepositoryImpl implements UserRepository {
 
     /*retrieve details of customer registered on a specific date*/
     @Override
-    public List<User> retrieveCustomersByDate(java.sql.Date date) {
+    public List<User> retrieveCustomersByDate(java.sql.Date date, int limit, int page) {
 
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE registered_date = ?", date);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE registered_date = ? LIMIT ? OFFSET ?", date, limit, page - 1);
         List<User> customerDetails=new ArrayList<User>();
 
         for (int i=0;i<mp.size();i++){
@@ -259,8 +259,8 @@ public  class UserRepositoryImpl implements UserRepository {
 
     /*retrieve details of customer registered between a specified date range*/
     @Override
-    public List<User> retrieveByDateRange(Date date1, Date date2) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE registered_date BETWEEN ? AND ? AND status='active'", date1, date2);
+    public List<User> retrieveByDateRange(Date date1, Date date2, int limit, int page) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE registered_date BETWEEN ? AND ? AND status='active' LIMIT ? OFFSET ?", date1, date2, limit, page - 1);
         List<User> customerDetails=new ArrayList<User>();
 
         for (int i=0;i<mp.size();i++){
@@ -291,8 +291,8 @@ public  class UserRepositoryImpl implements UserRepository {
 
     /*retrieve details of customers by a given attribute*/
     @Override
-    public List<User> filterByCity(String city, String status) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE address_line3 = ? AND status= ? ",city,status);
+    public List<User> filterByCity(String city, String status, int limit, int page) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE address_line3 = ? AND status= ? LIMIT ? OFFSET ?", city, status, limit, page - 1);
         List<User> customerDetails=new ArrayList<User>();
 
         for (int i=0;i<mp.size();i++){
@@ -350,8 +350,8 @@ public  class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<User> selectActiveUsers() {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE status=1");
+    public List<User> selectActiveUsers(int limit, int page) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE status=1LIMIT ? OFFSET ?", limit, page - 1);
         List<User> customerDetails=new ArrayList<User>();
 
         for (int i=0;i<mp.size();i++){
@@ -381,8 +381,8 @@ public  class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<User> selectBlockedUsers() {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE status=2");
+    public List<User> selectBlockedUsers(int limit, int page) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE status=2 LIMIT ? OFFSET ?", limit, page - 1);
         List<User> customerDetails=new ArrayList<User>();
 
         for (int i=0;i<mp.size();i++){
@@ -426,8 +426,8 @@ public  class UserRepositoryImpl implements UserRepository {
 
 
     @Override
-    public List<User> selectbyEndingDate(Date date) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE registered_date <= ? AND status='active'", date);
+    public List<User> selectbyEndingDate(Date date, int limit, int page) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE registered_date <= ? AND status='active' LIMIT ? OFFSET ?", date, limit, page);
         List<User> customerDetails=new ArrayList<User>();
 
         for (int i=0;i<mp.size();i++){
@@ -454,8 +454,8 @@ public  class UserRepositoryImpl implements UserRepository {
         return customerDetails;    }
 
     @Override
-    public List<User> selectbyStartingDate(Date date) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE registered_date >= ? AND status='active'", date);
+    public List<User> selectbyStartingDate(Date date, int limit, int page) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE registered_date >= ? AND status='active' LIMIT ? OFFSET ?", date, limit, page - 1);
         List<User> customerDetails=new ArrayList<User>();
 
         for (int i=0;i<mp.size();i++){
@@ -485,26 +485,28 @@ public  class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<User> filterByDepartment(String department,String status) {
+    public List<User> filterByDepartment(String department, String status, int llimit, int page) {
         return null;
     }
 
     @Override
-    public List<User> filterByDesignation(String designation,String status) {
+    public List<User> filterByDesignation(String designation, String status, int llimit, int page) {
         return null;
     }
 
     @Override
-    public List<User> filterByDepartmentDesig(String department,String designation,String status){return  null;}
-
-    @Override
-    public List<User> filterByBranch(String branch,String status) {
+    public List<User> filterByDepartmentDesig(String department, String designation, String status, int llimit, int page) {
         return null;
     }
 
     @Override
-    public List<User> filterBlockedUsersByCity(String city) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE address_line3= ? AND status=2", city);
+    public List<User> filterByBranch(String branch, String status, int llimit, int page) {
+        return null;
+    }
+
+    @Override
+    public List<User> filterBlockedUsersByCity(String city, int limit, int page) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE address_line3= ? AND status=2 LIMIT ? OFFSET ?", city, limit, page - 1);
         List<User> customerDetails=new ArrayList<User>();
 
         for (int i=0;i<mp.size();i++){
@@ -534,9 +536,9 @@ public  class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<User> selectAllByNameTypeAhead(String nameKey, String status) {
+    public List<User> selectAllByNameTypeAhead(String nameKey, String status, int limit, int page) {
         String key = "%" + nameKey + "%";
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE username LIKE ? AND status = ?", key,status);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE username LIKE ? AND status = ? LIMIT ? OFFSET ?", key, status, limit, page - 1);
         List<User> customerDetails = new ArrayList<User>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -566,9 +568,9 @@ public  class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<String> selectNameByNameTypeAhead(String nameKey, String status) {
+    public List<String> selectNameByNameTypeAhead(String nameKey, String status, int limit, int page) {
         String key = "%" + nameKey + "%";
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT username FROM customer WHERE username LIKE ? AND status = ?", key, status);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT username FROM customer WHERE username LIKE ? AND status = ? LIMIT ? OFFSET ?", key, status, limit, page - 1);
         List<String> customerDetails = new ArrayList<String>();
 
         for (int i = 0; i < mp.size(); i++) {
