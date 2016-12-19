@@ -30,7 +30,7 @@ public interface ShoppingCartRepository {
     //    void addItemToCart(Item item);
     void modifyItemInCart(Item item);
 
-    void removeItemFromCart(int itemId);
+    int removeItemFromCart(int productId);
 
     int add(Delivery del);
 
