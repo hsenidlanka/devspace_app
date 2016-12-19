@@ -18,8 +18,11 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -124,7 +127,7 @@ public class PaymentController {
             deliveryJsonObj.put("recepientName", recepientName);
             deliveryJsonObj.put("recepientAddress", recepientAddress);
             deliveryJsonObj.put("date", deliveryData.get("date").toString());
-            logger.info("DATE {}",deliveryData.get("date").toString());
+            logger.info("DATE {}", deliveryData.get("date").toString());
             deliveryJsonObj.put("time", deliveryData.get("time").toString());
             if (deliveryData.get("description") == null || deliveryData.get("description") == "") {
                 deliveryJsonObj.put("description", "");
@@ -160,9 +163,22 @@ public class PaymentController {
             ServerResponseMessage responseMessage = restTemplate.postForObject(paymentUrl, httpEntity, ServerResponseMessage.class);
             code = responseMessage.getCode() + "";
             if (code.equals("200")) {
-                /*session.removeAttribute("cartItems");
+                JSONObject receiptData = new JSONObject();
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                Date date = new Date();
+                String currentDateTime = dateFormat.format(date);
+                receiptData.put("orderDate", currentDateTime);
+                receiptData.put("orderId", "ORD123456");
+                receiptData.put("amount", request.getParameter("totalAmount"));
+                receiptData.put("orderStatus", "Paid");
+                receiptData.put("paymentOption", "Mobile");
+                receiptData.put("usedMobile", mobileNo);
+
+                session.setAttribute("receiptData", receiptData);
+
+                session.removeAttribute("cartItems");
                 session.removeAttribute("cartTotal");
-                session.removeAttribute("couponCode");*/
+                session.removeAttribute("couponCode");
             }
         } catch (RestClientException e) {
             logger.error("Error processing the payment.", e);
@@ -172,5 +188,15 @@ public class PaymentController {
             return code;
         }
         return code;
+    }
+
+    @RequestMapping(value = "/payment/receipt-data", method = RequestMethod.GET)
+    @ResponseBody
+    public JSONArray printReceipt(HttpSession session) {
+        JSONObject jsonObject = new JSONObject();
+        JSONArray receiptDataArray = new JSONArray();
+        jsonObject = (JSONObject) session.getAttribute("receiptData");
+        receiptDataArray.add(jsonObject);
+        return receiptDataArray;
     }
 }

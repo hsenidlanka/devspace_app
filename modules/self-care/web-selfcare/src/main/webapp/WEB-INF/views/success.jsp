@@ -5,6 +5,7 @@
     <link rel="shortcut icon" href="">
 
     <%@include file="includes/include.jsp" %>
+    <script src="<c:url value="/resources/js/success.js"/>"></script>
     <%@include file="includes/smart-wizard.jsp" %>
 </head>
 <body>
@@ -15,6 +16,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <img class="icons" src="<c:url value="/resources/images/icons/list-correct.png"/>">
+
                 <h3 class="header-panel">Order placed</h3>
             </div>
             <div class="panel-body">
@@ -37,12 +39,41 @@
 
                 <div class="container" style="width:1000px; margin-top: 30px;">
                     <div style="text-align: center;">
-                        <img src="<c:url value="/resources/images/icons/success.png"/>"  width="120px" height="120px">
+                        <img src="<c:url value="/resources/images/icons/success.png"/>" width="120px" height="120px">
 
                         <h1><fmt:message key="success.thank" bundle="${lang}"/></h1>
                     </div>
                     <div>
                         <h4><fmt:message key="success.your.order" bundle="${lang}"/></h4>
+                    </div>
+
+                    <div>
+                        <label class="lbl-order-details">Order date/time: </label>
+                        <label id="lbl-rec-orderDate"></label>
+                    </div>
+                    <div>
+                        <label class="lbl-order-details">Order id: </label>
+                        <label id="lbl-rec-orderId"></label>
+                    </div>
+                    <div>
+                        <label class="lbl-order-details">Amount (Rs.): </label>
+                        <label id="lbl-rec-amount"></label>
+                    </div>
+                    <div>
+                        <label class="lbl-order-details">Status: </label>
+                        <label id="lbl-rec-status"></label>
+                    </div>
+                    <div>
+                        <label class="lbl-order-details">Payment option: </label>
+                        <label id="lbl-rec-paymentOption"></label>
+                    </div>
+                    <div>
+                        <label class="lbl-order-details">Used mobile: </label>
+                        <label id="lbl-rec-usedMobile"></label>
+                    </div>
+
+                    <div>
+                        <button id="btn-print" style="margin-bottom: 5px;" class="btn btn-success btn-xs">Print receipt</button>
                     </div>
 
                     <div>
@@ -56,9 +87,9 @@
 <a href="#" class="scrollup"></a>
 <script>
     $('#smartwizard').smartWizard({
-        selected:5,
-        theme:'arrows',
-        anchorSettings:{
+        selected: 5,
+        theme: 'arrows',
+        anchorSettings: {
             anchorClickable: false
         }
     });

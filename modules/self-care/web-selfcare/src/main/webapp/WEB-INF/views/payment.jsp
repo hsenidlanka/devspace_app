@@ -4,9 +4,8 @@
     <%@include file="includes/include.jsp" %>
     <title><fmt:message key="delivery.payment" bundle="${lang}"/></title>
     <link rel="shortcut icon" href="">
-    <script src="<c:url value="/resources/js/payment-operations.js"/>"></script>
     <script src="<c:url value="/resources/js/hover.zoom.js"/>"></script>
-
+    <script src="<c:url value="/resources/js/payment-operations.js"/>"></script>
     <%@include file="includes/smart-wizard.jsp" %>
 </head>
 <body>

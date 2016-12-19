@@ -1,6 +1,6 @@
 $(document).ready(function () {
     var date = new Date();
-    var str = date.getFullYear() + "-" + getFormattedPartTime(date.getMonth()) + "-" + getFormattedPartTime(date.getDate());
+    var str = date.getFullYear() + "-" + getFormattedPartTime(date.getMonth()+1) + "-" + getFormattedPartTime(date.getDate());
     $(".del-date").val(str);
 
     $("#pickup-div").hide();
@@ -47,7 +47,7 @@ $(document).ready(function () {
             $("#timepicker1").prop("readonly", false);
         } else {
             var date = new Date();
-            var str = date.getFullYear() + "-" + getFormattedPartTime(date.getMonth()) + "-" + getFormattedPartTime(date.getDate());
+            var str = date.getFullYear() + "-" + getFormattedPartTime(date.getMonth()+1) + "-" + getFormattedPartTime(date.getDate());
             $(".del-date").val(str);
             var time = date.getHours() + ":" + getFormattedPartTime(date.getMinutes());
             $(".del-time").val(time);
