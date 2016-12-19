@@ -18,4 +18,6 @@ public interface CouponRepository {
     Coupon validateCoupon(String couponCode);
 
     int changeStatusToUsed(String couponCode);
+
+    boolean checkUniqueCoupon(String couponCode);
 }

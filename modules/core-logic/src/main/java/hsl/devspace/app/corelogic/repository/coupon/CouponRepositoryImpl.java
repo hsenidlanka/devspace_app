@@ -35,10 +35,16 @@ public class CouponRepositoryImpl implements CouponRepository {
     @Override
     public int add(String couponCode,String customerMobile){
         int row;
-        String sql = "INSERT INTO coupon" +
-                "(coupon_code,rate,expire_date,status,customer_mobile) VALUES (?,10,DATE_ADD(CURRENT_DATE,INTERVAL 30 DAY),1,?)";
-        row = jdbcTemplate.update(sql, new Object[]{couponCode, customerMobile});
-        log.info("{} new coupon inserted",row);
+        boolean unique = checkUniqueCoupon(couponCode);
+        if (unique) {
+            String sql = "INSERT INTO coupon" +
+                    "(coupon_code,rate,expire_date,status,customer_mobile) VALUES (?,10,DATE_ADD(CURRENT_DATE,INTERVAL 30 DAY),1,?)";
+            row = jdbcTemplate.update(sql, new Object[]{couponCode, customerMobile});
+            log.info("{} new coupon inserted", row);
+        } else {
+            log.info("{} coupon code already available");
+            row = 2;
+        }
         return row;
     }
 
@@ -117,6 +123,22 @@ public class CouponRepositoryImpl implements CouponRepository {
         }
         log.info("{}", coupon1);
         return coupon1;
+    }
+
+    public boolean checkUniqueCoupon(String couponCode) {
+        boolean result = true;
+        String sql = "SELECT count(*) FROM coupon WHERE coupon_code = ? ";
+
+        int count = jdbcTemplate.queryForObject(
+                sql, new Object[]{couponCode}, Integer.class);
+        if (count > 0) {
+            result = false;
+            log.info("coupon already available");
+        }
+        log.info("{}", result);
+        return result;
+
+
     }
 
 
