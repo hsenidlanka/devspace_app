@@ -249,3 +249,7 @@ table {
 .menu-add-to-cart-btn{
     font-size: 10px;
 }
+
+.lbl-order-details{
+    font-weight: bold;
+}
