@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -17,27 +18,29 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 @Test
-@ContextConfiguration(locations = {"classpath:spring-test-config.xml"})
+@WebAppConfiguration
+@ContextConfiguration(locations = {"classpath:spring-test-config.xml",  "classpath:testng.xml"})
 public class UserControllerTest extends AbstractTestNGSpringContextTests {
 
     private static final Logger LOG = LogManager.getLogger(UserControllerTest.class);
 
     @Autowired
-    private WebApplicationContext wac;
+    private WebApplicationContext webApplicationContext;
 
     private MockMvc mockMvc;
 
     @Test
     public void addUserTest()  {
-        try {
 
-            mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
-            mockMvc.perform(get("/users/add"))
-                    .andExpect(status().isOk())
+        try {
+            LOG.info("In Test method -- WAC = "+this.webApplicationContext);
+            this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
+            this.mockMvc.perform(get("https://localhost:8443/admin/users/add"))
+                    .andExpect(status().is(404))
                     .andExpect(view().name("/user_management/userAdd"));
+            // .andExpect(forwardedUrl("/item_management/viewItem"));
         } catch (Exception e) {
-            e.printStackTrace();
-            LOG.error("the exception is :",e);
+            LOG.error("error in item test1 {}", e);
         }
     }
 
