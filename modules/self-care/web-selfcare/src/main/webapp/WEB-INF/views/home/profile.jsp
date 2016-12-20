@@ -47,7 +47,11 @@
         });
 
         function load_home() {
-            document.getElementById("content").innerHTML='<object type="text/html" data="profile-info" style="width:105%; height: 80%;"></object>';
+            document.getElementById("content").innerHTML='<object type="text/html" data="profile-info" style="width:105%; height: 85%;"></object>';
+        }
+
+        function load_update_profile() {
+            document.getElementById("content").innerHTML='<object type="text/html" data="update-user" style="width:105%; height: 85%;"></object>';
         }
     </script>
 </head>
@@ -56,11 +60,11 @@
 
 <div class="navbar navbar-inverse navbar-fixed-left leftsidemenu" style="height: 100%">
     <%--<a class="navbar-brand" href="#">Brand</a>--%>
-    <ul class="nav navbar-nav">
-        <li><a href="#">Link2</a></li>
+    <ul class="nav navbar-nav" >
+        <li><a href="#" onclick="load_home();" style="width: 100%">Profile</a></li>
         <li><a href="#">Link3</a></li>
         <li><a href="#">Link4</a></li>
-        <li><a href="#">Link5</a></li>
+        <li><a href="#" onclick="load_update_profile();" style="width: 100%">Update Profile</a></li>
     </ul>
 </div>
 <div class="container" id="content"></div>
