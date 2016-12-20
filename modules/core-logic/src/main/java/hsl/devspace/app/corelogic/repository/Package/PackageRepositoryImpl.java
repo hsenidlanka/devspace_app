@@ -298,7 +298,7 @@ public class PackageRepositoryImpl implements PackageRepository {
 
     @Override
     public List<Package> paginateSelectAll(int limit, int page) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM package LIMIT ? OFFSET ?", limit, page - 1);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM package LIMIT ? OFFSET ?", limit, page);
         List<Package> pack = new ArrayList<Package>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -318,7 +318,7 @@ public class PackageRepositoryImpl implements PackageRepository {
     @Override
     public List<Package> paginateSelectAllByNamePattern(String packName, int limit, int page) {
         String key = "%" + packName + "%";
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM package WHERE name LIKE ? LIMIT ? OFFSET ?", key, limit, page - 1);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM package WHERE name LIKE ? LIMIT ? OFFSET ?", key, limit, page);
         List<Package> pack = new ArrayList<Package>();
 
         for (int i = 0; i < mp.size(); i++) {

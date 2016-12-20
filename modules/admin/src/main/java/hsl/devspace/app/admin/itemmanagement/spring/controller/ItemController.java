@@ -373,4 +373,14 @@ public class ItemController {
         LOGGER.trace("total item record count{}", item.count());
         return item.count();
     }
+
+    /*
+    *getting record count for loading item table with pagination
+    **/
+    @RequestMapping(value = "/itemSearchCount", method = RequestMethod.GET)
+    public @ResponseBody int getSearchCount(){
+
+        LOGGER.trace("searched item record count{}", item.count());
+        return item.count();
+    }
 }
