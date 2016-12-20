@@ -39,6 +39,8 @@ public interface ShoppingCartRepository {
     int updateDelivery(String agentName,String staffUsername,int deliveryId);
 
     int updatePayment(int paymentId,String staffUsername);
+
+    List<Map<String, Object>> selectAll();
 //    void addPackageToCart(int packageId);
 //    void modifyPackageInCart();
 //    void removePackageFromCart(int packageId);

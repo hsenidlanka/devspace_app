@@ -39,6 +39,9 @@
 <fmt:message key="admin.notificationmanagement.comments.view.url" var="commentsView" bundle="${bundle2}"/>
 <fmt:message key="admin.notificationmanagement.ratings.view.url" var="ratingsView" bundle="${bundle2}"/>
 
+<fmt:message key="admin.ordermanagement.process.url" var="orderProcess" bundle="${bundle2}"/>
+<fmt:message key="admin.ordermanagement.view.url" var="orderView" bundle="${bundle2}"/>
+
 <%--<spring:url value="header.jsp" var="page1"/>
 <link href="${page1}" rel="import">--%>
 
@@ -174,7 +177,8 @@
       <div class="panel panel-default">
         <div class="panel-heading">
           <h4 class="panel-title">
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">Notifications Management</a>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
+              <fmt:message key="notification.heading" bundle="${bundle1}"/></a>
           </h4>
         </div>
         <div id="collapseFive" class="panel-collapse collapse">
@@ -191,6 +195,36 @@
                 <a href="<c:out value="${ratingsView}"/>" class="panel-sub-menu2" style="font-weight:bold;
                 font-size:18px;">
                   <fmt:message key="notification.ratingssview.breadcrumb.view" bundle="${bundle1}"/>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix">
+              <fmt:message key="order.heading" bundle="${bundle1}"/>
+            </a>
+          </h4>
+        </div>
+        <div id="collapseSix" class="panel-collapse collapse">
+          <div class="panel-body">
+            <ul class="nav navbar-nav">
+              <li><img src="<c:url value="/themes/hsenid/images/packagecol.png"/>"/></li>
+              <li>
+                <a href="<c:out value="${orderView}"/>" class="panel-sub-menu2" style="font-weight:bold;
+                font-size:18px;">
+                  <fmt:message key="orderprocess.breadcrumb.view" bundle="${bundle1}"/>
+                </a>
+              </li>
+              <li>
+                <a href="<c:out value="${orderProcess}"/>" class="panel-sub-menu2" style="font-weight:bold;
+                font-size:18px;">
+                  <fmt:message key="orderprocess.breadcrumb.process" bundle="${bundle1}"/>
                 </a>
               </li>
             </ul>
