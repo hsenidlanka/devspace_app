@@ -260,7 +260,7 @@ public  class UserRepositoryImpl implements UserRepository {
     /*retrieve details of customer registered between a specified date range*/
     @Override
     public List<User> retrieveByDateRange(Date date1, Date date2, int limit, int page) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE registered_date BETWEEN ? AND ? AND status='active' LIMIT ? OFFSET ?", date1, date2, limit, page - 1);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE registered_date BETWEEN ? AND ? AND status='active' LIMIT ? OFFSET ?", date1, date2, limit, page);
         List<User> customerDetails=new ArrayList<User>();
 
         for (int i=0;i<mp.size();i++){
@@ -292,7 +292,7 @@ public  class UserRepositoryImpl implements UserRepository {
     /*retrieve details of customers by a given attribute*/
     @Override
     public List<User> filterByCity(String city, String status, int limit, int page) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE address_line3 = ? AND status= ? LIMIT ? OFFSET ?", city, status, limit, page - 1);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE address_line3 = ? AND status= ? LIMIT ? OFFSET ?", city, status, limit, page);
         List<User> customerDetails=new ArrayList<User>();
 
         for (int i=0;i<mp.size();i++){

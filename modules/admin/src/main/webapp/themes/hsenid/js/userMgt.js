@@ -189,17 +189,80 @@ $(document).ready(function () {
             var pageSend=(page-1)*pgLimit;
 
             var cname= $("#cnameSearch").val();
+            var from = $('#fromDate').val();
+            var to=$('#toDate').val();
+            var city=$('#citySearch').val();
 
 
-            $.ajax({
-                url: "https://localhost:8443/admin/userFilters/customerTable/typeheadName/data",
-                dataType: "json",
-                data: {"cname":cname, "initPage": pageSend, "pageLimit": pgLimit},
-                success: function (data) {
+            if((from == "") && (to == "") && (cname == "") && (city == "--Select--")  ){
+                $.ajax({
+                    //type: "POST",
+                    url: "https://localhost:8443/admin/users/view/customerTable",
+                    data: {"initPage": pageSend, "pageLimit": pgLimit},
+                    success: function (msg) {
 
-                    $('#tableCustomer').bootstrapTable('load', data);
-                }
-            })
+                        $('#tableCustomer').bootstrapTable('load', msg);
+                    },
+                    error: function (e) {
+                        alert("ajax failed" + e);
+                    }
+                });
+            }
+
+            if((cname != "")) {
+                $.ajax({
+                    url: "https://localhost:8443/admin/userFilters/customerTable/typeheadName/data",
+                    dataType: "json",
+                    data: {"cname": cname, "initPage": pageSend, "pageLimit": pgLimit},
+                    success: function (data) {
+                        $('#tableCustomer').bootstrapTable('load', data);
+                    }
+                })
+            }
+
+            if( (city != "--Select--")  ) {
+                $.ajax({
+                    //type: "POST",
+                    url: "https://localhost:8443/admin/userFilters/customerTable/city",
+                    data: {"city": city, "initPage": pageSend, "pageLimit": pgLimit},
+                    success: function (msg) {
+                        //alert("city ajax" + city);
+                        $('#tableCustomer').bootstrapTable('load', msg);
+                    },
+                    error: function (e) {
+                        alert("ajax failed" + city + e);
+                    }
+                });
+            }
+            if( (from != "") && (to != "")) {
+                $.ajax({
+                    //type: "POST",
+                    url: "https://localhost:8443/admin/userFilters/customerTable/date",
+                    data: {"from": from, "to": to, "name": cname, "initPage":pageSend, "pageLimit": pgLimit},
+                    success: function (msg) {
+                        //alert("ajax succ" + from +name +city);
+                        $('#tableCustomer').bootstrapTable('load', msg);
+                    },
+                    error: function (e) {
+                        alert("ajax failed" + e);
+                    }
+                });
+            }
+
+            if( (from != "") && (to != "") && (city != "--Select--")) {
+                $.ajax({
+                    //type: "POST",
+                    url: "https://localhost:8443/admin/userFilters/customerTable/date/city",
+                    data: {"from": from, "to": to, "city": city, "initPage": pageSend, "pageLimit": pgLimit},
+                    success: function (msg) {
+                        //alert("ajax succ" + from +name +city);
+                        $('#tableCustomer').bootstrapTable('load', msg);
+                    },
+                    error: function (e) {
+                        alert("ajax failed" + e);
+                    }
+                });
+            }
         }
     });
 
@@ -540,10 +603,14 @@ $(document).ready(function () {
         var name=$('#cnameSearch').val();
         var city=$('#citySearch').val();
 
+        $('#paginationCustomer').hide();
+        $('#pagination2Customer').show();
+
         if((from == "") && (to == "") && (name == "") && (city == "--Select--")  ){
             $.ajax({
                 //type: "POST",
                 url: "https://localhost:8443/admin/users/view/customerTable",
+                data: {"initPage": "0", "pageLimit": pgLimit},
                 success: function (msg) {
 
                     $('#tableCustomer').bootstrapTable('load', msg);
@@ -552,13 +619,26 @@ $(document).ready(function () {
                     alert("ajax failed" + e);
                 }
             });
+            /**
+             *Setting the number of pages according to the number of records
+             */
+            $.ajax({
+                url: 'https://localhost:8443/admin/users/CustomerPaginationTable',
+                //data: {"searchCatNm": $("#txtViewSearchCategory").val()},
+                success: function (recCount) {
+
+                    activeC.simplePaginator('setTotalPages', Math.ceil(recCount / 5));
+                }
+            });
+
+
 
         }
         if( (city != "--Select--")  ){
             $.ajax({
                 //type: "POST",
                 url:"https://localhost:8443/admin/userFilters/customerTable/city",
-                data: {"city":city},
+                data: {"city":city,"initPage": "0", "pageLimit": pgLimit},
                 success: function (msg) {
                     //alert("city ajax" + city);
                     $('#tableCustomer').bootstrapTable('load', msg);
@@ -567,12 +647,23 @@ $(document).ready(function () {
                     alert("ajax failed" + city +e);
                 }
             });
+            /**
+             *Setting the number of pages according to the number of records
+             */
+            $.ajax({
+                url: 'https://localhost:8443/admin/users/CustomerPaginationTable',
+                //data: {"searchCatNm": $("#txtViewSearchCategory").val()},
+                success: function (recCount) {
+
+                    activeC.simplePaginator('setTotalPages', Math.ceil(recCount / 5));
+                }
+            });
         }
         if( (from != "") && (to != "")){
             $.ajax({
                 //type: "POST",
                 url: "https://localhost:8443/admin/userFilters/customerTable/date",
-                data: {"from": from, "to": to, "name":name},
+                data: {"from": from, "to": to, "name":name,"initPage": "0", "pageLimit": pgLimit},
                 success: function (msg) {
                     //alert("ajax succ" + from +name +city);
                     $('#tableCustomer').bootstrapTable('load', msg);
@@ -581,18 +672,40 @@ $(document).ready(function () {
                     alert("ajax failed" + e);
                 }
             });
+            /**
+             *Setting the number of pages according to the number of records
+             */
+            $.ajax({
+                url: 'https://localhost:8443/admin/users/CustomerPaginationTable',
+                //data: {"searchCatNm": $("#txtViewSearchCategory").val()},
+                success: function (recCount) {
+
+                    activeC.simplePaginator('setTotalPages', Math.ceil(recCount / 5));
+                }
+            });
         }
         if( (from != "") && (to != "") && (city != "--Select--")){
             $.ajax({
                 //type: "POST",
                 url: "https://localhost:8443/admin/userFilters/customerTable/date/city",
-                data: {"from": from, "to": to, "city":city},
+                data: {"from": from, "to": to, "city":city,"initPage": "0", "pageLimit": pgLimit},
                 success: function (msg) {
                     //alert("ajax succ" + from +name +city);
                     $('#tableCustomer').bootstrapTable('load', msg);
                 },
                 error: function (e) {
                     alert("ajax failed" + e);
+                }
+            });
+            /**
+             *Setting the number of pages according to the number of records
+             */
+            $.ajax({
+                url: 'https://localhost:8443/admin/users/CustomerPaginationTable',
+                //data: {"searchCatNm": $("#txtViewSearchCategory").val()},
+                success: function (recCount) {
+
+                    activeC.simplePaginator('setTotalPages', Math.ceil(recCount / 5));
                 }
             });
         }
