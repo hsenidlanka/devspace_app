@@ -292,17 +292,55 @@ $(document).ready(function () {
 
             var pageSend=(page-1)*pgLimit;
             var sname = $("#snameSearch").val();
+            var designation= $('#designation_d').find(':selected').text();
+            var department=$('#department_d').find('option:selected').text();
+            var branch=$('#branch_d').find(':selected').text();
 
-            $.ajax({
-                url: "https://localhost:8443/admin/userFilters/staffTable/typeheadName/data",
-                dataType: "json",
-                data: {"sname":sname, "initPage": pageSend, "pageLimit": pgLimit},
-                success: function (data) {
+            if((designation == "--Select--") && (department == "--Select--") && (sname == "") && (branch == "--Select--")  ){
 
-                    $('#tableStaff').bootstrapTable('load', data);
-                }
-            })
+                $.ajax({
+                    //type: "POST",
+                    url: "https://localhost:8443/admin/users/view/staffTable",
+                    data:{"initPage":pageSend, "pageLimit": pgLimit},
+                    success: function (msg) {
+
+                        $('#tableStaff').bootstrapTable('load', msg);
+                    },
+                    error: function (e) {
+                        alert("ajax failed" + e);
+                    }
+                });
+            }
+            if((!(designation == "--Select--")) || (!(department == "--Select--")) || (!(branch == "--Select--")) ){
+                $.ajax({
+                    //type: "POST",
+                    url: "https://localhost:8443/admin/userFilters/staffTable",
+                    data:{"designation":designation,"department":department,"branch":branch,"name":sname,
+                        "initPage":pageSend, "pageLimit": pgLimit},
+                    success: function (msg) {
+
+                        $('#tableStaff').bootstrapTable('load', msg);
+                    },
+                    error: function (e) {
+                        alert("ajax failed" + e);
+                    }
+                });
+            }
+
+            if((sname != "") ) {
+                $.ajax({
+                    url: "https://localhost:8443/admin/userFilters/staffTable/typeheadName/data",
+                    dataType: "json",
+                    data: {"sname": sname, "initPage": pageSend, "pageLimit": pgLimit},
+                    success: function (data) {
+
+                        $('#tableStaff').bootstrapTable('load', data);
+                    }
+                })
+            }
         }
+
+
     });
 
     // InActive Customer  pagination in SEARCH scenarios
@@ -717,16 +755,21 @@ $(document).ready(function () {
 //ajax functions to filter the search results of Staff Users if an option is selected
 
     $("#filterButtonStaff").click(function(){
+
         var designation= $('#designation_d').find(':selected').text();
         var department=$('#department_d').find('option:selected').text();
-        var name=$('#cname').val();
+        var name=$("#snameSearch").val();
         var branch=$('#branch_d').find(':selected').text();
+
+        $('#paginationStaff').hide();
+        $('#pagination2Staff').show();
 
         if((designation == "--Select--") && (department == "--Select--") && (name == "") && (branch == "--Select--")  ){
 
             $.ajax({
                 //type: "POST",
                 url: "https://localhost:8443/admin/users/view/staffTable",
+                data:{"initPage":"0", "pageLimit": pgLimit},
                 success: function (msg) {
 
                     $('#tableStaff').bootstrapTable('load', msg);
@@ -735,18 +778,38 @@ $(document).ready(function () {
                     alert("ajax failed" + e);
                 }
             });
+            /**
+             *Setting the number of pages according to the number of records
+             */
+            $.ajax({
+                url: 'https://localhost:8443/admin/users/StaffPaginationTable',
+                //data: {"searchCatNm": $("#txtViewSearchCategory").val()},
+                success: function (recCount) {
+                    activeS.simplePaginator('setTotalPages', Math.ceil(recCount / 5));
+                }
+            });
         }
         if((!(designation == "--Select--")) || (!(department == "--Select--")) || (!(branch == "--Select--")) ){
             $.ajax({
                 //type: "POST",
                 url: "https://localhost:8443/admin/userFilters/staffTable",
-                data:{"designation":designation,"department":department,"branch":branch,"name":name},
+                data:{"designation":designation,"department":department,"branch":branch,"name":name,"initPage":"0", "pageLimit": pgLimit},
                 success: function (msg) {
 
                     $('#tableStaff').bootstrapTable('load', msg);
                 },
                 error: function (e) {
                     alert("ajax failed" + e);
+                }
+            });
+            /**
+             *Setting the number of pages according to the number of records
+             */
+            $.ajax({
+                url: 'https://localhost:8443/admin/users/StaffPaginationTable',
+                //data: {"searchCatNm": $("#txtViewSearchCategory").val()},
+                success: function (recCount) {
+                    activeS.simplePaginator('setTotalPages', Math.ceil(recCount / 5));
                 }
             });
         }
