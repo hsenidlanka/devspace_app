@@ -49,7 +49,7 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
         List<Map<String, Object>> usernameCustomer = jdbcTemplate.queryForList("SELECT id FROM customer WHERE username=?", username);
         if (usernameCustomer.size() != 0) {
             String sql = "INSERT INTO shopping_cart " +
-                    "(order_id,net_cost,customer_id,guest_id) VALUES (?,?,?,NULL)";
+                    "(order_id,order_date,order_time,net_cost,customer_id,guest_id) VALUES (?,CURRENT_DATE ,CURRENT_TIME,?,?,NULL)";
             jdbcTemplate.update(sql, new Object[]{orderId, netCost, usernameCustomer.get(0).get("id")});
             log.info("{} new shopping cart added");
 
@@ -58,7 +58,7 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
             List<Map<String, Object>> usernameGuest = jdbcTemplate.queryForList("SELECT id FROM guest WHERE mobile=?", username);
             if (usernameGuest.size() != 0) {
                 String sql = "INSERT INTO shopping_cart " +
-                        "(order_id,net_cost,customer_id,guest_id) VALUES (?,?,NULL ,?)";
+                        "(order_id,order_date,order_time,net_cost,customer_id,guest_id) VALUES (?,CURRENT_DATE ,CURRENT_TIME ,?,NULL ,?)";
                 jdbcTemplate.update(sql, new Object[]{orderId, netCost, usernameGuest.get(0).get("id")});
                 log.info("{} new shopping cart added");
 
@@ -67,7 +67,7 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
                         "(mobile) VALUES (?)";
                 jdbcTemplate.update(sql, new Object[]{username});
                 List<Map<String, Object>> mp4 = jdbcTemplate.queryForList("SELECT MAX(id) FROM guest");
-                String sql2 = "INSERT INTO shopping_cart (order_id,net_cost,customer_id,guest_id) VALUES (?,?,NULL,?)";
+                String sql2 = "INSERT INTO shopping_cart (order_id,order_date,order_time,net_cost,customer_id,guest_id) VALUES (?,CURRENT_DATE ,CURRENT_TIME ,?,NULL,?)";
                 jdbcTemplate.update(sql2, new Object[]{orderId, netCost, mp4.get(0).get("MAX(id)")});
                 log.info("{} new shopping cart added");
 
@@ -222,8 +222,8 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
         TransactionStatus stat = transactionManager.getTransaction(trDef);
         try {
             int cartId = addCart(netCost, username);
-            List<Integer> productIdList = addProductsToCart(items);
-            updateCartProductTable(cartId, productIdList);
+           /* List<Integer> productIdList = addProductsToCart(items);
+            updateCartProductTable(cartId, productIdList);*/
             int deliveryId = add(del);
             add(paymentMethodName, cartId, deliveryId);
             transactionManager.commit(stat);
@@ -320,6 +320,13 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
         String sql = "UPDATE payment_transaction staff_id=(SELECT id FROM staff WHERE username=?) WHERE id = ?";
         int row = jdbcTemplate.update(sql, new Object[]{staffUsername, paymentId});
         return row;
+    }
+
+    @Override
+    public List<Map<String, Object>> selectAll() {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT order_id,order_date,order_time,net_cost,customer_id,guest_id FROM shopping_cart  ");
+        log.info("{}", mp);
+        return mp;
     }
 
   /*  public String checkUniqueOrderId(String orderID){
