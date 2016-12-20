@@ -10,6 +10,7 @@
             border-radius: 0;
             height: 100%;
             background: #EAEAEA;
+            color: red;
         }
 
         .navbar-fixed-left .navbar-nav > li {
@@ -32,6 +33,10 @@
         .navbar-brand {
             color: #666666;
         }
+
+        .navbar-nav>li>a {
+            color: #777777 !important;
+        }
     </style>
 
 
@@ -42,15 +47,15 @@
         });
 
         function load_home() {
-            document.getElementById("content").innerHTML='<object type="text/html" data="profile-info" ></object>';
+            document.getElementById("content").innerHTML='<object type="text/html" data="profile-info" style="width:105%; height: 80%;"></object>';
         }
     </script>
 </head>
 <body>
 <%@include file="../includes/new-header.jsp" %>
 
-<div class="navbar navbar-inverse navbar-fixed-left leftsidemenu">
-    <a class="navbar-brand" href="#">Brand</a>
+<div class="navbar navbar-inverse navbar-fixed-left leftsidemenu" style="height: 100%">
+    <%--<a class="navbar-brand" href="#">Brand</a>--%>
     <ul class="nav navbar-nav">
         <li><a href="#">Link2</a></li>
         <li><a href="#">Link3</a></li>
@@ -58,8 +63,6 @@
         <li><a href="#">Link5</a></li>
     </ul>
 </div>
-<div class="container" id="content">
-
-</div>
+<div class="container" id="content"></div>
 </body>
 </html>

@@ -24,6 +24,9 @@
     <spring:url value="/themes/hsenid/js/category_table.js" var="js2"/>
     <script src="${js2}"></script>
 
+    <spring:url value="/themes/hsenid/js/categoryPagination.js" var="catPaging"/>
+    <script src="${catPaging}"></script>
+
 
 </head>
 
@@ -85,7 +88,7 @@
                             <input class="form-control typeahead" id="txtViewSearchCategory" type="text"/>
                         </div>
                         <div class="col-sm-3">
-                            <button type="button" class="btn btn-success" id="btnViewSearchItem"><span class="glyphicon glyphicon-search">
+                            <button type="button" class="btn btn-success" id="btnViewSearchCat"><span class="glyphicon glyphicon-search">
                             </span><fmt:message key="category.categoryview.searchbar.button"  bundle="${bundle1}"/>
                             </button>
                         </div>
@@ -95,6 +98,10 @@
                     <%--include the bootstrap table with category list--%>
                     <table  id="tableCategory">
                     </table>
+                    <div id="paginationCat" class="text-center">
+                    </div>
+                    <div id="pagination2Cat" class="text-center">
+                    </div>
             </div>
         </div>
     </center>

@@ -2,6 +2,7 @@ package hsl.devspace.app.corelogic.repository.category;
 
 import hsl.devspace.app.corelogic.domain.Category;
 import hsl.devspace.app.corelogic.domain.Item;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -22,7 +23,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     private JdbcTemplate jdbcTemplate;
     private PlatformTransactionManager transactionManager;
     //private static org.apache.log4j.Logger log = Logger.getLogger(CategoryRepositoryImpl.class);
-    org.slf4j.Logger log = LoggerFactory.getLogger(CategoryRepositoryImpl.class);
+   Logger log = LoggerFactory.getLogger(CategoryRepositoryImpl.class);
 
 
     public void setDataSource(DataSource dataSource) {
@@ -130,7 +131,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
 
     public List<Category> selectAllTypeAhead(String catName, int limit, int page) {
         String key = "%" + catName + "%";
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category LIKE ? LIMIT ? OFFSET ?", key, limit, page - 1);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category WHERE name LIKE ? LIMIT ? OFFSET ?", key, limit, page - 1);
         List<Category> categories = new ArrayList<Category>();
 
         for (Map<String, Object> aMp : mp) {
@@ -392,6 +393,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
         log.info("{}", catName);
         return catName;
     }
+
 
     @Override
     public List<String> retrieveSubcatogories(String category) {

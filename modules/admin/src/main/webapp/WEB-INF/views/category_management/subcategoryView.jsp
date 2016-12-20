@@ -22,8 +22,10 @@
     <link href="${css1}" rel="stylesheet">
     <link href="${css2}" rel="stylesheet">
 
-    <spring:url value="/themes/hsenid/js/subcategory_table.js" var="js2"/>
-    <script src="${js2}"></script>
+    <spring:url value="/themes/hsenid/js/subcategory_table.js" var="table"/>
+    <script src="${table}"></script>
+    <spring:url value="/themes/hsenid/js/subCategoryPagination.js" var="pagination"/>
+    <script src="${pagination}"></script>
 </head>
 
 <body>
@@ -90,7 +92,7 @@
                         <input class="form-control typeahead" id="txtViewSearchSubCategory" type="text"/>
                     </div>
                     <div class="col-sm-3">
-                        <button type="button" class="btn btn-success" id="btnViewSearchItem"><span class="glyphicon glyphicon-search">
+                        <button type="button" class="btn btn-success" id="btnViewSearchSubCat"><span class="glyphicon glyphicon-search">
                             </span><fmt:message key="category.subcategoryview.searchbar.button"  bundle="${bundle1}"/>
                         </button>
                     </div>
@@ -100,6 +102,10 @@
 
                 <table  id="tableSubCategory" data-value="${catName}">
                 </table>
+                    <div id="paginationSubCat" class="text-center">
+                    </div>
+                    <div id="pagination2SubCat" class="text-center">
+                    </div>
 
             </div>
 
