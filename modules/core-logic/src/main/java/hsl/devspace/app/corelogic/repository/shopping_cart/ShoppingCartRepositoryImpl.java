@@ -217,24 +217,34 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 
     /*complete process for shopping cart with payment and delivery*/
     @Transactional(propagation = Propagation.SUPPORTS)
-    public void generateCartProcess(double netCost, String username, List<Map<String, Object>> items, Delivery del, String paymentMethodName) {
+    public String generateCartProcess(double netCost, String username, List<Map<String, Object>> items, Delivery del, String paymentMethodName) {
+        String orderId = "0";
         TransactionDefinition trDef = new DefaultTransactionDefinition();
         TransactionStatus stat = transactionManager.getTransaction(trDef);
         try {
             int cartId = addCart(netCost, username);
-           /* List<Integer> productIdList = addProductsToCart(items);
-            updateCartProductTable(cartId, productIdList);*/
+            List<Integer> productIdList = addProductsToCart(items);
+            updateCartProductTable(cartId, productIdList);
             int deliveryId = add(del);
             add(paymentMethodName, cartId, deliveryId);
+            orderId = selectOrderId(cartId);
             transactionManager.commit(stat);
-
             log.info("updated");
+
 
         } catch (Exception e) {
             log.info(e.getMessage());
             transactionManager.rollback(stat);
             log.info("rollbacked");
         }
+        return orderId;
+    }
+
+    @Override
+    public String selectOrderId(int cartId) {
+        List<Map<String, Object>> mp4 = jdbcTemplate.queryForList("SELECT order_id FROM shopping_cart WHERE id=?", cartId);
+        log.info(mp4.get(0).get("order_id").toString());
+        return mp4.get(0).get("order_id").toString();
     }
 
 

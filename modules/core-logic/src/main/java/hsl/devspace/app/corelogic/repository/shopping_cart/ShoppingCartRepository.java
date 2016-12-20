@@ -17,7 +17,7 @@ public interface ShoppingCartRepository {
 
     void updateCartProductTable(int cartId, List<Integer> productIdList);
 
-    void generateCartProcess(double netCost, String username, List<Map<String, Object>> items, Delivery del, String paymentMethodName);
+    String generateCartProcess(double netCost, String username, List<Map<String, Object>> items, Delivery del, String paymentMethodName);
 
     int countPerCustomer(String customerUsername);
 
@@ -41,6 +41,8 @@ public interface ShoppingCartRepository {
     int updatePayment(int paymentId,String staffUsername);
 
     List<Map<String, Object>> selectAll();
+
+    String selectOrderId(int cartId);
 //    void addPackageToCart(int packageId);
 //    void modifyPackageInCart();
 //    void removePackageFromCart(int packageId);
