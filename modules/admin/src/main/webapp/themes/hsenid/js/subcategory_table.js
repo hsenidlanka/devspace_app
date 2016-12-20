@@ -12,7 +12,7 @@ $(document).ready(function () {
         success: function (result) {
 
             $('#tableSubCategory').bootstrapTable({
-                height: 380,
+                height: 300,
                 pagination: false,
                 clickToSelect: true,
                 singleSelect: true,

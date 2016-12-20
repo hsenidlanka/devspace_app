@@ -10,7 +10,7 @@ $(document).ready(function () {
         success: function (result) {
 
             $('#tableCategory').bootstrapTable({
-                height: 375,
+                height: 350,
                 pagination: false,
                 search: false,
                 showColumns: false,

@@ -275,7 +275,7 @@ $(document).ready(function () {
                 data: {"bcname":bcname, "initPage": pageSend, "pageLimit": pgLimit},
                 success: function (data) {
 
-                    $('#tableCustomer').bootstrapTable('load', data);
+                    $('#tableBannedcustomer').bootstrapTable('load', data);
                 }
             })
         }
