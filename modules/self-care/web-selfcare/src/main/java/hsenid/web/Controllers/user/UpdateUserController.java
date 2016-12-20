@@ -60,9 +60,9 @@ public class UpdateUserController {
         jsonObject.put("lastName", updateuser.getLastName());
         jsonObject.put("username", updateuser.getUsername());
         jsonObject.put("email", updateuser.getEmail());
-        jsonObject.put("addressL01", updateuser.getAddressLine01());
-        jsonObject.put("addressL02", updateuser.getAddressLine02());
-        jsonObject.put("addressL03", updateuser.getAddressLine03());
+        jsonObject.put("addressL1", updateuser.getAddressLine01());
+        jsonObject.put("addressL2", updateuser.getAddressLine02());
+        jsonObject.put("addressL3", updateuser.getAddressLine03());
         jsonObject.put("mobile", updateuser.getMobile());
 
         RestTemplate restTemplate = new RestTemplate();

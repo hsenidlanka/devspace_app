@@ -335,4 +335,12 @@ public class PackageRepositoryImpl implements PackageRepository {
         return pack;
     }
 
+    @Override
+    public int countSearchKey(String packageKey) {
+        String key = "%" + packageKey + "%";
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT(*) FROM package WHERE name LIKE ?", key);
+        System.out.println(Integer.parseInt(mp.get(0).get("COUNT(*)").toString()));
+        return Integer.parseInt(mp.get(0).get("COUNT(*)").toString());
+    }
+
 }

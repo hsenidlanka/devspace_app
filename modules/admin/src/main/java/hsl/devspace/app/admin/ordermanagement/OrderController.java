@@ -9,7 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/orders")
@@ -29,13 +33,13 @@ public class OrderController {
         return modelview;
     }
 
- /*   //to view the item table
+    //to view the order table
     @RequestMapping(value = "/view/orderTable", method = RequestMethod.GET)
     public
     @ResponseBody
     List<Map<String, Object>> viewItem() {
-       // LOGGER.info("View all item details {} ", (shoppingCartRepository.viewAllItemDetails()));
-       // return item.viewAllItemDetails();
-    }*/
+        LOGGER.info("View all order details {} ", (shoppingCart.selectAll()));
+        return shoppingCart.selectAll();
+    }
 
 }

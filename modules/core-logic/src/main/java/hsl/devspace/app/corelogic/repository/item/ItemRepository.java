@@ -61,4 +61,6 @@ public interface ItemRepository {
 
     List<Map<String, Object>> viewAllItemDetails(int limit, int page);
 
+    int countSearchKey(String itemKey);
+
 }
