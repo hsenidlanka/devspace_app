@@ -11,8 +11,10 @@
 <head>
 
 
-    <spring:url value="/themes/hsenid/js/customers_table.js" var="js1"/>
-    <script src="${js1}"></script>
+    <spring:url value="/themes/hsenid/js/customers_table.js" var="table"/>
+    <script src="${table}"></script>
+    <spring:url value="/themes/hsenid/js/customerPagination.js" var="pagination"/>
+    <script src="${pagination}"></script>
 
     <script>
         //datepicker
@@ -131,8 +133,12 @@
     </div>
     <%--<div class="col-sm-1"></div>--%>
 
-<table  id="tableCustomer">
-</table>
+    <table  id="tableCustomer">
+    </table>
+    <div id="paginationCustomer" class="text-center">
+    </div>
+    <div id="pagination2Customer" class="text-center">
+    </div>
 
 <!--div to include modals-->
 <!--<div id="includedContent1"></div>-->

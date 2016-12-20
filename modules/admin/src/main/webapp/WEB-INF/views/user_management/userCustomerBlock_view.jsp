@@ -10,8 +10,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <head>
 
-    <spring:url value="/themes/hsenid/js/bannedCustomer_table.js" var="js1"/>
-    <script src="${js1}"></script>
+    <spring:url value="/themes/hsenid/js/bannedCustomer_table.js" var="tableCustomerB"/>
+    <script src="${tableCustomerB}"></script>
+    <spring:url value="/themes/hsenid/js/customerPagination.js" var="pagination"/>
+    <script src="${pagination}"></script>
 
     <script>
         //datepicker
@@ -98,6 +100,10 @@
 
 <table  id="tableBannedcustomer">
 </table>
+<div id="paginationBannedCustomer" class="text-center">
+</div>
+<div id="pagination2BannedCustomer" class="text-center">
+</div>
 
 
 <!--modelto appear when replacing a banned Customer or Staff user -->
