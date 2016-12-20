@@ -611,7 +611,6 @@ public class StaffRepositoryImpl implements UserRepository {
         return j;
 
     }
-
     public List<User> selectbyStartingDate(Date date, int limit, int page) {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE register_date >= ? AND status=1 LIMIT ? OFFSET ?", date, limit, page - 1);
         List<User> staffDetails = new ArrayList<User>();
