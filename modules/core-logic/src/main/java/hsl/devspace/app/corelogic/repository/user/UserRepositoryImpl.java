@@ -41,14 +41,14 @@ public  class UserRepositoryImpl implements UserRepository {
         String un = user.getUsername();
         String pw = user.getPassword();
         if (un != "" && pw != "") {
-           // if (checkUsernameUnique(un)==true) {
-                String sql = "INSERT INTO customer " +
-                        "(title,first_name,last_name,username,password,email,address_line1,address_line2,address_line3,mobile,registered_date,status) VALUES (?,?,?,?,sha1(?),?,?,?,?,?,CURRENT_DATE,1)";
+            // if (checkUsernameUnique(un)==true) {
+            String sql = "INSERT INTO customer " +
+                    "(title,first_name,last_name,username,password,email,address_line1,address_line2,address_line3,mobile,registered_date,status) VALUES (?,?,?,?,sha1(?),?,?,?,?,?,CURRENT_DATE,1)";
 
-                row = jdbcTemplate.update(sql, new Object[]{user.getTitle(), user.getFirstName(), user.getLastName(), user.getUsername(), user.getPassword(),
-                        user.getEmail(), user.getAddressL1(), user.getAddressL2(), user.getAddressL3(), user.getMobile()});
+            row = jdbcTemplate.update(sql, new Object[]{user.getTitle(), user.getFirstName(), user.getLastName(), user.getUsername(), user.getPassword(),
+                    user.getEmail(), user.getAddressL1(), user.getAddressL2(), user.getAddressL3(), user.getMobile()});
 
-                log.info("customer inserted");
+            log.info("customer inserted");
           /*  }else
                 log.info("username already available");*/
         } else
@@ -62,7 +62,7 @@ public  class UserRepositoryImpl implements UserRepository {
     @Override
     public int delete(String username) throws IllegalArgumentException {
 
-       // user.setUsername(username);
+        // user.setUsername(username);
         String sql = "DELETE FROM customer WHERE username = ?";
         int row = jdbcTemplate.update(sql, new Object[]{username});
         log.info("deleted");
@@ -83,7 +83,7 @@ public  class UserRepositoryImpl implements UserRepository {
             System.out.println(user.getPassword());
 
             String sql = "UPDATE customer SET password = sha1(?) WHERE username = ? ";
-             row = jdbcTemplate.update(sql, new Object[]{user.getPassword(), user.getUsername()});
+            row = jdbcTemplate.update(sql, new Object[]{user.getPassword(), user.getUsername()});
             log.info(row + "password changed");
         } else log.info("cannot change password");
         return row;
@@ -96,10 +96,10 @@ public  class UserRepositoryImpl implements UserRepository {
 
     /**
      * authenticate username and password matched for a existing customer
-       blocked=2
-       credentials matched=1
-       mismatched=0
-    */
+     blocked=2
+     credentials matched=1
+     mismatched=0
+     */
     @Override
     public int loginAuthenticate(String username,String password) {
 
@@ -152,7 +152,7 @@ public  class UserRepositoryImpl implements UserRepository {
             customer.setAddressL2(mp.get(i).get("address_line2").toString());
             if (mp.get(i).get("address_line3")!=null) {
                 customer.setAddressL3(mp.get(i).get("address_line3").toString());
-           }
+            }
             customer.setMobile(mp.get(i).get("mobile").toString());
             customer.setRegDate(Date.valueOf(mp.get(i).get("registered_date").toString()));
             customer.setStatus(mp.get(i).get("status").toString());
@@ -303,7 +303,7 @@ public  class UserRepositoryImpl implements UserRepository {
             customer.setLastName(mp.get(i).get("last_name").toString());
             customer.setUsername(mp.get(i).get("username").toString());
             customer.setPassword(mp.get(i).get("password").toString());
-            customer.setEmail(mp.get(i).get("email").toString()); 
+            customer.setEmail(mp.get(i).get("email").toString());
             customer.setAddressL1(mp.get(i).get("address_line1").toString());
             customer.setAddressL2(mp.get(i).get("address_line2").toString());
             if (mp.get(i).get("address_line3")!=null) {
@@ -324,8 +324,8 @@ public  class UserRepositoryImpl implements UserRepository {
 
     /*retrieve total no.of customers*/
     @Override
-    public int countUsers() {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer ");
+    public int countUsers(String status) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE status= ?",status);
         int count = mp.size();
         log.info("{}",count);
         return count;
@@ -351,7 +351,7 @@ public  class UserRepositoryImpl implements UserRepository {
 
     @Override
     public List<User> selectActiveUsers(int limit, int page) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE status=1LIMIT ? OFFSET ?", limit, page - 1);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE status=1 LIMIT ? OFFSET ?", limit, page);
         List<User> customerDetails=new ArrayList<User>();
 
         for (int i=0;i<mp.size();i++){
@@ -382,7 +382,7 @@ public  class UserRepositoryImpl implements UserRepository {
 
     @Override
     public List<User> selectBlockedUsers(int limit, int page) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE status=2 LIMIT ? OFFSET ?", limit, page - 1);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE status=2 LIMIT ? OFFSET ?", limit, page);
         List<User> customerDetails=new ArrayList<User>();
 
         for (int i=0;i<mp.size();i++){
@@ -538,7 +538,7 @@ public  class UserRepositoryImpl implements UserRepository {
     @Override
     public List<User> selectAllByNameTypeAhead(String nameKey, String status, int limit, int page) {
         String key = "%" + nameKey + "%";
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE username LIKE ? AND status = ? LIMIT ? OFFSET ?", key, status, limit, page - 1);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE username LIKE ? AND status = ? LIMIT ? OFFSET ?", key, status, limit, page );
         List<User> customerDetails = new ArrayList<User>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -568,9 +568,9 @@ public  class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<String> selectNameByNameTypeAhead(String nameKey, String status, int limit, int page) {
+    public List<String> selectNameByNameTypeAhead(String nameKey, String status) {
         String key = "%" + nameKey + "%";
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT username FROM customer WHERE username LIKE ? AND status = ? LIMIT ? OFFSET ?", key, status, limit, page - 1);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT username FROM customer WHERE username LIKE ? AND status = ? ", key, status);
         List<String> customerDetails = new ArrayList<String>();
 
         for (int i = 0; i < mp.size(); i++) {

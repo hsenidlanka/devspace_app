@@ -43,7 +43,7 @@ public interface UserRepository {
 
     List<User> filterByCity(String city, String status, int limit, int page);
 
-    int countUsers();
+    int countUsers(String status);
 
     boolean checkUsernameUnique(User user);
 
@@ -73,7 +73,7 @@ public interface UserRepository {
 
     List<User> selectAllByNameTypeAhead(String nameKey, String status, int limit, int page);
 
-    List<String> selectNameByNameTypeAhead(String nameKey, String status, int limit, int page);
+    List<String> selectNameByNameTypeAhead(String nameKey, String status);
 
 
 }
