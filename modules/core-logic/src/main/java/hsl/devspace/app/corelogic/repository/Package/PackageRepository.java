@@ -46,4 +46,6 @@ public interface PackageRepository {
     List<Package> paginateSelectAll(int limit, int page);
 
     List<Package> paginateSelectAllByNamePattern(String packName, int limit, int page);
+
+    int countSearchKey(String packageKey);
 }

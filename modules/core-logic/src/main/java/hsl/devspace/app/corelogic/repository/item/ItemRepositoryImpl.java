@@ -434,5 +434,13 @@ public class ItemRepositoryImpl implements ItemRepository {
         return itemDetails;
     }
 
+    @Override
+    public int countSearchKey(String itemKey) {
+        String key = "%" + itemKey + "%";
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT(*) FROM item WHERE name LIKE ?", key);
+        return Integer.parseInt(mp.get(0).get("COUNT(*)").toString());
+    }
+
+
 
 }
