@@ -6,6 +6,7 @@
 
     <%@include file="includes/include.jsp" %>
     <script src="<c:url value="/resources/js/success.js"/>"></script>
+    <script src="<c:url value="/resources/js/jspdf.min.js"/>"></script>
     <%@include file="includes/smart-wizard.jsp" %>
 </head>
 <body>
@@ -70,6 +71,10 @@
                     <div>
                         <label class="lbl-order-details">Used mobile: </label>
                         <label id="lbl-rec-usedMobile"></label>
+                    </div>
+                    <div>
+                        <label class="lbl-order-details">New coupon code: </label>
+                        <label id="lbl-rec-newCoupon"></label>
                     </div>
 
                     <div>
