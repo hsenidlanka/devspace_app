@@ -679,7 +679,7 @@ public class StaffRepositoryImpl implements UserRepository {
     }
 
     public List<User> filterByDesignation(String designation, String status, int limit, int page) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE designation = ? AND status=? LIMIT ? OFFSET ?", designation, status, limit, page - 1);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE designation = ? AND status=? LIMIT ? OFFSET ?", designation, status, limit, page);
         List<User> staffDetails = new ArrayList<User>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -712,7 +712,7 @@ public class StaffRepositoryImpl implements UserRepository {
     }
 
     public List<User> filterByDepartment(String department, String status, int limit, int page) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE department = ? AND status=? LIMIT ? OFFSET ?", department, status, limit, page - 1);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE department = ? AND status=? LIMIT ? OFFSET ?", department, status, limit, page);
         List<User> staffDetails = new ArrayList<User>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -742,7 +742,7 @@ public class StaffRepositoryImpl implements UserRepository {
     }
 
     public List<User> filterByDepartmentDesig(String department, String designation, String status, int limit, int page) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE department = ? AND status=? AND designation = ? LIMIT ? OFFSET ?", department, status, designation, limit, page - 1);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE department = ? AND status=? AND designation = ? LIMIT ? OFFSET ?", department, status, designation, limit, page);
         List<User> staffDetails = new ArrayList<User>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -773,7 +773,7 @@ public class StaffRepositoryImpl implements UserRepository {
     }
 
     public List<User> filterByBranch(String branch, String status, int limit, int page) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE branch = ? AND status=? LIMIT ? OFFSET ?", branch, status, limit, page - 1);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE branch = ? AND status=? LIMIT ? OFFSET ?", branch, status, limit, page);
         List<User> staffDetails = new ArrayList<User>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -807,7 +807,7 @@ public class StaffRepositoryImpl implements UserRepository {
 
     @Override
     public List<User> filterBlockedUsersByCity(String city, int limit, int page) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE address_line3 = ? AND status=2 LIMIT ? OFFSET ?", city, limit, page - 1);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE address_line3 = ? AND status=2 LIMIT ? OFFSET ?", city, limit, page);
         List<User> staffDetails = new ArrayList<User>();
 
         for (int i = 0; i < mp.size(); i++) {
