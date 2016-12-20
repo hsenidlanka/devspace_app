@@ -39,12 +39,17 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
     /*Add new cart*/
     @Override
     public int addCart(double netCost, String username) {
+        String orderId;
         List<Map<String, Object>> max = jdbcTemplate.queryForList("SELECT MAX(id) FROM shopping_cart");
         int maxId = Integer.parseInt(max.get(0).get("MAX(id)").toString());
         List<Map<String, Object>> order = jdbcTemplate.queryForList("SELECT order_id FROM shopping_cart WHERE id=?", maxId);
-        String idO = (order.get(0).get("order_id").toString());
-        OrderIdGenerator ord = new OrderIdGenerator();
-        String orderId = ord.generateOrderId(idO);
+        if (order.get(0).toString().equals("{order_id=}")) {
+            orderId = "PS00001";
+        } else {
+            String idO = (order.get(0).get("order_id").toString());
+            OrderIdGenerator ord = new OrderIdGenerator();
+            orderId = ord.generateOrderId(idO);
+        }
 
         List<Map<String, Object>> usernameCustomer = jdbcTemplate.queryForList("SELECT id FROM customer WHERE username=?", username);
         if (usernameCustomer.size() != 0) {
