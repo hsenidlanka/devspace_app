@@ -44,7 +44,7 @@
 
 
 </head>
-<style>
+<%--<style>
 
     hr {
         margin-top: 12px;
@@ -56,7 +56,8 @@
         /*font-size: 27px;*/
     }
 
-</style>
+
+</style>--%>
 
 <body style="height: 100%">
 <%--<%@include file="../includes/new-header.jsp" %>--%>
@@ -70,8 +71,9 @@
                    cssClass="form-horizontal">
 
             <div class="panel-heading">
-                <p style="font-size: xx-large;text-align: left"><fmt:message key="update.user.title"
-                                                                             bundle="${lang}"/>?</p>
+                <%--<p style="font-size: xx-large;text-align: left">--%>
+                    <img class="icons" src="<c:url value="/resources/images/icons/useredit.png"/>">
+                    <h3 style="display: inline-block;"><fmt:message key="update.user.title" bundle="${lang}"/>?</h3>
             </div>
 
             <div class="panel-body">
