@@ -1,48 +1,55 @@
 $(document).ready(function () {
 
-            $('#tableCustomer').bootstrapTable({
+    var pageLimit = 5;
+    //alert(pageLimit);
+    $.ajax({
+        url: 'https://localhost:8443/admin/users/view/customerTable',
+        data: {"initPage": "0", "pageLimit": pageLimit},
+        success: function (result) {
 
-                url: 'https://localhost:8443/admin/users/view/customerTable',
-                height: 392,
-                pagination: true,
-                pageSize: 8,
+            $('#tableCustomer').bootstrapTable({
+                height: 230,
+                pagination: false,
+                search: false,
+                showColumns: false,
+                showRefresh: false,
                 clickToSelect: true,
                 singleSelect: true,
                 minimumCountColumns: 3,
                 columns: [{
                     //field: 'id',
-                    field:'id',
+                    field: 'id',
                     title: 'ID :',
                     sortable: true,
-                    align:'left',
+                    align: 'left',
                     font: 14
-                },{
+                }, {
                     field: 'username',
                     title: 'Username :',
                     sortable: true,
-                    align:'left',
-                    searchable:true,
+                    align: 'left',
+                    searchable: true,
                     font: 14
                 }, {
                     field: 'first_name',
                     title: 'First Name :',
-                    align:'left',
+                    align: 'left',
                     sortable: true,
                     font: 14
                 }, {
                     field: 'mobile',
                     title: 'Phone No :',
-                    align:'left',
+                    align: 'left',
                     size: 14
                 }, {
                     field: 'address_line3',
                     title: 'City:',
-                    align:'left',
+                    align: 'left',
                     size: 14
-                },{
+                }, {
                     field: 'registered_date',
                     title: 'Registered Date:',
-                    align:'left',
+                    align: 'left',
                     font: 14
                 }, {
                     field: 'Options',
@@ -51,8 +58,10 @@ $(document).ready(function () {
                     font_size: 14,
                     formatter: operateFormatter1,
                     events: operateEvents1
-                }]
+                }],
+                data: result
             });
+        }
 });
 
 function operateFormatter1(value, row, index) {
@@ -112,7 +121,6 @@ window.operateEvents1 = {
 };
 
 //function to bann a customer user selected
-$(document).ready(function(){
     $("#btnBlockCustomer").click(function(){
         var uname = $('#lblBlockCustomerId').text();
         $.ajax({

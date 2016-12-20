@@ -11,8 +11,10 @@
 
 <head>
 
-    <spring:url value="/themes/hsenid/js/staff_table.js" var="js1"/>
-    <script src="${js1}"></script>
+    <spring:url value="/themes/hsenid/js/staff_table.js" var="tableStaff"/>
+    <script src="${tableStaff}"></script>
+    <spring:url value="/themes/hsenid/js/staffPagination.js" var="paginationStaff"/>
+    <script src="${paginationStaff}"></script>
 
 </head>
 <body>
@@ -134,6 +136,10 @@
 <!--staff detail table is included -->
 <table  id="tableStaff">
 </table>
+<div id="paginationStaff" class="text-center">
+</div>
+<div id="pagination2Staff" class="text-center">
+</div>
 
 
 <!--modelto appear when banning a Customer or Staff user -->
@@ -334,7 +340,7 @@
                                 <div class="col-xs-6">
                                     <div class="col-xs-12">
                                         <form:input path="password" class="form-control" id="updates_password" type="password"
-                                                    style="width: 220px"   onchange="validatePassword(update_password)"
+                                                    style="width: 220px"   onchange="validatePassword(updates_password)"
                                                     required="required"/>
                                     </div>
                                 </div>

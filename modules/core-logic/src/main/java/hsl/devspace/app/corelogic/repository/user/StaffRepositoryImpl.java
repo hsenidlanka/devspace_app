@@ -264,7 +264,7 @@ public class StaffRepositoryImpl implements UserRepository {
     public List<User> selectAllByNameTypeAhead(String nameKey, String status, int limit, int page) {
         String key = "%" + nameKey + "%";
 
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE username LIKE ? AND status= ? LIMIT ? OFFSET ?", key, status, limit, page - 1);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE username LIKE ? AND status= ? LIMIT ? OFFSET ?", key, status, limit, page);
         List<User> staffDetails = new ArrayList<User>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -296,10 +296,10 @@ public class StaffRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<String> selectNameByNameTypeAhead(String nameKey, String status, int limit, int page) {
+    public List<String> selectNameByNameTypeAhead(String nameKey, String status) {
         String key = "%" + nameKey + "%";
 
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT username FROM staff WHERE username LIKE ? AND status=? LIMIT ? OFFSET ?", key, status, limit, page - 1);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT username FROM staff WHERE username LIKE ? AND status=?", key, status);
         List<String> staffDetails = new ArrayList<String>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -415,7 +415,6 @@ public class StaffRepositoryImpl implements UserRepository {
     public List<User> filterByCity(String city) {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE address_line3 = ? AND status='active'",city);
         List<User> staffDetails = new ArrayList<User>();
-
         for (int i = 0; i < mp.size(); i++) {
             User staff = new User();
             staff.setId(Integer.parseInt(mp.get(i).get("id").toString()));
@@ -437,18 +436,15 @@ public class StaffRepositoryImpl implements UserRepository {
             staff.setRegDate(Date.valueOf(mp.get(i).get("register_date").toString()));
             staff.setStatus(mp.get(i).get("status").toString());
             staffDetails.add(staff);
-
-
         }
         log.info("{}", staffDetails);
         return staffDetails;
-
     }*/
 
     /*retrieve the total no.of staff members*/
     @Override
-    public int countUsers() {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff ");
+    public int countUsers(String  status) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE status=?",status);
         int count = mp.size();
         log.info("{}", count);
         return count;
@@ -475,7 +471,7 @@ public class StaffRepositoryImpl implements UserRepository {
 
     @Override
     public List<User> selectActiveUsers(int limit, int page) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE status=1 LIMIT ? OFFSET ?", limit, page - 1);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE status=1 LIMIT ? OFFSET ?", limit, page);
         List<User> staffDetails = new ArrayList<User>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -499,7 +495,6 @@ public class StaffRepositoryImpl implements UserRepository {
             staff.setRegDate(Date.valueOf(mp.get(i).get("register_date").toString()));
             staff.setStatus(mp.get(i).get("status").toString());
             staffDetails.add(staff);
-
         }
         log.info("{}", staffDetails);
         return staffDetails;
@@ -507,7 +502,7 @@ public class StaffRepositoryImpl implements UserRepository {
 
     @Override
     public List<User> selectBlockedUsers(int limit, int page) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE status=2 LIMIT ? OFFSET ?", limit, page - 1);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE status=2 LIMIT ? OFFSET ?", limit, page);
         List<User> staffDetails = new ArrayList<User>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -531,7 +526,6 @@ public class StaffRepositoryImpl implements UserRepository {
             staff.setRegDate(Date.valueOf(mp.get(i).get("register_date").toString()));
             staff.setStatus(mp.get(i).get("status").toString());
             staffDetails.add(staff);
-
 
         }
         log.info("{}", staffDetails);
@@ -847,10 +841,3 @@ public class StaffRepositoryImpl implements UserRepository {
 
 
 }
-
-
-
-
-
-
-

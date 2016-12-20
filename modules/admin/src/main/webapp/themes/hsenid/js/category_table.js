@@ -10,7 +10,7 @@ $(document).ready(function () {
         success: function (result) {
 
             $('#tableCategory').bootstrapTable({
-                height: 375,
+                height: 350,
                 pagination: false,
                 search: false,
                 showColumns: false,
@@ -183,7 +183,7 @@ window.operateEvents5 = {
         })
     });
 
-    //typical pagination
+    //typical extra  pagination
     var pag2 = $('#pagination2Cat').simplePaginator({
 
         // the number of total pages

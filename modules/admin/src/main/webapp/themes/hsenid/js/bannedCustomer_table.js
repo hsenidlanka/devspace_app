@@ -1,52 +1,58 @@
 $(document).ready(function () {
 
-    $('#tableBannedcustomer').bootstrapTable({
-
+    var pageLimit = 5;
+    //alert(pageLimit);
+    $.ajax({
         url: 'https://localhost:8443/admin/users/view/bannedcustomerTable',
-        height: 360,
-        pagination: true,
-        pageSize: 7,
-        pageList:[10,20,30],
-        clickToSelect: true,
-        singleSelect: true,
-        minimumCountColumns: 3,
-        columns: [{
-            //field: 'id',
-            field:'id',
-            title: 'ID :',
-            sortable: true,
-            align:'left'
-        },{
-            field: 'username',
-            title: 'Username :',
-            sortable: true,
-            align:'left',
-            searchable:true
-        }, {
-            field: 'first_name',
-            title: 'First Name :',
-            align:'left',
-            sortable: true
-        }, {
-            field: 'mobile',
-            title: 'Phone No :',
-            align:'left'
-        }, {
-            field: 'email',
-            title: 'Email :',
-            align:'left'
-        }, {
-            field: 'address_line3',
-            title: 'City:',
-            align:'left'
-        }, {
-                field: 'Options',
-                title: 'Operations :',
-                align: 'center',
-                formatter: operateFormatter4,
-                events: operateEvents4
-        }]
-    });
+        data: {"initPage": "0", "pageLimit": pageLimit},
+        success: function (result) {
+            $('#tableBannedcustomer').bootstrapTable({
+                height: 230,
+                pagination: false,
+                search: false,
+                showColumns: false,
+                showRefresh: false,
+                clickToSelect: true,
+                singleSelect: true,
+                minimumCountColumns: 3,
+                columns: [{
+                    field: 'id',
+                    title: 'ID :',
+                    sortable: true,
+                    align: 'left'
+                }, {
+                    field: 'username',
+                    title: 'Username :',
+                    sortable: true,
+                    align: 'left',
+                    searchable: true
+                }, {
+                    field: 'first_name',
+                    title: 'First Name :',
+                    align: 'left',
+                    sortable: true
+                }, {
+                    field: 'mobile',
+                    title: 'Phone No :',
+                    align: 'left'
+                }, {
+                    field: 'email',
+                    title: 'Email :',
+                    align: 'left'
+                }, {
+                    field: 'address_line3',
+                    title: 'City:',
+                    align: 'left'
+                }, {
+                    field: 'Options',
+                    title: 'Operations :',
+                    align: 'center',
+                    formatter: operateFormatter4,
+                    events: operateEvents4
+                }],
+                data: result
+            });
+        }
 });
 
 function operateFormatter4(value, row, index) {
@@ -106,7 +112,6 @@ window.operateEvents4 = {
 };
 
 //function to unbann a customer user selected
-$(document).ready(function(){
     $("#btnUnblockCustomer").click(function(){
         var uname = $('#lblUnblockCustomerId').text();
         $.ajax({

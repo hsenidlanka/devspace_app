@@ -1,15 +1,3 @@
-//userAdd js
-$(document).ready(function () {
-    $("#staffDetail").hide();
-
-    $("#staff").click(function(){
-        $("#staffDetail").show();
-    });
-
-    $("#customer").click(function(){
-        $("#staffDetail").hide();
-    });
-
 
 //customerView js
 function showMe(){
@@ -159,25 +147,286 @@ function passwordsEqual(fld1,fld2) {
     return true;
 }
 
+
+//userAdd js
+$(document).ready(function () {
+    $("#staffDetail").hide();
+
+    $("#staff").click(function(){
+        $("#staffDetail").show();
+    });
+
+    $("#customer").click(function(){
+        $("#staffDetail").hide();
+    });
+/////////////////////////////////////////////PAGINATION EXTRA => when page change ////////////////////////////////////////////////////////////////////
+    var pgLimit = 5;
+
+    // Active Customer  pagination in SEARCH scenarios
+    var activeC= $('#pagination2Customer').simplePaginator({
+
+        // the number of total pages
+        totalPages: 7,
+
+        // maximum of visible buttons
+        maxButtonsVisible: 5,
+
+        // page selected
+        currentPage: 1,
+
+        // text labels for buttons
+        nextLabel: 'next',
+        prevLabel: 'prev',
+        firstLabel: 'first',
+        lastLabel: 'last',
+
+        // specify if the paginator click in the currentButton
+        clickCurrentPage: true,
+
+        // called when a page is changed.
+        pageChange: function (page) {
+
+            var pageSend=(page-1)*pgLimit;
+
+            var cname= $("#cnameSearch").val();
+            var from = $('#fromDate').val();
+            var to=$('#toDate').val();
+            var city=$('#citySearch').val();
+
+
+            if((from == "") && (to == "") && (cname == "") && (city == "--Select--")  ){
+                $.ajax({
+                    //type: "POST",
+                    url: "https://localhost:8443/admin/users/view/customerTable",
+                    data: {"initPage": pageSend, "pageLimit": pgLimit},
+                    success: function (msg) {
+
+                        $('#tableCustomer').bootstrapTable('load', msg);
+                    },
+                    error: function (e) {
+                        alert("ajax failed" + e);
+                    }
+                });
+            }
+
+            if((cname != "")) {
+                $.ajax({
+                    url: "https://localhost:8443/admin/userFilters/customerTable/typeheadName/data",
+                    dataType: "json",
+                    data: {"cname": cname, "initPage": pageSend, "pageLimit": pgLimit},
+                    success: function (data) {
+                        $('#tableCustomer').bootstrapTable('load', data);
+                    }
+                })
+            }
+
+            if( (city != "--Select--")  ) {
+                $.ajax({
+                    //type: "POST",
+                    url: "https://localhost:8443/admin/userFilters/customerTable/city",
+                    data: {"city": city, "initPage": pageSend, "pageLimit": pgLimit},
+                    success: function (msg) {
+                        //alert("city ajax" + city);
+                        $('#tableCustomer').bootstrapTable('load', msg);
+                    },
+                    error: function (e) {
+                        alert("ajax failed" + city + e);
+                    }
+                });
+            }
+            if( (from != "") && (to != "")) {
+                $.ajax({
+                    //type: "POST",
+                    url: "https://localhost:8443/admin/userFilters/customerTable/date",
+                    data: {"from": from, "to": to, "name": cname, "initPage":pageSend, "pageLimit": pgLimit},
+                    success: function (msg) {
+                        //alert("ajax succ" + from +name +city);
+                        $('#tableCustomer').bootstrapTable('load', msg);
+                    },
+                    error: function (e) {
+                        alert("ajax failed" + e);
+                    }
+                });
+            }
+
+            if( (from != "") && (to != "") && (city != "--Select--")) {
+                $.ajax({
+                    //type: "POST",
+                    url: "https://localhost:8443/admin/userFilters/customerTable/date/city",
+                    data: {"from": from, "to": to, "city": city, "initPage": pageSend, "pageLimit": pgLimit},
+                    success: function (msg) {
+                        //alert("ajax succ" + from +name +city);
+                        $('#tableCustomer').bootstrapTable('load', msg);
+                    },
+                    error: function (e) {
+                        alert("ajax failed" + e);
+                    }
+                });
+            }
+        }
+    });
+
+    // Active Staff  pagination in SEARCH scenarios
+    var activeS= $('#pagination2Staff').simplePaginator({
+
+       // the number of total pages
+        totalPages: 7,
+
+        // maximum of visible buttons
+        maxButtonsVisible: 5,
+
+        // page selected
+        currentPage: 1,
+
+        // text labels for buttons
+        nextLabel: 'next',
+        prevLabel: 'prev',
+        firstLabel: 'first',
+        lastLabel: 'last',
+
+        // specify if the paginator click in the currentButton
+        clickCurrentPage: true,
+
+        // called when a page is changed.
+        pageChange: function (page) {
+
+            var pageSend=(page-1)*pgLimit;
+            var sname = $("#snameSearch").val();
+
+            $.ajax({
+                url: "https://localhost:8443/admin/userFilters/staffTable/typeheadName/data",
+                dataType: "json",
+                data: {"sname":sname, "initPage": pageSend, "pageLimit": pgLimit},
+                success: function (data) {
+
+                    $('#tableStaff').bootstrapTable('load', data);
+                }
+            })
+        }
+    });
+
+    // InActive Customer  pagination in SEARCH scenarios
+    var inactiveC= $('#pagination2BannedCustomer').simplePaginator({
+
+        // the number of total pages
+        totalPages: 7,
+
+        // maximum of visible buttons
+        maxButtonsVisible: 5,
+
+        // page selected
+        currentPage: 1,
+
+        // text labels for buttons
+        nextLabel: 'next',
+        prevLabel: 'prev',
+        firstLabel: 'first',
+        lastLabel: 'last',
+
+        // specify if the paginator click in the currentButton
+        clickCurrentPage: true,
+
+        // called when a page is changed.
+        pageChange: function (page) {
+
+            var pageSend=(page-1)*pgLimit;
+            var bcname= $("#bcnameSearch").val();
+
+            $.ajax({
+                url: "https://localhost:8443/admin/userFilters/bannedcustomerTable/typeheadName/data",
+                dataType: "json",
+                data: {"bcname":bcname, "initPage": pageSend, "pageLimit": pgLimit},
+                success: function (data) {
+
+                    $('#tableBannedcustomer').bootstrapTable('load', data);
+                }
+            })
+        }
+    });
+
+    //InActive Staff  pagination in SEARCH scenarios
+    var inactiveS= $('#pagination2BannedStaff').simplePaginator({
+
+        // the number of total pages
+        totalPages: 7,
+
+        // maximum of visible buttons
+        maxButtonsVisible: 5,
+
+        // page selected
+        currentPage: 1,
+
+        // text labels for buttons
+        nextLabel: 'next',
+        prevLabel: 'prev',
+        firstLabel: 'first',
+        lastLabel: 'last',
+
+        // specify if the paginator click in the currentButton
+        clickCurrentPage: true,
+
+        // called when a page is changed.
+        pageChange: function (page) {
+
+            var pageSend=(page-1)*pgLimit;
+            var bsname = $("#bsname").val();
+
+            $.ajax({
+                url: "https://localhost:8443/admin/userFilters/bannedStaffTable/typeheadName/data",
+                dataType: "json",
+                data: {"bsname":bsname, "initPage": pageSend, "pageLimit": pgLimit},
+                success: function (data) {
+
+                    $('#tableBannedstaff').bootstrapTable('load', data);
+                }
+            })
+        }
+    });
+
+
+
 /////////////////////////////////////////// TYPEHEAD FUNCTION FOR NAME FILTER ACTIVE USERS/////////////////////////////////
 /*
  * typeahead function to filter data in Customer table
  */
 
-$("#cnameSearch").keyup(function () {
-    var cname = $("#cnameSearch").val();
+    //to get the data in the table according to the typeahead keyup event
+    $("#cnameSearch").keyup(function () {
 
-    $.ajax({
-        url: "https://localhost:8443/admin/userFilters/customerTable/typeheadName/data",
-        data: {"cname": cname},
-        success: function (data) {
-            //alert(" value"+ data);
-            $('#tableCustomer').bootstrapTable('load', data);
+        var cname = $("#cnameSearch").val();
 
-        }
-    })
-});
+            $('#paginationCustomer').hide();
+            $('#pagination2Customer').show();
 
+            $.ajax({
+                url: "https://localhost:8443/admin/userFilters/customerTable/typeheadName/data",
+                dataType: "json",
+                data: {"cname": cname, "initPage": "0", "pageLimit": pgLimit},
+                success: function (data) {
+
+                    $('#tableCustomer').bootstrapTable('load', data);
+                },
+                error: function (e) {
+                    alert("error, load search customer" + e);
+                    console.log("error, load search customer" + e)
+                }
+            });
+
+            /**
+             *Setting the number of pages according to the number of records
+             */
+            $.ajax({
+                url: 'https://localhost:8443/admin/users/CustomerPaginationTable',
+                //data: {"searchCatNm": $("#txtViewSearchCategory").val()},
+                success: function (recCount) {
+
+                    activeC.simplePaginator('setTotalPages', Math.ceil(recCount / 5));
+                }
+            });
+    });
+
+
+    //to get the typeahead name list
     $("#cnameSearch").keyup(function () {
         var cname = $("#cnameSearch").val();
 
@@ -201,15 +450,31 @@ $("#cnameSearch").keyup(function () {
     $("#snameSearch").keyup(function () {
         var sname = $("#snameSearch").val();
 
+        $('#paginationStaff').hide();
+        $('#pagination2Staff').show();
+
         $.ajax({
             url: "https://localhost:8443/admin/userFilters/staffTable/typeheadName/data",
-            data: {"sname": sname},
+            data: {"sname": sname,"initPage": "0", "pageLimit": pgLimit},
             success: function (data) {
                 //alert(" value"+ data);
                 $('#tableStaff').bootstrapTable('load', data);
-
+            },
+            error: function (e) {
+                alert("error, load search staff" + e);
+                console.log("error, load search staff" + e)
             }
-        })
+        });
+        /**
+         *Setting the number of pages according to the number of records
+         */
+        $.ajax({
+            url: 'https://localhost:8443/admin/users/StaffPaginationTable',
+            //data: {"searchCatNm": $("#txtViewSearchCategory").val()},
+            success: function (recCount) {
+                activeS.simplePaginator('setTotalPages', Math.ceil(recCount / 5));
+            }
+        });
     });
 
     $("#snameSearch").keyup(function () {
@@ -251,15 +516,31 @@ $("#cnameSearch").keyup(function () {
     $("#bcnameSearch").keyup(function () {
         var bcname = $("#bcnameSearch").val();
 
+        $('#paginationBannedCustomer').hide();
+        $('#pagination2BannedCustomer').show();
+
         $.ajax({
             url: "https://localhost:8443/admin/userFilters/bannedCustomerTable/typeheadName/data",
-            data: {"bcname": bcname},
+            data: {"bcname": bcname,"initPage": "0", "pageLimit": pgLimit},
             success: function (data) {
                 //alert(" value"+ data);
                 $('#tableBannedcustomer').bootstrapTable('load', data);
-
+            },
+            error: function (e) {
+                alert("error, load search customer" + e);
+                console.log("error, load search customer" + e)
             }
-        })
+        });
+        /**
+         *Setting the number of pages according to the number of records
+         */
+        $.ajax({
+            url: 'https://localhost:8443/admin/users/BannedCustomerPaginationTable',
+            //data: {"searchCatNm": $("#txtViewSearchCategory").val()},
+            success: function (recCount) {
+                inactiveC.simplePaginator('setTotalPages', Math.ceil(recCount / 5));
+            }
+        });
     });
 
 
@@ -281,18 +562,35 @@ $("#cnameSearch").keyup(function () {
         })
     });
 
+    //for banned staff table data filter
     $("#bsname").keyup(function () {
         var bsname = $("#bsname").val();
 
+        $('#paginationBannedStaff').hide();
+        $('#pagination2BannedStaff').show();
+
         $.ajax({
             url: "https://localhost:8443/admin/userFilters/bannedStaffTable/typeheadName/data",
-            data: {"bsname": bsname},
+            data: {"bsname": bsname,"initPage": "0", "pageLimit": pgLimit},
             success: function (data) {
                 //alert(" value"+ data);
                 $('#tableBannedstaff').bootstrapTable('load', data);
-
+            },
+            error: function (e) {
+                alert("error, load search staff" + e);
+                console.log("error, load search staff" + e)
             }
-        })
+        });
+        /**
+         *Setting the number of pages according to the number of records
+         */
+        $.ajax({
+            url: 'https://localhost:8443/admin/users/BannedStaffPaginationTable',
+            //data: {"searchCatNm": $("#txtViewSearchCategory").val()},
+            success: function (recCount) {
+                inactiveS.simplePaginator('setTotalPages', Math.ceil(recCount / 5));
+            }
+        });
     });
 
 ///////////////////////////////////////////  AJAX CALLS TO FILTER ACTIVE USERS  ////////////////////////////////////////////
@@ -305,10 +603,14 @@ $("#cnameSearch").keyup(function () {
         var name=$('#cnameSearch').val();
         var city=$('#citySearch').val();
 
+        $('#paginationCustomer').hide();
+        $('#pagination2Customer').show();
+
         if((from == "") && (to == "") && (name == "") && (city == "--Select--")  ){
             $.ajax({
                 //type: "POST",
                 url: "https://localhost:8443/admin/users/view/customerTable",
+                data: {"initPage": "0", "pageLimit": pgLimit},
                 success: function (msg) {
 
                     $('#tableCustomer').bootstrapTable('load', msg);
@@ -317,13 +619,26 @@ $("#cnameSearch").keyup(function () {
                     alert("ajax failed" + e);
                 }
             });
+            /**
+             *Setting the number of pages according to the number of records
+             */
+            $.ajax({
+                url: 'https://localhost:8443/admin/users/CustomerPaginationTable',
+                //data: {"searchCatNm": $("#txtViewSearchCategory").val()},
+                success: function (recCount) {
+
+                    activeC.simplePaginator('setTotalPages', Math.ceil(recCount / 5));
+                }
+            });
+
+
 
         }
         if( (city != "--Select--")  ){
             $.ajax({
                 //type: "POST",
                 url:"https://localhost:8443/admin/userFilters/customerTable/city",
-                data: {"city":city},
+                data: {"city":city,"initPage": "0", "pageLimit": pgLimit},
                 success: function (msg) {
                     //alert("city ajax" + city);
                     $('#tableCustomer').bootstrapTable('load', msg);
@@ -332,12 +647,23 @@ $("#cnameSearch").keyup(function () {
                     alert("ajax failed" + city +e);
                 }
             });
+            /**
+             *Setting the number of pages according to the number of records
+             */
+            $.ajax({
+                url: 'https://localhost:8443/admin/users/CustomerPaginationTable',
+                //data: {"searchCatNm": $("#txtViewSearchCategory").val()},
+                success: function (recCount) {
+
+                    activeC.simplePaginator('setTotalPages', Math.ceil(recCount / 5));
+                }
+            });
         }
         if( (from != "") && (to != "")){
             $.ajax({
                 //type: "POST",
                 url: "https://localhost:8443/admin/userFilters/customerTable/date",
-                data: {"from": from, "to": to, "name":name},
+                data: {"from": from, "to": to, "name":name,"initPage": "0", "pageLimit": pgLimit},
                 success: function (msg) {
                     //alert("ajax succ" + from +name +city);
                     $('#tableCustomer').bootstrapTable('load', msg);
@@ -346,18 +672,40 @@ $("#cnameSearch").keyup(function () {
                     alert("ajax failed" + e);
                 }
             });
+            /**
+             *Setting the number of pages according to the number of records
+             */
+            $.ajax({
+                url: 'https://localhost:8443/admin/users/CustomerPaginationTable',
+                //data: {"searchCatNm": $("#txtViewSearchCategory").val()},
+                success: function (recCount) {
+
+                    activeC.simplePaginator('setTotalPages', Math.ceil(recCount / 5));
+                }
+            });
         }
         if( (from != "") && (to != "") && (city != "--Select--")){
             $.ajax({
                 //type: "POST",
                 url: "https://localhost:8443/admin/userFilters/customerTable/date/city",
-                data: {"from": from, "to": to, "city":city},
+                data: {"from": from, "to": to, "city":city,"initPage": "0", "pageLimit": pgLimit},
                 success: function (msg) {
                     //alert("ajax succ" + from +name +city);
                     $('#tableCustomer').bootstrapTable('load', msg);
                 },
                 error: function (e) {
                     alert("ajax failed" + e);
+                }
+            });
+            /**
+             *Setting the number of pages according to the number of records
+             */
+            $.ajax({
+                url: 'https://localhost:8443/admin/users/CustomerPaginationTable',
+                //data: {"searchCatNm": $("#txtViewSearchCategory").val()},
+                success: function (recCount) {
+
+                    activeC.simplePaginator('setTotalPages', Math.ceil(recCount / 5));
                 }
             });
         }

@@ -2,15 +2,16 @@
 
 <!--including JSTL to the page -->
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--<%@ taglib prefix="spring" uri="http://java.sun.com/jsp/jstl/core" %>--%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="spring" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <head>
 
-    <spring:url value="/themes/hsenid/js/bannedStaff_table.js" var="js1"/>
-    <script src="${js1}"></script>
+    <spring:url value="/themes/hsenid/js/bannedStaff_table.js" var="tableBannedStaff"/>
+    <script src="${tableBannedStaff}"></script>
+    <spring:url value="/themes/hsenid/js/staffPagination.js" var="paginationStaff"/>
+    <script src="${paginationStaff}"></script>
 
     <script>
         //datepicker
@@ -34,7 +35,6 @@
 <fmt:setBundle basename="messages_en" var="bundle1" />
 
 <!--<div  id="toolbar">-->
-
 <div class="col-xs-12">
     <fieldset class="scheduler-border">
         <legend class="scheduler-border" id="searchCriteria"></legend>
@@ -151,6 +151,11 @@
 
 <table  id="tableBannedstaff">
 </table>
+<div id="paginationBannedStaff" class="text-center">
+</div>
+<div id="pagination2BannedStaff" class="text-center">
+</div>
+
 
 
 <!--modelto appear when replacing a banned Customer or Staff user -->

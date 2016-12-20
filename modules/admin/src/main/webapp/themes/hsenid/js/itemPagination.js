@@ -42,6 +42,7 @@ $(document).ready(function () {
         // called when a page is changed.
         pageChange: function (page ) {
 
+         //   var initpg = ((page - 1) * pgLimit);
             $.ajax({
                 url: 'https://localhost:8443/admin/items/loadSearchItem',
                 dataType: "json",

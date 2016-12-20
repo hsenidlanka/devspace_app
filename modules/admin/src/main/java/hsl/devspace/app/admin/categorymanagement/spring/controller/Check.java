@@ -122,7 +122,6 @@ public class Check {
     }
 
 
-
     /** handler method to retrieve the details of sub-categories to view
      * based on category selected
      * @param data

@@ -1,56 +1,64 @@
 $(document).ready(function () {
 
-    $('#tableBannedstaff').bootstrapTable({
-
+    var pageLimit = 5;
+    //alert(pageLimit);
+    $.ajax({
         url: 'https://localhost:8443/admin/users/view/bannedstaffTable',
-        height: 320,
-        pagination: true,
-        pageSize: 7,
-        clickToSelect: true,
-        singleSelect: true,
-        minimumCountColumns: 3,
-        columns: [{
-            //field: 'id',
-            field:'id',
-            title: 'ID :',
-            sortable: true,
-            align:'left'
-        },{
-            field: 'username',
-            title: 'Username :',
-            sortable: true,
-            align:'left',
-            searchable:true
-        }, {
-            field: 'first_name',
-            title: 'First Name :',
-            align:'left',
-            sortable: true
-        },  {
-            field: 'mobile',
-            title: 'Mobile :',
-            align:'left'
-        }, {
-            field: 'designation',
-            title: 'Designation :',
-            align:'left'
-        }, {
-            field: 'department',
-            title: 'Department:',
-            align:'left'
-        }, {
-            field: 'branch',
-            title: 'Branch :',
-            sortable: true,
-            align:'left'
-        },{
-            field: 'Options',
-            title: 'Operations :',
-            align: 'center',
-            formatter: operateFormatter3,
-            events: operateEvents3
-        }]
-    });
+        data: {"initPage": "0", "pageLimit": pageLimit},
+        success: function (result) {
+            $('#tableBannedstaff').bootstrapTable({
+
+                height: 230,
+                pagination: false,
+                search: false,
+                showColumns: false,
+                showRefresh: false,
+                clickToSelect: true,
+                singleSelect: true,
+                minimumCountColumns: 3,
+                columns: [{
+                    field: 'id',
+                    title: 'ID :',
+                    sortable: true,
+                    align: 'left'
+                }, {
+                    field: 'username',
+                    title: 'Username :',
+                    sortable: true,
+                    align: 'left',
+                    searchable: true
+                }, {
+                    field: 'first_name',
+                    title: 'First Name :',
+                    align: 'left',
+                    sortable: true
+                }, {
+                    field: 'mobile',
+                    title: 'Mobile :',
+                    align: 'left'
+                }, {
+                    field: 'designation',
+                    title: 'Designation :',
+                    align: 'left'
+                }, {
+                    field: 'department',
+                    title: 'Department:',
+                    align: 'left'
+                }, {
+                    field: 'branch',
+                    title: 'Branch :',
+                    sortable: true,
+                    align: 'left'
+                }, {
+                    field: 'Options',
+                    title: 'Operations :',
+                    align: 'center',
+                    formatter: operateFormatter3,
+                    events: operateEvents3
+                }],
+                data: result
+            });
+        }
 });
 
 function operateFormatter3(value, row, index) {
@@ -107,12 +115,10 @@ window.operateEvents3 = {
         $('#lblUnblockStaffId').text(objc7["username"]);
         $('#lblUnblockStaffName').text("Name :"+objc7["first_name"]);
         $('#replaceStaffModal').modal({show:true});
-
     }
 };
 
 //function to unbann a staff user selected
-$(document).ready(function(){
     $("#btnUnblockStaff").click(function(){
         var uname = $('#lblUnblockStaffId').text();
         $.ajax({
