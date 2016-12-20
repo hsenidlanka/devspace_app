@@ -301,7 +301,6 @@ public class FilterController {
         return outStaff;
     }
 
-
 ///////////////////////////////////////////////////////////  INACTIVE USER Filter options handling ///////////////////////////////////////////
 
     /**Below handler methods are for the filter options of
