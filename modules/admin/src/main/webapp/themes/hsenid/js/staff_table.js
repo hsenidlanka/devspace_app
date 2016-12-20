@@ -1,55 +1,63 @@
 $(document).ready(function () {
 
-    $('#tableStaff').bootstrapTable({
-
+    var pageLimit = 5;
+    //alert(pageLimit);
+    $.ajax({
         url: 'https://localhost:8443/admin/users/view/staffTable',
-        height: 357,
-        pagination: true,
-        pageSize: 8,
-        clickToSelect: true,
-        singleSelect: true,
-        minimumCountColumns: 3,
-        columns: [{
-            //field: 'id',
-            field:'id',
-            title: 'ID :',
-            sortable: true,
-            align:'left'
-        },{
-            field: 'username',
-            title: 'Username :',
-            sortable: true,
-            align:'left',
-            searchable:true
-        }, {
-            field: 'first_name',
-            title: 'First Name :',
-            align:'left',
-            sortable: true
-        }, {
-            field: 'mobile',
-            title: 'Mobile :',
-            align:'left'
-        }, {
-            field: 'designation',
-            title: 'Designation :',
-            align:'left'
-        }, {
-            field: 'department',
-            title: 'Department:',
-            align:'left'
-        },{
-            field: 'branch',
-            title: 'Branch:',
-            align:'left'
-        }, {
-            field: 'Options',
-            title: 'Operations :',
-            align: 'center',
-            formatter: operateFormatter2,
-            events: operateEvents2
-        }]
-    });
+        data: {"initPage": "0", "pageLimit": pageLimit},
+        success: function (result) {
+            $('#tableStaff').bootstrapTable({
+
+                height: 230,
+                pagination: false,
+                search: false,
+                showColumns: false,
+                showRefresh: false,
+                clickToSelect: true,
+                singleSelect: true,
+                minimumCountColumns: 3,
+                columns: [{
+                    field: 'id',
+                    title: 'ID :',
+                    sortable: true,
+                    align: 'left'
+                }, {
+                    field: 'username',
+                    title: 'Username :',
+                    sortable: true,
+                    align: 'left',
+                    searchable: true
+                }, {
+                    field: 'first_name',
+                    title: 'First Name :',
+                    align: 'left',
+                    sortable: true
+                }, {
+                    field: 'mobile',
+                    title: 'Mobile :',
+                    align: 'left'
+                }, {
+                    field: 'designation',
+                    title: 'Designation :',
+                    align: 'left'
+                }, {
+                    field: 'department',
+                    title: 'Department:',
+                    align: 'left'
+                }, {
+                    field: 'branch',
+                    title: 'Branch:',
+                    align: 'left'
+                }, {
+                    field: 'Options',
+                    title: 'Operations :',
+                    align: 'center',
+                    formatter: operateFormatter2,
+                    events: operateEvents2
+                }],
+                data: result
+            });
+        }
 });
 
 function operateFormatter2(value, row, index) {
@@ -113,7 +121,6 @@ window.operateEvents2 = {
 };
 
 //function to bann a staff user selected
-$(document).ready(function(){
     $("#btnBlockStaff").click(function(){
         var uname = $('#lblBlockStaffId').text();
         $.ajax({

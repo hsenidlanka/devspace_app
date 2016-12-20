@@ -1,10 +1,10 @@
 $(document).ready(function () {
     var value1=$("table").attr("data-value");
-    alert("category"+value1);
+    //alert("category"+value1);
 
     var pgLimit = 3;
     var subcatName = $("#txtViewSearchSubCategory").val();
-    alert("subcatName"+subcatName);
+    //alert("subcatName"+subcatName);
 
     $.ajax({
         url: 'https://localhost:8443/admin/view/subcategoryTable/'+value1,

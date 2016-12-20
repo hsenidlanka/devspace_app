@@ -183,7 +183,7 @@ window.operateEvents5 = {
         })
     });
 
-    //typical pagination
+    //typical extra  pagination
     var pag2 = $('#pagination2Cat').simplePaginator({
 
         // the number of total pages
