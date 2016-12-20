@@ -95,7 +95,7 @@
                 <fieldset class="scheduler-border">
                     <legend class="scheduler-border"><fmt:message key="orderprocess.form.legend" bundle="${bundle1}"/></legend>
 
-                    <!--table of package details-->
+                    <!--table of order details-->
                     <table id="tblOrders">
 
                     </table>
@@ -147,7 +147,7 @@
 
 <!--Modal for edit package-->
 <div class="modal fade" id="ordrEditModal">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header item-modal-header-style">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
@@ -164,67 +164,91 @@
                     <div class="form-group">
 
                         <div class="row">
-                            <div class="col-xs-3" align="right">
+                            <div class="col-xs-4" align="right">
                                 <label><fmt:message key="orderprocess.form.ordr.id" bundle="${bundle1}"/></label>
                             </div>
                             <div class="col-xs-4">
-                                <form:input class="form-control" type="text" id="txtEditPkgNm" path="" readonly="true"/>
+                                <form:input class="form-control" type="text" id="txtOrdrId" path="" readonly="true"/>
                             </div>
                             <div class="col-xs-4">
-                                <span id="pkgNmErrEdt" class="input-group-error"></span>
+                                <span id="" class="input-group-error"></span>
                             </div>
                         </div>
-
-                        <br><br>
+                        <br>
 
                         <div class="row">
-                            <div class="col-xs-3" align="right">
-                                <label><fmt:message key="package.packageedit.form.packagedetails" bundle="${bundle1}"/> </label>
+                            <div class="col-xs-4" align="right">
+                                <label><fmt:message key="orderprocess.form.order.customer.id" bundle="${bundle1}"/></label>
                             </div>
-                            <div class="row col-xs-9" style="padding-left: 30px;">
-
-                                <div class="row col-xs-12">
-
-                                </div>
-
+                            <div class="col-xs-4">
+                                <form:input class="form-control" type="text" id="txtOrdrCusId" path="" readonly=""/>
+                            </div>
+                            <div class="col-xs-4">
+                                <span id="" class="input-group-error"></span>
                             </div>
                         </div>
-
-                        <br><br>
+                        <br>
 
                         <div class="row">
-                            <div class="col-xs-3" align="right">
-                                <label><fmt:message key="package.packageeditform.packageimages" bundle="${bundle1}"/></label>
+                            <div class="col-xs-4" align="right">
+                                <label><fmt:message key="orderprocess.form.order.guest.id" bundle="${bundle1}"/></label>
                             </div>
-                            <div class="col-xs-5">
-                                <form:input type="file" class="file_upload btn btn-default" path="" id="btnUpldImageEdit" value="Browse" />
-                                <br>
+                            <div class="col-xs-4">
+                                <form:input class="form-control" type="text" id="txtOrdrGstId" path="" readonly=""/>
+                            </div>
+                            <div class="col-xs-4">
+                                <span id="" class="input-group-error"></span>
                             </div>
                         </div>
-                        <br><br>
+                        <br>
 
                         <div class="row">
-                            <div class="col-xs-3" align="right">
-                                <label><fmt:message key="package.packageeditform.packageprice" bundle="${bundle1}"/> </label>
+                            <div class="col-xs-4" align="right">
+                                <label><fmt:message key="orderprocess.form.order.date" bundle="${bundle1}"/></label>
                             </div>
-                            <div class="col-xs-3">
-                                <form:input type="text" class="form-control price" id="editPkgPrice" value="0.00" path=""/>
+                            <div class="col-xs-4">
+                                <form:input class="form-control" type="date" id="txtOrdrDate" path="" readonly=""/>
                             </div>
-                            <div class="col-xs-3">
-                                <span id="pkgPriceErrEdt" class="input-group-error"></span>
+                            <div class="col-xs-4">
+                                <span id="" class="input-group-error"></span>
                             </div>
                         </div>
+                        <br>
+
+                        <div class="row">
+                            <div class="col-xs-4" align="right">
+                                <label><fmt:message key="orderprocess.form.order.time" bundle="${bundle1}"/></label>
+                            </div>
+                            <div class="col-xs-4">
+                                <form:input class="form-control" type="time" id="txtOrdrtime" path="" readonly=""/>
+                            </div>
+                            <div class="col-xs-4">
+                                <span id="" class="input-group-error"></span>
+                            </div>
+                        </div>
+                        <br>
+
+                        <div class="row">
+                            <div class="col-xs-4" align="right">
+                                <label><fmt:message key="orderprocess.form.order.price" bundle="${bundle1}"/> </label>
+                            </div>
+                            <div class="col-xs-4">
+                                <form:input type="text" class="form-control price" id="txtOrdrPrice" value="0.00" path=""/>
+                            </div>
+                            <div class="col-xs-4">
+                                <span id="ordrPriceErr" class="input-group-error"></span>
+                            </div>
+                        </div>
+                        <br>
 
                     </div>
-
-
 
             </div>
             <div style="text-align: center; z-index: 50000; width: 50%; margin: auto;" id="toaster"></div>
             <div class="modal-footer" align="right">
-                <form:button class="btn btn-success" type="submit" value="Yes" id="btnUpdtPkg"><fmt:message key="package.packageedit.form.button.submit" bundle="${bundle1}"/>
+                <form:button class="btn btn-success" type="submit" value="Yes" id="btnUpdtOrdr"><fmt:message key="orderprocess.form.button.submit" bundle="${bundle1}"/>
                 </form:button>
-                <form:button class="btn btn-success" type="reset" value="cancel" id="btnUpPkgCancel" data-dismiss="modal"><fmt:message key="package.packageedit.form.button.reset" bundle="${bundle1}"/>
+                <form:button class="btn btn-success" type="reset" value="cancel" id="btnOrdrRst" data-dismiss="modal"><fmt:message key="package.packageedit.form.button.reset" bundle="${bundle1}"/>
                 </form:button>
             </div>
             </fieldset>

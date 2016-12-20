@@ -40,13 +40,13 @@ $(document).ready(function () {
         clickCurrentPage: true,
 
         // called when a page is changed.
-        pageChange: function (page ) {
+        pageChange: function (page) {
 
-         //   var initpg = ((page - 1) * pgLimit);
+            var initpg = (page-1)*pgLimit;
             $.ajax({
                 url: 'https://localhost:8443/admin/items/loadSearchItem',
                 dataType: "json",
-                data: {"initPage": page, "pgLimit": pgLimit},
+                data: {"initPage": initpg, "pgLimit": pgLimit},
                 success: function (data) {
                     $('#tblItems').bootstrapTable('load', data);
                 }

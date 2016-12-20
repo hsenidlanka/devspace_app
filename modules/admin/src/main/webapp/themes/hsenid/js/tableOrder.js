@@ -10,9 +10,11 @@ $(document).ready(function () {
         success: function (result) {*/
 
             $("#tblOrders").bootstrapTable({
+                dataType:'JSON',
+                url: 'https://localhost:8443/admin/orders/view/orderTable',
                 height: 400,
                 striped: true,
-                pagination: false,
+                pagination: true,
                 pageSize: 10,
                 pageList: [10, 25, 50, 100, 200],
                 search: false,
@@ -20,7 +22,7 @@ $(document).ready(function () {
                 showRefresh: false,
                 minimumCountColumns: 2,
                 columns: [{
-                    field: 'id',
+                    field: 'order_id',
                     title: 'Order ID',
                     sortable: true
                 },{
@@ -40,6 +42,16 @@ $(document).ready(function () {
                 },{
                     field: 'guest_id',
                     title: 'Guest ID',
+                    align: 'right',
+                    sortable: true
+                },{
+                    field: 'order_time',
+                    title: 'Time',
+                    align: 'right',
+                    sortable: true
+                },{
+                    field: 'order_date',
+                    title: 'Date',
                     align: 'right',
                     sortable: true
                 }, {

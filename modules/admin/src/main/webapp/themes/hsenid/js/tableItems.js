@@ -128,10 +128,11 @@ $(document).ready(function () {
         // called when a page is changed.
         pageChange: function (page) {
 
+            var initpg = (page-1)*pgLimit;
             $.ajax({
                 url: 'https://localhost:8443/admin/items/loadSearchItem',
                 dataType: "json",
-                data: {"srchItmNm": $("#txtViewSearchItem").val(), "initPage": page, "pgLimit": pgLimit},
+                data: {"srchItmNm": $("#txtViewSearchItem").val(), "initPage": initpg, "pgLimit": pgLimit},
                 success: function (data) {
 
                     $('#tblItems').bootstrapTable('load', data);
@@ -144,7 +145,14 @@ $(document).ready(function () {
      * load data on request typeahead
      **/
     $("#btnViewSearchItem").click(function () {
+        $.ajax({
+            url: 'https://localhost:8443/admin/items/itemPaginationTable',
+            // data: {"srchItmNm": $("#txtViewSearchItem").val()},
+            success: function (recCount) {
 
+                pag2.simplePaginator('setTotalPages', Math.ceil(recCount / 10));
+            }
+        })
         if ($("#txtViewSearchItem").val().length > 0) {
 
             $('#pagination').hide();
@@ -156,7 +164,7 @@ $(document).ready(function () {
                 data: {"srchItmNm": $("#txtViewSearchItem").val(), "pgLimit": pgLimit, "initPage": "1"},
                 success: function (data) {
                     $("#tblItems").bootstrapTable('load', data);
-                    console.log(data);
+                   // console.log(data);
                 },
                 error: function (e) {
                     alert("error, load search item" + e);
@@ -167,14 +175,14 @@ $(document).ready(function () {
             /**
              *Setting the number of pages according to the number of records
              */
-            $.ajax({
+          /*  $.ajax({
                 url: 'https://localhost:8443/admin/items/itemPaginationTable',
-                data: {"srchItmNm": $("#txtViewSearchItem").val()},
+               // data: {"srchItmNm": $("#txtViewSearchItem").val()},
                 success: function (recCount) {
 
                     pag2.simplePaginator('setTotalPages', Math.ceil(recCount / 10));
                 }
-            })
+            })*/
         }
         else {
             $('#pagination').show();

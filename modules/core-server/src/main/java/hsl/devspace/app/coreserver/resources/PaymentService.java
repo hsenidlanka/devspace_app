@@ -32,12 +32,14 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * Created by Kasun Dinesh on 11/16/16.
+ * This class handles the requests related to the checkout process.
  */
 
-@Path("/payment")
+@Path("/payments")
 public class PaymentService {
     private static final Logger log = LoggerFactory.getLogger(PaymentService.class);
     ApplicationContext context = Context.appContext;
@@ -111,12 +113,26 @@ public class PaymentService {
                     .sendChargingRequest(directDebitRequest);
 
             String paymentStatusCode = chargingRequestResponse.getStatusCode();
-
+            log.info("payment status: {}", paymentStatusCode);
             switch (paymentStatusCode) {
                 case "S1000":
                     shoppingCartRepository.generateCartProcess(Double.parseDouble(amount), username, itemsListMap, delivery, paymentMethod);
                     log.info("new checkout processed successfully.");
-                    couponRepository.add("",subscriberId.replaceFirst("94","0"));
+                    if (couponCode != null || !couponCode.equals("")) {
+                        couponRepository.changeStatusToUsed(couponCode);
+                    }
+                    // Generate a new coupon code
+                    String newCouponCode;
+                    int newCouponStatus = 0;
+                    while (true) {
+                        newCouponCode = generateCouponCode("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUWXYZ123456789", 20);
+                        newCouponStatus = couponRepository.add(newCouponCode, subscriberId.replaceFirst("94", "0"));
+                        // Iteration continues if the generated coupon code exists in the database
+                        if (newCouponStatus != 2 && newCouponStatus > 0) {
+                            // Break the iteration if the generated coupon code is unique and valid
+                            break;
+                        }
+                    }
                     successMessage.setStatus("success");
                     successMessage.setCode(Response.Status.OK.getStatusCode());
                     successMessage.addLink(url, "self");
@@ -125,6 +141,8 @@ public class PaymentService {
                     dataObj.put("paymentAmount", amount);
                     dataObj.put("internalTrxId", chargingRequestResponse.getInternalTrxId());
                     dataObj.put("timeStamp", chargingRequestResponse.getTimeStamp());
+                    dataObj.put("orderId","ORD123456");
+                    dataObj.put("couponCode", newCouponCode);
                     successMessage.addData(dataObj);
                     URL smsUrl = new URL(DEVSPACE_BASE_URL + propertyReader.readProperty("sms.send.url"));
                     MtSmsResp smsResponse = sendPaymentSmsNotification(subscriberId, amount, applicationId, password, smsUrl);
@@ -133,14 +151,16 @@ public class PaymentService {
                         successMessage.setMessage("payment succeeded but failed to send the sms notification");
                     }
                     log.info("sms status: {}", smsResponse.getStatusCode());
-                    response = Response.status(Response.Status.OK).entity(successMessage).build();
+                    response = Response.status(Response.Status.OK).entity(successMessage).
+                            header("Access-Control-Allow-Origin", headerPropertyReader.readProperty("Access-Control-Allow-Origin")).build();
                     break;
                 case "E1308":
                     errorMessage.setStatus("error");
                     errorMessage.setErrorCode("E1308");
                     errorMessage.setErrorMessage("no enough credit");
                     errorMessage.setDescription("there is not enough balance in the user's account.");
-                    response = Response.status(Response.Status.OK).entity(errorMessage).build();
+                    response = Response.status(Response.Status.OK).entity(errorMessage).
+                            header("Access-Control-Allow-Origin", headerPropertyReader.readProperty("Access-Control-Allow-Origin")).build();
                     break;
                 case "E1313":
                     errorMessage.setStatus("error");
@@ -148,21 +168,24 @@ public class PaymentService {
                     errorMessage.setErrorMessage("authentication failed");
                     errorMessage.setDescription("no such active application with given applicationId" +
                             " or no active service provider or the given password in the request is invalid.");
-                    response = Response.status(Response.Status.OK).entity(errorMessage).build();
+                    response = Response.status(Response.Status.OK).entity(errorMessage).
+                            header("Access-Control-Allow-Origin", headerPropertyReader.readProperty("Access-Control-Allow-Origin")).build();
                     break;
                 case "E1326":
                     errorMessage.setStatus("error");
                     errorMessage.setErrorCode("E1326");
                     errorMessage.setErrorMessage("insufficient balance");
                     errorMessage.setDescription("account balance is not sufficient to perform the transaction.");
-                    response = Response.status(Response.Status.OK).entity(errorMessage).build();
+                    response = Response.status(Response.Status.OK).entity(errorMessage).
+                            header("Access-Control-Allow-Origin", headerPropertyReader.readProperty("Access-Control-Allow-Origin")).build();
                     break;
                 default:
                     errorMessage.setStatus("error");
                     errorMessage.setErrorCode("E1601");
                     errorMessage.setErrorMessage("unexpected error");
                     errorMessage.setDescription("system experienced an unexpected error.");
-                    response = Response.status(Response.Status.OK).entity(errorMessage).build();
+                    response = Response.status(Response.Status.OK).entity(errorMessage)
+                            .header("Access-Control-Allow-Origin", headerPropertyReader.readProperty("Access-Control-Allow-Origin")).build();
             }
         } catch (MalformedURLException e) {
             log.error("Error processing json response ", e);
@@ -185,5 +208,22 @@ public class PaymentService {
         SmsRequestSender requestSender = new SmsRequestSender(url);
         MtSmsResp smsResp = requestSender.sendSmsRequest(mtSmsReq);
         return smsResp;
+    }
+
+    // Generate a new coupon code
+    private String generateCouponCode(String combinations, int length) {
+        // Possible characters in the coupon code
+        String stringCombinations = combinations;
+        // Get possible characters to a char array
+        char[] charCombinations = stringCombinations.toCharArray();
+        StringBuilder stringBuilder = new StringBuilder();
+        Random random = new Random();
+        // 20: Length of the coupon code
+        for (int i = 0; i < length; i++) {
+            char randomChar = charCombinations[random.nextInt(charCombinations.length)];
+            stringBuilder.append(randomChar);
+        }
+        String couponCode = stringBuilder.toString();
+        return couponCode;
     }
 }

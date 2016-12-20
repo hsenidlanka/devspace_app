@@ -99,12 +99,16 @@ public class PaymentController {
                         }
                         itemsJsonObj.put("topping_name2", value);
                         break;
+                    case "itemInstructs":
+                        value = itemEntry.getValue();
+                        itemsJsonObj.put("instructions", value);
+                        break;
                 }
             }
             itemsJsonArray.add(itemsJsonObj);
         }
         jsonObject.put("items", itemsJsonArray);
-
+        logger.info("ITEMS: {}", itemsJsonArray);
         String paymentMethod = session.getAttribute("deliveryMethod").toString();
         if (paymentMethod.equals("Door Step")) {
             JSONArray jsonArray = (JSONArray) session.getAttribute("deliveryDetails");
@@ -127,7 +131,7 @@ public class PaymentController {
             deliveryJsonObj.put("recepientName", recepientName);
             deliveryJsonObj.put("recepientAddress", recepientAddress);
             deliveryJsonObj.put("date", deliveryData.get("date").toString());
-            logger.info("DATE {}", deliveryData.get("date").toString());
+//            logger.info("DATE {}", deliveryData.get("date").toString());
             deliveryJsonObj.put("time", deliveryData.get("time").toString());
             if (deliveryData.get("description") == null || deliveryData.get("description") == "") {
                 deliveryJsonObj.put("description", "");
@@ -173,6 +177,7 @@ public class PaymentController {
                 receiptData.put("orderStatus", "Paid");
                 receiptData.put("paymentOption", "Mobile");
                 receiptData.put("usedMobile", mobileNo);
+                receiptData.put("newCouponCode",responseMessage.getData().get(0).get("couponCode"));
 
                 session.setAttribute("receiptData", receiptData);
 

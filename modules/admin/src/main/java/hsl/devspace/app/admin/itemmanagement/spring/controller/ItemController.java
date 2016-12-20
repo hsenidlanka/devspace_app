@@ -370,6 +370,7 @@ public class ItemController {
     **/
     @RequestMapping(value = "/itemPaginationTable", method = RequestMethod.GET)
     public @ResponseBody int loadPagination(){
+        LOGGER.trace("total item record count{}", item.count());
         return item.count();
     }
 }
