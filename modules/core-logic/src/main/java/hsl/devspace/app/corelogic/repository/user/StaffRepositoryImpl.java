@@ -178,9 +178,9 @@ public class StaffRepositoryImpl implements UserRepository {
     public int update(User user) throws TransientDataAccessResourceException, SQLException {
 
 
-        String sql = "UPDATE staff SET title=?, password =sha1(?), first_name=? ,last_name=? ,email=?, mobile=? ,address_line1=?, address_line2=? ,address_line3=?, designation=?, department=? ,branch=? WHERE username = ? ";
+        String sql = "UPDATE staff SET  password =sha1(?), first_name=? ,last_name=? ,email=?, mobile=? ,address_line1=?, address_line2=? ,address_line3=?, designation=?, department=? ,branch=? WHERE username = ? ";
         log.info("going to update");
-        int count = jdbcTemplate.update(sql, new Object[]{user.getTitle(), user.getPassword(), user.getFirstName(), user.getLastName(), user.getEmail(),
+        int count = jdbcTemplate.update(sql, new Object[]{user.getPassword(), user.getFirstName(), user.getLastName(), user.getEmail(),
                 user.getMobile(), user.getAddressL1(), user.getAddressL2(), user.getAddressL3(), user.getDesignation(), user.getDepartment(), user.getBranch(), user.getUsername()});
         log.info("{}", count);
         return count;
