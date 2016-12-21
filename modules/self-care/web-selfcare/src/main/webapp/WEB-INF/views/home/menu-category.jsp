@@ -56,7 +56,7 @@
 <%--To change--%>
 
                                                     <c:set var="itemName" value="${fn:replace(itemData.name, ' ', '')}" />
-                                                    <img class="menu-images" src="${itemImageUrl}/${itemName}.jpg">
+                                                    <img class="menu-images" src="${itemImageUrl}/${itemName}.jpg" width="200px" height="200px">
                                                     <figcaption class="caption">
                                                         <input type="hidden" id="menu-item-desc"
                                                                value="<c:out value="${itemData.description}"/>"/>
