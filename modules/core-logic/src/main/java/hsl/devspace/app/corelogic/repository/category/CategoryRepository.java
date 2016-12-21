@@ -30,6 +30,8 @@ public interface CategoryRepository {
 
     int count();
 
+    public int countForCat(String catId);
+
     int update(String name, String description);
 
     public int updateCategory(Category cat);

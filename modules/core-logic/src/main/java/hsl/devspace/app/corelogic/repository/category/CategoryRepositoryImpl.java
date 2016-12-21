@@ -131,7 +131,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
 
     public List<Category> selectAllTypeAhead(String catName, int limit, int page) {
         String key = "%" + catName + "%";
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category WHERE name LIKE ? LIMIT ? OFFSET ?", key, limit, page - 1);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category WHERE name LIKE ? LIMIT ? OFFSET ?", key, limit, page);
         List<Category> categories = new ArrayList<Category>();
 
         for (Map<String, Object> aMp : mp) {
@@ -241,6 +241,9 @@ public class CategoryRepositoryImpl implements CategoryRepository {
         int count = Integer.parseInt(mp.get(0).get("total").toString());
         log.info("{}", count);
         return count;
+    }
+    public int countForCat(String catId){
+        return 0;
     }
 
     /*update category details-name,description*/
@@ -414,7 +417,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     }
 
     public List<Category> paginateSelectAll(int limit, int page) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category LIMIT ? OFFSET ?", limit, page - 1);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category LIMIT ? OFFSET ?", limit, page);
         List<Category> categories = new ArrayList<Category>();
 
         for (Map<String, Object> aMp : mp) {
