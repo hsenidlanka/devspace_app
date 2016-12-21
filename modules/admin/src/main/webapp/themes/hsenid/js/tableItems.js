@@ -1,12 +1,12 @@
 $(document).ready(function () {
 
     var pgLimit = 10;
-    var pkgName = $("#txtViewSearchItem").val();
+    var itmName = $("#txtViewSearchItem").val();
 
     $.ajax({
         url: "https://localhost:8443/admin/items/loadSearchItem",
         dataType: "json",
-        data: {"srchItmNm": pkgName, "initPage": "1", "pgLimit": pgLimit},
+        data: {"srchItmNm": itmName, "initPage": "1", "pgLimit": pgLimit},
         success: function (result) {
 
             $('#tblItems').bootstrapTable({
@@ -85,7 +85,7 @@ $(document).ready(function () {
     });
 
     /*
-     * typeahead function for load itemnames
+     * typeahead function for load item names
      * */
     $("#txtViewSearchItem").keyup(function () {
 
@@ -145,14 +145,14 @@ $(document).ready(function () {
      * load data on request typeahead
      **/
     $("#btnViewSearchItem").click(function () {
-        $.ajax({
-            url: 'https://localhost:8443/admin/items/itemPaginationTable',
-            // data: {"srchItmNm": $("#txtViewSearchItem").val()},
+        /*$.ajax({
+            url: 'https://localhost:8443/admin/items/itemSearchCount',
+             data: {"srchItmNm": $("#txtViewSearchItem").val()},
             success: function (recCount) {
 
                 pag2.simplePaginator('setTotalPages', Math.ceil(recCount / 10));
             }
-        })
+        })*/
         if ($("#txtViewSearchItem").val().length > 0) {
 
             $('#pagination').hide();
@@ -175,14 +175,14 @@ $(document).ready(function () {
             /**
              *Setting the number of pages according to the number of records
              */
-          /*  $.ajax({
-                url: 'https://localhost:8443/admin/items/itemPaginationTable',
-               // data: {"srchItmNm": $("#txtViewSearchItem").val()},
-                success: function (recCount) {
+             $.ajax({
+            url: 'https://localhost:8443/admin/items/itemSearchCount',
+             data: {"srchItmNm": $("#txtViewSearchItem").val()},
+            success: function (recCount) {
 
-                    pag2.simplePaginator('setTotalPages', Math.ceil(recCount / 10));
-                }
-            })*/
+                pag2.simplePaginator('setTotalPages', Math.ceil(recCount / 10));
+            }
+        })
         }
         else {
             $('#pagination').show();
