@@ -14,14 +14,16 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
 import javax.swing.*;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLIntegrityConstraintViolationException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/category")
@@ -242,14 +244,10 @@ public class CategoryController {
     //handler method to retrieve the details of categories to view
     @RequestMapping(value = "/view/categoryTable", method = RequestMethod.GET)
     public @ResponseBody List<Map<String, Object>> viewCategories(@ModelAttribute("category")  Category category,
-                                                                  HttpServletRequest request) {
+                                                                  @RequestParam("initPage") String initPage,
+                                                                  @RequestParam("pgLimit") String  pgLimit) {
 
         LOG.trace("Inside the category table load method");
-
-        String searchCatNm=request.getParameter("searchCatNm");
-        LOG.info("searchCatName{}",searchCatNm);
-        String initPage =request.getParameter("initPage");
-        String pgLimit=request.getParameter("pgLimit");
 
         //cast the initial page and page limits in pagination to integers
         int initPg = Integer.parseInt(initPage);
@@ -259,20 +257,41 @@ public class CategoryController {
 
         List<Map<String, Object>> outc = new ArrayList<Map<String, Object>>();
 
-        if( searchCatNm !=null){
-            LOG.trace("Category name SELECTED");
-            List<Category> categoryList1= categoryRepository.selectAllTypeAhead(searchCatNm,limitPg,initPg);
-            LOG.info("category with name selected {}",categoryList1);
-            outc=unSerializeCat(category,categoryList1);
-
-        }else {
             LOG.trace("Category name not selected");
             List<Category> categoryList2= categoryRepository.paginateSelectAll(limitPg,initPg);
-            LOG.info("category list returned from query{}",categoryList2);
+            LOG.error("CATEGORY LIST WITHOUT SEARCH NAME {}", categoryList2);
             outc=unSerializeCat(category,categoryList2);
-
-        }
+            LOG.error("CATEGORY LIST WITHOUT SEARCH NAME AFTER SERIALIZE {}",outc);
         return outc;
+    }
+
+
+    //handler method to retrieve the details of categories to view
+    @RequestMapping(value = "/view/categoryTable/catName", method = RequestMethod.GET)
+    public @ResponseBody List<Map<String, Object>> viewCategoriesNameFiltered(@ModelAttribute("category")  Category category,
+                                                                              @RequestParam("initPage") String initPage,
+                                                                              @RequestParam("pgLimit") String  pgLimit,
+                                                                              @RequestParam("searchCatNm") String searchCatNm) {
+
+        LOG.trace("Inside the category table load method with name search");
+        LOG.info("searchCatName{}",searchCatNm);
+
+        //cast the initial page and page limits in pagination to integers
+        int initPg = Integer.parseInt(initPage);
+        int limitPg = Integer.parseInt(pgLimit);
+
+        LOG.info("page limits{} {}", initPage, limitPg);
+
+        List<Map<String, Object>> outc2 = new ArrayList<Map<String, Object>>();
+
+            LOG.trace("Category name SELECTED");
+            List<Category> categoryList1= categoryRepository.selectAllTypeAhead(searchCatNm,limitPg,initPg);
+            LOG.error("CATEGORY LIST WITH SEARCH NAME ADDED {}", categoryList1);
+            outc2=unSerializeCat(category,categoryList1);
+            LOG.error("CATEGORY LIST AFTER SERIALIZE {}",outc2);
+
+
+        return outc2;
     }
 
     private List<Map<String, Object>> unSerializeCat(Category category,  List<Category> catList ){

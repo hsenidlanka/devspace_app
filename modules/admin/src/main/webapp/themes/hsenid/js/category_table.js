@@ -6,7 +6,7 @@ $(document).ready(function () {
 
     $.ajax({
         url: 'https://localhost:8443/admin/category/view/categoryTable',
-        data: {"searchCatNm":catName, "initPage": "1", "pgLimit": pgLimit},
+        data: {"initPage": "0", "pgLimit": pgLimit},
         success: function (result) {
 
             $('#tableCategory').bootstrapTable({
@@ -183,91 +183,5 @@ window.operateEvents5 = {
         })
     });
 
-    //typical extra  pagination
-    var pag2 = $('#pagination2Cat').simplePaginator({
 
-        // the number of total pages
-        totalPages: 7,
-
-        // maximum of visible buttons
-        maxButtonsVisible: 5,
-
-        // page selected
-        currentPage: 1,
-
-        // text labels for buttons
-        nextLabel: 'next',
-        prevLabel: 'prev',
-        firstLabel: 'first',
-        lastLabel: 'last',
-
-        // specify if the paginator click in the currentButton
-        clickCurrentPage: true,
-
-        // called when a page is changed.
-        pageChange: function (page) {
-
-            $.ajax({
-                url: 'https://localhost:8443/admin/category/view/categoryTable',
-                dataType: "json",
-                data: {"searchCatNm": $("#txtViewSearchCategory").val(), "initPage": page, "pgLimit": pgLimit},
-                success: function (data) {
-
-                    $('#tableCategory').bootstrapTable('load', data);
-                }
-            })
-        }
-    });
-
-    /*
-     * load data on request typeahead
-     **/
-    $("#btnViewSearchCat").click(function () {
-
-        if ($("#txtViewSearchCategory").val().length > 0) {
-
-            $('#paginationCat').hide();
-            $('#pagination2Cat').show();
-
-            $.ajax({
-                url: "https://localhost:8443/admin/category/view/categoryTable",
-                datatype: "JSON",
-                data: {"searchCatNm": $("#txtViewSearchCategory").val(), "pgLimit": pgLimit, "initPage": "1"},
-                success: function (data) {
-                    $("#tableCategory").bootstrapTable('load', data);
-                    console.log(data);
-                },
-                error: function (e) {
-                    alert("error, load search item" + e);
-                    console.log("error, load search item" + e)
-                }
-            });
-
-            /**
-             *Setting the number of pages according to the number of records
-             */
-            $.ajax({
-                url: 'https://localhost:8443/admin/category/CategoryPaginationTable',
-                //data: {"searchCatNm": $("#txtViewSearchCategory").val()},
-                success: function (recCount) {
-
-                    pag2.simplePaginator('setTotalPages', Math.ceil(recCount / 3));
-                }
-            })
-        }
-        else {
-            $('#paginationCat').show();
-            $('#pagination2Cat').hide();
-
-            $.ajax({
-                url: 'https://localhost:8443/admin/category/view/categoryTable"',
-                dataType: 'JSON',
-                data: {"searchCatNm": $("#txtViewSearchCategory").val(),"initPage": "1", "pgLimit": pgLimit},
-                success: function (data) {
-
-                    $('#tableCategory').bootstrapTable('load', data);
-                }
-            })
-        }
-    });
 });
