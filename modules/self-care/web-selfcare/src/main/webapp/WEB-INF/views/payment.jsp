@@ -4,7 +4,6 @@
     <%@include file="includes/include.jsp" %>
     <title><fmt:message key="delivery.payment" bundle="${lang}"/></title>
     <link rel="shortcut icon" href="">
-    <script src="<c:url value="/resources/js/hover.zoom.js"/>"></script>
     <script src="<c:url value="/resources/js/payment-operations.js"/>"></script>
     <%@include file="includes/smart-wizard.jsp" %>
 </head>
@@ -40,8 +39,8 @@
 
                 <div class="container" style="width:1000px; margin-top: 30px;">
                     <div class="row" style="padding-left: 50px;">
-                        <div class="col-md-3">
-                            <a href="success" class="zoom" id="pay-delivery"
+                        <div class="a col-md-3" style="padding: 5px;">
+                            <a href="success" id="pay-delivery"
                                data-toggle="tooltip" data-placement="top" title="Make payment on delivery."><img
                                     class="icons2" src="<c:url value="/resources/images/icons/delivery-xxl.png"/>"/></a>
 
@@ -49,7 +48,7 @@
                         </div>
                         <div class="col-md-1"></div>
                         <div class="col-md-3">
-                            <a href="pay-mobile" class="zoom" id="pay-mobile" data-toggle="tooltip"
+                            <a href="pay-mobile" id="pay-mobile" data-toggle="tooltip"
                                data-placement="top" title="Make payment using mobile phone."><img class="icons2"
                                                                                                   src="<c:url value="/resources/images/icons/mobile-payment.png"/>"/></a>
 
@@ -57,7 +56,7 @@
                         </div>
                         <div class="col-md-1"></div>
                         <div class="col-md-3">
-                            <a href="pay-card" class="zoom" id="pay-card" data-toggle="tooltip"
+                            <a href="pay-card" id="pay-card" data-toggle="tooltip"
                                data-placement="top" title="Make payment using Visa/Master card."><img class="icons2"
                                                                                                       src="<c:url value="/resources/images/icons/credit-cards-icon-25.png"/>"/></a>
 
@@ -74,8 +73,8 @@
 <script>
     $('#smartwizard').smartWizard({
         selected: 1,
-        theme:'arrows',
-        anchorSettings:{
+        theme: 'arrows',
+        anchorSettings: {
             anchorClickable: false
         }
     });
