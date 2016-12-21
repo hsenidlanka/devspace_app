@@ -116,43 +116,48 @@ public class PaymentService {
             log.info("payment status: {}", paymentStatusCode);
             switch (paymentStatusCode) {
                 case "S1000":
-                    shoppingCartRepository.generateCartProcess(Double.parseDouble(amount), username, itemsListMap, delivery, paymentMethod);
-                    log.info("new checkout processed successfully.");
-                    if (couponCode != null || !couponCode.equals("")) {
-                        couponRepository.changeStatusToUsed(couponCode);
-                    }
-                    // Generate a new coupon code
-                    String newCouponCode;
-                    int newCouponStatus = 0;
-                    while (true) {
-                        newCouponCode = generateCouponCode("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUWXYZ123456789", 20);
-                        newCouponStatus = couponRepository.add(newCouponCode, subscriberId.replaceFirst("94", "0"));
-                        // Iteration continues if the generated coupon code exists in the database
-                        if (newCouponStatus != 2 && newCouponStatus > 0) {
-                            // Break the iteration if the generated coupon code is unique and valid
-                            break;
+                    try {
+                        String orderId = shoppingCartRepository.generateCartProcess(Double.parseDouble(amount), username, itemsListMap, delivery, paymentMethod);
+                        log.info("new checkout processed successfully.");
+                        if (couponCode != null || !couponCode.equals("")) {
+                            couponRepository.changeStatusToUsed(couponCode);
                         }
+                        // Generate a new coupon code
+                        String newCouponCode;
+                        int newCouponStatus = 0;
+                        while (true) {
+                            newCouponCode = generateCouponCode("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUWXYZ123456789", 20);
+                            newCouponStatus = couponRepository.add(newCouponCode, subscriberId.replaceFirst("94", "0"));
+                            // Iteration continues if the generated coupon code exists in the database
+                            if (newCouponStatus != 2 && newCouponStatus > 0) {
+                                // Break the iteration if the generated coupon code is unique and valid
+                                break;
+                            }
+                        }
+                        successMessage.setStatus("success");
+                        successMessage.setCode(Response.Status.OK.getStatusCode());
+                        successMessage.addLink(url, "self");
+                        JSONObject dataObj = new JSONObject();
+                        dataObj.put("subscriberId", subscriberId);
+                        dataObj.put("paymentAmount", amount);
+                        dataObj.put("internalTrxId", chargingRequestResponse.getInternalTrxId());
+                        dataObj.put("timeStamp", chargingRequestResponse.getTimeStamp());
+                        dataObj.put("orderId", orderId);
+                        dataObj.put("couponCode", newCouponCode);
+                        successMessage.addData(dataObj);
+                        URL smsUrl = new URL(DEVSPACE_BASE_URL + propertyReader.readProperty("sms.send.url"));
+                        MtSmsResp smsResponse = sendPaymentSmsNotification(subscriberId, amount, applicationId, password, smsUrl);
+                        successMessage.setMessage("payment succeeded");
+                        if (!String.valueOf(smsResponse.getStatusCode()).equals("S1000")) {
+                            successMessage.setMessage("payment succeeded but failed to send the sms notification");
+                        }
+                        log.info("sms status: {}", smsResponse.getStatusCode());
+                        response = Response.status(Response.Status.OK).entity(successMessage).
+                                header("Access-Control-Allow-Origin", headerPropertyReader.readProperty("Access-Control-Allow-Origin")).build();
+                    }catch (Exception ex){
+                        log.error("error while processing the payment. {}", ex);
+                        throw new WebApplicationException(500);
                     }
-                    successMessage.setStatus("success");
-                    successMessage.setCode(Response.Status.OK.getStatusCode());
-                    successMessage.addLink(url, "self");
-                    JSONObject dataObj = new JSONObject();
-                    dataObj.put("subscriberId", subscriberId);
-                    dataObj.put("paymentAmount", amount);
-                    dataObj.put("internalTrxId", chargingRequestResponse.getInternalTrxId());
-                    dataObj.put("timeStamp", chargingRequestResponse.getTimeStamp());
-                    dataObj.put("orderId","ORD123456");
-                    dataObj.put("couponCode", newCouponCode);
-                    successMessage.addData(dataObj);
-                    URL smsUrl = new URL(DEVSPACE_BASE_URL + propertyReader.readProperty("sms.send.url"));
-                    MtSmsResp smsResponse = sendPaymentSmsNotification(subscriberId, amount, applicationId, password, smsUrl);
-                    successMessage.setMessage("payment succeeded");
-                    if (!String.valueOf(smsResponse.getStatusCode()).equals("S1000")) {
-                        successMessage.setMessage("payment succeeded but failed to send the sms notification");
-                    }
-                    log.info("sms status: {}", smsResponse.getStatusCode());
-                    response = Response.status(Response.Status.OK).entity(successMessage).
-                            header("Access-Control-Allow-Origin", headerPropertyReader.readProperty("Access-Control-Allow-Origin")).build();
                     break;
                 case "E1308":
                     errorMessage.setStatus("error");
