@@ -51,7 +51,7 @@
                                     </c:if>
                                     <div class="col-md-3">
                                         <ul class="grid cs-style-3">
-                                            <li data-teskly-viewitle="<c:out value="${itemData.description}"/>">
+                                            <li data-teskly-viewitled="<c:out value="${itemData.description}"/>">
                                                 <figure>
 <%--To change--%>
 
