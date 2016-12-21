@@ -64,7 +64,15 @@ public interface CategoryRepository {
 
     List<Category> selectSubCategoryForCategoryTypeAhead(String catName, String subCategoryKey, int limit, int page);
 
+    int countAllTypeAhead(String catName);
 
+    int countAllVisibleTypeAhead(String catName);
+
+    int countAllVisible();
+
+    int countSubCategoriesForCategory(String catName);
+
+    int SubCategoryForCategoryTypeAhead(String catName, String subCategoryKey);
 
 
 }
