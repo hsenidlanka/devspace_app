@@ -51,7 +51,7 @@ $(document).ready(function () {
         doc.setFont("courier");
         doc.text('Order date/time: ' + orderdate, 10, 105);
         doc.text('Order id: ' + orderid, 10, 115);
-        doc.text('Amount: ' + totalAmount, 10, 125);
+        doc.text('Amount (Rs.): ' + totalAmount, 10, 125);
         doc.text('Status: ' + status, 10, 135);
         doc.text('Payment option: ' + paymentMethod, 10, 145);
         doc.text('Used mobile: ' + mobileUsed, 10, 155);
