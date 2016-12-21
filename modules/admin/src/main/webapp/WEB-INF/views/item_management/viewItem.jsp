@@ -108,7 +108,7 @@
           <div align="center"><span class="glyphicon glyphicon-pencil"></span><fmt:message key="item.itemedit.panel.heading"/>
           </div>
         </div>
-        <form:form class="form-horizontal" role="form" id="frmEditItem" method="post" action="/admin/items/update_item">
+        <form:form class="form-horizontal" role="form" id="frmEditItem" method="post" action="/admin/items/update_item" enctype="multipart/form-data">
           <fieldset class="scheduler-border">
             <legend class="scheduler-border"><fmt:message key="item.itemedit.form.legend"/> </legend>
             <div class="modal-body">
@@ -259,9 +259,10 @@
                     </div>
 
                     <div class="col-xs-8">
-                      <form:button type="button" class="btn btn-success" id="btnEditImage"><span
+                      <%--<form:button type="button" class="btn btn-success" id="btnEditImage"><span
                               class="glyphicon glyphicon-open"></span><fmt:message key="item.itemedit.form.button.upldimages"/>
-                      </form:button>
+                      </form:button>--%>
+                      <form:input type="file" class="file_upload btn btn-default" path="imageUrl" id="btnEditImage" value="Browse" />
                       <br><br>
 
                     </div>

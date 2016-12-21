@@ -231,6 +231,13 @@ public class ItemController {
     public ModelAndView updateItem(@ModelAttribute("itemUpdate") Item itemUpdate) {
 
         try {
+            MultipartFile imgFile = itemUpdate.getImageUrl();
+            LOGGER.trace("realPathtoUpload item img = {}",imgFile);
+            LOGGER.trace("item objct-img url {}", itemUpdate.getImageUrl());
+
+            String imageName = itemUpdate.getItemName()+".jpg";
+            itemUpdate.setImage(imageName);
+
             int itmId = itemUpdate.getItemId();
             String itmName = itemUpdate.getItemName();
             String itmPriceEdit = itemUpdate.getPrice();
@@ -262,7 +269,7 @@ public class ItemController {
 
             int i = item.updateItem(itemUpdate, edittedList);
             LOGGER.trace(String.valueOf(i), "  info i edit ", i);
-            LOGGER.error("error in i edit {}", i);
+            LOGGER.error("error in i edit item {}", i);
             if (i != 1) {
                 JOptionPane.showMessageDialog(null, updateServerErr, "Error !",
                         JOptionPane.ERROR_MESSAGE);
@@ -274,6 +281,26 @@ public class ItemController {
                 LOGGER.trace("ItemUpdate category after {}", itemUpdate.getCategoryName());
                 LOGGER.trace("ItemUpdate sub-category after {}", itemUpdate.getSubCategoryName());
                 LOGGER.info("Updated item successfully {}", itmName);
+
+
+                if (!imgFile.isEmpty()) {
+                    LOGGER.error("empty file ?? {}",!imgFile.isEmpty());
+                    try {
+                        // Creating the directory to store file in server
+                        String realPathtoUpload = context.getRealPath(serverPath);
+                        LOGGER.trace("realPathtoUpload item img = , {} ", realPathtoUpload);
+                        uploadFile(imgFile, realPathtoUpload, imageName);
+
+                        //create a directory in local machine and upload imGE
+                        uploadFile(imgFile,localPathtoUpload, imageName);
+                        LOGGER.trace("localpathtoupload item image = , {} ", localPathtoUpload);
+                    }
+                    catch (Exception ex) {
+                        LOGGER.error("error in  getting image {}", ex);
+                    }
+                }else {
+                    LOGGER.error("You failed to upload {}" , imgFile ," because the file was empty.");
+                }
             }
         } catch (Exception er) {
             LOGGER.error("Exception " + er.getMessage());
