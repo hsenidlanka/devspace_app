@@ -471,10 +471,20 @@ public class PackageController {
     }
 
     /*
-    *getting record count for loading pkg table with pagination
+    *getting all record count for loading pkg table for pagination
     **/
     @RequestMapping(value = "/packagePaginationTable", method = RequestMethod.GET)
     public @ResponseBody int loadPagination(){
         return packageRepo.count();
+    }
+
+    /*
+   *getting all record count for loading pkg table for pagination
+   **/
+    @RequestMapping(value = "/searchPkgCount", method = RequestMethod.GET)
+    public @ResponseBody int loadSearchPkg(@RequestParam("srchPkgNm")String pkgnm){
+
+        LOGGER.trace("searched item record count{}", packageRepo.countSearchKey(pkgnm));
+        return packageRepo.countSearchKey(pkgnm);
     }
 }

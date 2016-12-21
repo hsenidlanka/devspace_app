@@ -151,7 +151,7 @@ $(document).ready(function () {
              *Setting the number of pages according to the number of records
              */
             $.ajax({
-                url: 'https://localhost:8443/admin/packages/packagePaginationTable',
+                url: 'https://localhost:8443/admin/packages/searchPkgCount',
                 data: {"srchPkgNm": $("#txtViewSearchPkg").val()},
                 success: function (recCount) {
 

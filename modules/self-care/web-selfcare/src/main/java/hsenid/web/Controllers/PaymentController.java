@@ -172,13 +172,14 @@ public class PaymentController {
                 Date date = new Date();
                 String currentDateTime = dateFormat.format(date);
                 receiptData.put("orderDate", currentDateTime);
-                receiptData.put("orderId", "ORD123456");
+                receiptData.put("orderId", responseMessage.getData().get(0).get("orderId"));
                 receiptData.put("amount", request.getParameter("totalAmount"));
                 receiptData.put("orderStatus", "Paid");
                 receiptData.put("paymentOption", "Mobile");
                 receiptData.put("usedMobile", mobileNo);
-                receiptData.put("newCouponCode",responseMessage.getData().get(0).get("couponCode"));
+                receiptData.put("newCouponCode", responseMessage.getData().get(0).get("couponCode"));
 
+                logger.info(receiptData.toString());
                 session.setAttribute("receiptData", receiptData);
 
                 session.removeAttribute("cartItems");
@@ -198,7 +199,7 @@ public class PaymentController {
     @RequestMapping(value = "/payment/receipt-data", method = RequestMethod.GET)
     @ResponseBody
     public JSONArray printReceipt(HttpSession session) {
-        JSONObject jsonObject = new JSONObject();
+        JSONObject jsonObject;
         JSONArray receiptDataArray = new JSONArray();
         jsonObject = (JSONObject) session.getAttribute("receiptData");
         receiptDataArray.add(jsonObject);

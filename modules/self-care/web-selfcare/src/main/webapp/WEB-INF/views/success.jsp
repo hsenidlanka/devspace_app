@@ -49,36 +49,36 @@
                     </div>
 
                     <div>
-                        <label class="lbl-order-details">Order date/time: </label>
+                        <label class="lbl-order-details"><fmt:message key="success.date" bundle="${lang}"/></label>
                         <label id="lbl-rec-orderDate"></label>
                     </div>
                     <div>
-                        <label class="lbl-order-details">Order id: </label>
+                        <label class="lbl-order-details"><fmt:message key="success.id" bundle="${lang}"/></label>
                         <label id="lbl-rec-orderId"></label>
                     </div>
                     <div>
-                        <label class="lbl-order-details">Amount (Rs.): </label>
+                        <label class="lbl-order-details"><fmt:message key="success.amount" bundle="${lang}"/></label>
                         <label id="lbl-rec-amount"></label>
                     </div>
                     <div>
-                        <label class="lbl-order-details">Status: </label>
+                        <label class="lbl-order-details"><fmt:message key="success.status" bundle="${lang}"/></label>
                         <label id="lbl-rec-status"></label>
                     </div>
                     <div>
-                        <label class="lbl-order-details">Payment option: </label>
+                        <label class="lbl-order-details"><fmt:message key="success.payment.option" bundle="${lang}"/></label>
                         <label id="lbl-rec-paymentOption"></label>
                     </div>
                     <div>
-                        <label class="lbl-order-details">Used mobile: </label>
+                        <label class="lbl-order-details"><fmt:message key="success.used.mobile" bundle="${lang}"/></label>
                         <label id="lbl-rec-usedMobile"></label>
                     </div>
                     <div>
-                        <label class="lbl-order-details">New coupon code: </label>
+                        <label class="lbl-order-details"><fmt:message key="success.new.coupon" bundle="${lang}"/></label>
                         <label id="lbl-rec-newCoupon"></label>
                     </div>
 
                     <div>
-                        <button id="btn-print" style="margin-bottom: 5px;" class="btn btn-success btn-xs">Print receipt</button>
+                        <button id="btn-print" style="margin-bottom: 5px;" class="btn btn-success btn-xs"><fmt:message key="success.save.pdf" bundle="${lang}"/></button>
                     </div>
 
                     <div>
