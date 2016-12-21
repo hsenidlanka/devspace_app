@@ -395,12 +395,28 @@ public class ItemRepositoryImpl implements ItemRepository {
     /*select name and price of toppings*/
     @Override
     public List<Map<String, Object>> getToppings() {
-        List<Map<String, Object>> category = jdbcTemplate.queryForList("SELECT i.name,si.price FROM item i,size si WHERE i.id=si.item_id" +
-                " AND i.sub_category_id=(SELECT id FROM sub_category WHERE category_id=" +
-                "(SELECT id FROM category WHERE name ='Topping')) ");
-        log.info("{}", category);
-        return category;
 
+        List<String> catid = new ArrayList<String>();
+        List<Map<String, Object>> another = new ArrayList<Map<String, Object>>();
+
+        List<Map<String, Object>> cat = jdbcTemplate.queryForList("SELECT id FROM sub_category WHERE category_id= (SELECT id FROM category WHERE name ='Topping')");
+        if (cat.size() > 0) {
+            for (int i = 0; i < cat.size(); i++) {
+                String id = cat.get(i).get("id").toString();
+                catid.add(id);
+            }
+
+            for (int j = 0; j < catid.size(); j++) {
+                List<Map<String, Object>> sub = jdbcTemplate.queryForList("SELECT i.name,si.price FROM item i,size si WHERE i.id=si.item_id" +
+                        " AND i.sub_category_id=? ", catid.get(j));
+                another.addAll(sub);
+            }
+        } else {
+            log.info("No sub-categories found");
+        }
+
+        log.info("result" + another);
+        return another;
     }
 
     @Override
