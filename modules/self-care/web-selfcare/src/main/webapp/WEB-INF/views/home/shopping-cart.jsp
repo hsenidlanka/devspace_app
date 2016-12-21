@@ -71,7 +71,7 @@
                                                 </td>
                                                 <td class="item-remove">
                                                         <%--<a class="mod"><i class="glyphicon glyphicon-edit"></i> Edit</a>&nbsp;--%>
-                                                    <a class="del"><i class="glyphicon glyphicon-remove"></i> Remove</a>
+                                                    <a class="m-btn mini red del" style="height:auto;"><i class="fa fa-times"></i> Remove</a>
                                                 </td>
                                             </tr>
                                         </c:forEach>
