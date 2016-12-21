@@ -6,6 +6,7 @@
     <title><fmt:message key="shopping" bundle="${lang}"/></title>
     <link rel="shortcut icon" href="">
     <link rel="stylesheet" href="<c:url value="/resources/css/shopping-cart-table.css"/>"/>
+    <link rel="stylesheet" href="<c:url value="/resources/css/m-buttons.css"/>"/>
     <script src="<c:url value="/resources/js/cart-operations.js"/>" type="text/javascript"></script>
 </head>
 <body>
@@ -70,7 +71,7 @@
                                                 </td>
                                                 <td class="item-remove">
                                                         <%--<a class="mod"><i class="glyphicon glyphicon-edit"></i> Edit</a>&nbsp;--%>
-                                                    <a class="del"><i class="glyphicon glyphicon-remove"></i> Remove</a>
+                                                    <a class="m-btn mini red del" style="height:auto;"><i class="fa fa-times"></i> Remove</a>
                                                 </td>
                                             </tr>
                                         </c:forEach>
@@ -251,31 +252,31 @@
 
 <!-- Cart proceed to checkout popup -->
 <div id="proceed-checkout-confirm" class="modal fade">
-    <div class="modal-dialog">
+    <div class="modal-dialog" style="width:780px;">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h3 class="modal-title" id="myModalLabel" contenteditable="true"><fmt:message key="shopping.proceed"
-                                                                                              bundle="${lang}"/></h3>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+                <img class="icons" src="<c:url value="/resources/images/icons/navigate-right-icon.png"/>">
+                <h4 class="modal-title header-panel" id="myModalLabel"><fmt:message key="shopping.proceed"
+                                                                                              bundle="${lang}"/></h4>
             </div>
             <div class="modal-body">
                 <p><fmt:message key="shopping.login.reg" bundle="${lang}"/>
                     <br>
-                    <br>
                 </p>
 
                 <div style="text-align:center">
-                    <div style="padding:5px;">
-                        <a class="btn btn-primary" id="btn-cart-login" style="width:300px;"><fmt:message key="shopping.login.system"
-                                                                                     bundle="${lang}"/></a>
+                    <div style="padding:5px; display: inline;">
+                        <a class="m-btn blue big" id="btn-cart-login" style="height:80px;"><fmt:message key="shopping.login.system"
+                                                                                     bundle="${lang}"/><i class="fa fa-sign-in fa-lg" aria-hidden="true" style="margin-left: 5px;"></i></a>
                     </div>
-                    <div style="padding:5px;">
-                        <a class="btn btn-primary" id="btn-cart-signup" style="width:300px;"><fmt:message key="shopping.create"
-                                                                                     bundle="${lang}"/></a>
+                    <div style="padding:5px; display: inline;">
+                        <a class="m-btn blue big" id="btn-cart-signup" style="height:80px;"><fmt:message key="shopping.create"
+                                                                                     bundle="${lang}"/><i class="fa fa-user fa-lg" aria-hidden="true" style="margin-left: 5px;"></i></a>
                     </div>
-                    <div style="padding:5px;">
-                        <a class="btn btn-primary" style="width:300px;" href="/web-selfcare/delivery"><fmt:message
-                                key="shopping.guest" bundle="${lang}"/></a>
+                    <div style="padding:5px; display: inline;">
+                        <a class="m-btn blue big" style="height:80px;" href="/web-selfcare/delivery"><fmt:message
+                                key="shopping.guest" bundle="${lang}"/><i class="fa fa-arrow-circle-o-right fa-lg" style="margin-left: 5px;" aria-hidden="true"></i></a>
                     </div>
                 </div>
             </div>

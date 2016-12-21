@@ -99,8 +99,10 @@ public class ItemController {
             String itemSize = newItem.getSize();
 
             MultipartFile imgFile = newItem.getImageUrl();
-            String imgFileNm = imgFile.getOriginalFilename();
             LOGGER.trace("multipart file itemMgt =, {}", imgFile);
+
+            String imgFileNm2 = itemNm.replaceAll("\\s","");
+            LOGGER.error("after remove spaces {}", imgFileNm2);
 
             LOGGER.trace("Item price =, {} ", itemPrice);
             LOGGER.trace("Item size = , {}", itemSize);
@@ -133,18 +135,20 @@ public class ItemController {
                     **/
                     if (!imgFile.isEmpty()) {
                         try {
+
+
                             // Creating the directory to store file in server
                             String realPathtoUpload = context.getRealPath(serverPath);
                             LOGGER.trace("realPathtoUpload = , {} ", realPathtoUpload);
-                            uploadFile(imgFile, realPathtoUpload, itemNm);
+                            uploadFile(imgFile, realPathtoUpload, imgFileNm2);
 
                             //create a directory in local machine and upload imGE
-                            uploadFile(imgFile, localPathtoUpload, itemNm);
+                            uploadFile(imgFile, localPathtoUpload, imgFileNm2);
                         } catch (Exception ex) {
                             LOGGER.error("error in  getting image {}", ex);
                         }
                     } else {
-                        LOGGER.error("You failed to upload {}", imgFileNm, " because the file was empty.");
+                        LOGGER.error("You failed to upload {}", imgFileNm2, " because the file was empty.");
                     }
 
                     LOGGER.info("added New Item to database {}", itemNm);
@@ -231,6 +235,18 @@ public class ItemController {
     public ModelAndView updateItem(@ModelAttribute("itemUpdate") Item itemUpdate) {
 
         try {
+            String itemNm = itemUpdate.getItemName();
+
+            MultipartFile imgFile = itemUpdate.getImageUrl();
+            LOGGER.trace("realPathtoUpload item img = {}",imgFile);
+            LOGGER.trace("item objct-img url {}", itemUpdate.getImageUrl());
+
+            String imageName = itemNm+".jpg";
+            itemUpdate.setImage(imageName);
+
+            String imgFileNm2 = itemNm.replaceAll("\\s","");
+            LOGGER.info("after remove spaces itm edit {}", imgFileNm2);
+
             int itmId = itemUpdate.getItemId();
             String itmName = itemUpdate.getItemName();
             String itmPriceEdit = itemUpdate.getPrice();
@@ -262,7 +278,7 @@ public class ItemController {
 
             int i = item.updateItem(itemUpdate, edittedList);
             LOGGER.trace(String.valueOf(i), "  info i edit ", i);
-            LOGGER.error("error in i edit {}", i);
+            LOGGER.error("error in i edit item {}", i);
             if (i != 1) {
                 JOptionPane.showMessageDialog(null, updateServerErr, "Error !",
                         JOptionPane.ERROR_MESSAGE);
@@ -274,6 +290,26 @@ public class ItemController {
                 LOGGER.trace("ItemUpdate category after {}", itemUpdate.getCategoryName());
                 LOGGER.trace("ItemUpdate sub-category after {}", itemUpdate.getSubCategoryName());
                 LOGGER.info("Updated item successfully {}", itmName);
+
+
+                if (!imgFile.isEmpty()) {
+                    LOGGER.error("empty file ?? {}",!imgFile.isEmpty());
+                    try {
+                        // Creating the directory to store file in server
+                        String realPathtoUpload = context.getRealPath(serverPath);
+                        LOGGER.trace("realPathtoUpload item img = , {} ", realPathtoUpload);
+                        uploadFile(imgFile, realPathtoUpload, imgFileNm2);
+
+                        //create a directory in local machine and upload imGE
+                        uploadFile(imgFile,localPathtoUpload, imgFileNm2);
+                        LOGGER.trace("localpathtoupload item image = , {} ", localPathtoUpload);
+                    }
+                    catch (Exception ex) {
+                        LOGGER.error("error in  getting image {}", ex);
+                    }
+                }else {
+                    LOGGER.error("You failed to upload {}" , imgFileNm2 ," because the file was empty.");
+                }
             }
         } catch (Exception er) {
             LOGGER.error("Exception " + er.getMessage());

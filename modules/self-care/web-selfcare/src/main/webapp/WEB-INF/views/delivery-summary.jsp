@@ -4,8 +4,8 @@
     <%@include file="includes/include.jsp" %>
     <title><fmt:message key="summary" bundle="${lang}"/></title>
     <link rel="shortcut icon" href="">
-    <link rel="stylesheet" href="<c:url value="/resources/css/progress-wizard.min.css"/>" >
-    <script src="<c:url value="/resources/js/delivery-summary.js"/>" ></script>
+    <link rel="stylesheet" href="<c:url value="/resources/css/progress-wizard.min.css"/>">
+    <script src="<c:url value="/resources/js/delivery-summary.js"/>"></script>
 
 </head>
 <body>
@@ -33,10 +33,14 @@
                             <div class="col-md-12">
                                 <div class="summary-table">
                                     <div class="summary-row summary-table-header">
-                                        <div class="summary-cell"><fmt:message key="summary.description" bundle="${lang}"/></div>
-                                        <div class="summary-cell"><fmt:message key="summary.price" bundle="${lang}"/></div>
-                                        <div class="summary-cell qty-cell"><fmt:message key="summary.qty" bundle="${lang}"/></div>
-                                        <div class="summary-cell"><fmt:message key="summary.total" bundle="${lang}"/></div>
+                                        <div class="summary-cell"><fmt:message key="summary.description"
+                                                                               bundle="${lang}"/></div>
+                                        <div class="summary-cell"><fmt:message key="summary.price"
+                                                                               bundle="${lang}"/></div>
+                                        <div class="summary-cell qty-cell"><fmt:message key="summary.qty"
+                                                                                        bundle="${lang}"/></div>
+                                        <div class="summary-cell"><fmt:message key="summary.total"
+                                                                               bundle="${lang}"/></div>
                                     </div>
                                     <c:forEach items="${cartItemsMap}" var="entry" varStatus="iteration">
                                         <div class="summary-row">
@@ -63,7 +67,8 @@
                 </div>
                 <div style="margin-top: 20px;">
                     <button class="btn btn-primary btn-editcart" onclick="location.href='shopping-cart'">
-                        <span class="glyphicon glyphicon-edit"></span>&nbsp;<fmt:message key="summary.edit" bundle="${lang}"/>
+                        <span class="glyphicon glyphicon-edit"></span>&nbsp;<fmt:message key="summary.edit"
+                                                                                         bundle="${lang}"/>
                     </button>
                 </div>
 
@@ -76,25 +81,30 @@
                                 <form class="form-horizontal" role="form">
                                     <div class="form-group">
                                         <div class="col-sm-2">
-                                            <label class="control-label"><fmt:message key="summary.date" bundle="${lang}"/></label>
+                                            <label class="control-label"><fmt:message key="summary.date"
+                                                                                      bundle="${lang}"/></label>
                                         </div>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="delsum-text-date" placeholder="<fmt:message key="summary.date" bundle="${lang}"/>"
+                                            <input type="text" class="form-control" id="delsum-text-date"
+                                                   placeholder="<fmt:message key="summary.date" bundle="${lang}"/>"
                                                    readonly>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-2">
-                                            <label class="control-label"><fmt:message key="summary.time" bundle="${lang}"/></label>
+                                            <label class="control-label"><fmt:message key="summary.time"
+                                                                                      bundle="${lang}"/></label>
                                         </div>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="delsum-text-time" placeholder="Time"
+                                            <input type="text" class="form-control" id="delsum-text-time"
+                                                   placeholder="Time"
                                                    readonly>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-2">
-                                            <label class="control-label"><fmt:message key="delivery.first" bundle="${lang}"/></label>
+                                            <label class="control-label"><fmt:message key="delivery.first"
+                                                                                      bundle="${lang}"/></label>
                                         </div>
                                         <div class="col-sm-10">
                                             <input type="text" id="del-fname" class="form-control" readonly>
@@ -102,7 +112,8 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-2">
-                                            <label class="control-label"><fmt:message key="signup.last.name" bundle="${lang}"/></label>
+                                            <label class="control-label"><fmt:message key="signup.last.name"
+                                                                                      bundle="${lang}"/></label>
                                         </div>
                                         <div class="col-sm-10">
                                             <input type="text" id="del-lname" class="form-control" readonly>
@@ -115,7 +126,8 @@
                                 <form class="form-horizontal" role="form">
                                     <div class="form-group">
                                         <div class="col-sm-2">
-                                            <label class="control-label"><fmt:message key="delivery.contact" bundle="${lang}"/></label>
+                                            <label class="control-label"><fmt:message key="delivery.contact"
+                                                                                      bundle="${lang}"/></label>
                                         </div>
                                         <div class="col-sm-10">
                                             <input type="text" id="del-contactno" class="form-control" readonly>
@@ -123,18 +135,22 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-2">
-                                            <label class="control-label"><fmt:message key="signup.address" bundle="${lang}"/></label>
+                                            <label class="control-label"><fmt:message key="signup.address"
+                                                                                      bundle="${lang}"/></label>
                                         </div>
                                         <div class="col-sm-10">
-                                            <textarea class="form-control" id="del-address" readonly></textarea>
+                                            <textarea class="form-control" id="del-address" readonly
+                                                      style="resize: vertical;"></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-2">
-                                            <label class="control-label"><fmt:message key="summary.description" bundle="${lang}"/></label>
+                                            <label class="control-label"><fmt:message key="summary.description"
+                                                                                      bundle="${lang}"/></label>
                                         </div>
                                         <div class="col-sm-10">
-                                            <textarea class="form-control" id="del-description" readonly></textarea>
+                                            <textarea class="form-control" id="del-description" readonly
+                                                      style="resize: vertical;"></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -147,7 +163,8 @@
                 </div>
 
                 <button class="btn btn-primary btn-editdelidetails" onclick="location.href='delivery'">
-                    <span class="glyphicon glyphicon-edit"></span>&nbsp;<fmt:message key="summary.edit.delivery" bundle="${lang}"/>
+                    <span class="glyphicon glyphicon-edit"></span>&nbsp;<fmt:message key="summary.edit.delivery"
+                                                                                     bundle="${lang}"/>
                 </button>
 
                 <div class="section3">
@@ -159,7 +176,10 @@
                                 <form class="form-horizontal" role="form">
                                     <div class="form-group">
                                         <div class="col-sm-12">
-                                            <textarea class="form-control" readonly rows="10" disabled></textarea>
+                                            <textarea class="form-control" readonly rows="10" disabled
+                                                      style="resize: vertical;">
+                                                <fmt:message key="order.summary.content" bundle="${lang}"/>
+                                            </textarea>
                                         </div>
                                     </div>
                                 </form>
@@ -167,7 +187,8 @@
                         </div>
                     </div>
                 </div>
-                <a class="btn btn-success btn-agree" href="payment"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;<fmt:message key="summary.agree" bundle="${lang}"/></a>
+                <a class="btn btn-success btn-agree" href="payment"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;<fmt:message
+                        key="summary.agree" bundle="${lang}"/></a>
             </div>
         </div>
     </div>
