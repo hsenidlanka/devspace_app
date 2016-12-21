@@ -152,7 +152,7 @@ public class ItemRepositoryImpl implements ItemRepository {
     public int update(Item item) {
 
         String sql = "UPDATE item SET description=?, type_id=(SELECT type_id FROM `type` WHERE `name`=?) ,image=?, sub_category_id=(SELECT id FROM sub_category WHERE name=?) WHERE name= ? ";
-        int row = jdbcTemplate.update(sql, new Object[]{item.getDescription(), item.getType(), item.getImageUrl(), item.getSubCategoryName(), item.getItemName()});
+        int row = jdbcTemplate.update(sql, new Object[]{item.getDescription(), item.getType(), item.getImage(), item.getSubCategoryName(), item.getItemName()});
         log.info("{} Item details changed", row);
         return row;
     }
