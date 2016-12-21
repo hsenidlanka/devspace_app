@@ -14,6 +14,7 @@
 </head>
 <body>
 <%@include file="../includes/new-header.jsp" %>
+
 <div class="loader-anim"></div>
 
 <div class="main-div">
@@ -52,9 +53,10 @@
                                         <ul class="grid cs-style-3">
                                             <li data-teskly-viewitle="<c:out value="${itemData.description}"/>">
                                                 <figure>
+<%--To change--%>
 
-                                                    <img class="menu-images"
-                                                         src="<c:url value="/resources/images/image_placeholder.gif"/>">
+                                                    <c:set var="itemName" value="${fn:replace(itemData.name, ' ', '')}" />
+                                                    <img class="menu-images" src="${itemImageUrl}/${itemName}.jpg">
                                                     <figcaption class="caption">
                                                         <input type="hidden" id="menu-item-desc"
                                                                value="<c:out value="${itemData.description}"/>"/>
