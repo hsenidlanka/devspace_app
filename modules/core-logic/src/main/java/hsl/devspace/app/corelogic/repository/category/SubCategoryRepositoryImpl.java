@@ -109,7 +109,7 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
     /*view all details of subcategories for a given category name*/
     @Override
     public List<Category> viewSubCategoriesforCategory(String catName, int limit, int page) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM sub_category WHERE category_id=(SELECT id FROM category WHERE NAME =? LIMIT ? OFFSET ?)", catName, limit, page - 1);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM sub_category WHERE category_id=(SELECT id FROM category WHERE NAME =? LIMIT ? OFFSET ?)", catName, limit, page);
         List<Category> subCategories = new ArrayList<Category>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -173,7 +173,7 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
     @Override
     public int countForCat(String catId) {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT(*) AS total FROM sub_category " +
-                "WHERE category_id=(SELECT id FROM category WHERE name =?", catId);
+                "WHERE category_id=(SELECT id FROM category WHERE name =?)", catId);
         int count = Integer.parseInt(mp.get(0).get("total").toString());
         log.info("{}", count);
         return count;
@@ -250,7 +250,7 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
 
     @Override
     public List<Category> paginateSelectAll(int limit, int page) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM sub_category LIMIT ? OFFSET ?", limit, page - 1);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM sub_category LIMIT ? OFFSET ?", limit, page);
         List<Category> subCategories = new ArrayList<Category>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -277,7 +277,7 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
 
     @Override
     public List<Category> paginateSelectNameAndDescription(int limit, int page) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT name,description FROM sub_category LIMIT ? OFFSET ?", limit, page - 1);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT name,description FROM sub_category LIMIT ? OFFSET ?", limit, page);
         List<Category> subCategories = new ArrayList<Category>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -295,7 +295,7 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
     @Override
     public List<Category> selectAllTypeAhead(String catName, int limit, int page) {
         String key = "%" + catName + "%";
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM sub_category WHERE name LIKE ? LIMIT ? OFFSET ?", key, limit, page - 1);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM sub_category WHERE name LIKE ? LIMIT ? OFFSET ?", key, limit, page);
         List<Category> subCategories = new ArrayList<Category>();
 
         for (int i = 0; i < mp.size(); i++) {
