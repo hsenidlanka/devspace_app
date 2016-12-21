@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -116,9 +115,12 @@ public class Check {
     /*
    * typeahead function calling method for sub-category name
    **/
-    @RequestMapping(value = "/typeahedSubCategoryNm/{catName}", method = RequestMethod.GET)
-    public @ResponseBody List<String> typeaheadName(@PathVariable String catName){
-        return subcategoryRepository.viewSubCategories(catName);
+    @RequestMapping(value = "/typeahedSubCategoryNm", method = RequestMethod.GET)
+    public @ResponseBody List<String> typeaheadName(@RequestParam("catName") String catName){
+        LOG.error("SUBCAT typeahead catName {}",catName);
+        List<String> subcatList= subcategoryRepository.viewSubCategories(catName);
+        LOG.error("SUBCAT typeahead namelist {}",subcatList);
+        return subcatList;
     }
 
 
@@ -129,17 +131,12 @@ public class Check {
      */
 
     @RequestMapping(value = "/view/subcategoryTable/{data}", method = RequestMethod.GET)
-    public @ResponseBody List<Map<String, Object>> viewSubCategoriesAll(@PathVariable String data,HttpServletRequest request){
+    public @ResponseBody List<Map<String, Object>> viewSubCategoriesAll(@PathVariable String data,
+                                                                        @RequestParam("initPage") String initPage,
+                                                                        @RequestParam("pgLimit") String  pgLimit){
 
         LOG.error("Inside the subcategory table load method");
         LOG.info("The selected SUB-CATEGORY transferred to controller{}", data);
-
-
-        //request parameters
-        String searchSubCatNm=request.getParameter("searchSubCatNm");
-        LOG.error("searchSubCatName {}",searchSubCatNm);
-        String initPage =request.getParameter("initPage");
-        String pgLimit=request.getParameter("pgLimit");
 
         //cast the initial page and page limits in pagination to integers
         int initPg = Integer.parseInt(initPage);
@@ -150,20 +147,42 @@ public class Check {
         List<Map<String, Object>> outc = new ArrayList<Map<String, Object>>();
         Category subcategory = null;
 
-        if( searchSubCatNm !=null){
+            LOG.error("SubCategory name not selected");
+            List<Category> categoryList2= subcategoryRepository.viewSubCategoriesforCategory(data, limitPg, initPg);
+            LOG.error("sub category list returned from query{}",categoryList2);
+            outc=unSerializeSubCat(subcategory, categoryList2);
+
+        return outc;
+    }
+
+    @RequestMapping(value = "/view/subcategoryTable/search/{data}", method = RequestMethod.GET)
+    public @ResponseBody List<Map<String, Object>> viewSubCategoriesAll(@PathVariable String data,
+                                                                        @RequestParam("initPage") String initPage,
+                                                                        @RequestParam("pgLimit") String  pgLimit,
+                                                                        @RequestParam("searchSubCatNm") String searchSubCatNm){
+
+        LOG.error("Inside the subcategory search data load method");
+        LOG.info("The selected SUB-CATEGORY transferred to controller{}", data);
+
+        LOG.error("searchSubCatName {}",searchSubCatNm);
+
+        //cast the initial page and page limits in pagination to integers
+        int initPg = Integer.parseInt(initPage);
+        int limitPg = Integer.parseInt(pgLimit);
+
+        LOG.error("page limits{} {}", initPage, limitPg);
+
+        List<Map<String, Object>> outcs = new ArrayList<Map<String, Object>>();
+        Category subcategory = null;
+
             LOG.error("SubCategory name SELECTED");
             List<Category> categoryList1= subcategoryRepository.selectSubCategoryForCategoryTypeAhead(data, searchSubCatNm,limitPg,initPg);
             LOG.error("subcategory with name selected {}",categoryList1);
-            outc=unSerializeSubCat(subcategory, categoryList1);
+            outcs=unSerializeSubCat(subcategory, categoryList1);
 
-        }else {
-            LOG.error("SubCategory name not selected");
-            List<Category> categoryList2= subcategoryRepository.selectAllVisibleTypeAhead(data,limitPg,initPg);
-            LOG.error("sub category list returned from query{}",categoryList2);
-            outc=unSerializeSubCat(subcategory, categoryList2);
-            }
-        return outc;
+        return outcs;
     }
+
 
     private List<Map<String, Object>> unSerializeSubCat(Category subcategory,  List<Category> subcategoryList ){
         List<Map<String, Object>> outc = new ArrayList<Map<String, Object>>();
@@ -185,10 +204,10 @@ public class Check {
 *getting record count for loading item table with pagination
 **/
     @RequestMapping(value = "/SubCategoryPaginationTable", method = RequestMethod.GET)
-    public @ResponseBody int loadPagination(){
+    public @ResponseBody int loadPagination(@RequestParam("catName") String catName){
 
-        LOG.error("Category Count is {}",subcategoryRepository.count());
-        return subcategoryRepository.count();
+        LOG.error("Category Count is {}",subcategoryRepository.countForCat(catName));
+        return subcategoryRepository.countForCat(catName);
     }
 
 

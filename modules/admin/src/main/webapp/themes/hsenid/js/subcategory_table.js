@@ -8,7 +8,7 @@ $(document).ready(function () {
 
     $.ajax({
         url: 'https://localhost:8443/admin/view/subcategoryTable/'+value1,
-        data: {"searchSubCatNm":subcatName, "initPage": "1", "pgLimit": pgLimit},
+        data: {"initPage": "0", "pgLimit": pgLimit},
         success: function (result) {
 
             $('#tableSubCategory').bootstrapTable({
@@ -133,10 +133,10 @@ window.operateEvents6 = {
 
         $.ajax({
             type: "GET",
-            url: "https://localhost:8443/admin/typeahedSubCategoryNm"+value1,
-            dataType: "JSON",
+            url: 'https://localhost:8443/admin/typeahedSubCategoryNm',
+            data: {"catName": value1},
             success: function (data) {
-                console.log(data);
+
                 $('#txtViewSearchSubCategory').typeahead({
                     source: data
                 }).focus();
@@ -147,90 +147,4 @@ window.operateEvents6 = {
         })
     });
 
-    //typical pagination
-    var pag2 = $('#pagination2SubCat').simplePaginator({
-
-        // the number of total pages
-        totalPages: 7,
-
-        // maximum of visible buttons
-        maxButtonsVisible: 5,
-
-        // page selected
-        currentPage: 1,
-
-        // text labels for buttons
-        nextLabel: 'next',
-        prevLabel: 'prev',
-        firstLabel: 'first',
-        lastLabel: 'last',
-
-        // specify if the paginator click in the currentButton
-        clickCurrentPage: true,
-
-        // called when a page is changed.
-        pageChange: function (page) {
-
-            $.ajax({
-                url: 'https://localhost:8443/admin/view/subcategoryTable/'+value1,
-                dataType: "json",
-                data: {"searchSubCatNm": $("#txtViewSearchSubCategory").val(), "initPage": page, "pgLimit": pgLimit},
-                success: function (data) {
-
-                    $('#tableSubCategory').bootstrapTable('load', data);
-                }
-            })
-        }
-    });
-
-    /*
-     * load data on request typeahead
-     **/
-    $("#btnViewSearchSubCat").click(function () {
-
-        if ($("#txtViewSearchSubCategory").val().length > 0) {
-
-            $('#paginationSubCat').hide();
-            $('#pagination2SubCat').show();
-
-            $.ajax({
-                url: "https://localhost:8443/admin/view/subcategoryTable/"+value1,
-                datatype: "JSON",
-                data: {"searchSubCatNm": $("#txtViewSearchSubCategory").val(), "pgLimit": pgLimit, "initPage": "1"},
-                success: function (data) {
-                    $("#tableCategory").bootstrapTable('load', data);
-                    console.log(data);
-                },
-                error: function (e) {
-                    alert("error, load search item" + e);
-                    console.log("error, load search item" + e)
-                }
-            });
-
-            /**
-             *Setting the number of pages according to the number of records
-             */
-            $.ajax({
-                url: 'https://localhost:8443/admin/SubCategoryPaginationTable',
-                //data: {"searchCatNm": $("#txtViewSearchCategory").val()},
-                success: function (recCount) {
-                    pag2.simplePaginator('setTotalPages', Math.ceil(recCount / 3));
-                }
-            })
-        }
-        else {
-            $('#paginationSubCat').show();
-            $('#pagination2SubCat').hide();
-
-            $.ajax({
-                url: 'https://localhost:8443/admin/view/subcategoryTable/'+value1,
-                dataType: 'JSON',
-                data: {"searchCatNm": $("#txtViewSearchSubCategory").val(),"initPage": "1", "pgLimit": pgLimit},
-                success: function (data) {
-
-                    $('#tableSubCategory').bootstrapTable('load', data);
-                }
-            })
-        }
-    });
 });

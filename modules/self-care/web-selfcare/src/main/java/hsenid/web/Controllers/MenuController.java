@@ -29,8 +29,11 @@ public class MenuController {
     @Value("${api.base.url}")
     private String baseUrl;
 
-    @Value("${admin.url.base.image}")
+    @Value("${admin.url.base.image.category}")
     private String imageBaseUrl;
+
+    @Value("${admin.url.base.image.item}")
+    private String itemImageBaseUrl;
 
     @Value("${api.url.category.list}")
     private String categoryListUrl;
@@ -79,6 +82,7 @@ public class MenuController {
 
         ServerResponseMessage subcategoriesResponse = restTemplate.getForObject(getSubcatUrl, ServerResponseMessage.class);
         modelAndView.addObject("subcategories", subcategoriesResponse.getData());
+        modelAndView.addObject("itemImageUrl", itemImageBaseUrl);
 
         for (int i = 0; i < subcategoriesResponse.getData().size(); i++) {
             ServerResponseMessage itemsResponse = restTemplate.getForObject(getItemsUrl + subcategoriesResponse.getData().get(i).get("name"), ServerResponseMessage.class);

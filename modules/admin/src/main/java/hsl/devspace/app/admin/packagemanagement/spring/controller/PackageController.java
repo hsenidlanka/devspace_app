@@ -206,6 +206,9 @@ public class PackageController {
 
             String pkgName = newPackage.getPackName();
 
+            String imgFileNm2 = pkgName.replaceAll("\\s","");
+            LOGGER.info("after remove spaces itm edit {}", imgFileNm2);
+
             boolean uniquePknm = packageRepo.checkUniquePackage(pkgName);
             LOGGER.trace("unique ad pkg {}", uniquePknm);
 
@@ -236,17 +239,17 @@ public class PackageController {
                             // Creating the directory to store file in server
                             String realPathtoUpload = context.getRealPath(serverPath);
                             LOGGER.trace("realPathtoUpload package = , {} ", realPathtoUpload);
-                            uploadFile(imgFile, realPathtoUpload, imageName);
+                            uploadFile(imgFile, realPathtoUpload, imgFileNm2);
 
                             //create a directory in local machine and upload imGE
-                            uploadFile(imgFile,localPathtoUpload, imageName);
+                            uploadFile(imgFile,localPathtoUpload, imgFileNm2);
                             LOGGER.trace("localpathtoupload package = , {} ", localPathtoUpload);
                         }
                         catch (Exception ex) {
                             LOGGER.error("error in  getting image {}", ex);
                         }
                     }else {
-                        LOGGER.error("You failed to upload {}" , imgFile ," because the file was empty.");
+                        LOGGER.error("You failed to upload {}" , imgFileNm2 ," because the file was empty.");
                     }
                     LOGGER.trace("added new package {}", pkgName);
                 }
@@ -351,6 +354,10 @@ public class PackageController {
             LOGGER.trace("test val = {}", s);
 
             String pkgName = editPackage.getPackName();
+
+            String imgFileNm2 = pkgName.replaceAll("\\s","");
+            LOGGER.info("after remove spaces itm edit {}", imgFileNm2);
+
             int i =packageRepo.updatePackage(editPackage, contListEdit);
 
             if(i != 1 ){
@@ -372,17 +379,17 @@ public class PackageController {
                         // Creating the directory to store file in server
                         String realPathtoUpload = context.getRealPath(serverPath);
                         LOGGER.trace("realPathtoUpload package = , {} ", realPathtoUpload);
-                        uploadFile(imgFile, realPathtoUpload, imageName);
+                        uploadFile(imgFile, realPathtoUpload, imgFileNm2);
 
                         //create a directory in local machine and upload imGE
-                        uploadFile(imgFile,localPathtoUpload, imageName);
+                        uploadFile(imgFile,localPathtoUpload, imgFileNm2);
                         LOGGER.trace("localpathtoupload package = , {} ", localPathtoUpload);
                     }
                     catch (Exception ex) {
                         LOGGER.error("error in  getting image {}", ex);
                     }
                 }else {
-                    LOGGER.error("You failed to upload {}" , imgFile ," because the file was empty.");
+                    LOGGER.error("You failed to upload {}" , imgFileNm2 ," because the file was empty.");
                 }
             }
         } catch (Exception e) {
@@ -423,7 +430,7 @@ public class PackageController {
                 dir.mkdirs();
 
             //file made
-            File createFile = new File(dir.getAbsolutePath() + File.separator + fileName);//name of the image
+            File createFile = new File(dir.getAbsolutePath() + File.separator + fileName+".jpg");//name of the image
             BufferedOutputStream stream = new BufferedOutputStream(
                     new FileOutputStream(createFile));
             stream.write(bytes);

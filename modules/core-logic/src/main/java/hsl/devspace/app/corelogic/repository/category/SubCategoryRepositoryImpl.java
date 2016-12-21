@@ -109,7 +109,7 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
     /*view all details of subcategories for a given category name*/
     @Override
     public List<Category> viewSubCategoriesforCategory(String catName, int limit, int page) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM sub_category WHERE category_id=(SELECT id FROM category WHERE NAME =? LIMIT ? OFFSET ?)", catName, limit, page);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM sub_category WHERE category_id=(SELECT id FROM category WHERE NAME =? LIMIT ? OFFSET ?)", catName, limit, page - 1);
         List<Category> subCategories = new ArrayList<Category>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -124,6 +124,12 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
         }
         log.info("{}", subCategories);
         return subCategories;
+    }
+
+    @Override
+    public int countSubCategoriesForCategory(String catName) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT(*) AS count FROM sub_category WHERE category_id=(SELECT id FROM category WHERE NAME =?)", catName);
+        return Integer.parseInt(mp.get(0).get("count").toString());
     }
 
 
@@ -167,7 +173,7 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
     @Override
     public int countForCat(String catId) {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT(*) AS total FROM sub_category " +
-                "WHERE category_id=(SELECT id FROM category WHERE name =?)",catId);
+                "WHERE category_id=(SELECT id FROM category WHERE name =?", catId);
         int count = Integer.parseInt(mp.get(0).get("total").toString());
         log.info("{}", count);
         return count;
@@ -334,7 +340,6 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
         return subCategories;
     }
 
-
     /*Add new category*/
     @Override
     public void createCategory1(Category cat) {
@@ -396,5 +401,32 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
         return null;
     }
     /*retrieve list of category names*/
+
+
+    @Override
+    public int countAllTypeAhead(String catName) {
+        String key = "%" + catName + "%";
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT(*) AS count FROM sub_category WHERE name LIKE ?", key);
+        return Integer.parseInt(mp.get(0).get("count").toString());
+    }
+
+    @Override
+    public int countAllVisibleTypeAhead(String catName) {
+        return 0;
+    }
+
+    @Override
+    public int countAllVisible() {
+        return 0;
+    }
+
+    @Override
+    public int SubCategoryForCategoryTypeAhead(String catName, String subCategoryKey) {
+        String key = "%" + subCategoryKey + "%";
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT(*) AS count FROM sub_category WHERE category_id=(SELECT id FROM category WHERE NAME =?) AND name LIKE ? ", catName, key);
+        return Integer.parseInt(mp.get(0).get("count").toString());
+
+
+    }
 
 }

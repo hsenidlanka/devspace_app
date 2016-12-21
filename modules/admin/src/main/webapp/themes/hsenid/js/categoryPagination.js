@@ -96,7 +96,7 @@ $(document).ready(function () {
      **/
     $("#btnViewSearchCat").click(function () {
         var catSearchName=$("#txtViewSearchCategory").val().length;
-        alert(catSearchName);
+        //alert(catSearchName);
 
 
 

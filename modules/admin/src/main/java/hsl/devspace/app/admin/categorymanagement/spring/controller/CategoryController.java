@@ -259,9 +259,8 @@ public class CategoryController {
 
             LOG.trace("Category name not selected");
             List<Category> categoryList2= categoryRepository.paginateSelectAll(limitPg,initPg);
-            LOG.error("CATEGORY LIST WITHOUT SEARCH NAME {}", categoryList2);
+            LOG.info("CATEGORY LIST WITHOUT SEARCH NAME {}", categoryList2);
             outc=unSerializeCat(category,categoryList2);
-            LOG.error("CATEGORY LIST WITHOUT SEARCH NAME AFTER SERIALIZE {}",outc);
         return outc;
     }
 
@@ -286,11 +285,8 @@ public class CategoryController {
 
             LOG.trace("Category name SELECTED");
             List<Category> categoryList1= categoryRepository.selectAllTypeAhead(searchCatNm,limitPg,initPg);
-            LOG.error("CATEGORY LIST WITH SEARCH NAME ADDED {}", categoryList1);
             outc2=unSerializeCat(category,categoryList1);
-            LOG.error("CATEGORY LIST AFTER SERIALIZE {}",outc2);
-
-
+            LOG.info("CATEGORY LIST AFTER SERIALIZE {}",outc2);
         return outc2;
     }
 

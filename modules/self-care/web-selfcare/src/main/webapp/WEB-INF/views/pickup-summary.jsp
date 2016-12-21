@@ -105,7 +105,9 @@
                                 <form class="form-horizontal" role="form">
                                     <div class="form-group">
                                         <div class="col-sm-12">
-                                            <textarea class="form-control" disabled="" rows="10" disabled></textarea>
+                                            <textarea class="form-control" disabled="" rows="10" disabled style="resize: vertical;">
+                                                <fmt:message key="order.summary.content" bundle="${lang}"/>
+                                            </textarea>
                                         </div>
                                     </div>
                                 </form>

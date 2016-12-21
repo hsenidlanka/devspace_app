@@ -23,7 +23,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     private JdbcTemplate jdbcTemplate;
     private PlatformTransactionManager transactionManager;
     //private static org.apache.log4j.Logger log = Logger.getLogger(CategoryRepositoryImpl.class);
-   Logger log = LoggerFactory.getLogger(CategoryRepositoryImpl.class);
+    Logger log = LoggerFactory.getLogger(CategoryRepositoryImpl.class);
 
 
     public void setDataSource(DataSource dataSource) {
@@ -129,6 +129,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
         return categories;
     }
 
+    @Override
     public List<Category> selectAllTypeAhead(String catName, int limit, int page) {
         String key = "%" + catName + "%";
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category WHERE name LIKE ? LIMIT ? OFFSET ?", key, limit, page);
@@ -152,11 +153,17 @@ public class CategoryRepositoryImpl implements CategoryRepository {
         return categories;
     }
 
+    @Override
+    public int countAllTypeAhead(String catName) {
+        String key = "%" + catName + "%";
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT(*) AS count FROM category WHERE name LIKE ?", key);
+        return Integer.parseInt(mp.get(0).get("count").toString());
+    }
+
     /*retrieve the details of a given category */
     @Override
     public Category selectCategoryDetail(int categoryId) {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category WHERE id = ?", categoryId);
-
 
         Category category = new Category();
         category.setCategory_id(Integer.parseInt(mp.get(0).get("id").toString()));
@@ -181,7 +188,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
 
     @Override
     public List<Category> selectAllVisible() {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category WHERE status='visible'");
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category WHERE status=1");
         List<Category> categories = new ArrayList<Category>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -206,7 +213,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
 
     public List<Category> selectAllVisibleTypeAhead(String catName, int limit, int page) {
         String key = "%" + catName + "%";
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category WHERE status='visible' LIKE ? LIMIT ? OFFSET ? ", key, limit, page - 1);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category WHERE status=1 LIKE ? LIMIT ? OFFSET ? ", key, limit, page - 1);
         List<Category> categories = new ArrayList<Category>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -230,6 +237,13 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     }
 
     @Override
+    public int countAllVisibleTypeAhead(String catName) {
+        String key = "%" + catName + "%";
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT(*) AS count FROM category WHERE status=1 LIKE ? ", key);
+        return Integer.parseInt(mp.get(0).get("count").toString());
+    }
+
+    @Override
     public List<Category> selectSubCategoryForCategoryTypeAhead(String catName, String subCategoryKey, int limit, int page) {
         return null;
     }
@@ -242,7 +256,8 @@ public class CategoryRepositoryImpl implements CategoryRepository {
         log.info("{}", count);
         return count;
     }
-    public int countForCat(String catId){
+
+    public int countForCat(String catId) {
         return 0;
     }
 
@@ -285,8 +300,6 @@ public class CategoryRepositoryImpl implements CategoryRepository {
             category.setCategoryName(mp.get(i).get("name").toString());
             category.setCatDescription(mp.get(i).get("description").toString());
             categories.add(category);
-
-
         }
         log.info("{}", categories);
         return categories;
@@ -439,7 +452,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     }
 
     public List<Category> paginateSelectAllVisible(int limit, int page) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category WHERE status='visible' LIMIT ? OFFSET ?", limit, page - 1);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category WHERE status=1 LIMIT ? OFFSET ?", limit, page - 1);
         List<Category> categories = new ArrayList<Category>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -456,10 +469,25 @@ public class CategoryRepositoryImpl implements CategoryRepository {
 
             categories.add(category);
             // }
-
         }
         log.info("{}", categories);
         return categories;
+    }
+
+    @Override
+    public int countAllVisible() {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT(*) AS COUNT FROM category WHERE status=1");
+        return Integer.parseInt(mp.get(0).get("count").toString());
+    }
+
+    @Override
+    public int countSubCategoriesForCategory(String catName) {
+        return 0;
+    }
+
+    @Override
+    public int SubCategoryForCategoryTypeAhead(String catName, String subCategoryKey) {
+        return 0;
     }
 
     public List<Category> paginateSelectNameAndDescription(int limit, int page) {
@@ -471,8 +499,6 @@ public class CategoryRepositoryImpl implements CategoryRepository {
             category.setCategoryName(mp.get(i).get("name").toString());
             category.setCatDescription(mp.get(i).get("description").toString());
             categories.add(category);
-
-
         }
         log.info("{}", categories);
         return categories;

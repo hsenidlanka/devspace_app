@@ -110,6 +110,14 @@ public class Category {
         this.creator=creator;
         this.status=status;
     }
+
+    public Category(String categoryName, String description, String image, String creator, String status) {
+        this.categoryName = categoryName;
+        this.catDescription = description;
+        this.image = image;
+        this.creator = creator;
+        this.status = status;
+    }
     //category(for admin category update )
    /* public Category(int category_id,String categoryName, String description,String status, String image) {
         this.category_id = category_id;

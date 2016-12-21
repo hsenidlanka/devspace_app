@@ -57,6 +57,11 @@ public class HomeController {
         return "/home/about-us";
     }
 
+    @RequestMapping("/test")
+    public String test() {
+        return "/testpage";
+    }
+
     @RequestMapping("/payment")
     public String payment() {
         return "payment";
