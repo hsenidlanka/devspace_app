@@ -347,118 +347,122 @@ public class FilterController {
         List<String> nameListB=staffRepository.selectNameByNameTypeAhead(bsname, "inactive");
         return  nameListB;
     }
-//
-//    /** handler method  to filter
-//     * the search data on the registered date**/
-//    @RequestMapping(value = "/bannedcustomerTable/city", method = RequestMethod.GET)
-//    public @ResponseBody
-//    List<Map<String, Object>> cityFilteredCustomerBlocked( @RequestParam("city") String city,
-//                                                           @RequestParam("name") String name) {
-//
-//        LOG.info("city {}", city);
-//        List<Map<String, Object>> outCustomerb = new ArrayList<Map<String, Object>>();
-//
-//        if((!(city.equals("--Select--"))) && ((name.equals(""))) ) {
-//            List<Map<String, Object>> cityList=citySelect(city,"inactive");
-//            return cityList;
-//        }
-//        if(((city.equals("--Select--"))) && (!(name.equals(""))) ) {
-//            List<Map<String, Object>> nameList=nameSelect(name,"inactive");
-//            return nameList;
-//        }
-//        if((!(city.equals("--Select--"))) && (!(name.equals(""))) ) {
-//            List<Map<String, Object>> cityList=citySelect(city,"inactive");
-//            List<Map<String, Object>> nameList=nameSelect(name,"inactive");
-//
-//            //to get the intersection of the two lists outCityDate1 and outCityDate2
-//            ArrayList<Map<String, Object>> common= new ArrayList<Map<String, Object>>(cityList);
-//            common.retainAll(nameList);
-//            return common;
-//
-//        }
-//
-//        return  outCustomerb;
-//    }
-//
-//    /**Below handler methods are for the filter options of
-//     ** the Staff Users(InActive) **/
-//    @RequestMapping(value = "/bannedstaffTable", method = RequestMethod.GET)
-//    public @ResponseBody
-//    List<Map<String, Object>> FilteredStaffBlocked(@RequestParam("designation") String designation, @RequestParam("department")
-//                                                    String department, @RequestParam("branch") String branch,
-//                                                    @RequestParam("name") String name){
-//
-//
-//        List<Map<String, Object>> outStaffb = new ArrayList<Map<String, Object>>();
-//
-//        //query for designation select filtering
-//        if((!(designation.equals("--Select--"))) && ((branch.equals("--Select--"))) && ((department.equals("--Select--")))) {
-//            List<Map<String, Object>> designationList=designationSelect(designation, "inactive");
-//            return designationList;
-//
-//        }
-//        //query for department select filtering
-//        if((!(department.equals("--Select--"))) && ((branch.equals("--Select--"))) && ((designation.equals("--Select--")))){
-//            List<Map<String, Object>> depList=departmentSelect(department,"inactive");
-//            return depList;
-//
-//        }
-//
-//        //query for branch select filtering
-//        if((!(branch.equals("--Select--"))) && ((designation.equals("--Select--"))) && ((department.equals("--Select--")))){
-//            List<Map<String, Object>> branchList=branchSelect(branch,"inactive");
-//            return branchList;
-//        }
-//
-//        //query for branch and department select filtering
-//        if((!(branch.equals("--Select--"))) && (!(department.equals("--Select--"))) &&((designation.equals("--Select--")))) {
-//
-//            List<Map<String, Object>> branchList=branchSelect(branch,"inactive");
-//            List<Map<String, Object>> depList=departmentSelect(department, "inactive");
-//
-//            //to get the intersection of the two lists outCityDate1 and outCityDate2
-//            ArrayList<Map<String, Object>> common= new ArrayList<Map<String, Object>>(branchList);
-//            common.retainAll(depList);
-//            return common;
-//        }
-//        //query for designation and department select filtering
-//        if((!(designation.equals("--Select--"))) && (!(department.equals("--Select--"))) && ((branch.equals("--Select--"))) ) {
-//
-//            List<Map<String, Object>> designationList=designationSelect(designation, "inactive");
-//            List<Map<String, Object>> depList=departmentSelect(department, "inactive");
-//
-//            //to get the intersection of the two lists outCityDate1 and outCityDate2
-//            ArrayList<Map<String, Object>> common= new ArrayList<Map<String, Object>>(designationList);
-//            common.retainAll(depList);
-//            return common;
-//        }
-//        //query for designation and branch select filtering
-//        if((!(designation.equals("--Select--"))) && ((department.equals("--Select--"))) && (!(branch.equals("--Select--"))) ) {
-//
-//            List<Map<String, Object>> designationList=designationSelect(designation,"inactive");
-//            List<Map<String, Object>> branchList=branchSelect(branch,"inactive");
-//
-//            //to get the intersection of the two lists outCityDate1 and outCityDate2
-//            ArrayList<Map<String, Object>> common= new ArrayList<Map<String, Object>>(designationList);
-//            common.retainAll(branchList);
-//            return common;
-//        }
-//
-//        //query for designation and branch select filtering
-//        if((!(designation.equals("--Select--"))) && (!(department.equals("--Select--"))) && (!(branch.equals("--Select--"))) ) {
-//
-//            List<Map<String, Object>> designationDepList=designationDepSelect(department,designation,"inactive");
-//            List<Map<String, Object>> branchList=branchSelect(branch,"inactive");
-//
-//            //to get the intersection of the two lists outCityDate1 and outCityDate2
-//            ArrayList<Map<String, Object>> common= new ArrayList<Map<String, Object>>(designationDepList);
-//            common.retainAll(branchList);
-//
-//            return common;
-//        }
-//        return outStaffb;
-//    }
-//
+
+    /** handler method  to filter
+     * the search data on the registered date**/
+    @RequestMapping(value = "/bannedcustomerTable/city", method = RequestMethod.GET)
+    public @ResponseBody
+    List<Map<String, Object>> cityFilteredCustomerBlocked( @RequestParam("city") String city,
+                                                           @RequestParam("name") String name,
+                                                           @RequestParam("pageLimit") String pageLimit,
+                                                           @RequestParam("initPage") String initPage) {
+        int initPg = Integer.parseInt(initPage);
+        int limitPg = Integer.parseInt(pageLimit);
+
+        LOG.info("city {}", city);
+        List<Map<String, Object>> outCustomerb = new ArrayList<Map<String, Object>>();
+
+        if((!(city.equals("--Select--"))) && ((name.equals(""))) ) {
+            List<Map<String, Object>> cityList=citySelect(city,"inactive",limitPg,initPg);
+            return cityList;
+        }
+        if(((city.equals("--Select--"))) && (!(name.equals(""))) ) {
+            List<Map<String, Object>> nameList=nameSelect(name,"inactive",limitPg,initPg);
+            return nameList;
+        }
+        if((!(city.equals("--Select--"))) && (!(name.equals(""))) ) {
+            List<Map<String, Object>> cityList=citySelect(city,"inactive",limitPg,initPg);
+            List<Map<String, Object>> nameList=nameSelect(name,"inactive",limitPg,initPg);
+
+            //to get the intersection of the two lists outCityDate1 and outCityDate2
+            ArrayList<Map<String, Object>> common= new ArrayList<Map<String, Object>>(cityList);
+            common.retainAll(nameList);
+            return common;
+        }
+        return  outCustomerb;
+    }
+
+    /**Below handler methods are for the filter options of
+     ** the Staff Users(InActive) **/
+    @RequestMapping(value = "/bannedstaffTable", method = RequestMethod.GET)
+    public @ResponseBody
+    List<Map<String, Object>> FilteredStaffBlocked(@RequestParam("designation") String designation, @RequestParam("department")
+                                                    String department, @RequestParam("branch") String branch,
+                                                    @RequestParam("name") String name, @RequestParam("pageLimit") String pageLimit,
+                                                    @RequestParam("initPage") String initPage){
+        int initPg = Integer.parseInt(initPage);
+        int limitPg = Integer.parseInt(pageLimit);
+
+        List<Map<String, Object>> outStaffb = new ArrayList<Map<String, Object>>();
+
+        //query for designation select filtering
+        if((!(designation.equals("--Select--"))) && ((branch.equals("--Select--"))) && ((department.equals("--Select--")))) {
+            List<Map<String, Object>> designationList=designationSelect(designation, "inactive",limitPg,initPg);
+            return designationList;
+
+        }
+        //query for department select filtering
+        if((!(department.equals("--Select--"))) && ((branch.equals("--Select--"))) && ((designation.equals("--Select--")))){
+            List<Map<String, Object>> depList=departmentSelect(department,"inactive",limitPg,initPg);
+            return depList;
+
+        }
+
+        //query for branch select filtering
+        if((!(branch.equals("--Select--"))) && ((designation.equals("--Select--"))) && ((department.equals("--Select--")))){
+            List<Map<String, Object>> branchList=branchSelect(branch,"inactive",limitPg,initPg);
+            return branchList;
+        }
+
+        //query for branch and department select filtering
+        if((!(branch.equals("--Select--"))) && (!(department.equals("--Select--"))) &&((designation.equals("--Select--")))) {
+
+            List<Map<String, Object>> branchList=branchSelect(branch,"inactive",limitPg,initPg);
+            List<Map<String, Object>> depList=departmentSelect(department, "inactive",limitPg,initPg);
+
+            //to get the intersection of the two lists outCityDate1 and outCityDate2
+            ArrayList<Map<String, Object>> common= new ArrayList<Map<String, Object>>(branchList);
+            common.retainAll(depList);
+            return common;
+        }
+        //query for designation and department select filtering
+        if((!(designation.equals("--Select--"))) && (!(department.equals("--Select--"))) && ((branch.equals("--Select--"))) ) {
+
+            List<Map<String, Object>> designationList=designationSelect(designation, "inactive",limitPg,initPg);
+            List<Map<String, Object>> depList=departmentSelect(department, "inactive",limitPg,initPg);
+
+            //to get the intersection of the two lists outCityDate1 and outCityDate2
+            ArrayList<Map<String, Object>> common= new ArrayList<Map<String, Object>>(designationList);
+            common.retainAll(depList);
+            return common;
+        }
+        //query for designation and branch select filtering
+        if((!(designation.equals("--Select--"))) && ((department.equals("--Select--"))) && (!(branch.equals("--Select--"))) ) {
+
+            List<Map<String, Object>> designationList=designationSelect(designation,"inactive",limitPg,initPg);
+            List<Map<String, Object>> branchList=branchSelect(branch,"inactive",limitPg,initPg);
+
+            //to get the intersection of the two lists outCityDate1 and outCityDate2
+            ArrayList<Map<String, Object>> common= new ArrayList<Map<String, Object>>(designationList);
+            common.retainAll(branchList);
+            return common;
+        }
+
+        //query for designation and branch select filtering
+        if((!(designation.equals("--Select--"))) && (!(department.equals("--Select--"))) && (!(branch.equals("--Select--"))) ) {
+
+            List<Map<String, Object>> designationDepList=designationDepSelect(department,designation,"inactive",limitPg,initPg);
+            List<Map<String, Object>> branchList=branchSelect(branch,"inactive",limitPg,initPg);
+
+            //to get the intersection of the two lists outCityDate1 and outCityDate2
+            ArrayList<Map<String, Object>> common= new ArrayList<Map<String, Object>>(designationDepList);
+            common.retainAll(branchList);
+
+            return common;
+        }
+        return outStaffb;
+    }
+
 /////////////////////////////////////////////// METHODS FOR FILTERINGS OF STAFF USERS ///////////////////////////////////////////////////////////////////////
 
     //method for filtering database values based on the designation

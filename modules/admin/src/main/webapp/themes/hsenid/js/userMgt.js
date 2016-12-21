@@ -367,19 +367,40 @@ $(document).ready(function () {
         // called when a page is changed.
         pageChange: function (page) {
 
-            var pageSend=(page-1)*pgLimit;
-            var bcname= $("#bcnameSearch").val();
+            var pageSend = (page - 1) * pgLimit;
+            var bcname = $("#bcnameSearch").val();
+            var city = $('#blockcCity').val();
 
-            $.ajax({
-                url: "https://localhost:8443/admin/userFilters/bannedcustomerTable/typeheadName/data",
-                dataType: "json",
-                data: {"bcname":bcname, "initPage": pageSend, "pageLimit": pgLimit},
-                success: function (data) {
+            if ((bcname == "") && (city == "--Select--")) {
+                $.ajax({
+                    //type: "POST",
+                    url: "https://localhost:8443/admin/users/view/bannedcustomerTable",
+                    data: {"initPage": pageSend, "pageLimit": pgLimit},
+                    success: function (msg) {
 
-                    $('#tableBannedcustomer').bootstrapTable('load', data);
-                }
-            })
+                        $('#tableBannedcustomer').bootstrapTable('load', msg);
+                    },
+                    error: function (e) {
+                        alert("ajax failed" + e);
+                    }
+                });
+            }
+            if ((city != "--Select--") || (bcname != "")) {
+                $.ajax({
+                    //type: "POST",
+                    url: "https://localhost:8443/admin/userFilters/bannedcustomerTable/city",
+                    data: {"city": city, "name": bcname, "initPage": pageSend, "pageLimit": pgLimit},
+                    success: function (msg) {
+                        //alert("city ajax" + city);
+                        $('#tableBannedcustomer').bootstrapTable('load', msg);
+                    },
+                    error: function (e) {
+                        alert("ajax failed" + city + e);
+                    }
+                });
+            }
         }
+
     });
 
     //InActive Staff  pagination in SEARCH scenarios
@@ -408,16 +429,39 @@ $(document).ready(function () {
 
             var pageSend=(page-1)*pgLimit;
             var bsname = $("#bsname").val();
+            var designation= $('#designation_db').find(':selected').text();
+            var department=$('#department_db').find('option:selected').text();
+            var branch=$('#branch_db').find(':selected').text();
 
-            $.ajax({
-                url: "https://localhost:8443/admin/userFilters/bannedStaffTable/typeheadName/data",
-                dataType: "json",
-                data: {"bsname":bsname, "initPage": pageSend, "pageLimit": pgLimit},
-                success: function (data) {
+            if((designation == "--Select--") && (department == "--Select--") && (bsname == "") && (branch == "--Select--")  ){
 
-                    $('#tableBannedstaff').bootstrapTable('load', data);
-                }
-            })
+                $.ajax({
+                    //type: "POST",
+                    url: "https://localhost:8443/admin/users/view/bannedstaffTable",
+                    data: {"initPage": pageSend, "pageLimit": pgLimit},
+                    success: function (msg) {
+
+                        $('#tableBannedstaff').bootstrapTable('load', msg);
+                    },
+                    error: function (e) {
+                        alert("ajax failed" + e);
+                    }
+                });
+            }
+            if((!(designation == "--Select--")) || (!(department == "--Select--")) || (!(branch == "--Select--")) ){
+                $.ajax({
+                    //type: "POST",
+                    url: "https://localhost:8443/admin/userFilters/bannedstaffTable",
+                    data:{"designation":designation,"department":department,"branch":branch,"name":bsname,"initPage": pageSend, "pageLimit": pgLimit},
+                    success: function (msg) {
+
+                        $('#tableBannedstaff').bootstrapTable('load', msg);
+                    },
+                    error: function (e) {
+                        alert("ajax failed" + e);
+                    }
+                });
+            }
         }
     });
 
@@ -747,6 +791,16 @@ $(document).ready(function () {
                 }
             });
         }
+        if((name != "")) {
+            $.ajax({
+                url: "https://localhost:8443/admin/userFilters/customerTable/typeheadName/data",
+                dataType: "json",
+                data: {"cname": name, "initPage": pageSend, "pageLimit": pgLimit},
+                success: function (data) {
+                    $('#tableCustomer').bootstrapTable('load', data);
+                }
+            })
+        }
 
     });
 
@@ -828,10 +882,14 @@ $(document).ready(function () {
         var city=$('#blockcCity').val();
         //alert(name);
 
+        $('#paginationBannedCustomer').hide();
+        $('#pagination2BannedCustomer').show();
+
         if((name == "") && (city == "--Select--")  ){
             $.ajax({
                 //type: "POST",
                 url: "https://localhost:8443/admin/users/view/bannedcustomerTable",
+                data: {"initPage":"0", "pageLimit": pgLimit},
                 success: function (msg) {
 
                     $('#tableBannedcustomer').bootstrapTable('load', msg);
@@ -840,13 +898,24 @@ $(document).ready(function () {
                     alert("ajax failed" + e);
                 }
             });
+            /**
+             *Setting the number of pages according to the number of records
+             */
+            $.ajax({
+                url: 'https://localhost:8443/admin/users/BannedCustomerPaginationTable',
+                //data: {"searchCatNm": $("#txtViewSearchCategory").val()},
+                success: function (recCount) {
+
+                    activeC.simplePaginator('setTotalPages', Math.ceil(recCount / 5));
+                }
+            });
 
         }
         if( (city != "--Select--") || (name != "")  ){
             $.ajax({
                 //type: "POST",
                 url:"https://localhost:8443/admin/userFilters/bannedcustomerTable/city",
-                data: {"city":city, "name":name},
+                data: {"city":city, "name":name,"initPage":"0", "pageLimit": pgLimit},
                 success: function (msg) {
                     //alert("city ajax" + city);
                     $('#tableBannedcustomer').bootstrapTable('load', msg);
@@ -855,9 +924,18 @@ $(document).ready(function () {
                     alert("ajax failed" + city +e);
                 }
             });
+            /**
+             *Setting the number of pages according to the number of records
+             */
+            $.ajax({
+                url: 'https://localhost:8443/admin/users/BannedCustomerPaginationTable',
+                //data: {"searchCatNm": $("#txtViewSearchCategory").val()},
+                success: function (recCount) {
+
+                    activeC.simplePaginator('setTotalPages', Math.ceil(recCount / 5));
+                }
+            });
         }
-
-
     });
 
 
@@ -870,11 +948,15 @@ $(document).ready(function () {
         var name=$('#bsname').val();
         var branch=$('#branch_db').find(':selected').text();
 
+        $('#paginationBannedStaff').hide();
+        $('#pagination2BannedStaff').show();
+
         if((designation == "--Select--") && (department == "--Select--") && (name == "") && (branch == "--Select--")  ){
 
             $.ajax({
                 //type: "POST",
                 url: "https://localhost:8443/admin/users/view/bannedstaffTable",
+                data: {"initPage":"0", "pageLimit": pgLimit},
                 success: function (msg) {
 
                     $('#tableBannedstaff').bootstrapTable('load', msg);
@@ -888,7 +970,7 @@ $(document).ready(function () {
             $.ajax({
                 //type: "POST",
                 url: "https://localhost:8443/admin/userFilters/bannedstaffTable",
-                data:{"designation":designation,"department":department,"branch":branch,"name":name},
+                data:{"designation":designation,"department":department,"branch":branch,"name":name,"initPage":"0", "pageLimit": pgLimit},
                 success: function (msg) {
 
                     $('#tableBannedstaff').bootstrapTable('load', msg);
