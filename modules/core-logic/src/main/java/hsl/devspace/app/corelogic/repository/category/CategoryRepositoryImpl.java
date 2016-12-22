@@ -279,12 +279,12 @@ public class CategoryRepositoryImpl implements CategoryRepository {
         int id = cat.getCategory_id();
         String name = cat.getCategoryName();
         String desc = cat.getCatDescription();
-//        String image=cat.getImage();
+        String image=cat.getImage();
         String status = cat.getStatus();
 
-        String sql = "UPDATE category SET name=?, description = ?,status = ? WHERE id = ? ";
+        String sql = "UPDATE category SET name=?, description = ?, image = ?, status = ? WHERE id = ? ";
 
-        int count = jdbcTemplate.update(sql, new Object[]{name, desc, status, id});
+        int count = jdbcTemplate.update(sql, new Object[]{name, desc,image, status, id});
         log.info("{}", count);
         return count;
     }
