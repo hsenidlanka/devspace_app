@@ -15,10 +15,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.ServletContext;
 import javax.swing.*;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -107,34 +104,6 @@ public class CategoryController {
 
         //for the image file uploaded
         MultipartFile imgFile=categoryObject.getImageUrl();
-        String imgFileName=imgFile.getOriginalFilename();
-        LOG.info("image file name  =" + imgFile.getOriginalFilename());
-
-        //set the image name equal to that of category name
-        categoryObject.setImage(categoryObject.getCategoryName()+".jpg");
-        int catAdd=categoryRepository.add(categoryObject);
-        if(catAdd ==1) {
-            for (int j=0;j< subcategory_name.length;j++) {
-
-                String subcatName=subcategory_name[j];
-                String subcatDescription= subcategory_des[j];
-                LOG.info("subcat name {} and des:{}",subcatName,subcatDescription);
-
-                //set the properties for the sucategory
-                categoryObject.setSubCategoryName(subcatName);
-                categoryObject.setSubcatDescription(subcatDescription);
-                categoryObject.setCreator("admin");
-
-                subcatAdd=subcategoryRepository.add(categoryObject);
-                LOG.info("subcat add return is: {}",subcatAdd);
-                if (subcatAdd ==0) {
-                    break;
-                }
-            }
-            if (subcatAdd ==0)
-                JOptionPane.showMessageDialog(null, insertError);
-            else
-                JOptionPane.showMessageDialog(null, insertSuccess);
 
             //to upload the image
                 if (!imgFile.isEmpty()) {
@@ -149,13 +118,46 @@ public class CategoryController {
                     //create a directory in local machine and upload the image there
                     uploadFile(imgFile,localPathtoUpload,catName);
 
-                }else {
-                    LOG.error("You failed to upload " + imgFileName + "because the file was empty.");
-                }
-        } else if(catAdd == 0)
-            JOptionPane.showMessageDialog(null, insertError);// put separate error pages
+                    //now image file upload is complete
+                    LOG.info("image file name  =" + imgFile.getOriginalFilename());
 
-    return new ModelAndView(new RedirectView("add"));
+                    //set the image name equal to that of category name
+                    categoryObject.setImage(categoryObject.getCategoryName()+".jpg");
+                    int catAdd=categoryRepository.add(categoryObject);
+
+                    if(catAdd ==1) {
+                        for (int j = 0; j < subcategory_name.length; j++) {
+
+                            String subcatName = subcategory_name[j];
+                            String subcatDescription = subcategory_des[j];
+                            LOG.info("subcat name {} and des:{}", subcatName, subcatDescription);
+
+                            //set the properties for the sucategory
+                            categoryObject.setSubCategoryName(subcatName);
+                            categoryObject.setSubcatDescription(subcatDescription);
+                            categoryObject.setCreator("admin");
+
+                            subcatAdd = subcategoryRepository.add(categoryObject);
+                            LOG.info("subcat add return is: {}", subcatAdd);
+                            if (subcatAdd == 0) {
+                                break;
+                            }
+                        }
+                    }
+                    if (catAdd ==0 || subcatAdd == 0)
+                            JOptionPane.showMessageDialog(null, insertError);
+                    else
+                            JOptionPane.showMessageDialog(null, insertSuccess);
+
+                    return new ModelAndView(new RedirectView("add"));
+
+                }else {
+                    LOG.error("You failed to upload because the file was empty.");
+                    JOptionPane.showMessageDialog(null, "Please select a Category Image");
+
+                    return new ModelAndView("category_management/totalAdd", "command",categoryObject);
+
+                }
     }
 
     private void uploadFile( MultipartFile image, String filePath, String fileName){
@@ -350,33 +352,93 @@ public @ResponseBody  Map<String, Object> editCategory(@RequestParam("id") int i
         map.put("creator",category.getCreator());
         map.put("image",category.getImage());
         map.put("status",category.getStatus());
-    LOG.error("The Category edit map{}", map);
+        LOG.error("The Category edit map{}", map);
 
     return map;
 }
 
 //handler method for sending customer edit form data to database
 @RequestMapping(value="/editCategory",method=RequestMethod.POST)
-public ModelAndView saveEditCategory(@ModelAttribute("editCategory") Category editCategory) {
+public ModelAndView saveEditCategory(@ModelAttribute("editCategory") Category editCategory,
+                                     @RequestParam("catName") String oldCatName) {
 
-        String n1=editCategory.getCategoryName();
+        String catName=editCategory.getCategoryName();
         String n2=editCategory.getCatDescription();
         int n3=editCategory.getCategory_id();
         String n4=editCategory.getStatus();
+        MultipartFile imgFile=editCategory.getImageUrl();
 
-        LOG.info("EDIT CATEGORY name {}", n1);
-        LOG.info("EDIT CATEGORY description {}", n2);
-        LOG.info("EDIT CATEGORY id {}", n3);
-        LOG.info("EDIT CATEGORY status {}", n4);
+        LOG.error("EDIT CATEGORY name {}", catName);
+        LOG.error("EDIT CATEGORY description {}", n2);
+        LOG.error("EDIT CATEGORY id {}", n3);
+        LOG.error("EDIT CATEGORY status {}", n4);
+        LOG.error("EDIT CATEGORY getImageUrl {}",imgFile);
+        LOG.error("OLLLLDD CAT name {}",oldCatName);
 
-        editCategory.setImage(editCategory.getCategoryName()+".jpg");
+
+    editCategory.setImage(editCategory.getCategoryName()+".jpg");
+    String n5=editCategory.getImage();
+    LOG.error("EDIT CATEGORY New set image naem {}", n5);
         //function to update the category detail except image
         int i=categoryRepository.updateCategory(editCategory);
         LOG.info("EDIT CUSTOMER i {}", i);
+        if (i == 1) {
+            //create a directory in server and upload the image there
+            String realPathtoUpload = context.getRealPath(serverPath);
+            LOG.error("realPathtoUpload " + realPathtoUpload);
 
-        if (i == 1)
+            //rename the file at local location
+            File localFileOld=new File(localPathtoUpload +oldCatName+".jpg");
+            File localFileNew=new File(localPathtoUpload +catName+".jpg");
+
+           /* FileInputStream fin = null;
+            FileOutputStream fout = null;
+            try {
+
+                byte[] buffer = imgFile.getBytes();
+                fin = new FileInputStream(localFileOld);
+                fout = new FileOutputStream(localFileNew);
+                int bytesRead;
+
+                while ((bytesRead = fin.read(buffer)) == -1) {
+                    fout.write(buffer, 0, bytesRead);
+                }
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    fin.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    fout.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+*/
+
+            boolean local=localFileOld.renameTo(localFileNew);
+            LOG.error("local file rename status {}",local);
+
+
+            //rename the file at the server
+            File serverFileOld=new File(realPathtoUpload+oldCatName+".jpg");
+            File serverFileNew=new File(realPathtoUpload +catName+".jpg");
+            boolean server=serverFileOld.renameTo(serverFileNew);
+            LOG.error("server file rename status {}",server);
+
+//            uploadFile(imgFile, realPathtoUpload, catName);
+
+            //create a directory in local machine and upload the image there
+//            uploadFile(imgFile, localPathtoUpload, catName);
             JOptionPane.showMessageDialog(null, updateSuccess);
-        else
+        }else
             JOptionPane.showMessageDialog(null,updateFail);
 
 return new ModelAndView(new RedirectView("/admin/category/view"));

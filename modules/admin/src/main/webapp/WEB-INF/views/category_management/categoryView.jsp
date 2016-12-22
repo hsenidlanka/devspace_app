@@ -201,7 +201,10 @@
                                 <form:input path="categoryName" type="text" class="form-control" id="editcategoryname"
                                             required="required"/>
                             </div>
+
                         </div>
+
+                        <input name="catName" type="hidden" id="catName">
                         <div class="form-group">
                             <label for="editcategorydes" class="control-label col-sm-4">
                                 <fmt:message key="category.categoryedit.modal.description" bundle="${bundle1}" />

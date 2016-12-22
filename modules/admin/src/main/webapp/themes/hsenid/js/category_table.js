@@ -105,8 +105,6 @@ window.operateEvents5 = {
         var objc1 = JSON.parse(data1);
         var id= objc1["id"];
         var name= objc1["name"];
-
-
         $.ajax({
             //type: "POST",
             url: "https://localhost:8443/admin/category/edit",
@@ -114,12 +112,14 @@ window.operateEvents5 = {
             success: function(msg){
                 var name=msg["name"];
                 var image1=msg["image"];
-                //alert("image name"+image1);
+
                 var  url="https://localhost:8443/admin/themes/hsenid/images/categories/" +image1;
-                //alert(url);
+                alert(url);
                 $('#imageUrl').attr('src',url);
                 $('#categoryid').val(id);
                 $('#editcategoryname').val(msg["name"]);
+                $('#catName').val(msg["name"]);
+
                 $('#editcategorydes').val(msg["description"]);
                 $('#editvisibility').val(msg["status"]);
 
