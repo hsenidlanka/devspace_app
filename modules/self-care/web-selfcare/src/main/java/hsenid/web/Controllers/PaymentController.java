@@ -28,13 +28,16 @@ import java.util.Map;
 
 @Controller
 public class PaymentController {
-    final static Logger logger = LoggerFactory.getLogger(DeliveryController.class);
+    final static Logger logger = LoggerFactory.getLogger(PaymentController.class);
 
     @Value("${api.url.base.url}")
     private String baseUrl;
 
     @Value("${api.url.payment.process}")
     private String paymentProcessUrl;
+
+    @Value("${api.url.customers.search}")
+    private String customerSearchUrl;
 
     @RequestMapping(value = "/payment/get-total", method = RequestMethod.GET)
     @ResponseBody
@@ -204,5 +207,22 @@ public class PaymentController {
         jsonObject = (JSONObject) session.getAttribute("receiptData");
         receiptDataArray.add(jsonObject);
         return receiptDataArray;
+    }
+
+    @RequestMapping(value = "/payment/customer-mobile", method = RequestMethod.GET)
+    @ResponseBody
+    public String getCustomerMobile(HttpSession session) {
+        String customerMobileNo = "";
+        if (session.getAttribute("username") != null || session.getAttribute("username").toString() != "") {
+            try {
+                RestTemplate restTemplate = new RestTemplate();
+                String getCustomerDetailsUrl = baseUrl + customerSearchUrl + session.getAttribute("username");
+                ServerResponseMessage responseMessage = restTemplate.getForObject(getCustomerDetailsUrl, ServerResponseMessage.class);
+//                customerMobileNo = responseMessage.getData().get(0).get("mobile").toString();
+            }catch (Exception e){
+                logger.error("ERROR :{}",e);
+            }
+        }
+        return customerMobileNo;
     }
 }

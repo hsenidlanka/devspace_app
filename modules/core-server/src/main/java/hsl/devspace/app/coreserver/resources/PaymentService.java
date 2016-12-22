@@ -150,6 +150,7 @@ public class PaymentService {
                             successMessage.addData(dataObj);
                             URL smsUrl = new URL(DEVSPACE_BASE_URL + propertyReader.readProperty("sms.send.url"));
                             MtSmsResp smsResponse = sendPaymentSmsNotification(subscriberId, amount, orderId, applicationId, password, smsUrl);
+                            sendCouponCodeSms(subscriberId, newCouponCode, applicationId, password, smsUrl);
                             successMessage.setMessage("payment succeeded");
                             if (!String.valueOf(smsResponse.getStatusCode()).equals("S1000")) {
                                 successMessage.setMessage("payment succeeded but failed to send the sms notification");
@@ -211,7 +212,20 @@ public class PaymentService {
         MtSmsReq mtSmsReq = new MtSmsReq();
         subscriberId = "tel:" + subscriberId;
         mtSmsReq.setDestinationAddresses(Arrays.asList(subscriberId));
-        mtSmsReq.setMessage("Thank you for the payment of Rs." + amount + ". Order id: " + orderId+".");
+        mtSmsReq.setMessage("Thank you for the payment of Rs." + amount + ". Order id: " + orderId + ".");
+        mtSmsReq.setApplicationId(applicationId);
+        mtSmsReq.setPassword(password);
+        SmsRequestSender requestSender = new SmsRequestSender(url);
+        MtSmsResp smsResp = requestSender.sendSmsRequest(mtSmsReq);
+        return smsResp;
+    }
+
+    // Send coupon code in a sms to the customer
+    private MtSmsResp sendCouponCodeSms(String subscriberId, String couponCode, String applicationId, String password, URL url) throws SdpException {
+        MtSmsReq mtSmsReq = new MtSmsReq();
+        subscriberId = "tel:" + subscriberId;
+        mtSmsReq.setDestinationAddresses(Arrays.asList(subscriberId));
+        mtSmsReq.setMessage("We are glad to offer you a coupon code. Please use it in your next purchase. Coupon code: " + couponCode);
         mtSmsReq.setApplicationId(applicationId);
         mtSmsReq.setPassword(password);
         SmsRequestSender requestSender = new SmsRequestSender(url);

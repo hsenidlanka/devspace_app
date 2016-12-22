@@ -251,7 +251,17 @@ function calculateDicountedTotal(element) {
 // Calculate the net amount by adding 5% service charge
 function calculateNetAmount() {
     var discountedTotal = $("#label-distot").text();
-    $("#net-amount-field").text(parseFloat(discountedTotal * 105 / 100).toFixed(2));
+    var serviceCharge = 5;
+    if (parseInt(discountedTotal) == 0) {
+        serviceCharge = 0;
+    } else if (parseInt(discountedTotal) > 10000) {
+        serviceCharge = 8;
+    }
+    $("#label-serv").text(serviceCharge.toFixed(2));
+    var serviceChargeForCalculation = 100 + parseInt(serviceCharge);
+    console.log(serviceCharge);
+    console.log(serviceChargeForCalculation);
+    $("#net-amount-field").text(parseFloat(discountedTotal * serviceChargeForCalculation / 100).toFixed(2));
 }
 
 // Store quantity details on the session when quantity gets updated

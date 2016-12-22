@@ -38,8 +38,9 @@ public class DeliveryController {
             return deliveryDetailsJson;
         } else {
             RestTemplate restTemplate = new RestTemplate();
-            String getToppingsUrl = baseUrl + customerSearchUrl + session.getAttribute("username");
-            ServerResponseMessage responseMessage = restTemplate.getForObject(getToppingsUrl, ServerResponseMessage.class);
+            String getCustomerDetailsUrl = baseUrl + customerSearchUrl + session.getAttribute("username");
+            logger.error("url: {}",getCustomerDetailsUrl);
+            ServerResponseMessage responseMessage = restTemplate.getForObject(getCustomerDetailsUrl, ServerResponseMessage.class);
             JSONArray jsonArray = new JSONArray();
             for (int i = 0; i < responseMessage.getData().size(); i++) {
                 JSONObject jsonObject = responseMessage.getData().get(i);
