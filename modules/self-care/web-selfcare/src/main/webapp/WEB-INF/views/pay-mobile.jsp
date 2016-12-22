@@ -141,8 +141,8 @@
 <script>
     $('#smartwizard').smartWizard({
         selected: 2,
-        theme:'arrows',
-        anchorSettings:{
+        theme: 'arrows',
+        anchorSettings: {
             anchorClickable: false
         }
     });

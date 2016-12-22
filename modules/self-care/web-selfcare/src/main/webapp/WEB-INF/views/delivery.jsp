@@ -73,7 +73,8 @@
                             <input type="text" class="del-date" id="date" name="date" style="height:auto;">
                             &nbsp;&nbsp;<fmt:message key="delivery.time" bundle="${lang}"/>
                             <div class="input-group" style="display: inline-block; vertical-align: middle;">
-                                <input id="timepicker1" class="bootstrap-timepicker1 del-time" type="text" style="height: auto;">
+                                <input id="timepicker1" class="bootstrap-timepicker1 del-time" type="text"
+                                       style="height: auto;">
                             </div>
                         </div>
 
@@ -171,7 +172,8 @@
                             </label>
                             &nbsp;&nbsp;<fmt:message key="delivery.time" bundle="${lang}"/>
                             <div class="input-group" style="display: inline-block; vertical-align: middle;">
-                                <input id="timepicker2" class="bootstrap-timepicker2 pickup-time" type="text" style="height: auto;">
+                                <input id="timepicker2" class="bootstrap-timepicker2 pickup-time" type="text"
+                                       style="height: auto;">
                             </div>
                         </div>
 
@@ -190,17 +192,18 @@
                                             <select class="form-control" id="pickup-branch">
                                                 <option value="<fmt:message key="delivery.colombo" bundle="${lang}"/>">
                                                     <fmt:message key="delivery.colombo" bundle="${lang}"/></option>
-                                                <option value="<fmt:message key="delivery.galle" bundle="${lang}"/>">
+                                                <%--<option value="<fmt:message key="delivery.galle" bundle="${lang}"/>">
                                                     <fmt:message key="delivery.galle" bundle="${lang}"/></option>
                                                 <option value="<fmt:message key="delivery.matara" bundle="${lang}"/>">
-                                                    <fmt:message key="delivery.matara" bundle="${lang}"/></option>
+                                                    <fmt:message key="delivery.matara" bundle="${lang}"/></option>--%>
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label"><fmt:message key="delivery.branch.address"
                                                                                       bundle="${lang}"/></label>
-                                            <textarea class="form-control txtarea-branch-address" rows="5"
-                                                      readonly></textarea>
+                                            <textarea class="form-control txtarea-branch-address" rows="6"
+                                                      readonly><fmt:message key="delivery.branch.address.value"
+                                                                            bundle="${lang}"/></textarea>
                                         </div>
                                         <div>
                                             <a class="btn btn-success btn-proceed-payment"
@@ -220,9 +223,10 @@
                                     <label class="control-label"><fmt:message key="delivery.locate"
                                                                               bundle="${lang}"/></label>
                                 </div>
+
                                 <img class="center-block img-responsive"
-                                     src="<c:url value="/resources/images/map.png"/>" width="300px"
-                                     height="300px;">
+                                         src="<c:url value="/resources/images/map.png"/>" width="300px"
+                                         height="300px;">
                             </div>
                         </div>
                     </div>
@@ -255,8 +259,8 @@
 <script>
     $('#smartwizard').smartWizard({
         selected: 0,
-        theme:'arrows',
-        anchorSettings:{
+        theme: 'arrows',
+        anchorSettings: {
             anchorClickable: false
         }
     });

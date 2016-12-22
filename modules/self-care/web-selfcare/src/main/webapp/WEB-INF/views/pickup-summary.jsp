@@ -5,7 +5,7 @@
     <title><fmt:message key="pickup" bundle="${lang}"/></title>
     <link rel="shortcut icon" href="">
     <link href="<c:url value="/resources/css/progress-wizard.min.css"/>" rel="stylesheet">
-    <script src="<c:url value="/resources/js/pickup-summary.js"/>" ></script>
+    <script src="<c:url value="/resources/js/pickup-summary.js"/>"></script>
 </head>
 <body>
 <div class="loader-anim"></div>
@@ -105,9 +105,9 @@
                                 <form class="form-horizontal" role="form">
                                     <div class="form-group">
                                         <div class="col-sm-12">
-                                            <textarea class="form-control" disabled="" rows="10" disabled style="resize: vertical;">
-                                                <fmt:message key="order.summary.content" bundle="${lang}"/>
-                                            </textarea>
+                                            <textarea class="form-control" disabled="" rows="10" disabled
+                                                      style="resize: vertical;"><fmt:message key="order.summary.content"
+                                                                                             bundle="${lang}"/></textarea>
                                         </div>
                                     </div>
                                 </form>
