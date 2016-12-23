@@ -2,7 +2,7 @@ package hsl.devspace.app.corelogic.domain;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -24,13 +24,13 @@ public class Item {
     private int subCategoryId;
     List<Map<String, Object>> sizePrice;
     private String creator;
-    private Timestamp createdDate;
+    private Date createdDate;
 
-    public Timestamp getCreatedDate() {
+    public Date getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(Timestamp createdDate) {
+    public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
     }
 
@@ -172,7 +172,7 @@ public class Item {
         this.itemId = itemId;
     }
 
-    public Item(String itemName, String description, String type, String image, String subCategoryName, Timestamp createdDate, String creator, int itemId) {
+    public Item(String itemName, String description, String type, String image, String subCategoryName, Date createdDate, String creator, int itemId) {
         this.itemName = itemName;
         this.description = description;
         this.type = type;

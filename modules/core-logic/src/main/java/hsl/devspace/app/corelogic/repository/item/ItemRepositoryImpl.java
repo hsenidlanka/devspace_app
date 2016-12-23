@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.sql.DataSource;
-import java.sql.Timestamp;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -45,7 +45,7 @@ public class ItemRepositoryImpl implements ItemRepository {
         String ims=img.getOriginalFilename();*/
 
         String sql = "INSERT INTO item" +
-                "(name,description,type_id,image,sub_category_id,created_date,creator) VALUES (?,?,(SELECT type_id FROM type WHERE name=? ),?,(SELECT id FROM sub_category WHERE name=?),Now(),?)";
+                "(name,description,type_id,image,sub_category_id,created_date,creator) VALUES (?,?,(SELECT type_id FROM type WHERE name=? ),?,(SELECT id FROM sub_category WHERE name=?),CURRENT_DATE ,?)";
         row = jdbcTemplate.update(sql, new Object[]{item.getItemName(), item.getDescription(),
                 item.getType(), item.getImage(), item.getSubCategoryName(), item.getCreator()});
         log.info("{} new item inserted", row);
@@ -118,7 +118,7 @@ public class ItemRepositoryImpl implements ItemRepository {
             item.setTypeId(Integer.parseInt(mp.get(i).get("type_id").toString()));
             item.setImage(mp.get(i).get("image").toString());
             item.setSubCategoryId(Integer.parseInt(mp.get(i).get("sub_category_id").toString()));
-            item.setCreatedDate(Timestamp.valueOf(mp.get(i).get("created_date").toString()));
+            item.setCreatedDate(Date.valueOf(mp.get(i).get("created_date").toString()));
             item.setCreator(mp.get(i).get("creator").toString());
             items.add(item);
         }
