@@ -8,7 +8,7 @@ $(document).ready(function () {
         success: function (result) {
             $('#tableBannedstaff').bootstrapTable({
 
-                height: 230,
+                height: 410,
                 pagination: false,
                 search: false,
                 showColumns: false,
@@ -104,7 +104,7 @@ window.operateEvents3 = {
 
             },
             error:function(e){
-                alert("ajax failed" +uname+ ""+e);
+                alert("ajax failed" +bstaff_uname+ ""+e);
             }
         });
     },

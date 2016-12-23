@@ -73,13 +73,13 @@
                 <br>
                 <div class="tab-content">
                     <!--div to get customer info-->
-                    <div id="home" class="tab-pane fade in active">
+                    <div id="home" class="tab-pane fade in active" style="margin: -20px -5px 0 -10px;" >
                         <div>
                             <jsp:include page="userCustomer_view.jsp"/>
                         </div>
                     </div>
                     <!--div to present staff info-->
-                    <div id="menu1" class="tab-pane fade">
+                    <div id="menu1" class="tab-pane fade" style="margin: -20px -5px 0 -10px;">
                         <div >
                             <jsp:include page="userStaff_view.jsp"/>
 

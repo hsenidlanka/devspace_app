@@ -8,7 +8,7 @@ $(document).ready(function () {
         success: function (result) {
 
             $('#tableCustomer').bootstrapTable({
-                height: 230,
+                height: 415,
                 pagination: false,
                 search: false,
                 showColumns: false,

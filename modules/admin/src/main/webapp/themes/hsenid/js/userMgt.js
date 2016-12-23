@@ -160,7 +160,7 @@ $(document).ready(function () {
         $("#staffDetail").hide();
     });
 /////////////////////////////////////////////PAGINATION EXTRA => when page change ////////////////////////////////////////////////////////////////////
-    var pgLimit = 5;
+    var pgLimit = 10;
 
     // Active Customer  pagination in SEARCH scenarios
     var activeC= $('#pagination2Customer').simplePaginator({
@@ -169,7 +169,7 @@ $(document).ready(function () {
         totalPages: 7,
 
         // maximum of visible buttons
-        maxButtonsVisible: 5,
+        maxButtonsVisible: 10,
 
         // page selected
         currentPage: 1,
@@ -502,7 +502,7 @@ $(document).ready(function () {
                 //data: {"searchCatNm": $("#txtViewSearchCategory").val()},
                 success: function (recCount) {
 
-                    activeC.simplePaginator('setTotalPages', Math.ceil(recCount / 5));
+                    activeC.simplePaginator('setTotalPages', Math.ceil(recCount / pgLimit));
                 }
             });
     });
@@ -554,7 +554,7 @@ $(document).ready(function () {
             url: 'https://localhost:8443/admin/users/StaffPaginationTable',
             //data: {"searchCatNm": $("#txtViewSearchCategory").val()},
             success: function (recCount) {
-                activeS.simplePaginator('setTotalPages', Math.ceil(recCount / 5));
+                activeS.simplePaginator('setTotalPages', Math.ceil(recCount / pgLimit));
             }
         });
     });
@@ -620,7 +620,7 @@ $(document).ready(function () {
             url: 'https://localhost:8443/admin/users/BannedCustomerPaginationTable',
             //data: {"searchCatNm": $("#txtViewSearchCategory").val()},
             success: function (recCount) {
-                inactiveC.simplePaginator('setTotalPages', Math.ceil(recCount / 5));
+                inactiveC.simplePaginator('setTotalPages', Math.ceil(recCount / pgLimit));
             }
         });
     });
@@ -670,7 +670,7 @@ $(document).ready(function () {
             url: 'https://localhost:8443/admin/users/BannedStaffPaginationTable',
             //data: {"searchCatNm": $("#txtViewSearchCategory").val()},
             success: function (recCount) {
-                inactiveS.simplePaginator('setTotalPages', Math.ceil(recCount / 5));
+                inactiveS.simplePaginator('setTotalPages', Math.ceil(recCount / pgLimit));
             }
         });
     });
@@ -709,7 +709,7 @@ $(document).ready(function () {
                 //data: {"searchCatNm": $("#txtViewSearchCategory").val()},
                 success: function (recCount) {
 
-                    activeC.simplePaginator('setTotalPages', Math.ceil(recCount / 5));
+                    activeC.simplePaginator('setTotalPages', Math.ceil(recCount / pgLimit));
                 }
             });
 
@@ -737,7 +737,7 @@ $(document).ready(function () {
                 //data: {"searchCatNm": $("#txtViewSearchCategory").val()},
                 success: function (recCount) {
 
-                    activeC.simplePaginator('setTotalPages', Math.ceil(recCount / 5));
+                    activeC.simplePaginator('setTotalPages', Math.ceil(recCount / pgLimit));
                 }
             });
         }
@@ -762,7 +762,7 @@ $(document).ready(function () {
                 //data: {"searchCatNm": $("#txtViewSearchCategory").val()},
                 success: function (recCount) {
 
-                    activeC.simplePaginator('setTotalPages', Math.ceil(recCount / 5));
+                    activeC.simplePaginator('setTotalPages', Math.ceil(recCount / pgLimit));
                 }
             });
         }
@@ -787,7 +787,7 @@ $(document).ready(function () {
                 //data: {"searchCatNm": $("#txtViewSearchCategory").val()},
                 success: function (recCount) {
 
-                    activeC.simplePaginator('setTotalPages', Math.ceil(recCount / 5));
+                    activeC.simplePaginator('setTotalPages', Math.ceil(recCount / pgLimit));
                 }
             });
         }
@@ -839,7 +839,7 @@ $(document).ready(function () {
                 url: 'https://localhost:8443/admin/users/StaffPaginationTable',
                 //data: {"searchCatNm": $("#txtViewSearchCategory").val()},
                 success: function (recCount) {
-                    activeS.simplePaginator('setTotalPages', Math.ceil(recCount / 5));
+                    activeS.simplePaginator('setTotalPages', Math.ceil(recCount / pgLimit));
                 }
             });
         }
@@ -863,7 +863,7 @@ $(document).ready(function () {
                 url: 'https://localhost:8443/admin/users/StaffPaginationTable',
                 //data: {"searchCatNm": $("#txtViewSearchCategory").val()},
                 success: function (recCount) {
-                    activeS.simplePaginator('setTotalPages', Math.ceil(recCount / 5));
+                    activeS.simplePaginator('setTotalPages', Math.ceil(recCount / pgLimit));
                 }
             });
         }
@@ -906,7 +906,7 @@ $(document).ready(function () {
                 //data: {"searchCatNm": $("#txtViewSearchCategory").val()},
                 success: function (recCount) {
 
-                    activeC.simplePaginator('setTotalPages', Math.ceil(recCount / 5));
+                    activeC.simplePaginator('setTotalPages', Math.ceil(recCount / pgLimit));
                 }
             });
 
@@ -932,7 +932,7 @@ $(document).ready(function () {
                 //data: {"searchCatNm": $("#txtViewSearchCategory").val()},
                 success: function (recCount) {
 
-                    activeC.simplePaginator('setTotalPages', Math.ceil(recCount / 5));
+                    activeC.simplePaginator('setTotalPages', Math.ceil(recCount / pgLimit));
                 }
             });
         }

@@ -164,18 +164,15 @@ public class FilterController {
               Date toDate= sdf.parse(to);
               java.sql.Date sqlfromDate= new java.sql.Date(fromDate.getTime());
               java.sql.Date sqltoDate= new java.sql.Date(toDate.getTime());
-
-
-              ArrayList<Map<String, Object>> outCityDate1 = new ArrayList<Map<String, Object>>();
-              ArrayList<Map<String, Object>> outCityDate2 = new ArrayList<Map<String, Object>>();
+        LOG.error("sqlFromDate: {}",sqlfromDate);
 
         //two lists of User objects obtained filtered by date and city respectively
-              List<User> customerList3=customerRepository.retrieveByDateRange(sqlfromDate,sqltoDate,limitPg,initPg);
-              List<User> customerList4=customerRepository.filterByCity(city,"active",limitPg,initPg);
-
+              List<User> dateFilteredcustomerList=customerRepository.retrieveByDateRange(sqlfromDate,sqltoDate,limitPg,initPg);
+              LOG.error("retrive by date range {}",dateFilteredcustomerList);
+        ArrayList<Map<String, Object>> outCityDate1 = new ArrayList<Map<String, Object>>();
         //first filter by date range
-        for (int i=0;i<customerList3.size();i++){
-            User customerUser=customerList3.get(i);
+        for (int i=0;i<dateFilteredcustomerList.size();i++){
+            User customerUser=dateFilteredcustomerList.get(i);
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("id", customerUser.getId());
             map.put("username", customerUser.getUsername());
@@ -191,9 +188,12 @@ public class FilterController {
             LOG.error("out {}", outCityDate1);
         }
 
+        List<User> cityFilteredcustomerList=customerRepository.filterByCity(city,"active",limitPg,initPg);
+        LOG.error("retrieve by city: {}",cityFilteredcustomerList);
+        ArrayList<Map<String, Object>> outCityDate2 = new ArrayList<Map<String, Object>>();
         //secondly filter by city
-        for (int i=0;i<customerList4.size();i++){
-            User customerUser=customerList4.get(i);
+        for (int i=0;i<cityFilteredcustomerList.size();i++){
+            User customerUser=cityFilteredcustomerList.get(i);
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("id", customerUser.getId());
             map.put("username", customerUser.getUsername());
