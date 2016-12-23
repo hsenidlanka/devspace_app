@@ -84,9 +84,9 @@ a {
     height: 100%;
 }
 #content #left {
-    float: left;
+    float: right;
     width: 75%;
-    background: #7BC087;
+    background: transparent;
 }
 @media all and (max-width: 780px) {
     #content #left {
@@ -94,11 +94,11 @@ a {
     }
 }
 #content #left #map {
-    height: 450px;
+    height: 476px;
     /*height: 500px;*/
     position: relative;
     /*background-image: url("http://f.cl.ly/items/452R3S1440221Z3m372j/israel.png");*/
-    background-image: url("../images/contactusbg.png");
+    background-image: url("../images/mapimage.jpg");
     background-size: cover;
 }
 #content #left #map p {
@@ -243,11 +243,10 @@ a {
 #content #right form {
     border-top: solid thin #8e9699;
     border-bottom: solid thin #8e9699;
-    margin: 20px 0;
-    padding: 20px 0;
+    margin: 7px 0;
+    padding: 7px 0;
 }
-#content #right form input,
-#content #right form select,
+
 #content #right form textarea {
     background: #394141;
     padding: 8px;
@@ -255,6 +254,21 @@ a {
     width: 100%;
     color: white;
 }
+#content #right form select{
+    background: #394141;
+    padding: 8px;
+    margin-bottom: 1px;
+    width: 100%;
+    color: white;
+}
+#content #right form input{
+    background: #394141;
+    padding: 0px;
+    margin-bottom: 0px;
+    width: 100%;
+    color: white;
+}
+
 #content #right form input:last-of-type,
 #content #right form textarea:last-of-type,
 #content #right form select:last-of-type{

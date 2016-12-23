@@ -85,23 +85,28 @@
 
                     <div style="margin-left: 20px">
                         <div class="form-group">
-                            <h4><strong>Personal Information</strong></h4>
+                            <h4><strong><fmt:message key="update.user.personal.info" bundle="${lang}"/></strong></h4>
                         </div>
                         <div class="form-group">
-                            <label class="row"><p><fmt:message key="signup.title" bundle="${lang}"/></p></label>
+                            <label class=""><p><strong><fmt:message key="signup.title" bundle="${lang}"/></strong></p></label>
 
-                            <div class="row">
+                            <div class="">
 
-                                <form:radiobutton path="title" id="Mr" name="titlejs" value="Mr"/>Mr
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <form:radiobutton path="title" id="Mrs" name="titlejs" value="Mrs"/>Mrs
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <form:radiobutton path="title" id="Ms" name="titlejs" value="Ms"/>Ms
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <form:radiobutton path="title" id="Dr" name="titlejs" value="Dr"/>Dr
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <form:radiobutton path="title" id="Rev" name="titlejs" value="Rev"/>Rev
-
+                                <label class="radio-inline">
+                                    <form:radiobutton path="title" id="Mr" name="titlejs" value="Mr"/>Mr
+                                </label>
+                                <label class="radio-inline">
+                                    <form:radiobutton path="title" id="Mrs" name="titlejs" value="Mrs"/>Mrs
+                                </label>
+                                <label class="radio-inline">
+                                    <form:radiobutton path="title" id="Ms" name="titlejs" value="Ms"/>Ms
+                                </label>
+                                <label class="radio-inline">
+                                    <form:radiobutton path="title" id="Dr" name="titlejs" value="Dr"/>Dr
+                                </label>
+                                <label class="radio-inline">
+                                    <form:radiobutton path="title" id="Rev" name="titlejs" value="Rev"/>Rev
+                                </label>
                             </div>
                             <div class="row">
                                 <form:errors path="title" cssClass="help-inline" cssStyle="color: red"/>
@@ -111,12 +116,12 @@
 
                         <div class="form-group">
                             <form:label path="firstName" for="firstName">
-                                <p>First Name</p>
+                                <p><strong><fmt:message key="signup.first.name" bundle="${lang}"/></strong></p>
                             </form:label>
 
                             <div class="">
                                 <div class="row inline">
-                                    <form:input id="firstNamejs" path="firstName" cssStyle="width: 72%"/>
+                                    <form:input id="firstNamejs" path="firstName" cssClass="form-control input-sm" cssStyle="width: 72%"/>
                                 </div>
                                 <div class="row">
                                     <form:errors path="firstName" cssClass="help-inline" cssStyle="color: red"/>
@@ -127,12 +132,12 @@
                         <div class="form-group">
 
                             <form:label path="lastName" for="lastName">
-                                <p>Last Name</p>
+                                <p><strong><fmt:message key="signup.last.name" bundle="${lang}"/></strong></p>
                             </form:label>
 
                             <div class="">
                                 <div class="row inline">
-                                    <form:input path="lastName" id="lastNamejs" cssStyle="width: 72%"/>
+                                    <form:input path="lastName" id="lastNamejs" cssClass="form-control input-sm" cssStyle="width: 72%"/>
                                 </div>
                                 <div class="row">
                                     <form:errors path="lastName" cssClass="help-inline" cssStyle="color: red"/>
@@ -143,12 +148,12 @@
 
                         <div class="form-group">
                             <form:label path="username" for="username">
-                                <p>Username</p>
+                                <p><strong><fmt:message key="signup.username" bundle="${lang}"/></strong></p>
                             </form:label>
 
                             <div class="">
                                 <div class="row inline">
-                                    <form:input id="usernamejs" path="username" cssStyle="width:72%" readonly="true"/>
+                                    <form:input id="usernamejs" path="username" cssClass="form-control input-sm" cssStyle="width:72%" readonly="true"/>
                                 </div>
                                 <div class="row">
                                     <form:errors path="username" cssClass="help-inline" cssStyle="color: red"/>
@@ -162,16 +167,16 @@
                     <%----%>
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <h4><strong>Contact Information</strong></h4>
+                        <h4><strong><fmt:message key="update.user.contact.info" bundle="${lang}"/></strong></h4>
                     </div>
                     <div class="form-group">
                         <form:label path="email" for="email">
-                            <p>Email</p>
+                            <p><strong><fmt:message key="signup.email" bundle="${lang}"/></strong></p>
                         </form:label>
 
                         <div class="">
                             <div class="row inline">
-                                <form:input id="emailjs" path="email" cssStyle="width:72%"/>
+                                <form:input id="emailjs" path="email" cssClass="form-control input-sm" cssStyle="width:72%"/>
                             </div>
                             <div class="row">
                                 <form:errors path="email" cssClass="help-inline" cssStyle="color: red"/>
@@ -182,12 +187,12 @@
 
                     <div class="form-group">
                         <form:label path="mobile" for="mobile">
-                            <p>Mobile</p>
+                            <p><strong><fmt:message key="signup.email" bundle="${lang}"/>Mobile</strong></p>
                         </form:label>
 
                         <div class="">
                             <div class="row inline">
-                                <form:input id="mobilejs" path="mobile" cssStyle="width:72%"/>
+                                <form:input id="mobilejs" path="mobile" cssClass="form-control input-sm" cssStyle="width:72%"/>
                             </div>
                             <div class="row">
                                 <form:errors path="mobile" cssClass="help-inline" cssStyle="color: red"/>
@@ -197,12 +202,12 @@
 
                     <div class="form-group">
                         <form:label path="addressLine01" for="addressLine01" cssClass="text-left">
-                            <p>Address</p>
+                            <p><strong><fmt:message key="signup.email" bundle="${lang}"/>Address</strong></p>
                         </form:label>
                         <div class="">
                             <div class="row">
                                 <div class="row inline">
-                                    <form:input id="addr1js" path="addressLine01" cssStyle="width:72%"/>
+                                    <form:input id="addr1js" path="addressLine01" cssClass="form-control input-sm" cssStyle="width:72%"/>
                                 </div>
                                 <div class="row">
                                     <form:errors path="addressLine01" cssClass="help-inline" cssStyle="color: red"/>
@@ -210,7 +215,7 @@
                             </div>
                             <div class="row" style="margin-top: 7px">
                                 <div class="row inline">
-                                    <form:input id="addr2js" path="addressLine02" cssStyle="width:72%"/>
+                                    <form:input id="addr2js" path="addressLine02" cssClass="form-control input-sm" cssStyle="width:72%"/>
                                 </div>
                                 <div class="row">
                                     <form:errors path="addressLine02" cssClass="help-inline" cssStyle="color: red"/>
@@ -218,7 +223,7 @@
                             </div>
                             <div class="row" style="margin-top: 7px">
                                 <div class="row inline">
-                                    <form:input id="addr3js" path="addressLine03" cssStyle="width:72%"/>
+                                    <form:input id="addr3js" path="addressLine03" cssClass="form-control input-sm" cssStyle="width:72%"/>
                                 </div>
                                 <div class="row">
                                     <form:errors path="addressLine03" cssClass="help-inline" cssStyle="color: red"/>

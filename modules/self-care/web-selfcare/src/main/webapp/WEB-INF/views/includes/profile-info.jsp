@@ -2,7 +2,11 @@
 <html>
 <head>
     <%@include file="../includes/include.jsp" %>
-
+<%--<script>
+    function load_update_profile() {
+        document.getElementById("content").innerHTML='<object type="text/html" data="update-user" style="width:105%; height: 85%;"></object>';
+    }
+</script>--%>
 </head>
 
 <body>
@@ -19,36 +23,36 @@
                 <tbody>
                 <tr>
                     <td><strong>First Name</strong></td>
-                    <td>Menuka</td>
+                    <td>Demo Data</td>
 
                 </tr>
                 <tr>
                     <td><strong>Last Name</strong></td>
-                    <td>Ishan</td>
+                    <td>Demo Data</td>
                 </tr>
                 <tr>
                     <td><strong>Username</strong></td>
-                    <td>testing</td>
+                    <td>Demo Data</td>
                 </tr>
                 <tr>
                     <td><strong>Email</strong></td>
-                    <td>eladena@gmail.com</td>
+                    <td>Demo Data</td>
                 </tr>
                 <tr>
                     <td><strong>Address Line 1</strong></td>
-                    <td></td>
+                    <td>Demo Data</td>
                 </tr>
                 <tr>
                     <td><strong>Address Line 2</strong></td>
-                    <td></td>
+                    <td>Demo Data</td>
                 </tr>
                 <tr>
                     <td><strong>Address Line 3</strong></td>
-                    <td></td>
+                    <td>Demo Data</td>
                 </tr>
                 <tr>
                     <td><strong>Mobile</strong></td>
-                    <td></td>
+                    <td>Demo Data</td>
                 </tr>
                 <tr>
                     <td></td>
@@ -62,7 +66,7 @@
             <div class="col-sm-4"></div>
             <div class="col-sm-4">
                 <center>
-                    <a href="#" onclick="load_update_profile();" class="btn btn-warning">Update Profile</a>
+                    <a href="update-user" class="btn btn-warning">Update Profile</a>
                 </center>
             </div>
             <div class="col-sm-4"></div>

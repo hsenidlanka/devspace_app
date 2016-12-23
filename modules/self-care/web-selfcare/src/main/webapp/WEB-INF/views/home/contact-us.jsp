@@ -63,6 +63,7 @@
 </head>
 <body>
 <%@include file="../includes/new-header.jsp" %>
+
 <div class="loader-anim"></div>
 <div id='browser'>
     <div id='browser-bar'>
@@ -75,8 +76,8 @@
     <div id='content'>
         <div id='left'>
             <div id='map'>
-                <h4 style="color: #f5f5f5;"><fmt:message key="contactus.where.to.find" bundle="${lang}"/></h4>
-                <div class='map-locator'>
+                <%--<h4 style="color: #f5f5f5;"><fmt:message key="contactus.where.to.find" bundle="${lang}"/></h4>--%>
+                <%--<div class='map-locator'>
                     <div class='tooltip'>
                         <ul>
                             <li>
@@ -93,7 +94,7 @@
                             </li>
                         </ul>
                     </div>
-                </div>
+                </div>--%>
                 <div class='zoom'></div>
             </div>
             <ul id='location-bar'>
@@ -136,27 +137,20 @@
 
             <c:if test="${empty validForm}">
 
-
             <form:form action="/web-selfcare/contact-us" method="post" modelAttribute="contactus">
-                    ${invalidForm}
+                    <center><h6 style="color:whitesmoke;">${invalidForm}</h6></center>
 
                 <form:select cssClass="form-control" path="inquiryType">
-
-                    <form:option value="1"><fmt:message key="contactus.complaint"
-                                                        bundle="${lang}"/></form:option>
-                    <form:option value="2"><fmt:message key="contactus.suggestion"
-                                                        bundle="${lang}"/></form:option>
-                    <form:option value="3"><fmt:message key="contactus.clarification"
-                                                        bundle="${lang}"/></form:option>
+                    <form:option value="1"><fmt:message key="contactus.complaint" bundle="${lang}"/></form:option>
+                    <form:option value="2"><fmt:message key="contactus.suggestion" bundle="${lang}"/></form:option>
+                    <form:option value="3"><fmt:message key="contactus.clarification" bundle="${lang}"/></form:option>
                     <form:option value="4"><fmt:message key="contactus.other" bundle="${lang}"/></form:option>
-
                 </form:select>
 
-                <div class="has-error">
-                    <form:errors path="inquiryType" class="help-inline"/>
-                </div>
-
-
+                <%--<div class="has-error"> class="help-inline" --%>
+                    <form:errors path="inquiryType" />
+                <%--</div>--%>
+                <%--<br>--%>
                 <form:select class="form-control" path="title">
                     <form:option value="Mr"><fmt:message key="signup.mr" bundle="${lang}"/></form:option>
                     <form:option value="Mrs"><fmt:message key="signup.mrs" bundle="${lang}"/></form:option>
@@ -166,37 +160,33 @@
                     "<fmt:message key="contactus.yourn" bundle="${lang}"/>"
                 </form:select>
 
-                <div class="has-error">
-                    <form:errors path="title" class="help-inline"/>
-                </div>
+                <%--<div class="has-error">class="help-inline"--%>
+                    <form:errors path="title" />
+                <%--</div>--%>
+                <%--<br>--%>
+                <form:input cssClass="form-control" path="name" id="txt-fname" type="text" placeholder="   Your Name"/>
+                <%--<div class="has-error">  class="help-inline"--%>
+                    <form:errors path="name"/>
+                <%--</div>--%>
+                <%--<br>--%>
+                <form:input cssClass="form-control" path="contactEmail" id="txt-email" type="text" placeholder="   example@domain.com"></form:input>
 
-                <form:input path="name" cssClass="form-control" id="txt-fname" type="text" placeholder="Your Name"/>
-                <%--<label id="fname_error" class="error-labels"></label>--%>
-                <div class="has-error">
-                    <form:errors path="name" class="help-inline"/>
-                </div>
-
-
-                <form:input path="contactEmail" cssClass="form-control" id="txt-email" type="text"
-                            placeholder="example@domain.com"></form:input>
                 <form:errors path="contactEmail"/>
 
+                <%--<br>--%>
 
-                <form:input cssClass="form-control" id="txt-contactno" type="text" placeholder="+94-XXXXXXXXXX"
-                            path="contactNo"/>
+                <form:input cssClass="form-control" id="txt-contactno" type="text" placeholder="   0-XXXXXXXXXX" path="contactNo"/>
 
-                <div class="has-error">
-                    <form:errors path="contactNo" class="help-inline"/>
-                </div>
+                <%--<div class="has-error"> class="help-inline"--%>
+                    <form:errors path="contactNo" />
+                <%--</div>--%>
+                <%--<br>--%>
+                <form:textarea path="msg" cssClass="form-control" id="txt-inquirymsg" type="text" placeholder=" Your Message"/>
 
-                <form:textarea path="msg" cssClass="form-control" id="txt-inquirymsg" type="text"
-                               placeholder="Your Message"/>
-
-                <div class="has-error">
-                    <form:errors path="msg" class="help-inline"/>
-                </div>
-
-
+                <%--<div class="has-error"> class="help-inline"--%>
+                    <form:errors path="msg" />
+                <%--</div>--%>
+                <br>
                 <center>
                     <button class="btn btn-success" id="btn-proceed-submit" type="submit">
                         <fmt:message key="contactus.submit" bundle="${lang}"/>
@@ -212,13 +202,12 @@
             </c:if>
 
 
-            <p style="color: whitesmoke">other way</p>
+            <p style="color: whitesmoke"><fmt:message key="contactus.other.contact" bundle="${lang}"/></p>
 
-            <p class='other fa fa-envelope'>
-                <a href='#'><fmt:message key="contactus.email" bundle="${lang}"/></a>
+            <p class='other' >
+                <a href='#' style="color: whitesmoke"> <i class="fa fa-envelope" aria-hidden="true"></i> <fmt:message key="contactus.email" bundle="${lang}"/></a>
             </p>
-
-            <p class='other fa fa-phone'> <fmt:message key="contactus.number" bundle="${lang}"/></p>
+            <p class='other' style="color: whitesmoke"><i class="fa fa-phone" aria-hidden="true"></i> <fmt:message key="contactus.number" bundle="${lang}"/></p>
         </div>
     </div>
 </div>
