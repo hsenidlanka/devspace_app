@@ -92,7 +92,7 @@ public class ItemController {
     public ModelAndView addItem(@ModelAttribute("newItem") Item newItem) {
 
         try {
-            LOGGER.trace("item obj vals = {}",newItem);
+            LOGGER.trace("item obj vals = {}", newItem);
 
             String itemNm = newItem.getItemName();
             String itemPrice = newItem.getPrice();
@@ -101,7 +101,7 @@ public class ItemController {
             MultipartFile imgFile = newItem.getImageUrl();
             LOGGER.trace("multipart file itemMgt =, {}", imgFile);
 
-            String imgFileNm2 = itemNm.replaceAll("\\s","");
+            String imgFileNm2 = itemNm.replaceAll("\\s", "");
             LOGGER.error("after remove spaces {}", imgFileNm2);
 
             LOGGER.trace("Item price =, {} ", itemPrice);
@@ -118,7 +118,7 @@ public class ItemController {
                 listItem.setPrice(pricelist.get(s));
                 items.add(listItem);
             }
-            newItem.setImage(itemNm+".jpg");
+            newItem.setImage(itemNm + ".jpg");
             boolean uniqueItemNm = item.checkAvailability(itemNm);
             if (!uniqueItemNm) {
                 int a = item.addItem(newItem, items);
@@ -238,13 +238,13 @@ public class ItemController {
             String itemNm = itemUpdate.getItemName();
 
             MultipartFile imgFile = itemUpdate.getImageUrl();
-            LOGGER.trace("realPathtoUpload item img = {}",imgFile);
+            LOGGER.trace("realPathtoUpload item img = {}", imgFile);
             LOGGER.trace("item objct-img url {}", itemUpdate.getImageUrl());
 
-            String imageName = itemNm+".jpg";
+            String imageName = itemNm + ".jpg";
             itemUpdate.setImage(imageName);
 
-            String imgFileNm2 = itemNm.replaceAll("\\s","");
+            String imgFileNm2 = itemNm.replaceAll("\\s", "");
             LOGGER.info("after remove spaces itm edit {}", imgFileNm2);
 
             int itmId = itemUpdate.getItemId();
@@ -293,7 +293,7 @@ public class ItemController {
 
 
                 if (!imgFile.isEmpty()) {
-                    LOGGER.error("empty file ?? {}",!imgFile.isEmpty());
+                    LOGGER.error("empty file ?? {}", !imgFile.isEmpty());
                     try {
                         // Creating the directory to store file in server
                         String realPathtoUpload = context.getRealPath(serverPath);
@@ -301,14 +301,13 @@ public class ItemController {
                         uploadFile(imgFile, realPathtoUpload, imgFileNm2);
 
                         //create a directory in local machine and upload imGE
-                        uploadFile(imgFile,localPathtoUpload, imgFileNm2);
+                        uploadFile(imgFile, localPathtoUpload, imgFileNm2);
                         LOGGER.trace("localpathtoupload item image = , {} ", localPathtoUpload);
-                    }
-                    catch (Exception ex) {
+                    } catch (Exception ex) {
                         LOGGER.error("error in  getting image {}", ex);
                     }
-                }else {
-                    LOGGER.error("You failed to upload {}" , imgFileNm2 ," because the file was empty.");
+                } else {
+                    LOGGER.error("You failed to upload {}", imgFileNm2, " because the file was empty.");
                 }
             }
         } catch (Exception er) {
@@ -370,7 +369,9 @@ public class ItemController {
     * typeahead function calling method for item name
     **/
     @RequestMapping(value = "/typeahedItmNm", method = RequestMethod.GET)
-    public @ResponseBody List<String> typeaheadName(){
+    public
+    @ResponseBody
+    List<String> typeaheadName() {
 
         return item.selectNameList();
     }
@@ -380,24 +381,31 @@ public class ItemController {
    *reloading item table view on search & paginating basis
    * */
     @RequestMapping(value = "/loadSearchItem", method = RequestMethod.GET)
-    public @ResponseBody List<Map<String, Object>> loadSearchItem(HttpServletRequest request){
+    public
+    @ResponseBody
+    List<Map<String, Object>> loadSearchItem(HttpServletRequest request) {
 
-        String itmNm = request.getParameter("srchItmNm");
-        String pgInit = request.getParameter("initPage");
-        int initPg = Integer.parseInt(pgInit);
-        String pgLimt = request.getParameter("pgLimit");
-        int pgLimit = Integer.parseInt(pgLimt);
+        List<Map<String, Object>> itemDetails = null;
+        try {
+            String itmNm = request.getParameter("srchItmNm");
+            String pgInit = request.getParameter("initPage");
+            int initPg = Integer.parseInt(pgInit);
+            String pgLimt = request.getParameter("pgLimit");
+            int pgLimit = Integer.parseInt(pgLimt);
 
-        List<Map<String, Object>> itemDetails;
-        LOGGER.trace("load item name 1 {}", itmNm);
+            LOGGER.trace("load item name 1 {}", itmNm);
 
-        if(itmNm!=null){
-            itemDetails= item.paginateSelectedItemDetails(itmNm,pgLimit,initPg);
-            LOGGER.trace("selected item {}",itemDetails);
-        }else {
-            itemDetails=item.viewAllItemDetails(pgLimit, initPg);
-            LOGGER.trace("load item {}",itemDetails);
+            if (itmNm != null) {
+                itemDetails = item.paginateSelectedItemDetails(itmNm, pgLimit, initPg);
+                LOGGER.trace("selected item {}", itemDetails);
+            } else {
+                itemDetails = item.viewAllItemDetails(pgLimit, initPg);
+                LOGGER.trace("load item {}", itemDetails);
+            }
+        } catch (Exception e) {
+            LOGGER.error("error in loading item details : {}", e);
         }
+
         return itemDetails;
     }
 
@@ -405,7 +413,9 @@ public class ItemController {
     *getting record count for loading item table with pagination
     **/
     @RequestMapping(value = "/itemPaginationTable", method = RequestMethod.GET)
-    public @ResponseBody int loadPagination(){
+    public
+    @ResponseBody
+    int loadPagination() {
         LOGGER.trace("total item record count{}", item.count());
         return item.count();
     }
@@ -414,7 +424,9 @@ public class ItemController {
     *getting record count for loading item table with pagination
     **/
     @RequestMapping(value = "/itemSearchCount", method = RequestMethod.GET)
-    public @ResponseBody int getSearchCount(@RequestParam("srchItmNm")String itmName){
+    public
+    @ResponseBody
+    int getSearchCount(@RequestParam("srchItmNm") String itmName) {
 
         LOGGER.trace("searched item record count{}", item.countSearchKey(itmName));
         return item.countSearchKey(itmName);
