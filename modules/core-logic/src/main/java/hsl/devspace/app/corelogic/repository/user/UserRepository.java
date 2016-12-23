@@ -41,6 +41,8 @@ public interface UserRepository {
 
     List<User> retrieveByDateRange(java.sql.Date date1, java.sql.Date date2, int limit, int page);
 
+    public List<User> retrieveByDateRangeCity(Date date1, Date date2,String city, int limit, int page) ;
+
     List<User> filterByCity(String city, String status, int limit, int page);
 
     int countUsers(String status);

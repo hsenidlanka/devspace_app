@@ -404,6 +404,9 @@ public class StaffRepositoryImpl implements UserRepository {
         log.info("{}", staffDetails);
         return staffDetails;
     }
+    public List<User> retrieveByDateRangeCity(Date date1, Date date2,String city, int limit, int page) {
+        return null;
+    }
 
     @Override
     public List<User> filterByCity(String city, String status, int limit, int page) {

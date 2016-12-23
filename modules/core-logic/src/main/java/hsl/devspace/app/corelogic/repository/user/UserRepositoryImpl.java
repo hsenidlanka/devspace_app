@@ -282,8 +282,39 @@ public  class UserRepositoryImpl implements UserRepository {
             customer.setStatus(mp.get(i).get("status").toString());
 
             customerDetails.add(customer);
+        }
+        log.info("{}",customerDetails);
+        return customerDetails;
+    }
 
 
+
+    @Override
+    public List<User> retrieveByDateRangeCity(Date date1, Date date2,String city, int limit, int page) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE " +
+                "registered_date BETWEEN ? AND ? AND address_line3 = ? AND status='active' LIMIT ? OFFSET ?",
+                date1, date2, city,limit, page);
+        List<User> customerDetails=new ArrayList<User>();
+
+        for (int i=0;i<mp.size();i++){
+            User customer = new User();
+            customer.setId(Integer.parseInt(mp.get(i).get("id").toString()));
+            customer.setTitle(mp.get(i).get("title").toString());
+            customer.setFirstName(mp.get(i).get("first_name").toString());
+            customer.setLastName(mp.get(i).get("last_name").toString());
+            customer.setUsername(mp.get(i).get("username").toString());
+            customer.setPassword(mp.get(i).get("password").toString());
+            customer.setEmail(mp.get(i).get("email").toString());
+            customer.setAddressL1(mp.get(i).get("address_line1").toString());
+            customer.setAddressL2(mp.get(i).get("address_line2").toString());
+            if (mp.get(i).get("address_line3")!=null) {
+                customer.setAddressL3(mp.get(i).get("address_line3").toString());
+            }
+            customer.setMobile(mp.get(i).get("mobile").toString());
+            customer.setRegDate(Date.valueOf(mp.get(i).get("registered_date").toString()));
+            customer.setStatus(mp.get(i).get("status").toString());
+
+            customerDetails.add(customer);
         }
         log.info("{}",customerDetails);
         return customerDetails;
