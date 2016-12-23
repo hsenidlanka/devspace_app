@@ -6,7 +6,7 @@ $(document).ready(function () {
     $.ajax({
         url: "https://localhost:8443/admin/items/loadSearchItem",
         dataType: "json",
-        data: {"srchItmNm": itmName, "initPage": "1", "pgLimit": pgLimit},
+        data: {"srchItmNm": itmName, "initPage": "0", "pgLimit": pgLimit},
         success: function (result) {
 
             $('#tblItems').bootstrapTable({
@@ -89,6 +89,7 @@ $(document).ready(function () {
      * */
     $("#txtViewSearchItem").keyup(function () {
 
+
         $.ajax({
             type: "GET",
             url: "https://localhost:8443/admin/items/typeahedItmNm",
@@ -145,14 +146,7 @@ $(document).ready(function () {
      * load data on request typeahead
      **/
     $("#btnViewSearchItem").click(function () {
-        /*$.ajax({
-            url: 'https://localhost:8443/admin/items/itemSearchCount',
-             data: {"srchItmNm": $("#txtViewSearchItem").val()},
-            success: function (recCount) {
 
-                pag2.simplePaginator('setTotalPages', Math.ceil(recCount / 10));
-            }
-        })*/
         if ($("#txtViewSearchItem").val().length > 0) {
 
             $('#pagination').hide();
@@ -161,7 +155,7 @@ $(document).ready(function () {
             $.ajax({
                 url: "https://localhost:8443/admin/items/loadSearchItem",
                 datatype: "JSON",
-                data: {"srchItmNm": $("#txtViewSearchItem").val(), "pgLimit": pgLimit, "initPage": "1"},
+                data: {"srchItmNm": $("#txtViewSearchItem").val(), "pgLimit": pgLimit, "initPage": "0"},
                 success: function (data) {
                     $("#tblItems").bootstrapTable('load', data);
                    // console.log(data);
@@ -199,6 +193,56 @@ $(document).ready(function () {
             })
         }
     });
+
+    $("#txtViewSearchItem").keyup(function () {
+
+        if ($("#txtViewSearchItem").val().length > 0) {
+
+            $('#pagination').hide();
+            $('#pagination2').show();
+
+            $.ajax({
+                url: "https://localhost:8443/admin/items/loadSearchItem",
+                datatype: "JSON",
+                data: {"srchItmNm": $("#txtViewSearchItem").val(), "pgLimit": pgLimit, "initPage": "0"},
+                success: function (data) {
+                    $("#tblItems").bootstrapTable('load', data);
+                    // console.log(data);
+                },
+                error: function (e) {
+                    alert("error, load search item" + e);
+                    console.log("error, load search item" + e)
+                }
+            })
+
+            /**
+             *Setting the number of pages according to the number of records
+             */
+            $.ajax({
+                url: 'https://localhost:8443/admin/items/itemSearchCount',
+                data: {"srchItmNm": $("#txtViewSearchItem").val()},
+                success: function (recCount) {
+
+                    pag2.simplePaginator('setTotalPages', Math.ceil(recCount / 10));
+                }
+            })
+        }
+        else {
+            $('#pagination').show();
+            $('#pagination2').hide();
+
+            $.ajax({
+                url: 'https://localhost:8443/admin/items/loadSearchItem',
+                dataType: 'JSON',
+                data: {"initPage": "1", "pgLimit": pgLimit},
+                success: function (data) {
+
+                    $('#tblItems').bootstrapTable('load', data);
+                }
+            })
+        }
+    });
+
 });
 
 function operateFormatter(value, row, index) {
@@ -272,7 +316,7 @@ window.operateEvents = {
         })
     },
 
-    'click .delete': function (e, value, row, index) {
+    'click .deleteItem': function (e, value, row, index) {
 
         var dataDelt = JSON.stringify(row);
         var deltObj = JSON.parse(dataDelt);

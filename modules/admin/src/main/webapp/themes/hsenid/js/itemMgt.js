@@ -48,7 +48,14 @@ $(document).ready(function () {
             ($(this)[0].selectionStart >= text.length - 2)) {
             event.preventDefault();
         }
-    })
+    });
+
+    $('.price').focusout(function(){
+        if($(this).val != null){
+           $(this).val(parseFloat($(this).val()).toFixed(2));
+
+        }
+    });
 
     /*
      * populating the sub-category list in addItem.jsp

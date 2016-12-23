@@ -9,13 +9,32 @@ $(document).ready(function () {
         }
     });
 
-    $("#txtAddPkgPrice").focusout(function () {
-        if ($(this).val() == '0.0' || null) {
+    $("#txtAddPkgPrice").change(function () {
+
+        if ($(this).val() != null) {
+            if($(this).val() == '0.0' || $(this).val() == '0.00' || $(this).val() == ''){
+                $(this).addClass('invalid-input');
+                document.getElementById('pkgPriceErr').innerHTML = 'Package price is invalid !';
+            }else{
+                $(this).val(parseFloat($(this).val()).toFixed(2));
+                document.getElementById('pkgPriceErr').innerHTML =" ";
+                $(this).removeClass('invalid-input');
+            }
+        }
+        else {
+            document.getElementById('pkgPriceErr').innerHTML = 'Package price should not be empty !';
+            $(this).addClass('invalid-input');
+        }
+
+
+       /* if ($(this).val() == '0.0' || null) {
             document.getElementById('pkgPriceErr').innerHTML = 'Package price should not be empty !';
             $(this).addClass('invalid-input');
         } else {
+            document.getElementById('pkgPriceErr').innerHTML =" ";
             $(this).removeClass('invalid-input');
-        }
+            $(this).val(parseFloat($(this).val()).toFixed(2));
+        }*/
     });
     $("#editPkgPrice").focusout(function () {
         if ($(this).val() == '0.00' || null) {
@@ -124,8 +143,8 @@ $(document).ready(function () {
 
 
 /*
-* function for getting item name list according to the selected category
-**/
+ * function for getting item name list according to the selected category
+ **/
 function setItemList(categoryNmVal, slctElementVal, selectedItmVal) {
 
     $.ajax({
@@ -190,8 +209,8 @@ function generate(selectedItm, slctElement) {
 }
 
 /*
-* function for creating package content
-**/
+ * function for creating package content
+ **/
 function contentCreate() {
     jsonObj2 = [];
 

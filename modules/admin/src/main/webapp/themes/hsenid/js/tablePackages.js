@@ -6,7 +6,7 @@ $(document).ready(function () {
     $.ajax({
         url: "https://localhost:8443/admin/packages/loadSearchPackage",
         dataType: "json",
-        data: {"pkgName": pkgName, "initPage": "1", "pgLimit": pgLimit},
+        data: {"pkgName": pkgName, "initPage": "0", "pgLimit": pgLimit},
         success: function (result) {
 
             $("#tblPackages").bootstrapTable({
@@ -136,7 +136,55 @@ $(document).ready(function () {
             $.ajax({
                 url: "https://localhost:8443/admin/packages/loadSearchPackage",
                 datatype: "JSON",
-                data: {"srchPkgNm": $("#txtViewSearchPkg").val(), "initPage": "1", "pgLimit": pgLimit},
+                data: {"srchPkgNm": $("#txtViewSearchPkg").val(), "initPage": "0", "pgLimit": pgLimit},
+                success: function (data) {
+                    $("#tblPackages").bootstrapTable('load', data);
+                    console.log(data);
+                },
+                error: function (e) {
+                    alert("error, load search item" + e);
+                    console.log("error, load search item" + e)
+                }
+            })
+
+            /**
+             *Setting the number of pages according to the number of records
+             */
+            $.ajax({
+                url: 'https://localhost:8443/admin/packages/searchPkgCount',
+                data: {"srchPkgNm": $("#txtViewSearchPkg").val()},
+                success: function (recCount) {
+
+                    pag2.simplePaginator('setTotalPages', Math.ceil(recCount / 10));
+                }
+            })
+
+        } else {
+            $('#pagination3').show();
+            $('#pagination4').hide();
+
+            $.ajax({
+                url: 'https://localhost:8443/admin/packages/loadSearchPackage',
+                dataType: 'JSON',
+                data: {"initPage": "1", "pgLimit": pgLimit},
+                success: function (data) {
+
+                    $('#tblPackages').bootstrapTable('load', data);
+                }
+            })
+        }
+    });
+
+    $("#txtViewSearchPkg").keyup(function () {
+        if ($("#txtViewSearchPkg").val().length > 0) {
+
+            $('#pagination3').hide();
+            $('#pagination4').show();
+
+            $.ajax({
+                url: "https://localhost:8443/admin/packages/loadSearchPackage",
+                datatype: "JSON",
+                data: {"srchPkgNm": $("#txtViewSearchPkg").val(), "initPage": "0", "pgLimit": pgLimit},
                 success: function (data) {
                     $("#tblPackages").bootstrapTable('load', data);
                     console.log(data);
