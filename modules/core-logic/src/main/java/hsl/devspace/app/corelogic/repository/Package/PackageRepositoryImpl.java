@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.sql.DataSource;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -42,8 +43,8 @@ public class PackageRepositoryImpl implements PackageRepository {
        /* MultipartFile img = pack.getImageUrl();
         String ims = img.getOriginalFilename();*/
         String sql = "INSERT INTO package " +
-                "(name,price,image) VALUES (?,?,?)";
-        row = jdbcTemplate.update(sql, new Object[]{pack.getPackName(), pack.getPrice(), pack.getImage()});
+                "(name,price,image,created_date,creator) VALUES (?,?,?,NOW(),?)";
+        row = jdbcTemplate.update(sql, new Object[]{pack.getPackName(), pack.getPrice(), pack.getImage(), pack.getCreator()});
         log.debug("{} new package added", row);
         return row;
     }
@@ -96,7 +97,7 @@ public class PackageRepositoryImpl implements PackageRepository {
     /*view all details of package*/
     @Override
     public List<Package> selectAll() {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM package");
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM package ORDER BY created_date DESC ");
         List<Package> pack = new ArrayList<Package>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -105,18 +106,18 @@ public class PackageRepositoryImpl implements PackageRepository {
             packages.setPackName(mp.get(i).get("name").toString());
             packages.setPrice(Double.parseDouble(mp.get(i).get("price").toString()));
             packages.setImage(mp.get(i).get("image").toString());
+            packages.setCreatedDate(Timestamp.valueOf(mp.get(0).get("created_date").toString()));
+            packages.setCreator(mp.get(0).get("creator").toString());
             pack.add(packages);
-
-
         }
-        log.debug("{}", pack);
+        log.info("{}", pack);
         return pack;
     }
 
     @Override
     public List<Package> selectAllByNamePattern(String packName) {
         String key = "%" + packName + "%";
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM package WHERE name LIKE ?", key);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM package WHERE name LIKE ? ORDER BY created_date DESC", key);
         List<Package> pack = new ArrayList<Package>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -125,6 +126,8 @@ public class PackageRepositoryImpl implements PackageRepository {
             packages.setPackName(mp.get(i).get("name").toString());
             packages.setPrice(Double.parseDouble(mp.get(i).get("price").toString()));
             packages.setImage(mp.get(i).get("image").toString());
+            packages.setCreatedDate(Timestamp.valueOf(mp.get(0).get("created_date").toString()));
+            packages.setCreator(mp.get(0).get("creator").toString());
             pack.add(packages);
 
 
@@ -289,7 +292,7 @@ public class PackageRepositoryImpl implements PackageRepository {
 
     @Override
     public int paginate(int limit, int page) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM package LIMIT ? OFFSET ?", limit, page);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM package ORDER BY created_date DESC LIMIT ? OFFSET ?", limit, page);
         int count = mp.size();
         log.info("{}", count);
         return count;
@@ -298,7 +301,7 @@ public class PackageRepositoryImpl implements PackageRepository {
 
     @Override
     public List<Package> paginateSelectAll(int limit, int page) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM package LIMIT ? OFFSET ?", limit, page);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM package ORDER BY created_date DESC LIMIT ? OFFSET ?", limit, page);
         List<Package> pack = new ArrayList<Package>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -307,6 +310,8 @@ public class PackageRepositoryImpl implements PackageRepository {
             packages.setPackName(mp.get(i).get("name").toString());
             packages.setPrice(Double.parseDouble(mp.get(i).get("price").toString()));
             packages.setImage(mp.get(i).get("image").toString());
+            packages.setCreatedDate(Timestamp.valueOf(mp.get(0).get("created_date").toString()));
+            packages.setCreator(mp.get(0).get("creator").toString());
             pack.add(packages);
 
 
@@ -318,7 +323,7 @@ public class PackageRepositoryImpl implements PackageRepository {
     @Override
     public List<Package> paginateSelectAllByNamePattern(String packName, int limit, int page) {
         String key = "%" + packName + "%";
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM package WHERE name LIKE ? LIMIT ? OFFSET ?", key, limit, page);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM package WHERE name LIKE ? ORDER BY created_date DESC LIMIT ? OFFSET ?", key, limit, page);
         List<Package> pack = new ArrayList<Package>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -327,9 +332,9 @@ public class PackageRepositoryImpl implements PackageRepository {
             packages.setPackName(mp.get(i).get("name").toString());
             packages.setPrice(Double.parseDouble(mp.get(i).get("price").toString()));
             packages.setImage(mp.get(i).get("image").toString());
+            packages.setCreatedDate(Timestamp.valueOf(mp.get(0).get("created_date").toString()));
+            packages.setCreator(mp.get(0).get("creator").toString());
             pack.add(packages);
-
-
         }
         log.info("{}", pack);
         return pack;

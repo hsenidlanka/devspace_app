@@ -2,6 +2,7 @@ package hsl.devspace.app.corelogic.domain;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +23,26 @@ public class Item {
     private int typeId;
     private int subCategoryId;
     List<Map<String, Object>> sizePrice;
+    private String creator;
+    private Timestamp createdDate;
+
+    public Timestamp getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Timestamp createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public String getCreator() {
+        return creator;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator;
+    }
+
+
 
     public String getImage() {
         return image;
@@ -150,21 +171,25 @@ public class Item {
         this.subCategoryName = subCategoryName;
         this.itemId = itemId;
     }
-    public Item(String itemName, String description, String type,String image, String subCategoryName, int itemId) {
+
+    public Item(String itemName, String description, String type, String image, String subCategoryName, Timestamp createdDate, String creator, int itemId) {
         this.itemName = itemName;
         this.description = description;
         this.type = type;
         this.image = image;
         this.subCategoryName = subCategoryName;
+        this.createdDate = createdDate;
+        this.creator = creator;
         this.itemId = itemId;
     }
 
-    public Item(String itemName, String description, String type, String image, String subCategoryName) {
+    public Item(String itemName, String description, String type, String image, String subCategoryName, String creator) {
         this.itemName = itemName;
         this.description = description;
         this.type = type;
         this.image = image;
         this.subCategoryName = subCategoryName;
+        this.creator = creator;
     }
 
     public Item(String price, String size) {
@@ -176,17 +201,20 @@ public class Item {
     public String toString() {
         return "Item{" +
                 "itemName='" + itemName + '\'' +
-                  ", price=" + price +
+                ", price='" + price + '\'' +
                 ", description='" + description + '\'' +
-                 ", size='" + size + '\'' +
+                ", size='" + size + '\'' +
                 ", type='" + type + '\'' +
                 ", image='" + image + '\'' +
+                ", imageUrl=" + imageUrl +
                 ", subCategoryName='" + subCategoryName + '\'' +
                 ", itemId=" + itemId +
                 ", categoryName='" + categoryName + '\'' +
-                ", sizePrice='" + sizePrice + '\'' +
+                ", typeId=" + typeId +
+                ", subCategoryId=" + subCategoryId +
+                ", sizePrice=" + sizePrice +
+                ", createdDate=" + createdDate +
+                ", creator='" + creator + '\'' +
                 '}';
     }
-
-
 }
