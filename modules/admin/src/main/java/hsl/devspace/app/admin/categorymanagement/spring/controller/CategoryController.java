@@ -61,6 +61,7 @@ public class CategoryController {
 
     private int subcatAdd=0;
 
+
 ///////////////////////////////////////////////////// CATEGORY INSERT HANDLER METHODS  ///////////////////////////////////////
 
 
@@ -109,9 +110,8 @@ public class CategoryController {
                 if (!imgFile.isEmpty()) {
                     //get category name
                     String catName= categoryObject.getCategoryName();
-
-                    //create a directory in server and upload the image there
                     String realPathtoUpload = context.getRealPath(serverPath);
+                    //create a directory in server and upload the image there
                     LOG.info("realPathtoUpload " + realPathtoUpload);
                     uploadFile(imgFile,realPathtoUpload,catName);
 
@@ -160,6 +160,9 @@ public class CategoryController {
                 }
     }
 
+    /**
+    ****function ot upload a new Category image
+    **/
     private void uploadFile( MultipartFile image, String filePath, String fileName){
         try {
             byte[] bytes = image.getBytes();
@@ -190,7 +193,6 @@ public class CategoryController {
 
         String catName2=catName.replaceAll("\\s", "");
         LOG.info(catName2);
-
         LOG.info(subcategoryObject.getCategoryName());
 
         for (int j=0;j<subcategory_name.length;j++) {
@@ -214,7 +216,6 @@ public class CategoryController {
             else if (i ==0)
                 JOptionPane.showMessageDialog(null, insertError);
                 break;
-
         }
         JOptionPane.showMessageDialog(null, insertSubSuccess);
         return new ModelAndView(new RedirectView("add"));
@@ -362,87 +363,73 @@ public @ResponseBody  Map<String, Object> editCategory(@RequestParam("id") int i
 public ModelAndView saveEditCategory(@ModelAttribute("editCategory") Category editCategory,
                                      @RequestParam("catName") String oldCatName) {
 
-        String catName=editCategory.getCategoryName();
-        String n2=editCategory.getCatDescription();
-        int n3=editCategory.getCategory_id();
-        String n4=editCategory.getStatus();
-        MultipartFile imgFile=editCategory.getImageUrl();
+    LOG.info("OLLLLDD CAT name {}", oldCatName);
+    String catName=editCategory.getCategoryName();
+    LOG.info("EDIT CATEGORY name {}", catName);
 
-        LOG.error("EDIT CATEGORY name {}", catName);
-        LOG.error("EDIT CATEGORY description {}", n2);
-        LOG.error("EDIT CATEGORY id {}", n3);
-        LOG.error("EDIT CATEGORY status {}", n4);
-        LOG.error("EDIT CATEGORY getImageUrl {}",imgFile);
-        LOG.error("OLLLLDD CAT name {}",oldCatName);
-
+    MultipartFile imgFile=editCategory.getImageUrl();
+    LOG.info("ORIGINAL NAME: {}", imgFile.getOriginalFilename());
 
     editCategory.setImage(editCategory.getCategoryName()+".jpg");
     String n5=editCategory.getImage();
-    LOG.error("EDIT CATEGORY New set image naem {}", n5);
+    LOG.info("EDIT CATEGORY New set image naem {}", n5);
         //function to update the category detail except image
         int i=categoryRepository.updateCategory(editCategory);
         LOG.info("EDIT CUSTOMER i {}", i);
         if (i == 1) {
             //create a directory in server and upload the image there
             String realPathtoUpload = context.getRealPath(serverPath);
-            LOG.error("realPathtoUpload " + realPathtoUpload);
+            LOG.info("realPathtoUpload " + realPathtoUpload);
 
-            //rename the file at local location
-            File localFileOld=new File(localPathtoUpload +oldCatName+".jpg");
-            File localFileNew=new File(localPathtoUpload +catName+".jpg");
-
-           /* FileInputStream fin = null;
-            FileOutputStream fout = null;
-            try {
-
-                byte[] buffer = imgFile.getBytes();
-                fin = new FileInputStream(localFileOld);
-                fout = new FileOutputStream(localFileNew);
-                int bytesRead;
-
-                while ((bytesRead = fin.read(buffer)) == -1) {
-                    fout.write(buffer, 0, bytesRead);
-                }
-
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                try {
-                    fin.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    fout.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-            }
-*/
-
-            boolean local=localFileOld.renameTo(localFileNew);
-            LOG.error("local file rename status {}",local);
-
-
-            //rename the file at the server
-            File serverFileOld=new File(realPathtoUpload+oldCatName+".jpg");
-            File serverFileNew=new File(realPathtoUpload +catName+".jpg");
-            boolean server=serverFileOld.renameTo(serverFileNew);
-            LOG.error("server file rename status {}",server);
-
-//            uploadFile(imgFile, realPathtoUpload, catName);
-
-            //create a directory in local machine and upload the image there
-//            uploadFile(imgFile, localPathtoUpload, catName);
+            //function to update the existing Category image name or both
+           updateCatImage(realPathtoUpload,oldCatName,catName,imgFile);
             JOptionPane.showMessageDialog(null, updateSuccess);
         }else
             JOptionPane.showMessageDialog(null,updateFail);
 
-return new ModelAndView(new RedirectView("/admin/category/view"));
+    return new ModelAndView(new RedirectView("/admin/category/view"));
 }
+    /***
+    *methodto update the Category image accoering to the Category update changes
+     *
+    ***/
+    private void updateCatImage(String serverPath, String oldCatName, String newCatName, MultipartFile imageUploaded){
+        //old and new files at local location
+        File localFileOld = new File(localPathtoUpload + oldCatName + ".jpg");
+        File localFileNew = new File(localPathtoUpload + newCatName + ".jpg");
+
+        //old and new files at server location
+        File serverFileOld = new File(serverPath + oldCatName + ".jpg");
+        File serverFileNew = new File(serverPath + newCatName + ".jpg");
+
+        //in case new file is not uploaded, only file renaming is done according to the edited category name
+        if(imageUploaded.getOriginalFilename().equals("")) {
+            //rename the file at local location
+            boolean local = localFileOld.renameTo(localFileNew);
+            LOG.error("local file rename status {}", local);
+            //rename the file at the server
+            boolean server = serverFileOld.renameTo(serverFileNew);
+            LOG.error("server file rename status {}", server);
+
+            //in case new file is Uploaded, initial file is deleted and upload the new file with category name
+        }else {
+            //delete old one at local
+            boolean localStatus=localFileOld.delete();
+            if(localStatus){
+                uploadFile(imageUploaded,localPathtoUpload,newCatName);
+                LOG.error("local file{} uploadedsuccessfully",newCatName);
+            }else
+                LOG.error("local file delete operation");
+
+            //delete old at server
+            boolean serverStatus=serverFileOld.delete();
+            if (serverStatus) {
+                uploadFile(imageUploaded, serverPath, newCatName);
+                LOG.error("server file{} deleted successfully",newCatName);
+            }else
+                LOG.error("server file delete operation");
+        }
+    }
 
 
 ///////////////////////////////////////////////////// CATEGORY DELETE HANDLER METHODS  ///////////////////////////////////////

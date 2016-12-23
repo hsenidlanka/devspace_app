@@ -8,7 +8,7 @@ $(document).ready(function () {
         success: function (result) {
             $('#tableStaff').bootstrapTable({
 
-                height: 230,
+                height: 415,
                 pagination: false,
                 search: false,
                 showColumns: false,

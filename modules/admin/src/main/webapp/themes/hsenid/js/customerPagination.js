@@ -2,7 +2,7 @@
 ////////////////////////////////  default pagination function for Customers view (ACTIVE)///////////////////////////////////////////
 
 $(document).ready(function () {
-    var pgLimit = 5;
+    var pgLimit = 10;
     /**
      * ajax function for getting records count
      */
@@ -11,7 +11,7 @@ $(document).ready(function () {
     $.ajax({
         url: 'https://localhost:8443/admin/users/CustomerPaginationTable',
         success: function (recCount) {
-            pag.simplePaginator('setTotalPages', Math.ceil(recCount /5));
+            pag.simplePaginator('setTotalPages', Math.ceil(recCount /10));
         }
     });
 
@@ -57,7 +57,7 @@ $(document).ready(function () {
 
 
 $(document).ready(function () {
-    var pgLimit = 5;
+    var pgLimit = 10;
     /**
      * ajax function for getting records count
      */
@@ -66,7 +66,7 @@ $(document).ready(function () {
     $.ajax({
         url: 'https://localhost:8443/admin/users/BannedCustomerPaginationTable',
         success: function (recCount) {
-            pag.simplePaginator('setTotalPages', Math.ceil(recCount /5));
+            pag.simplePaginator('setTotalPages', Math.ceil(recCount /10));
         }
     });
 

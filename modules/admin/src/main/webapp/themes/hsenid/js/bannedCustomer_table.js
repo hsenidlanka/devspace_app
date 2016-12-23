@@ -7,7 +7,7 @@ $(document).ready(function () {
         data: {"initPage": "0", "pageLimit": pageLimit},
         success: function (result) {
             $('#tableBannedcustomer').bootstrapTable({
-                height: 230,
+                height: 420,
                 pagination: false,
                 search: false,
                 showColumns: false,
@@ -91,9 +91,7 @@ window.operateEvents4 = {
                 $('#customerDetail_username').val(msg["username"]);
                 $('#customerDetail_status').val(msg["status"]);
                 $('#customerDetail_reg').val(msg["registered_date"]);
-
                 $('#blockedCustomerModal').modal({show:true});
-
             },
             error:function(e){
                 alert("ajax failed" +uname+ ""+e);

@@ -55,10 +55,12 @@
             <a href="<c:out value="${url1}"/>"><fmt:message key="user.breadcrumb.home" bundle="${bundle1}"/></a>
         </li>
         <li>
-            <a href="<c:out value="${url1}"/>"><fmt:message key="category.breadcrumb.categorymanagement" bundle="${bundle1}"/></a>
+            <a href="<c:out value="${url1}"/>"><fmt:message key="category.breadcrumb.categorymanagement"
+                                                            bundle="${bundle1}"/></a>
         </li>
         <li class="active">
-            <a href="<c:out value="${url2}"/>"><fmt:message key="category.categoryadd.breadcrumb.viewcat" bundle="${bundle1}"/></a>
+            <a href="<c:out value="${url2}"/>"><fmt:message key="category.categoryadd.breadcrumb.viewcat"
+                                                            bundle="${bundle1}"/></a>
         </li>
     </ul>
 </div>
@@ -88,8 +90,9 @@
                             <input class="form-control typeahead" id="txtViewSearchCategory" type="text"/>
                         </div>
                         <div class="col-sm-3">
-                            <button type="button" class="btn btn-success" id="btnViewSearchCat"><span class="glyphicon glyphicon-search">
-                            </span><fmt:message key="category.categoryview.searchbar.button"  bundle="${bundle1}"/>
+                            <button type="button" class="btn btn-success" id="btnViewSearchCat">
+                                <span class="glyphicon glyphicon-search"></span>
+                                <fmt:message key="category.categoryview.searchbar.button"  bundle="${bundle1}"/>
                             </button>
                         </div>
                         <div class="col-sm-1"></div>
@@ -223,14 +226,24 @@
                                   <img  id="imageUrl"/>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">
+
+                            </label>
+                            <div class="col-sm-8" style="margin: 0 0 -100px 0;">
+                                <a href="#" id="imageEditButton">
+                                    <fmt:message key="category.categoryedit.modal.imageChange" bundle="${bundle1}" /></a>
+                            </div>
+                        </div>
+
 
                         <div class="form-group">
                             <label class="control-label col-sm-4">
 
                             </label>
                             <div class="col-sm-8">
-                                <form:input type="file" class="file_upload btn btn-default" path="imageUrl" id="editbtnUpldImage"
-                                           cssStyle="width: 220px"/>
+                                <form:input type="file" class="file_upload btn btn-default" path="imageUrl"
+                                            id="editbtnUpldImage" disabled="true"/>
                             </div>
                         </div>
                         <div class="form-group">
@@ -241,10 +254,12 @@
                                 <div class="col-xs-2">
                                     <form:select path="status" class="form-control" id="editvisibility" style="width:75px">
                                         <form:option value="1">
-                                            <fmt:message key="category.categoryadd.form.catvisibility.option1" bundle="${bundle1}"/>
+                                            <fmt:message key="category.categoryadd.form.catvisibility.option1"
+                                                         bundle="${bundle1}"/>
                                         </form:option>
                                         <form:option value="0">
-                                            <fmt:message key="category.categoryadd.form.catvisibility.option2" bundle="${bundle1}" />
+                                            <fmt:message key="category.categoryadd.form.catvisibility.option2"
+                                                         bundle="${bundle1}" />
                                         </form:option>
                                     </form:select>
                                 </div>

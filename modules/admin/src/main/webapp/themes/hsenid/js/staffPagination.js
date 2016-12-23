@@ -2,7 +2,7 @@
 /////////////////////////////////////////  default pagination function for Staff view (ACTIVE)////////////////////////////////
 
 $(document).ready(function () {
-    var pgLimit = 5;
+    var pgLimit = 10;
     /**
      * ajax function for getting records count
      */
@@ -12,7 +12,7 @@ $(document).ready(function () {
         url: 'https://localhost:8443/admin/users/StaffPaginationTable',
         success: function (recCount) {
             //alert(recCount);
-            pag.simplePaginator('setTotalPages', Math.ceil(recCount / 5));
+            pag.simplePaginator('setTotalPages', Math.ceil(recCount / pgLimit));
         }
     });
 
@@ -56,7 +56,7 @@ $(document).ready(function () {
 /////////////////////////////////////////  default pagination function for Staff view (INACTIVE)////////////////////////////////
 
 $(document).ready(function () {
-    var pgLimit = 5;
+    var pgLimit = 10;
     /**
      * ajax function for getting records count
      */
@@ -66,7 +66,7 @@ $(document).ready(function () {
         url: 'https://localhost:8443/admin/users/BannedStaffPaginationTable',
         success: function (recCount) {
             //alert(recCount);
-            pag.simplePaginator('setTotalPages', Math.ceil(recCount / 5));
+            pag.simplePaginator('setTotalPages', Math.ceil(recCount / pgLimit));
         }
     });
 

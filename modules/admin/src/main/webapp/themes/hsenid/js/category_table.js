@@ -114,7 +114,7 @@ window.operateEvents5 = {
                 var image1=msg["image"];
 
                 var  url="https://localhost:8443/admin/themes/hsenid/images/categories/" +image1;
-                alert(url);
+                //alert(url);
                 $('#imageUrl').attr('src',url);
                 $('#categoryid').val(id);
                 $('#editcategoryname').val(msg["name"]);
@@ -131,7 +131,12 @@ window.operateEvents5 = {
         });
     }
 };
+    //to enable the upload image button on image edit
+    $('#imageEditButton').click(function()
+    {
+        document.getElementById("editbtnUpldImage").disabled = false;
 
+    });
 
 //function to delete a category selected
 
