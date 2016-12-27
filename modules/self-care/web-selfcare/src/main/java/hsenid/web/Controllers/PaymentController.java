@@ -30,7 +30,7 @@ import java.util.Map;
 public class PaymentController {
     final static Logger logger = LoggerFactory.getLogger(PaymentController.class);
 
-    @Value("${api.url.base.url}")
+    @Value("${api.base.url}")
     private String baseUrl;
 
     @Value("${api.url.payment.process}")
@@ -212,16 +212,14 @@ public class PaymentController {
     @RequestMapping(value = "/payment/customer-mobile", method = RequestMethod.GET)
     @ResponseBody
     public String getCustomerMobile(HttpSession session) {
-        String customerMobileNo = "";
-        if (session.getAttribute("username") != null || session.getAttribute("username").toString() != "") {
-            try {
-                RestTemplate restTemplate = new RestTemplate();
-                String getCustomerDetailsUrl = baseUrl + customerSearchUrl + session.getAttribute("username");
-                ServerResponseMessage responseMessage = restTemplate.getForObject(getCustomerDetailsUrl, ServerResponseMessage.class);
-//                customerMobileNo = responseMessage.getData().get(0).get("mobile").toString();
-            }catch (Exception e){
-                logger.error("ERROR :{}",e);
-            }
+        String customerMobileNo;
+        if (session.getAttribute("username") == null || session.getAttribute("username").toString() == "") {
+            customerMobileNo = "";
+        }else{
+            RestTemplate restTemplate = new RestTemplate();
+            String getCustomerDetailsUrl = baseUrl + customerSearchUrl + session.getAttribute("username");
+            ServerResponseMessage responseMessage = restTemplate.getForObject(getCustomerDetailsUrl, ServerResponseMessage.class);
+            customerMobileNo = responseMessage.getData().get(0).get("mobile").toString();
         }
         return customerMobileNo;
     }

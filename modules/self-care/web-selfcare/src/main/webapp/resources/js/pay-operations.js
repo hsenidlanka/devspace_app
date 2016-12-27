@@ -18,11 +18,8 @@ function fillCustomerMobileNo() {
         type: "GET",
         url: "/web-selfcare/payment/customer-mobile",
         success: function (mobileNo) {
-            alert(mobileNo);
-            if (mobileNo == "") {
-                alert("empty");
-            } else {
-                alert("ok");
+            if (mobileNo != "") {
+                $("#txt-mobile-no").val(mobileNo);
             }
         }
     });

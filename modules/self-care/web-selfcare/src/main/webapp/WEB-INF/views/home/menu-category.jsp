@@ -89,7 +89,7 @@
                                                             </c:when>
                                                             <c:otherwise>
                                                                 <div class="row" style="margin-top: 15px;">
-                                                                    <label style="float: left; font-size: small">Price:</label>
+                                                                    <label style="float: left; font-size: small">Price: <br>(Rs.)</label>
                                                                     <label id="lbl-sizeprice"
                                                                            style="float: left;"><fmt:formatNumber type="currency" currencySymbol=""
                                                                                                                   maxFractionDigits="2" groupingUsed="false" value="${itemData.price[0]['price']}"/></label>
@@ -105,7 +105,9 @@
                                                                                varStatus="loop">
                                                                         <input type="hidden"
                                                                                id="hiddenFld-<c:out value="${itemData.price[loop.index]['size']}"/>"
-                                                                               value="<c:out value="${itemData.price[loop.index]['price']}"/>"/>
+                                                                               <%--value="<c:out value="${itemData.price[loop.index]['price']}"/>"/>--%>
+                                                                               value="<fmt:formatNumber type="currency" currencySymbol=""
+                                                                                                                  maxFractionDigits="2" groupingUsed="false" value="${itemData.price[loop.index]['price']}"/>"/>
                                                                     </c:forEach>
 
                                                                 </div>

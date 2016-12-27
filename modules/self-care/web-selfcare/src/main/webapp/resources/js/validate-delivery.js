@@ -58,7 +58,8 @@ $(document).ready(function () {
             var selectedVal = $("input[type=radio][name=radiodelwhen]:checked").val();
             if (selectedVal != "del-later" || $(".del-date").val()=="") {
                 var date = new Date();
-                var str = date.getFullYear() + "-" + getFormattedPartTime(date.getMonth()) + "-" + getFormattedPartTime(date.getDate());
+                date.setMinutes(date.getMinutes() + 30);
+                var str = date.getFullYear() + "-" + getFormattedPartTime(date.getMonth()+1) + "-" + getFormattedPartTime(date.getDate());
                 $(".del-date").val(str);
                 var time = date.getHours() + ":" + getFormattedPartTime(date.getMinutes());
                 $(".del-time").val(time);
