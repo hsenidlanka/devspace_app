@@ -555,6 +555,7 @@ public  class UserRepositoryImpl implements UserRepository {
         return customerDetails;
     }
 
+
     @Override
     public List<User> selectAllByNameTypeAhead(String nameKey, String status, int limit, int page) {
         String key = "%" + nameKey + "%";
