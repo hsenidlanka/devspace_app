@@ -43,7 +43,7 @@ public  class UserRepositoryImpl implements UserRepository {
         if (un != "" && pw != "") {
             // if (checkUsernameUnique(un)==true) {
             String sql = "INSERT INTO customer " +
-                    "(title,first_name,last_name,username,password,email,address_line1,address_line2,address_line3,mobile,registered_date,status) VALUES (?,?,?,?,sha1(?),?,?,?,?,?,CURRENT_DATE,1)";
+                    "(title,first_name,last_name,username,password,email,address_line1,address_line2,address_line3,mobile,registered_date,status) VALUES (?,?,?,?,sha1(?),?,?,?,?,?,CURRENT_DATE,3)";
 
             row = jdbcTemplate.update(sql, new Object[]{user.getTitle(), user.getFirstName(), user.getLastName(), user.getUsername(), user.getPassword(),
                     user.getEmail(), user.getAddressL1(), user.getAddressL2(), user.getAddressL3(), user.getMobile()});
@@ -103,24 +103,19 @@ public  class UserRepositoryImpl implements UserRepository {
     @Override
     public int loginAuthenticate(String username,String password) {
 
-        int result ;
-        List<Map<String, Object>> mp1= jdbcTemplate.queryForList("SELECT status FROM customer WHERE BINARY username = ?",username);
-        if(mp1.size()!=0) {
-            log.info("{}", mp1.get(0).get("status"));
-            if (mp1.get(0).get("status").toString().equals("active")) {
-                List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE BINARY username = ? AND BINARY password =sha1(?)", username, password);
-                log.info("{}", mp);
-
-                if (mp.size() != 0) {
-                    log.info("{}", mp.get(0));
-                    result = 1;
-                } else result = 0;
-
-            } else result = 2;
-        }else result=0;
-        log.info("{}",result);
-
-        return result;
+        int status = 0;
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT status FROM customer WHERE BINARY username = ? AND BINARY password =sha1(?)", username, password);
+        if (mp.size() != 0) {
+            if (mp.get(0).get("status").toString() == "active") {
+                status = 1;
+            } else if (mp.get(0).get("status").toString() == "inactive") {
+                status = 2;
+            } else {
+                status = 3;
+            }
+        }
+        log.info("{}", status);
+        return status;
     }
 
     /*change username and password for a customer*/
@@ -548,8 +543,6 @@ public  class UserRepositoryImpl implements UserRepository {
             customer.setStatus(mp.get(i).get("status").toString());
 
             customerDetails.add(customer);
-
-
         }
         log.info("{}",customerDetails);
         return customerDetails;
@@ -670,4 +663,3 @@ public  class UserRepositoryImpl implements UserRepository {
     }
 
 }
-
