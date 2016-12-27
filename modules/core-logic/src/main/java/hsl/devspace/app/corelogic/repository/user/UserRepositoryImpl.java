@@ -378,8 +378,6 @@ public  class UserRepositoryImpl implements UserRepository {
             customer.setStatus(mp.get(i).get("status").toString());
 
             customerDetails.add(customer);
-
-
         }
         log.info("{}",customerDetails);
         return customerDetails;
@@ -577,10 +575,7 @@ public  class UserRepositoryImpl implements UserRepository {
             customer.setMobile(mp.get(i).get("mobile").toString());
             customer.setRegDate(Date.valueOf(mp.get(i).get("registered_date").toString()));
             customer.setStatus(mp.get(i).get("status").toString());
-
             customerDetails.add(customer);
-
-
         }
         log.info("{}", customerDetails);
         return customerDetails;
