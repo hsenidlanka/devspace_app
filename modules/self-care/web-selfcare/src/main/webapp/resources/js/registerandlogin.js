@@ -1,12 +1,11 @@
 $(document).ready(function () {
+    $("#blockedUser").hide();
 
-/*
-    $("#testId").click(function(){
-        if ($('input[name=title]:checked').length > 0) {
-            alert(($('input[name=title]:checked').length > 0));
-        }
+    //The fade out of blocked user yet to implement. Waiting for verifivation to complete
+
+    $("#signUpBtn").click(function(){
+        $("#blockedUser").show().delay(5000).fadeOut();
     });
-*/
 
 
     //Registration form submission
