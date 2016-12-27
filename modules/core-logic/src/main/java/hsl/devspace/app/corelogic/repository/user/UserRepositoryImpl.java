@@ -548,8 +548,6 @@ public  class UserRepositoryImpl implements UserRepository {
             customer.setStatus(mp.get(i).get("status").toString());
 
             customerDetails.add(customer);
-
-
         }
         log.info("{}",customerDetails);
         return customerDetails;

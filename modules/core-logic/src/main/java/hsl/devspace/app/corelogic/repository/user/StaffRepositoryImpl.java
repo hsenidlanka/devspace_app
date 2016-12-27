@@ -804,11 +804,7 @@ public class StaffRepositoryImpl implements UserRepository {
         log.info("{}", staffDetails);
         return staffDetails;
 
-
-
-
     }
-
 
 
     public List<User> filterByBranchDesig(String branch, String designation, String status, int limit, int page) {
