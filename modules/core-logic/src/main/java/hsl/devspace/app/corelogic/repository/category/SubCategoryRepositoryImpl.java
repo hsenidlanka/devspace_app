@@ -10,6 +10,7 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.sql.DataSource;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -38,18 +39,23 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
     @Override
     public int add(Category category) {
         int row = 0;
+        if (category.getSubCategoryName() != null && category.getSubcatDescription() != null && category.getCreator() != null && category.getCategoryName() != null) {
+            String catNm = category.getSubCategoryName();
+            System.out.println(catNm);
+            boolean availability = checkAvailability(catNm);
 
-        String catNm = category.getSubCategoryName();
-        boolean availability = checkAvailability(catNm);
+            if (availability == false) {
+                String sql = "INSERT INTO sub_category " +
+                        "(name,description,creator,created_date,category_id) VALUES (?,?,?,NOW(),(SELECT id FROM category WHERE name=?))";
+                row = jdbcTemplate.update(sql, new Object[]{category.getSubCategoryName(), category.getSubcatDescription(),
+                        category.getCreator(), category.getCategoryName()});
+                log.info("{} new sub category inserted", row);
+            } else {
+                log.info("{} sub category already available", row);
 
-        if (availability == false) {
-            String sql = "INSERT INTO sub_category " +
-                    "(name,description,creator,category_id) VALUES (?,?,?,(SELECT id FROM category WHERE name=?))";
-            row = jdbcTemplate.update(sql, new Object[]{category.getSubCategoryName(), category.getSubcatDescription(),
-                    category.getCreator(), category.getCategoryName()});
-            log.info("{} new sub category inserted", row);
+            }
         } else
-            log.info("{} sub category already available", row);
+            log.info("value cannot be null");
 
         return row;
     }
@@ -86,7 +92,7 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
     /*view all details of subcategory*/
     @Override
     public List<Category> selectAll() {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM sub_category");
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM sub_category ORDER BY created_date DESC ");
         List<Category> subCategories = new ArrayList<Category>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -96,6 +102,7 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
             category.setSubCategoryName(mp.get(i).get("name").toString());
             category.setSubcatDescription(mp.get(i).get("description").toString());
             category.setCreator(mp.get(i).get("creator").toString());
+            category.setCreatedDate(Timestamp.valueOf(mp.get(i).get("created_date").toString()));
             category.setCategory_id(Integer.parseInt(mp.get(i).get("category_id").toString()));
 
             subCategories.add(category);
@@ -109,7 +116,7 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
     /*view all details of subcategories for a given category name*/
     @Override
     public List<Category> viewSubCategoriesforCategory(String catName, int limit, int page) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM sub_category WHERE category_id=(SELECT id FROM category WHERE NAME =? LIMIT ? OFFSET ?)", catName, limit, page);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM sub_category WHERE category_id=(SELECT id FROM category WHERE NAME =? LIMIT ? OFFSET ?) ORDER BY created_date DESC", catName, limit, page);
         List<Category> subCategories = new ArrayList<Category>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -118,6 +125,7 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
             category.setSubCategoryName(mp.get(i).get("name").toString());
             category.setSubcatDescription(mp.get(i).get("description").toString());
             category.setCreator(mp.get(i).get("creator").toString());
+            category.setCreatedDate(Timestamp.valueOf(mp.get(i).get("created_date").toString()));
             category.setCategory_id(Integer.parseInt(mp.get(i).get("category_id").toString()));
 
             subCategories.add(category);
@@ -150,6 +158,8 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
         category.setSubCategoryName(mp.get(0).get("name").toString());
         category.setSubcatDescription(mp.get(0).get("description").toString());
         category.setCreator(mp.get(0).get("creator").toString());
+        category.setCreatedDate(Timestamp.valueOf(mp.get(0).get("created_date").toString()));
+
 
         log.info("msg {}", category);
         return category;
@@ -250,7 +260,7 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
 
     @Override
     public List<Category> paginateSelectAll(int limit, int page) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM sub_category LIMIT ? OFFSET ?", limit, page);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM sub_category ORDER BY created_date DESC LIMIT ? OFFSET ?", limit, page);
         List<Category> subCategories = new ArrayList<Category>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -260,6 +270,7 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
             category.setSubCategoryName(mp.get(i).get("name").toString());
             category.setSubcatDescription(mp.get(i).get("description").toString());
             category.setCreator(mp.get(i).get("creator").toString());
+            category.setCreatedDate(Timestamp.valueOf(mp.get(i).get("created_date").toString()));
             category.setCategory_id(Integer.parseInt(mp.get(i).get("category_id").toString()));
 
             subCategories.add(category);
@@ -277,7 +288,7 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
 
     @Override
     public List<Category> paginateSelectNameAndDescription(int limit, int page) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT name,description FROM sub_category LIMIT ? OFFSET ?", limit, page);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT name,description FROM sub_category ORDER BY created_date DESC LIMIT ? OFFSET ?", limit, page);
         List<Category> subCategories = new ArrayList<Category>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -295,7 +306,7 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
     @Override
     public List<Category> selectAllTypeAhead(String catName, int limit, int page) {
         String key = "%" + catName + "%";
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM sub_category WHERE name LIKE ? LIMIT ? OFFSET ?", key, limit, page);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM sub_category WHERE name LIKE ? ORDER BY created_date DESC LIMIT ? OFFSET ?", key, limit, page);
         List<Category> subCategories = new ArrayList<Category>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -305,6 +316,7 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
             category.setSubCategoryName(mp.get(i).get("name").toString());
             category.setSubcatDescription(mp.get(i).get("description").toString());
             category.setCreator(mp.get(i).get("creator").toString());
+            category.setCreatedDate(Timestamp.valueOf(mp.get(i).get("created_date").toString()));
             category.setCategory_id(Integer.parseInt(mp.get(i).get("category_id").toString()));
 
             subCategories.add(category);
@@ -323,7 +335,7 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
     @Override
     public List<Category> selectSubCategoryForCategoryTypeAhead(String catName, String subCategoryKey, int limit, int page) {
         String key = "%" + subCategoryKey + "%";
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM sub_category WHERE category_id=(SELECT id FROM category WHERE NAME =?) AND name LIKE ? LIMIT ? OFFSET ?", catName, key, limit, page);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM sub_category WHERE category_id=(SELECT id FROM category WHERE NAME =?) AND name LIKE ? ORDER BY created_date DESC LIMIT ? OFFSET ?", catName, key, limit, page);
         List<Category> subCategories = new ArrayList<Category>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -332,6 +344,7 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
             category.setSubCategoryName(mp.get(i).get("name").toString());
             category.setSubcatDescription(mp.get(i).get("description").toString());
             category.setCreator(mp.get(i).get("creator").toString());
+            category.setCreatedDate(Timestamp.valueOf(mp.get(i).get("created_date").toString()));
             category.setCategory_id(Integer.parseInt(mp.get(i).get("category_id").toString()));
 
             subCategories.add(category);

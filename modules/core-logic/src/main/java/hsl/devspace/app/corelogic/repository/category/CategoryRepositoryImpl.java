@@ -11,6 +11,7 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.sql.DataSource;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -40,19 +41,25 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     @Override
     public int add(Category category) {
         int row = 0;
-        String catNm = category.getCategoryName();
-        boolean availability = checkAvailability(catNm);
-        if (availability == false) {
+        if (category.getCategoryName() != null && category.getCatDescription() != null && category.getImage() != null && category.getCreator() != null && category.getStatus() != null) {
+            String catNm = category.getCategoryName();
+
+            boolean availability = checkAvailability(catNm);
+            if (availability == false) {
           /*  MultipartFile img = category.getImageUrl();
             String ims = img.getOriginalFilename();*/
-            String sql = "INSERT INTO category " +
-                    "(name,description,image,creator,status) VALUES (?,?,?,?,?)";
+                String sql = "INSERT INTO category " +
+                        "(name,description,image,creator,created_date,status) VALUES (?,?,?,?,NOW(),?)";
 
-            row = jdbcTemplate.update(sql, new Object[]{category.getCategoryName(), category.getCatDescription(), category.getImage(), category.getCreator(), category.getStatus()});
+                row = jdbcTemplate.update(sql, new Object[]{category.getCategoryName(), category.getCatDescription(), category.getImage(), category.getCreator(), category.getStatus()});
 
-            log.info("{} new category inserted", row);
-        } else
-            log.info("{} category already available", row);
+                log.info("{} new category inserted", row);
+            } else
+                log.info("{} category already available", row);
+        } else {
+            log.info("Values cannot be null");
+        }
+
 
         return row;
     }
@@ -61,13 +68,14 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     @Override
     public boolean checkAvailability(String categoryName) {
         boolean result;
-
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category WHERE  name=?", categoryName);
-        log.info("{}", mp);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category WHERE name=?", categoryName);
+        log.info("{} {}", mp, mp.size());
 
         if (mp.size() != 0) {
             result = true;
-        } else result = false;
+        } else {
+            result = false;
+        }
         log.info("{} availability checking", result);
         return result;
 
@@ -92,10 +100,10 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     /*Delete category*/
     @Override
     public int delete(String categoryName) {
-        category.setCategoryName(categoryName);
+        // category.setCategoryName(categoryName);
 
         String sql = "DELETE FROM category WHERE name = ?";
-        int row = jdbcTemplate.update(sql, new Object[]{category.getCategoryName()});
+        int row = jdbcTemplate.update(sql, new Object[]{categoryName});
         log.info("{} category deleted", row);
         return row;
     }
@@ -108,7 +116,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     /*view all category details */
     @Override
     public List<Category> selectAll() {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category");
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category ORDER BY created_date DESC ");
         List<Category> categories = new ArrayList<Category>();
 
         for (Map<String, Object> aMp : mp) {
@@ -121,6 +129,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
                 category.setImage(aMp.get("image").toString());
             }
             category.setCreator(aMp.get("creator").toString());
+            category.setCreatedDate(Timestamp.valueOf(aMp.get("created_date").toString()));
             category.setStatus(aMp.get("status").toString());
             categories.add(category);
             // }
@@ -132,7 +141,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     @Override
     public List<Category> selectAllTypeAhead(String catName, int limit, int page) {
         String key = "%" + catName + "%";
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category WHERE name LIKE ? LIMIT ? OFFSET ?", key, limit, page);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category WHERE name LIKE ? ORDER BY created_date DESC LIMIT ? OFFSET ? ", key, limit, page);
         List<Category> categories = new ArrayList<Category>();
 
         for (Map<String, Object> aMp : mp) {
@@ -145,6 +154,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
                 category.setImage(aMp.get("image").toString());
             }
             category.setCreator(aMp.get("creator").toString());
+            category.setCreatedDate(Timestamp.valueOf(aMp.get("created_date").toString()));
             category.setStatus(aMp.get("status").toString());
             categories.add(category);
             // }
@@ -173,6 +183,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
             category.setImage(mp.get(0).get("image").toString());
         }
         category.setCreator(mp.get(0).get("creator").toString());
+        category.setCreatedDate(Timestamp.valueOf(mp.get(0).get("created_date").toString()));
         category.setStatus(mp.get(0).get("status").toString());
 
 
@@ -201,6 +212,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
                 category.setImage(mp.get(i).get("image").toString());
             }
             category.setCreator(mp.get(i).get("creator").toString());
+            category.setCreatedDate(Timestamp.valueOf(mp.get(i).get("created_date").toString()));
             category.setStatus(mp.get(i).get("status").toString());
 
             categories.add(category);
@@ -213,7 +225,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
 
     public List<Category> selectAllVisibleTypeAhead(String catName, int limit, int page) {
         String key = "%" + catName + "%";
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category WHERE status=1 LIKE ? LIMIT ? OFFSET ? ", key, limit, page - 1);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category WHERE status=1 LIKE ? ORDER BY created_date DESC LIMIT ? OFFSET ? ", key, limit, page - 1);
         List<Category> categories = new ArrayList<Category>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -226,6 +238,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
                 category.setImage(mp.get(i).get("image").toString());
             }
             category.setCreator(mp.get(i).get("creator").toString());
+            category.setCreatedDate(Timestamp.valueOf(mp.get(i).get("created_date").toString()));
             category.setStatus(mp.get(i).get("status").toString());
 
             categories.add(category);
@@ -430,7 +443,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     }
 
     public List<Category> paginateSelectAll(int limit, int page) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category LIMIT ? OFFSET ?", limit, page);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category ORDER BY created_date DESC LIMIT ? OFFSET ?", limit, page);
         List<Category> categories = new ArrayList<Category>();
 
         for (Map<String, Object> aMp : mp) {
@@ -443,6 +456,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
                 category.setImage(aMp.get("image").toString());
             }
             category.setCreator(aMp.get("creator").toString());
+            category.setCreatedDate(Timestamp.valueOf(aMp.get("created_date").toString()));
             category.setStatus(aMp.get("status").toString());
             categories.add(category);
             // }
@@ -452,7 +466,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     }
 
     public List<Category> paginateSelectAllVisible(int limit, int page) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category WHERE status=1 LIMIT ? OFFSET ?", limit, page - 1);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category WHERE status=1 ORDER BY created_date DESC LIMIT ? OFFSET ?", limit, page - 1);
         List<Category> categories = new ArrayList<Category>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -465,6 +479,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
                 category.setImage(mp.get(i).get("image").toString());
             }
             category.setCreator(mp.get(i).get("creator").toString());
+            category.setCreatedDate(Timestamp.valueOf(mp.get(i).get("created_date").toString()));
             category.setStatus(mp.get(i).get("status").toString());
 
             categories.add(category);

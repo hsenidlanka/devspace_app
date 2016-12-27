@@ -2,6 +2,8 @@ package hsl.devspace.app.corelogic.domain;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import java.sql.Timestamp;
+
 /**
  * Created by hsenid on 9/15/16.
  */
@@ -16,6 +18,15 @@ public class Category {
     private String status;
     private String image;
     private MultipartFile imageUrl;
+    private Timestamp createdDate;
+
+    public Timestamp getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Timestamp createdDate) {
+        this.createdDate = createdDate;
+    }
 
     public MultipartFile getImageUrl() {
         return imageUrl;
@@ -134,11 +145,12 @@ public class Category {
         this.categoryName=categoryName;
     }
     //sub category for subcategory details for a given category
-    public Category(int subcategory_id,int category_id, String subCategoryName,String description,String creator,String categoryName){
+    public Category(int subcategory_id, int category_id, String subCategoryName, String description, String creator, Timestamp createdDate, String categoryName) {
         this.subCategoryId=subcategory_id;
         this.subCategoryName=subCategoryName;
         this.subcatDescription=description;
         this.creator=creator;
+        this.createdDate = createdDate;
         this.category_id=category_id;
         this.categoryName=categoryName;
     }
@@ -164,6 +176,7 @@ public class Category {
                 ", status='" + status + '\'' +
                 ", image='" + image + '\'' +
                 ", imageUrl=" + imageUrl +
+                ", createdDate=" + createdDate +
                 '}';
     }
 }
