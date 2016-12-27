@@ -398,6 +398,31 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
     }
 
     @Override
+    public List<Item> loadMenuItemsTypeAhead(String subCatName, String itemKey) {
+        String key = "%" + itemKey + "%";
+        List<Map<String, Object>> another = jdbcTemplate.queryForList("SELECT * FROM item WHERE sub_category_id=(SELECT id FROM sub_category WHERE name=?) AND name LIKE ?", subCatName, key);
+        List<Item> itemList = new ArrayList<Item>();
+
+        log.info("{}", another);
+        for (int j = 0; j < another.size(); j++) {
+            Item item = new Item();
+            item.setItemId(Integer.parseInt(another.get(j).get("id").toString()));
+            List<Map<String, Object>> size = jdbcTemplate.queryForList("SELECT size,price FROM size WHERE item_id=?", another.get(j).get("id"));
+            item.setSizePrice(size);
+            item.setItemName(another.get(j).get("name").toString());
+            item.setDescription(another.get(j).get("description").toString());
+            List<Map<String, Object>> type = jdbcTemplate.queryForList("SELECT name FROM type WHERE type_id=?", another.get(j).get("type_id"));
+            item.setType(type.get(0).get("name").toString());
+            item.setImage(another.get(j).get("image").toString());
+            item.setSubCategoryId(Integer.parseInt(another.get(j).get("sub_category_id").toString()));
+            itemList.add(item);
+
+        }
+        log.info("ItemList{}", itemList);
+        return itemList;
+    }
+
+    @Override
     public List<String> viewSubCategories(String catName) {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT name FROM sub_category WHERE category_id=(SELECT id FROM category WHERE name =?)", catName);
         List<String> subCatName = new ArrayList<String>();
