@@ -14,7 +14,6 @@ import java.util.List;
  */
 public interface UserRepository {
 
-
     public int add(User user) throws SQLIntegrityConstraintViolationException, DuplicateKeyException;
 
     int delete(String username) throws SQLException;
@@ -24,6 +23,7 @@ public interface UserRepository {
     boolean confirmPassword() throws SQLException;
 
     int loginAuthenticate(String username, String password) throws SQLException;
+
 
     int update(User user) throws SQLException, TransientDataAccessResourceException;
 
@@ -80,6 +80,32 @@ public interface UserRepository {
     List<User> selectAllByNameTypeAhead(String nameKey, String status, int limit, int page);
 
     List<String> selectNameByNameTypeAhead(String nameKey, String status);
+
+    int countByDate(Date date);
+
+    int countByDateRange(Date date1, Date date2);
+
+    int countByCity(String city, String status);
+
+    int countActiveUsers();
+
+    int countBlockedUsers();
+
+    int countByEndingDate(Date date);
+
+    int countByStartingDate(Date date);
+
+    int countBlockedUsersByCity(String city);
+
+    int countAllByNameTypeAhead(String nameKey, String status);
+
+    int countByDesignation(String designation, String status);
+
+    int countByDepartment(String department, String status);
+
+    int countByDepartmentDesig(String department, String designation, String status);
+
+    int countByBranch(String branch, String status);
 
 
 }
