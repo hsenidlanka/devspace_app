@@ -77,14 +77,14 @@ public class CustomerService {
     public Response login(User user, @javax.ws.rs.core.Context UriInfo uriInfo) {
         int status = userRepository.loginAuthenticate(user.getUsername(), user.getPassword());
         Response response;
+        SuccessMessage successMessage = new SuccessMessage();
+        successMessage.setStatus("success");
+        successMessage.setCode(Response.Status.OK.getStatusCode());
+        successMessage.setMessage("username, password validated.");
         if (status == 1) {
-            SuccessMessage successMessage = new SuccessMessage();
-            successMessage.setStatus("success");
-            successMessage.setCode(Response.Status.OK.getStatusCode());
-            successMessage.setMessage("username, password validated.");
-
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("username", user.getUsername());
+            jsonObject.put("accountStatus", "verified");
             successMessage.addData(jsonObject);
 
             String url = uriInfo.getAbsolutePath().toString();
@@ -92,7 +92,22 @@ public class CustomerService {
             successMessage.addLink(BASE_URL + "customers/" + user.getUsername(), "profile");
             response = Response.status(Response.Status.OK).entity(successMessage).build();
         } else if (status == 2) {
-            throw new WebApplicationException(403);
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("username", user.getUsername());
+            jsonObject.put("accountStatus", "blocked");
+            successMessage.addData(jsonObject);
+            String url = uriInfo.getAbsolutePath().toString();
+            successMessage.addLink(url, "self");
+            response = Response.status(Response.Status.OK).entity(successMessage).build();
+        } else if (status == 3) {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("username", user.getUsername());
+            jsonObject.put("accountStatus", "not-verified");
+            successMessage.addData(jsonObject);
+            String url = uriInfo.getAbsolutePath().toString();
+            successMessage.addLink(url, "self");
+            successMessage.addLink(BASE_URL + "customers/verify", "verify customer");
+            response = Response.status(Response.Status.OK).entity(successMessage).build();
         } else {
             throw new WebApplicationException(401);
         }
