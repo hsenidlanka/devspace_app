@@ -30,7 +30,7 @@ public class ContactService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response addGuest(ContactUs contactUs, @javax.ws.rs.core.Context UriInfo uriInfo) {
         int res = contactUsRepository.add(contactUs);
-        Response response = null;
+        Response response;
         if (res > 0) {
             SuccessMessage successMessage = new SuccessMessage();
             successMessage.setStatus("success");
