@@ -1,28 +1,46 @@
 $(document).ready(function () {
     var date = new Date();
-    var str = date.getFullYear() + "-" + getFormattedPartTime(date.getMonth()+1) + "-" + getFormattedPartTime(date.getDate());
+    date.setMinutes(date.getMinutes() + 30);
+    var str = date.getFullYear() + "-" + getFormattedPartTime(date.getMonth() + 1) + "-" + getFormattedPartTime(date.getDate());
     $(".del-date").val(str);
+
+    var time = date.getHours() + ":" + getFormattedPartTime(date.getMinutes());
+    $(".del-time").val(time);
+    $(".pickup-time").val(time);
 
     $("#pickup-div").hide();
     $("#date").prop("readonly", true);
     $("#timepicker1").prop("readonly", true);
     $("#timepicker2").prop("readonly", true);
-    $('.bootstrap-timepicker1').timepicker({
-        minuteStep: 5,
-        showMeridian: false,
-        icons: {
-            up: 'fa fa-chevron-up',
-            down: 'fa fa-chevron-down'
-        }
+    /*$('.bootstrap-timepicker1').timepicker({
+     minuteStep: 5,
+     showMeridian: false,
+     icons: {
+     up: 'fa fa-chevron-up',
+     down: 'fa fa-chevron-down'
+     }
+     });*/
+    $("#timepicker1").timepicker({
+        'setTime':date,
+        'minTime': date,
+        'showDuration': true,
+        'timeFormat': 'H:i',
+        'maxTime': '23.00'
     });
-    $('.bootstrap-timepicker2').timepicker({
-        minuteStep: 5,
-        showMeridian: false,
-        icons: {
-            up: 'fa fa-chevron-up',
-            down: 'fa fa-chevron-down'
-        }
+    $("#timepicker2").timepicker({
+        'minTime': date,
+        'showDuration': true,
+        'timeFormat': 'H:i',
+        'maxTime': '23.00'
     });
+    /*$('.bootstrap-timepicker2').timepicker({
+     minuteStep: 5,
+     showMeridian: false,
+     icons: {
+     up: 'fa fa-chevron-up',
+     down: 'fa fa-chevron-down'
+     }
+     });*/
 
     fillDeliveryFormData();
 
@@ -46,8 +64,7 @@ $(document).ready(function () {
             $("#date").prop("readonly", false);
             $("#timepicker1").prop("readonly", false);
         } else {
-            var date = new Date();
-            var str = date.getFullYear() + "-" + getFormattedPartTime(date.getMonth()+1) + "-" + getFormattedPartTime(date.getDate());
+            var str = date.getFullYear() + "-" + getFormattedPartTime(date.getMonth() + 1) + "-" + getFormattedPartTime(date.getDate());
             $(".del-date").val(str);
             var time = date.getHours() + ":" + getFormattedPartTime(date.getMinutes());
             $(".del-time").val(time);

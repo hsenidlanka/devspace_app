@@ -5,10 +5,12 @@
     <title><fmt:message key="delivery" bundle="${lang}"/></title>
     <link rel="shortcut icon" href="">
     <link href="<c:url value="/resources/css/bootstrap-datepicker3.css"/>" rel="stylesheet"/>
+    <link href="<c:url value="/resources/css/jquery.timepicker.css"/>" rel="stylesheet"/>
     <script src="<c:url value="/resources/js/bootstrap-datepicker.min.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/resources/js/jquery.timepicker.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/delivery-operations.js"/>"></script>
-    <link href="<c:url value="/resources/css/bootstrap-timepicker.css"/>" rel="stylesheet">
-    <script src="<c:url value="/resources/js/bootstrap-timepicker.js"/>"></script>
+    <%--<link href="<c:url value="/resources/css/bootstrap-timepicker.css"/>" rel="stylesheet">--%>
+    <%--<script src="<c:url value="/resources/js/bootstrap-timepicker.js"/>"></script>--%>
     <script src="<c:url value="/resources/js/datepicker.js"/>"></script>
     <script src="<c:url value="/resources/js/validate-delivery.js"/>"></script>
 
