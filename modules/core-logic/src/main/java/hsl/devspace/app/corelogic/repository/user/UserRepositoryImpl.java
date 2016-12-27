@@ -530,6 +530,16 @@ public  class UserRepositoryImpl implements UserRepository {
         return null;
     }
 
+    public List<User> filterByBranchDesigDep(String branch,String designation,String department, String status, int limit, int page){
+        return null;
+    }
+    public List<User> filterByBranchDesig(String branch, String designation, String status, int limit, int page) {
+        return null;
+    }
+    public List<User> filterByBranchDep(String branch, String department, String status, int limit, int page) {
+        return null;
+    }
+
     @Override
     public List<User> filterByBranch(String branch, String status, int llimit, int page) {
         return null;
