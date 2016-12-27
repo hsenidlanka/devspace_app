@@ -39,6 +39,14 @@ $(document).ready(function () {
                     field: 'type',
                     title: 'Type',
                     sortable: true
+                },{
+                    field: 'created_date',
+                    title: 'Added Date',
+                    sortable: true
+                },{
+                    field: 'creator',
+                    title: 'Creator',
+                    sortable: true
                 }, {
                     field: 'description',
                     title: 'Item description',

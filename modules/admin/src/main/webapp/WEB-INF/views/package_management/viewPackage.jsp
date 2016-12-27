@@ -64,7 +64,7 @@
 <div class="form-box" id="view-pkg-form-box">
     <div class="panel panel-default">
         <div class="panel-heading  common-form-headings">
-            <h3 class="default-panel-headings">View Package</h3>
+            <h3 class="default-panel-headings"><fmt:message key="package.viewpackage.breadcrumb.viewpkg" bundle="${bundle2}"/></h3>
         </div>
 
         <div class="panel-body">
@@ -73,7 +73,7 @@
                 <div class="col-sm-1"></div>
                 <div class="col-sm-3">
                     <label class="control-label" style="float: right;">
-                        Package Name :
+                        <fmt:message key="package.viewpackage.package.name" bundle="${bundle2}"/>
                     </label>
 
                 </div>
@@ -82,7 +82,7 @@
                 </div>
                 <div class="col-sm-3">
                     <button type="button" class="btn btn-success" id="btnViewSearchPkg"><span
-                            class="glyphicon glyphicon-search"></span> Search
+                            class="glyphicon glyphicon-search"></span><fmt:message key="package.viewpackage.package.search" bundle="${bundle2}"/>
                     </button>
                 </div>
                 <div class="col-sm-1"></div>
@@ -91,7 +91,7 @@
 
             <form:form class="form-horizontal" role="form" id="frmViewPkg" action="" method="post">
                 <fieldset class="scheduler-border">
-                    <legend class="scheduler-border">Available Packages</legend>
+                    <legend class="scheduler-border"><fmt:message key="package.viewpackage.package.name" bundle="${bundle2}"/></legend>
 
                     <!--table of package details-->
                     <table id="tblPackages">
@@ -116,12 +116,15 @@
             <div class="modal-header item-modal-header-style">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
                         class="glyphicon glyphicon-remove"></span></button>
-                <div align="center"><span class="glyphicon glyphicon-trash"></span> Delete Package
+                <div align="center"><span class="glyphicon glyphicon-trash"></span>
+                    <fmt:message key="package.viewpackage.package.delete" bundle="${bundle1}"/>
                 </div>
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label id="lblDeltPkgMsg"><fmt:message key="package.deletemodal.warning.question" bundle="${bundle1}"/></label><br><br>
+                    <label id="lblDeltPkgMsg">
+                        <fmt:message key="package.deletemodal.warning.question" bundle="${bundle1}"/>
+                    </label><br><br>
 
                     <div align="center" class="row">
                         <div class="col-xs-6" style="text-align: right"> <label ><fmt:message key="package.deletemodal.packageid" bundle="${bundle1}"/></label></div>
