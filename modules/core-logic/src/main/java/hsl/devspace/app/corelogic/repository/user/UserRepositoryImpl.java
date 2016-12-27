@@ -289,6 +289,11 @@ public  class UserRepositoryImpl implements UserRepository {
         return customerDetails;
     }
 
+    @Override
+    public List<User> retrieveByDateRangeCity(Date date1, Date date2, String city, int limit, int page) {
+        return null;
+    }
+
     /*retrieve details of customers by a given attribute*/
     @Override
     public List<User> filterByCity(String city, String status, int limit, int page) {
@@ -500,6 +505,21 @@ public  class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    public List<User> filterByBranchDesigDep(String branch, String designation, String department, String status, int limit, int page) {
+        return null;
+    }
+
+    @Override
+    public List<User> filterByBranchDesig(String branch, String designation, String status, int limit, int page) {
+        return null;
+    }
+
+    @Override
+    public List<User> filterByBranchDep(String branch, String department, String status, int limit, int page) {
+        return null;
+    }
+
+    @Override
     public List<User> filterByBranch(String branch, String status, int llimit, int page) {
         return null;
     }
@@ -581,6 +601,71 @@ public  class UserRepositoryImpl implements UserRepository {
         }
         log.info("{}", customerDetails);
         return customerDetails;
+    }
+
+    @Override
+    public int countByDate(Date date) {
+        return 0;
+    }
+
+    @Override
+    public int countByDateRange(Date date1, Date date2) {
+        return 0;
+    }
+
+    @Override
+    public int countByCity(String city, String status) {
+        return 0;
+    }
+
+    @Override
+    public int countActiveUsers() {
+        return 0;
+    }
+
+    @Override
+    public int countBlockedUsers() {
+        return 0;
+    }
+
+    @Override
+    public int countByEndingDate(Date date) {
+        return 0;
+    }
+
+    @Override
+    public int countByStartingDate(Date date) {
+        return 0;
+    }
+
+    @Override
+    public int countBlockedUsersByCity(String city) {
+        return 0;
+    }
+
+    @Override
+    public int countAllByNameTypeAhead(String nameKey, String status) {
+        return 0;
+    }
+
+    @Override
+    public int countByDesignation(String designation, String status) {
+        return 0;
+    }
+
+    @Override
+    public int countByDepartment(String department, String status) {
+        return 0;
+    }
+
+    @Override
+    public int countByDepartmentDesig(String department, String designation, String status) {
+        return 0;
+    }
+
+    @Override
+    public int countByBranch(String branch, String status) {
+        return 0;
     }
 
 }
