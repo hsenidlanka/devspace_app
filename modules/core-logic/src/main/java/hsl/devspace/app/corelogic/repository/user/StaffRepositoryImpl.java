@@ -1008,5 +1008,10 @@ public class StaffRepositoryImpl implements UserRepository {
         return 0;
     }
 
+    @Override
+    public int addVerificationCode(String username, String code) {
+        return 0;
+    }
+
 
 }

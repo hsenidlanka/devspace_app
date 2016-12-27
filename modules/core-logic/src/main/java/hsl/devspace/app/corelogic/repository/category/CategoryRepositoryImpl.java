@@ -397,6 +397,55 @@ public class CategoryRepositoryImpl implements CategoryRepository {
         return itemList;
     }
 
+    @Override
+    public List<Item> loadMenuItemsTypeAhead(String catName, String itemKey) {
+        String key = "%" + itemKey + "%";
+        // List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM item WHERE sub_category_id=(SELECT id FROM sub_category WHERE category_id=(SELECT id FROM category WHERE name=?))",catName);
+        List<Map<String, Object>> mp1 = jdbcTemplate.queryForList("SELECT id FROM category WHERE name=?", catName);
+        List<Map<String, Object>> mp = null;
+        List<Map<String, Object>> another = new ArrayList<Map<String, Object>>();
+        List<Item> itemList = new ArrayList<Item>();
+
+        if (mp1.size() > 0) {
+            List<Map<String, Object>> mp2 = jdbcTemplate.queryForList("SELECT id FROM sub_category WHERE category_id=?", mp1.get(0).get("id"));
+            if (mp2.size() > 0) {
+                int i = 0;
+                while (i < mp2.size()) {
+                    mp = jdbcTemplate.queryForList("SELECT * FROM item WHERE sub_category_id=? AND name LIKE ?", mp2.get(i).get("id"), key);
+                    another.addAll(mp);
+                    log.info("{}", mp);
+                    i++;
+                }
+            } else {
+                log.info("no valid sub categories found");
+            }
+        } else {
+            log.info("not a valid category name");
+        }
+
+        log.info("mp" + mp);
+        log.info("another" + another);
+        for (int j = 0; j < another.size(); j++) {
+            Item item = new Item();
+            item.setItemId(Integer.parseInt(another.get(j).get("id").toString()));
+            item.setItemName(another.get(j).get("name").toString());
+            item.setDescription(another.get(j).get("description").toString());
+            item.setType(another.get(j).get("type_id").toString());
+            if (another.get(j).get("image") != null) {
+                item.setImage(another.get(j).get("image").toString());
+            }
+            List<Map<String, Object>> mp5 = jdbcTemplate.queryForList("SELECT name FROM sub_category WHERE id=?", another.get(j).get("sub_category_id"));
+            //item.setSubCategoryId(Integer.parseInt(another.get(j).get("sub_category_id").toString()));
+            item.setSubCategoryName(mp5.get(0).get("name").toString());
+
+            itemList.add(item);
+
+
+        }
+        log.info("{}", itemList);
+        return itemList;
+    }
+
     /*view all sub categories of a specific category*/
     @Override
     public List<String> viewSubCategories(String catName) {

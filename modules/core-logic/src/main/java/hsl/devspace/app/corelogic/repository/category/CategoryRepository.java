@@ -74,5 +74,7 @@ public interface CategoryRepository {
 
     int SubCategoryForCategoryTypeAhead(String catName, String subCategoryKey);
 
+    List<Item> loadMenuItemsTypeAhead(String subCatName, String itemKey);
+
 
 }

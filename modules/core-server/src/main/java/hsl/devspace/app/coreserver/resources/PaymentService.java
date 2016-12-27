@@ -241,7 +241,7 @@ public class PaymentService {
         char[] charCombinations = stringCombinations.toCharArray();
         StringBuilder stringBuilder = new StringBuilder();
         Random random = new Random();
-        // 20: Length of the coupon code
+        // length: Length of the coupon code
         for (int i = 0; i < length; i++) {
             char randomChar = charCombinations[random.nextInt(charCombinations.length)];
             stringBuilder.append(randomChar);
