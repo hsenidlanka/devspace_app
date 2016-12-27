@@ -27,7 +27,7 @@
 <body>
 
 <%@include file="../includes/new-header.jsp" %>
-
+<%--<%@include file="../includes/loginmodal.jsp" %>--%>
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators" hidden="hidden">
@@ -86,17 +86,17 @@
 
     <div class="col-sm-4" style="padding-top: 80px;padding-left: 260px">
         <span>
-            <a href="http://www.facebook.com/"> <img src="<c:url value="/resources/images/facebook-flat.png"/>"
+            <a href="http://www.facebook.com/" target="_blank"> <img src="<c:url value="/resources/images/facebook-flat.png"/>"
                                                      style="padding-right: 10px"></a>
         </span>
 
         <span>
-            <a href="http://www.twitter.com"> <img src="<c:url value="/resources/images/twitter-flat.png"/>"
+            <a href="http://www.twitter.com" target="_blank"> <img src="<c:url value="/resources/images/twitter-flat.png"/>"
                                                    style="padding-right: 10px"></a>
         </span>
 
         <span>
-            <a href="#"> <img src="<c:url value="/resources/images/google-plus-flat.png"/>" style="padding-right: 10px"></a>
+            <a href="https://plus.google.com/" target="_blank"> <img src="<c:url value="/resources/images/google-plus-flat.png"/>" style="padding-right: 10px"></a>
         </span>
     </div>
 </div>
@@ -124,7 +124,7 @@
         <div class="col-sm-4">
 
             <label class="radio-inline">
-                <a href="https://play.google.com/store/apps"><img style="width: 130px;height: 55px"
+                <a href="https://play.google.com/store/apps" target="_blank"><img style="width: 130px;height: 55px"
                                                                   src="<c:url value="/resources/images/google-play-store-button.png"/>"></a>
             </label>
         </div>
