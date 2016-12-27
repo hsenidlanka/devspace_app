@@ -14,6 +14,7 @@ import java.util.List;
  */
 public interface UserRepository {
 
+
     public int add(User user) throws SQLIntegrityConstraintViolationException, DuplicateKeyException;
 
     int delete(String username) throws SQLException;
