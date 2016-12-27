@@ -42,6 +42,8 @@ public interface UserRepository {
 
     List<User> retrieveByDateRange(java.sql.Date date1, java.sql.Date date2, int limit, int page);
 
+    public List<User> retrieveByDateRangeCity(Date date1, Date date2,String city, int limit, int page) ;
+
     List<User> filterByCity(String city, String status, int limit, int page);
 
     int countUsers(String status);
@@ -67,6 +69,10 @@ public interface UserRepository {
     List<User> filterByDesignation(String designation, String status, int limit, int page);
 
     public List<User> filterByDepartmentDesig(String department, String designation, String status, int limit, int page);
+    public List<User> filterByBranchDesigDep(String branch,String designation,String department, String status, int limit, int page);
+
+    public List<User> filterByBranchDesig(String branch, String designation, String status, int limit, int page) ;
+    public List<User> filterByBranchDep(String branch, String department, String status, int limit, int page);
 
     List<User> filterByBranch(String branch, String status, int limit, int page);
 

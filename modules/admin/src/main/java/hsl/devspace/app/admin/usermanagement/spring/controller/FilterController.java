@@ -155,20 +155,20 @@ public class FilterController {
                                                         @RequestParam("pageLimit") String pageLimit,
                                                         @RequestParam("initPage") String initPage) throws ParseException {
 
-              int initPg = Integer.parseInt(initPage);
-              int limitPg = Integer.parseInt(pageLimit);
+        int initPg = Integer.parseInt(initPage);
+        int limitPg = Integer.parseInt(pageLimit);
 
-              //convert java.util time to sql time
-              SimpleDateFormat sdf= new SimpleDateFormat("MM/dd/yyyy");
-              Date fromDate= sdf.parse(from);
-              Date toDate= sdf.parse(to);
-              java.sql.Date sqlfromDate= new java.sql.Date(fromDate.getTime());
-              java.sql.Date sqltoDate= new java.sql.Date(toDate.getTime());
+        //convert java.util time to sql time
+        SimpleDateFormat sdf= new SimpleDateFormat("MM/dd/yyyy");
+        Date fromDate= sdf.parse(from);
+        Date toDate= sdf.parse(to);
+        java.sql.Date sqlfromDate= new java.sql.Date(fromDate.getTime());
+        java.sql.Date sqltoDate= new java.sql.Date(toDate.getTime());
         LOG.error("sqlFromDate: {}",sqlfromDate);
 
         //two lists of User objects obtained filtered by date and city respectively
-              List<User> dateFilteredcustomerList=customerRepository.retrieveByDateRange(sqlfromDate,sqltoDate,limitPg,initPg);
-              LOG.error("retrive by date range {}",dateFilteredcustomerList);
+        List<User> dateFilteredcustomerList=customerRepository.retrieveByDateRangeCity(sqlfromDate,sqltoDate,city,limitPg,initPg);
+        LOG.error("retrive by date range {}",dateFilteredcustomerList);
         ArrayList<Map<String, Object>> outCityDate1 = new ArrayList<Map<String, Object>>();
         //first filter by date range
         for (int i=0;i<dateFilteredcustomerList.size();i++){
@@ -187,34 +187,7 @@ public class FilterController {
             outCityDate1.add(map);
             LOG.error("out {}", outCityDate1);
         }
-
-        List<User> cityFilteredcustomerList=customerRepository.filterByCity(city,"active",limitPg,initPg);
-        LOG.error("retrieve by city: {}",cityFilteredcustomerList);
-        ArrayList<Map<String, Object>> outCityDate2 = new ArrayList<Map<String, Object>>();
-        //secondly filter by city
-        for (int i=0;i<cityFilteredcustomerList.size();i++){
-            User customerUser=cityFilteredcustomerList.get(i);
-            Map<String, Object> map = new HashMap<String, Object>();
-            map.put("id", customerUser.getId());
-            map.put("username", customerUser.getUsername());
-            map.put("first_name",customerUser.getFirstName());
-            map.put("last_name", customerUser.getLastName());
-            map.put("mobile", customerUser.getMobile());
-            map.put("email", customerUser.getEmail());
-            map.put("address_line3", customerUser.getAddressL3());
-            map.put("registered_date", customerUser.getRegDate());
-
-            LOG.info("newUser {}", customerUser);
-            outCityDate2.add(map);
-            LOG.error("out {}",outCityDate2);
-        }
-
-        //to get the intersection of the two lists outCityDate1 and outCityDate2
-        ArrayList<Map<String, Object>> common= new ArrayList<Map<String, Object>>(outCityDate1);
-        common.retainAll(outCityDate2);
-        LOG.error("The intersected list of the date and city filtered lists {}",common);
-
-        return common;
+        return outCityDate1;
     }
 
 
@@ -251,7 +224,12 @@ public class FilterController {
             List<Map<String, Object>> branchList=branchSelect(branch,"active",limitPg,initPg);
             return branchList;
         }
+        //////query for designation and department select filtering
+        if((!(designation.equals("--Select--"))) && (!(department.equals("--Select--"))) && ((branch.equals("--Select--"))) ) {
 
+            List<Map<String, Object>> designationList=designationDepSelect(department,designation,"active",limitPg,initPg);
+            return designationList;
+        }
         //query for branch and department select filtering
         if((!(branch.equals("--Select--"))) && (!(department.equals("--Select--"))) &&((designation.equals("--Select--")))) {
 
@@ -263,17 +241,7 @@ public class FilterController {
             common.retainAll(depList);
             return common;
         }
-        //////query for designation and department select filtering
-        if((!(designation.equals("--Select--"))) && (!(department.equals("--Select--"))) && ((branch.equals("--Select--"))) ) {
 
-            List<Map<String, Object>> designationList=designationSelect(designation, "active",limitPg,initPg);
-            List<Map<String, Object>> depList=departmentSelect(department, "active",limitPg,initPg);
-
-            //to get the intersection of the two lists outCityDate1 and outCityDate2
-            ArrayList<Map<String, Object>> common= new ArrayList<Map<String, Object>>(designationList);
-            common.retainAll(depList);
-            return common;
-        }
         ///////query for designation and branch select filtering
         if((!(designation.equals("--Select--"))) && ((department.equals("--Select--"))) && (!(branch.equals("--Select--"))) ) {
 

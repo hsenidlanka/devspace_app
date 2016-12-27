@@ -220,7 +220,7 @@ $(document).ready(function () {
                 })
             }
 
-            if( (city != "--Select--")  ) {
+            if( (city != "--Select--") && (from == "") && (to == "") ) {
                 $.ajax({
                     //type: "POST",
                     url: "https://localhost:8443/admin/userFilters/customerTable/city",
@@ -234,7 +234,7 @@ $(document).ready(function () {
                     }
                 });
             }
-            if( (from != "") && (to != "")) {
+            if( (from != "") && (to != "") && (city == "--Select--") ) {
                 $.ajax({
                     //type: "POST",
                     url: "https://localhost:8443/admin/userFilters/customerTable/date",
@@ -273,7 +273,7 @@ $(document).ready(function () {
         totalPages: 7,
 
         // maximum of visible buttons
-        maxButtonsVisible: 5,
+        maxButtonsVisible: 10,
 
         // page selected
         currentPage: 1,
@@ -795,7 +795,7 @@ $(document).ready(function () {
             $.ajax({
                 url: "https://localhost:8443/admin/userFilters/customerTable/typeheadName/data",
                 dataType: "json",
-                data: {"cname": name, "initPage": pageSend, "pageLimit": pgLimit},
+                data: {"cname": name, "initPage":"0", "pageLimit": pgLimit},
                 success: function (data) {
                     $('#tableCustomer').bootstrapTable('load', data);
                 }
