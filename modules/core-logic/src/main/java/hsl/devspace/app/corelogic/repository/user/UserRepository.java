@@ -14,6 +14,7 @@ import java.util.List;
  */
 public interface UserRepository {
 
+
     public int add(User user) throws SQLIntegrityConstraintViolationException, DuplicateKeyException;
 
     int delete(String username) throws SQLException;
@@ -68,9 +69,11 @@ public interface UserRepository {
     List<User> filterByDesignation(String designation, String status, int limit, int page);
 
     public List<User> filterByDepartmentDesig(String department, String designation, String status, int limit, int page);
+
     public List<User> filterByBranchDesigDep(String branch,String designation,String department, String status, int limit, int page);
 
     public List<User> filterByBranchDesig(String branch, String designation, String status, int limit, int page) ;
+
     public List<User> filterByBranchDep(String branch, String department, String status, int limit, int page);
 
     List<User> filterByBranch(String branch, String status, int limit, int page);
