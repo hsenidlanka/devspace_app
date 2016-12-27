@@ -106,9 +106,9 @@ public  class UserRepositoryImpl implements UserRepository {
         int status = 0;
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT status FROM customer WHERE BINARY username = ? AND BINARY password =sha1(?)", username, password);
         if (mp.size() != 0) {
-            if (mp.get(0).get("status").toString() == "active") {
+            if (mp.get(0).get("status").toString().equals("active")) {
                 status = 1;
-            } else if (mp.get(0).get("status").toString() == "inactive") {
+            } else if (mp.get(0).get("status").toString().equals("inactive")) {
                 status = 2;
             } else {
                 status = 3;
