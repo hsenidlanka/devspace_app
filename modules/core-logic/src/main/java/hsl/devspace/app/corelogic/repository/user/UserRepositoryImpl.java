@@ -662,4 +662,14 @@ public  class UserRepositoryImpl implements UserRepository {
         return 0;
     }
 
+    @Override
+    public int addVerificationCode(String username, String code) {
+        String sql = "INSERT INTO verification_code " +
+                "(customer_id,verification_code) VALUES ((SELECT id FROM customer WHERE username=?),?)";
+
+        int row = jdbcTemplate.update(sql, new Object[]{username, code});
+        return row;
+
+    }
+
 }

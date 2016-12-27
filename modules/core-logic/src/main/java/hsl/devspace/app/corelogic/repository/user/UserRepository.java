@@ -110,5 +110,7 @@ public interface UserRepository {
 
     int countByBranch(String branch, String status);
 
+    int addVerificationCode(String username, String code);
+
 
 }
