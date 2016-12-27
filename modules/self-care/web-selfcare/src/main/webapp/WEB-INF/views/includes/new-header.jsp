@@ -50,7 +50,7 @@
 
                     <li>
 
-                        <a id="loginBtn" class="form-group-sm" data-toggle="modal" data-target="#modal-login"><img
+                        <a id="loginBtn" class="form-group-sm" data-toggle="modal" data-target="#modal-login" data-backdrop="static"><img
                                 src="<c:url value="/resources/images/user2.png"/>" style=""></span> </a>
                     </li>
 
@@ -99,15 +99,7 @@
                                 </div>
                             </li>
                         </ul>
-                            <%--<div class="dropdown">
-                                <button class="btn btn-lg btn-link dropbtn" type="button" data-toggle="dropdown">${name}<span
-                                        class="caret"></span></button>
 
-                                <div class="dropdown-menu">
-                                    <a class="btn-lg" href="/web-selfcare/update-user"><fmt:message key="update.user.profile" bundle="${lang}"/></a>
-                                    <a class="btn-lg" href="/web-selfcare/logout"><fmt:message key="new.header.log.out" bundle="${lang}"/></a>
-                                </div>
-                            </div>--%>
                     </li>
                 </c:if>
             </ul>
@@ -123,83 +115,88 @@
 
 <!------------------------------login modal--------------------------->
 
-<div id="modal-login" class="modal-login modal fade">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
+<script>
+    (function ($) {
+        "use strict";
+        function centerModal() {
+            $(this).css('display', 'block');
+            var $dialog = $(this).find(".modal-dialog"),
+                    offset = ($(window).height() - $dialog.height()) / 2,
+                    bottomMargin = parseInt($dialog.css('marginBottom'), 10);
 
-            <div class="modal-header">
-                <div class="panel-heading" style="width: 87%">
+            // Make sure you don't hide the top part of the modal w/ a negative margin if it's longer than the screen height, and keep the margin equal to the bottom margin of the modal
+            if (offset < bottomMargin) offset = bottomMargin;
+            $dialog.css("margin-top", offset);
+        }
+
+        $(document).on('show.bs.modal', '.modal', centerModal);
+        $(window).on("resize", function () {
+            $('.modal:visible').each(centerModal);
+        });
+    }(jQuery));
+</script>
+
+<div class="container">
+
+    <!-- Modal -->
+    <div class="modal fade" id="modal-login" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+
+                <div class="panel-heading">
                     <div class="row">
                         <div class="col-sm-4">
-                            <p style="font-size: xx-large;text-align: left"><fmt:message key="new.header.login"
-                                                                                         bundle="${lang}"/></p>
+                            <img src="/web-selfcare/resources/images/logo.png" style="width:50px;height:50px;">
                         </div>
-                        <div class="col-sm-5"></div>
-                        <div class="col-sm-3">
-                            <button data-dismiss="modal" aria-hidden="true">&times;</button>
+
+                        <div class="col-sm-6">
+                            <h3 style="margin-top: 15px;">Please Log in</h3>
+                        </div>
+                        <div class="col-sm-2">
+                            <a type="button" class="btn" data-dismiss="modal" style="margin-top: 10px; margin-left: 35px"><i class="fa fa-window-close fa-2x" aria-hidden="true"></i></a>
                         </div>
                     </div>
                 </div>
 
-            </div>
+                <div class="modal-body" style="margin-top: 10px; margin-bottom: 10px">
+                    <div id="blockedUser">
 
-            <div class="modal-body" style="width: 87%">
-                <form name="loginForm" id="loginForm" novalidate="novalidate" action="3" method="post">
+                    </div>
+                    <br>
+                    <form>
+                        <div class="row">
+                            <div class="row">
+                                <label for="loginUsername" class="col-sm-4" style="text-align: left">Username</label>
+                                <input id="loginUsername" class="col-sm-8" name="loginUsername">
+                            </div>
 
+                            <div style="margin-top: 20px; margin-left: 200px" id="usernameError" class="error-labels"></div>
 
-                    <div class="row form-group">
-                        <div class="col-sm-2">
-                            <label class="control-label" for="loginUsername">Username</label>
                         </div>
-                        <div class="">
-                            <input id="loginUsername" style="width:60%;" class="col-sm-10" min="3" name="loginUsername"
-                                   required="" type="text" data-error-msg="Username required !!!">
+
+                        <div class="row">
+                            <label for="loginPassword" class="col-sm-4" style="text-align: left">Password</label>
+                            <input id="loginPassword" class="col-sm-8" name="loginPassword">
+                            <div style="margin-top: 45px; margin-left: 200px;" id="passwordError2" class="error-labels"></div>
                         </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-2"></div>
-                        <div id="usernameError" class="error-labels col-sm-10"></div>
-                        <%--<div class="col-sm-4"></div>--%>
-                    </div>
-
-                    <div class="row  form-group">
-                        <div class="col-sm-2"><label for="loginPassword">Password</label></div>
-                        <input id="loginPassword" style="width:60%;" name="loginPassword" class="col-sm-10" min="3"
-                               required="" data-error-msg="Please provide Valid password !!!" type="password">
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-2"></div>
-                        <div id="passwordError2" class="error-labels col-sm-10"></div>
-                        <%--<div class="col-sm-4"></div>--%>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-4"></div>
-                        <div class="col-sm-3">
-                            <button id="loginFormSubmit" name="loginFormSubmit" type="button"
-                                    class="btn btn-success"><fmt:message key="new.header.login" bundle="${lang}"/>
+                    </form>
+                </div>
+                <div class="modal-footer" style="margin-top: 5px;">
+                    <center>
+                        <div class="row">
+                            <button id="loginFormSubmit" name="loginFormSubmit" type="button" class="btn btn-success" data-dismiss="modal">
+                                <i class="fa fa-sign-in" aria-hidden="true"></i> Log in
                             </button>
                         </div>
-                        <div class="col-sm-6"></div>
-                    </div>
-                    <div class="row"><br></div>
-                    <div class="row">
-                        <div class="col-sm-10">
-                            <p align="center"><a href="#">Forget my password?</a></p>
-                        </div>
-                        <div class="col-sm-2"></div>
-                    </div>
-                </form>
-
-                <!-- end-account -->
-                <div class="clear"></div>
-
+                    </center>
+                </div>
             </div>
-            <!------------------------------signup modal --------------------------------------------->
+
         </div>
     </div>
+
 </div>
 
 
