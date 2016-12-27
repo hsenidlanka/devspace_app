@@ -17,7 +17,7 @@ import java.util.Map;
 /**
  * Created by hsenid on 7/4/16.
  */
-public  class UserRepositoryImpl implements UserRepository {
+public class UserRepositoryImpl implements UserRepository {
     User user = new User();
     private JdbcTemplate jdbcTemplate;
     private PlatformTransactionManager transactionManager;
@@ -40,10 +40,10 @@ public  class UserRepositoryImpl implements UserRepository {
         int row = 0;
         String un = user.getUsername();
         String pw = user.getPassword();
-        if (un != "" && pw != "") {
+        if (un != "" && pw != "" && un != null && pw != null) {
             // if (checkUsernameUnique(un)==true) {
             String sql = "INSERT INTO customer " +
-                    "(title,first_name,last_name,username,password,email,address_line1,address_line2,address_line3,mobile,registered_date,status) VALUES (?,?,?,?,sha1(?),?,?,?,?,?,CURRENT_DATE,1)";
+                    "(title,first_name,last_name,username,password,email,address_line1,address_line2,address_line3,mobile,registered_date,status) VALUES (?,?,?,?,sha1(?),?,?,?,?,?,CURRENT_DATE,3)";
 
             row = jdbcTemplate.update(sql, new Object[]{user.getTitle(), user.getFirstName(), user.getLastName(), user.getUsername(), user.getPassword(),
                     user.getEmail(), user.getAddressL1(), user.getAddressL2(), user.getAddressL3(), user.getMobile()});
@@ -74,11 +74,11 @@ public  class UserRepositoryImpl implements UserRepository {
     /*change password of a specific customer*/
     @Override
     public int changePassword(String username, String password, String nPw) {
-        int row=0;
+        int row = 0;
         user.setUsername(username);
         user.setPassword(password);
-        int verified = loginAuthenticate(username,password);
-        if (verified==1) {
+        int verified = loginAuthenticate(username, password);
+        if (verified == 1) {
             user.setPassword(nPw);
             System.out.println(user.getPassword());
 
@@ -96,32 +96,27 @@ public  class UserRepositoryImpl implements UserRepository {
 
     /**
      * authenticate username and password matched for a existing customer
-     blocked=2
-     credentials matched=1
-     mismatched=0
+     * blocked=2
+     * credentials matched=1
+     * mismatched=0
      */
     @Override
-    public int loginAuthenticate(String username,String password) {
-
-        int result ;
-        List<Map<String, Object>> mp1= jdbcTemplate.queryForList("SELECT status FROM customer WHERE BINARY username = ?",username);
-        if(mp1.size()!=0) {
-            log.info("{}", mp1.get(0).get("status"));
-            if (mp1.get(0).get("status").toString().equals("active")) {
-                List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE BINARY username = ? AND BINARY password =sha1(?)", username, password);
-                log.info("{}", mp);
-
-                if (mp.size() != 0) {
-                    log.info("{}", mp.get(0));
-                    result = 1;
-                } else result = 0;
-
-            } else result = 2;
-        }else result=0;
-        log.info("{}",result);
-
-        return result;
+    public int loginAuthenticate(String username, String password) {
+        int status = 0;
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT status FROM customer WHERE BINARY username = ? AND BINARY password =sha1(?)", username, password);
+        if (mp.size() != 0) {
+            if (mp.get(0).get("status").toString() == "active") {
+                status = 1;
+            } else if (mp.get(0).get("status").toString() == "inactive") {
+                status = 2;
+            } else {
+                status = 3;
+            }
+        }
+        log.info("{}", status);
+        return status;
     }
+
 
     /*change username and password for a customer*/
     @Override
@@ -130,6 +125,9 @@ public  class UserRepositoryImpl implements UserRepository {
         String sql = "UPDATE customer SET  first_name=?, last_name=? ,email=? ,address_line1=? ,address_line2=?, address_line3=?, mobile=? WHERE username = ? ";
         int count = jdbcTemplate.update(sql, new Object[]{user.getFirstName(), user.getLastName(), user.getEmail(), user.getAddressL1(), user.getAddressL2(), user.getAddressL3(), user.getMobile(), user.getUsername()});
         log.info("{}",count);
+        /*String sql = "UPDATE customer SET title=?, first_name=?, last_name=? ,email=? ,address_line1=? ,address_line2=?, address_line3=?, mobile=? WHERE username = ? ";
+        int count = jdbcTemplate.update(sql, new Object[]{user.getTitle(), user.getFirstName(), user.getLastName(), user.getEmail(), user.getAddressL1(), user.getAddressL2(), user.getAddressL3(), user.getMobile(), user.getUsername()});
+        log.info("{}", count);*/
         return count;
 
     }
@@ -140,7 +138,7 @@ public  class UserRepositoryImpl implements UserRepository {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE BINARY username = ?", username);
         User customer = new User();
 
-        for (int i=0;i<mp.size();i++){
+        for (int i = 0; i < mp.size(); i++) {
             customer.setId(Integer.parseInt(mp.get(i).get("id").toString()));
             customer.setTitle(mp.get(i).get("title").toString());
             customer.setFirstName(mp.get(i).get("first_name").toString());
@@ -150,7 +148,7 @@ public  class UserRepositoryImpl implements UserRepository {
             customer.setEmail(mp.get(i).get("email").toString());
             customer.setAddressL1(mp.get(i).get("address_line1").toString());
             customer.setAddressL2(mp.get(i).get("address_line2").toString());
-            if (mp.get(i).get("address_line3")!=null) {
+            if (mp.get(i).get("address_line3") != null) {
                 customer.setAddressL3(mp.get(i).get("address_line3").toString());
             }
             customer.setMobile(mp.get(i).get("mobile").toString());
@@ -158,9 +156,8 @@ public  class UserRepositoryImpl implements UserRepository {
             customer.setStatus(mp.get(i).get("status").toString());
 
 
-
         }
-        log.info("{}",customer);
+        log.info("{}", customer);
         return customer;
     }
 
@@ -168,9 +165,9 @@ public  class UserRepositoryImpl implements UserRepository {
     @Override
     public List<User> selectAll(int limit, int page) {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer LIMIT ? OFFSET ?", limit, page - 1);
-        List<User> customerDetails=new ArrayList<User>();
+        List<User> customerDetails = new ArrayList<User>();
 
-        for (int i=0;i<mp.size();i++){
+        for (int i = 0; i < mp.size(); i++) {
             User customer = new User();
             customer.setId(Integer.parseInt(mp.get(i).get("id").toString()));
             customer.setTitle(mp.get(i).get("title").toString());
@@ -181,7 +178,7 @@ public  class UserRepositoryImpl implements UserRepository {
             customer.setEmail(mp.get(i).get("email").toString());
             customer.setAddressL1(mp.get(i).get("address_line1").toString());
             customer.setAddressL2(mp.get(i).get("address_line2").toString());
-            if (mp.get(i).get("address_line3")!=null) {
+            if (mp.get(i).get("address_line3") != null) {
                 customer.setAddressL3(mp.get(i).get("address_line3").toString());
             }
             customer.setMobile(mp.get(i).get("mobile").toString());
@@ -192,7 +189,7 @@ public  class UserRepositoryImpl implements UserRepository {
 
 
         }
-        log.info("{}",customerDetails);
+        log.info("{}", customerDetails);
         return customerDetails;
     }
 
@@ -203,7 +200,7 @@ public  class UserRepositoryImpl implements UserRepository {
         user.setUsername(username);
         String sql = "UPDATE customer SET status=2 WHERE username = ?";
         int row = jdbcTemplate.update(sql, new Object[]{user.getUsername()});
-        log.info("{} block status",row);
+        log.info("{} block status", row);
         return row;
     }
 
@@ -214,13 +211,8 @@ public  class UserRepositoryImpl implements UserRepository {
         user.setUsername(username);
         String sql = "UPDATE customer SET status=1 WHERE username = ?";
         int row = jdbcTemplate.update(sql, new Object[]{user.getUsername()});
-        log.info("{} unblock status",row);
+        log.info("{} unblock status", row);
         return row;
-    }
-
-    @Override
-    public int updateGroupStaff(String des, String username) {
-        return 0;
     }
 
 
@@ -229,316 +221,6 @@ public  class UserRepositoryImpl implements UserRepository {
     public List<User> retrieveCustomersByDate(java.sql.Date date, int limit, int page) {
 
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE registered_date = ? LIMIT ? OFFSET ?", date, limit, page - 1);
-        List<User> customerDetails=new ArrayList<User>();
-
-        for (int i=0;i<mp.size();i++){
-            User customer = new User();
-            customer.setId(Integer.parseInt(mp.get(i).get("id").toString()));
-            customer.setTitle(mp.get(i).get("title").toString());
-            customer.setFirstName(mp.get(i).get("first_name").toString());
-            customer.setLastName(mp.get(i).get("last_name").toString());
-            customer.setUsername(mp.get(i).get("username").toString());
-            customer.setPassword(mp.get(i).get("password").toString());
-            customer.setEmail(mp.get(i).get("email").toString());
-            customer.setAddressL1(mp.get(i).get("address_line1").toString());
-            customer.setAddressL2(mp.get(i).get("address_line2").toString());
-            if (mp.get(i).get("address_line3")!=null) {
-                customer.setAddressL3(mp.get(i).get("address_line3").toString());
-            }
-            customer.setMobile(mp.get(i).get("mobile").toString());
-            customer.setRegDate(Date.valueOf(mp.get(i).get("registered_date").toString()));
-            customer.setStatus(mp.get(i).get("status").toString());
-
-            customerDetails.add(customer);
-
-
-        }
-        log.info("{}",customerDetails);
-        return customerDetails;
-    }
-
-    /*retrieve details of customer registered between a specified date range*/
-    @Override
-    public List<User> retrieveByDateRange(Date date1, Date date2, int limit, int page) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE registered_date BETWEEN ? AND ? AND status='active' LIMIT ? OFFSET ?", date1, date2, limit, page);
-        List<User> customerDetails=new ArrayList<User>();
-
-        for (int i=0;i<mp.size();i++){
-            User customer = new User();
-            customer.setId(Integer.parseInt(mp.get(i).get("id").toString()));
-            customer.setTitle(mp.get(i).get("title").toString());
-            customer.setFirstName(mp.get(i).get("first_name").toString());
-            customer.setLastName(mp.get(i).get("last_name").toString());
-            customer.setUsername(mp.get(i).get("username").toString());
-            customer.setPassword(mp.get(i).get("password").toString());
-            customer.setEmail(mp.get(i).get("email").toString());
-            customer.setAddressL1(mp.get(i).get("address_line1").toString());
-            customer.setAddressL2(mp.get(i).get("address_line2").toString());
-            if (mp.get(i).get("address_line3")!=null) {
-                customer.setAddressL3(mp.get(i).get("address_line3").toString());
-            }
-            customer.setMobile(mp.get(i).get("mobile").toString());
-            customer.setRegDate(Date.valueOf(mp.get(i).get("registered_date").toString()));
-            customer.setStatus(mp.get(i).get("status").toString());
-
-            customerDetails.add(customer);
-
-
-        }
-        log.info("{}",customerDetails);
-        return customerDetails;
-    }
-
-    /*retrieve details of customers by a given attribute*/
-    @Override
-    public List<User> filterByCity(String city, String status, int limit, int page) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE address_line3 = ? AND status= ? LIMIT ? OFFSET ?", city, status, limit, page);
-        List<User> customerDetails=new ArrayList<User>();
-
-        for (int i=0;i<mp.size();i++){
-            User customer = new User();
-            customer.setId(Integer.parseInt(mp.get(i).get("id").toString()));
-            customer.setTitle(mp.get(i).get("title").toString());
-            customer.setFirstName(mp.get(i).get("first_name").toString());
-            customer.setLastName(mp.get(i).get("last_name").toString());
-            customer.setUsername(mp.get(i).get("username").toString());
-            customer.setPassword(mp.get(i).get("password").toString());
-            customer.setEmail(mp.get(i).get("email").toString());
-            customer.setAddressL1(mp.get(i).get("address_line1").toString());
-            customer.setAddressL2(mp.get(i).get("address_line2").toString());
-            if (mp.get(i).get("address_line3")!=null) {
-                customer.setAddressL3(mp.get(i).get("address_line3").toString());
-            }
-            customer.setMobile(mp.get(i).get("mobile").toString());
-            customer.setRegDate(Date.valueOf(mp.get(i).get("registered_date").toString()));
-            customer.setStatus(mp.get(i).get("status").toString());
-
-            customerDetails.add(customer);
-
-
-        }
-        log.info("{}",customerDetails);
-        return customerDetails;
-
-    }
-
-    /*retrieve total no.of customers*/
-    @Override
-    public int countUsers(String status) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE status= ?",status);
-        int count = mp.size();
-        log.info("{}",count);
-        return count;
-    }
-
-    @Override
-    public boolean checkUsernameUnique(User user) {
-
-        boolean result = true;
-
-        String sql = "SELECT count(*) FROM customer WHERE  username = ?  ";
-
-        int count = jdbcTemplate.queryForObject(
-                sql, new Object[]{user.getUsername()}, Integer.class);
-
-        if (count > 0) {
-            result = false;
-            log.info("username already available");
-        }
-        log.info("{}",result);
-        return result;
-    }
-
-    @Override
-    public List<User> selectActiveUsers(int limit, int page) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE status=1 LIMIT ? OFFSET ?", limit, page);
-        List<User> customerDetails=new ArrayList<User>();
-
-        for (int i=0;i<mp.size();i++){
-            User customer = new User();
-            customer.setId(Integer.parseInt(mp.get(i).get("id").toString()));
-            customer.setTitle(mp.get(i).get("title").toString());
-            customer.setFirstName(mp.get(i).get("first_name").toString());
-            customer.setLastName(mp.get(i).get("last_name").toString());
-            customer.setUsername(mp.get(i).get("username").toString());
-            customer.setPassword(mp.get(i).get("password").toString());
-            customer.setEmail(mp.get(i).get("email").toString());
-            customer.setAddressL1(mp.get(i).get("address_line1").toString());
-            customer.setAddressL2(mp.get(i).get("address_line2").toString());
-            if (mp.get(i).get("address_line3")!=null) {
-                customer.setAddressL3(mp.get(i).get("address_line3").toString());
-            }
-            customer.setMobile(mp.get(i).get("mobile").toString());
-            customer.setRegDate(Date.valueOf(mp.get(i).get("registered_date").toString()));
-            customer.setStatus(mp.get(i).get("status").toString());
-
-            customerDetails.add(customer);
-
-
-        }
-        log.info("{}",customerDetails);
-        return customerDetails;
-    }
-
-    @Override
-    public List<User> selectBlockedUsers(int limit, int page) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE status=2 LIMIT ? OFFSET ?", limit, page);
-        List<User> customerDetails=new ArrayList<User>();
-
-        for (int i=0;i<mp.size();i++){
-            User customer = new User();
-            customer.setId(Integer.parseInt(mp.get(i).get("id").toString()));
-            customer.setTitle(mp.get(i).get("title").toString());
-            customer.setFirstName(mp.get(i).get("first_name").toString());
-            customer.setLastName(mp.get(i).get("last_name").toString());
-            customer.setUsername(mp.get(i).get("username").toString());
-            customer.setPassword(mp.get(i).get("password").toString());
-            customer.setEmail(mp.get(i).get("email").toString());
-            customer.setAddressL1(mp.get(i).get("address_line1").toString());
-            customer.setAddressL2(mp.get(i).get("address_line2").toString());
-            if (mp.get(i).get("address_line3")!=null) {
-                customer.setAddressL3(mp.get(i).get("address_line3").toString());
-            }
-            customer.setMobile(mp.get(i).get("mobile").toString());
-            customer.setRegDate(Date.valueOf(mp.get(i).get("registered_date").toString()));
-            customer.setStatus(mp.get(i).get("status").toString());
-
-            customerDetails.add(customer);
-        }
-        log.info("{}",customerDetails);
-        return customerDetails;
-    }
-
-    @Override
-    public int addStaffMember(User user) {
-        return 0;
-    }
-
-    @Override
-    public int deleteStaff(String username) {
-        return 0;
-    }
-
-    @Override
-    public int updateStaffMember(User user) {
-        return 0;
-    }
-
-
-    @Override
-    public List<User> selectbyEndingDate(Date date, int limit, int page) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE registered_date <= ? AND status='active' LIMIT ? OFFSET ?", date, limit, page);
-        List<User> customerDetails=new ArrayList<User>();
-
-        for (int i=0;i<mp.size();i++){
-            User customer = new User();
-            customer.setId(Integer.parseInt(mp.get(i).get("id").toString()));
-            customer.setTitle(mp.get(i).get("title").toString());
-            customer.setFirstName(mp.get(i).get("first_name").toString());
-            customer.setLastName(mp.get(i).get("last_name").toString());
-            customer.setUsername(mp.get(i).get("username").toString());
-            customer.setPassword(mp.get(i).get("password").toString());
-            customer.setEmail(mp.get(i).get("email").toString());
-            customer.setAddressL1(mp.get(i).get("address_line1").toString());
-            customer.setAddressL2(mp.get(i).get("address_line2").toString());
-            if (mp.get(i).get("address_line3")!=null) {
-                customer.setAddressL3(mp.get(i).get("address_line3").toString());
-            }
-            customer.setMobile(mp.get(i).get("mobile").toString());
-            customer.setRegDate(Date.valueOf(mp.get(i).get("registered_date").toString()));
-            customer.setStatus(mp.get(i).get("status").toString());
-
-            customerDetails.add(customer);
-        }
-        log.info("{}",customerDetails);
-        return customerDetails;    }
-
-    @Override
-    public List<User> selectbyStartingDate(Date date, int limit, int page) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE registered_date >= ? AND status='active' LIMIT ? OFFSET ?", date, limit, page - 1);
-        List<User> customerDetails=new ArrayList<User>();
-
-        for (int i=0;i<mp.size();i++){
-            User customer = new User();
-            customer.setId(Integer.parseInt(mp.get(i).get("id").toString()));
-            customer.setTitle(mp.get(i).get("title").toString());
-            customer.setFirstName(mp.get(i).get("first_name").toString());
-            customer.setLastName(mp.get(i).get("last_name").toString());
-            customer.setUsername(mp.get(i).get("username").toString());
-            customer.setPassword(mp.get(i).get("password").toString());
-            customer.setEmail(mp.get(i).get("email").toString());
-            customer.setAddressL1(mp.get(i).get("address_line1").toString());
-            customer.setAddressL2(mp.get(i).get("address_line2").toString());
-            if (mp.get(i).get("address_line3")!=null) {
-                customer.setAddressL3(mp.get(i).get("address_line3").toString());
-            }
-            customer.setMobile(mp.get(i).get("mobile").toString());
-            customer.setRegDate(Date.valueOf(mp.get(i).get("registered_date").toString()));
-            customer.setStatus(mp.get(i).get("status").toString());
-
-            customerDetails.add(customer);
-
-
-        }
-        log.info("{}",customerDetails);
-        return customerDetails;
-    }
-
-    @Override
-    public List<User> filterByDepartment(String department, String status, int llimit, int page) {
-        return null;
-    }
-
-    @Override
-    public List<User> filterByDesignation(String designation, String status, int llimit, int page) {
-        return null;
-    }
-
-    @Override
-    public List<User> filterByDepartmentDesig(String department, String designation, String status, int llimit, int page) {
-        return null;
-    }
-
-    @Override
-    public List<User> filterByBranch(String branch, String status, int llimit, int page) {
-        return null;
-    }
-
-    @Override
-    public List<User> filterBlockedUsersByCity(String city, int limit, int page) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE address_line3= ? AND status=2 LIMIT ? OFFSET ?", city, limit, page - 1);
-        List<User> customerDetails=new ArrayList<User>();
-
-        for (int i=0;i<mp.size();i++){
-            User customer = new User();
-            customer.setId(Integer.parseInt(mp.get(i).get("id").toString()));
-            customer.setTitle(mp.get(i).get("title").toString());
-            customer.setFirstName(mp.get(i).get("first_name").toString());
-            customer.setLastName(mp.get(i).get("last_name").toString());
-            customer.setUsername(mp.get(i).get("username").toString());
-            customer.setPassword(mp.get(i).get("password").toString());
-            customer.setEmail(mp.get(i).get("email").toString());
-            customer.setAddressL1(mp.get(i).get("address_line1").toString());
-            customer.setAddressL2(mp.get(i).get("address_line2").toString());
-            if (mp.get(i).get("address_line3")!=null) {
-                customer.setAddressL3(mp.get(i).get("address_line3").toString());
-            }
-            customer.setMobile(mp.get(i).get("mobile").toString());
-            customer.setRegDate(Date.valueOf(mp.get(i).get("registered_date").toString()));
-            customer.setStatus(mp.get(i).get("status").toString());
-
-            customerDetails.add(customer);
-
-
-        }
-        log.info("{}",customerDetails);
-        return customerDetails;
-    }
-
-    @Override
-    public List<User> selectAllByNameTypeAhead(String nameKey, String status, int limit, int page) {
-        String key = "%" + nameKey + "%";
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE username LIKE ? AND status = ? LIMIT ? OFFSET ?", key, status, limit, page );
         List<User> customerDetails = new ArrayList<User>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -568,6 +250,339 @@ public  class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    public int countByDate(Date date) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT(*) AS count FROM customer WHERE registered_date = ?", date);
+        return Integer.parseInt(mp.get(0).get("count").toString());
+
+    }
+
+    /*retrieve details of customer registered between a specified date range*/
+    @Override
+    public List<User> retrieveByDateRange(Date date1, Date date2, int limit, int page) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE registered_date BETWEEN ? AND ? AND status='active' LIMIT ? OFFSET ?", date1, date2, limit, page);
+        List<User> customerDetails = new ArrayList<User>();
+
+        for (int i = 0; i < mp.size(); i++) {
+            User customer = new User();
+            customer.setId(Integer.parseInt(mp.get(i).get("id").toString()));
+            customer.setTitle(mp.get(i).get("title").toString());
+            customer.setFirstName(mp.get(i).get("first_name").toString());
+            customer.setLastName(mp.get(i).get("last_name").toString());
+            customer.setUsername(mp.get(i).get("username").toString());
+            customer.setPassword(mp.get(i).get("password").toString());
+            customer.setEmail(mp.get(i).get("email").toString());
+            customer.setAddressL1(mp.get(i).get("address_line1").toString());
+            customer.setAddressL2(mp.get(i).get("address_line2").toString());
+            if (mp.get(i).get("address_line3") != null) {
+                customer.setAddressL3(mp.get(i).get("address_line3").toString());
+            }
+            customer.setMobile(mp.get(i).get("mobile").toString());
+            customer.setRegDate(Date.valueOf(mp.get(i).get("registered_date").toString()));
+            customer.setStatus(mp.get(i).get("status").toString());
+
+            customerDetails.add(customer);
+
+
+        }
+        log.info("{}", customerDetails);
+        return customerDetails;
+    }
+
+    @Override
+    public int countByDateRange(Date date1, Date date2) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT(*) AS count FROM customer WHERE registered_date BETWEEN ? AND ? AND status='active'", date1, date2);
+        return Integer.parseInt(mp.get(0).get("count").toString());
+
+    }
+
+    /*retrieve details of customers by a given attribute*/
+    @Override
+    public List<User> filterByCity(String city, String status, int limit, int page) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE address_line3 = ? AND status= ? LIMIT ? OFFSET ?", city, status, limit, page);
+        List<User> customerDetails = new ArrayList<User>();
+
+        for (int i = 0; i < mp.size(); i++) {
+            User customer = new User();
+            customer.setId(Integer.parseInt(mp.get(i).get("id").toString()));
+            customer.setTitle(mp.get(i).get("title").toString());
+            customer.setFirstName(mp.get(i).get("first_name").toString());
+            customer.setLastName(mp.get(i).get("last_name").toString());
+            customer.setUsername(mp.get(i).get("username").toString());
+            customer.setPassword(mp.get(i).get("password").toString());
+            customer.setEmail(mp.get(i).get("email").toString());
+            customer.setAddressL1(mp.get(i).get("address_line1").toString());
+            customer.setAddressL2(mp.get(i).get("address_line2").toString());
+            if (mp.get(i).get("address_line3") != null) {
+                customer.setAddressL3(mp.get(i).get("address_line3").toString());
+            }
+            customer.setMobile(mp.get(i).get("mobile").toString());
+            customer.setRegDate(Date.valueOf(mp.get(i).get("registered_date").toString()));
+            customer.setStatus(mp.get(i).get("status").toString());
+
+            customerDetails.add(customer);
+
+
+        }
+        log.info("{}", customerDetails);
+        return customerDetails;
+
+    }
+
+    @Override
+    public int countByCity(String city, String status) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT(*) AS count FROM customer WHERE address_line3 = ? AND status= ?", city, status);
+        return Integer.parseInt(mp.get(0).get("count").toString());
+    }
+
+    /*retrieve total no.of customers*/
+    @Override
+    public int countUsers(String status) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT(*) AS count FROM customer WHERE status= ?", status);
+        return Integer.parseInt(mp.get(0).get("count").toString());
+
+    }
+
+    @Override
+    public boolean checkUsernameUnique(User user) {
+
+        boolean result = true;
+
+        String sql = "SELECT count(*) FROM customer WHERE  username = ?  ";
+
+        int count = jdbcTemplate.queryForObject(
+                sql, new Object[]{user.getUsername()}, Integer.class);
+
+        if (count > 0) {
+            result = false;
+            log.info("username already available");
+        }
+        log.info("{}", result);
+        return result;
+    }
+
+    @Override
+    public List<User> selectActiveUsers(int limit, int page) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE status=1 LIMIT ? OFFSET ?", limit, page);
+        List<User> customerDetails = new ArrayList<User>();
+
+        for (int i = 0; i < mp.size(); i++) {
+            User customer = new User();
+            customer.setId(Integer.parseInt(mp.get(i).get("id").toString()));
+            customer.setTitle(mp.get(i).get("title").toString());
+            customer.setFirstName(mp.get(i).get("first_name").toString());
+            customer.setLastName(mp.get(i).get("last_name").toString());
+            customer.setUsername(mp.get(i).get("username").toString());
+            customer.setPassword(mp.get(i).get("password").toString());
+            customer.setEmail(mp.get(i).get("email").toString());
+            customer.setAddressL1(mp.get(i).get("address_line1").toString());
+            customer.setAddressL2(mp.get(i).get("address_line2").toString());
+            if (mp.get(i).get("address_line3") != null) {
+                customer.setAddressL3(mp.get(i).get("address_line3").toString());
+            }
+            customer.setMobile(mp.get(i).get("mobile").toString());
+            customer.setRegDate(Date.valueOf(mp.get(i).get("registered_date").toString()));
+            customer.setStatus(mp.get(i).get("status").toString());
+
+            customerDetails.add(customer);
+
+
+        }
+        log.info("{}", customerDetails);
+        return customerDetails;
+    }
+
+    @Override
+    public int countActiveUsers() {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT(*) AS count FROM customer WHERE status=1 ");
+        return Integer.parseInt(mp.get(0).get("count").toString());
+
+    }
+
+    @Override
+    public List<User> selectBlockedUsers(int limit, int page) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE status=2 LIMIT ? OFFSET ?", limit, page);
+        List<User> customerDetails = new ArrayList<User>();
+
+        for (int i = 0; i < mp.size(); i++) {
+            User customer = new User();
+            customer.setId(Integer.parseInt(mp.get(i).get("id").toString()));
+            customer.setTitle(mp.get(i).get("title").toString());
+            customer.setFirstName(mp.get(i).get("first_name").toString());
+            customer.setLastName(mp.get(i).get("last_name").toString());
+            customer.setUsername(mp.get(i).get("username").toString());
+            customer.setPassword(mp.get(i).get("password").toString());
+            customer.setEmail(mp.get(i).get("email").toString());
+            customer.setAddressL1(mp.get(i).get("address_line1").toString());
+            customer.setAddressL2(mp.get(i).get("address_line2").toString());
+            if (mp.get(i).get("address_line3") != null) {
+                customer.setAddressL3(mp.get(i).get("address_line3").toString());
+            }
+            customer.setMobile(mp.get(i).get("mobile").toString());
+            customer.setRegDate(Date.valueOf(mp.get(i).get("registered_date").toString()));
+            customer.setStatus(mp.get(i).get("status").toString());
+
+            customerDetails.add(customer);
+        }
+        log.info("{}", customerDetails);
+        return customerDetails;
+    }
+
+    @Override
+    public int countBlockedUsers() {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT(*) AS count FROM customer WHERE status=2 ");
+        return Integer.parseInt(mp.get(0).get("count").toString());
+    }
+
+    @Override
+    public List<User> selectbyEndingDate(Date date, int limit, int page) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE registered_date <= ? AND status='active' LIMIT ? OFFSET ?", date, limit, page);
+        List<User> customerDetails = new ArrayList<User>();
+
+        for (int i = 0; i < mp.size(); i++) {
+            User customer = new User();
+            customer.setId(Integer.parseInt(mp.get(i).get("id").toString()));
+            customer.setTitle(mp.get(i).get("title").toString());
+            customer.setFirstName(mp.get(i).get("first_name").toString());
+            customer.setLastName(mp.get(i).get("last_name").toString());
+            customer.setUsername(mp.get(i).get("username").toString());
+            customer.setPassword(mp.get(i).get("password").toString());
+            customer.setEmail(mp.get(i).get("email").toString());
+            customer.setAddressL1(mp.get(i).get("address_line1").toString());
+            customer.setAddressL2(mp.get(i).get("address_line2").toString());
+            if (mp.get(i).get("address_line3") != null) {
+                customer.setAddressL3(mp.get(i).get("address_line3").toString());
+            }
+            customer.setMobile(mp.get(i).get("mobile").toString());
+            customer.setRegDate(Date.valueOf(mp.get(i).get("registered_date").toString()));
+            customer.setStatus(mp.get(i).get("status").toString());
+
+            customerDetails.add(customer);
+        }
+        log.info("{}", customerDetails);
+        return customerDetails;
+    }
+
+    @Override
+    public int countByEndingDate(Date date) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT(*) AS count FROM customer WHERE registered_date <= ? AND status='active'", date);
+        return Integer.parseInt(mp.get(0).get("count").toString());
+    }
+
+    @Override
+    public List<User> selectbyStartingDate(Date date, int limit, int page) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE registered_date >= ? AND status='active' LIMIT ? OFFSET ?", date, limit, page - 1);
+        List<User> customerDetails = new ArrayList<User>();
+
+        for (int i = 0; i < mp.size(); i++) {
+            User customer = new User();
+            customer.setId(Integer.parseInt(mp.get(i).get("id").toString()));
+            customer.setTitle(mp.get(i).get("title").toString());
+            customer.setFirstName(mp.get(i).get("first_name").toString());
+            customer.setLastName(mp.get(i).get("last_name").toString());
+            customer.setUsername(mp.get(i).get("username").toString());
+            customer.setPassword(mp.get(i).get("password").toString());
+            customer.setEmail(mp.get(i).get("email").toString());
+            customer.setAddressL1(mp.get(i).get("address_line1").toString());
+            customer.setAddressL2(mp.get(i).get("address_line2").toString());
+            if (mp.get(i).get("address_line3") != null) {
+                customer.setAddressL3(mp.get(i).get("address_line3").toString());
+            }
+            customer.setMobile(mp.get(i).get("mobile").toString());
+            customer.setRegDate(Date.valueOf(mp.get(i).get("registered_date").toString()));
+            customer.setStatus(mp.get(i).get("status").toString());
+
+            customerDetails.add(customer);
+
+
+        }
+        log.info("{}", customerDetails);
+        return customerDetails;
+    }
+
+    @Override
+    public int countByStartingDate(Date date) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT(*) AS count FROM customer WHERE registered_date >= ? AND status='active'", date);
+        return Integer.parseInt(mp.get(0).get("count").toString());
+    }
+
+    @Override
+    public List<User> filterBlockedUsersByCity(String city, int limit, int page) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE address_line3= ? AND status=2 LIMIT ? OFFSET ?", city, limit, page - 1);
+        List<User> customerDetails = new ArrayList<User>();
+
+        for (int i = 0; i < mp.size(); i++) {
+            User customer = new User();
+            customer.setId(Integer.parseInt(mp.get(i).get("id").toString()));
+            customer.setTitle(mp.get(i).get("title").toString());
+            customer.setFirstName(mp.get(i).get("first_name").toString());
+            customer.setLastName(mp.get(i).get("last_name").toString());
+            customer.setUsername(mp.get(i).get("username").toString());
+            customer.setPassword(mp.get(i).get("password").toString());
+            customer.setEmail(mp.get(i).get("email").toString());
+            customer.setAddressL1(mp.get(i).get("address_line1").toString());
+            customer.setAddressL2(mp.get(i).get("address_line2").toString());
+            if (mp.get(i).get("address_line3") != null) {
+                customer.setAddressL3(mp.get(i).get("address_line3").toString());
+            }
+            customer.setMobile(mp.get(i).get("mobile").toString());
+            customer.setRegDate(Date.valueOf(mp.get(i).get("registered_date").toString()));
+            customer.setStatus(mp.get(i).get("status").toString());
+
+            customerDetails.add(customer);
+
+
+        }
+        log.info("{}", customerDetails);
+        return customerDetails;
+    }
+
+    @Override
+    public int countBlockedUsersByCity(String city) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT(*) AS count FROM customer WHERE address_line3= ? AND status=2", city);
+        return Integer.parseInt(mp.get(0).get("count").toString());
+    }
+
+
+    @Override
+    public List<User> selectAllByNameTypeAhead(String nameKey, String status, int limit, int page) {
+        String key = "%" + nameKey + "%";
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE username LIKE ? AND status = ? LIMIT ? OFFSET ?", key, status, limit, page);
+        List<User> customerDetails = new ArrayList<User>();
+
+        for (int i = 0; i < mp.size(); i++) {
+            User customer = new User();
+            customer.setId(Integer.parseInt(mp.get(i).get("id").toString()));
+            customer.setTitle(mp.get(i).get("title").toString());
+            customer.setFirstName(mp.get(i).get("first_name").toString());
+            customer.setLastName(mp.get(i).get("last_name").toString());
+            customer.setUsername(mp.get(i).get("username").toString());
+            customer.setPassword(mp.get(i).get("password").toString());
+            customer.setEmail(mp.get(i).get("email").toString());
+            customer.setAddressL1(mp.get(i).get("address_line1").toString());
+            customer.setAddressL2(mp.get(i).get("address_line2").toString());
+            if (mp.get(i).get("address_line3") != null) {
+                customer.setAddressL3(mp.get(i).get("address_line3").toString());
+            }
+            customer.setMobile(mp.get(i).get("mobile").toString());
+            customer.setRegDate(Date.valueOf(mp.get(i).get("registered_date").toString()));
+            customer.setStatus(mp.get(i).get("status").toString());
+
+            customerDetails.add(customer);
+
+
+        }
+        log.info("{}", customerDetails);
+        return customerDetails;
+    }
+
+    public int countAllByNameTypeAhead(String nameKey, String status) {
+        String key = "%" + nameKey + "%";
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT(*) AS count FROM customer WHERE username LIKE ? AND status = ? ", key, status);
+        return Integer.parseInt(mp.get(0).get("count").toString());
+
+    }
+
+    @Override
     public List<String> selectNameByNameTypeAhead(String nameKey, String status) {
         String key = "%" + nameKey + "%";
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT username FROM customer WHERE username LIKE ? AND status = ? ", key, status);
@@ -582,5 +597,66 @@ public  class UserRepositoryImpl implements UserRepository {
         log.info("{}", customerDetails);
         return customerDetails;
     }
+
+    @Override
+    public int updateGroupStaff(String des, String username) {
+        return 0;
+    }
+
+    @Override
+    public int addStaffMember(User user) {
+        return 0;
+    }
+
+    @Override
+    public int deleteStaff(String username) {
+        return 0;
+    }
+
+    @Override
+    public int updateStaffMember(User user) {
+        return 0;
+    }
+
+    @Override
+    public List<User> filterByDepartment(String department, String status, int llimit, int page) {
+        return null;
+    }
+
+    @Override
+    public List<User> filterByDesignation(String designation, String status, int llimit, int page) {
+        return null;
+    }
+
+    @Override
+    public List<User> filterByDepartmentDesig(String department, String designation, String status, int llimit, int page) {
+        return null;
+    }
+
+    @Override
+    public List<User> filterByBranch(String branch, String status, int llimit, int page) {
+        return null;
+    }
+
+    @Override
+    public int countByDesignation(String designation, String status) {
+        return 0;
+    }
+
+    @Override
+    public int countByDepartment(String department, String status) {
+        return 0;
+    }
+
+    @Override
+    public int countByDepartmentDesig(String department, String designation, String status) {
+        return 0;
+    }
+
+    @Override
+    public int countByBranch(String branch, String status) {
+        return 0;
+    }
+
 
 }

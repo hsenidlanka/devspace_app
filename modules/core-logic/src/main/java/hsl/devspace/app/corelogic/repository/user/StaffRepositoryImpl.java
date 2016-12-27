@@ -125,7 +125,7 @@ public class StaffRepositoryImpl implements UserRepository {
     @Override
     public int changePassword(String username, String password, String nPw) {
 
-        int row=0;
+        int row = 0;
         user.setUsername(username);
         user.setPassword(password);
         int verified = loginAuthenticate(username, password);
@@ -405,49 +405,11 @@ public class StaffRepositoryImpl implements UserRepository {
         return staffDetails;
     }
 
-    @Override
-    public List<User> filterByCity(String city, String status, int limit, int page) {
-        return null;
-    }
-
-    /*retrieve details of staff members filtered by a given attribute*/
-/*    @Override
-    public List<User> filterByCity(String city) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE address_line3 = ? AND status='active'",city);
-        List<User> staffDetails = new ArrayList<User>();
-        for (int i = 0; i < mp.size(); i++) {
-            User staff = new User();
-            staff.setId(Integer.parseInt(mp.get(i).get("id").toString()));
-            staff.setTitle(mp.get(i).get("title").toString());
-            staff.setUsername(mp.get(i).get("username").toString());
-            staff.setPassword(mp.get(i).get("password").toString());
-            staff.setFirstName(mp.get(i).get("first_name").toString());
-            staff.setLastName(mp.get(i).get("last_name").toString());
-            staff.setEmail(mp.get(i).get("email").toString());
-            staff.setMobile(mp.get(i).get("mobile").toString());
-            staff.setAddressL1(mp.get(i).get("address_line1").toString());
-            staff.setAddressL2(mp.get(i).get("address_line2").toString());
-            if (mp.get(i).get("address_line3") != null) {
-                staff.setAddressL3(mp.get(i).get("address_line3").toString());
-            }
-            staff.setDesignation(mp.get(i).get("designation").toString());
-            staff.setDepartment(mp.get(i).get("department").toString());
-            staff.setBranch(mp.get(i).get("branch").toString());
-            staff.setRegDate(Date.valueOf(mp.get(i).get("register_date").toString()));
-            staff.setStatus(mp.get(i).get("status").toString());
-            staffDetails.add(staff);
-        }
-        log.info("{}", staffDetails);
-        return staffDetails;
-    }*/
-
     /*retrieve the total no.of staff members*/
     @Override
-    public int countUsers(String  status) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE status=?",status);
-        int count = mp.size();
-        log.info("{}", count);
-        return count;
+    public int countUsers(String status) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT(*) AS count FROM staff WHERE status=?", status);
+        return Integer.parseInt(mp.get(0).get("count").toString());
     }
 
     /*check username availability*/
@@ -611,6 +573,7 @@ public class StaffRepositoryImpl implements UserRepository {
         return j;
 
     }
+
     public List<User> selectbyStartingDate(Date date, int limit, int page) {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE register_date >= ? AND status=1 LIMIT ? OFFSET ?", date, limit, page - 1);
         List<User> staffDetails = new ArrayList<User>();
@@ -837,6 +800,88 @@ public class StaffRepositoryImpl implements UserRepository {
         return staffDetails;
     }
 
+    @Override
+    public int countByDate(Date date) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT(*) AS count FROM staff WHERE register_date = ? LIMIT ? OFFSET ?", date);
+        return Integer.parseInt(mp.get(0).get("count").toString());
+    }
+
+    @Override
+    public int countByDateRange(Date date1, Date date2) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT (*) AS count FROM staff WHERE register_date BETWEEN ? AND ? AND status='active'", date1, date2);
+        return Integer.parseInt(mp.get(0).get("count").toString());
+    }
+
+    @Override
+    public int countActiveUsers() {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT(*) AS count FROM staff WHERE status=1 ");
+        return Integer.parseInt(mp.get(0).get("count").toString());
+    }
+
+    @Override
+    public int countBlockedUsers() {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT(*) AS count FROM staff WHERE status=2 ");
+        return Integer.parseInt(mp.get(0).get("count").toString());
+    }
+
+    @Override
+    public int countByEndingDate(Date date) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT(*) AS count FROM staff WHERE register_date <= ? AND status=1", date);
+        return Integer.parseInt(mp.get(0).get("count").toString());
+    }
+
+    @Override
+    public int countByStartingDate(Date date) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT(*) AS count FROM staff WHERE register_date >= ? AND status=1 ", date);
+        return Integer.parseInt(mp.get(0).get("count").toString());
+    }
+
+    @Override
+    public int countBlockedUsersByCity(String city) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT(*) AS count FROM staff WHERE address_line3 = ? AND status=2 ", city);
+        return Integer.parseInt(mp.get(0).get("count").toString());
+    }
+
+    @Override
+    public int countAllByNameTypeAhead(String nameKey, String status) {
+        String key = "%" + nameKey + "%";
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT(*) AS count FROM staff WHERE username LIKE ? AND status= ?", key, status);
+        return Integer.parseInt(mp.get(0).get("count").toString());
+    }
+
+    @Override
+    public int countByDesignation(String designation, String status) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT(*) AS count FROM staff WHERE designation = ? AND status=?", designation, status);
+        return Integer.parseInt(mp.get(0).get("count").toString());
+    }
+
+    @Override
+    public int countByDepartment(String department, String status) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT(*) AS count  FROM staff WHERE department = ? AND status=?", department, status);
+        return Integer.parseInt(mp.get(0).get("count").toString());
+    }
+
+    @Override
+    public int countByDepartmentDesig(String department, String designation, String status) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT(*) AS count FROM staff WHERE department = ? AND status=? AND designation = ?", department, status, designation);
+        return Integer.parseInt(mp.get(0).get("count").toString());
+    }
+
+    @Override
+    public int countByBranch(String branch, String status) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT(*) AS count FROM staff WHERE branch = ? AND status=?", branch, status);
+        return Integer.parseInt(mp.get(0).get("count").toString());
+    }
+
+    @Override
+    public int countByCity(String city, String status) {
+        return 0;
+    }
+
+    @Override
+    public List<User> filterByCity(String city, String status, int limit, int page) {
+        return null;
+    }
 
 
 }
