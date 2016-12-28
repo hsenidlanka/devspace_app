@@ -74,7 +74,7 @@
         </div>
 
 
-        <div style="margin-top: 50px; margin-bottom: 30px" class="row">
+        <div style="margin-top: 65px; margin-bottom: 15px" class="row">
             <div class="col-sm-2"></div>
             <div class="col-sm-8">
 

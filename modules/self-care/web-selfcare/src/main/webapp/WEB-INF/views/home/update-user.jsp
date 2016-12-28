@@ -81,11 +81,11 @@
                 <center>
                     <div class="updatesuccess">${updatedMsg}</div>
                 </center>
-
-                <div class="col-sm-6">
-
-                    <h4><strong><fmt:message key="update.user.personal.info" bundle="${lang}"/></strong></h4>
-
+                <div class="col-sm-1"></div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <h4><strong><fmt:message key="update.user.personal.info" bundle="${lang}"/></strong></h4>
+                    </div>
                     <div class="form-group">
 
                         <div class="row">
@@ -117,42 +117,45 @@
                     </div>
 
                     <div class="form-group">
-                    <div class="row">
-                    <form:label path="firstName" for="firstName">
-                        <strong>
-                            <fmt:message key="signup.first.name" bundle="${lang}"/>
-                        </strong>
-                    </form:label>
-                    </div>
                         <div class="row">
-                    <form:input id="firstNamejs" path="firstName" cssClass="form-control input-sm" cssStyle="width: 72%"/>
-                    <form:errors path="firstName" cssClass="help-inline" cssStyle="color: red"/>
+                            <form:label path="firstName" for="firstName">
+                                <strong>
+                                    <fmt:message key="signup.first.name" bundle="${lang}"/>
+                                </strong>
+                            </form:label>
+                        </div>
+                        <div class="row">
+                            <form:input id="firstNamejs" path="firstName" cssClass="form-control input-sm"/>
+                            <form:errors path="firstName" cssClass="help-inline" cssStyle="color: red"/>
                         </div>
                     </div>
 
-                    <form:label path="lastName" for="lastName">
-                        <p><strong><fmt:message key="signup.last.name" bundle="${lang}"/></strong></p>
-                    </form:label>
+                    <div class="form-group">
+                        <form:label path="lastName" for="lastName">
+                            <p><strong><fmt:message key="signup.last.name" bundle="${lang}"/></strong></p>
+                        </form:label>
 
-                    <form:input path="lastName" id="lastNamejs" cssClass="form-control input-sm" cssStyle="width: 72%"/>
-                    <form:errors path="lastName" cssClass="help-inline" cssStyle="color: red"/>
+                        <form:input path="lastName" id="lastNamejs" cssClass="form-control input-sm"/>
+                        <form:errors path="lastName" cssClass="help-inline" cssStyle="color: red"/>
+                    </div>
 
+                    <div class="form-group">
+                        <form:label path="username" for="username">
+                            <p><strong><fmt:message key="signup.username" bundle="${lang}"/></strong></p>
+                        </form:label>
 
-                    <form:label path="username" for="username">
-                        <p><strong><fmt:message key="signup.username" bundle="${lang}"/></strong></p>
-                    </form:label>
+                        <form:input id="usernamejs" path="username" cssClass="form-control input-sm" readonly="true"/>
 
-                    <form:input id="usernamejs" path="username" cssClass="form-control input-sm" cssStyle="width:72%"
-                                readonly="true"/>
-
-                    <form:errors path="username" cssClass="help-inline" cssStyle="color: red"/>
-
+                        <form:errors path="username" cssClass="help-inline" cssStyle="color: red"/>
+                    </div>
                 </div>
 
+                <div class="col-sm-2"></div>
                     <%----%>
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <div class="form-group">
-                        <h4><strong><fmt:message key="update.user.contact.info" bundle="${lang}"/></strong></h4>
+                        <h4 style=""><strong><fmt:message key="update.user.contact.info" bundle="${lang}"/></strong>
+                        </h4>
                     </div>
                     <div class="form-group">
                         <form:label path="email" for="email">
@@ -161,8 +164,7 @@
 
                         <div class="">
                             <div class="row inline">
-                                <form:input id="emailjs" path="email" cssClass="form-control input-sm"
-                                            cssStyle="width:72%"/>
+                                <form:input id="emailjs" path="email" cssClass="form-control input-sm"/>
                             </div>
                             <div class="row">
                                 <form:errors path="email" cssClass="help-inline" cssStyle="color: red"/>
@@ -178,8 +180,7 @@
 
                         <div class="">
                             <div class="row inline">
-                                <form:input id="mobilejs" path="mobile" cssClass="form-control input-sm"
-                                            cssStyle="width:72%"/>
+                                <form:input id="mobilejs" path="mobile" cssClass="form-control input-sm"/>
                             </div>
                             <div class="row">
                                 <form:errors path="mobile" cssClass="help-inline" cssStyle="color: red"/>
@@ -191,38 +192,35 @@
                         <form:label path="addressLine01" for="addressLine01" cssClass="text-left">
                             <p><strong><fmt:message key="signup.email" bundle="${lang}"/>Address</strong></p>
                         </form:label>
-                        <div class="">
+                            <%--<div class="">--%>
+                        <div class="row">
+                            <div class="row inline">
+                                <form:input id="addr1js" path="addressLine01" cssClass="form-control input-sm"/>
+                            </div>
                             <div class="row">
-                                <div class="row inline">
-                                    <form:input id="addr1js" path="addressLine01" cssClass="form-control input-sm"
-                                                cssStyle="width:72%"/>
-                                </div>
-                                <div class="row">
-                                    <form:errors path="addressLine01" cssClass="help-inline" cssStyle="color: red"/>
-                                </div>
-                            </div>
-                            <div class="row" style="margin-top: 7px">
-                                <div class="row inline">
-                                    <form:input id="addr2js" path="addressLine02" cssClass="form-control input-sm"
-                                                cssStyle="width:72%"/>
-                                </div>
-                                <div class="row">
-                                    <form:errors path="addressLine02" cssClass="help-inline" cssStyle="color: red"/>
-                                </div>
-                            </div>
-                            <div class="row" style="margin-top: 7px">
-                                <div class="row inline">
-                                    <form:input id="addr3js" path="addressLine03" cssClass="form-control input-sm"
-                                                cssStyle="width:72%"/>
-                                </div>
-                                <div class="row">
-                                    <form:errors path="addressLine03" cssClass="help-inline" cssStyle="color: red"/>
-                                </div>
+                                <form:errors path="addressLine01" cssClass="help-inline" cssStyle="color: red"/>
                             </div>
                         </div>
+                        <div class="row" style="margin-top: 7px">
+                            <div class="row inline">
+                                <form:input id="addr2js" path="addressLine02" cssClass="form-control input-sm"/>
+                            </div>
+                            <div class="row">
+                                <form:errors path="addressLine02" cssClass="help-inline" cssStyle="color: red"/>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 7px">
+                            <div class="row inline">
+                                <form:input id="addr3js" path="addressLine03" cssClass="form-control input-sm"/>
+                            </div>
+                            <div class="row">
+                                <form:errors path="addressLine03" cssClass="help-inline" cssStyle="color: red"/>
+                            </div>
+                        </div>
+                            <%--</div>--%>
                     </div>
                 </div>
-
+                <div class="col-sm-1"></div>
                 <br>
 
                 <div class="row">
@@ -230,8 +228,9 @@
                     <div class="col-sm-4">
 
                         <center>
-                            <button type="submit" class="btn btn-warning">
-                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <fmt:message key="update.user.profile" bundle="${lang}"/></span>
+                            <button type="submit" style="margin-top: 10px;margin-bottom: 8px" class="btn btn-warning">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <fmt:message
+                                    key="update.user.profile" bundle="${lang}"/>
                             </button>
                         </center>
                     </div>
