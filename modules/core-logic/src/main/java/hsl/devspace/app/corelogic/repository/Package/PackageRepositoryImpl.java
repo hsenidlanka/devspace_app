@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.sql.DataSource;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +44,7 @@ public class PackageRepositoryImpl implements PackageRepository {
        /* MultipartFile img = pack.getImageUrl();
         String ims = img.getOriginalFilename();*/
         String sql = "INSERT INTO package " +
-                "(name,price,image,created_date,creator) VALUES (?,?,?,NOW(),?)";
+                "(name,price,image,created_date,creator) VALUES (?,?,?,CURRENT_DATE ,?)";
         row = jdbcTemplate.update(sql, new Object[]{pack.getPackName(), pack.getPrice(), pack.getImage(), pack.getCreator()});
         log.debug("{} new package added", row);
         return row;
@@ -106,7 +107,7 @@ public class PackageRepositoryImpl implements PackageRepository {
             packages.setPackName(mp.get(i).get("name").toString());
             packages.setPrice(Double.parseDouble(mp.get(i).get("price").toString()));
             packages.setImage(mp.get(i).get("image").toString());
-            packages.setCreatedDate(Timestamp.valueOf(mp.get(0).get("created_date").toString()));
+            packages.setCreatedDate(java.sql.Date.valueOf(mp.get(0).get("created_date").toString()));
             packages.setCreator(mp.get(0).get("creator").toString());
             pack.add(packages);
         }
@@ -126,7 +127,7 @@ public class PackageRepositoryImpl implements PackageRepository {
             packages.setPackName(mp.get(i).get("name").toString());
             packages.setPrice(Double.parseDouble(mp.get(i).get("price").toString()));
             packages.setImage(mp.get(i).get("image").toString());
-            packages.setCreatedDate(Timestamp.valueOf(mp.get(0).get("created_date").toString()));
+            packages.setCreatedDate(Date.valueOf(mp.get(0).get("created_date").toString()));
             packages.setCreator(mp.get(0).get("creator").toString());
             pack.add(packages);
 

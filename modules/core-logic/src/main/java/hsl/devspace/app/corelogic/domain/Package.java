@@ -2,7 +2,7 @@ package hsl.devspace.app.corelogic.domain;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,7 +19,7 @@ public class Package {
     private String itemName;
     private List<Item> sizePrice;
     private String creator;
-    private Timestamp createdDate;
+    private Date createdDate;
     private int quantity;
     private String size;
 
@@ -31,11 +31,11 @@ public class Package {
         this.creator = creator;
     }
 
-    public Timestamp getCreatedDate() {
+    public Date getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(Timestamp createdDate) {
+    public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
     }
 
@@ -139,7 +139,7 @@ public class Package {
         this.size = size;
     }
 
-    public Package(String packName, double price, String image, Timestamp createdDate, String creator) {
+    public Package(String packName, double price, String image, Date createdDate, String creator) {
         this.packName = packName;
         this.price = price;
         this.image = image;
