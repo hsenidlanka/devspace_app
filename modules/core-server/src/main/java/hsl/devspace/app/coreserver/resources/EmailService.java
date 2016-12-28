@@ -42,8 +42,9 @@ public class EmailService {
         String url = uriInfo.getAbsolutePath().toString();
         Response response;
         try {
+            String username = jsonObject.get("username").toString();
             String receiverEmail = jsonObject.get("email").toString();
-            sendVerificationEmail(receiverEmail, verificationCode);
+            sendVerificationEmail(username, receiverEmail, verificationCode);
             SuccessMessage successMessage = new SuccessMessage();
             successMessage.setStatus("success");
             successMessage.setCode(Response.Status.CREATED.getStatusCode());
@@ -53,21 +54,21 @@ public class EmailService {
             successDataJsonObj.put("verificationCode", verificationCode);
             successMessage.addData(successDataJsonObj);
             successMessage.addLink(url, "self");
-            successMessage.addLink(BASE_URL+"customers/verify", "verify customer");
+            successMessage.addLink(BASE_URL + "customers/verify", "verify customer");
             response = Response.status(Response.Status.OK).entity(successMessage).
                     header("Access-Control-Allow-Origin", headerPropertyReader.readProperty("Access-Control-Allow-Origin")).build();
         } catch (EmailException e) {
-            log.error("Error sending email. {}", e);
+            log.error("Error sending verification code email. {}", e);
             throw new WebApplicationException(500);
         } catch (MalformedURLException e) {
-            log.error("Error sending email. {}", e);
+            log.error("Error sending verification code email. {}", e);
             throw new WebApplicationException(500);
         }
         return response;
     }
 
     // Process of sending an email containing the verification code
-    private void sendVerificationEmail(String receiverEmail, String verificationCode) throws EmailException, MalformedURLException {
+    public String sendVerificationEmail(String username, String receiverEmail, String verificationCode) throws EmailException, MalformedURLException {
         HtmlEmail email = new HtmlEmail();
         email.setHostName(emailPropertyReader.readProperty("host.name"));
         email.setSmtpPort(Integer.parseInt(emailPropertyReader.readProperty("smtp.port")));
@@ -82,6 +83,7 @@ public class EmailService {
         // set the html message
         String htmlMsg = "<html><div style=\"text-align:center\"><img width=\"150px\" height=\"150px\" src=\"cid:" + cid + "\"></div>";
         htmlMsg += "<h2>Please verify your email address.</h2>";
+        htmlMsg += "<p>Dear " + username + ",<br>";
         htmlMsg += "<p>Thank you for registering with Pizza Shefu.<br>";
         htmlMsg += "To proceed with login you need to verify your account. Please use the following code to verify your account.</p>";
         htmlMsg += "<h3>" + verificationCode + "</h3>";
@@ -92,10 +94,11 @@ public class EmailService {
 
         email.addTo(receiverEmail);
         email.send();
+        return verificationCode;
     }
 
     // Generate a new verification code
-    private String generateVerificationCode(String combinations, int length) {
+    public String generateVerificationCode(String combinations, int length) {
         // Possible characters in the coupon code
         String stringCombinations = combinations;
         // Get possible characters to a char array

@@ -3,6 +3,7 @@ package hsl.devspace.app.corelogic.domain;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * Created by hsenid on 9/15/16.
@@ -18,13 +19,13 @@ public class Category {
     private String status;
     private String image;
     private MultipartFile imageUrl;
-    private Timestamp createdDate;
+    private Date createdDate;
 
-    public Timestamp getCreatedDate() {
+    public Date getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(Timestamp createdDate) {
+    public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
     }
 

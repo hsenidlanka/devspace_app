@@ -10,6 +10,7 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.sql.DataSource;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -125,7 +126,7 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
             category.setSubCategoryName(mp.get(i).get("name").toString());
             category.setSubcatDescription(mp.get(i).get("description").toString());
             category.setCreator(mp.get(i).get("creator").toString());
-            category.setCreatedDate(Timestamp.valueOf(mp.get(i).get("created_date").toString()));
+            category.setCreatedDate(Date.valueOf(mp.get(i).get("created_date").toString()));
             category.setCategory_id(Integer.parseInt(mp.get(i).get("category_id").toString()));
 
             subCategories.add(category);

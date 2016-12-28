@@ -11,6 +11,7 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.sql.DataSource;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -154,7 +155,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
                 category.setImage(aMp.get("image").toString());
             }
             category.setCreator(aMp.get("creator").toString());
-            category.setCreatedDate(Timestamp.valueOf(aMp.get("created_date").toString()));
+            category.setCreatedDate(Date.valueOf(aMp.get("created_date").toString()));
             category.setStatus(aMp.get("status").toString());
             categories.add(category);
             // }
@@ -505,7 +506,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
                 category.setImage(aMp.get("image").toString());
             }
             category.setCreator(aMp.get("creator").toString());
-            category.setCreatedDate(Timestamp.valueOf(aMp.get("created_date").toString()));
+            category.setCreatedDate(Date.valueOf(aMp.get("created_date").toString()));
             category.setStatus(aMp.get("status").toString());
             categories.add(category);
             // }
