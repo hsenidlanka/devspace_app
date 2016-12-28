@@ -15,7 +15,8 @@
                                                                                                  bundle="${lang}"/></p>
                                 </div>
                                 <div class="col-sm-4">
-                                    <button data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <a  type="button" class="btn" data-dismiss="modal" style="margin-left: 35px; color:#888"><i class="fa fa-window-close fa-2x" aria-hidden="true"></i></a>
+                                    <%--<button data-dismiss="modal" aria-hidden="true"><i class="fa fa-window-close" aria-hidden="true"></i></button>--%>
                                 </div>
                                 <div class="col-sm-2"></div>
                             </div>
@@ -42,15 +43,19 @@
                                         <label class="radio-inline">
                                             <input type="radio" name="title" value="Mr"><fmt:message key="signup.mr" bundle="${lang}"/>
                                         </label>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         <label class="radio-inline">
                                             <input type="radio" name="title" value="Mrs"><fmt:message key="signup.mrs" bundle="${lang}"/>
                                         </label>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         <label class="radio-inline">
                                             <input type="radio" name="title" value="Miss"><fmt:message key="signup.miss" bundle="${lang}"/>
                                         </label>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         <label class="radio-inline">
                                             <input type="radio" name="title" value="Dr"><fmt:message key="signup.dr" bundle="${lang}"/>
                                         </label>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         <label class="radio-inline">
                                             <input type="radio" name="title" value="Rev"><fmt:message key="signup.rev" bundle="${lang}"/>
                                         </label>

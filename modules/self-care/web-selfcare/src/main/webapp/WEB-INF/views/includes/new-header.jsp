@@ -115,7 +115,7 @@
 
 <!------------------------------login modal--------------------------->
 
-<script>
+<%--<script>
     (function ($) {
         "use strict";
         function centerModal() {
@@ -134,33 +134,30 @@
             $('.modal:visible').each(centerModal);
         });
     }(jQuery));
-</script>
+</script>--%>
 
-<div class="container">
+<div class="container ">
 
     <!-- Modal -->
     <div class="modal fade" id="modal-login" role="dialog">
-        <div class="modal-dialog">
+        <div class="modal-dialog panel panel-success">
 
             <!-- Modal content-->
             <div class="modal-content">
 
                 <div class="panel-heading">
                     <div class="row">
-                        <div class="col-sm-4">
-                            <img src="/web-selfcare/resources/images/logo.png" style="width:50px;height:50px;">
-                        </div>
-
-                        <div class="col-sm-6">
-                            <h3 style="margin-top: 15px;">Please Log in</h3>
+                        <div class="col-sm-10">
+                            <img  src="/web-selfcare/resources/images/logo.png" style=" width:50px;height:50px;">
+                            <h3 style="margin-top: 15px;display: inline-block;">Please Log in</h3>
                         </div>
                         <div class="col-sm-2">
-                            <a type="button" class="btn" data-dismiss="modal" style="margin-top: 10px; margin-left: 35px"><i class="fa fa-window-close fa-2x" aria-hidden="true"></i></a>
+                            <a type="button" class="btn" data-dismiss="modal" style="margin-top: 10px; margin-left: 35px; color: #888"><i class="fa fa-window-close fa-2x" aria-hidden="true"></i></a>
                         </div>
                     </div>
                 </div>
 
-                <div class="modal-body" style="margin-top: 10px; margin-bottom: 10px">
+                <div class="modal-body panel-body" style="margin-top: 1px; margin-bottom: 10px">
                     <div id="blockedUser">
 
                     </div>
@@ -168,8 +165,8 @@
                     <form>
                         <div class="row">
                             <div class="row">
-                                <label for="loginUsername" class="col-sm-4" style="text-align: left">Username</label>
-                                <input id="loginUsername" class="col-sm-8" name="loginUsername">
+                                <label for="loginUsername" class="col-sm-4" style="text-align: center">Username</label>
+                                <input type="text" style="border:1px solid #cccccc" id="loginUsername" class="col-sm-8" name="loginUsername" placeholder="Enter username">
                             </div>
 
                             <div style="margin-top: 20px; margin-left: 200px" id="usernameError" class="error-labels"></div>
@@ -177,21 +174,23 @@
                         </div>
 
                         <div class="row">
-                            <label for="loginPassword" class="col-sm-4" style="text-align: left">Password</label>
-                            <input id="loginPassword" class="col-sm-8" name="loginPassword">
+                            <label for="loginPassword" class="col-sm-4" style="text-align: center">Password</label>
+                            <input type="password" style="border:1px solid #cccccc" id="loginPassword" class="col-sm-8" name="loginPassword" placeholder="Enter password">
                             <div style="margin-top: 45px; margin-left: 200px;" id="passwordError2" class="error-labels"></div>
                         </div>
+                        <br>
+                        <center>
+                            <div class="row">
+                                <button id="loginFormSubmit" name="loginFormSubmit" type="button" class="btn btn-success" data-dismiss="modal">
+                                    <i class="fa fa-sign-in" aria-hidden="true"></i> Log in
+                                </button>
+                            </div>
+                        </center>
                     </form>
                 </div>
-                <div class="modal-footer" style="margin-top: 5px;">
-                    <center>
-                        <div class="row">
-                            <button id="loginFormSubmit" name="loginFormSubmit" type="button" class="btn btn-success" data-dismiss="modal">
-                                <i class="fa fa-sign-in" aria-hidden="true"></i> Log in
-                            </button>
-                        </div>
-                    </center>
-                </div>
+                <%--<div class="panel-success" style="margin-top: 5px;">--%>
+
+                <%--</div>--%>
             </div>
 
         </div>

@@ -96,21 +96,21 @@
                             </label>
                         </div>
                         <div class="row">
-                            <form:label cssClass="radio-inline"path="">
+                            <label class="radio-inline" for="Mr">
                                 <form:radiobutton path="title" id="Mr" name="titlejs" value="Mr"/>Mr
-                            </form:label>
-                            <form:label path="">
+                            </label>
+                            <label class="radio-inline" path="Mrs">
                                 <form:radiobutton path="title" id="Mrs" name="titlejs" value="Mrs"/>Mrs
-                            </form:label>
-                            <form:label path="">
+                            </label>
+                            <label class="radio-inline" for="Ms">
                                 <form:radiobutton path="title" id="Ms" name="titlejs" value="Ms"/>Ms
-                            </form:label>
-                            <form:label path="">
+                            </label>
+                            <label class="radio-inline" for="Dr">
                                 <form:radiobutton path="title" id="Dr" name="titlejs" value="Dr"/>Dr
-                            </form:label>
-                            <form:label path="">
+                            </label>
+                            <label class="radio-inline" for="Rev">
                                 <form:radiobutton path="title" id="Rev" name="titlejs" value="Rev"/>Rev
-                            </form:label>
+                            </label>
 
                             <form:errors path="title" cssClass="help-inline" cssStyle="color: red"/>
                         </div>
@@ -231,8 +231,7 @@
 
                         <center>
                             <button type="submit" class="btn btn-warning">
-                                <fmt:message key="update.user.profile" bundle="${lang}"/> <span
-                                    class="glyphicon glyphicon-send"></span>
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <fmt:message key="update.user.profile" bundle="${lang}"/></span>
                             </button>
                         </center>
                     </div>
