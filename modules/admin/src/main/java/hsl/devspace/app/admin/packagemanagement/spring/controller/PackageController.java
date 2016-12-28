@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import hsl.devspace.app.corelogic.domain.Item;
 import hsl.devspace.app.corelogic.domain.Package;
 import hsl.devspace.app.corelogic.repository.Package.PackageRepository;
+import hsl.devspace.app.corelogic.repository.Package.ReturnTypeResolver;
 import hsl.devspace.app.corelogic.repository.category.CategoryRepository;
 import hsl.devspace.app.corelogic.repository.category.SubCategoryRepositoryImpl;
 import hsl.devspace.app.corelogic.repository.item.ItemRepository;
@@ -493,5 +494,16 @@ public class PackageController {
 
         LOGGER.trace("searched item record count{}", packageRepo.countSearchKey(pkgnm));
         return packageRepo.countSearchKey(pkgnm);
+    }
+
+
+    /*
+    * load package content
+    **/
+    @RequestMapping(value = "/loadPkgCont", method = RequestMethod.GET)
+    public @ResponseBody List<ReturnTypeResolver> loadPkgCont(@RequestParam("pkgName")String pkgnm){
+
+        LOGGER.trace("load package content:{}",  packageRepo.getContentDetails(pkgnm));
+        return  packageRepo.getContentDetails(pkgnm);
     }
 }

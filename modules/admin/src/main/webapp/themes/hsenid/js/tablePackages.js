@@ -27,6 +27,14 @@ $(document).ready(function () {
                     field: 'packName',
                     title: 'Package Name',
                     sortable: true
+                },{
+                    field: 'created_date',
+                    title: 'Added Date',
+                    sortable: true
+                },{
+                    field: 'creator',
+                    title: 'Creator',
+                    sortable: true
                 }, {
                     field: 'price',
                     title: 'Package Price (LKR)',
@@ -249,6 +257,21 @@ window.operateEvents = {
         $("#editPkgPrice").val(objct["price"]);
 
         $('#pkgEditModal').modal('show');
+
+        var  pkgNm = $("#txtEditPkgNm").val();
+
+        $.ajax({
+            type:"GET",
+            url:"https://localhost:8443/admin/packages/loadPkgCont",
+            data:{"pkgName":pkgNm},
+            success: function(data){
+                alert(data);
+                console.log(data);
+            },
+            error: function(er){
+
+            }
+        });
     },
 
     'click .deletePkg': function (e, value, row, index) {
@@ -262,6 +285,27 @@ window.operateEvents = {
         $('#pkgDeleteModal').modal('show');
     }
 };
+
+/*
+*
+*
+* */
+function loadContent(){
+    var  pkgNm = $("#txtEditPkgNm").val();
+
+    $.ajax({
+        type:"GET",
+        url:"https://localhost:8443/admin/packages/loadPkgCont",
+        data:{"pkgName":pkgNm},
+        success: function(data){
+            alert(data);
+            console.log(data);
+        },
+        error: function(er){
+
+        }
+    });
+}
 
 
 /*

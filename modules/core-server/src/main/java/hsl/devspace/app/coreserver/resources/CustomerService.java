@@ -6,6 +6,7 @@ import hsl.devspace.app.coreserver.common.Context;
 import hsl.devspace.app.coreserver.common.PropertyReader;
 import hsl.devspace.app.coreserver.model.ServerModel;
 import hsl.devspace.app.coreserver.model.SuccessMessage;
+import org.apache.commons.mail.EmailException;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import java.net.MalformedURLException;
 import java.sql.SQLException;
 
 /**
@@ -38,7 +40,20 @@ public class CustomerService {
     public Response register(User user, @javax.ws.rs.core.Context UriInfo uriInfo) {
         int res = userRepository.add(user);
         Response response;
+        String sentCode = "";
         if (res > 0) {
+            EmailService emailService = new EmailService();
+            String verificationCode = emailService.generateVerificationCode("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUWXYZ123456789!@#$%&", 32);
+            userRepository.addVerificationCode(user.getUsername(), verificationCode);
+            try {
+                sentCode = emailService.sendVerificationEmail(user.getUsername(), user.getEmail(), verificationCode);
+            } catch (EmailException e) {
+                log.error("Error sending verification code email. {}", e);
+                throw new WebApplicationException(500);
+            } catch (MalformedURLException e) {
+                log.error("Error sending verification code email. {}", e);
+                throw new WebApplicationException(500);
+            }
             SuccessMessage successMessage = new SuccessMessage();
             successMessage.setStatus("success");
             successMessage.setCode(Response.Status.CREATED.getStatusCode());
@@ -56,11 +71,12 @@ public class CustomerService {
                 jsonObject.put("addressLine03", user.getAddressL3());
             }
             jsonObject.put("mobile", user.getMobile());
+            jsonObject.put("verificationCode", sentCode);
             successMessage.addData(jsonObject);
 
             String url = uriInfo.getAbsolutePath().toString();
             successMessage.addLink(url, "self");
-            successMessage.addLink(BASE_URL + "customers/" + user.getUsername(), "profile");
+            successMessage.addLink(BASE_URL + "customers/verify", "verify customer");
 
             response = Response.status(Response.Status.CREATED).entity(successMessage).build();
         } else {
@@ -77,14 +93,14 @@ public class CustomerService {
     public Response login(User user, @javax.ws.rs.core.Context UriInfo uriInfo) {
         int status = userRepository.loginAuthenticate(user.getUsername(), user.getPassword());
         Response response;
+        SuccessMessage successMessage = new SuccessMessage();
+        successMessage.setStatus("success");
+        successMessage.setCode(Response.Status.OK.getStatusCode());
+        successMessage.setMessage("username, password validated.");
         if (status == 1) {
-            SuccessMessage successMessage = new SuccessMessage();
-            successMessage.setStatus("success");
-            successMessage.setCode(Response.Status.OK.getStatusCode());
-            successMessage.setMessage("username, password validated.");
-
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("username", user.getUsername());
+            jsonObject.put("accountStatus", "verified");
             successMessage.addData(jsonObject);
 
             String url = uriInfo.getAbsolutePath().toString();
@@ -92,7 +108,22 @@ public class CustomerService {
             successMessage.addLink(BASE_URL + "customers/" + user.getUsername(), "profile");
             response = Response.status(Response.Status.OK).entity(successMessage).build();
         } else if (status == 2) {
-            throw new WebApplicationException(403);
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("username", user.getUsername());
+            jsonObject.put("accountStatus", "blocked");
+            successMessage.addData(jsonObject);
+            String url = uriInfo.getAbsolutePath().toString();
+            successMessage.addLink(url, "self");
+            response = Response.status(Response.Status.OK).entity(successMessage).build();
+        } else if (status == 3) {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("username", user.getUsername());
+            jsonObject.put("accountStatus", "not-verified");
+            successMessage.addData(jsonObject);
+            String url = uriInfo.getAbsolutePath().toString();
+            successMessage.addLink(url, "self");
+            successMessage.addLink(BASE_URL + "customers/verify", "verify customer");
+            response = Response.status(Response.Status.OK).entity(successMessage).build();
         } else {
             throw new WebApplicationException(401);
         }
