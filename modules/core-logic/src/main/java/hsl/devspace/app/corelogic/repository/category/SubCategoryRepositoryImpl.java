@@ -437,7 +437,14 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
 
     @Override
     public List<String> selectCategoryNames() {
-        return null;
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT name FROM sub_category");
+        List<String> catName = new ArrayList<String>();
+        for (int i = 0; i < mp.size(); i++) {
+            String nm = mp.get(i).get("name").toString();
+            catName.add(nm);
+        }
+        log.info("{}", catName);
+        return catName;
     }
     /*retrieve list of category names*/
 
