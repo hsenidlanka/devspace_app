@@ -34,24 +34,45 @@ function showItemCheck(){
         slctSubcat.style.display = "block";
         var catName = $("#selectCatFltr").val();
 
-        $("#selectCatFltr").change(function(){
+        if($("#catCheck").is(":checked")){
+            $("#selectCatFltr").change(function(){
+                $.ajax({
+                    type:'GET',
+                    url:"https://localhost:8443/admin/itemFilters/subcategoryList",
+                    data:{"catName":catName},
+                    success:function(data){
+                        var slctsubcatList = $("#selectSubCatFltr"), option = "";
+                        slctsubcatList.empty();
+
+                        for (var sb = 0; sb < data.length; sb++) {
+                            option = option + "<option value='" + data[sb] + "'>" + data[sb] + "</option>";
+                        }
+                        slctsubcatList.append(option);
+                    }, error: function (e) {
+                        alert("error in loading sub-category list 1" + e);
+                    }
+                });
+            })
+        }
+
+        if(!$("#catCheck").is(":checked")){
             $.ajax({
                 type:'GET',
                 url:"https://localhost:8443/admin/itemFilters/subcategoryList",
-                data:{"catName":catName},
                 success:function(data){
-                    var slctsubcatList = $("#selectSubCatFltr"), option = "";
-                    slctsubcatList.empty();
+                    var slctsubcatList2 = $("#selectSubCatFltr"), option = "";
+                    slctsubcatList2.empty();
 
-                    for (var sb = 0; sb < data.length; sb++) {
-                        option = option + "<option value='" + data[sb] + "'>" + data[sb] + "</option>";
+                    for (var sb2 = 0; sb2 < data.length; sb2++) {
+                        option = option + "<option value='" + data[sb2] + "'>" + data[sb2] + "</option>";
                     }
-                    slctsubcatList.append(option);
+                    slctsubcatList2.append(option);
                 }, error: function (e) {
-                    alert("error in loading sub-category list" + e);
+                    alert("error in loading sub-category list 2" + e);
                 }
             });
-        })
+        }
+
 
     } else{
         slctSubcat.style.display = "none";

@@ -7,20 +7,32 @@ Provide a RESTful API to self-care modules to communicate with the system. Buit 
 * Java Development Kit (JDK) 1.8
 * MYSQL Server 5.7
 * Apache Maven 3.3
+* DevSpace Maven Dependency
 * DevSpace Simulator
 
 #####Config & Build
-1.Goto the location of the program folder (core-server).</br>
-`$ cd <path>/core-server`</br>
-2.Run following command.</br>
+1. Download DevSpace Maven dependency from the following link.
+https://1drv.ms/u/s!AgR5Dn7i6sy0g5c9PM5ym3FrB78IYA
+
+2. Browse to the directory where the downloaded JAR file exists.
+
+3. Install the jar to maven repository (m2 directory) using the following command.
+`mvn install:install-file -Dfile=sdp.app.api-1.0.144.jar -DgroupId=hms -DartifactId=sdp.app.api -Dversion=1.0.144 -Dpackaging=jar`
+
+4. Goto the location of the program folder (core-server).
+`$ cd <path>/core-server`
+
+5. Run following command.
 `$ mvn clean install`
 
 If the build is successful, continue with the further steps.
+If an error occurred please check above five steps again.
 
 #####Execute the program
-1.Goto the bin directory in the target directory.</br>
+1. Goto the bin directory in the target directory.
 `$ cd target/bin`</br>
-2.Run the following command to start the core-server.</br>
+
+2. Run the following command to start the core-server.
 `$ ./core-server start`</br>
 
 #####Access the API

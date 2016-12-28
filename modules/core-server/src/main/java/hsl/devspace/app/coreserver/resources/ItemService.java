@@ -145,20 +145,38 @@ public class ItemService {
 
     // Search for a item
     @GET
-    @Path("/search/{seachKey}")
+    @Path("/search/{seachKey}/{category}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response searchItem(@PathParam("seachKey") String searchKey, @javax.ws.rs.core.Context UriInfo uriInfo) {
+    public Response searchItem(@PathParam("seachKey") String searchKey, @PathParam("category") String searchCategory, @javax.ws.rs.core.Context UriInfo uriInfo) {
         SuccessMessage successMessage = new SuccessMessage();
-        successMessage.setCode(Response.Status.OK.getStatusCode());
-        successMessage.setStatus("success");
+        List<List<Map<String, Object>>> searchedDataList = itemRepository.retrieveItemDetailsForSearch(searchKey, searchCategory);
+
         String url = uriInfo.getAbsolutePath().toString();
         successMessage.addLink(url, "self");
-        List<Map<String, Object>> listMap = itemRepository.retrieveSelectedItemDetails(searchKey);
-        if (listMap.size() == 0) {
-            successMessage.setMessage("no records found for the serach key " + searchKey);
+        if (searchedDataList.size() == 0) {
+            successMessage.setMessage("no records found for the serach key " + searchKey + " in category " + searchCategory);
         } else {
-            successMessage.setMessage("records found for the search key " + searchKey);
+            successMessage.setMessage("records found for the search key " + searchKey + " in category " + searchCategory);
         }
+        for (int i = 0; i < searchedDataList.size(); i += 2) {
+            List<Map<String, Object>> listMap = searchedDataList.get(i);
+            for (Map<String, Object> map : listMap) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("itemName", map.get("item_name"));
+                jsonObject.put("subCategoryName", map.get("sub_category_name"));
+                jsonObject.put("type", map.get("type"));
+                jsonObject.put("description", map.get("description"));
+                jsonObject.put("price", searchedDataList.get(i + 1));
+                successMessage.addData(jsonObject);
+
+            }
+        }
+        successMessage.setCode(Response.Status.OK.getStatusCode());
+        successMessage.setStatus("success");
+        
+        /*
+        List<Map<String, Object>> listMap = itemRepository.retrieveSelectedItemDetails(searchKey);
+
         for (Map<String, Object> map : listMap) {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("itemName", map.get("item_name"));
@@ -167,7 +185,7 @@ public class ItemService {
             jsonObject.put("type", map.get("type"));
             jsonObject.put("description", map.get("description"));
             successMessage.addData(jsonObject);
-        }
+        }*/
         return Response.status(Response.Status.OK).entity(successMessage)
                 .header("Access-Control-Allow-Origin", propertyReader.readProperty("Access-Control-Allow-Origin"))
                 .build();

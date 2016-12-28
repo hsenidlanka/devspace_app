@@ -90,22 +90,15 @@
                                 </div>
                                 <div class="col-xs-6">
                                     <div class="row itemSearchBar">
-                                        <div class="col-sm-1"></div>
-                                        <div class="col-sm-3">
-                                            <label class="control-label" style="float: right;">
-                                                Package Name :
-                                            </label>
 
-                                        </div>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-8">
                                             <input class="form-control" id="txtViewSearchPkg" type="text"/>
                                         </div>
-                                        <div class="col-sm-3">
+                                        <div class="col-sm-4">
                                             <button type="button" class="btn btn-success" id="btnViewSearchPkg"><span
                                                     class="glyphicon glyphicon-search"></span> Search
                                             </button>
                                         </div>
-                                        <div class="col-sm-1"></div>
                                     </div>
                                 </div>
                             </div>

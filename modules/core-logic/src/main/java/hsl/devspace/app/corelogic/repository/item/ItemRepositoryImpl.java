@@ -285,12 +285,37 @@ public class ItemRepositoryImpl implements ItemRepository {
         return items;
     }
 
+    /*search item details and size price for a given category and a search key*/
+    @Override
+    public List<List<Map<String, Object>>> retrieveItemDetailsForSearch(String itemkey, String category) {
+        String key = "%" + itemkey + "%";
+        List<Map<String, Object>> itemDetails = jdbcTemplate.queryForList("SELECT i.id,i.name AS item_name,i.created_date,i.creator,c.name " +
+                "AS category_name, s.name AS sub_category_name,t.name AS type,i.description,i.image FROM item i" +
+                " INNER JOIN sub_category s ON i.sub_category_id=s.id INNER JOIN type t ON i.type_id=t.type_id " +
+                "INNER JOIN category c ON c.id=s.category_id WHERE i.name LIKE ? AND c.name=?", key, category);
+        List<List<Map<String, Object>>> listPrice = new ArrayList<List<Map<String, Object>>>();
+        for (int k = 0; k < itemDetails.size(); k++) {
+            List<Map<String, Object>> size = jdbcTemplate.queryForList("SELECT size,price FROM size WHERE item_id=?", itemDetails.get(k).get("id"));
+            log.info("{}", size);
+            List<Map<String, Object>> sizeList = new ArrayList<Map<String, Object>>();
+
+            sizeList.add(itemDetails.get(k));
+            listPrice.add(sizeList);
+            listPrice.add(size);
+        }
+
+
+        log.info("{}=listPrice", listPrice);
+        return listPrice;
+    }
+
     /**
      * retrieve sizes of a item  by item name
      */
     @Override
     public List<Item> retrieveSelectedItemSizes(String name) {
         List<Map<String, Object>> size = jdbcTemplate.queryForList("SELECT size,price FROM size WHERE item_id=(SELECT id FROM item WHERE name=?)", name);
+        log.info("{}", size);
         List<Item> items = new ArrayList<Item>();
         for (int k = 0; k < size.size(); k++) {
             log.info("{}", size.get(k));
