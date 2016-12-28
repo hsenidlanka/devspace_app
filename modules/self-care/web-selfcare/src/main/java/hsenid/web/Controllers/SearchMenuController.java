@@ -2,6 +2,8 @@ package hsenid.web.Controllers;
 
 import hsenid.web.models.ServerResponseMessage;
 import hsenid.web.supportclasses.SendStringBuilds;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,8 +11,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by hsenid on 11/2/16.
@@ -27,55 +37,116 @@ public class SearchMenuController {
     @Value("${api.url.items.searchName}")
     private String searchItemNameUrl;
 
+    @Value("${api.url.category.list}")
+    private String categoryListUrl;
+
+    @Value("${api.url.subcategory}")
+    private String subcategoryListUrl;
+
+    @Value("${api.url.subcategory.items}")
+    private String subcategoryItemsUrl;
+
+    @Value("${api.url.subcategory}")
+    private String toppingsUrl;
+
+    @Value("${api.url.category.list}")
+    private String catList;
+
     @RequestMapping(value = "/search-menu", method = RequestMethod.GET)
     public ModelAndView loadSearchMenuPage() {
         return new ModelAndView("/home/search-menu");
     }
 
-    @RequestMapping(value = "search-menu/{searchItem}", method = RequestMethod.GET)
+    @RequestMapping(value = "search-menu/{searchItem}/{category}", method = RequestMethod.GET)
     //@ResponseBody
-    public ModelAndView generateSearchItem(@PathVariable String searchItem) {
+    public ModelAndView generateSearchItem(@PathVariable String searchItem, @PathVariable String category) {
         ModelAndView modelAndView = new ModelAndView("search-results");
-        logger.info(searchItem + "item");
-
-        // modelAndView.addObject("searchItem", searchItem);
         RestTemplate restTemplate = new RestTemplate();
-        String getItemUrl = SendStringBuilds.sendString(baseUrl, searchItemNameUrl, searchItem);
-        logger.info(getItemUrl + " url");
 
+        String getItemUrl = SendStringBuilds.sendString(baseUrl, searchItemNameUrl, searchItem, "/", category);
+        // String getItemsUrl = baseUrl + subcategoryListUrl;
+        modelAndView.addObject("category", category);
         ServerResponseMessage searchItemResponse = restTemplate.getForObject(getItemUrl, ServerResponseMessage.class);
         modelAndView.addObject("it", searchItemResponse.getData());
-        modelAndView.addObject("test", searchItem);
+
+       /* List<String> itemNamesList = new ArrayList<>();
+        List<List<JSONObject>> test1 = new ArrayList<>();*/
+        /*for (int i = 0; i < searchItemResponse.getData().size(); i++) {
+            String itemName = searchItemResponse.getData().get(i).get("itemName").toString();
+            ////following url should return size price list when parameter is item name
+            ServerResponseMessage itemsResponse = restTemplate.getForObject(getItemsUrl + itemName, ServerResponseMessage.class);
+            logger.info("itemsResponse={}", itemsResponse.getData());
+
+           *//* List<JSONObject> itTest=new ArrayList<>();
+            itTest.add(searchItemResponse.getData().get(i));
+            itTest.add(itemsResponse.getData().get(0));
+       *//*itemNamesList.add(itemName);
+           test1.add(itTest);*//*
+        }
+*/
         return modelAndView;
 
     }
 
-    /*@RequestMapping(value = "/search-results", method = RequestMethod.GET)
-    public ModelAndView newLoadSearch() {
-        return new ModelAndView("/search-results", "searchitemdata", new SearchItemData());
-    }*/
-
-
-
-   /* @RequestMapping(value = "/search-menu", method = RequestMethod.GET)
-    public ModelAndView sendSearchItem(@ModelAttribute("searchitemdata") @Valid SearchItemData searchitemdata, BindingResult result, Model model) {
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("searchItem", searchitemdata.getSearchItem());
-        RestTemplate restTemplate = new RestTemplate();
-        MultiValueMap<String, String> headers = new LinkedMultiValueMap<String, String>();
-        headers.add("Content-Type", "application/json");
-        HttpEntity<JSONObject> httpEntity = new HttpEntity<JSONObject>(jsonObject, headers);
-        String searchUrl = baseUrl + searchItemNameUrl;
-        try {
-            ReplyFromServer data = restTemplate.postForObject(searchUrl, httpEntity, ReplyFromServer.class);
-            model.addAttribute("items", data);
-            logger.info("{}", data);
-        } catch (Exception e) {
-            logger.info(e.getMessage());
+    @RequestMapping(value = "/search-menu/add-to-cart", method = RequestMethod.POST)
+    @ResponseBody
+    public boolean addToCart(HttpSession session, HttpServletRequest request) {
+        if (session.getAttribute("cartItems") == null || session.getAttribute("cartItems") == "") {
+            List<Map<String, String>> cartItems = new ArrayList<Map<String, String>>();
+            session.setAttribute("cartItems", cartItems);
         }
-        return new ModelAndView("/search-results", "searchitemdata", new SearchItemData());
+        List<Map<String, String>> cartItems = (List<Map<String, String>>) session.getAttribute("cartItems");
+        Map<String, String> map = new HashMap<String, String>();
+
+        String itemTitle = request.getParameter("itemTitle");
+        String itemDescription = request.getParameter("itemDescription");
+        String itemSize = request.getParameter("itemSize");
+        String itemTopping1 = request.getParameter("itemTopping1");
+        String itemTopping1Price = "0";
+        if (request.getParameter("itemTopping1Price") != null) {
+            itemTopping1Price = request.getParameter("itemTopping1Price");
+        }
+        String itemTopping2 = request.getParameter("itemTopping2");
+        String itemTopping2Price = "0";
+        if (request.getParameter("itemTopping2Price") != null) {
+            itemTopping2Price = request.getParameter("itemTopping2Price");
+        }
+        String itemInstructs = request.getParameter("itemInstructs");
+        String itemQty = request.getParameter("itemQty");
+        String itemPrice = request.getParameter("itemPrice");
+        String itemTotal = request.getParameter("itemTotal");
+
+        map.put("itemTitle", itemTitle);
+        map.put("itemDescription", itemDescription);
+        map.put("itemSize", itemSize);
+        map.put("itemTopping1", itemTopping1);
+        map.put("itemTopping2", itemTopping2);
+        double toppingsTotal = Double.parseDouble(itemTopping1Price) + Double.parseDouble(itemTopping2Price);
+        map.put("itemToppingsTotal", toppingsTotal + "");
+        map.put("itemInstructs", itemInstructs);
+        map.put("itemQty", itemQty);
+        map.put("itemPrice", itemPrice);
+        map.put("itemTotal", itemTotal);
+        cartItems.add(map);
+        session.setAttribute("cartItems", cartItems);
+        return true;
     }
-*/
+
+    // Get the details of available topping to customize the pizza before adding to the shopping cart.
+    @RequestMapping(value = "/search-menu/toppings", method = RequestMethod.GET)
+    @ResponseBody
+    public JSONArray getToppings() {
+        RestTemplate restTemplate = new RestTemplate();
+        String getToppingsUrl = baseUrl + toppingsUrl + "topping";
+        ServerResponseMessage responseMessage = restTemplate.getForObject(getToppingsUrl, ServerResponseMessage.class);
+
+        JSONArray jsonArray = new JSONArray();
+        for (int i = 0; i < responseMessage.getData().size(); i++) {
+            JSONObject jsonObject = responseMessage.getData().get(i);
+            jsonArray.add(jsonObject);
+        }
+        return jsonArray;
+    }
 
 
 }
