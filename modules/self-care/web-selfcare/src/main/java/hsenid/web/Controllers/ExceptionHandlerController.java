@@ -9,9 +9,9 @@ import org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolv
 @EnableWebMvc
 public class ExceptionHandlerController extends DefaultHandlerExceptionResolver {
 
-    @ExceptionHandler(Exception.class)
+  /*  @ExceptionHandler(Exception.class)
     public String handleNoSuchMethodtFoundException(Exception ex){
         return "locations";
     }
-
+*/
 }
