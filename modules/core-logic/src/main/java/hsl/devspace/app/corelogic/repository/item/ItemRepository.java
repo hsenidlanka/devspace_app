@@ -63,4 +63,6 @@ public interface ItemRepository {
 
     int countSearchKey(String itemKey);
 
+    List<List<Map<String, Object>>> retrieveItemDetailsForSearch(String itemkey, String category);
+
 }
