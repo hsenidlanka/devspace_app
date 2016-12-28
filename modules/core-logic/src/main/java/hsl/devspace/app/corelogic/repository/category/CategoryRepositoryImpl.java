@@ -12,7 +12,6 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.sql.DataSource;
 import java.sql.Date;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -130,7 +129,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
                 category.setImage(aMp.get("image").toString());
             }
             category.setCreator(aMp.get("creator").toString());
-            category.setCreatedDate(Timestamp.valueOf(aMp.get("created_date").toString()));
+            category.setCreatedDate(Date.valueOf(aMp.get("created_date").toString()));
             category.setStatus(aMp.get("status").toString());
             categories.add(category);
             // }
@@ -213,7 +212,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
                 category.setImage(mp.get(i).get("image").toString());
             }
             category.setCreator(mp.get(i).get("creator").toString());
-            category.setCreatedDate(Timestamp.valueOf(mp.get(i).get("created_date").toString()));
+            category.setCreatedDate(Date.valueOf(mp.get(i).get("created_date").toString()));
             category.setStatus(mp.get(i).get("status").toString());
 
             categories.add(category);
@@ -239,7 +238,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
                 category.setImage(mp.get(i).get("image").toString());
             }
             category.setCreator(mp.get(i).get("creator").toString());
-            category.setCreatedDate(Timestamp.valueOf(mp.get(i).get("created_date").toString()));
+            category.setCreatedDate(Date.valueOf(mp.get(i).get("created_date").toString()));
             category.setStatus(mp.get(i).get("status").toString());
 
             categories.add(category);
@@ -529,7 +528,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
                 category.setImage(mp.get(i).get("image").toString());
             }
             category.setCreator(mp.get(i).get("creator").toString());
-            category.setCreatedDate(Timestamp.valueOf(mp.get(i).get("created_date").toString()));
+            category.setCreatedDate(Date.valueOf(mp.get(i).get("created_date").toString()));
             category.setStatus(mp.get(i).get("status").toString());
 
             categories.add(category);
