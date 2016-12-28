@@ -1014,6 +1014,11 @@ public class StaffRepositoryImpl implements UserRepository {
     }
 
     @Override
+    public List<User> selectNonVerifiedUsers(int limit, int page) {
+        return null;
+    }
+
+    @Override
     public void changeStatusToActiveFromNotVerified(String username, String code) {
 
     }

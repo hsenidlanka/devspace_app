@@ -112,6 +112,8 @@ public interface UserRepository {
 
     int addVerificationCode(String username, String code);
 
+    List<User> selectNonVerifiedUsers(int limit, int page);
+
     void changeStatusToActiveFromNotVerified(String username, String code);
 
 
