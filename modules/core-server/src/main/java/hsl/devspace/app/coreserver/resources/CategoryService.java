@@ -11,12 +11,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 
-import javax.ws.rs.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Kasun Dinesh on 9/26/16.
@@ -29,7 +31,7 @@ public class CategoryService {
     CategoryRepositoryImpl categoryRepository = (CategoryRepositoryImpl) context.getBean("categoryRepoImpl");
     private ServerModel serverModel = (ServerModel) context.getBean("serverModel");
     final String BASE_URL = serverModel.getBaseUrl();
-    PropertyReader propertyReader=new PropertyReader("header.properties");
+    PropertyReader propertyReader = new PropertyReader("header.properties");
 
     // Retrieve all the categories
     @GET
@@ -47,13 +49,13 @@ public class CategoryService {
 
         if (categoryList.size() != 0) {
             successMessage.setMessage("categories retrieved");
-            for (int i=0; i<categoryList.size(); i++) {
+            for (int i = 0; i < categoryList.size(); i++) {
                 JSONObject jsonObject = new JSONObject();
-                category= (Category) categoryList.get(i);
+                category = (Category) categoryList.get(i);
                 jsonObject.put("name", category.getCategoryName());
                 jsonObject.put("description", category.getCatDescription());
                 successMessage.addData(jsonObject);
-                successMessage.addLink(BASE_URL+"subcategories/category/"+category.getCategoryName().replaceAll(" ","%20"), "subcategories of "+category.getCategoryName().toString());
+                successMessage.addLink(BASE_URL + "subcategories/category/" + category.getCategoryName().replaceAll(" ", "%20"), "subcategories of " + category.getCategoryName().toString());
             }
         } else {
             successMessage.setMessage("no categories to retrieve");
