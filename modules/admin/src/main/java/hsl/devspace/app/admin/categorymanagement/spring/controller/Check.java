@@ -53,8 +53,10 @@ public class Check {
 
     //handler method to retrieve the edit details in a sub-category record
     @RequestMapping(value = "/subcategory/edit", method = RequestMethod.GET)
-    public @ResponseBody  Map<String, Object> editSubCategory(@RequestParam("subcatId") String subcatId){
+    public @ResponseBody  Map<String, Object> editSubCategory(@RequestParam("subcatId") String subcatId,
+                                                              @RequestParam("catValue") String catValue){
 
+        LOG.error("category value in sub-category view page:{}",catValue);
         int subcatIdInt = Integer.parseInt(subcatId);
         Category category=subcategoryRepository.selectSubCategoryDetail(subcatIdInt);
         LOG.info("the selected SUB category detail{}", category);
@@ -64,6 +66,7 @@ public class Check {
         map.put("name",category.getSubCategoryName());
         map.put("description",category.getSubcatDescription());
         map.put("creator",category.getCreator());
+        map.put("catName",catValue);
 
         LOG.info("the SUB CAT map in edit form{}", map);
         return map;
@@ -194,6 +197,7 @@ public class Check {
             map.put("name", subcategory.getSubCategoryName());
             map.put("description", subcategory.getSubcatDescription());
             map.put("creator", subcategory.getCreator());
+            map.put("created_date", subcategory.getCreatedDate());
             map.put("cat_id", subcategory.getCategory_id());
             outc.add(map);
         }

@@ -268,7 +268,7 @@ public class CategoryController {
     }
 
 
-    //handler method to retrieve the details of categories to view
+    //handler method to retrieve the details of categories to view in typehead filter
     @RequestMapping(value = "/view/categoryTable/catName", method = RequestMethod.GET)
     public @ResponseBody List<Map<String, Object>> viewCategoriesNameFiltered(@ModelAttribute("category")  Category category,
                                                                               @RequestParam("initPage") String initPage,
@@ -312,6 +312,7 @@ public class CategoryController {
             map.put("name", category.getCategoryName());
             map.put("description", category.getCatDescription());
             map.put("creator", category.getCreator());
+            map.put("created_date", category.getCreatedDate());
             map.put("status", v1);
 
             LOG.info("newCategory {}", category);
@@ -363,12 +364,10 @@ public @ResponseBody  Map<String, Object> editCategory(@RequestParam("id") int i
 public ModelAndView saveEditCategory(@ModelAttribute("editCategory") Category editCategory,
                                      @RequestParam("catName") String oldCatName) {
 
-    LOG.info("OLLLLDD CAT name {}", oldCatName);
+    LOG.error("OLLLLDD CAT name {}", oldCatName);
     String catName=editCategory.getCategoryName();
-    LOG.info("EDIT CATEGORY name {}", catName);
-
-    MultipartFile imgFile=editCategory.getImageUrl();
-    LOG.info("ORIGINAL NAME: {}", imgFile.getOriginalFilename());
+    LOG.error("EDIT CATEGORY name {}", catName);
+    LOG.error("Edit Category object {}",editCategory);
 
     editCategory.setImage(editCategory.getCategoryName()+".jpg");
     String n5=editCategory.getImage();
@@ -380,9 +379,10 @@ public ModelAndView saveEditCategory(@ModelAttribute("editCategory") Category ed
             //create a directory in server and upload the image there
             String realPathtoUpload = context.getRealPath(serverPath);
             LOG.info("realPathtoUpload " + realPathtoUpload);
-
+            MultipartFile imgFile=editCategory.getImageUrl();
+            LOG.error("image file MULTIPART {}",imgFile);
             //function to update the existing Category image name or both
-           updateCatImage(realPathtoUpload,oldCatName,catName,imgFile);
+           updateCatImage(realPathtoUpload, oldCatName, catName, imgFile);
             JOptionPane.showMessageDialog(null, updateSuccess);
         }else
             JOptionPane.showMessageDialog(null,updateFail);
@@ -395,6 +395,7 @@ public ModelAndView saveEditCategory(@ModelAttribute("editCategory") Category ed
     ***/
     private void updateCatImage(String serverPath, String oldCatName, String newCatName, MultipartFile imageUploaded){
         //old and new files at local location
+        LOG.error("inside catImage update method");
         File localFileOld = new File(localPathtoUpload + oldCatName + ".jpg");
         File localFileNew = new File(localPathtoUpload + newCatName + ".jpg");
 
@@ -403,7 +404,8 @@ public ModelAndView saveEditCategory(@ModelAttribute("editCategory") Category ed
         File serverFileNew = new File(serverPath + newCatName + ".jpg");
 
         //in case new file is not uploaded, only file renaming is done according to the edited category name
-        if(imageUploaded.getOriginalFilename().equals("")) {
+
+        if(imageUploaded== null) {
             //rename the file at local location
             boolean local = localFileOld.renameTo(localFileNew);
             LOG.error("local file rename status {}", local);
@@ -413,13 +415,14 @@ public ModelAndView saveEditCategory(@ModelAttribute("editCategory") Category ed
 
             //in case new file is Uploaded, initial file is deleted and upload the new file with category name
         }else {
+            LOG.error("image upload original name: {}",imageUploaded.getOriginalFilename());
             //delete old one at local
             boolean localStatus=localFileOld.delete();
             if(localStatus){
                 uploadFile(imageUploaded,localPathtoUpload,newCatName);
                 LOG.error("local file{} uploadedsuccessfully",newCatName);
             }else
-                LOG.error("local file delete operation");
+                LOG.error("local file delete operation failed");
 
             //delete old at server
             boolean serverStatus=serverFileOld.delete();
@@ -427,7 +430,7 @@ public ModelAndView saveEditCategory(@ModelAttribute("editCategory") Category ed
                 uploadFile(imageUploaded, serverPath, newCatName);
                 LOG.error("server file{} deleted successfully",newCatName);
             }else
-                LOG.error("server file delete operation");
+                LOG.error("server file delete operation failed");
         }
     }
 
@@ -451,6 +454,24 @@ public @ResponseBody int deleteCategory(@RequestParam("catName") String catName)
     //finally delete the category
     int catdeleteReturn=categoryRepository.delete(catName);
     LOG.info("delete result:{}", catdeleteReturn);
+
+    File localFileOld = new File(localPathtoUpload + catName + ".jpg");
+    File serverFileOld = new File(serverPath + catName + ".jpg");
+
+    if(catdeleteReturn ==1){
+        boolean d1=localFileOld.delete();
+        if(d1 == true){
+            LOG.info("local category image deleted successfully");
+        }else
+            LOG.error("local category image deletion failed");
+
+        boolean d2=serverFileOld.delete();
+        if (d2== true)
+            LOG.info("server category image deleted successfully");
+        else
+            LOG.error("server category image deletion failed");
+    }else
+        LOG.error("Error in deleting category form the database");
 
     return catdeleteReturn;
 }

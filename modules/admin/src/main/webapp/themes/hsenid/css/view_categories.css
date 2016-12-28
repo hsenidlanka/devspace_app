@@ -63,3 +63,9 @@
 .removesubcat{
     color: red;
 }
+
+#editcategorydes {
+    height: 149px;
+    width: 369px;
+    margin: 0px -1px 0px 0px;
+}

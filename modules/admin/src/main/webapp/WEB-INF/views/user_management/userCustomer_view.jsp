@@ -67,7 +67,14 @@
                                 </label>
                             </div>
                             <div class="col-xs-3">
-
+                                <select id="selectVerifyOrNot">
+                                    <option value="Verified">
+                                        <fmt:message key="user.userview.customer.selectOption.verified" bundle="${bundle1}"/>
+                                    </option>
+                                    <option value="Not Verified">
+                                        <fmt:message key="user.userview.customer.selectOption.notverified" bundle="${bundle1}"/>
+                                    </option>
+                                </select>
                             </div>
                         </div>
                         <!--<div class="col-xs-2"></div>-->

@@ -220,36 +220,7 @@ $(document).ready(function () {
                 })
             }
 
-            if( (city != "--Select--") && (from == "") && (to == "") ) {
-                $.ajax({
-                    //type: "POST",
-                    url: "https://localhost:8443/admin/userFilters/customerTable/city",
-                    data: {"city": city, "initPage": pageSend, "pageLimit": pgLimit},
-                    success: function (msg) {
-                        //alert("city ajax" + city);
-                        $('#tableCustomer').bootstrapTable('load', msg);
-                    },
-                    error: function (e) {
-                        alert("ajax failed" + city + e);
-                    }
-                });
-            }
-            if( (from != "") && (to != "") && (city == "--Select--") ) {
-                $.ajax({
-                    //type: "POST",
-                    url: "https://localhost:8443/admin/userFilters/customerTable/date",
-                    data: {"from": from, "to": to, "name": cname, "initPage":pageSend, "pageLimit": pgLimit},
-                    success: function (msg) {
-                        //alert("ajax succ" + from +name +city);
-                        $('#tableCustomer').bootstrapTable('load', msg);
-                    },
-                    error: function (e) {
-                        alert("ajax failed" + e);
-                    }
-                });
-            }
-
-            if( (from != "") && (to != "") && (city != "--Select--")) {
+            if( (from != "") || (to != "") || (!(city == "--Select--"))) {
                 $.ajax({
                     //type: "POST",
                     url: "https://localhost:8443/admin/userFilters/customerTable/date/city",
@@ -712,61 +683,9 @@ $(document).ready(function () {
                     activeC.simplePaginator('setTotalPages', Math.ceil(recCount / pgLimit));
                 }
             });
-
-
-
         }
-        if( (city != "--Select--")  ){
-            $.ajax({
-                //type: "POST",
-                url:"https://localhost:8443/admin/userFilters/customerTable/city",
-                data: {"city":city,"initPage": "0", "pageLimit": pgLimit},
-                success: function (msg) {
-                    //alert("city ajax" + city);
-                    $('#tableCustomer').bootstrapTable('load', msg);
-                },
-                error: function (e) {
-                    alert("ajax failed" + city +e);
-                }
-            });
-            /**
-             *Setting the number of pages according to the number of records
-             */
-            $.ajax({
-                url: 'https://localhost:8443/admin/users/CustomerPaginationTable',
-                //data: {"searchCatNm": $("#txtViewSearchCategory").val()},
-                success: function (recCount) {
 
-                    activeC.simplePaginator('setTotalPages', Math.ceil(recCount / pgLimit));
-                }
-            });
-        }
-        if( (from != "") && (to != "")){
-            $.ajax({
-                //type: "POST",
-                url: "https://localhost:8443/admin/userFilters/customerTable/date",
-                data: {"from": from, "to": to, "name":name,"initPage": "0", "pageLimit": pgLimit},
-                success: function (msg) {
-                    //alert("ajax succ" + from +name +city);
-                    $('#tableCustomer').bootstrapTable('load', msg);
-                },
-                error: function (e) {
-                    alert("ajax failed" + e);
-                }
-            });
-            /**
-             *Setting the number of pages according to the number of records
-             */
-            $.ajax({
-                url: 'https://localhost:8443/admin/users/CustomerPaginationTable',
-                //data: {"searchCatNm": $("#txtViewSearchCategory").val()},
-                success: function (recCount) {
-
-                    activeC.simplePaginator('setTotalPages', Math.ceil(recCount / pgLimit));
-                }
-            });
-        }
-        if( (from != "") && (to != "") && (city != "--Select--")){
+        if( (from != "") || (to != "") || (!(city == "--Select--"))){
             $.ajax({
                 //type: "POST",
                 url: "https://localhost:8443/admin/userFilters/customerTable/date/city",

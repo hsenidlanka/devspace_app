@@ -12,7 +12,7 @@ $(document).ready(function () {
         success: function (result) {
 
             $('#tableSubCategory').bootstrapTable({
-                height: 300,
+                height: 360,
                 pagination: false,
                 clickToSelect: true,
                 singleSelect: true,
@@ -41,6 +41,12 @@ $(document).ready(function () {
                     field: 'creator',
                     title: 'Creator:',
                     align: 'left'
+                },{
+                    field: 'created_date',
+                    title: 'Created Date:',
+                    align: 'left',
+                    sortable: true
+
                 }, {
                     field: 'Options',
                     title: 'Operations :',
@@ -83,11 +89,13 @@ window.operateEvents6 = {
         $.ajax({
             //type: "POST",
             url: "https://localhost:8443/admin/subcategory/edit",
-            data: {"subcatId":subcatId},
+            data: {"subcatId":subcatId,"catValue":value1},
             success: function(msg){
                 $('#subcategoryid').val(msg["id"]);
                 $('#editsubcategoryname').val(msg["name"]);
                 $('#editsubcategorydes').val(msg["description"]);
+                $('#cat_name').val(msg["catName"]);
+
                 $('#subcatmodifyModel').modal({show:true});
             },
             error:function(e){

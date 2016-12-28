@@ -197,6 +197,7 @@
                                             readonly="true"/>
                             </div>
                         </div>
+
                         <div class="form-group">
                             <label for="editsubcategoryname" class="control-label col-sm-4">
                                 <fmt:message key="category.categoryedit.modal.name" bundle="${bundle1}" />
@@ -215,6 +216,7 @@
                             <div class="col-sm-8">
                                 <form:textarea path="subcatDescription" type="text" class="form-control" id="editsubcategorydes"></form:textarea>
                             </div>
+                            <form:input  path="categoryName" type="hidden" name="cat_name" id="cat_name"/> >
                         </div>
 
                         <div class="modal-footer" style="height:10px">
