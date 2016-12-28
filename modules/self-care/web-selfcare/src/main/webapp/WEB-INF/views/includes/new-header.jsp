@@ -50,7 +50,8 @@
 
                     <li>
 
-                        <a id="loginBtn" class="form-group-sm" data-toggle="modal" data-target="#modal-login" data-backdrop="static"><img
+                        <a id="loginBtn" class="form-group-sm" data-toggle="modal" data-target="#modal-login"
+                           data-backdrop="static"><img
                                 src="<c:url value="/resources/images/user2.png"/>" style=""></span> </a>
                     </li>
 
@@ -87,13 +88,14 @@
                             <li>
                                 <div class="navbar-login navbar-login-session">
                                     <div class="row">
-                                        <div class="col-xs-6" >
-                                            <a href="/web-selfcare/profile" class="btn btn-primary" >View Profile</a>
+                                        <div class="col-xs-6">
+                                            <a href="/web-selfcare/profile" class="btn btn-primary">View Profile</a>
                                         </div>
-                                        <div class="col-xs-6" >
-                                                <a href="/web-selfcare/logout" class="btn btn-danger">
-                                                    <span style="vertical-align: middle"><i class="fa fa-power-off" aria-hidden="true"></i> Log Out</span>
-                                                </a>
+                                        <div class="col-xs-6">
+                                            <a href="/web-selfcare/logout" class="btn btn-danger">
+                                                <span style="vertical-align: middle"><i class="fa fa-power-off"
+                                                                                        aria-hidden="true"></i> Log Out</span>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -148,40 +150,45 @@
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-sm-10">
-                            <img  src="/web-selfcare/resources/images/logo.png" style=" width:50px;height:50px;">
+                            <img src="/web-selfcare/resources/images/logo.png" style=" width:50px;height:50px;">
+
                             <h3 style="margin-top: 15px;display: inline-block;">Please Log in</h3>
                         </div>
                         <div class="col-sm-2">
-                            <a type="button" class="btn" data-dismiss="modal" style="margin-top: 10px; margin-left: 35px; color: #888"><i class="fa fa-window-close fa-2x" aria-hidden="true"></i></a>
+                            <a type="button" class="btn" data-dismiss="modal"
+                               style="margin-top: 10px; margin-left: 35px; color: #888"><i
+                                    class="fa fa-window-close fa-2x" aria-hidden="true"></i></a>
                         </div>
                     </div>
                 </div>
 
-                <div class="modal-body panel-body" style="margin-top: 1px; margin-bottom: 10px">
-                    <div id="blockedUser">
-
-                    </div>
-                    <br>
+                <div class="modal-body panel-body" style="margin-top: 1px;">
+                    <div id="blockedUser"></div>
                     <form>
-                        <div class="row">
-                            <div class="row">
-                                <label for="loginUsername" class="col-sm-4" style="text-align: center">Username</label>
-                                <input type="text" style="border:1px solid #cccccc" id="loginUsername" class="col-sm-8" name="loginUsername" placeholder="Enter username">
-                            </div>
 
-                            <div style="margin-top: 20px; margin-left: 200px" id="usernameError" class="error-labels"></div>
+                        <div class="form-group">
+                            <label for="loginUsername" class="control-label" style="text-align: center"><h4><strong>Username</strong></h4></label>
+                            <input type="text" style="border:1px solid #cccccc" id="loginUsername"
+                                   class="form-control input-md" name="loginUsername"
+                                   placeholder="Enter username">
 
+                            <div style="margin-left: 15px; margin-top: 16px" id="usernameError" class="error-labels"></div>
                         </div>
 
-                        <div class="row">
-                            <label for="loginPassword" class="col-sm-4" style="text-align: center">Password</label>
-                            <input type="password" style="border:1px solid #cccccc" id="loginPassword" class="col-sm-8" name="loginPassword" placeholder="Enter password">
-                            <div style="margin-top: 45px; margin-left: 200px;" id="passwordError2" class="error-labels"></div>
+
+                        <div class="form-group">
+                            <label for="loginPassword" class="control-label" style="text-align: center"><h4><strong>Password</strong></h4></label>
+                            <input type="password" style="border:1px solid #cccccc" id="loginPassword"
+                                   class="form-control input-md" name="loginPassword"
+                                   placeholder="Enter password">
+
+                            <div style="margin-left: 15px; margin-top: 16px" id="passwordError2" class="error-labels"></div>
                         </div>
                         <br>
                         <center>
-                            <div class="row">
-                                <button id="loginFormSubmit" name="loginFormSubmit" type="button" class="btn btn-success" data-dismiss="modal">
+                            <div class="form-group">
+                                <button style="width: 100%" id="loginFormSubmit" name="loginFormSubmit" type="button"
+                                        class="btn btn-success" data-dismiss="modal">
                                     <i class="fa fa-sign-in" aria-hidden="true"></i> Log in
                                 </button>
                             </div>
