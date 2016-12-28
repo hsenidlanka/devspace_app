@@ -150,12 +150,12 @@ $(document).ready(function () {
                 $('<p align="left" style="color: red; margin-left: -12px; margin-top: -12px; margin-bottom: 12px;">Please provide a valid username</p>').appendTo('#unameError');
             }
 
-            if(registerPass1.length <= 0){
-                $('<p align="left" style="color: red; margin-left: -12px; margin-top: -12px; margin-bottom: 12px;">Please provide a password</p>').appendTo('#passwordError');
+            if(registerPass1.length < 6){
+                $('<p align="left" style="color: red; margin-left: -12px; margin-top: -12px; margin-bottom: 12px;">Please provide a password with more than 6 characters</p>').appendTo('#passwordError');
             }
 
-            if(registerPass2.length <= 0){
-                $('<p align="left" style="color: red; margin-left: -12px; margin-top: -12px; margin-bottom: 12px;">Please provide a confirm password</p>').appendTo('#rePasswordError');
+            if(registerPass2.length < 6){
+                $('<p align="left" style="color: red; margin-left: -12px; margin-top: -12px; margin-bottom: 12px;">Please provide a password with more than 6 characters</p>').appendTo('#rePasswordError');
             }
             return false;
         }
@@ -218,8 +218,8 @@ $(document).ready(function () {
             if (loginUsername.length <= 0) {
                 $('<p align="left" style="color: red; margin-left: -12px; margin-top: -12px; margin-bottom: 12px;">Please provide a valid username</p>').appendTo('#usernameError');
             }
-            if (loginPassword.length <= 0) {
-                $('<p align="left" style="color: red; margin-left: -12px; margin-top: -12px; margin-bottom: 12px;">Please provide a valid password</p>').appendTo('#passwordError2');
+            if (loginPassword.length < 6) {
+                $('<p align="left" style="color: red; margin-left: -12px; margin-top: -12px; margin-bottom: 12px;">Please provide a password with more than 8 characters</p>').appendTo('#passwordError2');
             }
             return false;
         }

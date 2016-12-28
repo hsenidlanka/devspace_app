@@ -92,10 +92,10 @@
                                     <div class="row itemSearchBar">
 
                                         <div class="col-sm-8">
-                                            <input class="form-control" id="txtViewSearchPkg" type="text"/>
+                                            <input class="form-control" id="txtViewSearchItem" type="text"/>
                                         </div>
                                         <div class="col-sm-4">
-                                            <button type="button" class="btn btn-success" id="btnViewSearchPkg"><span
+                                            <button type="button" class="btn btn-success" id="btnViewSearchItem"><span
                                                     class="glyphicon glyphicon-search"></span> Search
                                             </button>
                                         </div>
@@ -107,20 +107,21 @@
 
                     <div class="form-group">
                         <div class="row">
-                            <div id="filterCatDiv" style="display: none">
-                                <div class="col-xs-2" style="text-align: right">
-                                    <label>Category:</label>
+                            <div id="filterCatDiv" style="display: none" class="col-xs-4">
+                                <div class="col-xs-3" style="text-align: right">
                                 </div>
-                                <div class="col-xs-2">
-                                    <select class="form-control" id="selectCatFltr"></select>
+                                <div class="col-xs-9">
+                                    <select class="form-control" id="selectCatFltr">
+                                        <option>--Category--</option>
+                                    </select>
                                 </div>
                             </div>
-                            <div id="filterSubcatDiv" style="display: none">
-                                <div class="col-xs-2" style="text-align: right">
-                                    <label>Sub-category:</label>
-                                </div>
-                                <div class="col-xs-2">
-                                    <select class="form-control" id="selectSubCatFltr"></select>
+                            <div id="filterSubcatDiv" style="display: none" class="col-xs-4">
+                                <div class="col-xs-3"></div>
+                                <div class="col-xs-9">
+                                    <select class="form-control" id="selectSubCatFltr">
+                                        <option>--Sub-category--</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>

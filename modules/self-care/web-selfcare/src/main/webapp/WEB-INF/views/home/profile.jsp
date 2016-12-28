@@ -57,7 +57,7 @@
 </head>
 <body>
 <%@include file="../includes/new-header.jsp" %>
-
+${userDataProfile.title}
 <div class="navbar navbar-inverse navbar-fixed-left leftsidemenu" style="height: 100%">
     <%--<a class="navbar-brand" href="#">Brand</a>--%>
     <ul class="nav navbar-nav" >

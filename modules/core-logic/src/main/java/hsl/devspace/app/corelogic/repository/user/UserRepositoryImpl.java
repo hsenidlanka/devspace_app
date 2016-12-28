@@ -667,4 +667,24 @@ public  class UserRepositoryImpl implements UserRepository {
 
     }
 
+    public int checkVerificationCodeAvailability(String username, String code) {
+        int availability = 0;
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT verification_code FROM verification_code WHERE customer_id=(SELECT id FROM customer WHERE username=?) ORDER BY id DESC LIMIT 1", username);
+        if (mp.size() != 0 && mp.get(0).get("verification_code").toString().equals(code)) {
+            availability = 1;
+        }
+        System.out.println(availability);
+        return availability;
+
+    }
+
+    public void changeStatusToActiveFromNotVerified(String username, String code) {
+        int stat = checkVerificationCodeAvailability(username, code);
+        if (stat == 1) {
+            String sql = "UPDATE customer SET status=1 WHERE username = ?";
+            int row = jdbcTemplate.update(sql, new Object[]{username});
+            log.info("{} activate status", row);
+        }
+    }
+
 }

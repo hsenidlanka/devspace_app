@@ -28,7 +28,7 @@
           </div>
           <form>
           <div style="display: inline-block; float:right;">
-            <div class="form-group">
+            <div class="form-group row">
               <div class="col-sm-10" style="padding-right: 0px;">
                 <input id="txt-menu-search" name="txt-menu-search" type="text"
                             class="form-control input-sm"/>
@@ -38,6 +38,26 @@
                 <button class="btn btn-primary input-sm" id="btn-menu-search" type="button"><span><i
                         class="glyphicon glyphicon-search"></i></span></button>
               </div>
+              <div id="div_source1">
+                <select id="ch_user1">
+                  <%--<option value="select"></option>--%>
+                </select>
+              </div>
+              <script>
+                $.ajax({
+                  type: "GET",
+                  url: "http://localhost:2222/pizza-shefu/api/v1.0/categories/list",
+                  dataType: "json",
+                  success: function (data) {
+                    $.each(data.data, function (i, obj) {
+                      alert(obj.name + ":" + obj.name);
+                      var div_data = "<option value=" + obj.name + ">" + obj.name + "</option>";
+                      alert(div_data);
+                      $(div_data).appendTo('#ch_user1');
+                    });
+                  }
+                });
+              </script>
               <%--<script>
                 $.ajax("home/search-menu")
                         .done(function (result) {
@@ -1598,6 +1618,7 @@
 <script>
   $("#btn-menu-search").click(function () {
     var searchKey = $("#txt-menu-search").val();
+    var category = $("#ch_user1").val();
     if ($("#txt-menu-search").val().length == 0) {
       $("#txt-menu-search").css("border-color", "red");
       $.notify(" Search field is empty...", {
@@ -1609,7 +1630,7 @@
         background: "#D44950"
       });
     } else {
-      window.location.href = window.location.href + "/" + searchKey;
+      window.location.href = window.location.href + "/" + searchKey + "/" + category;
 
     }
     /*$.ajax({

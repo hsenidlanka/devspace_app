@@ -7,20 +7,6 @@
     <script src="<c:url value="/resources/js/prettify.js"/>"></script>
     <script src="<c:url value="/resources/js/loader.js"/>"></script>
 
-    <style>
-        .status {
-            display: inline;
-            visibility: hidden;
-            width: 15px
-        }
-
-        .IMGself {
-            vertical-align: -10px;
-            width: 15px;
-            visibility: hidden
-        }
-    </style>
-
     <script>
         $(document).ready(function () {
 

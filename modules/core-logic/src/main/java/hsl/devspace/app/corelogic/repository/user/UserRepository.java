@@ -112,5 +112,7 @@ public interface UserRepository {
 
     int addVerificationCode(String username, String code);
 
+    void changeStatusToActiveFromNotVerified(String username, String code);
+
 
 }
