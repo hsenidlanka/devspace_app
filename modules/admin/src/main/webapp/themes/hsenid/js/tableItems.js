@@ -97,11 +97,21 @@ $(document).ready(function () {
      * */
     $("#txtViewSearchItem").keyup(function () {
 
+        var cat = null;
+        var subcat = null;
+
+        if($("#catCheck").is(":checked")){
+            cat = $("#selectCatFltr").val();
+        }
+        if($("#subCatCheck").is(":checked")){
+            subcat = $("#selectSubCatFltr").val();
+        }
 
         $.ajax({
             type: "GET",
             url: "https://localhost:8443/admin/items/typeahedItmNm",
             dataType: "JSON",
+            data:{"cat":cat, "subcat":subcat},
             success: function (data) {
                 console.log(data);
                 $('#txtViewSearchItem').typeahead({
