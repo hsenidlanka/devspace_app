@@ -371,9 +371,26 @@ public class ItemController {
     @RequestMapping(value = "/typeahedItmNm", method = RequestMethod.GET)
     public
     @ResponseBody
-    List<String> typeaheadName() {
+    List<String> typeaheadName(HttpServletRequest request) {
 
-        return item.selectNameList();
+        String cat = request.getParameter("cat");
+        String subcat = request.getParameter("subcat");
+        List<String> resultList = null;
+
+        try {
+            if (cat != null) {
+
+            } else if (subcat != null) {
+
+            } else {
+                resultList = item.selectNameList();
+            }
+        } catch (Exception e) {
+            LOGGER.error("error in typeahead: {}", e);
+        }
+
+
+        return resultList;
     }
 
 
