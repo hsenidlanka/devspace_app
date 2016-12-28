@@ -110,13 +110,13 @@
                     <div class="col-xs-6">
                       <div class="col-xs-4">
                         <form:select path="title" class="form-control" id="selectTitle" style="width: 65px">
-                          <form:option value="mr">
+                          <form:option value="Mr">
                               <fmt:message key="user.useradd.form.title.mr" bundle="${bundle1}"/>
                           </form:option>
-                          <form:option value="mrs">
+                          <form:option value="Mrs">
                               <fmt:message key="user.useradd.form.title.mrs" bundle="${bundle1}" />
                           </form:option>
-                          <form:option value="miss">
+                          <form:option value="Miss">
                               <fmt:message key="user.useradd.form.title.miss" bundle="${bundle1}" />
                           </form:option>
                         </form:select>
@@ -173,8 +173,19 @@
                   <div class="col-xs-8">
                       <div class="col-xs-6">
                           <div class="col-xs-12">
-                            <form:input path="addressL3" class="form-control" id="city" placeholder="City" type="text"
-                                        style="width: 200px" required="required"/>
+                              <form:select path="addressL3" class="form-control" id="city" placeholder="City"
+                                           style="width: 200px" required="required">
+                                  <form:option value="City Select"><fmt:message key="user.customer.select" bundle="${bundle1}" />
+                                  </form:option>
+                                  <form:option value="Colombo"><fmt:message key="user.staff.branch1" bundle="${bundle1}" />
+                                  </form:option>
+                                  <form:option value="Gampaha"><fmt:message key="user.staff.branch2" bundle="${bundle1}" />
+                                  </form:option>
+                                  <form:option value="Ja-Ela"><fmt:message key="user.staff.branch3" bundle="${bundle1}" />
+                                  </form:option>
+                                  <form:option value="Kadana"><fmt:message key="user.staff.branch4" bundle="${bundle1}" />
+                                  </form:option>
+                              </form:select>
                           </div>
                       </div>
                       <div class="col-xs-6">

@@ -3,7 +3,7 @@
  */
 
 $(document).ready(function () {
-    var pgLimit = 3;
+    var pgLimit = 5;
     /**
      * ajax function for getting records count
      */
@@ -12,7 +12,7 @@ $(document).ready(function () {
     $.ajax({
         url: 'https://localhost:8443/admin/category/CategoryPaginationTable',
         success: function (recCount) {
-            pag.simplePaginator('setTotalPages', Math.ceil(recCount / 3));
+            pag.simplePaginator('setTotalPages', Math.ceil(recCount /pgLimit));
         }
     });
 
@@ -125,7 +125,7 @@ $(document).ready(function () {
                 //data: {"searchCatNm": $("#txtViewSearchCategory").val()},
                 success: function (recCount) {
 
-                    pag2.simplePaginator('setTotalPages', Math.ceil(recCount / 3));
+                    pag2.simplePaginator('setTotalPages', Math.ceil(recCount / pgLimit));
                 }
             })
         }
@@ -160,7 +160,7 @@ $(document).ready(function () {
             //data: {"searchCatNm": $("#txtViewSearchCategory").val()},
             success: function (recCount) {
 
-                pag2.simplePaginator('setTotalPages', Math.ceil(recCount / 3));
+                pag2.simplePaginator('setTotalPages', Math.ceil(recCount / pgLimit));
             }
         })
 

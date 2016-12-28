@@ -13,9 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -28,7 +28,7 @@ public class ItemFilter {
     private ItemRepository item;
 
     @Autowired
-    private CategoryRepository categoryRepository ;
+    private CategoryRepository categoryRepository;
 
     @Autowired
     private SubCategoryRepositoryImpl subCategoryRepository;
@@ -47,26 +47,29 @@ public class ItemFilter {
     }
 
 
-/*
-* load sub-category list from database
-* */
+    /*
+    * load sub-category list from database
+    * */
     @RequestMapping(value = "/subcategoryList", method = RequestMethod.GET)
     public
     @ResponseBody
-    List<String> gatSubCatList(@RequestParam("catName")String categoryNm) {
+    List<String> gatSubCatList(HttpServletRequest request) {
 
-        LOGGER.trace("category name for item filter: {}",categoryNm);
+        String categoryNm = request.getParameter("catName");
+        LOGGER.trace("category name for item filter: {}", categoryNm);
+
         List<String> subCat = null;
-
-        if(categoryNm != null){
-            subCat = subCategoryRepository.retrieveSubcatogories(categoryNm);
-            LOGGER.trace("Sub-cat List in item filter with category name{}", subCat);
+        try {
+            if (categoryNm == null) {
+                subCat = subCategoryRepository.selectCategoryNames();
+                LOGGER.trace("Sub-cat List in item filter 2{}", subCat);
+            } else {
+                subCat = subCategoryRepository.retrieveSubcatogories(categoryNm);
+                LOGGER.trace("Sub-cat List in item filter with category name{}", subCat);
+            }
+        } catch (Exception e) {
+            LOGGER.error("Error in loading sub-cat list {}", e);
         }
-        else{
-            subCat = subCategoryRepository.retrieveSubcatogories(categoryNm);
-            LOGGER.trace("Sub-cat List in item filter{}", subCat);
-        }
-
         return subCat;
     }
 }

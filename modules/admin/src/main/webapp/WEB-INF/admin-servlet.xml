@@ -15,24 +15,14 @@
 
     <mvc:annotation-driven/>
     <context:component-scan base-package="hsl.devspace.app.admin.*" />
-
-    <mvc:resources mapping="/themes/**" location="/themes/" />
-    <!--<mvc:view-controller path="/" view-name="home"/>-->
     <context:component-scan base-package="hsl.devspace.app.admin.test.*"/>
 
+    <mvc:resources mapping="/themes/**" location="/themes/" />
     <!--<mvc:resources mapping="/resources/**" location="/resources/" />-->
-
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <!--<property name="prefix" value="/WEB-INF/views" />-->
-        <property name="prefix" value="/WEB-INF/views/" />
-        <property name="suffix" value=".jsp" />
-    </bean>
-
-    <bean id="userValidator" class="hsl.devspace.app.admin.usermanagement.spring.validator.UserValidator"/>
 
 
     <!--It pulls values from a properties file into bean definitions
-    enable to obtain values in a jsp file or in controller.-->
+ enable to obtain values in a jsp file or in controller.-->
     <bean id="connectionProperties"
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations" >
@@ -43,6 +33,21 @@
             </list>
         </property>
     </bean>
+
+    <!--Exception,View, or Handler Resolvers -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--<property name="prefix" value="/WEB-INF/views" />-->
+        <property name="prefix" value="/WEB-INF/views/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+
+
+
+    <bean id="userValidator" class="hsl.devspace.app.admin.usermanagement.spring.validator.UserValidator"/>
+
+    <!-- Configures Handler Interceptors -->
+
+
 
     <!--import the datasource configuration file from core-logic module-->
     <import resource="classpath*:session-factory-config.xml"/>

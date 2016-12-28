@@ -3,7 +3,7 @@
  */
 
 $(document).ready(function () {
-    var pgLimit = 3;
+    var pgLimit = 5;
     var value1=$("table").attr("data-value");
 
     /**
@@ -19,7 +19,7 @@ $(document).ready(function () {
         url: 'https://localhost:8443/admin/SubCategoryPaginationTable',
         data:{"catName":value1},
         success: function (recCount) {
-            pagSubCat.simplePaginator('setTotalPages', Math.ceil(recCount / 3));
+            pagSubCat.simplePaginator('setTotalPages', Math.ceil(recCount / pgLimit));
         }
     });
 
@@ -127,7 +127,7 @@ $(document).ready(function () {
                 url: 'https://localhost:8443/admin/SubCategoryPaginationTable',
                 data:{"catName":value1},
                 success: function (recCount) {
-                    pagSubCat2.simplePaginator('setTotalPages', Math.ceil(recCount / 3));
+                    pagSubCat2.simplePaginator('setTotalPages', Math.ceil(recCount /pgLimit));
                 }
             });
         }
