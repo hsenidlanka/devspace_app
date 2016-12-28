@@ -31,7 +31,7 @@ public class ItemFilter {
     private CategoryRepository categoryRepository ;
 
     @Autowired
-    private SubCategoryRepositoryImpl subCategory;
+    private SubCategoryRepositoryImpl subCategoryRepository;
 
 
     /*
@@ -55,8 +55,18 @@ public class ItemFilter {
     @ResponseBody
     List<String> gatSubCatList(@RequestParam("catName")String categoryNm) {
 
-        List<String> subCat = subCategory.retrieveSubcatogories(categoryNm);
-        LOGGER.trace("get Sub-cat List in item filter{}", subCat);
+        LOGGER.trace("category name for item filter: {}",categoryNm);
+        List<String> subCat = null;
+
+        if(categoryNm != null){
+            subCat = subCategoryRepository.retrieveSubcatogories(categoryNm);
+            LOGGER.trace("Sub-cat List in item filter with category name{}", subCat);
+        }
+        else{
+            subCat = subCategoryRepository.retrieveSubcatogories(categoryNm);
+            LOGGER.trace("Sub-cat List in item filter{}", subCat);
+        }
+
         return subCat;
     }
 }
