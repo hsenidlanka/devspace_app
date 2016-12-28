@@ -159,7 +159,7 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
         category.setSubCategoryName(mp.get(0).get("name").toString());
         category.setSubcatDescription(mp.get(0).get("description").toString());
         category.setCreator(mp.get(0).get("creator").toString());
-        category.setCreatedDate(Timestamp.valueOf(mp.get(0).get("created_date").toString()));
+        category.setCreatedDate(Date.valueOf(mp.get(0).get("created_date").toString()));
 
 
         log.info("msg {}", category);

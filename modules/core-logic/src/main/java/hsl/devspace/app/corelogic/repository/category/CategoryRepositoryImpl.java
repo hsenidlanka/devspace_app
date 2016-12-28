@@ -40,7 +40,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
 
     /*Add new category*/
     @Override
-    public int add(Category category) {
+    public int     add(Category category) {
         int row = 0;
         if (category.getCategoryName() != null && category.getCatDescription() != null && category.getImage() != null && category.getCreator() != null && category.getStatus() != null) {
             String catNm = category.getCategoryName();
@@ -184,7 +184,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
             category.setImage(mp.get(0).get("image").toString());
         }
         category.setCreator(mp.get(0).get("creator").toString());
-        category.setCreatedDate(Timestamp.valueOf(mp.get(0).get("created_date").toString()));
+        category.setCreatedDate(Date.valueOf(mp.get(0).get("created_date").toString()));
         category.setStatus(mp.get(0).get("status").toString());
 
 
