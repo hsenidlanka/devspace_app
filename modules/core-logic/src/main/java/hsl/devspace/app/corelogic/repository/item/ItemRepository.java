@@ -67,4 +67,8 @@ public interface ItemRepository {
 
     List<List<Map<String, Object>>> retrieveItemDetailsForSearchBySubCategory(String itemkey, String subCategory);
 
+    List<String> searchItemNameByCategory(String itemkey, String category);
+
+    List<String> searchItemNameBySubCategory(String itemkey, String subCategory);
+
 }

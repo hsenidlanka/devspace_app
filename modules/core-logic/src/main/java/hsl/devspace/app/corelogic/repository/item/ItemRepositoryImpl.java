@@ -286,6 +286,10 @@ public class ItemRepositoryImpl implements ItemRepository {
     }
 
     /*search item details and size price for a given category and a search key*/
+
+    /**
+     * Don't change this method
+     */
     @Override
     public List<List<Map<String, Object>>> retrieveItemDetailsForSearch(String itemkey, String category) {
         String key = "%" + itemkey + "%";
@@ -327,9 +331,34 @@ public class ItemRepositoryImpl implements ItemRepository {
             listPrice.add(size);
         }
 
-
         log.info("{}=listPrice", listPrice);
         return listPrice;
+    }
+
+    @Override
+    public List<String> searchItemNameByCategory(String itemkey, String category) {
+        String key = "%" + itemkey + "%";
+        List<Map<String, Object>> itemDetails = jdbcTemplate.queryForList("SELECT i.name AS item_name FROM item i INNER JOIN sub_category s ON i.sub_category_id=s.id INNER JOIN category c ON c.id=s.category_id WHERE i.name LIKE ? AND c.name=? ", key, category);
+        List<String> nameList = new ArrayList<String>();
+        for (int k = 0; k < itemDetails.size(); k++) {
+            String name = itemDetails.get(k).get("item_name").toString();
+            nameList.add(name);
+        }
+        System.out.println(nameList);
+        return nameList;
+    }
+
+    @Override
+    public List<String> searchItemNameBySubCategory(String itemkey, String subCategory) {
+        String key = "%" + itemkey + "%";
+        List<Map<String, Object>> itemDetails = jdbcTemplate.queryForList("SELECT i.name AS item_name FROM item i INNER JOIN sub_category s ON i.sub_category_id=s.id INNER JOIN category c ON c.id=s.category_id WHERE i.name LIKE ? AND s.name=? ", key, subCategory);
+        List<String> nameList = new ArrayList<String>();
+        for (int k = 0; k < itemDetails.size(); k++) {
+            String name = itemDetails.get(k).get("item_name").toString();
+            nameList.add(name);
+        }
+        System.out.println(nameList);
+        return nameList;
     }
 
     /**
