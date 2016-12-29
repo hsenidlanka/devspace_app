@@ -78,7 +78,7 @@ public class MenuController {
 
         RestTemplate restTemplate = new RestTemplate();
         String getSubcatUrl = baseUrl + subcategoryListUrl + category; // Get sub-categories
-        String getItemsUrl = baseUrl + subcategoryItemsUrl; // Get items
+        String getItemsUrl = baseUrl + subcategoryItemsUrl; // Get items.
 
         ServerResponseMessage subcategoriesResponse = restTemplate.getForObject(getSubcatUrl, ServerResponseMessage.class);
         modelAndView.addObject("subcategories", subcategoriesResponse.getData());
