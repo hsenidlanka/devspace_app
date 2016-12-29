@@ -57,7 +57,7 @@
         <div class='circles'></div>
         <div class='circles'></div>
         <div class='circles'></div>
-        <h2 style="color: #f5f5f5; text-align: center;"><fmt:message key="new.header.contact" bundle="${lang}"/></h2>
+        <h2 style="color: #f5f5f5; text-align: center; margin-top: 5px"><fmt:message key="new.header.contact" bundle="${lang}"/></h2>
         <span class='arrow entypo-resize-full'></span>
     </div>
 
