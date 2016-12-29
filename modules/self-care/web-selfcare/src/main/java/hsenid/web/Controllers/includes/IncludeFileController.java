@@ -54,9 +54,9 @@ public class IncludeFileController {
         return "/includes/profile-info";
     }
 
-    /*@RequestMapping("/testcont")
-    public Exception testt(){
-        return new Exception("Test Exception");
-    }*/
+    @RequestMapping("/change-password")
+    public String changePassword(){
+        return "/includes/change-password";
+    }
 
 }
