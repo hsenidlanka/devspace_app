@@ -100,7 +100,7 @@ public class EmailService {
         email.setHtmlMsg(htmlMsg);
 
         // Set the alternative message if the email client does not support HTML messages
-        email.setTextMsg("Please use the follwing code to activate your code.\n" + verificationCode);
+        email.setTextMsg("Please use the following code to activate your code.\n" + verificationCode);
 
         email.addTo(receiverEmail);
         email.send();
