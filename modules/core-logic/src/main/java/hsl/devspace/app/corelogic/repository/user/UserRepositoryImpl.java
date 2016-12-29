@@ -678,13 +678,15 @@ public  class UserRepositoryImpl implements UserRepository {
 
     }
 
-    public void changeStatusToActiveFromNotVerified(String username, String code) {
+    public int changeStatusToActiveFromNotVerified(String username, String code) {
         int stat = checkVerificationCodeAvailability(username, code);
+        int row = 0;
         if (stat == 1) {
             String sql = "UPDATE customer SET status=1 WHERE username = ?";
-            int row = jdbcTemplate.update(sql, new Object[]{username});
+            row = jdbcTemplate.update(sql, new Object[]{username});
             log.info("{} activate status", row);
         }
+        return row;
     }
 
     public List<User> selectNonVerifiedUsers(int limit, int page) {
