@@ -75,9 +75,9 @@ public class CustomerService {
             jsonObject.put("firstName", user.getFirstName());
             jsonObject.put("lastName", user.getLastName());
             jsonObject.put("username", user.getUsername());
-            jsonObject.put("Email", user.getEmail());
-            jsonObject.put("AddressLine01", user.getAddressL1());
-            jsonObject.put("AddressLine02", user.getAddressL2());
+            jsonObject.put("email", user.getEmail());
+            jsonObject.put("addressLine01", user.getAddressL1());
+            jsonObject.put("addressLine02", user.getAddressL2());
             if (user.getAddressL3() != null) {
                 jsonObject.put("addressLine03", user.getAddressL3());
             }

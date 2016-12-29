@@ -48,8 +48,16 @@ $(document).ready(function () {
         });
     });
 
+    new jBox('Tooltip', {
+        attach: '.tooltip2',
+        theme: 'TooltipDark',
+        animation: 'zoomIn',
+        width: 250
+    });
+
     $("#sizes").change(function () {
         var selectedSize = $("#sizes").val();
+        //alert(selectedSize);
         var fldId = '#hiddenFld-' + selectedSize;
         $(this).closest("div").find("#lbl-sizeprice").text($(fldId).val());
     });

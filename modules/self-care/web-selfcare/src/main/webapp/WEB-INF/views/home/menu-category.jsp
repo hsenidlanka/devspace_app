@@ -8,9 +8,10 @@
     <script src="<c:url value="/resources/js/menu-operations.js"/>"></script>
     <link href="<c:url value="/resources/css/component.css"/>" rel="stylesheet" type="text/css">
     <link href="<c:url value="/resources/css/default.css"/>" rel="stylesheet" type="text/css">
-    <link href="<c:url value="/resources/css/teskly.viewitle.css"/>" rel="stylesheet" type="text/css">
+    <link href="<c:url value="/resources/css/jBox.css"/>" rel="stylesheet" type="text/css">
+    <link href="<c:url value="/resources/css/TooltipDark.css"/>" rel="stylesheet" type="text/css">
     <script src="<c:url value="/resources/js/modernizr.custom.js"/>"></script>
-    <script src="<c:url value="/resources/js/teskly.viewitle.js"/>"></script>
+    <script src="<c:url value="/resources/js/jBox.min.js"/>"></script>
 </head>
 <body>
 <%@include file="../includes/new-header.jsp" %>
@@ -51,12 +52,21 @@
                                     </c:if>
                                     <div class="col-md-3">
                                         <ul class="grid cs-style-3">
-                                            <li data-teskly-viewitled="<c:out value="${itemData.description}"/>">
-                                                <figure>
-<%--To change--%>
-
-                                                    <c:set var="itemName" value="${fn:replace(itemData.name, ' ', '')}" />
-                                                    <img class="menu-images" src="${itemImageUrl}/${itemName}.jpg" width="200px" height="200px">
+                                            <li>
+                                                <c:choose>
+                                                    <c:when test="${empty itemData.description}">
+                                                        <c:set var="itemDescription" value="No description available." scope="page"/>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <c:set var="itemDescription" value="${itemData.description}" scope="page"/>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                                <figure class="tooltip2"
+                                                        title="<c:out value="${itemDescription}"/>">
+                                                    <c:set var="itemName"
+                                                           value="${fn:replace(itemData.name, ' ', '')}"/>
+                                                    <img class="menu-images" src="${itemImageUrl}/${itemName}.jpg"
+                                                         width="200px" height="200px">
                                                     <figcaption class="caption">
                                                         <input type="hidden" id="menu-item-desc"
                                                                value="<c:out value="${itemData.description}"/>"/>
@@ -77,8 +87,10 @@
                                                                            value="${fn:toUpperCase(substringSize)}"/>
 
                                                                     <c:out value="${formattedSize}"/>:&nbsp;<label id="pizza-price-<c:out
-                                                                        value="${itemData.price[loop.index]['size']}"/>"><fmt:formatNumber type="currency" currencySymbol=""
-                                                                                                                                           maxFractionDigits="2" groupingUsed="false" value="${itemData.price[loop.index]['price']}"/>
+                                                                        value="${itemData.price[loop.index]['size']}"/>"><fmt:formatNumber
+                                                                        type="currency" currencySymbol=""
+                                                                        maxFractionDigits="2" groupingUsed="false"
+                                                                        value="${itemData.price[loop.index]['price']}"/>
                                                                     </label><br>
                                                                 </c:forEach>
                                                                 <a class="btn menu-add-to-cart-btn btn-success btn-xs btn-addtocart-<c:out value="${category}"/>">
@@ -89,10 +101,13 @@
                                                             </c:when>
                                                             <c:otherwise>
                                                                 <div class="row" style="margin-top: 15px;">
-                                                                    <label style="float: left; font-size: small">Price: <br>(Rs.)</label>
+                                                                    <label style="float: left; font-size: small">Price:
+                                                                        <br>(Rs.)</label>
                                                                     <label id="lbl-sizeprice"
-                                                                           style="float: left;"><fmt:formatNumber type="currency" currencySymbol=""
-                                                                                                                  maxFractionDigits="2" groupingUsed="false" value="${itemData.price[0]['price']}"/></label>
+                                                                           style="float: left;"><fmt:formatNumber
+                                                                            type="currency" currencySymbol=""
+                                                                            maxFractionDigits="2" groupingUsed="false"
+                                                                            value="${itemData.price[0]['price']}"/></label>
                                                                     <select id="sizes" class="sizes-dropdowns"
                                                                             style="text-transform: capitalize; font-size: small; float: right; width: 80px; height: 20px">
                                                                         <c:forEach begin="0" end="${sizePriceLength-1}"
@@ -105,7 +120,7 @@
                                                                                varStatus="loop">
                                                                         <input type="hidden"
                                                                                id="hiddenFld-<c:out value="${itemData.price[loop.index]['size']}"/>"
-                                                                               <%--value="<c:out value="${itemData.price[loop.index]['price']}"/>"/>--%>
+                                                                            <%--value="<c:out value="${itemData.price[loop.index]['price']}"/>"/>--%>
                                                                                value="<fmt:formatNumber type="currency" currencySymbol=""
                                                                                                                   maxFractionDigits="2" groupingUsed="false" value="${itemData.price[loop.index]['price']}"/>"/>
                                                                     </c:forEach>
@@ -146,7 +161,9 @@
 </div>
 <%@include file="../includes/modals.jsp" %>
 <script>
-    jQuery(document).viewitle();
+    $(document).ready(function () {
+
+    });
 </script>
 </body>
 </html>

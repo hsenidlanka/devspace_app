@@ -503,7 +503,13 @@ public class PackageController {
     @RequestMapping(value = "/loadPkgCont", method = RequestMethod.GET)
     public @ResponseBody List<ReturnTypeResolver> loadPkgCont(@RequestParam("pkgName")String pkgnm){
 
-        LOGGER.trace("load package content:{}",  packageRepo.getContentDetails(pkgnm));
-        return  packageRepo.getContentDetails(pkgnm);
+        List<ReturnTypeResolver> content = null;
+        try{
+            content = packageRepo.getContentDetails(pkgnm);
+            LOGGER.trace("load package content for pkkg nm:{}", pkgnm+" "+content);
+        }catch (Exception er){
+            LOGGER.error("Error in loading pkg content {}",er);
+        }
+        return  content;
     }
 }
