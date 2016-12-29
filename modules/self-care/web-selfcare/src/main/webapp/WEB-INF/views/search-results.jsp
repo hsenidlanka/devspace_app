@@ -53,9 +53,9 @@
                                     dataType: "json",
                                     success: function (data) {
                                         $.each(data.data, function (i, obj) {
-                                            alert(obj.name + ":" + obj.name);
+//                                            alert(obj.name + ":" + obj.name);
                                             var div_data = "<option value=" + obj.name + ">" + obj.name + "</option>";
-                                            alert(div_data);
+                                            // alert(div_data);
                                             $(div_data).appendTo('#ch_user1');
                                         });
                                     }
@@ -96,13 +96,12 @@
 
                                     </c:when>
                                     <c:otherwise>
-                                        <c:if test="${category=='Pizza'}">
+                                        <%--<c:if test="${category=='Pizza'}">--%>
                                             <div class="panel panel-default">
                                                 <div class="panel-heading">
                                                     <h4 class="panel-title">
-                                                        <a data-toggle="collapse" href="#search-pizza"><fmt:message
-                                                                key="searchresults.pizza"
-                                                                bundle="${lang}"/></a>
+                                                        <a data-toggle="collapse" href="#search-pizza"><c:out
+                                                                value="${category}"/></a>
                                                     </h4>
                                                 </div>
 
@@ -111,15 +110,19 @@
                                                         <div class="row">
 
                                                             <c:forEach items="${it}" var="item">
-                                                                <%-- <c:choose>
-                                                                     <c:when test="${item.categoryName=='Pizza'} ">--%>
 
                                                                 <div class="col-md-3">
                                                                     <ul class="grid cs-style-3">
                                                                         <li data-teskly-viewitle="<c:out value="${item.description}"/>">
                                                                             <figure>
-                                                                                <img src="<c:url value="/resources/images/image_placeholder.gif"/>"
-                                                                                     class="menu-images">
+                                                                                    <%--<img src="<c:url value="/resources/images/image_placeholder.gif"/>"
+                                                                                         class="menu-images">--%>
+                                                                                <c:set var="itemName"
+                                                                                       value="${fn:replace(item.itemName, ' ', '')}"/>
+                                                                                <img class="menu-images"
+                                                                                     src="${itemImageUrl}/${itemName}.jpg"
+                                                                                     width="200px" height="200px">
+
                                                                                 <figcaption class="caption">
                                                                                     <input type="hidden"
                                                                                            id="menu-item-desc"
@@ -128,7 +131,7 @@
                                                                                     <c:set var="sizePriceLength"
                                                                                            value="${fn:length(item.price)}"/>
 
-
+                                                                                    <c:if test="${category=='Pizza'}">
                                                                                         <%--<c:when test="${category eq 'Pizza'}">--%>
                                                                                     <c:forEach begin="0"
                                                                                                end="${sizePriceLength-1}"
@@ -150,47 +153,58 @@
                                                                                             value="${item.price[loop.index]['price']}"/>
                                                                                         </label><br>
                                                                                     </c:forEach>
+
                                                                                     <a class="btn menu-add-to-cart-btn btn-success btn-xs btn-addtocart-pizza"/>
                                                                                     Add
                                                                                     to
                                                                                     cart
                                                                                     </a>
-                                                                                        <%--</c:when>--%>
+                                                                                    </c:if>
+                                                                                    <c:if test="${category!='Pizza'}">
+                                                                                        <div class="row"
+                                                                                             style="margin-top: 15px;">
+                                                                                            <label style="float: left; font-size: small">Price:
+                                                                                                <br>(Rs.)</label>
+                                                                                            <label id="lbl-sizeprice"
+                                                                                                   style="float: left;"><fmt:formatNumber
+                                                                                                    type="currency"
+                                                                                                    currencySymbol=""
+                                                                                                    maxFractionDigits="2"
+                                                                                                    groupingUsed="false"
+                                                                                                    value="${item.price[0]['price']}"/></label>
+                                                                                            <select id="sizes"
+                                                                                                    class="sizes-dropdowns"
+                                                                                                    style="text-transform: capitalize; font-size: small; float: right; width: 80px; height: 20px">
+                                                                                                <c:forEach begin="0"
+                                                                                                           end="${sizePriceLength-1}"
+                                                                                                           varStatus="loop">
+                                                                                                    <option value="<c:out value="${item.price[loop.index]['size']}"/>">
+                                                                                                        <c:out value="${item.price[loop.index]['size']}"/></option>
+                                                                                                </c:forEach>
+                                                                                            </select>
+                                                                                            <c:forEach begin="0"
+                                                                                                       end="${sizePriceLength-1}"
+                                                                                                       varStatus="loop">
+                                                                                                <input type="hidden"
+                                                                                                       id="hiddenFld-<c:out value="${item.price[loop.index]['size']}"/>"
+                                                                                                       value="<fmt:formatNumber type="currency" currencySymbol=""
+                                                                                                                  maxFractionDigits="2" groupingUsed="false" value="${item.price[loop.index]['price']}"/>"/>
+                                                                                            </c:forEach>
 
-                                                                                        <%-- </c:when>
-                                                                                         <c:otherwise>
-                                                                                             <div>
-                                                                                                 <label>Price:</label>
-                                                                                                 <label id="lbl-sizeprice"><c:out
-                                                                                                         value="${item.price[0]['price']}"/></label>
-                                                                                                 <select id="sizes" class="sizes-dropdowns"
-                                                                                                         style="text-transform: capitalize; font-size: small;">
-                                                                                                     <c:forEach begin="0" end="${sizePriceLength-1}"
-                                                                                                                varStatus="loop">
-                                                                                                         <option value="<c:out value="${item.price[loop.index]['size']}"/>">
-                                                                                                             <c:out value="${item.price[loop.index]['size']}"/></option>
-                                                                                                     </c:forEach>
-                                                                                                 </select>
-                                                                                                 <c:forEach begin="0" end="${sizePriceLength-1}"
-                                                                                                            varStatus="loop">
-                                                                                                     <input type="hidden"
-                                                                                                            id="hiddenFld-<c:out value="${item.price[loop.index]['size']}"/>"
-                                                                                                            value="<c:out value="${item.price[loop.index]['price']}"/>"/>
-                                                                                                 </c:forEach>
+                                                                                        </div>
+                                                                                        <div style="float: left;margin-top: 10px;">
+                                                                                            <label class="add-to-cart-label-qty">QTY:</label>
+                                                                                            <input class="spin add-to-cart-spin"
+                                                                                                   type="number"
+                                                                                                   min="1" max="100"
+                                                                                                   value="1">
+                                                                                        </div>
+                                                                                        <a class="btn menu-add-to-cart-btn btn-success btn-xs btn-addtocart"
+                                                                                           style="float: right;margin-bottom: -15px;">
+                                                                                            Add to cart
+                                                                                        </a>
+                                                                                    </c:if>
 
-                                                                                             </div>
-                                                                                             <div style="margin-top: 15px;">
-                                                                                                 <label class="add-to-cart-label-qty">QTY:</label>
-                                                                                                 <input class="spin add-to-cart-spin" type="number"
-                                                                                                        min="1" max="100" value="1">
-                                                                                             </div>
-                                                                                             <a class="btn btn-success btn-xs btn-addtocart">
-                                                                                                 Add
-                                                                                                 to
-                                                                                                 cart
-                                                                                             </a>
-                                                                                         </c:otherwise>
-                                                                                     </c:choose>--%>
                                                                                 </figcaption>
 
                                                                             </figure>
@@ -202,104 +216,11 @@
                                                                     </div>
                                                                 </div>
 
-                                                                <%-- </c:when>
-                                                             </c:choose>--%>
                                                             </c:forEach>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </c:if>
-                                        <c:if test="${category!='Pizza'}">
-
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading">
-                                                    <h4 class="panel-title">
-                                                        <a data-toggle="collapse" href="#search-pizza2"><c:out
-                                                                value="${category}"/></a>
-                                                    </h4>
-                                                </div>
-
-                                                <div id="search-pizza2" class="panel-collapse collapse in">
-                                                    <div class="panel-body">
-                                                        <div class="row">
-
-                                                            <c:forEach items="${it}" var="item">
-                                                                <%-- <c:choose>
-                                                                        <c:when test="${item.categoryName==category}">--%>
-
-                                                                        <div class="col-md-3">
-                                                                            <ul class="grid cs-style-3">
-                                                                                <li data-teskly-viewitle="<c:out value="${item.description}"/>">
-                                                                                    <figure>
-                                                                                        <img src="<c:url value="/resources/images/image_placeholder.gif"/>"
-                                                                                             class="menu-images">
-                                                                                        <figcaption class="caption">
-                                                                                            <input type="hidden"
-                                                                                                   id="menu-item-desc"
-                                                                                                   value="<c:out value="${item.description}"/>"/>
-
-                                                                                            <c:set var="sizePriceLength"
-                                                                                                   value="${fn:length(item.price)}"/>
-                                                                                            <div>
-                                                                                                <label>Price:</label>
-                                                                                                <label id="lbl-sizeprice"><c:out
-                                                                                                        value="${item.price[0]['price']}"/></label>
-                                                                                                <select id="sizes"
-                                                                                                        class="sizes-dropdowns"
-                                                                                                        style="text-transform: capitalize; font-size: small;">
-                                                                                                    <c:forEach begin="0"
-                                                                                                               end="${sizePriceLength-1}"
-                                                                                                               varStatus="loop">
-                                                                                                        <option value="<c:out value="${item.price[loop.index]['size']}"/>">
-                                                                                                            <c:out value="${item.price[loop.index]['size']}"/></option>
-                                                                                                    </c:forEach>
-                                                                                                </select>
-                                                                                                <c:forEach begin="0"
-                                                                                                           end="${sizePriceLength-1}"
-                                                                                                           varStatus="loop">
-                                                                                                    <input type="hidden"
-                                                                                                           id="hiddenFld-<c:out value="${item.price[loop.index]['size']}"/>"
-                                                                                                           value="<c:out value="${item.price[loop.index]['price']}"/>"/>
-                                                                                                </c:forEach>
-
-                                                                                            </div>
-                                                                                            <div style="margin-top: 15px;">
-                                                                                                <label class="add-to-cart-label-qty">QTY:</label>
-                                                                                                <input class="spin add-to-cart-spin"
-                                                                                                       type="number"
-                                                                                                       min="1" max="100"
-                                                                                                       value="1">
-                                                                                            </div>
-                                                                                            <a class="btn btn-success btn-xs btn-addtocart">
-                                                                                                Add
-                                                                                                to
-                                                                                                cart
-                                                                                            </a>
-
-
-                                                                                        </figcaption>
-
-                                                                                    </figure>
-                                                                                </li>
-                                                                            </ul>
-                                                                            <div class="itemdata-name"
-                                                                                 style="text-align: center;">
-                                                                                <label id="menu-item-name2">${item.itemName}</label>
-                                                                            </div>
-                                                                        </div>
-
-                                                                <%--</c:when>
-                                                           </c:choose>--%>
-                                                            </c:forEach>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </c:if>
-
 
                                     </c:otherwise>
                                 </c:choose>

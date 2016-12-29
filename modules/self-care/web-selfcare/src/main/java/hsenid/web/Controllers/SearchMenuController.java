@@ -52,6 +52,12 @@ public class SearchMenuController {
     @Value("${api.url.category.list}")
     private String catList;
 
+    @Value("${admin.url.base.image.category}")
+    private String imageBaseUrl;
+
+    @Value("${admin.url.base.image.item}")
+    private String itemImageBaseUrl;
+
     @RequestMapping(value = "/search-menu", method = RequestMethod.GET)
     public ModelAndView loadSearchMenuPage() {
         return new ModelAndView("/home/search-menu");
@@ -64,26 +70,11 @@ public class SearchMenuController {
         RestTemplate restTemplate = new RestTemplate();
 
         String getItemUrl = SendStringBuilds.sendString(baseUrl, searchItemNameUrl, searchItem, "/", category);
-        // String getItemsUrl = baseUrl + subcategoryListUrl;
         modelAndView.addObject("category", category);
         ServerResponseMessage searchItemResponse = restTemplate.getForObject(getItemUrl, ServerResponseMessage.class);
         modelAndView.addObject("it", searchItemResponse.getData());
+        modelAndView.addObject("itemImageUrl", itemImageBaseUrl);
 
-       /* List<String> itemNamesList = new ArrayList<>();
-        List<List<JSONObject>> test1 = new ArrayList<>();*/
-        /*for (int i = 0; i < searchItemResponse.getData().size(); i++) {
-            String itemName = searchItemResponse.getData().get(i).get("itemName").toString();
-            ////following url should return size price list when parameter is item name
-            ServerResponseMessage itemsResponse = restTemplate.getForObject(getItemsUrl + itemName, ServerResponseMessage.class);
-            logger.info("itemsResponse={}", itemsResponse.getData());
-
-           *//* List<JSONObject> itTest=new ArrayList<>();
-            itTest.add(searchItemResponse.getData().get(i));
-            itTest.add(itemsResponse.getData().get(0));
-       *//*itemNamesList.add(itemName);
-           test1.add(itTest);*//*
-        }
-*/
         return modelAndView;
 
     }
