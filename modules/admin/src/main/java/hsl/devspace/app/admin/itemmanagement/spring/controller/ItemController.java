@@ -375,21 +375,49 @@ public class ItemController {
 
         String cat = request.getParameter("cat");
         String subcat = request.getParameter("subcat");
-        List<String> resultList = null;
+        List<String> resultList = new ArrayList<String>();
+
+        LOGGER.trace("cat in filter {}",cat);
+        LOGGER.trace("subcat in filter {}",subcat);
 
         try {
-            if (cat != null) {
+            if ((subcat==null) || (subcat.equals(""))){
+               if ((cat==null) || (cat.equals(""))){
+                   resultList = item.selectNameList();
+               }
+               else
+               {
+                   List<Item> catList;
+                   catList = categoryRepository.loadMenuItems(cat);
+                   LOGGER.error("catList in filter {}", catList);
 
-            } else if (subcat != null) {
+                   for (int a = 0; a < catList.size(); a++) {
+                       String nm;
+                       nm = catList.get(a).getItemName();
+                       LOGGER.trace("nm in filtert {}", nm);
+                       resultList.add(nm);
+                   }
+                   LOGGER.trace("resultList in item-cat filter : {}", resultList);
+               }
+            }
+            else {
+                List<Item> subcatList;
+                subcatList = categoryRepository.loadMenuItems(subcat);
+                LOGGER.error("subcatList in filter {}",subcatList);
 
-            } else {
-                resultList = item.selectNameList();
+                for (int b = 0; b < subcatList.size(); b++) {
+                    String nm2 ;
+                    nm2 = subcatList.get(b).getItemName();
+                    LOGGER.error("nm in filtert {}",nm2);
+                    resultList.add(nm2);
+                    LOGGER.error("resultttt in {}",resultList);
+                }
+
+                LOGGER.error("resultList in item-subcat filter : {}",resultList);
             }
         } catch (Exception e) {
             LOGGER.error("error in typeahead: {}", e);
         }
-
-
         return resultList;
     }
 
@@ -425,6 +453,44 @@ public class ItemController {
 
         return itemDetails;
     }
+
+    ////////////////**********************////////////
+      /*
+   *reloading item table view on search & paginating basis
+   * */
+    @RequestMapping(value = "/loadSearchItem2", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    List<List<Map<String, Object>>> loadSearchItem2(HttpServletRequest request) {
+
+        List<List<Map<String, Object>>> itemDetails = null;
+        try {
+            String itmNm = request.getParameter("srchItmNm");
+            String catNm = request.getParameter("cat");
+            String subCat = request.getParameter("subcat");
+
+            String pgInit = request.getParameter("initPage");
+            int initPg = Integer.parseInt(pgInit);
+            String pgLimt = request.getParameter("pgLimit");
+            int pgLimit = Integer.parseInt(pgLimt);
+
+            LOGGER.trace("load item, cat, subcat name 2 {}", itmNm+" "+catNm+" "+subCat);
+
+            if((subCat == null) || (subCat.equals(""))) {
+                itemDetails = item.retrieveItemDetailsForSearch(itmNm, catNm);
+                LOGGER.trace("selected item with cat {}", itemDetails);
+            } else {
+                //itemDetails = item.viewAllItemDetails(pgLimit, initPg);
+                LOGGER.trace("load item {}", itemDetails);
+            }
+        } catch (Exception e) {
+            LOGGER.error("error in loading item details with cat and subcat : {}", e);
+        }
+
+        return itemDetails;
+    }
+
+
 
     /*
     *getting record count for loading item table with pagination

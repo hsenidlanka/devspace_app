@@ -258,7 +258,7 @@ window.operateEvents = {
 
         $('#pkgEditModal').modal('show');
 
-        var  pkgNm = $("#txtEditPkgNm").val();
+        var  pkgNm = objct["packName"];
 
         $.ajax({
             type:"GET",
