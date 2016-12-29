@@ -4,6 +4,7 @@ import hsl.devspace.app.corelogic.domain.User;
 import hsl.devspace.app.corelogic.repository.user.UserRepositoryImpl;
 import hsl.devspace.app.coreserver.common.Context;
 import hsl.devspace.app.coreserver.common.PropertyReader;
+import hsl.devspace.app.coreserver.model.ErrorMessage;
 import hsl.devspace.app.coreserver.model.ServerModel;
 import hsl.devspace.app.coreserver.model.SuccessMessage;
 import org.apache.commons.mail.EmailException;
@@ -11,6 +12,10 @@ import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -31,6 +36,7 @@ public class CustomerService {
     private ServerModel serverModel = (ServerModel) context.getBean("serverModel");
     final String BASE_URL = serverModel.getBaseUrl();
     PropertyReader propertyReader = new PropertyReader("header.properties");
+    EmailService emailService = new EmailService();
 
     // Register a new customer
     @POST
@@ -38,20 +44,25 @@ public class CustomerService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response register(User user, @javax.ws.rs.core.Context UriInfo uriInfo) {
+        PlatformTransactionManager transactionManager = (PlatformTransactionManager) context.getBean("transactionManager");
+        TransactionDefinition def = new DefaultTransactionDefinition();
+        TransactionStatus status = transactionManager.getTransaction(def);
         int res = userRepository.add(user);
         Response response;
         String sentCode = "";
         if (res > 0) {
-            EmailService emailService = new EmailService();
             String verificationCode = emailService.generateVerificationCode("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUWXYZ123456789!@#$%&", 32);
             userRepository.addVerificationCode(user.getUsername(), verificationCode);
             try {
                 sentCode = emailService.sendVerificationEmail(user.getUsername(), user.getEmail(), verificationCode);
+                transactionManager.commit(status);
             } catch (EmailException e) {
                 log.error("Error sending verification code email. {}", e);
+                transactionManager.rollback(status);
                 throw new WebApplicationException(500);
             } catch (MalformedURLException e) {
                 log.error("Error sending verification code email. {}", e);
+                transactionManager.rollback(status);
                 throw new WebApplicationException(500);
             }
             SuccessMessage successMessage = new SuccessMessage();
@@ -80,6 +91,7 @@ public class CustomerService {
 
             response = Response.status(Response.Status.CREATED).entity(successMessage).build();
         } else {
+            transactionManager.rollback(status);
             throw new WebApplicationException(400);
         }
         return response;
@@ -233,6 +245,49 @@ public class CustomerService {
             response = Response.status(Response.Status.OK).entity(successMessage).build();
         } else {
             throw new WebApplicationException(401);
+        }
+        return response;
+    }
+
+    // Verify customer
+    @POST
+    @Path("/verify")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response verify(JSONObject jsonObject, @javax.ws.rs.core.Context UriInfo uriInfo) {
+        String username = (String) jsonObject.get("username");
+        String verificationCode = (String) jsonObject.get("verificationCode");
+        int codeStatus = userRepository.checkVerificationCodeAvailability(username, verificationCode);
+        Response response;
+        if (codeStatus == 1) {
+            userRepository.changeStatusToActiveFromNotVerified(username, verificationCode);
+            User user = userRepository.retrieveSelectedUserDetails(username);
+            String receiverEmail = user.getEmail();
+            try {
+                emailService.sendVerificationSuccessEmail(username, receiverEmail);
+            } catch (EmailException e) {
+                log.error("Error sending verification success email. {}", e);
+                throw new WebApplicationException(500);
+            } catch (MalformedURLException e) {
+                log.error("Error sending verification success email. {}", e);
+                throw new WebApplicationException(500);
+            }
+            SuccessMessage successMessage = new SuccessMessage();
+            successMessage.setStatus("success");
+            successMessage.setCode(200);
+            successMessage.setMessage("user verified successfully");
+            successMessage.addData(jsonObject);
+            String url = uriInfo.getAbsolutePath().toString();
+            successMessage.addLink(url, "self");
+            successMessage.addLink(BASE_URL + "customers/login", "customer login");
+            response = Response.status(Response.Status.OK).entity(successMessage).build();
+        } else {
+            ErrorMessage errorMessage = new ErrorMessage();
+            errorMessage.setStatus("error");
+            errorMessage.setErrorCode("401");
+            errorMessage.setErrorMessage("invalid verification details");
+            errorMessage.setDescription("entered parameters have no matching combinations.");
+            response = Response.status(Response.Status.OK).entity(errorMessage).build();
         }
         return response;
     }

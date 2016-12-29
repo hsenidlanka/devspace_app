@@ -37,8 +37,7 @@ public class PackageService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getPackages(@javax.ws.rs.core.Context UriInfo uriInfo) {
         List packageList = packageRepository.selectAll();
-        Response response;
-        Package pack=new Package();
+        Package pack;
         SuccessMessage successMessage = new SuccessMessage();
         successMessage.setCode(Response.Status.OK.getStatusCode());
         successMessage.setStatus("success");
@@ -52,6 +51,12 @@ public class PackageService {
                 jsonObject.put("PackageName", pack.getPackName());
 //                jsonObject.put("content", pack.getContent());
                 jsonObject.put("price", pack.getPrice());
+                String packImage;
+                if (pack.getImage() == null || pack.getImage().equals("")) {
+                    packImage = "";
+                } else {
+                    packImage = pack.getImage();
+                }
                 jsonObject.put("imagePath", pack.getImage());
                 successMessage.addData(jsonObject);
             }
