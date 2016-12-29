@@ -12,7 +12,6 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.sql.DataSource;
 import java.sql.Date;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -107,7 +106,7 @@ public class PackageRepositoryImpl implements PackageRepository {
             packages.setPackName(mp.get(i).get("name").toString());
             packages.setPrice(Double.parseDouble(mp.get(i).get("price").toString()));
             packages.setImage(mp.get(i).get("image").toString());
-            packages.setCreatedDate(java.sql.Date.valueOf(mp.get(0).get("created_date").toString()));
+            packages.setCreatedDate(Date.valueOf(mp.get(0).get("created_date").toString()));
             packages.setCreator(mp.get(0).get("creator").toString());
             pack.add(packages);
         }
@@ -311,7 +310,7 @@ public class PackageRepositoryImpl implements PackageRepository {
             packages.setPackName(mp.get(i).get("name").toString());
             packages.setPrice(Double.parseDouble(mp.get(i).get("price").toString()));
             packages.setImage(mp.get(i).get("image").toString());
-            packages.setCreatedDate(Timestamp.valueOf(mp.get(0).get("created_date").toString()));
+            packages.setCreatedDate(Date.valueOf(mp.get(0).get("created_date").toString()));
             packages.setCreator(mp.get(0).get("creator").toString());
             pack.add(packages);
 
@@ -333,7 +332,7 @@ public class PackageRepositoryImpl implements PackageRepository {
             packages.setPackName(mp.get(i).get("name").toString());
             packages.setPrice(Double.parseDouble(mp.get(i).get("price").toString()));
             packages.setImage(mp.get(i).get("image").toString());
-            packages.setCreatedDate(Timestamp.valueOf(mp.get(0).get("created_date").toString()));
+            packages.setCreatedDate(Date.valueOf(mp.get(0).get("created_date").toString()));
             packages.setCreator(mp.get(0).get("creator").toString());
             pack.add(packages);
         }
