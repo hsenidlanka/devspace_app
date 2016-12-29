@@ -173,19 +173,7 @@ public class ItemService {
         }
         successMessage.setCode(Response.Status.OK.getStatusCode());
         successMessage.setStatus("success");
-        
-        /*
-        List<Map<String, Object>> listMap = itemRepository.retrieveSelectedItemDetails(searchKey);
 
-        for (Map<String, Object> map : listMap) {
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("itemName", map.get("item_name"));
-            jsonObject.put("categoryName", map.get("category_name"));
-            jsonObject.put("subCategoryName", map.get("sub_category_name"));
-            jsonObject.put("type", map.get("type"));
-            jsonObject.put("description", map.get("description"));
-            successMessage.addData(jsonObject);
-        }*/
         return Response.status(Response.Status.OK).entity(successMessage)
                 .header("Access-Control-Allow-Origin", propertyReader.readProperty("Access-Control-Allow-Origin"))
                 .build();
