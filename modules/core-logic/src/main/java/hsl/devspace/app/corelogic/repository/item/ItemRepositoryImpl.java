@@ -314,25 +314,41 @@ public class ItemRepositoryImpl implements ItemRepository {
     }
 
     @Override
-    public List<List<Map<String, Object>>> retrieveItemDetailsForSearchBySubCategory(String itemkey, String subCategory) {
+    public List<Map<String, Object>> retrieveItemDetailsForSearchByCategory(String itemkey, String category, int limit, int page) {
         String key = "%" + itemkey + "%";
         List<Map<String, Object>> itemDetails = jdbcTemplate.queryForList("SELECT i.id,i.name AS item_name,i.created_date,i.creator,c.name " +
                 "AS category_name, s.name AS sub_category_name,t.name AS type,i.description,i.image FROM item i" +
                 " INNER JOIN sub_category s ON i.sub_category_id=s.id INNER JOIN type t ON i.type_id=t.type_id " +
-                "INNER JOIN category c ON c.id=s.category_id WHERE i.name LIKE ? AND s.name=?", key, subCategory);
-        List<List<Map<String, Object>>> listPrice = new ArrayList<List<Map<String, Object>>>();
-        for (int k = 0; k < itemDetails.size(); k++) {
-            List<Map<String, Object>> size = jdbcTemplate.queryForList("SELECT size,price FROM size WHERE item_id=?", itemDetails.get(k).get("id"));
-            log.info("{}", size);
-            List<Map<String, Object>> sizeList = new ArrayList<Map<String, Object>>();
+                "INNER JOIN category c ON c.id=s.category_id WHERE i.name LIKE ? AND c.name=? LIMIT ? OFFSET ?", key, category, limit, page);
+        return itemDetails;
+    }
 
-            sizeList.add(itemDetails.get(k));
-            listPrice.add(sizeList);
-            listPrice.add(size);
-        }
+    @Override
+    public List<Map<String, Object>> retrieveItemDetailsForSearchBySubCategory(String itemkey, String subCategory, int limit, int page) {
+        String key = "%" + itemkey + "%";
+        List<Map<String, Object>> itemDetails = jdbcTemplate.queryForList("SELECT i.id,i.name AS item_name,i.created_date,i.creator,c.name " +
+                "AS category_name, s.name AS sub_category_name,t.name AS type,i.description,i.image FROM item i" +
+                " INNER JOIN sub_category s ON i.sub_category_id=s.id INNER JOIN type t ON i.type_id=t.type_id " +
+                "INNER JOIN category c ON c.id=s.category_id WHERE i.name LIKE ? AND s.name=? LIMIT ? OFFSET ?", key, subCategory, limit, page);
+        return itemDetails;
+    }
 
-        log.info("{}=listPrice", listPrice);
-        return listPrice;
+    @Override
+    public List<Map<String, Object>> retrieveItemDetailsByCategory(String category, int limit, int page) {
+        List<Map<String, Object>> itemDetails = jdbcTemplate.queryForList("SELECT i.id,i.name AS item_name,i.created_date,i.creator,c.name " +
+                "AS category_name, s.name AS sub_category_name,t.name AS type,i.description,i.image FROM item i" +
+                " INNER JOIN sub_category s ON i.sub_category_id=s.id INNER JOIN type t ON i.type_id=t.type_id " +
+                "INNER JOIN category c ON c.id=s.category_id WHERE c.name=? LIMIT ? OFFSET ?", category, limit, page);
+        return itemDetails;
+    }
+
+    @Override
+    public List<Map<String, Object>> retrieveItemDetailsBySubCategory(String subCategory, int limit, int page) {
+        List<Map<String, Object>> itemDetails = jdbcTemplate.queryForList("SELECT i.id,i.name AS item_name,i.created_date,i.creator,c.name " +
+                "AS category_name, s.name AS sub_category_name,t.name AS type,i.description,i.image FROM item i" +
+                " INNER JOIN sub_category s ON i.sub_category_id=s.id INNER JOIN type t ON i.type_id=t.type_id " +
+                "INNER JOIN category c ON c.id=s.category_id WHERE s.name=? LIMIT ? OFFSET ?", subCategory, limit, page);
+        return itemDetails;
     }
 
     @Override
