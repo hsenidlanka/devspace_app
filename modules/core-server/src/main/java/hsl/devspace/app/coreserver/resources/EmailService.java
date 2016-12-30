@@ -84,7 +84,7 @@ public class EmailService {
         email.setFrom(emailPropertyReader.readProperty("authenticator.account.email"), emailPropertyReader.readProperty("verification.account.name"));
         email.setSubject(emailPropertyReader.readProperty("verification.message.subject"));
 
-        URL url = new URL("http://localhost:8081/web-selfcare/resources/images/logo.png");
+        URL url = new URL("https://drive.google.com/open?id=0BzrDi0cg0nb1Xzh6Z19BZXF2LTQ");
         String cid = email.embed(url, "Pizza Shefu logo");
 
         // set the html message
