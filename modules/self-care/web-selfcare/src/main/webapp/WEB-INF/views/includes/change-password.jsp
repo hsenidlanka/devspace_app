@@ -16,7 +16,9 @@
         <div class="col-sm-1"></div>
         <div style="height: 400px; margin-top: 20px" class="container col-sm-10">
             <c:if test="${empty updateSuccessful}">
-                <%--${empty updateSuccessful}--%>
+                <c:if test="${not empty formFailed}">
+                    netskdbl
+                </c:if>
                 <form:form action="/web-selfcare/change-password-post" method="post" modelAttribute="changepassword">
                     <%--<c:if test="${empty validForm}"></c:if>--%>
                     <div class="row form-group">
@@ -56,7 +58,7 @@
             </c:if>
 
             <c:if test="${not empty updateSuccessful}">
-                <div class="row form-group">
+                <div style="border-style: outset;" class="row form-group">
                     <center>
                     <h1><i class="fa fa-cogs" aria-hidden="true"></i> Password update successful! </h1>
                     </center>
@@ -64,6 +66,8 @@
                 <br>
                 <div class="row form-group">
                     <center><strong>What do you want to do next?</strong></center>
+                    
+                    <center style="margin-top: 10px">Here are some options ...</center>
                 </div>
                 <br>
                 <div class="row form-group">
