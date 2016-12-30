@@ -243,6 +243,17 @@ public class CustomerService {
             String url = uriInfo.getAbsolutePath().toString();
             successMessage.addLink(url, "self");
             response = Response.status(Response.Status.OK).entity(successMessage).build();
+            User user = userRepository.retrieveSelectedUserDetails(username);
+            String receiverEmail = user.getEmail();
+            try {
+                emailService.sendPasswordChangedNotificationEmail(username,receiverEmail);
+            } catch (EmailException e) {
+                log.error("Error sending password success notification email. {}", e);
+                throw new WebApplicationException(500);
+            } catch (MalformedURLException e) {
+                log.error("Error sending password success notification email. {}", e);
+                throw new WebApplicationException(500);
+            }
         } else {
             throw new WebApplicationException(401);
         }

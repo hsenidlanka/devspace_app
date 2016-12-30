@@ -55,12 +55,19 @@ $(document).ready(function () {
         width: 250
     });
 
-    $("#sizes").change(function () {
+    $(document.body).on('change', '#sizes' ,function(){
+        var selectedSize = $(this).val();
+        var fldId = '#hiddenFld-' + selectedSize;
+        var price=$(this).closest("div").find(fldId).val();
+        $(this).closest("div").find("#lbl-sizeprice").text(price);
+    });
+
+/*    $("#sizes").change(function () {
         var selectedSize = $("#sizes").val();
         //alert(selectedSize);
         var fldId = '#hiddenFld-' + selectedSize;
         $(this).closest("div").find("#lbl-sizeprice").text($(fldId).val());
-    });
+    });*/
 
     $(".btn-addtocart-pizza").click(function () {
         var price;
