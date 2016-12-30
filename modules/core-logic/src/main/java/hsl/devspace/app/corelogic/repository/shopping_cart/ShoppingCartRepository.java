@@ -47,6 +47,8 @@ public interface ShoppingCartRepository {
     List<Map<String, Object>> getPurchaseHistory(String username, int limit, int page);
 
     List<Map<String, Object>> selectItemDetailsOfOrder(String orderId);
+
+    List<Map<String, Object>> selectPaymentAndDeliveryDetails(String orderId);
 //    void addPackageToCart(int packageId);
 //    void modifyPackageInCart();
 //    void removePackageFromCart(int packageId);
