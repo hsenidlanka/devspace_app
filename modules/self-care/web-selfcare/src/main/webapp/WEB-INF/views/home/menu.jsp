@@ -23,7 +23,8 @@
                 </div>
             </div>
             <div class="panel-body">
-                <h4><fmt:message key="menu.main.panel.subheader"
+                <img src="<c:url value="/resources/images/icons/bullet_blue.png"/>" style="width: 25px;height: 25px; margin-bottom: 8px;"/>
+                <h4 style="display:inline-block;"><fmt:message key="menu.main.panel.subheader"
                                  bundle="${lang}"/></h4>
 
                 <div class="row" style="margin-top: 15px;">

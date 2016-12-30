@@ -39,7 +39,9 @@
                         <c:set var="subCat2" value="${fn:replace(subCat1,
                                 ' ', '')}"/>
                         <div style="margin-top: 15px;">
-                            <h4><c:out value="${subcategory.name}"/></h4>
+                            <img src="<c:url value="/resources/images/icons/bullet_blue.png"/>"
+                                 style="width: 25px;height: 25px; margin-bottom: 8px;"/>
+                            <h4 style="display: inline-block;"><c:out value="${subcategory.name}"/></h4>
                             <c:out value="${subcategory.description}"/>
                         </div>
                         <div class="row" style="margin-top: 15px;">
@@ -55,10 +57,12 @@
                                             <li>
                                                 <c:choose>
                                                     <c:when test="${empty itemData.description}">
-                                                        <c:set var="itemDescription" value="No description available." scope="page"/>
+                                                        <c:set var="itemDescription" value="No description available."
+                                                               scope="page"/>
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <c:set var="itemDescription" value="${itemData.description}" scope="page"/>
+                                                        <c:set var="itemDescription" value="${itemData.description}"
+                                                               scope="page"/>
                                                     </c:otherwise>
                                                 </c:choose>
                                                 <figure class="tooltip2"
@@ -109,7 +113,7 @@
                                                                             maxFractionDigits="2" groupingUsed="false"
                                                                             value="${itemData.price[0]['price']}"/></label>
                                                                     <select id="sizes" class="sizes-dropdowns"
-                                                                            style="text-transform: capitalize; font-size: small; float: right; width: 80px; height: 20px">
+                                                                            style="text-transform: capitalize; font-size: small; float: right; width: 80px; height: 20px; color: #000000;">
                                                                         <c:forEach begin="0" end="${sizePriceLength-1}"
                                                                                    varStatus="loop">
                                                                             <option value="<c:out value="${itemData.price[loop.index]['size']}"/>">
@@ -148,7 +152,7 @@
                                 </c:forEach>
                             </c:when>
                             <c:otherwise>
-                                <storng>No items to show</storng>
+                                <p style="margin-left: 30px;"><strong>No items to show</strong></p>
                             </c:otherwise>
                         </c:choose>
 
