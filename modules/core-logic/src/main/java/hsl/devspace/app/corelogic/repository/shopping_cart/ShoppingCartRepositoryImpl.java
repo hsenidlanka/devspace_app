@@ -362,6 +362,13 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
         return mp;
     }
 
+
+    @Override
+    public List<Map<String, Object>> selectOrderDetails(String username, int limit, int page) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM shopping_cart WHERE customer_id=(SELECT id FROM customer WHERE username=?)", username);
+        return mp;
+    }
+
     @Override
     public List<Map<String, Object>> selectItemDetailsOfOrder(String orderId) {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT p.* ,i.name FROM product p INNER JOIN shopping_cart_product sp ON sp.product_id=p.id " +
