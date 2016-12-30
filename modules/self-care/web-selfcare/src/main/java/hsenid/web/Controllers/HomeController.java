@@ -35,17 +35,9 @@ public class HomeController {
 
     @RequestMapping("/profile")
     public String viewProfile() {
-
         return "/home/profile";
-//        logger.info(username);
-
     }
 
-   /* @RequestMapping("/menu")
-    public String menu() {
-        return "/home/menu";
-    }
-*/
     @RequestMapping("/locations")
     public String locations() {
         return "/home/locations";
@@ -61,15 +53,16 @@ public class HomeController {
         return "redirect:/";
     }
 
+    @RequestMapping("/email-verification")
+    public String emailVerification(){
+        return "includes/email-verification";
+    }
+
+
     @RequestMapping("/about-us")
     public String aboutus() {
         return "/home/about-us";
     }
-
-   /* @RequestMapping("/test")
-    public String test() {
-        return "/testpage";
-    }*/
 
     @RequestMapping("/payment")
     public String payment() {

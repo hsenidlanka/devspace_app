@@ -98,7 +98,7 @@ public class IncludeFileController {
             redirectAttributes.addFlashAttribute("updateSuccessful", "success");
         } catch (RestClientException e) {
             logger.error(e.getMessage());
-            redirectAttributes.addAttribute("formFailed", "Form Failed!");
+            redirectAttributes.addFlashAttribute("formFailed", "Form Failed!");
         }
 
         return "redirect:/change-password";

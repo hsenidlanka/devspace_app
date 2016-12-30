@@ -3,6 +3,7 @@ package hsenid.web.Controllers.user;
 import hsenid.web.models.BooleanResponse;
 import hsenid.web.models.ReplyFromServer;
 import hsenid.web.models.User;
+import hsenid.web.models.Verification;
 import hsenid.web.supportclasses.SendStringBuilds;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
@@ -33,6 +34,8 @@ public class LoginController {
     final static String password="password";
 
     User user = new User();
+
+    Verification verification = new Verification();
 
     //    Defining logger
     final static Logger logger = LoggerFactory.getLogger(LoginController.class);
@@ -90,9 +93,11 @@ public class LoginController {
 //  if valide set session and sent it.
     @RequestMapping(value = "/login")
     @ResponseBody
-    public BooleanResponse login(HttpSession session,HttpServletRequest request){
-        String uname = request.getParameter(username);
-        String pword = request.getParameter(password);
+    public Verification login(HttpSession session,HttpServletRequest request){
+//        String uname = request.getParameter(username);
+        String uname = "kkalla";
+        String pword = "password";
+//        String pword = request.getParameter(password);
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put(username, uname);
@@ -114,21 +119,24 @@ public class LoginController {
 //                logger.info(userDataUrl);
                 ReplyFromServer replyFromServer1 = restTemplate1.getForObject(userDataUrl, ReplyFromServer.class);
 
-                user.setTitle(replyFromServer1.getData().get(0).getTitle());
-                user.setFirstName(replyFromServer1.getData().get(0).getFirstName());
-                user.setLastName(replyFromServer1.getData().get(0).getLastName());
-                user.setEmail(replyFromServer1.getData().get(0).getEmail());
-                user.setMobile(replyFromServer1.getData().get(0).getMobile());
-                user.setUsername(replyFromServer1.getData().get(0).getUsername());
-                user.setAddressLine01(replyFromServer1.getData().get(0).getAddressLine01());
-                user.setAddressLine02(replyFromServer1.getData().get(0).getAddressLine02());
-                user.setAddressLine03(replyFromServer1.getData().get(0).getAddressLine03());
+//                user.setTitle(replyFromServer1.getData().get(0).getTitle());
+//                user.setFirstName(replyFromServer1.getData().get(0).getFirstName());
+//                user.setLastName(replyFromServer1.getData().get(0).getLastName());
+//                user.setEmail(replyFromServer1.getData().get(0).getEmail());
+//                user.setMobile(replyFromServer1.getData().get(0).getMobile());
+//                user.setUsername(replyFromServer1.getData().get(0).getUsername());
+//                user.setAddressLine01(replyFromServer1.getData().get(0).getAddressLine01());
+//                user.setAddressLine02(replyFromServer1.getData().get(0).getAddressLine02());
+//                user.setAddressLine03(replyFromServer1.getData().get(0).getAddressLine03());
+                verification.setUserStatus(replyFromServer.getData().get(0).getAccountStatus());
+//                logger.info(String.valueOf(replyFromServer.getData().get(0).getAccountStatus()));
 
             }
 
         } catch (RestClientException e) {
             logger.error(e.getMessage());
-            return new BooleanResponse(false);
+            verification.setUserStatus("inactive");
+            return verification;
         }
 
 //            Adding attributes to the session
@@ -137,7 +145,7 @@ public class LoginController {
         session.setAttribute("email", user.getEmail());
 
 
-        return new BooleanResponse(true);
+        return verification;
     }
 
 }
