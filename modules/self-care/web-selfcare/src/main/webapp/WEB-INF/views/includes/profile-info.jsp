@@ -2,11 +2,6 @@
 <html>
 <head>
     <%@include file="../includes/include.jsp" %>
-    <script>
-       /* function load_change_password() {
-            document.getElementById("content").innerHTML='<object type="text/html" data="change-password" style="width:105%; height: 85%;"></object>';
-        }*/
-    </script>
 </head>
 
 <body>
@@ -79,7 +74,7 @@
 
                 <center>
                     <a href="update-user" class="btn btn-warning"><i class="fa fa-pencil-square-o"
-                                                                     aria-hidden="true"></i><fmt:message key="update.user.profile" bundle="${lang}"/></a>
+                                                                     aria-hidden="true"></i> <fmt:message key="update.user.profile" bundle="${lang}"/></a>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <a href="change-password" class="btn btn-warning"><i class="fa fa-unlock-alt" aria-hidden="true"></i>
                         <fmt:message key="view.change" bundle="${lang}"/></a>

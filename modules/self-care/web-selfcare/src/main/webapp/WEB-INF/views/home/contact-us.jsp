@@ -140,8 +140,7 @@
                                 placeholder="   example@domain.com"></form:input>
                     <form:errors path="contactEmail"/>
 
-                    <form:input cssClass="form-control" id="txt-contactno" type="text" placeholder="   0-XXXXXXXXXX"
-                                path="contactNo"/>
+                    <form:input cssClass="form-control" id="txt-contactno" type="text" placeholder="   0-XXXXXXXXXX" path="contactNo"/>
                     <form:errors path="contactNo"/>
 
                     <form:textarea path="msg" cssClass="form-control" id="txt-inquirymsg" type="text"
