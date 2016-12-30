@@ -20,6 +20,8 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 
 /**
@@ -152,6 +154,43 @@ public class EmailService {
 
         // Set the alternative message if the email client does not support HTML messages
         email.setTextMsg("Your account has activated successfully.");
+
+        email.addTo(receiverEmail);
+        email.send();
+        return "";
+    }
+
+    // Process of sending an email notifying a successful account activation
+    public String sendPasswordChangedNotificationEmail(String username, String receiverEmail) throws EmailException, MalformedURLException {
+        HtmlEmail email = new HtmlEmail();
+        email.setHostName(emailPropertyReader.readProperty("host.name"));
+        email.setSmtpPort(Integer.parseInt(emailPropertyReader.readProperty("smtp.port")));
+        email.setAuthenticator(new DefaultAuthenticator(emailPropertyReader.readProperty("authenticator.account.email"), emailPropertyReader.readProperty("authenticator.account.password")));
+        email.setSSLOnConnect(true);
+        email.setFrom(emailPropertyReader.readProperty("authenticator.account.email"), emailPropertyReader.readProperty("verification.account.name"));
+        email.setSubject(emailPropertyReader.readProperty("password.changed.message.subject"));
+
+        URL url = new URL("http://localhost:8081/web-selfcare/resources/images/logo.png");
+        String cid = email.embed(url, "Pizza Shefu logo");
+
+        Date dNow = new Date();
+        SimpleDateFormat ft = new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss a zzz");
+
+        // set the html message
+        String htmlMsg = "<html><div style=\"text-align:center\"><img width=\"150px\" height=\"150px\" src=\"cid:" + cid + "\"></div>";
+        htmlMsg += "<h2 style='color:#ff8000;'>Password changed.</h2>";
+        htmlMsg += "<p style='font-size:14px;'>Dear " + username + ",<br>";
+        htmlMsg += "<p style='font-size:14px;'>Your password has changed on " + ft.format(dNow) + ". Please contact support if you did not change the password.<br>";
+        htmlMsg += "We are glad to help you.</p><br>";
+        htmlMsg += "<p style='font-size:14px;'>Thank you.</p>";
+        htmlMsg += "<p style='font-size:14px;'><strong><i>Support-Pizza Shefu</i></strong></p>";
+        htmlMsg += "</html>";
+
+        // Set the html message
+        email.setHtmlMsg(htmlMsg);
+
+        // Set the alternative message if the email client does not support HTML messages
+        email.setTextMsg("Yout account password changed. Contact support if you did not change it.");
 
         email.addTo(receiverEmail);
         email.send();
