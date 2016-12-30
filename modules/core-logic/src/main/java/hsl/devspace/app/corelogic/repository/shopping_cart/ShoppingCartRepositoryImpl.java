@@ -41,7 +41,7 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
     public int addCart(double netCost, String username) {
         String orderId;
         List<Map<String, Object>> max = jdbcTemplate.queryForList("SELECT MAX(id) FROM shopping_cart");
-        if (max.get(0).get("MAX(id)").toString().equals("") || max.get(0).get("MAX(id)") == null) {
+        if (max.get(0).get("MAX(id)") == null) {
             orderId = "PS00001";
         } else {
             int maxId = Integer.parseInt(max.get(0).get("MAX(id)").toString());
