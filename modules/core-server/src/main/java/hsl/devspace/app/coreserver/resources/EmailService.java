@@ -84,7 +84,7 @@ public class EmailService {
         email.setFrom(emailPropertyReader.readProperty("authenticator.account.email"), emailPropertyReader.readProperty("verification.account.name"));
         email.setSubject(emailPropertyReader.readProperty("verification.message.subject"));
 
-        URL url = new URL("https://drive.google.com/open?id=0BzrDi0cg0nb1Xzh6Z19BZXF2LTQ");
+        URL url = new URL(emailPropertyReader.readProperty("email.logo"));
         String cid = email.embed(url, "Pizza Shefu logo");
 
         // set the html message
@@ -136,7 +136,7 @@ public class EmailService {
         email.setFrom(emailPropertyReader.readProperty("authenticator.account.email"), emailPropertyReader.readProperty("verification.account.name"));
         email.setSubject(emailPropertyReader.readProperty("verification.success.message.subject"));
 
-        URL url = new URL("http://localhost:8081/web-selfcare/resources/images/logo.png");
+        URL url = new URL(emailPropertyReader.readProperty("email.logo"));
         String cid = email.embed(url, "Pizza Shefu logo");
 
         // set the html message
@@ -160,7 +160,7 @@ public class EmailService {
         return "";
     }
 
-    // Process of sending an email notifying a successful account activation
+    // Process of sending an email notifying a password change
     public String sendPasswordChangedNotificationEmail(String username, String receiverEmail) throws EmailException, MalformedURLException {
         HtmlEmail email = new HtmlEmail();
         email.setHostName(emailPropertyReader.readProperty("host.name"));
@@ -170,7 +170,7 @@ public class EmailService {
         email.setFrom(emailPropertyReader.readProperty("authenticator.account.email"), emailPropertyReader.readProperty("verification.account.name"));
         email.setSubject(emailPropertyReader.readProperty("password.changed.message.subject"));
 
-        URL url = new URL("http://localhost:8081/web-selfcare/resources/images/logo.png");
+        URL url = new URL(emailPropertyReader.readProperty("email.logo"));
         String cid = email.embed(url, "Pizza Shefu logo");
 
         Date dNow = new Date();
