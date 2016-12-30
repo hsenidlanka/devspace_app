@@ -160,10 +160,5 @@
     </div>
 </div>
 <%@include file="../includes/modals.jsp" %>
-<script>
-    $(document).ready(function () {
-
-    });
-</script>
 </body>
 </html>
