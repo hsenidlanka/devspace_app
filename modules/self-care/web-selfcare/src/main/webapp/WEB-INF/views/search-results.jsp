@@ -10,12 +10,14 @@
     <script src="<c:url value="/resources/js/search-operations.js"/>"></script>
     <script src="<c:url value="/resources/js/jquery.contenthover.js"/>"></script>
 
-    <script src="<c:url value="/resources/js/menu-operations.js"/>"></script>
     <link href="<c:url value="/resources/css/component.css"/>" rel="stylesheet" type="text/css">
     <link href="<c:url value="/resources/css/default.css"/>" rel="stylesheet" type="text/css">
-    <link href="<c:url value="/resources/css/teskly.viewitle.css"/>" rel="stylesheet" type="text/css">
+    <%--<link href="<c:url value="/resources/css/teskly.viewitle.css"/>" rel="stylesheet" type="text/css">--%>
     <script src="<c:url value="/resources/js/modernizr.custom.js"/>"></script>
-    <script src="<c:url value="/resources/js/teskly.viewitle.js"/>"></script>
+    <%--<script src="<c:url value="/resources/js/teskly.viewitle.js"/>"></script>--%>
+    <link href="<c:url value="/resources/css/jBox.css"/>" rel="stylesheet" type="text/css">
+    <link href="<c:url value="/resources/css/TooltipDark.css"/>" rel="stylesheet" type="text/css">
+    <script src="<c:url value="/resources/js/jBox.min.js"/>"></script>
 </head>
 <body>
 <div class="loader-anim"></div>
@@ -113,10 +115,25 @@
 
                                                                 <div class="col-md-3">
                                                                     <ul class="grid cs-style-3">
-                                                                        <li data-teskly-viewitle="<c:out value="${item.description}"/>">
-                                                                            <figure>
+                                                                            <%--<li data-teskly-viewitle="<c:out value="${item.description}"/>">--%>
+                                                                        <li>
+                                                                            <c:choose>
+                                                                                <c:when test="${empty item.description}">
+                                                                                    <c:set var="itemDescription"
+                                                                                           value="No description available."
+                                                                                           scope="page"/>
+                                                                                </c:when>
+                                                                                <c:otherwise>
+                                                                                    <c:set var="itemDescription"
+                                                                                           value="${item.description}"
+                                                                                           scope="page"/>
+                                                                                </c:otherwise>
+                                                                            </c:choose>
+                                                                            <figure class="tooltip2"
+                                                                                    title="<c:out value="${itemDescription}"/>">
+
                                                                                     <%--<img src="<c:url value="/resources/images/image_placeholder.gif"/>"
-                                                                                         class="menu-images">--%>
+                                                                                                 class="menu-images">--%>
                                                                                 <c:set var="itemName"
                                                                                        value="${fn:replace(item.itemName, ' ', '')}"/>
                                                                                 <img class="menu-images"
@@ -315,8 +332,8 @@
 
     });
 </script>
-<script>
+<%--<script>
     jQuery(document).viewitle();
-</script>
+</script>--%>
 </body>
 </html>

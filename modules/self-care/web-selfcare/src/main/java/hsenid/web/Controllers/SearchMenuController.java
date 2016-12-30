@@ -2,8 +2,6 @@ package hsenid.web.Controllers;
 
 import hsenid.web.models.ServerResponseMessage;
 import hsenid.web.supportclasses.SendStringBuilds;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,16 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by hsenid on 11/2/16.
@@ -79,7 +69,7 @@ public class SearchMenuController {
 
     }
 
-    @RequestMapping(value = "/search-menu/add-to-cart", method = RequestMethod.POST)
+   /* @RequestMapping(value = "/search-menu/add-to-cart", method = RequestMethod.POST)
     @ResponseBody
     public boolean addToCart(HttpSession session, HttpServletRequest request) {
         if (session.getAttribute("cartItems") == null || session.getAttribute("cartItems") == "") {
@@ -137,7 +127,7 @@ public class SearchMenuController {
             jsonArray.add(jsonObject);
         }
         return jsonArray;
-    }
+    }*/
 
 
 }
