@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/itemFilters")
@@ -72,4 +73,56 @@ public class ItemFilter {
         }
         return subCat;
     }
+
+
+
+    /////////////////////**************
+
+    /*
+    *reloading item table view on search & paginating basis
+    * */
+    @RequestMapping(value = "/loadSearchItem2", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    List<Map<String, Object>> loadSearchItem2(HttpServletRequest request) {
+
+        List<Map<String, Object>> itemDetails = null;
+        try {
+            String itmNm = request.getParameter("srchItmNm");
+            String catNm = request.getParameter("cat");
+            String subCat = request.getParameter("subcat");
+
+            String pgInit = request.getParameter("initPage");
+            int initPg = Integer.parseInt(pgInit);
+            String pgLimt = request.getParameter("pgLimit");
+            int pgLimit = Integer.parseInt(pgLimt);
+
+            LOGGER.trace("load item, cat, subcat name 2 {}", itmNm+" "+catNm+" "+subCat);
+
+            if((subCat == null) || (subCat.equals(""))) {
+                if((itmNm==null) || (itmNm.equals(""))){
+                    itemDetails = item.retrieveItemDetailsByCategory(catNm,pgLimit,initPg);
+                }
+                else{
+                    itemDetails = item.retrieveItemDetailsForSearchByCategory(itmNm,catNm,pgLimit, initPg);
+                }
+                LOGGER.trace("selected item details with cat {}", itemDetails);
+            }
+            else {
+                if((itmNm==null) || (itmNm.equals(""))){
+                    itemDetails = item.retrieveItemDetailsBySubCategory(subCat,pgLimit,initPg);
+                }
+                else{
+                    itemDetails = item.retrieveItemDetailsForSearchBySubCategory(itmNm, subCat, pgLimit, initPg);
+                }
+                LOGGER.trace("selected item details with sub-cat {}", itemDetails);
+            }
+        }
+        catch (Exception e) {
+            LOGGER.error("error in loading item details with cat and subcat : {}", e);
+        }
+
+        return itemDetails;
+    }
+
 }

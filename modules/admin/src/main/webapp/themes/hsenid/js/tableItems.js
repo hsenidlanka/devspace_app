@@ -203,8 +203,6 @@ $(document).ready(function () {
 
             if(!$("#subCatCheck").is(":checked")){
                 if(!$("#catCheck").is(":checked")){
-                    cat=null;
-                    subcat=null;
 
                     $.ajax({
                         url: "https://localhost:8443/admin/items/loadSearchItem",
@@ -222,12 +220,12 @@ $(document).ready(function () {
                 }
                 else{
                     cat=$("#selectCatFltr").val();
-                    subcat=null;
+                    subcat="";
 
                     $.ajax({
-                        url: "https://localhost:8443/admin/items/loadSearchItem2",
+                        url: "https://localhost:8443/admin/itemFilters/loadSearchItem2",
                         datatype: "JSON",
-                        data: {"srchItmNm": $("#txtViewSearchItem").val(), "pgLimit": pgLimit, "initPage": "0","cat":cat},
+                        data: {"srchItmNm": $("#txtViewSearchItem").val(), "pgLimit": pgLimit, "initPage": "0","cat":cat,"subcat":subcat},
                         success: function (data) {
                             $("#tblItems").bootstrapTable('load', data);
                             // console.log(data);
@@ -240,13 +238,13 @@ $(document).ready(function () {
                 }
             }
             else{
-                cat=null;
+                cat="";
                 subcat=$("#selectSubCatFltr").val();
 
                 $.ajax({
-                    url: "https://localhost:8443/admin/items/loadSearchItem2",
+                    url: "https://localhost:8443/admin/itemFilters/loadSearchItem2",
                     datatype: "JSON",
-                    data: {"srchItmNm": $("#txtViewSearchItem").val(), "pgLimit": pgLimit, "initPage": "0","subcat":subcat},
+                    data: {"srchItmNm": $("#txtViewSearchItem").val(), "pgLimit": pgLimit, "initPage": "0", "cat":cat, "subcat":subcat},
                     success: function (data) {
                         $("#tblItems").bootstrapTable('load', data);
                         // console.log(data);
@@ -275,7 +273,7 @@ $(document).ready(function () {
             $('#pagination').show();
             $('#pagination2').hide();
 
-            $.ajax({
+           /* $.ajax({
                 url: 'https://localhost:8443/admin/items/loadSearchItem',
                 dataType: 'JSON',
                 data: {"initPage": "1", "pgLimit": pgLimit},
@@ -283,7 +281,46 @@ $(document).ready(function () {
 
                     $('#tblItems').bootstrapTable('load', data);
                 }
-            })
+            })*/
+
+
+            ////
+            if(!$("#subCatCheck").is(":checked")){
+                if(!$("#catCheck").is(":checked")){
+
+                    $.ajax({
+                        url: "https://localhost:8443/admin/items/loadSearchItem",
+                        datatype: "JSON",
+                        data: {"srchItmNm": $("#txtViewSearchItem").val(), "pgLimit": pgLimit, "initPage": "0"},
+                        success: function (data) {
+                            $("#tblItems").bootstrapTable('load', data);
+                            // console.log(data);
+                        },
+                        error: function (e) {
+                            alert("error, load search item" + e);
+                            console.log("error, load search item" + e)
+                        }
+                    })
+                }
+                else{
+                    cat=$("#selectCatFltr").val();
+                    subcat="";
+
+                    $.ajax({
+                        url: "https://localhost:8443/admin/itemFilters/loadSearchItem2",
+                        datatype: "JSON",
+                        data: {"srchItmNm": $("#txtViewSearchItem").val(), "pgLimit": pgLimit, "initPage": "0","cat":cat,"subcat":subcat},
+                        success: function (data) {
+                            $("#tblItems").bootstrapTable('load', data);
+                            // console.log(data);
+                        },
+                        error: function (e) {
+                            alert("error, load search item" + e);
+                            console.log("error, load search item-cat" + e)
+                        }
+                    })
+                }
+            }
         }
     });
 
@@ -294,19 +331,60 @@ $(document).ready(function () {
             $('#pagination').hide();
             $('#pagination2').show();
 
-            $.ajax({
-                url: "https://localhost:8443/admin/items/loadSearchItem",
-                datatype: "JSON",
-                data: {"srchItmNm": $("#txtViewSearchItem").val(), "pgLimit": pgLimit, "initPage": "0"},
-                success: function (data) {
-                    $("#tblItems").bootstrapTable('load', data);
-                    // console.log(data);
-                },
-                error: function (e) {
-                    alert("error, load search item" + e);
-                    console.log("error, load search item" + e)
+            if(!$("#subCatCheck").is(":checked")){
+                if(!$("#catCheck").is(":checked")){
+
+                    $.ajax({
+                        url: "https://localhost:8443/admin/items/loadSearchItem",
+                        datatype: "JSON",
+                        data: {"srchItmNm": $("#txtViewSearchItem").val(), "pgLimit": pgLimit, "initPage": "0"},
+                        success: function (data) {
+                            $("#tblItems").bootstrapTable('load', data);
+                            // console.log(data);
+                        },
+                        error: function (e) {
+                            alert("error, load search item" + e);
+                            console.log("error, load search item" + e)
+                        }
+                    })
                 }
-            })
+                else{
+                    cat=$("#selectCatFltr").val();
+                    subcat="";
+
+                    $.ajax({
+                        url: "https://localhost:8443/admin/itemFilters/loadSearchItem2",
+                        datatype: "JSON",
+                        data: {"srchItmNm": $("#txtViewSearchItem").val(), "pgLimit": pgLimit, "initPage": "0","cat":cat,"subcat":subcat},
+                        success: function (data) {
+                            $("#tblItems").bootstrapTable('load', data);
+                            // console.log(data);
+                        },
+                        error: function (e) {
+                            alert("error, load search item" + e);
+                            console.log("error, load search item-cat" + e)
+                        }
+                    })
+                }
+            }
+            else{
+                cat="";
+                subcat=$("#selectSubCatFltr").val();
+
+                $.ajax({
+                    url: "https://localhost:8443/admin/itemFilters/loadSearchItem2",
+                    datatype: "JSON",
+                    data: {"srchItmNm": $("#txtViewSearchItem").val(), "pgLimit": pgLimit, "initPage": "0", "cat":cat, "subcat":subcat},
+                    success: function (data) {
+                        $("#tblItems").bootstrapTable('load', data);
+                        // console.log(data);
+                    },
+                    error: function (e) {
+                        alert("error, load search item" + e);
+                        console.log("error, load search item-subcat" + e)
+                    }
+                })
+            }
 
             /**
              *Setting the number of pages according to the number of records
@@ -324,7 +402,7 @@ $(document).ready(function () {
             $('#pagination').show();
             $('#pagination2').hide();
 
-            $.ajax({
+           /* $.ajax({
                 url: 'https://localhost:8443/admin/items/loadSearchItem',
                 dataType: 'JSON',
                 data: {"initPage": "1", "pgLimit": pgLimit},
@@ -332,9 +410,247 @@ $(document).ready(function () {
 
                     $('#tblItems').bootstrapTable('load', data);
                 }
+            })*/
+
+            /////
+            if(!$("#subCatCheck").is(":checked")){
+                if(!$("#catCheck").is(":checked")){
+
+                    $.ajax({
+                        url: "https://localhost:8443/admin/items/loadSearchItem",
+                        datatype: "JSON",
+                        data: {"srchItmNm": $("#txtViewSearchItem").val(), "pgLimit": pgLimit, "initPage": "0"},
+                        success: function (data) {
+                            $("#tblItems").bootstrapTable('load', data);
+                            // console.log(data);
+                        },
+                        error: function (e) {
+                            alert("error, load search item" + e);
+                            console.log("error, load search item" + e)
+                        }
+                    })
+                }
+                else{
+                    cat=$("#selectCatFltr").val();
+                    subcat="";
+
+                    $.ajax({
+                        url: "https://localhost:8443/admin/itemFilters/loadSearchItem2",
+                        datatype: "JSON",
+                        data: {"srchItmNm": $("#txtViewSearchItem").val(), "pgLimit": pgLimit, "initPage": "0","cat":cat,"subcat":subcat},
+                        success: function (data) {
+                            $("#tblItems").bootstrapTable('load', data);
+                            // console.log(data);
+                        },
+                        error: function (e) {
+                            alert("error, load search item" + e);
+                            console.log("error, load search item-cat" + e)
+                        }
+                    })
+                }
+            }
+        }
+    });
+
+
+    /*
+    * for loading data in table on dropdown change event
+    * */
+    $("#catCheck").click(function () {
+        if($("#catCheck").is(":checked")){
+
+           // $('#pagination').show();
+          //  $('#pagination2').hide();
+
+            $("#selectCatFltr").change(function(){
+                if(!$("#subCatCheck").is(":checked")){
+
+                    cat=$("#selectCatFltr").val();
+                    subcat="";
+
+                    $.ajax({
+                        url: "https://localhost:8443/admin/itemFilters/loadSearchItem2",
+                        datatype: "JSON",
+                        data: {"srchItmNm":"", "pgLimit": pgLimit, "initPage": "0","cat":cat,"subcat":subcat},
+                        success: function (data) {
+                            $("#tblItems").bootstrapTable('load', data);
+                            console.log("gdrdd "+data);
+                        },
+                        error: function (e) {
+                            alert("error, load search item" + e);
+                            console.log("error, load search item-cat" + e)
+                        }
+                    });
+                }
+                else{
+                    cat=$("#selectCatFltr").val();
+                    subcat=$("#selectSubCatFltr").val();
+
+                    $.ajax({
+                        url: "https://localhost:8443/admin/itemFilters/loadSearchItem2",
+                        datatype: "JSON",
+                        data: {"srchItmNm":"", "pgLimit": pgLimit, "initPage": "0","cat":cat,"subcat":subcat},
+                        success: function (data) {
+                            $("#tblItems").bootstrapTable('load', data);
+                            console.log("gdrdd2 "+data);
+                        },
+                        error: function (e) {
+                            alert("error, load search item" + e);
+                            console.log("error, load search item-cat" + e)
+                        }
+                    });
+                }
+            })
+        }
+
+        if(!$("#catCheck").is(":checked")){
+            $.ajax({
+                url: "https://localhost:8443/admin/items/loadSearchItem",
+                datatype: "JSON",
+                data: {"srchItmNm": $("#txtViewSearchItem").val(), "pgLimit": pgLimit, "initPage": "0"},
+                success: function (data) {
+                    $("#tblItems").bootstrapTable('load', data);
+                    // console.log(data);
+                },
+                error: function (e) {
+                    alert("error, load search item" + e);
+                    console.log("error, load search item" + e)
+                }
             })
         }
     });
+
+
+    /*
+     * for loading data in table on sub-cat dropdown change event
+     * */
+    $("#subCatCheck").click(function () {
+        //if($("#catCheck").is(":checked")){
+
+            $('#pagination').show();
+            $('#pagination2').hide();
+
+        if(!$("#catCheck").is(":checked")){
+
+            cat="";
+            subcat=$("#selectSubCatFltr").val();
+
+            $.ajax({
+                url: "https://localhost:8443/admin/itemFilters/loadSearchItem2",
+                datatype: "JSON",
+                data: {"srchItmNm":"", "pgLimit": pgLimit, "initPage": "0","cat":cat,"subcat":subcat},
+                success: function (data) {
+                    $("#tblItems").bootstrapTable('load', data);
+                    console.log("gdrdd "+data);
+                },
+                error: function (e) {
+                    alert("error, load search item" + e);
+                    console.log("error, load search item-cat" + e)
+                }
+            });
+        }
+        else{
+            cat=$("#selectCatFltr").val();
+            subcat=$("#selectSubCatFltr").val();
+
+            $.ajax({
+                url: "https://localhost:8443/admin/itemFilters/loadSearchItem2",
+                datatype: "JSON",
+                data: {"srchItmNm":"", "pgLimit": pgLimit, "initPage": "0","cat":cat,"subcat":subcat},
+                success: function (data) {
+                    $("#tblItems").bootstrapTable('load', data);
+                    console.log("gdrdd2 "+data);
+                },
+                error: function (e) {
+                    alert("error, load search item" + e);
+                    console.log("error, load search item-cat" + e)
+                }
+            });
+        }
+
+            $("#selectSubCatFltr").click(function(){
+                if(!$("#catCheck").is(":checked")){
+
+                    cat="";
+                    subcat=$("#selectSubCatFltr").val();
+
+                    $.ajax({
+                        url: "https://localhost:8443/admin/itemFilters/loadSearchItem2",
+                        datatype: "JSON",
+                        data: {"srchItmNm":"", "pgLimit": pgLimit, "initPage": "0","cat":cat,"subcat":subcat},
+                        success: function (data) {
+                            $("#tblItems").bootstrapTable('load', data);
+                            console.log("gdrdd "+data);
+                        },
+                        error: function (e) {
+                            alert("error, load search item" + e);
+                            console.log("error, load search item-cat" + e)
+                        }
+                    });
+                }
+                else{
+                    cat=$("#selectCatFltr").val();
+                    subcat=$("#selectSubCatFltr").val();
+
+                    $.ajax({
+                        url: "https://localhost:8443/admin/itemFilters/loadSearchItem2",
+                        datatype: "JSON",
+                        data: {"srchItmNm":"", "pgLimit": pgLimit, "initPage": "0","cat":cat,"subcat":subcat},
+                        success: function (data) {
+                            $("#tblItems").bootstrapTable('load', data);
+                            console.log("gdrdd2 "+data);
+                        },
+                        error: function (e) {
+                            alert("error, load search item" + e);
+                            console.log("error, load search item-cat" + e)
+                        }
+                    });
+                }
+
+                //subcatLoadTable();
+            })
+       // }
+
+       /* if(!$("#catCheck").is(":checked")){
+            $.ajax({
+                url: "https://localhost:8443/admin/items/loadSearchItem",
+                datatype: "JSON",
+                data: {"srchItmNm": $("#txtViewSearchItem").val(), "pgLimit": pgLimit, "initPage": "0"},
+                success: function (data) {
+                    $("#tblItems").bootstrapTable('load', data);
+                    // console.log(data);
+                },
+                error: function (e) {
+                    alert("error, load search item" + e);
+                    console.log("error, load search item" + e)
+                }
+            })
+        }*/
+    });
+
+
+
+
+    //for on click event of  category drop down
+   /* $("#selectCatFltr").click(function(){
+
+        cat=$("#selectCatFltr").val();
+        subcat="";
+
+        $.ajax({
+            url: "https://localhost:8443/admin/itemFilters/loadSearchItem2",
+            datatype: "JSON",
+            data: {"srchItmNm": $("#txtViewSearchItem").val(), "pgLimit": pgLimit, "initPage": "0","cat":cat,"subcat":subcat},
+            success: function (data) {
+                $("#tblItems").bootstrapTable('load', data);
+                console.log(data);
+            },
+            error: function (e) {
+                alert("error, load search item33" + e);
+                console.log("error, load search item-cat" + e)
+            }
+        })
+    });*/
 
 });
 
@@ -424,3 +740,44 @@ window.operateEvents = {
 
 
 
+/*
+function subcatLoadTable(pgLimit,cat,subcat){
+
+    if(!$("#catCheck").is(":checked")){
+
+        cat="";
+        subcat=$("#selectSubCatFltr").val();
+
+        $.ajax({
+            url: "https://localhost:8443/admin/itemFilters/loadSearchItem2",
+            datatype: "JSON",
+            data: {"srchItmNm":"", "pgLimit": pgLimit, "initPage": "0","cat":cat,"subcat":subcat},
+            success: function (data) {
+                $("#tblItems").bootstrapTable('load', data);
+                console.log("gdrdd "+data);
+            },
+            error: function (e) {
+                alert("error, load search item" + e);
+                console.log("error, load search item-cat" + e)
+            }
+        });
+    }
+    else{
+        cat=$("#selectCatFltr").val();
+        subcat=$("#selectSubCatFltr").val();
+
+        $.ajax({
+            url: "https://localhost:8443/admin/itemFilters/loadSearchItem2",
+            datatype: "JSON",
+            data: {"srchItmNm":"", "pgLimit": pgLimit, "initPage": "0","cat":cat,"subcat":subcat},
+            success: function (data) {
+                $("#tblItems").bootstrapTable('load', data);
+                console.log("gdrdd2 "+data);
+            },
+            error: function (e) {
+                alert("error, load search item" + e);
+                console.log("error, load search item-cat" + e)
+            }
+        });
+    }
+}*/

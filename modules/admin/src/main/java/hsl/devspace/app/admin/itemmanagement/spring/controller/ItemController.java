@@ -458,7 +458,7 @@ public class ItemController {
       /*
    *reloading item table view on search & paginating basis
    * */
-    @RequestMapping(value = "/loadSearchItem2", method = RequestMethod.GET)
+   /* @RequestMapping(value = "/loadSearchItem2", method = RequestMethod.GET)
     public
     @ResponseBody
     List<List<Map<String, Object>>> loadSearchItem2(HttpServletRequest request) {
@@ -488,7 +488,7 @@ public class ItemController {
         }
 
         return itemDetails;
-    }
+    }*/
 
 
 
