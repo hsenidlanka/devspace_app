@@ -342,6 +342,14 @@ public class ItemRepositoryImpl implements ItemRepository {
         return itemDetails;
     }
 
+    public int countItemDetailsByCategory(String category) {
+        List<Map<String, Object>> itemDetails = jdbcTemplate.queryForList("SELECT i.id,i.name AS item_name,i.created_date,i.creator,c.name " +
+                "AS category_name, s.name AS sub_category_name,t.name AS type,i.description,i.image FROM item i" +
+                " INNER JOIN sub_category s ON i.sub_category_id=s.id INNER JOIN type t ON i.type_id=t.type_id " +
+                "INNER JOIN category c ON c.id=s.category_id WHERE c.name=?", category);
+        return itemDetails.size();
+
+    }
     @Override
     public List<Map<String, Object>> retrieveItemDetailsBySubCategory(String subCategory, int limit, int page) {
         List<Map<String, Object>> itemDetails = jdbcTemplate.queryForList("SELECT i.id,i.name AS item_name,i.created_date,i.creator,c.name " +
@@ -350,6 +358,14 @@ public class ItemRepositoryImpl implements ItemRepository {
                 "INNER JOIN category c ON c.id=s.category_id WHERE s.name=? LIMIT ? OFFSET ?", subCategory, limit, page);
         return itemDetails;
     }
+
+    @Override
+    public int countItemDetailsBySubCategory(String subCategory) {
+        List<Map<String, Object>> itemDetails = jdbcTemplate.queryForList("SELECT COUNT(*) FROM item WHERE sub_category_id=(SELECT id FROM sub_category WHERE name=?)", subCategory);
+        return itemDetails.size();
+
+    }
+
 
     @Override
     public List<String> searchItemNameByCategory(String itemkey, String category) {
@@ -365,6 +381,13 @@ public class ItemRepositoryImpl implements ItemRepository {
     }
 
     @Override
+    public int countSearchItemNameByCategory(String itemkey, String category) {
+        List<String> items = searchItemNameByCategory(itemkey, category);
+        return items.size();
+
+    }
+
+    @Override
     public List<String> searchItemNameBySubCategory(String itemkey, String subCategory) {
         String key = "%" + itemkey + "%";
         List<Map<String, Object>> itemDetails = jdbcTemplate.queryForList("SELECT i.name AS item_name FROM item i INNER JOIN sub_category s ON i.sub_category_id=s.id INNER JOIN category c ON c.id=s.category_id WHERE i.name LIKE ? AND s.name=? ", key, subCategory);
@@ -376,6 +399,13 @@ public class ItemRepositoryImpl implements ItemRepository {
         System.out.println(nameList);
         return nameList;
     }
+
+    @Override
+    public int countSearchItemNameBySubCategory(String itemkey, String category) {
+        List<String> items = searchItemNameBySubCategory(itemkey, category);
+        return items.size();
+    }
+
 
     /**
      * retrieve sizes of a item  by item name
