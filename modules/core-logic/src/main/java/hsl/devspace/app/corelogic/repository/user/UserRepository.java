@@ -116,7 +116,7 @@ public interface UserRepository {
 
     List<User> selectNonVerifiedUsers(int limit, int page);
 
-    void changeStatusToActiveFromNotVerified(String username, String code);
+    int changeStatusToActiveFromNotVerified(String username, String code);
 
 
 }

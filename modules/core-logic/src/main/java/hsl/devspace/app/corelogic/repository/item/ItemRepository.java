@@ -65,10 +65,22 @@ public interface ItemRepository {
 
     List<List<Map<String, Object>>> retrieveItemDetailsForSearch(String itemkey, String category);
 
-    List<List<Map<String, Object>>> retrieveItemDetailsForSearchBySubCategory(String itemkey, String subCategory);
-
+    List<Map<String, Object>> retrieveItemDetailsForSearchBySubCategory(String itemkey, String subCategory, int limit, int page);
     List<String> searchItemNameByCategory(String itemkey, String category);
 
     List<String> searchItemNameBySubCategory(String itemkey, String subCategory);
 
+    List<Map<String, Object>> retrieveItemDetailsForSearchByCategory(String itemkey, String category, int limit, int page);
+
+    List<Map<String, Object>> retrieveItemDetailsByCategory(String category, int limit, int page);
+
+    List<Map<String, Object>> retrieveItemDetailsBySubCategory(String subCategory, int limit, int page);
+
+    int countItemDetailsByCategory(String category);
+
+    int countItemDetailsBySubCategory(String subCategory);
+
+    int countSearchItemNameByCategory(String itemkey, String category);
+
+    int countSearchItemNameBySubCategory(String itemkey, String category);
 }

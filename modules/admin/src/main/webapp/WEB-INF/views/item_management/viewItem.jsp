@@ -112,7 +112,7 @@
                                 </div>
                                 <div class="col-xs-9">
                                     <select class="form-control" id="selectCatFltr">
-                                        <option>--Category--</option>
+                                        <option value="">--Category--</option>
                                     </select>
                                 </div>
                             </div>

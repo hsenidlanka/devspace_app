@@ -3,6 +3,8 @@ package hsl.devspace.app.coreserver.exception;
 import hsl.devspace.app.coreserver.common.Context;
 import hsl.devspace.app.coreserver.common.PropertyReader;
 import hsl.devspace.app.coreserver.model.ErrorMessage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 
 import javax.ws.rs.WebApplicationException;
@@ -14,7 +16,7 @@ import javax.ws.rs.core.Response;
  * This class will handle the responses for various kinds of WebApplicationExceptions.
  */
 public class WebApplicationExceptionHandler {
-
+    private static final Logger log = LoggerFactory.getLogger(WebApplicationExceptionHandler.class);
     ApplicationContext context = Context.appContext;
 
     // This method will generate a relevant response according to the WebApplicationException occurred.

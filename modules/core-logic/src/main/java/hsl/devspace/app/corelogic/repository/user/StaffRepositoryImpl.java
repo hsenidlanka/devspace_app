@@ -1025,8 +1025,8 @@ public class StaffRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public void changeStatusToActiveFromNotVerified(String username, String code) {
-
+    public int changeStatusToActiveFromNotVerified(String username, String code) {
+        return 0;
     }
 
 

@@ -64,7 +64,7 @@
 <div class="form-box" id="view-pkg-form-box">
     <div class="panel panel-default">
         <div class="panel-heading  common-form-headings">
-            <h3 class="default-panel-headings"><fmt:message key="package.viewpackage.breadcrumb.viewpkg" bundle="${bundle2}"/></h3>
+            <h3 class="default-panel-headings"><fmt:message key="package.viewpackage.breadcrumb.viewpkg" bundle="${bundle1}"/></h3>
         </div>
 
         <div class="panel-body">
@@ -73,7 +73,7 @@
                 <div class="col-sm-1"></div>
                 <div class="col-sm-3">
                     <label class="control-label" style="float: right;">
-                        <fmt:message key="package.viewpackage.package.name" bundle="${bundle2}"/>
+                        <fmt:message key="package.viewpackage.package.name" bundle="${bundle1}"/>
                     </label>
 
                 </div>
@@ -82,7 +82,7 @@
                 </div>
                 <div class="col-sm-3">
                     <button type="button" class="btn btn-success" id="btnViewSearchPkg"><span
-                            class="glyphicon glyphicon-search"></span><fmt:message key="package.viewpackage.package.search" bundle="${bundle2}"/>
+                            class="glyphicon glyphicon-search"></span><fmt:message key="package.viewpackage.package.search" bundle="${bundle1}"/>
                     </button>
                 </div>
                 <div class="col-sm-1"></div>
@@ -91,7 +91,7 @@
 
             <form:form class="form-horizontal" role="form" id="frmViewPkg" action="" method="post">
                 <fieldset class="scheduler-border">
-                    <legend class="scheduler-border"><fmt:message key="package.viewpackage.package.name" bundle="${bundle2}"/></legend>
+                    <legend class="scheduler-border"><fmt:message key="package.viewpackage.package.name" bundle="${bundle1}"/></legend>
 
                     <!--table of package details-->
                     <table id="tblPackages">

@@ -32,7 +32,7 @@ public interface ShoppingCartRepository {
 
     int removeItemFromCart(int productId);
 
-    int add(Delivery del);
+    int add(Delivery del, int cartId);
 
     int add(String paymentMethodName, int cartId, int deliveryId);
 
@@ -43,6 +43,16 @@ public interface ShoppingCartRepository {
     List<Map<String, Object>> selectAll();
 
     String selectOrderId(int cartId);
+
+    List<Map<String, Object>> getPurchaseHistory(String username, int limit, int page);
+
+    List<Map<String, Object>> selectItemDetailsOfOrder(String orderId);
+
+    List<Map<String, Object>> selectPaymentAndDeliveryDetails(String orderId);
+
+    List<Map<String, Object>> selectOrderDetails(String username, int limit, int page);
+
+    public int countOrderDetails(String username);
 //    void addPackageToCart(int packageId);
 //    void modifyPackageInCart();
 //    void removePackageFromCart(int packageId);

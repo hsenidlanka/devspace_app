@@ -29,17 +29,13 @@
           <form>
           <div style="display: inline-block; float:right;">
             <div class="form-group row">
-              <div class="col-sm-10" style="padding-right: 0px;">
-                <input id="txt-menu-search" name="txt-menu-search" type="text"
-                            class="form-control input-sm"/>
-
+              <div class="col-sm-6" style="padding-right: 0px;">
+                <input type="text" class="form-control input-md" placeholder="<fmt:message key="searchresults.search.placeholder"
+                                                                                      bundle="${lang}"/>"
+                       name="txt-search-menu" id="txt-menu-search">
               </div>
-              <div class="col-sm-2" style="padding-left: 2px;">
-                <button class="btn btn-primary input-sm" id="btn-menu-search" type="button"><span><i
-                        class="glyphicon glyphicon-search"></i></span></button>
-              </div>
-              <div id="div_source1">
-                <select id="ch_user1">
+              <div class="col-sm-4" id="div_source1">
+                <select class="form-control input-md" id="ch_user1">
                   <%--<option value="select"></option>--%>
                 </select>
               </div>
@@ -58,18 +54,12 @@
                   }
                 });
               </script>
-              <%--<script>
-                $.ajax("home/search-menu")
-                        .done(function (result) {
-                          alert(result.data[0].itemName);
-                        })
-                        .fail(function () {
-                          alert("error");
-                        })
-                        .always(function () {
-                          alert("complete");
-                        });
-              </script>--%>
+              <div class="col-sm-2" style="padding-left: 2px;">
+                <button class="btn btn-primary input-md" id="btn-menu-search" type="button"><span><i
+                        class="glyphicon glyphicon-search"></i></span></button>
+              </div>
+
+
             </div>
             <div style="margin-top: 40px;">
                 <%--  <label>Filter:</label>

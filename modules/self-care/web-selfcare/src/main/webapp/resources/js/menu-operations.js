@@ -48,11 +48,26 @@ $(document).ready(function () {
         });
     });
 
-    $("#sizes").change(function () {
+    new jBox('Tooltip', {
+        attach: '.tooltip2',
+        theme: 'TooltipDark',
+        animation: 'zoomIn',
+        width: 250
+    });
+
+    $(document.body).on('change', '#sizes' ,function(){
+        var selectedSize = $(this).val();
+        var fldId = '#hiddenFld-' + selectedSize;
+        var price=$(this).closest("div").find(fldId).val();
+        $(this).closest("div").find("#lbl-sizeprice").text(price);
+    });
+
+/*    $("#sizes").change(function () {
         var selectedSize = $("#sizes").val();
+        //alert(selectedSize);
         var fldId = '#hiddenFld-' + selectedSize;
         $(this).closest("div").find("#lbl-sizeprice").text($(fldId).val());
-    });
+    });*/
 
     $(".btn-addtocart-pizza").click(function () {
         var price;

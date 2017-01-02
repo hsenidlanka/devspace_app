@@ -57,7 +57,7 @@
         <div class='circles'></div>
         <div class='circles'></div>
         <div class='circles'></div>
-        <h2 style="color: #f5f5f5; text-align: center;"><fmt:message key="new.header.contact" bundle="${lang}"/></h2>
+        <h2 style="color: #f5f5f5; text-align: center; margin-top: 5px"><fmt:message key="new.header.contact" bundle="${lang}"/></h2>
         <span class='arrow entypo-resize-full'></span>
     </div>
 
@@ -140,8 +140,7 @@
                                 placeholder="   example@domain.com"></form:input>
                     <form:errors path="contactEmail"/>
 
-                    <form:input cssClass="form-control" id="txt-contactno" type="text" placeholder="   0-XXXXXXXXXX"
-                                path="contactNo"/>
+                    <form:input cssClass="form-control" id="txt-contactno" type="text" placeholder="   0-XXXXXXXXXX" path="contactNo"/>
                     <form:errors path="contactNo"/>
 
                     <form:textarea path="msg" cssClass="form-control" id="txt-inquirymsg" type="text"

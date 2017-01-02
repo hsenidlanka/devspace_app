@@ -45,7 +45,7 @@ public class UpdateUserController {
 
 
     @PostMapping("/update-user")
-    public String submitUpdate(@ModelAttribute("updateuser") @Valid User updateuser, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String submitUpdate(HttpSession session, @ModelAttribute("updateuser") @Valid User updateuser, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
         JSONObject jsonObject = new JSONObject();
         logger.info(String.valueOf(bindingResult.hasErrors()));
@@ -70,6 +70,14 @@ public class UpdateUserController {
         try {
             restTemplate.put(customerUpdateUrl, jsonObject);
             redirectAttributes.addFlashAttribute("updatedMsg", "Profile updation Successful!!!");
+
+            session.removeAttribute("username");
+            session.removeAttribute("name");
+            session.removeAttribute("email");
+
+            session.setAttribute("username", updateuser.getUsername());
+            session.setAttribute("name", SendStringBuilds.sendString(updateuser.getFirstName(), " ", updateuser.getLastName()));
+            session.setAttribute("email", updateuser.getEmail());
 
         } catch (RestClientException e) {
             logger.error("update error {}", e.getMessage());

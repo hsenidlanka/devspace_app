@@ -40,7 +40,6 @@ public class ContactUsController {
             return "/home/contact-us";
         }
 
-
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("inquiryType", contactus.getInquiryType());
         jsonObject.put("title", contactus.getTitle());

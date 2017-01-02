@@ -119,9 +119,7 @@
                     <div class="form-group">
                         <div class="row">
                             <form:label path="firstName" for="firstName">
-                                <strong>
-                                    <fmt:message key="signup.first.name" bundle="${lang}"/>
-                                </strong>
+                                <strong><fmt:message key="signup.first.name" bundle="${lang}"/></strong>
                             </form:label>
                         </div>
                         <div class="row">
@@ -131,12 +129,15 @@
                     </div>
 
                     <div class="form-group">
-                        <form:label path="lastName" for="lastName">
-                            <p><strong><fmt:message key="signup.last.name" bundle="${lang}"/></strong></p>
-                        </form:label>
-
-                        <form:input path="lastName" id="lastNamejs" cssClass="form-control input-sm"/>
-                        <form:errors path="lastName" cssClass="help-inline" cssStyle="color: red"/>
+                        <div class="row">
+                            <form:label path="lastName" for="lastName">
+                                <p><strong><fmt:message key="signup.last.name" bundle="${lang}"/></strong></p>
+                            </form:label>
+                        </div>
+                        <div class="row">
+                            <form:input path="lastName" id="lastNamejs" cssClass="form-control input-sm"/>
+                            <form:errors path="lastName" cssClass="help-inline" cssStyle="color: red"/>
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -192,7 +193,6 @@
                         <form:label path="addressLine01" for="addressLine01" cssClass="text-left">
                             <p><strong><fmt:message key="signup.email" bundle="${lang}"/>Address</strong></p>
                         </form:label>
-                            <%--<div class="">--%>
                         <div class="row">
                             <div class="row inline">
                                 <form:input id="addr1js" path="addressLine01" cssClass="form-control input-sm"/>
@@ -217,7 +217,6 @@
                                 <form:errors path="addressLine03" cssClass="help-inline" cssStyle="color: red"/>
                             </div>
                         </div>
-                            <%--</div>--%>
                     </div>
                 </div>
                 <div class="col-sm-1"></div>

@@ -5,6 +5,16 @@ public class UserData extends User {
 
     String registeredDate;
 
+    public String getAccountStatus() {
+        return accountStatus;
+    }
+
+    public void setAccountStatus(String accountStatus) {
+        this.accountStatus = accountStatus;
+    }
+
+    String accountStatus;
+
     public String getRegisteredDate() {
         return registeredDate;
     }

@@ -14,7 +14,7 @@
         }
 
         .navbar-fixed-left .navbar-nav > li {
-            float: none;  /* Cancel default li float: left */
+            float: none; /* Cancel default li float: left */
             width: 139px;
         }
 
@@ -27,14 +27,16 @@
             margin-top: -50px;
             margin-left: 140px;
         }
-        .leftsidemenu{
+
+        .leftsidemenu {
             margin-top: -20px;
         }
+
         .navbar-brand {
             color: #666666;
         }
 
-        .navbar-nav>li>a {
+        .navbar-nav > li > a {
             color: #777777 !important;
         }
     </style>
@@ -42,16 +44,20 @@
 
     <script>
 
-        $( document ).ready(function() {
+        $(document).ready(function () {
             load_home()
         });
 
         function load_home() {
-            document.getElementById("content").innerHTML='<object type="text/html" data="profile-info" style="width:105%; height: 85%;"></object>';
+            document.getElementById("content").innerHTML = '<object type="text/html" data="profile-info" style="width:105%; height: 85%;"></object>';
         }
 
         function load_update_profile() {
-            document.getElementById("content").innerHTML='<object type="text/html" data="update-user" style="width:105%; height: 85%;"></object>';
+            document.getElementById("content").innerHTML = '<object type="text/html" data="update-user" style="width:105%; height: 85%;"></object>';
+        }
+
+        function load_purchseHistory() {
+            document.getElementById("content").innerHTML = '<object type="text/html" data="purchase-history" style="width:105%; height: 85%;"></object>';
         }
     </script>
 </head>
@@ -60,9 +66,9 @@
 ${userDataProfile.title}
 <div class="navbar navbar-inverse navbar-fixed-left leftsidemenu" style="height: 100%">
     <%--<a class="navbar-brand" href="#">Brand</a>--%>
-    <ul class="nav navbar-nav" >
+    <ul class="nav navbar-nav">
         <li><a href="#" onclick="load_home();" style="width: 100%">Profile</a></li>
-        <li><a href="#">Link3</a></li>
+        <li><a href="#" onclick="load_purchseHistory();">Purchase history</a></li>
         <li><a href="#">Link4</a></li>
         <li><a href="#" onclick="load_update_profile();" style="width: 100%">Update Profile</a></li>
     </ul>

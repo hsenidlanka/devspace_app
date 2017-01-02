@@ -41,14 +41,18 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
     public int addCart(double netCost, String username) {
         String orderId;
         List<Map<String, Object>> max = jdbcTemplate.queryForList("SELECT MAX(id) FROM shopping_cart");
-        int maxId = Integer.parseInt(max.get(0).get("MAX(id)").toString());
-        List<Map<String, Object>> order = jdbcTemplate.queryForList("SELECT order_id FROM shopping_cart WHERE id=?", maxId);
-        if (order.get(0).toString().equals("{order_id=}")) {
+        if (max.get(0).get("MAX(id)") == null) {
             orderId = "PS00001";
         } else {
-            String idO = (order.get(0).get("order_id").toString());
-            OrderIdGenerator ord = new OrderIdGenerator();
-            orderId = ord.generateOrderId(idO);
+            int maxId = Integer.parseInt(max.get(0).get("MAX(id)").toString());
+            List<Map<String, Object>> order = jdbcTemplate.queryForList("SELECT order_id FROM shopping_cart WHERE id=?", maxId);
+            if (order.get(0).toString().equals("{order_id=}")) {
+                orderId = "PS00001";
+            } else {
+                String idO = (order.get(0).get("order_id").toString());
+                OrderIdGenerator ord = new OrderIdGenerator();
+                orderId = ord.generateOrderId(idO);
+            }
         }
 
         List<Map<String, Object>> usernameCustomer = jdbcTemplate.queryForList("SELECT id FROM customer WHERE username=?", username);
@@ -165,17 +169,17 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM shopping_cart WHERE id=?", cartId);
         if (mp.get(0).get("customer_id") != null) {
             String sql = "INSERT INTO payment_transaction " +
-                    "(date,time,amount,payment_status,order_type,customer_id,payment_method_id,delivery_id)" +
-                    " VALUES (CURRENT_DATE,CURRENT_TIME ,(SELECT net_cost FROM shopping_cart WHERE id=?),?,?,?,(SELECT id FROM payment_method WHERE name=?),?)";
+                    "(cart_id,date,time,amount,payment_status,order_type,customer_id,payment_method_id,delivery_id)" +
+                    " VALUES (?,CURRENT_DATE,CURRENT_TIME ,(SELECT net_cost FROM shopping_cart WHERE id=?),?,?,?,(SELECT id FROM payment_method WHERE name=?),?)";
 
-            row = jdbcTemplate.update(sql, new Object[]{cartId, "pending", "online", mp.get(0).get("customer_id").toString(), paymentMethodName, deliveryId});
+            row = jdbcTemplate.update(sql, new Object[]{cartId, cartId, "pending", "online", mp.get(0).get("customer_id").toString(), paymentMethodName, deliveryId});
             log.info("{} payment inserted", row);
         } else {
             String sql = "INSERT INTO payment_transaction " +
-                    "(date,time,amount,payment_status,order_type,payment_method_id,delivery_id,guest_id)" +
-                    " VALUES (CURRENT_DATE,CURRENT_TIME ,(SELECT net_cost FROM shopping_cart WHERE id=?),?,?,(SELECT id FROM payment_method WHERE name=?),?,?)";
+                    "(cart_id,date,time,amount,payment_status,order_type,payment_method_id,delivery_id,guest_id)" +
+                    " VALUES (?,CURRENT_DATE,CURRENT_TIME ,(SELECT net_cost FROM shopping_cart WHERE id=?),?,?,(SELECT id FROM payment_method WHERE name=?),?,?)";
 
-            row = jdbcTemplate.update(sql, new Object[]{cartId, "pending", "online", paymentMethodName, deliveryId, mp.get(0).get("guest_id").toString()});
+            row = jdbcTemplate.update(sql, new Object[]{cartId, cartId, "pending", "online", paymentMethodName, deliveryId, mp.get(0).get("guest_id").toString()});
             log.info("{} payment inserted", row);
         }
         List<Map<String, Object>> mp4 = jdbcTemplate.queryForList("SELECT MAX(id) FROM payment_transaction");
@@ -187,14 +191,14 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 
     /*Add shopping cart to delivery process*/
     @Override
-    public int add(Delivery del) {
+    public int add(Delivery del, int cartId) {
         int deliveryId = 0;
         int row;
         if (del.getDeliveryMethod() == "pickup") {
             String sql = "INSERT INTO delivery " +
-                    "(delivery_date,delivery_time,delivery_status,delivery_method_id) VALUES (?,?,?,(SELECT id FROM delivery_method WHERE name=?))";
+                    "(cart_id,delivery_date,delivery_time,delivery_status,delivery_method_id) VALUES (?,?,?,?,(SELECT id FROM delivery_method WHERE name=?))";
 
-            row = jdbcTemplate.update(sql, new Object[]{del.getDeliveryDate(), del.getDeliveryTime(), "pending", del.getDeliveryMethod()});
+            row = jdbcTemplate.update(sql, new Object[]{cartId, del.getDeliveryDate(), del.getDeliveryTime(), "pending", del.getDeliveryMethod()});
             log.info("{} new pickup inserted", row);
             List<Map<String, Object>> mp4 = jdbcTemplate.queryForList("SELECT MAX(id) FROM delivery");
             deliveryId = Integer.parseInt(mp4.get(0).get("MAX(id)").toString());
@@ -207,8 +211,8 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
                 log.info("All required fields are not filled");
             } else {
                 String sql = "INSERT INTO delivery " +
-                        "(recepient_name,recepient_address,delivery_date,delivery_time,delivery_status,description,delivery_method_id) VALUES (?,?,?,?,?,?,(SELECT id FROM delivery_method WHERE name=?))";
-                row = jdbcTemplate.update(sql, new Object[]{recName, recAddress,
+                        "(cart_id,recepient_name,recepient_address,delivery_date,delivery_time,delivery_status,description,delivery_method_id) VALUES (?,?,?,?,?,?,?,(SELECT id FROM delivery_method WHERE name=?))";
+                row = jdbcTemplate.update(sql, new Object[]{cartId, recName, recAddress,
                         del.getDeliveryDate(), del.getDeliveryTime(), "pending", del.getDescription(), del.getDeliveryMethod()});
                 log.info("{} new delivery inserted", row);
                 List<Map<String, Object>> mp4 = jdbcTemplate.queryForList("SELECT MAX(id) FROM delivery");
@@ -230,7 +234,7 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
             int cartId = addCart(netCost, username);
             List<Integer> productIdList = addProductsToCart(items);
             updateCartProductTable(cartId, productIdList);
-            int deliveryId = add(del);
+            int deliveryId = add(del, cartId);
             add(paymentMethodName, cartId, deliveryId);
             orderId = selectOrderId(cartId);
             transactionManager.commit(stat);
@@ -344,6 +348,55 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
         return mp;
     }
 
+    @Override
+    public List<Map<String, Object>> getPurchaseHistory(String username, int limit, int page) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT sc.id AS cart_id,sc.order_id,sc.order_date,sc.order_time,sc.net_cost,sc.customer_id," +
+                "i.name,p.size,p.quantity,d.agent_name,d.staff_id,t.date AS transactin_date,dm.name AS delivery_method," +
+                "pm.name AS payment_method,d.recepient_name,d.recepient_address,d.delivery_date,d.delivery_time,d.delivery_status,t.time AS transaction_time,t.payment_status" +
+                " FROM shopping_cart sc INNER JOIN shopping_cart_product sp ON sc.id=sp.shopping_cart_id " +
+                "INNER JOIN product p ON p.id=sp.product_id INNER JOIN delivery d ON d.cart_id=sc.id " +
+                "INNER JOIN payment_transaction t ON t.cart_id=sc.id INNER JOIN item i ON p.type_id=i.id " +
+                "INNER JOIN delivery_method dm ON dm.id=d.delivery_method_id INNER JOIN payment_method pm ON pm.id=t.payment_method_id" +
+                " WHERE sc.customer_id=(SELECT id FROM customer WHERE username=?) LIMIT ? OFFSET ? ", username, limit, page);
+
+        return mp;
+    }
+
+
+    @Override
+    public List<Map<String, Object>> selectOrderDetails(String username, int limit, int page) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM shopping_cart WHERE customer_id=(SELECT id FROM customer WHERE username=?) LIMIT ? OFFSET ?", username, limit, page);
+        return mp;
+    }
+
+    @Override
+    public int countOrderDetails(String username) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT(*) AS total FROM shopping_cart WHERE customer_id=(SELECT id FROM customer WHERE username=?)", username);
+        return Integer.parseInt(mp.get(0).get("total").toString());
+    }
+
+    @Override
+    public List<Map<String, Object>> selectItemDetailsOfOrder(String orderId) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT p.* ,i.name FROM product p INNER JOIN shopping_cart_product sp ON sp.product_id=p.id " +
+                "INNER JOIN item i ON i.id=p.type_id INNER JOIN shopping_cart sc ON sc.id=sp.shopping_cart_id " +
+                "WHERE sc.order_id=?", orderId);
+        return mp;
+    }
+
+    @Override
+    public List<Map<String, Object>> selectPaymentAndDeliveryDetails(String orderId) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT d.id AS delivery_id,d.cart_id,d.agent_name,d.recepient_name,d.recepient_address,d.delivery_date," +
+                "d.delivery_time,d.delivery_status,d.description,st.username AS delivery_handler,dm.name,t.id AS transaction_id," +
+                "t.date AS transaction_date,t.time AS transaction_time,t.amount,t.payment_status,t.order_type,c.username AS customer_username,st.username" +
+                " AS transaction_handler,pm.name AS payment_method FROM delivery d " +
+                "INNER JOIN payment_transaction t ON t.delivery_id=d.id " +
+                "INNER JOIN delivery_method dm ON dm.id=d.delivery_method_id" +
+                " INNER JOIN customer c ON c.id=t.customer_id " +
+                "INNER JOIN staff st ON st.id=t.staff_id INNER JOIN payment_method pm ON pm.id=t.payment_method_id " +
+                "WHERE d.cart_id=(SELECT id FROM shopping_cart WHERE order_id=?)", orderId);
+        return mp;
+    }
+
   /*  public String checkUniqueOrderId(String orderID){
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT id FROM shopping_cart WHERE order_id=? ",orderID);
         if(mp.size()!=0){
@@ -367,5 +420,6 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 
    /* @Override
     public void removePackageFromCart(int packageId) {}*/
+
 
 }

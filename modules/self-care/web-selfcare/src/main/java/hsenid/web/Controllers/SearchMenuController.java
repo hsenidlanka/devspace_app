@@ -2,8 +2,6 @@ package hsenid.web.Controllers;
 
 import hsenid.web.models.ServerResponseMessage;
 import hsenid.web.supportclasses.SendStringBuilds;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,16 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by hsenid on 11/2/16.
@@ -52,6 +42,12 @@ public class SearchMenuController {
     @Value("${api.url.category.list}")
     private String catList;
 
+    @Value("${admin.url.base.image.category}")
+    private String imageBaseUrl;
+
+    @Value("${admin.url.base.image.item}")
+    private String itemImageBaseUrl;
+
     @RequestMapping(value = "/search-menu", method = RequestMethod.GET)
     public ModelAndView loadSearchMenuPage() {
         return new ModelAndView("/home/search-menu");
@@ -64,31 +60,16 @@ public class SearchMenuController {
         RestTemplate restTemplate = new RestTemplate();
 
         String getItemUrl = SendStringBuilds.sendString(baseUrl, searchItemNameUrl, searchItem, "/", category);
-        // String getItemsUrl = baseUrl + subcategoryListUrl;
         modelAndView.addObject("category", category);
         ServerResponseMessage searchItemResponse = restTemplate.getForObject(getItemUrl, ServerResponseMessage.class);
         modelAndView.addObject("it", searchItemResponse.getData());
+        modelAndView.addObject("itemImageUrl", itemImageBaseUrl);
 
-       /* List<String> itemNamesList = new ArrayList<>();
-        List<List<JSONObject>> test1 = new ArrayList<>();*/
-        /*for (int i = 0; i < searchItemResponse.getData().size(); i++) {
-            String itemName = searchItemResponse.getData().get(i).get("itemName").toString();
-            ////following url should return size price list when parameter is item name
-            ServerResponseMessage itemsResponse = restTemplate.getForObject(getItemsUrl + itemName, ServerResponseMessage.class);
-            logger.info("itemsResponse={}", itemsResponse.getData());
-
-           *//* List<JSONObject> itTest=new ArrayList<>();
-            itTest.add(searchItemResponse.getData().get(i));
-            itTest.add(itemsResponse.getData().get(0));
-       *//*itemNamesList.add(itemName);
-           test1.add(itTest);*//*
-        }
-*/
         return modelAndView;
 
     }
 
-    @RequestMapping(value = "/search-menu/add-to-cart", method = RequestMethod.POST)
+   /* @RequestMapping(value = "/search-menu/add-to-cart", method = RequestMethod.POST)
     @ResponseBody
     public boolean addToCart(HttpSession session, HttpServletRequest request) {
         if (session.getAttribute("cartItems") == null || session.getAttribute("cartItems") == "") {
@@ -146,7 +127,7 @@ public class SearchMenuController {
             jsonArray.add(jsonObject);
         }
         return jsonArray;
-    }
+    }*/
 
 
 }
