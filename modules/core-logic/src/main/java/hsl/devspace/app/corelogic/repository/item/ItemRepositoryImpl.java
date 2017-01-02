@@ -251,7 +251,7 @@ public class ItemRepositoryImpl implements ItemRepository {
         List<Map<String, Object>> itemDetails = jdbcTemplate.queryForList("SELECT i.id,i.name AS item_name,i.created_date,i.creator,c.name " +
                 "AS category_name, s.name AS sub_category_name,t.name AS type,i.description,i.image FROM item i" +
                 " INNER JOIN sub_category s ON i.sub_category_id=s.id INNER JOIN type t ON i.type_id=t.type_id " +
-                "INNER JOIN category c ON c.id=s.category_id WHERE i.id=? ORDER BY i.created_date DESC ", id);
+                "INNER JOIN category c ON c.id=s.category_id WHERE i.id=? ORDER BY i.id DESC ", id);
         log.info("{}", itemDetails);
         return itemDetails;
     }
@@ -262,7 +262,7 @@ public class ItemRepositoryImpl implements ItemRepository {
         List<Map<String, Object>> itemDetails = jdbcTemplate.queryForList("SELECT i.id,i.name AS item_name,i.created_date,i.creator,c.name " +
                 "AS category_name, s.name AS sub_category_name,t.name AS type,i.description,i.image FROM item i" +
                 " INNER JOIN sub_category s ON i.sub_category_id=s.id INNER JOIN type t ON i.type_id=t.type_id " +
-                "INNER JOIN category c ON c.id=s.category_id WHERE i.name LIKE ? ORDER BY i.created_date DESC ", key);
+                "INNER JOIN category c ON c.id=s.category_id WHERE i.name LIKE ? ORDER BY i.id DESC ", key);
         log.info("{}", itemDetails);
         return itemDetails;
     }
@@ -493,7 +493,7 @@ public class ItemRepositoryImpl implements ItemRepository {
         List<Map<String, Object>> itemDetails = jdbcTemplate.queryForList("SELECT i.id,i.name AS item_name,i.created_date,i.creator,c.name " +
                 "AS category_name, s.name AS sub_category_name,t.name AS type,i.description,i.image FROM item i" +
                 " INNER JOIN sub_category s ON i.sub_category_id=s.id INNER JOIN type t ON i.type_id=t.type_id " +
-                "INNER JOIN category c ON c.id=s.category_id ORDER BY i.created_date DESC ");
+                "INNER JOIN category c ON c.id=s.category_id ORDER BY i.id DESC ");
 
         log.info("{}", itemDetails);
         return itemDetails;
@@ -558,7 +558,7 @@ public class ItemRepositoryImpl implements ItemRepository {
         List<Map<String, Object>> itemDetails = jdbcTemplate.queryForList("SELECT i.id,i.name AS item_name,i.created_date,i.creator,c.name " +
                 "AS category_name, s.name AS sub_category_name,t.name AS type,i.description,i.image FROM item i" +
                 " INNER JOIN sub_category s ON i.sub_category_id=s.id INNER JOIN type t ON i.type_id=t.type_id " +
-                "INNER JOIN category c ON c.id=s.category_id WHERE i.name LIKE ? ORDER BY i.created_date DESC LIMIT ? OFFSET ?", key, limit, page);
+                "INNER JOIN category c ON c.id=s.category_id WHERE i.name LIKE ? ORDER BY i.id DESC LIMIT ? OFFSET ?", key, limit, page);
         log.info("{}", itemDetails);
         return itemDetails;
     }
@@ -568,7 +568,7 @@ public class ItemRepositoryImpl implements ItemRepository {
         List<Map<String, Object>> itemDetails = jdbcTemplate.queryForList("SELECT i.id,i.name AS item_name,i.created_date,i.creator,c.name " +
                 "AS category_name, s.name AS sub_category_name,t.name AS type,i.description,i.image FROM item i" +
                 " INNER JOIN sub_category s ON i.sub_category_id=s.id INNER JOIN type t ON i.type_id=t.type_id " +
-                "INNER JOIN category c ON c.id=s.category_id  ORDER BY i.created_date DESC LIMIT ? OFFSET ?", limit, page);
+                "INNER JOIN category c ON c.id=s.category_id  ORDER BY i.id DESC LIMIT ? OFFSET ?", limit, page);
 
         log.info("{}", itemDetails);
         return itemDetails;
