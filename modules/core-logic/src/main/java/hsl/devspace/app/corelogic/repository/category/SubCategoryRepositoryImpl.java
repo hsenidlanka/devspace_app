@@ -93,7 +93,7 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
     /*view all details of subcategory*/
     @Override
     public List<Category> selectAll() {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM sub_category ORDER BY created_date DESC ");
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM sub_category ORDER BY id DESC ");
         List<Category> subCategories = new ArrayList<Category>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -117,7 +117,7 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
     /*view all details of subcategories for a given category name*/
     @Override
     public List<Category> viewSubCategoriesforCategory(String catName, int limit, int page) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM sub_category WHERE category_id=(SELECT id FROM category WHERE NAME =? LIMIT ? OFFSET ?) ORDER BY created_date DESC", catName, limit, page);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM sub_category WHERE category_id=(SELECT id FROM category WHERE NAME =? LIMIT ? OFFSET ?) ORDER BY id DESC", catName, limit, page);
         List<Category> subCategories = new ArrayList<Category>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -261,7 +261,7 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
 
     @Override
     public List<Category> paginateSelectAll(int limit, int page) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM sub_category ORDER BY created_date DESC LIMIT ? OFFSET ?", limit, page);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM sub_category ORDER BY id DESC LIMIT ? OFFSET ?", limit, page);
         List<Category> subCategories = new ArrayList<Category>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -289,7 +289,7 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
 
     @Override
     public List<Category> paginateSelectNameAndDescription(int limit, int page) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT name,description FROM sub_category ORDER BY created_date DESC LIMIT ? OFFSET ?", limit, page);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT name,description FROM sub_category ORDER BY id DESC LIMIT ? OFFSET ?", limit, page);
         List<Category> subCategories = new ArrayList<Category>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -307,7 +307,7 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
     @Override
     public List<Category> selectAllTypeAhead(String catName, int limit, int page) {
         String key = "%" + catName + "%";
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM sub_category WHERE name LIKE ? ORDER BY created_date DESC LIMIT ? OFFSET ?", key, limit, page);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM sub_category WHERE name LIKE ? ORDER BY id DESC LIMIT ? OFFSET ?", key, limit, page);
         List<Category> subCategories = new ArrayList<Category>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -336,7 +336,7 @@ public class SubCategoryRepositoryImpl implements CategoryRepository {
     @Override
     public List<Category> selectSubCategoryForCategoryTypeAhead(String catName, String subCategoryKey, int limit, int page) {
         String key = "%" + subCategoryKey + "%";
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM sub_category WHERE category_id=(SELECT id FROM category WHERE NAME =?) AND name LIKE ? ORDER BY created_date DESC LIMIT ? OFFSET ?", catName, key, limit, page);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM sub_category WHERE category_id=(SELECT id FROM category WHERE NAME =?) AND name LIKE ? ORDER BY id DESC LIMIT ? OFFSET ?", catName, key, limit, page);
         List<Category> subCategories = new ArrayList<Category>();
 
         for (int i = 0; i < mp.size(); i++) {

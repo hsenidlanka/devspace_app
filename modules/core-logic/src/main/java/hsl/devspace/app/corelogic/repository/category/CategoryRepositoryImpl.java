@@ -116,7 +116,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     /*view all category details */
     @Override
     public List<Category> selectAll() {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category ORDER BY created_date DESC ");
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category ORDER BY id DESC ");
         List<Category> categories = new ArrayList<Category>();
 
         for (Map<String, Object> aMp : mp) {
@@ -141,7 +141,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     @Override
     public List<Category> selectAllTypeAhead(String catName, int limit, int page) {
         String key = "%" + catName + "%";
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category WHERE name LIKE ? ORDER BY created_date DESC LIMIT ? OFFSET ? ", key, limit, page);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category WHERE name LIKE ? ORDER BY id DESC LIMIT ? OFFSET ? ", key, limit, page);
         List<Category> categories = new ArrayList<Category>();
 
         for (Map<String, Object> aMp : mp) {
@@ -225,7 +225,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
 
     public List<Category> selectAllVisibleTypeAhead(String catName, int limit, int page) {
         String key = "%" + catName + "%";
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category WHERE status=1 LIKE ? ORDER BY created_date DESC LIMIT ? OFFSET ? ", key, limit, page - 1);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category WHERE status=1 LIKE ? ORDER BY id DESC LIMIT ? OFFSET ? ", key, limit, page - 1);
         List<Category> categories = new ArrayList<Category>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -492,7 +492,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     }
 
     public List<Category> paginateSelectAll(int limit, int page) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category ORDER BY created_date DESC LIMIT ? OFFSET ?", limit, page);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category ORDER BY id DESC LIMIT ? OFFSET ?", limit, page);
         List<Category> categories = new ArrayList<Category>();
 
         for (Map<String, Object> aMp : mp) {
@@ -515,7 +515,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     }
 
     public List<Category> paginateSelectAllVisible(int limit, int page) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category WHERE status=1 ORDER BY created_date DESC LIMIT ? OFFSET ?", limit, page - 1);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM category WHERE status=1 ORDER BY id DESC LIMIT ? OFFSET ?", limit, page - 1);
         List<Category> categories = new ArrayList<Category>();
 
         for (int i = 0; i < mp.size(); i++) {
