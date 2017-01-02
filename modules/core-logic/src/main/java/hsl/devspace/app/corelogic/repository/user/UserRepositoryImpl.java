@@ -34,7 +34,7 @@ public  class UserRepositoryImpl implements UserRepository {
         this.transactionManager = transactionManager;
     }
 
-    /*add a new customer*/
+    /*add a new customer by customer himself*/
     @Override
     public int add(User user) throws DuplicateKeyException {
         int row = 0;
@@ -57,6 +57,32 @@ public  class UserRepositoryImpl implements UserRepository {
         return row;
 
     }
+
+    /*add a new customer by admin*/
+    @Override
+    public int addCustomer(User user) throws DuplicateKeyException {
+        int row = 0;
+        String un = user.getUsername();
+        String pw = user.getPassword();
+        if (un != "" && pw != "") {
+            // if (checkUsernameUnique(un)==true) {
+            String sql = "INSERT INTO customer " +
+                    "(title,first_name,last_name,username,password,email,address_line1,address_line2,address_line3,mobile,registered_date,status) VALUES (?,?,?,?,sha1(?),?,?,?,?,?,CURRENT_DATE,1)";
+
+            row = jdbcTemplate.update(sql, new Object[]{user.getTitle(), user.getFirstName(), user.getLastName(), user.getUsername(), user.getPassword(),
+                    user.getEmail(), user.getAddressL1(), user.getAddressL2(), user.getAddressL3(), user.getMobile()});
+
+            log.info("customer inserted");
+          /*  }else
+                log.info("username already available");*/
+        } else
+            log.error("values cannot be empty");
+
+        return row;
+
+    }
+
+
 
     /*delete a customer*/
     @Override
@@ -254,8 +280,8 @@ public  class UserRepositoryImpl implements UserRepository {
 
     /*retrieve details of customer registered between a specified date range*/
     @Override
-    public List<User> retrieveByDateRange(Date date1, Date date2, int limit, int page) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE registered_date BETWEEN ? AND ? AND status='active' ORDER BY registered_date DESC LIMIT ? OFFSET ?", date1, date2, limit, page);
+    public List<User> retrieveByDateRange(Date date1, Date date2, String status, int limit, int page) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE registered_date BETWEEN ? AND ? AND status= ? ORDER BY registered_date DESC LIMIT ? OFFSET ?", date1, date2,status, limit, page);
         List<User> customerDetails=new ArrayList<User>();
 
         for (int i=0;i<mp.size();i++){
@@ -285,8 +311,34 @@ public  class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<User> retrieveByDateRangeCity(Date date1, Date date2, String city, int limit, int page) {
-        return null;
+    public List<User> retrieveByDateRangeCity(Date date1, Date date2, String city,String status, int limit, int page) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM customer WHERE registered_date BETWEEN ? AND ? AND status= ? AND address_line3 = ?  ORDER BY registered_date DESC LIMIT ? OFFSET ?", date1, date2,status,city, limit, page);
+        List<User> customerDetails=new ArrayList<User>();
+
+        for (int i=0;i<mp.size();i++){
+            User customer = new User();
+            customer.setId(Integer.parseInt(mp.get(i).get("id").toString()));
+            customer.setTitle(mp.get(i).get("title").toString());
+            customer.setFirstName(mp.get(i).get("first_name").toString());
+            customer.setLastName(mp.get(i).get("last_name").toString());
+            customer.setUsername(mp.get(i).get("username").toString());
+            customer.setPassword(mp.get(i).get("password").toString());
+            customer.setEmail(mp.get(i).get("email").toString());
+            customer.setAddressL1(mp.get(i).get("address_line1").toString());
+            customer.setAddressL2(mp.get(i).get("address_line2").toString());
+            if (mp.get(i).get("address_line3")!=null) {
+                customer.setAddressL3(mp.get(i).get("address_line3").toString());
+            }
+            customer.setMobile(mp.get(i).get("mobile").toString());
+            customer.setRegDate(Date.valueOf(mp.get(i).get("registered_date").toString()));
+            customer.setStatus(mp.get(i).get("status").toString());
+
+            customerDetails.add(customer);
+
+
+        }
+        log.info("{}",customerDetails);
+        return customerDetails;
     }
 
     /*retrieve details of customers by a given attribute*/
@@ -314,8 +366,6 @@ public  class UserRepositoryImpl implements UserRepository {
             customer.setStatus(mp.get(i).get("status").toString());
 
             customerDetails.add(customer);
-
-
         }
         log.info("{}",customerDetails);
         return customerDetails;
