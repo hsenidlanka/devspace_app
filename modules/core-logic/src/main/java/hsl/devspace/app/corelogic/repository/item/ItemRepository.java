@@ -75,4 +75,12 @@ public interface ItemRepository {
     List<Map<String, Object>> retrieveItemDetailsByCategory(String category, int limit, int page);
 
     List<Map<String, Object>> retrieveItemDetailsBySubCategory(String subCategory, int limit, int page);
+
+    int countItemDetailsByCategory(String category);
+
+    int countItemDetailsBySubCategory(String subCategory);
+
+    int countSearchItemNameByCategory(String itemkey, String category);
+
+    int countSearchItemNameBySubCategory(String itemkey, String category);
 }
