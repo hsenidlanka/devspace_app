@@ -17,6 +17,8 @@ public interface UserRepository {
 
     public int add(User user) throws SQLIntegrityConstraintViolationException, DuplicateKeyException;
 
+    public int addCustomer(User user);
+
     int delete(String username) throws SQLException;
 
     int changePassword(String username, String password, String nPassw) throws SQLException;
@@ -40,9 +42,9 @@ public interface UserRepository {
 
     List<User> retrieveCustomersByDate(java.sql.Date date, int limit, int page);
 
-    List<User> retrieveByDateRange(java.sql.Date date1, java.sql.Date date2, int limit, int page);
+    List<User> retrieveByDateRange(java.sql.Date date1, java.sql.Date date2,String status, int limit, int page);
 
-    public List<User> retrieveByDateRangeCity(Date date1, Date date2,String city, int limit, int page) ;
+    public List<User> retrieveByDateRangeCity(Date date1, Date date2,String city,String status, int limit, int page) ;
 
     List<User> filterByCity(String city, String status, int limit, int page);
 

@@ -74,6 +74,11 @@ public class StaffRepositoryImpl implements UserRepository {
 
     }
 
+    @Override
+    public int addCustomer(User user){
+        return 0;
+    }
+
     /*insert into group staff table when adding a new staff member*/
     @Override
     public int updateGroupStaff(String des, String username) {
@@ -375,8 +380,8 @@ public class StaffRepositoryImpl implements UserRepository {
         retrieve details of staff members registered between specified time period
     */
     @Override
-    public List<User> retrieveByDateRange(Date date1, Date date2, int limit, int page) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE register_date BETWEEN ? AND ? AND status='active' ORDER BY register_date DESC LIMIT ? OFFSET ?", date1, date2, limit, page - 1);
+    public List<User> retrieveByDateRange(Date date1, Date date2,String status, int limit, int page) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM staff WHERE register_date BETWEEN ? AND ? AND status= ? ORDER BY register_date DESC LIMIT ? OFFSET ?", date1, date2,status, limit, page - 1);
         List<User> staffDetails = new ArrayList<User>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -404,7 +409,8 @@ public class StaffRepositoryImpl implements UserRepository {
         log.info("{}", staffDetails);
         return staffDetails;
     }
-    public List<User> retrieveByDateRangeCity(Date date1, Date date2,String city, int limit, int page) {
+    @Override
+    public List<User> retrieveByDateRangeCity(Date date1, Date date2,String city,String status, int limit, int page) {
         return null;
     }
 
