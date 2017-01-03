@@ -56,7 +56,7 @@
             document.getElementById("content").innerHTML = '<object type="text/html" data="update-user" style="width:105%; height: 85%;"></object>';
         }
 
-        function load_purchseHistory() {
+        function load_purchaseHistory() {
             document.getElementById("content").innerHTML = '<object type="text/html" data="purchase-history" style="width:105%; height: 85%;"></object>';
         }
     </script>
@@ -68,7 +68,7 @@ ${userDataProfile.title}
     <%--<a class="navbar-brand" href="#">Brand</a>--%>
     <ul class="nav navbar-nav">
         <li><a href="#" onclick="load_home();" style="width: 100%">Profile</a></li>
-        <li><a href="#" onclick="load_purchseHistory();">Purchase history</a></li>
+        <li><a href="#" onclick="load_purchaseHistory();">Purchase history</a></li>
         <li><a href="#">Link4</a></li>
         <li><a href="#" onclick="load_update_profile();" style="width: 100%">Update Profile</a></li>
     </ul>

@@ -233,3 +233,8 @@ table {
 .lbl-order-details{
     font-weight: bold;
 }
+
+#txtSearchOrder{
+    height: 34px;
+    width: 250px;
+}
