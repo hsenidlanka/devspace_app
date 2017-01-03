@@ -191,7 +191,7 @@
                                                                                                     value="${item.price[0]['price']}"/></label>
                                                                                             <select id="sizes"
                                                                                                     class="sizes-dropdowns"
-                                                                                                    style="text-transform: capitalize; font-size: small; float: right; width: 80px; height: 20px">
+                                                                                                    style="text-transform: capitalize; font-size: small; float: right; width: 80px; height: 20px;color:#000000">
                                                                                                 <c:forEach begin="0"
                                                                                                            end="${sizePriceLength-1}"
                                                                                                            varStatus="loop">
@@ -225,6 +225,7 @@
                                                                                 </figcaption>
 
                                                                             </figure>
+
                                                                         </li>
                                                                     </ul>
                                                                     <div class="itemdata-name"
@@ -250,7 +251,7 @@
                             <%-- <h4><fmt:message key="searchresults.suggestions"
                                               bundle="${lang}"/></h4>--%>
                             <%--<div class="panel" style="float: right">--%>
-                            <div class="panel-heading">
+                                <div class="panel-heading" style="height: 39px">
 
                                 <h4 style="font-size: larger"><fmt:message key="searchresults.suggestions"
                                                                            bundle="${lang}"/></h4>
@@ -263,6 +264,8 @@
                                     <li data-target="#myCarousel1" data-slide-to="1"></li>
                                     <li data-target="#myCarousel1" data-slide-to="2"></li>
                                     <li data-target="#myCarousel1" data-slide-to="3"></li>
+                                    <li data-target="#myCarousel1" data-slide-to="4"></li>
+
                                 </ol>
 
                                 <!-- Wrapper for slides -->
@@ -281,6 +284,9 @@
 
                                     <div class="item">
                                         <img src="<c:url value="/resources/images/desserts/millionaires-shortbread-bars-no-bake-dessert-400x600.jpg"/>">
+                                    </div>
+                                    <div class="item">
+                                        <img src="<c:url value="/resources/images/pizzas/Margherita-Pizza-With-Salami-2-400x600.png"/>">
                                     </div>
                                 </div>
 
