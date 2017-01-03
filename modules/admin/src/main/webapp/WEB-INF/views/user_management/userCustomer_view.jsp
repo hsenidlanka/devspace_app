@@ -71,7 +71,7 @@
                                     <option value="Verified">
                                         <fmt:message key="user.userview.customer.selectOption.verified" bundle="${bundle1}"/>
                                     </option>
-                                    <option value="Not Verified">
+                                    <option value="Not_Verified">
                                         <fmt:message key="user.userview.customer.selectOption.notverified" bundle="${bundle1}"/>
                                     </option>
                                 </select>

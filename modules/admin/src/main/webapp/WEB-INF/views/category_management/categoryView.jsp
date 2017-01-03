@@ -69,7 +69,7 @@
 <div class="row">
 <div class="viewcategorysize">
     <center>
-        <div class="panel panel-default " style="width:85%">
+        <div class="panel panel-default " style="width:90%">
 
             <div class="panel-heading common-form-headings">
                 <h3 class="default-panel-headings">
@@ -98,13 +98,17 @@
                         <div class="col-sm-1"></div>
                     </div>
                     <br>
-                    <%--include the bootstrap table with category list--%>
-                    <table  id="tableCategory">
-                    </table>
-                    <div id="paginationCat" class="text-center">
-                    </div>
-                    <div id="pagination2Cat" class="text-center">
-                    </div>
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border" style=" font-weight: bold;margin: 0 0 15px -930px; ">
+                            <fmt:message key="category.categoryview.fieldset.legend" bundle="${bundle1}"/></legend>
+                            <%--include the bootstrap table with category list--%>
+                            <table  id="tableCategory">
+                            </table>
+                            <div id="paginationCat" class="text-center">
+                            </div>
+                            <div id="pagination2Cat" class="text-center">
+                            </div>
+                    </fieldset>
             </div>
         </div>
     </center>
