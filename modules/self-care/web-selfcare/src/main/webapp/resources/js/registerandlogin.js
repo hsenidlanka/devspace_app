@@ -159,29 +159,10 @@ $(document).ready(function () {
             }
             return false;
         }
-
-
-        /*$.ajax({
-
-            type: 'post',
-            url: "register",
-            data: $('#adduser_form').serialize(),
-            success: function (result) {
-                console.log("success");
-                $('#registerSuccesful').modal('show');
-            },
-            error: function () {
-                $("#ajaccall").append("<b>Appended text</b>");
-            }
-        });*/
-
-
     });
 
 
     //Login form submition
-
-    //$("#loginFormSubmit").off('click');
 
     $("#loginBtn").click(function () {
         $('#usernameError').empty();
@@ -194,32 +175,62 @@ $(document).ready(function () {
 
         $('#usernameError').empty();
         $('#passwordError2').empty();
+        $('#NotRegisteredUser').empty();
 
 
         if (loginUsername.length > 0 && loginPassword.length > 0) {
+                //alert("Test two pass");
             $.ajax({
-                type: 'post',
-                url: "login",
+                type: 'get',
+                url: "checkNotUser",
                 data: {username: loginUsername, password: loginPassword},
                 success: function (result) {
-                    if (result.userStatus.match(/verified/g).length > 0) {
-                        window.location = "/web-selfcare/";
-                    } else {
-                        //alert("Invalied Username of Password");
+                    if(result.userStatus.match(/unauthorized/g) !== null){
+                        if(result.userStatus.match(/unauthorized/g).length > 0){
+                            $("#NotRegisteredUser").fadeIn();
+                            $("#NotRegisteredUser").fadeOut(4000);
+                            $('<p align="left" style="color: red; margin-left: -12px; margin-top: -12px; margin-bottom: 12px;">Please Enter Valid Username and password</p>').appendTo('#NotRegisteredUser');
+                        }
+                    } else{
+                        $.ajax({
+                            type: 'post',
+                            url: "login",
+                            data: {username: loginUsername, password: loginPassword},
+                            success: function (result) {
+                                switch(result.userStatus) {
+                                    case "verified":
+                                        window.location = "/web-selfcare/";
+                                        break;
+                                    case "notVerified":
+                                        window.location = "/web-selfcare/email-verification";
+                                        break;
+                                    case "blocked":
+                                        window.location = "/web-selfcare/blockedUserRedirect";
+                                        break;
+                                }
+                            },
+                            error: function () {
+                                $("#ajaccall").append("<b>Appended text</b>");
+                            }
+                        });
                     }
-                    console.log("success");
                 },
-                error: function () {
-                    $("#ajaccall").append("<b>Appended text</b>");
-                }
+            error: function () {
+                $("#ajaxcall").append("<b>Appended text</b>");
+            }
             });
+            return false;
 
         } else {
             if (loginUsername.length <= 0) {
+                $("#usernameError").fadeIn();
                 $('<p align="left" style="color: red; margin-left: -12px; margin-top: -12px; margin-bottom: 12px;">Please provide a valid username</p>').appendTo('#usernameError');
+                $("#usernameError").fadeOut(4000);
             }
             if (loginPassword.length < 6) {
+                $("#passwordError2").fadeIn();
                 $('<p align="left" style="color: red; margin-left: -12px; margin-top: -12px; margin-bottom: 12px;">Please provide a password with more than 8 characters</p>').appendTo('#passwordError2');
+                $("#passwordError2").fadeOut(4000);
             }
             return false;
         }

@@ -6,5 +6,7 @@
 </head>
 <body>
     <%@include file="../includes/new-header.jsp" %>
+    ${userStatus}
+
 </body>
 </html>

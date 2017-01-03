@@ -60,7 +60,6 @@
                     <li class="dropdown">
 
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <%--<span class="glyphicon glyphicon-user"></span> --%>
                             <strong>${name}</strong>
                             <span class="glyphicon glyphicon-chevron-down"></span>
                         </a>
@@ -117,27 +116,6 @@
 
 <!------------------------------login modal--------------------------->
 
-<%--<script>
-    (function ($) {
-        "use strict";
-        function centerModal() {
-            $(this).css('display', 'block');
-            var $dialog = $(this).find(".modal-dialog"),
-                    offset = ($(window).height() - $dialog.height()) / 2,
-                    bottomMargin = parseInt($dialog.css('marginBottom'), 10);
-
-            // Make sure you don't hide the top part of the modal w/ a negative margin if it's longer than the screen height, and keep the margin equal to the bottom margin of the modal
-            if (offset < bottomMargin) offset = bottomMargin;
-            $dialog.css("margin-top", offset);
-        }
-
-        $(document).on('show.bs.modal', '.modal', centerModal);
-        $(window).on("resize", function () {
-            $('.modal:visible').each(centerModal);
-        });
-    }(jQuery));
-</script>--%>
-
 <div class="container ">
 
     <!-- Modal -->
@@ -165,7 +143,9 @@
                 <div class="modal-body panel-body" style="margin-top: 1px;">
                     <div id="blockedUser"></div>
                     <form>
-
+                        <div class="form-group">
+                            <div style="margin-left: 15px; margin-top: 16px" id="NotRegisteredUser" class="error-labels"></div>
+                        </div>
                         <div class="form-group">
                             <label for="loginUsername" class="control-label" style="text-align: center"><h4><strong>Username</strong></h4></label>
                             <input type="text" style="border:1px solid #cccccc" id="loginUsername"
@@ -174,7 +154,6 @@
 
                             <div style="margin-left: 15px; margin-top: 16px" id="usernameError" class="error-labels"></div>
                         </div>
-
 
                         <div class="form-group">
                             <label for="loginPassword" class="control-label" style="text-align: center"><h4><strong>Password</strong></h4></label>
@@ -195,35 +174,9 @@
                         </center>
                     </form>
                 </div>
-                <%--<div class="panel-success" style="margin-top: 5px;">--%>
-
-                <%--</div>--%>
             </div>
 
         </div>
     </div>
 
 </div>
-
-
-<%--Login Successful modal--%>
-
-<div class="modal fade" id="registerSuccesful" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-
-            <div class="modal-body">
-                <p>User Account Creation Successful</p><br>
-
-                <p>Please login </p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-
-    </div>
-</div>
-<%--Login Successful modal end--%>
