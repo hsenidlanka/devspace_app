@@ -1,6 +1,8 @@
 $(document).ready(function () {
 
     showItemCheck();
+    getAllSubcats();
+    loadCategories();
 });
 
 
@@ -181,45 +183,3 @@ function loadSubCats(catName) {
         }
     });
 }
-
-
-//if ($("#subCatCheck").is(":checked")){
-//
-//    slctSubcat.style.display = "block";
-//
-//    $("#subCatCheck").click(function() {
-//
-//        if ($("#catCheck").is(":checked")) {
-//
-//            var catName = $("#selectCatFltr").val();
-//            loadSubCats(catName);
-//
-//            $("#selectCatFltr").change(function () {
-//                var catName = $("#selectCatFltr").val();
-//                loadSubCats(catName);
-//            })
-//        }
-//
-//        if (!$("#catCheck").is(":checked")) {
-//            // else{
-//            //$("#selectSubCatFltr").reset();
-//            var catName = null;
-//            loadSubCats(catName);
-//            /*  $.ajax({
-//             type:'GET',
-//             url:"https://localhost:8443/admin/itemFilters/subcategoryList",
-//             success:function(data){
-//             var slctsubcatList2 = $("#selectSubCatFltr"), option = "";
-//             slctsubcatList2.empty();
-//
-//             for (var sb2 = 0; sb2 < data.length; sb2++) {
-//             option = option + "<option value='" + data[sb2] + "'>" + data[sb2] + "</option>";
-//             }
-//             slctsubcatList2.append(option);
-//             }, error: function (e) {
-//             alert("error in loading sub-category list 2" + e);
-//             }
-//             });*/
-//        }
-//    });
-//}

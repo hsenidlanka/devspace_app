@@ -1,7 +1,8 @@
 package hsenid.web.models;
 
 public class Verification {
-    String userStatus;
+
+    private String userStatus;
 
     public String getUserStatus() {
         return userStatus;
@@ -10,4 +11,5 @@ public class Verification {
     public void setUserStatus(String userStatus) {
         this.userStatus = userStatus;
     }
+
 }

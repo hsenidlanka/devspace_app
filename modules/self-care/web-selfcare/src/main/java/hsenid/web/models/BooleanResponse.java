@@ -1,7 +1,8 @@
 package hsenid.web.models;
 
 public class BooleanResponse {
-    boolean userAvailable;
+
+    private boolean userAvailable;
 
     public BooleanResponse(boolean userAvailable) {
         this.userAvailable = userAvailable;
@@ -14,4 +15,5 @@ public class BooleanResponse {
     public void setUserAvailable(boolean userAvailable) {
         this.userAvailable = userAvailable;
     }
+
 }

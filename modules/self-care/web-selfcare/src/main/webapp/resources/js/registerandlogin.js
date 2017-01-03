@@ -202,10 +202,10 @@ $(document).ready(function () {
                 url: "login",
                 data: {username: loginUsername, password: loginPassword},
                 success: function (result) {
-                    if (result.userAvailable) {
+                    if (result.userStatus.match(/verified/g).length > 0) {
                         window.location = "/web-selfcare/";
                     } else {
-                        alert("Invalied Username of Password");
+                        //alert("Invalied Username of Password");
                     }
                     console.log("success");
                 },

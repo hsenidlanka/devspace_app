@@ -97,7 +97,7 @@ public class PackageRepositoryImpl implements PackageRepository {
     /*view all details of package*/
     @Override
     public List<Package> selectAll() {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM package ORDER BY created_date DESC ");
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM package ORDER BY id DESC ");
         List<Package> pack = new ArrayList<Package>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -117,7 +117,7 @@ public class PackageRepositoryImpl implements PackageRepository {
     @Override
     public List<Package> selectAllByNamePattern(String packName) {
         String key = "%" + packName + "%";
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM package WHERE name LIKE ? ORDER BY created_date DESC", key);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM package WHERE name LIKE ? ORDER BY id DESC", key);
         List<Package> pack = new ArrayList<Package>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -292,7 +292,7 @@ public class PackageRepositoryImpl implements PackageRepository {
 
     @Override
     public int paginate(int limit, int page) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM package ORDER BY created_date DESC LIMIT ? OFFSET ?", limit, page);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM package ORDER BY id DESC LIMIT ? OFFSET ?", limit, page);
         int count = mp.size();
         log.info("{}", count);
         return count;
@@ -301,7 +301,7 @@ public class PackageRepositoryImpl implements PackageRepository {
 
     @Override
     public List<Package> paginateSelectAll(int limit, int page) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM package ORDER BY created_date DESC LIMIT ? OFFSET ?", limit, page);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM package ORDER BY id DESC LIMIT ? OFFSET ?", limit, page);
         List<Package> pack = new ArrayList<Package>();
 
         for (int i = 0; i < mp.size(); i++) {
@@ -323,7 +323,7 @@ public class PackageRepositoryImpl implements PackageRepository {
     @Override
     public List<Package> paginateSelectAllByNamePattern(String packName, int limit, int page) {
         String key = "%" + packName + "%";
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM package WHERE name LIKE ? ORDER BY created_date DESC LIMIT ? OFFSET ?", key, limit, page);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM package WHERE name LIKE ? ORDER BY id DESC LIMIT ? OFFSET ?", key, limit, page);
         List<Package> pack = new ArrayList<Package>();
 
         for (int i = 0; i < mp.size(); i++) {

@@ -1,9 +1,6 @@
 package hsenid.web.Controllers.user;
 
-import hsenid.web.models.BooleanResponse;
-import hsenid.web.models.ReplyFromServer;
-import hsenid.web.models.User;
-import hsenid.web.models.Verification;
+import hsenid.web.models.*;
 import hsenid.web.supportclasses.SendStringBuilds;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
@@ -94,10 +91,12 @@ public class LoginController {
     @RequestMapping(value = "/login")
     @ResponseBody
     public Verification login(HttpSession session,HttpServletRequest request){
-//        String uname = request.getParameter(username);
-        String uname = "kkalla";
-        String pword = "password";
-//        String pword = request.getParameter(password);
+        Verification verification = new Verification();
+
+        String uname = request.getParameter(username);
+//        String uname = "testre";
+//        String pword = "password";
+        String pword = request.getParameter(password);
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put(username, uname);
@@ -108,16 +107,24 @@ public class LoginController {
         HttpEntity<JSONObject> jsonObjectHttpEntity = new HttpEntity<JSONObject>(jsonObject, headers);
 
         RestTemplate restTemplate = new RestTemplate();
-        ReplyFromServer replyFromServer = null;
-        try {
-            replyFromServer = restTemplate.postForObject(loginUrl, jsonObjectHttpEntity, ReplyFromServer.class);
+        ServerResponseMessage responseMessage;
 
-            if(replyFromServer.getStatus().equals("success")){
+        try {
+            responseMessage = restTemplate.postForObject(loginUrl, jsonObjectHttpEntity, ServerResponseMessage.class);
+            logger.info("New  {}",(String) responseMessage.getData().get(0).get("accountStatus"));
+            verification.setUserStatus((String) responseMessage.getData().get(0).get("accountStatus"));
+//            verification.setUserStatus((String) responseMessage.getData().get(0).get("accountStatus"));
+//            verification.setUserStatus((String) responseMessage.getData().get(0).get("accountStatus"));
+
+//            ServerResponseMessage responseMessage = replyFromServer
+
+          /*  if(replyFromServer.getStatus().equals("success")){
 
                 RestTemplate restTemplate1 = new RestTemplate();
-                String userDataUrl = replyFromServer.getLinks().get(1).getLink();
+//                String userDataUrl = replyFromServer.getLinks().get(1).getLink();
 //                logger.info(userDataUrl);
-                ReplyFromServer replyFromServer1 = restTemplate1.getForObject(userDataUrl, ReplyFromServer.class);
+//                ServerResponseMessage responseMessage = restTemplate1.getForObject(userDataUrl, ServerResponseMessage.class);
+//                logger.info((String) responseMessage.getData().get(0).get("accountStatus"));
 
 //                user.setTitle(replyFromServer1.getData().get(0).getTitle());
 //                user.setFirstName(replyFromServer1.getData().get(0).getFirstName());
@@ -130,20 +137,23 @@ public class LoginController {
 //                user.setAddressLine03(replyFromServer1.getData().get(0).getAddressLine03());
                 verification.setUserStatus(replyFromServer.getData().get(0).getAccountStatus());
 //                logger.info(String.valueOf(replyFromServer.getData().get(0).getAccountStatus()));
+                logger.info(verification.getUserStatus());
 
-            }
+            }*/
 
         } catch (RestClientException e) {
             logger.error(e.getMessage());
-            verification.setUserStatus("inactive");
+//            verification.setUserStatus("inactive");
+            verification.setUserStatus("unauthorized");
             return verification;
         }
 
 //            Adding attributes to the session
-        session.setAttribute("username", user.getUsername());
-        session.setAttribute("name", SendStringBuilds.sendString(user.getFirstName(), " ", user.getLastName()));
-        session.setAttribute("email", user.getEmail());
-
+//        session.setAttribute("username", user.getUsername());
+//        session.setAttribute("name", SendStringBuilds.sendString(user.getFirstName(), " ", user.getLastName()));
+//        session.setAttribute("email", user.getEmail());
+        session.setAttribute("username", "testre");
+        session.setAttribute("name", SendStringBuilds.sendString("Hard", " ", "Coded"));
 
         return verification;
     }
