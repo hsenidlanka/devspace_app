@@ -10,7 +10,7 @@ $(document).ready(function () {
         success: function (result) {
 
             $('#tableCategory').bootstrapTable({
-                height: 370,
+                height: 390,
                 pagination: false,
                 search: false,
                 showColumns: false,
@@ -20,45 +20,56 @@ $(document).ready(function () {
                     field: 'id',
                     title: 'ID :',
                     sortable: true,
-                    align: 'left',
-                    //class: 'col-xs-1'
+                    //width:50,
+                    //class: 'col-xs-1',
+                    align: 'left'
                 }, {
                     field: 'name',
                     title: 'Name :',
                     sortable: true,
                     align: 'left',
                     searchable: true,
-                    //class: 'col-xs-2',
+                    //width:25,
+                    //class: 'col-xs-1',
                     formatter: linkFormatter,
                     events: linkEvents
                 }, {
                     field: 'description',
                     title: 'Description :',
                     align: 'left',
-                    sortable: true,
-                    class: 'col-xs-4'
+                    //width:10,
+                    class: 'col-xs-5',
+                    sortable: true
+
                 }, {
                     field: 'creator',
                     title: 'Creator:',
                     align: 'left',
+                    //width:25,
+                    //class: 'col-xs-1',
                     sortable: true
-                    //class: 'col-xs-1'
+
                 }, {
                     field: 'created_date',
                     title: 'Created Date:',
                     align: 'left',
+                    //width:25,
+                    //class: 'col-xs-1',
                     sortable: true
-                    //class: 'col-xs-1'
+
                 }, {
                     field: 'status',
                     title: 'Visibility :',
                     align: 'left',
+                    //width:25,
+                    //class: 'col-xs-1',
                     sortable: true
-                    //class: 'col-xs-1'
+
                 }, {
                     field: 'Options',
                     title: 'Operations :',
                     align: 'center',
+                    //width:1,
                     //class: 'col-xs-2',
                     formatter: operateFormatter5,
                     events: operateEvents5
