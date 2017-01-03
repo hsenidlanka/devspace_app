@@ -201,8 +201,36 @@ $(document).ready(function () {
                                     case "verified":
                                         window.location = "/web-selfcare/";
                                         break;
+
                                     case "notVerified":
-                                        window.location = "/web-selfcare/email-verification";
+                                        alert(loginUsername)
+                                        /*$.ajax({
+
+                                            type: "POST",
+                                            // The URL for the request
+                                            url: "chechBlocked",
+                                            // The data to send (will be converted to a query string)
+                                            data: {
+                                                username: chkName
+                                            },
+
+                                            // The type of data we expect back
+                                            dataType: "json",
+                                            success: function (data2) {
+
+                                                if (!data2.userAvailable) {
+                                                    $("#loginUsername").val('');
+                                                    alert("Username is blocked");
+                                                } else {
+                                                    return fasle;
+                                                }
+                                            },
+                                            error: function (data) {
+                                                //alert("error worked");
+                                                //console.log("error work");
+                                            }
+                                        });*/
+                                        window.location = "/web-selfcare/email-verification?username="+loginUsername;
                                         break;
                                     case "blocked":
                                         window.location = "/web-selfcare/blockedUserRedirect";
