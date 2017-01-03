@@ -6,10 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -96,7 +93,7 @@ public class FilterController {
         if((!(from.equals(""))) && (!(to.equals(""))) && ((city.equals("--Select--")))) {
 
             LOG.error("date range selected: from{}, to{}",from,to);
-            List<Map<String, Object>> outDateRange=dateSelect(from,to,limitPg,initPg);
+            List<Map<String, Object>> outDateRange=dateSelect(from,to,"active",limitPg,initPg);
             return outDateRange;
         }
 
@@ -112,7 +109,7 @@ public class FilterController {
         if((!(from.equals(""))) && (!(to.equals(""))) && (!(city.equals("--Select--")))) {
 
             LOG.error(" Date range and city selected: city{}, from:{}, to{}", city,from,to);
-            List<Map<String, Object>> outCityDate=dateCitySelect(from,to,city,limitPg,initPg);
+            List<Map<String, Object>> outCityDate=dateCitySelect(from,to,city,"active",limitPg,initPg);
             return outCityDate;
         }
 
@@ -517,7 +514,7 @@ public class FilterController {
     }
 
 
-    public List<Map<String, Object>> dateSelect(String from,String to, int limitPg, int initPg) throws ParseException {
+    public List<Map<String, Object>> dateSelect(String from,String to,String status, int limitPg, int initPg) throws ParseException {
 
         //convert java.util time to sql time
         SimpleDateFormat sdf= new SimpleDateFormat("MM/dd/yyyy");
@@ -527,7 +524,7 @@ public class FilterController {
         java.sql.Date sqltoDate= new java.sql.Date(toDate.getTime());
 
         List<Map<String, Object>> outDate = new ArrayList<Map<String, Object>>();
-        List<User> customerList1= customerRepository.retrieveByDateRange(sqlfromDate,sqltoDate,limitPg,initPg);
+        List<User> customerList1= customerRepository.retrieveByDateRange(sqlfromDate,sqltoDate,status,limitPg,initPg);
 
         for (int i=0;i<customerList1.size();i++){
             User customerUser=customerList1.get(i);
@@ -548,7 +545,7 @@ public class FilterController {
         return outDate;
     }
 
-    public List<Map<String, Object>> dateCitySelect(String from,String to, String city, int limitPg, int initPg)
+    public List<Map<String, Object>> dateCitySelect(String from,String to, String city,String status, int limitPg, int initPg)
             throws ParseException {
 
         //convert java.util time to sql time
@@ -558,9 +555,10 @@ public class FilterController {
         java.sql.Date sqlfromDate = new java.sql.Date(fromDate.getTime());
         java.sql.Date sqltoDate = new java.sql.Date(toDate.getTime());
         LOG.error("sqlFromDate: {}", sqlfromDate);
+        LOG.error("city in dateCitySelect:{}",city);
 
         //two lists of User objects obtained filtered by date and city respectively
-        List<User> dateFilteredcustomerList = customerRepository.retrieveByDateRangeCity(sqlfromDate, sqltoDate, city, limitPg, initPg);
+        List<User> dateFilteredcustomerList = customerRepository.retrieveByDateRangeCity(sqlfromDate, sqltoDate, city, status,limitPg, initPg);
         LOG.error("retrive by date range {}", dateFilteredcustomerList);
         ArrayList<Map<String, Object>> outCityDate1 = new ArrayList<Map<String, Object>>();
         //first filter by date range
@@ -582,27 +580,6 @@ public class FilterController {
         }
         return outCityDate1;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     //function to obtain the Customer List with typed name
     public List<Map<String, Object>> nameSelect(String name, String status, int limit, int page) {
@@ -647,6 +624,114 @@ public class FilterController {
             LOG.info("out {}", outNameList);
         }
        return outNameList;
+    }
+//////////////////////////////////////////////////to filter NON-Verified users from Active Users//////////////////////////////
+
+    /*
+*getting record count for loading Customer table with pagination (NOT-VERIFIED)
+**/
+    @RequestMapping(value = "/NonVerifiedCustomerPaginationTable", method = RequestMethod.GET)
+    public @ResponseBody int loadPagination2(){
+        LOG.info("Category Count is {}",customerRepository.countUsers("not-verified"));
+        return customerRepository.countUsers("not-verified");
+    }
+
+
+    //handler method to retrieve the details of a particular NON-vERIFIED  customer user
+    @RequestMapping(value = "/view/customerTable/nonVerified", method = RequestMethod.GET)
+    public @ResponseBody List<Map<String, Object>> viewCustomer(@ModelAttribute("newUser")  User customerUser,
+                                                                @RequestParam("pageLimit") String pageLimit,
+                                                                @RequestParam("initPage") String initPage){
+
+        int initPg = Integer.parseInt(initPage);
+        int limitPg = Integer.parseInt(pageLimit);
+
+        List<Map<String, Object>> outc = new ArrayList<Map<String, Object>>();
+        List<User> customerList= customerRepository.selectNonVerifiedUsers(limitPg, initPg);
+
+        for (int i=0;i<customerList.size();i++){
+            customerUser=customerList.get(i);
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("id", customerUser.getId());
+            map.put("username", customerUser.getUsername());
+            map.put("first_name",customerUser.getFirstName());
+            map.put("last_name", customerUser.getLastName());
+            map.put("mobile", customerUser.getMobile());
+            map.put("email", customerUser.getEmail());
+            map.put("address_line3", customerUser.getAddressL3());
+            map.put("registered_date", customerUser.getRegDate());
+
+            LOG.info("newUser {}", customerUser);
+            outc.add(map);
+            LOG.info("out {}",outc);
+        }
+        return outc;
+    }
+
+    /** handler  method to filter the NON-VERIFIED customer user data based on typeahead usernames **/
+    @RequestMapping(value = "/customerTable/typeheadName/data/nonVerified", method = RequestMethod.GET)
+    public @ResponseBody
+    List<Map<String, Object>> typeheadNameFilterDataNonVerified (@RequestParam("cname") String cname,
+                                                      @RequestParam("pageLimit") String pageLimit,
+                                                      @RequestParam("initPage") String initPage){
+        int initPg = Integer.parseInt(initPage);
+        int limitPg = Integer.parseInt(pageLimit);
+
+        List<Map<String, Object>> nameListTypeaheadDataNon=nameSelect(cname,"not-verified",limitPg,initPg);
+        return  nameListTypeaheadDataNon;
+    }
+
+
+
+    /** handler  method to filter the customer usernames based on typeahead usernames **/
+    @RequestMapping(value = "/customerTable/typeheadName/nonVerified", method = RequestMethod.GET)
+    public @ResponseBody
+    List<String> typeheadNameFilterNonVerified (@RequestParam("cname") String cname){
+        List<String> nameListTypeaheadNon=customerRepository.selectNameByNameTypeAhead(cname, "not-verified");
+        return  nameListTypeaheadNon;
+    }
+//////////////////////////////////////NON-VERIFIED Customers Filter by date range and city///////////////////////////////////
+
+    /** handler method to filter
+     * the search data of Customer Users on the registered date range and the city combination**/
+    @RequestMapping(value = "/customerTable/date/city/nonVerified", method = RequestMethod.GET)
+    public @ResponseBody
+    List<Map<String, Object>> datecityFilteredNonVerifiedCustomer(@RequestParam("from") String from,
+                                                       @RequestParam("to") String to,
+                                                       @RequestParam("city") String city,
+                                                       @RequestParam("pageLimit") String pageLimit,
+                                                       @RequestParam("initPage") String initPage) throws ParseException {
+
+        int initPg = Integer.parseInt(initPage);
+        int limitPg = Integer.parseInt(pageLimit);
+
+        List<Map<String, Object>> outCustomerNonVerified = new ArrayList<Map<String, Object>>();
+
+        //date range is selected
+        if((!(from.equals(""))) && (!(to.equals(""))) && ((city.equals("--Select--")))) {
+
+            LOG.error("date range selected: from{}, to{}",from,to);
+            List<Map<String, Object>> outDateRangeN=dateSelect(from,to,"not-verified",limitPg,initPg);
+            return outDateRangeN;
+        }
+
+        //city is selected
+        if(((from.equals(""))) && ((to.equals(""))) && (!(city.equals("--Select--")))) {
+
+            LOG.error("city {}", city);
+            List<Map<String, Object>> outCityN = citySelect(city, "not-verified", limitPg, initPg);
+            return outCityN;
+        }
+
+        //both the city and date range are selected
+        if((!(from.equals(""))) && (!(to.equals(""))) && (!(city.equals("--Select--")))) {
+
+            LOG.error(" Date range and city selected: city{}, from:{}, to{}", city,from,to);
+            List<Map<String, Object>> outCityDateN=dateCitySelect(from,to,city,"not-verified",limitPg,initPg);
+            return outCityDateN;
+        }
+
+        return outCustomerNonVerified;
     }
 
 

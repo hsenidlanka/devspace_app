@@ -97,7 +97,7 @@ public class UserController {
         if(userType.equals("customer")){
             boolean usernameUnique = customerRepository.checkUsernameUnique(newUser);
             if (usernameUnique) {
-                int i = customerRepository.add(newUser);
+                int i = customerRepository.addCustomer(newUser);
                 if (i == 1)
                     JOptionPane.showMessageDialog(null,insertSuccessC);
             }else {
