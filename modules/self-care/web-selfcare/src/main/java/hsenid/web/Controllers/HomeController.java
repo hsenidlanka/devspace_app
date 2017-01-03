@@ -1,17 +1,12 @@
 package hsenid.web.Controllers;
 
-import hsenid.web.models.ReplyFromServer;
-import hsenid.web.models.User;
-import hsenid.web.supportclasses.SendStringBuilds;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.client.RestClientException;
-import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpSession;
 
@@ -34,7 +29,7 @@ public class HomeController {
     }
 
     @RequestMapping("/profile")
-    public String viewProfile() {
+    public String viewProfile(HttpSession session) {
         return "/home/profile";
     }
 
