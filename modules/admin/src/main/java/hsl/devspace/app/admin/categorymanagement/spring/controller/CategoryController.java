@@ -14,8 +14,13 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.swing.*;
-import java.io.*;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -62,6 +67,7 @@ public class CategoryController {
     private int subcatAdd=0;
 
 
+
 ///////////////////////////////////////////////////// CATEGORY INSERT HANDLER METHODS  ///////////////////////////////////////
 
 
@@ -96,11 +102,16 @@ public class CategoryController {
     @RequestMapping(value="/addCategory")
     public ModelAndView saveOrUpdate(@ModelAttribute("categoryObject")  Category categoryObject,
                                      @RequestParam("subcategory_name[]") String[] subcategory_name,
-                                     @RequestParam("subcategory_des[]") String[] subcategory_des
-                                    ) throws SQLIntegrityConstraintViolationException {
+                                     @RequestParam("subcategory_des[]") String[] subcategory_des,
+                                     HttpServletRequest request)
+                                     throws SQLIntegrityConstraintViolationException {
 
-        //set the creator in category object
-        categoryObject.setCreator("admin");
+
+        //set the creator in category object using session attributes
+        HttpSession session = request.getSession();
+        String userId =(String)session.getAttribute("username");
+        LOG.error("The user logged in is: {}",userId);
+        categoryObject.setCreator(userId);
         LOG.info("Add Category category object {}", categoryObject);
 
         //for the image file uploaded
