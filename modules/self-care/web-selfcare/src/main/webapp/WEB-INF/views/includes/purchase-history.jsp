@@ -8,6 +8,31 @@
     <script src="<c:url value="/resources/js/simple-bootstrap-paginator.js"/>"></script>
     <script src="<c:url value="/resources/js/purchase-history.js"/>"></script>
     <link rel="stylesheet" href="<c:url value="/resources/css/m-buttons.css"/>"/>
+
+    <style>
+        /*.tbody-ordItems {
+            display: block;
+            height: 50px;
+            overflow: auto;
+        }
+
+        .thead-ordItems, .tbody-ordItems, .tr-ordItems {
+            display: table;
+            width: 100%;
+            table-layout: fixed; *//* even columns width , fix width of table too *//*
+        }
+
+        .table-ordItems {
+            width: 100%;
+        }*/
+
+        .thead-ordItems {
+            background-color: #0094c0;
+            font-weight: bold;
+            color: #f5f5f5;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 <div class="panel panel-default">
@@ -45,6 +70,26 @@
             </select>
         </div>
         <div id="pagination" style="float: right;font-size: 12px;"></div>
+    </div>
+</div>
+
+<%-- Modal shows details of the items of an order --%>
+<div id="order-items-popup" class="modal fade">
+    <div class="modal-dialog" style="width: 70%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img class="icons" src="<c:url value="/resources/images/icons/pay-confirm.png"/>">
+                <h4 class="modal-title header-panel"><fmt:message key="purchase.history.order.items.header"
+                                                                  bundle="${lang}"/></h4>
+            </div>
+            <div class="modal-body">
+                <div id="table-orderItems"></div>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default" data-dismiss="modal"><fmt:message key="purchase.history.model.close"
+                                                                             bundle="${lang}"/></a>
+            </div>
+        </div>
     </div>
 </div>
 </body>

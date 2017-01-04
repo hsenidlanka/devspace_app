@@ -29,6 +29,9 @@ public class PurchaseHistoryController {
     @Value("${api.url.puchase.history.count}")
     private String purchaseHistoryCountUrl;
 
+    @Value("${api.url.puchase.history.order.items}")
+    private String purchaseHistoryOrderItemsUrl;
+
     @RequestMapping(value = "/purchase-history", method = RequestMethod.GET)
     public ModelAndView loadPurchaseHistoryPage() {
         ModelAndView modelAndView = new ModelAndView("includes/purchase-history");
@@ -56,6 +59,20 @@ public class PurchaseHistoryController {
         RestTemplate restTemplate = new RestTemplate();
         ServerResponseMessage responseMessage = restTemplate.getForObject(url, ServerResponseMessage.class);
         return Integer.parseInt(responseMessage.getData().get(0).get("count").toString());
+    }
+
+    @RequestMapping(value = "purchase-history/order-items", method = RequestMethod.GET)
+    @ResponseBody
+    public JSONArray getOrderItems(HttpServletRequest request) {
+        String url = baseUrl + purchaseHistoryOrderItemsUrl + request.getParameter("orderId");
+        RestTemplate restTemplate = new RestTemplate();
+        ServerResponseMessage responseMessage = restTemplate.getForObject(url, ServerResponseMessage.class);
+        JSONArray jsonArray = new JSONArray();
+        for (int i = 0; i < responseMessage.getData().size(); i++) {
+            JSONObject jsonObject = responseMessage.getData().get(i);
+            jsonArray.add(jsonObject);
+        }
+        return jsonArray;
     }
 }
 
