@@ -11,5 +11,5 @@ import java.util.Map;
 public interface FeedbackRepository {
     int add(Feedback feedback);
 
-    List<Map<String, Object>> view();
+    List<Map<String, Object>> view(int limit, int page);
 }
