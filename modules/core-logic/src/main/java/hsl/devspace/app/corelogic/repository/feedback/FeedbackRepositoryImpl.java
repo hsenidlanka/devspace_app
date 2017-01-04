@@ -20,14 +20,11 @@ public class FeedbackRepositoryImpl implements FeedbackRepository{
 
     public void setDataSource(DataSource dataSource) {
         jdbcTemplate = new JdbcTemplate(dataSource);
-
     }
 
     public void setTransactionManager(PlatformTransactionManager transactionManager) {
         this.transactionManager = transactionManager;
-
     }
-
     /*Add new feedback*/
     @Override
     public int add(Feedback feedback) {
@@ -43,9 +40,17 @@ public class FeedbackRepositoryImpl implements FeedbackRepository{
     /*retrieve feedback details*/
     @Override
     public List<Map<String, Object>> view(int limit, int page) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT f.*,c.username, i.name AS item FROM feedback f INNER JOIN item i ON i.id=f.item_id INNER JOIN customer c ON f.customer_id=c.id ORDER BY f.id DESC LIMIT ? OFFSET ?", limit, page);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT f.*,c.username FROM feedback f,customer c WHERE f.customer_id=c.id ORDER BY f.id DESC LIMIT ? OFFSET ?", limit, page);
         log.info("{}", mp);
         return mp;
+    }
+
+    @Override
+    public int count() {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT count(*) AS total FROM feedback ");
+        int count = Integer.parseInt(mp.get(0).get("total").toString());
+        log.info("{}", count);
+        return count;
     }
 
     @Override
