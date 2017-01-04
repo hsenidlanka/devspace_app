@@ -127,7 +127,7 @@ public class LoginController {
 
                     session.setAttribute("name", SendStringBuilds.sendString(user.getFirstName(), " ", user.getLastName()));
                     session.setAttribute("email", user.getEmail());
-                    session.setAttribute("username", username);
+                    session.setAttribute("username", uname);
                     session.setAttribute("userStatus", verification.getUserStatus());
                 } catch (Exception e) {
                     logger.error("Login Controller, inner try failed. reason {}", e.getMessage());
@@ -137,33 +137,9 @@ public class LoginController {
             } else if (status.equals("notVerified")) {
                 if (session != null) {
                     session.invalidate();
-//                    logger.info("User Logged out.");
                 }
             }
             verification.setUserStatus(status);
-
-          /*  if(replyFromServer.getStatus().equals("success")){
-
-                RestTemplate restTemplate1 = new RestTemplate();
-//                String userDataUrl = replyFromServer.getLinks().get(1).getLink();
-//                logger.info(userDataUrl);
-//                ServerResponseMessage responseMessage = restTemplate1.getForObject(userDataUrl, ServerResponseMessage.class);
-//                logger.info((String) responseMessage.getData().get(0).get("accountStatus"));
-
-//                user.setTitle(replyFromServer1.getData().get(0).getTitle());
-//                user.setFirstName(replyFromServer1.getData().get(0).getFirstName());
-//                user.setLastName(replyFromServer1.getData().get(0).getLastName());
-//                user.setEmail(replyFromServer1.getData().get(0).getEmail());
-//                user.setMobile(replyFromServer1.getData().get(0).getMobile());
-//                user.setUsername(replyFromServer1.getData().get(0).getUsername());
-//                user.setAddressLine01(replyFromServer1.getData().get(0).getAddressLine01());
-//                user.setAddressLine02(replyFromServer1.getData().get(0).getAddressLine02());
-//                user.setAddressLine03(replyFromServer1.getData().get(0).getAddressLine03());
-                verification.setUserStatus(replyFromServer.getData().get(0).getAccountStatus());
-//                logger.info(String.valueOf(replyFromServer.getData().get(0).getAccountStatus()));
-                logger.info(verification.getUserStatus());
-
-            }*/
 
         } catch (RestClientException e) {
             logger.error(e.getMessage());
