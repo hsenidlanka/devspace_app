@@ -12,4 +12,6 @@ public interface FeedbackRepository {
     int add(Feedback feedback);
 
     List<Map<String, Object>> view(int limit, int page);
+
+    int changeStatus(int id, String status);
 }
