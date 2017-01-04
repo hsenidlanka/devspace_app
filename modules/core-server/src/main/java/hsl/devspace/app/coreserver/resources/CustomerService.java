@@ -24,9 +24,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.net.MalformedURLException;
 import java.sql.SQLException;
-import java.text.NumberFormat;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Kasun Dinesh on 6/29/16.
@@ -305,37 +302,6 @@ public class CustomerService {
             errorMessage.setDescription("entered parameters have no matching combinations.");
             response = Response.status(Response.Status.OK).entity(errorMessage).build();
         }
-        return response;
-    }
-
-    @GET
-    @Path("/purchase-history/{username}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getPurchaseHistoryOfCustomer(@PathParam("username") String username, @javax.ws.rs.core.Context UriInfo uriInfo) {
-        List<Map<String, Object>> purchaseHistoryDataList = shoppingCartRepository.selectOrderDetails(username, 100, 0);
-        Response response;
-        SuccessMessage successMessage = new SuccessMessage();
-        successMessage.setCode(200);
-        successMessage.setStatus("success");
-        NumberFormat format=NumberFormat.getInstance();
-        format.setMaximumFractionDigits(2);
-        format.setMinimumFractionDigits(2);
-        if (purchaseHistoryDataList.size() > 0) {
-            successMessage.setMessage("order details for a customer retrieved");
-            for (int i = 0; i < purchaseHistoryDataList.size(); i++) {
-                Map<String, Object> purchasedDataMap = purchaseHistoryDataList.get(i);
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("orderId", purchasedDataMap.get("order_id"));
-                jsonObject.put("date", purchasedDataMap.get("order_date"));
-                jsonObject.put("time", purchasedDataMap.get("order_time"));
-                jsonObject.put("netCost", format.format(Double.parseDouble(purchasedDataMap.get("net_cost").toString())));
-                successMessage.addData(jsonObject);
-            }
-        } else {
-            successMessage.setMessage("no order details found");
-        }
-        response = Response.status(200).entity(successMessage).build();
         return response;
     }
 }
