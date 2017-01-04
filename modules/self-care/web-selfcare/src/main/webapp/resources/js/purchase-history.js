@@ -80,12 +80,58 @@ function initPurchaseHistoryTable() {
         'click .edit': function (e, value, row, index) {
             var js = JSON.stringify(row);
             var obj = JSON.parse(js);
-
+            $.ajax({
+                url: "purchase-history/order-items",
+                type: "GET",
+                dataType: "json",
+                data: {"orderId": obj['orderId']},
+                success: function (result) {
+                    $("#order-items-popup").modal('show');
+                    var content = "<table class='table-bordered table-condensed table-ordItems' style='width: 100%;'>";
+                    content += '<thead class="thead-ordItems">';
+                    content += '<th>Item name</th>';
+                    content += '<th>Size</th>';
+                    content += '<th>Quantity</th>';
+                    content += '<th>Topping 01</th>';
+                    content += '<th>Topping 02</th>';
+                    content += '<th>Instructions</th>';
+                    content += '</thead>';
+                    content += '<tbody class="tbody-ordItems">';
+                    $.each(result, function (idx, obj) {
+                        content += '<tr class="tr-ordItems">';
+                        content += '<td>' + obj['itemName'] + '</td>';
+                        content += '<td>' + obj['size'] + '</td>';
+                        content += '<td align="right">' + obj['quantity'] + '</td>';
+                        var topping1 = "-";
+                        var topping2 = "-";
+                        var instructions = "-";
+                        if ($.trim(obj['topping1']) != "") {
+                            topping1 = obj['topping1'];
+                        }
+                        if ($.trim(obj['topping2']) != "") {
+                            topping2 = obj['topping2'];
+                        }
+                        if ($.trim(obj['instructions']) != "") {
+                            instructions = obj['instructions'];
+                        }
+                        content += '<td>' + topping1 + '</td>';
+                        content += '<td>' + topping2 + '</td>';
+                        content += '<td>' + instructions + '</td>';
+                        content += '</tr>';
+                    });
+                    content += "</tbody>";
+                    content += "</table>";
+                    $("#table-orderItems").html(content);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert("Error loading order items. Message: " + errorThrown);
+                }
+            });
         },
         'click .delete': function (e, value, row, index) {
             var js = JSON.stringify(row);
             var obj = JSON.parse(js);
-
+            alert(obj['orderId']);
         }
     };
 }
