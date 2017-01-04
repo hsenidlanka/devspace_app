@@ -48,7 +48,8 @@ function initPurchaseHistoryTable() {
                     field: 'netCost',
                     title: 'Net amount (Rs.)',
                     align: 'right',
-                    valign: 'bottom'
+                    valign: 'bottom',
+                    sortable: true
                 }, {
                     field: 'operate',
                     title: 'Operations',

@@ -27,11 +27,14 @@
         }*/
 
         .thead-ordItems {
-            background-color: #0094c0;
+            background-color: rgba(66, 68, 68, 0.88);
             font-weight: bold;
             color: #f5f5f5;
             text-align: center;
         }
+        /*#table-purchaseHistory th{
+            background-color: #00a5ff !important;
+        }*/
     </style>
 </head>
 <body>
