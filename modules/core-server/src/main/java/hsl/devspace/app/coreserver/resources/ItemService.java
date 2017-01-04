@@ -21,7 +21,7 @@ import java.util.Map;
 
 /**
  * Created by Kasun Dinesh on 9/30/16.
- * This class handles the requests related to the coupons.
+ * This class handles the requests related to the food items.
  */
 @Path("/items")
 public class ItemService {
@@ -104,7 +104,7 @@ public class ItemService {
                     .build();
         }
         return Response.status(Response.Status.OK).entity(successMessage)
-                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Origin", propertyReader.readProperty("Access-Control-Allow-Origin"))
                 .build();
     }
 
