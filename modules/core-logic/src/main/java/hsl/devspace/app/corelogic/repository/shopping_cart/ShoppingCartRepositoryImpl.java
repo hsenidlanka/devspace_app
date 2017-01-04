@@ -383,15 +383,15 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
             List<Map<String, Object>> mp2;
             List<Map<String, Object>> mp1 = jdbcTemplate.queryForList("SELECT type FROM product WHERE id=?", mp.get(i).get("product_id"));
             if (mp1.get(0).get("type").toString().equals("item")) {
-                mp2 = jdbcTemplate.queryForList("SELECT p.id AS product_id,p.type AS type,p.size,p.quantity ,p.instructions,i.name,(SELECT name FROM item WHERE id=p.topping_id1) AS topping1," +
+                mp2 = jdbcTemplate.queryForList("SELECT p.id ,p.type AS type,p.size,p.quantity ,p.instructions,i.name,(SELECT name FROM item WHERE id=p.topping_id1) AS topping1," +
                         "(SELECT name FROM item WHERE id=p.topping_id2) AS topping2 FROM product p " +
                         "INNER JOIN shopping_cart_product sp ON sp.product_id=p.id " +
                         "INNER JOIN item i ON i.id=p.type_id INNER JOIN shopping_cart sc ON sc.id=sp.shopping_cart_id " +
-                        "WHERE p.id=?", mp.get(i).get("product_id"));
+                        "WHERE sc.order_id=? AND p.id=?", orderId, mp.get(i).get("product_id"));
             } else {
                 mp2 = jdbcTemplate.queryForList("SELECT p.* ,pck.name FROM product p INNER JOIN shopping_cart_product sp ON sp.product_id=p.id " +
                         "INNER JOIN package pck ON pck.id=p.type_id INNER JOIN shopping_cart sc ON sc.id=sp.shopping_cart_id " +
-                        "WHERE p.id=?", mp.get(i).get("product_id"));
+                        "WHERE sc.order_id=? AND p.id=?", orderId, mp.get(i).get("product_id"));
             }
             items.add(mp2);
         }
