@@ -22,17 +22,18 @@
                 }
             }
             var user = GetURLParameter('username')
-
-            alert(user);
+            $("#hiddenUsername").val(user);
+            var test = $("#hiddenUsername").val();
+//            alert("Mama Thama -> "+test);
         })
     </script>
 
     <div class="container">
-        <%= request.getParameter("username") %>
-        <form>
+        <%--<%= request.getParameter("username") %>--%>
+        <form:form>
             <input id="hiddenUsername" type="hidden">
             <button onclick="">test</button>
-        </form>
+        </form:form>
     </div>
 
 </body>

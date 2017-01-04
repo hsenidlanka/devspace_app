@@ -33,11 +33,6 @@ public class HomeController {
         return "/home/profile";
     }
 
-    @RequestMapping("/locations")
-    public String locations() {
-        return "/home/locations";
-    }
-
     @RequestMapping("/logout")
     public String logout(HttpSession session){
 

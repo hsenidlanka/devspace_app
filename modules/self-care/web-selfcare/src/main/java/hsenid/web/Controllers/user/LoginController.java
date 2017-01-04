@@ -48,7 +48,7 @@ public class LoginController {
     Verification verification = new Verification();
 
 
-    //    Checking whether a user is blocked or not
+  /*  //    Checking whether a user is blocked or not
     @RequestMapping(value = "chechBlocked", produces = "application/json")
     @ResponseBody
     public BooleanResponse checkBlockedUser(HttpServletRequest request) {
@@ -84,7 +84,7 @@ public class LoginController {
         logger.info("Username is not blocked");
         return new BooleanResponse(true);
 
-    }
+    }*/
 //  check given user credentials are valid or not
 //  if valide set session and sent it.
 
@@ -127,7 +127,7 @@ public class LoginController {
 
                     session.setAttribute("name", SendStringBuilds.sendString(user.getFirstName(), " ", user.getLastName()));
                     session.setAttribute("email", user.getEmail());
-                    session.setAttribute("username", uname);
+                    session.setAttribute(username, uname);
                     session.setAttribute("userStatus", verification.getUserStatus());
                 } catch (Exception e) {
                     logger.error("Login Controller, inner try failed. reason {}", e.getMessage());
@@ -144,15 +144,8 @@ public class LoginController {
         } catch (RestClientException e) {
             logger.error(e.getMessage());
             verification.setUserStatus("unauthorized");
-//            return verification;
         }
         return verification;
-//            Adding attributes to the session
-//        session.setAttribute("username", user.getUsername());
-//        session.setAttribute("name", SendStringBuilds.sendString("Hard", " ", "Coded"));
-//        return verification;return "includes/email-verification";
-
-//        return "error-pages/error500";
     }
 
     @GetMapping("/checkNotUser")
