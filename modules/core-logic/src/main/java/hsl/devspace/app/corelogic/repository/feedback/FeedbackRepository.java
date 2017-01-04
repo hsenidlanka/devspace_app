@@ -14,4 +14,14 @@ public interface FeedbackRepository {
     List<Map<String, Object>> view(int limit, int page);
 
     int changeStatus(int id, String status);
+
+    List<Map<String, Object>> selectBlockedFeedbacks(int limit, int offset);
+
+    List<Map<String, Object>> selectActiveFeedbacks(int limit, int offset);
+
+    List<Map<String, Object>> selectInactiveFeedbacks(int limit, int offset);
+
+    List<Map<String, Object>> selectFeedbacksByDateRange(java.sql.Date dateFrom, java.sql.Date dateTo, int limit, int offset);
+
+    List<Map<String, Object>> selectFeedbacksByDateRangeAndStatus(java.sql.Date dateFrom, java.sql.Date dateTo, String status, int limit, int offset);
 }
