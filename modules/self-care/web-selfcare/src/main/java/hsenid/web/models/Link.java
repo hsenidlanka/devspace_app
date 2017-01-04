@@ -1,8 +1,8 @@
 package hsenid.web.models;
 
 public class Link {
-    String rel;
-    String link;
+    private String rel;
+    private String link;
 
     public String getRel() {
         return rel;

@@ -34,7 +34,7 @@
 
             </div>
             <div class="col-sm-4" style="width: 100px"></div>
-            <img src="<c:url value="/resources/images/pizza_hut_eabout2.png"/>"  style="width: 330px;height: 250px">
+            <img src="<c:url value="/resources/images/pizza_hut_eabout2.png"/>" style="width: 330px;height: 250px">
         </div>
     </div>
 </div>

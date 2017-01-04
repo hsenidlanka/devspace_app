@@ -11,31 +11,31 @@ import javax.validation.constraints.Size;
 public class User {
 
     @Pattern(regexp = "^(?!\\s*$|\\s).*$", message = "Please enter a title!")
-    String title;
+    private String title;
 
     @Pattern(regexp = "^(?!\\s*$|\\s).*$",  message = "Please enter your first name!")
-    String firstName;
+    private String firstName;
 
     @Pattern(regexp = "^(?!\\s*$|\\s).*$", message = "Please enter your last name!")
-    String lastName;
+    private String lastName;
 
     @NotEmpty(message = "Please enter a valid email!")
     @Email(message = "Please enter a valid email!")
-    String email;
+    private String email;
 
     @Pattern(regexp = "^(?!\\s*$|\\s).*$", message = "Please enter a valid username!")
-    String username;
+    private String username;
 
     @Pattern(regexp = "^0[0-9]{9}$", message = "Please Enter Valid Contact Number!")
-    String mobile;
+    private String mobile;
 
     @Pattern(regexp = "^(?!\\s*$|\\s).*$", message = "Please enter address line one")
-    String addressLine01;
+    private String addressLine01;
 
     @Pattern(regexp = "^(?!\\s*$|\\s).*$", message = "Please enter address line two")
-    String addressLine02;
+    private String addressLine02;
 
-    String addressLine03;
+    private String addressLine03;
 
     public String getTitle() {
         return title;
