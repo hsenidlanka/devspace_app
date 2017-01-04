@@ -33,7 +33,7 @@ public class FeedbackRepositoryImpl implements FeedbackRepository{
     public int add(Feedback feedback) {
         int row;
         String sql = "INSERT INTO feedback " +
-                "(date,time,comment,number_of_stars,customer_id,item_id) VALUES (CURDATE(),CURTIME(),?,?,(SELECT id FROM customer WHERE username=?),(SELECT id FROM item WHERE name=?))";
+                "(date,time,comment,number_of_stars,customer_id,item_id,status) VALUES (CURDATE(),CURTIME(),?,?,(SELECT id FROM customer WHERE username=?),(SELECT id FROM item WHERE name=?),'inactive')";
 
         row = jdbcTemplate.update(sql, new Object[]{feedback.getComment(),feedback.getNumberOfStars(),feedback.getCustomerUserName(),feedback.getItemName()});
         log.info("{} new feedback added",row);
@@ -43,7 +43,7 @@ public class FeedbackRepositoryImpl implements FeedbackRepository{
     /*retrieve feedback details*/
     @Override
     public List<Map<String, Object>> view() {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT f.id,f.date,f.time,f.comment,c.username FROM feedback f,customer c WHERE f.customer_id=c.id");
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT f.*,c.username FROM feedback f,customer c WHERE f.customer_id=c.id");
         log.info("{}", mp);
         return mp;
     }
