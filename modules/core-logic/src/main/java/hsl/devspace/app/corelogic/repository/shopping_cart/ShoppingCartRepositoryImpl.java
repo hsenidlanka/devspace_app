@@ -365,7 +365,7 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 
     @Override
     public List<Map<String, Object>> selectOrderDetails(String username, int limit, int page) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM shopping_cart WHERE customer_id=(SELECT id FROM customer WHERE username=?) LIMIT ? OFFSET ?", username, limit, page);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM shopping_cart WHERE customer_id=(SELECT id FROM customer WHERE username=?) ORDER BY order_date DESC LIMIT ? OFFSET ?", username, limit, page);
         return mp;
     }
 
@@ -376,11 +376,27 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
     }
 
     @Override
-    public List<Map<String, Object>> selectItemDetailsOfOrder(String orderId) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT p.* ,i.name FROM product p INNER JOIN shopping_cart_product sp ON sp.product_id=p.id " +
-                "INNER JOIN item i ON i.id=p.type_id INNER JOIN shopping_cart sc ON sc.id=sp.shopping_cart_id " +
-                "WHERE sc.order_id=?", orderId);
-        return mp;
+    public List<List<Map<String, Object>>> selectItemDetailsOfOrder(String orderId) {
+        List<List<Map<String, Object>>> items = new ArrayList<List<Map<String, Object>>>();
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT product_id FROM shopping_cart_product WHERE shopping_cart_id=(SELECT id FROM shopping_cart WHERE order_id=?)", orderId);
+        for (int i = 0; i < mp.size(); i++) {
+            List<Map<String, Object>> mp2;
+            List<Map<String, Object>> mp1 = jdbcTemplate.queryForList("SELECT type FROM product WHERE id=?", mp.get(i).get("product_id"));
+            if (mp1.get(0).get("type").toString().equals("item")) {
+                mp2 = jdbcTemplate.queryForList("SELECT p.id AS product_id,p.type AS type,p.size,p.quantity ,p.instructions,i.name,(SELECT name FROM item WHERE id=p.topping_id1) AS topping1," +
+                        "(SELECT name FROM item WHERE id=p.topping_id2) AS topping2 FROM product p " +
+                        "INNER JOIN shopping_cart_product sp ON sp.product_id=p.id " +
+                        "INNER JOIN item i ON i.id=p.type_id INNER JOIN shopping_cart sc ON sc.id=sp.shopping_cart_id " +
+                        "WHERE p.id=?", mp.get(i).get("product_id"));
+            } else {
+                mp2 = jdbcTemplate.queryForList("SELECT p.* ,pck.name FROM product p INNER JOIN shopping_cart_product sp ON sp.product_id=p.id " +
+                        "INNER JOIN package pck ON pck.id=p.type_id INNER JOIN shopping_cart sc ON sc.id=sp.shopping_cart_id " +
+                        "WHERE p.id=?", mp.get(i).get("product_id"));
+            }
+            items.add(mp2);
+        }
+        log.info("{}", items);
+        return items;
     }
 
     @Override
