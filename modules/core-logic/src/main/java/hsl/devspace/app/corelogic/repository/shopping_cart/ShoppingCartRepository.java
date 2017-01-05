@@ -47,11 +47,14 @@ public interface ShoppingCartRepository {
     List<Map<String, Object>> getPurchaseHistory(String username, int limit, int page);
 
     List<List<Map<String, Object>>> selectItemDetailsOfOrder(String orderId);
-    List<Map<String, Object>> selectPaymentAndDeliveryDetails(String orderId);
+
+    List<Map<String, Object>> selectDeliveryDetails(String orderId);
 
     List<Map<String, Object>> selectOrderDetails(String username, int limit, int page);
 
     public int countOrderDetails(String username);
+
+    List<Map<String, Object>> selectPaymentDetails(String orderId);
 //    void addPackageToCart(int packageId);
 //    void modifyPackageInCart();
 //    void removePackageFromCart(int packageId);
