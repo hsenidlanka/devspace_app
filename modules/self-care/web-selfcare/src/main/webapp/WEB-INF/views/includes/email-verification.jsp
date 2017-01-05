@@ -23,23 +23,74 @@
         $("#hiddenUsername").val(user);
         $("#testuser").val(user);
         var test = $("#hiddenUsername").val();
+
+        $("#resendVerificationCode").click(function(){
+            $.ajax({
+
+
+                type: "GET",
+                // The URL for the request
+                url: "resendVerification",
+                // The data to send (will be converted to a query string)
+                data: {
+                    username: user
+                },
+
+                // The type of data we expect back
+                dataType: "json",
+                success: function (data2) {
+
+                    if (data2.userAvailable) {
+                        $('#verificationContent').empty();
+//                        $('<p align="left" style="color: red; margin-left: -12px; margin-top: -12px; margin-bottom: 12px;">Form Submition failed</p>')
+                        $('<div class="form-group"><div class="col-sm-2"></div> <div class="col-sm-10"> <h4 style="color: red;">Verification code resending successful. Please check emails.</h4> </div> </div>')
+                                .appendTo('#verificationContent');
+                    }else{
+                        $('#verificationContent').empty();
+                        $('<div class="form-group"><div class="col-sm-2"></div> <div class="col-sm-10"> <h3 style="color: red;">Verification code resending Failed.</h3> </div> </div>')
+                                .appendTo('#verificationContent');
+                    }
+                },
+                error: function (data) {
+                    console.log("error work");
+                }
+            });
+
+//            alert("The paragraph was clicked.");
+        });
 //            alert("Mama Thama -> "+test);
     })
 </script>
 
 <div class="container">
     <%--<%= request.getParameter("username") %>--%>
-    <div class="panel panel-success">
+    <div style="height: 80%" class="panel panel-success">
 
         <div class="panel-heading">
             <img class="icons" src="<c:url value="/resources/images/icons/emailVerify.png"/>">
 
             <h3 style="display: inline-block;"><fmt:message key="email.verify.title" bundle="${lang}"/></h3>
         </div>
-        <div class="panel-body">
+        <div style="height: 80%" class="panel-body">
             <c:if test="${empty verifyPass}">
+                <div id="verificationContent">
+                    <div class="form-group">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-10">
+                            <h4>We just sent you verification code, Check your email account</h4>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-10">
+                            <h6 style="color: red">If you can't find the email, please check your spam folder</h6>
+                        </div>
+                    </div>
+                </div>
+
                 <form:form action="/web-selfcare/email-verification" method="post"
-                           modelAttribute="emailverification">
+                           modelAttribute="emailverification" cssStyle="margin-top: 120px">
                     <div class="form-group">
                         <div class="row">
                             <div class="col-sm-2"></div>
@@ -62,7 +113,8 @@
                             </div>
                             <div class="col-sm-6">
                                 <form:input cssClass="form-control input-sm" id="verificationCode"
-                                            path="verificationCode"/>
+                                            path="verificationCode"
+                                            placeholder="Please Enter verification code here"/>
                             </div>
                             <div class="col-sm-2"></div>
 
@@ -75,21 +127,77 @@
                             <div class="col-sm-2"></div>
                         </div>
                     </div>
+                    <br>
+                    <br>
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-sm-5"></div>
-                            <div class="col-sm-2">
-                                <button type="submit" class="btn btn-warning"><i class="fa fa-envelope-o"
-                                                                                 aria-hidden="true"></i> Verify Email
-                                </button>
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-10">
+                                <center>
+                                    <button type="submit" class="btn btn-warning">
+                                        <i class="fa fa-envelope-o" aria-hidden="true"></i> Verify Email
+                                    </button>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <button type="button" id="resendVerificationCode" class="btn btn-warning">
+                                        <i class="fa fa-share-square" aria-hidden="true"></i> Resend verification code
+                                    </button>
+                                </center>
                             </div>
-                            <div class="col-sm-5"></div>
+                            <div class="col-sm-1"></div>
                         </div>
                     </div>
                 </form:form>
+
             </c:if>
+            <%--Here Start the Email Verified Massege--%>
             <c:if test="${not empty verifyPass}">
-                Passed
+                <div class="">
+                    <div class="row">
+                        <div class="col-sm-4"></div>
+                        <div class="col-sm-4">
+                            <center>
+                                <img style="width:125px;height:105px;" class="icons"
+                                     src="<c:url value="/resources/images/icons/verifySuccess.png"/>">
+                            </center>
+                        </div>
+                        <div class="col-sm-4"></div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-4"></div>
+                        <div class="col-sm-4">
+                            <center>
+                                <h2>
+                                    <strong>
+                                        Verification Successful
+                                    </strong>
+                                </h2>
+                            </center>
+                        </div>
+                        <div class="col-sm-4"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4"></div>
+                        <div class="col-sm-4">
+                            <center>
+                                <h3>
+                                    Do you Like to Menu?
+                                </h3>
+                            </center>
+                        </div>
+                        <div class="col-sm-4"></div>
+                    </div>
+                    <div style="margin-top: 50px" class="row">
+                        <div class="col-sm-4"></div>
+                        <div class="col-sm-4">
+                            <center><a href="/web-selfcare/menu" class="btn btn-warning"><i class="fa fa-shopping-cart"
+                                                                               aria-hidden="true"></i> Check Menu</a>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a class="btn btn-warning" href="/profile"><i
+                                        class="fa fa-user" aria-hidden="true"></i> Check Profile</a></center>
+                        </div>
+                        <div class="col-sm-4"></div>
+                    </div>
+                </div>
             </c:if>
         </div>
     </div>

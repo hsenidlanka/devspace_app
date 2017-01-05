@@ -2,6 +2,7 @@ package hsenid.web.Controllers.user;
 
 import hsenid.web.models.BooleanResponse;
 import hsenid.web.models.ReplyFromServer;
+import hsenid.web.models.ServerResponseMessage;
 import hsenid.web.supportclasses.SendStringBuilds;
 import org.codehaus.jettison.json.JSONException;
 import org.json.simple.JSONObject;
@@ -34,25 +35,38 @@ public class RegisterController {
     final static Logger logger = LoggerFactory.getLogger(RegisterController.class);
 
     // call api to register the user
-    @RequestMapping(value = "/register", method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ResponseBody
     public BooleanResponse register(HttpServletRequest regRequest) throws JSONException {
 
-        String addressL3 = null;
+        String addressL3 = "";
 
         String title = regRequest.getParameter("title");
+//        String title = "Mr";
         String firstName = regRequest.getParameter("fname");
-        String lastName = regRequest.getParameter("lname");
-        String addressL1 = regRequest.getParameter("address1");
-        String addressL2 = regRequest.getParameter("address2");
+//        String firstName = "First";
+                String lastName = regRequest.getParameter("lname");
+//        String lastName = "Last";
+                String addressL1 = regRequest.getParameter("address1");
+//        String addressL1 = "Addr1";
+                String addressL2 = regRequest.getParameter("address2");
+//        String addressL2 = "Addr2";
         addressL3 = regRequest.getParameter("address3");
         String mobile = regRequest.getParameter("mobileNo");
+//        String mobile = "0871234567";
         String email = regRequest.getParameter("email");
+//        String email = "email@mail.com";
         String password = regRequest.getParameter("password");
+//        String password =  "password";
         String username = regRequest.getParameter("uname");
+//        String username = "uname2";
 
-        if (addressL3.length() < 1) {
-            addressL3 = null;
+        try {
+            if (addressL3.length() < 1) {
+                addressL3 = "";
+            }
+        } catch (Exception e) {
+            logger.error("Adddr 3 fail {}",e.getMessage());
         }
         String mobileRegex = "^0[0-9]{9}$";
         String emailRegex = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
@@ -81,9 +95,9 @@ public class RegisterController {
         HttpEntity<JSONObject> httpEntity = new HttpEntity<JSONObject>(jsonObject, headers);
 
         try {
-            ReplyFromServer message = restTemplate.postForObject(registerUrl, httpEntity, ReplyFromServer.class);
+            ServerResponseMessage serverResponseMessage = restTemplate.postForObject(registerUrl, httpEntity, ServerResponseMessage.class);
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            logger.error("User registration failed. Reason -> {}",e.getMessage());
             return new BooleanResponse(false);
         }
 
@@ -114,7 +128,6 @@ public class RegisterController {
         } else {
             uniqueUser = new BooleanResponse(true);
         }
-
         return uniqueUser;
     }
 

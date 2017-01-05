@@ -49,6 +49,7 @@ public class LoginController {
     final static String title = "title";
     final static String username = "username";
     final static String password = "password";
+    final static String resendEmailUrl = "/email/verification-code";
     RestTemplate restTemplate = new RestTemplate();
     User user = new User();
     Verification verification = new Verification();
@@ -148,6 +149,27 @@ public class LoginController {
         return "/error-pages/error500";
     }
 
+    @RequestMapping("/resendVerification")
+    @ResponseBody
+    public BooleanResponse resendVerificationCode(HttpServletRequest request){
+        String uname = request.getParameter("username");
+//        logger.error(uname);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put(username, uname);
+
+        MultiValueMap<String, String> headers = new LinkedMultiValueMap<String, String>();
+        headers.add("Content-Type", "application/json");
+        HttpEntity<JSONObject> jsonObjectHttpEntity = new HttpEntity<JSONObject>(jsonObject, headers);
+        String fullResendUrl = SendStringBuilds.sendString(baseUrl, resendEmailUrl);
+
+        try {
+            ServerResponseMessage responseMessage = restTemplate.postForObject(fullResendUrl, jsonObjectHttpEntity, ServerResponseMessage.class);
+        } catch (RestClientException e) {
+            logger.error("Verification code resend failed, reason -> {}" ,e.getMessage());
+            return new BooleanResponse(false);
+        }
+        return new BooleanResponse(true);
+    }
 
 
 }
