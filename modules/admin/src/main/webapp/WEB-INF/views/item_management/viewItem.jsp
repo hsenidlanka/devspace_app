@@ -77,14 +77,14 @@
                             <div class="col-xs-10" id="checkItmDiv" style="vertical-align: middle">
                                 <div class="col-xs-3">
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" value="1" id="catCheck" onchange="showItemCheck()">
+                                        <input type="checkbox" value="1" id="catCheck" <%--onchange="showItemCheck()"--%>>
                                         <fmt:message key="item.itemview.label.chkbx.cat" bundle="${bundle1}"/>
                                     </label>
                                 </div>
                                 <div class="col-xs-3">
                                     <label class="checkbox-inline">
                                         <input type="checkbox" value="3" id="subCatCheck"
-                                               onchange="showItemCheck()">
+                                              <%-- onchange="showItemCheck()"--%>>
                                         <fmt:message key="item.itemview.label.chkbx.subcat" bundle="${bundle1}"/>
                                     </label>
                                 </div>
@@ -107,7 +107,7 @@
 
                     <div class="form-group">
                         <div class="row">
-                            <div id="filterCatDiv" style="display: none" class="col-xs-4">
+                            <div id="filterCatDiv" <%--style="display: none"--%> class="col-xs-4">
                                 <div class="col-xs-3" style="text-align: right">
                                 </div>
                                 <div class="col-xs-9">
@@ -116,7 +116,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div id="filterSubcatDiv" style="display: none" class="col-xs-4">
+                            <div id="filterSubcatDiv" <%--style="display: none"--%> class="col-xs-4">
                                 <div class="col-xs-3"></div>
                                 <div class="col-xs-9">
                                     <select class="form-control" id="selectSubCatFltr">

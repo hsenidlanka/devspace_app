@@ -203,33 +203,6 @@ $(document).ready(function () {
                                         break;
 
                                     case "notVerified":
-                                        alert(loginUsername)
-                                        /*$.ajax({
-
-                                            type: "POST",
-                                            // The URL for the request
-                                            url: "chechBlocked",
-                                            // The data to send (will be converted to a query string)
-                                            data: {
-                                                username: chkName
-                                            },
-
-                                            // The type of data we expect back
-                                            dataType: "json",
-                                            success: function (data2) {
-
-                                                if (!data2.userAvailable) {
-                                                    $("#loginUsername").val('');
-                                                    alert("Username is blocked");
-                                                } else {
-                                                    return fasle;
-                                                }
-                                            },
-                                            error: function (data) {
-                                                //alert("error worked");
-                                                //console.log("error work");
-                                            }
-                                        });*/
                                         window.location = "/web-selfcare/email-verification?username="+loginUsername;
                                         break;
                                     case "blocked":
@@ -262,40 +235,6 @@ $(document).ready(function () {
             }
             return false;
         }
-
-    });
-
-
-    //Check a username is blocked or not
-
-    $("#loginUsername").blur(function () {
-        var chkName = $("#loginUsername").val();
-        $.ajax({
-
-            type: "POST",
-            // The URL for the request
-            url: "chechBlocked",
-            // The data to send (will be converted to a query string)
-            data: {
-                checkName: chkName
-            },
-
-            // The type of data we expect back
-            dataType: "json",
-            success: function (data2) {
-
-                if (!data2.userAvailable) {
-                    $("#loginUsername").val('');
-                    alert("Username is blocked");
-                } else {
-                    return fasle;
-                }
-            },
-            error: function (data) {
-                alert("error worked");
-                console.log("error work");
-            }
-        });
 
     });
 

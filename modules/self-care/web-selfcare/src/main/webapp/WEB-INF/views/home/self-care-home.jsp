@@ -86,17 +86,20 @@
 
     <div class="col-sm-4" style="padding-top: 80px;padding-left: 260px">
         <span>
-            <a href="http://www.facebook.com/" target="_blank"> <img src="<c:url value="/resources/images/facebook-flat.png"/>"
-                                                     style="padding-right: 10px"></a>
+            <a href="http://www.facebook.com/" target="_blank"> <img
+                    src="<c:url value="/resources/images/facebook-flat.png"/>"
+                    style="padding-right: 10px"></a>
         </span>
 
         <span>
-            <a href="http://www.twitter.com" target="_blank"> <img src="<c:url value="/resources/images/twitter-flat.png"/>"
-                                                   style="padding-right: 10px"></a>
+            <a href="http://www.twitter.com" target="_blank"> <img
+                    src="<c:url value="/resources/images/twitter-flat.png"/>"
+                    style="padding-right: 10px"></a>
         </span>
 
         <span>
-            <a href="https://plus.google.com/" target="_blank"> <img src="<c:url value="/resources/images/google-plus-flat.png"/>" style="padding-right: 10px"></a>
+            <a href="https://plus.google.com/" target="_blank"> <img
+                    src="<c:url value="/resources/images/google-plus-flat.png"/>" style="padding-right: 10px"></a>
         </span>
     </div>
 </div>
@@ -125,7 +128,7 @@
 
             <label class="radio-inline">
                 <a href="https://play.google.com/store/apps" target="_blank"><img style="width: 130px;height: 55px"
-                                                                  src="<c:url value="/resources/images/google-play-store-button.png"/>"></a>
+                                                                                  src="<c:url value="/resources/images/google-play-store-button.png"/>"></a>
             </label>
         </div>
 

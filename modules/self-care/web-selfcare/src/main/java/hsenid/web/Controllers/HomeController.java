@@ -43,12 +43,6 @@ public class HomeController {
         return "redirect:/";
     }
 
-    @RequestMapping("/email-verification")
-    public String emailVerification(){
-        return "includes/email-verification";
-    }
-
-
     @RequestMapping("/about-us")
     public String aboutus() {
         return "/home/about-us";

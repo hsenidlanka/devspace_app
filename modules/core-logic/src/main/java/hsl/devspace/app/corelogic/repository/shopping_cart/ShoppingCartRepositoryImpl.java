@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.sql.DataSource;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -400,20 +401,40 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
     }
 
     @Override
-    public List<Map<String, Object>> selectPaymentAndDeliveryDetails(String orderId) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT d.id AS delivery_id,d.cart_id,d.agent_name,d.recepient_name,d.recepient_address,d.delivery_date," +
-                "d.delivery_time,d.delivery_status,d.description,st.username AS delivery_handler,dm.name,t.id AS transaction_id," +
-                "t.date AS transaction_date,t.time AS transaction_time,t.amount,t.payment_status,t.order_type,c.username AS customer_username,st.username" +
-                " AS transaction_handler,pm.name AS payment_method FROM delivery d " +
-                "INNER JOIN payment_transaction t ON t.delivery_id=d.id " +
-                "INNER JOIN delivery_method dm ON dm.id=d.delivery_method_id" +
-                " INNER JOIN customer c ON c.id=t.customer_id " +
-                "INNER JOIN staff st ON st.id=t.staff_id INNER JOIN payment_method pm ON pm.id=t.payment_method_id " +
-                "WHERE d.cart_id=(SELECT id FROM shopping_cart WHERE order_id=?)", orderId);
+    public List<Map<String, Object>> selectDeliveryDetails(String orderId) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT delivery.id,delivery.cart_id,delivery.agent_name,delivery.recepient_name,delivery.recepient_address,delivery.delivery_date,delivery.delivery_time,delivery.delivery_status,delivery.description,staff.username as staff_name,delivery_method.name AS delivery_method FROM delivery INNER JOIN staff ON staff.id=delivery.staff_id INNER JOIN delivery_method ON delivery_method.id=delivery.delivery_method_id WHERE delivery.cart_id=(SELECT id FROM shopping_cart WHERE order_id=?)", orderId);
         return mp;
     }
 
-  /*  public String checkUniqueOrderId(String orderID){
+    @Override
+    public List<Map<String, Object>> selectPaymentDetails(String orderId) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT payment_transaction.id,payment_transaction.cart_id,payment_transaction.date AS transaction_date,payment_transaction.time AS transaction_time,payment_transaction.amount,payment_transaction.payment_status,payment_transaction.order_type,customer.username,staff.username AS staff_name,payment_method.name,payment_transaction.delivery_id,payment_transaction.guest_id FROM payment_transaction INNER JOIN customer ON customer.id=payment_transaction.customer_id INNER JOIN staff ON staff.id=payment_transaction.staff_id INNER JOIN payment_method ON payment_method.id=payment_transaction.payment_method_id WHERE payment_transaction.cart_id=(SELECT id FROM shopping_cart WHERE order_id=?) ", orderId);
+        return mp;
+    }
+
+    @Override
+    public List<Map<String, Object>> getPurchaseHistoryByDate(String username, LocalDate date, int limit, int page) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT sc.id AS cart_id,sc.order_id,sc.order_date,sc.order_time,sc.net_cost,sc.customer_id," +
+                "i.name,p.size,p.quantity,d.agent_name,d.staff_id,t.date AS transactin_date,dm.name AS delivery_method," +
+                "pm.name AS payment_method,d.recepient_name,d.recepient_address,d.delivery_date,d.delivery_time,d.delivery_status,t.time AS transaction_time,t.payment_status" +
+                " FROM shopping_cart sc INNER JOIN shopping_cart_product sp ON sc.id=sp.shopping_cart_id " +
+                "INNER JOIN product p ON p.id=sp.product_id INNER JOIN delivery d ON d.cart_id=sc.id " +
+                "INNER JOIN payment_transaction t ON t.cart_id=sc.id INNER JOIN item i ON p.type_id=i.id " +
+                "INNER JOIN delivery_method dm ON dm.id=d.delivery_method_id INNER JOIN payment_method pm ON pm.id=t.payment_method_id" +
+                " WHERE sc.customer_id=(SELECT id FROM customer WHERE username=?) AND sc.order_date=? LIMIT ? OFFSET ? ", username, date, limit, page);
+
+        return mp;
+    }
+
+    @Override
+    public int countOrdersForCustomerByDate(String customerUsername, LocalDate date) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT(*) AS total FROM shopping_cart WHERE customer_id=(SELECT id FROM customer WHERE username=?) AND order_date=?", customerUsername, date);
+        int count = Integer.parseInt(mp.get(0).get("total").toString());
+        log.info("{}", count);
+        return count;
+    }
+
+    /*  public String checkUniqueOrderId(String orderID){
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT id FROM shopping_cart WHERE order_id=? ",orderID);
         if(mp.size()!=0){
             log.info("already available..checking");

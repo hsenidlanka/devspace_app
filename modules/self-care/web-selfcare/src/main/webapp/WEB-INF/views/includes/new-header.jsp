@@ -36,10 +36,7 @@
                 <li><a href="/web-selfcare/about-us"><fmt:message key="new.header.about" bundle="${lang}"/></a></li>
 
                 <li>
-                    <a href="/web-selfcare/shopping-cart"><img
-                            src="<c:url value="/resources/images/shopping-cart.png"/>"
-                            style="padding-left: 30px;vertical-align: top;"><span class="badge"><c:out
-                            value="${fn:length(cartItemsMap)}"/></span></a>
+                    <a href="/web-selfcare/shopping-cart"><img src="<c:url value="/resources/images/shopping-cart.png"/>" style="padding-left: 30px;vertical-align: top;"><span class="badge"><c:out value="${fn:length(cartItemsMap)}"/></span></a>
                 </li>
                 <c:if test="${empty username}">
                     <li>
@@ -49,9 +46,7 @@
 
                     <li>
 
-                        <a id="loginBtn" class="form-group-sm" data-toggle="modal" data-target="#modal-login"
-                           data-backdrop="static"><img
-                                src="<c:url value="/resources/images/user2.png"/>" style=""></span> </a>
+                        <a id="loginBtn" class="form-group-sm" data-toggle="modal" data-target="#modal-login" data-backdrop="static"><img src="<c:url value="/resources/images/user2.png"/>" style=""></span> </a>
                     </li>
 
                 </c:if>
@@ -74,9 +69,7 @@
                                         </div>
                                         <div class="col-lg-8">
                                             <p class="text-center"><strong>Welcome Back !</strong></p>
-
                                             <p class="text-center"><strong>${name}</strong></p>
-
                                             <p class="text-center small">${email}</p>
                                         </div>
                                     </div>
@@ -90,10 +83,7 @@
                                             <a href="/web-selfcare/profile" class="btn btn-primary">View Profile</a>
                                         </div>
                                         <div class="col-xs-6">
-                                            <a href="/web-selfcare/logout" class="btn btn-danger">
-                                                <span style="vertical-align: middle"><i class="fa fa-power-off"
-                                                                                        aria-hidden="true"></i> Log Out</span>
-                                            </a>
+                                            <a href="/web-selfcare/logout" class="btn btn-danger"><span style="vertical-align: middle"><i class="fa fa-power-off" aria-hidden="true"></i> Log Out</span></a>
                                         </div>
                                     </div>
                                 </div>
@@ -128,13 +118,10 @@
                     <div class="row">
                         <div class="col-sm-10">
                             <img src="/web-selfcare/resources/images/logo.png" style=" width:50px;height:50px;">
-
                             <h3 style="margin-top: 15px;display: inline-block;">Please Log in</h3>
                         </div>
                         <div class="col-sm-2">
-                            <a type="button" class="btn" data-dismiss="modal"
-                               style="margin-top: 10px; margin-left: 35px; color: #888"><i
-                                    class="fa fa-window-close fa-2x" aria-hidden="true"></i></a>
+                            <a type="button" class="btn" data-dismiss="modal" style="margin-top: 10px; margin-left: 35px; color: #888"><i class="fa fa-window-close fa-2x" aria-hidden="true"></i></a>
                         </div>
                     </div>
                 </div>
@@ -147,28 +134,20 @@
                         </div>
                         <div class="form-group">
                             <label for="loginUsername" class="control-label" style="text-align: center"><h4><strong>Username</strong></h4></label>
-                            <input type="text" style="border:1px solid #cccccc" id="loginUsername"
-                                   class="form-control input-md" name="loginUsername"
-                                   placeholder="Enter username">
+                            <input type="text" style="border:1px solid #cccccc" id="loginUsername" class="form-control input-md" name="loginUsername" placeholder="Enter username">
 
                             <div style="margin-left: 15px; margin-top: 16px" id="usernameError" class="error-labels"></div>
                         </div>
 
                         <div class="form-group">
                             <label for="loginPassword" class="control-label" style="text-align: center"><h4><strong>Password</strong></h4></label>
-                            <input type="password" style="border:1px solid #cccccc" id="loginPassword"
-                                   class="form-control input-md" name="loginPassword"
-                                   placeholder="Enter password">
-
+                            <input type="password" style="border:1px solid #cccccc" id="loginPassword" class="form-control input-md" name="loginPassword" placeholder="Enter password">
                             <div style="margin-left: 15px; margin-top: 16px" id="passwordError2" class="error-labels"></div>
                         </div>
                         <br>
                         <center>
                             <div class="form-group">
-                                <button style="width: 100%" id="loginFormSubmit" name="loginFormSubmit" type="button"
-                                        class="btn btn-success" data-dismiss="modal">
-                                    <i class="fa fa-sign-in" aria-hidden="true"></i> Log in
-                                </button>
+                                <button style="width: 100%" id="loginFormSubmit" name="loginFormSubmit" type="button" class="btn btn-success" data-dismiss="modal"><i class="fa fa-sign-in" aria-hidden="true"></i> Log in</button>
                             </div>
                         </center>
                     </form>
