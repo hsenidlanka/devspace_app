@@ -3,17 +3,7 @@ package hsenid.web.models;
 
 public class UserData extends User {
 
-    String registeredDate;
-
-    public String getAccountStatus() {
-        return accountStatus;
-    }
-
-    public void setAccountStatus(String accountStatus) {
-        this.accountStatus = accountStatus;
-    }
-
-    String accountStatus;
+    private String registeredDate;
 
     public String getRegisteredDate() {
         return registeredDate;

@@ -57,7 +57,8 @@
         <div class='circles'></div>
         <div class='circles'></div>
         <div class='circles'></div>
-        <h2 style="color: #f5f5f5; text-align: center; margin-top: 5px"><fmt:message key="new.header.contact" bundle="${lang}"/></h2>
+        <h2 style="color: #f5f5f5; text-align: center; margin-top: 5px"><fmt:message key="new.header.contact"
+                                                                                     bundle="${lang}"/></h2>
         <span class='arrow entypo-resize-full'></span>
     </div>
 
@@ -109,9 +110,9 @@
 
                 <form:form action="/web-selfcare/contact-us" method="post" modelAttribute="contactus">
                     <c:if test="${not empty invalidForm}">
-                    <div class="row" style="background: #efe6f4; height: 35px">
-                        <center><h6 style="color:darkred;">${invalidForm}</h6></center>
-                    </div>
+                        <div class="row" style="background: #efe6f4; height: 35px">
+                            <center><h6 style="color:darkred;">${invalidForm}</h6></center>
+                        </div>
                     </c:if>
                     <form:select cssClass="form-control" path="inquiryType">
                         <form:option value="1"><fmt:message key="contactus.complaint" bundle="${lang}"/></form:option>
@@ -140,7 +141,8 @@
                                 placeholder="   example@domain.com"></form:input>
                     <form:errors path="contactEmail"/>
 
-                    <form:input cssClass="form-control" id="txt-contactno" type="text" placeholder="   0-XXXXXXXXXX" path="contactNo"/>
+                    <form:input cssClass="form-control" id="txt-contactno" type="text" placeholder="   0-XXXXXXXXXX"
+                                path="contactNo"/>
                     <form:errors path="contactNo"/>
 
                     <form:textarea path="msg" cssClass="form-control" id="txt-inquirymsg" type="text"
@@ -172,7 +174,7 @@
 
             <p class='other' style="color: whitesmoke"><i class="fa fa-phone" aria-hidden="true"></i> <fmt:message
                     key="contactus.number" bundle="${lang}"/></p>
-            
+
         </div>
     </div>
 </div>

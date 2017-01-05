@@ -44,7 +44,7 @@
                                         <c:forEach items="${cartItemsMap}" var="entry" varStatus="iteration">
                                             <tr>
                                                 <td class="item-toppingsTotal"><c:out
-                                                    value="${entry.itemToppingsTotal}"/></td>
+                                                        value="${entry.itemToppingsTotal}"/></td>
                                                 <td class="item-index"><c:out
                                                         value="${iteration.index}"/></td>
                                                 <td class="item-title"
@@ -57,8 +57,9 @@
                                                 </td>
                                                 <td class="item-price">
                                                     <fmt:formatNumber type="currency" currencySymbol=""
-                                                                      maxFractionDigits="2" groupingUsed="false" value="${entry.itemPrice}"/>
-                                                    </td>
+                                                                      maxFractionDigits="2" groupingUsed="false"
+                                                                      value="${entry.itemPrice}"/>
+                                                </td>
                                                 <td class="item-qty"><input class="spin item-qty"
                                                                             type="number"
                                                                             min="1"
@@ -71,7 +72,8 @@
                                                 </td>
                                                 <td class="item-remove">
                                                         <%--<a class="mod"><i class="glyphicon glyphicon-edit"></i> Edit</a>&nbsp;--%>
-                                                    <a class="m-btn mini red del" style="height:auto;"><i class="fa fa-times"></i> Remove</a>
+                                                    <a class="m-btn mini red del" style="height:auto;"><i
+                                                            class="fa fa-times"></i> Remove</a>
                                                 </td>
                                             </tr>
                                         </c:forEach>
@@ -237,9 +239,11 @@
                         </div>
                         <!--/carousel-inner-->
                         <a class="left carousel-control cart-carousel-control" href="#myCarousel"
-                           data-slide="prev"><i class="fa fa-chevron-circle-left carousel-arrows" aria-hidden="true"></i></a>
+                           data-slide="prev"><i class="fa fa-chevron-circle-left carousel-arrows"
+                                                aria-hidden="true"></i></a>
                         <a class="right carousel-control cart-carousel-control" href="#myCarousel"
-                           data-slide="next"><i class="fa fa-chevron-circle-right carousel-arrows" aria-hidden="true"></i></a>
+                           data-slide="next"><i class="fa fa-chevron-circle-right carousel-arrows"
+                                                aria-hidden="true"></i></a>
                     </div>
                     <!--/myCarousel-->
                 </div>
@@ -255,10 +259,11 @@
     <div class="modal-dialog" style="width:780px;">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i>
+                </button>
                 <img class="icons" src="<c:url value="/resources/images/icons/navigate-right-icon.png"/>">
                 <h4 class="modal-title header-panel" id="myModalLabel"><fmt:message key="shopping.proceed"
-                                                                                              bundle="${lang}"/></h4>
+                                                                                    bundle="${lang}"/></h4>
             </div>
             <div class="modal-body">
                 <p><fmt:message key="shopping.login.reg" bundle="${lang}"/>
@@ -267,16 +272,22 @@
 
                 <div style="text-align:center">
                     <div style="padding:5px; display: inline;">
-                        <a class="m-btn blue big" id="btn-cart-login" style="height:80px;"><fmt:message key="shopping.login.system"
-                                                                                     bundle="${lang}"/><i class="fa fa-sign-in fa-lg" aria-hidden="true" style="margin-left: 5px;"></i></a>
+                        <a class="m-btn blue big" id="btn-cart-login" style="height:80px;"><fmt:message
+                                key="shopping.login.system"
+                                bundle="${lang}"/><i class="fa fa-sign-in fa-lg" aria-hidden="true"
+                                                     style="margin-left: 5px;"></i></a>
                     </div>
                     <div style="padding:5px; display: inline;">
-                        <a class="m-btn blue big" id="btn-cart-signup" style="height:80px;"><fmt:message key="shopping.create"
-                                                                                     bundle="${lang}"/><i class="fa fa-user fa-lg" aria-hidden="true" style="margin-left: 5px;"></i></a>
+                        <a class="m-btn blue big" id="btn-cart-signup" style="height:80px;"><fmt:message
+                                key="shopping.create"
+                                bundle="${lang}"/><i class="fa fa-user fa-lg" aria-hidden="true"
+                                                     style="margin-left: 5px;"></i></a>
                     </div>
                     <div style="padding:5px; display: inline;">
                         <a class="m-btn blue big" style="height:80px;" href="/web-selfcare/delivery"><fmt:message
-                                key="shopping.guest" bundle="${lang}"/><i class="fa fa-arrow-circle-o-right fa-lg" style="margin-left: 5px;" aria-hidden="true"></i></a>
+                                key="shopping.guest" bundle="${lang}"/><i class="fa fa-arrow-circle-o-right fa-lg"
+                                                                          style="margin-left: 5px;"
+                                                                          aria-hidden="true"></i></a>
                     </div>
                 </div>
             </div>
@@ -292,7 +303,8 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i>
+                </button>
                 <img class="icons" src="<c:url value="/resources/images/icons/shopping-cart-remove.png"/>">
                 <h4 class="modal-title header-panel"><fmt:message key="shopping.remove" bundle="${lang}"/></h4>
             </div>
@@ -306,6 +318,7 @@
 
                     <div class="caption">
                         <h3 id="header-item-title">&nbsp;</h3>
+
                         <p id="p-item-qty">&nbsp;</p>
                     </div>
                 </div>

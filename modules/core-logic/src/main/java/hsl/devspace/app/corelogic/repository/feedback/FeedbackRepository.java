@@ -13,6 +13,8 @@ public interface FeedbackRepository {
 
     List<Map<String, Object>> view(int limit, int page);
 
+    public int count();
+
     int changeStatus(int id, String status);
 
     List<Map<String, Object>> selectBlockedFeedbacks(int limit, int offset);

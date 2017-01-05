@@ -59,9 +59,10 @@
                 </div>
             </div>
             <div class="panel-body">
-                <img src="<c:url value="/resources/images/icons/bullet_blue.png"/>" style="width: 25px;height: 25px; margin-bottom: 8px;"/>
+                <img src="<c:url value="/resources/images/icons/bullet_blue.png"/>"
+                     style="width: 25px;height: 25px; margin-bottom: 8px;"/>
                 <h4 style="display:inline-block;"><fmt:message key="menu.main.panel.subheader"
-                                 bundle="${lang}"/></h4>
+                                                               bundle="${lang}"/></h4>
 
                 <div class="row" style="margin-top: 15px;">
                     <div class="col-md-9">
@@ -74,7 +75,8 @@
                             <div class="col-md-3">
                                 <ul class="grid cs-style-3">
                                     <li>
-                                        <figure><img src="${category.baseUrl}${category.name}.jpg" style="height: 200px;width: 200px">
+                                        <figure><img src="${category.baseUrl}${category.name}.jpg"
+                                                     style="height: 200px;width: 200px">
                                             <figcaption>
                                                 <h3>${category.name}</h3>
                                                 <a href="menu\<c:out value="${category.name}"/>">Browse</a>
