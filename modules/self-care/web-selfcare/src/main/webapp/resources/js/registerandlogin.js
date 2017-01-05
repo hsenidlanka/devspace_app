@@ -3,13 +3,13 @@ $(document).ready(function () {
 
     //The fade out of blocked user yet to implement. Waiting for verifivation to complete
 
-    $("#signUpBtn").click(function(){
+    $("#signUpBtn").click(function () {
         $("#blockedUser").show().delay(5000).fadeOut();
     });
 
 
     //Registration form submission
-    $("#signUpBtn").click(function(){
+    /*$("#signUpBtn").click(function () {
         $('#formSubmitError').empty();
         $('#titleError').empty();
         $('#fnameError').empty();
@@ -22,7 +22,7 @@ $(document).ready(function () {
         $('#passwordError').empty();
         $('#rePasswordError').empty();
 
-    });
+    });*/
 
     //Number Validation
 
@@ -31,13 +31,13 @@ $(document).ready(function () {
         return regex.test(number);
     }
 
-    $("#mobileNo").blur(function(){
+    $("#mobileNo").blur(function () {
         var registerNumber = $.trim($("#mobileNo").val());
         $('#mobileNoError').empty();
-        if(!isNumber(registerNumber)){
+        if (!isNumber(registerNumber)) {
             $("#mobileNo").val('');
             $('<p align="left" style="color: red; margin-left: -12px; margin-top: -12px; margin-bottom: 12px;">Please provide a valid number</p>').appendTo('#mobileNoError');
-        }else{
+        } else {
             $('#mobileNoError').empty();
         }
 
@@ -50,13 +50,13 @@ $(document).ready(function () {
         return regex.test(email);
     }
 
-    $("#email").blur(function(){
+    $("#email").blur(function () {
         var registerEmail = $.trim($("#email").val());
         $('#emailError').empty();
-        if(!isEmail(registerEmail)){
+        if (!isEmail(registerEmail)) {
             $("#email").val('');
             $('<p align="left" style="color: red; margin-left: -12px; margin-top: -12px; margin-bottom: 12px;">Please provide a email</p>').appendTo('#emailError');
-        }else{
+        } else {
             $('#emailError').empty();
         }
 
@@ -97,11 +97,17 @@ $(document).ready(function () {
                     type: 'post',
                     url: "register",
                     data: $('#adduser_form').serialize(),
+                    beforeSend: function (xhr) {
+                        xhr.withCredentials = true;
+                    },
                     success: function (result) {
-                        if(result.userAvailable){
-                            console.log("success");
-                            $('#registerSuccesful').modal('show');
-                        }else{
+                        if (result.userAvailable) {
+                            //console.log("Registration success");
+                            alert("test reg");
+                            //$('#registerSuccesful').modal('show');
+                            window.location = "/web-selfcare/email-verification?username=" + registerUname;
+
+                        } else {
                             $('<p align="left" style="color: red; margin-left: -12px; margin-top: -12px; margin-bottom: 12px;">Form Submition failed</p>').appendTo('#formSubmitError');
                             return false;
                         }
@@ -111,50 +117,50 @@ $(document).ready(function () {
                         $("#ajaccall").append("<b>Appended text</b>");
                     }
                 });
-            }else{
+            } else {
                 $('<p align="left" style="color: red; margin-left: -12px; margin-top: -12px; margin-bottom: 12px;">Passwords do not match</p>').appendTo('#rePasswordError');
                 return false;
             }
 
-        }else{
-            if($('input[name=title]:checked').length <= 0){
+        } else {
+            if ($('input[name=title]:checked').length <= 0) {
                 $('<p align="left" style="color: red; margin-left: -12px; margin-top: -12px; margin-bottom: 12px;">Please select a title</p>').appendTo('#titleError');
             }
 
-            if(registerFirst.length <= 0){
+            if (registerFirst.length <= 0) {
                 $('<p align="left" style="color: red; margin-left: -12px; margin-top: -12px; margin-bottom: 12px;">Please provide a first name</p>').appendTo('#fnameError');
             }
 
-            if(registerLast.length <= 0){
+            if (registerLast.length <= 0) {
                 $('<p align="left" style="color: red; margin-left: -12px; margin-top: -12px; margin-bottom: 12px;">Please provide a last name</p>').appendTo('#lnameError');
             }
 
-            if(registerAddr1.length <= 0){
+            if (registerAddr1.length <= 0) {
                 $('<p align="left" style="color: red; margin-left: -12px; margin-top: -12px; margin-bottom: 12px;">Please provide a address line 1</p>').appendTo('#address1Error');
             }
 
-            if(registerAddr2.length <= 0){
+            if (registerAddr2.length <= 0) {
                 $('<p align="left" style="color: red; margin-left: -12px; margin-top: -12px; margin-bottom: 12px;">Please provide a address line 2</p>').appendTo('#address2Error');
             }
 
             //(registerPhone.length > 0) && (registerEmail.length > 0) && (registerUname.length > 0) && (registerPass1.length > 0) && (registerPass2.length > 0)) {
-            if(registerPhone.length <= 0){
+            if (registerPhone.length <= 0) {
                 $('<p align="left" style="color: red; margin-left: -12px; margin-top: -12px; margin-bottom: 12px;">Please provide a contact number</p>').appendTo('#mobileNoError');
             }
 
-            if(registerEmail.length <= 0){
+            if (registerEmail.length <= 0) {
                 $('<p align="left" style="color: red; margin-left: -12px; margin-top: -12px; margin-bottom: 12px;">Please provide a email</p>').appendTo('#emailError');
             }
 
-            if(registerUname.length <= 0){
+            if (registerUname.length <= 0) {
                 $('<p align="left" style="color: red; margin-left: -12px; margin-top: -12px; margin-bottom: 12px;">Please provide a valid username</p>').appendTo('#unameError');
             }
 
-            if(registerPass1.length < 6){
+            if (registerPass1.length < 6) {
                 $('<p align="left" style="color: red; margin-left: -12px; margin-top: -12px; margin-bottom: 12px;">Please provide a password with more than 6 characters</p>').appendTo('#passwordError');
             }
 
-            if(registerPass2.length < 6){
+            if (registerPass2.length < 6) {
                 $('<p align="left" style="color: red; margin-left: -12px; margin-top: -12px; margin-bottom: 12px;">Please provide a password with more than 6 characters</p>').appendTo('#rePasswordError');
             }
             return false;
@@ -179,31 +185,31 @@ $(document).ready(function () {
 
 
         if (loginUsername.length > 0 && loginPassword.length > 0) {
-                //alert("Test two pass");
+            //alert("Test two pass");
             $.ajax({
                 type: 'get',
                 url: "checkNotUser",
                 data: {username: loginUsername, password: loginPassword},
                 success: function (result) {
-                    if(result.userStatus.match(/unauthorized/g) !== null){
-                        if(result.userStatus.match(/unauthorized/g).length > 0){
+                    if (result.userStatus.match(/unauthorized/g) !== null) {
+                        if (result.userStatus.match(/unauthorized/g).length > 0) {
                             $("#NotRegisteredUser").fadeIn();
                             $("#NotRegisteredUser").fadeOut(4000);
                             $('<p align="left" style="color: red; margin-left: -12px; margin-top: -12px; margin-bottom: 12px;">Please Enter Valid Username and password</p>').appendTo('#NotRegisteredUser');
                         }
-                    } else{
+                    } else {
                         $.ajax({
                             type: 'post',
                             url: "login",
                             data: {username: loginUsername, password: loginPassword},
                             success: function (result) {
-                                switch(result.userStatus) {
+                                switch (result.userStatus) {
                                     case "verified":
                                         window.location = "/web-selfcare/";
                                         break;
 
                                     case "notVerified":
-                                        window.location = "/web-selfcare/email-verification?username="+loginUsername;
+                                        window.location = "/web-selfcare/email-verification?username=" + loginUsername;
                                         break;
                                     case "blocked":
                                         window.location = "/web-selfcare/blockedUserRedirect";
@@ -216,9 +222,9 @@ $(document).ready(function () {
                         });
                     }
                 },
-            error: function () {
-                $("#ajaxcall").append("<b>Appended text</b>");
-            }
+                error: function () {
+                    $("#ajaxcall").append("<b>Appended text</b>");
+                }
             });
             return false;
 
