@@ -147,6 +147,15 @@ public class Package {
         this.creator = creator;
     }
 
+   /* public Package(int packageId, String packName, double price, String image, Date createdDate, String creator) {
+        this.packageId=packageId;
+        this.packName = packName;
+        this.price = price;
+        this.image = image;
+        this.createdDate = createdDate;
+        this.creator = creator;
+    }*/
+
     public Package(String packName, double price, String image, String creator) {
         this.packName = packName;
         this.price = price;
@@ -181,6 +190,8 @@ public class Package {
                 ", categoryName='" + categoryName + '\'' +
                 ", itemName='" + itemName + '\'' +
                 ", sizePrice=" + sizePrice +
+                ", creator='" + creator + '\'' +
+                ", createdDate=" + createdDate +
                 ", quantity=" + quantity +
                 ", size='" + size + '\'' +
                 '}';
