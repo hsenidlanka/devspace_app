@@ -1,21 +1,21 @@
 $(document).ready(function () {
 
-    showItemCheck();
-    getAllSubcats();
-    loadCategories();
+    //showItemCheck();
+    //getAllSubcats();
+    //loadCategories();
 });
 
 
-function showItemCheck() {
+/*function showItemCheck() {
 
     var categoryChk = document.getElementById("catCheck");
     var subcatChk = document.getElementById("subCatCheck");
     var slctCat = document.getElementById("filterCatDiv");
     var slctSubcat = document.getElementById("filterSubcatDiv");
 
-    /**
+    *//**
      *category & subCat filter elements
-     */
+     *//*
 
       //
       //Category filter & cat-Subcat dropdown population
@@ -26,9 +26,9 @@ function showItemCheck() {
             slctCat.style.display = "block";
             loadCategories();
 
-            if ($("#subCatCheck").is(":checked")) {
+            *//*if ($("#subCatCheck").is(":checked")) {
                 loadSubCats($("#selectCatFltr").val());
-            }
+            }*//*
         }
         else {
             slctCat.style.display = "none";
@@ -38,15 +38,15 @@ function showItemCheck() {
 
                 getAllSubcats();
 
-                $("#catCheck").change(function () {
+                *//*$("#catCheck").change(function () {
                     if ($("#catCheck").is(":checked")) {
 
                         loadSubCats($("#selectCatFltr").val());
                         console.log("SSsss " + $("#selectCatFltr").val());
                     }
-                });
+                });*//*
             }
-            return $("#selectCatFltr").defaultSelected;
+            //return $("#selectCatFltr").defaultSelected;
         }
     });
 
@@ -57,74 +57,26 @@ function showItemCheck() {
         if ($("#subCatCheck").is(":checked")) {
             slctSubcat.style.display = "block";
 
-            if ($("#catCheck").is(":checked")) {
+            *//*if ($("#catCheck").is(":checked")) {
 
                 var catName = $("#selectCatFltr").val();
-                loadSubCats(catName);
+                loadSubCats($("#selectCatFltr").val());
 
-                $("#selectCatFltr").change(function () {
+                *//**//*$("#selectCatFltr").change(function () {
                     var catName = $("#selectCatFltr").val();
-                    loadSubCats(catName);
-                })
-            }
+                    loadSubCats($("#selectCatFltr").val());
+                })*//**//*
+            }*//*
             if (!$("#catCheck").is(":checked")) {
                 getAllSubcats();
             }
         }
         else {
             slctSubcat.style.display = "none";
-            return $("#selectSubCatFltr").defaultSelected;
         }
     });
 
-
-    /*if ($("#subCatCheck").is(":checked")){
-
-     slctSubcat.style.display = "block";
-
-     $("#subCatCheck").click(function() {
-
-     if ($("#catCheck").is(":checked")) {
-
-     var catName = $("#selectCatFltr").val();
-     loadSubCats(catName);
-
-     $("#selectCatFltr").change(function () {
-     var catName = $("#selectCatFltr").val();
-     loadSubCats(catName);
-     })
-     }
-
-     if (!$("#catCheck").is(":checked")) {
-     // else{
-     //$("#selectSubCatFltr").reset();
-     var catName = null;
-     loadSubCats(catName);
-     */
-    /*  $.ajax({
-     type:'GET',
-     url:"https://localhost:8443/admin/itemFilters/subcategoryList",
-     success:function(data){
-     var slctsubcatList2 = $("#selectSubCatFltr"), option = "";
-     slctsubcatList2.empty();
-
-     for (var sb2 = 0; sb2 < data.length; sb2++) {
-     option = option + "<option value='" + data[sb2] + "'>" + data[sb2] + "</option>";
-     }
-     slctsubcatList2.append(option);
-     }, error: function (e) {
-     alert("error in loading sub-category list 2" + e);
-     }
-     });*/
-    /*
-     }
-     });
-     }
-     else{
-     slctSubcat.style.display = "none";
-     return $("#selectSubCatFltr").defaultSelected;
-     }*/
-}
+}*/
 
 function loadCategories() {
     $.ajax({
@@ -142,6 +94,7 @@ function loadCategories() {
             alert("error in loading category list" + e);
         }
     });
+    return true;
 }
 
 
@@ -165,7 +118,6 @@ function getAllSubcats() {
 
 
 function loadSubCats(catName) {
-
     $.ajax({
         type: 'GET',
         url: "https://localhost:8443/admin/itemFilters/subcategoryList",
