@@ -57,7 +57,7 @@ public interface ShoppingCartRepository {
 
     List<Map<String, Object>> selectPaymentDetails(String orderId);
 
-    List<Map<String, Object>> getPurchaseHistoryByDate(String username, LocalDate date, int limit, int page);
+    List<Map<String, Object>> getOrderDetailsByDate(String username, LocalDate date, int limit, int page);
 
     int countOrdersForCustomerByDate(String customerUsername, LocalDate date);
 //    void addPackageToCart(int packageId);
