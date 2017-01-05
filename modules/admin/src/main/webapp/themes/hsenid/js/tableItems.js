@@ -1,11 +1,21 @@
-
+var catVal ;
+var subCatVal;
 
 $(document).ready(function () {
+
+    $("#selectCatFltr").hide();
+    $("#selectSubCatFltr").hide();
+
+    var pgLimit = 10;
+    loadCategories();
+    if(loadCategories()==true){
+        loadSubCats($("#selectCatFltr").val());
+    }
 
     var cat;
     var subcat;
 
-    var pgLimit = 10;
+
     var itmName = $("#txtViewSearchItem").val();
 
     $.ajax({
@@ -364,20 +374,6 @@ $(document).ready(function () {
                     var itmNm= $("#txtViewSearchItem").val();
 
                     loadDatatoTable(itmNm,pgLimit,"0",cat,subcat)
-
-                   /* $.ajax({
-                        url: "https://localhost:8443/admin/itemFilters/loadSearchItem2",
-                        datatype: "JSON",
-                        data: {"srchItmNm": $("#txtViewSearchItem").val(), "pgLimit": pgLimit, "initPage": "0","cat":cat,"subcat":subcat},
-                        success: function (data) {
-                            $("#tblItems").bootstrapTable('load', data);
-                            // console.log(data);
-                        },
-                        error: function (e) {
-                            alert("error, load search item" + e);
-                            console.log("error, load search item-cat" + e)
-                        }
-                    })*/
                 }
             }
             else{
@@ -386,20 +382,6 @@ $(document).ready(function () {
                 var itmNm = $("#txtViewSearchItem").val();
 
                     loadDatatoTable(itmNm,pgLimit,"0",cat,subcat);
-
-               /* $.ajax({
-                    url: "https://localhost:8443/admin/itemFilters/loadSearchItem2",
-                    datatype: "JSON",
-                    data: {"srchItmNm": $("#txtViewSearchItem").val(), "pgLimit": pgLimit, "initPage": "0", "cat":cat, "subcat":subcat},
-                    success: function (data) {
-                        $("#tblItems").bootstrapTable('load', data);
-                        // console.log(data);
-                    },
-                    error: function (e) {
-                        alert("error, load search item" + e);
-                        console.log("error, load search item-subcat" + e)
-                    }
-                })*/
             }
 
             /**
@@ -475,21 +457,29 @@ $(document).ready(function () {
     /*
     * for loading data in table on dropdown change event
     * */
+/*
     $("#catCheck").click(function () {
 
         if($("#catCheck").is(":checked")){
 
             categoryLoading(pgLimit);
+            $("#selectCatFltr").show();
+            subCategoryLoading(pgLimit);
            // $('#pagination').show();
           //  $('#pagination2').hide();
 
             $("#selectCatFltr").change(function(){
                 categoryLoading(pgLimit);
+                console.log("slctCat onchange evnt ");
             })
         }
 
         if(!$("#catCheck").is(":checked")){
-            $.ajax({
+            $("#selectCatFltr").hide();
+            getAllSubcats();
+            subCategoryLoading(pgLimit);
+           // loadDatatoTable($("#txtViewSearchItem").val(),pgLimit,"0","",$("#selectSubCatFltr").val());
+   $.ajax({
                 url: "https://localhost:8443/admin/items/loadSearchItem",
                 datatype: "JSON",
                 data: {"srchItmNm": $("#txtViewSearchItem").val(), "pgLimit": pgLimit, "initPage": "0"},
@@ -502,6 +492,7 @@ $(document).ready(function () {
                     console.log("error, load search item" + e)
                 }
             })
+
         }
     });
 
@@ -512,34 +503,24 @@ $(document).ready(function () {
             // $('#pagination').show();
             //  $('#pagination2').hide();
             subCategoryLoading(pgLimit);
+            $("#selectSubCatFltr").show();
 
             $("#selectSubCatFltr").change(function(){
                 subCategoryLoading(pgLimit);
-                /*if(!$("#catCheck").is(":checked")){
 
-                    cat="";
-                    subcat=$("#selectSubCatFltr").val();
-
-                    loadDatatoTable("",pgLimit,"0",cat,subcat);
-                }
-                else{
-                    cat=$("#selectCatFltr").val();
-                    subcat=$("#selectSubCatFltr").val();
-
-                    loadDatatoTable("",pgLimit,"0",cat,subcat);
-
-                }*/
             })
         }
 
         if(!$("#subCatCheck").is(":checked")){
+            $("#selectSubCatFltr").hide();
+
             if($("#catCheck").is(":checked")){
+                $("#selectCatFltr").show();
 
                 cat=$("#selectCatFltr").val();
                 subcat="";
-subCategoryLoading(pgLimit);
+                subCategoryLoading(pgLimit);
                 //loadDatatoTable("",pgLimit,"0",cat,subcat);
-
             }else{
                 $.ajax({
                     url: "https://localhost:8443/admin/items/loadSearchItem",
@@ -557,6 +538,117 @@ subCategoryLoading(pgLimit);
             }
         }
     });
+*/
+
+//*******///
+    $("#catCheck").click(function(){
+
+        if ($("#catCheck").is(":checked")) {
+            $("#selectCatFltr").show();
+
+            if ($("#subCatCheck").is(":checked")) {
+
+                $("#selectSubCatFltr").show();
+                //      subCatVal = $("#selectSubCatFltr").val();
+
+                loadSubCats($("#selectCatFltr").val());
+                loadDatatoTable("",pgLimit,"0",$("#selectCatFltr").val(),$("#selectSubCatFltr").val());
+                //subCategoryLoading(pgLimit);
+            }else{
+                $("#selectSubCatFltr").hide();
+                //  loadSubCats($("#selectCatFltr").val());
+            }
+        }
+        else {
+            $("#selectCatFltr").hide();
+            loadCategories();
+            getAllSubcats();
+
+            /* if ($("#subCatCheck").is(":checked")) {
+             // $("#selectSubCatFltr").show();
+             getAllSubcats();
+             loadDatatoTable("",pgLimit,"0","",$("#selectSubCatFltr").val());
+             }*/
+
+        }
+        //loadCategories();
+        //loadSubCats($("#selectCatFltr").val());
+        categoryLoading(pgLimit);
+        // subCategoryLoading(pgLimit);
+
+    });
+
+
+    $("#subCatCheck").click(function(){
+        if ($("#subCatCheck").is(":checked")) {
+            $("#selectSubCatFltr").show();
+
+            if ($("#catCheck").is(":checked")) {
+                $("#selectCatFltr").show();
+            }
+            else{
+                $("#selectCatFltr").hide();
+getAllSubcats();
+            }
+        }
+        else{
+            $("#selectSubCatFltr").hide();
+            loadSubCats($("#selectCatFltr").val());
+            $.ajax({
+                url: "https://localhost:8443/admin/items/loadSearchItem",
+                datatype: "JSON",
+                data: {"srchItmNm": $("#txtViewSearchItem").val(), "pgLimit": pgLimit, "initPage": "0"},
+                success: function (data) {
+                    $("#tblItems").bootstrapTable('load', data);
+                    console.log(data);
+                },
+                error: function (e) {
+                    alert("error, load search item" + e);
+                    console.log("error, load search item" + e)
+                }
+            })
+            if (!$("#catCheck").is(":checked")) {
+
+                $.ajax({
+                    url: "https://localhost:8443/admin/items/loadSearchItem",
+                    datatype: "JSON",
+                    data: {"srchItmNm": $("#txtViewSearchItem").val(), "pgLimit": pgLimit, "initPage": "0"},
+                    success: function (data) {
+                        $("#tblItems").bootstrapTable('load', data);
+                        console.log(data);
+                    },
+                    error: function (e) {
+                        alert("error, load search item" + e);
+                        console.log("error, load search item" + e)
+                    }
+                })
+            }
+        }
+        subCategoryLoading(pgLimit);
+    });
+
+
+    ///////
+
+    $('#selectCatFltr').change(function(){
+
+        if($("#selectSubCatFltr").is(":visible")){
+            $("#selectSubCatFltr").val("");
+        }
+        subCategoryLoading(pgLimit);
+        loadSubCats($(this).val());
+
+        categoryLoading(pgLimit);
+        console.log("onchange 123456777 ");
+    });
+
+    $("#selectSubCatFltr").change(function(){
+        subCategoryLoading(pgLimit);
+        console.log("onchange 4578 147");
+    });
+
+  // categoryLoading(pgLimit,$("#selectCatFltr").val(),$("#selectSubCatFltr").val());
+   //subCategoryLoading(pgLimit,$("#selectCatFltr").val(),$("#selectSubCatFltr").val());
 });
 
 function operateFormatter(value, row, index) {
@@ -644,45 +736,48 @@ window.operateEvents = {
 };
 
 
+//function categoryLoading(pgLimit,cat,subcat){
 function categoryLoading(pgLimit){
 
     if(!$("#subCatCheck").is(":checked")){
 
-        cat=$("#selectCatFltr").val();
-        subcat="";
-
-        loadDatatoTable("",pgLimit,"0",cat,subcat)
+     catVal =$("#selectCatFltr").val();
+       subCatVal="";
+        //alert(catVal+" 1 "+subCatVal);
+        loadDatatoTable("",pgLimit,"0",catVal,subCatVal)
 
     }
-    else{
-        cat=$("#selectCatFltr").val();
-        subcat=$("#selectSubCatFltr").val();
-
-        loadDatatoTable("",pgLimit,"0",cat,subcat);
+    if($("#subCatCheck").is(":checked")){
+        catVal=$("#selectCatFltr").val();
+        subCatVal=$("#selectSubCatFltr").val();
+        //alert(catVal+" 2 "+subCatVal);
+        loadDatatoTable("",pgLimit,"0",catVal,subCatVal);
     }
 
 }
 
+//function subCategoryLoading(pgLimit,cat,subcat){
 function subCategoryLoading(pgLimit){
 
-    if(!$("#catCheck").is(":checked")){
+   if(!$("#catCheck").is(":checked")){
 
-        var cat="";
-        var subcat=$("#selectSubCatFltr").val();
-
-        loadDatatoTable("",pgLimit,"0",cat,subcat);
+       catVal="";
+        subCatVal=$("#selectSubCatFltr").val();
+      // alert(catVal+" 3 "+subCatVal);
+        loadDatatoTable("",pgLimit,"0","",$("#selectSubCatFltr").val());
     }
-    else{
-        var cat=$("#selectCatFltr").val();
-        var subcat=$("#selectSubCatFltr").val();
-
-        loadDatatoTable("",pgLimit,"0",cat,subcat);
+    if($("#catCheck").is(":checked")){
+         catVal=$("#selectCatFltr").val();
+        subCatVal=$("#selectSubCatFltr").val();
+        //alert(catVal+" 4 "+subCatVal);
+        loadDatatoTable("",pgLimit,"0",catVal,subCatVal);
 
     }
 }
 
 
 function loadDatatoTable(srchItem,pgLimit,initPg,cat,subCat){
+
     $.ajax({
         url: "https://localhost:8443/admin/itemFilters/loadSearchItem2",
         datatype: "JSON",
