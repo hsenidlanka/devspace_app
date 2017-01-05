@@ -26,4 +26,8 @@ public interface FeedbackRepository {
     List<Map<String, Object>> selectFeedbacksByDateRange(java.sql.Date dateFrom, java.sql.Date dateTo, int limit, int offset);
 
     List<Map<String, Object>> selectFeedbacksByDateRangeAndStatus(java.sql.Date dateFrom, java.sql.Date dateTo, String status, int limit, int offset);
+
+    List<Map<String, Object>> filterFeedbacksByStatus(String status, int limit, int offset);
+
+    List<Map<String, Object>> selectFeedbacksByCustomerTypeAhead(String nameKey, int limit, int offset);
 }
