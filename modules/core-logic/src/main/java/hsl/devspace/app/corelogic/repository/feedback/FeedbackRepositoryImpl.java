@@ -69,31 +69,32 @@ public class FeedbackRepositoryImpl implements FeedbackRepository{
     @Override
     public List<Map<String, Object>> selectActiveFeedbacks(int limit, int offset) {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT f.*,c.username, i.name AS item FROM feedback f INNER JOIN item i ON i.id=f.item_id INNER JOIN customer c ON f.customer_id=c.id WHERE f.status='active' ORDER BY f.id DESC LIMIT ? OFFSET ? ", limit, offset);
-        System.out.println(mp);
         return mp;
     }
 
     @Override
     public List<Map<String, Object>> selectInactiveFeedbacks(int limit, int offset) {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT f.*,c.username, i.name AS item FROM feedback f INNER JOIN item i ON i.id=f.item_id INNER JOIN customer c ON f.customer_id=c.id WHERE f.status='inactive' ORDER BY f.id DESC LIMIT ? OFFSET ? ", limit, offset);
-        System.out.println(mp);
-
         return mp;
     }
 
     @Override
     public List<Map<String, Object>> selectFeedbacksByDateRange(java.sql.Date dateFrom, java.sql.Date dateTo, int limit, int offset) {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT f.*,c.username, i.name AS item FROM feedback f INNER JOIN item i ON i.id=f.item_id INNER JOIN customer c ON f.customer_id=c.id WHERE f.date BETWEEN ? AND ? ORDER BY f.id DESC LIMIT ? OFFSET ? ", dateFrom, dateTo, limit, offset);
-        System.out.println(mp);
-
         return mp;
     }
 
     @Override
     public List<Map<String, Object>> selectFeedbacksByDateRangeAndStatus(java.sql.Date dateFrom, java.sql.Date dateTo, String status, int limit, int offset) {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT f.*,c.username, i.name AS item FROM feedback f INNER JOIN item i ON i.id=f.item_id INNER JOIN customer c ON f.customer_id=c.id WHERE f.date BETWEEN ? AND ? AND f.status=? ORDER BY f.id DESC LIMIT ? OFFSET ? ", dateFrom, dateTo, status, limit, offset);
-        System.out.println(mp);
-
         return mp;
     }
+
+    public List<Map<String, Object>> selectFeedbacksByCustomerTypeAhead(String nameKey, int limit, int offset) {
+        String key = "%" + nameKey + "%";
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT f.*,c.username, i.name AS item FROM feedback f INNER JOIN item i ON i.id=f.item_id INNER JOIN customer c ON f.customer_id=c.id WHERE c.username LIKE ? ORDER BY f.id DESC LIMIT ? OFFSET ? ", key, limit, offset);
+        return mp;
+    }
+
+
 }
