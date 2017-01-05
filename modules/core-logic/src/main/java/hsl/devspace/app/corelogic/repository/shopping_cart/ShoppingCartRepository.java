@@ -3,6 +3,7 @@ package hsl.devspace.app.corelogic.repository.shopping_cart;
 import hsl.devspace.app.corelogic.domain.Delivery;
 import hsl.devspace.app.corelogic.domain.Item;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -55,6 +56,8 @@ public interface ShoppingCartRepository {
     public int countOrderDetails(String username);
 
     List<Map<String, Object>> selectPaymentDetails(String orderId);
+
+    List<Map<String, Object>> getPurchaseHistoryByDate(String username, LocalDate date, int limit, int page);
 //    void addPackageToCart(int packageId);
 //    void modifyPackageInCart();
 //    void removePackageFromCart(int packageId);
