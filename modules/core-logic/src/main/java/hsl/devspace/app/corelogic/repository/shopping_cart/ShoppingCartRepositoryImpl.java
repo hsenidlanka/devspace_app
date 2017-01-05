@@ -414,8 +414,7 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 
     @Override
     public List<Map<String, Object>> getOrderDetailsByDate(String username, LocalDate date, int limit, int page) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM shopping_cart WHERE customer_id=(SELECT id FROM customer WHERE username=?) and order_date=?", username, date, limit, page);
-
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM shopping_cart WHERE customer_id=(SELECT id FROM customer WHERE username=?) and order_date=? LIMIT ? OFFSET ?", username, date, limit, page);
         return mp;
     }
 
