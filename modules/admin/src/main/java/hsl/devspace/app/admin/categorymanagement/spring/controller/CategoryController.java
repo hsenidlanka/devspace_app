@@ -408,11 +408,15 @@ public ModelAndView saveEditCategory(@ModelAttribute("editCategory") Category ed
         //old and new files at local location
         LOG.error("inside catImage update method");
         File localFileOld = new File(localPathtoUpload + oldCatName + ".jpg");
+        LOG.error("localFileOld :{}",localFileOld );
         File localFileNew = new File(localPathtoUpload + newCatName + ".jpg");
+        LOG.error("localFileNew :{}",localFileNew );
 
         //old and new files at server location
         File serverFileOld = new File(serverPath + oldCatName + ".jpg");
+        LOG.error("serverFileOld :{}",serverFileOld );
         File serverFileNew = new File(serverPath + newCatName + ".jpg");
+        LOG.error("serverFileNew :{}",serverFileNew);
 
         //in case new file is not uploaded, only file renaming is done according to the edited category name
 
