@@ -402,13 +402,13 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 
     @Override
     public List<Map<String, Object>> selectDeliveryDetails(String orderId) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT delivery.id,delivery.cart_id,delivery.agent_name,delivery.recepient_name,delivery.recepient_address,delivery.delivery_date,delivery.delivery_time,delivery.delivery_status,delivery.description,staff.username as staff_name,delivery_method.name AS delivery_method FROM delivery INNER JOIN staff ON staff.id=delivery.staff_id INNER JOIN delivery_method ON delivery_method.id=delivery.delivery_method_id WHERE delivery.cart_id=(SELECT id FROM shopping_cart WHERE order_id=?)", orderId);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT delivery.id,delivery.cart_id,delivery.agent_name,delivery.recepient_name,delivery.recepient_address,delivery.delivery_date,delivery.delivery_time,delivery.delivery_status,delivery.description,delivery_method.name AS delivery_method FROM delivery INNER JOIN delivery_method ON delivery_method.id=delivery.delivery_method_id WHERE delivery.cart_id=(SELECT id FROM shopping_cart WHERE order_id=?)", orderId);
         return mp;
     }
 
     @Override
     public List<Map<String, Object>> selectPaymentDetails(String orderId) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT payment_transaction.id,payment_transaction.cart_id,payment_transaction.date AS transaction_date,payment_transaction.time AS transaction_time,payment_transaction.amount,payment_transaction.payment_status,payment_transaction.order_type,customer.username,staff.username AS staff_name,payment_method.name,payment_transaction.delivery_id,payment_transaction.guest_id FROM payment_transaction INNER JOIN customer ON customer.id=payment_transaction.customer_id INNER JOIN staff ON staff.id=payment_transaction.staff_id INNER JOIN payment_method ON payment_method.id=payment_transaction.payment_method_id WHERE payment_transaction.cart_id=(SELECT id FROM shopping_cart WHERE order_id=?) ", orderId);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT payment_transaction.id,payment_transaction.cart_id,payment_transaction.date AS transaction_date,payment_transaction.time AS transaction_time,payment_transaction.amount,payment_transaction.payment_status,payment_transaction.order_type,customer.username,payment_method.name,payment_transaction.delivery_id,payment_transaction.guest_id FROM payment_transaction INNER JOIN customer ON customer.id=payment_transaction.customer_id INNER JOIN payment_method ON payment_method.id=payment_transaction.payment_method_id WHERE payment_transaction.cart_id=(SELECT id FROM shopping_cart WHERE order_id=?) ", orderId);
         return mp;
     }
 
