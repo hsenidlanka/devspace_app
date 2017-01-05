@@ -74,5 +74,28 @@ public class PurchaseHistoryController {
         }
         return jsonArray;
     }
+
+    @RequestMapping(value = "purchase-history/order-count/date", method = RequestMethod.GET)
+    @ResponseBody
+    public int getOrdersCountByDate(HttpSession session, HttpServletRequest request) {
+        String url = baseUrl + purchaseHistoryCountUrl + session.getAttribute("username").toString() + "/" + request.getParameter("date").replaceAll(" ", "");
+        RestTemplate restTemplate = new RestTemplate();
+        ServerResponseMessage responseMessage = restTemplate.getForObject(url, ServerResponseMessage.class);
+        return Integer.parseInt(responseMessage.getData().get(0).get("count").toString());
+    }
+
+    @RequestMapping(value = "purchase-history/orders/date", method = RequestMethod.GET)
+    @ResponseBody
+    public JSONArray getOrdersByDate(HttpSession session, HttpServletRequest request) {
+        String url = baseUrl + purchaseHistoryUrl + session.getAttribute("username").toString() + "/" + request.getParameter("date").toString().replaceAll(" ", "") + "?page=" + request.getParameter("page") + "&records=" + request.getParameter("records");
+        RestTemplate restTemplate = new RestTemplate();
+        ServerResponseMessage responseMessage = restTemplate.getForObject(url, ServerResponseMessage.class);
+        JSONArray jsonArray = new JSONArray();
+        for (int i = 0; i < responseMessage.getData().size(); i++) {
+            JSONObject jsonObject = responseMessage.getData().get(i);
+            jsonArray.add(jsonObject);
+        }
+        return jsonArray;
+    }
 }
 

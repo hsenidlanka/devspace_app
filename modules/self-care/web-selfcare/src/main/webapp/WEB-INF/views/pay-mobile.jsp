@@ -90,9 +90,9 @@
                 <fmt:message key="pay.msg" bundle="${lang}"/>
             </div>
             <div class="modal-footer">
-                <a class="btn btn-default" id="btn-pay-cancel" data-dismiss="modal"><fmt:message key="pay.cancel"
+                <a class="btn btn-default btn-sm" id="btn-pay-cancel" data-dismiss="modal"><fmt:message key="pay.cancel"
                                                                                                  bundle="${lang}"/></a>
-                <a class="btn btn-success" id="btn-pay-popup"><fmt:message key="pay.modal.ok" bundle="${lang}"/></a>
+                <a class="btn btn-success btn-sm" id="btn-pay-popup"><fmt:message key="pay.modal.ok" bundle="${lang}"/></a>
             </div>
         </div>
     </div>
@@ -112,7 +112,7 @@
                 </p>
             </div>
             <div class="modal-footer">
-                <a class="btn btn-default" data-dismiss="modal"><fmt:message key="pay.ok" bundle="${lang}"/></a>
+                <a class="btn btn-default btn-sm" data-dismiss="modal"><fmt:message key="pay.ok" bundle="${lang}"/></a>
             </div>
         </div>
     </div>
@@ -132,7 +132,7 @@
                 </p>
             </div>
             <div class="modal-footer">
-                <a class="btn btn-default" data-dismiss="modal"><fmt:message key="pay.ok" bundle="${lang}"/></a>
+                <a class="btn btn-default btn-sm" data-dismiss="modal"><fmt:message key="pay.ok" bundle="${lang}"/></a>
             </div>
         </div>
     </div>
