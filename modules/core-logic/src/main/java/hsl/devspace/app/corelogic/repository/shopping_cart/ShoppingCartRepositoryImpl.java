@@ -426,12 +426,15 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
         return mp;
     }
 
-    
+    @Override
+    public int countOrdersForCustomerByDate(String customerUsername, LocalDate date) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT(*) AS total FROM shopping_cart WHERE customer_id=(SELECT id FROM customer WHERE username=?) AND order_date=?", customerUsername, date);
+        int count = Integer.parseInt(mp.get(0).get("total").toString());
+        log.info("{}", count);
+        return count;
+    }
 
-
-
-
-  /*  public String checkUniqueOrderId(String orderID){
+    /*  public String checkUniqueOrderId(String orderID){
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT id FROM shopping_cart WHERE order_id=? ",orderID);
         if(mp.size()!=0){
             log.info("already available..checking");
