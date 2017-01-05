@@ -59,13 +59,13 @@ $(document).ready(function () {
             data: {"pkgName": pkgName},
 
             success: function (data) {
-                $.toaster({priority: 'success', title: 'Success', message: 'Deleted the item  ' + pkgName});
+                $.toaster({priority: 'success', title: 'Success', message: 'Deleted the package  ' + pkgName});
                 setTimeout(function () {
                     location.reload();
                 }, 3000);
             },
             error: function (e) {
-                $.toaster({priority: 'danger', title: 'Error', message: 'Cannot delete the item ' + pkgName});
+                $.toaster({priority: 'danger', title: 'Error', message: 'Cannot delete the package ' + pkgName});
                 setTimeout(function () {
                     location.reload();
                 }, 3000);

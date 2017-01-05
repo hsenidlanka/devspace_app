@@ -31,6 +31,7 @@
 </head>
 <body>
 <fmt:setBundle basename="messages_en" var="bundle1"/>
+<fmt:setBundle basename="system" scope="session" var="bundle2"/>
 <jsp:include page="../header.jsp"/>
 
 <div class="brand">
@@ -43,11 +44,15 @@
 <div>
     <div id="add-item-breadcrumb-position">
         <ul class="breadcrumb breadcrumb-menu">
-            <li><a href="https://localhost:8443/admin/users/list"><fmt:message key="item.itemview.breadcrumb.home"
+
+            <fmt:message key="admin.home.url" var="urlHome" bundle="${bundle2}"/>
+            <fmt:message key="admin.itemmanagement.itemadd.url" var="urlVwItm" bundle="${bundle2}"/>
+
+            <li><a href="<c:out value="${urlHome}"/>"><fmt:message key="item.itemview.breadcrumb.home"
                                                                                bundle="${bundle1}"/> </a></li>
-            <li><a href="https://localhost:8443/admin/users/list"><fmt:message
+            <li><a href="<c:out value="${urlHome}"/>"><fmt:message
                     key="item.itemview.breadcrumb.itemmanagement" bundle="${bundle1}"/> </a></li>
-            <li class="active"><a href="#"><fmt:message key="item.itemview.breadcrumb.viewitem"
+            <li class="active"><a href="<c:out value="${urlVwItm}"/>"><fmt:message key="item.itemview.breadcrumb.viewitem"
                                                         bundle="${bundle1}"/> </a></li>
         </ul>
     </div>
@@ -383,13 +388,21 @@
                     </div>
 
                     <div class="modal-footer" align="right">
-                        <button class="btn btn-success" type="submit" value="Yes" id="btnUpdtItm">
+                        <div class="col-xs-3">
+                        </div>
+                        <div class="col-xs-3">
+                            <button class="btn btn-success" type="submit" value="Yes" id="btnUpdtItm">
                             <fmt:message key="item.itemedit.form.button.save" bundle="${bundle1}"/>
                         </button>
-                        <button class="btn btn-success" type="reset" value="cancel" id="btnCnclUpdtItm"
-                                data-dismiss="modal">
-                            <fmt:message key="item.itemedit.form.button.cancel" bundle="${bundle1}"/>
-                        </button>
+                        </div>
+                        <div class="col-xs-3">
+                            <button class="btn btn-success" type="reset" value="cancel" id="btnCnclUpdtItm"
+                                    data-dismiss="modal">
+                                <fmt:message key="item.itemedit.form.button.cancel" bundle="${bundle1}"/>
+                            </button>
+                        </div>
+                        <div class="col-xs-3">
+                        </div>
                     </div>
                 </fieldset>
             </form:form>
@@ -451,14 +464,20 @@
                         <div style="text-align: center; z-index: 50000; width: 75%; margin: auto;" id="toaster"></div>
                     </div>
 
-                    <div class="modal-footer" align="right">
+                    <div class="modal-footer">
+                        <div class="col-xs-3"></div>
+                        <div class="col-xs-3" align="right">
                         <button class="btn btn-success" type="button" value="Yes" id="btnDeltItm">
                             <fmt:message key="item.deletemodal.button.yes" bundle="${bundle1}"/>
                         </button>
+                            </div>
+                        <div class="col-xs-3" align="left">
                         <button class="btn btn-success" type="button" value="cancel" id="btnCnclDeltItm"
                                 data-dismiss="modal">
                             <fmt:message key="item.deletemodal.button.no" bundle="${bundle1}"/>
                         </button>
+                            </div>
+                        <div class="col-xs-3"></div>
                     </div>
                 </fieldset>
             </form:form>

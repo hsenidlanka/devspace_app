@@ -24,6 +24,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.swing.*;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -191,13 +192,21 @@ public class PackageController {
 
     //For submitting the form for add new package
     @RequestMapping(value = "/add_package", method = RequestMethod.POST)
-    public ModelAndView addPackage(@ModelAttribute("newPackage") Package newPackage) {
+    public ModelAndView addPackage(@ModelAttribute("newPackage") Package newPackage,
+                                   HttpServletRequest request) {
 
         LOGGER.error("package objct11 {}", newPackage);
         LOGGER.error("package objct11c1 {}", newPackage.getContent());
         LOGGER.error("package objct11c2 {}", newPackage.getItemName());
 
         try {
+            //set the creator in category object using session attributes
+            HttpSession session = request.getSession();
+            String userId =(String)session.getAttribute("username");
+            LOGGER.error("The user logged in is: {}",userId);
+            newPackage.setCreator(userId);
+            LOGGER.trace("package added vals = {}", newPackage);
+
             MultipartFile imgFile = newPackage.getImageUrl();
             LOGGER.trace("realPathtoUpload package = {}",imgFile);
             LOGGER.trace("package objct-img url {}", newPackage.getImageUrl());
@@ -449,7 +458,15 @@ public class PackageController {
     @RequestMapping(value = "/typeahedPkgNm", method = RequestMethod.GET)
     public @ResponseBody List<String> typeaheadPkgName(){
 
-        return packageRepo.getPackageNameList();
+        List<String> pkgNameList =null;
+        LOGGER.trace("typeahead pkg name {}",packageRepo.getPackageNameList());
+        try{
+            pkgNameList = packageRepo.getPackageNameList();
+        }catch (Exception ex)
+        {
+            LOGGER.error("error in pkgName List {}",ex);
+        }
+        return pkgNameList;
     }
 
     /*
