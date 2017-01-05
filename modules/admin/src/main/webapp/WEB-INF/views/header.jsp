@@ -1,8 +1,6 @@
 <html xmlns:jsp="http://java.sun.com/JSP/Page">
 
-
 <!--including JSTL to the page -->
-
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
@@ -66,7 +64,7 @@
 </div>
 <div class="row">
     <div class="col-xs-8">
-        <a href="https://localhost:8443/admin/users/list"><img id="logo" src="<c:url value="/themes/hsenid/images/logo.png"/>" alt="logo"/></a>
+        <a href="https://localhost:8443/admin/PizzaShefu/"><img id="logo" src="<c:url value="/themes/hsenid/images/logo.png"/>" alt="logo"/></a>
     </div>
 
     <div class="col-xs-4">
