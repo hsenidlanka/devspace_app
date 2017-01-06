@@ -61,6 +61,7 @@ public class SearchMenuController {
 
         String getItemUrl = SendStringBuilds.sendString(baseUrl, searchItemNameUrl, searchItem, "/", category);
         modelAndView.addObject("category", category);
+        modelAndView.addObject("searchKey", searchItem);
         ServerResponseMessage searchItemResponse = restTemplate.getForObject(getItemUrl, ServerResponseMessage.class);
         modelAndView.addObject("it", searchItemResponse.getData());
         modelAndView.addObject("itemImageUrl", itemImageBaseUrl);

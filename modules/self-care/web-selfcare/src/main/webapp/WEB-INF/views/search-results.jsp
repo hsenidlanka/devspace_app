@@ -39,8 +39,8 @@
                     <div style="display: inline-block; float:right;">
                         <div class="form-group row">
                             <div class="col-sm-6" style="padding-right: 0px;">
-                                <input type="text" class="form-control input-md" placeholder="<fmt:message key="searchresults.search.placeholder"
-                                                                                      bundle="${lang}"/>"
+                                <input type="text" class="form-control input-md" placeholder="<c:out
+                                                                value="${searchKey}"/>"
                                        name="txt-search-menu" id="txt-menu-search">
                             </div>
                             <div class="col-sm-4" id="div_source1">
@@ -336,6 +336,13 @@
 
         }
 
+    });
+</script>
+<script>
+    $("#txt-menu-search").keyup(function (event) {
+        if (event.keyCode == 13) {
+            $("#btn-menu-search").click();
+        }
     });
 </script>
 <%--<script>
