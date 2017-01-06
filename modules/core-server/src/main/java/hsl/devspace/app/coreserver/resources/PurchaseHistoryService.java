@@ -29,6 +29,7 @@ public class PurchaseHistoryService {
     ShoppingCartRepositoryImpl shoppingCartRepository = (ShoppingCartRepositoryImpl) context.getBean("shoppingCartRepoImpl");
     PropertyReader propertyReader = new PropertyReader("header.properties");
 
+    // Retrieve orders placed by a given customer
     @GET
     @Path("/{username}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -63,6 +64,7 @@ public class PurchaseHistoryService {
         return response;
     }
 
+    // Retrieve number of orders placed by a customer
     @GET
     @Path("/count/{username}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -84,6 +86,7 @@ public class PurchaseHistoryService {
         return response;
     }
 
+    // Retrieve items of an order
     @GET
     @Path("/items/{orderid}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -131,6 +134,88 @@ public class PurchaseHistoryService {
                 .build();
     }
 
+    // Retrieve delivery details of a order
+    @GET
+    @Path("/delivery/{orderid}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getOrderDeliveryData(@PathParam("orderid") String orderId, @javax.ws.rs.core.Context UriInfo uriInfo) {
+        List<Map<String, Object>> deliveryDataList = shoppingCartRepository.selectDeliveryDetails(orderId);
+        SuccessMessage successMessage = new SuccessMessage();
+        successMessage.setCode(200);
+        successMessage.setStatus("success");
+        if (deliveryDataList.size() > 0) {
+            successMessage.setMessage("delivery data retrieved for the order " + orderId);
+            Map<String, Object> deliveryDataMap = deliveryDataList.get(0);
+            JSONObject deliveryDataJson = new JSONObject();
+            deliveryDataJson.put("deliveryDate", deliveryDataMap.get("delivery_date"));
+            deliveryDataJson.put("deliveryTime", deliveryDataMap.get("delivery_time"));
+
+            String recepientName;
+            if (deliveryDataMap.get("recepient_name") == null || deliveryDataMap.get("recepient_name") == "") {
+                recepientName = "";
+            } else {
+                recepientName = deliveryDataMap.get("recepient_name").toString();
+            }
+
+            String recepientAddress;
+            if (deliveryDataMap.get("recepient_address") == null || deliveryDataMap.get("recepient_address") == "") {
+                recepientAddress = "";
+            } else {
+                recepientAddress = deliveryDataMap.get("recepient_address").toString();
+            }
+
+            String description;
+            if (deliveryDataMap.get("description") == null || deliveryDataMap.get("description") == "") {
+                description = "";
+            } else {
+                description = deliveryDataMap.get("description").toString();
+            }
+
+            deliveryDataJson.put("recipientName", recepientName);
+            deliveryDataJson.put("recipientAddress", recepientAddress);
+            deliveryDataJson.put("description", description);
+            deliveryDataJson.put("deliveryMethod", deliveryDataMap.get("delivery_method"));
+            deliveryDataJson.put("deliveryStatus", deliveryDataMap.get("delivery_status"));
+            successMessage.addData(deliveryDataJson);
+        } else {
+            successMessage.setMessage("no delivery data found for the order " + orderId);
+        }
+        String selfUrl = uriInfo.getAbsolutePath().toString();
+        successMessage.addLink(selfUrl, "self");
+        return Response.status(200).entity(successMessage).header("Access-Control-Allow-Origin", propertyReader.readProperty("Access-Control-Allow-Origin")).build();
+    }
+
+    // Retrieve payment details of a order
+    @GET
+    @Path("/payment/{orderid}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getOrderPaymentData(@PathParam("orderid") String orderId, @javax.ws.rs.core.Context UriInfo uriInfo) {
+        List<Map<String, Object>> paymentDataList = shoppingCartRepository.selectPaymentDetails(orderId);
+        NumberFormat numberFormat = NumberFormat.getInstance();
+        numberFormat.setMaximumFractionDigits(2);
+        numberFormat.setMinimumFractionDigits(2);
+        SuccessMessage successMessage = new SuccessMessage();
+        successMessage.setCode(200);
+        successMessage.setStatus("success");
+        if (paymentDataList.size() > 0) {
+            successMessage.setMessage("payment data retrieved for the order " + orderId);
+            Map<String, Object> paymentDataMap = paymentDataList.get(0);
+            JSONObject paymentDataJson = new JSONObject();
+            paymentDataJson.put("paymentDate", paymentDataMap.get("transaction_date"));
+            paymentDataJson.put("paymentTime", paymentDataMap.get("transaction_time"));
+            paymentDataJson.put("amount", numberFormat.format(Double.parseDouble(paymentDataMap.get("amount").toString())));
+            paymentDataJson.put("paymentType", paymentDataMap.get("order_type"));
+            paymentDataJson.put("paymentMethod", paymentDataMap.get("name"));
+            successMessage.addData(paymentDataJson);
+        } else {
+            successMessage.setMessage("no payment data found for the order " + orderId);
+        }
+        String selfUrl = uriInfo.getAbsolutePath().toString();
+        successMessage.addLink(selfUrl, "self");
+        return Response.status(200).entity(successMessage).header("Access-Control-Allow-Origin", propertyReader.readProperty("Access-Control-Allow-Origin")).build();
+    }
+
+    // Retrieve orders placed by a given customer filtered by order placed date
     @GET
     @Path("/{username}/{date}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -139,9 +224,9 @@ public class PurchaseHistoryService {
         SuccessMessage successMessage = new SuccessMessage();
         successMessage.setCode(200);
         successMessage.setStatus("success");
-        NumberFormat format = NumberFormat.getInstance();
-        format.setMaximumFractionDigits(2);
-        format.setMinimumFractionDigits(2);
+        NumberFormat numberFormat = NumberFormat.getInstance();
+        numberFormat.setMaximumFractionDigits(2);
+        numberFormat.setMinimumFractionDigits(2);
         if (purchaseHistoryDataList.size() > 0) {
             successMessage.setMessage("order details for the customer retrieved");
             for (int i = 0; i < purchaseHistoryDataList.size(); i++) {
@@ -150,7 +235,7 @@ public class PurchaseHistoryService {
                 jsonObject.put("orderId", purchasedDataMap.get("order_id"));
                 jsonObject.put("date", purchasedDataMap.get("order_date"));
                 jsonObject.put("time", purchasedDataMap.get("order_time"));
-                jsonObject.put("netCost", format.format(Double.parseDouble(purchasedDataMap.get("net_cost").toString())));
+                jsonObject.put("netCost", numberFormat.format(Double.parseDouble(purchasedDataMap.get("net_cost").toString())));
                 successMessage.addData(jsonObject);
             }
         } else {
@@ -163,6 +248,7 @@ public class PurchaseHistoryService {
                 .build();
     }
 
+    // Retrieve count of orders of a customer filtered by date
     @GET
     @Path("/count/{username}/{date}")
     @Produces(MediaType.APPLICATION_JSON)
