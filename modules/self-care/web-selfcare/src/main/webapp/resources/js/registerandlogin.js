@@ -86,7 +86,17 @@ $(document).ready(function () {
         $('#unameError').empty();
         $('#passwordError').empty();
         $('#rePasswordError').empty();
-        //alert(registerUname);
+
+        var regUsername = $("#uname").val();
+        var regPassword = $("#password").val();
+        var regTitle = $("#title").val();
+        var regFname = $("#fname").val();
+        var regLname = $("#lname").val();
+        var regAddr1 = $("#address1").val();
+        var regAddr2 = $("#address2").val();
+        var regAddr3 = $("#address3").val();
+        var regEmail = $("#email").val();
+        var regMobile = $("#mobileNo").val();
 
 
         if (($('input[name=title]:checked').length > 0) && (registerFirst.length > 0) && (registerLast.length > 0) && (registerAddr1.length > 0) && (registerAddr2.length > 0) && (registerPhone.length > 0) && (registerEmail.length > 0) && (registerUname.length > 0) && (registerPass1.length > 0) && (registerPass2.length > 0)) {
@@ -96,9 +106,17 @@ $(document).ready(function () {
                 $.ajax({
                     type: 'post',
                     url: "register",
-                    data: $('#adduser_form').serialize(),
-                    beforeSend: function (xhr) {
-                        xhr.withCredentials = true;
+                    data: {
+                        username: regUsername,
+                        password: regPassword,
+                        title : regTitle,
+                        fname : regTitle,
+                        lname : regLname,
+                        address1 : regAddr1,
+                        address2 : regAddr2,
+                        address3 : regAddr3,
+                        email : regEmail,
+                        mobileNo : regMobile,
                     },
                     success: function (result) {
                         if (result.userAvailable) {
