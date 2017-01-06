@@ -238,3 +238,13 @@ table {
     height: 34px;
     width: 250px;
 }
+
+/* Set styles for the labels (dynamically generating) containing the delivery data in delivery data showing modal. */
+.dynamicLbl-del-data{
+    margin-bottom: 8px;
+}
+
+/* Set styles for the labels (dynamically generating) containing the payment data in delivery data showing modal. */
+.dynamicLbl-pay-data{
+    margin-bottom: 8px;
+}

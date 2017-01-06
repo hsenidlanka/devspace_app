@@ -89,8 +89,11 @@ function initPurchaseHistoryTable() {
             '<a class="view-items m-btn mini blue" style="height: auto;" href="javascript:void(0)" title="View items of an order">',
             'Order items',
             '</a>&nbsp;&nbsp;',
-            '<a class="view-del-pay m-btn mini green" style="height: auto;" href="javascript:void(0)" title="View payment/delivery status of the order">',
-            'Delivery & Payment',
+            '<a class="view-del m-btn mini purple" style="height: auto;" href="javascript:void(0)" title="View delivery details of an order">',
+            'Delivery',
+            '</a>&nbsp;&nbsp;',
+            '<a class="view-pay m-btn mini green" style="height: auto;" href="javascript:void(0)" title="View payment details of the order">',
+            'Payment',
             '</a></center>'
         ].join('');
     }
@@ -147,11 +150,70 @@ function initPurchaseHistoryTable() {
                 }
             });
         },
-        'click .view-del-pay': function (e, value, row, index) {
+        'click .view-del': function (e, value, row, index) {
             var js = JSON.stringify(row);
             var obj = JSON.parse(js);
-            alert(obj['orderId']);
-            $("#modal-payment-delivery").modal('show');
+            $("#modal-delivery").modal('show');
+            $.ajax({
+                url: "purchase-history/order-delivery",
+                type: "get",
+                dataType: "json",
+                data: {"orderId": obj['orderId']},
+                success: function (result) {
+                    var headerContent = "<h4>Delivery details of order: " + obj['orderId'] + "</h4><hr>";
+                    var content = "";
+                    $.each(result, function (idx, deliveryDataObj) {
+                        if (deliveryDataObj['deliveryMethod'] == "pickup") {
+                            content += "<div class='dynamicLbl-del-data'><label><strong>Delivery method: </strong>" + deliveryDataObj['deliveryMethod'] + "</label></div>";
+                            content += "<div class='dynamicLbl-del-data'><label><strong>Pickup date: </strong>" + deliveryDataObj['deliveryDate'] + "</label></div>";
+                            content += "<div class='dynamicLbl-del-data'><label><strong>Pickup time: </strong>" + deliveryDataObj['deliveryTime'] + "</label></div>";
+                            content += "<div class='dynamicLbl-del-data'><label><strong>Delivery Status: </strong>" + deliveryDataObj['deliveryStatus'] + "</label></div>";
+                        } else {
+                            content += "<div class='dynamicLbl-del-data'><label><strong>Delivery method: </strong>" + deliveryDataObj['deliveryMethod'] + "</label></div>";
+                            content += "<div class='dynamicLbl-del-data'><label><strong>Delivery date: </strong>" + deliveryDataObj['deliveryDate'] + "</label></div>";
+                            content += "<div class='dynamicLbl-del-data'><label><strong>Delivery time: </strong>" + deliveryDataObj['deliveryTime'] + "</label></div>";
+                            content += "<div class='dynamicLbl-del-data'><label><strong>Recipient name: </strong>" + deliveryDataObj['recipientName'] + "</label></div>";
+                            content += "<div class='dynamicLbl-del-data'><label><strong>Recipient address: </strong>" + deliveryDataObj['recipientAddress'] + "</label></div>";
+                            content += "<div class='dynamicLbl-del-data'><label><strong>Description: </strong>" + deliveryDataObj['description'] + "</label></div>";
+                            content += "<div class='dynamicLbl-del-data'><label><strong>Delivery Status: </strong>" + deliveryDataObj['deliveryStatus'] + "</label></div>";
+                        }
+                    });
+                    $("#delivery-header-div").html(headerContent);
+                    $("#delivery-data-div").html(content);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert("Error loading order delivery data. Message: " + errorThrown);
+                }
+            });
+        },
+        'click .view-pay': function (e, value, row, index) {
+            var js = JSON.stringify(row);
+            var obj = JSON.parse(js);
+            $.ajax({
+                url: "purchase-history/order-payment",
+                type: "get",
+                dataType: "json",
+                data: {"orderId": obj['orderId']},
+                success: function (result) {
+                    var headerContent = "<h4>Payment details of order: " + obj['orderId'] + "</h4><hr>";
+                    var content = "";
+
+                    $.each(result, function (idx, deliveryDataObj) {
+                        content += "<div class='dynamicLbl-pay-data'><label><strong>Payment method: </strong>" + deliveryDataObj['paymentMethod'] + "</label></div>";
+                        content += "<div class='dynamicLbl-pay-data'><label><strong>Amount (Rs.): </strong>" + deliveryDataObj['amount'] + "</label></div>";
+                        content += "<div class='dynamicLbl-pay-data'><label><strong>Payment date: </strong>" + deliveryDataObj['paymentDate'] + "</label></div>";
+                        content += "<div class='dynamicLbl-pay-data'><label><strong>Payment time: </strong>" + deliveryDataObj['paymentTime'] + "</label></div>";
+                        content += "<div class='dynamicLbl-pay-data'><label><strong>Payment type: </strong>" + deliveryDataObj['paymentType'] + "</label></div>";
+                    });
+
+                    $("#payment-header-div").html(headerContent);
+                    $("#payment-data-div").html(content);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert("Error loading order payment data. Message: " + errorThrown);
+                }
+            });
+            $("#modal-payment").modal('show');
         }
     };
 }
@@ -226,6 +288,7 @@ function loadDataByPageSize() {
     });
 
     $.ajax({
+        type: "GET",
         url: "purchase-history/order-count",
         success: function (result) {
             var totalPages = Math.ceil(result / recPerPage);
@@ -273,8 +336,7 @@ function searchOrder() {
                 paginationBar.simplePaginator('changePage', 1);
             }
         });
-    }
-    else {
+    } else {
         $('#pagination').hide();
         $('#pagination2').show();
         $('#comboPages').hide();
@@ -288,6 +350,7 @@ function searchOrder() {
             type: "GET",
             data: {"date": searchDate, "page": 1, "records": recPerPage},
             success: function (result) {
+                console.log("1st");
                 $('#table-purchaseHistory').bootstrapTable('load', result);
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -301,6 +364,7 @@ function searchOrder() {
             url: "purchase-history/order-count/date",
             data: {"date": searchDate},
             success: function (result) {
+                console.log("2nd");
                 var pageCount = Math.ceil(result / recPerPage);
                 if (pageCount == 0) {
                     pageCount = 1;
@@ -323,10 +387,11 @@ function searchOrder() {
                     type: "GET",
                     data: {"date": searchDate, "page": page, "records": recPerPage},
                     success: function (result) {
+                        console.log("3rd");
                         $('#table-purchaseHistory').bootstrapTable('load', result);
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
-                        alert("Error initializing pagination. Message: " + errorThrown);
+                        alert("Error initializing search pagination. Message: " + errorThrown);
                     }
                 });
             }
