@@ -1,4 +1,4 @@
-var catVal ;
+var catVal;
 var subCatVal;
 
 $(document).ready(function () {
@@ -8,7 +8,7 @@ $(document).ready(function () {
 
     var pgLimit = 10;
     loadCategories();
-    if(loadCategories()==true){
+    if (loadCategories() == true) {
         loadSubCats($("#selectCatFltr").val());
     }
 
@@ -54,11 +54,11 @@ $(document).ready(function () {
                     field: 'type',
                     title: 'Type',
                     sortable: true
-                },{
+                }, {
                     field: 'created_date',
                     title: 'Added Date',
                     sortable: true
-                },{
+                }, {
                     field: 'creator',
                     title: 'Creator',
                     sortable: true
@@ -112,25 +112,25 @@ $(document).ready(function () {
      * */
     $("#txtViewSearchItem").keyup(function () {
 
-        if($("#catCheck").is(":checked")){
+        if ($("#catCheck").is(":checked")) {
             cat = $("#selectCatFltr").val();
-        }else{
+        } else {
             cat = null;
         }
 
-        if($("#subCatCheck").is(":checked")){
+        if ($("#subCatCheck").is(":checked")) {
             subcat = $("#selectSubCatFltr").val();
-        }else{
+        } else {
             subcat = null;
         }
-       // alert(cat +" "+ subcat);
+        // alert(cat +" "+ subcat);
         $.ajax({
             type: "GET",
             url: "https://localhost:8443/admin/items/typeahedItmNm",
             dataType: "JSON",
-            data:{"cat":cat, "subcat":subcat},
+            data: {"cat": cat, "subcat": subcat},
             success: function (data) {
-                console.log("typeahead json "+data);
+                console.log("typeahead json " + data);
                 $('#txtViewSearchItem').typeahead({
                     source: data
                 }).focus();
@@ -142,27 +142,26 @@ $(document).ready(function () {
     });
 
 /////////////////////////////////////////////////////////////////////
-/*
-    function getTypeaheadResult(){
-        $.ajax({
-            type: "GET",
-            url: "https://localhost:8443/admin/items/typeahedItmNm",
-            dataType: "JSON",
-            data:{"cat":cat, "subcat":subcat},
-            success: function (data) {
-                //  alert(data);
-                console.log(data);
-                $('#txtViewSearchItem').typeahead({
-                    source: data
-                }).focus();
-            },
-            error: function (er) {
-                console.log("error in typeahead " + er)
-            }
-        })
-    }
-*/
-
+    /*
+     function getTypeaheadResult(){
+     $.ajax({
+     type: "GET",
+     url: "https://localhost:8443/admin/items/typeahedItmNm",
+     dataType: "JSON",
+     data:{"cat":cat, "subcat":subcat},
+     success: function (data) {
+     //  alert(data);
+     console.log(data);
+     $('#txtViewSearchItem').typeahead({
+     source: data
+     }).focus();
+     },
+     error: function (er) {
+     console.log("error in typeahead " + er)
+     }
+     })
+     }
+     */
 
 
     var pag2 = $('#pagination2').simplePaginator({
@@ -188,7 +187,7 @@ $(document).ready(function () {
         // called when a page is changed.
         pageChange: function (page) {
 
-            var initpg = (page-1)*pgLimit;
+            var initpg = (page - 1) * pgLimit;
             $.ajax({
                 url: 'https://localhost:8443/admin/items/loadSearchItem',
                 dataType: "json",
@@ -211,8 +210,8 @@ $(document).ready(function () {
             $('#pagination').hide();
             $('#pagination2').show();
 
-            if(!$("#subCatCheck").is(":checked")){
-                if(!$("#catCheck").is(":checked")){
+            if (!$("#subCatCheck").is(":checked")) {
+                if (!$("#catCheck").is(":checked")) {
 
                     $.ajax({
                         url: "https://localhost:8443/admin/items/loadSearchItem",
@@ -228,82 +227,82 @@ $(document).ready(function () {
                         }
                     })
                 }
-                else{
-                    cat=$("#selectCatFltr").val();
-                    subcat="";
-                    var itmNm= $("#txtViewSearchItem").val();
+                else {
+                    cat = $("#selectCatFltr").val();
+                    subcat = "";
+                    var itmNm = $("#txtViewSearchItem").val();
 
-                    loadDatatoTable(itmNm,pgLimit,"0",cat,subcat);
+                    loadDatatoTable(itmNm, pgLimit, "0", cat, subcat);
 
 
-                   /* $.ajax({
-                        url: "https://localhost:8443/admin/itemFilters/loadSearchItem2",
-                        datatype: "JSON",
-                        data: {"srchItmNm": $("#txtViewSearchItem").val(), "pgLimit": pgLimit, "initPage": "0","cat":cat,"subcat":subcat},
-                        success: function (data) {
-                            $("#tblItems").bootstrapTable('load', data);
-                            // console.log(data);
-                        },
-                        error: function (e) {
-                            alert("error, load search item" + e);
-                            console.log("error, load search item-cat" + e)
-                        }
-                    })*/
+                    /* $.ajax({
+                     url: "https://localhost:8443/admin/itemFilters/loadSearchItem2",
+                     datatype: "JSON",
+                     data: {"srchItmNm": $("#txtViewSearchItem").val(), "pgLimit": pgLimit, "initPage": "0","cat":cat,"subcat":subcat},
+                     success: function (data) {
+                     $("#tblItems").bootstrapTable('load', data);
+                     // console.log(data);
+                     },
+                     error: function (e) {
+                     alert("error, load search item" + e);
+                     console.log("error, load search item-cat" + e)
+                     }
+                     })*/
                 }
             }
-            else{
-                cat="";
-                subcat=$("#selectSubCatFltr").val();
-                var itmNm= $("#txtViewSearchItem").val();
+            else {
+                cat = "";
+                subcat = $("#selectSubCatFltr").val();
+                var itmNm = $("#txtViewSearchItem").val();
 
-                loadDatatoTable(itmNm,pgLimit,"0",cat,subcat);
+                loadDatatoTable(itmNm, pgLimit, "0", cat, subcat);
 
-           /*     $.ajax({
-                    url: "https://localhost:8443/admin/itemFilters/loadSearchItem2",
-                    datatype: "JSON",
-                    data: {"srchItmNm": $("#txtViewSearchItem").val(), "pgLimit": pgLimit, "initPage": "0", "cat":cat, "subcat":subcat},
-                    success: function (data) {
-                        $("#tblItems").bootstrapTable('load', data);
-                        // console.log(data);
-                    },
-                    error: function (e) {
-                        alert("error, load search item" + e);
-                        console.log("error, load search item-subcat" + e)
-                    }
-                })*/
+                /*     $.ajax({
+                 url: "https://localhost:8443/admin/itemFilters/loadSearchItem2",
+                 datatype: "JSON",
+                 data: {"srchItmNm": $("#txtViewSearchItem").val(), "pgLimit": pgLimit, "initPage": "0", "cat":cat, "subcat":subcat},
+                 success: function (data) {
+                 $("#tblItems").bootstrapTable('load', data);
+                 // console.log(data);
+                 },
+                 error: function (e) {
+                 alert("error, load search item" + e);
+                 console.log("error, load search item-subcat" + e)
+                 }
+                 })*/
             }
 
 
             /**
              *Setting the number of pages according to the number of records
              */
-             $.ajax({
-            url: 'https://localhost:8443/admin/items/itemSearchCount',
-             data: {"srchItmNm": $("#txtViewSearchItem").val()},
-            success: function (recCount) {
+            $.ajax({
+                url: 'https://localhost:8443/admin/items/itemSearchCount',
+                data: {"srchItmNm": $("#txtViewSearchItem").val()},
+                success: function (recCount) {
 
-                pag2.simplePaginator('setTotalPages', Math.ceil(recCount / 10));
-            }
-        })
+                    pag2.simplePaginator('setTotalPages', Math.ceil(recCount / 10));
+                }
+            })
         }
         else {
             $('#pagination').show();
             $('#pagination2').hide();
 
-           /* $.ajax({
-                url: 'https://localhost:8443/admin/items/loadSearchItem',
-                dataType: 'JSON',
-                data: {"initPage": "1", "pgLimit": pgLimit},
-                success: function (data) {
+            /* $.ajax({
+             url: 'https://localhost:8443/admin/items/loadSearchItem',
+             dataType: 'JSON',
+             data: {"initPage": "1", "pgLimit": pgLimit},
+             success: function (data) {
 
-                    $('#tblItems').bootstrapTable('load', data);
-                }
-            })*/
+             $('#tblItems').bootstrapTable('load', data);
+             }
+             })*/
 
 
             ////
-            if(!$("#subCatCheck").is(":checked")){
-                if(!$("#catCheck").is(":checked")){
+            if (!$("#subCatCheck").is(":checked")) {
+                if (!$("#catCheck").is(":checked")) {
 
                     $.ajax({
                         url: "https://localhost:8443/admin/items/loadSearchItem",
@@ -319,26 +318,26 @@ $(document).ready(function () {
                         }
                     })
                 }
-                else{
-                    cat=$("#selectCatFltr").val();
-                    subcat="";
-                    var itmNm= $("#txtViewSearchItem").val();
+                else {
+                    cat = $("#selectCatFltr").val();
+                    subcat = "";
+                    var itmNm = $("#txtViewSearchItem").val();
 
-                    loadDatatoTable(itmNm,pgLimit,"0",cat,subcat);
+                    loadDatatoTable(itmNm, pgLimit, "0", cat, subcat);
 
-                   /* $.ajax({
-                        url: "https://localhost:8443/admin/itemFilters/loadSearchItem2",
-                        datatype: "JSON",
-                        data: {"srchItmNm": $("#txtViewSearchItem").val(), "pgLimit": pgLimit, "initPage": "0","cat":cat,"subcat":subcat},
-                        success: function (data) {
-                            $("#tblItems").bootstrapTable('load', data);
-                            // console.log(data);
-                        },
-                        error: function (e) {
-                            alert("error, load search item" + e);
-                            console.log("error, load search item-cat" + e)
-                        }
-                    })*/
+                    /* $.ajax({
+                     url: "https://localhost:8443/admin/itemFilters/loadSearchItem2",
+                     datatype: "JSON",
+                     data: {"srchItmNm": $("#txtViewSearchItem").val(), "pgLimit": pgLimit, "initPage": "0","cat":cat,"subcat":subcat},
+                     success: function (data) {
+                     $("#tblItems").bootstrapTable('load', data);
+                     // console.log(data);
+                     },
+                     error: function (e) {
+                     alert("error, load search item" + e);
+                     console.log("error, load search item-cat" + e)
+                     }
+                     })*/
                 }
             }
         }
@@ -351,8 +350,8 @@ $(document).ready(function () {
             $('#pagination').hide();
             $('#pagination2').show();
 
-            if(!$("#subCatCheck").is(":checked")){
-                if(!$("#catCheck").is(":checked")){
+            if (!$("#subCatCheck").is(":checked")) {
+                if (!$("#catCheck").is(":checked")) {
 
                     $.ajax({
                         url: "https://localhost:8443/admin/items/loadSearchItem",
@@ -368,20 +367,20 @@ $(document).ready(function () {
                         }
                     })
                 }
-                else{
-                    cat=$("#selectCatFltr").val();
-                    subcat="";
-                    var itmNm= $("#txtViewSearchItem").val();
+                else {
+                    cat = $("#selectCatFltr").val();
+                    subcat = "";
+                    var itmNm = $("#txtViewSearchItem").val();
 
-                    loadDatatoTable(itmNm,pgLimit,"0",cat,subcat)
+                    loadDatatoTable(itmNm, pgLimit, "0", cat, subcat)
                 }
             }
-            else{
-                cat="";
-                subcat=$("#selectSubCatFltr").val();
+            else {
+                cat = "";
+                subcat = $("#selectSubCatFltr").val();
                 var itmNm = $("#txtViewSearchItem").val();
 
-                    loadDatatoTable(itmNm,pgLimit,"0",cat,subcat);
+                loadDatatoTable(itmNm, pgLimit, "0", cat, subcat);
             }
 
             /**
@@ -400,19 +399,19 @@ $(document).ready(function () {
             $('#pagination').show();
             $('#pagination2').hide();
 
-           /* $.ajax({
-                url: 'https://localhost:8443/admin/items/loadSearchItem',
-                dataType: 'JSON',
-                data: {"initPage": "1", "pgLimit": pgLimit},
-                success: function (data) {
+            /* $.ajax({
+             url: 'https://localhost:8443/admin/items/loadSearchItem',
+             dataType: 'JSON',
+             data: {"initPage": "1", "pgLimit": pgLimit},
+             success: function (data) {
 
-                    $('#tblItems').bootstrapTable('load', data);
-                }
-            })*/
+             $('#tblItems').bootstrapTable('load', data);
+             }
+             })*/
 
             /////
-            if(!$("#subCatCheck").is(":checked")){
-                if(!$("#catCheck").is(":checked")){
+            if (!$("#subCatCheck").is(":checked")) {
+                if (!$("#catCheck").is(":checked")) {
 
                     $.ajax({
                         url: "https://localhost:8443/admin/items/loadSearchItem",
@@ -428,26 +427,26 @@ $(document).ready(function () {
                         }
                     })
                 }
-                else{
-                    cat=$("#selectCatFltr").val();
-                    subcat="";
+                else {
+                    cat = $("#selectCatFltr").val();
+                    subcat = "";
                     var itmNm = $("#txtViewSearchItem").val();
 
-                    loadDatatoTable(itmNm,pgLimit,"0",cat,subcat);
+                    loadDatatoTable(itmNm, pgLimit, "0", cat, subcat);
 
-                  /*  $.ajax({
-                        url: "https://localhost:8443/admin/itemFilters/loadSearchItem2",
-                        datatype: "JSON",
-                        data: {"srchItmNm": $("#txtViewSearchItem").val(), "pgLimit": pgLimit, "initPage": "0","cat":cat,"subcat":subcat},
-                        success: function (data) {
-                            $("#tblItems").bootstrapTable('load', data);
-                            // console.log(data);
-                        },
-                        error: function (e) {
-                            alert("error, load search item" + e);
-                            console.log("error, load search item-cat" + e)
-                        }
-                    })*/
+                    /*  $.ajax({
+                     url: "https://localhost:8443/admin/itemFilters/loadSearchItem2",
+                     datatype: "JSON",
+                     data: {"srchItmNm": $("#txtViewSearchItem").val(), "pgLimit": pgLimit, "initPage": "0","cat":cat,"subcat":subcat},
+                     success: function (data) {
+                     $("#tblItems").bootstrapTable('load', data);
+                     // console.log(data);
+                     },
+                     error: function (e) {
+                     alert("error, load search item" + e);
+                     console.log("error, load search item-cat" + e)
+                     }
+                     })*/
                 }
             }
         }
@@ -455,93 +454,93 @@ $(document).ready(function () {
 
 
     /*
-    * for loading data in table on dropdown change event
-    * */
-/*
-    $("#catCheck").click(function () {
+     * for loading data in table on dropdown change event
+     * */
+    /*
+     $("#catCheck").click(function () {
 
-        if($("#catCheck").is(":checked")){
+     if($("#catCheck").is(":checked")){
 
-            categoryLoading(pgLimit);
-            $("#selectCatFltr").show();
-            subCategoryLoading(pgLimit);
-           // $('#pagination').show();
-          //  $('#pagination2').hide();
+     categoryLoading(pgLimit);
+     $("#selectCatFltr").show();
+     subCategoryLoading(pgLimit);
+     // $('#pagination').show();
+     //  $('#pagination2').hide();
 
-            $("#selectCatFltr").change(function(){
-                categoryLoading(pgLimit);
-                console.log("slctCat onchange evnt ");
-            })
-        }
+     $("#selectCatFltr").change(function(){
+     categoryLoading(pgLimit);
+     console.log("slctCat onchange evnt ");
+     })
+     }
 
-        if(!$("#catCheck").is(":checked")){
-            $("#selectCatFltr").hide();
-            getAllSubcats();
-            subCategoryLoading(pgLimit);
-           // loadDatatoTable($("#txtViewSearchItem").val(),pgLimit,"0","",$("#selectSubCatFltr").val());
-   $.ajax({
-                url: "https://localhost:8443/admin/items/loadSearchItem",
-                datatype: "JSON",
-                data: {"srchItmNm": $("#txtViewSearchItem").val(), "pgLimit": pgLimit, "initPage": "0"},
-                success: function (data) {
-                    $("#tblItems").bootstrapTable('load', data);
-                    // console.log(data);
-                },
-                error: function (e) {
-                    alert("error, load search item" + e);
-                    console.log("error, load search item" + e)
-                }
-            })
+     if(!$("#catCheck").is(":checked")){
+     $("#selectCatFltr").hide();
+     getAllSubcats();
+     subCategoryLoading(pgLimit);
+     // loadDatatoTable($("#txtViewSearchItem").val(),pgLimit,"0","",$("#selectSubCatFltr").val());
+     $.ajax({
+     url: "https://localhost:8443/admin/items/loadSearchItem",
+     datatype: "JSON",
+     data: {"srchItmNm": $("#txtViewSearchItem").val(), "pgLimit": pgLimit, "initPage": "0"},
+     success: function (data) {
+     $("#tblItems").bootstrapTable('load', data);
+     // console.log(data);
+     },
+     error: function (e) {
+     alert("error, load search item" + e);
+     console.log("error, load search item" + e)
+     }
+     })
 
-        }
-    });
+     }
+     });
 
 
-    $("#subCatCheck").click(function () {
-        if($("#subCatCheck").is(":checked")){
+     $("#subCatCheck").click(function () {
+     if($("#subCatCheck").is(":checked")){
 
-            // $('#pagination').show();
-            //  $('#pagination2').hide();
-            subCategoryLoading(pgLimit);
-            $("#selectSubCatFltr").show();
+     // $('#pagination').show();
+     //  $('#pagination2').hide();
+     subCategoryLoading(pgLimit);
+     $("#selectSubCatFltr").show();
 
-            $("#selectSubCatFltr").change(function(){
-                subCategoryLoading(pgLimit);
+     $("#selectSubCatFltr").change(function(){
+     subCategoryLoading(pgLimit);
 
-            })
-        }
+     })
+     }
 
-        if(!$("#subCatCheck").is(":checked")){
-            $("#selectSubCatFltr").hide();
+     if(!$("#subCatCheck").is(":checked")){
+     $("#selectSubCatFltr").hide();
 
-            if($("#catCheck").is(":checked")){
-                $("#selectCatFltr").show();
+     if($("#catCheck").is(":checked")){
+     $("#selectCatFltr").show();
 
-                cat=$("#selectCatFltr").val();
-                subcat="";
-                subCategoryLoading(pgLimit);
-                //loadDatatoTable("",pgLimit,"0",cat,subcat);
-            }else{
-                $.ajax({
-                    url: "https://localhost:8443/admin/items/loadSearchItem",
-                    datatype: "JSON",
-                    data: {"srchItmNm": $("#txtViewSearchItem").val(), "pgLimit": pgLimit, "initPage": "0"},
-                    success: function (data) {
-                        $("#tblItems").bootstrapTable('load', data);
-                        // console.log(data);
-                    },
-                    error: function (e) {
-                        alert("error, load search item" + e);
-                        console.log("error, load search item" + e)
-                    }
-                })
-            }
-        }
-    });
-*/
+     cat=$("#selectCatFltr").val();
+     subcat="";
+     subCategoryLoading(pgLimit);
+     //loadDatatoTable("",pgLimit,"0",cat,subcat);
+     }else{
+     $.ajax({
+     url: "https://localhost:8443/admin/items/loadSearchItem",
+     datatype: "JSON",
+     data: {"srchItmNm": $("#txtViewSearchItem").val(), "pgLimit": pgLimit, "initPage": "0"},
+     success: function (data) {
+     $("#tblItems").bootstrapTable('load', data);
+     // console.log(data);
+     },
+     error: function (e) {
+     alert("error, load search item" + e);
+     console.log("error, load search item" + e)
+     }
+     })
+     }
+     }
+     });
+     */
 
 //*******///
-    $("#catCheck").click(function(){
+    $("#catCheck").click(function () {
 
         if ($("#catCheck").is(":checked")) {
             $("#selectCatFltr").show();
@@ -552,9 +551,9 @@ $(document).ready(function () {
                 //      subCatVal = $("#selectSubCatFltr").val();
 
                 loadSubCats($("#selectCatFltr").val());
-                loadDatatoTable("",pgLimit,"0",$("#selectCatFltr").val(),$("#selectSubCatFltr").val());
+                loadDatatoTable("", pgLimit, "0", $("#selectCatFltr").val(), $("#selectSubCatFltr").val());
                 //subCategoryLoading(pgLimit);
-            }else{
+            } else {
                 $("#selectSubCatFltr").hide();
                 //  loadSubCats($("#selectCatFltr").val());
             }
@@ -576,14 +575,14 @@ $(document).ready(function () {
             //        console.log("error, load search item" + e)
             //    }
             //});
-             if ($("#subCatCheck").is(":checked")) {
-             // $("#selectSubCatFltr").show();
-             getAllSubcats();
-             loadDatatoTable("",pgLimit,"0","",$("#selectSubCatFltr").val());
-             }else{
-                 loadDatatoTable("",pgLimit,"0","","");
-console.log("Fffeeaa");
-             }
+            if ($("#subCatCheck").is(":checked")) {
+                // $("#selectSubCatFltr").show();
+                getAllSubcats();
+                loadDatatoTable("", pgLimit, "0", "", $("#selectSubCatFltr").val());
+            } else {
+                loadDatatoTable("", pgLimit, "0", "", "");
+                console.log("Fffeeaa");
+            }
 
         }
         //loadCategories();
@@ -594,19 +593,19 @@ console.log("Fffeeaa");
     });
 
 
-    $("#subCatCheck").click(function(){
+    $("#subCatCheck").click(function () {
         if ($("#subCatCheck").is(":checked")) {
             $("#selectSubCatFltr").show();
 
             if ($("#catCheck").is(":checked")) {
                 $("#selectCatFltr").show();
             }
-            else{
+            else {
                 $("#selectCatFltr").hide();
-getAllSubcats();
+                getAllSubcats();
             }
         }
-        else{
+        else {
             $("#selectSubCatFltr").hide();
             loadCategories();
             loadSubCats($("#selectCatFltr").val());
@@ -639,8 +638,8 @@ getAllSubcats();
                         console.log("error, load search item" + e)
                     }
                 })
-            }else{
-                loadDatatoTable("",pgLimit,"0",$("#selectCatFltr").val(),"");
+            } else {
+                loadDatatoTable("", pgLimit, "0", $("#selectCatFltr").val(), "");
             }
         }
         subCategoryLoading(pgLimit);
@@ -649,9 +648,9 @@ getAllSubcats();
 
     ///////
 
-    $('#selectCatFltr').change(function(){
+    $('#selectCatFltr').change(function () {
 
-        if($("#selectSubCatFltr").is(":visible")){
+        if ($("#selectSubCatFltr").is(":visible")) {
             $("#selectSubCatFltr").val("");
         }
         subCategoryLoading(pgLimit);
@@ -661,13 +660,13 @@ getAllSubcats();
         console.log("onchange 123456777 ");
     });
 
-    $("#selectSubCatFltr").change(function(){
+    $("#selectSubCatFltr").change(function () {
         subCategoryLoading(pgLimit);
         console.log("onchange 4578 147");
     });
 
-  // categoryLoading(pgLimit,$("#selectCatFltr").val(),$("#selectSubCatFltr").val());
-   //subCategoryLoading(pgLimit,$("#selectCatFltr").val(),$("#selectSubCatFltr").val());
+    // categoryLoading(pgLimit,$("#selectCatFltr").val(),$("#selectSubCatFltr").val());
+    //subCategoryLoading(pgLimit,$("#selectCatFltr").val(),$("#selectSubCatFltr").val());
 });
 
 function operateFormatter(value, row, index) {
@@ -756,60 +755,45 @@ window.operateEvents = {
 
 
 //function categoryLoading(pgLimit,cat,subcat){
-function categoryLoading(pgLimit){
+function categoryLoading(pgLimit) {
 
-    if(!$("#subCatCheck").is(":checked")){
+    if (!$("#subCatCheck").is(":checked")) {
 
-     catVal =$("#selectCatFltr").val();
-       subCatVal="";
+        catVal = $("#selectCatFltr").val();
+        subCatVal = "";
         //alert(catVal+" 1 "+subCatVal);
-        loadDatatoTable("",pgLimit,"0",catVal,subCatVal)
+        loadDatatoTable("", pgLimit, "0", catVal, subCatVal)
 
     }
-    if($("#subCatCheck").is(":checked")){
-        catVal=$("#selectCatFltr").val();
-        subCatVal=$("#selectSubCatFltr").val();
+    if ($("#subCatCheck").is(":checked")) {
+        catVal = $("#selectCatFltr").val();
+        subCatVal = $("#selectSubCatFltr").val();
         //alert(catVal+" 2 "+subCatVal);
-        loadDatatoTable("",pgLimit,"0",catVal,subCatVal);
+        loadDatatoTable("", pgLimit, "0", catVal, subCatVal);
     }
 
 }
 
 //function subCategoryLoading(pgLimit,cat,subcat){
-function subCategoryLoading(pgLimit){
+function subCategoryLoading(pgLimit) {
 
-   if(!$("#catCheck").is(":checked")){
+    if (!$("#catCheck").is(":checked")) {
 
-       catVal="";
-        subCatVal=$("#selectSubCatFltr").val();
-      // alert(catVal+" 3 "+subCatVal);
-        loadDatatoTable("",pgLimit,"0","",$("#selectSubCatFltr").val());
+        catVal = "";
+        subCatVal = $("#selectSubCatFltr").val();
+        // alert(catVal+" 3 "+subCatVal);
+        loadDatatoTable("", pgLimit, "0", "", $("#selectSubCatFltr").val());
     }
-    if($("#catCheck").is(":checked")){
-         catVal=$("#selectCatFltr").val();
-        subCatVal=$("#selectSubCatFltr").val();
+    if ($("#catCheck").is(":checked")) {
+        catVal = $("#selectCatFltr").val();
+        subCatVal = $("#selectSubCatFltr").val();
         //alert(catVal+" 4 "+subCatVal);
-        loadDatatoTable("",pgLimit,"0",catVal,subCatVal);
+        loadDatatoTable("", pgLimit, "0", catVal, subCatVal);
 
     }
 }
 
 
-function loadDatatoTable(srchItem,pgLimit,initPg,cat,subCat){
 
-    $.ajax({
-        url: "https://localhost:8443/admin/itemFilters/loadSearchItem2",
-        datatype: "JSON",
-        data: {"srchItmNm":srchItem, "pgLimit": pgLimit, "initPage": initPg,"cat":cat,"subcat":subCat},
-        success: function (data) {
-            $("#tblItems").bootstrapTable('load', data);
-            console.log("load data by common function "+data);
-        },
-        error: function (e) {
-            alert("error, load search item by common function " + e);
-            console.log("error, load data by common function" + e)
-        }
-    });
-}
 
 

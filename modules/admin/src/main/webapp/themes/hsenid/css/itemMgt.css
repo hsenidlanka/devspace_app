@@ -203,3 +203,18 @@ legend.scheduler-border {
     padding: 5px 5px 5px 5px !important;
     width: 100%;
 }
+.itemPill{
+    color: #0d630d;
+    background-color: #dff0d8;
+    text-decoration: underline;
+    border-radius: 7%;
+    font-size: medium;
+}
+.itmViewDiv{
+    width:12% ;
+}
+.itmFilter{
+    width: 12%;
+    text-align: right;
+    vertical-align: middle;
+}
