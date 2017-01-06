@@ -135,11 +135,17 @@
                 </div>
                 <div style="text-align: center; width: 75%; margin: auto;" id="toaster"></div>
             </div>
-            <div class="modal-footer" align="right">
-                <button class="btn btn-success" type="button" value="Yes" id="btnDeltPkg"><fmt:message key="package.deletemodal.button.yes" bundle="${bundle1}"/>
-                </button>
-                <button class="btn btn-success" type="button" value="cancel" id="btnCnclDeltPkg" data-dismiss="modal"><fmt:message key="package.deletemodal.button.no" bundle="${bundle1}"/>
-                </button>
+            <div class="modal-footer">
+                <div class="col-xs-3"></div>
+                <div class="col-xs-3" align="right">
+                    <button class="btn btn-success" type="button" value="Yes" id="btnDeltPkg"><fmt:message key="package.deletemodal.button.yes" bundle="${bundle1}"/>
+                    </button>
+                </div>
+                <div class="col-xs-3" align="left">
+                    <button class="btn btn-success" type="button" value="cancel" id="btnCnclDeltPkg" data-dismiss="modal"><fmt:message key="package.deletemodal.button.no" bundle="${bundle1}"/>
+                    </button>
+                </div>
+                <div class="col-xs-3"></div>
             </div>
         </div>
     </div>

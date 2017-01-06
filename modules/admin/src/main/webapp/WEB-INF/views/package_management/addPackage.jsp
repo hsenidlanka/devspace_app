@@ -125,10 +125,10 @@
                                     <div class="col-xs-4">
                                         <strong><fmt:message key="package.packageadd.form.packagedetails.itemname" bundle="${bundle1}"/></strong>
                                     </div>
-                                <div class="col-xs-3">
+                                <div class="col-xs-4">
                                         <strong><fmt:message key="package.packageadd.form.packagedetails.itemsize" bundle="${bundle1}"/></strong>
                                     </div>
-                                    <div class="col-xs-3">
+                                    <div class="col-xs-2">
                                         <strong><fmt:message key="package.packageadd.form.packagedetails.qty" bundle="${bundle1}"/></strong>
                                     </div>
                                 </div>
@@ -146,12 +146,12 @@
                                             <form:option value="-" label="---"/>
                                         </form:select>
                                     </div>
-                                    <div class="col-xs-3">
+                                    <div class="col-xs-4">
                                         <form:select type="text" class="form-control" path="size" id="szpr">
                                             <form:option value="-" label="---"/>
                                         </form:select>
                                     </div>
-                                    <div class="col-xs-3">
+                                    <div class="col-xs-2">
                                         <form:input class="form-control qty-spinner" type="number" min="0" id="contQty" path="quantity"/>
                                     </div>
                                 </div>

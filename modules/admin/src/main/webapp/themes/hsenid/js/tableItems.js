@@ -563,12 +563,27 @@ $(document).ready(function () {
             $("#selectCatFltr").hide();
             loadCategories();
             getAllSubcats();
-
-            /* if ($("#subCatCheck").is(":checked")) {
+            //$.ajax({
+            //    url: "https://localhost:8443/admin/items/loadSearchItem",
+            //    datatype: "JSON",
+            //    data: {"srchItmNm": $("#txtViewSearchItem").val(), "pgLimit": pgLimit, "initPage": "0"},
+            //    success: function (data) {
+            //        $("#tblItems").bootstrapTable('load', data);
+            //        console.log(data);
+            //    },
+            //    error: function (e) {
+            //        alert("error, load search item" + e);
+            //        console.log("error, load search item" + e)
+            //    }
+            //});
+             if ($("#subCatCheck").is(":checked")) {
              // $("#selectSubCatFltr").show();
              getAllSubcats();
              loadDatatoTable("",pgLimit,"0","",$("#selectSubCatFltr").val());
-             }*/
+             }else{
+                 loadDatatoTable("",pgLimit,"0","","");
+console.log("Fffeeaa");
+             }
 
         }
         //loadCategories();
@@ -593,20 +608,22 @@ getAllSubcats();
         }
         else{
             $("#selectSubCatFltr").hide();
+            loadCategories();
             loadSubCats($("#selectCatFltr").val());
-            $.ajax({
-                url: "https://localhost:8443/admin/items/loadSearchItem",
-                datatype: "JSON",
-                data: {"srchItmNm": $("#txtViewSearchItem").val(), "pgLimit": pgLimit, "initPage": "0"},
-                success: function (data) {
-                    $("#tblItems").bootstrapTable('load', data);
-                    console.log(data);
-                },
-                error: function (e) {
-                    alert("error, load search item" + e);
-                    console.log("error, load search item" + e)
-                }
-            })
+
+            //$.ajax({
+            //    url: "https://localhost:8443/admin/items/loadSearchItem",
+            //    datatype: "JSON",
+            //    data: {"srchItmNm": $("#txtViewSearchItem").val(), "pgLimit": pgLimit, "initPage": "0"},
+            //    success: function (data) {
+            //        $("#tblItems").bootstrapTable('load', data);
+            //        console.log(data);
+            //    },
+            //    error: function (e) {
+            //        alert("error, load search item" + e);
+            //        console.log("error, load search item" + e)
+            //    }
+            //});
             if (!$("#catCheck").is(":checked")) {
 
                 $.ajax({
@@ -622,6 +639,8 @@ getAllSubcats();
                         console.log("error, load search item" + e)
                     }
                 })
+            }else{
+                loadDatatoTable("",pgLimit,"0",$("#selectCatFltr").val(),"");
             }
         }
         subCategoryLoading(pgLimit);

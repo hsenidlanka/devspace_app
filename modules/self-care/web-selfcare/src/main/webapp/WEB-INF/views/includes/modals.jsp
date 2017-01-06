@@ -63,9 +63,79 @@
                 </form>
             </div>
             <div class="modal-footer" style="margin-top:-30px;">
-                <a class="btn btn-default" data-dismiss="modal">Cancel</a>
-                <button class="btn btn-success btn-popup-add-to-cart-pizza">Add to Cart</button>
+                <a class="btn btn-default btn-sm" data-dismiss="modal">Cancel</a>
+                <button class="btn btn-success btn-popup-add-to-cart-pizza btn-sm">Add to Cart</button>
             </div>
         </div>
     </div>
 </div>
+<%-- End Add to cart modal --%>
+
+<%-- Modal shows details of the items of an order --%>
+<div id="order-items-popup" class="modal fade">
+    <div class="modal-dialog" style="width: 70%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img class="icons" src="<c:url value="/resources/images/icons/item_list.ico"/>">
+                <h4 class="modal-title header-panel"><fmt:message key="purchase.history.order.items.header"
+                                                                  bundle="${lang}"/></h4>
+            </div>
+            <div class="modal-body">
+                <div id="table-orderItems"></div>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default btn-sm" data-dismiss="modal"><fmt:message key="purchase.history.model.close"
+                                                                             bundle="${lang}"/></a>
+            </div>
+        </div>
+    </div>
+</div>
+<%-- End Item details modal --%>
+
+<!-- Start Payment and Delivery data modal -->
+<div class="modal fade" id="modal-payment-delivery">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <img class="header-icons" src="../images/icons/signup-header-icon.png"/>
+                <h3 class="modal-title header-modals">&nbsp;Payment & Delivery Details</h3>
+            </div>
+            <div class="modal-body">
+                <form id="customer-signup-form" method="post" action="">
+                    <div class="panel-group" id="accordion">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Payment Details</a>
+                                </h4>
+                            </div>
+                            <div id="collapse1" class="panel-collapse collapse in">
+                                <div class="panel-body">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Delivery Details</a>
+                                </h4>
+                            </div>
+                            <div id="collapse2" class="panel-collapse collapse">
+                                <div class="panel-body">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default btn-sm" data-dismiss="modal">Close</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Payment and Delivery data modal -->

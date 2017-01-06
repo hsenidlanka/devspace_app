@@ -27,12 +27,14 @@
 </head>
 <body>
 
-<fmt:bundle basename="messages_en">
+<fmt:setBundle basename="messages_en" var="bundle1" />
+<fmt:setBundle basename="system" scope="session" var="bundle2"/>
+
 <jsp:include page="../header.jsp"/>
 
 <div class="brand">
   <div style="position: relative; left: -50%;">
-   <fmt:message key="item.itemadd.heading"/>
+   <fmt:message key="item.itemadd.heading" bundle="${bundle1}"/>
   </div>
 </div>
 <br>
@@ -40,9 +42,14 @@
 <div>
   <div id="add-item-breadcrumb-position">
     <ul class="breadcrumb breadcrumb-menu">
-      <li><a href="https://localhost:8443/admin/users/list"><fmt:message key="item.itemadd.breadcrumb.home"/></a></li>
-      <li><a href="https://localhost:8443/admin/users/list"><fmt:message key="item.itemadd.breadcrumb.itemmanagement"/></a></li>
-      <li class="active"><a href="#"><fmt:message key="item.itemadd.breadcrumb.additem"/></a></li>
+
+      <fmt:message key="admin.home.url" var="urlHome" bundle="${bundle2}"/>
+      <fmt:message key="admin.itemmanagement.itemadd.url" var="urlItm" bundle="${bundle2}"/>
+      <fmt:message key="admin.categorymanage.categoryadd.url" var="urlCat" bundle="${bundle2}"/>
+
+      <li><a href="<c:out value="${urlHome}"/>"><fmt:message key="item.itemadd.breadcrumb.home" bundle="${bundle1}"/></a></li>
+      <li><a href="<c:out value="${urlItm}"/>"><fmt:message key="item.itemadd.breadcrumb.itemmanagement" bundle="${bundle1}"/></a></li>
+      <li class="active"><a href="<c:out value="${urlItm}"/>"><fmt:message key="item.itemadd.breadcrumb.additem" bundle="${bundle1}"/></a></li>
     </ul>
   </div>
 </div>
@@ -50,18 +57,18 @@
 <div class="form-box" id="add-item-form-box">
   <div class="panel panel-default">
     <div class="panel-heading common-form-headings">
-      <h3 class="default-panel-headings"><fmt:message key="item.itemadd.panel.heading"/></h3>
+      <h3 class="default-panel-headings"><fmt:message key="item.itemadd.panel.heading" bundle="${bundle1}"/></h3>
     </div>
     <div class="panel-body">
 
       <form:form class="form-horizontal" role="form" id="frmAddItem" action="/admin/items/add_item" method="post" enctype="multipart/form-data">
         <fieldset class="scheduler-border">
-          <legend class="scheduler-border"><fmt:message key="item.itemadd.form.legend"/></legend>
+          <legend class="scheduler-border"><fmt:message key="item.itemadd.form.legend" bundle="${bundle1}"/></legend>
 
 
           <div class="form-group">
             <div class="row">
-              <label class="col-xs-3 control-label"><fmt:message key="item.itemadd.form.category"/></label>
+              <label class="col-xs-3 control-label"><fmt:message key="item.itemadd.form.category" bundle="${bundle1}"/></label>
 
               <div class="col-xs-5">
 
@@ -75,14 +82,15 @@
               </div>
 
               <div class="col-xs-4">
-                <button type="button" class="btn btn-success" id="btnAddCat"><span class="glyphicon glyphicon-plus"></span><fmt:message key="item.itemadd.form.category.addnew"/> </button>
+                <button type="button" class="btn btn-success" id="btnAddCat" onclick="<c:out value="${urlCat}"/>"><span class="glyphicon glyphicon-plus"></span>
+                  <fmt:message key="item.itemadd.form.category.addnew" bundle="${bundle1}"/> </button>
               </div>
             </div>
           </div>
 
           <div class="form-group">
             <div class="row">
-              <label class="col-xs-3 control-label"><fmt:message key="item.itemadd.form.subcategory"/> <div id="output"></div>
+              <label class="col-xs-3 control-label"><fmt:message key="item.itemadd.form.subcategory" bundle="${bundle1}"/> <div id="output"></div>
               </label>
 
               <div class="col-xs-5">
@@ -99,7 +107,7 @@
 
           <div class="form-group">
             <div class="row">
-              <label for="txtItemName" class="col-xs-3 control-label"><fmt:message key="item.itemadd.form.itemname"/></label>
+              <label for="txtItemName" class="col-xs-3 control-label"><fmt:message key="item.itemadd.form.itemname" bundle="${bundle1}"/></label>
 
               <div class="col-xs-5">
                 <form:input class="form-control" id="txtItemName" type="text" path="itemName"/>
@@ -112,16 +120,16 @@
 
           <div class="form-group">
             <div class="row">
-              <label class="col-xs-3 control-label"><fmt:message key="item.itemadd.form.itemprice"/></label>
+              <label class="col-xs-3 control-label"><fmt:message key="item.itemadd.form.itemprice" bundle="${bundle1}"/></label>
 
               <div class="col-xs-5">
 
                 <div class="row item-tbl-row item-tbl-hdr" style="text-align: center;">
                   <div class="col-xs-5">
-                    <strong><fmt:message key="item.itemadd.form.item.check.size"/></strong>
+                    <strong><fmt:message key="item.itemadd.form.item.check.size" bundle="${bundle1}"/></strong>
                   </div>
                   <div class="col-xs-7">
-                    <strong><fmt:message key="item.itemadd.form.item.text.price"/></strong>
+                    <strong><fmt:message key="item.itemadd.form.item.text.price" bundle="${bundle1}"/></strong>
                   </div>
                 </div>
 
@@ -182,7 +190,7 @@
 
           <div class="form-group">
             <div class="row">
-              <label class="col-xs-3 control-label"><fmt:message key="item.itemadd.form.itemtype"/></label>
+              <label class="col-xs-3 control-label"><fmt:message key="item.itemadd.form.itemtype" bundle="${bundle1}"/></label>
 
               <div class="col-xs-7">
                 <label class="radio-inline">
@@ -209,7 +217,7 @@
           <div class="form-group">
             <div class="row">
               <label for="btnUpldImage" class="col-xs-3 control-label">
-                <fmt:message key="item.itemadd.form.itemimages"/>
+                <fmt:message key="item.itemadd.form.itemimages" bundle="${bundle1}"/>
               </label>
 
               <div class="col-xs-5">
@@ -240,12 +248,15 @@
           <div class="row" align="right">
             <div class="col-xs-3">
             </div>
+            <div class="col-xs-3" align="left">
+              <form:button type="button" class="btn btn-success" id="btnAddClear" onclick="this.form.reset();">
+                <fmt:message key="item.itemadd.form.button.reset" bundle="${bundle1}"/>
+              </form:button>
+            </div>
             <div class="col-xs-3" align="center">
               <form:button type="submit" class="btn btn-success btn-group-xs" id="btnAddItem"><span
-                      class="glyphicon glyphicon-plus"></span><fmt:message key="item.itemadd.form.button.submit"/></form:button>
-            </div>
-            <div class="col-xs-3" align="left">
-              <form:button type="button" class="btn btn-success" id="btnAddClear" onclick="this.form.reset();"><fmt:message key="item.itemadd.form.button.reset"/> </form:button>
+                      class="glyphicon glyphicon-plus"></span>
+                <fmt:message key="item.itemadd.form.button.submit" bundle="${bundle1}"/></form:button>
             </div>
             <div class="col-xs-3">
             </div>
@@ -255,6 +266,6 @@
     </div>
   </div>
 </div>
-  </fmt:bundle>
+
 </body>
 </html>

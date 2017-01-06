@@ -19,6 +19,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.swing.*;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -89,10 +90,16 @@ public class ItemController {
 
     //For submitting the add new item
     @RequestMapping(value = "/add_item")
-    public ModelAndView addItem(@ModelAttribute("newItem") Item newItem) {
+    public ModelAndView addItem(@ModelAttribute("newItem") Item newItem,
+                                HttpServletRequest request) {
 
         try {
-            LOGGER.trace("item obj vals = {}", newItem);
+            //set the creator in category object using session attributes
+            HttpSession session = request.getSession();
+            String userId =(String)session.getAttribute("username");
+            LOGGER.error("The user logged in is: {}",userId);
+            newItem.setCreator(userId);
+            LOGGER.trace("item added vals = {}", newItem);
 
             String itemNm = newItem.getItemName();
             String itemPrice = newItem.getPrice();
@@ -232,9 +239,17 @@ public class ItemController {
     }
 
     @RequestMapping(value = "/update_item", method = RequestMethod.POST)
-    public ModelAndView updateItem(@ModelAttribute("itemUpdate") Item itemUpdate) {
+    public ModelAndView updateItem(@ModelAttribute("itemUpdate") Item itemUpdate,
+                                   HttpServletRequest request) {
 
         try {
+            //set the creator in category object using session attributes
+            HttpSession session = request.getSession();
+            String userId =(String)session.getAttribute("username");
+            LOGGER.error("The user logged in is: {}",userId);
+            itemUpdate.setCreator(userId);
+            LOGGER.info("updated item {}", itemUpdate);
+
             String itemNm = itemUpdate.getItemName();
 
             MultipartFile imgFile = itemUpdate.getImageUrl();
@@ -293,6 +308,7 @@ public class ItemController {
 
 
                 if (!imgFile.isEmpty()) {
+
                     LOGGER.error("empty file ?? {}", !imgFile.isEmpty());
                     try {
                         // Creating the directory to store file in server

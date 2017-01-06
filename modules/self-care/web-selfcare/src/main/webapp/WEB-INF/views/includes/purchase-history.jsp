@@ -3,6 +3,8 @@
 <head>
     <%@include file="include.jsp" %>
     <link href="<c:url value="/resources/css/bootstrap-table.min.css"/>" rel="stylesheet" type="text/css">
+    <link href="<c:url value="/resources/css/bootstrap-datepicker3.css"/>" rel="stylesheet"/>
+    <script src="<c:url value="/resources/js/bootstrap-datepicker.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap-table.min.js"/>"></script>
     <script src="<c:url value="/resources/js/bootstrap3-typeahead.min.js"/>"></script>
     <script src="<c:url value="/resources/js/simple-bootstrap-paginator.js"/>"></script>
@@ -32,6 +34,7 @@
             color: #f5f5f5;
             text-align: center;
         }
+
         /*#table-purchaseHistory th{
             background-color: #00a5ff !important;
         }*/
@@ -40,15 +43,16 @@
 <body>
 <div class="panel panel-default">
     <div class="panel-heading">
-        <img class="icons" src="<c:url value="/resources/images/icons/pay.png"/>">
+        <img class="icons" src="<c:url value="/resources/images/icons/purchase_history.png"/>">
 
         <h3 class="header-panel"><fmt:message key="purchase.history.header.text" bundle="${lang}"/></h3>
     </div>
     <div class="panel-body">
         <div class="input-group pull-right" style="margin-bottom: 5px;">
             <div class="input-group">
-                <input type="text" id="txtSearchOrder" class="search form-control"
-                       placeholder="Search customer by first name">
+                <input type="text" id="txtSearchOrder" name="date" class="search form-control"
+                       placeholder="<fmt:message key="purchase.history.search.placeholder" bundle="${lang}"/>"
+                       style="width: 150px">
 
                 <div class="input-group-btn">
                     <button class="m-btn blue icn-only" id="btnSearchOrder" type="submit"
@@ -73,27 +77,10 @@
             </select>
         </div>
         <div id="pagination" style="float: right;font-size: 12px;"></div>
+        <div id="pagination2" style="float: right;font-size: 12px;"></div>
     </div>
 </div>
 
-<%-- Modal shows details of the items of an order --%>
-<div id="order-items-popup" class="modal fade">
-    <div class="modal-dialog" style="width: 70%;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <img class="icons" src="<c:url value="/resources/images/icons/pay-confirm.png"/>">
-                <h4 class="modal-title header-panel"><fmt:message key="purchase.history.order.items.header"
-                                                                  bundle="${lang}"/></h4>
-            </div>
-            <div class="modal-body">
-                <div id="table-orderItems"></div>
-            </div>
-            <div class="modal-footer">
-                <a class="btn btn-default" data-dismiss="modal"><fmt:message key="purchase.history.model.close"
-                                                                             bundle="${lang}"/></a>
-            </div>
-        </div>
-    </div>
-</div>
+<%@include file="modals.jsp" %>
 </body>
 </html>

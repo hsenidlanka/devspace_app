@@ -41,12 +41,7 @@
         <property name="suffix" value=".jsp" />
     </bean>
 
-
-
     <bean id="userValidator" class="hsl.devspace.app.admin.usermanagement.spring.validator.UserValidator"/>
-
-    <!-- Configures Handler Interceptors -->
-
 
 
     <!--import the datasource configuration file from core-logic module-->

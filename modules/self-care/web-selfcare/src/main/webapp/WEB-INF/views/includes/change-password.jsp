@@ -9,7 +9,6 @@
 <div class="panel panel-success">
     <div class="panel-heading">
         <img class="icons" src="<c:url value="/resources/images/icons/changepassword.png"/>">
-
         <h3 style="display: inline-block;"><fmt:message key="view.change" bundle="${lang}"/></h3>
     </div>
     <div class="panel-body">

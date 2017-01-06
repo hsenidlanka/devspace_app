@@ -115,8 +115,12 @@ $(document).ready(function () {
 
         //
         console.log($(this).val());
-        console.log($(this).parent().parent().next().find(".form-control").css('color', 'green'));
-        console.log($(this).parent().parent().next().next().find(".form-control").css('color', 'rgb(167, 68, 7)'));
+        console.log($(this).parent().parent().next().find(".form-control").css({
+            'color':'green',
+            'font-weight': 'bold'}));
+        console.log($(this).parent().parent().next().next().find(".form-control").css({
+            'color': 'rgb(49, 49, 64)',
+            'font-weight': 'bold'}));
         //
 
         if ($(this).is(":checked")) {

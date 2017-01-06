@@ -14,6 +14,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.text.NumberFormat;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -41,7 +42,7 @@ public class PurchaseHistoryService {
         format.setMaximumFractionDigits(2);
         format.setMinimumFractionDigits(2);
         if (purchaseHistoryDataList.size() > 0) {
-            successMessage.setMessage("order details for a customer retrieved");
+            successMessage.setMessage("order details for the customer retrieved");
             for (int i = 0; i < purchaseHistoryDataList.size(); i++) {
                 Map<String, Object> purchasedDataMap = purchaseHistoryDataList.get(i);
                 JSONObject jsonObject = new JSONObject();
@@ -125,6 +126,65 @@ public class PurchaseHistoryService {
         } else {
             successMessage.setMessage("no items retrieved for the order: " + orderId);
         }
+        return Response.status(200).entity(successMessage)
+                .header("Access-Control-Allow-Origin", propertyReader.readProperty("Access-Control-Allow-Origin"))
+                .build();
+    }
+
+    @GET
+    @Path("/{username}/{date}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getPurchaseHistoryOfCustomerByDate(@PathParam("username") String username, @PathParam("date") String date, @QueryParam("page") int page, @QueryParam("records") int records, @javax.ws.rs.core.Context UriInfo uriInfo) {
+        List<Map<String, Object>> purchaseHistoryDataList = shoppingCartRepository.getOrderDetailsByDate(username, LocalDate.parse(date), records, (page - 1) * records);
+        SuccessMessage successMessage = new SuccessMessage();
+        successMessage.setCode(200);
+        successMessage.setStatus("success");
+        NumberFormat format = NumberFormat.getInstance();
+        format.setMaximumFractionDigits(2);
+        format.setMinimumFractionDigits(2);
+        if (purchaseHistoryDataList.size() > 0) {
+            successMessage.setMessage("order details for the customer retrieved");
+            for (int i = 0; i < purchaseHistoryDataList.size(); i++) {
+                Map<String, Object> purchasedDataMap = purchaseHistoryDataList.get(i);
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("orderId", purchasedDataMap.get("order_id"));
+                jsonObject.put("date", purchasedDataMap.get("order_date"));
+                jsonObject.put("time", purchasedDataMap.get("order_time"));
+                jsonObject.put("netCost", format.format(Double.parseDouble(purchasedDataMap.get("net_cost").toString())));
+                successMessage.addData(jsonObject);
+            }
+        } else {
+            successMessage.setMessage("no order details found");
+        }
+        String selfUrl = uriInfo.getAbsolutePath().toString();
+        successMessage.addLink(selfUrl, "self");
+        return Response.status(200).entity(successMessage)
+                .header("Access-Control-Allow-Origin", propertyReader.readProperty("Access-Control-Allow-Origin"))
+                .build();
+    }
+
+    @GET
+    @Path("/count/{username}/{date}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getPurchaseHistoryCountOfCustomerByDate(@PathParam("username") String username, @PathParam("date") String date, @javax.ws.rs.core.Context UriInfo uriInfo) {
+        int count = shoppingCartRepository.countOrdersForCustomerByDate(username, LocalDate.parse(date));
+        SuccessMessage successMessage = new SuccessMessage();
+        successMessage.setStatus("success");
+        successMessage.setCode(200);
+
+        JSONObject jsonObject = new JSONObject();
+        if (count > 0) {
+            successMessage.setMessage("records found");
+            jsonObject.put("count", count);
+            successMessage.addData(jsonObject);
+        } else {
+            successMessage.setMessage("no records found");
+            jsonObject.put("count", 0);
+            successMessage.addData(jsonObject);
+        }
+        String selfUrl = uriInfo.getAbsolutePath().toString();
+        successMessage.addLink(selfUrl, "self");
+
         return Response.status(200).entity(successMessage)
                 .header("Access-Control-Allow-Origin", propertyReader.readProperty("Access-Control-Allow-Origin"))
                 .build();
