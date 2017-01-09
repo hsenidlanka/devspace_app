@@ -40,7 +40,7 @@ public class FeedbackRepositoryImpl implements FeedbackRepository{
     /*retrieve feedback details*/
     @Override
     public List<Map<String, Object>> view(int limit, int page) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT f.*,c.username FROM feedback f,customer c WHERE f.customer_id=c.id ORDER BY f.id DESC LIMIT ? OFFSET ?", limit, page);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT f.*,c.username,item.name AS item_name FROM customer c,feedback f INNER JOIN item ON item.id=f.item_id WHERE f.customer_id=c.id ORDER BY f.id DESC LIMIT ? OFFSET ?", limit, page);
         log.info("{}", mp);
         return mp;
     }
