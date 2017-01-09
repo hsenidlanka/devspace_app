@@ -10,7 +10,7 @@ $(document).ready(function () {
             //alert(result);
 
             $('#tableComments').bootstrapTable({
-                height: 344,
+                height: 380,
               /*  pagination: true,
                 pageSize: 4,
                 pageList: [10, 20, 30],*/
@@ -38,6 +38,12 @@ $(document).ready(function () {
                     sortable: true
                     //class: 'col-xs-2'
                 }, {
+                    field: 'item',
+                    title: 'Item :',
+                    align: 'left',
+                    sortable: true
+                    //class: 'col-xs-2'
+                },{
                     field: 'time',
                     title: 'Time :',
                     align: 'left',
@@ -47,7 +53,7 @@ $(document).ready(function () {
                     field: 'comment',
                     title: 'Comment :',
                     align: 'left',
-                    class: 'col-xs-5'
+                    class: 'col-xs-3'
                 },{
                     field: 'status',
                     title: 'Status :',
@@ -63,12 +69,7 @@ $(document).ready(function () {
                 }],
                 data: result
             })
-        },
-        error: function (e) {
-            alert("error, in loading comments table" + e);
-            console.log("error, load search item" + e)
         }
-
 });
 
 function operateFormatterComments(value, row, index) {
