@@ -35,6 +35,7 @@ ___
 2. Run the following command to start the core-server.
 `$ ./core-server start`</br>
 ___
+
 #### Access the API
 To access the API, please use the documentation by one of the following methods.
 
