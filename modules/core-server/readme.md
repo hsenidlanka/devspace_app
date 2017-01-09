@@ -9,7 +9,7 @@ Provide a RESTful API to self-care modules to communicate with the system. Buit 
 * Apache Maven 3.3
 * DevSpace Maven Dependency
 * DevSpace Simulator
-___
+
 #### Config & Build
 1. Download DevSpace Maven dependency from the following link.
 https://1drv.ms/u/s!AgR5Dn7i6sy0g5c9PM5ym3FrB78IYA
@@ -27,14 +27,14 @@ https://1drv.ms/u/s!AgR5Dn7i6sy0g5c9PM5ym3FrB78IYA
 
 If the build is successful, continue with the further steps.
 If an error occurred please check above five steps again.
-___
+
 #### Execute the program
 1. Goto the bin directory in the target directory.
 `$ cd target/bin`</br>
 
 2. Run the following command to start the core-server.
 `$ ./core-server start`</br>
-___
+
 #### Access the API
 To access the API, please use the documentation by one of the following methods.
 
