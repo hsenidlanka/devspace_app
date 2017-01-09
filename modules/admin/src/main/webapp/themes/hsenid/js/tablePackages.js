@@ -28,7 +28,7 @@ $(document).ready(function () {
                     title: 'Package Name',
                     sortable: true
                 },{
-                    field: 'created_date',
+                    field: 'createdDate',
                     title: 'Added Date',
                     sortable: true
                 },{

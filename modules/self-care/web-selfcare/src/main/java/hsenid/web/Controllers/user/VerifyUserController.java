@@ -26,7 +26,7 @@ import javax.validation.Valid;
 
 @Controller
 @PropertySource("classpath:config.properties")
-@RequestMapping("/email-verification" )
+@RequestMapping("/email-verification")
 public class VerifyUserController {
     final static Logger logger = LoggerFactory.getLogger(VerifyUserController.class);
     @Value("${api.url.base.url}")
@@ -87,11 +87,11 @@ public class VerifyUserController {
                     confirmedUser.setAddressLine02(replyFromServer.getData().get(0).getAddressLine02());
                     confirmedUser.setAddressLine03(replyFromServer.getData().get(0).getAddressLine03());
 
-//                    logger.error(SendStringBuilds.sendString(replyFromServer.getData().get(0).getFirstName(), " ",replyFromServer.getData().get(0).getLastName()));
                     session.setAttribute("name", SendStringBuilds.sendString(confirmedUser.getFirstName(), " ", confirmedUser.getLastName()));
                     session.setAttribute("email", confirmedUser.getEmail());
                     session.setAttribute(username, uname);
                     redirectAttributes.addFlashAttribute("verifyPass", "pass");
+                    
                     logger.info("User Data set work");
                     return "redirect:/email-verification";
                 } catch (RestClientException e) {

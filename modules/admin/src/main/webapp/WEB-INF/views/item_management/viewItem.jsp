@@ -18,13 +18,15 @@
     <spring:url value="/themes/hsenid/js/itemMgt.js" var="itemJs"/>
     <spring:url value="/themes/hsenid/js/itemFilter.js" var="itmFltr"/>
     <spring:url value="/themes/hsenid/js/myAlerts.js" var="myAlerts"/>
-    <spring:url value="/themes/hsenid/js/tableItems.js" var="tblViewItm"/>
+    <%--<spring:url value="/themes/hsenid/js/tableItems.js" var="tblViewItm"/>--%>
+    <spring:url value="/themes/hsenid/js/searchItem.js" var="srchItem"/>
     <spring:url value="/themes/hsenid/js/itemPagination.js" var="itmPaging"/>
 
     <script src="${itemJs}"></script>
     <script src="${itmFltr}"></script>
     <script src="${myAlerts}"></script>
-    <script src="${tblViewItm}"></script>
+    <%--<script src="${tblViewItm}"></script>--%>
+    <script src="${srchItem}"></script>
     <script src="${itmPaging}"></script>
 
 
@@ -49,11 +51,12 @@
             <fmt:message key="admin.itemmanagement.itemadd.url" var="urlVwItm" bundle="${bundle2}"/>
 
             <li><a href="<c:out value="${urlHome}"/>"><fmt:message key="item.itemview.breadcrumb.home"
-                                                                               bundle="${bundle1}"/> </a></li>
+                                                                   bundle="${bundle1}"/> </a></li>
             <li><a href="<c:out value="${urlHome}"/>"><fmt:message
                     key="item.itemview.breadcrumb.itemmanagement" bundle="${bundle1}"/> </a></li>
-            <li class="active"><a href="<c:out value="${urlVwItm}"/>"><fmt:message key="item.itemview.breadcrumb.viewitem"
-                                                        bundle="${bundle1}"/> </a></li>
+            <li class="active"><a href="<c:out value="${urlVwItm}"/>"><fmt:message
+                    key="item.itemview.breadcrumb.viewitem"
+                    bundle="${bundle1}"/> </a></li>
         </ul>
     </div>
 </div>
@@ -66,74 +69,39 @@
 
         <div class="panel-body">
 
-            <%--checkboxes for filters and...--%>
+            <%--Item search filters--%>
             <div class="col-xs-12">
                 <fieldset class="scheduler-border">
                     <legend class="scheduler-border" id="itemCriteria"></legend>
 
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-xs-2" style="text-align: right">
-                                <label class=" control-label">
+                            <div class="col-xs-1 itmViewDiv">
+                                    <button class="btn btn-link itemPill">View All Items</button>
+                            </div>
+                            <div class="col-xs-2 itmFilter">
+                                <label class="control-label">
                                     <fmt:message key="item.itemview.label.filter" bundle="${bundle1}"/>
                                 </label>
                             </div>
-                            <!--checkboxes to select-->
-                            <div class="col-xs-10" id="checkItmDiv" style="vertical-align: middle">
-                                <div class="col-xs-3">
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" value="1" id="catCheck" <%--onchange="showItemCheck()"--%>>
-                                        <fmt:message key="item.itemview.label.chkbx.cat" bundle="${bundle1}"/>
-                                    </label>
-                                </div>
-                                <div class="col-xs-3">
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" value="3" id="subCatCheck"
-                                              <%-- onchange="showItemCheck()"--%>>
-                                        <fmt:message key="item.itemview.label.chkbx.subcat" bundle="${bundle1}"/>
-                                    </label>
-                                </div>
-                                <div class="col-xs-6">
-                                    <div class="row itemSearchBar">
-
-                                        <div class="col-sm-8">
-                                            <input class="form-control" id="txtViewSearchItem" type="text"/>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <button type="button" class="btn btn-success" id="btnViewSearchItem"><span
-                                                    class="glyphicon glyphicon-search"></span> Search
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="col-xs-3">
+                                <select class="form-control" id="selectCatFltr">
+                                    <option value="0">--Select Category--</option>
+                                </select>
+                            </div>
+                            <div class="col-xs-3">
+                                <select class="form-control" id="selectSubCatFltr" disabled>
+                                    <option value="0">-Select Sub-category-</option>
+                                </select>
+                            </div>
+                            <div class="col-xs-3">
+                                <input class="form-control" id="txtViewSearchItem" type="text" placeholder="type item name.."/>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <div class="row">
-                            <div id="filterCatDiv" <%--style="display: none"--%> class="col-xs-4">
-                                <div class="col-xs-3" style="text-align: right">
-                                </div>
-                                <div class="col-xs-9">
-                                    <select class="form-control" id="selectCatFltr">
-                                        <option value="">--Category--</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div id="filterSubcatDiv" <%--style="display: none"--%> class="col-xs-4">
-                                <div class="col-xs-3"></div>
-                                <div class="col-xs-9">
-                                    <select class="form-control" id="selectSubCatFltr">
-                                        <option>--Sub-category--</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </fieldset>
             </div>
-            <br>
 
             <form:form class="form-horizontal" role="form" id="frmViewItem" commandName="viewItem"
                        modelAttribute="viewItem" method="post" action="/view_item">
@@ -392,8 +360,8 @@
                         </div>
                         <div class="col-xs-3">
                             <button class="btn btn-success" type="submit" value="Yes" id="btnUpdtItm">
-                            <fmt:message key="item.itemedit.form.button.save" bundle="${bundle1}"/>
-                        </button>
+                                <fmt:message key="item.itemedit.form.button.save" bundle="${bundle1}"/>
+                            </button>
                         </div>
                         <div class="col-xs-3">
                             <button class="btn btn-success" type="reset" value="cancel" id="btnCnclUpdtItm"
@@ -467,16 +435,16 @@
                     <div class="modal-footer">
                         <div class="col-xs-3"></div>
                         <div class="col-xs-3" align="right">
-                        <button class="btn btn-success" type="button" value="Yes" id="btnDeltItm">
-                            <fmt:message key="item.deletemodal.button.yes" bundle="${bundle1}"/>
-                        </button>
-                            </div>
+                            <button class="btn btn-success" type="button" value="Yes" id="btnDeltItm">
+                                <fmt:message key="item.deletemodal.button.yes" bundle="${bundle1}"/>
+                            </button>
+                        </div>
                         <div class="col-xs-3" align="left">
-                        <button class="btn btn-success" type="button" value="cancel" id="btnCnclDeltItm"
-                                data-dismiss="modal">
-                            <fmt:message key="item.deletemodal.button.no" bundle="${bundle1}"/>
-                        </button>
-                            </div>
+                            <button class="btn btn-success" type="button" value="cancel" id="btnCnclDeltItm"
+                                    data-dismiss="modal">
+                                <fmt:message key="item.deletemodal.button.no" bundle="${bundle1}"/>
+                            </button>
+                        </div>
                         <div class="col-xs-3"></div>
                     </div>
                 </fieldset>

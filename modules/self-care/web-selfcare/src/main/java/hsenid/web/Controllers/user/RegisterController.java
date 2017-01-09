@@ -42,41 +42,33 @@ public class RegisterController {
         String addressL3 = "";
 
         String title = regRequest.getParameter("title");
-//        String title = "Mr";
         String firstName = regRequest.getParameter("fname");
-//        String firstName = "First";
-                String lastName = regRequest.getParameter("lname");
-//        String lastName = "Last";
-                String addressL1 = regRequest.getParameter("address1");
-//        String addressL1 = "Addr1";
-                String addressL2 = regRequest.getParameter("address2");
-//        String addressL2 = "Addr2";
+        String lastName = regRequest.getParameter("lname");
+        String addressL1 = regRequest.getParameter("address1");
+        String addressL2 = regRequest.getParameter("address2");
         addressL3 = regRequest.getParameter("address3");
         String mobile = regRequest.getParameter("mobileNo");
-//        String mobile = "0871234567";
         String email = regRequest.getParameter("email");
-//        String email = "email@mail.com";
         String password = regRequest.getParameter("password");
-//        String password =  "password";
         String username = regRequest.getParameter("uname");
-//        String username = "uname2";
 
         try {
             if (addressL3.length() < 1) {
                 addressL3 = "";
             }
         } catch (Exception e) {
-            logger.error("Adddr 3 fail {}",e.getMessage());
+            logger.error("Adddr 3 fail {}", e.getMessage());
         }
         String mobileRegex = "^0[0-9]{9}$";
         String emailRegex = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
 
-        if ( !(title.length() > 1) && !(firstName.length() > 1) && !(lastName.length() > 1) && !(addressL1.length() > 2) && !(addressL2.length() > 2) && !email.matches(emailRegex) && !mobile.matches(mobileRegex) && (username.length()>2)) {
+        if (!(title.length() > 1) && !(firstName.length() > 1) && !(lastName.length() > 1) && !(addressL1.length() > 2) && !(addressL2.length() > 2) && !email.matches(emailRegex) && !mobile.matches(mobileRegex) && (username.length() > 2)) {
             logger.error("RegisterController recieved invalid details");
             return new BooleanResponse(false);
         }
 
         JSONObject jsonObject = new JSONObject();
+        
         jsonObject.put("title", title);
         jsonObject.put("firstName", firstName);
         jsonObject.put("lastName", lastName);
@@ -97,7 +89,7 @@ public class RegisterController {
         try {
             ServerResponseMessage serverResponseMessage = restTemplate.postForObject(registerUrl, httpEntity, ServerResponseMessage.class);
         } catch (Exception e) {
-            logger.error("User registration failed. Reason -> {}",e.getMessage());
+            logger.error("User registration failed. Reason -> {}", e.getMessage());
             return new BooleanResponse(false);
         }
 
