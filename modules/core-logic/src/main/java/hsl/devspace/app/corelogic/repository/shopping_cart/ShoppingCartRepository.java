@@ -60,7 +60,5 @@ public interface ShoppingCartRepository {
     List<Map<String, Object>> getOrderDetailsByDate(String username, LocalDate date, int limit, int page);
 
     int countOrdersForCustomerByDate(String customerUsername, LocalDate date);
-//    void addPackageToCart(int packageId);
-//    void modifyPackageInCart();
-//    void removePackageFromCart(int packageId);
+
 }
