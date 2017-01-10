@@ -114,7 +114,7 @@
                 background: "#D44950"
             });
         } else {
-            window.location.href = "http://localhost:8080/web-selfcare/search-menu/" + searchKey + "/" + category;
+            window.location.href = window.location.href + "/" + searchKey + "/" + category;
 
         }
 
