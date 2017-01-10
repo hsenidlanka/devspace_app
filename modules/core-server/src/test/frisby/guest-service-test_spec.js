@@ -1,10 +1,31 @@
 var frisby = require('frisby');
 var base_url = "http://localhost:2222/pizza-shefu/api/v1.0";
 
-// Test add guest user-valid data.
-frisby.create('Register guest test 01-valid data')
+// Test add guest user-empty mobile no.
+frisby.create('Register guest test 01-empty mobile no')
     .post(base_url + '/guests/add/', {
-        "mobile": "0111111111"
+        "mobile": ""
+    }, {json: true})
+    .expectStatus(400)
+    .inspectJSON()
+    .expectJSONTypes({
+        status: String,
+        code: String,
+        errorMessage: String,
+        description: String
+    })
+    .expectJSON({
+        "status": "error",
+        "code": "400",
+        "errorMessage": "HTTP_BAD_REQUEST",
+        "description": "incorrect request. make sure the data sent are correct."
+    })
+    .toss();
+
+// Test add guest user-valid data.
+frisby.create('Register guest test 02-valid data')
+    .post(base_url + '/guests/add/', {
+        "mobile": "0000000000"
     }, {json: true})
     .expectStatus(201)
     .inspectJSON()
@@ -21,7 +42,7 @@ frisby.create('Register guest test 01-valid data')
         "message": "guest user added to the database",
         "data": [
             {
-                "mobileNo": "0111111111"
+                "mobileNo": "0000000000"
             }
         ],
         "links": [
@@ -30,26 +51,5 @@ frisby.create('Register guest test 01-valid data')
                 "link": "http://localhost:2222/pizza-shefu/api/v1.0/guests/add/"
             }
         ]
-    })
-    .toss();
-
-// Test add guest user-empty mobile no.
-frisby.create('Register guest test 01-empty mobile no')
-    .post(base_url + '/guests/add/', {
-        "mobile": ""
-    }, {json: true})
-    .expectStatus(400)
-    .inspectJSON()
-    .expectJSONTypes({
-        status: String,
-        code: Number,
-        errorMessage: String,
-        description: String
-    })
-    .expectJSON({
-        "status": "error",
-        "code": 400,
-        "errorMessage": "HTTP_BAD_REQUEST",
-        "description": "incorrect request. make sure the data sent are correct."
     })
     .toss();

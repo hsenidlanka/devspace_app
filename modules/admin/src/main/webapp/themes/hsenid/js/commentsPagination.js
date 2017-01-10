@@ -88,13 +88,11 @@ $(document).ready(function () {
                 $.ajax({
                     //type: "POST",
                     url: 'https://localhost:8443/admin/notification/commentsView',
-                    data: {"initPage": pageSend, " pgLimit": pgLimit},
+                    dataType: "json",
+                    data: {"initPage":pageSend, "pgLimit": pgLimit},
                     success: function (msg) {
 
                         $('#tableComments').bootstrapTable('load', msg);
-                    },
-                    error: function (e) {
-                        alert("ajax failed in comment table load" + e);
                     }
                 });
             }
@@ -103,24 +101,21 @@ $(document).ready(function () {
                 $.ajax({
                     url: "https://localhost:8443/admin/notification/commentsView/typeheadName/data",
                     dataType: "json",
-                    data: {"cmntName": cmntName, "initPage": pageSend, "pageLimit": pgLimit},
+                    data: {"cmntName": cmntName, "initPage": pageSend, "pgLimit": pgLimit},
                     success: function (data) {
                         $('#tableComments').bootstrapTable('load', data);
                     }
                 })
             }
 
-            if ((from != "") || (to != "") || (!(city == "--Select--"))) {
+            if ((from != "") || (to != "") || (!(status == "--Select--"))) {
                 $.ajax({
                     //type: "POST",
                     url: "https://localhost:8443/admin/notification/commentsView/date/status",
-                    data: {"from": from, "to": to, "status": status, "initPage": pageSend, "pageLimit": pgLimit},
+                    data: {"from": from, "to": to, "status": status, "initPage": pageSend, "pgLimit": pgLimit},
                     success: function (msg) {
                         //alert("ajax succ" + from +name +city);
-                        $('#tableCustomer').bootstrapTable('load', msg);
-                    },
-                    error: function (e) {
-                        alert("ajax failed" + e);
+                        $('#tableComments').bootstrapTable('load', msg);
                     }
                 });
             }
@@ -136,7 +131,7 @@ $(document).ready(function () {
         $.ajax({
             url: "https://localhost:8443/admin/notification/commentsView/typeheadName/data",
             datatype: "JSON",
-            data: {"cmntName": $("#cmntSearch").val(), "pageLimit": pgLimit, "initPage": "0"},
+            data: {"cmntName": $("#cmntSearch").val(), "pgLimit": pgLimit, "initPage": "0"},
             success: function (data) {
                 $("#tableComments").bootstrapTable('load', data);
                 console.log(data);
@@ -158,47 +153,66 @@ $(document).ready(function () {
     });
 
     /*
-     * load data on request typeahead with the Search bbutton cilcked
+     * load data on selection of status or date range and the Search button cilcked
      **/
-  /*  $("#btnViewSearchCat").click(function () {
-        var catSearchName=$("#txtViewSearchCategory").val().length;
-        //alert(catSearchName);
+    $("#filterButtonComment").click(function() {
+        var from = $('#fromDateComments').val();
+        var to=$('#toDateComments').val();
+        var status=$('#statusSearch').val();
+        var cmntName=$('#cmntSearch').val();
+        alert(status);
 
 
+        $('#paginationComments').hide();
+        $('#pagination2Comments').show();
 
-        if ($("#txtViewSearchCategory").val().length > 0) {
-            $('#paginationCat').hide();
-            $('#pagination2Cat').show();
-
+        if ((from == "") && (to == "") && (cmntName == "") && (status == "--Select--")) {
+            alert("inside the all fields null");
             $.ajax({
-                url: "https://localhost:8443/admin/category/view/categoryTable/catName",
-                data: {"searchCatNm": $("#txtViewSearchCategory").val(), "initPage": "0", "pgLimit": pgLimit},
-                success: function (data) {
-                    $("#tableCategory").bootstrapTable('load', data);
-                    console.log(data);
-                },
-                error: function (e) {
-                    alert("error, load search category With name" + e);
-                    console.log("error, load search category With name" + e)
+                //type: "POST",
+                url: 'https://localhost:8443/admin/notification/commentsView',
+                dataType: "json",
+                data: {"initPage": "0", "pgLimit": pgLimit},
+                success: function (msg) {
+                    $('#tableComments').bootstrapTable('load', msg);
                 }
             });
-
-            *//**
+            /**
              *Setting the number of pages according to the number of records
-             *//*
+             */
+                //Setting the number of pages according to the number of records
             $.ajax({
-                url: 'https://localhost:8443/admin/category/CategoryPaginationTable',
-                //data: {"searchCatNm": $("#txtViewSearchCategory").val()},
+                url: 'https://localhost:8443/admin/notification/CommentsPaginationTable',
                 success: function (recCount) {
-
-                    pag2.simplePaginator('setTotalPages', Math.ceil(recCount / pgLimit));
+                    pagComment2.simplePaginator('setTotalPages', Math.ceil(recCount /pgLimit));
                 }
-            })
+            });
+        }
+
+        if ((from != "") || (to != "") || (!(status == "--Select--"))) {
+            $.ajax({
+                //type: "POST",
+                url: "https://localhost:8443/admin/notification/commentsView/date/status",
+                data: {"from": from, "to": to, "status": status, "initPage": "0", "pgLimit": pgLimit},
+                success: function (msg) {
+                    //alert("ajax succ" + from +name +city);
+                    $('#tableComments').bootstrapTable('load', msg);
+                },
+                error: function (e) {
+                    alert("ajax failed" + e);
+                }
+            });
+            /**
+             *Setting the number of pages according to the number of records
+             */
+            $.ajax({
+                url: 'https://localhost:8443/admin/notification/CommentsPaginationTable',
+                success: function (recCount) {
+                    pagComment2.simplePaginator('setTotalPages', Math.ceil(recCount /pgLimit));
+                }
+            });
         }
     });
 
-
-
-  */
 });
 
