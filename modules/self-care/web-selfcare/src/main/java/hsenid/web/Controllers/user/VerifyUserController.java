@@ -85,7 +85,8 @@ public class VerifyUserController {
                     confirmedUser.setUsername(replyFromServer.getData().get(0).getUsername());
                     confirmedUser.setAddressLine01(replyFromServer.getData().get(0).getAddressLine01());
                     confirmedUser.setAddressLine02(replyFromServer.getData().get(0).getAddressLine02());
-                    confirmedUser.setAddressLine03(replyFromServer.getData().get(0).getAddressLine03());
+                    String addr3 = SendStringBuilds.getValueOrDefault(replyFromServer.getData().get(0).getAddressLine03(), " ");
+                    confirmedUser.setAddressLine03(addr3);
 
                     session.setAttribute("name", SendStringBuilds.sendString(confirmedUser.getFirstName(), " ", confirmedUser.getLastName()));
                     session.setAttribute("email", confirmedUser.getEmail());

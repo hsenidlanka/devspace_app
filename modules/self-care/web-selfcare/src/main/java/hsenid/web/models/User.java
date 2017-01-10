@@ -10,7 +10,8 @@ import javax.validation.constraints.Size;
 
 public class User {
 
-    @Pattern(regexp = "^(?!\\s*$|\\s).*$", message = "Please enter a title!")
+//    @Pattern(regexp = "^(?!\\s*$|\\s).*$", message = "Please enter a title!")
+    @NotEmpty(message = "Please select a title")
     private String title;
 
     @Pattern(regexp = "^(?!\\s*$|\\s).*$",  message = "Please enter your first name!")
@@ -36,6 +37,7 @@ public class User {
     private String addressLine02;
 
     private String addressLine03;
+
 
     public String getTitle() {
         return title;
