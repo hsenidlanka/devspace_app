@@ -218,3 +218,11 @@ legend.scheduler-border {
     text-align: right;
     vertical-align: middle;
 }
+.itemPill:hover {
+    color: #3B8102;
+    font-weight: bold;
+}
+#itemImageUrl{
+    width: 250px;
+    height: 150px;
+}

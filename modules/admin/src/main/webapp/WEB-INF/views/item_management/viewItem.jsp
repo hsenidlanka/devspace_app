@@ -310,13 +310,11 @@
                                     </div>
 
                                     <div class="col-xs-8">
-                                            <%--<form:button type="button" class="btn btn-success" id="btnEditImage"><span
-                                                    class="glyphicon glyphicon-open"></span><fmt:message key="item.itemedit.form.button.upldimages"/>
-                                            </form:button>--%>
+                                        <div><img id="itemImageUrl"/></div>
+                                        <br>
                                         <form:input type="file" class="file_upload-item btn btn-default" path="imageUrl"
                                                     id="btnEditImage" value="Browse"/>
-                                        <br><br>
-
+                                        <br>
                                     </div>
                                 </div>
                             </div>

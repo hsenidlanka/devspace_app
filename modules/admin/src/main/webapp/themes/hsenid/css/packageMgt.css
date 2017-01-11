@@ -13,3 +13,7 @@
 .deletePkg{
     color:red;
 }
+#pkgImageUrl{
+    width: 300px;
+    height: 200px;
+}

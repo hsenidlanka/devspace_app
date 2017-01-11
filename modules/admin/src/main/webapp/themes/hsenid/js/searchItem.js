@@ -103,17 +103,7 @@ $(document).ready(function(){
      * */
     $("#txtViewSearchItem").keyup(function () {
 
-        if ($("#catCheck").is(":checked")) {
-         cat = $("#selectCatFltr").val();
-        } else {
-            cat = null;
-        }
 
-        if ($("#subCatCheck").is(":checked")) {
-            subcat = $("#selectSubCatFltr").val();
-        } else {
-            subcat = null;
-        }
         // alert(cat +" "+ subcat);
         $.ajax({
             type: "GET",
@@ -156,15 +146,42 @@ $(document).ready(function(){
         pageChange: function (page) {
 
             var initpg = (page - 1) * pgLimit;
-            $.ajax({
+            var catNm = $("#selectCatFltr").val();
+
+            if(catNm==0){
+                $.ajax({
+                    url: 'https://localhost:8443/admin/items/loadSearchItem',
+                    dataType: "json",
+                    data: {"srchItmNm": $("#txtViewSearchItem").val(), "initPage": initpg, "pgLimit": pgLimit},
+                    success: function (data) {
+                        $('#tblItems').bootstrapTable('load', data);
+                    }
+                })
+            }else{
+
+                $.ajax({
+                    url: 'https://localhost:8443/admin/items/loadItemByCat',
+                    dataType: "json",
+                    data: {"srchItmSubcat": $("#selectSubCatFltr").val(), "initPage": initpg, "pgLimit": pgLimit},
+                    success: function (data) {
+                        $('#tblItems').bootstrapTable('load', data);
+                        console.log("Ddddddd");
+                    }
+                })
+            }
+
+           /* $.ajax({
                 url: 'https://localhost:8443/admin/items/loadSearchItem',
                 dataType: "json",
                 data: {"srchItmNm": $("#txtViewSearchItem").val(), "initPage": initpg, "pgLimit": pgLimit},
                 success: function (data) {
 
                     $('#tblItems').bootstrapTable('load', data);
+                },
+                error:function(er){
+                    console.log("error 12 here "+er);
                 }
-            })
+            })*/
         }
     });
 
@@ -174,6 +191,21 @@ $(document).ready(function(){
 
             $('#pagination').hide();
             $('#pagination2').show();
+
+            ////
+            $.ajax({
+                url: "https://localhost:8443/admin/items/loadSearchItem",
+                datatype: "JSON",
+                data: {"srchItmNm": $(this).val(), "pgLimit": pgLimit, "initPage": "0"},
+                success: function (data) {
+                    $("#tblItems").bootstrapTable('load', data);
+                    console.log(" nnnyy 67 "+data);
+                },
+                error: function (e) {
+                    alert("error in load search item" + e);
+                    console.log("error, load search item 255 " + e)
+                }
+            });
 
             /**
              *Setting the number of pages according to the number of records
@@ -185,32 +217,41 @@ $(document).ready(function(){
 
                     pag2.simplePaginator('setTotalPages', Math.ceil(recCount / 10));
                 }
-            })
+            });
         }
         else {
             $('#pagination').show();
             $('#pagination2').hide();
-
-             $.ajax({
-             url: 'https://localhost:8443/admin/items/loadSearchItem',
-             dataType: 'JSON',
-             data: {"initPage": "1", "pgLimit": pgLimit},
-             success: function (data) {
-
-             $('#tblItems').bootstrapTable('load', data);
-             }
-             });
         }
     });
+
 
     $("#selectCatFltr").change(function () {
         catVal = $(this).val();
 
         if(catVal !=0){
+            $('#pagination').hide();
+            $('#pagination2').show();
+
             loadItemDetails(catVal);
             console.log("ddihiuhe 154");
 
+            /**
+             *Setting the number of pages according to the number of records
+             */
+            $.ajax({
+                url: 'https://localhost:8443/admin/items/catSearchCount',
+                data: {"catName":catVal},
+                success: function (recCount) {
+
+                    pag2.simplePaginator('setTotalPages', Math.ceil(recCount / 10));
+                }
+            });
+
         }else{
+            $('#pagination').show();
+            $('#pagination2').hide();
+
             $("#selectSubCatFltr").attr("disabled",true);
             $.ajax({
                 url: "https://localhost:8443/admin/items/loadSearchItem",
@@ -224,14 +265,28 @@ $(document).ready(function(){
                     alert("error, load search item" + e);
                     console.log("error, load search item" + e)
                 }
-            })
+            });
         }
     });
 
     $("#selectSubCatFltr").change(function () {
+        $('#pagination').hide();
+        $('#pagination2').show();
 
         subCatVal=$(this).val();
         loadDatatoTable(itmName,pgLimit,"0",catVal,subCatVal);
+
+        /**
+         *Setting the number of pages according to the number of records
+         */
+        $.ajax({
+            url: 'https://localhost:8443/admin/items/subCatSearchCount',
+            data: {"subCatName":subCatVal},
+            success: function (recCount) {
+
+                pag2.simplePaginator('setTotalPages', Math.ceil(recCount / 10));
+            }
+        });
     })
 
 
@@ -257,6 +312,10 @@ window.operateEvents = {
         var objct = JSON.parse(data);
 
         var itemId = objct["id"];
+        var imgName = (objct["item_name"]).replace(/\s/g,'');
+        var itmImg = imgName+".jpg";
+        var url = "https://localhost:8443/admin/themes/hsenid/images/items/"+itmImg;
+
         $.ajax({
             //dataType:"JSON",
             type: "POST",
@@ -292,6 +351,7 @@ window.operateEvents = {
                     }
                 });
 
+                $("#itemImageUrl").attr('src',url);
                 $("#hiddenId").val(objct["id"]); // set id to a hidden field
                 $("#txtEditName").val(objct["item_name"]); // set item_name field
                 $("#selectCatedt").val(objct["category_name"]); // set category_name as selected

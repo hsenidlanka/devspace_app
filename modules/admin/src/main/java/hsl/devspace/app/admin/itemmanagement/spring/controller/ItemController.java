@@ -530,4 +530,60 @@ public class ItemController {
         LOGGER.trace("searched item record count{}", item.countSearchKey(itmName));
         return item.countSearchKey(itmName);
     }
+
+    /*
+    *getting record count for loading items by category with pagination
+    **/
+    @RequestMapping(value = "/catSearchCount", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    int getCatSearchCount(@RequestParam("catName") String catName) {
+
+        LOGGER.trace("searched items by category record count{}", item.countItemDetailsByCategory(catName));
+        return item.countItemDetailsByCategory(catName);
+    }
+
+    /*
+    *getting record count for loading items by category with pagination
+    **/
+    @RequestMapping(value = "/subCatSearchCount", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    int getsubCatSearchCount(@RequestParam("subCatName") String subCatName) {
+
+        LOGGER.trace("searched items by category record count{}", item.countItemDetailsBySubCategory(subCatName));
+        return item.countItemDetailsBySubCategory(subCatName);
+    }
+
+   /*
+   *reloading item table by filtering category search & paginating basis
+   * */
+    @RequestMapping(value = "/loadItemByCat", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    List<Map<String, Object>> loadItemByCategory(HttpServletRequest request) {
+
+        List<Map<String, Object>> itemDetailsCat = null;
+        try {
+            String itmSubcat = request.getParameter("srchItmSubcat");
+            String pgInit = request.getParameter("initPage");
+            int initPg = Integer.parseInt(pgInit);
+            String pgLimt = request.getParameter("pgLimit");
+            int pgLimit = Integer.parseInt(pgLimt);
+
+            LOGGER.trace("load item name by subCat {}", itmSubcat);
+
+            if (itmSubcat != null) {
+                itemDetailsCat = item.retrieveItemDetailsBySubCategory(itmSubcat, pgLimit, initPg);
+                LOGGER.trace("selected item by subCat {}", itemDetailsCat);
+            } else {
+                itemDetailsCat = item.viewAllItemDetails(pgLimit, initPg);
+                LOGGER.trace("load item by subcat {}", itemDetailsCat);
+            }
+        } catch (Exception e) {
+            LOGGER.error("error in loading item details : {}", e);
+        }
+
+        return itemDetailsCat;
+    }
 }

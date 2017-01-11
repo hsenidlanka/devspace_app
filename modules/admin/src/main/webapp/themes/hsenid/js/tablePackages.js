@@ -21,11 +21,11 @@ $(document).ready(function () {
                 minimumCountColumns: 2,
                 columns: [{
                     field: 'packageId',
-                    title: 'Package ID',
+                    title: 'ID',
                     sortable: true
                 }, {
                     field: 'packName',
-                    title: 'Package Name',
+                    title: 'Name',
                     sortable: true
                 },{
                     field: 'createdDate',
@@ -37,7 +37,7 @@ $(document).ready(function () {
                     sortable: true
                 }, {
                     field: 'price',
-                    title: 'Package Price (LKR)',
+                    title: 'Price (LKR)',
                     align: 'right',
                     sortable: true
                 }, {
@@ -252,9 +252,14 @@ window.operateEvents = {
         var objct = JSON.parse(data);
 
         var pkgId = objct["packageId"];
+        var imgNamePkg = (objct["packName"]).replace(/\s/g,'');
+        var pkgImg = imgNamePkg+".jpg";
+        var url = "https://localhost:8443/admin/themes/hsenid/images/packages/"+pkgImg;
+
 
         $("#txtEditPkgNm").val(objct["packName"]);
         $("#editPkgPrice").val(objct["price"]);
+        $("#pkgImageUrl").attr('src',url);
 
         $('#pkgEditModal').modal('show');
 
@@ -265,8 +270,54 @@ window.operateEvents = {
             url:"https://localhost:8443/admin/packages/loadPkgCont",
             data:{"pkgName":pkgNm},
             success: function(data){
-                alert(data);
-                console.log(data);
+console.log(JSON.stringify(data)+" fffaaa");
+                $.each(data, function (key, val) {
+                    var cat = val['categoryName'];
+                    var item = val['item'];
+                    var size = val['size'];
+                    var qty = val['quantity'];
+                    alert(cat+" & "+item+" & "+size+" & "+qty);
+                    $('.chkbxPkgCat').each(function () {
+
+                        if($(this).val()==cat) {
+
+                         $(this).prop('checked',true);
+
+                            var slctedItm = $(this).parent().parent().next().find(".form-control").attr('id');
+                            var selectedSize = $(this).parent().parent().next().next().find(".form-control").attr('id');
+                            var selectedQty2 = $(this).parent().parent().next().next().next().find(".form-control");
+
+                            if ($(this).is(":checked")) {
+
+                                setItemList(cat, slctedItm, selectedSize);
+
+                                //$(slctedItm).val(item);
+
+                                $(this).parent().parent().next().find(".form-control").val($.trim(item));
+                                $(this).parent().parent().next().next().find(".form-control").val(val['size']);
+                                $(this).parent().parent().next().next().next().find(".form-control").val('1');
+                               /* selectedQty2.click(function () {
+                                    if ($.trim($(this).val()) == "0") {
+                                        selectedQty2.css({"border-color": "red", "border-width": "2px"});
+                                    }
+                                    else {
+                                        selectedQty2.css({"border-color": "", "border-width": ""});
+                                    }
+                                });*/
+
+                            }
+
+                        // $(this).parent().parent().next().find(".form-control").val(item);
+                        /*$(this).parent().parent().next().find(".form-control").val("jjjjjj");
+                         $(this).parent().parent().next().next().find(".form-control").val(size);
+                         $(this).parent().parent().next().next().next().find(".form-control").val(qty);*/
+                         }else{
+                            //$(this).prop('checked',false);
+                        }
+                    });
+                });
+
+
             },
             error: function(er){
 
