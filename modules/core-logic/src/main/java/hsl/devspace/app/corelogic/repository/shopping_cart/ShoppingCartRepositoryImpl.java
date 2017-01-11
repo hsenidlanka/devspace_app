@@ -471,10 +471,14 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
     @Override
     public List<Map<String, Object>> selectItemHistoryForCustomer(String username, int limit, int offset) {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT DISTINCT item.name,item.description,shopping_cart.order_date FROM item INNER JOIN product ON product.type_id=item.id INNER JOIN shopping_cart_product ON shopping_cart_product.product_id=product.id INNER JOIN shopping_cart ON shopping_cart.id=shopping_cart_product.shopping_cart_id WHERE shopping_cart.customer_id=(SELECT id FROM customer WHERE username=?) ORDER BY shopping_cart.order_date LIMIT ? OFFSET ? ", username, limit, offset);
-        System.out.println(mp);
         return mp;
     }
 
+    @Override
+    public int countItemHistoryForCustomer(String username) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT DISTINCT item.name,item.description,shopping_cart.order_date FROM item INNER JOIN product ON product.type_id=item.id INNER JOIN shopping_cart_product ON shopping_cart_product.product_id=product.id INNER JOIN shopping_cart ON shopping_cart.id=shopping_cart_product.shopping_cart_id WHERE shopping_cart.customer_id=(SELECT id FROM customer WHERE username=?) ORDER BY shopping_cart.order_date ", username);
+        return mp.size();
+    }
     /*  public String checkUniqueOrderId(String orderID){
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT id FROM shopping_cart WHERE order_id=? ",orderID);
         if(mp.size()!=0){

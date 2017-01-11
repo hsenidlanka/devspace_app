@@ -67,4 +67,5 @@ public interface ShoppingCartRepository {
 
     List<Map<String, Object>> selectPendingDelivery();
 
+    int countItemHistoryForCustomer(String username);
 }
