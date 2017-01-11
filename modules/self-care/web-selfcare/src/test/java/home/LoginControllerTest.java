@@ -14,9 +14,8 @@ import org.testng.annotations.Test;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @Test
 @WebAppConfiguration
@@ -27,78 +26,79 @@ public class LoginControllerTest extends AbstractTestNGSpringContextTests {
 
     private MockMvc mockMvc;
 
+
+    @Test
+    public void blockedUserTest() throws Exception {
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+        this.mockMvc.perform(get("/blockedUserRedirect")
+                .accept(MediaType.ALL))
+                .andExpect(status().isOk())
+                .andExpect(view().name("/error-pages/error500"));
+    }
+
+
     @DataProvider
     public Object[][] notBlockedUsername() {
         return new Object[][]{
                 {"testre"},
-                {"tagtest"},
                 {"kkalla"}
         };
     }
 
     @Test(dataProvider = "notBlockedUsername")
-    public void testCheckNotBlockedUser(String username) throws Exception {
+    public void resendVerifyTestSuccess(String username) throws Exception {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
-        this.mockMvc.perform(get("/chechBlocked")
-                .param("checkName", username)
+        this.mockMvc.perform(post("/resendVerification")
+                .param("username", username)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().json("{'userAvailable':true}"));
+                .andExpect(jsonPath("$.userAvailable").value(true));
     }
 
-    @Test
-    public void testCheckBlockedUser() throws Exception {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
-        this.mockMvc.perform(get("/chechBlocked")
-                .param("checkName", "block")
-                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(content().json("{'userAvailable':false}"));
-    }
 
     @DataProvider
     public Object[][] loginDetails() {
         return new Object[][]{
-                {"testre", "password"},
-                {"kkalla", "password"}
+                {"testre", "password"}
         };
     }
 
     @Test(dataProvider="loginDetails")
     public void testSuccessLogin(String username, String password) throws Exception {
-        this.mockMvc.perform(get("/login")
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+        this.mockMvc.perform(post("/login")
                 .param("username", username)
                 .param("password", password)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.userAvailable", is(true)));
+                .andExpect(jsonPath("$.userStatus").value("verified"));
     }
 
     @DataProvider
     public Object[][] loginDetailsInvalid() {
         return new Object[][]{
-                {"testre", ""},
+                {"testre", " "},
                 {"kkalla", "passworddd"},
-                {"", "password"},
+                {" ", "password"},
                 {"kkalladd", "password"},
                 {"testre3f", "password"},
                 {"kkalla123", "password"},
                 {"1233", "jvjvbvjba"},
-                {"", ""},
-                {"kkalla", ""}
+                {" ", " "},
+                {"kkalla", " "}
         };
     }
 
     @Test(dataProvider="loginDetailsInvalid")
     public void testFailedLogin(String username, String password) throws Exception {
-        this.mockMvc.perform(get("/login")
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+        this.mockMvc.perform(post("/login")
                 .param("username", username)
                 .param("password", password)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.userAvailable", is(false)));
+                .andExpect(jsonPath("$.userStatus").value("unauthorized"));
     }
-
 
 
 }
