@@ -91,7 +91,7 @@
 
             <form:form class="form-horizontal" role="form" id="frmViewPkg" action="" method="post">
                 <fieldset class="scheduler-border">
-                    <legend class="scheduler-border"><fmt:message key="package.viewpackage.package.name" bundle="${bundle1}"/></legend>
+                    <legend class="scheduler-border"><fmt:message key="package.viewpackage.package.details" bundle="${bundle1}"/></legend>
 
                     <!--table of package details-->
                     <table id="tblPackages">
@@ -199,10 +199,10 @@
                                                <div class="col-xs-4">
                                                    <strong><fmt:message key="package.packageedit.form.packagedetails.itemname" bundle="${bundle1}"/></strong>
                                                </div>
-                                               <div class="col-xs-3">
+                                               <div class="col-xs-4">
                                                    <strong><fmt:message key="package.packageedit.form.packagedetails.itemsize" bundle="${bundle1}"/></strong>
                                                </div>
-                                               <div class="col-xs-3">
+                                               <div class="col-xs-2">
                                                    <strong><fmt:message key="package.packageedit.form.packagedetails.qty" bundle="${bundle1}"/></strong>
                                                </div>
                                            </div>
@@ -219,12 +219,12 @@
                                                        <form:option value="-" label="---"/>
                                                    </form:select>
                                                </div>
-                                               <div class="col-xs-3">
+                                               <div class="col-xs-4">
                                                    <form:select type="text" class="form-control" path="size" id="szpr">
                                                        <form:option value="-" label="---"/>
                                                    </form:select>
                                                </div>
-                                               <div class="col-xs-3">
+                                               <div class="col-xs-2">
                                                    <form:input class="form-control qty-spinner" type="number" min="0" id="contQty" path="quantity"/>
                                                </div>
                                            </div>
@@ -247,11 +247,13 @@
                                     <label><fmt:message key="package.packageeditform.packageimages" bundle="${bundle1}"/></label>
                                 </div>
                                 <div class="col-xs-5">
+                                    <div><img id="pkgImageUrl"/></div>
+                                    <br>
                                     <form:input type="file" class="file_upload btn btn-default" path="imageUrl" id="btnUpldImageEdit" value="Browse" />
                                     <br>
                                 </div>
                             </div>
-                            <br><br>
+                            <br>
 
                             <div class="row">
                                 <div class="col-xs-3" align="right">

@@ -36,11 +36,11 @@ $(document).ready(function () {
                 minimumCountColumns: 2,
                 columns: [{
                     field: 'id',
-                    title: 'Item ID',
+                    title: 'ID',
                     sortable: true
                 }, {
                     field: 'item_name',
-                    title: 'Item Name',
+                    title: 'Name',
                     sortable: true
                 }, {
                     field: 'category_name',
@@ -141,28 +141,6 @@ $(document).ready(function () {
         })
     });
 
-/////////////////////////////////////////////////////////////////////
-    /*
-     function getTypeaheadResult(){
-     $.ajax({
-     type: "GET",
-     url: "https://localhost:8443/admin/items/typeahedItmNm",
-     dataType: "JSON",
-     data:{"cat":cat, "subcat":subcat},
-     success: function (data) {
-     //  alert(data);
-     console.log(data);
-     $('#txtViewSearchItem').typeahead({
-     source: data
-     }).focus();
-     },
-     error: function (er) {
-     console.log("error in typeahead " + er)
-     }
-     })
-     }
-     */
-
 
     var pag2 = $('#pagination2').simplePaginator({
 
@@ -234,20 +212,6 @@ $(document).ready(function () {
 
                     loadDatatoTable(itmNm, pgLimit, "0", cat, subcat);
 
-
-                    /* $.ajax({
-                     url: "https://localhost:8443/admin/itemFilters/loadSearchItem2",
-                     datatype: "JSON",
-                     data: {"srchItmNm": $("#txtViewSearchItem").val(), "pgLimit": pgLimit, "initPage": "0","cat":cat,"subcat":subcat},
-                     success: function (data) {
-                     $("#tblItems").bootstrapTable('load', data);
-                     // console.log(data);
-                     },
-                     error: function (e) {
-                     alert("error, load search item" + e);
-                     console.log("error, load search item-cat" + e)
-                     }
-                     })*/
                 }
             }
             else {
@@ -256,20 +220,6 @@ $(document).ready(function () {
                 var itmNm = $("#txtViewSearchItem").val();
 
                 loadDatatoTable(itmNm, pgLimit, "0", cat, subcat);
-
-                /*     $.ajax({
-                 url: "https://localhost:8443/admin/itemFilters/loadSearchItem2",
-                 datatype: "JSON",
-                 data: {"srchItmNm": $("#txtViewSearchItem").val(), "pgLimit": pgLimit, "initPage": "0", "cat":cat, "subcat":subcat},
-                 success: function (data) {
-                 $("#tblItems").bootstrapTable('load', data);
-                 // console.log(data);
-                 },
-                 error: function (e) {
-                 alert("error, load search item" + e);
-                 console.log("error, load search item-subcat" + e)
-                 }
-                 })*/
             }
 
 
@@ -289,18 +239,6 @@ $(document).ready(function () {
             $('#pagination').show();
             $('#pagination2').hide();
 
-            /* $.ajax({
-             url: 'https://localhost:8443/admin/items/loadSearchItem',
-             dataType: 'JSON',
-             data: {"initPage": "1", "pgLimit": pgLimit},
-             success: function (data) {
-
-             $('#tblItems').bootstrapTable('load', data);
-             }
-             })*/
-
-
-            ////
             if (!$("#subCatCheck").is(":checked")) {
                 if (!$("#catCheck").is(":checked")) {
 
