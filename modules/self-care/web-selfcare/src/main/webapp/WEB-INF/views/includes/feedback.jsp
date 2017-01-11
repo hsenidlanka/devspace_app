@@ -3,6 +3,7 @@
 <head>
     <%@include file="include.jsp" %>
     <link rel="stylesheet" href="<c:url value="/resources/css/m-buttons.css"/>"/>
+    <script src="<c:url value="/resources/js/feedback-operations.js"/>"></script>
 </head>
 <body>
 <div class="panel panel-default">
@@ -12,7 +13,7 @@
         <h3 class="header-panel"><fmt:message key="feedback.header.text" bundle="${lang}"/></h3>
     </div>
     <div class="panel-body">
-
+        <div id="feedback-content-div"></div>
     </div>
 </div>
 </body>
