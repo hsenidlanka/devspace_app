@@ -42,31 +42,28 @@
     <%--<div class="col-xs-1"></div>--%>
     <div class="col-xs-12">
         <fieldset class="scheduler-border">
-            <legend class="scheduler-border" id="searchCriteria"></legend>
+            <legend class="scheduler-border" id="searchCriteria">
+                <fmt:message key="user.userview.customer.label.filter" bundle="${bundle1}"/>
+            </legend>
 
             <div class="form-group">
                 <div class="row">
-                    <div class="col-xs-8" style="width: 64%  ">
-                        <div class="col-xs-2" style="text-align: right">
-                            <label class=" control-label" >
-                                <fmt:message key="user.userview.customer.label.filter" bundle="${bundle1}"/>
-                            </label>
-                        </div>
-                        <!--checkboxes to select-->
-                        <div class="col-xs-10" id="checkboxDiv">
-                            <div class="col-xs-5">
-                                <label class="checkbox-inline">
-                                    <input type="checkbox" value="1" id="regCheck" onchange="showMe()">
-                                    <fmt:message key="user.userview.customer.filter.regDate" bundle="${bundle1}"/>
-                                </label>
+                    <div class="col-xs-9" style="width: 64% ">
+                            <div class="col-xs-6">
+                                <div class="col-xs-2" style="width: 50%;">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" value="1" id="regCheck" onchange="showMe()">
+                                        <fmt:message key="user.userview.customer.filter.regDate" bundle="${bundle1}"/>
+                                    </label>
+                                </div>
                             </div>
-                            <div class="col-xs-4">
+                            <div class="col-xs-4" style="text-align: right;margin: 0 -90px 0 -120px;">
                                 <label class="checkbox-inline">
                                     <input type="checkbox" value="3" id="liveCheck" onchange="showMe()">
                                     <fmt:message key="user.userview.customer.filter.livingArea" bundle="${bundle1}"/>
                                 </label>
                             </div>
-                            <div class="col-xs-3">
+                            <div class="col-xs-2" style="margin: 0 0px 0 190px;">
                                 <select id="selectVerifyOrNot">
                                     <option value="Verified">
                                         <fmt:message key="user.userview.customer.selectOption.verified" bundle="${bundle1}"/>
@@ -76,11 +73,11 @@
                                     </option>
                                 </select>
                             </div>
-                        </div>
+                        <%--</div>--%>
                         <!--<div class="col-xs-2"></div>-->
                     </div>
 
-                    <div class="col-xs-4" style="width: 36%">
+                    <div class="col-xs-3" style="width: 36%">
                         <div class="col-xs-8">
                             <input class="form-control typeahead"  placeholder="Username" type="text" id="cnameSearch" >
                         </div>
@@ -98,41 +95,38 @@
        <!--Filtering elements to be displayed as checkbox is checked     -->
             <div class="form-group">
                 <div class="row">
-                    <div class="col-xs-8" id="regPeriod"  style="width: 64%; display:none">
-                        <div class="col-xs-2"  style="text-align: right">
-                            <label class=" control-label">
-                                <fmt:message key="user.userview.customer.filter.regDate.from" bundle="${bundle1}"/>
-                            </label>
-                        </div>
-                        <div class="col-xs-10">
-                            <div class="col-xs-4">
+                    <div class="col-xs-9"  style="width: 64%; ">
+                        <div class="col-xs-6"  id="regPeriod" style="text-align: left; margin: -25px -2px 0 0; display:none">
+                            <div class="col-xs-6">
+                                <label class=" control-label" >
+                                    <fmt:message key="user.userview.customer.filter.regDate.from" bundle="${bundle1}"/>
+                                </label>
                                 <input class="form-control" id="fromDate" type="text"
                                                placeholder="Click on me" style="width: 130px"/>
                             </div>
-                            <div class="col-xs-1">
+                            <div class="col-xs-6">
                                 <label class=" control-label">
                                     <fmt:message key="user.userview.customer.filter.regDate.to" bundle="${bundle1}"/>
                                 </label>
-                            </div>
-                            <div class="col-xs-4">
+
                                 <input class="form-control" id="toDate" placeholder="Click on me"
                                                type="text" style="width: 130px" />
                             </div>
                         </div>
-                    </div>
-
-                    <!--next half-->
-                    <!--name form-group-->
-                    <div class="col-xs-4" style="width: 36%">
-                        <div class="col-xs-8">
-                                <select class="form-control" id="citySearch"  style="display: none;">
+                        <div class="col-xs-6" >
+                            <div class="col-xs-8" >
+                                <select class="form-control" id="citySearch" style="text-align: right;margin:0px -5px 0 -50px;;display: none;" >
                                     <option><fmt:message key="user.customer.select" bundle="${bundle1}" /></option>
                                     <option><fmt:message key="user.customer.city1" bundle="${bundle1}" /></option>
                                     <option><fmt:message key="user.customer.city2" bundle="${bundle1}" /></option>
                                     <option><fmt:message key="user.customer.city3" bundle="${bundle1}" /></option>
                                     <option><fmt:message key="user.customer.city4" bundle="${bundle1}" /></option>
                                 </select>
+                            </div>
                         </div>
+                    </div>
+
+                    <div class="col-xs-4" style="width: 36%">
                     </div>
                 </div>
             </div>
@@ -177,15 +171,22 @@
 
             </div>
             <div class="modal-footer" align="right">
-                <button class="btn btn-success" type="button" value="Yes" id="btnBlockCustomer" >
-                    <fmt:message key="user.block.modal.button.yes" bundle="${bundle1}" />
-                    <span class="glyphicon glyphicon-ok"></span>
-                </button>
-                <button class="btn btn-success" type="button" id="btnCnclBlockCustomer" value="cancel"
-                        data-dismiss="modal" aria-hidden="true">
-                    <fmt:message key="user.block.modal.button.cancel" bundle="${bundle1}" />
-                    <span class="glyphicon glyphicon-remove"></span>
-                </button>
+                <div class="col-xs-3"></div>
+                <div class="col-xs-2" >
+                    <button class="btn btn-success" type="button" id="btnCnclBlockCustomer" value="cancel"
+                            data-dismiss="modal" aria-hidden="true">
+                        <fmt:message key="user.block.modal.button.cancel" bundle="${bundle1}" />
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>
+                <div class="col-xs-2"></div>
+                <div class="col-xs-2" >
+                    <button class="btn btn-success" type="button" value="Yes" id="btnBlockCustomer" >
+                        <fmt:message key="user.block.modal.button.yes" bundle="${bundle1}" />
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </button>
+                </div>
+                <div class="col-xs-3"></div>
             </div>
         </div>
     </div>
@@ -379,22 +380,30 @@
                             </div>
                         </div>
                     </div>
-
-
-                    <form:button class="btn btn-success" type="submit" value="Update" id="btnUpdateCustomer">
-                        <fmt:message key="user.customer.update.form.button" bundle="${bundle1}" />
-                    </form:button>
-                    <form:button class="btn btn-success" type="button" value="cancel" id="btnCnclUpdateStaff" data-dismiss="modal"
-                                 aria-hidden="true">
-                        <fmt:message key="user.block.modal.button.cancel" bundle="${bundle1}" />
-                    </form:button>
+                    <div class="modal-footer" align="right">
+                        <div class="col-xs-3"></div>
+                        <div class="col-xs-2" >
+                            <form:button class="btn btn-success" type="button" value="cancel" id="btnCnclUpdateStaff" data-dismiss="modal"
+                                     aria-hidden="true">
+                                <fmt:message key="user.block.modal.button.cancel" bundle="${bundle1}" />
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </form:button>
+                        </div>
+                        <div class="col-xs-2"></div>
+                        <div class="col-xs-2" >
+                            <form:button class="btn btn-success" type="submit" value="Update" id="btnUpdateCustomer">
+                                <fmt:message key="user.customer.update.form.button" bundle="${bundle1}" />
+                                <span class="glyphicon glyphicon-ok"></span>
+                            </form:button>
+                        </div>
+                    </div>
 
                 </form:form>
             </div>
 
-            <div class="modal-footer" align="right">
 
-            </div>
+
+
         </div>
     </div>
 </div>

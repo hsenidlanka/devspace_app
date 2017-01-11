@@ -129,13 +129,21 @@
                 </div>
             </div>
             <div class="modal-footer" align="right">
-                <button class="btn btn-success" type="button" value="Yes" id="btnUnblockCustomer">
-                    <fmt:message key="user.block.modal.button.yes" bundle="${bundle1}" />
-                </button>
-                <button class="btn btn-success" type="button" value="cancel" id="btnCnclBlockStaff"
-                        data-dismiss="modal" aria-hidden="true">
-                    <fmt:message key="user.block.modal.button.cancel" bundle="${bundle1}" />
-                </button>
+                <div class="col-xs-3"></div>
+                <div class="col-xs-2" >
+                    <button class="btn btn-success" type="button" value="cancel" id="btnCnclBlockStaff"
+                            data-dismiss="modal" aria-hidden="true">
+                        <fmt:message key="user.block.modal.button.cancel" bundle="${bundle1}" />
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>
+                <div class="col-xs-2"></div>
+                <div class="col-xs-2" >
+                    <button class="btn btn-success" type="button" value="Yes" id="btnUnblockCustomer">
+                        <fmt:message key="user.block.modal.button.yes" bundle="${bundle1}" />
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
