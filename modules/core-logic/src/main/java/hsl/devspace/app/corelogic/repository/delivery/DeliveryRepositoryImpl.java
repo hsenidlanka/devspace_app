@@ -6,6 +6,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by hsenid on 9/19/16.
@@ -71,5 +73,11 @@ public class DeliveryRepositoryImpl implements DeliveryRepository {
         row = jdbcTemplate.update(sql, new Object[]{deliveryMethod});
         log.info("{} delivery method deleted",row);
         return row;
+    }
+
+    @Override
+    public List<Map<String, Object>> selectDeliveryDetails(int limit, int offset) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT shopping_cart.order_id,delivery.agent_name,delivery.recepient_name,delivery.recepient_address,delivery.delivery_date,delivery.delivery_time,delivery.delivery_status FROM delivery INNER JOIN shopping_cart ON shopping_cart.id=delivery.cart_id WHERE delivery.delivery_method_id=2 LIMIT ? OFFSET ? ", limit, offset);
+        return mp;
     }
 }
