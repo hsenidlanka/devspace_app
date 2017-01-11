@@ -60,11 +60,9 @@ public class LoginController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     public Verification login(HttpSession session, HttpServletRequest request) {
+
         String uname = request.getParameter(username);
-//        String uname = "testre";
         String pword = request.getParameter(password);
-//        String pword = "password";
-                logger.info("{} {}", uname,pword);
         User user = new User();
         ReplyFromServer replyFromServer;
 
@@ -113,7 +111,7 @@ public class LoginController {
                     session.invalidate();
                 }
             }
-//            verification.setUserStatus(status);
+            verification.setUserStatus(status);
 
         } catch (RestClientException e) {
             logger.error(e.getMessage());
