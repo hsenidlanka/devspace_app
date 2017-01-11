@@ -39,13 +39,19 @@ public class PackageRepositoryImpl implements PackageRepository {
     /*Add new package*/
     @Override
     public int add(Package pack) {
-        int row;
+        int row = 0;
        /* MultipartFile img = pack.getImageUrl();
         String ims = img.getOriginalFilename();*/
-        String sql = "INSERT INTO package " +
-                "(name,price,image,created_date,creator) VALUES (?,?,?,CURRENT_DATE ,?)";
-        row = jdbcTemplate.update(sql, new Object[]{pack.getPackName(), pack.getPrice(), pack.getImage(), pack.getCreator()});
-        log.debug("{} new package added", row);
+        if (pack.getCreator().equals("") || pack.getCreator() == null) {
+            log.info("Values cannot be null");
+
+        } else {
+            String sql = "INSERT INTO package " +
+                    "(name,price,image,created_date,creator) VALUES (?,?,?,CURRENT_DATE ,?)";
+            row = jdbcTemplate.update(sql, new Object[]{pack.getPackName(), pack.getPrice(), pack.getImage(), pack.getCreator()});
+            log.debug("{} new package added", row);
+        }
+
         return row;
     }
 
@@ -251,6 +257,7 @@ public class PackageRepositoryImpl implements PackageRepository {
                 List<Map<String, Object>> mp1 = jdbcTemplate.queryForList("SELECT name FROM item WHERE id=?", mp2.get(i).get("item_id"));
                 List<Map<String, Object>> mp3 = jdbcTemplate.queryForList("SELECT size FROM size WHERE item_id=?", mp2.get(i).get("item_id"));
                 List<Map<String, Object>> mp4 = jdbcTemplate.queryForList("SELECT c.name FROM category c WHERE id=(SELECT category_id FROM sub_category WHERE id=(SELECT sub_category_id FROM item WHERE id=?))", mp2.get(i).get("item_id"));
+                List<Map<String, Object>> mp5 = jdbcTemplate.queryForList("SELECT quantity FROM package_item WHERE item_id=? AND package_id=?", mp2.get(i).get("item_id"), mp.get(0).get("id"));
 
                 rv.setItem(mp1.get(0).get("name").toString());
                 for (int j = 0; j < mp3.size(); j++) {
@@ -258,7 +265,7 @@ public class PackageRepositoryImpl implements PackageRepository {
                 }
                 rv.setSize(sizes);
                 rv.setCategoryName(mp4.get(0).get("name").toString());
-
+                rv.setQuantity(Integer.parseInt(mp5.get(0).get("quantity").toString()));
                 items.add(rv);
 
             }

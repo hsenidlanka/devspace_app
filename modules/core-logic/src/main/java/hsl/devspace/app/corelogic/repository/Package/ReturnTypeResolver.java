@@ -10,6 +10,15 @@ public class ReturnTypeResolver {
     private String item;
     private List<String> size;
     private String categoryName;
+    private int quantity;
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 
     public String getItem() {
         return item;
@@ -35,10 +44,11 @@ public class ReturnTypeResolver {
         this.categoryName = categoryName;
     }
 
-    public ReturnTypeResolver(String item, List<String> size, String categoryName) {
+    public ReturnTypeResolver(String item, List<String> size, String categoryName, int quantity) {
         this.item = item;
         this.size = size;
         this.categoryName = categoryName;
+        this.quantity = quantity;
     }
 
     public ReturnTypeResolver() {
@@ -50,6 +60,7 @@ public class ReturnTypeResolver {
                 "item='" + item + '\'' +
                 ", size=" + size +
                 ", categoryName='" + categoryName + '\'' +
+                ", quantity=" + quantity +
                 '}';
     }
 }
