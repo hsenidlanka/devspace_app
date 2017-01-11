@@ -74,11 +74,13 @@ public class UpdateUserController {
             session.removeAttribute("username");
             session.removeAttribute("name");
             session.removeAttribute("email");
+            session.removeAttribute("mobile");
 
             session.setAttribute("username", updateuser.getUsername());
             session.setAttribute("name", SendStringBuilds.sendString(updateuser.getFirstName(), " ", updateuser.getLastName()));
+            session.setAttribute("mobile", updateuser.getMobile());
             session.setAttribute("email", updateuser.getEmail());
-
+            logger.info("test ses update {}", session.getAttribute("mobile"));
         } catch (RestClientException e) {
             logger.error("update error {}", e.getMessage());
             redirectAttributes.addFlashAttribute("updatedMsg", "Profile updation failed!!!");
