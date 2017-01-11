@@ -61,4 +61,10 @@ public interface ShoppingCartRepository {
 
     int countOrdersForCustomerByDate(String customerUsername, LocalDate date);
 
+    List<Map<String, Object>> selectItemHistoryForCustomer(String username, int limit, int offset);
+
+    List<Map<String, Object>> selectUnAssignedDelivery();
+
+    List<Map<String, Object>> selectPendingDelivery();
+
 }
