@@ -30,4 +30,8 @@ public interface FeedbackRepository {
     List<Map<String, Object>> filterFeedbacksByStatus(String status, int limit, int offset);
 
     List<Map<String, Object>> selectFeedbacksByCustomerTypeAhead(String nameKey, int limit, int offset);
+
+    int updateFeedback(int id, String comment, int stars);
+
+    List<Map<String, Object>> selectFeedbacksByCustomerAndItem(String username, String item);
 }

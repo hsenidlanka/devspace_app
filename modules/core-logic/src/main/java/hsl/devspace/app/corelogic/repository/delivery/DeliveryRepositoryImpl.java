@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -79,5 +80,15 @@ public class DeliveryRepositoryImpl implements DeliveryRepository {
     public List<Map<String, Object>> selectDeliveryDetails(int limit, int offset) {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT shopping_cart.order_id,delivery.agent_name,delivery.recepient_name,delivery.recepient_address,delivery.delivery_date,delivery.delivery_time,delivery.delivery_status FROM delivery INNER JOIN shopping_cart ON shopping_cart.id=delivery.cart_id WHERE delivery.delivery_method_id=2 LIMIT ? OFFSET ? ", limit, offset);
         return mp;
+    }
+
+    @Override
+    public List<String> selectDeliveryAgents(String branch) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT username FROM staff WHERE designation='Agent' AND branch=? AND status='active'", branch);
+        List<String> agents = new ArrayList<String>();
+        for (int i = 0; i < mp.size(); i++) {
+            agents.add(mp.get(i).get("username").toString());
+        }
+        return agents;
     }
 }

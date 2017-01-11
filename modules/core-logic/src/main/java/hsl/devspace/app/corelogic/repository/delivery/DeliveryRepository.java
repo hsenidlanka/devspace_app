@@ -16,4 +16,6 @@ public interface DeliveryRepository {
 
     List<Map<String, Object>> selectDeliveryDetails(int limit, int offset);
 
+    List<String> selectDeliveryAgents(String branch);
+
 }

@@ -103,5 +103,18 @@ public class FeedbackRepositoryImpl implements FeedbackRepository{
         return mp;
     }
 
+    @Override
+    public int updateFeedback(int id, String comment, int stars) {
+        String sql = "UPDATE feedback SET comment=?,number_of_stars=? WHERE id=?";
+        int row = jdbcTemplate.update(sql, new Object[]{comment, stars, id});
+        return row;
+    }
+
+    @Override
+    public List<Map<String, Object>> selectFeedbacksByCustomerAndItem(String username, String item) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT feedback.comment,feedback.number_of_stars,c.username, i.name AS item FROM feedback INNER JOIN item i ON i.id=feedback.item_id INNER JOIN customer c ON feedback.customer_id=c.id WHERE c.username=? AND i.name=? ", username, item);
+        return mp;
+    }
+
 
 }
