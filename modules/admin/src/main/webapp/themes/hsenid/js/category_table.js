@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
 
-    var pgLimit = 3;
+    var pgLimit = 5;
     var catName = $("#txtViewSearchCategory").val();
 
     $.ajax({
@@ -10,7 +10,7 @@ $(document).ready(function () {
         success: function (result) {
 
             $('#tableCategory').bootstrapTable({
-                height: 390,
+                height: 380,
                 pagination: false,
                 search: false,
                 showColumns: false,

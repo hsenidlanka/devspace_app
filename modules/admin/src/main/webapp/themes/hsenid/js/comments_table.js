@@ -10,7 +10,7 @@ $(document).ready(function () {
             //alert(result);
 
             $('#tableComments').bootstrapTable({
-                height: 380,
+                height: 460,
               /*  pagination: true,
                 pageSize: 4,
                 pageList: [10, 20, 30],*/
@@ -37,6 +37,12 @@ $(document).ready(function () {
                     align: 'left',
                     sortable: true
                     //class: 'col-xs-2'
+                },{
+                    field: 'time',
+                    title: 'Time :',
+                    align: 'left',
+                    sortable: true
+                        //class: 'col-xs-2'
                 }, {
                     field: 'item',
                     title: 'Item :',
@@ -44,16 +50,10 @@ $(document).ready(function () {
                     sortable: true
                     //class: 'col-xs-2'
                 },{
-                    field: 'time',
-                    title: 'Time :',
-                    align: 'left',
-                    sortable: true
-                        //class: 'col-xs-2'
-                },{
                     field: 'comment',
                     title: 'Comment :',
                     align: 'left',
-                    class: 'col-xs-3'
+                    class: 'col-xs-4'
                 },{
                     field: 'status',
                     title: 'Status :',

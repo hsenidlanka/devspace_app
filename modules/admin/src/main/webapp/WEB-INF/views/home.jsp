@@ -186,22 +186,21 @@
             <ul class="nav navbar-nav">
               <li><img src="<c:url value="/themes/hsenid/images/feedback.png"/>"/></li>
               <li>
-                <a href="<c:out value="${commentsView}"/>" class="panel-sub-menu2" style="font-weight:bold;
+                <a href="<c:out value="${commentsView}"/>" class="panel-sub-menu3" style="font-weight:bold;
                 font-size:18px;">
                   <fmt:message key="notification.commentsview.breadcrumb.view" bundle="${bundle1}"/>
                 </a>
               </li>
-              <li>
+          <%--    <li>
                 <a href="<c:out value="${ratingsView}"/>" class="panel-sub-menu2" style="font-weight:bold;
                 font-size:18px;">
                   <fmt:message key="notification.ratingssview.breadcrumb.view" bundle="${bundle1}"/>
                 </a>
-              </li>
+              </li>--%>
             </ul>
           </div>
         </div>
       </div>
-
 
       <div class="panel panel-default">
         <div class="panel-heading">

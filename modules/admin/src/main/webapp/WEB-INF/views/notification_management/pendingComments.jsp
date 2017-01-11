@@ -89,30 +89,26 @@
                 <%--comments filter criteria--%>
                     <div class="col-xs-12">
                         <fieldset class="scheduler-border">
-                            <legend class="scheduler-border" id="searchCriteria"></legend>
+                            <legend class="scheduler-border" id="commentSearch" >
+                                <fmt:message key="user.userview.customer.label.filter" bundle="${bundle1}"/>
+                            </legend>
                             <div class="form-group">
                                 <div class="row">
-                                    <div class="col-xs-8" style="width: 64%">
-                                        <div class="col-xs-2" style="text-align: right">
-                                            <label class=" control-label" >
-                                                <fmt:message key="user.userview.customer.label.filter" bundle="${bundle1}"/>
-                                            </label>
-                                        </div>
-                                        <!--checkboxes to select-->
-                                        <div class="col-xs-10" id="checkboxDiv">
-                                            <div class="col-xs-5">
+                                    <div class="col-xs-9" style="width: 64%">
+                                        <div class="col-xs-6" style="text-align: left;">
+                                            <div class="col-xs-2" style="width: 50%;">
                                                 <label class="checkbox-inline">
                                                     <input type="checkbox" value="1" id="postCheck" onchange="showMeComments()">
-                                                        <fmt:message key="notification.commentsview.searchcriteria.date" bundle="${bundle1}"/>
+                                                    <fmt:message key="notification.commentsview.searchcriteria.date" bundle="${bundle1}"/>
                                                 </label>
                                             </div>
-                                            <div class="col-xs-5">
-                                                <label class="checkbox-inline">
-                                                    <input type="checkbox" value="2" id="statusCheck" onchange="showMeComments()">
+                                        </div>
+                                        <!--checkboxes to select-->
+                                        <div class="col-xs-6" style="text-align:left;margin: 0 -10px 0 -10px;">
+                                            <label class="checkbox-inline">
+                                                <input type="checkbox" value="2" id="statusCheck" onchange="showMeComments()">
                                                         <fmt:message key="notification.commentsview.searchcriteria.status" bundle="${bundle1}"/>
-                                                </label>
-                                            </div>
-                                            <div class="col-xs-2"></div>
+                                            </label>
                                         </div>
                                     </div>
 
@@ -134,25 +130,31 @@
                             <!--Filtering elements to be displayed as checkbox is checked     -->
                             <div class="form-group">
                                 <div class="row">
-                                    <div class="col-xs-8" id="postedPeriod"  style="width: 64%; display:none">
-                                        <div class="col-xs-2"  style="text-align: right">
-                                            <label class=" control-label">
-                                                <fmt:message key="user.userview.customer.filter.regDate.from" bundle="${bundle1}"/>
-                                            </label>
-                                        </div>
-                                        <div class="col-xs-10">
-                                            <div class="col-xs-5">
+                                    <div class="col-xs-9"  style="width: 64%; ">
+                                        <div class="col-xs-6"  id="postedPeriod"  style="text-align: left; margin: -25px -2px 0 0; display:none">
+                                            <div class="col-xs-6">
+                                                <label class=" control-label">
+                                                    <fmt:message key="user.userview.customer.filter.regDate.from" bundle="${bundle1}"/>
+                                                </label>
                                                 <input class="form-control" id="fromDateComments" type="text"
                                                        placeholder="Click on me" style="width: 130px"/>
                                             </div>
-                                            <div class="col-xs-1">
+                                            <div class="col-xs-6">
                                                 <label class=" control-label">
                                                     <fmt:message key="user.userview.customer.filter.regDate.to" bundle="${bundle1}"/>
                                                 </label>
-                                            </div>
-                                            <div class="col-xs-5">
                                                 <input class="form-control" id="toDateComments" placeholder="Click on me"
                                                        type="text" style="width: 130px" />
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6"   >
+                                            <div class="col-xs-8" >
+                                                <select class="form-control" id="statusSearch" style="text-align: right;margin:0px -25px 0 -70px;;display: none;">
+                                                    <option value="--Select--"><fmt:message key="notification.commentsview.status.select" bundle="${bundle1}" /></option>
+                                                    <option value="Active"><fmt:message key="notification.commentsview.status.active" bundle="${bundle1}" /></option>
+                                                    <option value="Inactive"><fmt:message key="notification.commentsview.status.inactive" bundle="${bundle1}" /></option>
+                                                    <option value="Blocked"><fmt:message key="notification.commentsview.status.block" bundle="${bundle1}" /></option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -160,14 +162,6 @@
                                     <!--next half-->
                                     <!--name form-group-->
                                     <div class="col-xs-4" style="width: 36%">
-                                        <div class="col-xs-8">
-                                            <select class="form-control" id="statusSearch"  style="display: none;">
-                                                <option value="--Select--"><fmt:message key="notification.commentsview.status.select" bundle="${bundle1}" /></option>
-                                                <option value="Active"><fmt:message key="notification.commentsview.status.active" bundle="${bundle1}" /></option>
-                                                <option value="Inactive"><fmt:message key="notification.commentsview.status.inactive" bundle="${bundle1}" /></option>
-                                                <option value="Blocked"><fmt:message key="notification.commentsview.status.block" bundle="${bundle1}" /></option>
-                                            </select>
-                                        </div>
                                     </div>
                                 </div>
                             </div>

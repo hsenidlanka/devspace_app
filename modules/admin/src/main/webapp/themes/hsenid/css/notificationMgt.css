@@ -15,8 +15,12 @@ fieldset.scheduler-border {
     font-weight: bold !important;
 }
 
-#searchCriteria {
-    border-color: #989393;
+#commentSearch {
+    width: 10%;
+    margin: 0 -40px 10px -1000px;
+    /* text-align: left; */
+    font-size: 16px;
+    font-weight: bold;
 }
 .comment-modal-header-style{
     color: #e7ce98;

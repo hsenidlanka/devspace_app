@@ -27,10 +27,11 @@
     margin: 20px 0 20px 459px;
 }
 #userviewBreadcrump{
-    margin: 30px 0 20px 450px;
+    margin: 20px 0 30px 470px;
 }
 #viewuser_box{
     width: 90%;
+    margin: 45px 0 0 10px;
 }
 .details{
     font-weight: 100;
@@ -122,5 +123,7 @@ legend.scheduler-border {
     color: #57ad06 !important;
     font-weight: bold !important;
 }
-
-
+#searchCriteria{
+margin: 0 -10px 10px -1000px;
+font-weight: bold;
+}

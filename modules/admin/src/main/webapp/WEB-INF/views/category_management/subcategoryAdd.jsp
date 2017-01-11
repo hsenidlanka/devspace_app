@@ -62,9 +62,9 @@
                     </label>
                 </div>
                 <div class="row">
-                    <div class="col-xs-2"></div>
-                    <div class=" col-xs-6 radio" style="text-align: left">
-                        <label id="subcat" class="col-xs-6 control-label">
+                    <%--<div class="col-xs-2"></div>--%>
+                    <div class=" col-xs-12 radio">
+                        <label id="subcat" class="col-xs-6 control-label" style="text-align:left">
 
                         </label>
                     </div>
@@ -72,9 +72,10 @@
             </div>
         </div>
           <%--<fieldset class="scheduler-border" style="padding-right: 300px;">--%>
-              <legend class="scheduler-border">
-                  <fmt:message key="category.categoryadd.form.add.subcategories" bundle="${bundle1}"/>
-              </legend>
+              <%--<legend class="scheduler-border">--%>
+
+              <fmt:message key="category.categoryadd.form.add.subcategories" bundle="${bundle1}"/>
+              <%--</legend>--%>
 
 
               <div class="row subcat_add_table col-xs-12" id="subcat_table" style="margin-left: 1%;">
