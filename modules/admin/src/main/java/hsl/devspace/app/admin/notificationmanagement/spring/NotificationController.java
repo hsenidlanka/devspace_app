@@ -44,12 +44,14 @@ public class NotificationController {
     List<Map<String, Object>> showCommentsTable( @RequestParam("initPage") String initPage,
                                                  @RequestParam("pgLimit") String  pgLimit){
 
+        LOG.error("inside commentsView call");
         //cast the initial page and page limits in pagination to integers
         int initPg = Integer.parseInt(initPage);
         int limitPg = Integer.parseInt(pgLimit);
+        LOG.error("page{} and liomit{}",initPage, limitPg);
 
         List<Map<String, Object>> commentList = feedbackRepository.view(limitPg,initPg);
-        LOG.error("NOTIFICATION COMMENTS table{}",commentList);
+        LOG.error("NOTIFICATION COMMENTS table{}", commentList);
 
         return commentList ;
     }
@@ -60,7 +62,7 @@ public class NotificationController {
     @RequestMapping(value = "/CommentsPaginationTable", method = RequestMethod.GET)
     public @ResponseBody int loadPagination(){
 
-        LOG.error("Comments Count is {}",feedbackRepository.count());
+        LOG.info("Comments Count is {}", feedbackRepository.count());
         return feedbackRepository.count();
     }
 
@@ -72,7 +74,7 @@ public class NotificationController {
 
         int cmntId2=Integer.parseInt(cmntId);
         int approveState= feedbackRepository.changeStatus(cmntId2,"active");
-        LOG.error("Comment approve Result: {}",approveState);
+        LOG.info("Comment approve Result: {}", approveState);
         return approveState;
     }
 
@@ -92,10 +94,10 @@ public class NotificationController {
     @RequestMapping(value = "/commentsView/typeheadName/data", method = RequestMethod.GET)
     public @ResponseBody
     List<Map<String, Object>> typeheadNameFilterData (@RequestParam("cmntName") String cmntName,
-                                                      @RequestParam("pageLimit") String pageLimit,
+                                                      @RequestParam("pgLimit") String pgLimit,
                                                       @RequestParam("initPage") String initPage){
         int initPg = Integer.parseInt(initPage);
-        int limitPg = Integer.parseInt(pageLimit);
+        int limitPg = Integer.parseInt(pgLimit);
 
         List<Map<String, Object>> nameList=feedbackRepository.selectFeedbacksByCustomerTypeAhead(cmntName,limitPg,initPg);
         return  nameList;
@@ -107,26 +109,26 @@ public class NotificationController {
     public @ResponseBody
     List<Map<String, Object>> dateStatusFilterData (@RequestParam("from") String from,@RequestParam("to") String to,
                                                     @RequestParam("status") String status,
-                                                    @RequestParam("pageLimit") String pageLimit,
+                                                    @RequestParam("pgLimit") String pgLimit,
                                                     @RequestParam("initPage") String initPage) throws ParseException {
         int initPg = Integer.parseInt(initPage);
-        int limitPg = Integer.parseInt(pageLimit);
+        int limitPg = Integer.parseInt(pgLimit);
 
-
-        //convert java.util time to sql time
-        SimpleDateFormat sdf= new SimpleDateFormat("MM/dd/yyyy");
-        Date fromDate= sdf.parse(from);
-        Date toDate= sdf.parse(to);
-        java.sql.Date sqlfromDate= new java.sql.Date(fromDate.getTime());
-        java.sql.Date sqltoDate= new java.sql.Date(toDate.getTime());
-
+        LOG.error("inside the date range, status filter method");
         List<Map<String, Object>> outCommentSearch = new ArrayList<Map<String, Object>>();
 
         //date range is selected
         if((!(from.equals(""))) && (!(to.equals(""))) && ((status.equals("--Select--")))) {
+            //convert java.util time to sql time
+            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+            Date fromDate = sdf.parse(from);
+            Date toDate = sdf.parse(to);
+            java.sql.Date sqlfromDate = new java.sql.Date(fromDate.getTime());
+            java.sql.Date sqltoDate = new java.sql.Date(toDate.getTime());
 
             LOG.error("date range selected: from{}, to{}",from,to);
             List<Map<String, Object>> outDateRange=feedbackRepository.selectFeedbacksByDateRange(sqlfromDate, sqltoDate, limitPg, initPg);
+            LOG.error("output of date range selected: {}",outDateRange);
             return outDateRange;
         }
 
@@ -135,11 +137,20 @@ public class NotificationController {
 
             LOG.error("status {}", status);
             List<Map<String, Object>> outStatus = feedbackRepository.filterFeedbacksByStatus(status, limitPg, initPg);
+            LOG.error("Status filter output: {}",outStatus);
             return outStatus;
         }
 
         //both the city and date range are selected
         if((!(from.equals(""))) && (!(to.equals(""))) && (!(status.equals("--Select--")))) {
+
+            //convert java.util time to sql time
+            LOG.error("from date:{} and to date:{}",from,to);
+            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+            Date fromDate = sdf.parse(from);
+            Date toDate = sdf.parse(to);
+            java.sql.Date sqlfromDate = new java.sql.Date(fromDate.getTime());
+            java.sql.Date sqltoDate = new java.sql.Date(toDate.getTime());
 
             LOG.error(" Date range and status selected: status{}, from:{}, to{}", status,from,to);
             List<Map<String, Object>> outCityDate=feedbackRepository.selectFeedbacksByDateRangeAndStatus(sqlfromDate,sqltoDate,status,limitPg,initPg);
