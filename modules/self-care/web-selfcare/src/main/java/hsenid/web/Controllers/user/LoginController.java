@@ -61,8 +61,10 @@ public class LoginController {
     @ResponseBody
     public Verification login(HttpSession session, HttpServletRequest request) {
         String uname = request.getParameter(username);
+//        String uname = "testre";
         String pword = request.getParameter(password);
-        logger.info("{} {}", uname,pword);
+//        String pword = "password";
+                logger.info("{} {}", uname,pword);
         User user = new User();
         ReplyFromServer replyFromServer;
 
@@ -77,6 +79,7 @@ public class LoginController {
         ServerResponseMessage responseMessage;
 
         try {
+
             responseMessage = restTemplate.postForObject(loginUrl, jsonObjectHttpEntity, ServerResponseMessage.class);
             String status = (String) responseMessage.getData().get(0).get("accountStatus");
             if (status.equals("verified")) {
@@ -110,7 +113,7 @@ public class LoginController {
                     session.invalidate();
                 }
             }
-            verification.setUserStatus(status);
+//            verification.setUserStatus(status);
 
         } catch (RestClientException e) {
             logger.error(e.getMessage());
