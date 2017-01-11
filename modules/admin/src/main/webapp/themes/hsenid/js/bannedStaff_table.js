@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    var pageLimit = 5;
+    var pageLimit = 10;
     //alert(pageLimit);
     $.ajax({
         url: 'https://localhost:8443/admin/users/view/bannedstaffTable',

@@ -16,8 +16,7 @@
         #logo {
             position: absolute;
             height: 150px;
-            top: -5px;
-            left: 15px;
+            margin: -25px 10px -30px 10px;
         }
 
         #logout {

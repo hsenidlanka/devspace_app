@@ -69,7 +69,7 @@
 <div class="row">
 <div class="viewcategorysize">
     <center>
-        <div class="panel panel-default " style="width:90%">
+        <div class="panel panel-default " style="width:90%;margin: 20px 0 0 0;">
 
             <div class="panel-heading common-form-headings">
                 <h3 class="default-panel-headings">
@@ -84,16 +84,15 @@
                             <label class="control-label" style="float: right;">
                                 <fmt:message key="category.categoryview.searchbar.label"  bundle="${bundle1}"/>
                             </label>
-
                         </div>
                         <div class="col-sm-4">
                             <input class="form-control typeahead" id="txtViewSearchCategory" type="text"/>
                         </div>
                         <div class="col-sm-3">
-                            <button type="button" class="btn btn-success" id="btnViewSearchCat">
+                            <%--<button type="button" class="btn btn-success" id="btnViewSearchCat">
                                 <span class="glyphicon glyphicon-search"></span>
                                 <fmt:message key="category.categoryview.searchbar.button"  bundle="${bundle1}"/>
-                            </button>
+                            </button>--%>
                         </div>
                         <div class="col-sm-1"></div>
                     </div>
@@ -150,16 +149,18 @@
                 <div class="form-group row" style="text-align: center">
                     <div class="col-xs-3"></div>
                     <div class="col-xs-2" >
+                        <button class="btn btn-success"  data-dismiss="modal" aria-hidden="true">
+                            <fmt:message key="category.categorydelete.modal.cancel" bundle="${bundle1}" />
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    </div>
+                    <div class="col-xs-2"></div>
+                    <div class="col-xs-2" >
                         <button class="btn btn-success" id="btnDeleteCategory">
                             <fmt:message key="category.categorydelete.modal.approve" bundle="${bundle1}" />
                             <span class="glyphicon glyphicon-ok"></span>
                         </button>
                     </div>
-                    <div class="col-xs-2"></div>
-                    <div class="col-xs-2" >
-                        <button class="btn btn-success"  data-dismiss="modal" aria-hidden="true">
-                            <fmt:message key="category.categorydelete.modal.cancel" bundle="${bundle1}" />
-                        <span class="glyphicon glyphicon-remove"></span></button></div>
                     <div class="col-xs-3"></div>
                 </div>
             </div>
@@ -186,19 +187,17 @@
             <div class="modal-body">
                 <form:form role="form" id="admin_editcatform"  method="POST" class="form-horizontal"
                            enctype="multipart/form-data" accept-charset="utf-8" action="/admin/category/editCategory">
-                    <fieldset style="margin: 0 40px 0 -30px;">
+                    <fieldset>
                         <br>
                         <div class="form-group">
                             <label for="categoryid" class="control-label col-sm-4">
                                 <fmt:message key="category.categoryedit.modal.id" bundle="${bundle1}" />
                             </label>
-
                             <div class="col-sm-8">
                                 <form:input path="category_id" type="text" class="form-control" id="categoryid"
                                             readonly="true"/>
                             </div>
                         </div>
-
                         <div class="form-group">
                             <label for="editcategoryname" class="control-label col-sm-4">
                                 <fmt:message key="category.categoryedit.modal.name" bundle="${bundle1}" />
@@ -210,7 +209,6 @@
                             </div>
 
                         </div>
-
                         <input name="catName" type="hidden" id="catName">
                         <div class="form-group">
                             <label for="editcategorydes" class="control-label col-sm-4">
@@ -239,8 +237,6 @@
                                     <fmt:message key="category.categoryedit.modal.imageChange" bundle="${bundle1}" /></a>
                             </div>
                         </div>
-
-
                         <div class="form-group">
                             <label class="control-label col-sm-4">
 
@@ -269,25 +265,25 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="modal-footer" style="height:10px">
                             <div class="form-group row" style="text-align: center">
                                 <div class="col-xs-3"></div>
+                                <div class="col-xs-2" >
+                                    <button class="btn btn-success"  data-dismiss="modal" aria-hidden="true">
+                                        <fmt:message key="category.categorydelete.modal.cancel" bundle="${bundle1}" />
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </button>
+                                </div>
+                                <div class="col-xs-2"></div>
                                 <div class="col-xs-2" >
                                     <button class="btn btn-success" id="btnEditCategory" type="submit">
                                         <fmt:message key="category.categoryedit.modal.approve" bundle="${bundle1}" />
                                         <span class="glyphicon glyphicon-ok"></span>
                                     </button>
                                 </div>
-                                <div class="col-xs-2"></div>
-                                <div class="col-xs-2" >
-                                    <button class="btn btn-success"  data-dismiss="modal" aria-hidden="true">
-                                        <fmt:message key="category.categorydelete.modal.cancel" bundle="${bundle1}" />
-                                        <span class="glyphicon glyphicon-remove"></span></button></div>
                                 <div class="col-xs-3"></div>
                             </div>
                         </div>
-
                     </fieldset>
                 </form:form>
             </div>

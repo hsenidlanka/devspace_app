@@ -169,13 +169,21 @@
 
             </div>
             <div class="modal-footer" align="right">
-                <button class="btn btn-success" type="button" value="Yes" id="btnBlockStaff">
-                    <fmt:message key="user.block.modal.button.yes" bundle="${bundle1}" />
-                </button>
-                <button class="btn btn-success" type="button" value="cancel" id="btnCnclBlockStaff" data-dismiss="modal"
-                        aria-hidden="true">
+                <div class="col-xs-3"></div>
+                <div class="col-xs-2" >
+                    <button class="btn btn-success" type="button" value="cancel" id="btnCnclBlockStaff" data-dismiss="modal"
+                            aria-hidden="true">
                         <fmt:message key="user.block.modal.button.cancel" bundle="${bundle1}" />
-                </button>
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>
+                <div class="col-xs-2"></div>
+                <div class="col-xs-2" >
+                    <button class="btn btn-success" type="button" value="Yes" id="btnBlockStaff">
+                        <fmt:message key="user.block.modal.button.yes" bundle="${bundle1}" />
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -472,21 +480,26 @@
                             </div>
                         </div>
                     </div>
-
-                    <form:button class="btn btn-success" type="submit" value="Update" id="btnUpdateStaff">
-                        <fmt:message key="user.customer.update.form.button" bundle="${bundle1}" />
-                    </form:button>
-                    <button class="btn btn-success" type="button" value="cancel" id="btnCnclUpdateStaff" data-dismiss="modal"
-                            aria-hidden="true">
-                        <fmt:message key="user.block.modal.button.cancel" bundle="${bundle1}" />
-                    </button>
-
+                    <div class="modal-footer" align="right">
+                        <div class="col-xs-3"></div>
+                        <div class="col-xs-2" >
+                            <button class="btn btn-success" type="button" value="cancel" id="btnCnclUpdateStaff" data-dismiss="modal"
+                                    aria-hidden="true">
+                                <fmt:message key="user.block.modal.button.cancel" bundle="${bundle1}" />
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                        </div>
+                        <div class="col-xs-2"></div>
+                        <div class="col-xs-2" >
+                            <form:button class="btn btn-success" type="submit" value="Update" id="btnUpdateStaff">
+                                <fmt:message key="user.customer.update.form.button" bundle="${bundle1}" />
+                                <span class="glyphicon glyphicon-ok"></span>
+                            </form:button>
+                        </div>
+                    </div>
                 </form:form>
             </div>
 
-            <div class="modal-footer" align="right">
-
-            </div>
         </div>
     </div>
 </div>
