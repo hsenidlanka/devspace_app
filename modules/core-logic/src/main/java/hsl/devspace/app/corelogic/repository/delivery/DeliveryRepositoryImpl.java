@@ -82,6 +82,11 @@ public class DeliveryRepositoryImpl implements DeliveryRepository {
         return mp;
     }
 
+    public int countDeliveryDetails() {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT shopping_cart.order_id,delivery.agent_name,delivery.recepient_name,delivery.recepient_address,delivery.delivery_date,delivery.delivery_time,delivery.delivery_status FROM delivery INNER JOIN shopping_cart ON shopping_cart.id=delivery.cart_id WHERE delivery.delivery_method_id=2 ");
+        return mp.size();
+    }
+
     @Override
     public List<String> selectDeliveryAgents(String branch) {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT username FROM staff WHERE designation='Agent' AND branch=? AND status='active'", branch);
@@ -89,6 +94,7 @@ public class DeliveryRepositoryImpl implements DeliveryRepository {
         for (int i = 0; i < mp.size(); i++) {
             agents.add(mp.get(i).get("username").toString());
         }
+        log.info("{}", agents);
         return agents;
     }
 }
