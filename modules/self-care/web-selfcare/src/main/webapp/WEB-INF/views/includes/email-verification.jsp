@@ -192,7 +192,7 @@
                         <div class="col-sm-4">
                             <center><a href="/web-selfcare/menu" class="btn btn-warning"><i class="fa fa-shopping-cart"
                                                                                aria-hidden="true"></i> Check Menu</a>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a class="btn btn-warning" href="/profile"><i
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a class="btn btn-warning" href="/web-selfcare/profile"><i
                                         class="fa fa-user" aria-hidden="true"></i> Check Profile</a></center>
                         </div>
                         <div class="col-sm-4"></div>

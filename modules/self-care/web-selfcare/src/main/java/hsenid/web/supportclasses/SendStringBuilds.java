@@ -10,4 +10,12 @@ public class SendStringBuilds {
         }
         return stringBuilder.toString();
     }
+
+    private static boolean isNotNullOrEmpty(String str) {
+        return str != null && !str.isEmpty();
+    }
+
+    public static String getValueOrDefault(String value, String defaultValue) {
+        return isNotNullOrEmpty(value) ? value : defaultValue;
+    }
 }

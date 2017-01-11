@@ -4,8 +4,46 @@
 var frisby = require('frisby');
 var base_url = "http://localhost:2222/pizza-shefu/api/v1.0";
 
+// Test add coupon-empty customer mobile.
+frisby.create('Coupon test 01-empty customer mobile')
+    .post(base_url + '/coupons/add/', {
+        "couponCode": "frisbytest"
+    }, {json: true})
+    .expectStatus(500)
+    .inspectJSON()
+    .expectJSONTypes({
+        code: String,
+        description: String,
+        status: String
+    })
+    .expectJSON({
+        "status": "error",
+        "code": "500",
+        "description": "internal server error occurred."
+    })
+    .toss();
+
+// Test add coupon-empty coupon code.
+frisby.create('Coupon test 02-empty coupon code')
+    .post(base_url + '/coupons/add/', {
+        "customerMobile": "12345678"
+    }, {json: true})
+    .expectStatus(500)
+    .inspectJSON()
+    .expectJSONTypes({
+        code: String,
+        description: String,
+        status: String
+    })
+    .expectJSON({
+        "status": "error",
+        "code": "500",
+        "description": "internal server error occurred."
+    })
+    .toss();
+
 // Test add coupon-valid data.
-frisby.create('Coupon test 01-valid data')
+frisby.create('Coupon test 03-valid data')
     .post(base_url + '/coupons/add/', {
         "couponCode": "frisbytest",
         "customerMobile": "12345678"
@@ -35,43 +73,5 @@ frisby.create('Coupon test 01-valid data')
                 "link": "http://localhost:2222/pizza-shefu/api/v1.0/coupons/add/"
             }
         ]
-    })
-    .toss();
-
-// Test add coupon-empty customer mobile.
-frisby.create('Coupon test 02-empty customer mobile')
-    .post(base_url + '/coupons/add/', {
-        "couponCode": "frisbytest"
-    }, {json: true})
-    .expectStatus(500)
-    .inspectJSON()
-    .expectJSONTypes({
-        code: Number,
-        description: String,
-        status: String
-    })
-    .expectJSON({
-        "status": "error",
-        "code": 500,
-        "description": "internal server error occurred."
-    })
-    .toss();
-
-// Test add coupon-empty coupon code.
-frisby.create('Coupon test 02-empty coupon code')
-    .post(base_url + '/coupons/add/', {
-        "customerMobile": "12345678"
-    }, {json: true})
-    .expectStatus(500)
-    .inspectJSON()
-    .expectJSONTypes({
-        code: Number,
-        description: String,
-        status: String
-    })
-    .expectJSON({
-        "status": "error",
-        "code": 500,
-        "description": "internal server error occurred."
     })
     .toss();

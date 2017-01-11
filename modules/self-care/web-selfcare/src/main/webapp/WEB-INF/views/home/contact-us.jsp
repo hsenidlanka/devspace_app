@@ -13,7 +13,6 @@
             var name = "${name}";
             var mobile = "${mobile}";
             var email = "${email}";
-
             $("#txt-fname").val(name);
             $("#txt-email").val(email);
             $("#txt-contactno").val(mobile);
@@ -49,7 +48,6 @@
 </head>
 <body>
 <%@include file="../includes/new-header.jsp" %>
-
 <div class="loader-anim"></div>
 <div id='browser'>
 

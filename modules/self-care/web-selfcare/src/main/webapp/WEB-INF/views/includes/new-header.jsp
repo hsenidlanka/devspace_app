@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@include file="signup-modal.jsp" %>
+<%--<%@include file="signup-modal.jsp" %>--%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <style>
     .navbar-login {
@@ -40,8 +40,7 @@
                 </li>
                 <c:if test="${empty username}">
                     <li>
-                        <a id="signUpBtn" class="form-group" data-toggle="modal" data-target="#modal-signup"><img
-                                src="<c:url value="/resources/images/signup.png"/>" style=""></a>
+                        <a href="/web-selfcare/register" id="signUpBtn" class="form-group" data-toggle="modal" ><img src="<c:url value="/resources/images/signup.png"/>" ></a>
                     </li>
 
                     <li>

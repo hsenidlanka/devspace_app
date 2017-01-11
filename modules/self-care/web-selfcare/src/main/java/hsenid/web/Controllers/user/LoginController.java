@@ -57,11 +57,12 @@ public class LoginController {
 //  check given user credentials are valid or not
 //  if valide set session and sent it.
 
-    @RequestMapping(value = "/login")
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     public Verification login(HttpSession session, HttpServletRequest request) {
         String uname = request.getParameter(username);
         String pword = request.getParameter(password);
+        logger.info("{} {}", uname,pword);
         User user = new User();
         ReplyFromServer replyFromServer;
 
@@ -94,8 +95,11 @@ public class LoginController {
 
                     session.setAttribute("name", SendStringBuilds.sendString(user.getFirstName(), " ", user.getLastName()));
                     session.setAttribute("email", user.getEmail());
+                    session.setAttribute("mobile", user.getMobile());
+//                    logger.info("Test {}", user.getMobile());
                     session.setAttribute(username, uname);
                     session.setAttribute("userStatus", verification.getUserStatus());
+
                 } catch (Exception e) {
                     logger.error("Login Controller, inner try failed. reason {}", e.getMessage());
                 }

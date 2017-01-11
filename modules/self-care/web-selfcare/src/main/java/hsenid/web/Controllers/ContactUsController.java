@@ -1,6 +1,7 @@
 package hsenid.web.Controllers;
 
 import hsenid.web.models.ContactUs;
+import hsenid.web.models.RegisterModal;
 import hsenid.web.models.ReplyFromServer;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;

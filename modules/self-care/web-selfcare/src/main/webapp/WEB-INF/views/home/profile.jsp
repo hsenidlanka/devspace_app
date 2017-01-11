@@ -59,6 +59,10 @@
         function load_purchaseHistory() {
             document.getElementById("content").innerHTML = '<object type="text/html" data="purchase-history" style="width:105%; height: 85%;"></object>';
         }
+
+        function load_feedbacks() {
+            document.getElementById("content").innerHTML = '<object type="text/html" data="feedbacks" style="width:105%; height: 85%;"></object>';
+        }
     </script>
 </head>
 <body>
@@ -69,7 +73,7 @@ ${userDataProfile.title}
     <ul class="nav navbar-nav">
         <li><a href="#" onclick="load_home();" style="width: 100%">Profile</a></li>
         <li><a href="#" onclick="load_purchaseHistory();">Purchase history</a></li>
-        <li><a href="#">Link4</a></li>
+        <li><a href="#" onclick="load_feedbacks();">Feedbacks</a></li>
         <li><a href="#" onclick="load_update_profile();" style="width: 100%">Update Profile</a></li>
     </ul>
 </div>

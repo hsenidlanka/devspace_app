@@ -65,6 +65,7 @@ $(document).ready(function () {
     //$("#submitBtn").off('click');
     $("#submitBtn").click(function () {
 
+        //alert("sbmt");
         var registerFirst = $.trim($("#fname").val());
         var registerLast = $.trim($("#lname").val());
         var registerAddr1 = $.trim($("#address1").val());
@@ -89,7 +90,7 @@ $(document).ready(function () {
 
         var regUsername = $("#uname").val();
         var regPassword = $("#password").val();
-        var regTitle = $("#title").val();
+        var regTitle = $('input[name=title]:checked').val();
         var regFname = $("#fname").val();
         var regLname = $("#lname").val();
         var regAddr1 = $("#address1").val();
@@ -102,12 +103,13 @@ $(document).ready(function () {
         if (($('input[name=title]:checked').length > 0) && (registerFirst.length > 0) && (registerLast.length > 0) && (registerAddr1.length > 0) && (registerAddr2.length > 0) && (registerPhone.length > 0) && (registerEmail.length > 0) && (registerUname.length > 0) && (registerPass1.length > 0) && (registerPass2.length > 0)) {
             //alert("Test Heat")
             if (registerPass1 === registerPass2) {
-                $('#formSubmitError').empty();
+                //$('#formSubmitError').empty();
+
                 $.ajax({
                     type: 'post',
                     url: "register",
                     data: {
-                        username: regUsername,
+                        uname: regUsername,
                         password: regPassword,
                         title : regTitle,
                         fname : regTitle,
@@ -116,25 +118,16 @@ $(document).ready(function () {
                         address2 : regAddr2,
                         address3 : regAddr3,
                         email : regEmail,
-                        mobileNo : regMobile,
+                        mobileNo : regMobile
                     },
                     success: function (result) {
-                        if (result.userAvailable) {
-                            //console.log("Registration success");
-                            alert("test reg");
-                            //$('#registerSuccesful').modal('show');
-                            window.location = "/web-selfcare/email-verification?username=" + registerUname;
-
-                        } else {
-                            $('<p align="left" style="color: red; margin-left: -12px; margin-top: -12px; margin-bottom: 12px;">Form Submition failed</p>').appendTo('#formSubmitError');
-                            return false;
-                        }
-
+                        alert(result.userAvailable);
                     },
                     error: function () {
                         $("#ajaccall").append("<b>Appended text</b>");
                     }
                 });
+
             } else {
                 $('<p align="left" style="color: red; margin-left: -12px; margin-top: -12px; margin-bottom: 12px;">Passwords do not match</p>').appendTo('#rePasswordError');
                 return false;
@@ -196,7 +189,7 @@ $(document).ready(function () {
     $("#loginFormSubmit").click(function () {
         var loginUsername = $.trim($("#loginUsername").val());
         var loginPassword = $.trim($("#loginPassword").val());
-
+        //alert(loginUsername+loginPassword);
         $('#usernameError').empty();
         $('#passwordError2').empty();
         $('#NotRegisteredUser').empty();
@@ -219,13 +212,15 @@ $(document).ready(function () {
                         $.ajax({
                             type: 'post',
                             url: "login",
-                            data: {username: loginUsername, password: loginPassword},
+                            data: {
+                                username: loginUsername,
+                                password: loginPassword
+                            },
                             success: function (result) {
                                 switch (result.userStatus) {
                                     case "verified":
                                         window.location = "/web-selfcare/";
                                         break;
-
                                     case "notVerified":
                                         window.location = "/web-selfcare/email-verification?username=" + loginUsername;
                                         break;

@@ -6,11 +6,6 @@
     padding-right: 10px;
 }
 
-body {
-    /*font-family: 'Open Sans', sans-serif;*/
-    /*font-size: 100%;*/
-}
-
 *, *:before, *:after {
     margin: 0;
     padding: 0;
@@ -95,9 +90,7 @@ a {
 }
 #content #left #map {
     height: 476px;
-    /*height: 500px;*/
     position: relative;
-    /*background-image: url("http://f.cl.ly/items/452R3S1440221Z3m372j/israel.png");*/
     background-image: url("../images/mapimage.jpg");
     background-size: cover;
 }

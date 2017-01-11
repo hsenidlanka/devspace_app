@@ -26,40 +26,64 @@ frisby.create('Category service test 01-correct url')
         "data": [
             {
                 "name": "Pizza",
-                "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown"
+                "description": "Pizza is a flatbread generally topped with tomato sauce and cheese and baked in an oven. It is commonly topped with a selection of meats, vegetables and condiments."
             },
             {
                 "name": "Beverage",
-                "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown"
+                "description": "Freshly cooked pasta with prawns, vegetables & sliced mushrooms baked with a white cream sauce and mozzarella cheese"
             },
             {
                 "name": "Desserts",
-                "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown"
+                "description": "Freshly cooked pasta with prawns, vegetables & sliced mushrooms baked with a white cream sauce and mozzarella cheese"
+            },
+            {
+                "name": "Salad",
+                "description": "Freshly cooked pasta with prawns, vegetables & sliced mushrooms baked with a white cream sauce and mozzarella cheese"
+            },
+            {
+                "name": "IceCream",
+                "description": "Ice Cream is of different flavours ."
+            },
+            {
+                "name": "Pasta2",
+                "description": "There are different types of Pasta2"
             }
         ],
         "links": [
             {
-                "rel": "self",
-                "link": "http://localhost:2222/pizza-shefu/api/v1.0/categories/list"
+                "link": "http://localhost:2222/pizza-shefu/api/v1.0/categories/list",
+                "rel": "self"
             },
             {
-                "rel": "subcategories of Pizza",
-                "link": "http://localhost:2222/pizza-shefu/api/v1.0/subcategories/category/Pizza"
+                "link": "http://localhost:2222/pizza-shefu/api/v1.0/subcategories/category/Pizza",
+                "rel": "subcategories of Pizza"
             },
             {
-                "rel": "subcategories of Beverage",
-                "link": "http://localhost:2222/pizza-shefu/api/v1.0/subcategories/category/Beverage"
+                "link": "http://localhost:2222/pizza-shefu/api/v1.0/subcategories/category/Beverage",
+                "rel": "subcategories of Beverage"
             },
             {
-                "rel": "subcategories of Desserts",
-                "link": "http://localhost:2222/pizza-shefu/api/v1.0/subcategories/category/Desserts"
+                "link": "http://localhost:2222/pizza-shefu/api/v1.0/subcategories/category/Desserts",
+                "rel": "subcategories of Desserts"
+            },
+            {
+                "link": "http://localhost:2222/pizza-shefu/api/v1.0/subcategories/category/Salad",
+                "rel": "subcategories of Salad"
+            },
+            {
+                "link": "http://localhost:2222/pizza-shefu/api/v1.0/subcategories/category/IceCream",
+                "rel": "subcategories of IceCream"
+            },
+            {
+                "link": "http://localhost:2222/pizza-shefu/api/v1.0/subcategories/category/Pasta2",
+                "rel": "subcategories of Pasta2"
             }
         ]
     })
     .toss();
 
 // Test get all categories-wrong method.
-frisby.create('Category service test 01-wrong method')
+frisby.create('Category service test 02-wrong method')
     .post(base_url + '/categories/list',
     {
         headers: {'Content-Type': 'application/json'}
@@ -68,13 +92,13 @@ frisby.create('Category service test 01-wrong method')
     .inspectJSON()
     .expectJSONTypes({
         status: String,
-        code: Number,
+        code: String,
         errorMessage: String,
         description: String
     })
     .expectJSON({
         "status": "error",
-        "code": 405,
+        "code": "405",
         "errorMessage": "HTTP_METHOD_NOT_ALLOWED",
         "description": "wrong http method used. use the proper http method as described in the documentation."
     })

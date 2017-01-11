@@ -53,7 +53,7 @@ public class SearchMenuController {
         return new ModelAndView("/home/search-menu");
     }
 
-    @RequestMapping(value = "search-menu/{searchItem}/{category}", method = RequestMethod.GET)
+    @RequestMapping(value = "menu/{searchItem}/{category}", method = RequestMethod.GET)
     //@ResponseBody
     public ModelAndView generateSearchItem(@PathVariable String searchItem, @PathVariable String category) {
         ModelAndView modelAndView = new ModelAndView("search-results");
