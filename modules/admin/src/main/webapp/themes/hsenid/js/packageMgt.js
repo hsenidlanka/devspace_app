@@ -1,5 +1,6 @@
 var categoryNm;
-
+var accumulatedPrice;
+var abc;
 $(document).ready(function () {
 
     $("#txtAddPkgName").focusout(function () {
@@ -12,12 +13,12 @@ $(document).ready(function () {
     $("#txtAddPkgPrice").change(function () {
 
         if ($(this).val() != null) {
-            if($(this).val() == '0.0' || $(this).val() == '0.00' || $(this).val() == ''){
+            if ($(this).val() == '0.0' || $(this).val() == '0.00' || $(this).val() == '') {
                 $(this).addClass('invalid-input');
                 document.getElementById('pkgPriceErr').innerHTML = 'Package price is invalid !';
-            }else{
+            } else {
                 $(this).val(parseFloat($(this).val()).toFixed(2));
-                document.getElementById('pkgPriceErr').innerHTML =" ";
+                document.getElementById('pkgPriceErr').innerHTML = " ";
                 $(this).removeClass('invalid-input');
             }
         }
@@ -27,14 +28,14 @@ $(document).ready(function () {
         }
 
 
-       /* if ($(this).val() == '0.0' || null) {
-            document.getElementById('pkgPriceErr').innerHTML = 'Package price should not be empty !';
-            $(this).addClass('invalid-input');
-        } else {
-            document.getElementById('pkgPriceErr').innerHTML =" ";
-            $(this).removeClass('invalid-input');
-            $(this).val(parseFloat($(this).val()).toFixed(2));
-        }*/
+        /* if ($(this).val() == '0.0' || null) {
+         document.getElementById('pkgPriceErr').innerHTML = 'Package price should not be empty !';
+         $(this).addClass('invalid-input');
+         } else {
+         document.getElementById('pkgPriceErr').innerHTML =" ";
+         $(this).removeClass('invalid-input');
+         $(this).val(parseFloat($(this).val()).toFixed(2));
+         }*/
     });
     $("#editPkgPrice").focusout(function () {
         if ($(this).val() == '0.00' || null) {
@@ -42,6 +43,9 @@ $(document).ready(function () {
             $(this).addClass('invalid-input');
         } else {
             $(this).removeClass('invalid-input');
+        }
+        if ($(this).val != null) {
+            $(this).val(parseFloat($(this).val()).toFixed(2));
         }
     });
 
@@ -116,15 +120,17 @@ $(document).ready(function () {
         //
         console.log($(this).val());
         console.log($(this).parent().parent().next().find(".form-control").css({
-            'color':'green',
-            'font-weight': 'bold'}));
+            'color': 'green',
+            'font-weight': 'bold'
+        }));
         console.log($(this).parent().parent().next().next().find(".form-control").css({
             'color': 'rgb(49, 49, 64)',
-            'font-weight': 'bold'}));
+            'font-weight': 'bold'
+        }));
         //
 
         if ($(this).is(":checked")) {
-            setItemList(categoryNm, slctElement, selectedItm);
+            setItemList(categoryNm, slctElement, selectedItm, selectedQty);
             $(this).parent().parent().next().next().next().find(".form-control").val('1');
 
             selectedQty.click(function () {
@@ -133,9 +139,9 @@ $(document).ready(function () {
                 }
                 else {
                     selectedQty.css({"border-color": "", "border-width": ""});
+                    priceCounting($("#" + selectedItm + " option:selected").text(), $(selectedQty).val());
                 }
             });
-
         } else {
             $(this).parent().parent().next().find(".form-control").val('');
             $(this).parent().parent().next().next().find(".form-control").val('');
@@ -143,13 +149,17 @@ $(document).ready(function () {
             selectedQty.css({"border-color": "", "border-width": ""});
         }
     });
+
+    /*if(($("#editPkgPrice").val()) != null) {
+     $("#editPkgPrice").val(parseFloat($("#editPkgPrice").val()).toFixed(2));
+     }*/
 });
 
 
 /*
  * function for getting item name list according to the selected category
  **/
-function setItemList(categoryNmVal, slctElementVal, selectedItmVal) {
+function setItemList(categoryNmVal, slctElementVal, selectedItmVal, itmQty) {
 
     $.ajax({
         url: "https://localhost:8443/admin/packages/getItemNames",
@@ -165,11 +175,18 @@ function setItemList(categoryNmVal, slctElementVal, selectedItmVal) {
             slctItemsPkg.append(option);
 
             //get default size price on load
-            generate(selectedItmVal, slctElementVal);
+            generate(selectedItmVal, slctElementVal, itmQty);
+
 
             //get size price on change
             $("#" + slctElementVal).change(function () {
                 generate(selectedItmVal, slctElementVal);
+                priceCounting($("#" + selectedItmVal + " option:selected").text(), $(itmQty).val());
+            });
+
+            /*******************/
+            $("#" + selectedItmVal).change(function () {
+                priceCounting($("#" + selectedItmVal + " option:selected").text(), $(itmQty).val());
             });
 
         },
@@ -182,7 +199,7 @@ function setItemList(categoryNmVal, slctElementVal, selectedItmVal) {
 /*
  * Common function for populate item size and price in
  **/
-function generate(selectedItm, slctElement) {
+function generate(selectedItm, slctElement, itmQty) {
     var selectedName = $("#" + slctElement).val();
 
     $.ajax({
@@ -195,16 +212,20 @@ function generate(selectedItm, slctElement) {
             var parsedData = JSON.parse(dataList);
             var listlength = Object.keys(parsedData).length;
             console.log("size list " + dataList);
-            console.log(parsedData);
-            console.log(listlength);
+            console.log("sz-pc1 " + parsedData);
 
             var keys = Object.keys(parsedData);
+            var abc = null;
             var sizePriceList = $("#" + selectedItm), option = "";
             sizePriceList.empty();
             $.each(keys, function (index, value) {
                 option = option + "<option value='" + value + "'>" + value + "-" + parsedData[value] + "</option>";
+                //abc= parsedData[value];
             });
             sizePriceList.append(option);
+
+            //priceCounting(abc,$(itmQty).val());
+            priceCounting($("#" + selectedItm + " option:selected").text(), $(itmQty).val());
         },
         error: function (er) {
             alert(er);
@@ -253,3 +274,21 @@ function contentCreate() {
     });
 }
 
+
+/*
+ * function for calculating accumulated package price
+ **/
+function priceCounting(prcField, qtyField) {
+//TODO
+    var totPrc = 0;
+    var itmQty = qtyField;
+    var resPrc = parseFloat((prcField.split('-')).pop());
+
+    totPrc = totPrc +(resPrc * itmQty);
+    alert(totPrc);
+
+   var finalPrc = $(".lblAccumPrice1").text(totPrc);
+
+    totPrc += parseFloat(finalPrc);
+    alert(totPrc);
+}
