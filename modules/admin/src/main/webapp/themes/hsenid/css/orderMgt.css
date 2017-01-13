@@ -8,3 +8,11 @@
     width: 80%;
     margin-left: 10%;
 }
+#process-order{
+    width: 90%;
+    margin: 10px 10px 0 65px;
+}
+.pagination > li > a {
+    color: #57ad06 !important;
+    font-weight: bold !important;
+}
