@@ -3,6 +3,7 @@ package hsl.devspace.app.corelogic.repository.contact_us;
 import hsl.devspace.app.corelogic.domain.ContactUs;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 
 /**
@@ -16,5 +17,6 @@ public interface ContactUsRepository {
     List<ContactUs> selectByDate(Date date);
     List<ContactUs> selectByType(String type);
 
+    int delete(String username, Date date, Time time);
 
 }
