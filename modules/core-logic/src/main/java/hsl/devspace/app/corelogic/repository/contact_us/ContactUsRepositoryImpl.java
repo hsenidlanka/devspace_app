@@ -7,6 +7,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
 import java.sql.Date;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -33,12 +34,14 @@ public class ContactUsRepositoryImpl implements ContactUsRepository   {
     @Override
     public int add(ContactUs contact) {
         int row = 0;
+        if (contact.getTitle() != "" && contact.getName() != "" && contact.getEmail() != "" && contact.getMobile() != "" && contact.getMessage() != "") {
+            String sql = "INSERT INTO contact_us " +
+                    "(type,title,name,email,mobile,message,date,time,status) VALUES (?,?,?,?,?,?,CURRENT_DATE,CURRENT_TIME,1)";
 
-        String sql = "INSERT INTO contact_us " +
-                "(type,title,name,email,mobile,message,date,time,status) VALUES (?,?,?,?,?,?,CURRENT_DATE,CURRENT_TIME,1)";
+            row = jdbcTemplate.update(sql, new Object[]{contact.getInquiryType(), contact.getTitle(), contact.getName(), contact.getEmail(), contact.getMobile(), contact.getMessage()});
+            log.info("{} new contactUs inquiry inserted", row);
+        }
 
-        row = jdbcTemplate.update(sql, new Object[]{contact.getInquiryType(),contact.getTitle(),contact.getName(),contact.getEmail(),contact.getMobile(),contact.getMessage()});
-        log.info("{} new contactUs inquiry inserted", row);
         return row;
     }
 
@@ -140,4 +143,13 @@ public class ContactUsRepositoryImpl implements ContactUsRepository   {
         log.info("{}",contact);
         return contact;
     }
+
+    public int delete(String username, Date date, Time time) {
+        String sql = "DELETE FROM contact_us WHERE name = ? AND date=? AND time=?";
+        int row = jdbcTemplate.update(sql, new Object[]{username, date, time});
+        log.info("{} contact deleted", row);
+        return row;
+    }
+
+
 }

@@ -49,7 +49,7 @@ public class StaffRepositoryImpl implements UserRepository {
         String un = user.getUsername();
         String pw = user.getPassword();
         String des = user.getDesignation();
-        if (un != "" && pw != "") {
+        if (un != "" && pw != "" && user.getTitle() != "" && user.getDesignation() != "" && user.getDepartment() != "" && user.getBranch() != "g") {
             // if (checkUsernameUnique(un)==true) {
 
 

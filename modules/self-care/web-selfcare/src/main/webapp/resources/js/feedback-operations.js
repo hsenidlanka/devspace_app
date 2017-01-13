@@ -7,8 +7,12 @@ $(document).ready(function () {
         }
     });
 
-    $(document.body).on('click', '.btn-viewfeedback' ,function(){
-        var itemName = $(this).closest('div').find('h5.h5-itemname').text();
-        alert(itemName);
+    $(document.body).on('click', '.btn-viewfeedback', function () {
+        var itemName = $(this).closest('div').find('span').text();
+        $("#modal-addFeedback").modal('show');
+
+        //alert(itemName);
+        $("#btn-add-feedback-ok").click(function(){
+        });
     });
 });

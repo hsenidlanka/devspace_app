@@ -34,15 +34,6 @@ public class HomeControllerTest extends AbstractTestNGSpringContextTests {
                 .andExpect(view().name("/home/self-care-home"));
     }
 
-//    move to menu controller
-  /*  @Test
-    public void menuTest() throws Exception {
-        this.mockMvc.perform(get("/menu")
-                .accept(MediaType.ALL))
-                .andExpect(status().isOk())
-                .andExpect(view().name("home/menu"));
-    }*/
-
     @Test
     public void aboutus() throws Exception {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();

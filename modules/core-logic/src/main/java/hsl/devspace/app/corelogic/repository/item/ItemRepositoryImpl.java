@@ -43,13 +43,15 @@ public class ItemRepositoryImpl implements ItemRepository {
         int id = item.getItemId();
         /*MultipartFile img=item.getImageUrl();
         String ims=img.getOriginalFilename();*/
-
-        String sql = "INSERT INTO item" +
-                "(name,description,type_id,image,sub_category_id,created_date,creator) VALUES (?,?,(SELECT type_id FROM type WHERE name=? ),?,(SELECT id FROM sub_category WHERE name=?),CURRENT_DATE ,?)";
-        row = jdbcTemplate.update(sql, new Object[]{item.getItemName(), item.getDescription(),
-                item.getType(), item.getImage(), item.getSubCategoryName(), item.getCreator()});
-        log.info("{} new item inserted", row);
-
+        if (item.getItemName() != null && item.getType() != "" && item.getCreator() != null && item.getSubCategoryName() != null) {
+            String sql = "INSERT INTO item" +
+                    "(name,description,type_id,image,sub_category_id,created_date,creator) VALUES (?,?,(SELECT type_id FROM type WHERE name=? ),?,(SELECT id FROM sub_category WHERE name=?),CURRENT_DATE ,?)";
+            row = jdbcTemplate.update(sql, new Object[]{item.getItemName(), item.getDescription(),
+                    item.getType(), item.getImage(), item.getSubCategoryName(), item.getCreator()});
+            log.info("{} new item inserted", row);
+        } else {
+            log.info("values cannot be empty");
+        }
         return id;
     }
 

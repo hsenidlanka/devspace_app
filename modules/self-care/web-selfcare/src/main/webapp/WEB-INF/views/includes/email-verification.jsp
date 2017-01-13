@@ -8,6 +8,8 @@
 <%@include file="../includes/new-header.jsp" %>
 <script>
     $(document).ready(function () {
+
+
         function GetURLParameter(sParam) {
             var sPageURL = window.location.search.substring(1);
             var sURLVariables = sPageURL.split('&');
@@ -20,9 +22,13 @@
         }
 
         var user = GetURLParameter('username');
-        $("#hiddenUsername").val(user);
-        $("#testuser").val(user);
-        var test = $("#hiddenUsername").val();
+        if(typeof user != 'undefined'){
+            $("#hiddenUsername").val(user);
+        }
+
+        if(typeof user === 'undefined'){
+            var test = $("#hiddenUsername").val();
+        }
 
         $("#resendVerificationCode").click(function(){
             $.ajax({
@@ -98,12 +104,12 @@
                                 <label class="control-label">Username : </label>
                             </div>
                             <div class="col-sm-6">
-                                <strong><%= request.getParameter("username") %>
+                                <strong><div id="usernameSet"><%= request.getParameter("username") %></div>
                                 </strong>
                             </div>
                             <div class="col-sm-2"></div>
                         </div>
-                        <form:input id="hiddenUsername" type="hidden" path="username"/>
+                        <form:input id="hiddenUsername" path="username" type="hidden" readonly="true" />
                     </div>
                     <div class="form-group">
                         <div class="row">

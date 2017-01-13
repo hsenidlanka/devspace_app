@@ -53,7 +53,7 @@ public class FeedbackController {
             }
             htmlData += "<div class='col-md-6'>";
             htmlData += "<div style='float:left;'><img src='" + adminItemImageUrl + "/" + jsonObject.get("itemName").toString().replaceAll(" ", "") + ".jpg' width='150px' height='150px'></div>";
-            htmlData += "<div style='float:left; margin-left:10px;'><h5 class='h5-itemname'>Item name: " + jsonObject.get("itemName") + "</h5>";
+            htmlData += "<div style='float:left; margin-left:10px;'><h5 class='h5-itemname'>Item name: <span id='itemname-spn'>" + jsonObject.get("itemName") + "</span></h5>";
             htmlData += "<h5>Last order: " + jsonObject.get("lastOrdered") + "</h5>";
             htmlData += "<button class='btn-viewfeedback m-btn sm purple'>Feedback</button></div>";
             htmlData += "</div>";
