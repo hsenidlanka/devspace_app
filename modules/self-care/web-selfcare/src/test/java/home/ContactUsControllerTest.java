@@ -9,6 +9,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -27,9 +28,13 @@ public class ContactUsControllerTest extends AbstractTestNGSpringContextTests {
 
     private MockMvc mockMvc;
 
+    @BeforeMethod
+    public void setWac(){
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+    }
+
     @Test
     public void getViewTest() throws Exception {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
         this.mockMvc.perform(get("/contact-us")
                 .accept(MediaType.ALL))
                 .andExpect(status().isOk())

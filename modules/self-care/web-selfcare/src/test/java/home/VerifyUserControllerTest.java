@@ -9,6 +9,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -26,11 +27,13 @@ public class VerifyUserControllerTest extends AbstractTestNGSpringContextTests {
     private WebApplicationContext wac;
 
     private MockMvc mockMvc;
-
+    @BeforeMethod
+    public void setWac(){
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+    }
 
     @Test
     public void getEmailVerificationTest() throws Exception {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
 
         this.mockMvc.perform(get("/email-verification")
                 .accept(MediaType.ALL))
@@ -53,7 +56,6 @@ public class VerifyUserControllerTest extends AbstractTestNGSpringContextTests {
     @Test(dataProvider="dataForVerifyFail")
     public void verifyFailedTes(String uname, String verifyCode) throws Exception {
 
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
         this.mockMvc.perform(post("/email-verification")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("username", uname)

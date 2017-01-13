@@ -30,9 +30,7 @@ public class UpdateUserControllerTest extends AbstractTestNGSpringContextTests {
     public Object[][] usernamesForUserDataSend() {
         return new Object[][]{
                 {"testre"},
-                {"kkalla"}
-//                {"block"},
-//                {"tagtest"}
+                {"admin"}
         };
 
     }

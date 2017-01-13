@@ -10,6 +10,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -29,9 +30,13 @@ public class RegisterControllerTest extends AbstractTestNGSpringContextTests {
 
     private MockMvc mockMvc;
 
+    @BeforeMethod
+    public void setWac(){
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+    }
+
     @Test
     public void registrationGetTest() throws Exception {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
         this.mockMvc.perform(get("/register")
                 .accept(MediaType.ALL))
                 .andExpect(status().isOk())
@@ -51,7 +56,6 @@ public class RegisterControllerTest extends AbstractTestNGSpringContextTests {
     @Test(dataProvider="getDataForRegisterFail")
     public void testRegisterFailed(String title, String fName, String lName, String email, String uname, String mobile, String addr1, String addr2, String addr3) throws Exception {
 
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
         this.mockMvc.perform(post("/register")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("title", title)
@@ -92,7 +96,6 @@ public class RegisterControllerTest extends AbstractTestNGSpringContextTests {
         Random random = new Random();
         int userInt = random.nextInt(100000) + 1;
 
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
         String redirectUrl = SendStringBuilds.sendString("/email-verification?username=", String.valueOf(userInt));
         this.mockMvc.perform(post("/register")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
