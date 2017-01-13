@@ -16,18 +16,23 @@
         #logo {
             position: absolute;
             height: 150px;
-            margin: -25px 10px -30px 10px;
+            margin: -30px 10px -30px 10px;
         }
 
         #logout {
             position: absolute;
-            top: 45px;
-            right: 40px;
             color: #1c6218;
+            margin: 5px 350px 0 345px;
+            width: 100px;
+            font-style: italic;
         }
 
         a:hover {
             color: black;
+        }
+        #user {
+            margin: 100px 10px 0px 1150px;
+            font-size: 18px;
         }
     </style>
     <spring:url value="/themes/hsenid/js/logout.js" var="jsLogout"/>
@@ -57,9 +62,8 @@
 %>
 
 <div class="row">
-    <div class="col-xs-6">
-        <b><a id="user" href="#">Logged in as <%= session.getAttribute("username")%></a></b>
-    </div>
+
+        <b><a id="user" href="#" >Welcome <%= session.getAttribute("username")%></a></b>
 </div>
 <div class="row">
     <div class="col-xs-8">

@@ -79,6 +79,10 @@
         <property name="dataSource" ref="productionDataSource"/>
         <property name="transactionManager" ref="transactionManager"/>
     </bean>
+    <bean id="deliveryRepository" class="hsl.devspace.app.corelogic.repository.delivery.DeliveryRepositoryImpl">
+        <property name="dataSource" ref="productionDataSource"/>
+        <property name="transactionManager" ref="transactionManager"/>
+    </bean>
 
     <bean id="multipartResolver"
           class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
