@@ -3,15 +3,14 @@ package hsenid.web.models;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 public class User {
 
-//    @Pattern(regexp = "^(?!\\s*$|\\s).*$", message = "Please enter a title!")
+//    @Pattern(regexp = "/^[a-zA-Z]{1,}$/", message = "Please enter a ti   jjtle!")
     @NotEmpty(message = "Please select a title")
+    @Size(min = 1,  message = "Please select a title")
     private String title;
 
     @Pattern(regexp = "^(?!\\s*$|\\s).*$",  message = "Please enter your first name!")

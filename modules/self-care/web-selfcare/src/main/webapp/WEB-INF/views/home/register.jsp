@@ -2,12 +2,7 @@
 <html>
 <head>
     <%@include file="../includes/include.jsp" %>
-    <title>Register</title>
-    <%--<style type="text/css">
-        body {
-            overflow:hidden;
-        }
-    </style>--%>
+    <title><fmt:message key="register.page.title" bundle="${lang}"/></title>
 </head>
 <body>
 <%@include file="../includes/new-header.jsp" %>
@@ -202,7 +197,7 @@
                 <center>
                     <button type="submit" class="btn btn-warning">
                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <fmt:message
-                            key="update.user.profile" bundle="${lang}"/>
+                            key="register.page.register" bundle="${lang}"/>
                     </button>
                 </center>
             </div>

@@ -275,4 +275,63 @@ public class PurchaseHistoryService {
                 .header("Access-Control-Allow-Origin", propertyReader.readProperty("Access-Control-Allow-Origin"))
                 .build();
     }
+
+    // Retrieve items purchased by a customer
+    @GET
+    @Path("/items/user/{username}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getCustomerPurchasedItems(@PathParam("username") String username, @QueryParam("page") int page, @QueryParam("records") int records, @javax.ws.rs.core.Context UriInfo uriInfo) {
+        List<Map<String, Object>> itemListData = shoppingCartRepository.selectItemHistoryForCustomer(username, records, (page - 1) * records);
+        SuccessMessage successMessage = new SuccessMessage();
+        successMessage.setStatus("success");
+        successMessage.setCode(200);
+
+        if (itemListData.size() > 0) {
+            successMessage.setMessage("order details for the customer retrieved");
+            for (int i = 0; i < itemListData.size(); i++) {
+                Map<String, Object> itemsMap = itemListData.get(i);
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("itemName", itemsMap.get("name"));
+                jsonObject.put("description", itemsMap.get("description"));
+                jsonObject.put("lastOrdered", itemsMap.get("order_date"));
+                successMessage.addData(jsonObject);
+            }
+        }
+
+        String selfUrl = uriInfo.getAbsolutePath().toString();
+        successMessage.addLink(selfUrl, "self");
+
+        return Response.status(200).entity(successMessage)
+                .header("Access-Control-Allow-Origin", propertyReader.readProperty("Access-Control-Allow-Origin"))
+                .build();
+    }
+
+    // Retrieve count of items purchased by a customer
+    @GET
+    @Path("/items/count/{username}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getCustomerPurchasedItemsCount(@PathParam("username") String username, @javax.ws.rs.core.Context UriInfo uriInfo) {
+        int itemsCount = shoppingCartRepository.countItemHistoryForCustomer(username);
+        SuccessMessage successMessage = new SuccessMessage();
+        successMessage.setStatus("success");
+        successMessage.setCode(200);
+
+        JSONObject jsonObject = new JSONObject();
+        if (itemsCount > 0) {
+            successMessage.setMessage("records found");
+            jsonObject.put("count", itemsCount);
+            successMessage.addData(jsonObject);
+        } else {
+            successMessage.setMessage("no records found");
+            jsonObject.put("count", 0);
+            successMessage.addData(jsonObject);
+        }
+
+        String selfUrl = uriInfo.getAbsolutePath().toString();
+        successMessage.addLink(selfUrl, "self");
+
+        return Response.status(200).entity(successMessage)
+                .header("Access-Control-Allow-Origin", propertyReader.readProperty("Access-Control-Allow-Origin"))
+                .build();
+    }
 }

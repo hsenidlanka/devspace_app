@@ -133,7 +133,7 @@
                 <div id="delivery-header-div"></div>
                 <div class="row">
                     <div class="col-md-7" id="delivery-data-div" style="font-size: 16px;"></div>
-                    <div class="col-md-5">dgdfgd</div>
+                    <div class="col-md-5" id="delivery-data-img-div">dgdfgd</div>
                 </div>
             </div>
             <div class="modal-footer">

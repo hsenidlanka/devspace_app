@@ -5,6 +5,7 @@ import hsenid.web.supportclasses.SendStringBuilds;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpEntity;
@@ -50,13 +51,11 @@ public class VerifyUserController {
     @RequestMapping(method = RequestMethod.POST)
     public String confirmVerification(@ModelAttribute("emailverification") @Valid EmailVerificationModel verificationModel, BindingResult result, RedirectAttributes redirectAttributes, Model model, HttpSession session){
         if (result.hasErrors()){
-            String retStr = SendStringBuilds.sendString("includes/email-verification/", "?username=", verificationModel.getUsername());
-            return retStr;
+            return "includes/email-verification";
         }
 
         String uname = verificationModel.getUsername();
         String verificationCode = verificationModel.getVerificationCode();
-
         JSONObject jsonObject = new JSONObject();
         jsonObject.put(username, uname);
         jsonObject.put("verificationCode", verificationCode);
@@ -65,7 +64,6 @@ public class VerifyUserController {
         headers.add("Content-Type", "application/json");
         HttpEntity<JSONObject> jsonObjectHttpEntity = new HttpEntity<JSONObject>(jsonObject, headers);
         String verifyEmailUrl = SendStringBuilds.sendString(baseUrl, "/customers/verify");
-        logger.info(String.valueOf(jsonObject));
         try {
             ServerResponseMessage responseMessage = restTemplate.postForObject(verifyEmailUrl, jsonObjectHttpEntity, ServerResponseMessage.class);
             if (responseMessage.getStatus().equals("success")){
@@ -105,7 +103,6 @@ public class VerifyUserController {
                 redirectAttributes.addFlashAttribute("notValidCode", "notValid");
                 logger.info("Not Valide code work");
                 return "redirect:/email-verification";
-//                return "redirect:/includes/email-verification";
             }
 
         } catch (RestClientException e) {
@@ -113,9 +110,8 @@ public class VerifyUserController {
                 session.invalidate();
             }
             logger.error("Verification failed Reason -> {}", e.getMessage());
-
         }
-//        logger.info( "testphrase {} {}", verificationModel.getUsername(), verificationModel.getVerificationCode());
+
         redirectAttributes.addFlashAttribute("verifyFailed", "failed");
         return "redirect:home/menu";
     }
