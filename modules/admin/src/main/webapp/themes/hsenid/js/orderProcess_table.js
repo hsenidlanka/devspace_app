@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    var pgLimit = 5;
+    var pgLimit = 10;
     var catName = $("#txtViewSearchCategory").val();
     //alert(pgLimit);
 
@@ -10,7 +10,7 @@ $(document).ready(function () {
         success: function (result) {
             //alert("table success");
             $('#tableprocessOrder').bootstrapTable({
-                height: 380,
+                height: 530,
                 pagination: false,
                 search: false,
                 showColumns: false,
@@ -28,8 +28,8 @@ $(document).ready(function () {
                     title: 'Reciepient Name:',
                     sortable: true,
                     align: 'left',
-                    searchable: true,
-                    class: 'col-xs-1'
+                    searchable: true
+                    //class: 'col-xs-1'
                     //width:25,
                 }, {
                     field: 'delivery_date',
@@ -56,17 +56,17 @@ $(document).ready(function () {
                     sortable: true
 
                 }, {
-                    field: 'branch',
+                    field: 'sbranch',
                     title: 'Serving Branch :',
                     align: 'center',
                     //width:1,
                     //class: 'col-xs-2',
-                    formatter: branchFormatter,
-                    events: branchEvents
+                    formatter: branchFormatter
+                    //events: branchEvents
                 }, {
                     field: 'agent_name',
                     title: 'Delivery Agent:',
-                    align: 'left',
+                    align: 'center',
                     formatter: agentFormatter,
                     events: agentEvents,
                     //width:25,
@@ -98,7 +98,7 @@ $(document).ready(function () {
         'click .link': function(e, value, row, index) {
             var data1 = JSON.stringify(row);
             var objc1 = JSON.parse(data1);
-            var name= objc1["name"];
+            var name= objc1["branch"];
             //alert("value"+ value);
             window.location.href = "https://localhost:8443/admin/subCategory/"+value;
         }
@@ -107,48 +107,77 @@ $(document).ready(function () {
 
     function branchFormatter(value, row, index) {
         return [
-            ' <select class="branchSelect"><option value="--Select--">--Select--</option><option value="Colombo">Colombo</option> <option value="Gampaha">Gampaha</option>' +
-            ' <option value="Ja-Ela">Ja-Ela</option> <option value="Kandana">Kandana</option> </select> '
+            ' <select class="branchSelect" id="sss"><option value="--Select--\">--Select--</option><option value="Colombo\">Colombo</option> <option value="Gampaha\">Gampaha</option>' +
+            ' <option value="Ja-Ela\">Ja-Ela</option> <option value="Kandana\">Kandana</option> </select> ',
+            value,index
         ].join('');
     }
 
 
-    window.branchEvents = {
-        'click .removecat': function(e, value, row, index) {
-            var data2 = JSON.stringify(row);
-            var objc2 = JSON.parse(data2);
-            $('#lblDeleteCategoryId').text(objc2["name"]);
-            $('#deleteModal1').modal({show:true});
-        },
-        'click .likecat': function(e, value, row, index) {
-            var data1 = JSON.stringify(row);
-            var objc1 = JSON.parse(data1);
-            var id= objc1["id"];
-            var name= objc1["name"];
+
+/*    window.branchEvents = {
+        'click #sss': function(e, value, row, index) {
+            var cells = new Array();
+            //for (i=0,)
+            var branch1=$('.branchSelect').val();
+            alert(branch1);
+            var branch=$('.branchSelect').find(':selected').val();
+            alert(branch);
+            //var branch=.find('option:selected').text();
+       *//*     $('#sss').each(function(){
+                cells.push($(this).text());
+            });
+            alert(cells);
+            alert(cells[0]);
+            alert(cells[index]);*//*
+
+
             $.ajax({
-                //type: "POST",
-                url: "https://localhost:8443/admin/category/edit",
-                data: {"id":id},
-                success: function(msg){
-                    var name=msg["name"];
-                    var image1=msg["image"];
+                url: 'https://localhost:8443/admin/processOrders/delivery/agents',
+                data: {"branch":branch},
+                success: function (msg) {
+                    alert(msg);
 
-                    var  url="https://localhost:8443/admin/themes/hsenid/images/categories/" +image1;
-                    //alert(url);
-                    $('#imageUrl').attr('src',url);
-                    $('#categoryid').val(id);
-                    $('#editcategoryname').val(msg["name"]);
-                    $('#catName').val(msg["name"]);
+                    *//* var  subcat_label = $("#subcat"), label = "";
+                     subcat_label.empty();
 
-                    $('#editcategorydes').val(msg["description"]);
-                    $('#editvisibility').val(msg["status"]);
-
-                    $('#modifyModel').modal({show:true});
+                     for (var C = 0; C < msg.length; C++) {
+                     //alert("each subcat" + msg[C]);
+                     label =label + "<label>" + msg[C]+"</label>";
+                     }
+                     subcat_label.append(label)*//*
                 },
-                error:function(e){
-                    alert("ajax failed");
+                error: function (e) {
+                    alert("ajax failed in populating the delivery agents" + e);
                 }
             });
         }
-    };
+    };*/
+
+    //to populate the delivery agents list based on the branch selected
+    $('#tableprocessOrder').on('click','<tbody>.branchSelect',function(){
+        var branch=$('.branchSelect').find(':selected').val();
+        alert(branch);
+    $.ajax({
+        url: 'https://localhost:8443/admin/processOrders/delivery/agents',
+        data: {"branch":branch},
+        success: function (msg) {
+            alert(msg);
+
+            /* var  subcat_label = $("#subcat"), label = "";
+             subcat_label.empty();
+
+             for (var C = 0; C < msg.length; C++) {
+             //alert("each subcat" + msg[C]);
+             label =label + "<label>" + msg[C]+"</label>";
+             }
+             subcat_label.append(label)*/
+        },
+        error: function (e) {
+            alert("ajax failed in populating the delivery agents" + e);
+        }
+    });
+    });
+
 });
+

@@ -2,7 +2,7 @@
 /////////////////////////////////////////  default pagination function for order Process////////////////////////////////
 
 $(document).ready(function () {
-    var pgLimit = 5;
+    var pgLimit = 10;
     /**
      * ajax function for getting records count
      */
@@ -11,7 +11,7 @@ $(document).ready(function () {
     $.ajax({
         url: 'https://localhost:8443/admin/processOrders/delivery/count',
         success: function (recCount) {
-            alert(recCount);
+            //alert(recCount);
             pagOrder1.simplePaginator('setTotalPages', Math.ceil(recCount / pgLimit));
         }
     });
