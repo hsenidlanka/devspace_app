@@ -60,7 +60,7 @@ public class FeedbackService {
     @Path("/view/{item}/{username}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateFeedback(@PathParam("item") String itemName, @PathParam("username") String username, @javax.ws.rs.core.Context UriInfo uriInfo) {
+    public Response viewFeedback(@PathParam("item") String itemName, @PathParam("username") String username, @javax.ws.rs.core.Context UriInfo uriInfo) {
         List<Map<String, Object>> feedbackList = feedbackRepository.selectFeedbacksByCustomerAndItem(username, itemName);
         SuccessMessage successMessage = new SuccessMessage();
         successMessage.setStatus("success");
@@ -81,5 +81,38 @@ public class FeedbackService {
         String selfUrl = uriInfo.getAbsolutePath().toString();
         successMessage.addLink(selfUrl, "self");
         return Response.status(200).entity(successMessage).header("Access-Control-Allow-Origin", propertyReader.readProperty("Access-Control-Allow-Origin")).build();
+    }
+
+    @PUT
+    @Path("/update")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updateFeedback(JSONObject feedbackJson, @javax.ws.rs.core.Context UriInfo uriInfo) {
+        String username = feedbackJson.get("customerUserName").toString();
+        String itemName = feedbackJson.get("itemName").toString();
+        String comment = feedbackJson.get("comment").toString();
+        int stars = Integer.parseInt(feedbackJson.get("numberOfStars").toString());
+
+        int affectedRows = feedbackRepository.updateFeedback(username, itemName, comment, stars);
+        SuccessMessage successMessage = new SuccessMessage();
+        if (affectedRows > 0) {
+            successMessage.setCode(Response.Status.CREATED.getStatusCode());
+            successMessage.setStatus("success");
+            String url = uriInfo.getAbsolutePath().toString();
+            successMessage.addLink(url, "self");
+            successMessage.setMessage("feedback added successfully.");
+
+            JSONObject jsonObject = new JSONObject();
+
+            jsonObject.put("comment", comment);
+            jsonObject.put("numberOfStars", stars);
+            jsonObject.put("itemName", itemName);
+            jsonObject.put("customerUserName", username);
+
+            successMessage.addData(jsonObject);
+        } else {
+            throw new WebApplicationException(400);
+        }
+        return Response.status(Response.Status.OK).entity(successMessage).header("Access-Control-Allow-Origin", propertyReader.readProperty("Access-Control-Allow-Origin")).build();
     }
 }
