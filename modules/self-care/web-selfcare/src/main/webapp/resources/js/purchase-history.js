@@ -162,6 +162,7 @@ function initPurchaseHistoryTable() {
                 success: function (result) {
                     var headerContent = "<h4>Delivery details of order: " + obj['orderId'] + "</h4><hr>";
                     var content = "";
+                    var imgContent = "";
                     $.each(result, function (idx, deliveryDataObj) {
                         if (deliveryDataObj['deliveryMethod'] == "pickup") {
                             content += "<div class='dynamicLbl-del-data'><label><strong>Delivery method: </strong>" + deliveryDataObj['deliveryMethod'] + "</label></div>";
