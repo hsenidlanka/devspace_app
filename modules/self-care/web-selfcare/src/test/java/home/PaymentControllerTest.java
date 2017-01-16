@@ -52,12 +52,4 @@ public class PaymentControllerTest extends AbstractTestNGSpringContextTests {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
     }
 
-    @Test
-    public void testGetOrdersCountByDate(String username) throws Exception {
-        this.mockMvc.perform(get("/payment/customer-mobile")
-                .sessionAttr("username", username)
-                .accept(MediaType.ALL))
-                .andExpect(status().is4xxClientError());
-    }
-
 }

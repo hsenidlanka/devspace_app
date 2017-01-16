@@ -10,6 +10,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -45,5 +46,36 @@ public class MenuControllerTest extends AbstractTestNGSpringContextTests {
     public void getPathVariableViews() throws Exception {
         this.mockMvc.perform(get("/menu/{category}", 3))
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    public void getToppingTest() throws Exception {
+        this.mockMvc.perform(get("/menu/toppings"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
+    }
+
+    @DataProvider
+    public Object[][] TestMenuCategoryUrl() {
+        return new Object[][]
+                {
+                        {"test"},
+                        {"cheese"},
+                        {"barbercue"},
+                        {"hulk"},
+                        {"3"},
+                        {"42134ghkjhj"},
+                        {"12345"}
+                };
+    }
+
+    @Test(dataProvider = "TestMenuCategoryUrl")
+    public void getPathVariableViews(String category) throws Exception {
+        this.mockMvc.perform(get("/menu/{category}", category))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("category"))
+                .andExpect(model().attributeExists("itemImageUrl"))
+                .andExpect(model().attributeExists("subcategories"))
+                .andExpect(view().name("home/menu-category"));
     }
 }

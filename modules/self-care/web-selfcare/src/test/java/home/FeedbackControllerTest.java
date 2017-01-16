@@ -1,10 +1,63 @@
 package home;
 
-import static org.testng.Assert.*;
+import hsenid.config.WebConfig;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
-/**
- * Created by hsenid on 1/16/17.
- */
-public class FeedbackControllerTest {
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+@Test
+@WebAppConfiguration
+@ContextConfiguration(classes = WebConfig.class)
+public class FeedbackControllerTest extends AbstractTestNGSpringContextTests {
+
+    @Autowired
+    private WebApplicationContext wac;
+
+    private MockMvc mockMvc;
+
+    @BeforeMethod
+    public void setWac(){
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+    }
+
+    @Test
+    public void getFeedbackViewTest() throws Exception {
+        this.mockMvc.perform(get("/feedbacks")
+                .accept(MediaType.ALL))
+                .andExpect(status().isOk())
+                .andExpect(view().name("includes/feedback"));
+    }
+
+    @DataProvider
+    public Object[][] usernameSender() {
+        return new Object[][]
+                {
+                        {"test"},
+                        {"cheese"},
+                        {"barbercue"},
+                        {"hulk"},
+                        {"3"},
+                        {"42134ghkjhj"},
+                        {"12345"}
+                };
+    }
+    @Test(dataProvider = "usernameSender")
+    public void getFeedbackPurchasedTestFail(String username) throws Exception {
+        this.mockMvc.perform(get("feedbacks/purchased-items")
+                .sessionAttr("username", username)
+                .accept(MediaType.TEXT_HTML))
+                .andExpect(status().is4xxClientError());
+    }
 }
