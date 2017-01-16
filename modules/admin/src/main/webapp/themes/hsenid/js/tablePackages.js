@@ -256,27 +256,36 @@ window.operateEvents = {
         var pkgImg = imgNamePkg+".jpg";
         var url = "https://localhost:8443/admin/themes/hsenid/images/packages/"+pkgImg;
 
-
         $("#txtEditPkgNm").val(objct["packName"]);
         $("#editPkgPrice").val(objct["price"]);
+
+
         $("#pkgImageUrl").attr('src',url);
 
         $('#pkgEditModal').modal('show');
-
+        if(($("#editPkgPrice").val()) != null) {
+            $("#editPkgPrice").val(parseFloat($("#editPkgPrice").val()).toFixed(2));
+        }
         var  pkgNm = objct["packName"];
+        $(".chkbxPkgCat").prop('checked',false);
+        $("select").val('');
+        $(".qty-spinner").val(0);
 
+        /*
+        * for loading and displaying package content
+        **/
         $.ajax({
             type:"GET",
             url:"https://localhost:8443/admin/packages/loadPkgCont",
             data:{"pkgName":pkgNm},
             success: function(data){
-console.log(JSON.stringify(data)+" fffaaa");
+
                 $.each(data, function (key, val) {
                     var cat = val['categoryName'];
                     var item = val['item'];
                     var size = val['size'];
                     var qty = val['quantity'];
-                    alert(cat+" & "+item+" & "+size+" & "+qty);
+
                     $('.chkbxPkgCat').each(function () {
 
                         if($(this).val()==cat) {
@@ -285,42 +294,27 @@ console.log(JSON.stringify(data)+" fffaaa");
 
                             var slctedItm = $(this).parent().parent().next().find(".form-control").attr('id');
                             var selectedSize = $(this).parent().parent().next().next().find(".form-control").attr('id');
-                            var selectedQty2 = $(this).parent().parent().next().next().next().find(".form-control");
 
                             if ($(this).is(":checked")) {
 
                                 setItemList(cat, slctedItm, selectedSize);
-
-                                //$(slctedItm).val(item);
+                                console.log($(this).parent().parent().next().find(".form-control").css({
+                                    'color':'green',
+                                    'font-weight': 'bold'}));
+                                console.log($(this).parent().parent().next().next().find(".form-control").css({
+                                    'color': 'rgb(49, 49, 64)',
+                                    'font-weight': 'bold'}));
 
                                 $(this).parent().parent().next().find(".form-control").val($.trim(item));
-                                $(this).parent().parent().next().next().find(".form-control").val(val['size']);
-                                $(this).parent().parent().next().next().next().find(".form-control").val('1');
-                               /* selectedQty2.click(function () {
-                                    if ($.trim($(this).val()) == "0") {
-                                        selectedQty2.css({"border-color": "red", "border-width": "2px"});
-                                    }
-                                    else {
-                                        selectedQty2.css({"border-color": "", "border-width": ""});
-                                    }
-                                });*/
-
+                                $(this).parent().parent().next().next().find(".form-control").val($.trim(size));
+                                $(this).parent().parent().next().next().next().find(".form-control").val($.trim(qty));
                             }
-
-                        // $(this).parent().parent().next().find(".form-control").val(item);
-                        /*$(this).parent().parent().next().find(".form-control").val("jjjjjj");
-                         $(this).parent().parent().next().next().find(".form-control").val(size);
-                         $(this).parent().parent().next().next().next().find(".form-control").val(qty);*/
-                         }else{
-                            //$(this).prop('checked',false);
-                        }
+                         }
                     });
                 });
-
-
             },
             error: function(er){
-
+                alert("error in loading package content");
             }
         });
     },
@@ -336,27 +330,6 @@ console.log(JSON.stringify(data)+" fffaaa");
         $('#pkgDeleteModal').modal('show');
     }
 };
-
-/*
-*
-*
-* */
-function loadContent(){
-    var  pkgNm = $("#txtEditPkgNm").val();
-
-    $.ajax({
-        type:"GET",
-        url:"https://localhost:8443/admin/packages/loadPkgCont",
-        data:{"pkgName":pkgNm},
-        success: function(data){
-            alert(data);
-            console.log(data);
-        },
-        error: function(er){
-
-        }
-    });
-}
 
 
 /*

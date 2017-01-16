@@ -9,6 +9,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -26,10 +27,13 @@ public class LoginControllerTest extends AbstractTestNGSpringContextTests {
 
     private MockMvc mockMvc;
 
+    @BeforeMethod
+    public void setWac(){
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+    }
 
     @Test
     public void blockedUserTest() throws Exception {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
         this.mockMvc.perform(get("/blockedUserRedirect")
                 .accept(MediaType.ALL))
                 .andExpect(status().isOk())
@@ -41,13 +45,12 @@ public class LoginControllerTest extends AbstractTestNGSpringContextTests {
     public Object[][] notBlockedUsername() {
         return new Object[][]{
                 {"testre"},
-                {"kkalla"}
+                {"admin"}
         };
     }
 
     @Test(dataProvider = "notBlockedUsername")
     public void resendVerifyTestSuccess(String username) throws Exception {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
         this.mockMvc.perform(post("/resendVerification")
                 .param("username", username)
                 .accept(MediaType.APPLICATION_JSON))
@@ -65,7 +68,6 @@ public class LoginControllerTest extends AbstractTestNGSpringContextTests {
 
     @Test(dataProvider="loginDetails")
     public void testSuccessLogin(String username, String password) throws Exception {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
         this.mockMvc.perform(post("/login")
                 .param("username", username)
                 .param("password", password)
@@ -91,7 +93,6 @@ public class LoginControllerTest extends AbstractTestNGSpringContextTests {
 
     @Test(dataProvider="loginDetailsInvalid")
     public void testFailedLogin(String username, String password) throws Exception {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
         this.mockMvc.perform(post("/login")
                 .param("username", username)
                 .param("password", password)

@@ -107,7 +107,16 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="row" id="accumPrice">
+                        <div class="col-xs-3"></div>
+                        <div class="col-xs-4"></div>
+                        <div class="col-xs-2" align="right">
+                            <label id="">Exact Price:</label>
+                        </div>
+                        <div class="col-xs-2">
+                            <label class="lblAccumPrice1 price" style="color: #0019ea;"></label>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <div class="row">
                             <label class="col-xs-3 control-label">

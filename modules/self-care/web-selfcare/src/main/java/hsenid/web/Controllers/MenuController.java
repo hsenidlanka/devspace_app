@@ -1,6 +1,7 @@
 package hsenid.web.Controllers;
 
 import hsenid.web.models.ServerResponseMessage;
+import hsenid.web.supportclasses.SendStringBuilds;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
@@ -57,16 +58,14 @@ public class MenuController {
         }
         ModelAndView modelAndView = new ModelAndView("home/menu");
         RestTemplate restTemplate = new RestTemplate();
-        String url = baseUrl + categoryListUrl; // Get categories
+        String url = SendStringBuilds.sendString(baseUrl,categoryListUrl); // Get categories
         ServerResponseMessage responseMessage = restTemplate.getForObject(url, ServerResponseMessage.class);
-//        logger.info(String.valueOf(responseMessage.getData().size()));
 
         for (int i=0; i < responseMessage.getData().size() ; i++){
             responseMessage.getData().get(i).put("baseUrl", imageBaseUrl);
         }
 
         modelAndView.addObject("categories", responseMessage.getData());
-//        logger.info(String.valueOf(responseMessage.getData()));
         return modelAndView;
     }
 
@@ -77,8 +76,8 @@ public class MenuController {
         modelAndView.addObject("category", category);
 
         RestTemplate restTemplate = new RestTemplate();
-        String getSubcatUrl = baseUrl + subcategoryListUrl + category; // Get sub-categories
-        String getItemsUrl = baseUrl + subcategoryItemsUrl; // Get items.
+        String getSubcatUrl = SendStringBuilds.sendString(baseUrl,subcategoryListUrl,category); // Get sub-categories
+        String getItemsUrl = SendStringBuilds.sendString(baseUrl, subcategoryItemsUrl); // Get items.
 
         ServerResponseMessage subcategoriesResponse = restTemplate.getForObject(getSubcatUrl, ServerResponseMessage.class);
         modelAndView.addObject("subcategories", subcategoriesResponse.getData());

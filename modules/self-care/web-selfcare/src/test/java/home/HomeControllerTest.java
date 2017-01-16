@@ -10,6 +10,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -25,9 +26,13 @@ public class HomeControllerTest extends AbstractTestNGSpringContextTests {
 
     private MockMvc mockMvc;
 
+    @BeforeMethod
+    public void setWac(){
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+    }
+
     @Test
     public void homeTest() throws Exception {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
         this.mockMvc.perform(get("/home", "/")
                 .accept(MediaType.ALL))
                 .andExpect(status().isOk())
@@ -36,7 +41,6 @@ public class HomeControllerTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void aboutus() throws Exception {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
         this.mockMvc.perform(get("/about-us")
                 .accept(MediaType.ALL))
                 .andExpect(status().isOk())
