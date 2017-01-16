@@ -39,4 +39,11 @@ public class MenuControllerTest extends AbstractTestNGSpringContextTests {
                 .andExpect(status().isOk())
                 .andExpect(view().name("home/menu"));
     }
+
+//    Use dataproviders. Further test for Content
+    @Test
+    public void getPathVariableViews() throws Exception {
+        this.mockMvc.perform(get("/menu/{category}", 3))
+                .andExpect(status().isOk());
+    }
 }
