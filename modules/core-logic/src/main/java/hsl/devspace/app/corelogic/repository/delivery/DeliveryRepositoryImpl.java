@@ -1,7 +1,8 @@
 package hsl.devspace.app.corelogic.repository.delivery;
 
 import hsl.devspace.app.corelogic.domain.Delivery;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.PlatformTransactionManager;
 
@@ -18,7 +19,9 @@ public class DeliveryRepositoryImpl implements DeliveryRepository {
     private JdbcTemplate jdbcTemplate;
     private PlatformTransactionManager transactionManager;
    // private static org.apache.log4j.Logger log = Logger.getLogger(DeliveryRepositoryImpl.class);
-   org.slf4j.Logger log = LoggerFactory.getLogger(DeliveryRepositoryImpl.class);
+//   org.slf4j.Logger log = LoggerFactory.getLogger(DeliveryRepositoryImpl.class);
+    private static final Logger log = LogManager.getLogger(DeliveryRepositoryImpl.class);
+
 
     public void setDataSource(DataSource dataSource) {
         jdbcTemplate = new JdbcTemplate(dataSource);
@@ -78,7 +81,9 @@ public class DeliveryRepositoryImpl implements DeliveryRepository {
 
     @Override
     public List<Map<String, Object>> selectDeliveryDetails(int limit, int offset) {
+        log.info("inside delivery data table load method");
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT shopping_cart.order_id,delivery.agent_name,delivery.recepient_name,delivery.recepient_address,delivery.delivery_date,delivery.delivery_time,delivery.delivery_status FROM delivery INNER JOIN shopping_cart ON shopping_cart.id=delivery.cart_id WHERE delivery.delivery_method_id=2 LIMIT ? OFFSET ? ", limit, offset);
+        log.info("delivery details {}",mp);
         return mp;
     }
 
