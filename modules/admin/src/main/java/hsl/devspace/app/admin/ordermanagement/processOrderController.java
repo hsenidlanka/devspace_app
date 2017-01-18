@@ -61,10 +61,10 @@ public class processOrderController {
 
 //    handler method to obtain the delivery agent list from the database based on the branch selected
     @RequestMapping(value = "/delivery/agents", method = RequestMethod.GET)
-    public @ResponseBody List<String> agentListRetrieve(@RequestParam("branch") String branch){
+    public @ResponseBody List<String> agentListRetrieve(@RequestParam("selectedBranch") String selectedBranch){
         LOG.error("inside the agent list retrieve method");
-        List<String> agentsList=deliveryRepository.selectDeliveryAgents(branch);
-        LOG.error("the delivery agents for {} are {}",branch,agentsList);
+        List<String> agentsList=deliveryRepository.selectDeliveryAgents(selectedBranch);
+        LOG.error("the delivery agents for {} are {}",selectedBranch,agentsList);
         return agentsList;
     }
 }

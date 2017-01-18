@@ -113,14 +113,18 @@ public class MenuController {
         String itemSize = request.getParameter("itemSize");
         String itemTopping1 = request.getParameter("itemTopping1");
         String itemTopping1Price = "0";
+
         if (request.getParameter("itemTopping1Price") != null) {
             itemTopping1Price = request.getParameter("itemTopping1Price");
         }
+
         String itemTopping2 = request.getParameter("itemTopping2");
         String itemTopping2Price = "0";
+
         if (request.getParameter("itemTopping2Price") != null) {
             itemTopping2Price = request.getParameter("itemTopping2Price");
         }
+
         String itemInstructs = request.getParameter("itemInstructs");
         String itemQty = request.getParameter("itemQty");
         String itemPrice = request.getParameter("itemPrice");
@@ -139,6 +143,7 @@ public class MenuController {
         map.put("itemTotal", itemTotal);
         cartItems.add(map);
         session.setAttribute("cartItems", cartItems);
+
         return true;
     }
 

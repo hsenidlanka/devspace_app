@@ -16,6 +16,7 @@ $(document).ready(function () {
                 showColumns: false,
                 showRefresh: false,
                 minimumCountColumns: 2,
+                rowStyle: rowStyle(1,0),
                 columns: [{
                     field: 'order_id',
                     title: 'Order :',
@@ -56,14 +57,14 @@ $(document).ready(function () {
                     sortable: true
 
                 }, {
-                    field: 'sbranch',
-                    title: 'Serving Branch :',
+                    field: 'process',
+                    title: 'Process the Order :',
                     align: 'center',
                     //width:1,
                     //class: 'col-xs-2',
-                    formatter: branchFormatter
-                    //events: branchEvents
-                }, {
+                    formatter: processFormatter,
+                    events: processEvents
+                }, /*{
                     field: 'agent_name',
                     title: 'Delivery Agent:',
                     align: 'center',
@@ -72,12 +73,13 @@ $(document).ready(function () {
                     //width:25,
                     //class: 'col-xs-1',
                     sortable: true
-                }, {
+                },*/ {
                     field: 'delivery_status',
                     title: 'Delivery Status:',
                     align: 'left',
                     //width:25,
-                    //class: 'col-xs-1',
+                    //class: 'danger',
+                   //events:statusFormatter,
                     sortable: true
                 }],
                 data: result
@@ -85,16 +87,47 @@ $(document).ready(function () {
         }
     });
 
-    function agentFormatter(value, row, index) {
+   /* function statusFormatter(value, row, index) {
+        //alert(value);
         return [
-            ' <select class="agentSelect"> <option value="volvo">Volvo</option> <option value="saab">Saab</option>' +
-            ' <option value="mercedes">Mercedes</option> <option value="audi">Audi</option> </select> '
+            value,
+
+          rowStyle(row,index)
 
         ].join('');
 
+    }*/
+
+    function rowStyle(row, index) {
+        var data1 = JSON.stringify(row);
+        var objc1 = JSON.parse(data1);
+        var id= objc1["delivery_status"];
+        var id2= objc1["recepient_address"];
+        alert(index);
+        alert(row);
+
+      /*  alert(id);
+        alert(id2);*/
+
+        return {
+            class: 'danger',
+            css: {"color": "blue", "font-size": "15px"}
+        };
     }
 
-    window.agentEvents = {
+    function processFormatter(value, row, index) {
+        return [
+            '<a class="likecat" href="javascript:void(0)" title="LikeCustomer" data-toggle="modal" >',
+            '<i class="glyphicon glyphicon-edit">Process</i>',
+            //'<em class="fa fa-pencil"></em>',
+            '</a>  ',
+            '<a class="removecat" href="javascript:void(0)" title="Delete">',
+            '<i class="glyphicon glyphicon-remove">Change</i>',
+            '</a>'
+        ].join('');
+    }
+
+    window.processEvents = {
         'click .link': function(e, value, row, index) {
             var data1 = JSON.stringify(row);
             var objc1 = JSON.parse(data1);
@@ -107,55 +140,56 @@ $(document).ready(function () {
 
     function branchFormatter(value, row, index) {
         return [
-            ' <select class="branchSelect" id="sss"><option value="--Select--\">--Select--</option><option value="Colombo\">Colombo</option> <option value="Gampaha\">Gampaha</option>' +
-            ' <option value="Ja-Ela\">Ja-Ela</option> <option value="Kandana\">Kandana</option> </select> ',
-            value,index
+            ' <select class="branchSelect"  name="branchSelectN"><option value="--Select--">--Select-- </option><option value="Colombo\">Colombo </option> <option value="Gampaha\">Gampaha </option>' +
+            ' <option value="Ja-Ela\">Ja-Ela </option> <option value="Kandana\">Kandana </option> </select>'
+
         ].join('');
     }
 
 
 
-/*    window.branchEvents = {
-        'click #sss': function(e, value, row, index) {
-            var cells = new Array();
-            //for (i=0,)
-            var branch1=$('.branchSelect').val();
-            alert(branch1);
-            var branch=$('.branchSelect').find(':selected').val();
-            alert(branch);
-            //var branch=.find('option:selected').text();
-       *//*     $('#sss').each(function(){
-                cells.push($(this).text());
-            });
-            alert(cells);
-            alert(cells[0]);
-            alert(cells[index]);*//*
+    window.branchEvents = {
+        'click .branchSelect': function(e, value, row, index) {
 
+            var branch=$('.branchSelect').find(':selected').text();
+            var nodeArray= [];
+            nodeArray=branch.split(" ");
+
+            var selectedBranch=nodeArray[index];
+            alert(selectedBranch);
 
             $.ajax({
                 url: 'https://localhost:8443/admin/processOrders/delivery/agents',
-                data: {"branch":branch},
+                data: {"selectedBranch":selectedBranch},
                 success: function (msg) {
                     alert(msg);
+                    alert(index);
+                    alert("value:"+value);
 
-                    *//* var  subcat_label = $("#subcat"), label = "";
-                     subcat_label.empty();
+                    var data1 = JSON.stringify(row);
+                    var objc1 = JSON.parse(data1);
+                    var id= objc1["sbranch"];
+                    alert(id);
 
-                     for (var C = 0; C < msg.length; C++) {
-                     //alert("each subcat" + msg[C]);
-                     label =label + "<label>" + msg[C]+"</label>";
-                     }
-                     subcat_label.append(label)*//*
+                    var slctBranchAgent = $(".agentSelect"), option = "";
+                    alert(slctBranchAgent);
+                    slctBranchAgent.empty();
+
+                    option="<option>" +"--Select-- "+"</option>";
+                    for (var itm = 0; itm < msg.length; itm++) {
+                        option = option + "<option value='" + msg[itm]+ "'>" + msg[itm]+ "</option>";
+                    }
+                    slctBranchAgent.append(option);
                 },
                 error: function (e) {
                     alert("ajax failed in populating the delivery agents" + e);
                 }
             });
         }
-    };*/
+    };
 
     //to populate the delivery agents list based on the branch selected
-    $('#tableprocessOrder').on('click','<tbody>.branchSelect',function(){
+  /*  $('#tableprocessOrder').on('click','.branchSelect',function(){
         var branch=$('.branchSelect').find(':selected').val();
         alert(branch);
     $.ajax({
@@ -164,20 +198,20 @@ $(document).ready(function () {
         success: function (msg) {
             alert(msg);
 
-            /* var  subcat_label = $("#subcat"), label = "";
+            *//* var  subcat_label = $("#subcat"), label = "";
              subcat_label.empty();
 
              for (var C = 0; C < msg.length; C++) {
              //alert("each subcat" + msg[C]);
              label =label + "<label>" + msg[C]+"</label>";
              }
-             subcat_label.append(label)*/
+             subcat_label.append(label)*//*
         },
         error: function (e) {
             alert("ajax failed in populating the delivery agents" + e);
         }
     });
-    });
+    });*/
 
 });
 
