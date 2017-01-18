@@ -87,6 +87,7 @@ public class DeliveryRepositoryImpl implements DeliveryRepository {
         return mp;
     }
 
+    @Override
     public int countDeliveryDetails() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT shopping_cart.order_id,delivery.agent_name,delivery.recepient_name,delivery.recepient_address,delivery.delivery_date,delivery.delivery_time,delivery.delivery_status FROM delivery INNER JOIN shopping_cart ON shopping_cart.id=delivery.cart_id WHERE delivery.delivery_method_id=2 ");
         return mp.size();
@@ -94,12 +95,40 @@ public class DeliveryRepositoryImpl implements DeliveryRepository {
 
     @Override
     public List<String> selectDeliveryAgents(String branch) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT username FROM staff WHERE designation='Agent' AND branch=? AND status='active'", branch);
+        List<Map<String, Object>> mp1 = jdbcTemplate.queryForList("SELECT agent_name FROM delivery WHERE delivery_status<>'processing' AND agent_name IS NOT NULL ");
         List<String> agents = new ArrayList<String>();
-        for (int i = 0; i < mp.size(); i++) {
-            agents.add(mp.get(i).get("username").toString());
+        for (int j = 0; j < mp1.size(); j++) {
+            List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT username FROM staff WHERE branch=? AND status='active' AND username=?", branch, mp1.get(j).get("username"));
+            for (int i = 0; i < mp.size(); i++) {
+                agents.add(mp.get(0).get("username").toString());
+            }
         }
+
         log.info("{}", agents);
         return agents;
     }
+
+
+
+   /* public List<String> selectDeliveryAgentsTest(String branch) {
+        List<Map<String, Object>> mp1 = jdbcTemplate.queryForList("SELECT agent_name FROM delivery WHERE delivery_status<>'processing' AND agent_name IS NOT NULL ");
+        List<String> agents = new ArrayList<String>();
+        for (int j=0;j<mp1.size();j++){
+            List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT username FROM staff WHERE branch=? AND status='active' AND username=?", branch,mp1.get(j).get("username"));
+            for (int i = 0; i < mp.size(); i++) {
+                agents.add(mp.get(0).get("username").toString());
+            }
+        }
+
+        log.info("{}", agents);
+        return agents;
+    }*/
+
+    /*List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT username FROM staff WHERE designation='Agent' AND branch=? AND status='active'", branch);
+    List<String> agents = new ArrayList<String>();
+    for (int i = 0; i < mp.size(); i++) {
+        agents.add(mp.get(i).get("username").toString());
+    }
+    log.info("{}", agents);
+    return agents;*/
 }

@@ -39,13 +39,14 @@
                     <div style="display: inline-block; float:right;">
                         <div class="form-group row">
                             <div class="col-sm-6" style="padding-right: 0px;">
-                                <input type="text" class="form-control input-md" placeholder="<c:out
+                                <input type="text" class="form-control input-md" value="<c:out
                                                                 value="${searchKey}"/>"
                                        name="txt-search-menu" id="txt-menu-search">
                             </div>
                             <div class="col-sm-4" id="div_source1">
                                 <select class="form-control input-md" id="ch_user1">
-                                    <%--<option value="select"></option>--%>
+                                    <option value="${category}"><c:out
+                                            value="${category}"/></option>
                                 </select>
                             </div>
                             <script>

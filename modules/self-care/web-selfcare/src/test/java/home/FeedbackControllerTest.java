@@ -14,12 +14,14 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 @Test
 @WebAppConfiguration
 @ContextConfiguration(classes = WebConfig.class)
-public class MenuControllerTest extends AbstractTestNGSpringContextTests {
+public class FeedbackControllerTest extends AbstractTestNGSpringContextTests {
+
     @Autowired
     private WebApplicationContext wac;
 
@@ -31,32 +33,15 @@ public class MenuControllerTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void getMenuView() throws Exception {
-
-        this.mockMvc.perform(get("/menu")
+    public void getFeedbackViewTest() throws Exception {
+        this.mockMvc.perform(get("/feedbacks")
                 .accept(MediaType.ALL))
                 .andExpect(status().isOk())
-                .andExpect(model().attributeExists("categories"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("home/menu"));
-    }
-
-//    Use dataproviders. Further test for Content
-    @Test
-    public void getPathVariableViews() throws Exception {
-        this.mockMvc.perform(get("/menu/{category}", 3))
-                .andExpect(status().isOk());
-    }
-
-    @Test
-    public void getToppingTest() throws Exception {
-        this.mockMvc.perform(get("/menu/toppings"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
+                .andExpect(view().name("includes/feedback"));
     }
 
     @DataProvider
-    public Object[][] TestMenuCategoryUrl() {
+    public Object[][] usernameSender() {
         return new Object[][]
                 {
                         {"test"},
@@ -68,14 +53,11 @@ public class MenuControllerTest extends AbstractTestNGSpringContextTests {
                         {"12345"}
                 };
     }
-
-    @Test(dataProvider = "TestMenuCategoryUrl")
-    public void getPathVariableViews(String category) throws Exception {
-        this.mockMvc.perform(get("/menu/{category}", category))
-                .andExpect(status().isOk())
-                .andExpect(model().attributeExists("category"))
-                .andExpect(model().attributeExists("itemImageUrl"))
-                .andExpect(model().attributeExists("subcategories"))
-                .andExpect(view().name("home/menu-category"));
+    @Test(dataProvider = "usernameSender")
+    public void getFeedbackPurchasedTestFail(String username) throws Exception {
+        this.mockMvc.perform(get("feedbacks/purchased-items")
+                .sessionAttr("username", username)
+                .accept(MediaType.TEXT_HTML))
+                .andExpect(status().is4xxClientError());
     }
 }
