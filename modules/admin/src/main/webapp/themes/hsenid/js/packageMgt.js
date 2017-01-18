@@ -75,7 +75,7 @@ $(document).ready(function () {
             ($(this)[0].selectionStart >= text.length - 2)) {
             event.preventDefault();
         }
-    })
+    });
 
     /*
      * Function for clone and appending content table dynamically
@@ -279,16 +279,56 @@ function contentCreate() {
  * function for calculating accumulated package price
  **/
 function priceCounting(prcField, qtyField) {
-//TODO
-    var totPrc = 0;
-    var itmQty = qtyField;
+
+    /*var totPrc = 0.00;
+    var itmQty = parseInt(qtyField);
     var resPrc = parseFloat((prcField.split('-')).pop());
 
     totPrc = totPrc +(resPrc * itmQty);
-    alert(totPrc);
 
-   var finalPrc = $(".lblAccumPrice1").text(totPrc);
+    var finalPrc = $(".lblAccumPrice1").text(totPrc);
 
-    totPrc += parseFloat(finalPrc);
-    alert(totPrc);
+    totPrc += parseFloat(finalPrc);*/
+
+    var sum = 0;
+    var qty = parseInt(qtyField);
+    var untPrc = parseFloat((prcField.split('-')).pop());
+    var cal = (qty * untPrc);
+
+   // $(".chkbxPkgCat:checked").each(function(){
+      //  $('.chkbxPkgCat').each(function () {
+            if($(".chkbxPkgCat").is(':checked')){
+                console.log(" qty "+qty+" untPr= "+untPrc);
+                sum +=cal;
+
+            }
+       // });
+    $(".lblAccumPrice1").text(sum.toFixed(2));
+
+    $(".lblAccumPrice1").each(function () {
+        sum += parseFloat($(this).val() || 0);
+        console.log("aaaff "+sum);
+    });
+  //  });
+
+    console.log(" bbaaa "+sum+" type= "+typeof ((sum).toFixed(2)));
+}
+
+$(".chkbxPkgCat").change(function(){
+
+    var itm = $(this).parent().parent().next().next().find(".form-control").val();
+    var qty = $(this).parent().parent().next().next().next().find(".form-control").text();
+console.log("fere "+itm+" & "+qty);
+    priceCounting(itm,qty);
+});
+
+
+function recalculate(){
+    var sum = 0;
+
+    $("input[type=checkbox]:checked").each(function(){
+        sum += parseInt($(this).attr("rel"));
+    });
+
+    alert(sum);
 }
