@@ -9,8 +9,8 @@
     margin-left: 10%;
 }
 #process-order{
-    width: 90%;
-    margin: 10px 10px 0 65px;
+    width: 95%;
+    margin: 10px -8px 0 35px;
 }
 .pagination > li > a {
     color: #57ad06 !important;
@@ -27,4 +27,15 @@ fieldset.scheduler-border {
     font-weight: bold;
     font-size: 16px;
     margin: 10px 10px 20px 20px;
+}
+
+#orderModalDialog {
+    width: 500px;
+    margin: 20px 420px;
+}
+.assignorder-modal-header-style{
+    color: #e7ce98;
+    background: #045406;
+    font-weight: bolder;
+    font-size: 20px;
 }
