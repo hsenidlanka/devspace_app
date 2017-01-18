@@ -292,15 +292,24 @@ function priceCounting(prcField, qtyField) {
 
     var sum = 0;
     var qty = parseInt(qtyField);
-    $(".chkbxPkgCat:checked").each(function(){
+    var untPrc = parseFloat((prcField.split('-')).pop());
+    var cal = (qty * untPrc);
 
+   // $(".chkbxPkgCat:checked").each(function(){
+      //  $('.chkbxPkgCat').each(function () {
+            if($(".chkbxPkgCat").is(':checked')){
+                console.log(" qty "+qty+" untPr= "+untPrc);
+                sum +=cal;
 
-        var untPrc = parseFloat((prcField.split('-')).pop());
+            }
+       // });
+    $(".lblAccumPrice1").text(sum.toFixed(2));
 
-        console.log(" qty "+qty+" untPr= "+untPrc);
-        sum = sum+ (qty * untPrc);
-        $(".lblAccumPrice1").text(sum);
+    $(".lblAccumPrice1").each(function () {
+        sum += parseFloat($(this).val() || 0);
+        console.log("aaaff "+sum);
     });
+  //  });
 
     console.log(" bbaaa "+sum+" type= "+typeof ((sum).toFixed(2)));
 }

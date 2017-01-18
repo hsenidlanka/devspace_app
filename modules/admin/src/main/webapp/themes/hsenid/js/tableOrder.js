@@ -25,11 +25,11 @@ $(document).ready(function () {
                     field: 'order_id',
                     title: 'Order ID',
                     sortable: true
-                },{
+                },/*{
                     field: 'date',
                     title: 'Order Date',
                     sortable: true
-                }, {
+                },*/ {
                     field: 'net_cost',
                     title: 'Order Price (LKR)',
                     align: 'right',
