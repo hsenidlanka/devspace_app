@@ -68,4 +68,8 @@ public interface ShoppingCartRepository {
     List<Map<String, Object>> selectPendingDelivery();
 
     int countItemHistoryForCustomer(String username);
+
+    List<Map<String, Object>> selectAllOrders();
+
+    List<Map<String, Object>> selectAllOrdersPaginate(int limit, int offset);
 }

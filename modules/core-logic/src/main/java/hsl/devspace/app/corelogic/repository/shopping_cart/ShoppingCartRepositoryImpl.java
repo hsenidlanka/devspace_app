@@ -40,56 +40,62 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
     /*Add new cart*/
     @Override
     public int addCart(double netCost, String username) {
-        String orderId;
-        List<Map<String, Object>> max = jdbcTemplate.queryForList("SELECT MAX(id) FROM shopping_cart");
-        if (max.get(0).get("MAX(id)") == null) {
-            orderId = "PS00001";
-        } else {
-            int maxId = Integer.parseInt(max.get(0).get("MAX(id)").toString());
-            List<Map<String, Object>> order = jdbcTemplate.queryForList("SELECT order_id FROM shopping_cart WHERE id=?", maxId);
-            if (order.get(0).toString().equals("{order_id=}")) {
+        int id;
+        if (netCost >= 0 && username != null) {
+            String orderId;
+            List<Map<String, Object>> max = jdbcTemplate.queryForList("SELECT MAX(id) FROM shopping_cart");
+            if (max.get(0).get("MAX(id)") == null) {
                 orderId = "PS00001";
             } else {
-                String idO = (order.get(0).get("order_id").toString());
-                OrderIdGenerator ord = new OrderIdGenerator();
-                orderId = ord.generateOrderId(idO);
+                int maxId = Integer.parseInt(max.get(0).get("MAX(id)").toString());
+                List<Map<String, Object>> order = jdbcTemplate.queryForList("SELECT order_id FROM shopping_cart WHERE id=?", maxId);
+                if (order.get(0).toString().equals("{order_id=}")) {
+                    orderId = "PS00001";
+                } else {
+                    String idO = (order.get(0).get("order_id").toString());
+                    OrderIdGenerator ord = new OrderIdGenerator();
+                    orderId = ord.generateOrderId(idO);
+                }
             }
-        }
 
-        List<Map<String, Object>> usernameCustomer = jdbcTemplate.queryForList("SELECT id FROM customer WHERE username=?", username);
-        if (usernameCustomer.size() != 0) {
-            String sql = "INSERT INTO shopping_cart " +
-                    "(order_id,order_date,order_time,net_cost,customer_id,guest_id) VALUES (?,CURRENT_DATE ,CURRENT_TIME,?,?,NULL)";
-            jdbcTemplate.update(sql, new Object[]{orderId, netCost, usernameCustomer.get(0).get("id")});
-            log.info("{} new shopping cart added");
-
-
-        } else {
-            List<Map<String, Object>> usernameGuest = jdbcTemplate.queryForList("SELECT id FROM guest WHERE mobile=?", username);
-            if (usernameGuest.size() != 0) {
+            List<Map<String, Object>> usernameCustomer = jdbcTemplate.queryForList("SELECT id FROM customer WHERE username=?", username);
+            if (usernameCustomer.size() != 0) {
                 String sql = "INSERT INTO shopping_cart " +
-                        "(order_id,order_date,order_time,net_cost,customer_id,guest_id) VALUES (?,CURRENT_DATE ,CURRENT_TIME ,?,NULL ,?)";
-                jdbcTemplate.update(sql, new Object[]{orderId, netCost, usernameGuest.get(0).get("id")});
+                        "(order_id,order_date,order_time,net_cost,customer_id,guest_id) VALUES (?,CURRENT_DATE ,CURRENT_TIME,?,?,NULL)";
+                jdbcTemplate.update(sql, new Object[]{orderId, netCost, usernameCustomer.get(0).get("id")});
                 log.info("{} new shopping cart added");
+
 
             } else {
-                String sql = "INSERT INTO guest " +
-                        "(mobile) VALUES (?)";
-                jdbcTemplate.update(sql, new Object[]{username});
-                List<Map<String, Object>> mp4 = jdbcTemplate.queryForList("SELECT MAX(id) FROM guest");
-                String sql2 = "INSERT INTO shopping_cart (order_id,order_date,order_time,net_cost,customer_id,guest_id) VALUES (?,CURRENT_DATE ,CURRENT_TIME ,?,NULL,?)";
-                jdbcTemplate.update(sql2, new Object[]{orderId, netCost, mp4.get(0).get("MAX(id)")});
-                log.info("{} new shopping cart added");
+                List<Map<String, Object>> usernameGuest = jdbcTemplate.queryForList("SELECT id FROM guest WHERE mobile=?", username);
+                if (usernameGuest.size() != 0) {
+                    String sql = "INSERT INTO shopping_cart " +
+                            "(order_id,order_date,order_time,net_cost,customer_id,guest_id) VALUES (?,CURRENT_DATE ,CURRENT_TIME ,?,NULL ,?)";
+                    jdbcTemplate.update(sql, new Object[]{orderId, netCost, usernameGuest.get(0).get("id")});
+                    log.info("{} new shopping cart added");
 
+                } else {
+                    String sql = "INSERT INTO guest " +
+                            "(mobile) VALUES (?)";
+                    jdbcTemplate.update(sql, new Object[]{username});
+                    List<Map<String, Object>> mp4 = jdbcTemplate.queryForList("SELECT MAX(id) FROM guest");
+                    String sql2 = "INSERT INTO shopping_cart (order_id,order_date,order_time,net_cost,customer_id,guest_id) VALUES (?,CURRENT_DATE ,CURRENT_TIME ,?,NULL,?)";
+                    jdbcTemplate.update(sql2, new Object[]{orderId, netCost, mp4.get(0).get("MAX(id)")});
+                    log.info("{} new shopping cart added");
+
+                }
             }
+
+            List<Map<String, Object>> mp4 = jdbcTemplate.queryForList("SELECT MAX(id) FROM shopping_cart");
+            id = Integer.parseInt(mp4.get(0).get("MAX(id)").toString());
+            List<Map<String, Object>> mp5 = jdbcTemplate.queryForList("SELECT * FROM shopping_cart WHERE id=?", id);
+
+            log.info("{}", id);
+            log.info("mp5 {}", mp5);
+        } else {
+            id = 0;
         }
 
-        List<Map<String, Object>> mp4 = jdbcTemplate.queryForList("SELECT MAX(id) FROM shopping_cart");
-        int id = Integer.parseInt(mp4.get(0).get("MAX(id)").toString());
-        List<Map<String, Object>> mp5 = jdbcTemplate.queryForList("SELECT * FROM shopping_cart WHERE id=?", id);
-
-        log.info("{}", id);
-        log.info("mp5 {}", mp5);
 
         return id;
     }
@@ -478,6 +484,20 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
     public int countItemHistoryForCustomer(String username) {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT DISTINCT item.name,item.description,shopping_cart.order_date FROM item INNER JOIN product ON product.type_id=item.id INNER JOIN shopping_cart_product ON shopping_cart_product.product_id=product.id INNER JOIN shopping_cart ON shopping_cart.id=shopping_cart_product.shopping_cart_id WHERE shopping_cart.customer_id=(SELECT id FROM customer WHERE username=?) ORDER BY shopping_cart.order_date ", username);
         return mp.size();
+    }
+
+    @Override
+    public List<Map<String, Object>> selectAllOrders() {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM shopping_cart ORDER BY id DESC ");
+        log.info("{}", mp);
+        return mp;
+    }
+
+    @Override
+    public List<Map<String, Object>> selectAllOrdersPaginate(int limit, int offset) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM shopping_cart ORDER  BY id DESC LIMIT ? OFFSET ?", limit, offset);
+        log.info("{}", mp);
+        return mp;
     }
     /*  public String checkUniqueOrderId(String orderID){
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT id FROM shopping_cart WHERE order_id=? ",orderID);
