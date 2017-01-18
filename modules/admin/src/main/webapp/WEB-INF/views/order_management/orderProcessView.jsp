@@ -84,13 +84,11 @@
 
       <%--<form:form class="form-horizontal" role="form" id="frmViewOdr" action="" method="post">--%>
         <fieldset class="scheduler-border">
-          <legend class="scheduler-border"><fmt:message key="orderprocess.form.legend" bundle="${bundle1}"/></legend>
+          <legend class="scheduler-border" id="orderLegend"><fmt:message key="orderprocess.form.legend" bundle="${bundle1}"/></legend>
 
           <!--table of order details-->
           <table id="tableprocessOrder">
-
           </table>
-
           <div id="pagination1Delivery" class="text-center">
           </div>
           <div id="pagination2Delivery" class="text-center">

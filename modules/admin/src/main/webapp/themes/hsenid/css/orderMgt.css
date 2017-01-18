@@ -16,3 +16,15 @@
     color: #57ad06 !important;
     font-weight: bold !important;
 }
+fieldset.scheduler-border {
+    border: 1px groove #ddd !important;
+    /* padding: 0 1.4em 1.4em 1.4em !important; */
+    padding: 0 5px 0 5px;
+    margin: 0 0 1.5em 0 !important;
+}
+#orderLegend {
+    width: inherit;
+    font-weight: bold;
+    font-size: 16px;
+    margin: 10px 10px 20px 20px;
+}
