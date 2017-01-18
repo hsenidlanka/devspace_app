@@ -75,7 +75,7 @@ $(document).ready(function () {
             ($(this)[0].selectionStart >= text.length - 2)) {
             event.preventDefault();
         }
-    })
+    });
 
     /*
      * Function for clone and appending content table dynamically
@@ -279,16 +279,47 @@ function contentCreate() {
  * function for calculating accumulated package price
  **/
 function priceCounting(prcField, qtyField) {
-//TODO
-    var totPrc = 0;
-    var itmQty = qtyField;
+
+    /*var totPrc = 0.00;
+    var itmQty = parseInt(qtyField);
     var resPrc = parseFloat((prcField.split('-')).pop());
 
     totPrc = totPrc +(resPrc * itmQty);
-    alert(totPrc);
 
-   var finalPrc = $(".lblAccumPrice1").text(totPrc);
+    var finalPrc = $(".lblAccumPrice1").text(totPrc);
 
-    totPrc += parseFloat(finalPrc);
-    alert(totPrc);
+    totPrc += parseFloat(finalPrc);*/
+
+    var sum = 0;
+    var qty = parseInt(qtyField);
+    $(".chkbxPkgCat:checked").each(function(){
+
+
+        var untPrc = parseFloat((prcField.split('-')).pop());
+
+        console.log(" qty "+qty+" untPr= "+untPrc);
+        sum = sum+ (qty * untPrc);
+        $(".lblAccumPrice1").text(sum);
+    });
+
+    console.log(" bbaaa "+sum+" type= "+typeof ((sum).toFixed(2)));
+}
+
+$(".chkbxPkgCat").change(function(){
+
+    var itm = $(this).parent().parent().next().next().find(".form-control").val();
+    var qty = $(this).parent().parent().next().next().next().find(".form-control").text();
+console.log("fere "+itm+" & "+qty);
+    priceCounting(itm,qty);
+});
+
+
+function recalculate(){
+    var sum = 0;
+
+    $("input[type=checkbox]:checked").each(function(){
+        sum += parseInt($(this).attr("rel"));
+    });
+
+    alert(sum);
 }
