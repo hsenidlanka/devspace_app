@@ -1,8 +1,7 @@
 package hsl.devspace.app.corelogic.repository.delivery;
 
 import hsl.devspace.app.corelogic.domain.Delivery;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.PlatformTransactionManager;
 
@@ -20,7 +19,7 @@ public class DeliveryRepositoryImpl implements DeliveryRepository {
     private PlatformTransactionManager transactionManager;
    // private static org.apache.log4j.Logger log = Logger.getLogger(DeliveryRepositoryImpl.class);
 //   org.slf4j.Logger log = LoggerFactory.getLogger(DeliveryRepositoryImpl.class);
-    private static final Logger log = LogManager.getLogger(DeliveryRepositoryImpl.class);
+   org.slf4j.Logger log = LoggerFactory.getLogger(DeliveryRepositoryImpl.class);
 
 
     public void setDataSource(DataSource dataSource) {
@@ -122,7 +121,7 @@ public class DeliveryRepositoryImpl implements DeliveryRepository {
 
         log.info("{}", agents);
         return agents;
-    }*/
+    }
 
     /*List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT username FROM staff WHERE designation='Agent' AND branch=? AND status='active'", branch);
     List<String> agents = new ArrayList<String>();
