@@ -74,10 +74,6 @@ public class ItemFilter {
         return subCat;
     }
 
-
-
-    /////////////////////**************
-
     /*
     *reloading item table view on search & paginating basis
     * */
