@@ -17,9 +17,12 @@
     <spring:url value="/themes/hsenid/css/itemMgt.css" var="cssItem"/>
     <spring:url value="/themes/hsenid/css/packageMgt.css" var="cssPackage"/>
     <spring:url value="/themes/hsenid/css/orderMgt.css" var="cssOrder"/>
+    <spring:url value="/themes/hsenid/css/jquery_ui.css" var="cssjqryUi"/>
+
     <link href="${cssItem}" rel="stylesheet">
     <link href="${cssPackage}" rel="stylesheet">
     <link href="${cssOrder}" rel="stylesheet">
+    <link href="${cssjqryUi}" rel="stylesheet">
 
     <%--  other javascripts --%>
 
@@ -27,11 +30,13 @@
     <spring:url value="/themes/hsenid/js/packageMgt.js" var="pkgMgt"/>
     <spring:url value="/themes/hsenid/js/myAlerts.js" var="myAlerts"/>
     <spring:url value="/themes/hsenid/js/tableOrder.js" var="ordrTblView"/>
+    <spring:url value="/themes/hsenid/js/jquery_ui.min.js" var="jqueryUi"/>
 
     <script src="${itemJs}"></script>
     <script src="${pkgMgt}"></script>
     <script src="${ordrTblView}"></script>
     <script src="${myAlerts}"></script>
+    <script src="${jqueryUi}"></script>
 </head>
 
 <body>
@@ -73,23 +78,6 @@
         </div>
 
         <div class="panel-body">
-
-            <%--  <div class="row itemSearchBar">
-                  <div class="col-sm-1"></div>
-                  <div class="col-sm-3">
-                      <label class="control-label" style="float: right;">
-                          <fmt:message key="orderprocess.order.id" bundle="${bundle1}"/>
-                      </label>
-
-                  </div>
-                  <div class="col-sm-4">
-                      <input class="form-control" id="txtViewSearchOrdr" type="text"/>
-                  </div>
-                  <div class="col-sm-3">
-                  </div>
-                  <div class="col-sm-1"></div>
-              </div>--%>
-
             <%--  ////--%>
 
 
@@ -101,19 +89,24 @@
                             <%-- <div class="col-xs-1 ordrViewDiv">
                                  <button class="btn btn-link orderPill">View All Orders</button>
                              </div>--%>
-                            <div class="col-xs-2 orderFilter">
-                                <label class="control-label">
-                                    Filter By:
+                            <div class="col-xs-3">
+                                <label class=" control-label" >
+                                    <fmt:message key="orderprocess.vieworder.odrDate.from" bundle="${bundle1}"/>
                                 </label>
+                                    <input class="form-control" id="fromDateOdr" type="text"
+                                           placeholder="Click on me" style="width: 130px"/>
+                            </div>
+                            <div class="col-xs-3">
+                                <label class=" control-label">
+                                    <fmt:message key="orderprocess.vieworder.odrDate.to" bundle="${bundle1}"/>
+                                </label>
+
+                                <input class="form-control" id="toDateOdr" placeholder="Click on me"
+                                       type="text" style="width: 130px" />
                             </div>
                             <div class="col-xs-3">
                                 <select class="form-control" id="selectOrdrType">
                                     <option value="0">--Select Order Type--</option>
-                                </select>
-                            </div>
-                            <div class="col-xs-3">
-                                <select class="form-control" id="" disabled="">
-                                    <option value="0">-Select-</option>
                                 </select>
                             </div>
                             <div class="col-xs-3">

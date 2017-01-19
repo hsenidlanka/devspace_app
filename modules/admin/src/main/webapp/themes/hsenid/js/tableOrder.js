@@ -1,5 +1,14 @@
 $(document).ready(function () {
 
+    $("#fromDateOdr").datepicker({
+        "changeMonth":true,
+        "changeYear":true
+    });
+
+    $("#toDateOdr").datepicker({
+        "changeMonth":true,
+        "changeYear":true
+    });
  /*   var pgLimit = 10;
     var pkgName = $("#txtViewSearchPkg").val();*/
 
@@ -54,37 +63,35 @@ $(document).ready(function () {
                     title: 'Date',
                     align: 'right',
                     sortable: true
-                }, {
+                }/*, {
                     field: 'operate',
                     title: 'Operations',
                     align: 'center',
                     formatter: operateFormatter,
                     events: operateEvents
-                }]
+                }*/]
            // })
        // }
     });
-/*    $("#btnDeltPkg").click(function () {
-        var pkgName = $("#lblDeltPkgName").text();
-        $.ajax({
-            type: "POST",
-            url: "https://localhost:8443/admin/packages/delete_package",
-            data: {"pkgName": pkgName},
 
-            success: function (data) {
-                $.toaster({priority: 'success', title: 'Success', message: 'Deleted the item  ' + pkgName});
-                setTimeout(function () {
-                    location.reload();
-                }, 3000);
-            },
-            error: function (e) {
-                $.toaster({priority: 'danger', title: 'Error', message: 'Cannot delete the item ' + pkgName});
-                setTimeout(function () {
-                    location.reload();
-                }, 3000);
+    $("#toDateOdr").click(function(){
+        if(!$(this).null || ""){
+            if($("#fromDateOdr").null || ""){
+                var todate = $(this).val();
+                var fromDate = $("#fromDateOdr").val();
+                $.ajax({
+                    type:'get',
+                    url:'',
+                    data:{'todate':todate, 'fromDate':fromDate},
+                    success:function(data){
+
+                    }
+                })
             }
-        })
-    });*/
+
+
+        }
+    });
 
     /*
      * typeahead function for load pkgNames

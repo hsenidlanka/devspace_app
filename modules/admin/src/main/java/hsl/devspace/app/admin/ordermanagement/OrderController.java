@@ -38,6 +38,8 @@ public class OrderController {
     public
     @ResponseBody
     List<Map<String, Object>> viewItem() {
+
+
         LOGGER.info("View all order details {} ", (shoppingCart.selectAll()));
         return shoppingCart.selectAll();
     }
