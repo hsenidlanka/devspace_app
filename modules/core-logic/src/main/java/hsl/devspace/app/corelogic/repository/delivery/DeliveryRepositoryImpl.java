@@ -107,6 +107,20 @@ public class DeliveryRepositoryImpl implements DeliveryRepository {
         return agents;
     }
 
+    @Override
+    public int updateDelivery(String agentName, String staffUsername, String orderId) {
+        String sql = "UPDATE delivery SET agent_name=?,delivery_status=?,staff_id=(SELECT id FROM staff WHERE username=?) WHERE cart_id =(SELECT id FROM shopping_cart WHERE order_id=?)";
+        int row = jdbcTemplate.update(sql, new Object[]{agentName, "Processing", staffUsername, orderId});
+        return row;
+    }
+
+    @Override
+    public int updateDeliveryAgent(String agentName, String orderId) {
+        String sql = "UPDATE delivery SET agent_name=? WHERE cart_id =(SELECT id FROM shopping_cart WHERE order_id=?)";
+        int row = jdbcTemplate.update(sql, new Object[]{agentName, orderId});
+        return row;
+    }
+
 
 
    /* public List<String> selectDeliveryAgentsTest(String branch) {

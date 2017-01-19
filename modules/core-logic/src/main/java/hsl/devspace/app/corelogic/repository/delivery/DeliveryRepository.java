@@ -20,4 +20,8 @@ public interface DeliveryRepository {
 
     List<String> selectDeliveryAgents(String branch);
 
+    int updateDelivery(String agentName, String staffUsername, String orderId);
+
+    int updateDeliveryAgent(String agentName, String orderId);
+
 }
