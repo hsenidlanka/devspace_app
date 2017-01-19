@@ -29,7 +29,7 @@ public class OrderController {
     public ModelAndView loadOrderView(ModelAndView modelview){
 
         modelview.addObject("command", new ShoppingCart());
-        modelview.setViewName("/order_processing/orderView");
+        modelview.setViewName("/order_management/orderView");
         return modelview;
     }
 

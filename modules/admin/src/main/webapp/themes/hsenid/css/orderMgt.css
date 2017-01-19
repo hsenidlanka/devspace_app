@@ -28,3 +28,7 @@ fieldset.scheduler-border {
     font-size: 16px;
     margin: 10px 10px 20px 20px;
 }
+#process-order {
+    width: 95%;
+    margin: 10px -8px 0 35px;
+}
