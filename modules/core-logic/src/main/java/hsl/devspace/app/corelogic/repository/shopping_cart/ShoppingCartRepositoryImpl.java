@@ -313,6 +313,14 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
         return count;
     }
 
+    @Override
+    public int countTotalCarts() {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT COUNT(*) AS total FROM shopping_cart");
+        int count = Integer.parseInt(mp.get(0).get("total").toString());
+        log.info("{}", count);
+        return count;
+    }
+
   /*  @Override
     public void addItemToCart(Item item) {
         String sql="INSERT INTO shopping_cart VALUES (?,?,?)";
@@ -507,6 +515,22 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
         log.info("{}", mp);
         return mp;
     }
+
+    @Override
+    public List<Map<String, Object>> selectAllOrdersByDateFrom(Date dateFrom, int limit, int offset) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM shopping_cart WHERE order_date >= ? ORDER  BY id DESC LIMIT ? OFFSET ?", limit, offset);
+        log.info("{}", mp);
+        return mp;
+    }
+
+    @Override
+    public List<Map<String, Object>> selectAllOrdersByDateTo(Date dateTo, int limit, int offset) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM shopping_cart WHERE order_date <= ? ORDER  BY id DESC LIMIT ? OFFSET ?", limit, offset);
+        log.info("{}", mp);
+        return mp;
+    }
+
+
     /*  public String checkUniqueOrderId(String orderID){
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT id FROM shopping_cart WHERE order_id=? ",orderID);
         if(mp.size()!=0){

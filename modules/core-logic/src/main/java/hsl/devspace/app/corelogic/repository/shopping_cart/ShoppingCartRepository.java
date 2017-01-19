@@ -75,4 +75,10 @@ public interface ShoppingCartRepository {
     List<Map<String, Object>> selectAllOrdersPaginate(int limit, int offset);
 
     List<Map<String, Object>> selectAllOrdersByDateRange(Date date1, Date date2, int limit, int offset);
+
+    List<Map<String, Object>> selectAllOrdersByDateFrom(Date dateFrom, int limit, int offset);
+
+    List<Map<String, Object>> selectAllOrdersByDateTo(Date dateTo, int limit, int offset);
+
+    public int countTotalCarts();
 }
