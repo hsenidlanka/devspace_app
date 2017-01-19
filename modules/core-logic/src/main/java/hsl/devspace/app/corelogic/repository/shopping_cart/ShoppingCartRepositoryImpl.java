@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.sql.DataSource;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -496,6 +497,13 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
     @Override
     public List<Map<String, Object>> selectAllOrdersPaginate(int limit, int offset) {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM shopping_cart ORDER  BY id DESC LIMIT ? OFFSET ?", limit, offset);
+        log.info("{}", mp);
+        return mp;
+    }
+
+    @Override
+    public List<Map<String, Object>> selectAllOrdersByDateRange(Date date1, Date date2, int limit, int offset) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM shopping_cart WHERE order_date BETWEEN ? AND ? ORDER  BY id DESC LIMIT ? OFFSET ?", limit, offset);
         log.info("{}", mp);
         return mp;
     }
