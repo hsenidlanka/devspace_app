@@ -511,7 +511,7 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 
     @Override
     public List<Map<String, Object>> selectAllOrdersByDateRange(Date date1, Date date2, int limit, int offset) {
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM shopping_cart WHERE order_date BETWEEN ? AND ? ORDER  BY id DESC LIMIT ? OFFSET ?", limit, offset);
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT * FROM shopping_cart WHERE order_date BETWEEN ? AND ? ORDER  BY id DESC LIMIT ? OFFSET ?", date1, date2, limit, offset);
         log.info("{}", mp);
         return mp;
     }
