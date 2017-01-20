@@ -94,18 +94,31 @@ public class DeliveryRepositoryImpl implements DeliveryRepository {
 
     @Override
     public List<String> selectDeliveryAgents(String branch) {
-        List<Map<String, Object>> mp1 = jdbcTemplate.queryForList("SELECT agent_name FROM delivery WHERE delivery_status<>'processing' AND agent_name IS NOT NULL ");
         List<String> agents = new ArrayList<String>();
-        for (int j = 0; j < mp1.size(); j++) {
-            List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT username FROM staff WHERE branch=? AND status='active' AND username=?", branch, mp1.get(j).get("username"));
-            for (int i = 0; i < mp.size(); i++) {
-                agents.add(mp.get(0).get("username").toString());
-            }
+        List<String> agents2 = new ArrayList<String>();
+        List<String> completeList = new ArrayList<String>();
+
+        List<Map<String, Object>> mp1 = jdbcTemplate.queryForList("SELECT username FROM staff WHERE branch=? AND status='active' AND designation='Agent'", branch);
+
+        for (int i = 0; i < mp1.size(); i++) {
+            agents.add(mp1.get(i).get("username").toString());
         }
 
-        log.info("{}", agents);
-        return agents;
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT agent_name FROM delivery WHERE delivery_status='processing'");
+        for (int i = 0; i < mp.size(); i++) {
+            agents2.add(mp.get(i).get("agent_name").toString());
+        }
+        for (int i = 0; i < agents.size(); i++) {
+            if (agents2.contains(agents.get(i))) {
+                log.info("already assigned");
+            } else {
+                completeList.add(agents.get(i));
+            }
+        }
+        log.info("{}", completeList);
+        return completeList;
     }
+
 
     @Override
     public int updateDelivery(String agentName, String staffUsername, String orderId) {
