@@ -1,3 +1,6 @@
+var pgLimit =10;
+var fromDate = $("#fromDateOdr").val();
+
 $(document).ready(function () {
 
     $("#fromDateOdr").datepicker({
@@ -12,18 +15,18 @@ $(document).ready(function () {
  /*   var pgLimit = 10;
     var pkgName = $("#txtViewSearchPkg").val();*/
 
-    /* $.ajax({
-       url: "https://localhost:8443/admin/packages/loadSearchPackage",
+     $.ajax({
+       url: "https://localhost:8443/admin/orders/view/orderTable",
         dataType: "json",
-        data: {"pkgName": pkgName, "initPage": "1", "pgLimit": pgLimit},
-        success: function (result) {*/
+        data: { "initPage": "1", "pgLimit": pgLimit},
+        success: function (result) {
 
             $("#tblOrders").bootstrapTable({
                 dataType:'JSON',
                 url: 'https://localhost:8443/admin/orders/view/orderTable',
                 height: 400,
                 striped: true,
-                pagination: true,
+                pagination: false,
                 pageSize: 10,
                 pageList: [10, 25, 50, 100, 200],
                 search: false,
@@ -34,11 +37,7 @@ $(document).ready(function () {
                     field: 'order_id',
                     title: 'Order ID',
                     sortable: true
-                },/*{
-                    field: 'date',
-                    title: 'Order Date',
-                    sortable: true
-                },*/ {
+                },{
                     field: 'net_cost',
                     title: 'Order Price (LKR)',
                     align: 'right',
@@ -69,28 +68,73 @@ $(document).ready(function () {
                     align: 'center',
                     formatter: operateFormatter,
                     events: operateEvents
-                }*/]
-           // })
-       // }
+                }*/],
+                data: result
+            })
+        }
     });
 
-    $("#toDateOdr").click(function(){
-        if(!$(this).null || ""){
-            if($("#fromDateOdr").null || ""){
+    var pag2 = $('#pagination6').simplePaginator({
+
+        // the number of total pages
+        totalPages: 7,
+
+        // maximum of visible buttons
+        maxButtonsVisible: 5,
+
+        // page selected
+        currentPage: 1,
+
+        // text labels for buttons
+        nextLabel: 'next',
+        prevLabel: 'prev',
+        firstLabel: 'first',
+        lastLabel: 'last',
+
+        // specify if the paginator click in the currentButton
+        clickCurrentPage: true,
+
+        // called when a page is changed.
+        pageChange: function (page) {
+
+            var initpg = (page - 1) * pgLimit;
+            $.ajax({
+                url: 'https://localhost:8443/admin/orders/view/orderTable',
+                dataType: "json",
+                data: {"initPage": initpg, "pgLimit": pgLimit},
+                success: function (data) {
+
+                    $('#tblOrders').bootstrapTable('load', data);
+                }
+            })
+        }
+    });
+
+
+    $("#toDateOdr").focusout(function(){
+        fromDate = $("#fromDateOdr").val();
+       if(!$(this).null || ""){
+            if(!((fromDate).null || "")){
                 var todate = $(this).val();
-                var fromDate = $("#fromDateOdr").val();
+               //
                 $.ajax({
                     type:'get',
-                    url:'',
-                    data:{'todate':todate, 'fromDate':fromDate},
+                    url:'https://localhost:8443/admin/orders/view/orderTable',
+                    data:{'todate':todate, 'fromDate':fromDate, "initPage": "0", "pgLimit": pgLimit},
                     success:function(data){
-
+                        $('#tblOrders').bootstrapTable('load', data);
+                        console.log("success in view order");
+                    },
+                    error:function(ex){
+                        console.log("error in view order "+ex);
                     }
                 })
+            }else{
+                alert("from date is not selected");
             }
-
-
-        }
+        }else{
+           alert("to date is not selected");
+       }
     });
 
     /*

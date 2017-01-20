@@ -29,12 +29,15 @@
     <spring:url value="/themes/hsenid/js/itemMgt.js" var="itemJs"/>
     <spring:url value="/themes/hsenid/js/packageMgt.js" var="pkgMgt"/>
     <spring:url value="/themes/hsenid/js/myAlerts.js" var="myAlerts"/>
+    <spring:url value="/themes/hsenid/js/orderViewPagination.js" var="ordrPaging"/>
     <spring:url value="/themes/hsenid/js/tableOrder.js" var="ordrTblView"/>
     <spring:url value="/themes/hsenid/js/jquery_ui.min.js" var="jqueryUi"/>
+
 
     <script src="${itemJs}"></script>
     <script src="${pkgMgt}"></script>
     <script src="${ordrTblView}"></script>
+    <script src="${ordrPaging}"></script>
     <script src="${myAlerts}"></script>
     <script src="${jqueryUi}"></script>
 </head>
