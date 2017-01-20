@@ -17,7 +17,7 @@
     font-weight: bold !important;
 }
 fieldset.scheduler-border {
-    border: 1px groove #ddd !important;
+    border: 1px groove rgba(182, 185, 199, 0.31)
     /* padding: 0 1.4em 1.4em 1.4em !important; */
     padding: 0 5px 0 5px;
     margin: 0 0 1.5em 0 !important;
@@ -31,4 +31,42 @@ fieldset.scheduler-border {
 #process-order {
     width: 95%;
     margin: 10px -8px 0 35px;
+}
+#orderModalDialog {
+    width: 500px;
+}
+#reassignorderModalDialog{
+    width: 500px;
+}
+
+.assignorder-modal-header-style{
+    color: #e7ce98;
+    background: #045406;
+    font-weight: bolder;
+    font-size: 20px;
+}
+#lblOrderId {
+    color: #c76b6b;
+}
+.opModalTitle{
+    text-align: center;
+    font-size: 18px;
+}
+
+legend.scheduler-border {
+    width: auto;
+    font-size: 1.2em;
+}
+
+fieldset.scheduler-border {
+    border: 1px groove rgba(51, 39, 39, 0.36) !important;
+    /* padding: 0 1.4em 1.4em 1.4em !important; */
+    padding: 0 5px 0 5px;
+    margin: 0 0 1.5em 0 !important;
+}
+.dynamic {
+    font-style: italic;
+    font-weight: 100;
+    font-size: 18px;
+    color: #484d61;
 }

@@ -1,16 +1,16 @@
 package hsl.devspace.app.admin.ordermanagement;
 
+import hsl.devspace.app.corelogic.domain.Delivery;
 import hsl.devspace.app.corelogic.repository.delivery.DeliveryRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
@@ -66,5 +66,28 @@ public class processOrderController {
         List<String> agentsList=deliveryRepository.selectDeliveryAgents(selectedBranch);
         LOG.error("the delivery agents for {} are {}",selectedBranch,agentsList);
         return agentsList;
+    }
+
+    //handler method to assign the delivery agent for a Pending order
+    @RequestMapping(value = "/agentAssign", method = RequestMethod.GET)
+    public @ResponseBody int agentAssign(@ModelAttribute("deliveryObject") Delivery deliveryObject,
+                                         @RequestParam("orderId") String orderId,
+                                         HttpServletRequest request){
+
+        //set the creator in the delivery assign using session attributes
+        HttpSession session = request.getSession();
+        String userId =(String)session.getAttribute("username");
+        LOG.error("user: {}",userId);
+        String agent=deliveryObject.getAgentName();
+        LOG.error("agent:{}",agent);
+
+        LOG.error("order:{}",orderId);
+
+        int assignStatus=deliveryRepository.updateDelivery(agent,userId,orderId);
+        LOG.error("assignStatus:{}",assignStatus);
+
+
+
+        return 1;
     }
 }

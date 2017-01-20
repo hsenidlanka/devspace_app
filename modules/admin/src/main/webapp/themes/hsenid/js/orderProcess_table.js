@@ -118,15 +118,19 @@ $(document).ready(function () {
         'click .assignOrder': function(e, value, row, index) {
             var data2 = JSON.stringify(row);
             var objc2 = JSON.parse(data2);
-            $('#lblDeleteCategoryId').text(objc2["order_id"]);
+            $('#lblOrderId').text(objc2["order_id"]);
             $('#assignOrderModel').modal({show:true});
         },
         'click .reassignOrder': function(e, value, row, index) {
             var data1 = JSON.stringify(row);
             var objc1 = JSON.parse(data1);
-            var id= objc1["id"];
-            var name= objc1["name"];
-            $.ajax({
+            var id= objc1["order_id"];
+            var name= objc1["agent_name"];
+            $('#lblChangeOrderId').text(id);
+            $('#changeAgent').text(name);
+
+            $('#reassignOrderModel').modal({show:true});
+      /*      $.ajax({
                 //type: "POST",
                 url: "https://localhost:8443/admin/category/edit",
                 data: {"id":id},
@@ -149,12 +153,44 @@ $(document).ready(function () {
                 error:function(e){
                     alert("ajax failed");
                 }
-            });
+            });*/
         }
     };
 
 
+    //ajax call to load the agents list when branch is selected
+    $("#selectBranch").change(function () {
+        var selectedBranch=$('#selectBranch').find(':selected').text();
+        //alert(selectedBranch);
+        $("#lblBranchId").text(selectedBranch);
+        $.ajax({
+            url: 'https://localhost:8443/admin/processOrders/delivery/agents',
+            data: {"selectedBranch":selectedBranch},
+            success: function (msg) {
+                //alert(msg);
+                var slctBranchAgent = $("#selectAgent"), option = "";
 
+                slctBranchAgent.empty();
+
+                option="<option>" +"--Select-- "+"</option>";
+                for (var itm = 0; itm < msg.length; itm++) {
+                    option = option + "<option value='" + msg[itm]+ "'>" + msg[itm]+ "</option>";
+                }
+                slctBranchAgent.append(option);
+            },
+            error: function (e) {
+                alert("ajax failed in populating the delivery agents" + e);
+            }
+        });
+    });
+
+    //javascript to show the chosen agent name on a label
+    $("#selectAgent").change(function () {
+        var selectedAgent=$(this).find(':selected').text();
+        alert(selectedAgent);
+        $("#lblAgentId ").text(selectedAgent);
+
+    });
 
 
 

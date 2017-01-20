@@ -96,14 +96,13 @@
         </fieldset>
       <%--</form:form>--%>
     </div>
-
   </div>
 </div>
 
 
 <%------------------------------------==============models=================---------------------------------------------------->
 
-<%--modal to edit the category selected--%>
+<%--modal to assign the delivery agent to an order and change the status --%>
 <div class="modal fade" id="assignOrderModel">
   <div class="modal-dialog" id="orderModalDialog">
 
@@ -119,25 +118,30 @@
         </div>
       </div>
       <div class="modal-body">
-        <form:form role="form"   method="POST" class="form-horizontal">
-          <fieldset>
+        <form:form role="form"   method="POST" class="form-horizontal" action="/admin/processOrders/agentAssign">
+            <div class="form-group opModalTitle">
+              <label class="control-label ">
+                <fmt:message key="orderprocess.assignorder.modal.title" bundle="${bundle1}" />
+              </label>
+              <input name="orderId" id="lblOrderId"/>
+            </div>
+          <fieldset class="scheduler-border">
+            <div class="form-group"></div>
             <div class="form-group">
               <div class="col-xs-2"></div>
               <div class="col-xs-5">
                 <div class="form-group">
-                  <label  class="control-label ">
+                  <label class="control-label ">
                     <fmt:message key="orderprocess.assignorder.modal.selectbranch" bundle="${bundle1}" />
                   </label>
-                  <select class="form-control" id="selectBranch" style="width: 100px">
-                    <option value="Mr">
-                      <fmt:message key="user.useradd.form.title.mr" bundle="${bundle1}"/>
-                    </option>
-                    <option value="Mrs">
-                      <fmt:message key="user.useradd.form.title.mrs" bundle="${bundle1}" />
-                    </option>
-                    <option value="Miss">
-                      <fmt:message key="user.useradd.form.title.miss" bundle="${bundle1}" />
-                    </option>
+                </div>
+                <div class="form-group">
+                  <select class="form-control" id="selectBranch" style="width: 150px">
+                    <option value="Null"><fmt:message key="user.customer.select" bundle="${bundle1}"/></option>
+                    <option value="Colombo"><fmt:message key="user.staff.branch1" bundle="${bundle1}"/></option>
+                    <option value="Gampaha"><fmt:message key="user.staff.branch2" bundle="${bundle1}" /></option>
+                    <option value="Ja-Ela"><fmt:message key="user.staff.branch3" bundle="${bundle1}" /></option>
+                    <option value="Kandana"><fmt:message key="user.staff.branch4" bundle="${bundle1}" /></option>
                   </select>
                 </div>
               </div>
@@ -146,125 +150,187 @@
                   <label  class="control-label ">
                     <fmt:message key="orderprocess.assignorder.modal.selectagent" bundle="${bundle1}" />
                   </label>
-                  <select class="form-control" id="selectAgent" style="width: 100px">
+                </div>
+                <div class="form-group">
+                  <select class="form-control" id="selectAgent" style="width: 150px">
                     <option value="Mr">
-                      <fmt:message key="user.useradd.form.title.mr" bundle="${bundle1}"/>
-                    </option>
-                    <option value="Mrs">
-                      <fmt:message key="user.useradd.form.title.mrs" bundle="${bundle1}" />
-                    </option>
-                    <option value="Miss">
-                      <fmt:message key="user.useradd.form.title.miss" bundle="${bundle1}" />
+                      <fmt:message key="user.customer.select" bundle="${bundle1}"/>
                     </option>
                   </select>
                 </div>
               </div>
             </div>
-
-
-         <%--   <br>
             <div class="form-group">
-              <label for="categoryid" class="control-label col-sm-4">
-                <fmt:message key="category.categoryedit.modal.id" bundle="${bundle1}" />
-              </label>
-              <div class="col-sm-8">
-                <form:input path="category_id" type="text" class="form-control" id="categoryid"
-                            readonly="true"/>
+              <div class="col-xs-2"></div>
+              <div class="col-xs-5">
+                <div class="form-group">
+                  <label  class="control-label ">
+                    <fmt:message key="orderprocess.assignorder.modal.branch.selection" bundle="${bundle1}" />
+                  </label>
+                </div>
               </div>
-            </div>
-            <div class="form-group">
-              <label for="editcategoryname" class="control-label col-sm-4">
-                <fmt:message key="category.categoryedit.modal.name" bundle="${bundle1}" />
-              </label>
-
-              <div class="col-sm-8">
-                <form:input path="categoryName" type="text" class="form-control" id="editcategoryname"
-                            required="required"/>
-              </div>
-
-            </div>
-            <input name="catName" type="hidden" id="catName">
-            <div class="form-group">
-              <label for="editcategorydes" class="control-label col-sm-4">
-                <fmt:message key="category.categoryedit.modal.description" bundle="${bundle1}" />
-
-              </label>
-              <div class="col-sm-8">
-                <form:textarea path="catDescription" type="text" class="form-control" id="editcategorydes"></form:textarea>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="editbtnUpldImage" class="control-label col-sm-4" >
-                <fmt:message key="category.categoryedit.modal.image" bundle="${bundle1}" />
-              </label>
-              <div class="col-sm-8">
-                <img  id="imageUrl"/>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-sm-4">
-
-              </label>
-              <div class="col-sm-8" style="margin: 0 0 -100px 0;">
-                <a href="#" id="imageEditButton">
-                  <fmt:message key="category.categoryedit.modal.imageChange" bundle="${bundle1}" /></a>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-sm-4">
-
-              </label>
-              <div class="col-sm-8">
-                <form:input type="file" class="file_upload btn btn-default" path="imageUrl"
-                            id="editbtnUpldImage" disabled="true"/>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="editvisibility" class="control-label col-sm-4" style="">
-                <fmt:message key="category.categoryedit.modal.visibility" bundle="${bundle1}" />
-              </label>
-              <div class="col-sm-8">
-                <div class="col-xs-2">
-                  <form:select path="status" class="form-control" id="editvisibility" style="width:75px">
-                    <form:option value="1">
-                      <fmt:message key="category.categoryadd.form.catvisibility.option1"
-                                   bundle="${bundle1}"/>
-                    </form:option>
-                    <form:option value="0">
-                      <fmt:message key="category.categoryadd.form.catvisibility.option2"
-                                   bundle="${bundle1}" />
-                    </form:option>
-                  </form:select>
+              <div class="col-xs-5">
+                <div class="form-group">
+                  <label class="control-label dynamic " id="lblBranchId">
+                  </label>
                 </div>
               </div>
             </div>
-            <div class="modal-footer" style="height:10px">
-              <div class="form-group row" style="text-align: center">
-                <div class="col-xs-3"></div>
-                <div class="col-xs-2" >
-                  <button class="btn btn-success"  data-dismiss="modal" aria-hidden="true">
-                    <fmt:message key="category.categorydelete.modal.cancel" bundle="${bundle1}" />
-                    <span class="glyphicon glyphicon-remove"></span>
-                  </button>
+            <div class="form-group">
+              <div class="col-xs-2"></div>
+              <div class="col-xs-5">
+                <div class="form-group">
+                  <label  class="control-label ">
+                    <fmt:message key="orderprocess.assignorder.modal.agent.selection" bundle="${bundle1}" />
+                  </label>
                 </div>
-                <div class="col-xs-2"></div>
-                <div class="col-xs-2" >
-                  <button class="btn btn-success" id="btnEditCategory" type="submit">
-                    <fmt:message key="category.categoryedit.modal.approve" bundle="${bundle1}" />
-                    <span class="glyphicon glyphicon-ok"></span>
-                  </button>
+              </div>
+              <div class="col-xs-5">
+                <div class="form-group">
+                  <form:label path="agentName" class="control-label dynamic" id="lblAgentId"></form:label>
                 </div>
-                <div class="col-xs-3"></div>
               </div>
             </div>
-          </fieldset>--%>
           </fieldset>
         </form:form>
+      </div>
+      <div class="modal-footer" style="height:70px">
+        <div class="form-group row" style="text-align: center">
+          <div class="col-xs-3"></div>
+          <div class="col-xs-2" >
+            <button class="btn btn-success"  data-dismiss="modal" aria-hidden="true">
+              <fmt:message key="category.categorydelete.modal.cancel" bundle="${bundle1}" />
+              <span class="glyphicon glyphicon-remove"></span>
+            </button>
+          </div>
+          <div class="col-xs-2"></div>
+          <div class="col-xs-2" >
+            <button class="btn btn-success" id="btnAssignDelivery" type="submit">
+              <fmt:message key="orderprocess.assignorder.modal.footer.assign.button" bundle="${bundle1}" />
+              <span class="glyphicon glyphicon-ok"></span>
+            </button>
+          </div>
+          <div class="col-xs-3"></div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
+
+<%--modal to change and  reassign the agent --%>
+<div class="modal fade" id="reassignOrderModel">
+  <div class="modal-dialog" id="reassignorderModalDialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header assignorder-modal-header-style" style="text-align: center">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
+                class="glyphicon glyphicon-remove"></span>
+        </button>
+        <div align="center">
+          <span class="glyphicon glyphicon-edit"></span>
+          <fmt:message key="orderprocess.changeorder.modal.heading" bundle="${bundle1}" />
+        </div>
+      </div>
+      <div class="modal-body">
+        <form:form role="form"   method="POST" class="form-horizontal">
+          <div class="form-group opModalTitle">
+            <label class="control-label ">
+              <fmt:message key="orderprocess.assignorder.modal.title" bundle="${bundle1}" />
+            </label>
+            <label id="lblChangeOrderId"></label>
+          </div>
+          <fieldset class="scheduler-border">
+            <div class="form-group"></div>
+            <div class="form-group">
+              <div class="col-xs-2"></div>
+              <div class="col-xs-5">
+                <div class="form-group">
+                  <label class="control-label ">
+                    <fmt:message key="orderprocess.changeorder.modal.selectbranch" bundle="${bundle1}" />
+                  </label>
+                </div>
+                <div class="form-group">
+                  <select class="form-control" id="changeBranch" style="width: 150px">
+                    <option value="Null"><fmt:message key="user.customer.select" bundle="${bundle1}"/></option>
+                    <option value="Colombo"><fmt:message key="user.staff.branch1" bundle="${bundle1}"/></option>
+                    <option value="Gampaha"><fmt:message key="user.staff.branch2" bundle="${bundle1}" /></option>
+                    <option value="Ja-Ela"><fmt:message key="user.staff.branch3" bundle="${bundle1}" /></option>
+                    <option value="Kandana"><fmt:message key="user.staff.branch4" bundle="${bundle1}" /></option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-xs-5">
+                <div class="form-group">
+                  <label  class="control-label ">
+                    <fmt:message key="orderprocess.changeorder.modal.selectagent" bundle="${bundle1}" />
+                  </label>
+                </div>
+                <div class="form-group">
+                  <select class="form-control" id="changeAgent" style="width: 150px">
+                    <option value="Mr">
+                      <fmt:message key="user.customer.select" bundle="${bundle1}"/>
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-xs-2"></div>
+              <div class="col-xs-5">
+                <div class="form-group">
+                  <label  class="control-label ">
+                    <fmt:message key="orderprocess.assignorder.modal.branch.selection" bundle="${bundle1}" />
+                  </label>
+                </div>
+              </div>
+              <div class="col-xs-5">
+                <div class="form-group">
+                  <label class="control-label dynamic " id="lblChangedBranchId">
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-xs-2"></div>
+              <div class="col-xs-5">
+                <div class="form-group">
+                  <label  class="control-label ">
+                    <fmt:message key="orderprocess.assignorder.modal.agent.selection" bundle="${bundle1}" />
+                  </label>
+                </div>
+              </div>
+              <div class="col-xs-5">
+                <div class="form-group">
+                  <label class="control-label dynamic" id="lblChangeAgentId"></label>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </form:form>
+      </div>
+      <div class="modal-footer" style="height:70px">
+        <div class="form-group row" style="text-align: center">
+          <div class="col-xs-3"></div>
+          <div class="col-xs-2" >
+            <button class="btn btn-success"  data-dismiss="modal" aria-hidden="true">
+              <fmt:message key="category.categorydelete.modal.cancel" bundle="${bundle1}" />
+              <span class="glyphicon glyphicon-remove"></span>
+            </button>
+          </div>
+          <div class="col-xs-2"></div>
+          <div class="col-xs-2" >
+            <button class="btn btn-success" id="btnReassignDelivery" type="submit">
+              <fmt:message key="orderprocess.changeorder.modal.footer.assign.button" bundle="${bundle1}" />
+              <span class="glyphicon glyphicon-ok"></span>
+            </button>
+          </div>
+          <div class="col-xs-3"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
