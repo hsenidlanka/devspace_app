@@ -15,6 +15,7 @@ $(document).ready(function () {
                 search: false,
                 showColumns: false,
                 showRefresh: false,
+                //rowStyle:rowStyle,
                 minimumCountColumns: 2,
                 columns: [{
                     field: 'id',
@@ -78,6 +79,15 @@ $(document).ready(function () {
             });
         }
 });
+
+
+ /*   function rowStyle(row, index) {
+            return {
+                //class: 'danger',
+                css: {"color": "#191970"}
+
+            };
+    }*/
 
 function linkFormatter(value, row, index) {
     return [
