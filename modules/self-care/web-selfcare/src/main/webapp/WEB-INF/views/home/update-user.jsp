@@ -44,25 +44,8 @@
 
 
 </head>
-<%--<style>
-
-    hr {
-        margin-top: 12px;
-        margin-bottom: 12px;
-        box-shadow: 0 10px 10px -10px #88C470 inset !important;
-    }
-
-    .updatesuccess {
-        /*font-size: 27px;*/
-    }
-
-
-</style>--%>
 
 <body style="height: 100%">
-<%--<%@include file="../includes/new-header.jsp" %>--%>
-
-<%--<center>--%>
 <div>
 
     <div class="panel panel-success">
@@ -71,7 +54,6 @@
                    cssClass="form-horizontal">
 
             <div class="panel-heading">
-                    <%--<p style="font-size: xx-large;text-align: left">--%>
                 <img class="icons" src="<c:url value="/resources/images/icons/useredit.png"/>">
 
                 <h3 style="display: inline-block;"><fmt:message key="update.user.title" bundle="${lang}"/></h3>
@@ -176,7 +158,7 @@
 
                     <div class="form-group">
                         <form:label path="mobile" for="mobile">
-                            <p><strong><fmt:message key="signup.email" bundle="${lang}"/>Mobile</strong></p>
+                            <p><strong><fmt:message key="pay.mobile.no" bundle="${lang}"/></strong></p>
                         </form:label>
 
                         <div class="">
@@ -191,7 +173,7 @@
 
                     <div class="form-group">
                         <form:label path="addressLine01" for="addressLine01" cssClass="text-left">
-                            <p><strong><fmt:message key="signup.email" bundle="${lang}"/>Address</strong></p>
+                            <p><strong><fmt:message key="signup.address" bundle="${lang}"/></strong></p>
                         </form:label>
                         <div class="row">
                             <div class="row inline">
