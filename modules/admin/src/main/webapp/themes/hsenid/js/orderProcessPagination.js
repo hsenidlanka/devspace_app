@@ -3,6 +3,7 @@
 
 $(document).ready(function () {
     var pgLimit = 10;
+
     /**
      * ajax function for getting records count
      */
@@ -77,17 +78,63 @@ $(document).ready(function () {
         // called when a page is changed.
         pageChange: function (page) {
             var pageSend=(page-1)*pgLimit;
+            var searchDelivery = $("#txtViewSearchOrdr").val();
 
-            $.ajax({
-                url: 'https://localhost:8443/admin/processOrders/view/orderProcessTable',
-                dataType: "json",
-                data: {"initPage":pageSend, "pgLimit": pgLimit},
-                success: function (data) {
-                    $('#tableprocessOrder').bootstrapTable('load', data);
-                }
-            })
+            if(searchDelivery == "") {
+                $.ajax({
+                    url: 'https://localhost:8443/admin/processOrders/view/orderProcessTable',
+                    dataType: "json",
+                    data: {"initPage": pageSend, "pgLimit": pgLimit},
+                    success: function (data) {
+                        $('#tableprocessOrder').bootstrapTable('load', data);
+                    }
+                })
+            }else{
+                $.ajax({
+                    url: 'https://localhost:8443/admin/processOrders/filter/byDeliverStatus',
+                    dataType: "json",
+                    data: {"searchDelivery": searchDelivery,"initPage": pageSend, "pgLimit": pgLimit},
+                    success: function (data) {
+                        $('#tableprocessOrder').bootstrapTable('load', data);
+                    }
+                })
+            }
         }
     });
+
+    //for banned staff table data filter
+    $("#txtViewSearchOrdr").keyup(function () {
+        var searchDelivery = $("#txtViewSearchOrdr").val();
+
+        $('#pagination1Delivery').hide();
+        $('#pagination2Delivery').show();
+
+        $.ajax({
+            url: "https://localhost:8443/admin/processOrders/filter/byDeliverStatus",
+            data: {"searchDelivery ": searchDelivery ,"initPage": "0", "pgLimit": pgLimit},
+            dataType: "json",
+            success: function (data) {
+                //alert(" value"+ data);
+                $('#tableprocessOrder').bootstrapTable('load', data);
+            },
+            error: function (e) {
+                alert("error, load search staff" + e);
+                //console.log("error, load search staff" + e)
+            }
+        });
+        /**
+         *Setting the number of pages according to the number of records
+         */
+        $.ajax({
+            url: 'https://localhost:8443/admin/processOrders/delivery/filteredCount',
+            data: {"searchDelivery ": searchDelivery},
+            success: function (recCount) {
+               pagOrder2.simplePaginator('setTotalPages', Math.ceil(recCount / pgLimit));
+            }
+        });
+    });
+
+
 
 
 
