@@ -24,4 +24,7 @@ public interface DeliveryRepository {
 
     int updateDeliveryAgent(String agentName, String orderId);
 
+    List<Map<String, Object>> selectDeliveryDetailsByStatus(String status, int limit, int offset);
+
+    int countDeliveryDetailsByStatus(String status);
 }

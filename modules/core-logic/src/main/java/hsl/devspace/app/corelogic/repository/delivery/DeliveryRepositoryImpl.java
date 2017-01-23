@@ -87,6 +87,20 @@ public class DeliveryRepositoryImpl implements DeliveryRepository {
     }
 
     @Override
+    public List<Map<String, Object>> selectDeliveryDetailsByStatus(String status, int limit, int offset) {
+        log.info("inside delivery data table load method");
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT shopping_cart.order_id,delivery.agent_name,delivery.recepient_name,delivery.recepient_address,delivery.delivery_date,delivery.delivery_time,delivery.delivery_status FROM delivery INNER JOIN shopping_cart ON shopping_cart.id=delivery.cart_id WHERE delivery.delivery_method_id=2 AND delivery.delivery_status=? ORDER BY delivery.delivery_date DESC LIMIT ? OFFSET ? ", status, limit, offset);
+        log.info("delivery details {}", mp);
+        return mp;
+    }
+
+    @Override
+    public int countDeliveryDetailsByStatus(String status) {
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT shopping_cart.order_id,delivery.agent_name,delivery.recepient_name,delivery.recepient_address,delivery.delivery_date,delivery.delivery_time,delivery.delivery_status FROM delivery INNER JOIN shopping_cart ON shopping_cart.id=delivery.cart_id WHERE delivery.delivery_method_id=2 AND delivery.delivery_status=? ");
+        return mp.size();
+    }
+
+    @Override
     public int countDeliveryDetails() {
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT shopping_cart.order_id,delivery.agent_name,delivery.recepient_name,delivery.recepient_address,delivery.delivery_date,delivery.delivery_time,delivery.delivery_status FROM delivery INNER JOIN shopping_cart ON shopping_cart.id=delivery.cart_id WHERE delivery.delivery_method_id=2 ");
         return mp.size();
