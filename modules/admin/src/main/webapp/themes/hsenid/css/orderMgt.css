@@ -70,3 +70,8 @@ fieldset.scheduler-border {
     font-size: 18px;
     color: #484d61;
 }
+.disabledAnchor{
+    pointer-events: none !important;
+    cursor: default;
+    color: rgba(83, 62, 37, 0.37);
+}

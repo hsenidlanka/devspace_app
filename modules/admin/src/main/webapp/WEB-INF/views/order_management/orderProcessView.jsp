@@ -64,13 +64,13 @@
     <div class="panel-body">
       <div class="row itemSearchBar">
         <div class="col-sm-1"></div>
-        <div class="col-sm-3">
+        <div class="col-sm-4">
           <label class="control-label" style="float: right;">
             <fmt:message key="orderprocess.order.id" bundle="${bundle1}"/>
           </label>
 
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-3">
           <input class="form-control" id="txtViewSearchOrdr" type="text"/>
         </div>
         <div class="col-sm-3">
@@ -118,12 +118,12 @@
         </div>
       </div>
       <div class="modal-body">
-        <form:form role="form"   method="POST" class="form-horizontal" action="/admin/processOrders/agentAssign">
+        <form role="form"   method="POST" class="form-horizontal">
             <div class="form-group opModalTitle">
               <label class="control-label ">
                 <fmt:message key="orderprocess.assignorder.modal.title" bundle="${bundle1}" />
               </label>
-              <input name="orderId" id="lblOrderId"/>
+              <label id="lblOrderId"></label>
             </div>
           <fieldset class="scheduler-border">
             <div class="form-group"></div>
@@ -137,7 +137,7 @@
                 </div>
                 <div class="form-group">
                   <select class="form-control" id="selectBranch" style="width: 150px">
-                    <option value="Null"><fmt:message key="user.customer.select" bundle="${bundle1}"/></option>
+                    <option value="--Select--"><fmt:message key="user.customer.select" bundle="${bundle1}"/></option>
                     <option value="Colombo"><fmt:message key="user.staff.branch1" bundle="${bundle1}"/></option>
                     <option value="Gampaha"><fmt:message key="user.staff.branch2" bundle="${bundle1}" /></option>
                     <option value="Ja-Ela"><fmt:message key="user.staff.branch3" bundle="${bundle1}" /></option>
@@ -153,7 +153,7 @@
                 </div>
                 <div class="form-group">
                   <select class="form-control" id="selectAgent" style="width: 150px">
-                    <option value="Mr">
+                    <option value="--Select--">
                       <fmt:message key="user.customer.select" bundle="${bundle1}"/>
                     </option>
                   </select>
@@ -171,8 +171,7 @@
               </div>
               <div class="col-xs-5">
                 <div class="form-group">
-                  <label class="control-label dynamic " id="lblBranchId">
-                  </label>
+                  <label class="control-label dynamic " id="lblBranchId"></label>
                 </div>
               </div>
             </div>
@@ -187,12 +186,12 @@
               </div>
               <div class="col-xs-5">
                 <div class="form-group">
-                  <form:label path="agentName" class="control-label dynamic" id="lblAgentId"></form:label>
+                  <label  class="control-label dynamic" id="lblAgentId"></label>
                 </div>
               </div>
             </div>
           </fieldset>
-        </form:form>
+        </form>
       </div>
       <div class="modal-footer" style="height:70px">
         <div class="form-group row" style="text-align: center">
