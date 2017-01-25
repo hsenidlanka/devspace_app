@@ -86,9 +86,7 @@ $(document).ready(function () {
         var data1 = JSON.stringify(row);
         var objc1 = JSON.parse(data1);
         var deliveryStatus= objc1["delivery_status"];
-/*
-        alert(index);
-        alert(deliveryStatus);*/
+        //alert(deliveryStatus);
 
         if(deliveryStatus == "Pending") {
             return {
@@ -102,15 +100,14 @@ $(document).ready(function () {
     }
 
     function processFormatter(value, row, index) {
-        return [
-            '<a class="assignOrder" href="javascript:void(0)" title="LikeCustomer" data-toggle="modal" >',
-            '<i class="glyphicon glyphicon-edit">Assign</i>',
-            //'<em class="fa fa-pencil"></em>',
-            '</a>  ',
-            '<a class="reassignOrder" href="javascript:void(0)" title="Delete">',
-            '<i class="glyphicon glyphicon-refresh">Change</i>',
-            '</a>'
-        ].join('');
+
+            return [
+                '<a class="assignOrder" id="assignOrder" href="javascript:void(0)" title="LikeCustomer" data-toggle="modal" >',
+                '<i class="glyphicon glyphicon-edit">Assign</i>',
+                //'<em class="fa fa-pencil"></em>',
+                '</a>  '
+            ].join('');
+
     }
 
     window.processEvents = {
@@ -120,40 +117,6 @@ $(document).ready(function () {
             var objc2 = JSON.parse(data2);
             $('#lblOrderId').text(objc2["order_id"]);
             $('#assignOrderModel').modal({show:true});
-        },
-        'click .reassignOrder': function(e, value, row, index) {
-            var data1 = JSON.stringify(row);
-            var objc1 = JSON.parse(data1);
-            var id= objc1["order_id"];
-            var name= objc1["agent_name"];
-            $('#lblChangeOrderId').text(id);
-            $('#changeAgent').text(name);
-
-            $('#reassignOrderModel').modal({show:true});
-      /*      $.ajax({
-                //type: "POST",
-                url: "https://localhost:8443/admin/category/edit",
-                data: {"id":id},
-                success: function(msg){
-                    var name=msg["name"];
-                    var image1=msg["image"];
-
-                    var  url="https://localhost:8443/admin/themes/hsenid/images/categories/" +image1;
-                    //alert(url);
-                    $('#imageUrl').attr('src',url);
-                    $('#categoryid').val(id);
-                    $('#editcategoryname').val(msg["name"]);
-                    $('#catName').val(msg["name"]);
-
-                    $('#editcategorydes').val(msg["description"]);
-                    $('#editvisibility').val(msg["status"]);
-
-                    $('#modifyModel').modal({show:true});
-                },
-                error:function(e){
-                    alert("ajax failed");
-                }
-            });*/
         }
     };
 
@@ -163,6 +126,8 @@ $(document).ready(function () {
         var selectedBranch=$('#selectBranch').find(':selected').text();
         //alert(selectedBranch);
         $("#lblBranchId").text(selectedBranch);
+        $("#lblAgentId").text("");
+
         $.ajax({
             url: 'https://localhost:8443/admin/processOrders/delivery/agents',
             data: {"selectedBranch":selectedBranch},
@@ -187,64 +152,56 @@ $(document).ready(function () {
     //javascript to show the chosen agent name on a label
     $("#selectAgent").change(function () {
         var selectedAgent=$(this).find(':selected').text();
-        alert(selectedAgent);
+        //alert(selectedAgent);
         $("#lblAgentId ").text(selectedAgent);
 
     });
 
+    $("#btnAssignDelivery").click(function() {
+        //var branchName=$('#selectBranch').find(':selected').text();
+        //var agentName=$('#selectAgent').find(':selected').text();
+        var branchName=$('#lblBranchId').text();
+        var agentName=$('#lblAgentId').text();
+        var orderId=$('#lblOrderId').text();
+        alert(orderId);
+        alert(agentName);
+        alert(branchName);
 
+        if(agentName == ""){
+            $.toaster({ priority : 'danger', title : 'Error', message : 'Selection is NOT complete'});
 
-
-   /* function branchFormatter(value, row, index) {
-        return [
-            ' <select class="branchSelect"  name="branchSelectN"><option value="--Select--">--Select-- </option><option value="Colombo\">Colombo </option> <option value="Gampaha\">Gampaha </option>' +
-            ' <option value="Ja-Ela\">Ja-Ela </option> <option value="Kandana\">Kandana </option> </select>'
-
-        ].join('');
-    }
-
-
-
-    window.branchEvents = {
-        'click .branchSelect': function(e, value, row, index) {
-
-            var branch=$('.branchSelect').find(':selected').text();
-            var nodeArray= [];
-            nodeArray=branch.split(" ");
-
-            var selectedBranch=nodeArray[index];
-            alert(selectedBranch);
-
+        }
+        else if( agentName != "" ){
             $.ajax({
-                url: 'https://localhost:8443/admin/processOrders/delivery/agents',
-                data: {"selectedBranch":selectedBranch},
+                url: "https://localhost:8443/admin/processOrders/agentAssign",
+                data: {"orderId": orderId, "agentName": agentName},
                 success: function (msg) {
-                    alert(msg);
-                    alert(index);
-                    alert("value:"+value);
 
-                    var data1 = JSON.stringify(row);
-                    var objc1 = JSON.parse(data1);
-                    var id= objc1["sbranch"];
-                    alert(id);
-
-                    var slctBranchAgent = $(".agentSelect"), option = "";
-                    alert(slctBranchAgent);
-                    slctBranchAgent.empty();
-
-                    option="<option>" +"--Select-- "+"</option>";
-                    for (var itm = 0; itm < msg.length; itm++) {
-                        option = option + "<option value='" + msg[itm]+ "'>" + msg[itm]+ "</option>";
+                    if (msg == 1) {
+                        $.toaster({
+                            priority: 'success', title: 'Success', message: 'Deliver agent assigned successfully: '
+                            + agentName
+                        });
+                        $("#assignOrderModel").modal('hide');
+                        setTimeout(function () {
+                            location.reload();
+                        }, 2000);
+                    } else {
+                        $.toaster({
+                            priority: 'danger',
+                            title: 'Error',
+                            message: 'Cannot assign the delivery agent ' + agentName
+                        });
                     }
-                    slctBranchAgent.append(option);
                 },
                 error: function (e) {
-                    alert("ajax failed in populating the delivery agents" + e);
+                    alert("ajax failed" + e);
                 }
             });
         }
-    };
-*/
+    });
+
+
 
 });
 

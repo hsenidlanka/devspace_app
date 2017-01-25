@@ -114,7 +114,7 @@ window.operateEvents2 = {
 
         },
         error:function(e){
-            alert("ajax failed" +uname+ ""+e);
+            alert("ajax failed" +staff_uname+ ""+e);
         }
     });
 }
