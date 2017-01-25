@@ -28,12 +28,15 @@ public class FeedbackRepositoryImpl implements FeedbackRepository{
     /*Add new feedback*/
     @Override
     public int add(Feedback feedback) {
-        int row;
-        String sql = "INSERT INTO feedback " +
-                "(date,time,comment,number_of_stars,customer_id,item_id,status) VALUES (CURDATE(),CURTIME(),?,?,(SELECT id FROM customer WHERE username=?),(SELECT id FROM item WHERE name=?),'inactive')";
+        int row = 0;
+        if (feedback.getComment() != "" && feedback.getCustomerUserName() != "" && feedback.getItemName() != "") {
+            String sql = "INSERT INTO feedback " +
+                    "(date,time,comment,number_of_stars,customer_id,item_id,status) VALUES (CURDATE(),CURTIME(),?,?,(SELECT id FROM customer WHERE username=?),(SELECT id FROM item WHERE name=?),'inactive')";
 
-        row = jdbcTemplate.update(sql, new Object[]{feedback.getComment(),feedback.getNumberOfStars(),feedback.getCustomerUserName(),feedback.getItemName()});
-        log.info("{} new feedback added",row);
+            row = jdbcTemplate.update(sql, new Object[]{feedback.getComment(), feedback.getNumberOfStars(), feedback.getCustomerUserName(), feedback.getItemName()});
+            log.info("{} new feedback added", row);
+        }
+
         return row;
     }
 
@@ -115,4 +118,6 @@ public class FeedbackRepositoryImpl implements FeedbackRepository{
         List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT feedback.comment,feedback.number_of_stars,c.username, i.name AS item FROM feedback INNER JOIN item i ON i.id=feedback.item_id INNER JOIN customer c ON feedback.customer_id=c.id WHERE c.username=? AND i.name=? ", username, item);
         return mp;
     }
+
+
 }
