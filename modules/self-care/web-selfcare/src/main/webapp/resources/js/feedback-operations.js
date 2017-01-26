@@ -10,7 +10,7 @@ $(document).ready(function () {
 
     $(function () {
         $rateYo = $("#rateYo").rateYo({
-            starWidth: "30px",
+            starWidth: "20px",
             fullStar: true
         });
         $("#rateYo").rateYo("option", "rating", 1);
@@ -19,12 +19,9 @@ $(document).ready(function () {
     $(document.body).on('click', '.btn-viewfeedback', function () {
         var itemName = $(this).closest('div').find('span').text();
 
-        $("#feedback-comment").text("");
         $("#rateYo").rateYo("option", "rating", 3);
-
-        $("#lbl-feedbackSuccess").hide();
-        $("#lbl-feedbackFailed").hide();
         $("#modal-addFeedback").modal('show');
+
         $.ajax({
             type: "GET",
             url: "feedbacks/get",
@@ -51,22 +48,65 @@ $(document).ready(function () {
                     type: "POST",
                     url: "feedbacks/add",
                     data: {
-                        "comment": $("#feedback-comment").text(),
+                        "comment": $("#feedback-comment").val(),
                         "numberOfStars": rating,
                         "itemName": itemName
                     },
                     success: function (statusCode) {
                         if (statusCode == 201) {
-                            $("#lbl-feedbackSuccess").show();
-                            $("#lbl-feedbackFailed").hide();
+                            $.notify("Feedback added successfully.", {
+                                align: "center",
+                                verticalAlign: "top",
+                                delay: 3000,
+                                animationType: "fade",
+                                color: "#fff",
+                                background: "#00B300"
+                            });
+                            $("#modal-addFeedback").modal('hide');
                         } else {
-                            $("#lbl-feedbackFailed").show();
-                            $("#lbl-feedbackSuccess").hide();
+                            $.notify("Error adding the feedback.", {
+                                align: "center",
+                                verticalAlign: "top",
+                                delay: 3000,
+                                animationType: "fade",
+                                color: "#fff",
+                                background: "#D44950"
+                            });
                         }
                     }
                 });
             } else {
-                alert("noo");
+                $.ajax({
+                    type: "POST",
+                    url: "feedbacks/update",
+                    data: {
+                        "comment": $("#feedback-comment").val(),
+                        "numberOfStars": rating,
+                        "itemName": itemName
+                    },
+                    success: function (statusCode) {
+                        if (statusCode == 201) {
+                            $.notify("Feedback updated successfully.", {
+                                align: "center",
+                                verticalAlign: "top",
+                                delay: 3000,
+                                animationType: "fade",
+                                color: "#fff",
+                                background: "#00B300"
+                            });
+                            $("#modal-addFeedback").modal('hide');
+                        } else {
+                            $.notify("Error updating the feedback.", {
+                                align: "center",
+                                verticalAlign: "top",
+                                delay: 3000,
+                                animationType: "fade",
+                                color: "#fff",
+                                background: "#D44950"
+                            });
+                        }
+                    }
+                });
             }
         });
     });

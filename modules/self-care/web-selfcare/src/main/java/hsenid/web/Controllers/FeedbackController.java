@@ -6,6 +6,9 @@ import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,6 +40,9 @@ public class FeedbackController {
 
     @Value("${api.url.feedback.add}")
     private String addFeedackUrl;
+
+    @Value("${api.url.feedback.update}")
+    private String updateFeedackUrl;
 
     @RequestMapping(value = "/feedbacks", method = RequestMethod.GET)
     public ModelAndView loadFeedbacksPage() {
@@ -91,8 +97,9 @@ public class FeedbackController {
     public int addFeedback(HttpSession session, HttpServletRequest request) {
         String url = baseUrl + addFeedackUrl;
         JSONObject feedbackJson = new JSONObject();
+
         feedbackJson.put("comment", request.getParameter("comment"));
-        feedbackJson.put("numberOfStars", Integer.parseInt(request.getParameter("stars")));
+        feedbackJson.put("numberOfStars", Integer.parseInt(request.getParameter("numberOfStars")));
         feedbackJson.put("customerUserName", session.getAttribute("username"));
         feedbackJson.put("itemName", request.getParameter("itemName"));
 
@@ -100,5 +107,24 @@ public class FeedbackController {
         ServerResponseMessage responseMessage = restTemplate.postForObject(url, feedbackJson, ServerResponseMessage.class);
         int statusCode = responseMessage.getCode();
         return statusCode;
+    }
+
+    @RequestMapping(value = "/feedbacks/update", method = RequestMethod.POST)
+    @ResponseBody
+    public int updateFeedback(HttpSession session, HttpServletRequest request) {
+        String url = baseUrl + updateFeedackUrl;
+        JSONObject feedbackJson = new JSONObject();
+
+        feedbackJson.put("comment", request.getParameter("comment"));
+        feedbackJson.put("numberOfStars", Integer.parseInt(request.getParameter("numberOfStars")));
+        feedbackJson.put("customerUserName", session.getAttribute("username"));
+        feedbackJson.put("itemName", request.getParameter("itemName"));
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        HttpEntity<JSONObject> entity = new HttpEntity<JSONObject>(feedbackJson);
+        ResponseEntity<ServerResponseMessage> responseEntity = restTemplate.exchange(url, HttpMethod.PUT, entity, ServerResponseMessage.class);
+
+        return responseEntity.getBody().getCode();
     }
 }
