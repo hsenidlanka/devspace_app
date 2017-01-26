@@ -4,6 +4,10 @@
     <%@include file="include.jsp" %>
     <link rel="stylesheet" href="<c:url value="/resources/css/m-buttons.css"/>"/>
     <script src="<c:url value="/resources/js/feedback-operations.js"/>"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.2.0/jquery.rateyo.min.css">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.2.0/jquery.rateyo.min.js"></script>
 </head>
 <body>
 <div class="panel panel-default">
@@ -31,14 +35,7 @@
             <div class="modal-body">
                 <div>
                     <label>Rating:</label>
-
-                    <select id="demo" name="rating">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
+                    <div id="rateYo"></div>
                 </div>
                 <div class="form-group">
                     <label>Comment:</label>
@@ -46,6 +43,8 @@
                     <textarea class="form-control" rows="5" id="feedback-comment" style="resize: vertical;"></textarea>
                 </div>
             </div>
+            <div class="alert alert-success fade in" style="margin-top: -25px;" id="lbl-feedbackSuccess">Success</div>
+            <div class="alert alert-danger fade in" style="margin-top: -25px;" id="lbl-feedbackFailed">Error</div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-success" id="btn-add-feedback-ok">Add</button>
@@ -54,11 +53,5 @@
     </div>
 </div>
 <!-- End Feedback modal -->
-<script>
-    $('#example-css').barrating({
-        theme: 'css-stars',
-        showSelectedRating: false
-    });
-</script>
 </body>
 </html>
