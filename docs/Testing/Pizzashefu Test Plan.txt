@@ -1,0 +1,378 @@
+Pizzashefu Test Plan
+	Selfcare 
+		contact us
+			invalid email
+			as a guest
+			as an user
+			empty data
+			invalid mobile
+		shopping cart
+			delivery method
+				delivery
+					as an user
+					as guest
+					valid details
+					empty details
+					order summary
+						edit cart
+						edit delivery details
+				pickup
+					order summary
+						edit pickup details
+						edit cart
+					change branch
+					pick up later
+					pickup now
+			payments
+				Pay by Mobile
+					with sufficient money 
+					with insufficient money 
+				Pay on Delivery
+				Pay by Card
+			items
+				remove items
+				change quantity
+			coupon
+				valid coupon
+				without coupon
+				invalid coupon
+		Menu
+			add iitem
+				selection tests
+					ice cream
+					dessert
+					salad
+					Pizza
+					Beverage
+				quantity tests
+					one item
+					multiple items
+			select category
+				Desserts
+				Salads 
+				Pizza :
+				Beverage
+				Ice creams 
+				user added category
+			search items
+				empty search key
+				available item key
+				unavailable item key
+				search with different category
+		User 
+			Profile 
+				feedback
+					stars
+						update stars
+						add stars
+					comments
+						add comments
+						update comment
+				change password
+					add incorrect current password
+					add correct current password
+					add empty passwords
+					add not empty passwords
+					Password shorter than 6 characters
+				view profile
+				logout
+				update profile
+					add valid data
+						valid mobile
+						not empty data 
+						valid email
+					Add invalid data
+						empty data
+						invalid email 
+						invalid mobile
+			Registration
+				email verification
+					resend email verification
+					valid verification code
+					invalid verification code
+					resend verification and add old code
+				invalid mobile
+				empty data
+				invalid email
+				valid data
+				username that in the system
+				password shorter than 6 letter
+			Login
+				Invalid credentials 
+				Valid credentials 
+				Empty Credentials
+				blocked user credentials
+				password shorter than 6 letter
+	Admin
+		Notification Management
+			search by username
+			Filter by
+				state and posted date
+					blocked future date range
+					inactive minus date range
+					inactive valid date range
+					active future range
+					active valid date range
+					active minus date range
+					inactive future date range
+					blocked valid date range
+					blocked minus date range
+				status
+					active
+					inactive
+					blocked
+				posted date
+					future date range
+					valid date range
+					minus date range
+			descending by column
+			ascending by columns
+		package management
+			add package
+				correct package content
+					quantity
+						empty
+						invalid item quantity
+						valid item quantity
+					item
+						category  loading
+						sub-category loading
+				empty package content
+				Add existing name
+				Add new
+				Add empty name
+				empty price
+				select  item category
+					load available categories
+					load relevant sub-categories
+			edit package
+				load avaliable details
+				 name
+					invalid
+						wrong format
+						empty
+					valid 
+				 price
+					invalid price
+						empty price
+						wrong format
+					valid price 
+				 package content
+					empty content
+					valid content
+					invalid content
+			delete package
+			Search/View  package
+				view/Search all
+				view/search exact package
+				search  unavailable
+		Category   Management
+			Add category
+				add a new category
+					add only the category
+						upload category image  in different formats
+						without a category image
+						new  category name
+						empty category name
+						existing category name
+						upload category image  with different sizes
+					add  a category with the subcategories
+						With valid subcategory data
+							upload category image  in different formats
+							new  category name
+							existing category name
+							empty category name
+							without a category image
+						With valid category details
+							new subcategory name
+							empty sub-category name(only description)
+							existing sub-category name
+							empty sub-category row
+				add  sub-categories for an existing category
+					with a category selected
+						new subcategory name
+						empty sub-category row
+						existing sub-category name
+						empty sub-category name(only description)
+					without a category selectd
+						empty sub-category row
+						new subcategory name
+						existing sub-category name
+						empty sub-category name(only description)
+			View category
+				Edit Category
+					edit category image
+					edit only category name
+					edit only category description
+					edit all
+				Search category
+					search by category name
+				Sort categories
+				Delete category
+				View sub-categories in a category
+					Search sub-categories
+						search by sub-category name
+					Edit sub-category
+						edit both
+						edit only sub-category name
+						edit only sub-catrgory description
+					Delete sub-categories
+		user account
+			logout
+			login
+				blocked credentials
+				valid credentials
+				empty credentials
+				invalid credentials
+		Item Management
+			View/Search item 
+				view items filtered by
+					Unavailable  search
+					exact search
+					sub-category based 
+					category based 
+				View all items
+					Sorting recently added
+					Sorting by item name
+					Soriting by ID
+			 Edit Item 
+				edit selected item
+					enter invalid details
+					enter valid details 
+				load details of selected item
+			add item 
+				Empty item name
+				Add item with existing name
+				Add new item
+				Empty image
+				Empty price
+				Empty price for selected size
+				Non-selected item category 
+			Delete Item
+		Order Management
+			process order
+				View orders
+					filter by order status
+				Assign Delivery agent
+					select branch
+					Without selectingbranch
+					change the selections
+			view order
+				filter by order date
+					invalid date range
+					filter by valid date range
+					filter by wrong date range
+						minus date range
+						future date range
+				search by order id
+				pagination test
+				view all orders
+				ascending columns 
+				filter by order type
+				descending columns
+		User Management
+			view user
+				customer
+					Search Customer
+						Search by username
+						Filter by Verification
+							verified
+								registered date
+									selection change
+									valid date range
+									future date range
+									negative date range
+								living area
+									Selection change 
+									City selected
+									No city selected
+							not verifiied
+								registered date
+								living area
+					Block Customer
+					Edit Customer
+						change with invalid data
+							empty values
+							invalid mail  format
+							un-matching password
+							wrong password length
+							invalid mobile 
+						change with valid data
+				staff
+					Search Staff
+						filter by combinations
+						Filter by branch working
+						Filter by department
+						Filter by designation
+						by username
+					Block Staff
+					Edit Staff
+						change with valid data
+						change with invalid data
+			blocked user
+				Blocked Customer
+					name
+						valid data
+						empty data
+					living area
+					column descending
+					column ascending
+				Blocked Staff
+					with multiple variables
+						multiple empty values
+						with one empty value from each
+						valid data
+					Department
+						without Dapartment
+						valid data
+					search by key word
+						valid data
+						without  key word
+					Designation
+						valid data
+						without Designation
+					Branch
+						valid data
+						without branch
+					columns ascending
+					columns descending
+					pagination test
+			add user
+				customer
+					add valid data
+					add in valid data
+						invalid password
+							not matching password
+							without numaral
+							shorter password length
+						invalid mobile
+						invalid email
+						no city selected
+						already registered username
+						empty data
+							empty address line 1
+							empty email
+							empty last name
+							empty first name
+							empty address line 2
+				staff
+					user role
+						Branch
+						Department
+						Designation
+					add invalid data
+						invalid password
+							not matching password
+							without numaral
+							shorter password length
+						invalid mobile
+						invalid email
+						no city selected
+						already registered username
+						empty data
+							empty address line 1
+							empty email
+							empty last name
+							empty first name
+							empty address line 2
+					add valid data
