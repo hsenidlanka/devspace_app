@@ -16,7 +16,7 @@
         <div style="height: 400px; margin-top: 20px" class="container col-sm-10">
             <c:if test="${empty updateSuccessful}">
                 <c:if test="${not empty formFailed}">
-                    netskdbl
+                    Password update failed. Possible reason -> invalid current password
                 </c:if>
                 <form:form action="/web-selfcare/change-password-post" method="post" modelAttribute="changepassword">
                     <%--<c:if test="${empty validForm}"></c:if>--%>
