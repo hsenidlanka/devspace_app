@@ -73,7 +73,7 @@
                                                 <td class="item-remove">
                                                         <%--<a class="mod"><i class="glyphicon glyphicon-edit"></i> Edit</a>&nbsp;--%>
                                                     <a class="m-btn mini red del" style="height:auto;"><i
-                                                            class="fa fa-times"></i> Remove</a>
+                                                            class="fa fa-times"></i> <fmt:message key="shopping.remove.text" bundle="${lang}"/></a>
                                                 </td>
                                             </tr>
                                         </c:forEach>
@@ -175,30 +175,30 @@
                                     <div class="col-sm-3"><a href="#x"><img
                                             src="<c:url value="/resources/images/pizzas/02.jpg"/>"
                                             class="img-responsive"></a>
-                                        <h4>Item title</h4>
+                                        <h4><fmt:message key="shopping.cart.item.title" bundle="${lang}"/></h4>
 
-                                        <p>Item description</p>
+                                        <p><fmt:message key="shopping.cart.item.description" bundle="${lang}"/></p>
                                     </div>
                                     <div class="col-sm-3"><a href="#x"><img
                                             src="<c:url value="/resources/images/desserts/cake%2003.jpg"/>"
                                             class="img-responsive"></a>
-                                        <h4>Item title</h4>
+                                        <h4><fmt:message key="shopping.cart.item.title" bundle="${lang}"/></h4>
 
-                                        <p>Item description</p>
+                                        <p><fmt:message key="shopping.cart.item.description" bundle="${lang}"/></p>
                                     </div>
                                     <div class="col-sm-3"><a href="#x"><img
                                             src="<c:url value="/resources/images/desserts/ice-cream%2002.jpg"/>"
                                             class="img-responsive"></a>
-                                        <h4>Item title</h4>
+                                        <h4><fmt:message key="shopping.cart.item.title" bundle="${lang}"/></h4>
 
-                                        <p>Item description</p>
+                                        <p><fmt:message key="shopping.cart.item.description" bundle="${lang}"/></p>
                                     </div>
                                     <div class="col-sm-3"><a href="#x"><img
                                             src="<c:url value="/resources/images/pizzas/22.png"/>"
                                             class="img-responsive"></a>
-                                        <h4>Item title</h4>
+                                        <h4><fmt:message key="shopping.cart.item.title" bundle="${lang}"/></h4>
 
-                                        <p>Item description</p>
+                                        <p><fmt:message key="shopping.cart.item.description" bundle="${lang}"/></p>
                                     </div>
                                 </div>
                             </div>
@@ -208,30 +208,30 @@
                                     <div class="col-sm-3"><a href="#x"><img
                                             src="<c:url value="/resources/images/beverages/coffee%2003.jpg"/>"
                                             class="img-responsive"></a>
-                                        <h4>Item title</h4>
+                                        <h4><fmt:message key="shopping.cart.item.title" bundle="${lang}"/></h4>
 
-                                        <p>Item description</p>
+                                        <p><fmt:message key="shopping.cart.item.description" bundle="${lang}"/></p>
                                     </div>
                                     <div class="col-sm-3"><a href="#x"><img
                                             src="<c:url value="/resources/images/desserts/pudding%2003.jpg"/>"
                                             class="img-responsive"></a>
-                                        <h4>Item title</h4>
+                                        <h4><fmt:message key="shopping.cart.item.title" bundle="${lang}"/></h4>
 
-                                        <p>Item description</p>
+                                        <p><fmt:message key="shopping.cart.item.description" bundle="${lang}"/></p>
                                     </div>
                                     <div class="col-sm-3"><a href="#x"><img
                                             src="<c:url value="/resources/images/pizzas/21.jpg"/>"
                                             class="img-responsive"></a>
-                                        <h4>Item title</h4>
+                                        <h4><fmt:message key="shopping.cart.item.title" bundle="${lang}"/></h4>
 
-                                        <p>Item description</p>
+                                        <p><fmt:message key="shopping.cart.item.description" bundle="${lang}"/></p>
                                     </div>
                                     <div class="col-sm-3"><a href="#x"><img
                                             src="<c:url value="/resources/images/pizzas/12.jpg"/>"
                                             class="img-responsive"></a>
-                                        <h4>Item title</h4>
+                                        <h4><fmt:message key="shopping.cart.item.title" bundle="${lang}"/></h4>
 
-                                        <p>Item description</p>
+                                        <p><fmt:message key="shopping.cart.item.description" bundle="${lang}"/></p>
                                     </div>
                                 </div>
                                 <!--/row-->
@@ -324,15 +324,15 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-default btn-sm" data-dismiss="modal" style="width:70px;">No</button>
-                <button id="removeOk" class="btn btn-danger btn-sm" style="width:70px;">Yes</button>
+                <button class="btn btn-default btn-sm" data-dismiss="modal" style="width:70px;"><fmt:message key="btn.text.no" bundle="${lang}"/></button>
+                <button id="removeOk" class="btn btn-danger btn-sm" style="width:70px;"><fmt:message key="btn.text.yes" bundle="${lang}"/></button>
             </div>
         </div>
     </div>
 </div>
 
 <!-- Cart item modify popup -->
-<div id="modify-item-popup" class="modal fade">
+<%--<div id="modify-item-popup" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -409,7 +409,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>--%>
 <a href="#" class="scrollup"></a>
 </body>
 </html>

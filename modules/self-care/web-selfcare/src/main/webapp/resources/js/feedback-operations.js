@@ -21,7 +21,7 @@ $(document).ready(function () {
 
         $("#rateYo").rateYo("option", "rating", 3);
         $("#modal-addFeedback").modal('show');
-
+        $("#feedback-comment").val("");
         $.ajax({
             type: "GET",
             url: "feedbacks/get",
@@ -29,10 +29,11 @@ $(document).ready(function () {
             dataType: "json",
             success: function (response) {
                 $.each(response, function (idx, obj) {
-                    $("#feedback-comment").text(obj['comment']);
                     if (obj['comment'].length > 0) {
+                        $("#feedback-comment").val(obj['comment']);
                         $("#btn-add-feedback-ok").text("Update");
                     } else {
+                        $("#feedback-comment").val("");
                         $("#btn-add-feedback-ok").text("Add");
                     }
                     $("#rateYo").rateYo("option", "rating", obj['stars']);
