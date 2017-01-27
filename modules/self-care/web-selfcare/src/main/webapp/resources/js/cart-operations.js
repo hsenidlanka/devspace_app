@@ -2,9 +2,13 @@
 $(document).ready(function () {
     initCalculations();
 
+    $(".item-qty").keydown(function (e) {
+        e.preventDefault();
+    });
+
     $('#myCarousel').carousel({
         interval: 5000
-    })
+    });
 
     $("#coupon-alert-div").hide();
 
@@ -20,7 +24,7 @@ $(document).ready(function () {
         }
     });
 
-    $(".mod").click(function () {
+    /*$(".mod").click(function () {
         $("#modify-item-popup").modal("show");
         $('#modifyOk').off('click');
         $('#modifyOk').click(function () {
@@ -33,7 +37,7 @@ $(document).ready(function () {
             });
             $("#modify-item-popup").modal("hide");
         });
-    });
+    });*/
 
     // Remove item from the shopping cart
     $(".del").click(function () {

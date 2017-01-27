@@ -161,30 +161,30 @@
                                     <div class="col-sm-3"><a href="#x"><img
                                             src="<c:url value="/resources/images/pizzas/02.jpg"/>"
                                             class="img-responsive"></a>
-                                        <h4>Item title</h4>
+                                        <h4><fmt:message key="shopping.cart.item.title" bundle="${lang}"/></h4>
 
-                                        <p>Item description</p>
+                                        <p><fmt:message key="shopping.cart.item.description" bundle="${lang}"/></p>
                                     </div>
                                     <div class="col-sm-3"><a href="#x"><img
                                             src="<c:url value="/resources/images/desserts/cake%2003.jpg"/>"
                                             class="img-responsive"></a>
-                                        <h4>Item title</h4>
+                                        <h4><fmt:message key="shopping.cart.item.title" bundle="${lang}"/></h4>
 
-                                        <p>Item description</p>
+                                        <p><fmt:message key="shopping.cart.item.description" bundle="${lang}"/></p>
                                     </div>
                                     <div class="col-sm-3"><a href="#x"><img
                                             src="<c:url value="/resources/images/desserts/ice-cream%2002.jpg"/>"
                                             class="img-responsive"></a>
-                                        <h4>Item title</h4>
+                                        <h4><fmt:message key="shopping.cart.item.title" bundle="${lang}"/></h4>
 
-                                        <p>Item description</p>
+                                        <p><fmt:message key="shopping.cart.item.description" bundle="${lang}"/></p>
                                     </div>
                                     <div class="col-sm-3"><a href="#x"><img
                                             src="<c:url value="/resources/images/pizzas/22.png"/>"
                                             class="img-responsive"></a>
-                                        <h4>Item title</h4>
+                                        <h4><fmt:message key="shopping.cart.item.title" bundle="${lang}"/></h4>
 
-                                        <p>Item description</p>
+                                        <p><fmt:message key="shopping.cart.item.description" bundle="${lang}"/></p>
                                     </div>
                                 </div>
                             </div>
@@ -194,30 +194,30 @@
                                     <div class="col-sm-3"><a href="#x"><img
                                             src="<c:url value="/resources/images/beverages/coffee%2003.jpg"/>"
                                             class="img-responsive"></a>
-                                        <h4>Item title</h4>
+                                        <h4><fmt:message key="shopping.cart.item.title" bundle="${lang}"/></h4>
 
-                                        <p>Item description</p>
+                                        <p><fmt:message key="shopping.cart.item.description" bundle="${lang}"/></p>
                                     </div>
                                     <div class="col-sm-3"><a href="#x"><img
                                             src="<c:url value="/resources/images/desserts/pudding%2003.jpg"/>"
                                             class="img-responsive"></a>
-                                        <h4>Item title</h4>
+                                        <h4><fmt:message key="shopping.cart.item.title" bundle="${lang}"/></h4>
 
-                                        <p>Item description</p>
+                                        <p><fmt:message key="shopping.cart.item.description" bundle="${lang}"/></p>
                                     </div>
                                     <div class="col-sm-3"><a href="#x"><img
                                             src="<c:url value="/resources/images/pizzas/21.jpg"/>"
                                             class="img-responsive"></a>
-                                        <h4>Item title</h4>
+                                        <h4><fmt:message key="shopping.cart.item.title" bundle="${lang}"/></h4>
 
-                                        <p>Item description</p>
+                                        <p><fmt:message key="shopping.cart.item.description" bundle="${lang}"/></p>
                                     </div>
                                     <div class="col-sm-3"><a href="#x"><img
                                             src="<c:url value="/resources/images/pizzas/12.jpg"/>"
                                             class="img-responsive"></a>
-                                        <h4>Item title</h4>
+                                        <h4><fmt:message key="shopping.cart.item.title" bundle="${lang}"/></h4>
 
-                                        <p>Item description</p>
+                                        <p><fmt:message key="shopping.cart.item.description" bundle="${lang}"/></p>
                                     </div>
                                 </div>
                                 <!--/row-->
@@ -308,7 +308,7 @@
 </div>
 
 <!-- Cart item modify popup -->
-<div id="modify-item-popup" class="modal fade">
+<%--<div id="modify-item-popup" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -391,7 +391,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>--%>
 
 <%--<a href="#" class="scrollup"></a>--%>
 </body>
