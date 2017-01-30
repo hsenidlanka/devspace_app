@@ -127,3 +127,14 @@ legend.scheduler-border {
 margin: 0 -10px 10px -1000px;
 font-weight: bold;
 }
+
+.help-inline{
+    color: red;
+    font-size: 10px;
+}
+.pswdLabel {
+    font-size: 10px;
+    font-style: italic;
+    font-weight: 100;
+    margin: 0 10px 0 -45px;
+}

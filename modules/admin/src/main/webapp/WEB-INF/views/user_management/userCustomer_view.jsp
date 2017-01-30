@@ -271,7 +271,7 @@
                                 <div class="col-xs-6">
                                     <div class="col-xs-12">
                                         <form:input path="addressL3" class="form-control" id="update_city" type="text"
-                                                    style="width: 219px" required="required"/>
+                                                    style="width: 219px"  />
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
@@ -291,7 +291,7 @@
                                 <div class="col-xs-6">
                                     <div class="col-xs-12">
                                         <form:input path="mobile" class="form-control" id="update_mobile" type="text"
-                                                    style="width: 220px" required="required"/>
+                                                    style="width: 220px" pattern="^\(?(\+94)\)?([0-9]{9})$" required="required"/>
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
@@ -310,7 +310,8 @@
                                 <div class="col-xs-6">
                                     <div class="col-xs-12">
                                         <form:input path="email" class="form-control" id="update_email" type="text"
-                                                    style="width: 220px" required="required"/>
+                                                    style="width: 220px" pattern="^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.
+                                              [a-zA-Z0-9-]+)*\.(([0-9]{1,3})|([a-zA-Z]{2,3}))$" required="required"/>
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
