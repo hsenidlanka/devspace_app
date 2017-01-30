@@ -1,5 +1,10 @@
 package hsl.devspace.app.corelogic.domain;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.sql.Date;
 
 /**
@@ -9,27 +14,61 @@ public class User {
 
     private boolean isConfirmed;
     private String dob;
-private int id;
+    private int id;
+
+    @NotEmpty(message = "Required")
+    @Size(min = 1, message = "Required")
     private String title;
+
+    @Pattern(regexp = "^(?!\\s*$|\\s).*$", message = "Please enter your first name!")
     private String firstName;
+
+    @Pattern(regexp = "^(?!\\s*$|\\s).*$", message = "Please enter your last name!")
     private String lastName;
+
+    @Pattern(regexp = "^(?!\\s*$|\\s).*$", message = "Please enter a valid username!")
     private String username;
+
+
+    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$", message = "Please enter a valid password!")
+//    @Size(min = 6, message = "please use a password longer than 6 characters")
     private String password;
+
+    @NotEmpty(message = "Please confirm the password!")
+    private String cpassword;
+
+    @NotEmpty(message = "Please enter a valid email!")
+    @Email(message = "Please enter a valid email!")
     private String email;
+
+    @Pattern(regexp = "^(?!\\s*$|\\s).*$", message = "Please enter address line one")
     private String addressL1;
+
+    @Pattern(regexp = "^(?!\\s*$|\\s).*$", message = "Please enter address line two")
     private String addressL2;
+
     private String addressL3;
+
+    @Pattern(regexp = "^\\(?(\\+94)\\)?([0-9]{9})$", message = "Please Enter Valid Contact Number!")
     private String mobile;
+
     private String designation;
     private String department;
-    private String  branch;
+    private String branch;
     private Date regDate;
 
-    private enum status{
-        active,inactive
+    private enum status {
+        active, inactive
     }
+
     private String status;
 
+    public String getCpassword(){
+        return cpassword;
+    }
+    public void setCpassword(String cpassword){
+        this.cpassword=cpassword;
+    }
     public String getStatus() {
         return status;
     }
@@ -53,6 +92,7 @@ private int id;
     public void setRegDate(Date regDate) {
         this.regDate = regDate;
     }
+
     public String getEmail() {
         return email;
     }
@@ -68,7 +108,6 @@ private int id;
     public void setAddressL3(String addressL3) {
         this.addressL3 = addressL3;
     }
-
 
 
     public String getBranch() {
@@ -110,7 +149,6 @@ private int id;
     public void setDepartment(String department) {
         this.department = department;
     }
-
 
 
     public String getLastName() {
@@ -178,7 +216,7 @@ private int id;
         this.addressL2 = addressL2;
     }
 
-    public User( String username, String password) {
+    public User(String username, String password) {
 
         this.username = username;
         this.password = password;
@@ -189,28 +227,28 @@ private int id;
         user.getUsername();*/
     }
 
-    public User(String title, String username,String password,String firstName, String lastName,String email,
-                String mobile,String addressL1, String addressL2,String addressL3,String designation, String department,
+    public User(String title, String username, String password, String firstName, String lastName, String email,
+                String mobile, String addressL1, String addressL2, String addressL3, String designation, String department,
                 String branch) {
-        this.title=title;
+        this.title = title;
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.email=email;
-        this.mobile=mobile;
+        this.email = email;
+        this.mobile = mobile;
         this.addressL1 = addressL1;
         this.addressL2 = addressL2;
         this.addressL3 = addressL3;
-        this.designation=designation;
-        this.department=department;
-        this.branch=branch;
+        this.designation = designation;
+        this.department = department;
+        this.branch = branch;
     }
     //staff update
 
-    public User(int id,String title, String firstName, String lastName, String username, String password, String email, String addressL1, String addressL2, String addressL3, String mobile, String designation, String department, String branch) {
+    public User(int id, String title, String firstName, String lastName, String username, String password, String email, String addressL1, String addressL2, String addressL3, String mobile, String designation, String department, String branch) {
         this.id = id;
-        this.title=title;
+        this.title = title;
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -226,18 +264,18 @@ private int id;
     }
 
     //customer
-    public User(String title,String firstName,String lastName,String username,String password,String email,String addressL1,
-                String addressL2,String addressL3,String mobile){
-        this.title=title;
-        this.firstName=firstName;
-        this.lastName=lastName;
-        this.username=username;
-        this.password=password;
-        this.email=email;
-        this.addressL1=addressL1;
-        this.addressL2=addressL2;
+    public User(String title, String firstName, String lastName, String username, String password, String email, String addressL1,
+                String addressL2, String addressL3, String mobile) {
+        this.title = title;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.addressL1 = addressL1;
+        this.addressL2 = addressL2;
         this.addressL3 = addressL3;
-        this.mobile=mobile;
+        this.mobile = mobile;
     }
 
     //for update customer
@@ -247,7 +285,7 @@ private int id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
-       // this.password = password;
+        // this.password = password;
         this.email = email;
         this.addressL1 = addressL1;
         this.addressL2 = addressL2;
@@ -255,8 +293,8 @@ private int id;
         this.mobile = mobile;
     }
 
-    public User(String mobile){
-        this.mobile=mobile;
+    public User(String mobile) {
+        this.mobile = mobile;
     }
 
     @Override
