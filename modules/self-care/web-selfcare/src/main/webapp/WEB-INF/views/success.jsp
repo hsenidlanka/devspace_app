@@ -18,7 +18,7 @@
             <div class="panel-heading">
                 <img class="icons" src="<c:url value="/resources/images/icons/list-correct.png"/>">
 
-                <h3 class="header-panel">Order placed</h3>
+                <h3 class="header-panel"><fmt:message key="success.title" bundle="${lang}"/></h3>
             </div>
             <div class="panel-body">
                 <div id="smartwizard">

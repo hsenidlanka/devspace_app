@@ -1,0 +1,32 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="810" measuredH="172" mockupW="450" mockupH="171">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::TitleWindow" x="360" y="1" w="450" h="171" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Success%20User%20Add</text>
+        <topheight>30</topheight>
+      </controlProperties>
+    </control>
+    <control controlID="34" controlTypeID="com.balsamiq.mockups::TextArea" x="360" y="29" w="450" h="48" measuredW="200" measuredH="140" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>11982760</color>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="35" controlTypeID="com.balsamiq.mockups::Component" x="676" y="35" w="39" h="36" measuredW="39" measuredH="36" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22316%2C34%2C355%2C70%22%20href%3D%22shopping_cart_modify_popup.bmml%22%20alt%3D%22shopping_cart_modify_popup%22%20id%3D%220%22/%3E</map>
+        <src>./assets/symbols.bmml#bs-badge-success</src>
+      </controlProperties>
+    </control>
+    <control controlID="36" controlTypeID="com.balsamiq.mockups::SubTitle" x="368" y="44" w="-1" h="-1" measuredW="293" measuredH="27" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>User%20Added%20Successfully%20%21%21</text>
+      </controlProperties>
+    </control>
+    <control controlID="39" controlTypeID="com.balsamiq.mockups::Button" x="564" y="104" w="55" h="33" measuredW="41" measuredH="27" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>OK</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

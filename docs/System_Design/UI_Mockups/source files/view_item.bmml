@@ -1,0 +1,46 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1224" measuredH="574" mockupW="952" mockupH="538">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="272" y="36" w="952" h="538" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>16770457</color>
+      </controlProperties>
+    </control>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::Title" x="676" y="51" w="-1" h="-1" measuredW="109" measuredH="27" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <size>24</size>
+        <text>View%20Item</text>
+      </controlProperties>
+    </control>
+    <control controlID="56" controlTypeID="com.balsamiq.mockups::DataGrid" x="306" y="210" w="894" h="316" measuredW="675" measuredH="328" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <alternateRowColor>12303802</alternateRowColor>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22782.56298828125%2C221.5%2C813.3349609375%2C235.5%22%20href%3D%22edit_item.bmml%22%20alt%3D%22Edit%20%22%20id%3D%2256%22/%3E%3Carea%20shape%3D%22rect%22%20coords%3D%22825.935546875%2C221.5%2C870.63720703125%2C235.5%22%20href%3D%22Delete_Item.bmml%22%20alt%3D%22Delete%22%20id%3D%2256%22/%3E%3Carea%20shape%3D%22rect%22%20coords%3D%22780.462890625%2C289.5%2C811.23486328125%2C303.5%22%20href%3D%22edit_item.bmml%22%20alt%3D%22Edit%20%22%20id%3D%2256%22/%3E%3Carea%20shape%3D%22rect%22%20coords%3D%22823.83544921875%2C289.5%2C868.537109375%2C303.5%22%20href%3D%22Delete_Item.bmml%22%20alt%3D%22Delete%22%20id%3D%2256%22/%3E%3Carea%20shape%3D%22rect%22%20coords%3D%22780.462890625%2C357.5%2C811.23486328125%2C371.5%22%20href%3D%22modify_category.bmml%22%20alt%3D%22Edit%20%22%20id%3D%2256%22/%3E%3Carea%20shape%3D%22rect%22%20coords%3D%22823.83544921875%2C357.5%2C868.537109375%2C371.5%22%20href%3D%22Delete_Item.bmml%22%20alt%3D%22Delete%22%20id%3D%2256%22/%3E%3Carea%20shape%3D%22rect%22%20coords%3D%22780.462890625%2C417%2C811.23486328125%2C431%22%20href%3D%22edit_item.bmml%22%20alt%3D%22Edit%20%22%20id%3D%2256%22/%3E%3Carea%20shape%3D%22rect%22%20coords%3D%22823.83544921875%2C417%2C868.537109375%2C431%22%20href%3D%22Delete_Item.bmml%22%20alt%3D%22Delete%22%20id%3D%2256%22/%3E%3Carea%20shape%3D%22rect%22%20coords%3D%22780.462890625%2C468%2C811.23486328125%2C482%22%20href%3D%22edit_item.bmml%22%20alt%3D%22Edit%20%22%20id%3D%2256%22/%3E%3Carea%20shape%3D%22rect%22%20coords%3D%22823.83544921875%2C468%2C868.537109375%2C482%22%20href%3D%22Delete_Item.bmml%22%20alt%3D%22Delete%22%20id%3D%2256%22/%3E</map>
+        <size>14</size>
+        <text>Id%20%5E%2C%20Name%20%5Ev%2CCategory%20%5Ev%2CPrice%20%5Ev%2CType%20%5Ev%2CDesc%20%5Ev%0APZ001%2C%20Spicy%20Meatball%20Supreme%2C%20Pizza%2C%20%5CrR-560.00%5CrM-%20890.00%5CrL-%201430.00%2C%20Non-veg%2C%20xxxxx%2C%20%20%5B*Edit*%20%5D%28edit_item%29%20%20%20%5B*Delete*%5D%28Delete_Item%29%0APZ002%2C%20HOT%20N%20SPICY%20CHICKEN%2C%20Pizza%2C%20%5CrR-560.00%5CrM-%20890.00%5CrL-%201430.00%2C%20Non-veg%2C%20xxxxx%2C%20%5B*Edit*%20%5D%28edit_item%29%20%20%20%5B*Delete*%5D%28Delete_Item%29%0ABV012%2C%20Minute%20Maid%20Apple%20Juice%2C%20Beverage%2C%20%5CrR-90.00%5CrM-%20160.00%5CrL-330.00%2C%20Veg%2C%20xxxxx%2C%20%5B*Edit*%20%5D%28modify_category%29%20%20%20%5B*Delete*%5D%28Delete_Item%29%0ATP004%2C%20Provolone%20Cheese%2C%20Toppings%2C%20%5CrR-190.00%5CrO-280.00%2C%20Veg%2C%20xxxxx%20%2C%20%5B*Edit*%20%5D%28edit_item%29%20%20%20%5B*Delete*%5D%28Delete_Item%29%0ASL014%2C%20Crispy%20Cchicken%20Caesar%20Salad%2C%20Salads%2C%20%5CrR-390.00%5CrL-570.00%2C%20Non-veg%2C%20xxxx%2C%20%5B*Edit*%20%5D%28edit_item%29%20%20%20%5B*Delete*%5D%28Delete_Item%29%0A%7B10C%2C%2025C%2C%2015C%2C%2015R%2C%2010C%2C%205C%2C%2020C%7D</text>
+        <value>79</value>
+        <verticalScrollbar>true</verticalScrollbar>
+      </controlProperties>
+    </control>
+    <control controlID="63" controlTypeID="com.balsamiq.mockups::TextInput" x="969" y="104" w="183" h="-1" measuredW="153" measuredH="27" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Enter%20Item%20Name%20Here..</text>
+      </controlProperties>
+    </control>
+    <control controlID="67" controlTypeID="com.balsamiq.mockups::Label" x="321" y="104" w="-1" h="-1" measuredW="51" measuredH="21" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Filter%20by%3A</text>
+      </controlProperties>
+    </control>
+    <control controlID="68" controlTypeID="com.balsamiq.mockups::ComboBox" x="378" y="104" w="-1" h="-1" measuredW="140" measuredH="78" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>--Select%20Category%20--%0A%20Pizza%0APasta%0A...</text>
+      </controlProperties>
+    </control>
+    <control controlID="100" controlTypeID="com.balsamiq.mockups::ComboBox" x="575" y="104" w="-1" h="-1" measuredW="165" measuredH="24" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>--%20Select%20Sub%20category--</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

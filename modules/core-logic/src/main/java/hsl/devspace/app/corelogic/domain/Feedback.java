@@ -71,6 +71,14 @@ public class Feedback {
         this.itemName = itemName;
     }
 
+    public Feedback(String comment, int numberOfStars, String customerUserName, String itemName) {
+
+        this.comment = comment;
+        this.numberOfStars = numberOfStars;
+        this.customerUserName = customerUserName;
+        this.itemName = itemName;
+    }
+
     public Feedback() {
     }
 
