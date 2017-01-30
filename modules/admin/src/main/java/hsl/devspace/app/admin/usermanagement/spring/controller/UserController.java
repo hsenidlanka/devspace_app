@@ -341,7 +341,7 @@ public class UserController {
     //handler method for sending customer edit form data to database
     @RequestMapping(value="customer/editCustomer",method=RequestMethod.POST)
     public ModelAndView editCustomer(@ModelAttribute("customer")  User customer,BindingResult validationResult)
-                                      throws SQLException {
+                                     throws SQLException {
 
         String n1=customer.getFirstName();
         String n2=customer.getLastName();
