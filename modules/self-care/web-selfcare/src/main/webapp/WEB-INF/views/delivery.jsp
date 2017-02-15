@@ -94,7 +94,7 @@
                                                type="text">
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label" for="txt-lname"><fmt:message key="signup.last.name"
+                                        <label class="control-label" for="txt-lname"><fmt:message key="delivery.last"
                                                                                                   bundle="${lang}"/></label>
                                         <label id="lname_error" class="error-labels"></label>
                                         <input class="form-control" type="text"
@@ -109,7 +109,7 @@
                                                placeholder="<fmt:message key="delivery.enter.contact" bundle="${lang}"/>">
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label"><fmt:message key="signup.email"
+                                        <label class="control-label"><fmt:message key="delivery.email"
                                                                                   bundle="${lang}"/></label>
                                         <label id="email_error" class="error-labels"></label>
                                         <input id="txt-email" class="form-control" type="text"
