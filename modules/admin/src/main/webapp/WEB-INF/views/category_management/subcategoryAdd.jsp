@@ -101,7 +101,7 @@
                       </div>
                       <div class="col-xs-5">
                           <textarea name="subcategory_des[]"  class="form-control" id="subcategorydes"
-                                         placeholder="Enter Subcategory Description" ></textarea>
+                                    required="required" placeholder="Enter Subcategory Description" ></textarea>
                       </div>
                       <div class="col-xs-3">
                           <a href="#" class="addsub ">
