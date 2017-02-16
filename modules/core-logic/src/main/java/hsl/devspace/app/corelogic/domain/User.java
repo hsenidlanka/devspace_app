@@ -1,6 +1,5 @@
 package hsl.devspace.app.corelogic.domain;
 
-import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.Pattern;
@@ -31,14 +30,13 @@ public class User {
 
 
     @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$", message = "Please enter a valid password!")
-//    @Size(min = 6, message = "please use a password longer than 6 characters")
     private String password;
 
     @NotEmpty(message = "Please confirm the password!")
     private String cpassword;
 
     @NotEmpty(message = "Please enter a valid email!")
-    @Email(message = "Please enter a valid email!")
+    @Pattern(regexp = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$" , message = "Please enter a valid email!")
     private String email;
 
     @Pattern(regexp = "^(?!\\s*$|\\s).*$", message = "Please enter address line one")
