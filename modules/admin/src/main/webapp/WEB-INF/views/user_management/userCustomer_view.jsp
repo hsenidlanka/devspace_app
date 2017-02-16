@@ -43,27 +43,25 @@
     <div class="col-xs-12">
         <fieldset class="scheduler-border">
             <legend class="scheduler-border" id="searchCriteria">
-                <fmt:message key="user.userview.customer.label.filter" bundle="${bundle1}"/>
+
             </legend>
 
             <div class="form-group">
                 <div class="row">
                     <div class="col-xs-9" style="width: 64% ">
-                            <div class="col-xs-6">
-                                <div class="col-xs-2" style="width: 50%;">
+                            <div class="col-xs-2">
+                                <%--<div class="col-xs-2" style="width: 50%;">--%>
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" value="1" id="regCheck" onchange="showMe()">
-                                        <fmt:message key="user.userview.customer.filter.regDate" bundle="${bundle1}"/>
+                                        <fmt:message key="user.userview.customer.label.filter" bundle="${bundle1}"/>
+
                                     </label>
-                                </div>
+                                <%--</div>--%>
                             </div>
-                            <div class="col-xs-4" style="text-align: right;margin: 0 -90px 0 -120px;">
-                                <label class="checkbox-inline">
-                                    <input type="checkbox" value="3" id="liveCheck" onchange="showMe()">
-                                    <fmt:message key="user.userview.customer.filter.livingArea" bundle="${bundle1}"/>
-                                </label>
+                            <div class="col-xs-7" style="text-align: left;margin: 0 10px 0 30px;">
+                                <input type="checkbox" value="1" id="regCheck" onchange="showMe()">
+                                <fmt:message key="user.userview.customer.filter.regDate" bundle="${bundle1}"/>
                             </div>
-                            <div class="col-xs-2" style="margin: 0 0px 0 190px;">
+                            <div class="col-xs-3" style="margin: 0 -100px 0 -45px;">
                                 <select id="selectVerifyOrNot">
                                     <option value="Verified">
                                         <fmt:message key="user.userview.customer.selectOption.verified" bundle="${bundle1}"/>
@@ -96,7 +94,8 @@
             <div class="form-group">
                 <div class="row">
                     <div class="col-xs-9"  style="width: 64%; ">
-                        <div class="col-xs-6"  id="regPeriod" style="text-align: left; margin: -25px -2px 0 0; display:none">
+                        <div class="col-xs-2"></div>
+                        <div class="col-xs-7"  id="regPeriod" style="text-align: left;margin: -20px 10px 0 20px; display:none">
                             <div class="col-xs-6">
                                 <label class=" control-label" >
                                     <fmt:message key="user.userview.customer.filter.regDate.from" bundle="${bundle1}"/>
@@ -113,16 +112,8 @@
                                                type="text" style="width: 130px" />
                             </div>
                         </div>
-                        <div class="col-xs-6" >
-                            <div class="col-xs-8" >
-                                <select class="form-control" id="citySearch" style="text-align: right;margin:0px -5px 0 -50px;;display: none;" >
-                                    <option><fmt:message key="user.customer.select" bundle="${bundle1}" /></option>
-                                    <option><fmt:message key="user.customer.city1" bundle="${bundle1}" /></option>
-                                    <option><fmt:message key="user.customer.city2" bundle="${bundle1}" /></option>
-                                    <option><fmt:message key="user.customer.city3" bundle="${bundle1}" /></option>
-                                    <option><fmt:message key="user.customer.city4" bundle="${bundle1}" /></option>
-                                </select>
-                            </div>
+                        <div class="col-xs-3" >
+
                         </div>
                     </div>
 

@@ -271,7 +271,8 @@
                   <div class="col-xs-8">
                       <div class="col-xs-6">
                           <div class="col-xs-12">
-                              <form:errors path="email"  cssClass="help-inline" cssStyle="color: red;margin: 0 10px 0 -30px;"/>                          </div>
+                              <form:errors path="email"  cssClass="help-inline" cssStyle="color: red;margin: 0 10px 0 -30px;"/>
+                          </div>
                       </div>
                   </div>
               </div>
