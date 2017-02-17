@@ -1,13 +1,14 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 </div> <!-- END #content -->
 
 <footer>
     <div id="copyright">
         <p><spring:message code="copyright" /></p>
-        <p id="footer-sub-msg">Powered by <a href="http://www.apereo.org/cas">Apereo Central Authentication Service <%=org.jasig.cas.CasVersion.getVersion()%></a>
-        <br>hSenid Software International- 2016</p>
+        <p id="footer-sub-msg"><spring:message code="apereo.powered.by"/> <a href="http://www.apereo.org/cas"><spring:message code="apereo.cas.name"/> <%=org.jasig.cas.CasVersion.getVersion()%></a>
+        <br><spring:message code="company.name"/> </p>
     </div>
 </footer>
 
