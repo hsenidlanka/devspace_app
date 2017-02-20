@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <html>
@@ -262,7 +263,7 @@
 
 <!-- Cart proceed to checkout popup -->
 <div id="proceed-checkout-confirm" class="modal fade">
-    <div class="modal-dialog" style="width:780px;">
+    <div class="modal-dialog" style="width:850px;">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i>
