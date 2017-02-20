@@ -73,7 +73,7 @@
         <h3 class="default-panel-headings "><fmt:message key="user.useradd.panel.heading" bundle="${bundle1}"/></h3>
       </div>
       <div class="panel-body">
-        <form:form role="form" id="admin_adduser_form"  method="POST" class="form-horizontal"
+        <form:form role="form" id="admin_adduser_form"  method="POST" class="form-horizontal" modelAttribute="newUser"
                    action="/admin/users/addCustomer">
 
           <fieldset class="scheduler-border">
@@ -99,6 +99,7 @@
                     </div>
                   </div>
                 </div>
+
             </div>
 
             <div class="form-group">
@@ -120,10 +121,11 @@
                               <fmt:message key="user.useradd.form.title.miss" bundle="${bundle1}" />
                           </form:option>
                         </form:select>
+                         <form:errors path="title" cssClass="help-inline" cssStyle="color: red"/>
                       </div>
                       <div class="col-xs-5">
                         <form:input path="firstName" class="form-control" id="fname" placeholder="First Name"
-                                    type="text"  style="width: 150px" required="required"/>
+                                    type="text"  style="width: 150px" />
                       </div>
                     </div>
                     <div class="col-xs-6">
@@ -131,10 +133,25 @@
                       <div class="col-xs-5">
                         <form:input path="lastName" class="form-control" id="lname" placeholder="Last Name"
                                     type="text"  style="width: 170px"/>
+
                       </div>
                     </div>
                 </div>
             </div>
+                <div class="row">
+                    <label  class="col-xs-3 control-label" ></label>
+                    <div class="col-xs-8">
+                        <div class="col-xs-6">
+                            <div class="col-xs-12">
+                                <form:errors path="firstName" cssClass="help-inline" cssStyle="margin: 0 9px 0 -19px;"/>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6">
+                            <form:errors path="lastName" cssClass="help-inline" cssStyle="margin: 0 10px 0 -20px;"/>
+                        </div>
+                    </div>
+                </div>
             </div><br>
 
           <div class="form-group">
@@ -149,8 +166,18 @@
                                   type="text"/>
                     </div>
                   </div>
-                  <div class="col-xs-6"></div>
                 </div>
+              </div>
+              <div class="row">
+                  <label  class="col-xs-3 control-label" ></label>
+                  <div class="col-xs-8">
+                      <div class="col-xs-8">
+                          <div class="col-xs-12">
+                            <form:errors path="addressL1" cssClass="help-inline" cssStyle="margin: 0 60px 0 -40px;;"/>
+                          </div>
+                      </div>
+                      <div class="col-xs-4"></div>
+                  </div>
               </div>
               <div class="row"> <label class="control-label"></label>   </div>
               <div class="row">
@@ -160,11 +187,22 @@
                   <div class="col-xs-12">
                     <div class="col-xs-12">
                       <form:input path="addressL2" class="form-control" id="addLine2" placeholder="Address Line 2"
-                                  type="text" required="required"/>
+                                  type="text" />
+
                     </div>
                   </div>
                   <div class="col-xs-6"></div>
                 </div>
+              </div>
+              <div class="row">
+                  <label  class="col-xs-3 control-label" ></label>
+                  <div class="col-xs-8">
+                      <div class="col-xs-8">
+                        <div class="col-xs-12">
+                            <form:errors path="addressL2" cssClass="help-inline" cssStyle="margin: 0 60px 0 -40px;"/>
+                        </div>
+                      </div>
+                  </div>
               </div>
               <div class="row"> <label class="control-label"></label>   </div>
               <div class="row">
@@ -173,19 +211,9 @@
                   <div class="col-xs-8">
                       <div class="col-xs-6">
                           <div class="col-xs-12">
-                              <form:select path="addressL3" class="form-control" id="city" placeholder="City"
-                                           style="width: 200px" required="required">
-                                  <form:option value="City Select"><fmt:message key="user.customer.select" bundle="${bundle1}" />
-                                  </form:option>
-                                  <form:option value="Colombo"><fmt:message key="user.staff.branch1" bundle="${bundle1}" />
-                                  </form:option>
-                                  <form:option value="Gampaha"><fmt:message key="user.staff.branch2" bundle="${bundle1}" />
-                                  </form:option>
-                                  <form:option value="Ja-Ela"><fmt:message key="user.staff.branch3" bundle="${bundle1}" />
-                                  </form:option>
-                                  <form:option value="Kadana"><fmt:message key="user.staff.branch4" bundle="${bundle1}" />
-                                  </form:option>
-                              </form:select>
+                              <form:input path="addressL3" class="form-control" id="addLine3" placeholder="Address Line 3"
+                                          type="text" />
+
                           </div>
                       </div>
                       <div class="col-xs-6">
@@ -206,14 +234,23 @@
                       <div class="col-xs-6">
                           <div class="col-xs-12">
                               <form:input path="mobile" class="form-control" id="mobileNo" placeholder="+94XXXXXXXXX"
-                                              type="text" style="width: 260px" pattern="^\(?(\+94)\)?([0-9]{9})$"
-                                              required="required"/>
+                                              type="text" style="width: 260px"
+                                            />
                           </div>
                       </div>
                       <div class="col-xs-6"></div>
                   </div>
               </div>
-              <div class="row"> <label class="control-label"></label>   </div>
+              <div class="row">
+                  <label class="col-xs-3 control-label"></label>
+                  <div class="col-xs-8">
+                      <div class="col-xs-6">
+                          <div class="col-xs-12">
+                            <form:errors path="mobile" cssClass="help-inline" cssStyle=""/>
+                          </div>
+                      </div>
+                  </div>
+              </div>
               <div class="row">
                   <label  class="col-xs-3 control-label">
                       <fmt:message key="user.useradd.form.email" bundle="${bundle1}" />
@@ -222,15 +259,23 @@
                       <div class="col-xs-6">
                           <div class="col-xs-12">
                               <form:input path="email" class="form-control" id="email" placeholder="myname@example.com"
-                                              type="text" style="width: 260px"
-                                              pattern="^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.
-                                              [a-zA-Z0-9-]+)*\.(([0-9]{1,3})|([a-zA-Z]{2,3}))$" required="required"/>
+                                              type="text" style="width: 260px"/>
+
                           </div>
                       </div>
                       <div class="col-xs-6"></div>
                   </div>
               </div>
-              <div class="row"> <label class="control-label"></label>   </div>
+              <div class="row">
+                  <label class="col-xs-3 control-label"></label>
+                  <div class="col-xs-8">
+                      <div class="col-xs-6">
+                          <div class="col-xs-12">
+                              <form:errors path="email"  cssClass="help-inline" cssStyle="color: red;margin: 0 10px 0 -30px;"/>
+                          </div>
+                      </div>
+                  </div>
+              </div>
               <div class="row">
                   <label  class="col-xs-3 control-label" >
                       <fmt:message key="user.useradd.form.username" bundle="${bundle1}" />
@@ -239,14 +284,33 @@
                       <div class="col-xs-6">
                           <div class="col-xs-12">
                               <form:input path="username" class="form-control" name="username_admin" id="username_admin"
-                                              placeholder="User Name" type="text" style="width: 260px" required="required"/>
+                                              placeholder="User Name" type="text" style="width: 260px" />
 
                           </div>
                       </div>
                       <div class="col-xs-6"></div>
                   </div>
               </div>
-              <div class="row"><label class=" control-label"></label></div>
+              <div class="row">
+                  <label class="col-xs-3 control-label"></label>
+                  <div class="col-xs-8">
+                      <div class="col-xs-8">
+                          <div class="col-xs-12">
+                              <form:errors path="username" cssClass="help-inline" cssStyle=" margin: 0 10px 0 -85px;"/>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+                  <label class="col-xs-3 control-label"></label>
+                  <div class="col-xs-8">
+                      <div class="col-xs-10">
+                          <div class="col-xs-12">
+                              <label class="pswdLabel" >Minimum 8 characters at least 1 Alphabet and 1 Number:</label>
+                          </div>
+                      </div>
+                  </div>
+              </div>
               <div class="row">
                   <label  class="col-xs-3 control-label" >
                       <fmt:message key="user.useradd.form.password" bundle="${bundle1}" />
@@ -255,15 +319,23 @@
                       <div class="col-xs-6">
                           <div class="col-xs-12">
                               <form:input path="password" class="form-control" id="password1" placeholder="Password"
-                                              type="password" style="width: 260px"  required="required"
-                                              onchange="validatePassword(password1)"/>
-
+                                              type="password" style="width: 260px"
+                                           />
                           </div>
                       </div>
                       <div class="col-xs-6"></div>
                   </div>
               </div>
-              <div class="row"><label class=" control-label"></label></div>
+              <div class="row">
+                  <label class="col-xs-3 control-label"></label>
+                  <div class="col-xs-8">
+                      <div class="col-xs-8">
+                          <div class="col-xs-12">
+                              <form:errors path="password" cssClass="help-inline" cssStyle="margin: 0 10px 0 -90px;"/>
+                          </div>
+                      </div>
+                  </div>
+              </div>
               <div class="row">
                   <label  class="col-xs-3 control-label" >
                       <fmt:message key="user.useradd.form.cpassword" bundle="${bundle1}" />
@@ -271,12 +343,22 @@
                   <div class="col-xs-8">
                       <div class="col-xs-6">
                           <div class="col-xs-12">
-                              <input  class="form-control" id="cpassword"
+                              <form:input  class="form-control" path="cpassword"
                                       placeholder="Password Confirm" type="password" style="width: 260px"
-                                      required="required" onchange="passwordsEqual(cpassword,password1)"/>
+                                      onchange="passwordsEqual(cpassword,password1)"/>
                           </div>
                       </div>
                       <div class="col-xs-6"></div>
+                  </div>
+              </div>
+              <div class="row">
+                  <label class="col-xs-3 control-label"></label>
+                  <div class="col-xs-8">
+                      <div class="col-xs-8">
+                          <div class="col-xs-12">
+                              <form:errors path="cpassword" cssClass="help-inline" cssStyle="margin: 0 20px 0 -85px;"/>
+                          </div>
+                      </div>
                   </div>
               </div>
           </div><br>

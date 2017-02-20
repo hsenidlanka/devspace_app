@@ -43,7 +43,6 @@ public class Check {
     public String showSubCategoryList(@PathVariable String name,Map<String, Object> model){
         LOG.info("path variable: {}",name);
 
-
         model.put("command",new Category());
         model.put("catName",name);
         return "category_management/subcategoryView";

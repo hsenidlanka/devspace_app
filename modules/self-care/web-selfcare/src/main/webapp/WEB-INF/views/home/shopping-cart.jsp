@@ -73,7 +73,8 @@
                                                 <td class="item-remove">
                                                         <%--<a class="mod"><i class="glyphicon glyphicon-edit"></i> Edit</a>&nbsp;--%>
                                                     <a class="m-btn mini red del" style="height:auto;"><i
-                                                            class="fa fa-times"></i> Remove</a>
+                                                            class="fa fa-times"></i> <fmt:message
+                                                            key="shopping.remove.text" bundle="${lang}"/></a>
                                                 </td>
                                             </tr>
                                         </c:forEach>
@@ -126,27 +127,32 @@
                                 </div>
                                 <div style="margin-top: 30px;">
                                     <label><strong><fmt:message key="pay.total" bundle="${lang}"/> <label
-                                            id="label-tot">0.00</label></strong></label><br>
+                                            id="label-tot"><fmt:message key="default.price"
+                                                                        bundle="${lang}"/></label></strong></label><br>
                                     <label style="margin-top: 5px;"><strong><fmt:message key="shopping.discount.rate"
                                                                                          bundle="${lang}"/> <label
-                                            id="label-dis-rate">0.00</label></strong></label><br>
+                                            id="label-dis-rate"><fmt:message key="default.price"
+                                                                             bundle="${lang}"/></label></strong></label><br>
                                     <label style="margin-top: 5px;"><strong><fmt:message key="shopping.discount.amount"
                                                                                          bundle="${lang}"/> <label
-                                            id="label-dis">0.00</label></strong></label>
+                                            id="label-dis"><fmt:message key="default.price"
+                                                                        bundle="${lang}"/></label></strong></label>
                                 </div>
                                 <hr>
                                 <div>
                                     <label><strong><fmt:message key="shopping.discount.total" bundle="${lang}"/> <label
-                                            id="label-distot">0.00</label></strong></label><br>
+                                            id="label-distot"><fmt:message key="default.price"
+                                                                           bundle="${lang}"/></label></strong></label><br>
                                     <label style="margin-top: 5px;"><strong><fmt:message key="shopping.service"
                                                                                          bundle="${lang}"/> <label
-                                            id="label-serv">5</label></strong></label>
+                                            id="label-serv"><fmt:message key="default.percentage"
+                                                                         bundle="${lang}"/></label></strong></label>
                                 </div>
                                 <div style="margin-top: 10px; border: groove; border-color: #62c462; border-width: thin;">
                                     <p id="net-amount-text"><strong><fmt:message key="shopping.net"
                                                                                  bundle="${lang}"/></strong></p>
 
-                                    <p id="net-amount-field">0.00</p>
+                                    <p id="net-amount-field"><fmt:message key="default.price" bundle="${lang}"/></p>
                                 </div>
                                 <div style="margin-top: 5px;">
                                     <button type="submit" class="btn btn-success" id="checkoutButton"
@@ -175,30 +181,30 @@
                                     <div class="col-sm-3"><a href="#x"><img
                                             src="<c:url value="/resources/images/pizzas/02.jpg"/>"
                                             class="img-responsive"></a>
-                                        <h4>Item title</h4>
+                                        <h4><fmt:message key="shopping.cart.item.title" bundle="${lang}"/></h4>
 
-                                        <p>Item description</p>
+                                        <p><fmt:message key="shopping.cart.item.description" bundle="${lang}"/></p>
                                     </div>
                                     <div class="col-sm-3"><a href="#x"><img
                                             src="<c:url value="/resources/images/desserts/cake%2003.jpg"/>"
                                             class="img-responsive"></a>
-                                        <h4>Item title</h4>
+                                        <h4><fmt:message key="shopping.cart.item.title" bundle="${lang}"/></h4>
 
-                                        <p>Item description</p>
+                                        <p><fmt:message key="shopping.cart.item.description" bundle="${lang}"/></p>
                                     </div>
                                     <div class="col-sm-3"><a href="#x"><img
                                             src="<c:url value="/resources/images/desserts/ice-cream%2002.jpg"/>"
                                             class="img-responsive"></a>
-                                        <h4>Item title</h4>
+                                        <h4><fmt:message key="shopping.cart.item.title" bundle="${lang}"/></h4>
 
-                                        <p>Item description</p>
+                                        <p><fmt:message key="shopping.cart.item.description" bundle="${lang}"/></p>
                                     </div>
                                     <div class="col-sm-3"><a href="#x"><img
                                             src="<c:url value="/resources/images/pizzas/22.png"/>"
                                             class="img-responsive"></a>
-                                        <h4>Item title</h4>
+                                        <h4><fmt:message key="shopping.cart.item.title" bundle="${lang}"/></h4>
 
-                                        <p>Item description</p>
+                                        <p><fmt:message key="shopping.cart.item.description" bundle="${lang}"/></p>
                                     </div>
                                 </div>
                             </div>
@@ -208,30 +214,30 @@
                                     <div class="col-sm-3"><a href="#x"><img
                                             src="<c:url value="/resources/images/beverages/coffee%2003.jpg"/>"
                                             class="img-responsive"></a>
-                                        <h4>Item title</h4>
+                                        <h4><fmt:message key="shopping.cart.item.title" bundle="${lang}"/></h4>
 
-                                        <p>Item description</p>
+                                        <p><fmt:message key="shopping.cart.item.description" bundle="${lang}"/></p>
                                     </div>
                                     <div class="col-sm-3"><a href="#x"><img
                                             src="<c:url value="/resources/images/desserts/pudding%2003.jpg"/>"
                                             class="img-responsive"></a>
-                                        <h4>Item title</h4>
+                                        <h4><fmt:message key="shopping.cart.item.title" bundle="${lang}"/></h4>
 
-                                        <p>Item description</p>
+                                        <p><fmt:message key="shopping.cart.item.description" bundle="${lang}"/></p>
                                     </div>
                                     <div class="col-sm-3"><a href="#x"><img
                                             src="<c:url value="/resources/images/pizzas/21.jpg"/>"
                                             class="img-responsive"></a>
-                                        <h4>Item title</h4>
+                                        <h4><fmt:message key="shopping.cart.item.title" bundle="${lang}"/></h4>
 
-                                        <p>Item description</p>
+                                        <p><fmt:message key="shopping.cart.item.description" bundle="${lang}"/></p>
                                     </div>
                                     <div class="col-sm-3"><a href="#x"><img
                                             src="<c:url value="/resources/images/pizzas/12.jpg"/>"
                                             class="img-responsive"></a>
-                                        <h4>Item title</h4>
+                                        <h4><fmt:message key="shopping.cart.item.title" bundle="${lang}"/></h4>
 
-                                        <p>Item description</p>
+                                        <p><fmt:message key="shopping.cart.item.description" bundle="${lang}"/></p>
                                     </div>
                                 </div>
                                 <!--/row-->
@@ -324,15 +330,17 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-default btn-sm" data-dismiss="modal" style="width:70px;">No</button>
-                <button id="removeOk" class="btn btn-danger btn-sm" style="width:70px;">Yes</button>
+                <button class="btn btn-default btn-sm" data-dismiss="modal" style="width:70px;"><fmt:message
+                        key="btn.text.no" bundle="${lang}"/></button>
+                <button id="removeOk" class="btn btn-danger btn-sm" style="width:70px;"><fmt:message key="btn.text.yes"
+                                                                                                     bundle="${lang}"/></button>
             </div>
         </div>
     </div>
 </div>
 
 <!-- Cart item modify popup -->
-<div id="modify-item-popup" class="modal fade">
+<%--<div id="modify-item-popup" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -409,7 +417,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>--%>
 <a href="#" class="scrollup"></a>
 </body>
 </html>

@@ -1,0 +1,31 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1228" measuredH="517" mockupW="950" mockupH="466">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="278" y="51" w="950" h="466" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>16770457</color>
+      </controlProperties>
+    </control>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::SubTitle" x="725" y="66" w="-1" h="-1" measuredW="155" measuredH="27" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>*View%20Package*</text>
+      </controlProperties>
+    </control>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::Label" x="656" y="110" w="-1" h="-1" measuredW="109" measuredH="24" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>16</size>
+        <text>Package%20Name</text>
+      </controlProperties>
+    </control>
+    <control controlID="23" controlTypeID="com.balsamiq.mockups::TextInput" x="821" y="109" w="188" h="-1" measuredW="79" measuredH="26" zOrder="3" locked="false" isInGroup="-1"/>
+    <control controlID="24" controlTypeID="com.balsamiq.mockups::DataGrid" x="306" y="159" w="894" h="316" measuredW="645" measuredH="328" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <alternateRowColor>12303802</alternateRowColor>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22756.6630859375%2C155.5%2C787.43505859375%2C169.5%22%20href%3D%22edit_item.bmml%22%20alt%3D%22Edit%20%22%20id%3D%2224%22/%3E%3Carea%20shape%3D%22rect%22%20coords%3D%22800.03564453125%2C155.5%2C844.7373046875%2C169.5%22%20href%3D%22Delete_Item.bmml%22%20alt%3D%22Delete%22%20id%3D%2224%22/%3E%3Carea%20shape%3D%22rect%22%20coords%3D%22754.56298828125%2C223.5%2C785.3349609375%2C237.5%22%20href%3D%22edit_item.bmml%22%20alt%3D%22Edit%20%22%20id%3D%2224%22/%3E%3Carea%20shape%3D%22rect%22%20coords%3D%22797.935546875%2C223.5%2C842.63720703125%2C237.5%22%20href%3D%22Delete_Item.bmml%22%20alt%3D%22Delete%22%20id%3D%2224%22/%3E%3Carea%20shape%3D%22rect%22%20coords%3D%22752.462890625%2C291.5%2C783.23486328125%2C305.5%22%20href%3D%22modify_category.bmml%22%20alt%3D%22Edit%20%22%20id%3D%2224%22/%3E%3Carea%20shape%3D%22rect%22%20coords%3D%22795.83544921875%2C291.5%2C840.537109375%2C305.5%22%20href%3D%22Delete_Item.bmml%22%20alt%3D%22Delete%22%20id%3D%2224%22/%3E%3Carea%20shape%3D%22rect%22%20coords%3D%22752.462890625%2C351%2C783.23486328125%2C365%22%20href%3D%22edit_item.bmml%22%20alt%3D%22Edit%20%22%20id%3D%2224%22/%3E%3Carea%20shape%3D%22rect%22%20coords%3D%22795.83544921875%2C351%2C840.537109375%2C365%22%20href%3D%22Delete_Item.bmml%22%20alt%3D%22Delete%22%20id%3D%2224%22/%3E%3Carea%20shape%3D%22rect%22%20coords%3D%22754.56298828125%2C402%2C785.3349609375%2C416%22%20href%3D%22edit_item.bmml%22%20alt%3D%22Edit%20%22%20id%3D%2224%22/%3E%3Carea%20shape%3D%22rect%22%20coords%3D%22797.935546875%2C402%2C842.63720703125%2C416%22%20href%3D%22Delete_Item.bmml%22%20alt%3D%22Delete%22%20id%3D%2224%22/%3E</map>
+        <size>14</size>
+        <text>Id%20%5E%2C%20Name%20%5Ev%2CAdded%20Date%20%5Ev%2CPrice%20%5Ev%2CCreator%20%5Ev%0APZ001%2C%20Spicy%20Meatball%20Supreme%2C%202016-12-01%2C%20%5CrR-560.00%5CrM-%20890.00%5CrL-%201430.00%2C%20Non-veg%2C%20%20%20%5B*Edit*%20%5D%28edit_item%29%20%20%20%5B*Delete*%5D%28Delete_Item%29%0APZ002%2C%20HOT%20N%20SPICY%20CHICKEN%2C%202016-12-01%2C%20%5CrR-560.00%5CrM-%20890.00%5CrL-%201430.00%2C%20Non-veg%2C%20%20%5B*Edit*%20%5D%28edit_item%29%20%20%20%5B*Delete*%5D%28Delete_Item%29%0ABV012%2C%20Minute%20Maid%20Apple%20Juice%2C%202016-12-01%2C%20%5CrR-90.00%5CrM-%20160.00%5CrL-330.00%2C%20Veg%2C%20%5B*Edit*%20%5D%28modify_category%29%20%20%20%5B*Delete*%5D%28Delete_Item%29%0ATP004%2C%20Provolone%20Cheese%2C%202016-12-01%2C%20%5CrR-190.00%5CrO-280.00%2C%20Veg%2C%20%5B*Edit*%20%5D%28edit_item%29%20%20%20%5B*Delete*%5D%28Delete_Item%29%0ASL014%2C%20Crispy%20Cchicken%20Caesar%20Salad%2C%202016-12-01%2C%20%5CrR-390.00%5CrL-570.00%2C%20Non-veg%2C%20%20%5B*Edit*%20%5D%28edit_item%29%20%20%20%5B*Delete*%5D%28Delete_Item%29%0A%7B10C%2C%2025C%2C%2015C%2C%2015R%2C%2010C%2C%2025C%7D</text>
+        <value>79</value>
+        <verticalScrollbar>true</verticalScrollbar>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

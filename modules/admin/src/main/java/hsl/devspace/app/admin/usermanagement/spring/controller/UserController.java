@@ -16,6 +16,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.swing.*;
+import javax.validation.Valid;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
@@ -67,16 +68,16 @@ public class UserController {
 //    customer user add is done in below methods
     @RequestMapping(value="/add",method=RequestMethod.GET)
     public ModelAndView showCustomer(){
-        return new ModelAndView("user_management/userAdd", "command",new User());
+        return new ModelAndView("user_management/userAdd", "newUser",new User());
     }
 
     @RequestMapping(value="/addCustomer",method = RequestMethod.POST)
-    public ModelAndView saveOrUpdate(@ModelAttribute("newUser")  User newUser,
-                                     @RequestParam("radioName") String userType,BindingResult validationResult,
+    public ModelAndView saveOrUpdate(@ModelAttribute("newUser") @Valid User newUser,BindingResult validationResult,
+                                     @RequestParam("radioName") String userType,
                                      HttpServletRequest request, HttpServletResponse response) throws SQLIntegrityConstraintViolationException {
 
         if (validationResult.hasErrors()) {
-            new ModelAndView("user_management/userAdd", "command", newUser);
+            return new ModelAndView("user_management/userAdd");
         }
 
         if (userType.equals("staff")) {
@@ -91,7 +92,7 @@ public class UserController {
                 }
             } else {
                 JOptionPane.showMessageDialog(null, insertUnsuccess);
-                return new ModelAndView("user_management/userAdd", "command", newUser);
+                return new ModelAndView("user_management/userAdd", "newUser", newUser);
             }
         }
         if(userType.equals("customer")){
@@ -103,7 +104,7 @@ public class UserController {
             }else {
 //                validationResult.rejectValue("username", "error.username.exists", "The username is already in use.");
                 JOptionPane.showMessageDialog(null, insertUnsuccess);
-                return new ModelAndView("user_management/userAdd", "command", newUser);
+                return new ModelAndView("user_management/userAdd", "newUser", newUser);
             }
         }
         return new ModelAndView(new RedirectView("add"));
@@ -339,7 +340,8 @@ public class UserController {
 
     //handler method for sending customer edit form data to database
     @RequestMapping(value="customer/editCustomer",method=RequestMethod.POST)
-    public ModelAndView editCustomer(@ModelAttribute("customer") User customer) throws SQLException {
+    public ModelAndView editCustomer(@ModelAttribute("customer")  User customer,BindingResult validationResult)
+                                     throws SQLException {
 
         String n1=customer.getFirstName();
         String n2=customer.getLastName();

@@ -137,14 +137,14 @@
                                                     <fmt:message key="user.userview.customer.filter.regDate.from" bundle="${bundle1}"/>
                                                 </label>
                                                 <input class="form-control" id="fromDateComments" type="text"
-                                                       placeholder="Click on me" style="width: 130px"/>
+                                                       placeholder="Click on me" style="width: 130px" required="required"/>
                                             </div>
                                             <div class="col-xs-6">
                                                 <label class=" control-label">
                                                     <fmt:message key="user.userview.customer.filter.regDate.to" bundle="${bundle1}"/>
                                                 </label>
                                                 <input class="form-control" id="toDateComments" placeholder="Click on me"
-                                                       type="text" style="width: 130px" />
+                                                       type="text" style="width: 130px"  required="required"/>
                                             </div>
                                         </div>
                                         <div class="col-xs-6"   >
@@ -180,7 +180,7 @@
     <%--</div>--%>
 </center>
 
-<%--modal to delete the category selected--%>
+<%--modal to approve the comment selected--%>
 <div class="modal fade" id="approveCommentModel">
     <div class="modal-dialog">
         <!-- Modal content-->
@@ -224,16 +224,18 @@
                 <div class="form-group row" style="text-align: center">
                     <div class="col-xs-3"></div>
                     <div class="col-xs-2" >
-                        <button class="btn btn-success" id="btnApproveComment">
-                            <fmt:message key="category.categorydelete.modal.approve" bundle="${bundle1}" />
-                            <span class="glyphicon glyphicon-ok"></span>
+                        <button class="btn btn-success"  data-dismiss="modal" aria-hidden="true">
+                            <fmt:message key="category.categorydelete.modal.cancel" bundle="${bundle1}" />
+                            <span class="glyphicon glyphicon-remove"></span>
                         </button>
                     </div>
                     <div class="col-xs-2"></div>
                     <div class="col-xs-2" >
-                        <button class="btn btn-success"  data-dismiss="modal" aria-hidden="true">
-                            <fmt:message key="category.categorydelete.modal.cancel" bundle="${bundle1}" />
-                            <span class="glyphicon glyphicon-remove"></span></button></div>
+                        <button class="btn btn-success" id="btnApproveComment">
+                            <fmt:message key="notification.commentsview.approve.modal.submit.button" bundle="${bundle1}" />
+                            <span class="glyphicon glyphicon-ok"></span>
+                        </button>
+                    </div>
                     <div class="col-xs-3"></div>
                 </div>
             </div>
@@ -245,7 +247,7 @@
 
 
 
-<%--modal to approve a comment selected--%>
+<%--modal to delete a comment selected--%>
 <div class="modal fade" id="discardCommentModel">
     <div class="modal-dialog">
         <!-- Modal content-->
@@ -289,16 +291,18 @@
                 <div class="form-group row" style="text-align: center">
                     <div class="col-xs-3"></div>
                     <div class="col-xs-2" >
-                        <button class="btn btn-success" id="btnDiscardComment">
-                            <fmt:message key="category.categorydelete.modal.approve" bundle="${bundle1}" />
-                            <span class="glyphicon glyphicon-ok"></span>
+                        <button class="btn btn-success"  data-dismiss="modal" aria-hidden="true">
+                            <fmt:message key="category.categorydelete.modal.cancel" bundle="${bundle1}" />
+                            <span class="glyphicon glyphicon-remove"></span>
                         </button>
                     </div>
                     <div class="col-xs-2"></div>
                     <div class="col-xs-2" >
-                        <button class="btn btn-success"  data-dismiss="modal" aria-hidden="true">
-                            <fmt:message key="category.categorydelete.modal.cancel" bundle="${bundle1}" />
-                            <span class="glyphicon glyphicon-remove"></span></button></div>
+                        <button class="btn btn-success" id="btnDiscardComment">
+                            <fmt:message key="notification.commentsview.discard.modal.submit.button" bundle="${bundle1}" />
+                            <span class="glyphicon glyphicon-ok"></span>
+                        </button>
+                    </div>
                     <div class="col-xs-3"></div>
                 </div>
             </div>

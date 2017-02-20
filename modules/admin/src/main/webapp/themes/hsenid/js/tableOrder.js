@@ -1,5 +1,6 @@
 var pgLimit =10;
-var fromDate = $("#fromDateOdr").val();
+var fromDate ;
+var todate ;
 
 $(document).ready(function () {
 
@@ -62,13 +63,13 @@ $(document).ready(function () {
                     title: 'Date',
                     align: 'right',
                     sortable: true
-                }/*, {
+                }, {
                     field: 'operate',
                     title: 'Operations',
                     align: 'center',
                     formatter: operateFormatter,
                     events: operateEvents
-                }*/],
+                }],
                 data: result
             })
         }
@@ -111,16 +112,16 @@ $(document).ready(function () {
     });
 
 
-    $("#toDateOdr").focusout(function(){
+    $("#toDateOdr").click(function(){
         fromDate = $("#fromDateOdr").val();
        if(!$(this).null || ""){
             if(!((fromDate).null || "")){
-                var todate = $(this).val();
+                 todate = $(this).val();
                //
                 $.ajax({
                     type:'get',
                     url:'https://localhost:8443/admin/orders/view/orderTable',
-                    data:{'todate':todate, 'fromDate':fromDate, "initPage": "0", "pgLimit": pgLimit},
+                    data:{'todate':todate, 'fromDate':fromDate, "initPage": "1", "pgLimit": pgLimit},
                     success:function(data){
                         $('#tblOrders').bootstrapTable('load', data);
                         console.log("success in view order");
@@ -133,8 +134,36 @@ $(document).ready(function () {
                 alert("from date is not selected");
             }
         }else{
-           alert("to date is not selected");
+           $.ajax({
+               type:'get',
+               url:'https://localhost:8443/admin/orders/view/orderTable',
+               data:{'todate':"", 'fromDate':"", "initPage": "1", "pgLimit": pgLimit},
+               success:function(data){
+                   $('#tblOrders').bootstrapTable('load', data);
+                   console.log("success in view order");
+               },
+               error:function(ex){
+                   console.log("error in view order "+ex);
+               }
+           })
        }
+    });
+
+    $("#fromDateOdr").click(function(){
+        if($(this).null || ""){
+            $.ajax({
+                type:'get',
+                url:'https://localhost:8443/admin/orders/view/orderTable',
+                data:{'todate':"", 'fromDate':"", "initPage": "1", "pgLimit": pgLimit},
+                success:function(data){
+                    $('#tblOrders').bootstrapTable('load', data);
+                    console.log("success in view order2 "+ data);
+                },
+                error:function(ex){
+                    console.log("error in view order2 "+ex);
+                }
+            })
+        }
     });
 
     /*
@@ -252,12 +281,12 @@ $(document).ready(function () {
 function operateFormatter(value, row, index) {
     return [
         '<center>',
-        '<a class="editOrdr" title="Edit" id="linkEditOrdr">',
-        '<i class="glyphicon glyphicon-edit">Edit</i>',
-        '</a>&nbsp;&nbsp;&nbsp;&nbsp;',
+        '<a class="editOrdr" title="View" id="linkEditOrdr">',
+        '<i class="glyphicon glyphicon-edit">View</i>'
+        /*'</a>&nbsp;&nbsp;&nbsp;&nbsp;',
         '<a class="deleteOrdr" title="Cancel" id="linkDeleteOrdr">',
         '<i class="glyphicon glyphicon-remove">Cancel</i>',
-        '</a></center>'
+        '</a></center>'*/
     ].join('');
 }
 
@@ -269,11 +298,17 @@ window.operateEvents = {
         var objct = JSON.parse(data);
 
         var pkgId = objct["id"];
+        $("#txtOrdrId").val(objct["order_id"]);
+        $("#txtOrdrCusId").val(objct["customer_id"]);
+        $("#txtOrdrGstId").val(objct["guest_id"]);
+        $("#txtOrdrDate").val(objct["order_date"]);
+        $("#txtOrdrtime").val(objct["order_time"]);
+        $("#txtOrdrPrice").val(objct["net_cost"]);
 
         $('#ordrEditModal').modal('show');
-    },
+        }
 
-    'click .deleteOrdr': function (e, value, row, index) {
+         /*  'click .deleteOrdr': function (e, value, row, index) {
 
         var dataDelt = JSON.stringify(row);
         var deltObj = JSON.parse(dataDelt);
@@ -282,7 +317,7 @@ window.operateEvents = {
         $('#lblDeltPkgName').text(deltObj["packName"]);
 
         $('#pkgDeleteModal').modal('show');
-    }
+    }*/
 };
 
 

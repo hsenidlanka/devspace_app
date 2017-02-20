@@ -118,7 +118,7 @@ public class DeliveryRepositoryImpl implements DeliveryRepository {
             agents.add(mp1.get(i).get("username").toString());
         }
 
-        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT agent_name FROM delivery WHERE delivery_status='processing'");
+        List<Map<String, Object>> mp = jdbcTemplate.queryForList("SELECT agent_name FROM delivery WHERE delivery_status='Processing'");
         for (int i = 0; i < mp.size(); i++) {
             agents2.add(mp.get(i).get("agent_name").toString());
         }

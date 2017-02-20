@@ -43,7 +43,7 @@
                                data-toggle="tooltip" data-placement="top" title="Make payment on delivery."><img
                                     class="icons2" src="<c:url value="/resources/images/icons/delivery-xxl.png"/>"/></a>
 
-                            <h3 class="payment-icon-headings">Pay on Delivery</h3>
+                            <h3 class="payment-icon-headings"><fmt:message key="payment.on.delivery" bundle="${lang}"/></h3>
                         </div>
                         <div class="col-md-1"></div>
                         <div class="col-md-3">
@@ -51,7 +51,7 @@
                                data-placement="top" title="Make payment using mobile phone."><img class="icons2"
                                                                                                   src="<c:url value="/resources/images/icons/mobile-payment.png"/>"/></a>
 
-                            <h3 class="payment-icon-headings">Pay by Mobile</h3>
+                            <h3 class="payment-icon-headings"><fmt:message key="payment.by.mobile" bundle="${lang}"/></h3>
                         </div>
                         <div class="col-md-1"></div>
                         <div class="col-md-3">
@@ -59,7 +59,7 @@
                                data-placement="top" title="Make payment using Visa/Master card."><img class="icons2"
                                                                                                       src="<c:url value="/resources/images/icons/credit-cards-icon-25.png"/>"/></a>
 
-                            <h3 class="payment-icon-headings">Pay by Card</h3>
+                            <h3 class="payment-icon-headings"><fmt:message key="payment.option.card" bundle="${lang}"/></h3>
                         </div>
                         <div class="col-md-1"></div>
                     </div>

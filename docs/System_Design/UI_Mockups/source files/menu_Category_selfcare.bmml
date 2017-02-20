@@ -1,0 +1,175 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1107" measuredH="617" mockupW="890" mockupH="614">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="217" y="3" w="890" h="614" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>16777215</color>
+        <text>Pizza%20Shefu%0Ahttp%3A//www.pizzashefu.com/emailverificationsuccess</text>
+      </controlProperties>
+    </control>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::MenuBar" x="571" y="94" w="326" h="29" measuredW="302" measuredH="29" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <hrefs>menu_selfcare%26bm%3Bmenu_selfcare.bmml%26bm%3Bmenu_selfcare.bmml%26bm%3Bmenu_selfcare.bmml%2C%2Ccontactus_selfcare%26bm%3Bcontactus_selfcare.bmml%26bm%3Bcontactus_selfcare.bmml%26bm%3Bcontactus_selfcare.bmml%2Caboutus_selfcare%26bm%3Baboutus_selfcare.bmml%26bm%3Baboutus_selfcare.bmml%26bm%3Baboutus_selfcare.bmml</hrefs>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22372%2C101%2C413%2C114%22%20href%3D%22menu_selfcare.bmml%22%20alt%3D%22menu_selfcare%22%20id%3D%222%22/%3E%3Carea%20shape%3D%22rect%22%20coords%3D%22497%2C101%2C574%2C114%22%20href%3D%22contactus_selfcare.bmml%22%20alt%3D%22contactus_selfcare%22%20id%3D%222%22/%3E%3Carea%20shape%3D%22rect%22%20coords%3D%22583%2C101%2C647%2C114%22%20href%3D%22aboutus_selfcare.bmml%22%20alt%3D%22aboutus_selfcare%22%20id%3D%222%22/%3E</map>
+        <text>Menu%2CPackages%2CContact%20Us%2CAbout%20Us</text>
+      </controlProperties>
+    </control>
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::Icon" x="912" y="97" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>2848996</color>
+        <href>shopping_cart_pickup_order_summary%26bm%3Bshopping_cart_pickup_order_summary.bmml%26bm%3Bshopping_cart_pickup_order_summary.bmml%26bm%3Bshopping_cart_pickup_order_summary.bmml</href>
+        <icon>shopping-cart%7Csmall</icon>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22695%2C94%2C719%2C118%22%20href%3D%22shopping_cart_pickup_order_summary.bmml%22%20alt%3D%22shopping_cart_pickup_order_summary%22%20id%3D%2210%22/%3E</map>
+      </controlProperties>
+    </control>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::Image" x="232" y="78" w="65" h="53" measuredW="336" measuredH="470" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>Selfcare_home%26bm%3BSelfcare_home.bmml%26bm%3BSelfcare_home.bmml%26bm%3BSelfcare_home.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2215%2C75%2C80%2C128%22%20href%3D%22Selfcare_home.bmml%22%20alt%3D%22Selfcare_home%22%20id%3D%2211%22/%3E</map>
+        <src>./assets/logo.png</src>
+      </controlProperties>
+    </control>
+    <control controlID="25" controlTypeID="com.balsamiq.mockups::Button" x="951" y="96" w="60" h="27" measuredW="54" measuredH="27" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>login_selfcare%26bm%3Blogin_selfcare.bmml%26bm%3Blogin_selfcare.bmml%26bm%3Blogin_selfcare.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22734%2C93%2C794%2C120%22%20href%3D%22login_selfcare.bmml%22%20alt%3D%22login_selfcare%22%20id%3D%2225%22/%3E</map>
+        <text>Login</text>
+      </controlProperties>
+    </control>
+    <control controlID="26" controlTypeID="com.balsamiq.mockups::Button" x="1024" y="96" w="-1" h="-1" measuredW="73" measuredH="27" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>register_selfcare%26bm%3Bregister_selfcare.bmml%26bm%3Bregister_selfcare.bmml%26bm%3Bregister_selfcare.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22807%2C93%2C880%2C120%22%20href%3D%22register_selfcare.bmml%22%20alt%3D%22register_selfcare%22%20id%3D%2226%22/%3E</map>
+        <text>Register</text>
+      </controlProperties>
+    </control>
+    <control controlID="30" controlTypeID="com.balsamiq.mockups::Label" x="526" y="549" w="-1" h="-1" measuredW="125" measuredH="21" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>@%20All%20rights%20reserved</text>
+      </controlProperties>
+    </control>
+    <control controlID="31" controlTypeID="com.balsamiq.mockups::Label" x="714" y="549" w="-1" h="-1" measuredW="115" measuredH="21" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>powered%20by%20hSenid%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="70" controlTypeID="com.balsamiq.mockups::HRule" x="217" y="136" w="890" h="-1" measuredW="100" measuredH="10" zOrder="8" locked="false" isInGroup="-1"/>
+    <control controlID="128" controlTypeID="com.balsamiq.mockups::Image" x="899" y="241" w="176" h="293" measuredW="400" measuredH="600" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/pizza1-nota.jpg</src>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="129" controlTypeID="com.balsamiq.mockups::Image" x="897" y="198" w="39" h="30" measuredW="512" measuredH="512" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/favorite.png</src>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="130" controlTypeID="com.balsamiq.mockups::Label" x="948" y="204" w="-1" h="-1" measuredW="122" measuredH="24" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>16</size>
+        <text>Top%20rated%20pizzas</text>
+      </controlProperties>
+    </control>
+    <control controlID="131" controlTypeID="com.balsamiq.mockups::Image" x="232" y="146" w="30" h="32" measuredW="128" measuredH="128" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/menu.png</src>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="132" controlTypeID="com.balsamiq.mockups::HRule" x="217" y="176" w="890" h="-1" measuredW="100" measuredH="10" zOrder="13" locked="false" isInGroup="-1"/>
+    <control controlID="133" controlTypeID="com.balsamiq.mockups::Label" x="283" y="146" w="-1" h="-1" measuredW="61" measuredH="32" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <size>24</size>
+        <text>Menu</text>
+      </controlProperties>
+    </control>
+    <control controlID="134" controlTypeID="com.balsamiq.mockups::Image" x="246" y="234" w="120" h="92" measuredW="298" measuredH="298" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/Chicken%2520Bacon.png</src>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="135" controlTypeID="com.balsamiq.mockups::Image" x="422" y="234" w="120" h="92" measuredW="298" measuredH="298" zOrder="16" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/Chicken%2520Bacon.png</src>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="136" controlTypeID="com.balsamiq.mockups::Image" x="752" y="234" w="120" h="92" measuredW="298" measuredH="298" zOrder="17" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/Chicken%2520Bacon.png</src>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="137" controlTypeID="com.balsamiq.mockups::Image" x="422" y="400" w="120" h="92" measuredW="298" measuredH="298" zOrder="18" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/Chicken%2520Bacon.png</src>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="138" controlTypeID="com.balsamiq.mockups::Image" x="583" y="234" w="120" h="92" measuredW="298" measuredH="298" zOrder="19" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/Chicken%2520Bacon.png</src>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="139" controlTypeID="com.balsamiq.mockups::Image" x="246" y="400" w="120" h="92" measuredW="298" measuredH="298" zOrder="20" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/Chicken%2520Bacon.png</src>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="140" controlTypeID="com.balsamiq.mockups::Label" x="246" y="191" w="-1" h="-1" measuredW="53" measuredH="28" zOrder="21" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <size>20</size>
+        <text>Pizza</text>
+      </controlProperties>
+    </control>
+    <control controlID="141" controlTypeID="com.balsamiq.mockups::Label" x="246" y="346" w="-1" h="-1" measuredW="114" measuredH="24" zOrder="22" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <italic>true</italic>
+        <size>16</size>
+        <text>Cheese%20Lovers</text>
+      </controlProperties>
+    </control>
+    <control controlID="142" controlTypeID="com.balsamiq.mockups::Label" x="420" y="346" w="-1" h="-1" measuredW="129" measuredH="24" zOrder="23" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <size>16</size>
+        <text>Tandoori%20Chicken</text>
+      </controlProperties>
+    </control>
+    <control controlID="143" controlTypeID="com.balsamiq.mockups::Label" x="583" y="346" w="-1" h="-1" measuredW="113" measuredH="24" zOrder="24" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <size>16</size>
+        <text>Chicken%20Bacon</text>
+      </controlProperties>
+    </control>
+    <control controlID="144" controlTypeID="com.balsamiq.mockups::Label" x="752" y="346" w="-1" h="-1" measuredW="124" measuredH="24" zOrder="25" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <size>16</size>
+        <text>Devilled%20Chicken</text>
+      </controlProperties>
+    </control>
+    <control controlID="145" controlTypeID="com.balsamiq.mockups::Label" x="246" y="514" w="-1" h="-1" measuredW="106" measuredH="24" zOrder="26" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <size>16</size>
+        <text>Cheesy%20Onion</text>
+      </controlProperties>
+    </control>
+    <control controlID="146" controlTypeID="com.balsamiq.mockups::Label" x="422" y="514" w="-1" h="-1" measuredW="124" measuredH="24" zOrder="27" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <size>16</size>
+        <text>Sausage%20Delight</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

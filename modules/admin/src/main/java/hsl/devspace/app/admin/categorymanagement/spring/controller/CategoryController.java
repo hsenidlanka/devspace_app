@@ -42,8 +42,17 @@ public class CategoryController {
     @Value("${insert.category.success}")
     private String insertSuccess;
 
+    @Value("${insert.category.duplicate}")
+    private String insertCatDuplicate;
+
     @Value("${insert.subcategory.success}")
     private String insertSubSuccess;
+
+    @Value("${insert.subcategory.duplicate}")
+    private String insertSubDuplicate;
+
+    @Value("${insert.select.catimage}")
+    private String selectCatImage;
 
     @Value("${update.category.success}")
     private  String updateSuccess;
@@ -134,41 +143,58 @@ public class CategoryController {
 
                     //set the image name equal to that of category name
                     categoryObject.setImage(categoryObject.getCategoryName()+".jpg");
-                    int catAdd=categoryRepository.add(categoryObject);
+                    boolean catAvailability=categoryRepository.checkAvailability(categoryObject.getCategoryName());
+                    if(!catAvailability) {
+                        int catAdd = categoryRepository.add(categoryObject);
+                        if(catAdd ==1) {
+                            for (int j = 0; j < subcategory_name.length; j++) {
 
-                    if(catAdd ==1) {
-                        for (int j = 0; j < subcategory_name.length; j++) {
+                                String subcatName = subcategory_name[j];
+                                String subcatDescription = subcategory_des[j];
+                                LOG.info("subcat name {} and des:{}", subcatName, subcatDescription);
 
-                            String subcatName = subcategory_name[j];
-                            String subcatDescription = subcategory_des[j];
-                            LOG.info("subcat name {} and des:{}", subcatName, subcatDescription);
+                                //set the properties for the sucategory
+                                categoryObject.setSubCategoryName(subcatName);
+                                categoryObject.setSubcatDescription(subcatDescription);
+                                categoryObject.setCreator("admin");
 
-                            //set the properties for the sucategory
-                            categoryObject.setSubCategoryName(subcatName);
-                            categoryObject.setSubcatDescription(subcatDescription);
-                            categoryObject.setCreator("admin");
+                                boolean subcatAvailability=subcategoryRepository.checkAvailability(categoryObject.getSubCategoryName());
+                                if(!subcatAvailability) {
+                                    subcatAdd = subcategoryRepository.add(categoryObject);
+                                    LOG.info("subcat add return is: {}", subcatAdd);
+                                    if (subcatAdd == 0) {
+                                        break;
+                                    }
+                                }else {
+                                    LOG.error("You have entered duplicate SubCategory name");
+                                    JOptionPane.showMessageDialog(null,insertSubDuplicate);
 
-                            subcatAdd = subcategoryRepository.add(categoryObject);
-                            LOG.info("subcat add return is: {}", subcatAdd);
-                            if (subcatAdd == 0) {
-                                break;
+                                    return new ModelAndView("category_management/totalAdd", "command",categoryObject);
+                                }
                             }
                         }
-                    }
-                    if (catAdd ==0 || subcatAdd == 0)
+                        if (catAdd ==0 || subcatAdd == 0)
                             JOptionPane.showMessageDialog(null, insertError);
-                    else
+                        else
                             JOptionPane.showMessageDialog(null, insertSuccess);
 
-                    return new ModelAndView(new RedirectView("add"));
+
+                    }else {
+                        LOG.error("You have entered duplicate Category name");
+                        JOptionPane.showMessageDialog(null, insertCatDuplicate);
+
+                        return new ModelAndView("category_management/totalAdd", "command",categoryObject);
+
+                    }
 
                 }else {
                     LOG.error("You failed to upload because the file was empty.");
-                    JOptionPane.showMessageDialog(null, "Please select a Category Image");
+                    JOptionPane.showMessageDialog(null,selectCatImage);
 
                     return new ModelAndView("category_management/totalAdd", "command",categoryObject);
 
                 }
+        return new ModelAndView(new RedirectView("add"));
     }
 
     /**

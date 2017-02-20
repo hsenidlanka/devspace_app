@@ -65,15 +65,20 @@
             <table id="table-purchaseHistory" style="font-size: 12px;"></table>
         </div>
         <div class="input-group" style="margin-top:21px; margin-left:5px; float: right; font-size: 12px;">
-            <label class="pagiTexts" style="display: inline;">Go to page: </label>
+            <label class="pagiTexts" style="display: inline;"><fmt:message key="purchase.history.model.gotopage"
+                                                                           bundle="${lang}"/></label>
             <select id="comboPages" style="height: 32px; border-radius:4px; background-color: transparent;">
             </select>
             &nbsp;&nbsp;
-            <label class="pagiTexts" style="display: inline;">Records per page: </label>
+            <label class="pagiTexts" style="display: inline;"><fmt:message key="purchase.history.model.recsperpage"
+                                                                           bundle="${lang}"/></label>
             <select id="comboRecCount" style="height: 32px; border-radius:4px; background-color: transparent;">
-                <option value="5" selected>5</option>
-                <option value="10">10</option>
-                <option value="20">20</option>
+                <option value="5" selected><fmt:message key="purchase.history.model.rec1"
+                                                        bundle="${lang}"/></option>
+                <option value="10"><fmt:message key="purchase.history.model.rec2"
+                                                bundle="${lang}"/></option>
+                <option value="20"><fmt:message key="purchase.history.model.rec3"
+                                                bundle="${lang}"/></option>
             </select>
         </div>
         <div id="pagination" style="float: right;font-size: 12px;"></div>

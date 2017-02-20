@@ -119,6 +119,54 @@ $(document).ready(function () {
                     }
                 });
             }
+
+            if ((from != "") && (to == "")) {
+                //alert("Please select an ending date");
+                $.ajax({
+                    //type: "POST",
+                    url: 'https://localhost:8443/admin/notification/commentsView',
+                    dataType: "json",
+                    data: {"initPage": "0", "pgLimit": pgLimit},
+                    success: function (msg) {
+                        $('#tableComments').bootstrapTable('load', msg);
+                    }
+                });
+                /**
+                 *Setting the number of pages according to the number of records
+                 */
+                    //Setting the number of pages according to the number of records
+                $.ajax({
+                    url: 'https://localhost:8443/admin/notification/CommentsPaginationTable',
+                    success: function (recCount) {
+                        pagComment2.simplePaginator('setTotalPages', Math.ceil(recCount /pgLimit));
+                    }
+                });
+
+            }
+            if ((from == "") && (to != "")) {
+
+                $.ajax({
+                    //type: "POST",
+                    url: 'https://localhost:8443/admin/notification/commentsView',
+                    dataType: "json",
+                    data: {"initPage": "0", "pgLimit": pgLimit},
+                    success: function (msg) {
+                        $('#tableComments').bootstrapTable('load', msg);
+                    }
+                });
+                /**
+                 *Setting the number of pages according to the number of records
+                 */
+                    //Setting the number of pages according to the number of records
+                $.ajax({
+                    url: 'https://localhost:8443/admin/notification/CommentsPaginationTable',
+                    success: function (recCount) {
+                        pagComment2.simplePaginator('setTotalPages', Math.ceil(recCount /pgLimit));
+                    }
+                });
+            }
+
+
         }
     });
 
@@ -160,14 +208,14 @@ $(document).ready(function () {
         var to=$('#toDateComments').val();
         var status=$('#statusSearch').val();
         var cmntName=$('#cmntSearch').val();
-        alert(status);
+        //alert(status);
 
 
         $('#paginationComments').hide();
         $('#pagination2Comments').show();
 
         if ((from == "") && (to == "") && (cmntName == "") && (status == "--Select--")) {
-            alert("inside the all fields null");
+            //alert("inside the all fields null");
             $.ajax({
                 //type: "POST",
                 url: 'https://localhost:8443/admin/notification/commentsView',
@@ -212,6 +260,53 @@ $(document).ready(function () {
                 }
             });
         }
+
+        if ((from != "") && (to == "")) {
+            alert("Please select an ending date");
+            $.ajax({
+                //type: "POST",
+                url: 'https://localhost:8443/admin/notification/commentsView',
+                dataType: "json",
+                data: {"initPage": "0", "pgLimit": pgLimit},
+                success: function (msg) {
+                    $('#tableComments').bootstrapTable('load', msg);
+                }
+            });
+            /**
+             *Setting the number of pages according to the number of records
+             */
+                //Setting the number of pages according to the number of records
+            $.ajax({
+                url: 'https://localhost:8443/admin/notification/CommentsPaginationTable',
+                success: function (recCount) {
+                    pagComment2.simplePaginator('setTotalPages', Math.ceil(recCount /pgLimit));
+                }
+            });
+
+        }
+        if ((from == "") && (to != "")) {
+            alert("Please select a starting date");
+            $.ajax({
+                //type: "POST",
+                url: 'https://localhost:8443/admin/notification/commentsView',
+                dataType: "json",
+                data: {"initPage": "0", "pgLimit": pgLimit},
+                success: function (msg) {
+                    $('#tableComments').bootstrapTable('load', msg);
+                }
+            });
+            /**
+             *Setting the number of pages according to the number of records
+             */
+                //Setting the number of pages according to the number of records
+            $.ajax({
+                url: 'https://localhost:8443/admin/notification/CommentsPaginationTable',
+                success: function (recCount) {
+                    pagComment2.simplePaginator('setTotalPages', Math.ceil(recCount /pgLimit));
+                }
+            });
+        }
+
     });
 
 });

@@ -170,7 +170,7 @@ function validateEmail() {
         $("#email_error").text("Please enter a email.");
     } else {
         var inputVal = $("#txt-email").val();
-        var emailReg = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
+        var emailReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if (!emailReg.test(inputVal)) {
             $("#email_error").show();
             $("#txt-email").css("background-color", background_color);

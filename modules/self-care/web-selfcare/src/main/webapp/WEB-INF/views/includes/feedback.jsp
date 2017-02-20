@@ -3,7 +3,9 @@
 <head>
     <%@include file="include.jsp" %>
     <link rel="stylesheet" href="<c:url value="/resources/css/m-buttons.css"/>"/>
+    <link rel="stylesheet" href="<c:url value="/resources/css/jquery.rateyo.min.css"/>"/>
     <script src="<c:url value="/resources/js/feedback-operations.js"/>"></script>
+    <script src="<c:url value="/resources/js/jquery.rateyo.min.js"/>"></script>
 </head>
 <body>
 <div class="panel panel-default">
@@ -24,41 +26,36 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i>
                 </button>
-                <img class="icons" src="<c:url value="/resources/images/icons/delviery_history.png"/> "/>
+                <img class="icons" src="<c:url value="/resources/images/icons/feedback-icon.png"/> "/>
                 <h4 class="modal-title header-panel">&nbsp;<fmt:message key="feedback.modal.header.text"
                                                                         bundle="${lang}"/></h4>
             </div>
             <div class="modal-body">
                 <div>
-                    <label>Rating:</label>
+                    <label><fmt:message key="feedback.rating.fld"
+                                        bundle="${lang}"/></label>
 
-                    <select id="demo" name="rating">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
+                    <div id="rateYo"></div>
                 </div>
-                <div class="form-group">
-                    <label>Comment:</label>
+                <div class="form-group" style="margin-top: 10px;">
+                    <label><fmt:message key="feedback.comment.fld"
+                                        bundle="${lang}"/></label>
                     <label class="lbl-errors" id="feedback-comment-error"></label>
-                    <textarea class="form-control" rows="5" id="feedback-comment" style="resize: vertical;"></textarea>
+                    <textarea class="form-control" rows="5" id="feedback-comment"
+                              style="resize: vertical;margin-bottom: -25px;"></textarea>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success" id="btn-add-feedback-ok">Add</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><fmt:message
+                        key="purchase.history.model.close"
+                        bundle="${lang}"/></button>
+                <button type="button" class="btn btn-success" id="btn-add-feedback-ok"><fmt:message
+                        key="feedback.addbtn.text"
+                        bundle="${lang}"/></button>
             </div>
         </div>
     </div>
 </div>
 <!-- End Feedback modal -->
-<script>
-    $('#example-css').barrating({
-        theme: 'css-stars',
-        showSelectedRating: false
-    });
-</script>
 </body>
 </html>

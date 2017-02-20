@@ -214,7 +214,7 @@
       <div class="col-xs-3"></div>
       <div class="col-xs-4"></div>
       <div class="col-xs-2" align="right">
-          <label id="">Exact Price:</label>
+          <%--<label id="">Exact Price:</label>--%>
       </div>
       <div class="col-xs-2">
           <label class="lblAccumPrice" style="color: #0019ea;"></label>

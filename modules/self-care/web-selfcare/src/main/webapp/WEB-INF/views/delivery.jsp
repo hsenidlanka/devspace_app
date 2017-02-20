@@ -94,7 +94,7 @@
                                                type="text">
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label" for="txt-lname"><fmt:message key="signup.last.name"
+                                        <label class="control-label" for="txt-lname"><fmt:message key="delivery.last"
                                                                                                   bundle="${lang}"/></label>
                                         <label id="lname_error" class="error-labels"></label>
                                         <input class="form-control" type="text"
@@ -109,7 +109,7 @@
                                                placeholder="<fmt:message key="delivery.enter.contact" bundle="${lang}"/>">
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label"><fmt:message key="signup.email"
+                                        <label class="control-label"><fmt:message key="delivery.email"
                                                                                   bundle="${lang}"/></label>
                                         <label id="email_error" class="error-labels"></label>
                                         <input id="txt-email" class="form-control" type="text"
@@ -145,7 +145,8 @@
                                         <div>
                                             <a class="btn btn-success btn-proceed-payment btn-submit-proceed"
                                                id="btn-delivery-submit">
-                                                <span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;Proceed
+                                                <span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;<fmt:message
+                                                    key="delivery.proceed" bundle="${lang}"/>
                                             </a>
                                             <button type="reset" class="btn btn-success btn-delivery-reset"
                                                     value="<fmt:message key="delivery.reset" bundle="${lang}"/>">
@@ -242,15 +243,16 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="modal-title"><img src="<c:url value="/resources/images/icons/error.png"/>" width="100px"
-                                             height="100px">&nbsp;&nbsp;Validation
-                    errors</h2>
+                                             height="100px">&nbsp;&nbsp;<fmt:message key="validation.error.popup.title"
+                                                                                     bundle="${lang}"/></h2>
             </div>
             <div class="modal-body">
                 <p style="font-size: medium;"><fmt:message key="delivery.error" bundle="${lang}"/>
                 </p>
             </div>
             <div class="modal-footer">
-                <a class="btn btn-default" data-dismiss="modal">Ok</a>
+                <a class="btn btn-default" data-dismiss="modal"><fmt:message key="validation.error.popup.ok"
+                                                                             bundle="${lang}"/></a>
             </div>
         </div>
     </div>
