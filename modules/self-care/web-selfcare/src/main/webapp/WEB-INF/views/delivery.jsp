@@ -1,6 +1,7 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
 <html>
-<head lang="en">
+<head>
     <%@include file="includes/include.jsp" %>
     <title><fmt:message key="delivery" bundle="${lang}"/></title>
     <link rel="shortcut icon" href="">
