@@ -1,11 +1,11 @@
-<html xmlns:jsp="http://java.sun.com/JSP/Page">
-
-<!--including JSTL to the page -->
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%--<%@ taglib prefix="spring" uri="http://java.sun.com/jsp/jstl/core" %>--%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="spring" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<!DOCTYPE html>
 <head>
 
     <spring:url value="/themes/hsenid/js/bannedStaff_table.js" var="tableBannedStaff"/>
@@ -31,8 +31,8 @@
 
 </head>
 <body>
-<fmt:setLocale value="En"/>
-<fmt:setBundle basename="messages_en" var="bundle1" />
+<%--<fmt:setLocale value="En"/>
+<fmt:setBundle basename="messages_en" var="bundle1" />--%>
 
 <!--<div  id="toolbar">-->
 <div class="col-xs-12">
@@ -44,7 +44,7 @@
                 <div class="col-xs-8" style="width: 64%  ">
                     <div class="col-xs-2">
                         <label class=" control-label" >
-                            <fmt:message key="user.userview.staff.label.filter" bundle="${bundle1}"/>
+                            <fmt:message key="user.userview.staff.label.filter" />
                         </label>
                     </div>
                     <!--checkboxes to select-->
@@ -52,19 +52,19 @@
                         <div class="col-xs-5">
                             <label class="checkbox-inline">
                                 <input type="checkbox" value="1" id="blockCheck" onchange="showMeBlocked()">
-                                <fmt:message key="user.userview.staff.filter.designation" bundle="${bundle1}"/>
+                                <fmt:message key="user.userview.staff.filter.designation" />
                             </label>
                         </div>
                         <div class="col-xs-3">
                             <label class="checkbox-inline">
                                 <input  type="checkbox" value="2" id="bsCheck" onchange="showMeBlocked()" checked>
-                                <fmt:message key="user.userview.staff.filter.department" bundle="${bundle1}"/>
+                                <fmt:message key="user.userview.staff.filter.department"/>
                             </label>
                         </div>
                         <div class="col-xs-4">
                             <label class="checkbox-inline">
                                 <input type="checkbox" value="3" id="branchbCheck" onchange="showMeBlocked()">
-                                <fmt:message key="user.userview.staff.filter.branch" bundle="${bundle1}"/>
+                                <fmt:message key="user.userview.staff.filter.branch"/>
                             </label>
                         </div>
                     </div>
@@ -78,7 +78,7 @@
                     <div class="col-xs-1">
                         <button type="button" class="btn btn-success" id="filterButtonStaffB">
                             <span class="glyphicon glyphicon-search"></span>
-                            <fmt:message key="user.userview.staff.search" bundle="${bundle1}"/>
+                            <fmt:message key="user.userview.staff.search" />
                         </button>
                     </div>
                     <div class="col-xs-4"></div>
@@ -93,18 +93,18 @@
                 <div class="col-xs-4" id="designationb"  style="display: none">
                     <div class="col-xs-4">
                         <label class=" control-label">
-                            <fmt:message key="user.userview.staff.filter.designation" bundle="${bundle1}"/>
+                            <fmt:message key="user.userview.staff.filter.designation" />
                         </label>
                     </div>
                     <div class="col-xs-8">
                         <select class="form-control" id="designation_db">
-                            <option><fmt:message key="user.customer.select" bundle="${bundle1}" /></option>
-                            <option><fmt:message key="user.staff.designation1" bundle="${bundle1}" /></option>
-                            <option><fmt:message key="user.staff.designation2" bundle="${bundle1}" /></option>
-                            <option><fmt:message key="user.staff.designation3" bundle="${bundle1}" /></option>
-                            <option><fmt:message key="user.staff.designation4" bundle="${bundle1}" /></option>
-                            <option><fmt:message key="user.staff.designation5" bundle="${bundle1}" /></option>
-                            <option><fmt:message key="user.staff.designation6" bundle="${bundle1}" /></option>
+                            <option><fmt:message key="user.customer.select"  /></option>
+                            <option><fmt:message key="user.staff.designation1"  /></option>
+                            <option><fmt:message key="user.staff.designation2"  /></option>
+                            <option><fmt:message key="user.staff.designation3"  /></option>
+                            <option><fmt:message key="user.staff.designation4"  /></option>
+                            <option><fmt:message key="user.staff.designation5"  /></option>
+                            <option><fmt:message key="user.staff.designation6"  /></option>
                         </select>
                     </div>
                 </div>
@@ -112,16 +112,16 @@
                 <div class="col-xs-4"  id="departmentb"  style="display: none">
                     <div class="col-xs-4">
                         <label class=" control-label">
-                            <fmt:message key="user.userview.staff.filter.department" bundle="${bundle1}"/>
+                            <fmt:message key="user.userview.staff.filter.department" />
                         </label>
                     </div>
                     <div class="col-xs-8">
                         <select class="form-control" id="department_db">
-                            <option><fmt:message key="user.customer.select" bundle="${bundle1}" /></option>
-                            <option><fmt:message key="user.staff.department1" bundle="${bundle1}" /></option>
-                            <option><fmt:message key="user.staff.department2" bundle="${bundle1}" /></option>
-                            <option><fmt:message key="user.staff.department3" bundle="${bundle1}" /></option>
-                            <option><fmt:message key="user.staff.department4" bundle="${bundle1}" /></option>
+                            <option><fmt:message key="user.customer.select"  /></option>
+                            <option><fmt:message key="user.staff.department1" /></option>
+                            <option><fmt:message key="user.staff.department2" /></option>
+                            <option><fmt:message key="user.staff.department3"  /></option>
+                            <option><fmt:message key="user.staff.department4"  /></option>
                         </select>
                     </div>
                 </div>
@@ -129,16 +129,16 @@
                 <div class="col-xs-4" id="branchb" style="display: none">
                     <div class="col-xs-4">
                         <label class=" control-label">
-                            <fmt:message key="user.userview.staff.filter.branch" bundle="${bundle1}"/>
+                            <fmt:message key="user.userview.staff.filter.branch" />
                         </label>
                     </div>
                     <div class="col-xs-8">
                         <select class="form-control" id="branch_db" >
-                            <option><fmt:message key="user.customer.select" bundle="${bundle1}" /></option>
-                            <option><fmt:message key="user.staff.branch1" bundle="${bundle1}"/></option>
-                            <option><fmt:message key="user.staff.branch2" bundle="${bundle1}"/></option>
-                            <option><fmt:message key="user.staff.branch3" bundle="${bundle1}"/></option>
-                            <option><fmt:message key="user.staff.branch4" bundle="${bundle1}"/></option>
+                            <option><fmt:message key="user.customer.select"  /></option>
+                            <option><fmt:message key="user.staff.branch1" /></option>
+                            <option><fmt:message key="user.staff.branch2" /></option>
+                            <option><fmt:message key="user.staff.branch3" /></option>
+                            <option><fmt:message key="user.staff.branch4" /></option>
 
                         </select>
                     </div>
@@ -166,12 +166,12 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
                         class="glyphicon glyphicon-remove"></span></button>
                 <div align="center"><span class="glyphicon glyphicon-refresh"></span>
-                    <fmt:message key="user.staffreplace.modal.title" bundle="${bundle1}" />
+                    <fmt:message key="user.staffreplace.modal.title"  />
                 </div>
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label id="lblBlockStaffMsg"><fmt:message key="user.replace.modal.heading" bundle="${bundle1}" /></label><br><br>
+                    <label id="lblBlockStaffMsg"><fmt:message key="user.replace.modal.heading" /></label><br><br>
 
                     <div align="center">
                         <label id="lblUnblockStaffId"></label><br>
@@ -184,14 +184,14 @@
                 <div class="col-xs-2" >
                     <button class="btn btn-success" type="button" value="cancel" id="btnCnclBlockStaff"
                             data-dismiss="modal" aria-hidden="true">
-                        <fmt:message key="user.block.modal.button.cancel" bundle="${bundle1}" />
+                        <fmt:message key="user.block.modal.button.cancel" />
                         <span class="glyphicon glyphicon-remove"></span>
                     </button>
                 </div>
                 <div class="col-xs-2"></div>
                 <div class="col-xs-2" >
                     <button class="btn btn-success" type="button" value="Yes" id="btnUnblockStaff">
-                        <fmt:message key="user.block.modal.button.yes" bundle="${bundle1}" />
+                        <fmt:message key="user.block.modal.button.yes" />
                         <span class="glyphicon glyphicon-ok"></span>
                     </button>
                 </div>
@@ -209,7 +209,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
                         class="glyphicon glyphicon-remove"></span></button>
                 <div align="center"><span class="glyphicon glyphicon-edit"></span>
-                    <fmt:message key="user.blockuserview.customer.detail.modal.title" bundle="${bundle1}" />
+                    <fmt:message key="user.blockuserview.customer.detail.modal.title" />
                     <label id="currentbs_user"></label>
                 </div>
             </div>
@@ -219,7 +219,7 @@
                     <div class="form-group">
                         <div class="row">
                             <label  class="col-xs-3 control-label" >
-                                <fmt:message key="user.useradd.form.name" bundle="${bundle1}"/>
+                                <fmt:message key="user.useradd.form.name" />
                             </label>
                             <div class="col-xs-9">
                                 <div class="col-xs-6">
@@ -245,7 +245,7 @@
                     <div class="form-group">
                         <div class="row">
                             <label  class="col-xs-3 control-label" >
-                                <fmt:message key="user.useradd.form.address" bundle="${bundle1}"/>
+                                <fmt:message key="user.useradd.form.address"/>
                             </label>
                             <div class="col-xs-9">
                                 <div class="col-xs-12">
@@ -293,7 +293,7 @@
                     <div class="form-group">
                         <div class="row">
                             <label  class="col-xs-3 control-label" >
-                                <fmt:message key="user.useradd.form.mobile" bundle="${bundle1}" />
+                                <fmt:message key="user.useradd.form.mobile" />
                             </label>
                             <div class="col-xs-9">
                                 <div class="col-xs-6">
@@ -312,7 +312,7 @@
                     <div class="form-group">
                         <div class="row">
                             <label  class="col-xs-3 control-label" >
-                                <fmt:message key="user.useradd.form.email" bundle="${bundle1}" />
+                                <fmt:message key="user.useradd.form.email" />
                             </label>
                             <div class="col-xs-9">
                                 <div class="col-xs-6">
@@ -332,7 +332,7 @@
                     <div class="form-group">
                         <div class="row">
                             <label  class="col-xs-3 control-label" >
-                                <fmt:message key="user.useradd.form.username" bundle="${bundle1}" />
+                                <fmt:message key="user.useradd.form.username" />
                             </label>
                             <div class="col-xs-9">
                                 <div class="col-xs-6">
@@ -352,7 +352,7 @@
                     <div class="form-group">
                         <div class="row">
                             <label  class="col-xs-3 control-label" >
-                                <fmt:message key="user.useradd.form.designation" bundle="${bundle1}" />
+                                <fmt:message key="user.useradd.form.designation" />
                             </label>
                             <div class="col-xs-9">
                                 <div class="col-xs-6">
@@ -371,7 +371,7 @@
                     <div class="form-group">
                         <div class="row">
                             <label  class="col-xs-3 control-label" >
-                                <fmt:message key="user.useradd.form.department" bundle="${bundle1}" />
+                                <fmt:message key="user.useradd.form.department"/>
                             </label>
                             <div class="col-xs-9">
                                 <div class="col-xs-6">
@@ -390,7 +390,7 @@
                     <div class="form-group">
                         <div class="row">
                             <label  class="col-xs-3 control-label" >
-                                <fmt:message key="user.useradd.form.branch" bundle="${bundle1}" />
+                                <fmt:message key="user.useradd.form.branch"  />
                             </label>
                             <div class="col-xs-9">
                                 <div class="col-xs-6">
@@ -409,7 +409,7 @@
                     <div class="form-group">
                         <div class="row">
                             <label  class="col-xs-3 control-label" >
-                                <fmt:message key="user.useradd.form.status" bundle="${bundle1}" />
+                                <fmt:message key="user.useradd.form.status" />
                             </label>
                             <div class="col-xs-9">
                                 <div class="col-xs-6">
@@ -433,7 +433,7 @@
             <div class="modal-footer" style="text-align: center">
                 <button class="btn btn-success" type="button" value="cancel" id="buttonView" data-dismiss="modal"
                         aria-hidden="true">
-                    <fmt:message key="user.userview.button.ok" bundle="${bundle1}" />
+                    <fmt:message key="user.userview.button.ok" />
                 </button>
             </div>
         </div>

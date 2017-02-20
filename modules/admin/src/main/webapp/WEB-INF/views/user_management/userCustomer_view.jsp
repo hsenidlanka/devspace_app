@@ -1,15 +1,12 @@
-<html xmlns:jsp="http://java.sun.com/JSP/Page">
-
-<!--including JSTL to the page -->
-<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <%--<%@ taglib prefix="spring" uri="http://java.sun.com/jsp/jstl/core" %>--%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<!DOCTYPE html>
 <head>
-
 
     <spring:url value="/themes/hsenid/js/customers_table.js" var="table"/>
     <script src="${table}"></script>
@@ -35,8 +32,8 @@
 
 </head>
 <body>
-<fmt:setLocale value="En"/>
-<fmt:setBundle basename="messages_en" var="bundle1" />
+<%--<fmt:setLocale value="En"/>
+<fmt:setBundle basename="messages_en" var="bundle1" />--%>
 
 <!--<div  id="toolbar">-->
     <%--<div class="col-xs-1"></div>--%>
@@ -52,22 +49,22 @@
                             <div class="col-xs-2">
                                 <%--<div class="col-xs-2" style="width: 50%;">--%>
                                     <label class="checkbox-inline">
-                                        <fmt:message key="user.userview.customer.label.filter" bundle="${bundle1}"/>
+                                        <fmt:message key="user.userview.customer.label.filter" />
 
                                     </label>
                                 <%--</div>--%>
                             </div>
                             <div class="col-xs-7" style="text-align: left;margin: 0 10px 0 30px;">
                                 <input type="checkbox" value="1" id="regCheck" onchange="showMe()">
-                                <fmt:message key="user.userview.customer.filter.regDate" bundle="${bundle1}"/>
+                                <fmt:message key="user.userview.customer.filter.regDate" />
                             </div>
                             <div class="col-xs-3" style="margin: 0 -100px 0 -45px;">
                                 <select id="selectVerifyOrNot">
                                     <option value="Verified">
-                                        <fmt:message key="user.userview.customer.selectOption.verified" bundle="${bundle1}"/>
+                                        <fmt:message key="user.userview.customer.selectOption.verified"/>
                                     </option>
                                     <option value="Not_Verified">
-                                        <fmt:message key="user.userview.customer.selectOption.notverified" bundle="${bundle1}"/>
+                                        <fmt:message key="user.userview.customer.selectOption.notverified" />
                                     </option>
                                 </select>
                             </div>
@@ -82,7 +79,7 @@
                         <div class="col-xs-1">
                             <button type="button" class="btn btn-success" id="filterButtonCustomer" >
                                 <span class="glyphicon glyphicon-search"></span>
-                                <fmt:message key="user.userview.customer.search" bundle="${bundle1}"/>
+                                <fmt:message key="user.userview.customer.search"/>
                             </button>
                         </div>
                         <div class="col-xs-4"></div>
@@ -98,14 +95,14 @@
                         <div class="col-xs-7"  id="regPeriod" style="text-align: left;margin: -20px 10px 0 20px; display:none">
                             <div class="col-xs-6">
                                 <label class=" control-label" >
-                                    <fmt:message key="user.userview.customer.filter.regDate.from" bundle="${bundle1}"/>
+                                    <fmt:message key="user.userview.customer.filter.regDate.from" />
                                 </label>
                                 <input class="form-control" id="fromDate" type="text"
                                                placeholder="Click on me" style="width: 130px"/>
                             </div>
                             <div class="col-xs-6">
                                 <label class=" control-label">
-                                    <fmt:message key="user.userview.customer.filter.regDate.to" bundle="${bundle1}"/>
+                                    <fmt:message key="user.userview.customer.filter.regDate.to"/>
                                 </label>
 
                                 <input class="form-control" id="toDate" placeholder="Click on me"
@@ -145,12 +142,12 @@
                         class="glyphicon glyphicon-remove"></span>
                 </button>
                 <div align="center"><span class="glyphicon glyphicon-trash"></span>
-                    <fmt:message key="user.customerblock.modal.title" bundle="${bundle1}" />
+                    <fmt:message key="user.customerblock.modal.title" />
                 </div>
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label id="lblBlockCustomerMsg"><fmt:message key="user.block.modal.heading" bundle="${bundle1}" />
+                    <label id="lblBlockCustomerMsg"><fmt:message key="user.block.modal.heading" />
                     </label><br><br>
 
                     <div align="center">
@@ -166,14 +163,14 @@
                 <div class="col-xs-2" >
                     <button class="btn btn-success" type="button" id="btnCnclBlockCustomer" value="cancel"
                             data-dismiss="modal" aria-hidden="true">
-                        <fmt:message key="user.block.modal.button.cancel" bundle="${bundle1}" />
+                        <fmt:message key="user.block.modal.button.cancel"/>
                         <span class="glyphicon glyphicon-remove"></span>
                     </button>
                 </div>
                 <div class="col-xs-2"></div>
                 <div class="col-xs-2" >
                     <button class="btn btn-success" type="button" value="Yes" id="btnBlockCustomer" >
-                        <fmt:message key="user.block.modal.button.yes" bundle="${bundle1}" />
+                        <fmt:message key="user.block.modal.button.yes" />
                         <span class="glyphicon glyphicon-ok"></span>
                     </button>
                 </div>
@@ -191,7 +188,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
                         class="glyphicon glyphicon-remove"></span></button>
                 <div align="center"><span class="glyphicon glyphicon-edit"></span>
-                    <fmt:message key="user.customer.update.modal.heading" bundle="${bundle1}" />
+                    <fmt:message key="user.customer.update.modal.heading" />
                     <label id="current_user"></label>
                 </div>
             </div>
@@ -202,7 +199,7 @@
                     <div class="form-group">
                         <div class="row">
                             <label  class="col-xs-3 control-label" >
-                                <fmt:message key="user.useradd.form.name" bundle="${bundle1}"/>
+                                <fmt:message key="user.useradd.form.name"/>
                             </label>
                             <div class="col-xs-9">
                                 <div class="col-xs-6">
@@ -228,7 +225,7 @@
                     <div class="form-group">
                         <div class="row">
                             <label  class="col-xs-3 control-label" >
-                                <fmt:message key="user.useradd.form.address" bundle="${bundle1}"/>
+                                <fmt:message key="user.useradd.form.address" />
                             </label>
                             <div class="col-xs-9">
                                 <div class="col-xs-12">
@@ -276,7 +273,7 @@
                     <div class="form-group">
                         <div class="row">
                             <label  class="col-xs-3 control-label" >
-                                <fmt:message key="user.useradd.form.mobile" bundle="${bundle1}" />
+                                <fmt:message key="user.useradd.form.mobile"  />
                             </label>
                             <div class="col-xs-9">
                                 <div class="col-xs-6">
@@ -295,7 +292,7 @@
                     <div class="form-group">
                         <div class="row">
                             <label  class="col-xs-3 control-label" >
-                                <fmt:message key="user.useradd.form.email" bundle="${bundle1}" />
+                                <fmt:message key="user.useradd.form.email" />
                             </label>
                             <div class="col-xs-9">
                                 <div class="col-xs-6">
@@ -316,7 +313,7 @@
                     <div class="form-group">
                         <div class="row">
                             <label  class="col-xs-3 control-label" >
-                                <fmt:message key="user.useradd.form.username" bundle="${bundle1}" />
+                                <fmt:message key="user.useradd.form.username"  />
                             </label>
                             <div class="col-xs-9">
                                 <div class="col-xs-6">
@@ -335,7 +332,7 @@
                     <div class="form-group">
                         <div class="row">
                             <label  class="col-xs-3 control-label" >
-                                <fmt:message key="user.useradd.form.password" bundle="${bundle1}" />
+                                <fmt:message key="user.useradd.form.password"/>
                             </label>
                             <div class="col-xs-9">
                                 <div class="col-xs-6">
@@ -355,7 +352,7 @@
                     <div class="form-group">
                         <div class="row">
                             <label  class="col-xs-3 control-label" >
-                                <fmt:message key="user.useradd.form.cpassword" bundle="${bundle1}" />
+                                <fmt:message key="user.useradd.form.cpassword"/>
                             </label>
                             <div class="col-xs-9">
                                 <div class="col-xs-6">
@@ -377,14 +374,14 @@
                         <div class="col-xs-2" >
                             <form:button class="btn btn-success" type="button" value="cancel" id="btnCnclUpdateStaff" data-dismiss="modal"
                                      aria-hidden="true">
-                                <fmt:message key="user.block.modal.button.cancel" bundle="${bundle1}" />
+                                <fmt:message key="user.block.modal.button.cancel"/>
                                 <span class="glyphicon glyphicon-remove"></span>
                             </form:button>
                         </div>
                         <div class="col-xs-2"></div>
                         <div class="col-xs-2" >
                             <form:button class="btn btn-success" type="submit" value="Update" id="btnUpdateCustomer">
-                                <fmt:message key="user.customer.update.form.button" bundle="${bundle1}" />
+                                <fmt:message key="user.customer.update.form.button" />
                                 <span class="glyphicon glyphicon-ok"></span>
                             </form:button>
                         </div>
@@ -392,10 +389,6 @@
 
                 </form:form>
             </div>
-
-
-
-
         </div>
     </div>
 </div>
