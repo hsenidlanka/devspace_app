@@ -3,10 +3,11 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
 <link href="<c:url value="/resources/css/cssReset.css"/>" rel="stylesheet" type="text/css">
-<meta charset="UTF-8">
+<%--<meta charset="UTF-8">--%>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<fmt:setLocale value="en"/>
+<fmt:setLocale value="ja"/>
 <fmt:setBundle basename="messages" var="lang"/>
 
 <script src="<c:url value="/resources/js/jquery-1.9.1.js"/>"></script>
