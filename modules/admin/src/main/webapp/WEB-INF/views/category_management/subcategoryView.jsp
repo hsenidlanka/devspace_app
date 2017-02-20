@@ -1,13 +1,10 @@
-<html xmlns:jsp="http://java.sun.com/JSP/Page">
-
 <!--including JSTL to the page -->
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--<%@ taglib prefix="spring" uri="http://java.sun.com/jsp/jstl/core" %>--%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<!DOCTYPE html>
 <head>
 
     <title>View Sub Categories</title>
@@ -29,15 +26,15 @@
 </head>
 
 <body>
-<fmt:setLocale value="En"/>
-<fmt:setBundle basename="messages_en" var="bundle1" />
+<%--<fmt:setLocale value="En"/>
+<fmt:setBundle basename="messages_en" var="bundle1" />--%>
 <fmt:setBundle basename="system" scope="session" var="bundle2"/>
 
 <jsp:include page="../header.jsp"/>
 
 <div class="brand">
     <div style="position: relative; left: -50%;">
-        <fmt:message key="category.heading" bundle="${bundle1}"/>
+        <fmt:message key="category.heading"/>
     </div>
 </div>
 <br>
@@ -52,16 +49,16 @@
 
 
         <li>
-            <a href="<c:out value="${url1}"/>"><fmt:message key="user.breadcrumb.home" bundle="${bundle1}"/></a>
+            <a href="<c:out value="${url1}"/>"><fmt:message key="user.breadcrumb.home" /></a>
         </li>
         <li>
-            <a href="<c:out value="${url1}"/>"><fmt:message key="category.breadcrumb.categorymanagement" bundle="${bundle1}"/></a>
+            <a href="<c:out value="${url1}"/>"><fmt:message key="category.breadcrumb.categorymanagement"/></a>
         </li>
         <li>
-            <a href="<c:out value="${url2}"/>"><fmt:message key="category.categoryadd.breadcrumb.viewcat" bundle="${bundle1}"/></a>
+            <a href="<c:out value="${url2}"/>"><fmt:message key="category.categoryadd.breadcrumb.viewcat"/></a>
         </li>
         <li class="active">
-            <a href="<c:out value="${url3}"/>"><fmt:message key="category.categoryadd.breadcrumb.viewsubcat" bundle="${bundle1}"/></a>
+            <a href="<c:out value="${url3}"/>"><fmt:message key="category.categoryadd.breadcrumb.viewsubcat"/></a>
         </li>
     </ul>
 </div>
@@ -73,7 +70,7 @@
 
             <div class="panel-heading common-form-headings">
                 <h3 class="default-panel-headings">
-                    <fmt:message key="category.subcategoryview.panel.heading"  bundle="${bundle1}"/>  ${catName}
+                    <fmt:message key="category.subcategoryview.panel.heading"/>  ${catName}
                 </h3>
             </div>
 
@@ -84,7 +81,7 @@
                     <div class="col-sm-1"></div>
                     <div class="col-sm-3">
                         <label class="control-label" style="float: right;">
-                            <fmt:message key="category.subcategoryview.searchbar.label"  bundle="${bundle1}"/>
+                            <fmt:message key="category.subcategoryview.searchbar.label" />
                         </label>
 
                     </div>
@@ -93,7 +90,7 @@
                     </div>
                     <div class="col-sm-3">
                         <button type="button" class="btn btn-success" id="btnViewSearchSubCat"><span class="glyphicon glyphicon-search">
-                            </span><fmt:message key="category.subcategoryview.searchbar.button"  bundle="${bundle1}"/>
+                            </span><fmt:message key="category.subcategoryview.searchbar.button" />
                         </button>
                     </div>
                     <div class="col-sm-1"></div>
@@ -126,7 +123,7 @@
                 </button>
                 <div align="center">
                     <span class="glyphicon glyphicon-trash"></span>
-                    <fmt:message key="category.subcategorydelete.modal.heading" bundle="${bundle1}" />
+                    <fmt:message key="category.subcategorydelete.modal.heading" />
                 </div>
             </div>
             <div class="modal-body">
@@ -134,7 +131,7 @@
                     <fieldset>
                         <div class="form-group" style="text-align: center">
                             <label id="lblDeleteCategoryMsg">
-                                <fmt:message key="category.subcategorydelete.modal.message1" bundle="${bundle1}" />
+                                <fmt:message key="category.subcategorydelete.modal.message1"/>
                             </label><br>
                             <label id="lblDeleteSubCategoryId"></label><br>
                         </div>
@@ -151,14 +148,14 @@
                     <div class="col-xs-3"></div>
                     <div class="col-xs-2" >
                         <button class="btn btn-success" id="btnDeleteSubCategory">
-                            <fmt:message key="category.categorydelete.modal.approve" bundle="${bundle1}" />
+                            <fmt:message key="category.categorydelete.modal.approve"/>
                             <span class="glyphicon glyphicon-ok"></span>
                         </button>
                     </div>
                     <div class="col-xs-2"></div>
                     <div class="col-xs-2" >
                         <button class="btn btn-success"  data-dismiss="modal" aria-hidden="true" >
-                            <fmt:message key="category.categorydelete.modal.cancel" bundle="${bundle1}" />
+                            <fmt:message key="category.categorydelete.modal.cancel" />
                             <span class="glyphicon glyphicon-remove"></span></button></div>
                     <div class="col-xs-3"></div>
                 </div>
@@ -179,7 +176,7 @@
                 </button>
                 <div align="center">
                     <span class="glyphicon glyphicon-trash"></span>
-                    <fmt:message key="category.categoryedit.modal.approve" bundle="${bundle1}" />
+                    <fmt:message key="category.categoryedit.modal.approve"/>
                 </div>
             </div>
             <div class="modal-body">
@@ -189,7 +186,7 @@
                         <br>
                         <div class="form-group">
                             <label for="subcategoryid" class="control-label col-sm-4">
-                                <fmt:message key="category.categoryedit.modal.id" bundle="${bundle1}" />
+                                <fmt:message key="category.categoryedit.modal.id" />
                             </label>
 
                             <div class="col-sm-8">
@@ -200,7 +197,7 @@
 
                         <div class="form-group">
                             <label for="editsubcategoryname" class="control-label col-sm-4">
-                                <fmt:message key="category.categoryedit.modal.name" bundle="${bundle1}" />
+                                <fmt:message key="category.categoryedit.modal.name"  />
                             </label>
 
                             <div class="col-sm-8">
@@ -210,7 +207,7 @@
                         </div>
                         <div class="form-group">
                             <label for="editsubcategorydes" class="control-label col-sm-4">
-                                <fmt:message key="category.categoryedit.modal.description" bundle="${bundle1}" />
+                                <fmt:message key="category.categoryedit.modal.description" />
 
                             </label>
                             <div class="col-sm-8">
@@ -224,14 +221,14 @@
                                 <div class="col-xs-3"></div>
                                 <div class="col-xs-2" >
                                     <button class="btn btn-success" id="btnEditCategory" type="submit">
-                                        <fmt:message key="category.categoryedit.modal.approve" bundle="${bundle1}" />
+                                        <fmt:message key="category.categoryedit.modal.approve" />
                                         <span class="glyphicon glyphicon-ok"></span>
                                     </button>
                                 </div>
                                 <div class="col-xs-2"></div>
                                 <div class="col-xs-2" >
                                     <button class="btn btn-success"  data-dismiss="modal" aria-hidden="true">
-                                        <fmt:message key="category.categorydelete.modal.cancel" bundle="${bundle1}" />
+                                        <fmt:message key="category.categorydelete.modal.cancel"/>
                                         <span class="glyphicon glyphicon-remove"></span></button></div>
                                 <div class="col-xs-3"></div>
                             </div>
