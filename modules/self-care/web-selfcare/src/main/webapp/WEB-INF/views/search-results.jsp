@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
+    <meta charset="utf-8">
     <title>Search Results</title>
     <link rel="shortcut icon" href="">
 
@@ -173,9 +174,9 @@
                                                                                     </c:forEach>
 
                                                                                     <a class="btn menu-add-to-cart-btn btn-success btn-xs btn-addtocart-pizza"/>
-                                                                                    Add
-                                                                                    to
-                                                                                    cart
+                                                                                        <fmt:message
+                                                                                                key="searchresults.addToCart"
+                                                                                                bundle="${lang}"/>
                                                                                     </a>
                                                                                     </c:if>
                                                                                     <c:if test="${category!='Pizza'}">
@@ -219,8 +220,9 @@
                                                                                         </div>
                                                                                         <a class="btn menu-add-to-cart-btn btn-success btn-xs btn-addtocart"
                                                                                            style="float: right;margin-bottom: -15px;">
-                                                                                            Add to cart
-                                                                                        </a>
+                                                                                            <fmt:message
+                                                                                                    key="searchresults.addToCart"
+                                                                                                    bundle="${lang}"/> </a>
                                                                                     </c:if>
 
                                                                                 </figcaption>
