@@ -1,3 +1,4 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <jsp:directive.include file="includes/top.jsp"/>
 
 <c:if test="${not pageContext.request.secure}">
@@ -106,8 +107,11 @@
             <input type="hidden" name="execution" value="${flowExecutionKey}"/>
             <input type="hidden" name="_eventId" value="submit"/> </section>
             <section class="row btn-row">
-            <input class="btn-submit login-pg-button" name="submit" accesskey="l" value="Login" tabindex="6" type="submit" />
-            <input class="btn-reset login-pg-button" name="reset" accesskey="c" value="Clear" tabindex="7" type="reset" />
+            <input class="btn-submit login-pg-button" name="submit" accesskey="l"
+                   value="<spring:message code="screen.welcome.button.login"/>" tabindex="6" type="submit" />
+
+            <input class="btn-reset login-pg-button" name="reset" accesskey="c"
+                   value="<spring:message code="screen.welcome.button.clear"/>" tabindex="7" type="reset" />
         </section>
     </form:form>
 </div>

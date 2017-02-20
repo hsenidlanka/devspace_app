@@ -14,7 +14,7 @@ public class ContactUs {
     @Pattern(regexp = "^(?!\\s*$|\\s).*$", message = "Please enter title")
     private String title;
 
-    @Pattern(regexp = "^(?!\\s*$|\\s).*$", message = "Please enter a valid name")
+    @Pattern(regexp = "^(?!\\s*$|\\s).*$", message = "{validation.error}")
     private String name;
 
 

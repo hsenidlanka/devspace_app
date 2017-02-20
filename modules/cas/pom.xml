@@ -380,6 +380,32 @@
 
 
                     <!--*
+                        *Copying messages.properties files
+                        **-->
+
+                    <execution>
+                        <id>copy-modified-messages</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <overwrite>true</overwrite>
+                            <outputDirectory>${basedir}/target/unpacked/WEB-INF/classes</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}/resourcesWEB-INF/</directory>
+                                    <filtering>true</filtering>
+                                    <includes>
+                                        <include>messages.properties</include>
+                                        <include>messages_jp.properties</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+
+                    <!--*
                         **Copying images
                         *-->
                     <execution>
