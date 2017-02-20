@@ -1,14 +1,8 @@
-<!--including JSTL to the page -->
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="spring" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <head>
 
     <title>View Sub Categories</title>
-    <jsp:include page="../adminTop.jsp"/>
+    <%@include file="../adminTop.jsp" %>
 
 
     <spring:url value="/themes/hsenid/css/userMgt.css" var="css1"/>
