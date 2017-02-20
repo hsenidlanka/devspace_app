@@ -398,7 +398,7 @@
                                     <filtering>true</filtering>
                                     <includes>
                                         <include>messages.properties</include>
-                                        <include>messages_jp.properties</include>
+                                        <include>messages_ja.properties</include>
                                     </includes>
                                 </resource>
                             </resources>
