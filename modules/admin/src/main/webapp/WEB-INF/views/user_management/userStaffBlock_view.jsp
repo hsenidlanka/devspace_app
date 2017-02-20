@@ -98,13 +98,13 @@
                     </div>
                     <div class="col-xs-8">
                         <select class="form-control" id="designation_db">
-                            <option><fmt:message key="user.customer.select"  /></option>
-                            <option><fmt:message key="user.staff.designation1"  /></option>
-                            <option><fmt:message key="user.staff.designation2"  /></option>
-                            <option><fmt:message key="user.staff.designation3"  /></option>
-                            <option><fmt:message key="user.staff.designation4"  /></option>
-                            <option><fmt:message key="user.staff.designation5"  /></option>
-                            <option><fmt:message key="user.staff.designation6"  /></option>
+                            <option value="--Select--"><fmt:message key="user.customer.select"  /></option>
+                            <option value="System Admin"><fmt:message key="user.staff.designation1"  /></option>
+                            <option value="System Manager"><fmt:message key="user.staff.designation2"  /></option>
+                            <option value="Customer Manager"><fmt:message key="user.staff.designation3"  /></option>
+                            <option value="Cashier"><fmt:message key="user.staff.designation4"  /></option>
+                            <option value="Main Chef"><fmt:message key="user.staff.designation5"  /></option>
+                            <option value="Reporting Manager"><fmt:message key="user.staff.designation6"  /></option>
                         </select>
                     </div>
                 </div>
@@ -117,11 +117,11 @@
                     </div>
                     <div class="col-xs-8">
                         <select class="form-control" id="department_db">
-                            <option><fmt:message key="user.customer.select"  /></option>
-                            <option><fmt:message key="user.staff.department1" /></option>
-                            <option><fmt:message key="user.staff.department2" /></option>
-                            <option><fmt:message key="user.staff.department3"  /></option>
-                            <option><fmt:message key="user.staff.department4"  /></option>
+                            <option value="--Select--"><fmt:message key="user.customer.select"  /></option>
+                            <option value="Finance"><fmt:message key="user.staff.department1" /></option>
+                            <option value="Administration"><fmt:message key="user.staff.department2" /></option>
+                            <option value="Logistic"><fmt:message key="user.staff.department3"  /></option>
+                            <option value="Reporting"><fmt:message key="user.staff.department4"  /></option>
                         </select>
                     </div>
                 </div>
@@ -134,12 +134,11 @@
                     </div>
                     <div class="col-xs-8">
                         <select class="form-control" id="branch_db" >
-                            <option><fmt:message key="user.customer.select"  /></option>
-                            <option><fmt:message key="user.staff.branch1" /></option>
-                            <option><fmt:message key="user.staff.branch2" /></option>
-                            <option><fmt:message key="user.staff.branch3" /></option>
-                            <option><fmt:message key="user.staff.branch4" /></option>
-
+                            <option value="--Select--"><fmt:message key="user.customer.select"  /></option>
+                            <option value="Colombo"><fmt:message key="user.staff.branch1" /></option>
+                            <option value="Gampaha"><fmt:message key="user.staff.branch2" /></option>
+                            <option value="Ja-Ela"><fmt:message key="user.staff.branch3" /></option>
+                            <option value="Kadana"><fmt:message key="user.staff.branch4" /></option>
                         </select>
                     </div>
                 </div>

@@ -4,7 +4,6 @@ function showMe(){
 
     var regPeriod= document.getElementById("regPeriod");
     var fname= document.getElementById("cnameSearch");
-    var city= document.getElementById("citySearch");
     var designation= document.getElementById("designation");
     var department= document.getElementById("department");
     var branch= document.getElementById("branch");
@@ -16,12 +15,6 @@ function showMe(){
         regPeriod.style.display = "none";
     }
 
-
-    if (  $("#liveCheck").is(":checked")){
-        city.style.display = "block";
-    } else{
-        city.style.display = "none";
-    }
 
     //staff filter elements
     if (  $("#desigCheck").is(":checked")){
@@ -51,7 +44,7 @@ function showMeBlocked(){
 
     //blocked customers
     var bcname= document.getElementById("bcnameSearch");
-    var blockcCity= document.getElementById("blockcCity");
+    //var blockcCity= document.getElementById("blockcCity");
 
     //blocked staff filter
     if (  $("#blockCheck").is(":checked")){
@@ -75,7 +68,7 @@ function showMeBlocked(){
 
     //blocked customer filters
 
-
+/*
     if (  $("#bcCheck").is(":checked")){
         bcname.style.display = "block";
     } else{
@@ -86,7 +79,7 @@ function showMeBlocked(){
         blockcCity.style.display = "block";
     } else{
         blockcCity.style.display = "none";
-    }
+    }*/
 
 
 }
@@ -193,12 +186,12 @@ $(document).ready(function () {
             var cname= $("#cnameSearch").val();
             var from = $('#fromDate').val();
             var to=$('#toDate').val();
-            var city=$('#citySearch').val();
+            //var city=$('#citySearch').val();
             var customerVerification1=$('#selectVerifyOrNot').val();
             //alert(customerVerification);
 
             if(customerVerification1 == "Verified") {
-                if ((from == "") && (to == "") && (cname == "") && (city == "--Select--")) {
+                if ((from == "") && (to == "") && (cname == "") ) {
                     $.ajax({
                         //type: "POST",
                         url: "https://localhost:8443/admin/users/view/customerTable",
@@ -224,11 +217,11 @@ $(document).ready(function () {
                     })
                 }
 
-                if ((from != "") || (to != "") || (!(city == "--Select--"))) {
+                if ((from != "") || (to != "") ) {
                     $.ajax({
                         //type: "POST",
                         url: "https://localhost:8443/admin/userFilters/customerTable/date/city",
-                        data: {"from": from, "to": to, "city": city, "initPage": pageSend, "pageLimit": pgLimit},
+                        data: {"from": from, "to": to, "initPage": pageSend, "pageLimit": pgLimit},
                         success: function (msg) {
                             //alert("ajax succ" + from +name +city);
                             $('#tableCustomer').bootstrapTable('load', msg);
@@ -240,7 +233,7 @@ $(document).ready(function () {
                 }
             }
             if(customerVerification1 == "Not_Verified"){
-                if ((from == "") && (to == "") && (cname == "") && (city == "--Select--")) {
+                if ((from == "") && (to == "") && (cname == "") ) {
                     $.ajax({
 
                         url: "https://localhost:8443/admin/userFilters/view/customerTable/nonVerified",
@@ -264,11 +257,11 @@ $(document).ready(function () {
                         }
                     })
                 }
-                if ((from != "") || (to != "") || (!(city == "--Select--"))) {
+                if ((from != "") || (to != "")  ) {
                     $.ajax({
                         //type: "POST",
                         url: "https://localhost:8443/admin/userFilters/customerTable/date/city/nonVerified",
-                        data: {"from": from, "to": to, "city": city, "initPage": pageSend, "pageLimit": pgLimit},
+                        data: {"from": from, "to": to, "initPage": pageSend, "pageLimit": pgLimit},
                         success: function (msg) {
                             //alert("ajax succ" + from +name +city);
                             $('#tableCustomer').bootstrapTable('load', msg);
@@ -402,7 +395,7 @@ $(document).ready(function () {
                 $.ajax({
                     //type: "POST",
                     url: "https://localhost:8443/admin/userFilters/bannedcustomerTable/city",
-                    data: {"city": city, "name": bcname, "initPage": pageSend, "pageLimit": pgLimit},
+                    data: {"name": bcname, "initPage": pageSend, "pageLimit": pgLimit},
                     success: function (msg) {
                         //alert("city ajax" + city);
                         $('#tableBannedcustomer').bootstrapTable('load', msg);
@@ -442,9 +435,11 @@ $(document).ready(function () {
 
             var pageSend=(page-1)*pgLimit;
             var bsname = $("#bsname").val();
-            var designation= $('#designation_db').find(':selected').text();
-            var department=$('#department_db').find('option:selected').text();
-            var branch=$('#branch_db').find(':selected').text();
+            var designation= $('#designation_db').val();
+            var department=$('#department_db').val();
+            var branch=$('#branch_db').val();
+            /*var department=$('#department_db').find('option:selected').text();
+            var branch=$('#branch_db').find(':selected').text();*/
 
             if((designation == "--Select--") && (department == "--Select--") && (bsname == "") && (branch == "--Select--")  ){
 
@@ -745,7 +740,7 @@ $(document).ready(function () {
         var from = $('#fromDate').val();
         var to=$('#toDate').val();
         var name=$('#cnameSearch').val();
-        var city=$('#citySearch').val();
+        //var city=$('#citySearch').val();
         var customerVerification4=$('#selectVerifyOrNot').val();
 
         $('#paginationCustomer').hide();
@@ -753,7 +748,7 @@ $(document).ready(function () {
 
         if(customerVerification4 == "Verified") {
 
-            if ((from == "") && (to == "") && (name == "") && (city == "--Select--")) {
+            if ((from == "") && (to == "") && (name == "") ) {
                 $.ajax({
                     //type: "POST",
                     url: "https://localhost:8443/admin/users/view/customerTable",
@@ -778,12 +773,63 @@ $(document).ready(function () {
                     }
                 });
             }
+            if ((from == "") && (to != "") ) {
+                alert("Please select a starting date");
+                $.ajax({
+                    //type: "POST",
+                    url: "https://localhost:8443/admin/users/view/customerTable",
+                    data: {"initPage": "0", "pageLimit": pgLimit},
+                    success: function (msg) {
 
-            if ((from != "") || (to != "") || (!(city == "--Select--"))) {
+                        $('#tableCustomer').bootstrapTable('load', msg);
+                    },
+                    error: function (e) {
+                        alert("ajax failed" + e);
+                    }
+                });
+                /**
+                 *Setting the number of pages according to the number of records
+                 */
+                $.ajax({
+                    url: 'https://localhost:8443/admin/users/CustomerPaginationTable',
+                    //data: {"searchCatNm": $("#txtViewSearchCategory").val()},
+                    success: function (recCount) {
+
+                        activeC.simplePaginator('setTotalPages', Math.ceil(recCount / pgLimit));
+                    }
+                });
+            }
+            if ((from != "") && (to == "") ) {
+                alert("Please select an ending date");
+                $.ajax({
+                    //type: "POST",
+                    url: "https://localhost:8443/admin/users/view/customerTable",
+                    data: {"initPage": "0", "pageLimit": pgLimit},
+                    success: function (msg) {
+
+                        $('#tableCustomer').bootstrapTable('load', msg);
+                    },
+                    error: function (e) {
+                        alert("ajax failed" + e);
+                    }
+                });
+                /**
+                 *Setting the number of pages according to the number of records
+                 */
+                $.ajax({
+                    url: 'https://localhost:8443/admin/users/CustomerPaginationTable',
+                    //data: {"searchCatNm": $("#txtViewSearchCategory").val()},
+                    success: function (recCount) {
+
+                        activeC.simplePaginator('setTotalPages', Math.ceil(recCount / pgLimit));
+                    }
+                });
+            }
+            if ((from != "") || (to != "") ) {
                 $.ajax({
                     //type: "POST",
                     url: "https://localhost:8443/admin/userFilters/customerTable/date/city",
-                    data: {"from": from, "to": to, "city": city, "initPage": "0", "pageLimit": pgLimit},
+                    data: {"from": from, "to": to,"initPage": "0", "pageLimit": pgLimit},
                     success: function (msg) {
                         //alert("ajax succ" + from +name +city);
                         $('#tableCustomer').bootstrapTable('load', msg);
@@ -816,7 +862,7 @@ $(document).ready(function () {
             }
         }
         if(customerVerification4 == "Not_Verified"){
-            if ((from == "") && (to == "") && (name == "") && (city == "--Select--")) {
+            if ((from == "") && (to == "") && (name == "")) {
                 $.ajax({
                     //type: "POST",
                     url: "https://localhost:8443/admin/userFilters/view/customerTable/nonVerified",
@@ -842,11 +888,11 @@ $(document).ready(function () {
                 });
             }
 
-            if ((from != "") || (to != "") || (!(city == "--Select--"))) {
+            if ((from != "") || (to != "") ) {
                 $.ajax({
                     //type: "POST",
                     url: "https://localhost:8443/admin/userFilters/customerTable/date/city/nonVerified",
-                    data: {"from": from, "to": to, "city": city, "initPage": "0", "pageLimit": pgLimit},
+                    data: {"from": from, "to": to, "initPage": "0", "pageLimit": pgLimit},
                     success: function (msg) {
                         //alert("ajax succ" + from +name +city);
                         $('#tableCustomer').bootstrapTable('load', msg);
