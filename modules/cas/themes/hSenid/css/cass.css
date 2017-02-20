@@ -60,7 +60,7 @@ h2{
     padding-bottom: 25px;
 }
 footer{
-    padding-top:100px ;
+    padding-top:18px ;
     text-align: center;
     font-family: fantasy;
     font-style: oblique;
@@ -97,4 +97,7 @@ footer{
     border: 5px solid rgb(28, 99, 24);
     border-radius: 15px;
     background: rgb(189, 212, 184) none repeat scroll 0% 0%;
+}
+.sidebar-content{
+    font-size: 14px;
 }

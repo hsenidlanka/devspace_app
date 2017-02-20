@@ -17,7 +17,7 @@
 </head>
 <body>
 
-<fmt:setLocale value="En"/>
+<fmt:setLocale value="jp"/>
 <fmt:setBundle basename="messages_en" var="bundle1" />
 
 <div id="container">
