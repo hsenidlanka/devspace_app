@@ -1,16 +1,9 @@
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
 <!DOCTYPE html>
 <html>
 <head>
   <title>Order Process</title>
-
   <!-- include common CSS, fonts and js -->
-  <jsp:include page="../adminTop.jsp"/>
+  <%@include file="../adminTop.jsp" %>
 
   <spring:url value="/themes/hsenid/css/orderMgt.css" var="cssOrder"/>
   <link href="${cssOrder}" rel="stylesheet">
@@ -24,15 +17,15 @@
 </head>
 <body>
 
-<fmt:setLocale value="En"/>
-<fmt:setBundle basename="messages_en" var="bundle1" />
+<%--<fmt:setLocale value="En"/>
+<fmt:setBundle basename="messages_en" var="bundle1" />--%>
 <fmt:setBundle basename="system" scope="session" var="bundle2"/>
 
 <jsp:include page="../header.jsp"/>
 
 <div class="brand">
   <div style="position: relative; left: -50%;">
-    <fmt:message key="order.heading" bundle="${bundle1}"/>
+    <fmt:message key="order.heading" />
   </div>
 </div>
 <br>
@@ -44,9 +37,9 @@
       <fmt:message key="admin.home.url" var="url1" bundle="${bundle2}"/>
       <fmt:message key="admin.ordermanagement.view.url" var="url2" bundle="${bundle2}"/>
 
-      <li><a href="<c:out value="${url1}"/>"><fmt:message key="orderprocess.breadcrumb.home" bundle="${bundle1}"/></a></li>
-      <li><a href="<c:out value="${url1}"/>"><fmt:message key="order.heading" bundle="${bundle1}"/> </a></li>
-      <li class="active"><a href="<c:out value="${url2}"/>"><fmt:message key="orderprocess.breadcrumb.view" bundle="${bundle1}"/> </a></li>
+      <li><a href="<c:out value="${url1}"/>"><fmt:message key="orderprocess.breadcrumb.home"/></a></li>
+      <li><a href="<c:out value="${url1}"/>"><fmt:message key="order.heading" /> </a></li>
+      <li class="active"><a href="<c:out value="${url2}"/>"><fmt:message key="orderprocess.breadcrumb.view" /> </a></li>
     </ul>
   </div>
 </div>
@@ -57,7 +50,7 @@
   <div class="panel panel-default">
     <div class="panel-heading  common-form-headings">
       <h3 class="default-panel-headings">
-        <fmt:message key="orderprocess.delivery.process.view.table" bundle="${bundle1}"/>
+        <fmt:message key="orderprocess.delivery.process.view.table" />
       </h3>
     </div>
 
@@ -66,7 +59,7 @@
         <div class="col-sm-1"></div>
         <div class="col-sm-4">
           <label class="control-label" style="float: right;">
-            <fmt:message key="orderprocess.order.id" bundle="${bundle1}"/>
+            <fmt:message key="orderprocess.order.id" />
           </label>
 
         </div>
@@ -84,7 +77,7 @@
 
       <%--<form:form class="form-horizontal" role="form" id="frmViewOdr" action="" method="post">--%>
         <fieldset class="scheduler-border">
-          <legend class="scheduler-border" id="orderLegend"><fmt:message key="orderprocess.form.legend" bundle="${bundle1}"/></legend>
+          <legend class="scheduler-border" id="orderLegend"><fmt:message key="orderprocess.form.legend"/></legend>
 
           <!--table of order details-->
           <table id="tableprocessOrder">
@@ -114,14 +107,14 @@
         </button>
         <div align="center">
           <span class="glyphicon glyphicon-edit"></span>
-          <fmt:message key="orderprocess.assignorder.modal.heading" bundle="${bundle1}" />
+          <fmt:message key="orderprocess.assignorder.modal.heading"  />
         </div>
       </div>
       <div class="modal-body">
         <form role="form"   method="POST" class="form-horizontal">
             <div class="form-group opModalTitle">
               <label class="control-label ">
-                <fmt:message key="orderprocess.assignorder.modal.title" bundle="${bundle1}" />
+                <fmt:message key="orderprocess.assignorder.modal.title"  />
               </label>
               <label id="lblOrderId"></label>
             </div>
@@ -132,29 +125,29 @@
               <div class="col-xs-5">
                 <div class="form-group">
                   <label class="control-label ">
-                    <fmt:message key="orderprocess.assignorder.modal.selectbranch" bundle="${bundle1}" />
+                    <fmt:message key="orderprocess.assignorder.modal.selectbranch" />
                   </label>
                 </div>
                 <div class="form-group">
                   <select class="form-control" id="selectBranch" style="width: 150px">
-                    <option value="--Select--"><fmt:message key="user.customer.select" bundle="${bundle1}"/></option>
-                    <option value="Colombo"><fmt:message key="user.staff.branch1" bundle="${bundle1}"/></option>
-                    <option value="Gampaha"><fmt:message key="user.staff.branch2" bundle="${bundle1}" /></option>
-                    <option value="Ja-Ela"><fmt:message key="user.staff.branch3" bundle="${bundle1}" /></option>
-                    <option value="Kandana"><fmt:message key="user.staff.branch4" bundle="${bundle1}" /></option>
+                    <option value="--Select--"><fmt:message key="user.customer.select" /></option>
+                    <option value="Colombo"><fmt:message key="user.staff.branch1" /></option>
+                    <option value="Gampaha"><fmt:message key="user.staff.branch2" /></option>
+                    <option value="Ja-Ela"><fmt:message key="user.staff.branch3"  /></option>
+                    <option value="Kandana"><fmt:message key="user.staff.branch4" /></option>
                   </select>
                 </div>
               </div>
               <div class="col-xs-5">
                 <div class="form-group">
                   <label  class="control-label ">
-                    <fmt:message key="orderprocess.assignorder.modal.selectagent" bundle="${bundle1}" />
+                    <fmt:message key="orderprocess.assignorder.modal.selectagent" />
                   </label>
                 </div>
                 <div class="form-group">
                   <select class="form-control" id="selectAgent" style="width: 150px">
                     <option value="--Select--">
-                      <fmt:message key="user.customer.select" bundle="${bundle1}"/>
+                      <fmt:message key="user.customer.select" />
                     </option>
                   </select>
                 </div>
@@ -165,7 +158,7 @@
               <div class="col-xs-5">
                 <div class="form-group">
                   <label  class="control-label ">
-                    <fmt:message key="orderprocess.assignorder.modal.branch.selection" bundle="${bundle1}" />
+                    <fmt:message key="orderprocess.assignorder.modal.branch.selection" />
                   </label>
                 </div>
               </div>
@@ -180,7 +173,7 @@
               <div class="col-xs-5">
                 <div class="form-group">
                   <label  class="control-label ">
-                    <fmt:message key="orderprocess.assignorder.modal.agent.selection" bundle="${bundle1}" />
+                    <fmt:message key="orderprocess.assignorder.modal.agent.selection" />
                   </label>
                 </div>
               </div>
@@ -198,14 +191,14 @@
           <div class="col-xs-3"></div>
           <div class="col-xs-2" >
             <button class="btn btn-success"  data-dismiss="modal" aria-hidden="true">
-              <fmt:message key="category.categorydelete.modal.cancel" bundle="${bundle1}" />
+              <fmt:message key="category.categorydelete.modal.cancel" />
               <span class="glyphicon glyphicon-remove"></span>
             </button>
           </div>
           <div class="col-xs-2"></div>
           <div class="col-xs-2" >
             <button class="btn btn-success" id="btnAssignDelivery" type="submit">
-              <fmt:message key="orderprocess.assignorder.modal.footer.assign.button" bundle="${bundle1}" />
+              <fmt:message key="orderprocess.assignorder.modal.footer.assign.button" />
               <span class="glyphicon glyphicon-ok"></span>
             </button>
           </div>
@@ -229,14 +222,14 @@
         </button>
         <div align="center">
           <span class="glyphicon glyphicon-edit"></span>
-          <fmt:message key="orderprocess.changeorder.modal.heading" bundle="${bundle1}" />
+          <fmt:message key="orderprocess.changeorder.modal.heading" />
         </div>
       </div>
       <div class="modal-body">
         <form:form role="form"   method="POST" class="form-horizontal">
           <div class="form-group opModalTitle">
             <label class="control-label ">
-              <fmt:message key="orderprocess.assignorder.modal.title" bundle="${bundle1}" />
+              <fmt:message key="orderprocess.assignorder.modal.title" />
             </label>
             <label id="lblChangeOrderId"></label>
           </div>
@@ -247,29 +240,29 @@
               <div class="col-xs-5">
                 <div class="form-group">
                   <label class="control-label ">
-                    <fmt:message key="orderprocess.changeorder.modal.selectbranch" bundle="${bundle1}" />
+                    <fmt:message key="orderprocess.changeorder.modal.selectbranch" />
                   </label>
                 </div>
                 <div class="form-group">
                   <select class="form-control" id="changeBranch" style="width: 150px">
-                    <option value="Null"><fmt:message key="user.customer.select" bundle="${bundle1}"/></option>
-                    <option value="Colombo"><fmt:message key="user.staff.branch1" bundle="${bundle1}"/></option>
-                    <option value="Gampaha"><fmt:message key="user.staff.branch2" bundle="${bundle1}" /></option>
-                    <option value="Ja-Ela"><fmt:message key="user.staff.branch3" bundle="${bundle1}" /></option>
-                    <option value="Kandana"><fmt:message key="user.staff.branch4" bundle="${bundle1}" /></option>
+                    <option value="Null"><fmt:message key="user.customer.select" /></option>
+                    <option value="Colombo"><fmt:message key="user.staff.branch1" /></option>
+                    <option value="Gampaha"><fmt:message key="user.staff.branch2"/></option>
+                    <option value="Ja-Ela"><fmt:message key="user.staff.branch3" /></option>
+                    <option value="Kandana"><fmt:message key="user.staff.branch4"  /></option>
                   </select>
                 </div>
               </div>
               <div class="col-xs-5">
                 <div class="form-group">
                   <label  class="control-label ">
-                    <fmt:message key="orderprocess.changeorder.modal.selectagent" bundle="${bundle1}" />
+                    <fmt:message key="orderprocess.changeorder.modal.selectagent" />
                   </label>
                 </div>
                 <div class="form-group">
                   <select class="form-control" id="changeAgent" style="width: 150px">
                     <option value="Mr">
-                      <fmt:message key="user.customer.select" bundle="${bundle1}"/>
+                      <fmt:message key="user.customer.select"/>
                     </option>
                   </select>
                 </div>
@@ -280,7 +273,7 @@
               <div class="col-xs-5">
                 <div class="form-group">
                   <label  class="control-label ">
-                    <fmt:message key="orderprocess.assignorder.modal.branch.selection" bundle="${bundle1}" />
+                    <fmt:message key="orderprocess.assignorder.modal.branch.selection"  />
                   </label>
                 </div>
               </div>
@@ -296,7 +289,7 @@
               <div class="col-xs-5">
                 <div class="form-group">
                   <label  class="control-label ">
-                    <fmt:message key="orderprocess.assignorder.modal.agent.selection" bundle="${bundle1}" />
+                    <fmt:message key="orderprocess.assignorder.modal.agent.selection" />
                   </label>
                 </div>
               </div>
@@ -314,14 +307,14 @@
           <div class="col-xs-3"></div>
           <div class="col-xs-2" >
             <button class="btn btn-success"  data-dismiss="modal" aria-hidden="true">
-              <fmt:message key="category.categorydelete.modal.cancel" bundle="${bundle1}" />
+              <fmt:message key="category.categorydelete.modal.cancel"  />
               <span class="glyphicon glyphicon-remove"></span>
             </button>
           </div>
           <div class="col-xs-2"></div>
           <div class="col-xs-2" >
             <button class="btn btn-success" id="btnReassignDelivery" type="submit">
-              <fmt:message key="orderprocess.changeorder.modal.footer.assign.button" bundle="${bundle1}" />
+              <fmt:message key="orderprocess.changeorder.modal.footer.assign.button" />
               <span class="glyphicon glyphicon-ok"></span>
             </button>
           </div>

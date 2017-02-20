@@ -1,17 +1,10 @@
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
 <!DOCTYPE html>
 <html>
 <head lang="en">
 
     <title>View Order</title>
-
     <!-- include common CSS, fonts and js -->
-    <jsp:include page="../adminTop.jsp"/>
+    <%@include file="../adminTop.jsp" %>
 
     <%-- Other css --%>
     <spring:url value="/themes/hsenid/css/itemMgt.css" var="cssItem"/>
@@ -44,15 +37,15 @@
 
 <body>
 
-<fmt:setLocale value="En"/>
-<fmt:setBundle basename="messages_en" var="bundle1"/>
+<%--<fmt:setLocale value="En"/>
+<fmt:setBundle basename="messages_en" var="bundle1"/>--%>
 <fmt:setBundle basename="system" scope="session" var="bundle2"/>
 
 <jsp:include page="../header.jsp"/>
 
 <div class="brand">
     <div style="position: relative; left: -50%;">
-        <fmt:message key="order.heading" bundle="${bundle1}"/>
+        <fmt:message key="order.heading" />
     </div>
 </div>
 <br>
@@ -64,10 +57,10 @@
             <fmt:message key="admin.ordermanagement.view.url" var="url2" bundle="${bundle2}"/>
 
             <li><a href="<c:out value="${url1}"/>"><fmt:message key="orderprocess.breadcrumb.home"
-                                                                bundle="${bundle1}"/></a></li>
-            <li><a href="<c:out value="${url1}"/>"><fmt:message key="order.heading" bundle="${bundle1}"/> </a></li>
-            <li class="active"><a href="<c:out value="${url2}"/>"><fmt:message key="orderprocess.breadcrumb.view"
-                                                                               bundle="${bundle1}"/> </a></li>
+                                                                /></a></li>
+            <li><a href="<c:out value="${url1}"/>"><fmt:message key="order.heading" /> </a></li>
+            <li class="active"><a href="<c:out value="${url2}"/>"><fmt:message key="orderprocess.breadcrumb.view"/>
+            </a></li>
         </ul>
     </div>
 </div>
@@ -76,7 +69,7 @@
     <div class="panel panel-default">
         <div class="panel-heading  common-form-headings">
             <h3 class="default-panel-headings">
-                <fmt:message key="orderprocess.vieworder" bundle="${bundle1}"/>
+                <fmt:message key="orderprocess.vieworder"/>
             </h3>
         </div>
 
@@ -94,14 +87,14 @@
                              </div>--%>
                             <div class="col-xs-3">
                                 <label class=" control-label" >
-                                    <fmt:message key="orderprocess.vieworder.odrDate.from" bundle="${bundle1}"/>
+                                    <fmt:message key="orderprocess.vieworder.odrDate.from" />
                                 </label>
                                     <input class="form-control" id="fromDateOdr" type="text"
                                            placeholder="Click on me" style="width: 130px"/>
                             </div>
                             <div class="col-xs-3">
                                 <label class=" control-label">
-                                    <fmt:message key="orderprocess.vieworder.odrDate.to" bundle="${bundle1}"/>
+                                    <fmt:message key="orderprocess.vieworder.odrDate.to" />
                                 </label>
 
                                 <input class="form-control" id="toDateOdr" placeholder="Click on me"
@@ -126,7 +119,7 @@
             <form:form class="form-horizontal" role="form" id="frmViewOdr" action="" method="post">
                 <fieldset class="scheduler-border">
                     <legend class="scheduler-border"><fmt:message key="orderprocess.form.legend"
-                                                                  bundle="${bundle1}"/></legend>
+                                                                  /></legend>
 
                     <!--table of order details-->
                     <table id="tblOrders">
@@ -186,21 +179,20 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
                         class="glyphicon glyphicon-remove"></span></button>
                 <div align="center"><span class="glyphicon glyphicon-pencil"></span><fmt:message
-                        key="orderprocess.panel.heading" bundle="${bundle1}"/>
+                        key="orderprocess.panel.heading" />
                 </div>
             </div>
             <div class="modal-body">
 
                 <form:form class="form-horizontal" role="form" method="post" id="frmEditOrdr" action="">
                 <fieldset class="scheduler-border">
-                    <legend class="scheduler-border"><fmt:message key="orderprocess.form.edit.legend"
-                                                                  bundle="${bundle1}"/></legend>
+                    <legend class="scheduler-border"><fmt:message key="orderprocess.form.edit.legend"/></legend>
 
                     <div class="form-group">
 
                         <div class="row">
                             <div class="col-xs-5" align="right">
-                                <label><fmt:message key="orderprocess.form.ordr.id" bundle="${bundle1}"/></label>
+                                <label><fmt:message key="orderprocess.form.ordr.id" /></label>
                             </div>
                             <div class="col-xs-5">
                                 <form:input class="form-control" type="text" id="txtOrdrId" path="" readonly="true"/>
@@ -209,8 +201,7 @@
 
                         <div class="row">
                             <div class="col-xs-5" align="right">
-                                <label><fmt:message key="orderprocess.form.order.customer.id"
-                                                    bundle="${bundle1}"/></label>
+                                <label><fmt:message key="orderprocess.form.order.customer.id"/></label>
                             </div>
                             <div class="col-xs-5">
                                 <form:input class="form-control" type="text" id="txtOrdrCusId" path="" readonly="true"/>
@@ -219,7 +210,7 @@
 
                         <div class="row">
                             <div class="col-xs-5" align="right">
-                                <label><fmt:message key="orderprocess.form.order.guest.id" bundle="${bundle1}"/></label>
+                                <label><fmt:message key="orderprocess.form.order.guest.id" /></label>
                             </div>
                             <div class="col-xs-5">
                                 <form:input class="form-control" type="text" id="txtOrdrGstId" path="" readonly="true"/>
@@ -228,7 +219,7 @@
 
                         <div class="row">
                             <div class="col-xs-5" align="right">
-                                <label><fmt:message key="orderprocess.form.order.date" bundle="${bundle1}"/></label>
+                                <label><fmt:message key="orderprocess.form.order.date" /></label>
                             </div>
                             <div class="col-xs-5">
                                 <form:input class="form-control" type="date" id="txtOrdrDate" path="" readonly="true"/>
@@ -237,7 +228,7 @@
 
                         <div class="row">
                             <div class="col-xs-5" align="right">
-                                <label><fmt:message key="orderprocess.form.order.time" bundle="${bundle1}"/></label>
+                                <label><fmt:message key="orderprocess.form.order.time" /></label>
                             </div>
                             <div class="col-xs-5">
                                 <form:input class="form-control" type="time" id="txtOrdrtime" path="" readonly="true"/>
@@ -246,7 +237,7 @@
 
                         <div class="row">
                             <div class="col-xs-5" align="right">
-                                <label><fmt:message key="orderprocess.form.order.price" bundle="${bundle1}"/> </label>
+                                <label><fmt:message key="orderprocess.form.order.price" /> </label>
                             </div>
                             <div class="col-xs-5">
                                 <form:input type="text" class="form-control price" id="txtOrdrPrice" value="0.00"
@@ -254,12 +245,11 @@
                             </div>
                         </div>
                     </div>
-            </div>
+
             <div style="text-align: center; z-index: 50000; width: 50%; margin: auto;" id="toaster"></div>
             <div class="modal-footer" align="right">
                 <form:button class="btn btn-success" type="reset" value="cancel" id="btnOrdrRst"
-                             data-dismiss="modal"><fmt:message key="package.packageedit.form.button.reset"
-                                                               bundle="${bundle1}"/>
+                             data-dismiss="modal"><fmt:message key="package.packageedit.form.button.reset"/>
                 </form:button>
             </div>
             </fieldset>
@@ -267,6 +257,7 @@
         </div>
     </div>
 </div>
+</div>.
 
 </body>
 </html>
