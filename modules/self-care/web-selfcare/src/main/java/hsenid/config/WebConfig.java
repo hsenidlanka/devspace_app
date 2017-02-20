@@ -4,7 +4,10 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.validation.Validator;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -32,6 +35,36 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         messageSource.setBasename("messages.properties");
         return messageSource;
     }
+
+    @Bean
+    public ReloadableResourceBundleMessageSource validationMessageSource() {
+        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+        messageSource.setBasename("classpath:lang/validation");
+        messageSource.setCacheSeconds(10); // reload messages every 10 seconds
+        return messageSource;
+    }
+
+    @Override
+    public Validator getValidator(){
+        LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
+        validator.setValidationMessageSource((MessageSource)validationMessageSource());
+        return validator;
+    }
+
+    /*@Bean( name = "validationMessageSource" )
+    public ReloadableResourceBundleMessageSource validationMessageSource() {
+        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+        messageSource.setBasename("classpath:lang/validation");
+        messageSource.setCacheSeconds(10); // reload messages every 10 seconds
+        return messageSource;
+    }
+
+    @Override
+    public Validator getValidator() {
+       LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
+       validator.setValidationMessageSource((MessageSource) validationMessageSource());
+       return validator;
+    }*/
 
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer){
