@@ -1,13 +1,11 @@
-<html xmlns:jsp="http://java.sun.com/JSP/Page">
-
-<!--including JSTL to the page -->
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <%--<%@ taglib prefix="spring" uri="http://java.sun.com/jsp/jstl/core" %>--%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<!DOCTYPE html>
 <head>
 
     <title>Add Category</title>
@@ -15,8 +13,8 @@
 </head>
 
 <body>
-<fmt:setLocale value="En"/>
-<fmt:setBundle basename="messages_en" var="bundle1" />
+<%--<fmt:setLocale value="En"/>
+<fmt:setBundle basename="messages_en" var="bundle1" />--%>
 <fmt:setBundle basename="system" scope="session" var="bundle2"/>
 
 <center>
@@ -34,7 +32,7 @@
                     <div class="form-group">
                         <div class="row">
                             <label  class="col-xs-3 control-label" style="text-align: left;margin: 0 -60px 0 60px;">
-                                <fmt:message key="category.categoryadd.form.catname" bundle="${bundle1}"/>
+                                <fmt:message key="category.categoryadd.form.catname"/>
                             </label>
 
                             <div class="col-xs-8">
@@ -49,7 +47,7 @@
                     <div class="form-group">
                         <div class="row">
                             <label  class=" col-xs-3 control-label" style="text-align: left;margin: 0 -60px 0 60px;">
-                                <fmt:message key="category.categoryadd.form.catdescription" bundle="${bundle1}"/>
+                                <fmt:message key="category.categoryadd.form.catdescription" />
                             </label>
 
                             <div class="col-xs-8">
@@ -64,7 +62,7 @@
                     <div class="form-group">
                         <div class="row">
                             <label for="btnUpldImage" class="col-xs-3 control-label" style="text-align: left;margin: 0 -60px 0 60px;">
-                                <fmt:message key="category.categoryadd.form.catimage" bundle="${bundle1}"/>
+                                <fmt:message key="category.categoryadd.form.catimage" />
                             </label>
                             <div class="col-xs-8">
                                 <div class="col-xs-2">
@@ -81,16 +79,16 @@
                     <div class="form-group">
                         <div class="row">
                             <label for="viewability" class="col-xs-3 control-label" style="text-align: left;margin: 0 -60px 0 60px;">
-                                <fmt:message key="category.categoryadd.form.catvisibility" bundle="${bundle1}"/>
+                                <fmt:message key="category.categoryadd.form.catvisibility" />
                             </label>
                             <div class="col-xs-8">
                                 <div class="col-xs-2">
                                     <form:select path="status" class="form-control" id="viewability" style="width:75px">
                                         <form:option value="1">
-                                            <fmt:message key="category.categoryadd.form.catvisibility.option1" bundle="${bundle1}"/>
+                                            <fmt:message key="category.categoryadd.form.catvisibility.option1"/>
                                         </form:option>
                                         <form:option value="0">
-                                            <fmt:message key="category.categoryadd.form.catvisibility.option2" bundle="${bundle1}" />
+                                            <fmt:message key="category.categoryadd.form.catvisibility.option2" />
                                         </form:option>
                                     </form:select>
                                 </div>
@@ -102,7 +100,7 @@
                     <%--subcategory addition grid--%>
                     <div class="form-group">
                         <legend class="scheduler-border">
-                            <fmt:message key="category.categoryadd.form.add.subcategories" bundle="${bundle1}"/>
+                            <fmt:message key="category.categoryadd.form.add.subcategories" />
                         </legend>
 
 
@@ -110,13 +108,13 @@
 
                             <div class="row cat-tbl-row1 cat-tbl-hdr" style="width:600px;">
                                 <div class="col-xs-4">
-                                    <strong><fmt:message key="category.categoryadd.form.subcatname" bundle="${bundle1}"/></strong>
+                                    <strong><fmt:message key="category.categoryadd.form.subcatname"/></strong>
                                 </div>
                                 <div class="col-xs-5">
-                                    <strong><fmt:message key="category.categoryadd.form.subcatdescription" bundle="${bundle1}"/></strong>
+                                    <strong><fmt:message key="category.categoryadd.form.subcatdescription" /></strong>
                                 </div>
                                 <div class="col-xs-3">
-                                        <strong><fmt:message key="category.categoryadd.form.addOrRemove" bundle="${bundle1}"/></strong>
+                                        <strong><fmt:message key="category.categoryadd.form.addOrRemove" /></strong>
                                 </div>
                             </div>
 
@@ -151,14 +149,14 @@
                             <div class="col-xs-8">
                                 <div class="col-xs-2">
                                         <form:button type="reset" value="Reset" class="btn btn-success btn-md btnAddItem">
-                                            <fmt:message key="user.useradd.form.button.reset" bundle="${bundle1}" /></form:button>
+                                            <fmt:message key="user.useradd.form.button.reset" /></form:button>
 
                                 </div>
                                 <div class="col-xs-10">
 
                                         <form:button type="submit" class="btn btn-success btn-md" id="btnAddItem"><span
                                                 class="glyphicon glyphicon-plus"></span>
-                                            <fmt:message key="category.add.submit.button" bundle="${bundle1}" />
+                                            <fmt:message key="category.add.submit.button"  />
                                         </form:button>
 
                                 </div>
