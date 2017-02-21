@@ -4,9 +4,9 @@ import javax.validation.constraints.Pattern;
 
 public class RegisterModal extends User {
 
-    @Pattern(regexp = "^(?!\\s*$|\\s).*$", message = "Please enter a valid username!")
+    @Pattern(regexp = "^(?!\\s*$|\\s).*$", message = "{error.changepassword.currentPassword}")
     private String password;
-    @Pattern(regexp = "^(?!\\s*$|\\s).*$", message = "Please enter a valid username!")
+    @Pattern(regexp = "^(?!\\s*$|\\s).*$", message = "{error.changepassword.currentPassword}")
     private String confirmPassword;
 
     public String getPassword() {

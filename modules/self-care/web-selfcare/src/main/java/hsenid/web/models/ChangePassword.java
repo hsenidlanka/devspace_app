@@ -5,13 +5,13 @@ import javax.validation.constraints.Size;
 
 public class ChangePassword {
 
-    @Size(min = 6, message = "please use a password longer than 6 characters")
+    @Size(min = 6, message = "{error.changepassword.currentPassword}")
     private String currentPassword;
 
-    @Size(min = 6, message = "please use a password longer than 6 characters")
+    @Size(min = 6, message = "{error.changepassword.newPassword}")
     private String newPassword;
 
-    @Size(min = 6, message = "please use a password longer than 6 characters")
+    @Size(min = 6, message = "{error.changepassword.confirmNewPassword}")
     private String confirmNewPassword;
 
     public String getCurrentPassword() {

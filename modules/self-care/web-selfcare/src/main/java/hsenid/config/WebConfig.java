@@ -51,20 +51,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         return validator;
     }
 
-    /*@Bean( name = "validationMessageSource" )
-    public ReloadableResourceBundleMessageSource validationMessageSource() {
-        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-        messageSource.setBasename("classpath:lang/validation");
-        messageSource.setCacheSeconds(10); // reload messages every 10 seconds
-        return messageSource;
-    }
-
-    @Override
-    public Validator getValidator() {
-       LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
-       validator.setValidationMessageSource((MessageSource) validationMessageSource());
-       return validator;
-    }*/
 
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer){
