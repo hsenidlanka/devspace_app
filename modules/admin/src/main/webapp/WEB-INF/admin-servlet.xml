@@ -40,7 +40,7 @@
   this one resolves the user locale by getting the pre-defined value from the user-->
     <bean id="localeResolver"
           class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
-        <property name="defaultLocale" value="jp" />
+        <property name="defaultLocale" value="en" />
     </bean>
 
     <!-- Changes the locale when a 'locale' request parameter is sent; e.g. /?locale=de -->
