@@ -67,7 +67,7 @@
                                             </p>
                                         </div>
                                         <div class="col-lg-8">
-                                            <p class="text-center"><strong>Welcome Back !</strong></p>
+                                            <p class="text-center"><strong><fmt:message key="new.header.welcome" bundle="${lang}"/></strong></p>
                                             <p class="text-center"><strong>${name}</strong></p>
                                             <p class="text-center small">${email}</p>
                                         </div>
@@ -79,10 +79,10 @@
                                 <div class="navbar-login navbar-login-session">
                                     <div class="row">
                                         <div class="col-xs-6">
-                                            <a href="/web-selfcare/profile" class="btn btn-primary">View Profile</a>
+                                            <a href="/web-selfcare/profile" class="btn btn-primary"><fmt:message key="new.header.view.profile" bundle="${lang}"/></a>
                                         </div>
                                         <div class="col-xs-6">
-                                            <a href="/web-selfcare/logout" class="btn btn-danger"><span style="vertical-align: middle"><i class="fa fa-power-off" aria-hidden="true"></i> Log Out</span></a>
+                                            <a href="/web-selfcare/logout" class="btn btn-danger"><span style="vertical-align: middle"><i class="fa fa-power-off" aria-hidden="true"></i><fmt:message key="new.header.log.out" bundle="${lang}"/></span></a>
                                         </div>
                                     </div>
                                 </div>
@@ -117,7 +117,7 @@
                     <div class="row">
                         <div class="col-sm-10">
                             <img src="/web-selfcare/resources/images/logo.png" style=" width:50px;height:50px;">
-                            <h3 style="margin-top: 15px;display: inline-block;">Please Log in</h3>
+                            <h3 style="margin-top: 15px;display: inline-block;"><fmt:message key="login.modal.please" bundle="${lang}"/></h3>
                         </div>
                         <div class="col-sm-2">
                             <a type="button" class="btn" data-dismiss="modal" style="margin-top: 10px; margin-left: 35px; color: #888"><i class="fa fa-window-close fa-2x" aria-hidden="true"></i></a>
@@ -132,21 +132,21 @@
                             <div style="margin-left: 15px; margin-top: 16px" id="NotRegisteredUser" class="error-labels"></div>
                         </div>
                         <div class="form-group">
-                            <label for="loginUsername" class="control-label" style="text-align: center"><h4><strong>Username</strong></h4></label>
+                            <label for="loginUsername" class="control-label" style="text-align: center"><h4><strong><fmt:message key="signup.username" bundle="${lang}"/></strong></h4></label>
                             <input type="text" style="border:1px solid #cccccc" id="loginUsername" class="form-control input-md" name="loginUsername" placeholder="Enter username">
 
                             <div style="margin-left: 15px; margin-top: 16px" id="usernameError" class="error-labels"></div>
                         </div>
 
                         <div class="form-group">
-                            <label for="loginPassword" class="control-label" style="text-align: center"><h4><strong>Password</strong></h4></label>
+                            <label for="loginPassword" class="control-label" style="text-align: center"><h4><strong><fmt:message key="signup.password" bundle="${lang}"/></strong></h4></label>
                             <input type="password" style="border:1px solid #cccccc" id="loginPassword" class="form-control input-md" name="loginPassword" placeholder="Enter password">
                             <div style="margin-left: 15px; margin-top: 16px" id="passwordError2" class="error-labels"></div>
                         </div>
                         <br>
                         <center>
                             <div class="form-group">
-                                <button style="width: 100%" id="loginFormSubmit" name="loginFormSubmit" type="button" class="btn btn-success" data-dismiss="modal"><i class="fa fa-sign-in" aria-hidden="true"></i> Log in</button>
+                                <button style="width: 100%" id="loginFormSubmit" name="loginFormSubmit" type="button" class="btn btn-success" data-dismiss="modal"><i class="fa fa-sign-in" aria-hidden="true"></i> <fmt:message key="new.header.login" bundle="${lang}"/></button>
                             </div>
                         </center>
                     </form>

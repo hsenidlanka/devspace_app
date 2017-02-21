@@ -1,7 +1,7 @@
 <%-- Start-Pizza carousel --%>
 <img src="<c:url value="/resources/images/icons/favorite.png"/>" width="30px"
      height="30px"/>
-<h4 style="display:inline-block;">Top rated pizzas</h4>
+<h4 style="display:inline-block;"><fmt:message key="menu.carousal" bundle="${lang}"/></h4>
 
 <div id="myCarousel1" class="carousel slide" data-ride="carousel1">
     <!-- Indicators -->
