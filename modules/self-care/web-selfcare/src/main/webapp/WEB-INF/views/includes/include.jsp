@@ -4,10 +4,12 @@
 
 <link href="<c:url value="/resources/css/cssReset.css"/>" rel="stylesheet" type="text/css">
 <%--<meta charset="UTF-8">--%>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<fmt:setLocale value="ja"/>
+<% request.setAttribute("language", session.getAttribute("language")); %>
+
+<fmt:setLocale value="${language}"/>
 <fmt:setBundle basename="messages" var="lang"/>
 
 <script src="<c:url value="/resources/js/jquery-1.9.1.js"/>"></script>
@@ -38,3 +40,6 @@
 <script src="<c:url value="/resources/js/registerandlogin.js"/>"></script>
 
 <link rel="stylesheet" href="<c:url value="/resources/font-awesome-4.7.0/css/font-awesome.min.css"/>">
+
+<link href="<c:url value="/resources/css/lang-selector.css"/>" rel="stylesheet" type="text/css">
+<script src="<c:url value="/resources/js/change-language.js"/>"></script>
