@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--<%@include file="signup-modal.jsp" %>--%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
@@ -95,8 +96,8 @@
                     <div style="margin-top: 15px;">
                         <label><fmt:message key="header.language" bundle="${lang}"/></label>
                         <select id="lang-select" class="styled-select black" style="width: 100px;color: white;font-size: 12px;">
-                            <option value="en"><fmt:message key="language.english" bundle="${lang}"/></option>
-                            <option value="ja"><fmt:message key="language.japanese" bundle="${lang}"/></option>
+                            <option value="en">English</option>
+                            <option value="ja">日本語</option>
                         </select>
                     </div>
                 </li>
