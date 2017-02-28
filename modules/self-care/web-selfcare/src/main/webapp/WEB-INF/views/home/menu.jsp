@@ -80,7 +80,7 @@
                                                      style="height: 200px;width: 200px">
                                             <figcaption>
                                                 <h3>${category.name}</h3>
-                                                <a href="menu\<c:out value="${category.name}"/>">Browse</a>
+                                                <a href="menu\<c:out value="${category.name}"/>"><fmt:message key="menu.browse" bundle="${lang}"/></a>
                                             </figcaption>
                                         </figure>
                                     </li>

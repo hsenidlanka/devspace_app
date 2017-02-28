@@ -137,7 +137,7 @@
                                                                 </div>
                                                                 <a class="btn menu-add-to-cart-btn btn-success btn-xs btn-addtocart"
                                                                    style="float: right;margin-bottom: -15px;">
-                                                                    Add to cart
+                                                                    <fmt:message key="menu.category.add.to.cart" bundle="${lang}"/>
                                                                 </a>
                                                             </c:otherwise>
                                                         </c:choose>
@@ -152,7 +152,7 @@
                                 </c:forEach>
                             </c:when>
                             <c:otherwise>
-                                <p style="margin-left: 30px;"><strong>No items to show</strong></p>
+                                <p style="margin-left: 30px;"><strong><fmt:message key="menu.category.empty.message" bundle="${lang}"/></strong></p>
                             </c:otherwise>
                         </c:choose>
 
