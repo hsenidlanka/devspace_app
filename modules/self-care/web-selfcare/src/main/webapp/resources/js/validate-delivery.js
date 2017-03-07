@@ -1,7 +1,13 @@
 var background_color = "#fde99c";
-
+var selectedLang;// User selected language
 $(document).ready(function () {
     hideErrorLabels();
+
+    // Assign user selected language locale
+    selectedLang = $("#hid-lang").val();
+    if ($.trim(selectedLang) == "") {
+        selectedLang = "en";
+    }
 
     $("#txt-fname").keyup(function () {
         validateFirstName();
@@ -56,10 +62,10 @@ $(document).ready(function () {
             $("#validation-error-popup").modal('show');
         } else {
             var selectedVal = $("input[type=radio][name=radiodelwhen]:checked").val();
-            if (selectedVal != "del-later" || $(".del-date").val()=="") {
+            if (selectedVal != "del-later" || $(".del-date").val() == "") {
                 var date = new Date();
                 date.setMinutes(date.getMinutes() + 30);
-                var str = date.getFullYear() + "-" + getFormattedPartTime(date.getMonth()+1) + "-" + getFormattedPartTime(date.getDate());
+                var str = date.getFullYear() + "-" + getFormattedPartTime(date.getMonth() + 1) + "-" + getFormattedPartTime(date.getDate());
                 $(".del-date").val(str);
                 var time = date.getHours() + ":" + getFormattedPartTime(date.getMinutes());
                 $(".del-time").val(time);
@@ -84,7 +90,7 @@ $(document).ready(function () {
         }
     });
 
-    $("#btn-pickup-submit").click(function(){
+    $("#btn-pickup-submit").click(function () {
         $.ajax({
             type: "post",
             url: "delivery/save-pickup-data",
@@ -102,7 +108,13 @@ function validateFirstName() {
     if ($("#txt-fname").val().length == 0) {
         $("#fname_error").show();
         $("#txt-fname").css("background-color", background_color);
-        $("#fname_error").text("First name should not be empty.");
+        console.log(selectedLang);
+        $("#fname_error").text(/* Selected language */ja['fname_error_text']);
+        /*
+        * ja['fname_error_text'] or en['fname_error_text'].
+        * If can access data using selectedLang['fname_error_text'] or
+        * selectedLang.fname_error_text, problem solved.
+        */
         return false;
     } else {
         var inputVal = $("#txt-fname").val();

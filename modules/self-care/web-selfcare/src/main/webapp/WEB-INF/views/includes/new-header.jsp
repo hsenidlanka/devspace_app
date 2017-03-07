@@ -102,6 +102,8 @@
                     </div>
                 </li>
             </ul>
+            <input type="hidden" id="hid-lang"
+                   value="<c:out value="${language}"/>"/>
         </div>
     </div>
 </nav>

@@ -42,4 +42,8 @@
 <link rel="stylesheet" href="<c:url value="/resources/font-awesome-4.7.0/css/font-awesome.min.css"/>">
 
 <link href="<c:url value="/resources/css/lang-selector.css"/>" rel="stylesheet" type="text/css">
+
 <script src="<c:url value="/resources/js/change-language.js"/>"></script>
+<script src="<c:url value="/resources/js/translator.js"/>"></script>
+<script src="<c:url value="/resources/js/lang.js"/>"></script>
+
