@@ -22,10 +22,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLIntegrityConstraintViolationException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/category")
@@ -33,6 +30,9 @@ public class CategoryController {
 
     private static final Logger LOG = LogManager.getLogger(CategoryController.class);
 //    private static final Logger LOG = LoggerFactory.getLogger(CategoryController.class);
+
+    Locale locale1= new Locale("en","US");
+    Locale locale2= new Locale("ja","JP");
 
 
     /** reading the ValidationMessages property file using annotations**/

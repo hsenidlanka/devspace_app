@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
 <html>
@@ -233,6 +234,19 @@
           </div>
         </div>
       </div>
+
+      <script type="text/javascript" >
+
+      </script>
+
+
+      <b><%= request.getParameter("locale")%></b>!
+
+      <b>eeereee<%=session.getAttribute("ur")%></b>
+
+      Current Locale : ${pageContext.response.locale}
+
+      <input id="locale" type="hidden" value="${ur}"/>
 
     </div>
   </div>

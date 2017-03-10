@@ -78,40 +78,22 @@ public class FilterController {
     public @ResponseBody
     List<Map<String, Object>> datecityFilteredCustomer(@RequestParam("from") String from,
                                                        @RequestParam("to") String to,
-                                                        @RequestParam("city") String city,
                                                         @RequestParam("pageLimit") String pageLimit,
                                                         @RequestParam("initPage") String initPage) throws ParseException {
 
         int initPg = Integer.parseInt(initPage);
         int limitPg = Integer.parseInt(pageLimit);
 
-        List<Map<String, Object>> outCustomer = new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> outDateRange = new ArrayList<Map<String, Object>>();
 
         //date range is selected
-        if((!(from.equals(""))) && (!(to.equals(""))) && ((city.equals("--Select--")))) {
+        if((!(from.equals(""))) && (!(to.equals("")))) {
 
             LOG.error("date range selected: from{}, to{}",from,to);
-            List<Map<String, Object>> outDateRange=dateSelect(from,to,"active",limitPg,initPg);
-            return outDateRange;
+           outDateRange=dateSelect(from,to,"active",limitPg,initPg);
+
         }
-
-        //city is selected
-        if(((from.equals(""))) && ((to.equals(""))) && (!(city.equals("--Select--")))) {
-
-            LOG.error("city {}", city);
-            List<Map<String, Object>> outCity = citySelect(city, "active", limitPg, initPg);
-            return outCity;
-        }
-
-        //both the city and date range are selected
-        if((!(from.equals(""))) && (!(to.equals(""))) && (!(city.equals("--Select--")))) {
-
-            LOG.error(" Date range and city selected: city{}, from:{}, to{}", city,from,to);
-            List<Map<String, Object>> outCityDate=dateCitySelect(from,to,city,"active",limitPg,initPg);
-            return outCityDate;
-        }
-
-     return outCustomer;
+     return outDateRange;
     }
 
 
@@ -225,33 +207,20 @@ public class FilterController {
      * the search data on the registered date**/
     @RequestMapping(value = "/bannedcustomerTable/city", method = RequestMethod.GET)
     public @ResponseBody
-    List<Map<String, Object>> cityFilteredCustomerBlocked( @RequestParam("city") String city,
-                                                           @RequestParam("name") String name,
+    List<Map<String, Object>> cityFilteredCustomerBlocked( @RequestParam("name") String name,
                                                            @RequestParam("pageLimit") String pageLimit,
                                                            @RequestParam("initPage") String initPage) {
         int initPg = Integer.parseInt(initPage);
         int limitPg = Integer.parseInt(pageLimit);
 
-        LOG.info("city {}", city);
+
         List<Map<String, Object>> outCustomerb = new ArrayList<Map<String, Object>>();
 
-        if((!(city.equals("--Select--"))) && ((name.equals(""))) ) {
-            List<Map<String, Object>> cityList=citySelect(city,"inactive",limitPg,initPg);
-            return cityList;
-        }
-        if(((city.equals("--Select--"))) && (!(name.equals(""))) ) {
+        if( (!(name.equals(""))) ) {
             List<Map<String, Object>> nameList=nameSelect(name,"inactive",limitPg,initPg);
             return nameList;
         }
-        if((!(city.equals("--Select--"))) && (!(name.equals(""))) ) {
-            List<Map<String, Object>> cityList=citySelect(city,"inactive",limitPg,initPg);
-            List<Map<String, Object>> nameList=nameSelect(name,"inactive",limitPg,initPg);
 
-            //to get the intersection of the two lists outCityDate1 and outCityDate2
-            ArrayList<Map<String, Object>> common= new ArrayList<Map<String, Object>>(cityList);
-            common.retainAll(nameList);
-            return common;
-        }
         return  outCustomerb;
     }
 
@@ -488,7 +457,7 @@ public class FilterController {
 
     }
 
-    public List<Map<String, Object>> citySelect(String city, String status, int limit, int page) {
+  /*  public List<Map<String, Object>> citySelect(String city, String status, int limit, int page) {
         List<Map<String, Object>> outCity = new ArrayList<Map<String, Object>>();
         List<User> customerList2 = customerRepository.filterByCity(city,status,limit,page);
 
@@ -509,7 +478,7 @@ public class FilterController {
             LOG.info("out {}", outCity);
         }
         return outCity;
-    }
+    }*/
 
 
     public List<Map<String, Object>> dateSelect(String from,String to,String status, int limitPg, int initPg) throws ParseException {
@@ -543,7 +512,7 @@ public class FilterController {
         return outDate;
     }
 
-    public List<Map<String, Object>> dateCitySelect(String from,String to, String city,String status, int limitPg, int initPg)
+  /*  public List<Map<String, Object>> dateCitySelect(String from,String to, String status, int limitPg, int initPg)
             throws ParseException {
 
         //convert java.util time to sql time
@@ -553,7 +522,6 @@ public class FilterController {
         java.sql.Date sqlfromDate = new java.sql.Date(fromDate.getTime());
         java.sql.Date sqltoDate = new java.sql.Date(toDate.getTime());
         LOG.error("sqlFromDate: {}", sqlfromDate);
-        LOG.error("city in dateCitySelect:{}",city);
 
         //two lists of User objects obtained filtered by date and city respectively
         List<User> dateFilteredcustomerList = customerRepository.retrieveByDateRangeCity(sqlfromDate, sqltoDate, city, status,limitPg, initPg);
@@ -577,7 +545,7 @@ public class FilterController {
             LOG.error("out {}", outCityDate1);
         }
         return outCityDate1;
-    }
+    }*/
 
     //function to obtain the Customer List with typed name
     public List<Map<String, Object>> nameSelect(String name, String status, int limit, int page) {
@@ -696,40 +664,23 @@ public class FilterController {
     public @ResponseBody
     List<Map<String, Object>> datecityFilteredNonVerifiedCustomer(@RequestParam("from") String from,
                                                        @RequestParam("to") String to,
-                                                       @RequestParam("city") String city,
                                                        @RequestParam("pageLimit") String pageLimit,
                                                        @RequestParam("initPage") String initPage) throws ParseException {
 
         int initPg = Integer.parseInt(initPage);
         int limitPg = Integer.parseInt(pageLimit);
 
-        List<Map<String, Object>> outCustomerNonVerified = new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> outDateRangeN = new ArrayList<Map<String, Object>>();
 
         //date range is selected
-        if((!(from.equals(""))) && (!(to.equals(""))) && ((city.equals("--Select--")))) {
+        if((!(from.equals(""))) && (!(to.equals(""))) ) {
 
             LOG.error("date range selected: from{}, to{}",from,to);
-            List<Map<String, Object>> outDateRangeN=dateSelect(from,to,"not-verified",limitPg,initPg);
-            return outDateRangeN;
+            outDateRangeN=dateSelect(from,to,"not-verified",limitPg,initPg);
+
         }
 
-        //city is selected
-        if(((from.equals(""))) && ((to.equals(""))) && (!(city.equals("--Select--")))) {
-
-            LOG.error("city {}", city);
-            List<Map<String, Object>> outCityN = citySelect(city, "not-verified", limitPg, initPg);
-            return outCityN;
-        }
-
-        //both the city and date range are selected
-        if((!(from.equals(""))) && (!(to.equals(""))) && (!(city.equals("--Select--")))) {
-
-            LOG.error(" Date range and city selected: city{}, from:{}, to{}", city,from,to);
-            List<Map<String, Object>> outCityDateN=dateCitySelect(from,to,city,"not-verified",limitPg,initPg);
-            return outCityDateN;
-        }
-
-        return outCustomerNonVerified;
+        return outDateRangeN;
     }
 
 

@@ -3,7 +3,6 @@ package hsl.devspace.app.admin.usermanagement.spring.validator;
 
 
 
-import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.Pattern;
@@ -22,9 +21,10 @@ public class UserValidator {
     @Pattern(regexp = "^(?!\\s*$|\\s).*$", message = "Please enter your last name!")
     private String lastName;
 
-    @NotEmpty(message = "Please enter a valid email!")
-    @Email(message = "Please enter a valid email!")
+    @NotEmpty(message = "Please enter your email!")
+    @Pattern(regexp = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$" , message = "Please enter a valid email!")
     private String email;
+
 
     @Pattern(regexp = "^(?!\\s*$|\\s).*$", message = "Please enter a valid username!")
     private String username;

@@ -173,10 +173,8 @@ function setItemList(categoryNmVal, slctElementVal, selectedItmVal, itmQty) {
                 option = option + "<option value='" + data[itm].itemName + "'>" + data[itm].itemName + "</option>";
             }
             slctItemsPkg.append(option);
-
             //get default size price on load
             generate(selectedItmVal, slctElementVal, itmQty);
-
 
             //get size price on change
             $("#" + slctElementVal).change(function () {
@@ -188,7 +186,6 @@ function setItemList(categoryNmVal, slctElementVal, selectedItmVal, itmQty) {
             $("#" + selectedItmVal).change(function () {
                 priceCounting($("#" + selectedItmVal + " option:selected").text(), $(itmQty).val());
             });
-
         },
         error: function (e) {
             alert("error 2" + e);

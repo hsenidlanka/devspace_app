@@ -25,7 +25,7 @@ public class ThemeApplyingInterceptor extends HandlerInterceptorAdapter {
         return true;
     }
 
-    public void setThemeName(String themeName) {
+    public void  setThemeName(String themeName) {
         this.themeName = themeName;
     }
 }

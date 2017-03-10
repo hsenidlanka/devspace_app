@@ -22,7 +22,8 @@
         #logout {
             position: absolute;
             color: #1c6218;
-            margin: 5px 350px 0 345px;
+            margin: 10px 10px 0 200px;
+            /*margin: 5px 350px 0 345px;*/
             width: 100px;
             font-style: italic;
         }
@@ -31,7 +32,7 @@
             color: black;
         }
         #user {
-            margin: 100px 10px 0px 1150px;
+            margin: 0 10px 0 600px;
             font-size: 18px;
         }
     </style>
@@ -48,6 +49,7 @@
 
     session.setAttribute("casPrincipal", principal);
     session.setAttribute("username", request.getRemoteUser());
+    session.setAttribute("ur", request.getParameter("locale"));
 
     Map attributes = principal.getAttributes();
 
@@ -62,8 +64,11 @@
 %>
 
 <div class="row">
+    <div class="col-xs-4"></div>
+    <div class="col-xs-8">
+        <b><a id="user" href="#" ><fmt:message key="header.welcome" /> <%= session.getAttribute("username")%></a></b>
+    </div>
 
-        <b><a id="user" href="#" >Welcome <%= session.getAttribute("username")%></a></b>
 </div>
 <div class="row">
     <div class="col-xs-8">
@@ -73,7 +78,7 @@
     <div class="col-xs-4">
         <%--<a id="logout" href="<c:url value="https://localhost:8443/admin/PizzaShefu/logout"/>">Log Out</a>--%>
 
-            <a id="logout" href="#">Log Out</a>
+            <a id="logout" href="#"><fmt:message key="header.logout" /></a>
 
     </div>
 

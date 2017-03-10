@@ -28,7 +28,8 @@
         <property name="locations" >
             <list>
                 <value>classpath:connectivity.properties</value>
-                <value>classpath:ValidationMessages.properties</value>
+                <value>classpath:validation_messages_jp.properties</value>
+                <value>classpath:validation_messages_en.properties</value>
                 <value>classpath:system.properties</value>
             </list>
         </property>
@@ -40,27 +41,36 @@
   this one resolves the user locale by getting the pre-defined value from the user-->
     <bean id="localeResolver"
           class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
-        <property name="defaultLocale" value="en" />
-    </bean>
-
-    <!-- Changes the locale when a 'locale' request parameter is sent; e.g. /?locale=de -->
-    <bean id="localeChangeInterceptor"
-          class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
-        <property name="paramName" value="locale" />
-    </bean>
-
-    <bean id="handlerMapping" class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping" >
-        <property name="interceptors" ref="localeChangeInterceptor" />
+        <property name="defaultLocale" value="jp" />
     </bean>
 
     <!--  to enable i18n for our application. basename property is used to provide the location of resource bundles.
-    classpath:messages means that resource bundles are located in the classpath and follows name pattern as
-    messages_{locale}.properties. defaultEncoding property is used to define the encoding used for the messages.-->
+  classpath:messages means that resource bundles are located in the classpath and follows name pattern as
+  messages_{locale}.properties. defaultEncoding property is used to define the encoding used for the messages.-->
     <bean id="messageSource"
           class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
         <property name="basename" value="classpath:messages" />
         <property name="defaultEncoding" value="UTF-8" />
     </bean>
+
+
+    <!-- Changes the locale when a 'locale' request parameter is sent; e.g. /?locale=de -->
+    <mvc:interceptors>
+        <bean id="localeChangeInterceptor"
+              class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+            <property name="paramName" value="locale" />
+        </bean>
+    </mvc:interceptors>
+
+
+
+<!--
+
+    <bean id="handlerMapping" class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping" >
+        <property name="interceptors" ref="localeChangeInterceptor" />
+    </bean>
+-->
+
 
 <!--/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
 

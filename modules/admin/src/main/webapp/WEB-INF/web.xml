@@ -74,7 +74,11 @@
         </init-param>
         <init-param>
             <param-name>service</param-name>
-            <param-value>https://localhost:8443/admin/PizzaShefu/</param-value>
+            <param-value>https://localhost:8443/admin/PizzaShefu</param-value>
+        </init-param>
+        <init-param>
+            <param-name>serviceParameterName</param-name>
+            <param-value>service</param-value>
         </init-param>
     </filter>
     <filter-mapping>
@@ -83,7 +87,8 @@
     </filter-mapping>
 
 
-    <!--ticket validation filter-->
+    <!--ticket validation filter
+    Cas2.0 protocol is used here for validation. If allowedProxyChains parameter is set -->
     <filter>
         <filter-name>CAS Validation Filter</filter-name>
         <filter-class>org.jasig.cas.client.validation.Cas20ProxyReceivingTicketValidationFilter</filter-class>
@@ -94,6 +99,10 @@
         <init-param>
             <param-name>serverName</param-name>
             <param-value>https://localhost:8443</param-value>
+        </init-param>
+        <init-param>
+            <param-name>allowedProxyChains</param-name>
+            <param-value>https://localhost:8443/admin https://localhost:8443/admin/PizzaShefu</param-value>
         </init-param>
     </filter>
     <filter-mapping>
